@@ -1,0 +1,172 @@
+{
+  "main": {
+    "id": "8475e15555e5e09e",
+    "type": "split",
+    "children": [
+      {
+        "id": "cbbc68ace6807ae7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f7df2987f4ce42db",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "99b6551c3fc03820",
+    "type": "split",
+    "children": [
+      {
+        "id": "2e0bbca9fd1196c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa4fe56689b0fc48",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "700cceaa0d0435b1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6456f0ea52ffc2f2",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 658.5
+  },
+  "right": {
+    "id": "628c89310a05dc8a",
+    "type": "split",
+    "children": [
+      {
+        "id": "5b17912229af37b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "77cb4cd4ba30c0ce",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "15a31e3ddd7451b1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6b50ab8c7e63a240",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2bea1110aa5cdb10",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md"
+              }
+            }
+          },
+          {
+            "id": "b7c70d46107b4865",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "ef13b8b253b517d4",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 285.5,
+    "collapsed": true
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "aa4fe56689b0fc48",
+  "lastOpenFiles": [
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 1. Подготовка, повторение, первые анимации/Подготовка, повторение, первые анимации.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.21 Знакомимся с тегом form и его содержимым.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
+    "WebDev/HTML+CSS__Git+NPM/PUG/Pug.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 1. Подготовка, повторение, первые анимации/_lessons/1.12 Используйте REM вместо PX.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.42 Заключительное слово.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.27 Анимируем гамбургер.md",
+    "SelfDevelopment/Навыки аргументации для руководителей.md"
+  ]
+}

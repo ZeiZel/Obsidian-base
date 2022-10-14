@@ -1,0 +1,86 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": true,
+  "colorGroups": [
+    {
+      "query": "react",
+      "color": {
+        "a": 1,
+        "rgb": 2058203
+      }
+    },
+    {
+      "query": "JS",
+      "color": {
+        "a": 1,
+        "rgb": 14725458
+      }
+    },
+    {
+      "query": "Node",
+      "color": {
+        "a": 1,
+        "rgb": 11657298
+      }
+    },
+    {
+      "query": "HTML",
+      "color": {
+        "a": 1,
+        "rgb": 14732626
+      }
+    },
+    {
+      "query": "CSS",
+      "color": {
+        "a": 1,
+        "rgb": 4736692
+      }
+    },
+    {
+      "query": "SQL",
+      "color": {
+        "a": 1,
+        "rgb": 12992319
+      }
+    },
+    {
+      "query": "Docker",
+      "color": {
+        "a": 1,
+        "rgb": 12412105
+      }
+    },
+    {
+      "query": "Obsidian",
+      "color": {
+        "a": 1,
+        "rgb": 7472042
+      }
+    },
+    {
+      "query": "Figma",
+      "color": {
+        "a": 1,
+        "rgb": 13466234
+      }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": false,
+  "textFadeMultiplier": -1.4,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 0.894230769230769,
+  "collapse-forces": true,
+  "centerStrength": 0.381868131868132,
+  "repelStrength": 19.1208791208791,
+  "linkStrength": 0.371949367088608,
+  "linkDistance": 261,
+  "scale": 0.04231590268976005,
+  "close": true
+}

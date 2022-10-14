@@ -1,0 +1,119 @@
+{
+  "strategy": "default",
+  "matchStrategy": "prefix",
+  "maxNumberOfSuggestions": 5,
+  "maxNumberOfWordsAsPhrase": 3,
+  "minNumberOfCharactersTriggered": 0,
+  "minNumberOfWordsTriggeredPhrase": 1,
+  "complementAutomatically": true,
+  "delayMilliSeconds": 0,
+  "disableSuggestionsDuringImeOn": false,
+  "insertAfterCompletion": true,
+  "firstCharactersDisableSuggestions": ":/^",
+  "showMatchStrategy": false,
+  "showComplementAutomatically": false,
+  "showIndexingStatus": false,
+  "descriptionOnSuggestion": "Short",
+  "selectSuggestionKeys": "Tab",
+  "additionalCycleThroughSuggestionsKeys": "None",
+  "disableUpDownKeysForCycleThroughSuggestionsKeys": false,
+  "openSourceFileKey": "None",
+  "propagateEsc": false,
+  "enableCurrentFileComplement": true,
+  "currentFileMinNumberOfCharacters": 0,
+  "onlyComplementEnglishOnCurrentFileComplement": false,
+  "enableCurrentVaultComplement": false,
+  "currentVaultMinNumberOfCharacters": 0,
+  "includeCurrentVaultPathPrefixPatterns": "",
+  "excludeCurrentVaultPathPrefixPatterns": "",
+  "includeCurrentVaultOnlyFilesUnderCurrentDirectory": false,
+  "enableCustomDictionaryComplement": false,
+  "customDictionaryPaths": "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt",
+  "columnDelimiter": "Tab",
+  "customDictionaryWordRegexPattern": "",
+  "delimiterToHideSuggestion": "",
+  "delimiterToDivideSuggestionsForDisplayFromInsertion": "",
+  "caretLocationSymbolAfterComplement": "",
+  "displayedTextSuffix": " => ...",
+  "enableInternalLinkComplement": true,
+  "suggestInternalLinkWithAlias": false,
+  "excludeInternalLinkPathPrefixPatterns": "",
+  "enableFrontMatterComplement": true,
+  "frontMatterComplementMatchStrategy": "inherit",
+  "insertCommaAfterFrontMatterCompletion": false,
+  "showLogAboutPerformanceInConsole": false,
+  "selectionHistoryTree": {
+    "комбинация": {
+      "комбинация": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665309617589
+        }
+      }
+    },
+    "знаний": {
+      "знаний": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665311418615
+        }
+      }
+    },
+    "Конкуренция": {
+      "Конкуренция": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665318215216
+        }
+      }
+    },
+    "определённые": {
+      "определённые": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665320314938
+        }
+      }
+    },
+    "интервальное": {
+      "интервальное": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665320320135
+        }
+      }
+    },
+    "Задание": {
+      "Задание": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665326829153
+        }
+      }
+    },
+    "научить": {
+      "научить": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665327257294
+        }
+      }
+    },
+    "науки": {
+      "науки": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665327259647
+        }
+      }
+    },
+    "первой": {
+      "первой": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665503635724
+        }
+      }
+    }
+  }
+}
