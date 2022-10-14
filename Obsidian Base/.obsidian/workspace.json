@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md"
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md"
               }
             }
           },
@@ -158,8 +158,8 @@
   },
   "active": "f7df2987f4ce42db",
   "lastOpenFiles": [
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/04 – Объекты.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/04 – Объекты.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
