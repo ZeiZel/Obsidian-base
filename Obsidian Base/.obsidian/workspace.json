@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.22 Анимируем форму.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 439.5,
-    "collapsed": true
+    "width": 439.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.22 Анимируем форму.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.22 Анимируем форму.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.22 Анимируем форму.md"
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md"
               }
             }
           },
@@ -159,15 +158,15 @@
   },
   "active": "f7df2987f4ce42db",
   "lastOpenFiles": [
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/04 – Объекты.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.21 Знакомимся с тегом form и его содержимым.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 1. Подготовка, повторение, первые анимации/Подготовка, повторение, первые анимации.md",
-    "WebDev/HTML+CSS__Git+NPM/PUG/Pug.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 1. Подготовка, повторение, первые анимации/_lessons/1.12 Используйте REM вместо PX.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.42 Заключительное слово.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.27 Анимируем гамбургер.md",
-    "SelfDevelopment/Навыки аргументации для руководителей.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 5. Node package manager/NPM.md",
+    "SelfDevelopment/Storytelling.md"
   ]
 }
