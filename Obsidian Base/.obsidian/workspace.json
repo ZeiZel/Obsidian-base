@@ -13,18 +13,10 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
+                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
                 "mode": "source",
                 "source": false
               }
-            }
-          },
-          {
-            "id": "7a82f0bb45ccbe64",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {}
             }
           }
         ]
@@ -93,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
+                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
+                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md"
+                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md"
               }
             }
           },
@@ -166,15 +158,15 @@
   },
   "active": "f7df2987f4ce42db",
   "lastOpenFiles": [
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.26 Настраиваем переходы скорости анимаций, с помощью cubic-bezier.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.25 Создаем навигационное меню на чистом CSS.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.27 Анимируем гамбургер.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.24 Создаем footer сайта.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/13 - Обработка ошибок.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/12 - Функциональные выражения и стрелочные функции.md"
+    "WebDev/TypeScript/TypeScript.md",
+    "GameDev/Теория геймдизайна.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/029 Заключение модуля.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/01 - Подготовка к работе.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/045 Ресурсы для оттачивания навыков программирования.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md"
   ]
 }
