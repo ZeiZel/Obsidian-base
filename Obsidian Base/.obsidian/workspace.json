@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
+                "file": "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 433.5
+    "width": 433.5,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
+                "file": "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
+                "file": "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md"
+                "file": "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md"
               }
             }
           },
@@ -158,6 +159,7 @@
   },
   "active": "f7df2987f4ce42db",
   "lastOpenFiles": [
+    "WebDev/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
     "WebDev/TypeScript/TypeScript.md",
     "GameDev/Теория геймдизайна.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -166,7 +168,6 @@
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/01 - Подготовка к работе.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/045 Ресурсы для оттачивания навыков программирования.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md"
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/045 Ресурсы для оттачивания навыков программирования.md"
   ]
 }
