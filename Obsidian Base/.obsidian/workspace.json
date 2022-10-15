@@ -18,6 +18,14 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "7a82f0bb45ccbe64",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
           }
         ]
       }
@@ -145,11 +153,12 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 285.5,
+    "width": 387.5,
     "collapsed": true
   },
   "ribbon": {
@@ -157,6 +166,7 @@
   },
   "active": "f7df2987f4ce42db",
   "lastOpenFiles": [
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.24 Создаем footer сайта.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
@@ -165,7 +175,6 @@
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/12 - Функциональные выражения и стрелочные функции.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/11 - Конкатенация строк.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/10 - Оператор разделения на свойства.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/09 - Логические операторы.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/08 – Операторы.md"
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/09 - Логические операторы.md"
   ]
 }
