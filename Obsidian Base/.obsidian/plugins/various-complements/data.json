@@ -122,6 +122,14 @@
           "lastUpdated": 1665760683176
         }
       }
+    },
+    "cursor": {
+      "cursor": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1665826658071
+        }
+      }
     }
   }
 }
