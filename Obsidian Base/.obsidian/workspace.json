@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/_lessons/3.23 Делаем собственные radio button с помощью CSS.md"
               }
             }
           },
@@ -157,15 +157,15 @@
   },
   "active": "f7df2987f4ce42db",
   "lastOpenFiles": [
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/13 - Обработка ошибок.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/13 - Обработка ошибок.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/12 - Функциональные выражения и стрелочные функции.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/11 - Конкатенация строк.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/10 - Оператор разделения на свойства.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/09 - Логические операторы.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/08 – Операторы.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/07 - Области видимости.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/04 – Объекты.md"
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/07 - Области видимости.md"
   ]
 }
