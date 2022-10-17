@@ -4,23 +4,23 @@
     "type": "split",
     "children": [
       {
-        "id": "69ceacdde17fd15d",
+        "id": "de78e676076840ac",
         "type": "tabs",
         "children": [
           {
-            "id": "ce874556f0740cf7",
+            "id": "2ea6b850df9884c2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.18 Ошибка не сохраненного коммита при checkout.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "9e110100232d40a3",
+            "id": "0f7f13476d2c8bb9",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.18 Ошибка не сохраненного коммита при checkout.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.18 Ошибка не сохраненного коммита при checkout.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.18 Ошибка не сохраненного коммита при checkout.md"
               }
             }
           },
@@ -163,17 +163,17 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "ce874556f0740cf7",
+  "active": "2ea6b850df9884c2",
   "lastOpenFiles": [
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.18 Ошибка не сохраненного коммита при checkout.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.6 Создаем первый коммит.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.16 Как создавать ветки и перемещаться по ним..md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
     "Design/Motion Design/Motion Design.md",
     "Design/Motion Design/_lessons/Expressions for AE.md",
-    "Design/Motion Design/_lessons/PureRef.md",
-    "Design/Sound Design/Sound Design.md",
-    "English/English.md",
-    "English/_lessons/От Elementary до Intermediate за 30 дней. Тариф Мастер (2020).md"
+    "Design/Motion Design/_lessons/PureRef.md"
   ]
 }
