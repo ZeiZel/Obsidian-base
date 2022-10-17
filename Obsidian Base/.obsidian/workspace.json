@@ -4,22 +4,59 @@
     "type": "split",
     "children": [
       {
-        "id": "cbbc68ace6807ae7",
+        "id": "df85e75410302ee5",
         "type": "tabs",
         "children": [
           {
-            "id": "2dd5dfa3a19cad12",
+            "id": "be3b0ded0dffc38d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+                "file": "Design/Sound Design/Sound Design.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5f6c45905d30d1c9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6eca9772cbbda56a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Sound Design/_lessons/ЭКСПОРТИРОВАТЬ ВСЕ ДОРОГИ AUDITION В WAVES ФАЙЛЫ.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "58a84b8ec39ef4cf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Sound Design/_lessons/Работа в Adobe Audition с нуля.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -69,7 +106,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 433.5
+    "width": 272.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -85,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md"
+                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md"
               }
             }
           },
@@ -146,7 +183,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -156,17 +193,17 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "2dd5dfa3a19cad12",
+  "active": "5f6c45905d30d1c9",
   "lastOpenFiles": [
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.15 Что такое ветки.md",
+    "Design/Sound Design/Sound Design.md",
+    "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
+    "Design/Sound Design/_lessons/ЭКСПОРТИРОВАТЬ ВСЕ ДОРОГИ AUDITION В WAVES ФАЙЛЫ.md",
+    "Design/Sound Design/_lessons/Работа в Adobe Audition с нуля.md",
+    "SoftDev/CSharp.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.16 Как создавать ветки и перемещаться по ним..md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.15 Что такое ветки.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.14 Как вывести информацию о коммитах в терминал. Git log.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.13 Эмулируем работу 2-х разработчиков на одном репозитории.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.12 Как скачивать репозитории из GitHub.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.3 Как редактировать файлы через терминал.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.2 Базовые команды в терминале.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.11 Как удалить репозиторий GitHub.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 4. Adaptive design/_lessons/4.4 Адаптация проекта.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 4. Adaptive design/Adaptive Design.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.13 Эмулируем работу 2-х разработчиков на одном репозитории.md"
   ]
 }
