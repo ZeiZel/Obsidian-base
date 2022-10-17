@@ -4,47 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "f461b240a8179887",
+        "id": "69ceacdde17fd15d",
         "type": "tabs",
         "children": [
           {
-            "id": "e9e8f149b7d375fc",
+            "id": "ce874556f0740cf7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/Montage/Editing.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0927182e3fe3ad60",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Montage/_lessons/Супер Premiere Pro.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9a267c214ccc8923",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Montage/_lessons/КУРС ПО ПОЛНОМУ ПРОДАКШЕНУ ВИДЕО.md",
+                "file": "Design/Motion Design/Motion Design.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -94,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 272.5
+    "width": 317.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -110,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/Montage/_lessons/Супер Premiere Pro.md",
+                "file": "Design/Motion Design/Motion Design.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/Montage/_lessons/Супер Premiere Pro.md",
+                "file": "Design/Motion Design/Motion Design.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/Montage/_lessons/Супер Premiere Pro.md"
+                "file": "Design/Motion Design/Motion Design.md"
               }
             }
           },
@@ -181,17 +156,17 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "0927182e3fe3ad60",
+  "active": "ce874556f0740cf7",
   "lastOpenFiles": [
+    "Design/Sound Design/Sound Design.md",
+    "English/English.md",
+    "English/_lessons/От Elementary до Intermediate за 30 дней. Тариф Мастер (2020).md",
     "Design/Montage/Editing.md",
-    "Design/Montage/_lessons/КУРС ПО ПОЛНОМУ ПРОДАКШЕНУ ВИДЕО.md",
-    "GameDev/_lessons/ПИКСЕЛЬ АРТ ГРАФИКА ДЛЯ ИГР.md",
-    "GameDev/GameDev.md",
-    "GameDev/_lessons/Начальный Unity.md",
-    "GameDev/_lessons/XYZ Unity.md",
     "Design/Design Bank.md",
-    "Design/Sound Design/_lessons/Sound Gun Работа со звуком.md",
-    "Design/Motion Design/Motion Design.md",
-    "Design/Sound Design/Sound Design.md"
+    "Design/Graphics and Design.md",
+    "Design/Montage/_lessons/Супер DaVinci Resolve.md",
+    "Design/Montage/_lessons/Инструменты ретуши видео в DaVinci Resolve.md",
+    "Design/Montage/_lessons/Артур Орлов. Работа со звуком в Davinci Resolve.md",
+    "Design/Montage/_lessons/Подготовка DaVinci Resolve к работе.md"
   ]
 }
