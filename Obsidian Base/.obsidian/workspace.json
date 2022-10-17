@@ -4,52 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "df85e75410302ee5",
+        "id": "f461b240a8179887",
         "type": "tabs",
         "children": [
           {
-            "id": "be3b0ded0dffc38d",
+            "id": "e9e8f149b7d375fc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/Sound Design/Sound Design.md",
+                "file": "Design/Montage/Editing.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "5f6c45905d30d1c9",
+            "id": "0927182e3fe3ad60",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
+                "file": "Design/Montage/_lessons/Супер Premiere Pro.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "6eca9772cbbda56a",
+            "id": "9a267c214ccc8923",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/Sound Design/_lessons/ЭКСПОРТИРОВАТЬ ВСЕ ДОРОГИ AUDITION В WAVES ФАЙЛЫ.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "58a84b8ec39ef4cf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Sound Design/_lessons/Работа в Adobe Audition с нуля.md",
+                "file": "Design/Montage/_lessons/КУРС ПО ПОЛНОМУ ПРОДАКШЕНУ ВИДЕО.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
+                "file": "Design/Montage/_lessons/Супер Premiere Pro.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
+                "file": "Design/Montage/_lessons/Супер Premiere Pro.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md"
+                "file": "Design/Montage/_lessons/Супер Premiere Pro.md"
               }
             }
           },
@@ -193,17 +181,17 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "5f6c45905d30d1c9",
+  "active": "0927182e3fe3ad60",
   "lastOpenFiles": [
-    "Design/Sound Design/Sound Design.md",
-    "Design/Sound Design/_lessons/Теория звука. Что нужно знать о звуке, чтобы с ним работать..md",
-    "Design/Sound Design/_lessons/ЭКСПОРТИРОВАТЬ ВСЕ ДОРОГИ AUDITION В WAVES ФАЙЛЫ.md",
-    "Design/Sound Design/_lessons/Работа в Adobe Audition с нуля.md",
-    "SoftDev/CSharp.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.16 Как создавать ветки и перемещаться по ним..md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.15 Что такое ветки.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.14 Как вывести информацию о коммитах в терминал. Git log.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.13 Эмулируем работу 2-х разработчиков на одном репозитории.md"
+    "Design/Montage/Editing.md",
+    "Design/Montage/_lessons/КУРС ПО ПОЛНОМУ ПРОДАКШЕНУ ВИДЕО.md",
+    "GameDev/_lessons/ПИКСЕЛЬ АРТ ГРАФИКА ДЛЯ ИГР.md",
+    "GameDev/GameDev.md",
+    "GameDev/_lessons/Начальный Unity.md",
+    "GameDev/_lessons/XYZ Unity.md",
+    "Design/Design Bank.md",
+    "Design/Sound Design/_lessons/Sound Gun Работа со звуком.md",
+    "Design/Motion Design/Motion Design.md",
+    "Design/Sound Design/Sound Design.md"
   ]
 }
