@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.19 Как перекинуть созданные изменения на новую ветку.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 317.5
+    "width": 510.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.19 Как перекинуть созданные изменения на новую ветку.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.19 Как перекинуть созданные изменения на новую ветку.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.19 Как перекинуть созданные изменения на новую ветку.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md"
               }
             }
           },
@@ -165,15 +165,15 @@
   },
   "active": "2ea6b850df9884c2",
   "lastOpenFiles": [
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.20 Как перекинуть несколько коммитов на новую ветку.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.19 Как перекинуть созданные изменения на новую ветку.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.18 Ошибка не сохраненного коммита при checkout.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 3. Продвинутая вёрстка - CSS SASS/Продвинутая вёрстка - CSS SASS.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.6 Создаем первый коммит.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.16 Как создавать ветки и перемещаться по ним..md",
-    "Design/Motion Design/Motion Design.md",
-    "Design/Motion Design/_lessons/Expressions for AE.md",
-    "Design/Motion Design/_lessons/PureRef.md"
+    "Design/Motion Design/Motion Design.md"
   ]
 }
