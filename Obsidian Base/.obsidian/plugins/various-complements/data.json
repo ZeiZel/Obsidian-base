@@ -150,6 +150,22 @@
           "lastUpdated": 1665925307454
         }
       }
+    },
+    "animation": {
+      "animation": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1666017748929
+        }
+      }
+    },
+    "checkout": {
+      "checkout": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666017914081
+        }
+      }
     }
   }
 }
