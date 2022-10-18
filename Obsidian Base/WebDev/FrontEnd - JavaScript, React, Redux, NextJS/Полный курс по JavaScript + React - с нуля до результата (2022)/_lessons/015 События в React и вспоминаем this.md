@@ -43,11 +43,47 @@ nextYear = () => {
 <button onClick={() => this.nextYear()}>{text}</button>
 ```
 
+Если нам нужно передать в функцию значения, то нам опять же нужно воспользоваться анонимной стрелочной функцией `(e) => this.commitInputChanges(e, 'red')`, которая и позволит передать значения.
 
+```JSX
+// Функция, которая принимает в себя значения
+commitInputChanges = (e, color) => {  
+    console.log(color);  
+    this.setState(state => ({  
+        position: e.target.value,  
+    }));  
+}  
+  
+render() {  
+    const {name, surname, link} = this.props;  
+    const {text, years, position} = this.state;  
+    return (  
+        <div>  
+            <button onClick={() => this.nextYear()}>{text}</button>  
+            <h1>My name is {name}, surname - {surname}, age - {years} <br/> profession - {position}</h1>  
+            <a href={link}>My profile</a>  
 
+			//Форма с данными
 
+            <form>  
+                <label htmlFor={`profession${name}`}>Введите вашу профессию</label>  
+                <input type="text" id={`profession${name}`} onChange={(e) => this.commitInputChanges(e, 'red')}/>  
+            </form>  
+        </div>  
+    );  
+};
+```
 
+Так же нужно отметить, что `event` передаётся в функцию по умолчанию и нам не нужно передавать его отдельно
 
+```JSX
+// Это метод
+commitInputChanges = (e) => {  
+    this.setState(state => ({  
+        position: e.target.value,  
+    }));  
+}  
 
-
-
+// Это в рендере
+<input type="text" id={`profession${name}`} onChange={ this.commitInputChanges}/>  
+```
