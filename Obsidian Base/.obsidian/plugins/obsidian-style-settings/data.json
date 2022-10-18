@@ -4,5 +4,6 @@
   "obsidian-prism-theme@@pt-icons-accent": true,
   "obsidian-prism-theme@@scroll-bar-size": 8,
   "obsidian-prism-theme@@highlight-text-accent-dt": "pt-highlight-text-accent-dt",
-  "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-indigo-dt"
+  "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-indigo-dt",
+  "obsidian-prism-theme@@file-line-width": 880
 }
