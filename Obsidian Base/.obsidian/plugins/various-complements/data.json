@@ -214,6 +214,30 @@
           "lastUpdated": 1666111451641
         }
       }
+    },
+    "добавляем": {
+      "добавляем": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666187290870
+        }
+      }
+    },
+    "props": {
+      "props": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666187305358
+        }
+      }
+    },
+    "state": {
+      "state": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666187308744
+        }
+      }
     }
   }
 }
