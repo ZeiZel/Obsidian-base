@@ -8,18 +8,91 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2ea6b850df9884c2",
+            "id": "24f69ebc3aef0d1f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md",
+                "file": "Design/Graphics Design/Graphics Design.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d7e1043046048f3b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Graphics Design/_lessons/Инструменты фотошопа.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c7ca7074568238ec",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Graphics Design/_lessons/Инструменты Illustrator.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f9aac69760206675",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Graphics Design/_lessons/Базовый Photoshop - XYZ.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a42cfdea888b34a7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Graphics Design/_lessons/Супер Photoshop.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "495850636f489adc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Motion Design/Motion Design.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1857444b29457f82",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Graphics Design/_lessons/Вольница Моушен-Иллюстратор.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -85,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md",
+                "file": "Design/Motion Design/Motion Design.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md",
+                "file": "Design/Motion Design/Motion Design.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md"
+                "file": "Design/Motion Design/Motion Design.md"
               }
             }
           },
@@ -155,17 +228,17 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "2ea6b850df9884c2",
+  "active": "495850636f489adc",
   "lastOpenFiles": [
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.20 Как перекинуть несколько коммитов на новую ветку.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.22 Как восстановить конкретный файл из прошлого коммита.md",
+    "Design/Graphics Design/Graphics Design.md",
+    "Design/Graphics Design/_lessons/Андрей Журавлёв - Adobe Photoshop.md",
+    "Design/Graphics Design/_lessons/Супер Photoshop.md",
+    "Design/Graphics Design/_lessons/Базовый Photoshop - XYZ.md",
+    "Design/Graphics Design/_lessons/Инструменты Illustrator.md",
+    "Design/Graphics Design/_lessons/Инструменты фотошопа.md",
+    "Design/Graphics Design/_lessons/Вольница Моушен-Иллюстратор.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.23 Продвинутый git log и git show.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.16 Как создавать ветки и перемещаться по ним..md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/018 Иммутабельность состояния и собственные события.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/017 Работа с формами, управляемые и неуправляемые компоненты.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.22 Как восстановить конкретный файл из прошлого коммита.md"
   ]
 }
