@@ -4,95 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "de78e676076840ac",
+        "id": "be5a0a8d12792b95",
         "type": "tabs",
         "children": [
           {
-            "id": "24f69ebc3aef0d1f",
+            "id": "755759b63b639523",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Graphics Design/Graphics Design.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d7e1043046048f3b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Graphics Design/_lessons/Инструменты фотошопа.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c7ca7074568238ec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Graphics Design/_lessons/Инструменты Illustrator.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f9aac69760206675",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Graphics Design/_lessons/Базовый Photoshop - XYZ.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a42cfdea888b34a7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Graphics Design/_lessons/Супер Photoshop.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "495850636f489adc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Motion Design/Motion Design.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1857444b29457f82",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Graphics Design/_lessons/Вольница Моушен-Иллюстратор.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -142,7 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 393.5
+    "width": 378.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -158,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/Motion Design/Motion Design.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -175,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/Motion Design/Motion Design.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -197,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Design/Motion Design/Motion Design.md"
-              }
+              "state": {}
             }
           },
           {
@@ -228,17 +147,17 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "495850636f489adc",
+  "active": "755759b63b639523",
   "lastOpenFiles": [
-    "Design/Graphics Design/Graphics Design.md",
-    "Design/Graphics Design/_lessons/Андрей Журавлёв - Adobe Photoshop.md",
-    "Design/Graphics Design/_lessons/Супер Photoshop.md",
-    "Design/Graphics Design/_lessons/Базовый Photoshop - XYZ.md",
-    "Design/Graphics Design/_lessons/Инструменты Illustrator.md",
-    "Design/Graphics Design/_lessons/Инструменты фотошопа.md",
-    "Design/Graphics Design/_lessons/Вольница Моушен-Иллюстратор.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.23 Продвинутый git log и git show.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.22 Как восстановить конкретный файл из прошлого коммита.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.17 Закрываем пробел из начала мини курса с обозначениями -u и -M.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.19 Как перекинуть созданные изменения на новую ветку.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.12 Как скачивать репозитории из GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.15 Что такое ветки.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
+    "Whats Learning/_lessons/Основы HTML + CSS.md",
+    "SelfDevelopment/Карьерный чит/_lessons/Глава 1. Главное про резюме и портфолио.md",
+    "SelfDevelopment/Карьерный чит/Карьерный чит.md"
   ]
 }
