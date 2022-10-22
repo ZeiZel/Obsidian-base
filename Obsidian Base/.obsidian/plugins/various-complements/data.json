@@ -342,6 +342,30 @@
           "lastUpdated": 1666453963733
         }
       }
+    },
+    "queue": {
+      "queue": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666454860478
+        }
+      }
+    },
+    "setTimeout": {
+      "setTimeout": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1666455079694
+        }
+      }
+    },
+    "queueMicrotask": {
+      "queueMicrotask": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666455359294
+        }
+      }
     }
   }
 }
