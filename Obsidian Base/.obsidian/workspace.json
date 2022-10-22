@@ -32,18 +32,6 @@
             }
           },
           {
-            "id": "be0f0d2ad27cf68a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "3c0c4b2807e54951",
             "type": "leaf",
             "state": {
@@ -106,7 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 295.5
+    "width": 267.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -122,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md"
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md"
               }
             }
           },
@@ -192,15 +180,15 @@
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "be0f0d2ad27cf68a",
+  "active": "3c0c4b2807e54951",
   "lastOpenFiles": [
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/030 Библиотека Jquery.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/034 Event loop, подробная работа асинхронных и синхронных операций.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/034 Event loop, подробная работа асинхронных и синхронных операций.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/033 Web Animations API.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/032 JS анимации, requestAnimationFrame.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/031 Функции-генераторы.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/029 Современные библиотеки и фрэймворки.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/028 Как превратить код ES6+ в старый формат ES5. Babel, Core.js и полифиллы.md"
