@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/023 Стили в React. Inline Styles.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/024 Стили в React. CSS и SASSSCSS.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 267.5
+    "width": 265.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/023 Стили в React. Inline Styles.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/024 Стили в React. CSS и SASSSCSS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/023 Стили в React. Inline Styles.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/024 Стили в React. CSS и SASSSCSS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/023 Стили в React. Inline Styles.md"
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/024 Стили в React. CSS и SASSSCSS.md"
               }
             }
           },
@@ -158,6 +158,7 @@
   "active": "755759b63b639523",
   "lastOpenFiles": [
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/023 Стили в React. Inline Styles.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/022 Семантика и доступность контента (ARIA).md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/029 Заключение модуля.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/021 Практика. Реализуем поиск и фильтры.md",
@@ -165,7 +166,6 @@
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/030 Библиотека Jquery.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/022 Webpack. Собираем наш проект.md",
-    "Whats Learning/Что учим~.md",
-    "Whats Learning/_lessons/SSR.md"
+    "Whats Learning/Что учим~.md"
   ]
 }
