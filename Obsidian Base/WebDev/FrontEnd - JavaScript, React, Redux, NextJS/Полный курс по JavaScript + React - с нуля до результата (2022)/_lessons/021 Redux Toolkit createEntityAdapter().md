@@ -1,0 +1,1 @@
+## 021 Redux Toolkit createEntityAdapter()

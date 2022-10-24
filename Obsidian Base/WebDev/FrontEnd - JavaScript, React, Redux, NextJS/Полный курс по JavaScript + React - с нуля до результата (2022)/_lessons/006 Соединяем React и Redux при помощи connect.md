@@ -1,0 +1,1 @@
+## 006 Соединяем React и Redux при помощи connect

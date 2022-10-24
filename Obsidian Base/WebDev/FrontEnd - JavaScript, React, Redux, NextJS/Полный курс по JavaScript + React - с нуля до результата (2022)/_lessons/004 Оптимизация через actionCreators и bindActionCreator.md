@@ -1,0 +1,1 @@
+## 004 Оптимизация через actionCreators и bindActionCreator

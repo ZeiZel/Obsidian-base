@@ -1,23 +1,26 @@
 
-
-001 Основные принципы Redux. Теория
-002 Основные принципы Redux. Практика
-003 Чистые функции
-004 Оптимизация через actionCreators и bindActionCreator
-005 Добавим React в проект
-006 Соединяем React и Redux при помощи connect
-007 Соединяем React и Redux при помощи хуков
-008 Redux devtools
-009 Правило названия action и домашнее задание (мини-экзамен)
-
-015 Redux-thunk
-016 Redux Toolkit configureStore()
-017 Redux Toolkit createAction()
-018 Redux Toolkit createReducer()
-019 Redux Toolkit createSlice()
-020 Redux Toolkit createAsyncThunk()
-023 Про разные структуры проектов и закрепление материала
-024 Redux Toolkit RTK Query
-025 Что дальше
-
-
+[001 Основные принципы Redux. Теория](001%20Основные%20принципы%20Redux.%20Теория.md)
+[002 Основные принципы Redux. Практика](002%20Основные%20принципы%20Redux.%20Практика.md)
+[003 Чистые функции](003%20Чистые%20функции.md)
+[004 Оптимизация через actionCreators и bindActionCreator](004%20Оптимизация%20через%20actionCreators%20и%20bindActionCreator.md)
+[005 Добавим React в проект](005%20Добавим%20React%20в%20проект.md)
+[006 Соединяем React и Redux при помощи connect](006%20Соединяем%20React%20и%20Redux%20при%20помощи%20connect.md)
+[007 Соединяем React и Redux при помощи хуков](007%20Соединяем%20React%20и%20Redux%20при%20помощи%20хуков.md)
+[008 Redux devtools](008%20Redux%20devtools.md)
+[009 Правило названия action и домашнее задание (мини-экзамен)](009%20Правило%20названия%20action%20и%20домашнее%20задание%20(мини-экзамен).md)
+[010 Разбор самых сложных моментов](010%20Разбор%20самых%20сложных%20моментов.md)
+[011 Комбинирование reducers и красивые селекторы. CreateSelector()](011%20Комбинирование%20reducers%20и%20красивые%20селекторы.%20CreateSelector().md)
+[012 Про сложность реальной разработки](012%20Про%20сложность%20реальной%20разработки.md)
+[013 Store enhancers](013%20Store%20enhancers.md)
+[014 Middleware](014%20Middleware.md)
+[015 Redux-thunk](015%20Redux-thunk.md)
+[016 Redux Toolkit configureStore()](016%20Redux%20Toolkit%20configureStore().md)
+[017 Redux Toolkit createAction()](017%20Redux%20Toolkit%20createAction().md)
+[018 Redux Toolkit createReducer()](018%20Redux%20Toolkit%20createReducer().md)
+[019 Redux Toolkit createSlice()](019%20Redux%20Toolkit%20createSlice().md)
+[020 Redux Toolkit createAsyncThunk()](020%20Redux%20Toolkit%20createAsyncThunk().md)
+[021 Redux Toolkit createEntityAdapter()](021%20Redux%20Toolkit%20createEntityAdapter().md)
+[022 Подводные камни домашнего задания](022%20Подводные%20камни%20домашнего%20задания.md)
+[023 Про разные структуры проектов и закрепление материала](023%20Про%20разные%20структуры%20проектов%20и%20закрепление%20материала.md)
+[024 Redux Toolkit RTK Query](024%20Redux%20Toolkit%20RTK%20Query.md)
+[025 Что дальше](025%20Что%20дальше.md)
