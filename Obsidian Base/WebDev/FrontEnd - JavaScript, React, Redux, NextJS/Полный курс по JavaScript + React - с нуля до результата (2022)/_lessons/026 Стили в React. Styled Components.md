@@ -55,7 +55,140 @@ function App() {
 }
 ```
 
+Так же компоненты стилей можно наследовать и переопределять для других элементов:
 
+`App.js`
+```JSX
+export const Button = styled.button`  
+  display: block;  
+  padding: 5px 15px;  
+  background-color: gold;  
+  border: 1px solid rgba(0, 0, 0, 0.2);  
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);  
+`;
+```
+`index.js`
+```JSX
+import App, {Btn, Field, Header, Button} from './App';  
+import styled from 'styled-components';  
 
+// В () указываем элемент, который мы переписываем
+const BigButton = styled(Button)`  
+  margin: 0 auto;  
+  width: 245px;  
+  height: 50px;
+`;  
+  
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(  
+    <StrictMode>  
+        <App/>  
+        {/* Непосредственное использование переопределённой кнопки */}
+        <BigButton>Some Text</BigButton>  
+    </StrictMode>  
+);
+```
 
+![](_png/Pasted%20image%2020221024200245.png)
 
+Так же мы можем заменить выводимый тег. То есть если мы создавали компонент стилей `div`, то мы можем его поменять на `a` или на любой другой тег через `as="тег"`
+
+`index.js`
+```JSX
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(  
+    <StrictMode>  
+        <App/>  
+        {/* меняем тег 'div' на 'a' */}
+        <BigButton as="a">Some Text</BigButton>  
+    </StrictMode>  
+);
+```
+
+![](_png/Pasted%20image%2020221024200651.png)
+
+Так же синтаксис поддерживает вкладывание обращений к элементам
+
+`App.js`
+```JSX
+const EmpItem = styled.div`  
+    padding: 20px;    
+    margin-bottom: 15px;    
+    border-radius: 5px;    
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);  
+    a {  
+        display: block;        
+        margin: 10px 0px 10px 0px;        
+        color: black;  
+    }    
+    input {  
+        display: block;        
+        margin-top: 10px;    
+    }
+`;
+```
+
+![](_png/Pasted%20image%2020221024201450.png)
+
+Так же мы можем использовать выражения внутри наших CSS-свойств (те же тернарные операторы, которые будут подставлять нужное значение свойства в зависимости от значения атрибута, которое передаётся через `props`)
+
+`App.js`
+```JSX
+//...
+const EmpItem = styled.div`  
+    padding: 20px;    
+    margin-bottom: 15px;    
+    border-radius: 5px;    
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);  
+    a {  
+        display: block;        
+        margin: 10px 0px 10px 0px;  
+        
+        /*тут мы использем условие, опираясь на значение пропса*/      
+        color: ${props => props.active ? 'orange' : 'black'};  
+    }    
+    input {  
+        display: block;        
+        margin-top: 10px;    
+    }
+`;
+
+//...
+render() {  
+    const {name, surname, link} = this.props;  
+    const {text, years, position} = this.state;  
+    return (  
+    
+	    // В качестве пропса передаём атрибут активности (по умолчанию true)
+        <EmpItem active>  
+            <Button onClick={() => this.nextYear()}>{text}</Button>  
+            <Header>My name is {name}, surname - {surname}, age - {years} <br/> profession - {position}</Header>  
+            <a href={link}>My profile</a>  
+            <form>  
+                <label htmlFor={`profession${name}`}>Введите вашу профессию</label>  
+                <input type="text" id={`profession${name}`} onChange={(e) => this.commitInputChanges(e, 'red')}/>  
+            </form>  
+        </EmpItem>  
+    );  
+};
+```
+
+![](_png/Pasted%20image%2020221024203923.png)
+
+>[!info] Несколько важных фактов:
+> - Вендорные префиксы ставятся автоматически - их не требуется писать
+> - Отношения пишутся и работают как в обычном CSS
+> - Псевдоселекторы и псевдоэлементы работают точно так же
+> - Так же можно создавать тут же CSS-анимации
+
+>[!faq] Преймущества:
+> - Инкапсулирование стилей - они нигде друг с другом не пересекаются и нет необходимости писать лишние классы
+> - Так же отпадает необходимость пользоваться БЭМом
+> - Возможность использования пропсов и условий
+> - Вендорные префиксы ставятся автоматически
+
+>[!danger] Минусы:
+> - К такому синтаксису нужно привыкнуть
+> - Очень легко запутаться в тегах, если написано очень много стилизованных компонентов
+> - Названия стилей внутри devtools превращены в кашу (так как идёт динамическая генерация имён классов)
+> - CSS и JS вместе до конца - их не получится отдельно закэшировать
