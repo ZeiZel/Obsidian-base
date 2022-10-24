@@ -8,6 +8,7 @@ npm install --save styled-components
 ```
 
 Дальше для реализации компонента с логикой и его стилями используются ==[тэгированные шаблонные строки](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)==
+Конкретно тут мы сделаем компонент `Button`, который будет представлять из себя ссылку `a` с определёнными стилями внутри кавычек
 
 ```JSX
 const Button = styled.a`
@@ -32,5 +33,24 @@ const Button = styled.a`
 
 
 
+```JSX
+// импорт стилевых компонентов
+import styled from 'styled-components';
 
+// Создание стилевых компонентов
+const Wrapper = styled.div`  
+    width: 600px;    
+    margin: 80px auto 0 auto;
+`;  
+
+function App() {  
+    return (  
+	    // Использование стилевых компонентов
+        <Wrapper>  
+            <WhoAmI name='John' surname="Smith" link="google.com" />  
+            <WhoAmI name='Angela' surname="Coose" link="facebook.com" />  
+        </Wrapper>  
+    );  
+}
+```
 
