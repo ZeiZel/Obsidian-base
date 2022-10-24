@@ -11,7 +11,7 @@ npm install react-bootstrap bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
-И далее в побочных файлах только остаётся импортировать определённые компоненты бутстрапа 
+И далее в побочных файлах только остаётся импортировать определённые компоненты бутстрапа (из документации)
 
 ```JSX
 import {Container, Row, Col} from 'react-bootstrap';  
@@ -30,4 +30,26 @@ const BootstrapTest = () => {
 export default BootstrapTest;
 ```
 
+![](_png/Pasted%20image%2020221024182616.png)
 
+Использование в основном файле:
+
+```JSX
+import React, {StrictMode} from 'react';  
+import ReactDOM from 'react-dom/client';  
+import './index.css';  
+import App, {Btn, Field, Header} from './App';  
+import styled from 'styled-components';  
+
+// Импорты бутстрапа и примера
+import 'bootstrap/dist/css/bootstrap.min.css';  
+import BootstrapTest from './BootstrapTest';  
+  
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(  
+  <StrictMode>  
+      <App/>  
+      <BootstrapTest/>  {/* использование */}
+  </StrictMode>  
+);
+```
