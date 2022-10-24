@@ -31,14 +31,15 @@ const Button = styled.a`
 `
 ```
 
-
+И вот пример использования стилевых компонентов в ==React==:
+Так же эти компоненты можно экспортировать в другие компоненты
 
 ```JSX
 // импорт стилевых компонентов
 import styled from 'styled-components';
 
 // Создание стилевых компонентов
-const Wrapper = styled.div`  
+export const Wrapper = styled.div`  
     width: 600px;    
     margin: 80px auto 0 auto;
 `;  
@@ -53,4 +54,8 @@ function App() {
     );  
 }
 ```
+
+
+
+
 
