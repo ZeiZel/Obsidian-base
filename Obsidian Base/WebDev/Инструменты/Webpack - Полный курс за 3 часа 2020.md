@@ -114,7 +114,7 @@ window.analytics = createAnalytics();
 
 ## Инициализация приложения 
 
-Инициализируем ==node==, через который и установится ==Webpack==
+Инициализируем ==node==, через который и установим в дальнейшем ==Webpack==
 
 ```bash
 npm init
@@ -122,9 +122,19 @@ npm init
 
 ## Установка Webpack
 
+Устанавливаем ==webpack== для разработки (`-D`)
+
+```bash
+npm install -D webpack webpack-cli
+```
+
+- webpack - это сам основной функционал webpack
+- webpack-cli - это его команды в консоли
 
 
 ## Базовая настройка Webpack 
+
+
 
 
 
