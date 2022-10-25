@@ -422,6 +422,22 @@
           "lastUpdated": 1666707013739
         }
       }
+    },
+    "package": {
+      "package": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666708395076
+        }
+      }
+    },
+    "development": {
+      "development": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666708529707
+        }
+      }
     }
   }
 }

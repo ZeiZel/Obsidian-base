@@ -327,9 +327,13 @@ module.exports = {
 
 ## Очистка папки проекта 
 
+Устанавливаем плагин, который чистит проект от неиспользуемых файлов
+
 ```bash
 npm i -D clean-webpack-plugin 
 ```
+
+Подключаем его
 
 ```JS
 const path = require("path");  
@@ -352,6 +356,7 @@ module.exports = {
       new HTMLWebpackPlugin({  
          template: "./src/index.html",  
       }),  
+      // Новый плагин
       new CleanWebpackPlugin(), // инициализируем плагин
    ]  
 };
@@ -361,13 +366,23 @@ module.exports = {
 
 ![](_png/Pasted%20image%2020221025172213.png)
 
-
-
-
-
 ## Сборка проекта 
 
+Так же мы можем задать свои собственные консольные команды, которые мы можем забиндить под короткие алиасы. Конкретно в файле `package.json` мы можем в свойстве `"scripts"` задать свои алисасы и им присвоить консольную команду
 
+`package.json`
+```JS
+"scripts": {  
+	"dev": "webpack --mode development",  
+	"build": "webpack --mode production"  
+},
+```
+
+И через команду `npm run` мы вызываем запуск определённого скрипта (тут - компиляция в `development` режиме)
+
+```bash
+npm run dev
+```
 
 ## Контекст
 
