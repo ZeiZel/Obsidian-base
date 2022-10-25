@@ -386,7 +386,33 @@ npm run dev
 
 ## Контекст
 
+Конкретно свойство `context` позволяет нам указать самостоятельно, от какой точки будет идти ориентирование в проекте. По умолчанию вебпак ориентируется от начальной папки нашего проекта. Если мы добавим контекст, то все пути, нам нужно будет прописывать относительно этого контекста. Это удобно, так как почти все пути до файлов мы прописываем внутри той же папки `src`
 
+```JS
+const path = require("path");  
+const HTMLWebpackPlugin = require("html-webpack-plugin");  
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");  
+  
+module.exports = {  
+   // говорит, где находятся исходники  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "dist"),  
+   },  
+   plugins: [  
+      new HTMLWebpackPlugin({  
+         template: "./index.html",  
+      }),  
+      new CleanWebpackPlugin(),  
+   ]  
+};
+```
 
 ## CSS-лоадеры
 
