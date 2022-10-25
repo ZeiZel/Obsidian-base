@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/Инструменты/Webpack - Полный курс за 3 часа 2020.md",
+                "file": "WebDev/Инструменты/Webpack.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/Инструменты/Webpack - Полный курс за 3 часа 2020.md",
+                "file": "WebDev/Инструменты/Webpack.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/Инструменты/Webpack - Полный курс за 3 часа 2020.md",
+                "file": "WebDev/Инструменты/Webpack.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/Инструменты/Webpack - Полный курс за 3 часа 2020.md"
+                "file": "WebDev/Инструменты/Webpack.md"
               }
             }
           },
@@ -157,8 +157,8 @@
   },
   "active": "1cfc982b3325d6ee",
   "lastOpenFiles": [
+    "WebDev/Инструменты/Webpack.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/022 Webpack. Собираем наш проект.md",
-    "WebDev/Инструменты/Webpack - Полный курс за 3 часа 2020.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",

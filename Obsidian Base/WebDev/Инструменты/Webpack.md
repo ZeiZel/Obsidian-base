@@ -172,6 +172,8 @@ webpack
 ```
 ![](_png/Pasted%20image%2020221025160833.png)
 
+## Паттерны 
+
 Но в прошлом варианте у нас выпадал файл `Analytics.js`, так как он не был никак связан через импорты с основной точкой входа. Чтобы исправить ситуацию, можно назначить несколько точек входа (определить несколько чанков) и задать паттерн для имени выводимых файлов
 
 ```JS
@@ -194,48 +196,278 @@ module.exports = {
 
 ![](_png/Pasted%20image%2020221025162008.png)
 
+Однако мы можем столкнуться с той проблемой, что мы обновили скрипт, а он со своим именем уже захэшировался у пользователя в браузере и уже не обновляется - это может привести к неожиданным поломкам, поэтому стоит добавить ещё один паттерн, который будет основываться на внутреннем содержимом файла
 
+`[contenthash]` - будет давать имя, основываясь на его хэше
 
+```JS
+output: {  
+   filename: "[name].[contenthash].js",  
+   path: path.resolve(__dirname, "dist"),  
+},
+```
 
+И теперь при каждом обновлении мы будем получать новый файл
 
-
-
-## Паттерны 
-
-
+![](_png/Pasted%20image%2020221025164039.png)
 
 ## Плагины 
+
+Для примера установим плагин, который позволяет вебпаку компилировать не только JS-файлы, но и HTML со всеми нужными входными данными
+
+Установка плагина:
+```bash
+npm install -D html-webpack-plugin
+```
+Подключение плагина:
+```JS
+const path = require("path");  
+
+// подключение плагина в вебпак  
+const HTMLWebpackPlugin = require("html-webpack-plugin"); 
+  
+module.exports = {  
+   mode: "development",  
+   entry: {  
+      // так же может быть несколько точек входа в приложение  
+      main: "./src/index.js", // основной чанк  
+      analytics: "./src/analytics.js", // побочный чанк  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "dist"),  
+   },  
+   // Здесь мы задаём список плагинов, которые мы подключаем в вебпак  
+   plugins: [  
+      new HTMLWebpackPlugin() // инициализируем плагин в вебпаке  
+   ]  
+};
+```
+
+Как можно увидеть, сам плагин генерирует новый `index.html` из имеющегося в `src` и подставляет все нужные импорты скриптов, которые в свою очередь компилируются со своим хешем 
+
+![](_png/Pasted%20image%2020221025165504.png)
+
+Так же мы можем настраивать внутренности тегов в HTML
+
+```JS
+plugins: [  
+   new HTMLWebpackPlugin({  
+      title: 'webpack valery' // дали тайтл 
+   })
+]
+```
+
+
+
+
 
 
 ## Работа с HTML 
 
+Так же мы можем указать плагину, который компилирует HTML, какой файл будет являться для него темплейтом, который будет являться отображением сайта.
+Свойство `template` определяет, на примере какого файла генерировать основной HTML. *Так же в основной HTML будут вложены все нужные импорты*
+
+```JS
+const path = require("path");  
+const HTMLWebpackPlugin = require("html-webpack-plugin");  
+  
+module.exports = {  
+   mode: "development",  
+   entry: {  
+      main: "./src/index.js",  
+      analytics: "./src/analytics.js",  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "dist"),  
+   },  
+   plugins: [  
+      new HTMLWebpackPlugin({  
+         template: "./src/index.html", // можем указать основной HTML
+      })  
+   ]
+};
+```
+
+Оригинальный HTML в `src` (без каких-либо импортов)
+```HTML
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+   <meta charset="UTF-8">  
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <title>Webpack</title>  
+</head>  
+<body>  
+   <div class="container">  
+      <h1>WP Course</h1>  
+   </div>  
+</body>  
+</html>
+```
+То , что сгенерировал ==webpack== (вебпак сам добавил импорты на актуальные скрипты)
+```HTML
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+   <meta charset="UTF-8">  
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <title>Webpack</title>  
+<script defer src="main.a4fbcc6c859c6c9cd2a2.js"></script><script defer src="analytics.b0d68796ad2563de4d6c.js"></script></head>  
+<body>  
+   <div class="container">  
+      <h1>WP Course</h1>  
+   </div>  
+</body>  
+</html>
+```
 
 ## Очистка папки проекта 
+
+```bash
+npm i -D clean-webpack-plugin 
+```
+
+```JS
+const path = require("path");  
+const HTMLWebpackPlugin = require("html-webpack-plugin");  
+
+// подключаем плагин-очиститель
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");  
+  
+module.exports = {  
+   mode: "development",  
+   entry: {  
+      main: "./src/index.js",  
+      analytics: "./src/analytics.js",  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "dist"),  
+   },  
+   plugins: [  
+      new HTMLWebpackPlugin({  
+         template: "./src/index.html",  
+      }),  
+      new CleanWebpackPlugin(), // инициализируем плагин
+   ]  
+};
+```
+
+И теперь в папке проекта чистятся неиспользуемые файлы
+
+![](_png/Pasted%20image%2020221025172213.png)
+
+
+
+
+
 ## Сборка проекта 
+
+
+
 ## Контекст
+
+
+
 ## CSS-лоадеры
+
+
+
 ## Работа с JSON 
+
+
+
 ## Работа с файлами 
+
+
+
 ## Работа со шрифтами
+
+
+
 ## Подключение CSS-библиотек 
+
+
+
 ## Защита от публикации пакета 
+
+
+
 ## Работа с XML-файлами 
+
+
+
 ## Работа с CSV-файлами 
+
+
+
 ## Дополнительные настройки 
+
+
+
 ## Подключение JS-библиотек 
+
+
+
 ## Оптимизация 
+
+
+
 ## Webpack-dev-server
+
+
+
 ## Копирования статических файлов 
+
+
+
 ## Сжатие CSS, HTML, JS 
+
+
+
 ## Компиляция Less 
+
+
+
 ## Компиляция Sass 
+
+
+
 ## Оптимизация 
+
+
+
 ## Babel 
+
+
+
 ## Добавление плагинов для Babel 
+
+
+
 ## Компиляция TypeScript 
+
+
+
 ## Компиляция React JSX 
+
+
+
 ## Devtool
+
+
+
 ## ESLint 
+
+
+
 ## Динамические импорты
+
+
+
 ## Анализ финальной сборки
 
