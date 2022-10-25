@@ -167,6 +167,7 @@ webpack
 
 И теперь после подключения выходного файла к `index.html` webpack скомпилирует файл со всеми экспортами и импортами. Первыми в выходном файле всегда идут иммитации экспортов и импортов и сами exports/imports, которые мы делали. Уже только потом идёт сам код.
 
+`index.html`
 ```HTML
 <script src="bundle.js"></script>
 ```
@@ -176,6 +177,7 @@ webpack
 
 Но в прошлом варианте у нас выпадал файл `Analytics.js`, так как он не был никак связан через импорты с основной точкой входа. Чтобы исправить ситуацию, можно назначить несколько точек входа (определить несколько чанков) и задать паттерн для имени выводимых файлов
 
+`webpack.config.js`
 ```JS
 module.exports = {  
    mode: "development",  
@@ -200,6 +202,7 @@ module.exports = {
 
 `[contenthash]` - будет давать имя, основываясь на его хэше
 
+`webpack.config.js`
 ```JS
 output: {  
    filename: "[name].[contenthash].js",  
@@ -220,6 +223,7 @@ output: {
 npm install -D html-webpack-plugin
 ```
 Подключение плагина:
+`webpack.config.js`
 ```JS
 const path = require("path");  
 
@@ -250,6 +254,7 @@ module.exports = {
 
 Так же мы можем настраивать внутренности тегов в HTML
 
+`webpack.config.js`
 ```JS
 plugins: [  
    new HTMLWebpackPlugin({  
@@ -259,15 +264,12 @@ plugins: [
 ```
 
 
-
-
-
-
 ## Работа с HTML 
 
 Так же мы можем указать плагину, который компилирует HTML, какой файл будет являться для него темплейтом, который будет являться отображением сайта.
 Свойство `template` определяет, на примере какого файла генерировать основной HTML. *Так же в основной HTML будут вложены все нужные импорты*
 
+`webpack.config.js`
 ```JS
 const path = require("path");  
 const HTMLWebpackPlugin = require("html-webpack-plugin");  
@@ -335,6 +337,7 @@ npm i -D clean-webpack-plugin
 
 Подключаем его
 
+`webpack.config.js`
 ```JS
 const path = require("path");  
 const HTMLWebpackPlugin = require("html-webpack-plugin");  
@@ -388,6 +391,7 @@ npm run dev
 
 Конкретно свойство `context` позволяет нам указать самостоятельно, от какой точки будет идти ориентирование в проекте. По умолчанию вебпак ориентируется от начальной папки нашего проекта. Если мы добавим контекст, то все пути, нам нужно будет прописывать относительно этого контекста. Это удобно, так как почти все пути до файлов мы прописываем внутри той же папки `src`
 
+`webpack.config.js`
 ```JS
 const path = require("path");  
 const HTMLWebpackPlugin = require("html-webpack-plugin");  
@@ -416,11 +420,85 @@ module.exports = {
 
 ## CSS-лоадеры
 
+Лоадеры - это сущноси, которые добавляют дополнительный функционал вебпаку, который позволяет работать с другими видами файлов
 
+Устанавливаем первым делом два лоадера
+- `css-loader` позволяет импортировать стили в ==JS==
+- `style-loader` добавляет стили в секцию `HEAD` в ==HTML== 
+
+```bash
+npm i -D style-loader css-loader 
+```
+
+`webpack.config.js`
+```JS
+module.exports = {  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "dist"),  
+   },  
+   plugins: [  
+      new HTMLWebpackPlugin({  
+         template: "./index.html",  
+      }),  
+      new CleanWebpackPlugin(),  
+   ],  
+   
+   // Задаём лоадеры  
+   module: {  
+      rules: [  
+         {  
+			// Тут задаётся паттерн поиска файла 
+            // если нам попадаются файлы с таким расширением  
+            test: /\.css$/,  
+            // то нам нужно использовать такие лоадеры  
+            // лоадеры срабатывают справа-налево            
+            // первый лоадер позволяет импортировать стили, второй добавляет стили в секцию HEAD в HTML            
+            use: ['style-loader', 'css-loader'],  
+         }  
+      ],  
+   }  
+   
+};
+```
+
+`index.html`
+```JS
+import Post from './Post';  
+import './styles/style.css';  // подключение стилей
+  
+const post = new Post("Webpack Post Title");  
+  
+console.log("post to string", post.toString);
+```
+
+`style.css`
+```CSS
+.container {  
+    padding-top: 2rem;  
+    max-width: 1000px;  
+    margin: 0 auto;  
+}  
+  
+h1 {  
+    text-align: center;  
+    color: red;  
+    font-weight: 700;  
+    font-size: 60px;  
+}
+```
+
+![](_png/Pasted%20image%2020221025185419.png)
 
 ## Работа с JSON 
 
-
+59:10
 
 ## Работа с файлами 
 
