@@ -1,5 +1,24 @@
-# Webpack
 #Tools #Webpack
+
+## Решение частых ошибок
+
+**Первая ошибка**
+Если не работает Dev-server на текущей версии вебпака:
+```JSON
+devServer: { 
+	static: { 
+		directory: path.join(__dirname, 'src'), 
+	}, 
+	compress: true, 
+	port: 9000, 
+	open: true, 
+},
+```
+Команда в package.json тоже немного другая: 
+```JSON
+"start": "webpack serve"
+```
+
 
 ## Написание базового приложения 
 
