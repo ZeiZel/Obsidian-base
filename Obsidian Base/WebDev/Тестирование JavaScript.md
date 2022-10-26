@@ -1,4 +1,4 @@
-# Тестирование JavaScript
+# Тестирование JavaScript от А до Я (Jest, React Testing Library, e2e, screenshot)
 #Testing #End2End #Jest #ReactTestingLibrary #Screenshot 
 
 Введение. Теория. Пирамида тестирования. Квадрат допустимых значений

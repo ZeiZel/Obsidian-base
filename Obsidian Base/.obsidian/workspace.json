@@ -11,8 +11,12 @@
             "id": "1cfc982b3325d6ee",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "WebDev/Инструменты/Webpack.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "WebDev/Инструменты/Webpack.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "WebDev/Инструменты/Webpack.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "WebDev/Инструменты/Webpack.md"
+              }
             }
           },
           {
@@ -149,15 +157,15 @@
   },
   "active": "1cfc982b3325d6ee",
   "lastOpenFiles": [
-    "WebDev/Инструменты/Webpack.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/022 Webpack. Собираем наш проект.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/024 Стили в React. CSS и SASSSCSS.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/010 Улучшаем наш проект (анимации, правильное поведение overflow).md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/001 Что такое API и как работают реальные приложения.md"
+    "WebDev/Инструменты/WebStorm.md",
+    "WebDev/_png/Pasted image 20221011135903.png",
+    "WebDev/_png/Pasted image 20221011145617.png",
+    "WebDev/_png/Pasted image 20221011140204.png",
+    "WebDev/_png/d148fa9db2147641a7c7de7917ffe140.png",
+    "WebDev/_png/2a1eb325a69a0b80455a8ec55baeedd1.png",
+    "WebDev/_png/6e1308387b8c31931d6f5d6b96308510.png",
+    "WebDev/_png/dc59318868e5e14ad08673b6976c67d3.png",
+    "WebDev/_png/b43e02f6ad40a7413bb8aa2eedd5bb2e.png",
+    "WebDev/_png/89d21f1b7c3266449f52a34ccf07afc0.png"
   ]
 }

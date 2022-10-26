@@ -2,7 +2,7 @@
 
 ## таймкоды
 
- [51:50](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3110s) – CSS-лоадеры [58:56](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3536s) – Работа с JSON [1:02:50](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3770s) – Работа с файлами [1:09:02](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4142s) – Работа со шрифтами [1:13:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4401s) – Подключение CSS-библиотек [1:14:51](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4491s) – Защита от публикации пакета [1:15:32](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4532s) – Работа с XML-файлами [1:17:44](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4664s) – Работа с CSV-файлами [1:20:06](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4806s) – Дополнительные настройки [1:24:54](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5094s) – Подключение JS-библиотек [1:28:56](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5336s) – Оптимизация [1:33:40](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5620s) – Webpack-dev-server [1:39:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5954s) –  Копирования статических файлов [1:42:32](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=6152s) – Сжатие CSS, HTML, JS [1:59:37](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7177s) – Компиляция Less [2:06:08](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7568s) – Компиляция Sass [2:03:57](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7437s) – Оптимизация [2:10:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7821s) – Babel [2:22:35](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s) – Добавление плагинов для Babel [2:24:28](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s) – Компиляция TypeScript [2:27:20](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s) – Компиляция React JSX [2:33:38](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9218s) – Devtool [2:36:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9374s) – ESLint [2:43:00](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9780s) – Динамические импорты [2:44:52](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9892s) – Анализ финальной сборки
+[58:56](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3536s) – Работа с JSON [1:02:50](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3770s) – Работа с файлами [1:09:02](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4142s) – Работа со шрифтами [1:13:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4401s) – Подключение CSS-библиотек [1:14:51](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4491s) – Защита от публикации пакета [1:15:32](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4532s) – Работа с XML-файлами [1:17:44](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4664s) – Работа с CSV-файлами [1:20:06](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4806s) – Дополнительные настройки [1:24:54](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5094s) – Подключение JS-библиотек [1:28:56](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5336s) – Оптимизация [1:33:40](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5620s) – Webpack-dev-server [1:39:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5954s) –  Копирования статических файлов [1:42:32](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=6152s) – Сжатие CSS, HTML, JS [1:59:37](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7177s) – Компиляция Less [2:06:08](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7568s) – Компиляция Sass [2:03:57](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7437s) – Оптимизация [2:10:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7821s) – Babel [2:22:35](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s) – Добавление плагинов для Babel [2:24:28](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s) – Компиляция TypeScript [2:27:20](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s) – Компиляция React JSX [2:33:38](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9218s) – Devtool [2:36:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9374s) – ESLint [2:43:00](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9780s) – Динамические импорты [2:44:52](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9892s) – Анализ финальной сборки
 
 ## Решение частых ошибок
 
@@ -387,6 +387,17 @@ module.exports = {
 npm run dev
 ```
 
+#автоматическаякомпиляция
+Так же мы можем задать автоматическую компиляцию изменений в файлах
+```JSON
+"scripts": {  
+  "dev": "webpack --mode development",  
+  "build": "webpack --mode production",  
+  // создаём команду, которая будет постоянно смотреть и компилировать файлы
+  "watch": "webpack --mode development --watch"  
+},
+```
+
 ## Контекст
 
 Конкретно свойство `context` позволяет нам указать самостоятельно, от какой точки будет идти ориентирование в проекте. По умолчанию вебпак ориентируется от начальной папки нашего проекта. Если мы добавим контекст, то все пути, нам нужно будет прописывать относительно этого контекста. Это удобно, так как почти все пути до файлов мы прописываем внутри той же папки `src`
@@ -498,7 +509,16 @@ h1 {
 
 ## Работа с JSON 
 
-59:10
+
+
+```JS
+// Подключение JSON-файла
+import json from './assets/json.json';  
+console.log('json: ', json);
+```
+
+
+
 
 ## Работа с файлами 
 
