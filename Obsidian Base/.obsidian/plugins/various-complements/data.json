@@ -426,8 +426,8 @@
     "package": {
       "package": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666708395076
+          "count": 2,
+          "lastUpdated": 1666801064942
         }
       }
     },
@@ -444,6 +444,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1666712879583
+        }
+      }
+    },
+    "file-loader": {
+      "file-loader": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666799898782
         }
       }
     }

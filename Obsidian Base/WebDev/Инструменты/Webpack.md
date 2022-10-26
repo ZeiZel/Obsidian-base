@@ -528,7 +528,7 @@ console.log('json: ', json);
 npm install file-loader -g
 ```
 
-Во-вторых, нужно описать для него правила
+Во-вторых, нужно описать для него правила. В правилах мы укажем варианты расширений изображений, которые могут встречаться в нашем проекте
 
 `webpack.config.js`
 ```JSON
@@ -549,27 +549,162 @@ module: {
 }
 ```
 
+Использование в JS
 
+```JS
+import WebpackLogo from './assets/webpack-logo.png';
+  
+const post = new Post("Webpack Post Title", WebpackLogo);
+```
 
+Использование в CSS (создаст в `dist` отдельный файл с изображением)
 
-
-
-
+```CSS
+.logo {  
+    background-image: url("../assets/webpack-logo.png");  
+    background-size: cover;  
+    height: 200px;  
+    width: 200px;  
+    margin: 0 auto;  
+}
+```
+```HTML
+<div class="logo"></div>
+```
 
 ## Работа со шрифтами
 
+Дополнение конфига для работы со шрифтами:
+`webpack.config.js`
+```JSON
+rules: [  
+   {  
+      test: /\.css$/,  
+      use: ['style-loader', 'css-loader']  
+   },  
+   {  
+      test: /\.(png|jpe?g|gif)$/i,  
+      use: ['file-loader'],  
+   },  
+   // Тут нужно прописать правила работы file-loader со шрифтами
+   {  
+	   // типы шрифтов
+      test: /\.(ttf|eot|woff|woff2)$/,  
+      use: ['file-loader']  
+   }  
+],
+```
+Подключаем стили с нашего компьютера
+`font.css`
+```CSS
+@font-face {  
+    font-family: 'Roboto';  
+    src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');  
+}
+```
+Импортим файл в наш основной. Импорты работают почти так же как и в WP
+`style.css`
+```CSS
+@import "font.css";  
+  
+body {  
+    font-family: 'Roboto', sans-serif;  
+}
+```
 
+![](_png/Pasted%20image%2020221026185756.png)
 
 ## Подключение CSS-библиотек 
 
+Попробуем установить библиотеку для ==css==. Это нормализатор стилей под разные браузеры.
 
+```bash
+npm install normalize.css
+```
+
+Подключаем модуль так же через импорт. 
+`~` в начале имени модуля говорит нам о том, что модуль нужно искать в папке: `node_modules`
+
+```CSS
+@import "~normalize.css";
+```
 
 ## Защита от публикации пакета 
 
+Стандартно наш пакет имеет основную входную точку, которая определена в `package.json`, однако, чтобы защититься от публикации нам нужно заменить одну строчку
 
+`package.json`
+```JSON
+{  
+  "name": "webpack",  
+  "version": "1.0.0",  
+  "description": "",  
+  "main": "index.js",  // Это свойство нужно для публичных пакетов
+  "scripts": {  
+    "dev": "webpack --mode development",  
+    "build": "webpack --mode production",  
+    "watch": "webpack --mode development --watch"  
+  },
+```
+
+А сейчас наш пакет будет защищён от публикации
+
+```JSON
+{  
+  "name": "webpack",  
+  "version": "1.0.0",  
+  "description": "",  
+  "private": true,  // Это свойство делает наш пакет приватным
+  "scripts": {  
+    "dev": "webpack --mode development",  
+    "build": "webpack --mode production",  
+    "watch": "webpack --mode development --watch"  
+  },
+```
 
 ## Работа с XML-файлами 
 
+Установка лоадера ==XML==
+
+```bash
+npm install -D xml-loader
+```
+
+Добавление правил на ==XML==
+
+```JS
+module: {  
+   rules: [  
+      {  
+         test: /\.css$/,  
+         use: ['style-loader', 'css-loader']  
+      },  
+      {  
+         test: /\.(png|jpe?g|gif)$/i,  
+         use: ['file-loader'],  
+      },  
+      {  
+         test: /\.(ttf|eot|woff|woff2)$/,  
+         use: ['file-loader']  
+      }, 
+      // настройки для xml-loader 
+      {  
+         test: /\.xml$/,  
+         use: ['xml-loader']  
+      }  
+   ],  
+}
+```
+
+Вывод в консоль и подключение
+
+```JS
+import json from './assets/json.json';  
+import xml from './assets/data.xml';
+
+console.log('json: ', json);  
+console.log('XML: ', xml);
+```
 
 
 ## Работа с CSV-файлами 
