@@ -4,77 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "1d3ebae429d471ed",
+        "id": "3d4721bbec1aa65f",
         "type": "tabs",
         "children": [
           {
-            "id": "1cfc982b3325d6ee",
+            "id": "68ec328a8db57550",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WebDev/Инструменты/Webpack.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1c6b08b2e15f23e0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Motion Design/_lessons/Супер Cinema 4D.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "cc14bef9987cf3f5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "584446ecc2378148",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.0.3"
-              }
-            }
-          },
-          {
-            "id": "ba05d86ca50c8dfe",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design/Motion Design/_lessons/Супер Substance.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ed29ab736423a327",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -140,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -157,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -179,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md"
-              }
+              "state": {}
             }
           },
           {
@@ -208,7 +145,7 @@
     "width": 371.5,
     "collapsed": true
   },
-  "active": "584446ecc2378148",
+  "active": "68ec328a8db57550",
   "lastOpenFiles": [
     "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
     "Design/Motion Design/_lessons/Супер Cinema 4D.md",
