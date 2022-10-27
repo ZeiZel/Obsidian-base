@@ -4,35 +4,16 @@
 
 [58:56](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3536s) – Работа с JSON [1:02:50](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=3770s) – Работа с файлами [1:09:02](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4142s) – Работа со шрифтами [1:13:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4401s) – Подключение CSS-библиотек [1:14:51](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4491s) – Защита от публикации пакета [1:15:32](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4532s) – Работа с XML-файлами [1:17:44](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4664s) – Работа с CSV-файлами [1:20:06](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=4806s) – Дополнительные настройки [1:24:54](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5094s) – Подключение JS-библиотек [1:28:56](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5336s) – Оптимизация [1:33:40](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5620s) – Webpack-dev-server [1:39:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=5954s) –  Копирования статических файлов [1:42:32](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=6152s) – Сжатие CSS, HTML, JS [1:59:37](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7177s) – Компиляция Less [2:06:08](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7568s) – Компиляция Sass [2:03:57](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7437s) – Оптимизация [2:10:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7821s) – Babel [2:22:35](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s) – Добавление плагинов для Babel [2:24:28](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s) – Компиляция TypeScript [2:27:20](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s) – Компиляция React JSX [2:33:38](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9218s) – Devtool [2:36:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9374s) – ESLint [2:43:00](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9780s) – Динамические импорты [2:44:52](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9892s) – Анализ финальной сборки
 
-## Решение частых ошибок
-
-**Первая ошибка**
-Если не работает Dev-server на текущей версии вебпака:
-```JSON
-devServer: { 
-	static: { 
-		directory: path.join(__dirname, 'src'), 
-	}, 
-	compress: true, 
-	port: 9000, 
-	open: true, 
-},
-```
-Команда в package.json тоже немного другая: 
-```JSON
-"start": "webpack serve"
-```
-
-
 ## Написание базового приложения 
 
 Этот скрипт реализует функционал отправки сообщения в JSON-формате
 
 `Post.js`
 ```JS
-class Post {  
-   constructor(title) {  
+export default class Post {  
+   constructor(title, img) {  
       this.title = title;  
+      this.img = img;  
       this.date = new Date();  
    }  
   
@@ -40,6 +21,7 @@ class Post {
       return JSON.stringify({  
          title: this.title,  
          date: this.date.toJSON(),  
+         img: this.img,  
       });  
    }  
 }
@@ -516,9 +498,7 @@ WP позволяет нам подключать json-файлы без доп�
 import json from './assets/json.json';  
 console.log('json: ', json);
 ```
-
-1:02:10
-
+![](_png/Pasted%20image%2020221027180844.png)
 
 ## Работа с файлами 
 
@@ -707,17 +687,19 @@ import xml from './assets/data.xml';
 console.log('json: ', json);  
 console.log('XML: ', xml);
 ```
-
+![](_png/Pasted%20image%2020221027180902.png)
 
 ## Работа с CSV-файлами 
 
-
+`papaparse` нужен для работы с парсингом файлов
+`csv-loader` лоадер, который умеет обрабатывать ==csv== формат файлов
 
 ```bash
 npm i -d papaparse
 npm i -D csv-loader
 ```
 
+`webpack.config.js`
 ```JS
 {  
    test: /\.csv$/,  
@@ -725,10 +707,7 @@ npm i -D csv-loader
 }
 ```
 
-
-
-
-
+![](_png/Pasted%20image%2020221027180905.png)
 
 ## Дополнительные настройки 
 
@@ -770,7 +749,7 @@ import json from './assets/json';  // .json
 import WebpackLogo from './assets/webpack-logo'; // .png
 ```
 
-
+Так же присутствует свойство `alias`, которое позволяет задать псевдоним для путей в наших импортах
 
 ```JS
 resolve: {
@@ -791,17 +770,98 @@ import sayHic from '@models/script';
 ```
 ![](_png/Pasted%20image%2020221027174656.png)
 
-
-
-
-
 ## Подключение JS-библиотек 
 
 
+```bash
+npm i -S jquery
+```
+
+`index.js`
+```JS
+import * as $ from 'jquery';
+$('pre').html(post.toString());
+```
+![](_png/Pasted%20image%2020221027181333.png)
+
+
+```JS
+export default class Post {  
+   constructor(title, img) {  
+      this.title = title;  
+      this.img = img;  
+      this.date = new Date();  
+   }  
+  
+   toString() {  
+      return JSON.stringify({  
+         title: this.title,  
+         date: this.date.toJSON(),  
+         img: this.img,  
+      }, null, 2); // так же можно передать сюда параметры формата
+   }  
+}
+```
+![](_png/Pasted%20image%2020221027181539.png)
 
 ## Оптимизация 
 
+Представим, что у нас есть два файла, которые импортируют в себя ==jquery==. Мы столкнёмся с проблемой, что оба этих файла будут в себя отдельно импортировать библиотеку. Это приведёт к дополнительным прибавкам к весу файлов
 
+`index.js`
+```JS
+import * as $ from 'jquery';
+$('pre').html(post.toString());
+```
+
+`analytics.js`
+```JS
+import * as $ from 'jquery';  
+  
+function createAnalytics() {  
+   let counter = 0;  
+   let isDestroyed = false;  
+  
+   const listener = () => counter++;  
+  
+   $(document).on("click", listener);  
+  
+   return {  
+      destroy() {  
+         $(document).off("click", listener);  
+         isDestroyed = true;  
+      },  
+  
+      getClicks() {  
+         if (isDestroyed) {  
+            return "Analytics is destroyed";  
+         }  
+         return counter;  
+      },  
+   };  
+}  
+  
+window.analytics = createAnalytics();
+```
+
+Поэтому в WP есть свойство, которое позволяет настроить оптимизацию работы проекта. В нём мы можем объединять общие импорты в отдельные чанки, которые будут служить своего образа библиотеками (у нас будет один js, который будет хранить jquery)
+
+```JS
+module.exports = {  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   // Параметр оптимизации
+   optimization: {  
+      splitChunks: {  
+         chunks: 'all'  
+      }   
+	},
+// ....
+```
 
 ## Webpack-dev-server
 
@@ -886,7 +946,29 @@ module.exports = {
 
 ## Копирования статических файлов 
 
-1:39:19
+
+
+```bash
+npm i -D copy-webpack-plugin
+```
+
+```HTML
+<head>  
+   <meta charset="UTF-8">  
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <title>Webpack</title>  
+   <link rel="stylesheet" href="styles/style.css">  
+   <!--добавляем фавиконку-->
+   <link rel="icon" href="favicon.ico" type="image/icon">  
+</head>
+```
+
+
+
+
+
+
 
 ## Сжатие CSS, HTML, JS 
 

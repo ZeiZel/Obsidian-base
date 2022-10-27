@@ -486,6 +486,30 @@
           "lastUpdated": 1666881324672
         }
       }
+    },
+    "webpack": {
+      "webpack": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666883410891
+        }
+      }
+    },
+    "config": {
+      "config": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666883418304
+        }
+      }
+    },
+    "analytics": {
+      "analytics": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666884527884
+        }
+      }
     }
   }
 }
