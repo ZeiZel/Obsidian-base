@@ -725,6 +725,29 @@ console.log('XML: ', xml);
 
 ## Webpack-dev-server
 
+Если не будет работать, то вместо `-D` нужно попробовать `-g`
+
+```bash
+npm i webpack-dev-server -D
+```
+
+`package.json`
+```JSON
+"scripts": {  
+  "dev": "webpack --mode development",  
+  "build": "webpack --mode production",  
+  "watch": "webpack --mode development --watch", 
+  // Команда стартует сервер вебпака в режиме разработки и автоматически открывает страницу в браузере 
+  "start": "webpack serve --mode development --open"  
+},
+```
+
+
+
+
+
+
+
 
 
 ## Копирования статических файлов 
