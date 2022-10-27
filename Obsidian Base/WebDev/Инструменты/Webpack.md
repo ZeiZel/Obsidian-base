@@ -752,12 +752,13 @@ import WebpackLogo from './assets/webpack-logo'; // .png
 Так же присутствует свойство `alias`, которое позволяет задать псевдоним для путей в наших импортах
 
 ```JS
-resolve: {
-   extensions: ['.js', '.json', '.png'], 
-   // Так же тут мы можем указать псевдонимы для путей 
+resolve: {  
+   extensions: ['.js', '.jsx', '.ts', '.tsx'],  
    alias: {  
-      "@models": path.resolve(__dirname, 'src/models'),  
-      "@": path.resolve(__dirname, 'src')  
+      '@': path.resolve(__dirname, "src"),  
+      '@components': path.resolve(__dirname, 'src/components'),  
+      '@utilities': path.resolve(__dirname, 'src/utilities'),
+      '@modules': path.resolve(__dirname, 'src/modules')  
    }  
 },
 ```
@@ -767,6 +768,8 @@ resolve: {
 import sayHi from './models/script'; 
 // или через алиасы сгенерировать абсолютный путь
 import sayHic from '@models/script';
+// @ заменит src - так же сделает абсолютный путь
+import sayHic from '@/models/script';
 ```
 ![](_png/Pasted%20image%2020221027174656.png)
 
@@ -946,7 +949,7 @@ module.exports = {
 
 ## Копирования статических файлов 
 
-
+Так же мы можем указать нашему ==WP== куда копировать статические файлы (которые мы, например, подключили только в ==HTML==) 
 
 ```bash
 npm i -D copy-webpack-plugin
@@ -964,15 +967,35 @@ npm i -D copy-webpack-plugin
 </head>
 ```
 
+`webpack.config.js`
+```JS
+// подключаем плагин
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+// ....
 
+plugins: [  
+   new HTMLWebpackPlugin({  
+      template: "./index.html",  
+   }),  
+   new CleanWebpackPlugin(),  
+   // И теперь этот плагин перенесёт фотографию в выводимую папку
+   new CopyWebpackPlugin({  
+      patterns: [  
+         {  
+            from: path.resolve(__dirname, 'src/favicon.ico'),  
+            to: path.resolve(__dirname, 'dist')  
+         }  
+      ],  
+   }),  
+],
 
-
-
+// ....
+```
 
 ## Сжатие CSS, HTML, JS 
 
-
+1:43:48
 
 ## Компиляция Less 
 
