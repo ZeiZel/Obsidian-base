@@ -44,6 +44,16 @@
             }
           },
           {
+            "id": "584446ecc2378148",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.0.3"
+              }
+            }
+          },
+          {
             "id": "ba05d86ca50c8dfe",
             "type": "leaf",
             "state": {
@@ -54,9 +64,17 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "ed29ab736423a327",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -190,20 +208,17 @@
     "width": 371.5,
     "collapsed": true
   },
-  "ribbon": {
-    "mostRecentAction": ""
-  },
-  "active": "cc14bef9987cf3f5",
+  "active": "584446ecc2378148",
   "lastOpenFiles": [
+    "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
     "Design/Motion Design/_lessons/Супер Cinema 4D.md",
-    "Design/Motion Design/_lessons/_d_lessons/Фишки Cinema 4D.md",
+    "Design/Motion Design/_lessons/_d_lessons/Глава 1. Интерфейс, функции и настройки.md",
+    "Design/Motion Design/_lessons/_d_lessons/Знакомство с Cinema 4D.md",
     "Design/Motion Design/_lessons/_d_lessons/Без названия.md",
+    "Design/Motion Design/_lessons/_d_lessons/Фишки Cinema 4D.md",
     "Design/Motion Design/_lessons/Супер Substance.md",
     "WebDev/Инструменты/Webpack.md",
     "WebDev/Инструменты/WebStorm.md",
-    "WebDev/_png/Pasted image 20221011135903.png",
-    "WebDev/_png/Pasted image 20221011145617.png",
-    "WebDev/_png/Pasted image 20221011140204.png",
-    "WebDev/_png/d148fa9db2147641a7c7de7917ffe140.png"
+    "WebDev/_png/Pasted image 20221011135903.png"
   ]
 }
