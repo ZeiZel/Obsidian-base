@@ -1,10 +1,10 @@
 {
-  "obsidian-prism-theme@@dark-accent-color-preset": "pt-accent-color-purple-dt",
+  "obsidian-prism-theme@@dark-accent-color-preset": "pt-accent-color-mint-dt",
   "obsidian-prism-theme@@accent-style-dt": "pt-accent-style-borderandfilled-dt",
   "obsidian-prism-theme@@pt-icons-accent": true,
   "obsidian-prism-theme@@scroll-bar-size": 8,
   "obsidian-prism-theme@@highlight-text-accent-dt": "pt-highlight-text-accent-dt",
-  "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-indigo-dt",
+  "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-raven-dt",
   "obsidian-prism-theme@@file-line-width": 880,
-  "obsidian-prism-theme@@highlight-text-accent-custom-dt": "#B464D3"
+  "obsidian-prism-theme@@highlight-text-accent-custom-dt": "#3A6E83"
 }

@@ -454,6 +454,38 @@
           "lastUpdated": 1666799898782
         }
       }
+    },
+    "devServer": {
+      "devServer": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666879862656
+        }
+      }
+    },
+    "production": {
+      "production": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666879960274
+        }
+      }
+    },
+    "Webpack": {
+      "Webpack": {
+        "internalLink": {
+          "count": 1,
+          "lastUpdated": 1666881260838
+        }
+      }
+    },
+    "extensions": {
+      "extensions": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1666881324672
+        }
+      }
     }
   }
 }

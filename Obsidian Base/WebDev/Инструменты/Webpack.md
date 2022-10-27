@@ -672,6 +672,7 @@ npm install -D xml-loader
 
 Добавление правил на ==XML==
 
+`webpack.config.js`
 ```JS
 module: {  
    rules: [  
@@ -698,6 +699,7 @@ module: {
 
 Вывод в консоль и подключение
 
+`index.js`
 ```JS
 import json from './assets/json.json';  
 import xml from './assets/data.xml';
@@ -709,9 +711,87 @@ console.log('XML: ', xml);
 
 ## Работа с CSV-файлами 
 
-1:17:40
+
+
+```bash
+npm i -d papaparse
+npm i -D csv-loader
+```
+
+```JS
+{  
+   test: /\.csv$/,  
+   use: ['csv-loader'],  
+}
+```
+
+
+
+
+
 
 ## Дополнительные настройки 
+
+Свойство `resolve` позволяет нам определить для ==Webpack==, что ему нужно искать по умолчанию. 
+То есть, если вложенное свойство `extensions` будет пустое, то мы должны будем всегда прописывать в `import`  расширения файлов. Если мы добавим расширения в массив, то ==WP== будет искать файл с подходящим расширением, даже если в импорте мы его не укажем
+
+```JS
+module.exports = {  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "public"),  
+   },  
+   resolve: {  
+      // Тут мы должны сказать WP, какие расширения нужно понимать по умолчанию  
+      extensions: ['.js', '.json', '.png'],  
+   },  
+   devServer: {  
+      static: {  
+         directory: path.join(__dirname, 'public'),  
+      },  
+      compress: true,  
+      port: 9000,  
+      open: true  
+   },
+// ....
+```
+
+С настройками выше наши импорты будут работать без указания расширения
+
+```JS
+import Post from './Post';  // .js
+import json from './assets/json';  // .json
+import WebpackLogo from './assets/webpack-logo'; // .png
+```
+
+
+
+```JS
+resolve: {
+   extensions: ['.js', '.json', '.png'], 
+   // Так же тут мы можем указать псевдонимы для путей 
+   alias: {  
+      "@models": path.resolve(__dirname, 'src/models'),  
+      "@": path.resolve(__dirname, 'src')  
+   }  
+},
+```
+
+```JS
+// и теперь можно задать относительный путь
+import sayHi from './models/script'; 
+// или через алиасы сгенерировать абсолютный путь
+import sayHic from '@models/script';
+```
+![](_png/Pasted%20image%2020221027174656.png)
+
+
 
 
 
@@ -725,11 +805,16 @@ console.log('XML: ', xml);
 
 ## Webpack-dev-server
 
+`devServer` вебпака собирает наш проект так же как и при обычной сборке, но складывает все собранные файлы в оперативную память, что позволяет ему не обновляя страницу обновлять все модули и отображать изменения. Поэтому сервер WP используется только в режиме разработки.
+Чтобы получить конечный билд, нужно запустить `production` сборку вебпака. 
+
 Если не будет работать, то вместо `-D` нужно попробовать `-g`
 
 ```bash
 npm i webpack-dev-server -D
 ```
+
+Создаём новую команду для запуска
 
 `package.json`
 ```JSON
@@ -737,22 +822,71 @@ npm i webpack-dev-server -D
   "dev": "webpack --mode development",  
   "build": "webpack --mode production",  
   "watch": "webpack --mode development --watch", 
-  // Команда стартует сервер вебпака в режиме разработки и автоматически открывает страницу в браузере 
-  "start": "webpack serve --mode development --open"  
+  // Команда стартует сервер вебпака
+  "start": "webpack serve"  
 },
 ```
 
+Тут уже достаточно для запуска будет вписать такую команду:
+```bash
+npm start
+```
+Чтобы остановить работу процесса, достаточно нажать `ctrl+c`
 
-
-
-
-
-
-
+`webpack.config.js`
+```JS
+module.exports = {  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   output: {  
+      filename: "[name].[contenthash].js",  
+      path: path.resolve(__dirname, "public"),  
+   },  
+   // Сюда вставляем активацию работы плагина devServer 
+   devServer: {  
+      static: {  
+         directory: path.join(__dirname, 'public'),  
+      },  
+      compress: true,  // Если нужно компрессия файла
+      port: 9000,  // Определяем порт
+      open: true // Автоматически запускает страницу в браузере
+   },  
+   plugins: [  
+      new HTMLWebpackPlugin({  
+         template: "./index.html",  
+      }),  
+      new CleanWebpackPlugin(),  
+   ],  
+   module: {  
+      rules: [  
+         {  
+            test: /\.css$/,  
+            use: ['style-loader', 'css-loader']  
+         },  
+         {  
+            test: /\.(png|jpe?g|gif)$/i,  
+            use: ['file-loader'],  
+         },  
+         {  
+            test: /\.(ttf|eot|woff|woff2)$/,  
+            use: ['file-loader']  
+         },  
+         {  
+            test: /\.xml$/,  
+            use: ['xml-loader']  
+         }  
+      ],  
+   }  
+};
+```
 
 ## Копирования статических файлов 
 
-
+1:39:19
 
 ## Сжатие CSS, HTML, JS 
 
