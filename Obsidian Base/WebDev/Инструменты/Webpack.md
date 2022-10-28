@@ -999,13 +999,16 @@ plugins: [
 
 ## Сжатие CSS, HTML, JS 
 
-
+**Минификация CSS**
+Данный плагин будет выводить отдельные CSS файлы и нормально их компилировать
 
 ```bash
 npm install --save-dev mini-css-extract-plugin
 ```
 
+Производим небольшие настройки и добавляем плагин в конфиг
 
+`webpack.config.js`
 ```JS
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
@@ -1074,8 +1077,11 @@ module: {
 
 ![](_png/Pasted%20image%2020221028174518.png)
 
-Тут мы дополнили как сам плагин, потому что в него можно передать объект с параметрами, так и реализовали проверку режима для наших компонентов и если мы находимся в режиме разработки, то у нас будет активн
+Тут мы дополнили 
+1) как сам плагин, потому что в него можно передать объект с параметрами 
+2) так и реализовали проверку режима для наших компонентов и если мы находимся в режиме разработки, то у нас будет активна смена модулей без перезагрузки страницы
 
+`webpack.config.js`
 ```JS
 // Эта переменная будет хранить в себе значение состояния, в котором находится сайт во время разработки  
 const isDev = process.env.NODE_ENV === "development";
@@ -1112,15 +1118,126 @@ module: {
 // ....
 ```
 
+Чтобы проверить работу смены окружений, нужно воспользоваться пакетом для их смены:
+
+```bash
+npm i -G cross-env
+```
+
+Строчками `cross-env NODE_ENV=development` мы определяем среду нашей разработки (продакшен или разработка). Этот код в скриптах позволит нам всегда контролировать среду, в которой мы находимся и определять работу некоторых наших функций вебпака
+
+`package.json`
+```JSON
+"scripts": {  
+  "dev": "cross-env NODE_ENV=development webpack --mode development",  
+  "build": "cross-env NODE_ENV=production webpack --mode production",  
+  "watch": "cross-env NODE_ENV=development webpack --mode development --watch",  
+  "start": "cross-env NODE_ENV=development webpack serve"  
+},
+```
+
+*Сам плагин для минификации CSS:*
+
+```bash
+npm install css-minimizer-webpack-plugin --save-dev
+```
+
+```JS
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");  
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");   
+  
+// Эта переменная будет хранить в себе значение состояния, в котором находится сайт во время разработки  
+const isDev = process.env.NODE_ENV === "development";  
+const isProd = process.env.NODE_ENV === "production";  
+  
+const optimization = () => {  
+   const config = {  
+      splitChunks: {  
+         chunks: 'all'  
+      }   }  
+
+   // Если режим продакшена
+   if (isProd) {  
+	   // то нужно добавить свойство minimizer с плагином минификации
+      config.minimizer = [   
+         new CssMinimizerPlugin() // сам минификатор CSS
+      ]  
+   }  
+  
+   return config;  
+}
+
+// ....
+
+module.exports = {  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   // Тут нужно вложить функцию, которая сгенерирует наш объект оптимизации
+   optimization: optimization(),
+
+// ....
+```
 
 
+**Минификация JS**
+
+```bash
+npm install terser-webpack-plugin --save-dev
+```
+
+`webpack.config.js`
+```JS
+// Подключаем минификатор JS
+const TerserPlugin = require("terser-webpack-plugin");  
+  
+// Эта переменная будет хранить в себе значение состояния, в котором находится сайт во время разработки  
+const isDev = process.env.NODE_ENV === "development";  
+const isProd = process.env.NODE_ENV === "production";  
+  
+const optimization = () => {  
+   const config = {  
+      splitChunks: {  
+         chunks: 'all'  
+      }   }  
+  
+   if (isProd) {  
+      config.minimizer = [  
+         new TerserPlugin(), // Подключаем минификатор JS  
+         new CssMinimizerPlugin(),  
+      ]  
+   }  
+  
+   return config;  
+}
+```
 
 
+**Минификация HTML**
+Уже этот код будет минифицировать ==HTML== код при работе в режиме продакшена
 
+`webpack.config.js`
+```JS
+// Если работаем в продакшн режиме...
+const isProd = process.env.NODE_ENV === "production";
 
+// ....
 
+plugins: [  
+   new HTMLWebpackPlugin({  
+	   template: "./index.html",  
+	   // Тут уже настраиваем минификацию
+	   minify: {  
+		   // ...то сжимаем все пробелы в коде
+	      collapseWhitespace: isProd  
+	   }  
+	}),
 
-
+// ...
+```
 
 ## Компиляция Less 
 
