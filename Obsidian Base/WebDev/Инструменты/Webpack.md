@@ -1242,44 +1242,192 @@ plugins: [
 
 ## Компиляция Less и Sass 
 
-Устанавливаем сам ==less== и его лоадер в наш проект
+Устанавливаем сам ==less==, ==sass== и их его лоадеры в наш проект
 
 ```bash
 npm install less less-loader --save-dev
 npm install sass-loader sass webpack --save-dev
 ```
 
-Далее подключаем правило, которое будет компилировать ==less==
+Далее подключаем правило, которое будет компилировать ==less== и ==sass==
 
+#полныйконфиг
+`wenpack.config.js`
 ```JS
-module: {  
-	rules: [  
-		{  
-			test: /\.css$/,  
-			use: [MiniCSSExtractPlugin.loader, 'css-loader']  
-		},  
-		// Это настройки компилации для less        
-		{  
-			test: /\.less$/i,  
-			use: [  
-				// compiles Less to CSS  
-				'style-loader',  
-				"css-loader",  
-				"less-loader",  
-			],  
-		},
+const path = require("path");  
+const HTMLWebpackPlugin = require("html-webpack-plugin");  
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");  
+const CopyWebpackPlugin = require("copy-webpack-plugin");  
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");  
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");  
+const TerserPlugin = require("terser-webpack-plugin");  
+  
+// Эта переменная будет хранить в себе значение состояния, в котором находится сайт во время разработки  
+const isDev = process.env.NODE_ENV === "development";  
+const isProd = process.env.NODE_ENV === "production";  
+  
+const optimization = () => {  
+   const config = {  
+      splitChunks: {  
+         chunks: 'all'  
+      }   }  
+  
+   if (isProd) {  
+      config.minimizer = [  
+         new TerserPlugin(),  
+         new CssMinimizerPlugin(),  
+      ]  
+   }  
+  
+   return config;  
+}  
+  
+// эта функция будет генерировать наименование файла  
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;  
+  
+module.exports = {  
+   context: path.resolve(__dirname, "src"),  
+   mode: "development",  
+   entry: {  
+      main: "./index.js",  
+      analytics: "./analytics.js",  
+   },  
+   optimization: optimization(),  
+   output: {  
+      filename: filename('js'),  
+      path: path.resolve(__dirname, "dist"),  
+   },  
+   resolve: {  
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],  
+      alias: {  
+         '@': path.resolve(__dirname, "src"),  
+         '@components': path.resolve(__dirname, 'src/components'),  
+         '@utilities': path.resolve(__dirname, 'src/utilities')  
+      }  
+   },  
+   devServer: {  
+      static: {  
+         directory: path.join(__dirname, 'dist'),  
+      },  
+      compress: true,  
+      port: 9000,  
+      open: true,  
+      hot: isDev, // перезагружает страницу если находимся в режиме разработчика  
+   },  
+   plugins: [  
+      new HTMLWebpackPlugin({  
+         template: "./index.html",  
+         minify: {  
+            collapseWhitespace: isProd  
+         }  
+      }),  
+      new CleanWebpackPlugin(),  
+      new CopyWebpackPlugin({  
+         patterns: [  
+            {  
+               from: path.resolve(__dirname, 'src/favicon.ico'),  
+               to: path.resolve(__dirname, 'dist')  
+            }  
+         ],  
+      }),  
+      new MiniCSSExtractPlugin({  
+         // копируем из output  
+         filename: filename('css'),  
+      }),  
+   ],  
+   module: {  
+      rules: [  
+         {  
+            test: /\.css$/,  
+            use: [MiniCSSExtractPlugin.loader, 'css-loader']  
+         },
+         // Тут подключаем SASS/SCSS  
+         {  
+            test: /\.s[ac]ss$/i,  
+            use: [  
+               "style-loader", // или MiniCSSExtractPlugin.loader
+               "css-loader",  
+               "sass-loader",  
+            ],  
+         },  
+         // А тут подключаем LESS
+         {  
+            test: /\.less$/i,  
+            use: [  
+               // compiles Less to CSS  
+               "style-loader", // или MiniCSSExtractPlugin.loader 
+               "css-loader",  
+               "less-loader",  
+            ],  
+         },  
+         {  
+            test: /\.(png|jpe?g|gif)$/i,  
+            use: ['file-loader'],  
+         },  
+         {  
+            test: /\.(ttf|eot|woff|woff2)$/,  
+            use: ['file-loader']  
+         },  
+         {  
+            test: /\.xml$/,  
+            use: ['xml-loader']  
+         },  
+         {  
+            test: /\.csv$/,  
+            use: ['csv-loader'],  
+         }  
+      ],  
+   }  
+};
 ```
 
+Стили Less
+```LESS
+@border: 1px solid #ccc;  
+  
+.box {  
+  padding: 1rem;  
+  border-radius: 5px;  
+  margin-top: 1rem;  
+  border: @border;  
+  
+  h2 {  
+    text-align: center;  
+    color: darkblue;  
+  }  
+}
+```
+
+Стили SCSS
+```SCSS
+$border: 1px solid #ccc;  
+  
+.card {  
+  padding: 1rem;  
+  border-radius: 5px;  
+  margin-top: 1rem;  
+  border: $border;  
+  
+  h2 {  
+    text-align: center;  
+    color: darkred;  
+  }  
+}
+```
+
+подключаем стили в файл скрипта
+`index.js`
+```JS
+import './styles/style.css';  
+import './styles/less.less';  
+import './styles/scss.scss';
+```
 
 ![](_png/Pasted%20image%2020221028195541.png)
 
-
-
-
-
 ## Оптимизация 
 
-
+2:08:37
 
 ## Babel 
 
