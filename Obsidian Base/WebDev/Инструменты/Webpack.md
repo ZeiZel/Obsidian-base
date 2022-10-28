@@ -122,6 +122,7 @@ npm install -D webpack webpack-cli
 
 Это минимальный конфиг для запуска webpack
 
+#полныйконфиг
 `webpack.config.js`
 ```JS
 // Это модуль, который хранит в себе путь до нашего проекта  
