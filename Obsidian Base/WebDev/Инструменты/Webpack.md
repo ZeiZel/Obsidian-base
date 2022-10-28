@@ -993,9 +993,134 @@ plugins: [
 // ....
 ```
 
+Как итог, можно увидеть фавиконку, которую мы напрямую подключили в HTML
+
+![](_png/Pasted%20image%2020221028165947.png)
+
 ## Сжатие CSS, HTML, JS 
 
-1:43:48
+
+
+```bash
+npm install --save-dev mini-css-extract-plugin
+```
+
+
+```JS
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+
+// ....
+
+plugins: [  
+   new HTMLWebpackPlugin({  
+      template: "./index.html",  
+   }),  
+   new CleanWebpackPlugin(),  
+   new CopyWebpackPlugin({  
+      patterns: [  
+         {  
+            from: path.resolve(__dirname, 'src/favicon.ico'),  
+            to: path.resolve(__dirname, 'dist')  
+         }  
+      ],  
+   }),  
+   // Добавляем плагин, который будет минифицировать CSS
+   new MiniCSSExtractPlugin({  
+      // копируем из output путь и меняем расширение на '.css'
+      filename: "[name].[contenthash].css",   
+}),  
+],  
+module: {  
+   rules: [  
+      {  
+         test: /\.css$/, 
+         // Меняем 'style-loader' на лоадер минификатора 
+         use: [MiniCSSExtractPlugin.loader, 'css-loader']  
+      },  
+      {  
+         test: /\.(png|jpe?g|gif)$/i,  
+         use: ['file-loader'],  
+      },  
+      {  
+         test: /\.(ttf|eot|woff|woff2)$/,  
+         use: ['file-loader']  
+      },  
+      {  
+         test: /\.xml$/,  
+         use: ['xml-loader']  
+      },  
+      {  
+         test: /\.csv$/,  
+         use: ['csv-loader'],  
+      }  
+   ],  
+}
+```
+
+Убираем из подключений ==CSS==, так как теперь он будет подключаться самостоятельно
+
+```HTML
+<head>  
+   <meta charset="UTF-8">  
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <title>Webpack</title>  
+   <!--добавляем фавиконку-->  
+   <link rel="icon" href="favicon.ico" type="image/icon">  
+</head>
+```
+
+Вот так выглядит выходной HTML-файл
+
+![](_png/Pasted%20image%2020221028174518.png)
+
+Тут мы дополнили как сам плагин, потому что в него можно передать объект с параметрами, так и реализовали проверку режима для наших компонентов и если мы находимся в режиме разработки, то у нас будет активн
+
+```JS
+// Эта переменная будет хранить в себе значение состояния, в котором находится сайт во время разработки  
+const isDev = process.env.NODE_ENV === "development";
+
+// ...
+
+devServer: {  
+   static: {  
+      directory: path.join(__dirname, 'dist'),  
+   },  
+   compress: true,  
+   port: 9000,  
+   open: true,
+   // перезагружает страницу если находимся в режиме разработчика    
+   hot: isDev, 
+},  
+ 
+module: {  
+   rules: [  
+      {  
+         test: /\.css$/,  
+        // Так же можно более детально настроить плагин, так как первым параметром он позволяет в себя положить объект с самим лоадером и его опциями
+         use: [{  
+            loader: MiniCSSExtractPlugin.loader,  
+            options: { 
+		// hot module reload - меняет сущности без перезагрузки
+	    // Если находимся в режиме разработчика, то будет активно  
+               hmr: isDev,  
+               reloadAll: true  
+            }  
+         }, 'css-loader']  
+      },
+      
+// ....
+```
+
+
+
+
+
+
+
+
+
+
 
 ## Компиляция Less 
 
