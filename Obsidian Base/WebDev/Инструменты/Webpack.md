@@ -1240,11 +1240,40 @@ plugins: [
 // ...
 ```
 
-## Компиляция Less 
+## Компиляция Less и Sass 
+
+Устанавливаем сам ==less== и его лоадер в наш проект
+
+```bash
+npm install less less-loader --save-dev
+npm install sass-loader sass webpack --save-dev
+```
+
+Далее подключаем правило, которое будет компилировать ==less==
+
+```JS
+module: {  
+	rules: [  
+		{  
+			test: /\.css$/,  
+			use: [MiniCSSExtractPlugin.loader, 'css-loader']  
+		},  
+		// Это настройки компилации для less        
+		{  
+			test: /\.less$/i,  
+			use: [  
+				// compiles Less to CSS  
+				'style-loader',  
+				"css-loader",  
+				"less-loader",  
+			],  
+		},
+```
 
 
+![](_png/Pasted%20image%2020221028195541.png)
 
-## Компиляция Sass 
+
 
 
 
