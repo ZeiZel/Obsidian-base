@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/Инструменты/Gulp.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/Инструменты/Gulp.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/Инструменты/Gulp.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md"
+                "file": "WebDev/Инструменты/Gulp.md"
               }
             }
           },
@@ -155,6 +155,7 @@
   },
   "active": "68ec328a8db57550",
   "lastOpenFiles": [
+    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/PostreSQL.md",
     "WebDev/Инструменты/Webpack.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/005 Работаем с JSX-препроцессором, ограничения в нем.md",
@@ -163,7 +164,6 @@
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "WebDev/Инструменты/Prettier.md",
     "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
-    "Design/Motion Design/_lessons/Супер Cinema 4D.md",
-    "Design/Motion Design/_lessons/_d_lessons/Глава 1. Интерфейс, функции и настройки.md"
+    "Design/Motion Design/_lessons/Супер Cinema 4D.md"
   ]
 }
