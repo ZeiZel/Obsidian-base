@@ -4,8 +4,6 @@
 
 #полныйконфиг - полная версия конфига ==webpack== 
 
- [2:10:21](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=7821s) – Babel [2:22:35](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s) – Добавление плагинов для Babel [2:24:28](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s) – Компиляция TypeScript [2:27:20](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s) – Компиляция React JSX [2:33:38](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9218s) – Devtool [2:36:14](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9374s) – ESLint [2:43:00](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9780s) – Динамические импорты [2:44:52](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=9892s) – Анализ финальной сборки
-
 ## Написание базового приложения 
 
 Этот скрипт реализует функционал отправки сообщения в JSON-формате
@@ -2012,4 +2010,197 @@ module.exports = {
 ```JSON
 "scripts": {    
   "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
+```
+
+## Полный конфиг сборки
+
+Папка проекта:
+
+![](_png/Pasted%20image%2020221029150511.png)
+
+Конфиг:
+
+```JS
+const path = require('path');  
+const HTMLWebpackPlugin = require('html-webpack-plugin');  
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');  
+const CopyWebpackPlugin = require('copy-webpack-plugin');  
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');  
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');  
+const TerserPlugin = require('terser-webpack-plugin');  
+  
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');  
+  
+// Эта переменная будет хранить в себе значение состояния, в котором находится сайт во время разработки  
+const isDev = process.env.NODE_ENV === 'development';  
+const isProd = process.env.NODE_ENV === 'production';  
+  
+// эта функция определяет под каждый тип разработки свою минификацию файлов  
+const optimization = () => {  
+   const config = {  
+      splitChunks: {  
+         chunks: 'all',  
+      },  
+   };  
+  
+   if (isProd) {  
+      config.minimizer = [new TerserPlugin(), new CssMinimizerPlugin()];  
+   }  
+  
+   return config;  
+};  
+  
+// эта функция генерирует опции лоадеров  
+const cssLoaders = extra => {  
+   const loader = [MiniCSSExtractPlugin.loader, 'css-loader'];  
+  
+   if (extra) loader.push(extra);  
+  
+   return loader;  
+};  
+  
+// Это опции под типы пресетов babel  
+const babelOptions = ext => {  
+   const options = {  
+      presets: ['@babel/preset-env'],  
+   };  
+  
+   if (ext) options.presets.push(ext);  
+  
+   return options;  
+};  
+  
+// будет добавлять указанные лоадеры  
+// const jsLoaders = ext => {  
+//     const loaders = [  
+//        {  
+//           loader: ['babel-loader'],  
+//           options: babelOptions(),  
+//        },  
+//     ];  
+//  
+//     if (isDev) loaders.push(ext);  
+//  
+//     return loaders;  
+// };  
+  
+// эта функция будет генерировать наименование файла  
+const filename = ext => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);  
+  
+const plugins = () => {  
+   const base = [  
+      new HTMLWebpackPlugin({  
+         template: './index.html',  
+         minify: {  
+            collapseWhitespace: isProd,  
+         },  
+      }),  
+      new CleanWebpackPlugin(),  
+      new CopyWebpackPlugin({  
+         patterns: [  
+            {  
+               from: path.resolve(__dirname, 'src/favicon.ico'),  
+               to: path.resolve(__dirname, 'dist'),  
+            },  
+         ],  
+      }),  
+      new MiniCSSExtractPlugin({  
+         // копируем из output  
+         filename: filename('css'),  
+      }),  
+   ];  
+  
+   if (isProd) base.push(new BundleAnalyzerPlugin());  
+  
+   return base;  
+};  
+  
+module.exports = {  
+   context: path.resolve(__dirname, 'src'),  
+   mode: 'development',  
+   devtool: isDev ? 'source-map' : 'eval-cheap-source-map',  
+   entry: {  
+      main: ['@babel/polyfill', './index.jsx'],  
+      analytics: './analytics.ts',  
+   },  
+   optimization: optimization(),  
+   output: {  
+      filename: filename('js'),  
+      path: path.resolve(__dirname, 'dist'),  
+   },  
+   resolve: {  
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],  
+      alias: {  
+         '@': path.resolve(__dirname, 'src'),  
+         '@components': path.resolve(__dirname, 'src/components'),  
+         '@utilities': path.resolve(__dirname, 'src/utilities'),  
+      },  
+   },  
+   devServer: {  
+      static: {  
+         directory: path.join(__dirname, 'dist'),  
+      },  
+      compress: true,  
+      port: 9000,  
+      open: true,  
+      hot: isDev, // перезагружает страницу если находимся в режиме разработчика  
+   },  
+   plugins: plugins(),  
+   module: {  
+      rules: [  
+         {  
+            test: /\.js$/,  
+            exclude: /node_modules/,  
+            use: {  
+               loader: 'babel-loader',  
+               options: babelOptions(),  
+            },  
+         },  
+         {  
+            test: /\.ts$/,  
+            exclude: /node_modules/,  
+            use: {  
+               loader: 'babel-loader',  
+               options: babelOptions('@babel/preset-typescript'),  
+            },  
+         },  
+         {  
+            test: /\.jsx$/,  
+            exclude: /node_modules/,  
+            use: {  
+               loader: 'babel-loader',  
+               options: babelOptions('@babel/preset-react'),  
+            },  
+         },  
+         {  
+            test: /\.css$/,  
+            use: cssLoaders(),  
+         },  
+         {  
+            test: /\.s[ac]ss$/i,  
+            use: cssLoaders('sass-loader'),  
+         },  
+         {  
+            test: /\.less$/i,  
+            use: cssLoaders('less-loader'),  
+         },  
+         {  
+            test: /\.(png|jpe?g|gif)$/i,  
+            use: ['file-loader'],  
+         },  
+         {  
+            test: /\.(ttf|eot|woff|woff2)$/,  
+            use: ['file-loader'],  
+         },  
+         {  
+            test: /\.xml$/,  
+            use: ['xml-loader'],  
+         },  
+         {  
+            test: /\.csv$/,  
+            use: ['csv-loader'],  
+         },  
+      ],  
+   },  
+};
 ```
