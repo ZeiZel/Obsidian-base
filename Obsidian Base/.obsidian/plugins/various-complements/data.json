@@ -570,8 +570,16 @@
     "characters": {
       "characters": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1667057192013
+        }
+      }
+    },
+    "непосредственно": {
+      "непосредственно": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1667055798087
+          "lastUpdated": 1667056858695
         }
       }
     }

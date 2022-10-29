@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "68ec328a8db57550",
+            "id": "c14c7fd2f8569663",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/03 Начало работы с Node.js.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/03 Начало работы с Node.js.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/03 Начало работы с Node.js.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/03 Начало работы с Node.js.md"
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md"
               }
             }
           },
@@ -153,8 +153,10 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "68ec328a8db57550",
+  "active": "c14c7fd2f8569663",
   "lastOpenFiles": [
+    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Mongo DB.md",
+    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/03 Начало работы с Node.js.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/02 Настройка окружения.md",
     "WebDev/Инструменты/Gulp.md",
@@ -162,8 +164,6 @@
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/PostreSQL.md",
     "WebDev/Инструменты/Webpack.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/005 Работаем с JSX-препроцессором, ограничения в нем.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/004 Create React App - создаем свое приложение.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md"
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md"
   ]
 }

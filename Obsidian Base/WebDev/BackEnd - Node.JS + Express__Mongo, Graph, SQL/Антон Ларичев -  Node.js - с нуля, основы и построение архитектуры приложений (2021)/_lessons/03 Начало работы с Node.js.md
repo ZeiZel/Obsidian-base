@@ -139,14 +139,40 @@ for (const c of characters) {
 }
 ```
 
+так же экспортировать можно непосредственно и функцию прямо на месте её создания
 
+```JS
+// characters.js
+module.exports = function log() {  
+   console.log('log');  
+}
 
+// app.js
+const log = require('./characters.js');  
+log();
+```
 
+>[!warning] Круговые зависимости, когда у нас есть импорты и экспорты между двумя файлами - могут привести к ошибке (потому как интерпретатор будет пытаться достучаться до элемента, которого пока не существует)
 
+И тут далее можно увидеть пример, когда мы подгружаем модуль в проект по условию (при выполнении условия - модуль подгружается)
 
+```JS
+// characters.js
+console.log('characters.js загружен');  
+  
+module.exports = function log() {  
+   console.log('log');  
+}
 
-
-
+// app.js
+const a = 1;  
+if (a > 0) {  
+   const log = require('./characters.js');  
+   log();  
+} else {  
+   console.log('Меньше 0');  
+}
+```
 
 ### 013 ES Modules
 
