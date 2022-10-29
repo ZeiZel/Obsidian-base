@@ -518,6 +518,22 @@
           "lastUpdated": 1667030267604
         }
       }
+    },
+    "eslint": {
+      "eslint": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1667042458440
+        }
+      }
+    },
+    "eslint-loader": {
+      "eslint-loader": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1667042461747
+        }
+      }
     }
   }
 }

@@ -1858,6 +1858,7 @@ root.render(
 
 В конфиг WP нужно вписать свойство `devtool`, которому по условию можно назначить определённый тип компайла карт
 
+`webpack.config.js`
 ```JS
 module.exports = {  
    context: path.resolve(__dirname, 'src'),  
@@ -1876,12 +1877,17 @@ module.exports = {
 
 ## ESLint 
 
-
+Устанавливаем сам `eslint` и `babel`-парсер для еслинта
 
 ```bash
 npm i -D eslint-loader
+
+npm i -D babel-eslint
 ```
 
+Добавим функцию, которая будет добавлять дополнительные лоадеры для ==JS== и закинем `eslint-loader` в компиляцию ==JS==
+
+`webpack.config.js`
 ```JS
 // будет добавлять указанные лоадеры  
 const jsLoaders = ext => {  
@@ -1904,20 +1910,36 @@ const jsLoaders = ext => {
 },
 ```
 
-
-
-
-
-
-
-
-
-
-
+`babel.js` - создадим для примера одну неиспользуемую переменную
+```JS
+const unused = 10;
+```
+`.eslintrc` - создаём в корне проекта
+```JSON
+{  
+	// Назначим парсер под бэйбель
+  "parser": "babel-eslint",  
+  // Скажем, чтобы выпадали варнинги, если будут обнаружены неиспользуемые переменные
+  "rules": {  
+    "no-unused-vars": "warn"  
+  },  
+  // активируем поддержку ES6
+  "env": {  
+    "es6": true,  
+    "browser": true  
+  },  
+  "extends": [  
+    "eslint:recommended"  
+  ]  
+}
+```
 
 ## Динамические импорты
 
 
+```bash
+npm i -D lodash
+```
 
 
 
