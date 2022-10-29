@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "76e77fc32574eb19",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "WebDev/Инструменты/Prettier.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/Инструменты/Webpack.md",
+                "file": "WebDev/Инструменты/Prettier.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/Инструменты/Webpack.md",
+                "file": "WebDev/Инструменты/Prettier.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/Инструменты/Webpack.md"
+                "file": "WebDev/Инструменты/Prettier.md"
               }
             }
           },
@@ -150,11 +163,12 @@
       }
     ],
     "direction": "horizontal",
-    "width": 371.5,
+    "width": 386.5,
     "collapsed": true
   },
-  "active": "68ec328a8db57550",
+  "active": "76e77fc32574eb19",
   "lastOpenFiles": [
+    "WebDev/Инструменты/Webpack.md",
     "Design/Motion Design/_lessons/_d_lessons/Глава 5. Материалы и текстуры.md",
     "Design/Motion Design/_lessons/Супер Cinema 4D.md",
     "Design/Motion Design/_lessons/_d_lessons/Глава 1. Интерфейс, функции и настройки.md",
@@ -162,7 +176,6 @@
     "Design/Motion Design/_lessons/_d_lessons/Без названия.md",
     "Design/Motion Design/_lessons/_d_lessons/Фишки Cinema 4D.md",
     "Design/Motion Design/_lessons/Супер Substance.md",
-    "WebDev/Инструменты/Webpack.md",
     "WebDev/Инструменты/WebStorm.md",
     "WebDev/_png/Pasted image 20221011135903.png"
   ]
