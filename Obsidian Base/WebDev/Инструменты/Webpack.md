@@ -1864,7 +1864,7 @@ module.exports = {
    context: path.resolve(__dirname, 'src'),  
    mode: 'development',  
    // тут уже в режиме разработчика будем генерировать карты
-   devtool: isDev ? 'source-map' : '',
+   devtool: isDev ? 'source-map' : 'eval-cheap-source-map',
 ```
 
 И теперь карты показывают, в каком файле были созданы стили и на какой строке они располагаются (конкретно позволяет работать с файлами специфических расширений из браузера)
@@ -1891,7 +1891,12 @@ npm i -D babel-eslint
 ```JS
 // будет добавлять указанные лоадеры  
 const jsLoaders = ext => {  
-   const loaders = ['babel-loader'];  
+   const loaders = [  
+      {  
+         loader: ['babel-loader'],  
+         options: babelOptions(),  
+      },  
+   ];  
   
    if (ext) loaders.push(ext);  
   
@@ -1903,10 +1908,7 @@ const jsLoaders = ext => {
 {  
    test: /\.js$/,  
    exclude: /node_modules/,  
-   use: {  
-      loader: jsLoaders('eslint-loader'),  
-      options: babelOptions(),  
-   },  
+   use: jsLoaders('eslint-loader'),  
 },
 ```
 
@@ -1936,33 +1938,78 @@ const unused = 10;
 
 ## Динамические импорты
 
+Библиотека простых функций
 
 ```bash
 npm i -D lodash
 ```
 
+Динамические импорты позволяют нам вставить библиотеку в любом участке кода и сразу же её использовать
 
-
-
-
-
-
-
-
-
-
+`babel.js`
+```JS
+import('lodash').then(_ => {  
+   console.log('Lodash: ', _.random(10, 11, true));  
+});
+```
 
 ## Анализ финальной сборки
 
+```bash
+npm i webpack-bundle-analyzer -D
+```
 
+```JS
+// ....
 
+// импортируем функцию анализирования конфига
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
+// Это список наших плагинов, который будет зависеть от 
+const plugins = () => {  
+   const base = [  
+      new HTMLWebpackPlugin({  
+         template: './index.html',  
+         minify: {  
+            collapseWhitespace: isProd,  
+         },  
+      }),  
+      new CleanWebpackPlugin(),  
+      new CopyWebpackPlugin({  
+         patterns: [  
+            {  
+               from: path.resolve(__dirname, 'src/favicon.ico'),  
+               to: path.resolve(__dirname, 'dist'),  
+            },  
+         ],  
+      }),  
+      new MiniCSSExtractPlugin({  
+         // копируем из output  
+         filename: filename('css'),  
+      }),  
+   ];  
+  
+   if (isProd) base.push(new BundleAnalyzerPlugin());  
+  
+   return base;  
+};
 
+// ....
 
+module.exports = {  
+   plugins: plugins(),
 
+// ....
+```
 
+И теперь тут можно увидеть, сколько занимают места разные библиотеки в нашем проекте
 
+![](_png/Pasted%20image%2020221029150254.png)
 
+Либо можно записать выполнение этого плагина через скрипт
 
-
-
+`package.json`
+```JSON
+"scripts": {    
+  "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
+```
