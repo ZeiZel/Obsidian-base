@@ -1568,24 +1568,42 @@ module.exports = {
 
 ## Babel 
 
+Устанавливаем нужные компоненты ==babel==
+
 ```bash
 npm install -D babel-loader @babel/core @babel/preset-env webpack
 ```
 
+Ну и добавим новые правила для активации работы ==babel== внутри ==webpack==  
+
+`webpack.config.js`
 ```JS
 { 
+	// обрабатываем js-файлы
 	test: /\.m?js$/, 
+	// исключаем нод-модули из компиляции
 	exclude: /node_modules/, 
 	use: { 
+		// используем лоадер babel
 		loader: "babel-loader", 
 		options: { 
+			// в опциях определяем пресеты
 			presets: ['@babel/preset-env'] 
 		} 
 	} 
 }
 ```
 
-
+`package.json`
+```JSON
+{  
+  "name": "webpack",
+  // компилировать так, чтобы не поддерживали только 0,25% браузеров, а все остальные - поддерживались  
+  "browserList": ">0.25%, not dead",  
+  "version": "1.0.0",  
+  "description": "",
+// ...
+```
 
 
 
