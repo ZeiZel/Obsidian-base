@@ -1574,10 +1574,29 @@ module.exports = {
 npm install -D babel-loader @babel/core @babel/preset-env webpack
 ```
 
+Так же нужно установить полифилы, которые будут переводить современные функции (async/await, get/set) под старые стандарты
+
+```bash
+npm install --save @babel/polyfill
+```
+
 Ну и добавим новые правила для активации работы ==babel== внутри ==webpack==  
 
 `webpack.config.js`
 ```JS
+// ....
+
+module.exports = {  
+   context: path.resolve(__dirname, 'src'),  
+   mode: 'development',  
+   entry: {  
+	   // тут как точку входа определяем массив, первым значением которого будут являться полифилы babel 
+      main: ['@babel/polyfill', './index.js'],  
+      analytics: './analytics.js',  
+   },
+
+// ....
+
 { 
 	// обрабатываем js-файлы
 	test: /\.m?js$/, 
@@ -1612,34 +1631,119 @@ npm install -D babel-loader @babel/core @babel/preset-env webpack
 
 
 
+```bash
+npm install --save-dev @babel/plugin-proposal-class-properties
+```
+
+```JS
+{  
+   test: /\.m?js$/,  
+   exclude: /node_modules/,  
+   use: {  
+      loader: 'babel-loader',  
+      options: {  
+         presets: ['@babel/preset-env'],  
+         plugins: [  
+            '@babel/plugin-proposal-class-properties',  
+         ]  
+      },  
+   },  
+},
+```
+
+```JS
+class Util {  
+   static id = Date.now();  
+}  
+  
+console.log(Util.id); // выведет дату
+```
 
 
-
-
-
-
+>[!note] Приведённый в примере плагин уже входит в `preset-env`
 
 
 
 ## Компиляция TypeScript 
 
+Для начала компиляции нужно установить пресет на ТС
 
+```bash
+npm install --save-dev @babel/preset-typescript
+```
 
+Дальше нужно подправить конфиг
 
+```JS
+// ...
 
+module.exports = {  
+   context: path.resolve(__dirname, 'src'),  
+   mode: 'development',  
+   entry: {  
+      main: ['@babel/polyfill', './index.js'],  
+      // тут в качестве второй точки входа поставить ts (так как этот файл мы переименовали в ts из js)
+      analytics: './analytics.ts',  
+   },
 
+// ...
 
+// Это уже правила для компиляции ts
+{  
+   test: /\.ts$/,  
+   exclude: /node_modules/,  
+   use: {  
+      loader: 'babel-loader',  
+      options: {  
+         presets: [  
+            '@babel/preset-env',  
+            // добавляем пресет на ts
+            '@babel/preset-typescript',  
+         ],  
+      },  
+   },  
+},
 
+// ...
+```
 
+Это сама аналитика, переделанная в ==TS==
 
-
-
-
+```TS
+import * as $ from 'jquery';  
+  
+function createAnalytics(): Object {  
+   let counter = 0;  
+   let isDestroyed: boolean = false;  
+  
+   const listener = (): number => counter++;  
+  
+   $(document).on('click', listener);  
+  
+   return {  
+      destroy() {  
+         $(document).off('click', listener);  
+         isDestroyed = true;  
+      },  
+  
+      getClicks() {  
+         if (isDestroyed) {  
+            return 'Analytics is destroyed';  
+         }  
+         return counter;  
+      },  
+   };  
+}  
+  
+window['analytics'] = createAnalytics();
+```
 
 ## Компиляция React JSX 
 
 
-
+```bash
+npm install --save-dev @babel/preset-react
+```
 
 
 
