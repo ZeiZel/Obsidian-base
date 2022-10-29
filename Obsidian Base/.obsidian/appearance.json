@@ -1,7 +1,8 @@
 {
-  "baseFontSize": 24,
+  "baseFontSize": 30,
   "translucency": false,
   "cssTheme": "Prism",
-  "accentColor": "",
-  "nativeMenus": false
+  "accentColor": "#cbb19f",
+  "nativeMenus": false,
+  "theme": "moonstone"
 }

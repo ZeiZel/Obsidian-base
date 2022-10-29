@@ -6,5 +6,7 @@
   "obsidian-prism-theme@@highlight-text-accent-dt": "pt-highlight-text-accent-dt",
   "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-raven-dt",
   "obsidian-prism-theme@@file-line-width": 880,
-  "obsidian-prism-theme@@highlight-text-accent-custom-dt": "#3A6E83"
+  "obsidian-prism-theme@@highlight-text-accent-custom-dt": "#3A6E83",
+  "sanctum@@file-line-width": 70,
+  "obsidian-prism-theme@@color-schemes-lt": "pt-color-scheme-swan-lt"
 }
