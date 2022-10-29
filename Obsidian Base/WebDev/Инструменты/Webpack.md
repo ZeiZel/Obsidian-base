@@ -1738,6 +1738,41 @@ function createAnalytics(): Object {
 window['analytics'] = createAnalytics();
 ```
 
+Так же как и в прошлых случаях, тут можно оптимизировать конфиг
+
+```JS
+// Это опции под типы пресетов babel  
+const babelOptions = (ext) => {  
+   const options = {  
+      presets: [  
+         '@babel/preset-env',  
+      ],  
+   }  
+   if (ext) options.presets.push(ext);  
+   return options; 
+}
+
+// ...
+
+{  
+   test: /\.m?js$/,  
+   exclude: /node_modules/,  
+   use: {  
+      loader: 'babel-loader',  
+      options: babelOptions(),  
+   },  
+},  
+{  
+   test: /\.ts$/,  
+   exclude: /node_modules/,  
+   use: {  
+      loader: 'babel-loader',  
+      options: babelOptions('@babel/preset-typescript'),  
+	},  
+},
+```
+
+
 ## Компиляция React JSX 
 
 
@@ -1745,32 +1780,129 @@ window['analytics'] = createAnalytics();
 npm install --save-dev @babel/preset-react
 ```
 
+```bash
+npm i react react-dom
+```
 
+`webpack.config.js`
+```JS
+entry: { 
+	// точку входа в вебпаке нужно поменять на '.jsx'
+   main: ['@babel/polyfill', './index.jsx'],  
+   analytics: './analytics.ts',  
+},
 
+// ....
+// Это правила для работы и компиляции JSX
+{  
+   test: /\.jsx$/,  
+   exclude: /node_modules/,  
+   use: {  
+      loader: 'babel-loader',  
+      // Устанавлвиаем пресет
+      options: babelOptions('@babel/preset-react'),  
+   },  
+},
+```
 
+`index.jsx`
+```JSX
+import './babel';  
+
+import './styles/style.css';  
+import './styles/less.less';  
+import './styles/scss.scss';  
+ 
+import React, { Component } from 'react';  
+import ReactDOM from 'react-dom/client';  
+  
+ 
+class App extends Component {  
+   render() {  
+      return (  
+         <div className='container'>  
+            <h1>WP Course</h1>  
+            <hr />  
+            <div className='logo' />  
+            <hr />  
+            <hr />  
+            <pre />  
+            <hr />  
+            <div className='box'>  
+               <h2>Less</h2>  
+            </div>  
+            <hr />  
+            <div className='card'>  
+               <h2>SCSS</h2>  
+            </div>  
+         </div>  
+      );  
+   }  
+}  
+  
+const root = ReactDOM.createRoot(document.getElementById('app'));  
+root.render(  
+   <React.StrictMode>  
+      <App />  
+   </React.StrictMode>,  
+);
+```
 
 
 
 ## Devtool
 
+Так же в WP можно настроить режимы компиляции по огромной таблице значений
 
+![](_png/Pasted%20image%2020221029134559.png)
 
+В конфиг WP нужно вписать свойство `devtool`, которому по условию можно назначить определённый тип компайла карт
 
+```JS
+module.exports = {  
+   context: path.resolve(__dirname, 'src'),  
+   mode: 'development',  
+   // тут уже в режиме разработчика будем генерировать карты
+   devtool: isDev ? 'source-map' : '',
+```
 
+И теперь карты показывают, в каком файле были созданы стили и на какой строке они располагаются (конкретно позволяет работать с файлами специфических расширений из браузера)
 
+![](_png/Pasted%20image%2020221029135133.png)
 
+И так же показывает исходник в самом браузере
 
-
-
-
-
-
+![](_png/Pasted%20image%2020221029135331.png)
 
 ## ESLint 
 
 
 
+```bash
+npm i -D eslint-loader
+```
 
+```JS
+// будет добавлять указанные лоадеры  
+const jsLoaders = ext => {  
+   const loaders = ['babel-loader'];  
+  
+   if (ext) loaders.push(ext);  
+  
+   return loaders;  
+};
+
+// ....
+
+{  
+   test: /\.js$/,  
+   exclude: /node_modules/,  
+   use: {  
+      loader: jsLoaders('eslint-loader'),  
+      options: babelOptions(),  
+   },  
+},
+```
 
 
 
