@@ -57,9 +57,117 @@
 
 ## Начало разработки. Создание проекта 
 
-11:33
+Создание проекта в данной папке 
+
+```bash
+npx create-react-app . // создание реакт приложения
+npm start // запуск devServer
+```
+
+Далее можем удалить все ненужные компоненты приложения и почистить его
+
+![](_png/Pasted%20image%2020221030134636.png)
+
+Так выглядит почищенный минимальный код для работы React 18:
+
+`public` > `index.html`
+```HTML
+<!DOCTYPE html>  
+<html lang="en">  
+   <head>  
+      <meta charset="UTF-8" />  
+      <meta  
+         name="viewport"  
+         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"  
+      />  
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />  
+      <title>Document</title>  
+   </head>  
+   <body>  
+      <noscript>   
+Включите JavaScript в браузере, чтобы приложение  
+         заработало  
+      </noscript>  
+      <div id="root">  
+         <!-- Сюда будет монтироваться всё реакт-приложение  -->  
+      </div>  
+   </body>  
+</html>
+```
+
+`src` > `App.js`
+```JSX
+import React from 'react';  
+  
+function App() {  
+   return (  
+      <div className='App'>  
+         <h1>Привет</h1>  
+      </div>  
+   );  
+}  
+  
+export default App;
+```
+`src`  > `index.js`
+```JSX
+import React from 'react';  
+import ReactDOM from 'react-dom/client';  
+import App from './App';  
+  
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(<App />);
+```
+
 
 ## Что такое JSX? 
+
+Для написания кода в React используется препроцессор JSX, который позволяет писать HTML-подобную вёрстку внутри его функций. Справа показан пример создания элементов React через его внутренний синтаксис.
+
+![](_png/Pasted%20image%2020221030133539.png)
+
+Весь код, который мы пишем внутри `render` должен содержаться внутри одного `div`. Так выглядит подключение в рендер компонента и созданных элементов 
+
+```JSX
+root.render(  
+   <div>  
+      <h1>Это чистый код</h1>  
+      <button>Кнопка</button>  
+      <App />   
+	</div>,  
+);
+```
+![](_png/Pasted%20image%2020221030134841.png)
+
+И вот так записываются элементы в классическом виде: длинными вложениями друг в друга
+
+```JSX
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(  
+   React.createElement('div', {},  
+      React.createElement(  
+         'button',  
+         {  
+            disabled: true,  
+         },  
+         'Нажми на меня',  
+      ),  
+   ),  
+);
+```
+![](_png/Pasted%20image%2020221030135401.png)
+
+
+
+![](_png/Pasted%20image%2020221030135625.png)
+
+
+
+
+
+
+
+
 
 
 

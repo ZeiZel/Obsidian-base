@@ -155,6 +155,7 @@
   },
   "active": "c14c7fd2f8569663",
   "lastOpenFiles": [
+    "WebDev/Инструменты/Prettier.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/019 Практика. Подъём состояния.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
@@ -163,7 +164,6 @@
     "Whats Learning/_lessons/Computer Science.md",
     "Whats Learning/_lessons/FrontEnd.md",
     "Whats Learning/Что учим~.md",
-    "_png/654cc17740a7b33805dbf27270881811.png.md",
-    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Mongo DB.md"
+    "_png/654cc17740a7b33805dbf27270881811.png.md"
   ]
 }
