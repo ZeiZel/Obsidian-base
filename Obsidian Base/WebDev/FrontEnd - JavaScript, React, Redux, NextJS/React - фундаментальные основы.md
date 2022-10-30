@@ -2,7 +2,7 @@
 
 ## Таймкоды
 
-[00:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=0s) ➝ Введение [03:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=195s) ➝ Теория [11:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=700s) ➝ Начало разработки. Создание проекта [16:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=970s) ➝ Что такое JSX? [18:11](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=1091s) ➝ Компонент App. Работа с состоянием. UseState [22:25](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=1345s) ➝ Управляемый инпут [24:07](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=1447s) ➝ Первый функциональный компонент [26:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=1600s) ➝ Первый классовый компонент [30:25](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=1825s) ➝ Что такое хуки? useState, useEffect [31:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=1870s) ➝ Стили. CSS. Классы [34:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2070s) ➝ Props. Аргументы компонента. [36:55](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2215s) ➝ Работы со списками. Преобразование массива объектов в массив React элементов [41:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2510s) ➝ Форма создания поста. Управляемые и неуправляемые компоненты [42:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2550s) ➝ Создание UI библиотеки. Первые компоненты. CSS модули. Пропс children [50:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3000s) ➝ Предотвращаем обновление страницы при submit формы [50:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3045s) ➝ хук useRef. Доступ к DOM элементу. Неуправляемый компонент [57:35](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3455s) ➝ React Devtools. Инструменты разработчика React [59:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3555s) ➝ Обмен данными между компонентами. От родителя к ребенку. От ребенка к родителю. [01:04:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3860s) ➝ Отрисовка по условию [01:05:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3930s) ➝ Сортировка. Выпадающий список [01:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4320s) ➝ Поиск. Фильтрация. [01:15:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4510s) ➝ useMemo. Мемоизация. Кеширование [01:23:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5030s) ➝ Модальное окно. Переиспользуемый UI компонент [01:30:23](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5423s) ➝ Анимации. React transition group [01:33:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5620s) ➝ Декомпозиция. Кастомные хуки [01:36:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5780s) ➝ Работа с сервером. Axios [01:38:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5920s) ➝ Жизненный цикл компонента. useEffect [01:43:08](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6188s) ➝ API. PostService [01:44:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6285s) ➝ Индикация загрузки данных с сервера [01:46:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6380s) ➝ Компонент Loader. Анимации [01:49:25](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6565s) ➝ Кастомный хук useFetching(). Обработка ошибок [01:54:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6855s)➝ Постраничный вывод. Пагинация (pagination) [02:06:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7580s) ➝ Обьяснение механизма изменения состояния [02:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7920s) ➝ React router. Постраничная навигация. BrowserRouter, Route, Switch, Redirect [02:22:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8520s) ➝ Динамическая навигация. useHistory, useParams [02:29:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8970s) ➝ Загрузка комментариев к посту [02:33:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9190s) ➝ Улучшаем навигацию. Приватные и публичные маршруты [02:38:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9480s) ➝ useContext. Глобальные данные. Авторизация пользователя [02:47:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=10030s) ➝ Бесконечная лента. Динамическая пагинация. useObserver
+ [41:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2510s) ➝ Форма создания поста. Управляемые и неуправляемые компоненты [42:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2550s) ➝ Создание UI библиотеки. Первые компоненты. CSS модули. Пропс children [50:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3000s) ➝ Предотвращаем обновление страницы при submit формы [50:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3045s) ➝ хук useRef. Доступ к DOM элементу. Неуправляемый компонент [57:35](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3455s) ➝ React Devtools. Инструменты разработчика React [59:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3555s) ➝ Обмен данными между компонентами. От родителя к ребенку. От ребенка к родителю. [01:04:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3860s) ➝ Отрисовка по условию [01:05:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3930s) ➝ Сортировка. Выпадающий список [01:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4320s) ➝ Поиск. Фильтрация. [01:15:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4510s) ➝ useMemo. Мемоизация. Кеширование [01:23:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5030s) ➝ Модальное окно. Переиспользуемый UI компонент [01:30:23](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5423s) ➝ Анимации. React transition group [01:33:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5620s) ➝ Декомпозиция. Кастомные хуки [01:36:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5780s) ➝ Работа с сервером. Axios [01:38:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5920s) ➝ Жизненный цикл компонента. useEffect [01:43:08](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6188s) ➝ API. PostService [01:44:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6285s) ➝ Индикация загрузки данных с сервера [01:46:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6380s) ➝ Компонент Loader. Анимации [01:49:25](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6565s) ➝ Кастомный хук useFetching(). Обработка ошибок [01:54:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6855s)➝ Постраничный вывод. Пагинация (pagination) [02:06:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7580s) ➝ Обьяснение механизма изменения состояния [02:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7920s) ➝ React router. Постраничная навигация. BrowserRouter, Route, Switch, Redirect [02:22:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8520s) ➝ Динамическая навигация. useHistory, useParams [02:29:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8970s) ➝ Загрузка комментариев к посту [02:33:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9190s) ➝ Улучшаем навигацию. Приватные и публичные маршруты [02:38:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9480s) ➝ useContext. Глобальные данные. Авторизация пользователя [02:47:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=10030s) ➝ Бесконечная лента. Динамическая пагинация. useObserver
 
 ## Введение
 
@@ -545,18 +545,114 @@ export default PostItem;
 
 ## Работы со списками. Преобразование массива объектов в массив React элементов 
 
-
-
+Создать массив объектов можно так же через `useState` и в него занести все нужные данные. Далее уже можем передать весь массив объектов в рендер и проциклить его через `map()` 
 
 Когда мы создаём списки, обязательным условием является передача ключа (атрибут `key`), который всегда должен хранить уникальное значение.
+В качестве уникального значения может выступать любое значение изнутри массива. Не стоит пользоваться индексом элемента для указания уникальности значения, так как это вызовет трудности при удалении нужного нам компонента из структуры дерева
 
+`App.jsx`
+```JSX
+import React, { useState } from 'react';  
+import './styles/App.css';  
+import PostItem from './components/post-item';  
+  
+function App() {  
+   const [posts, setPosts] = useState([  
+      { id: 1, title: 'Javascript', text: 'JS - это ЯП' },  
+      { id: 2, title: 'C#', text: 'C# - это уже язык' },  
+      { id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },  
+   ]);  
+  
+   return (  
+      <div className='App'>  
+         {posts.map(post => (  
+            <PostItem post={post} key={post.id} />  
+         ))}  
+      </div>  
+   );  
+}  
+  
+export default App;
+```
 
+![](_png/Pasted%20image%2020221030181415.png)
 
+Стили для компонента или элемента можно назначить через атрибут `style={}`
 
+```JSX
+return (  
+   <div className='App'>  
+      <h1 style={{ textAlign: 'center' }}>Список постов</h1>  
+      {posts.map(post => (  
+         <PostItem post={post} key={post.id} />  
+      ))}  
+   </div>  
+);
+```
+
+![](_png/Pasted%20image%2020221030181441.png)
+
+Так же мы можем список ещё раз разбить на отдельные компоненты и добавить больше автономности для наших списков. Теперь мы можем добавить новый массив и одной дополнительной строчкой создавать ещё один список элементов
+
+`posts-list.jsx` - это отдельный компонент для вывода списка 
+```JSX
+import React from 'react';  
+import PostItem from './post-item';  
+  
+const PostsList = ({ posts, title }) => {  
+   return (  
+      <div>  
+         <h1 style={{ textAlign: 'center' }}>{title}</h1>  
+         {posts.map(post => (  
+            <PostItem post={post} key={post.id} />  
+         ))}  
+      </div>  
+   );  
+};  
+  
+export default PostsList;
+```
+
+`App.jsx`
+```JSX
+import React, { useState } from 'react';  
+import './styles/App.css';  
+import PostItem from './components/post-item';  
+import PostsList from './components/posts-list';  
+  
+function App() {  
+   const [posts, setPosts] = useState([  
+      { id: 1, title: 'Javascript', text: 'JS - это ЯП' },  
+      { id: 2, title: 'C#', text: 'C# - это уже язык' },  
+      { id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },  
+   ]);  
+  
+   const [posts2, setPosts2] = useState([  
+      { id: 1, title: 'Python', text: 'JS - это ЯП' },  
+      { id: 2, title: 'Python#', text: 'C# - это уже язык' },  
+      {  
+         id: 3,  
+         title: 'Python++',  
+         text: 'C++ - это уже язык программирования',  
+      },  
+   ]);  
+  
+   return (  
+      <div className='App'>  
+         <PostsList posts={posts} title={'Список ЯП'} />  
+         <PostsList posts={posts2} title={'Список Python'} />  
+      </div>  
+   );  
+}  
+  
+export default App;
+```
+
+![](_png/Pasted%20image%2020221030182340.png)
 
 ## Форма создания поста. Управляемые и неуправляемые компоненты 
 
-
+42:00
 
 
 ## Создание UI библиотеки. Первые компоненты. CSS модули. Пропс children 
