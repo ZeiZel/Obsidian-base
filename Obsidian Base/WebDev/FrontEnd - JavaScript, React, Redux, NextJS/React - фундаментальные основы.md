@@ -252,10 +252,53 @@ export default App;
 
 ## Первый функциональный компонент 
 
+Быстро создать базовый компонент можно через шорткат `rsc`
 
+```JSX
+import React from 'react';  
+  
+const Counter = () => {  
+   return <div></div>;  
+};  
+  
+export default Counter;
+```
+
+И вот наш компонент счётчика, который мы расположили в папке с компонентами. Желательно именовать компоненты с заглавной буквы и явно указывать препроцессор `.jsx`
+
+```JSX
+import React, { useState } from 'react';  
+  
+const Counter = () => {  
+   const [counter, setLikes] = useState(0);  
+  
+   function increment() {  
+      setLikes(counter + 1);  
+   }  
+   const decrement = () => {  
+      setLikes(counter - 1);  
+   };  
+  
+   return (  
+      <div className='App'>  
+         <h2>{counter}</h2>  
+         <button onClick={increment}>increment</button>  
+         <hr />         <button onClick={decrement}>decrement</button>  
+      </div>  
+   );  
+};  
+  
+export default Counter;
+```
+![](_png/Pasted%20image%2020221030145208.png)
+
+Мы можем создать сколько угодно копий компонента и они будут независимы друг от друга. Так же нужно сказать, что так как они независимы, то и располагать их можно в любом месте приложения. 
+
+![](_png/Pasted%20image%2020221030145433.png)
 
 
 ## Первый классовый компонент 
+
 
 
 
