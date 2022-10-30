@@ -8,7 +8,7 @@
   "obsidian-prism-theme@@file-line-width": 880,
   "obsidian-prism-theme@@highlight-text-accent-custom-dt": "#3A6E83",
   "sanctum@@file-line-width": 70,
-  "obsidian-prism-theme@@color-schemes-lt": "pt-color-scheme-swan-lt",
+  "obsidian-prism-theme@@color-schemes-lt": "pt-color-scheme-periwinkle-lt",
   "obsidian-prism-theme@@pt-font-disable-ligatures": false,
   "obsidian-prism-theme@@pt-font-slashed-zero": true,
   "obsidian-prism-theme@@pt-fade-inactive-tabs": true,
@@ -21,5 +21,6 @@
   "obsidian-prism-theme@@pt-custom-vault-banner": false,
   "obsidian-prism-theme@@custom-vault-banner-horizontal-align": "pt-custom-vault-banner-justify-content-center",
   "obsidian-prism-theme@@custom-vault-banner-order": "pt-custom-vault-banner-order-ltr",
-  "obsidian-prism-theme@@pt-custom-vault-banner-sticky": true
+  "obsidian-prism-theme@@pt-custom-vault-banner-sticky": true,
+  "obsidian-prism-theme@@highlight-text-accent-custom-lt": "#9E7BD9"
 }
