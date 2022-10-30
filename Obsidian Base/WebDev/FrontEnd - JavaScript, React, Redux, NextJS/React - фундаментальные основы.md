@@ -299,16 +299,112 @@ export default Counter;
 
 ## Первый классовый компонент 
 
+При использовании классовых компонентов, стейты мы прописываем внутри конструкторов `this.state`, который хранит значения стейтов. 
 
+```JSX
+// Необходимо импортировать компонент  
+import React, { Component } from 'react';  
+  
+// Создать расширяемый от компонента класс  
+class ClassCounter extends Component {  
+   // Создаём конструктор класса, который принимает по умолчанию атрибуты (пропсы)  
+   constructor(props) {  
+      super(props);  
+      // И тут уже инициализируется стейт  
+      this.state = {  
+         count: 0,  
+      };  
+   }  
 
+	// Используем стрелочные функции, которые перенимают контекст вызова родителя
+   increment = () => {  
+      this.setState({  
+         count: this.state.count + 1,  
+      });  
+   };  
+  
+   decrement = () => {  
+      this.setState({  
+         count: this.state.count - 1,  
+      });  
+   };  
+  
+   // Через функцию render будет монтироваться наш компонент  
+   render() {  
+      return (  
+         <div className='App'>  
+            <h2>{this.state.count}</h2>  
+            <button onClick={this.increment}>increment</button>  
+            <hr />            
+            <button onClick={this.decrement}>decrement</button>  
+         </div>  
+      );  
+   }  
+}  
+  
+export default ClassCounter;
+```
+![](_png/Pasted%20image%2020221030152117.png)
 
+Так же мы можем использовать обычные функции, которые в качестве контекста хранят только себя. Чтобы решить проблему нужно как выше использовать либо стрелочную функцию, либо можно самостоятельно в стейте (`state`) забиндить (`bind`) область видимости
+
+```JSX
+constructor(props) {  
+	super(props);  
+		// И тут уже инициализируется стейт  
+		this.state = {  
+		count: 0,  
+	};
+
+	// Тут мы биндим контекст вызова функции
+	this.increment = this.increment.bind(this);  
+	this.decrement = this.decrement.bind(this);  
+   }  
+
+	// Уже эти функции не сохраняют контекст
+   increment() {  
+      this.setState({  
+         count: this.state.count + 1,  
+      });  
+   };  
+  
+   decrement() {  
+      this.setState({  
+         count: this.state.count - 1,  
+      });  
+   };  
+```
+
+Подключение идёт ровно так же как и при использование функциональных компонентов:
+
+```JSX
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(  
+   <React.StrictMode>  
+      <App />  
+      <ClassCounter />   
+	</React.StrictMode>,  
+);
+```
 
 ## Что такое хуки? useState, useEffect 
 
+==Хуки== - это функции React, которые позволяют использовать состояние и другие возможности React без написания ==классов==.
 
+Основные ==хуки==:
+- `useState()`
+- `useEffect()`
+- `useRef()`
+- `useMemo()`
+- `useCallback()`
+- `useContext()`
 
+>[!info] Особенности хуков:
+> - Так же можно делать свои же хуки на основе тех хуков, которые уже представлены в реакте
+> - Хуки можно использовать только на верхнем уровне вложенности (нельзя использовать в циклах, условиях и так далее)
 
 ## Стили. CSS. Классы 
+
 
 
 
