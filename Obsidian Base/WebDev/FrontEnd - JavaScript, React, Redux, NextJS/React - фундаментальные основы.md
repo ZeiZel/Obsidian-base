@@ -405,16 +405,151 @@ root.render(
 
 ## Стили. CSS. Классы 
 
+Вместо `class` используем `className`, так как `class` уже зарезервирован под классы.
+ 
+`App.jsx`
+```JSX
+import React from 'react';  
+// подключаем стили в основной файл
+import './styles/App.css';  
+import PostItem from './components/post-item';  
+  
+function App() {  
+   return (  
+	<div className='App'>  
+         <PostItem />  
+         <PostItem />         
+         <PostItem />      
+	</div>  
+   );  
+}  
+  
+export default App;
+```
 
+`App.css`
+```CSS
+* {  
+   margin: 0;  
+   padding: 0;  
+   box-sizing: border-box;  
+}  
+  
+#root {  
+   display: flex;  
+   justify-content: center;  
+}  
+  
+.App {  
+   width: 350px;  
+   margin: 10px;  
+}  
+  
+.post {  
+   display: flex;  
+   justify-content: space-between;  
+   align-items: center;  
+   padding: 15px;  
+   margin-top: 15px;  
+   border: 2px solid orange;  
+}
+```
+![](_png/Pasted%20image%2020221030173857.png)
 
-
+`post-item.jsx`
+```JSX
+import React from 'react';  
+  
+const PostItem = () => {  
+   return (  
+      <div className='post'>  
+         <div className='post__content'>  
+            <strong>1. C#</strong>  
+            <div>  
+               <p>C# - это язык программирования</p>  
+            </div>  
+         </div>  
+         <div className='post__buttons'>  
+            <button>Удалить</button>  
+         </div>  
+      </div>  
+   );  
+};  
+  
+export default PostItem;
+```
+![](_png/Pasted%20image%2020221030173908.png)
 
 ## Props. Аргументы компонента. 
 
+Мы можем написать имя компонента `<PostItem>` в `App.jsx` и внутрь него передать атрибуты, имя которым можем задать самостоятельно. Значения этим атрибутам можем задавать самостоятельно. 
+В самом компоненте можно получить значения из аргумента `props`, через который можно будет обратиться к полученным значениям и непосредственно воспользоваться полученными данными.
 
+`App.jsx`
+```JSX
+import React from 'react';  
+import './styles/App.css';  
+import PostItem from './components/post-item';  
+  
+function App() {  
+   return (  
+	<div className='App'>  
+         <PostItem  
+            post={{  
+               id: 1,  
+               title: 'Javascript',  
+               text: 'JS - это ЯП',  
+            }}  
+         />         
+         <PostItem            
+	         post={{  
+               id: 2,  
+               title: 'C#',  
+               text: 'C# - это уже язык',  
+            }}  
+         />      
+	</div>  
+   );  
+}  
+  
+export default App;
+```
 
+`post-item.jsx`
+```JSX
+import React from 'react';  
+  
+const PostItem = props => {  
+   console.log(props); // выведет объект, переданный через пропс  
+   return (  
+      <div className='post'>  
+         <div className='post__content'>  
+            <strong>  
+               {props.post.id}. {props.post.title}  
+            </strong>  
+            <div>  
+               <p>{props.post.text}</p>  
+            </div>  
+         </div>  
+         <div className='post__buttons'>  
+            <button>Удалить</button>  
+         </div>  
+      </div>  
+   );  
+};  
+  
+export default PostItem;
+```
+
+![](_png/Pasted%20image%2020221030175307.png)
 
 ## Работы со списками. Преобразование массива объектов в массив React элементов 
+
+
+
+
+Когда мы создаём списки, обязательным условием является передача ключа (атрибут `key`), который всегда должен хранить уникальное значение.
+
 
 
 
