@@ -20,14 +20,19 @@
             }
           },
           {
-            "id": "f0464e0cbdd645c6",
+            "id": "b4d375fe5281a0c8",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.24 Как объединять ветки с помощью Git merge. Способ Fast-forward.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -93,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.24 Как объединять ветки с помощью Git merge. Способ Fast-forward.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.24 Как объединять ветки с помощью Git merge. Способ Fast-forward.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.24 Как объединять ветки с помощью Git merge. Способ Fast-forward.md"
               }
             }
           },
@@ -161,17 +166,17 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "c14c7fd2f8569663",
+  "active": "b4d375fe5281a0c8",
   "lastOpenFiles": [
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.23 Продвинутый git log и git show.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.24 Как объединять ветки с помощью Git merge. Способ Fast-forward.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/Инструменты/Prettier.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/019 Практика. Подъём состояния.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/006 Элементы и компоненты.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Whats Learning/_lessons/Computer Science.md",
-    "Whats Learning/_lessons/FrontEnd.md",
-    "Whats Learning/Что учим~.md",
-    "_png/654cc17740a7b33805dbf27270881811.png.md"
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md"
   ]
 }
