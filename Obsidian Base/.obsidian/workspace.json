@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.32 Разница git reset и git restore.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.32 Разница git reset и git restore.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.32 Разница git reset и git restore.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.32 Разница git reset и git restore.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md"
               }
             }
           },
@@ -169,14 +169,14 @@
   "active": "b4d375fe5281a0c8",
   "lastOpenFiles": [
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.35 Как вывести схему веток в терминал. Git log –graph.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.34 Практический пример применения git diff.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.33 Введение в git diff. Вывод разницы нескольких коммитов в консоль.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.32 Разница git reset и git restore.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.31 Git reset –mixed.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.30 Git commit --amend изменение комментария прошлого коммита.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.29 Git reset –soft.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.28 Второй способ найти подвисший коммит с помощью ORIG_HEAD.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.27 Git reset --hard. Способ жесткого отката к коммиту.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.26 Как удалить файлы директории из состояния untracked.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.25 Как удалять ветки.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.24 Как объединять ветки с помощью Git merge. Способ Fast-forward.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.28 Второй способ найти подвисший коммит с помощью ORIG_HEAD.md"
   ]
 }
