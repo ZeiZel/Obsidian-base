@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md"
               }
             }
           },
@@ -180,13 +180,13 @@
   },
   "active": "b4d375fe5281a0c8",
   "lastOpenFiles": [
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
     "SelfDevelopment/Эмоциональный интеллект/Эмоциональный интеллект.md",
     "SelfDevelopment/Как учиться учиться.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/PostreSQL.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.35 Как вывести схему веток в терминал. Git log –graph.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.34 Практический пример применения git diff.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.33 Введение в git diff. Вывод разницы нескольких коммитов в консоль.md"
