@@ -652,19 +652,20 @@ export default App;
 
 ## Форма создания поста. Управляемые и неуправляемые компоненты 
 
+*Неуправляемый компонент*.
+```JSX
 
+```
+
+*Управляемый компонент*.
 `App.jsx`
 ```JSX
-return (
-		<div className='App'>
-			<form>
-				<input type='text' placeholder='Введите имя поста' />
-				<input type='text' placeholder='Введите текст поста' />
-				<button>Создать пост</button>
-			</form>
-			<PostsList posts={posts} title={'Список ЯП'} />
-		</div>
-	);
+<Input
+	value={title}
+	onChange={e => setTitle(e.target.value)}
+	type='text'
+	placeholder='Введите имя поста'
+/>
 ```
 
 
@@ -772,7 +773,11 @@ return (
 
 ## Предотвращаем обновление страницы при submit формы 
 
+По умолчанию кнопка в браузере всегда имеет значение `type="submit"`. Нам нужно предотвратить такое поведение, чтобы страница не перезагружалась при нажатии кнопки.
 
+```JSX
+
+```
 
 
 ## хук useRef. Доступ к DOM элементу. Неуправляемый компонент 
