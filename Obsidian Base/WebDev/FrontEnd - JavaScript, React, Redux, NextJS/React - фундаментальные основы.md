@@ -652,13 +652,123 @@ export default App;
 
 ## Форма создания поста. Управляемые и неуправляемые компоненты 
 
-42:00
+
+`App.jsx`
+```JSX
+return (
+		<div className='App'>
+			<form>
+				<input type='text' placeholder='Введите имя поста' />
+				<input type='text' placeholder='Введите текст поста' />
+				<button>Создать пост</button>
+			</form>
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+```
 
 
 ## Создание UI библиотеки. Первые компоненты. CSS модули. Пропс children 
 
+В первую очередь, расположим элементы таким образом и создадим отдельный компонент-кнопку, внутрь которого и поместим модуль ==CSS==. Импортнуть можно классы через их имя `classes.имяКласса`
 
+```JSX
+// Button.jsx
+import React from 'react';
+import classes from './button.module.css';
 
+const Button = props => {
+	return (
+		<button className={classes.myButton}>
+		</button>
+	);
+};
+
+export default Button;
+```
+`button.module.css`
+```CSS
+.myButton {
+	padding: 5px 15px;
+	font-size: 14px;
+	color: teal;
+	background: transparent;
+	border: 1px solid teal;
+	cursor: pointer;
+}
+```
+
+![](_png/Pasted%20image%2020221104151705.png)
+
+Тут уже подключаем компонент к основному файлу через вписание его в тег `<Button>`
+
+```JSX
+// App.jsx
+
+import Button from './components/UI/button/button';
+return (
+		<div className='App'>
+			<form>
+				<input type='text' placeholder='Введите имя поста' />
+				<input type='text' placeholder='Введите текст поста' />
+				<Button>Создать пост</Button>
+			</form>
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+```
+
+По поводу текста внутри кнопки. Изначально реакт не знает, куда и как его вставлять, поэтому нужно указать конкретно через пропс, куда попадёт текст
+
+![](_png/Pasted%20image%2020221104151258.png)
+
+```JSX
+import React from 'react';
+import classes from './button.module.css';
+
+const Button = props => {
+	return (
+		<button className={classes.myButton}>
+			{props.children}
+		</button>
+	);
+};
+
+export default Button;
+```
+
+![](_png/Pasted%20image%2020221104151428.png)
+
+Так же, чтобы передавать все пропсы (атрибуты и их значения) в компонент кнопки, можно просто передавать деструктурированную кнопку
+
+`button.jsx`
+```JSX
+// отделяем children
+const Button = ({ children, ...props }) => {
+	return (
+		// Передаём {...props}, что позволит нам сюда вставить все пропсы, вписанные в инстанс этого компонента (в app.jsx)
+		<button {...props} className={classes.myButton}>
+			{/*оставляем просто children*/}
+			{children}
+		</button>
+	);
+};
+```
+
+`app.jsx`
+```JSX
+return (
+		<div className='App'>
+			<form>
+				<input type='text' placeholder='Введите имя поста' />
+				<input type='text' placeholder='Введите текст поста' />
+				{/* исюда спокойно передаём любые атрибуты - они перенесутся дальше вниз по иерархии в сам компонент */}
+				<Button disabled>Создать пост</Button>
+			</form>
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+```
 
 ## Предотвращаем обновление страницы при submit формы 
 
