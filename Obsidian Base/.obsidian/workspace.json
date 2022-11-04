@@ -18,21 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "dbf8066dbfc7b3a0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.40 Что лучше git rebase или git merge.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.40 Что лучше git rebase или git merge.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.40 Что лучше git rebase или git merge.md",
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.40 Что лучше git rebase или git merge.md"
+                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md"
               }
             }
           },
@@ -166,11 +153,11 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "dbf8066dbfc7b3a0",
+  "active": "c14c7fd2f8569663",
   "lastOpenFiles": [
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.40 Что лучше git rebase или git merge.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.42 Заключительное слово.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.41 Как использовать файл .gitignore.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.39 Слияние веток с помощью git rebase.md",
