@@ -25,26 +25,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c6dfd5ba1b23eb6c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -110,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md"
               }
             }
           },
@@ -178,16 +166,16 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "c6dfd5ba1b23eb6c",
+  "active": "b4d375fe5281a0c8",
   "lastOpenFiles": [
-    "_assets/technical-support.png",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
+    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+    "_assets/technical-support.png",
     "GameDev/_lessons/Начальный Unity.md",
     "GameDev/_lessons/XYZ Unity.md",
     "GameDev/_lessons/ПИКСЕЛЬ АРТ ГРАФИКА ДЛЯ ИГР.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
     "SelfDevelopment/Эмоциональный интеллект/Эмоциональный интеллект.md"
   ]
