@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.39 Слияние веток с помощью git rebase.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.39 Слияние веток с помощью git rebase.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.39 Слияние веток с помощью git rebase.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md"
+                "file": "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.39 Слияние веток с помощью git rebase.md"
               }
             }
           },
@@ -169,6 +169,7 @@
   "active": "b4d375fe5281a0c8",
   "lastOpenFiles": [
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.38 Как скопировать определенный коммит с помощью git cherry-pick.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.37 Как откатиться назад после слияния.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
@@ -176,7 +177,6 @@
     "GameDev/_lessons/Начальный Unity.md",
     "GameDev/_lessons/XYZ Unity.md",
     "GameDev/_lessons/ПИКСЕЛЬ АРТ ГРАФИКА ДЛЯ ИГР.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md",
-    "SelfDevelopment/Эмоциональный интеллект/Эмоциональный интеллект.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.36 Объединяем ветки с помощью git merge. Способ Истинное слияние.md"
   ]
 }
