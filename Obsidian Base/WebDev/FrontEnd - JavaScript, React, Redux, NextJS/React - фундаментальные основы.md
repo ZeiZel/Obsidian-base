@@ -650,7 +650,7 @@ export default App;
 
 ![](_png/Pasted%20image%2020221030182340.png)
 
-## Форма создания поста. Управляемые и неуправляемые компоненты 
+## Управляемые и неуправляемые компоненты 
 
 *Неуправляемый компонент*.
 ```JSX
@@ -671,6 +671,13 @@ console.log(bodyInputRef.current.value);
 *Управляемый компонент*.
 `App.jsx`
 ```JSX
+// тут храним значения из нашего инпута
+const [title, setTitle] = useState('');
+
+// выводим значение этого компонента
+console.log(e.target.value);
+
+// Это сам управляемый компонент
 <Input
 	value={title}
 	onChange={e => setTitle(e.target.value)}
@@ -799,18 +806,275 @@ const addNewPost = e => {
 
 ## хук useRef. Доступ к DOM элементу. Неуправляемый компонент 
 
-Хук `useRef` позволяет напрямую получать доступ к элементу DOM-дерева
+Хук `useRef` позволяет напрямую получать доступ к элементу DOM-дерева. Функция `React.forwardRef()`, в которую оборачивают компонент, позволяет прокинуть внутрь компонента свою уникальную ссылку. Данный хук позволяет нам создать неуправляемый компонент React и получать из него данные. Создавать неуправляемые компоненты - это не самая желательная практика.
 
+`input.jsx`
+```JSX
+import React from 'react';
+import classes from './input.module.css';
+
+const Input = React.forwardRef((props, ref) => {
+	return <input ref={ref} {...props} className={classes.myInput} />;
+});
+
+export default Input;
+```
+
+`App.jsx`
+```JSX
+// Получаем доступ к DOM-элементу через useRef()
+const bodyInputRef = useRef();
+
+{/* Неуправляемый компонент */}
+<Input
+	ref={bodyInputRef}
+	type='text'
+	placeholder='Введите текст поста'
+/>
+```
+
+И вот примерно так будет реализован функционал создания постов 
+
+`post-list.jsx`
+```JSX
+const PostsList = ({ posts, title }) => {
+	return (
+		<div>
+			<h1 style={{ textAlign: 'center' }}>{title}</h1>
+			// добавляем индекс для поста
+			{posts.map((post, index) => (
+				// передаём его в сам пост
+				<PostItem number={index + 1} post={post} key={post.id} />
+			))}
+		</div>
+	);
+};
+```
+
+`post-item.jsx`
+```JSX
+const PostItem = props => {
+	console.log(props);
+	return (
+		<div className='post'>
+			<div className='post__content'>
+				<strong>
+					// И сюда передаём порядковый номер поста
+					{props.number}. {props.post.title}
+				</strong>
+				<div>
+					<p>{props.post.text}</p>
+				</div>
+			</div>
+			<div className='post__buttons'>
+				<button>Удалить</button>
+			</div>
+		</div>
+	);
+};
+```
+
+`App.jsx`
+```JSX
+import React, { useState, useRef } from 'react';
+import './styles/App.css';
+import PostItem from './components/post-item';
+import PostsList from './components/posts-list';
+import Button from './components/UI/button/button';
+import Input from './components/UI/input/input';
+
+function App() {
+	// тут находятся сами данные и метод, который эти данные изменяет
+	const [posts, setPosts] = useState([
+		{ id: 1, title: 'Javascript', text: 'JS - это ЯП' },
+		{ id: 2, title: 'C#', text: 'C# - это уже язык' },
+		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
+	]);
+
+	const [title, setTitle] = useState('');
+	const [text, setText] = useState('');
+
+	// Добавление нового поста
+	const addNewPost = e => {
+		// отключаем перезагрузку страницы при нажатии на кнопку
+		e.preventDefault();
+
+		// создаём объект, который добавим в массив
+		const newPost = {
+			id: Date.now(),
+			title,
+			text,
+		};
+
+		// Раскладываем сам массив и при пересоздании в его конец добавляем новый элемент
+		setPosts([...posts, newPost]);
+
+		// Очищаем инпуты
+		setTitle('');
+		setText('');
+	};
+
+	return (
+		<div className='App'>
+			<form>
+				{/* Это управляемый компонент */}
+				<Input
+					// Связываем состояние и значение инпута
+					value={title}
+					onChange={e => setTitle(e.target.value)}
+					type='text'
+					placeholder='Введите имя поста'
+				/>
+				{/* Неуправляемый компонент */}
+				<Input
+					value={text}
+					onChange={e => setText(e.target.value)}
+					type='text'
+					placeholder='Введите текст поста'
+				/>
+				<Button onClick={addNewPost}>Создать пост</Button>
+			</form>
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+}
+
+export default App;
+```
+![](_png/Pasted%20image%2020221104182334.png)
+
+Так же можно воспользоваться вторым вариантом создания поста, при котором у нас будет только одна точка изменения данных (не делим на `title` и `text`, а сразу имеем `post`)
+
+```JSX
+function App() {
+	const [posts, setPosts] = useState([
+		{ id: 1, title: 'Javascript', text: 'JS - это ЯП' },
+		{ id: 2, title: 'C#', text: 'C# - это уже язык' },
+		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
+	]);
+
+	const [post, setPost] = useState({ title: '', text: '' });
+
+	const addNewPost = e => {
+		e.preventDefault();
+
+		setPosts([...posts, { ...post, id: Date.now() }]);
+
+		setPost({ title: '', text: '' });
+	};
+
+	return (
+		<div className='App'>
+			<form>
+				<Input
+					value={post.title}
+					// Тут уже конкретно изменяем одно поле и весь объект оставляем в неизменном виде
+					onChange={e => setPost({ ...post, title: e.target.value })}
+					type='text'
+					placeholder='Введите имя поста'
+				/>
+				<Input
+					value={post.text}
+					onChange={e => setPost({ ...post, text: e.target.value })}
+					type='text'
+					placeholder='Введите текст поста'
+				/>
+				<Button onClick={addNewPost}>Создать пост</Button>
+			</form>
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+}
+
+export default App;
+```
+
+![](_png/Pasted%20image%2020221104183045.png)
 
 ## React Devtools. Инструменты разработчика React 
 
+Для реакта существуют отдельные инструменты разработки, которые позволяют: просматривать сами компоненты, из чего и каких пропсов они образованы, менять значения пропсов и так далее
 
+![](_png/Pasted%20image%2020221104183723.png)
 
 
 ## Обмен данными между компонентами. От родителя к ребенку. От ребенка к родителю. 
 
+Реализация обмена данными выглядит примерно следующим образом:
+1) Передаём данные мы между компонентами через пропсы. Пропсы всегда передаются от родителя к ребёнку - по другому никак не передать внутри компонентов
+2) Чтобы передать пропсы от ребёнка к родителю, нужно реализовать функцию, которая будет родителю возвращать данные от ребёнка (снизу вверх)
+
+И вот конкретная реализация, где мы деконструируем наше приложение и выводим форму вывода постов в отдельный компонент:
+
+`app.jsx`
+```JSX
+function App() {
+	const [posts, setPosts] = useState([
+		{ id: 1, title: 'Javascript', text: 'JS - это ЯП' },
+		{ id: 2, title: 'C#', text: 'C# - это уже язык' },
+		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
+	]);
+
+	// Эта функция будет менять массив со значением постов
+	const createPost = newPost => {
+		setPosts([...posts, newPost]);
+	};
+
+	return (
+		<div className='App'>
+			// и сюда мы передаём функцию, которая должна будет получать новое значение от дочернего элемента
+			<PostForm create={createPost} />
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+}
+```
+`post-form.jsx`
+```JSX
+import React, { useState } from 'react';
+import Button from './UI/button/button';
+import Input from './UI/input/input';
+
+// получаем от родителя из пропсов функцию для приёма данных
+const PostForm = ({create}) => {
+	const [post, setPost] = useState({ title: '', text: '' });
+
+	const addNewPost = e => {
+		e.preventDefault();
+
+		// Конкретно этот пост нужно будет передавать снизу вверх
+		const newPost = { ...post, id: Date.now() };
+
+		// И передаём в эту функцию сам
+		create(newPost);
+
+		setPost({ title: '', text: '' });
+	};
+
+	return (
+		<form>
+			<Input
+				value={post.title}
+				onChange={e => setPost({ ...post, title: e.target.value })}
+				type='text'
+				placeholder='Введите имя поста'
+			/>
+			<Input
+				value={post.text}
+				onChange={e => setPost({ ...post, text: e.target.value })}
+				type='text'
+				placeholder='Введите текст поста'
+			/>
+			<Button onClick={addNewPost}>Создать пост</Button>
+		</form>
+	);
+};
+
+export default PostForm;
+```
 
 
+1:02:28
 
 ## Отрисовка по условию 
 
