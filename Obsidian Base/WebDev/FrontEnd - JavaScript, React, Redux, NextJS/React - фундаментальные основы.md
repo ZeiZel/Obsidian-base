@@ -1,8 +1,7 @@
 #React
 
 ## Таймкоды
-
- [41:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2510s) ➝ Форма создания поста. Управляемые и неуправляемые компоненты [42:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=2550s) ➝ Создание UI библиотеки. Первые компоненты. CSS модули. Пропс children [50:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3000s) ➝ Предотвращаем обновление страницы при submit формы [50:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3045s) ➝ хук useRef. Доступ к DOM элементу. Неуправляемый компонент [57:35](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3455s) ➝ React Devtools. Инструменты разработчика React [59:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3555s) ➝ Обмен данными между компонентами. От родителя к ребенку. От ребенка к родителю. [01:04:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3860s) ➝ Отрисовка по условию [01:05:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3930s) ➝ Сортировка. Выпадающий список [01:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4320s) ➝ Поиск. Фильтрация. [01:15:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4510s) ➝ useMemo. Мемоизация. Кеширование [01:23:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5030s) ➝ Модальное окно. Переиспользуемый UI компонент [01:30:23](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5423s) ➝ Анимации. React transition group [01:33:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5620s) ➝ Декомпозиция. Кастомные хуки [01:36:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5780s) ➝ Работа с сервером. Axios [01:38:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5920s) ➝ Жизненный цикл компонента. useEffect [01:43:08](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6188s) ➝ API. PostService [01:44:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6285s) ➝ Индикация загрузки данных с сервера [01:46:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6380s) ➝ Компонент Loader. Анимации [01:49:25](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6565s) ➝ Кастомный хук useFetching(). Обработка ошибок [01:54:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6855s)➝ Постраничный вывод. Пагинация (pagination) [02:06:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7580s) ➝ Обьяснение механизма изменения состояния [02:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7920s) ➝ React router. Постраничная навигация. BrowserRouter, Route, Switch, Redirect [02:22:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8520s) ➝ Динамическая навигация. useHistory, useParams [02:29:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8970s) ➝ Загрузка комментариев к посту [02:33:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9190s) ➝ Улучшаем навигацию. Приватные и публичные маршруты [02:38:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9480s) ➝ useContext. Глобальные данные. Авторизация пользователя [02:47:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=10030s) ➝ Бесконечная лента. Динамическая пагинация. useObserver
+[01:04:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3860s) ➝ Отрисовка по условию [01:05:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=3930s) ➝ Сортировка. Выпадающий список [01:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4320s) ➝ Поиск. Фильтрация. [01:15:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=4510s) ➝ useMemo. Мемоизация. Кеширование [01:23:50](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5030s) ➝ Модальное окно. Переиспользуемый UI компонент [01:30:23](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5423s) ➝ Анимации. React transition group [01:33:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5620s) ➝ Декомпозиция. Кастомные хуки [01:36:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5780s) ➝ Работа с сервером. Axios [01:38:40](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=5920s) ➝ Жизненный цикл компонента. useEffect [01:43:08](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6188s) ➝ API. PostService [01:44:45](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6285s) ➝ Индикация загрузки данных с сервера [01:46:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6380s) ➝ Компонент Loader. Анимации [01:49:25](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6565s) ➝ Кастомный хук useFetching(). Обработка ошибок [01:54:15](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=6855s)➝ Постраничный вывод. Пагинация (pagination) [02:06:20](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7580s) ➝ Обьяснение механизма изменения состояния [02:12:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=7920s) ➝ React router. Постраничная навигация. BrowserRouter, Route, Switch, Redirect [02:22:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8520s) ➝ Динамическая навигация. useHistory, useParams [02:29:30](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=8970s) ➝ Загрузка комментариев к посту [02:33:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9190s) ➝ Улучшаем навигацию. Приватные и публичные маршруты [02:38:00](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=9480s) ➝ useContext. Глобальные данные. Авторизация пользователя [02:47:10](https://www.youtube.com/watch?v=GNrdg3PzpJQ&t=10030s) ➝ Бесконечная лента. Динамическая пагинация. useObserver
 
 ## Введение
 
@@ -833,7 +832,67 @@ const bodyInputRef = useRef();
 />
 ```
 
-И вот примерно так будет реализован функционал создания постов 
+#### Реализация функционала создания постов
+
+`App.jsx`
+```JSX
+function App() {
+	// тут находятся сами данные и метод, который эти данные изменяет
+	const [posts, setPosts] = useState([
+		{ id: 1, title: 'Javascript', text: 'JS - это ЯП' },
+		{ id: 2, title: 'C#', text: 'C# - это уже язык' },
+		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
+	]);
+
+	const [title, setTitle] = useState('');
+	const [text, setText] = useState('');
+
+	// ! ФУНКЦИЯ Добавления нового поста
+	const addNewPost = e => {
+		// отключаем перезагрузку страницы при нажатии на кнопку
+		e.preventDefault();
+
+		// создаём объект, который добавим в массив
+		const newPost = {
+			id: Date.now(),
+			title,
+			text,
+		};
+
+		// Деструктурируем массив и при пересоздании в его конец добавляем новый элемент
+		setPosts([...posts, newPost]);
+
+		// Очищаем инпуты
+		setTitle('');
+		setText('');
+	};
+
+	return (
+		<div className='App'>
+			<form>
+				<Input
+					value={title}
+					onChange={e => setTitle(e.target.value)}
+					type='text'
+					placeholder='Введите имя поста'
+				/>
+				<Input
+					value={text}
+					onChange={e => setText(e.target.value)}
+					type='text'
+					placeholder='Введите текст поста'
+				/>
+				{/* ! ВЕШАЕМ ФУНКЦИЮ НА КНОПКУ */}
+				<Button onClick={addNewPost}>Создать пост</Button>
+			</form>
+			{/* ! ЗДЕСЬ ПЕРЕДАЁТСЯ МАССИВ С КНОПКОЙ */}
+			<PostsList posts={posts} title={'Список ЯП'} />
+		</div>
+	);
+}
+
+export default App;
+```
 
 `post-list.jsx`
 ```JSX
@@ -841,7 +900,7 @@ const PostsList = ({ posts, title }) => {
 	return (
 		<div>
 			<h1 style={{ textAlign: 'center' }}>{title}</h1>
-			// добавляем индекс для поста
+			{/* добавляем индекс для поста и рендерим все посты из массива постов */}
 			{posts.map((post, index) => (
 				// передаём его в сам пост
 				<PostItem number={index + 1} post={post} key={post.id} />
@@ -859,7 +918,7 @@ const PostItem = props => {
 		<div className='post'>
 			<div className='post__content'>
 				<strong>
-					// И сюда передаём порядковый номер поста
+					{/* И сюда передаём порядковый номер поста */}
 					{props.number}. {props.post.title}
 				</strong>
 				<div>
@@ -874,73 +933,7 @@ const PostItem = props => {
 };
 ```
 
-`App.jsx`
-```JSX
-import React, { useState, useRef } from 'react';
-import './styles/App.css';
-import PostItem from './components/post-item';
-import PostsList from './components/posts-list';
-import Button from './components/UI/button/button';
-import Input from './components/UI/input/input';
 
-function App() {
-	// тут находятся сами данные и метод, который эти данные изменяет
-	const [posts, setPosts] = useState([
-		{ id: 1, title: 'Javascript', text: 'JS - это ЯП' },
-		{ id: 2, title: 'C#', text: 'C# - это уже язык' },
-		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
-	]);
-
-	const [title, setTitle] = useState('');
-	const [text, setText] = useState('');
-
-	// Добавление нового поста
-	const addNewPost = e => {
-		// отключаем перезагрузку страницы при нажатии на кнопку
-		e.preventDefault();
-
-		// создаём объект, который добавим в массив
-		const newPost = {
-			id: Date.now(),
-			title,
-			text,
-		};
-
-		// Раскладываем сам массив и при пересоздании в его конец добавляем новый элемент
-		setPosts([...posts, newPost]);
-
-		// Очищаем инпуты
-		setTitle('');
-		setText('');
-	};
-
-	return (
-		<div className='App'>
-			<form>
-				{/* Это управляемый компонент */}
-				<Input
-					// Связываем состояние и значение инпута
-					value={title}
-					onChange={e => setTitle(e.target.value)}
-					type='text'
-					placeholder='Введите имя поста'
-				/>
-				{/* Неуправляемый компонент */}
-				<Input
-					value={text}
-					onChange={e => setText(e.target.value)}
-					type='text'
-					placeholder='Введите текст поста'
-				/>
-				<Button onClick={addNewPost}>Создать пост</Button>
-			</form>
-			<PostsList posts={posts} title={'Список ЯП'} />
-		</div>
-	);
-}
-
-export default App;
-```
 ![](_png/Pasted%20image%2020221104182334.png)
 
 Так же можно воспользоваться вторым вариантом создания поста, при котором у нас будет только одна точка изменения данных (не делим на `title` и `text`, а сразу имеем `post`)
@@ -953,13 +946,16 @@ function App() {
 		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
 	]);
 
+	// объединяем все данные в один объект
 	const [post, setPost] = useState({ title: '', text: '' });
 
 	const addNewPost = e => {
 		e.preventDefault();
 
+		// добавляем новый пост в массив через объект
 		setPosts([...posts, { ...post, id: Date.now() }]);
 
+		// очищаем через объект
 		setPost({ title: '', text: '' });
 	};
 
@@ -1004,9 +1000,10 @@ export default App;
 1) Передаём данные мы между компонентами через пропсы. Пропсы всегда передаются от родителя к ребёнку - по другому никак не передать внутри компонентов
 2) Чтобы передать пропсы от ребёнка к родителю, нужно реализовать функцию, которая будет родителю возвращать данные от ребёнка (снизу вверх)
 
-И вот конкретная реализация, где мы деконструируем наше приложение и выводим форму вывода постов в отдельный компонент:
+#### Реализация создания поста
+Сначала выводим форму наших постов в отдельный компонент. Дальше уже нам нужно прокинуть функцию `createPost` в дочерний элемент компонента `App`, а именно в `PostForm`, который и будет сообщать родительскому компоненту (`App`), что нужно будет создать новый пост.
 
-`app.jsx`
+`app.jsx` - тут находится новая функция
 ```JSX
 function App() {
 	const [posts, setPosts] = useState([
@@ -1015,26 +1012,23 @@ function App() {
 		{ id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },
 	]);
 
-	// Эта функция будет менять массив со значением постов
+	// Эта функция будет добавлять новый пост
 	const createPost = newPost => {
 		setPosts([...posts, newPost]);
 	};
 
 	return (
 		<div className='App'>
-			// и сюда мы передаём функцию, которая должна будет получать новое значение от дочернего элемента
+			{/* и сюда мы передаём функцию, которая должна будет получать новое значение от дочернего элемента */}
 			<PostForm create={createPost} />
 			<PostsList posts={posts} title={'Список ЯП'} />
 		</div>
 	);
 }
 ```
-`post-form.jsx`
-```JSX
-import React, { useState } from 'react';
-import Button from './UI/button/button';
-import Input from './UI/input/input';
 
+`post-form.jsx` - тут эта функция вызывается и сообщает родителю, что нужно вызваться и создаться
+```JSX
 // получаем от родителя из пропсов функцию для приёма данных
 const PostForm = ({create}) => {
 	const [post, setPost] = useState({ title: '', text: '' });
@@ -1045,7 +1039,7 @@ const PostForm = ({create}) => {
 		// Конкретно этот пост нужно будет передавать снизу вверх
 		const newPost = { ...post, id: Date.now() };
 
-		// И передаём в эту функцию сам
+		// И передаём в эту функцию сам пост
 		create(newPost);
 
 		setPost({ title: '', text: '' });
@@ -1074,10 +1068,115 @@ export default PostForm;
 ```
 
 
-1:02:28
+#### Реализация удаления объекта
+Тут мы прокидываем вызваемую функцию в дочерние элементы вниз по иерархии.
+Создаём функцию `removePost`, которую передаём вниз через `PostsList` в компонент `PostItem`, где уже и вызываем `removePost()`, который находится в в данный момент времени в `app.jsx`
+
+`app.jsx`
+```JSX
+function App() {  
+   const [posts, setPosts] = useState([  
+      { id: 1, title: 'Javascript', text: 'JS - это ЯП' },  
+      { id: 2, title: 'C#', text: 'C# - это уже язык' },  
+      { id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },  
+   ]);  
+
+	// метод создания поста
+   const createPost = post => {  
+      setPosts([...posts, post]);  
+   };  
+
+	// Метод удаления поста
+   const removePost = post => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className='App'>  
+         <PostForm create={createPost} />  
+         <PostsList 
+	         posts={posts} 
+	         title={'Список ЯП'} 
+	         // прокидываем метод удаления в PostsList
+	         remove={removePost} 
+         />  
+      </div>  
+   );  
+}  
+  
+export default App;
+```
+
+`post-list.jsx`
+```JSX
+// принимаем функцию удаления из app.jsx
+const PostsList = ({ posts, title, remove }) => {  
+   return (  
+      <div>  
+         <h1 style={{ textAlign: 'center' }}>{title}</h1>  
+         {posts.map((post, index) => (  
+            <PostItem  
+               number={index + 1}  
+               post={post}  
+               key={post.id}  
+               // прокидываем функцию удаления дальше вниз к самому элементу списка
+               remove={remove}  
+            />  
+         ))}  
+      </div>  
+   );  
+};
+```
+
+`post-item.jsx`
+```JSX
+const PostItem = props => { 
+   return (  
+      <div className='post'>  
+         <div className='post__content'>  
+            <strong>  
+               {props.number}. {props.post.title}  
+            </strong>  
+            <div>  
+               <p>{props.post.text}</p>  
+            </div>  
+         </div>  
+         <div className='post__buttons'>  
+	         {/* и уже конкретно тут вызваем функцию удаления поста */}
+            <Button onClick={() => props.remove(props.post)}>  
+               Удалить  
+            </Button>  
+         </div>  
+      </div>  
+   );  
+};
+```
 
 ## Отрисовка по условию 
 
+Дальше нам нужно реализовать вывод надписи при условии, что в списке нет больше никаких постов. Реализовать это просто с помощью тернарных операторов.
+Используем тернарный оператор для реализации вывода сообщения
+
+```JSX
+return (  
+   <div className='App'>  
+      <PostForm create={createPost} />  
+      {/* Если длина массива не равна 0, то... */}
+      {posts.length !== 0 ? (
+	      {/* ... выводим посты */}  
+         <PostsList  
+            posts={posts}  
+            title={'Список ЯП'}  
+            remove={removePost}  
+         />  
+      ) : ( 
+	      {/* ... или выводим сообщение об их отсуствии */} 
+         <h1 style={{ textAlign: 'center' }}> Посты не найдены! </h1>  
+      )}   
+    </div>  
+);
+```
+![](_png/Pasted%20image%2020221105104741.png)
 
 
 
