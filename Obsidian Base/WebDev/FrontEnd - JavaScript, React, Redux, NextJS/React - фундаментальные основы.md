@@ -1155,7 +1155,7 @@ const PostItem = props => {
 ## Отрисовка по условию 
 
 Дальше нам нужно реализовать вывод надписи при условии, что в списке нет больше никаких постов. Реализовать это просто с помощью тернарных операторов.
-Используем тернарный оператор для реализации вывода сообщения
+Используем тернарный оператор для реализации вывода сообщения:
 
 ```JSX
 return (  
@@ -1170,7 +1170,7 @@ return (
             remove={removePost}  
          />  
       ) : ( 
-	      {/* ... или выводим сообщение об их отсуствии */} 
+	      {/* ... или выводим сообщение об их отсутствии */} 
          <h1 style={{ textAlign: 'center' }}> Посты не найдены! </h1>  
       )}   
     </div>  
@@ -1178,12 +1178,99 @@ return (
 ```
 ![](_png/Pasted%20image%2020221105104741.png)
 
-
-
 ## Сортировка. Выпадающий список 
 
+Реализация массива с постами осуществляется полностью на стороне компонента `App`
 
+`app.jsx`
+```JSX
+function App() {  
+   const [posts, setPosts] = useState([  
+      { id: 1, title: 'Javascript', text: 'JS - это ЯП' },  
+      { id: 2, title: 'C#', text: 'C# - это уже язык' },  
+      { id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },  
+   ]);  
+  
+   // Создаём состояние для сортировки, чтобы реализовать двустороннее связывание  
+   const [selectedSort, setSelectedSort] = useState('');  
+  
+   // Сортируем массивы по пользовательскому запросу  
+   const sortPosts = sort => {  
+      console.log(sort);  
+      // определяем, какая у нас будет сортировка
+      setSelectedSort(sort);  
+  
+      // нельзя мутировать состояние напрямую, поэтому сортируем копию массива  
+      setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));  
+   };  
+  
+   const createPost = post => {  
+      setPosts([...posts, post]);  
+   };  
+  
+   const removePost = post => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className='App'>  
+         <PostForm create={createPost} /> 
+         {/* Этот элемент отодвинет тег селекта опшенов */} 
+         <hr style={{ margin: '15px 0' }} />  
+         {/* Этот компонент у нас будет отвечать за реализацию опшенов для сортировки */}
+         <Select  
+	         // значение сортировки
+            value={selectedSort}  
+            // сортировка при смене типа сортировки
+            onChange={sortPosts}  
+            // значение по умолчанию
+            defaultValue='Сортировка по'  
+            // какие значения сортировки у нас будут
+            options={[  
+               { value: 'title', name: 'По названию' },  
+               { value: 'text', name: 'По описанию' },  
+            ]}  
+         />         
+         {posts.length ? (  
+            <PostsList 
+	            posts={posts} 
+	            title={'Список ЯП'} 
+	            remove={removePost} />  
+         ) : (  
+            <h1 style={{ textAlign: 'center' }}> Посты не найдены! </h1>  
+         )}      
+	</div>  
+   );  
+}  
+  
+export default App;
+```
 
+`select.jsx`
+```JSX
+const Select = ({ options, defaultValue, value, onChange }) => {  
+   return (  
+	   // в функции onChange будет определяться выбранный способ сортировки
+      <select value={value} onChange={e => onChange(e.target.value)}>  
+         {/* это опция-лейбл (дефолтное значение) */}
+         <option value='' disabled>  
+            {defaultValue}  
+         </option>  
+         {/* тут будут выводиться массив опций */}
+         {options.map(option => (  
+	         {/* в качестве ключа можно вставить значение */}
+            <option key={option.value} value={option.value}>  
+               {option.name}  
+            </option>  
+         ))}  
+      </select>  
+   );  
+};  
+  
+export default Select;
+```
+
+![|400](_png/Pasted%20image%2020221105113442.png)![|400](_png/Pasted%20image%2020221105113444.png)
 
 ## Поиск. Фильтрация. 
 

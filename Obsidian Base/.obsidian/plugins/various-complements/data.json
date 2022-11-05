@@ -1,7 +1,7 @@
 {
   "strategy": "default",
   "matchStrategy": "prefix",
-  "maxNumberOfSuggestions": 5,
+  "maxNumberOfSuggestions": 10,
   "maxNumberOfWordsAsPhrase": 3,
   "minNumberOfCharactersTriggered": 0,
   "minNumberOfWordsTriggeredPhrase": 1,
@@ -700,6 +700,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1667634123464
+        }
+      }
+    },
+    "onChange": {
+      "onChange": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1667637504351
         }
       }
     }
