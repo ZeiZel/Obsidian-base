@@ -1274,7 +1274,77 @@ export default Select;
 
 ## Поиск. Фильтрация. 
 
+Фильтрация будет осуществляться отдельной функцией 
 
+```JSX
+function App() {  
+   const [posts, setPosts] = useState([  
+      { id: 1, title: 'Javascript', text: 'JS - это ЯП' },  
+      { id: 2, title: 'C#', text: 'C# - это уже язык' },  
+      { id: 3, title: 'C++', text: 'C++ - это уже язык программирования' },  
+   ]);  
+  
+   const [selectedSort, setSelectedSort] = useState('');  
+   // выведем переменную поиска и функцию установки в отдельный стейт
+   const [searchQuery, setSearchQuery] = useState('');  
+  
+   // Конкретно эта функция будет проверять наличие сортировки  
+   function getSortedPosts() {  
+      console.log('отработала getSortedPosts');  
+      // и будет производить сортировку, если та существует  
+      if (selectedSort) {  
+         return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));  
+      }      // или возвращать чистый массив постов  
+      return posts;  
+   }  
+   // Саму сортировку перенесём в отдельную переменную  
+   const sortedPosts = getSortedPosts();  
+  
+   const sortPosts = sort => {  
+      console.log(sort);  
+      setSelectedSort(sort);  
+   };  
+  
+   const createPost = post => {  
+      setPosts([...posts, post]);  
+   };  
+  
+   const removePost = post => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className='App'>  
+         <PostForm create={createPost} />  
+         <hr style={{ margin: '15px 0' }} />  
+         <Input  
+            value={searchQuery}  
+            onChange={e => setSearchQuery(e.target.value)}  
+            placeholder='Поиск...'  
+         />         <Select  
+            value={selectedSort}  
+            onChange={sortPosts}  
+            defaultValue='Сортировка по'  
+            options={[  
+               { value: 'title', name: 'По названию' },  
+               { value: 'text', name: 'По описанию' },  
+            ]}  
+         />         {posts.length ? (  
+            // Сюда передаём сразу отсортированные посты  
+            <PostsList posts={sortedPosts} title={'Список ЯП'} remove={removePost} />  
+         ) : (  
+            <h1 style={{ textAlign: 'center' }}> Посты не найдены! </h1>  
+         )}      
+	</div>  
+   );  
+}  
+  
+export default App;
+```
+
+И тут мы можем заметить, что наша функция будет срабатывать и перерисовывать масиив каждый раз, как мы поменяем значение сортировки или введём новое значение в инпуте. Это жуткий удар по производительности, что не даст нормально существовать нашему приложению.
+
+![](_png/Pasted%20image%2020221105125402.png)
 
 
 ## useMemo. Мемоизация. Кеширование 
