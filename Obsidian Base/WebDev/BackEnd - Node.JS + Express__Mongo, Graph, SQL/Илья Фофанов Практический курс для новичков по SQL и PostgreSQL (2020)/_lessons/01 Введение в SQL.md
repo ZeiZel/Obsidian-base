@@ -186,13 +186,49 @@ CREATE TABLE book (
 
 ![](_png/Pasted%20image%2020220922182844.png)
 
+Конкретно тут мы создали условия, когда один паспорт связан с одним человеком
 
+Создали таблицы с персонами и паспортами
+```SQL
+CREATE TABLE person 
+(
+	person_id int PRIMARY KEY,
+	first_name varchar(64) NOT NULL,
+	last_name varchar(64) NOT NULL
+);
 
-
-
-
+CREATE TABLE passport 
+(
+	passport_id int PRIMARY KEY,
+	serial_number int NOT NULL,
+	fk_passport_person int REFERENCES person(person_id)
+);
+```
+Добавили забытый столбец с регистрацией в паспорте
+```SQL
+ALTER TABLE passport 
+ADD COLUMN registration text NOT NULL
+```
+Добавили значение персоны
+```SQL
+INSERT INTO person VALUES  (1, 'John', 'Snow');
+```
+Добавили паспорт
+```SQL
+INSERT INTO passport VALUES (1, 123421, 1, 'WFell')
+```
 
 ### 010 Отношение 'многие ко многим'
+
+Конкретно тут нам представлена область отношений авторов к их книгам: 
+1) Мы можем попробовать найти все книги за авторством кого-то
+2) Мы можем найти все книги, за авторством которой стояли определённые люди
+
+![](_png/Pasted%20image%2020221105182537.png)
+
+
+
+
 
 
 
