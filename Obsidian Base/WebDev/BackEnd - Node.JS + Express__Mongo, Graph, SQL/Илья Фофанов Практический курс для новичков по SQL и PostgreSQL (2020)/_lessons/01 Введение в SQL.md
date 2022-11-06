@@ -254,15 +254,15 @@ CREATE TABLE author (
 );
 ```
 
-
+Через `CONSTRAINT` задаём ограничение в виде ==составного (composite) первичного ключа== 
 
 ```SQL
 CREATE TABLE book_author (
 	book_id int REFERENCES book(book_id),
 	autor_id int REFERENCES author(author_id),
 	
-	-- задаём ограничение/первичный ключ
-	CONSTRAINT pk_book_author PRIMARY KEY (book_id, author_id) -- composite key
+	-- composite key
+	CONSTRAINT pk_book_author PRIMARY KEY (book_id, author_id)
 );
 ```
 
