@@ -262,7 +262,7 @@ CREATE TABLE book_author (
 	autor_id int REFERENCES author(author_id),
 	
 	-- задаём ограничение/первичный ключ
-	CONSTRAINT 
+	CONSTRAINT pk_book_author PRIMARY KEY (book_id, author_id) -- composite key
 );
 ```
 
