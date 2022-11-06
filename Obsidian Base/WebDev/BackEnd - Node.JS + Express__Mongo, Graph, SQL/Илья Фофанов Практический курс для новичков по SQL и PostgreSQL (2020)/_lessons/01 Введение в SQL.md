@@ -226,10 +226,45 @@ INSERT INTO passport VALUES (1, 123421, 1, 'WFell')
 
 ![](_png/Pasted%20image%2020221105182537.png)
 
+Отношения многие ко многим всегда моделируется с помощью третьей таблицы, которая их связывает. Простым `FOREIGN KEY` тут не получится обойтись
+
+![](_png/Pasted%20image%2020221106115053.png)
+
+В SQL есть условие `IF EXISTS`, которое позволяет запустить команду, если существует определённое значение.
+
+```SQL
+-- удалит таблицу book и author, если они существуют 
+DROP TABLE book IF EXISTS;
+DROP TABLE author IF EXISTS;
+```
 
 
 
+```SQL
+CREATE TABLE book (
+	book_id int PRIMARY KEY,
+	title text NOT NULL,
+	isbn text NOT NULL
+);
 
+CREATE TABLE author (
+	author_id int PRIMARY KEY,
+	full_name text NOT NULL,
+	rating real
+);
+```
+
+
+
+```SQL
+CREATE TABLE book_author (
+	book_id int REFERENCES book(book_id),
+	autor_id int REFERENCES author(author_id),
+	
+	-- задаём ограничение/первичный ключ
+	CONSTRAINT 
+);
+```
 
 
 ### 011 Создаём Northwind
