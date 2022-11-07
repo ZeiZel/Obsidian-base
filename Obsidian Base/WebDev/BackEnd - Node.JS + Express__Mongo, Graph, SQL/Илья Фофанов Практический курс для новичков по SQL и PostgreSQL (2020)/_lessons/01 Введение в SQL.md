@@ -234,11 +234,11 @@ INSERT INTO passport VALUES (1, 123421, 1, 'WFell')
 
 ```SQL
 -- удалит таблицу book и author, если они существуют 
-DROP TABLE book IF EXISTS;
-DROP TABLE author IF EXISTS;
+DROP TABLE IF EXISTS book;
+DROP TABLE IF EXISTS author;
 ```
 
-
+Тут создаём таблицы книг и авторов
 
 ```SQL
 CREATE TABLE book (
@@ -254,18 +254,14 @@ CREATE TABLE author (
 );
 ```
 
-Через `CONSTRAINT` задаём ограничение в виде ==составного (composite) первичного ключа== 
+Тут уже связываем таблицы друг с другом. Через `CONSTRAINT` задаём ограничение в виде ==составного (composite) первичного ключа== 
 
 ```SQL
 CREATE TABLE book_author (
 	book_id int REFERENCES book(book_id),
-	autor_id int REFERENCES author(author_id),
+	author_id int REFERENCES author(author_id),
 	
-	-- composite key
-	CONSTRAINT pk_book_author PRIMARY KEY (book_id, author_id)
+	-- задаём ограничение/первичный ключ
+	CONSTRAINT pk_book_author PRIMARY KEY (book_id, author_id) -- composite key
 );
 ```
-
-
-### 011 Создаём Northwind
-

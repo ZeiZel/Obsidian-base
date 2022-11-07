@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/21 Триггеры.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/21 Триггеры.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/21 Триггеры.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md"
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/21 Триггеры.md"
               }
             }
           },
@@ -180,13 +180,13 @@
   },
   "active": "9d41c2e5252cdd94",
   "lastOpenFiles": [
+    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/PostreSQL.md",
+    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/001 Что такое API и как работают реальные приложения.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
-    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/_lessons/01 Введение в SQL.md",
-    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Илья Фофанов Практический курс для новичков по SQL и PostgreSQL (2020)/PostreSQL.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.40 Что лучше git rebase или git merge.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.42 Заключительное слово.md"
