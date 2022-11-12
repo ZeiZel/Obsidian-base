@@ -24100,6 +24100,8 @@ var SimpleGit = class extends GitManager {
         const path3 = process.env["PATH"] + ":" + env.join(":");
         process.env["PATH"] = path3;
       }
+      const debug2 = require_browser();
+      debug2.enable("simple-git");
       await this.git.cwd(await this.git.revparse("--show-toplevel"));
     }
   }
@@ -24610,37 +24612,11 @@ var ObsidianGitSettingsTab = class extends import_obsidian7.PluginSettingTab {
       plugin.saveSettings();
     }));
     containerEl.createEl("br");
-    containerEl.createEl("h3", { text: "Advanced" });
-    if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian7.Setting(containerEl).setName("Update submodules").setDesc('"Create backup" and "pull" takes care of submodules. Missing features: Conflicted files, count of pulled/pushed/committed files. Tracking branch needs to be set for each submodule').addToggle((toggle) => toggle.setValue(plugin.settings.updateSubmodules).onChange((value) => {
-        plugin.settings.updateSubmodules = value;
-        plugin.saveSettings();
-      }));
-    if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian7.Setting(containerEl).setName("Custom Git binary path").addText((cb) => {
-        var _a2;
-        cb.setValue((_a2 = plugin.localStorage.getGitPath()) != null ? _a2 : "");
-        cb.setPlaceholder("git");
-        cb.onChange((value) => {
-          plugin.localStorage.setGitPath(value);
-          plugin.gitManager.updateGitPath(value || "git");
-        });
-      });
-    if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian7.Setting(containerEl).setName("Additional PATH environment variable paths").setDesc("Use each line for one path").addTextArea((cb) => {
-        cb.setValue(plugin.localStorage.getPATHPaths().join("\n"));
-        cb.onChange((value) => {
-          plugin.localStorage.setPATHPaths(value.split("\n"));
-        });
-      });
-    if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian7.Setting(containerEl).setName("Reload with new PATH environment variable").addButton((cb) => {
-        cb.setButtonText("Reload");
-        cb.setCta();
-        cb.onClick(() => {
-          plugin.gitManager.setGitInstance();
-        });
-      });
+    if (plugin.gitManager instanceof IsomorphicGit) {
+      containerEl.createEl("h3", { text: "Authentication/Commit Author" });
+    } else {
+      containerEl.createEl("h3", { text: "Commit Author" });
+    }
     if (plugin.gitManager instanceof IsomorphicGit)
       new import_obsidian7.Setting(containerEl).setName("Username on your git server. E.g. your username on GitHub").addText((cb) => {
         var _a2;
@@ -24670,6 +24646,38 @@ var ObsidianGitSettingsTab = class extends import_obsidian7.PluginSettingTab {
         cb.setValue(await plugin.gitManager.getConfig("user.email"));
         cb.onChange((value) => {
           plugin.gitManager.setConfig("user.email", value == "" ? void 0 : value);
+        });
+      });
+    containerEl.createEl("br");
+    containerEl.createEl("h3", { text: "Advanced" });
+    if (plugin.gitManager instanceof SimpleGit)
+      new import_obsidian7.Setting(containerEl).setName("Update submodules").setDesc('"Create backup" and "pull" takes care of submodules. Missing features: Conflicted files, count of pulled/pushed/committed files. Tracking branch needs to be set for each submodule').addToggle((toggle) => toggle.setValue(plugin.settings.updateSubmodules).onChange((value) => {
+        plugin.settings.updateSubmodules = value;
+        plugin.saveSettings();
+      }));
+    if (plugin.gitManager instanceof SimpleGit)
+      new import_obsidian7.Setting(containerEl).setName("Custom Git binary path").addText((cb) => {
+        var _a2;
+        cb.setValue((_a2 = plugin.localStorage.getGitPath()) != null ? _a2 : "");
+        cb.setPlaceholder("git");
+        cb.onChange((value) => {
+          plugin.localStorage.setGitPath(value);
+          plugin.gitManager.updateGitPath(value || "git");
+        });
+      });
+    if (plugin.gitManager instanceof SimpleGit)
+      new import_obsidian7.Setting(containerEl).setName("Additional PATH environment variable paths").setDesc("Use each line for one path").addTextArea((cb) => {
+        cb.setValue(plugin.localStorage.getPATHPaths().join("\n"));
+        cb.onChange((value) => {
+          plugin.localStorage.setPATHPaths(value.split("\n"));
+        });
+      });
+    if (plugin.gitManager instanceof SimpleGit)
+      new import_obsidian7.Setting(containerEl).setName("Reload with new PATH environment variable").addButton((cb) => {
+        cb.setButtonText("Reload");
+        cb.setCta();
+        cb.onClick(() => {
+          plugin.gitManager.setGitInstance();
         });
       });
     new import_obsidian7.Setting(containerEl).setName("Custom base path (Git repository path)").setDesc(`
