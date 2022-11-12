@@ -167,6 +167,23 @@ app.whenReady().then(() => {
 
 ## 011 Модуль BrowserWindow
 
+Модуль `BrowserWindow` хранит в себе класс, который позволяет отображать окно
+
+```JS
+import { app, BrowserWindow } from "electron";
+
+app.on("ready", () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+	});
+
+	window.loadURL("https://google.com");
+});
+```
+![](_png/Pasted%20image%2020221112205758.png)
+
+
 
 
 ## 012 Модуль Menu
