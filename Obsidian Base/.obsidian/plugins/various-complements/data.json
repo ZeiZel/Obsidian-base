@@ -47,78 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "комбинация": {
-      "комбинация": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665309617589
-        }
-      }
-    },
-    "знаний": {
-      "знаний": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665311418615
-        }
-      }
-    },
-    "Конкуренция": {
-      "Конкуренция": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665318215216
-        }
-      }
-    },
-    "определённые": {
-      "определённые": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665320314938
-        }
-      }
-    },
-    "интервальное": {
-      "интервальное": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665320320135
-        }
-      }
-    },
-    "Задание": {
-      "Задание": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665326829153
-        }
-      }
-    },
-    "научить": {
-      "научить": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665327257294
-        }
-      }
-    },
-    "науки": {
-      "науки": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665327259647
-        }
-      }
-    },
-    "первой": {
-      "первой": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665503635724
-        }
-      }
-    },
     "required": {
       "required": {
         "currentFile": {
@@ -748,6 +676,38 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1667727487267
+        }
+      }
+    },
+    "основной": {
+      "основной": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1668250390796
+        }
+      }
+    },
+    "Process": {
+      "Process": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668250157292
+        }
+      }
+    },
+    "рендерер-процесс": {
+      "рендерер-процесс": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1668250534789
+        }
+      }
+    },
+    "процесс": {
+      "процесс": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668250392925
         }
       }
     }
