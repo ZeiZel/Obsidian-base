@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/03 Разработка с Electron.js.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/03 Разработка с Electron.js.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/03 Разработка с Electron.js.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md"
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/03 Разработка с Electron.js.md"
               }
             }
           },
@@ -180,10 +180,10 @@
   },
   "active": "0e085e9fa8ea9d0f",
   "lastOpenFiles": [
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.41 Как использовать файл .gitignore.md",
     "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/01 Вступление.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
