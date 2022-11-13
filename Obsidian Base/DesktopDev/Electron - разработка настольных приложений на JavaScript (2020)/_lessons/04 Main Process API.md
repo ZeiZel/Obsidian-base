@@ -182,7 +182,7 @@ app.whenReady().then(() => {
 ```
 ![](_png/Pasted%20image%2020221112194044.png)
 
-## 011 Модуль BrowserWindow
+## 011 Модуль [BrowserWindow](https://www.electronjs.org/docs/latest/api/browser-window)
 
 Модуль `BrowserWindow` хранит в себе класс, который предоставляет нам конструктор нового браузерного окна, которое позволяет рендерить контент в приложении
 
@@ -201,7 +201,7 @@ app.on("ready", () => {
 ```
 ![](_png/Pasted%20image%2020221112205758.png)
 
-
+Уже метод `loadFile()` рендерит структуру страницы из нужного нам файла
 
 ```JS
 app.on("ready", () => {
@@ -236,17 +236,105 @@ app.on("ready", () => {
 });
 ```
 
+Далее мы так же можем избавиться от фликер-эффекта (эффект, при котором у нас сначала рендерится сама HTML-структура, а уже затем подгружаются стили). Для этого мы можем задать ивент, при котором окно покажется только после полного рендера страницы и так же можем задать цвет для нашего окна браузера по умолчанию (чтобы не смотреть на белое окно)
 
+```JS
+app.on("ready", () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		// не показываем окно сразу
+		show: false,
+		// фон изначально будет равен тому, что находится в стилях
+		backgroundColor: "#2c3e50",
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
 
+	window.loadFile("renderer/index.html");
 
+	// подписываемся на событие, которое сработает, когда окно полностью загрузится
+	window.on("ready-to-show", () => {
+		// ... нужно будет отобразить его
+		window.show();
+	});
 
+	window.webContents.openDevTools();
+});
+```
 
+Так же мы можем задать максимальный и минимальный размер нашего окна через модуль `screen`, который хранит в себе методы и свойства работы с размером окна пользователя
 
+```JS
+import { app, screen, BrowserWindow } from "electron";
 
+app.on("ready", () => {
+	// тут получаем размер окна пользователя
+	const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+	console.log(`${width} - ${height}`);
 
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		// тут минимальные размеры окна
+		minHeight: 500,
+		minWidth: 500,
+		// тут максимальные размеры окна
+		maxHeight: height < 1080 ? 1080 : height,
+		maxWidth: width,
+		show: false,
+		backgroundColor: "#2c3e50",
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
 
+	window.loadFile("renderer/index.html");
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+
+	window.webContents.openDevTools();
+});
+
+```
+
+Дальше уже идут свойства работы с окном приложения
+
+- `frame: false` - скроет рамку у приложения впринципе
+![](_png/Pasted%20image%2020221113100022.png)
+- `titleBarStyle: "hidden"` - имеет несколько свойств (почти все для мака), которые определяют положение элементов кнопок и самой рамки 
+![](_png/Pasted%20image%2020221113100022.png)
+
+И теперь нам нужно создать искуственную драг-область, за которую мы сможем перетаскивать приложение, так как у нас сейчас нет верха
+
+```HTML
+<div class="title-bar"></div>
+```
+```CSS
+.title-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	background: #3498db;
+	
+	// эта настройка наделяет элемент с данным классом поведением перетаскивания 
+	-webkit-app-region: drag;
+}
+```
+![](_png/Pasted%20image%2020221113101208.png)
 
 ## 012 Модуль Menu
+
+
+
+
+
+
 
 
 
