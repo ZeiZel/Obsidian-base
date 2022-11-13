@@ -1,6 +1,7 @@
 # Electron - разработка настольных приложений на JavaScript (2020)
 #JavaScript #Desctop #Electron
 
+[Почему именно электрон?](_lessons/Почему%20именно%20электрон.md)
 [02 Начало работы](_lessons/02%20Начало%20работы.md)
 [03 Разработка с Electron.js](_lessons/03%20Разработка%20с%20Electron.js.md)
 [04 Main Process API](_lessons/04%20Main%20Process%20API.md)

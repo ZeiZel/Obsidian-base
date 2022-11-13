@@ -698,8 +698,8 @@
     "рендерер-процесс": {
       "рендерер-процесс": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1668250534789
+          "count": 4,
+          "lastUpdated": 1668333348333
         }
       }
     },
@@ -740,6 +740,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668320771730
+        }
+      }
+    },
+    "ipcRenderer": {
+      "ipcRenderer": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668333678889
         }
       }
     }

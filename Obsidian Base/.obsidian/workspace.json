@@ -42,9 +42,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "2b3cf3bffbf91a75",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2ed9ede6168b3bfc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -110,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md"
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md"
               }
             }
           },
@@ -178,17 +202,17 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "0e085e9fa8ea9d0f",
+  "active": "2ed9ede6168b3bfc",
   "lastOpenFiles": [
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/04 Main Process API.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/03 Разработка с Electron.js.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/02 Настройка окружения.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/07 Упаковка и публикация приложений.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/02 Начало работы.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.41 Как использовать файл .gitignore.md",
-    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md"
+    "WebDev/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.41 Как использовать файл .gitignore.md"
   ]
 }
