@@ -210,6 +210,8 @@ const loadAndDisplayData = () => {
 
 ## 015 Модуль remote
 
+>[!danger] На данный момент этот модуль полностью закрыт в новых версиях Electron. Вместо `remote` нужно использовать ==preload-скрипты==
+
 С помощью модуля `remote`, мы можем пользоваться определёнными модулями из основного процесса
 
 ```JS
@@ -234,12 +236,27 @@ window.onload = () => {
 
 ![](_png/Pasted%20image%2020221113191435.png)
 
+Ну и так же можно получить остальные элементы
 
+```JS
+import { remote } from "electron";
+const { app, dialog, BrowserWindow } = remote;
+require("application.css");
 
+window.onload = () => {
+	const action = document.querySelector(".login");
+	action.addEventListener("click", () => {
+		// при нажатии на кнопку будет создаваться новое окно
+		let win = new BrowserWindow({
+			width: 500,
+			height: 500,
+		});
 
-
-
-
+		// тут сработает выход
+		app.quit();
+	});
+};
+```
 
 ## 016 Preload Script
 
