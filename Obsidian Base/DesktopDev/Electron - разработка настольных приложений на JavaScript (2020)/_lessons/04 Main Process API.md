@@ -522,11 +522,151 @@ const createWindow = () => {
 
 ![](_png/Pasted%20image%2020221113112207.png)
 
-## 013 Модуль Tray
+## 013 Модуль [Tray](https://www.electronjs.org/docs/latest/api/tray)
 
 Этот модуль позволяет создавать иконку трея нашего приложения.
 
+Первым делом, нам нужно установить в вебпак лоадер, который будет компилировать нормально изображения в наш выводной проект.
 
+```bash
+npm install file-loader --save-dev
+```
 
+```JS
+module.exports = {
+	renderer: {
+		entry: "./src/renderer/javascripts/index.js",
+	},
+	preload: {
+		entry: "./src/preload/index.js",
+	},
+	main: {
+		entry: "./src/main/index.js",
+		// 
+		module: {
+			rules: [
+				// наастраиваем первое правило для лоадера
+				{
+					test: /\.(png|jpe?g|gif)$/i,
+					use: [
+						{
+							// выбираем лоадер
+							loader: "file-loader",
+							options: {
+								// паттерн компиляции
+								name: "[path][name].[ext]",
+							},
+						},
+					],
+				},
+			],
+		},
+	},
+};
+```
 
+По сути очень важно, чтобы вебпак компилировал файл со своим именем, так как в конце у иконки должен быть суффикс `Template`, чтобы на мак-устройствах иконка выполняла свою анимацию корректно
 
+![](_png/Pasted%20image%2020221113114120.png)
+
+Дальше уже создаём инстанс трея со всеми входными параметрами
+
+```JS
+import path from "path";
+import { app, BrowserWindow, Tray } from "electron";
+import icon from "trayTemplate.png";
+
+const createWindow = () => {
+	// new Tray() - генерирует иконку в трее
+	// конкретно через path.resolve мы генерируем полный путь к иконке для приложения
+	const tray = new Tray(path.resolve(__dirname, icon));
+
+	// Выведет текст при наведении на иконку
+	tray.setToolTip("Electron Application");
+
+	tray.on("click", () => {
+		window.isVisible() ? window.hide() : window.show();
+	});
+
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		show: false,
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
+
+	window.loadFile("renderer/index.html");
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+};
+
+app.on("ready", () => {
+	createWindow();
+});
+```
+
+Теперь мы видим саму иконку приложения в трее, его тултип и можем выполнить логику, которая повешана на тултип.
+Так же нужно отметить, что мы можем подписаться на разные клики мышью, чтобы реализовать разную логику.
+
+![](_png/Pasted%20image%2020221113114727.png)
+![](_png/Pasted%20image%2020221113114731.png)
+
+И теперь мы можем создать менюшку для нашего трея:
+
+```JS
+import path from "path";
+import { app, BrowserWindow, Tray, Menu } from "electron";
+import icon from "trayTemplate.png";
+
+const createWindow = () => {
+	// создаём контекстное меню для трея
+	const trayMenu = new Menu.buildFromTemplate([
+		{
+			label: "Toggle App",
+			click: () => {
+				window.isVisible() ? window.hide() : window.show();
+			},
+		},
+		{
+			role: "quit",
+		},
+	]);
+
+	const tray = new Tray(path.resolve(__dirname, icon));
+
+	// присваиваем контекстное меню для трея
+	tray.setContextMenu(trayMenu);
+	tray.setToolTip("Electron Application");
+
+	tray.on("click", () => {
+		window.isVisible() ? window.hide() : window.show();
+	});
+
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		show: false,
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
+
+	window.loadFile("renderer/index.html");
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+};
+
+app.on("ready", () => {
+	createWindow();
+});
+```
+
+На *ПКМ* программа туглится, на *ЛКМ* открывается менюшка
+
+![|400](_png/Pasted%20image%2020221113120122.png)
