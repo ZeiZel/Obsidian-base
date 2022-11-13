@@ -328,7 +328,7 @@ app.on("ready", () => {
 ```
 ![](_png/Pasted%20image%2020221113101208.png)
 
-## 012 Модуль Menu
+## 012 Модуль [Menu](https://www.electronjs.org/docs/latest/api/menu)
 
 Сразу нужно сказать, что мы либо используем стоковое меню, либо создаём своё меню полностью с нуля.
 
@@ -399,13 +399,132 @@ app.on("ready", () => {
 
 ![](_png/Pasted%20image%2020221113103632.png)
 
+Так же есть более короткий способ создать новое меню, через `Menu.buildFromTemplate([{}])`
 
+```JS
+const menu = new Menu.buildFromTemplate([
+	{
+		label: "MyApp",
+		submenu: [
+			{
+				label: "option 1",
+				click() {
+					console.log("Option 1 is clicked");
+				},
+			},
+			{
+				type: "separator",
+			},
+			{
+				label: "option 2",
+				click() {
+					console.log("Option 2 is clicked");
+				},
+			},
+		],
+	},
+]);
+```
+![|400](_png/Pasted%20image%2020221113104230.png)
 
+Самое основное удобство последнего подхода заключается в том, что мы можем вынести шаблон в любое другое место кода или проекта, чтобы не разводить мусорку
 
+![](_png/Pasted%20image%2020221113104852.png)
+
+Так же электрон позволяет нам пользоваться его собственными элементами меню в нашем приложении
+
+```JS
+const menuTemplate = [
+	{
+		label: "MyApp",
+		submenu: [
+			{ role: "about" },
+			{ type: "separator" },
+			{ role: "services" },
+			{ role: "hide" },
+			{ role: "hideothers" },
+			{ role: "unhide" },
+			{ role: "quit" },
+		],
+	},
+];
+```
+![](_png/Pasted%20image%2020221113105223.png)
+
+Так же мы можем комбинировать подходы в реализации приложения
+
+```JS
+const menuTemplate = [
+	{
+		label: "MyApp",
+		submenu: [
+			{ role: "about" },
+			{ type: "separator" },
+			{ role: "services" },
+			{ role: "hide" },
+			{ role: "hideothers" },
+			{ role: "unhide" },
+			{ role: "quit" },
+		],
+	},
+	{
+		label: "MyMenu",
+		submenu: [
+			{
+				label: "Option 1",
+				click() {
+					console.log("Option 1");
+				},
+			},
+		],
+	},
+];
+```
+![|400](_png/Pasted%20image%2020221113105707.png)
+
+А тут уже показан пример создания **контекстного меню**, которое вызывается на *ПКМ*
+
+```JS
+// шаблон контекстного меню
+const contextMenuTemplate = [
+	{ role: "about" },
+	{ type: "separator" },
+	{ label: "option 1" },
+	{ label: "option 2" },
+];
+
+// создание контекстного меню
+const contextMenu = new Menu.buildFromTemplate(contextMenuTemplate);
+
+// создание окна
+const createWindow = () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		show: false,
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
+
+	window.loadFile("renderer/index.html");
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+
+	// при вызове контекстного меню, у нас будет оно появляться
+	window.webContents.on("context-menu", (e, params) => {
+		contextMenu.popup(window, params.x, params.y);
+	});
+};
+```
+
+![](_png/Pasted%20image%2020221113112207.png)
 
 ## 013 Модуль Tray
 
-
+Этот модуль позволяет создавать иконку трея нашего приложения.
 
 
 
