@@ -734,6 +734,14 @@
           "lastUpdated": 1668266818274
         }
       }
+    },
+    "devtools": {
+      "devtools": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668320771730
+        }
+      }
     }
   }
 }

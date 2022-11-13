@@ -124,20 +124,37 @@ if (!lock) {
 }
 ```
 
-Обычно паттерн, представленный ниже используют в каждом приложении:
+#блокировка_запуска_второго_экземпляра_приложения
+Обычно **именно данный паттерн**, представленный ниже используют в каждом приложении:
 
 ```JS
-const lock = app.releaseSingleInstanceLock();
+import { app, BrowserWindow } from "electron";
 
-if (!lock) {
+let myWindow = null;
+
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
 	app.quit();
 } else {
-	app.on("second-instance", () => {
-		if (win) {
-			win.focus();
+	app.on("second-instance", (event, commandLine, workingDirectory) => {
+		// когда кто-то пытается запустить второй экземпляр приложения, нужно сфокусироваться на первом
+		if (myWindow) {
+			if (myWindow.isMinimized()) myWindow.restore();
+			myWindow.focus();
 		}
-	})
+	});
+	// создаём myWindow и продолжаем реализовывать приложение
+	app.on("ready", () => {
+		let window = new BrowserWindow({
+			width: 1280,
+			height: 720,
+		});
+
+		window.loadURL("https://google.com");
+	});
 }
+
 ```
 
 Функция `showAboutPanel()` покажет панель о нашей программе. Однако без инстанса нашего окна, у нас выйдет окно о версии электрона
@@ -167,7 +184,7 @@ app.whenReady().then(() => {
 
 ## 011 Модуль BrowserWindow
 
-Модуль `BrowserWindow` хранит в себе класс, который позволяет отображать окно
+Модуль `BrowserWindow` хранит в себе класс, который предоставляет нам конструктор нового браузерного окна, которое позволяет рендерить контент в приложении
 
 ```JS
 import { app, BrowserWindow } from "electron";
@@ -178,10 +195,53 @@ app.on("ready", () => {
 		height: 720,
 	});
 
+	// загружает страницу интернет-ресурса
 	window.loadURL("https://google.com");
 });
 ```
 ![](_png/Pasted%20image%2020221112205758.png)
+
+
+
+```JS
+app.on("ready", () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+	});
+
+	// этот метод позволяет рендерить в окне наши страницы
+	window.loadFile("renderer/index.html");
+});
+```
+
+Так же, в процессе разработки нашего приложения, мы можем столкнуться с тем, что у нас могут не работать некоторые вещи (по типу импортов) на фронте компьютера.
+Чтобы решить проблему, мы можем воспользоваться свойством веб-настройки `nodeIntegration`, который предоставит работу с приложением и компьютером из devtools.
+Это небезопасная опция, которой не стоит пользоваться, но во время разработки ей можно пользоваться.
+Заменить эту настройку можно будет вдальнейшем прелоадом
+
+```JS
+app.on("ready", () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		// открывает рендерер-процессу доступ к node API
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
+
+	window.loadFile("renderer/index.html");
+	window.webContents.openDevTools();
+});
+```
+
+
+
+
+
+
+
 
 
 
