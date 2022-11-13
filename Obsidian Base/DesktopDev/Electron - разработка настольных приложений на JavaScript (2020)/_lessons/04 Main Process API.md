@@ -330,9 +330,74 @@ app.on("ready", () => {
 
 ## 012 Модуль Menu
 
+Сразу нужно сказать, что мы либо используем стоковое меню, либо создаём своё меню полностью с нуля.
 
+Это самый первый способ создания меню приложения (самый долгий и длинный с повторением кода):
 
+```JS
+import { app, screen, BrowserWindow, Menu, MenuItem } from "electron";
 
+app.on("ready", () => {
+	// создаём наш собственный инстанс меню
+	const menu = new Menu();
+
+	// тут уже добавляем пункты меню в наше меню
+	menu.append(
+		// первый раздел, который уже создаётся через инстанс объекта меню
+		new MenuItem({
+			// название раздела
+			label: "MyApp",
+			// определяем массив подменю
+			submenu: [
+				// первое подменю
+				new MenuItem({
+					// имя подменю
+					label: "Option 1",
+					// логика при нажатии
+					click() {
+						console.log("Option 1 clicked");
+					},
+				}),
+				// так же через менюАйтем мы можем задавать разные типы объектов
+				new MenuItem({
+					// это будет разделитель пунктов
+					type: "separator",
+				}),
+				new MenuItem({
+					label: "Option 2",
+					click() {
+						console.log("Option 2 clicked");
+					},
+				}),
+			],
+		})
+	);
+
+	// применяем инстанс нашего меню в качестве меню приложения
+	Menu.setApplicationMenu(menu);
+
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		show: false,
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
+
+	window.loadFile("renderer/index.html");
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+
+	window.webContents.openDevTools();
+});
+```
+
+![](_png/Pasted%20image%2020221113103629.png)
+
+![](_png/Pasted%20image%2020221113103632.png)
 
 
 
