@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md"
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md"
               }
             }
           },
@@ -192,8 +192,8 @@
   },
   "active": "0e085e9fa8ea9d0f",
   "lastOpenFiles": [
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/07 Упаковка и публикация приложений.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/04 Main Process API.md",

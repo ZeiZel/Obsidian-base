@@ -306,6 +306,8 @@ app.on("ready", () => {
 #чекер_сети
 Конкретно сейчас мы реализуем возможность определять, подключено ли приложение к сети. В `preload` мы запишем функционал, который будет создавать два канала, оповещающих о том, что приложение подключено к интернету. В `main` процессе мы будем подписываться на эти два канала и выводить сообщение о том, что приложение подключено или отключено от интернета
 
+Чтобы проверить работоспособность, кликни сюда: #devtools 
+
 `preload > index.js`
 ```JS
 import { ipcRenderer } from "electron";
@@ -422,19 +424,54 @@ window.onload = () => {
 
 ![](_png/Pasted%20image%2020221114191225.png)
 
-
-
-
-
-
-
-
-
 ## 017 API Браузера
 
+В `renderer` процессе мы имеем доступ ко всем функциям браузера, которые мы можем писать в нативном JS
 
+```JS
+require("application.css");
 
+const updateOnlineStatus = () => {
+	document.getElementById("status").innerHTML = navigator.onLine
+		? "online"
+		: "offline";
+};
 
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
 
+updateOnlineStatus();
+```
 
+![](_png/Pasted%20image%2020221114194957.png)
 
+#devtools
+>[!warning] Тут можно эмулировать отключение интернета
+>Так же нужно сказать, что так как мы работаем с бнраузерным API, то у нас есть доступ к веб SQL, локальному кэшу и остальным уникальным функциям браузеров
+
+![](_png/Pasted%20image%2020221114200953.png)
+
+Объект `Notification` создаёт системное уведомление. Мы можем вызывать его как API браузера на нашем ПК.
+
+```JS
+require("application.css");
+
+window.onfocus = () => {
+	window.addEventListener("online", () => {
+		const alert = new Notification("Electron App", {
+			body: "you are in online",
+			// уведомление будет без звукового сопровождения
+			silent: true,
+		});
+	});
+
+	window.addEventListener("offline", () => {
+		const alert = new Notification("Electron App", {
+			body: "you are in offline",
+		});
+	});
+};
+```
+![](_png/Pasted%20image%2020221114200849.png)
+
+>[!note] Так как мы пишем приложение в одном браузере, то, как упомяналось ранее, мы работаем только над одним проектом и можем не думать над кросс-браузерностью 
