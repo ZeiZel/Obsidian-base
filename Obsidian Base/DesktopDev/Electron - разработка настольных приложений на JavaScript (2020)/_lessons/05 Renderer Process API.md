@@ -337,6 +337,7 @@ ipcMain.on("online", () => {
 
 Так же мы можем настраивать логику работы приложения, если у пользователя нет интернета. 
 Например, когда пользователь что-то делает на компьютере, то мы сохраняем данные на компьютер, а когда интернет появляется, мы можем синхронизировать эти данные с сервером.
+*Это, по сути, пример использования API renderer процесса в main процессе с помощью preload скрипта*
 
 `main > index.js`
 ```JS
@@ -383,9 +384,43 @@ app.on("ready", () => {
 
 ```
 
+*Теперь передаём процессы из `preload` в `renderer` процесс.* 
+В прелоад подключим `contextBridge`, который позволит создать псевдоним для передаваемых функций и вложим в эти свойства функции, которые доступны только на бэке (в ноде). 
 
+`preload > index.js`
+```JS
+import { shell, contextBridge } from "electron";
 
+// и сюда вкладываем функции
+// первым аргументом идёт тот объект, который попадёт в рендерер-процесс
+// прямого доступа к функциям ноды в рендерере не будет - только доступ к нашим функциям
+contextBridge.exposeInMainWorld("URLWorker", {
+	// будет просто показывать версию
+	node: () => process.versions.node,
+	chrome: () => process.versions.chrome,
+	electron: () => process.versions.electron,
+	// будет открывать ссылки в браузере
+	openURL: (url) => shell.openExternal(url),
+});
+```
 
+`renderer > index.js`
+```JS
+require("application.css");
+
+window.onload = () => {
+	const button = document.querySelector(".login");
+	button.addEventListener("click", () => {
+		// выведет версию испольхуемого хрома
+		// вызвается функция при обращении к нашему заданному псевдониму в прелоаде
+		console.log(URLWorker.chrome());
+		// откроет ссылку в браузере
+		// URLWorker.openURL('https://ru.reactjs.org/docs');
+	});
+};
+```
+
+![](_png/Pasted%20image%2020221114191225.png)
 
 
 
