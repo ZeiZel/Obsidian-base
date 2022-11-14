@@ -301,9 +301,12 @@ app.on("ready", () => {
 
 ![](_png/Pasted%20image%2020221114093808.png)
 
-Предназначен этот модуль для создания узких, контролируемых интерфейсов через которые `renderer` сможет взаимодействовать с Node.js API:
+Предназначен этот модуль для создания узких, контролируемых интерфейсов через которые `renderer` сможет взаимодействовать с Node.js API
 
-`renderer > index.js`
+#чекер_сети
+Конкретно сейчас мы реализуем возможность определять, подключено ли приложение к сети. В `preload` мы запишем функционал, который будет создавать два канала, оповещающих о том, что приложение подключено к интернету. В `main` процессе мы будем подписываться на эти два канала и выводить сообщение о том, что приложение подключено или отключено от интернета
+
+`preload > index.js`
 ```JS
 import { ipcRenderer } from "electron";
 
@@ -331,6 +334,61 @@ ipcMain.on("online", () => {
 	console.log("App is online");
 });
 ```
+
+Так же мы можем настраивать логику работы приложения, если у пользователя нет интернета. 
+Например, когда пользователь что-то делает на компьютере, то мы сохраняем данные на компьютер, а когда интернет появляется, мы можем синхронизировать эти данные с сервером.
+
+`main > index.js`
+```JS
+import path from "path";
+import { app, BrowserWindow, ipcMain } from "electron";
+
+let online;
+
+ipcMain.on("offline", () => {
+	online = false;
+	console.log("App is offline");
+});
+
+ipcMain.on("online", () => {
+	online = true;
+	console.log("App is online");
+});
+
+const createWindow = () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		webPreferences: {
+			preload: path.join(app.getAppPath(), "preload", "index.js"),
+		},
+	});
+
+	window.webContents.loadFile("renderer/index.html");
+	window.webContents.openDevTools({ mode: "detach" });
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+};
+
+app.on("ready", () => {
+	createWindow();
+	if(online) {
+		// что-то делать
+	} else {
+		// сообщить пользователю, что нет интернета
+	}
+});
+
+```
+
+
+
+
+
+
+
 
 
 
