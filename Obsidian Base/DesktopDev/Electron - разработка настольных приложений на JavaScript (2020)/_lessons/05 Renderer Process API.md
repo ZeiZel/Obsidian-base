@@ -260,6 +260,51 @@ window.onload = () => {
 
 ## 016 Preload Script
 
+Эта настройка откроет devTools отдельным окном
+
+```JS
+window.webContents.openDevTools({ mode: "detach" });
+```
+![](_png/Pasted%20image%2020221114093657.png)
+
+Как и упоминалось ранее - использовать открытого доступа к файловой системе из инструментов разработчика - не есть хорошая практика. Вместо этого стоит использовать ==preload==-скрипт, который уже, в свою очередь, предоставит нам нужный функционал нашей системе. 
+Уберём свойство `nodeIntegration` и заменим его подключением `preload`
+
+```JS
+import path from "path";
+import { app, BrowserWindow } from "electron";
+
+app.on("ready", () => {
+	let window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		webPreferences: {
+			// Тут указываем путь к прелоаду: путь к программе - папка прелоада - js в прелоаде
+			preload: path.join(app.getAppPath(), "preload", "index.js"),
+		},
+	});
+
+	window.webContents.loadFile("renderer/index.html");
+	// откроем девтулз отдельно от приложения
+	window.webContents.openDevTools({ mode: "detach" });
+
+	window.on("ready-to-show", () => {
+		window.show();
+	});
+});
+
+```
+
+Самое главное, что мы получили сейчас - это отсутствие доступа к модулям nodejs и файловой системе из devTools
+
+![](_png/Pasted%20image%2020221114093808.png)
+
+
+
+
+
+
+
 
 
 ## 017 API Браузера

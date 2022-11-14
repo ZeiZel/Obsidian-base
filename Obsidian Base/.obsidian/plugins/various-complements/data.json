@@ -47,14 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "required": {
-      "required": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665760683176
-        }
-      }
-    },
     "cursor": {
       "cursor": {
         "currentFile": {
@@ -772,6 +764,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668340460989
+        }
+      }
+    },
+    "nodeIntegration": {
+      "nodeIntegration": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668408075924
         }
       }
     }
