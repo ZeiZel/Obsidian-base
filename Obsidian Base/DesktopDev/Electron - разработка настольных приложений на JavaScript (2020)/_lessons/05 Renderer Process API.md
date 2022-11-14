@@ -197,6 +197,7 @@ app.on("ready", () => {
 
 Так же хорошей практикой будет прописывать обработку ошибок на случай непредвиденных ситуаций
 
+`renderer > index.js`
 ```JS
 const loadAndDisplayData = () => {
 	loadData().then((data) => {
@@ -270,6 +271,7 @@ window.webContents.openDevTools({ mode: "detach" });
 Как и упоминалось ранее - использовать открытого доступа к файловой системе из инструментов разработчика - не есть хорошая практика. Вместо этого стоит использовать ==preload==-скрипт, который уже, в свою очередь, предоставит нам нужный функционал нашей системе. 
 Уберём свойство `nodeIntegration` и заменим его подключением `preload`
 
+`main > index.js`
 ```JS
 import path from "path";
 import { app, BrowserWindow } from "electron";
@@ -299,8 +301,36 @@ app.on("ready", () => {
 
 ![](_png/Pasted%20image%2020221114093808.png)
 
+Предназначен этот модуль для создания узких, контролируемых интерфейсов через которые `renderer` сможет взаимодействовать с Node.js API:
 
+`renderer > index.js`
+```JS
+import { ipcRenderer } from "electron";
 
+document.addEventListener("DOMContentLoaded", () => {
+	window.addEventListener("offline", () => {
+		ipcRenderer.send("offline");
+	});
+	window.addEventListener("online", () => {
+		ipcRenderer.send("online");
+	});
+});
+
+```
+
+`main > index.js`
+```JS
+import path from "path";
+import { app, BrowserWindow, ipcMain } from "electron";
+
+ipcMain.on("offline", () => {
+	console.log("App is offline");
+});
+
+ipcMain.on("online", () => {
+	console.log("App is online");
+});
+```
 
 
 
