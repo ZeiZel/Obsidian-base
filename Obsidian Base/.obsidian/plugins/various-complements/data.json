@@ -474,8 +474,8 @@
     "непосредственно": {
       "непосредственно": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1667573874392
+          "count": 4,
+          "lastUpdated": 1668536271529
         }
       }
     },
@@ -754,8 +754,8 @@
     "javascript": {
       "javascript": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668529626879
+          "count": 2,
+          "lastUpdated": 1668536074083
         }
       }
     },
@@ -764,6 +764,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668529655035
+        }
+      }
+    },
+    "index-файл": {
+      "index-файл": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668536078202
         }
       }
     }

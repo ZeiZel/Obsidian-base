@@ -228,8 +228,59 @@ export default App;
 
 ## 020 Интерфейс Создания Новой Записи
 
+В процессе реализации интерфейса нам понадобится лоадер для обработки svg-иконок
 
+```bash
+ npm install react-svg-loader --save-dev
+```
 
+Тут подключаем лоадер для svg-иконок
+
+`webpack.config.js`
+```JS
+module.exports = {
+	renderer: {
+		entry: "./src/renderer/javascripts/index.js",
+		module: {
+			rules: [
+				{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: ["@babel/react", "@babel/preset-env"],
+						},
+					},
+				},
+				// Добавляем обработчик svg
+				{
+					test: /\.svg$/,
+					use: [
+						{
+							loader: "babel-loader",
+						},
+						{
+							loader: "react-svg-loader",
+						},
+					],
+				},
+			],
+		},
+	},
+	preload: {
+		entry: "./src/preload/index.js",
+	},
+	main: {
+		entry: "./src/main/index.js",
+	},
+};
+
+```
+
+Убираем возможность менять размер нашего приложения, а так же скрываем стандартный тайтлбар, так как мы сделаем свой
+
+`main > app > index.js`
 ```JS
 this.window = new BrowserWindow({
 	title: CONFIG.name,
@@ -252,6 +303,8 @@ this.window = new BrowserWindow({
 });
 ```
 
+Тут добавим наш тайтлбар с названием приложения
+
 `index.html`
 ```HTML
 <!DOCTYPE html>
@@ -272,6 +325,18 @@ this.window = new BrowserWindow({
 </html>
 ```
 
+Это основной файл стилей, в котором нужно будет подключить как отдельные стили, так и стили для наших компонентов
+
+`application.css`
+```CSS
+@import url("layout.css");
+
+@import url("components/new-entry.css");
+@import url("components/entries.css");
+```
+
+Вынесем стили лейаута в отдельный файл. В лейауте приложения нужно будет применить стили шрифта приложения не только для всей страницы, но и в частности для поля текста. Так же нужно будет застилизировать `titlebar`. Свойство `-webkit-app-region: drag;` даст нам возможность перетягивать приложение за этот участок
+
 `layout.css`
 ```CSS
 html,
@@ -282,7 +347,8 @@ body {
 	overflow: hidden;
 }
 
-body {
+/* textarea не наследует шрифт от body, поэтому его нужно будет сюда вставить */
+body, textarea {
 	font-family: -apple-system, "Helvetica Neue", Helvetica, sans-serif;
 }
 
@@ -302,16 +368,168 @@ body {
 	text-align: center;
 	-webkit-app-region: drag;
 }
+
 ```
 
-`application.css`
+Тут мы стилизируем компонент, в котором мы создаём новые *entry*-записи
+
+`stylesheets > components > new-entry.css`
 ```CSS
-@import url("layout.css");
+.new-entry {
+	display: flex;
+	padding: 15px 10px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.new-entry .details {
+	/* займёт 2/3 пространства */
+	flex: 2;
+}
+
+.new-entry .actions {
+	/* займёт 1/3 пространства */
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.new-entry .trigger {
+	margin-top: 5px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.new-entry textarea {
+	border: none;
+	outline: none;
+	/* Запрещаем менять масштаб textarea */
+	resize: none;
+
+	font-size: 16px;
+	padding: 5px;
+}
+```
+
+Вывод реакт-приложения
+
+`renderer > javascripts > index.js`
+```JS
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./components/App";
+require("application.css");
+
+window.onload = () => {
+	const root = ReactDOM.createRoot(document.querySelector(".root"));
+	root.render(<App />);
+};
 ```
 
 
+`renderer > javascripts > components > App.js`
+```JS
+import React from "react";
+import New from "./new";
+import Entries from "./entries";
 
+const App = () => {
+	return (
+		<>
+			<New/>
+			<Entries/>
+		</>
+	);
+};
 
+export default App;
+```
+
+Тут мы будем реализовывать новый *entry* при каждом нажатии на кнопку создания нового действия
+
+`renderer > javascripts > components > new > index.js`
+```JS
+import React from "react";
+import Title from "./title";
+import Actions from "./actions";
+
+const New = () => {
+	return (
+		<div className="new-entry">
+			<Title />
+			<Actions />
+		</div>
+	);
+};
+
+export default New;
+```
+
+Это сам компонент `Title`, который вызвается в `new-entry` и представляет из себя текстовое поле, в которое мы вводим задачу
+
+`renderer > javascripts > components > new > title.js`
+```JS
+import React from "react";
+
+const Title = () => {
+	return (
+		<div className="details">
+			<textarea
+				value=""
+				id=""
+				cols="0"
+				rows="1"
+				placeholder="Start new activity"
+			></textarea>
+		</div>
+	);
+};
+
+export default Title;
+```
+
+Это сам компонент `Actions`, который вызвается в `new-entry` и представляет из себя кнопку, которая запускает таймер и будет создавать нам новый *entry* 
+
+`renderer > javascripts > components > new > actions.js`
+```JS
+import React from "react";
+import PlayIcon from "play.svg";
+import StopIcon from "stop.svg";
+
+const Actions = () => {
+	return (
+		<div className="actions">
+			<div className="time">00:00:00</div>
+			<div className="trigger">
+				<PlayIcon width="24" height="24" />
+			</div>
+		</div>
+	);
+};
+
+export default Actions;
+```
+
+Это уже непосредственно сам созданный прошлым компонентом *entry*
+
+`renderer > javascripts > components > entries > index.js`
+```JS
+import React from "react";
+
+const Entries = () => {
+	return <div className="entries">List of Entries</div>;
+};
+
+export default Entries;
+```
+
+На данном этапе разработки наша структура файлов и папок выглядит примерно так:
+
+![](_png/Pasted%20image%2020221115210355.png)
+
+И вот так выглядит само приложение:
+
+![](_png/Pasted%20image%2020221115210649.png)
 
 ## 021 Интерфейс Списка Записей
 
