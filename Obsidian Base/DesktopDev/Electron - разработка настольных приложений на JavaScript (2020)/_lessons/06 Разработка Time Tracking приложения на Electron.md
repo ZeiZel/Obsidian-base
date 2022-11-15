@@ -190,7 +190,7 @@ export default class TimerApp {
 
 ![](_png/Pasted%20image%2020221115192616.png)
 
-Дальше нам нужно реализовать 
+Дальше нам нужно реализовать файл ==React==-файл, который будет запускать нам реакт в нашем приложении
 
 `renderer > javascripts > index.js`
 ```JSX
@@ -205,7 +205,7 @@ window.onload = () => {
 };
 ```
 
-
+И в той же папке с основным файлом создаём папку `components/`, в который будем класть наши компоненты
 
 `renderer > javascripts > components > App.js`
 ```JS
@@ -227,6 +227,89 @@ export default App;
 ![](_png/Pasted%20image%2020221115192845.png)
 
 ## 020 Интерфейс Создания Новой Записи
+
+
+
+```JS
+this.window = new BrowserWindow({
+	title: CONFIG.name,
+	width: CONFIG.width,
+	height: CONFIG.height,
+	// ограничиваем изменение размеров приложения
+	minWidth: CONFIG.width,
+	minHeight: CONFIG.height,
+	maxWidth: CONFIG.width,
+	maxHeight: CONFIG.height,
+	// скрывает меню
+	autoHideMenuBar: true,
+	// убирает стоковый тайтл-бар системы
+	titleBarStyle: "hidden",
+	webPreferences: {
+		nodeIntegration: true,
+		// worldSafeExecuteJavaScript: true,
+		// preload: path.join(app.getAppPath(), "preload", "index.js"),
+	},
+});
+```
+
+`index.html`
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="index.js" type="text/javascript"></script>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+</head>
+
+<body>
+  <div class="titlebar">Timer App</div>
+  <div class="root" id="root"></div>
+</body>
+
+</html>
+```
+
+`layout.css`
+```CSS
+html,
+body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	font-family: -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.root {
+	margin-top: 30px;
+}
+
+.titlebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background: #34495e;
+	color: white;
+	text-align: center;
+	-webkit-app-region: drag;
+}
+```
+
+`application.css`
+```CSS
+@import url("layout.css");
+```
+
+
 
 
 
