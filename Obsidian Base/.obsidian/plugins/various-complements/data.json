@@ -47,30 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "cursor": {
-      "cursor": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665826658071
-        }
-      }
-    },
-    "mobile-first": {
-      "mobile-first": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665925296058
-        }
-      }
-    },
-    "Брейкпоинты": {
-      "Брейкпоинты": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1665925307454
-        }
-      }
-    },
     "animation": {
       "animation": {
         "currentFile": {
@@ -772,6 +748,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668408075924
+        }
+      }
+    },
+    "javascript": {
+      "javascript": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668529626879
+        }
+      }
+    },
+    "components": {
+      "components": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668529655035
         }
       }
     }
