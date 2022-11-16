@@ -78,9 +78,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "e895bdb85a852cef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -146,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -163,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -186,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md"
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md"
               }
             }
           },
@@ -214,11 +226,11 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "1ae5177fcf4ba479",
+  "active": "e895bdb85a852cef",
   "lastOpenFiles": [
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/05 Renderer Process API.md",
     "WebDev/Инструменты/Webpack.md",
     "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/ElectronJS.md",

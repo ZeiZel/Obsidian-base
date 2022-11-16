@@ -740,6 +740,108 @@ export default class Storage {
 
 ![](_png/Pasted%20image%2020221116110029.png)
 
+Тут мы реализуем подписку на канал из основного процесса
+
+`main`
+```JS
+import path from "path";
+import { app, BrowserWindow } from "electron";
+import Storage from "./storage";
+
+export default class TimerApp {
+	constructor() {
+		this.storage = new Storage();
+		console.log(this.storage);
+		this.subscribeForAppEvents();
+		app.whenReady().then(() => this.createWindow());
+	}
+
+	createWindow() {
+		this.window = new BrowserWindow({
+			title: CONFIG.name,
+			width: CONFIG.width,
+			height: CONFIG.height,
+			minWidth: CONFIG.width,
+			minHeight: CONFIG.height,
+			maxWidth: CONFIG.width,
+			maxHeight: CONFIG.height,
+			autoHideMenuBar: true,
+			titleBarStyle: "hidden",
+			webPreferences: {
+				preload: path.join(app.getAppPath(), "preload", "index.js"),
+			},
+		});
+
+		this.window.loadFile("renderer/index.html");
+
+		this.window.openDevTools({ mode: "detach" });
+
+		// тут мы реализуем отправку данных из хранилища в renderer процесс
+		this.window.webContents.on("did-finish-load", () => {
+			this.window.webContents.send("entires", {
+				entries: this.storage.get("entries"),
+			});
+		});
+
+		this.window.on("closed", () => {
+			window = null;
+		});
+	}
+
+	subscribeForAppEvents() {
+		app.on("window-all-closed", () => {
+			if (process.platform !== "darwin") {
+				app.quit();
+			}
+		});
+
+		app.on("activate", () => {
+			if (BrowserWindow.getAllWindows().length === 0) {
+				this.createWindow();
+			}
+		});
+	}
+}
+
+```
+
+Тут мы передадим в рендерер наш процесс, который подпишет нас на канал с основного процесса и передаст информацию в рендерер
+
+`preload`
+```JS
+import { contextBridge, ipcRenderer } from "electron";
+
+contextBridge.exposeInMainWorld("api", {
+	subscribeForEntries: (callback) => ipcRenderer.on("entries", callback),
+});
+```
+
+Тут нам нужно получить данные из основного процесса и передать их в компонент App.
+
+`renderer`
+```JS
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./components/App";
+require("application.css");
+
+api.subscribeForEntries((event, data) => {
+	renderApp(data.entries);
+});
+
+const renderApp = (entries) => {
+	const root = ReactDOM.createRoot(document.querySelector(".root"));
+	root.render(<App entries={entries} />);
+};
+
+```
+
+
+
+12:20
+
+
+
 
 ## 023 Реализация Таймера
 
