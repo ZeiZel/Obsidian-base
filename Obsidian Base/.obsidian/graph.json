@@ -69,6 +69,13 @@
         "a": 1,
         "rgb": 13466234
       }
+    },
+    {
+      "query": "Electron",
+      "color": {
+        "a": 1,
+        "rgb": 4781297
+      }
     }
   ],
   "collapse-display": true,
@@ -81,6 +88,6 @@
   "repelStrength": 16.7368421052632,
   "linkStrength": 0.921052631578947,
   "linkDistance": 164,
-  "scale": 0.11660891579457346,
+  "scale": 0.08317427835927586,
   "close": true
 }

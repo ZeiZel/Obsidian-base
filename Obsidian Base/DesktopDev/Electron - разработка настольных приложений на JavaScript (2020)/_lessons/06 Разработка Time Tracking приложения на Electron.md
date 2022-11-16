@@ -533,9 +533,105 @@ export default Entries;
 
 ## 021 Интерфейс Списка Записей
 
+Для начала, нужно в отдельный компонент выделить нашу отдельную запись. Основной компонент `entries` будет содержать много записей, которые будут отдельными `item`
 
+`javascripts > components > entries > index.js`
+```JS
+import React from "react";
+import Item from './item';
+
+const Entries = () => {
+	return (
+		<div className="entries">
+			<Item />
+		</div>
+	);
+};
+
+export default Entries;
+```
+
+Это сам компонент записи
+
+`javascripts > components > entries > item.js`
+```JS
+import React from "react";
+
+const Item = () => {
+	return (
+		<div className="entry">
+			<div className="details">
+				<div className="primary">Primary</div>
+				<div className="secondary">Secondary</div>
+			</div>
+			<div className="actions">
+				<div className="time">00:00:00</div>
+			</div>
+		</div>
+	);
+};
+
+export default Item;
+```
+
+Стили для наших записей
+
+`stylesheets > components > entries.css`
+```CSS
+.entry {
+	display: flex;
+	flex-direction: row;
+	padding: 10px 15px;
+	border-bottom: 1px solid #fafafa;
+}
+
+.entry:hover {
+	background-color: rgba(96, 131, 247, 0.452);
+	transition: 0.3s all ease;
+	cursor: default;
+}
+
+.entry .details {
+	display: flex;
+	flex-direction: column;
+	flex: 2;
+}
+
+.entry .actions {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex: 1;
+}
+
+.entry .primary {
+	margin-bottom: 8px;
+}
+
+.entry .secondary {
+	font-size: 14px;
+	color: #a8a8a8;
+}
+
+.entry .time {
+	color: #777;
+}
+```
+
+И теперь мы имеем стилизованный компонент записи
+
+![](_png/Pasted%20image%2020221116102622.png)
 
 ## 022 Сохранение Данных на Жестком Диске
+
+
+
+
+
+
+
+
+
 
 
 

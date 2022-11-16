@@ -762,8 +762,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668529655035
+          "count": 3,
+          "lastUpdated": 1668583481964
         }
       }
     },
@@ -772,6 +772,30 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668536078202
+        }
+      }
+    },
+    "stylesheets": {
+      "stylesheets": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668583445526
+        }
+      }
+    },
+    "javascripts": {
+      "javascripts": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668583477536
+        }
+      }
+    },
+    "entries": {
+      "entries": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668583485166
         }
       }
     }
