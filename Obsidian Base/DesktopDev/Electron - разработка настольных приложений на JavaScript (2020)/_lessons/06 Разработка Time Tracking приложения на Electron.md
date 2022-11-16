@@ -626,13 +626,119 @@ export default Item;
 
 
 
+`main > app > storage.js`
+```JS
+import { app } from "electron";
+// Дальше будем импортировать стандартные нодовские модули
+import path from "path";
+// первый модуль позволяет создать новую директорию
+// второй проверяет, существует ли эта директория
+import { mkdirSync, existsSync } from "fs";
+
+export default class Storage {
+	constructor() {
+		this.directory = path.join(app.getPath("userData"), "storage");
+		if (!existsSync(this.directory)) { 
+			mkdirSync(this.directory);
+		}
+	}
+}
+```
+
+`main > index.js`
+```JS
+	createWindow() {
+		this.window = new BrowserWindow({
+			title: CONFIG.name,
+			width: CONFIG.width,
+			height: CONFIG.height,
+			minWidth: CONFIG.width,
+			minHeight: CONFIG.height,
+			maxWidth: CONFIG.width,
+			maxHeight: CONFIG.height,
+			autoHideMenuBar: true,
+			titleBarStyle: "hidden",
+			webPreferences: {
+				nodeIntegration: true,
+			},
+		});
+
+		this.window.loadFile("renderer/index.html");
+
+		this.window.openDevTools({ mode: "detach" });
+
+		// если окно закроется, то его не будет
+		this.window.on("closed", () => {
+			window = null;
+		});
+
+		const storage = new Storage();
+		// А тут ставим точку останова
+		debugger;
+	}
+```
+
+И сейчас подключаемся к девтулзу, чтобы посмотреть на тот функционал, который мы получаем
+
+```bash
+bozon start --inspect-brk 3456
+```
+
+По данному пути мы можем перейти и получить доступ к папке:
+
+![](_png/Pasted%20image%2020221116104251.png)
 
 
 
+`main > app > storage.js`
+```JS
+import { app } from "electron";
+// Дальше будем импортировать стандартные нодовские модули
+import path from "path";
+// первый модуль позволяет создать новую директорию
+// второй проверяет, существует ли эта директория
+// третий позволяет читать определённые данные из файлов
+// четвёртый создаёт новый файл и записывает в него нужные данные
+import { mkdirSync, existsSync, readFileSync, writeFileSync } from "fs";
 
+export default class Storage {
+	constructor() {
+		this.directory = path.join(app.getPath("userData"), "storage");
+		if (!existsSync(this.directory)) {
+			mkdirSync(this.directory);
+		}
+	}
 
+	get(key) {
+		return this.read(key);
+	}
 
+	set(key, data) {
+		return this.write(key, data);
+	}
 
+	read(key) {
+		// file - это путь файла, который будет зависеть от того ключа, по которому мы хотим прочитать данные
+		return JSON.parse(readFileSync(this.file(key)).toString("utf8"));
+	}
+
+	write(key, data) {
+		return writeFileSync(this.file(key), JSON.stringify(data));
+	}
+
+	file(key) {
+		const file = path.join(this.directory, `${key}.json`);
+		if (!existsSync(file)) { // почеу то программа работает только с этим кодом: if (!existsSync(this.directory))
+			writeFileSync(file, null, { flag: "wx" });
+		}
+		return file;
+	}
+}
+```
+
+Опять запускаем приложение в режиме дебаггера. После реализации хранения данных, мы теперь можем выполнять создание, запись и изменение данных 
+
+![](_png/Pasted%20image%2020221116110029.png)
 
 
 ## 023 Реализация Таймера
