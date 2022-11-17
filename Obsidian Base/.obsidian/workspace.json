@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/04 Main Process API.md",
                 "mode": "source",
                 "source": false
               }
@@ -104,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -154,8 +154,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 376.5,
-    "collapsed": true
+    "width": 376.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -171,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/04 Main Process API.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -188,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md",
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/04 Main Process API.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -211,7 +210,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md"
+                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/04 Main Process API.md"
               }
             }
           },
@@ -239,8 +238,10 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "e895bdb85a852cef",
+  "active": "aa4fe56689b0fc48",
   "lastOpenFiles": [
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Создание первого приложения.md",
     "WebDev/TypeScript/TypeScript.md",
     "WebDev/TypeScript/_lessons/10 Декораторы.md",
     "WebDev/TypeScript/_lessons/09 Служебные типы.md",
@@ -248,8 +249,6 @@
     "WebDev/TypeScript/_lessons/03 Основные типы.md",
     "WebDev/TypeScript/_lessons/02 Настройка окружения.md",
     "WebDev/TypeScript/_lessons/01 Введение.md",
-    "WebDev/TypeScript/_lessons/11 Модульность и библиотеки.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/06 Разработка Time Tracking приложения на Electron.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript (2020)/_lessons/Почему именно электрон.md"
+    "WebDev/TypeScript/_lessons/11 Модульность и библиотеки.md"
   ]
 }
