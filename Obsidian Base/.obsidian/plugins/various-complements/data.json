@@ -47,14 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "animation": {
-      "animation": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666017748929
-        }
-      }
-    },
     "checkout": {
       "checkout": {
         "currentFile": {
@@ -796,6 +788,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668583485166
+        }
+      }
+    },
+    "electron": {
+      "electron": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668697116608
         }
       }
     }
