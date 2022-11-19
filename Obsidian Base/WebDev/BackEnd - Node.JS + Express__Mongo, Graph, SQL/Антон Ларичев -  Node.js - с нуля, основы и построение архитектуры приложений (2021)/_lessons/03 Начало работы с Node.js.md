@@ -70,7 +70,6 @@ console.log(data.toString());
 ### 012 CommonJS Modules
 
 
-
 `characters.js`
 ```JS
 let characters = [  
