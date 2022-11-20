@@ -8,36 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e895bdb85a852cef",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/05 Renderer Process API.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "c28ccf4e4bacf4bc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "WebDev/TypeScript/TypeScript.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "84b9b49e24f5f840",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Создание первого приложения.md",
                 "mode": "source",
                 "source": false
               }
@@ -56,7 +32,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -122,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Создание первого приложения.md",
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Создание первого приложения.md",
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Создание первого приложения.md"
+                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md"
               }
             }
           },
@@ -190,17 +166,17 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "84b9b49e24f5f840",
+  "active": "2242e12ebb202869",
   "lastOpenFiles": [
+    "WebDev/TypeScript/TypeScript.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/05 Renderer Process API.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/04 Main Process API.md",
+    "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Создание первого приложения.md",
     "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Почему именно электрон.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/Создание первого приложения.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/03 Начало работы с Node.js.md",
-    "DesktopDev/Electron - разработка настольных приложений на JavaScript/_lessons/05 Renderer Process API.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/02 Настройка окружения.md",
-    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/01 Введение.md",
-    "WebDev/TypeScript/TypeScript.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md"
+    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/01 Введение.md"
   ]
 }
