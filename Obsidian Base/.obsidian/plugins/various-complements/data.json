@@ -734,6 +734,22 @@
           "lastUpdated": 1668923599892
         }
       }
+    },
+    "removeListener": {
+      "removeListener": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668930585942
+        }
+      }
+    },
+    "removeAllListeners": {
+      "removeAllListeners": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1668930590160
+        }
+      }
     }
   }
 }
