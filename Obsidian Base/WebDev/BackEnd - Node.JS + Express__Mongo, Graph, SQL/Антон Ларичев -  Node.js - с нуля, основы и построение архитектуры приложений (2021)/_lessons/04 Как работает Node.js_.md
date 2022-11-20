@@ -129,15 +129,29 @@ console.log("Конец");
 ```
 ![](_png/Pasted%20image%2020221120182539.png)
 
+Так же мы можем убрать ссылку из стека на таймер через функцию `unref()` 
 
+```JS
+const timerId = setTimeout(() => {
+	console.log("BOOOOOM!");
+}, 5000);
 
+timerId.unref(); // таймер не отработает
+```
 
+Но так же мы можем обратно вернуть ссылку на таймер, чтобы он выполнился через `ref()`
 
+```JS
+const timerId = setTimeout(() => {
+	console.log("BOOOOOM!");
+}, 5000);
 
+timerId.unref(); // таймер отцеплен
 
-
-
-
+setImmediate(() => {
+	timerId.ref(); // таймер обратно прицепили и выполнили
+})
+```
 
 ## 019 Пример работы event loop
 
