@@ -175,13 +175,154 @@ if (a > 0) {
 
 ### 013 ES Modules
 
+Чтобы сказать ноде, что мы пользуемся модулями, нужно:
+1) Либо добавить расширение файлу `.mjs`
+2) Либо указать это в `package.json`
+3) Либо в `tsconfig`
+
+В обычной модульной системе, мы можем через `export` экспортировать объект из модуля
+
+`characters.mjs`
+```JS
+export const characters = ["Фродо", "Бильбо"];
+
+export function greet(character) {
+	console.log(`Поздравляю, ${character}!`);
+}
+```
+
+Далее через конструкцию `import` импортировать его в другом файле
+
+`app.mjs`
+```JS
+import { characters, greet } from "./characters.mjs";
+
+for (const c of characters) {
+	greet(c);
+}
+```
+
+Так же мы можем импортировать сразу все объекты через конструкцию `* as имя` 
+
+`app.mjs`
+```JS
+import * as char from "./characters.mjs";
+
+for (const c of char.characters) {
+	char.greet(c);
+}
+```
+
+Так же мы имеем дефолтный экспорт `export default` - это принимаемое значение из модуля по умолчанию
+
+`characters.mjs`
+```JS
+export const characters = ["Фродо", "Бильбо"];
+
+export function greet(character) {
+	console.log(`Поздравляю, ${character}!`);
+}
+
+export default function log() {
+	console.log("log");
+}
+```
+`app.mjs`
+```JS
+import log, { characters, greet } from "./characters.mjs";
+
+for (const c of characters) {
+	greet(c);
+}
+
+log();
+```
+
+Так же нам ничто не мешает объединять конструкции и импортировать дефолтную функцию + все объекты модуля 
+
+`app.mjs`
+```JS
+import log, * as char from "./characters.mjs";
+
+for (const c of char.characters) {
+	char.greet(c);
+}
+
+log();
+```
+
+Дальше мы можем столкнуться с такой проблемой при большом количестве импортов, что имена совпадают у объектов. Чтобы решить проблему, можно переопределить импортируемый объект
+
+`app.mjs`
+```JS
+import log, {characters, greet as hello} from "./characters.mjs";
+
+for (const c of characters) {
+	hello(c);
+}
+
+log();
+```
+
+Так же присутствует в ноде асинхронный импорт модуля, который позволяет произвести es module испорт из любого места. Сразу нужно сказать, что он возвращает промис, поэтому его нужно дожидаться
+
+`app.mjs`
+```JS
+async function main() {
+	const { characters, greet } = await import("./characters.mjs");
+
+	for (const c of characters) {
+		greet(c);
+	}
+}
+main();
+```
+
+Так же никто нам не мешает ловить и обрабатывать ошибки при данных импортах
+
+`app.mjs`
+```JS
+async function main() {
+	try {
+		// ошибка при импорте
+		const { characters, greet } = await import("./charactersыфвв.mjs");
+
+		for (const c of characters) {
+			greet(c);
+		}
+	} catch (error) {
+		console.log("Ошибка");
+	}
+}
+main();
+```
 
 
-
-
+>[!note] По возможности стоит пользоваться конкретно таким импортом, потому что он позволяет импортировать только то, что нужно, он асинхронен и удобен
 
 
 ### 014 Глобальные переменные
+
+Глобальные переменные - это переменные, доступ к которым мы можем получить из любого места приложения без дополнительных импортов и вызовов.
+
+Модули делятся на глобальные и глобальные модульные. Конкретно вторые зависят от того модуля, из которого мы их вызваем 
+
+Модуль `global` - это корневой объект всех переменных. Мы можем записать `global.console`, а так же и просто `console`
+
+- `preformance` - помогает определить производительность 
+- ``
+
+![](_png/Pasted%20image%2020221120081112.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
