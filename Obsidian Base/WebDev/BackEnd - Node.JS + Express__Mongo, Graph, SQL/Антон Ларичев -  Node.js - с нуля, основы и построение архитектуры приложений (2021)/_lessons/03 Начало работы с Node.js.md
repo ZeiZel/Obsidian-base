@@ -351,11 +351,76 @@ main();
 
 
 
+`app.js`
+```JS
+// добавляем модуль ивентов
+const EventEmitter = require("events");
+
+// создаём отдельный инстанс события (их может быть много)
+const myEmitter = new EventEmitter();
+
+// функция подключения к базе данных
+const lodDBConnection = () => {
+	console.log("DB Connected");
+};
+
+// тут мы создаём новое событие, при триггере которого будет срабатывать подключение к базе данных
+myEmitter.addListener("connected", lodDBConnection);
+
+// это сам триггер этого события
+myEmitter.emit("connected"); // "DB Connected"
+
+// так же нам стоит удалять подписки на ивент листенеры, так как это является одной из основных проблем утечек памяти программы
+myEmitter.removeListener("connected", lodDBConnection);
+// myEmitter.off("connected", lodDBConnection); // отклюает листенер с события
+// myEmitter.removeAllListeners("connected"); // удалит все листенеры с события
+
+// уже этот вызов листенера не сработает, так как мы убрали листенер с события
+myEmitter.emit("connected"); // ничего не произойдет
+```
 
 
 
 
+`app.js`
+```JS
+// Создание листенера с приёмом данных
+myEmitter.on("message", (data) => {
+	console.log(`Получено: ${data}`);
+});
 
+// триггерим листенер с передачей в него данных
+myEmitter.emit("message", {
+	name: "Valery",
+	surname: "Lvov",
+});
+```
+
+
+
+`app.js`
+```JS
+// Это событие сработает только один раз и потом удалится
+myEmitter.once("off", () => {
+	console.log("Я отключился");
+});
+
+myEmitter.emit("off"); // "Я отключился"
+myEmitter.emit("off"); // ничего не произойдёт
+```
+
+
+`app.js`
+```JS
+console.log(myEmitter.getMaxListeners()); // 10
+myEmitter.setMaxListeners(1); // устанавливаем максимальное число листенеров на наше событие
+console.log(myEmitter.getMaxListeners()); // 1
+
+console.log(myEmitter.listenerCount("message")); // 1 - так как этот листенер до сих пор существует
+console.log(myEmitter.listenerCount("off")); // 0 - так как уже отработал и удалился
+```
+
+Так же у листенеров есть порядок выполнения. Самыми первыми выполняются те, что находятся в начале массива. Мы можем влиять на выполнение этих листенеров определёнными методами.
 
 
 
