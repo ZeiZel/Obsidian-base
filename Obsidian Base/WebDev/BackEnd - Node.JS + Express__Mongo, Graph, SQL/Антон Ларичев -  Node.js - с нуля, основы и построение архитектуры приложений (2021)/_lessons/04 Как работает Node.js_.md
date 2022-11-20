@@ -78,6 +78,56 @@ setTimeout(() => {
 ```
 ![](_png/Pasted%20image%2020221120170311.png)
 
+Чтобы вызывать таймаут с аргументами, нужно просто перечислить их через запятую
+
+```JS
+function myFunc(arg) {
+	console.log(arg);
+}
+
+setTimeout(myFunc, 1000, "Этот мир");
+```
+
+Так же мы можем отменять выполнение таймера через `clearTimeout()`
+
+```JS
+const timerId = setTimeout(() => {
+	console.log("BOOOOOM!");
+}, 5000);
+
+setTimeout(() => {
+	clearTimeout(timerId);
+	console.log("Таймер очищен");
+}, 1000);
+
+```
+
+И так же мы можем отменить работу интервала. Интервал `setInterval()` уже повторяет функцию каждое определённое время.
+
+```JS
+const intervalId = setInterval(() => {
+	console.log(performance.now());
+}, 1000);
+
+setTimeout(() => {
+	clearTimeout(intervalId);
+	console.log("Интервал очищен");
+}, 5000);
+```
+![](_png/Pasted%20image%2020221120181243.png)
+
+Функция `setImmediate()` мгновенно выполняет функцию сразу в самом конце программы
+
+```JS
+console.log("Начало");
+
+setImmediate(() => {
+	console.log("Immediate");
+});
+
+console.log("Конец");
+```
+![](_png/Pasted%20image%2020221120182539.png)
 
 
 
