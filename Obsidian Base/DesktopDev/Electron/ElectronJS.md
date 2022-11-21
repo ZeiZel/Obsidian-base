@@ -1,4 +1,4 @@
-# Electron - разработка настольных приложений на JavaScript (2020)
+# Electron
 #JavaScript #Desctop #Electron
 
 [Почему именно электрон?](_lessons/Почему%20именно%20электрон.md)
