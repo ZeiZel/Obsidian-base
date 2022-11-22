@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
+                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/05 Многопоточность.md",
                 "mode": "source",
                 "source": false
               }
@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md"
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md"
               }
             }
           },
@@ -202,8 +202,10 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "2242e12ebb202869",
+  "active": "2bc48fc638ce71b2",
   "lastOpenFiles": [
+    "Development/Типизация TypeScript в React.md",
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/05 Многопоточность.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/MobileDev/React Native 2020. Мобильная разработка на JavaScript/React Native.md",
@@ -211,8 +213,6 @@
     "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
     "Development/DesktopDev/Electron/_lessons/5 Renderer Process API.md",
     "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
-    "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
-    "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
-    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md"
+    "Development/DesktopDev/Electron/_lessons/2 Начало работы.md"
   ]
 }
