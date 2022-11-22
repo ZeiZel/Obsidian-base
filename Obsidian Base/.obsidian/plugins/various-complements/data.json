@@ -55,94 +55,6 @@
         }
       }
     },
-    "EmployeesAddForm": {
-      "EmployeesAddForm": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666353954277
-        }
-      }
-    },
-    "increase": {
-      "increase": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666355166630
-        }
-      }
-    },
-    "onToggleRise": {
-      "onToggleRise": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666358807716
-        }
-      }
-    },
-    "employees-list-item": {
-      "employees-list-item": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666360155125
-        }
-      }
-    },
-    "подразумевает": {
-      "подразумевает": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666362090586
-        }
-      }
-    },
-    "фрагмента": {
-      "фрагмента": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666362112488
-        }
-      }
-    },
-    "используют": {
-      "используют": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666362198031
-        }
-      }
-    },
-    "timeout": {
-      "timeout": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666453963733
-        }
-      }
-    },
-    "queue": {
-      "queue": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666454860478
-        }
-      }
-    },
-    "setTimeout": {
-      "setTimeout": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666455079694
-        }
-      }
-    },
-    "queueMicrotask": {
-      "queueMicrotask": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666455359294
-        }
-      }
-    },
     "JQuery": {
       "JQuery": {
         "currentFile": {
@@ -764,6 +676,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1668965665467
+        }
+      }
+    },
+    "ДОМ-дерева": {
+      "ДОМ-дерева": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669130975826
         }
       }
     }
