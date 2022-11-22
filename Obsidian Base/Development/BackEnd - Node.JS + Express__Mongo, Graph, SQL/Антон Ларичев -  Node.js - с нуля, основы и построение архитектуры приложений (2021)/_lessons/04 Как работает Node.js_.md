@@ -482,7 +482,7 @@ for (let i = 0; i < 50; i++) {
 
 ## 022 Измерение производительности
 
-
+Стандартный способ измерения производительности производится через `performance.mark()` + `performance.measure()`, которые нам позволяют отмерить промежуток выполнения определённых операций
 
 ```JS
 function slow() {
@@ -509,9 +509,59 @@ slow();
 
 
 
+```JS
+// импортируем хук производительности
+// хук - это элемент, который позволяет на что-то подписаться
+const perf_hooks = require("perf_hooks");
 
+// оборачиваем функцию теста в хук проверки затраченного времени, чтобы определить затраты
+test = perf_hooks.performance.timerify(test);
 
+// и тут инстанциируем сам обзёрвер
+const performanceObserver = new perf_hooks.PerformanceObserver(
+	(items, observer) => {
+		// получаем все элементы
+		console.log(items.getEntries());
+		// получаем последний элемент нашей нужной нам функции
+		const entry = items.getEntriesByName("slow").pop();
+		// имя вхождения и время выполнения
+		console.log(`${entry.name}: ${entry.duration}`);
+		// отключаем сам обзёрвер
+		observer.disconnect();
+	}
+);
 
+// и тут указываем откуда получаем время выполнения
+performanceObserver.observe({ entryTypes: ["measure", "function"] });
 
+function test() {
+	const arr = [];
+	for (let i = 0; i < 100000000; i++) {
+		arr.push(i * i);
+	}
+}
 
+function slow() {
+	// делаем отметку по времени - начало
+	performance.mark("start");
+	const arr = [];
+	for (let i = 0; i < 100000000; i++) {
+		arr.push(i * i);
+	}
+	// делаем отметку по времени - конец
+	performance.mark("end");
 
+	// и тут будет происходить подсчёт времени нашей производительности
+	performance.measure("slow", "start", "end");
+
+	// получает только одно наше измерение по имени
+	console.log(performance.getEntriesByName("slow"));
+}
+
+slow();
+test();
+```
+
+>[!faq] Когда какие измерения нужно проводить?
+> - Если нужно измерить кусок кода, то нужно использовать `performance.mark()`
+>- Если нам нужно измерить время выполнения функции, то уже её нужно декорировать
