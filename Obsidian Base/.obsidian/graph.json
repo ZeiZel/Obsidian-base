@@ -76,6 +76,13 @@
         "a": 1,
         "rgb": 4781297
       }
+    },
+    {
+      "query": "Git",
+      "color": {
+        "a": 1,
+        "rgb": 7946773
+      }
     }
   ],
   "collapse-display": true,

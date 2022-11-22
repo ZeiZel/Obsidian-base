@@ -204,6 +204,7 @@
   },
   "active": "2242e12ebb202869",
   "lastOpenFiles": [
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/MobileDev/React Native 2020. Мобильная разработка на JavaScript/React Native.md",
     "Development/MobileDev/React Native 2020. Мобильная разработка на JavaScript/_lessons/1 Введение и подготовка.md",
@@ -212,7 +213,6 @@
     "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
     "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
-    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md",
-    "DesktopDev/Electron/_lessons/06 Разработка Time Tracking приложения на Electron.md"
+    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md"
   ]
 }
