@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/TypeScript/TypeScript.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React - фундаментальные основы.md",
                 "mode": "source",
                 "source": false
               }
@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/Типизация TypeScript в React.md",
+                "file": "Development/Типизация TypeScript в React.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,26 +49,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
+                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "d558b9f78c041017",
+            "id": "fe20dd1b2e06a0db",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/04 Старт проекта.md",
+                "file": "Development/DesktopDev/Electron/ElectronJS.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/04 Старт проекта.md",
+                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/04 Старт проекта.md",
+                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/04 Старт проекта.md"
+                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md"
               }
             }
           },
@@ -202,17 +202,17 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "d558b9f78c041017",
+  "active": "2242e12ebb202869",
   "lastOpenFiles": [
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/03 TypeScript.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/02 Настройка окружения.md",
-    "WebDev/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
-    "WebDev/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
-    "DesktopDev/Electron/Создание первого приложения.md",
-    "WebDev/Инструменты/Webpack.md",
-    "DesktopDev/Electron/Создание Electron приложения с другими технологиями.md",
-    "DesktopDev/Electron/ElectronJS.md",
-    "WebDev/TypeScript/TypeScript.md"
+    "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/MobileDev/React Native 2020. Мобильная разработка на JavaScript/React Native.md",
+    "Development/MobileDev/React Native 2020. Мобильная разработка на JavaScript/_lessons/1 Введение и подготовка.md",
+    "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+    "Development/DesktopDev/Electron/_lessons/5 Renderer Process API.md",
+    "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
+    "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
+    "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
+    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md",
+    "DesktopDev/Electron/_lessons/06 Разработка Time Tracking приложения на Electron.md"
   ]
 }

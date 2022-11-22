@@ -5,4 +5,4 @@ TypeScript используют в основе своей для поддерж
 ![](_png/Pasted%20image%2020220907172334.png)
 
 Материал:
-[TypeScript](../../WebDev/TypeScript/TypeScript.md)
+[TypeScript](../../Development/TypeScript/TypeScript.md)
