@@ -55,38 +55,6 @@
         }
       }
     },
-    "JQuery": {
-      "JQuery": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666515720947
-        }
-      }
-    },
-    "SearchPanel": {
-      "SearchPanel": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666519924444
-        }
-      }
-    },
-    "Реализация": {
-      "Реализация": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666523176184
-        }
-      }
-    },
-    "Инлайн-стили": {
-      "Инлайн-стили": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666531611492
-        }
-      }
-    },
     "Инициализация": {
       "Инициализация": {
         "currentFile": {
@@ -684,6 +652,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1669130975826
+        }
+      }
+    },
+    "представлен": {
+      "представлен": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669221428408
         }
       }
     }
