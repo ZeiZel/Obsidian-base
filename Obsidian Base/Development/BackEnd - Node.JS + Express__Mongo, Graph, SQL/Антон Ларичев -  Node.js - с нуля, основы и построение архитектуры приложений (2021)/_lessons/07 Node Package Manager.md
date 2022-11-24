@@ -241,7 +241,7 @@ npm cache clear
 
 ```bash
 // установка пакета с зависимостями для рантайма
-npm i axios chalk
+npm i axios chalk dedent-js
 
 // установка пакета с зависимостями для разработки
 npm i -D gulp

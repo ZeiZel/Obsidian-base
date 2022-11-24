@@ -193,6 +193,7 @@
   "active": "2242e12ebb202869",
   "lastOpenFiles": [
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/07 Node Package Manager.md",
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/08 Приложение 1 - CLI прогноз погоды.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/06 Движок V8.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/05 Многопоточность.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
@@ -200,7 +201,6 @@
     "Development/TypeScript/_lessons/03 Основные типы.md",
     "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
-    "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md"
+    "Development/TypeScript/_lessons/01 Введение.md"
   ]
 }
