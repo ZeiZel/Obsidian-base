@@ -662,6 +662,30 @@
           "lastUpdated": 1669221428408
         }
       }
+    },
+    "package-lock": {
+      "package-lock": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669288180854
+        }
+      }
+    },
+    "devDependencies": {
+      "devDependencies": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669289286977
+        }
+      }
+    },
+    "peerDependencies": {
+      "peerDependencies": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669289291076
+        }
+      }
     }
   }
 }
