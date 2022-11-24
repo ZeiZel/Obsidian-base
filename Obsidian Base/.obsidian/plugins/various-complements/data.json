@@ -55,14 +55,6 @@
         }
       }
     },
-    "Инициализация": {
-      "Инициализация": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666691893793
-        }
-      }
-    },
     "Своим": {
       "Своим": {
         "currentFile": {
@@ -684,6 +676,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1669289291076
+        }
+      }
+    },
+    "weather": {
+      "weather": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669306321541
+        }
+      }
+    },
+    "writeFile": {
+      "writeFile": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669308794254
         }
       }
     }
