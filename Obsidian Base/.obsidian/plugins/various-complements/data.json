@@ -55,43 +55,11 @@
         }
       }
     },
-    "Своим": {
-      "Своим": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666707007933
-        }
-      }
-    },
-    "template": {
-      "template": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666707013739
-        }
-      }
-    },
     "package": {
       "package": {
         "currentFile": {
           "count": 6,
           "lastUpdated": 1667044801115
-        }
-      }
-    },
-    "development": {
-      "development": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666708529707
-        }
-      }
-    },
-    "css-loader": {
-      "css-loader": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666712879583
         }
       }
     },
@@ -682,8 +650,8 @@
     "weather": {
       "weather": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669306321541
+          "count": 2,
+          "lastUpdated": 1669375607869
         }
       }
     },
