@@ -1,15 +1,104 @@
 ## 046 Простой http сервер
 
+И вот так выглядит создание самого простого сервера:
 
+```JS
+import http from "http";
 
+// сам хост
+const host = "127.0.0.1";
+// и канал, по которому можно будет слушать
+const port = 8000;
 
+// тут уже создаётся сам сервер
+const server = http.createServer((request, response) => {
+	// обработка запроса на сервере
+	response.statusCode = 200;
+	response.setHeader("Content-Type", "text/plain");
+	response.end("Привет!");
+});
 
+// это обработчик, который слушает наши запросы
+server.listen(port, host, () => {
+	console.log(`Сервер запущен на ${host}: ${port}`);
+});
+```
+
+Запускаем сервер
+
+![](_png/Pasted%20image%2020221125194040.png)
+
+И стучимся к нему
+
+![](_png/Pasted%20image%2020221125194030.png)
+
+И вот так выглядит роутинг нашего приложения, который осуществляется через `switch`
+
+```JS
+import http from "http";
+
+// сам хост
+const host = "127.0.0.1";
+// и канал, по которому можно будет слушать
+const port = 8000;
+
+// тут уже создаётся сам сервер
+const server = http.createServer((request, response) => {
+	// Запрос от пользователя будет POST или GET
+	switch (request.method) {
+		case "GET":
+			// Ссылка через которую пользователь отправил запрос
+			switch (request.url) {
+				case "/hello":
+					// обработка запроса на сервере
+					response.statusCode = 200;
+					response.setHeader("Content-Type", "text/plain");
+					response.end("Привет!");
+					break;
+			}
+			break;
+	}
+});
+
+// это обработчик, который слушает наши запросы
+server.listen(port, host, () => {
+	console.log(`Сервер запущен на ${host}: ${port}`);
+});
+```
+
+![](_png/Pasted%20image%2020221125194657.png)
+
+>[!warning] Основная проблема такого подхода заключается в том, что нам нужно будет писать свои абстракции под каждое разбиение кода
 
 ## 047 Переходим на express
 
+Установим экспресс
 
+```bash
+npm i express
+```
 
+Инициализируем приложение на экспрессе
 
+```JS
+import express from "express";
+
+const port = 8000;
+// тут мы инициилизируем приложение экспресса
+const app = express();
+
+// будет срабатывать на гете этого роута
+app.get('/hello', (request, response)=> {
+	response.send('привет')
+})
+
+// это сам листенер запросов пользователей
+app.listen(port, () => {
+	console.log(`Сервер запущен на http://localhost:${port}`);
+});
+```
+
+![](_png/Pasted%20image%2020221125200719.png)
 
 
 ## 048 Маршрутизация
@@ -34,3 +123,11 @@
 
 
 ## 051 Промежуточные обработчики
+
+
+
+
+
+
+
+
