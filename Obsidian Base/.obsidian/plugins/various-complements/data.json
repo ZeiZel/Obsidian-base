@@ -694,6 +694,22 @@
           "lastUpdated": 1669451030592
         }
       }
+    },
+    "Dependency": {
+      "Dependency": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669459809121
+        }
+      }
+    },
+    "Injection": {
+      "Injection": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669459814576
+        }
+      }
     }
   }
 }
