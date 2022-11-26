@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/03 Основные типы.md",
+                "file": "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
                 "mode": "source",
                 "source": false
               }
@@ -190,17 +190,17 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "2242e12ebb202869",
+  "active": "aa4fe56689b0fc48",
   "lastOpenFiles": [
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
+    "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/11 Первый шаг к архитектуре.md",
+    "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
+    "Development/TypeScript/_lessons/03 Основные типы.md",
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/_png/Pasted image 20221125200719.png",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/08 Приложение 1 - CLI прогноз погоды.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/_png/Pasted image 20221125115745.png",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/07 Node Package Manager.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Владилен Минин -  Node JS. Практический курс. (Mongo, GraphQL, MySQL, Express) (2020)/Node JS. Практический курс..md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/06 Движок V8.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/05 Многопоточность.md"
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/_png/Pasted image 20221125115745.png"
   ]
 }
