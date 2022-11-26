@@ -19876,7 +19876,7 @@ var IsomorphicGit = class extends GitManager {
       const upstreamCommit = await this.resolveRef("HEAD");
       this.plugin.lastUpdate = Date.now();
       const changedFiles = await this.getFileChangesCount(localCommit, upstreamCommit);
-      new import_obsidian5.Notice("Finished pull");
+      this.showNotice("Finished pull", false);
       return changedFiles.map((file) => ({
         path: file.path,
         working_dir: "P",
@@ -20254,9 +20254,9 @@ var IsomorphicGit = class extends GitManager {
       vault_path: this.getVaultPath(row[this.FILE])
     };
   }
-  showNotice(message) {
+  showNotice(message, infinity = true) {
     if (!this.plugin.settings.disablePopups) {
-      return new import_obsidian5.Notice(message, this.noticeLength);
+      return new import_obsidian5.Notice(message, infinity ? this.noticeLength : void 0);
     }
   }
 };
@@ -28938,17 +28938,17 @@ function add_css5(target) {
 }
 function get_each_context2(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[43] = list[i];
+  child_ctx[45] = list[i];
   return child_ctx;
 }
 function get_each_context_1(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[43] = list[i];
+  child_ctx[45] = list[i];
   return child_ctx;
 }
 function get_each_context_2(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[48] = list[i];
+  child_ctx[50] = list[i];
   return child_ctx;
 }
 function create_if_block_8(ctx) {
@@ -28965,7 +28965,7 @@ function create_if_block_8(ctx) {
     m(target, anchor) {
       insert(target, div, anchor);
       if (!mounted) {
-        dispose = listen(div, "click", ctx[31]);
+        dispose = listen(div, "click", ctx[33]);
         mounted = true;
       }
     },
@@ -29106,7 +29106,7 @@ function create_if_block4(ctx) {
       append2(div6, div5);
       append2(div5, div3);
       append2(div3, div2);
-      ctx[34](div2);
+      ctx[36](div2);
       append2(div5, t3);
       append2(div5, div4);
       append2(div4, t4);
@@ -29125,7 +29125,7 @@ function create_if_block4(ctx) {
       append2(div12, div10);
       append2(div12, t10);
       append2(div12, div11);
-      ctx[39](div11);
+      ctx[41](div11);
       append2(div14, t11);
       append2(div14, div13);
       append2(div13, t12);
@@ -29138,15 +29138,15 @@ function create_if_block4(ctx) {
       current = true;
       if (!mounted) {
         dispose = [
-          listen(div0, "click", ctx[32]),
-          listen(div1, "click", ctx[33]),
-          listen(div2, "click", ctx[18]),
-          listen(div6, "click", self2(ctx[35])),
-          listen(div8, "click", ctx[36]),
-          listen(div9, "click", ctx[37]),
-          listen(div10, "click", ctx[38]),
-          listen(div11, "click", ctx[17]),
-          listen(div15, "click", self2(ctx[40]))
+          listen(div0, "click", ctx[34]),
+          listen(div1, "click", ctx[35]),
+          listen(div2, "click", ctx[19]),
+          listen(div6, "click", self2(ctx[37])),
+          listen(div8, "click", ctx[38]),
+          listen(div9, "click", ctx[39]),
+          listen(div10, "click", ctx[40]),
+          listen(div11, "click", ctx[18]),
+          listen(div15, "click", self2(ctx[42]))
         ];
         mounted = true;
       }
@@ -29237,10 +29237,10 @@ function create_if_block4(ctx) {
     d(detaching) {
       if (detaching)
         detach(div18);
-      ctx[34](null);
+      ctx[36](null);
       if (if_block0)
         if_block0.d();
-      ctx[39](null);
+      ctx[41](null);
       if (if_block1)
         if_block1.d();
       if (if_block2)
@@ -29449,7 +29449,7 @@ function create_each_block_2(ctx) {
   let current;
   stagedfilecomponent = new stagedFileComponent_default({
     props: {
-      change: ctx[48],
+      change: ctx[50],
       view: ctx[1],
       manager: ctx[0].gitManager
     }
@@ -29465,7 +29465,7 @@ function create_each_block_2(ctx) {
     p(ctx2, dirty) {
       const stagedfilecomponent_changes = {};
       if (dirty[0] & 64)
-        stagedfilecomponent_changes.change = ctx2[48];
+        stagedfilecomponent_changes.change = ctx2[50];
       if (dirty[0] & 2)
         stagedfilecomponent_changes.view = ctx2[1];
       if (dirty[0] & 1)
@@ -29686,7 +29686,7 @@ function create_each_block_1(ctx) {
   let current;
   filecomponent = new fileComponent_default({
     props: {
-      change: ctx[43],
+      change: ctx[45],
       view: ctx[1],
       manager: ctx[0].gitManager
     }
@@ -29703,7 +29703,7 @@ function create_each_block_1(ctx) {
     p(ctx2, dirty) {
       const filecomponent_changes = {};
       if (dirty[0] & 64)
-        filecomponent_changes.change = ctx2[43];
+        filecomponent_changes.change = ctx2[45];
       if (dirty[0] & 2)
         filecomponent_changes.view = ctx2[1];
       if (dirty[0] & 1)
@@ -29776,7 +29776,7 @@ function create_if_block_12(ctx) {
         if_block.m(div3, null);
       current = true;
       if (!mounted) {
-        dispose = listen(div2, "click", ctx[41]);
+        dispose = listen(div2, "click", ctx[43]);
         mounted = true;
       }
     },
@@ -30025,7 +30025,7 @@ function create_each_block2(ctx) {
   let current;
   pulledfilecomponent = new pulledFileComponent_default({
     props: {
-      change: ctx[43],
+      change: ctx[45],
       view: ctx[1]
     }
   });
@@ -30041,7 +30041,7 @@ function create_each_block2(ctx) {
     p(ctx2, dirty) {
       const pulledfilecomponent_changes = {};
       if (dirty[0] & 128)
-        pulledfilecomponent_changes.change = ctx2[43];
+        pulledfilecomponent_changes.change = ctx2[45];
       if (dirty[0] & 2)
         pulledfilecomponent_changes.view = ctx2[1];
       pulledfilecomponent.$set(pulledfilecomponent_changes);
@@ -30063,8 +30063,8 @@ function create_each_block2(ctx) {
 }
 function create_fragment5(ctx) {
   let main;
+  let div9;
   let div8;
-  let div7;
   let div0;
   let t0;
   let div1;
@@ -30079,11 +30079,13 @@ function create_fragment5(ctx) {
   let t5;
   let div6;
   let t6;
-  let div9;
-  let textarea;
+  let div7;
   let t7;
-  let t8;
   let div10;
+  let textarea;
+  let t8;
+  let t9;
+  let div11;
   let current;
   let mounted;
   let dispose;
@@ -30092,8 +30094,8 @@ function create_fragment5(ctx) {
   return {
     c() {
       main = element("main");
+      div9 = element("div");
       div8 = element("div");
-      div7 = element("div");
       div0 = element("div");
       t0 = space();
       div1 = element("div");
@@ -30108,109 +30110,119 @@ function create_fragment5(ctx) {
       t5 = space();
       div6 = element("div");
       t6 = space();
-      div9 = element("div");
-      textarea = element("textarea");
+      div7 = element("div");
       t7 = space();
+      div10 = element("div");
+      textarea = element("textarea");
+      t8 = space();
       if (if_block0)
         if_block0.c();
-      t8 = space();
-      div10 = element("div");
+      t9 = space();
+      div11 = element("div");
       if (if_block1)
         if_block1.c();
-      attr(div0, "id", "commit-btn");
-      attr(div0, "data-icon", "check");
+      attr(div0, "id", "backup-btn");
+      attr(div0, "data-icon", "arrow-up-circle");
       attr(div0, "class", "clickable-icon nav-action-button");
-      attr(div0, "aria-label", "Commit");
-      attr(div1, "id", "stage-all");
+      attr(div0, "aria-label", "Backup");
+      attr(div1, "id", "commit-btn");
+      attr(div1, "data-icon", "check");
       attr(div1, "class", "clickable-icon nav-action-button");
-      attr(div1, "data-icon", "plus-circle");
-      attr(div1, "aria-label", "Stage all");
-      attr(div2, "id", "unstage-all");
+      attr(div1, "aria-label", "Commit");
+      attr(div2, "id", "stage-all");
       attr(div2, "class", "clickable-icon nav-action-button");
-      attr(div2, "data-icon", "minus-circle");
-      attr(div2, "aria-label", "Unstage all");
-      attr(div3, "id", "push");
+      attr(div2, "data-icon", "plus-circle");
+      attr(div2, "aria-label", "Stage all");
+      attr(div3, "id", "unstage-all");
       attr(div3, "class", "clickable-icon nav-action-button");
-      attr(div3, "data-icon", "upload");
-      attr(div3, "aria-label", "Push");
-      attr(div4, "id", "pull");
+      attr(div3, "data-icon", "minus-circle");
+      attr(div3, "aria-label", "Unstage all");
+      attr(div4, "id", "push");
       attr(div4, "class", "clickable-icon nav-action-button");
-      attr(div4, "data-icon", "download");
-      attr(div4, "aria-label", "Pull");
-      attr(div5, "id", "layoutChange");
+      attr(div4, "data-icon", "upload");
+      attr(div4, "aria-label", "Push");
+      attr(div5, "id", "pull");
       attr(div5, "class", "clickable-icon nav-action-button");
-      attr(div5, "aria-label", "Change Layout");
-      attr(div6, "id", "refresh");
+      attr(div5, "data-icon", "download");
+      attr(div5, "aria-label", "Pull");
+      attr(div6, "id", "layoutChange");
       attr(div6, "class", "clickable-icon nav-action-button");
-      attr(div6, "data-icon", "refresh-cw");
-      attr(div6, "aria-label", "Refresh");
-      set_style(div6, "margin", "1px");
-      toggle_class(div6, "loading", ctx[5]);
-      attr(div7, "class", "nav-buttons-container");
-      attr(div8, "class", "nav-header");
+      attr(div6, "aria-label", "Change Layout");
+      attr(div7, "id", "refresh");
+      attr(div7, "class", "clickable-icon nav-action-button");
+      attr(div7, "data-icon", "refresh-cw");
+      attr(div7, "aria-label", "Refresh");
+      set_style(div7, "margin", "1px");
+      toggle_class(div7, "loading", ctx[5]);
+      attr(div8, "class", "nav-buttons-container");
+      attr(div9, "class", "nav-header");
       attr(textarea, "rows", ctx[15]);
       attr(textarea, "class", "commit-msg-input svelte-fnxzfa");
       attr(textarea, "type", "text");
       attr(textarea, "spellcheck", "true");
       attr(textarea, "placeholder", "Commit Message");
-      attr(div9, "class", "git-commit-msg svelte-fnxzfa");
-      attr(div10, "class", "nav-files-container");
-      set_style(div10, "position", "relative");
+      attr(div10, "class", "git-commit-msg svelte-fnxzfa");
+      attr(div11, "class", "nav-files-container");
+      set_style(div11, "position", "relative");
       attr(main, "class", "svelte-fnxzfa");
     },
     m(target, anchor) {
       insert(target, main, anchor);
-      append2(main, div8);
-      append2(div8, div7);
-      append2(div7, div0);
-      ctx[22](div0);
-      append2(div7, t0);
-      append2(div7, div1);
-      ctx[23](div1);
-      append2(div7, t1);
-      append2(div7, div2);
-      ctx[24](div2);
-      append2(div7, t2);
-      append2(div7, div3);
-      ctx[25](div3);
-      append2(div7, t3);
-      append2(div7, div4);
-      ctx[26](div4);
-      append2(div7, t4);
-      append2(div7, div5);
-      ctx[27](div5);
-      append2(div7, t5);
-      append2(div7, div6);
-      ctx[29](div6);
-      append2(main, t6);
       append2(main, div9);
-      append2(div9, textarea);
-      set_input_value(textarea, ctx[2]);
-      append2(div9, t7);
-      if (if_block0)
-        if_block0.m(div9, null);
-      append2(main, t8);
+      append2(div9, div8);
+      append2(div8, div0);
+      ctx[23](div0);
+      append2(div8, t0);
+      append2(div8, div1);
+      ctx[24](div1);
+      append2(div8, t1);
+      append2(div8, div2);
+      ctx[25](div2);
+      append2(div8, t2);
+      append2(div8, div3);
+      ctx[26](div3);
+      append2(div8, t3);
+      append2(div8, div4);
+      ctx[27](div4);
+      append2(div8, t4);
+      append2(div8, div5);
+      ctx[28](div5);
+      append2(div8, t5);
+      append2(div8, div6);
+      ctx[29](div6);
+      append2(div8, t6);
+      append2(div8, div7);
+      ctx[31](div7);
+      append2(main, t7);
       append2(main, div10);
+      append2(div10, textarea);
+      set_input_value(textarea, ctx[2]);
+      append2(div10, t8);
+      if (if_block0)
+        if_block0.m(div10, null);
+      append2(main, t9);
+      append2(main, div11);
       if (if_block1)
-        if_block1.m(div10, null);
+        if_block1.m(div11, null);
       current = true;
       if (!mounted) {
         dispose = [
-          listen(div0, "click", ctx[16]),
-          listen(div1, "click", ctx[17]),
+          listen(div0, "click", ctx[17]),
+          listen(div1, "click", ctx[16]),
           listen(div2, "click", ctx[18]),
           listen(div3, "click", ctx[19]),
           listen(div4, "click", ctx[20]),
-          listen(div5, "click", ctx[28]),
-          listen(div6, "click", triggerRefresh),
-          listen(textarea, "input", ctx[30])
+          listen(div5, "click", ctx[21]),
+          listen(div6, "click", ctx[30]),
+          listen(div7, "click", triggerRefresh),
+          listen(textarea, "input", ctx[32])
         ];
         mounted = true;
       }
     },
     p(ctx2, dirty) {
       if (!current || dirty[0] & 32) {
-        toggle_class(div6, "loading", ctx2[5]);
+        toggle_class(div7, "loading", ctx2[5]);
       }
       if (!current || dirty[0] & 32768) {
         attr(textarea, "rows", ctx2[15]);
@@ -30224,7 +30236,7 @@ function create_fragment5(ctx) {
         } else {
           if_block0 = create_if_block_8(ctx2);
           if_block0.c();
-          if_block0.m(div9, null);
+          if_block0.m(div10, null);
         }
       } else if (if_block0) {
         if_block0.d(1);
@@ -30240,7 +30252,7 @@ function create_fragment5(ctx) {
           if_block1 = create_if_block4(ctx2);
           if_block1.c();
           transition_in(if_block1, 1);
-          if_block1.m(div10, null);
+          if_block1.m(div11, null);
         }
       } else if (if_block1) {
         group_outros();
@@ -30263,13 +30275,14 @@ function create_fragment5(ctx) {
     d(detaching) {
       if (detaching)
         detach(main);
-      ctx[22](null);
       ctx[23](null);
       ctx[24](null);
       ctx[25](null);
       ctx[26](null);
       ctx[27](null);
+      ctx[28](null);
       ctx[29](null);
+      ctx[31](null);
       if (if_block0)
         if_block0.d();
       if (if_block1)
@@ -30317,6 +30330,16 @@ function instance5($$self, $$props, $$invalidate) {
         return false;
       }
       plugin.gitManager.commit(commitMessage).then(() => {
+        if (commitMessage !== plugin.settings.commitMessage) {
+          $$invalidate(2, commitMessage = "");
+        }
+      }).finally(triggerRefresh);
+    }
+  }
+  async function backup() {
+    $$invalidate(5, loading = true);
+    if (status2) {
+      plugin.createBackup(false, false, commitMessage).then(() => {
         if (commitMessage !== plugin.settings.commitMessage) {
           $$invalidate(2, commitMessage = "");
         }
@@ -30396,35 +30419,41 @@ function instance5($$self, $$props, $$invalidate) {
   }
   function div0_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
-      buttons[0] = $$value;
+      buttons[5] = $$value;
       $$invalidate(8, buttons);
     });
   }
   function div1_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
-      buttons[1] = $$value;
+      buttons[0] = $$value;
       $$invalidate(8, buttons);
     });
   }
   function div2_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
-      buttons[2] = $$value;
+      buttons[1] = $$value;
       $$invalidate(8, buttons);
     });
   }
   function div3_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
-      buttons[3] = $$value;
+      buttons[2] = $$value;
       $$invalidate(8, buttons);
     });
   }
   function div4_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
-      buttons[4] = $$value;
+      buttons[3] = $$value;
       $$invalidate(8, buttons);
     });
   }
   function div5_binding($$value) {
+    binding_callbacks[$$value ? "unshift" : "push"](() => {
+      buttons[4] = $$value;
+      $$invalidate(8, buttons);
+    });
+  }
+  function div6_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       layoutBtn = $$value;
       $$invalidate(4, layoutBtn);
@@ -30435,7 +30464,7 @@ function instance5($$self, $$props, $$invalidate) {
     $$invalidate(0, plugin.settings.treeStructure = showTree, plugin);
     plugin.saveSettings();
   };
-  function div6_binding($$value) {
+  function div7_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       buttons[6] = $$value;
       $$invalidate(8, buttons);
@@ -30504,6 +30533,7 @@ function instance5($$self, $$props, $$invalidate) {
     lastPulledFilesOpen,
     rows,
     commit2,
+    backup,
     stageAll,
     unstageAll,
     push2,
@@ -30515,8 +30545,9 @@ function instance5($$self, $$props, $$invalidate) {
     div3_binding,
     div4_binding,
     div5_binding,
-    click_handler,
     div6_binding,
+    click_handler,
+    div7_binding,
     textarea_input_handler,
     click_handler_1,
     click_handler_2,
@@ -30753,22 +30784,33 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
     this.addCommand({
       id: "commit",
       name: "Commit all changes",
-      callback: () => this.promiseQueue.addTask(() => this.commit(false))
+      callback: () => this.promiseQueue.addTask(() => this.commit({ fromAutoBackup: false }))
     });
     this.addCommand({
       id: "commit-specified-message",
       name: "Commit all changes with specific message",
-      callback: () => this.promiseQueue.addTask(() => this.commit(false, true))
+      callback: () => this.promiseQueue.addTask(() => this.commit({
+        fromAutoBackup: false,
+        requestCustomMessage: true
+      }))
     });
     this.addCommand({
       id: "commit-staged",
       name: "Commit staged",
-      callback: () => this.promiseQueue.addTask(() => this.commit(false, false, true))
+      callback: () => this.promiseQueue.addTask(() => this.commit({
+        fromAutoBackup: false,
+        requestCustomMessage: false,
+        onlyStaged: true
+      }))
     });
     this.addCommand({
       id: "commit-staged-specified-message",
       name: "Commit staged with specific message",
-      callback: () => this.promiseQueue.addTask(() => this.commit(false, true, true))
+      callback: () => this.promiseQueue.addTask(() => this.commit({
+        fromAutoBackup: false,
+        requestCustomMessage: true,
+        onlyStaged: true
+      }))
     });
     this.addCommand({
       id: "push2",
@@ -31158,13 +31200,13 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
     this.lastUpdate = Date.now();
     this.setState(PluginState.idle);
   }
-  async createBackup(fromAutoBackup, requestCustomMessage = false) {
+  async createBackup(fromAutoBackup, requestCustomMessage = false, commitMessage) {
     if (!await this.isAllInitialized())
       return;
     if (this.settings.syncMethod == "reset" && this.settings.pullBeforePush) {
       await this.pull();
     }
-    if (!await this.commit(fromAutoBackup, requestCustomMessage))
+    if (!await this.commit({ fromAutoBackup, requestCustomMessage, commitMessage }))
       return;
     if (!this.settings.disablePush) {
       if (await this.gitManager.canPush()) {
@@ -31178,7 +31220,12 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
     }
     this.setState(PluginState.idle);
   }
-  async commit(fromAutoBackup, requestCustomMessage = false, onlyStaged = false) {
+  async commit({
+    fromAutoBackup,
+    requestCustomMessage = false,
+    onlyStaged = false,
+    commitMessage
+  }) {
     if (!await this.isAllInitialized())
       return false;
     const hadConflict = this.localStorage.getConflict() === "true";
@@ -31219,14 +31266,14 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
       return false;
     }
     if (changedFiles.length !== 0 || hadConflict) {
-      let commitMessage = fromAutoBackup ? this.settings.autoCommitMessage : this.settings.commitMessage;
+      let cmtMessage = commitMessage != null ? commitMessage : commitMessage = fromAutoBackup ? this.settings.autoCommitMessage : this.settings.commitMessage;
       if (fromAutoBackup && this.settings.customMessageOnAutoBackup || requestCustomMessage) {
         if (!this.settings.disablePopups && fromAutoBackup) {
           new import_obsidian23.Notice("Auto backup: Please enter a custom commit message. Leave empty to abort");
         }
         const tempMessage = await new CustomMessageModal(this, true).open();
         if (tempMessage != void 0 && tempMessage != "" && tempMessage != "...") {
-          commitMessage = tempMessage;
+          cmtMessage = tempMessage;
         } else {
           this.setState(PluginState.idle);
           return false;
@@ -31234,9 +31281,9 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
       }
       let committedFiles;
       if (onlyStaged) {
-        committedFiles = await this.gitManager.commit(commitMessage);
+        committedFiles = await this.gitManager.commit(cmtMessage);
       } else {
-        committedFiles = await this.gitManager.commitAll({ message: commitMessage, status: status2, unstagedFiles });
+        committedFiles = await this.gitManager.commitAll({ message: cmtMessage, status: status2, unstagedFiles });
       }
       let roughly = false;
       if (committedFiles === void 0) {
@@ -31417,7 +31464,7 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
   doAutoBackup() {
     this.promiseQueue.addTask(() => {
       if (this.settings.differentIntervalCommitAndPush) {
-        return this.commit(true);
+        return this.commit({ fromAutoBackup: true });
       } else {
         return this.createBackup(true);
       }
