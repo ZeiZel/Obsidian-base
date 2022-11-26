@@ -106,7 +106,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 376.5
+    "width": 374.5110321044922
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -190,7 +190,7 @@
     "width": 386.5,
     "collapsed": true
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "2242e12ebb202869",
   "lastOpenFiles": [
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
