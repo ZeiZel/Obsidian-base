@@ -63,14 +63,6 @@
         }
       }
     },
-    "file-loader": {
-      "file-loader": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666799898782
-        }
-      }
-    },
     "devServer": {
       "devServer": {
         "currentFile": {
@@ -676,6 +668,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1669390406388
+        }
+      }
+    },
+    "callback": {
+      "callback": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669444072436
         }
       }
     }
