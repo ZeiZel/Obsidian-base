@@ -311,17 +311,106 @@ app.listen(port, () => {
 
 ## 050 Router
 
+Далее мы можем воспользоваться конструктором `Router`, который позволит создать уникальный роут для каждой функциональности
 
+Конкретно тут мы описываем функционал для пользователя
 
+`users > uers.js`
+```JS
+import express from "express";
 
+const userRouter = express.Router();
 
+userRouter.post("/login", (req, res) => {
+	res.send("login");
+});
+
+userRouter.post("/register", (req, res) => {
+	res.send("register");
+});
+
+export { userRouter };
+```
+
+А тут уже импортируем через `app.use` определённый роутер и через него можем раздельно получать запросы
+
+`index.js`
+```JS
+import express from "express";
+import { userRouter } from "./users/users.js";
+
+const port = 8000;
+const app = express();
+
+app.get("/hello", (request, response) => {
+	response.send("Привет!");
+	response.end();
+});
+
+app.use("/users", userRouter);
+
+app.listen(port, () => {
+	console.log(`Сервер запущен на http://localhost:${port}`);
+});
+```
+
+И теперь мы можем получить отдельно по каждой ссылке свой запрос. Обращаемся по роуту `/users` на ссылку `/register`
+
+![](_png/Pasted%20image%2020221126105159.png)
 
 ## 051 Промежуточные обработчики
 
 
 
 
+```JS
+import express from "express";
+import { userRouter } from "./users/users.js";
+
+const port = 8000;
+const app = express();
+
+// на каждый запрос к этому файлу, будет выводиться время запроса
+app.use((req, res, next) => {
+	console.log("Время запроса: ", Date.now());
+	next();
+});
+
+app.get("/hello", (request, response) => {
+	response.send("Привет!");
+	response.end();
+});
+
+app.use("/users", userRouter);
+
+app.listen(port, () => {
+	console.log(`Сервер запущен на http://localhost:${port}`);
+});
+```
+
+![](_png/Pasted%20image%2020221126110405.png)
 
 
+```JS
+import express from "express";
+
+const userRouter = express.Router();
+
+// сейчас уже сначала триггернётся главный обработчик, а потом этот обработчик
+userRouter.use((req, res, next) => {
+	console.log("Обработчик users");
+	next();
+});
+
+userRouter.post("/login", (req, res) => {
+	res.send("login");
+});
+
+userRouter.post("/register", (req, res) => {
+	res.send("register");
+});
+
+export { userRouter };
+```
 
 
