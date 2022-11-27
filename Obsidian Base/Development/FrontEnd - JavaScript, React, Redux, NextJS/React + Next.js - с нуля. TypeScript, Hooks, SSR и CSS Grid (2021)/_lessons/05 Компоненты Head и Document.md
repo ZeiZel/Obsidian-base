@@ -139,8 +139,35 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
 ### 004 Компонент Document
 
+Данный компонент позволяет нам осуществить сразу несколько вещей:
+1) позволяет передать язык в наш документ `lang="ru"` (например, без этого параметра не будут работать скринридеры)
+2) даёт нам возможность работать со структурой документа
 
+`_document.tsx`
+```TSX
+import Document, {Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps} from "next/document";
 
+export default class MyDocument extends Document {
+	// эта функция берёт пропсы из основного документа и перебрасывает в наш
+	// таким образом, мы сохраняем пропсы в новом документе
+	static async getInitialProps(context: DocumentContext): Promise<DocumentInitialProps> {
+		const initialProps = await Document.getInitialProps(context);
+		return { ...initialProps };
+	}
 
+	// тут происходит рендер HTML-структуры нашего документа
+	render(): JSX.Element {
+		return (
+			<Html lang="ru">
+				<Head/>
+				<body>
+					<Main/>
+					<NextScript/>
+				</body>
+			</Html>
+		);
+	}
+}
+```
 
-
+![](_png/Pasted%20image%2020221127153526.png)
