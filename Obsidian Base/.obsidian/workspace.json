@@ -106,7 +106,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 374.5110321044922
+    "width": 374.5110321044922,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -182,11 +183,12 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 364.5,
+    "width": 312.5,
     "collapsed": true
   },
   "active": "2242e12ebb202869",
