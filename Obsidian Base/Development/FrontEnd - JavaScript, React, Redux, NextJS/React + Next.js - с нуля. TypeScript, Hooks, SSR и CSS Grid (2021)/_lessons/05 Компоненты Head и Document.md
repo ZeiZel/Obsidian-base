@@ -72,8 +72,69 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
 ### 003 React Fragment
 
+Компонент `<Fragment>` позволяет отрендерить объект на странице без вложения внутрь `div`-элемента. Его стоит использовать, чтобы не создавать лишней вложенности и реализовать передачу одного компонента реакта (див мы используем, чтобы не передавать массив объектов, который не может обработать библиотека)
 
+До использования компонента:
 
+![](_png/Pasted%20image%2020221127115434.png)
+
+После использования компонента лишнего дива нет
+
+![](_png/Pasted%20image%2020221127115408.png)
+
+Это первый способ, которым мы можем вызвать компонент: `<Fragment>`
+
+```TSX
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { Fragment } from 'react';
+
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <Fragment>
+      <head>
+        <title>Second Page</title>
+        <link key={2} rel="icon" href="/favicon2.ico" />
+      </head>
+      <Component {...pageProps} />
+    </Fragment>
+  );
+}
+```
+
+Так же мы можем вписать `<React.Fragment>`
+
+```TSX
+import React from 'react';
+
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <React.Fragment>
+      <head>
+        <title>Second Page</title>
+        <link key={2} rel="icon" href="/favicon2.ico" />
+      </head>
+      <Component {...pageProps} />
+    </React.Fragment>
+  );
+}
+```
+
+Ну и в конечном итоге мы можем просто написать `<>контент</>`
+
+```TSX
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <>
+      <head>
+        <title>Second Page</title>
+        <link key={2} rel="icon" href="/favicon2.ico" />
+      </head>
+      <Component {...pageProps} />
+    </>
+  );
+}
+```
 
 
 ### 004 Компонент Document

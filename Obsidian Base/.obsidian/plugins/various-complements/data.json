@@ -63,59 +63,11 @@
         }
       }
     },
-    "devServer": {
-      "devServer": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666879862656
-        }
-      }
-    },
-    "production": {
-      "production": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666879960274
-        }
-      }
-    },
-    "Webpack": {
-      "Webpack": {
-        "internalLink": {
-          "count": 1,
-          "lastUpdated": 1666881260838
-        }
-      }
-    },
-    "extensions": {
-      "extensions": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666881324672
-        }
-      }
-    },
-    "webpack": {
-      "webpack": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666887363105
-        }
-      }
-    },
     "config": {
       "config": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1666976261270
-        }
-      }
-    },
-    "analytics": {
-      "analytics": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1666884527884
         }
       }
     },
@@ -716,6 +668,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1669474243477
+        }
+      }
+    },
+    "Fragment": {
+      "Fragment": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669539136734
         }
       }
     }
