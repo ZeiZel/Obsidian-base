@@ -5,6 +5,8 @@ IOC - inversion of control
 
 
 
+![](_png/Pasted%20image%2020221127183336.png)
+
 
 
 ## 069 Декораторы
