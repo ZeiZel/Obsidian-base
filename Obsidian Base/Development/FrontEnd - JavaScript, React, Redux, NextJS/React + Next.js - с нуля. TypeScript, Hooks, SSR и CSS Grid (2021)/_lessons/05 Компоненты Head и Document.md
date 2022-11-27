@@ -139,9 +139,12 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
 ### 004 Компонент Document
 
+Если будут вопросы: https://nextjs.org/docs/advanced-features/custom-document
+
 Данный компонент позволяет нам осуществить сразу несколько вещей:
 1) позволяет передать язык в наш документ `lang="ru"` (например, без этого параметра не будут работать скринридеры)
-2) даёт нам возможность работать со структурой документа
+2) даёт возможность добавить класс в `body`, если потребуется 
+3) даёт нам возможность работать со структурой документа
 
 `_document.tsx`
 ```TSX
@@ -160,7 +163,7 @@ export default class MyDocument extends Document {
 		return (
 			<Html lang="ru">
 				<Head/>
-				<body>
+				<body className="someClass">
 					<Main/>
 					<NextScript/>
 				</body>
