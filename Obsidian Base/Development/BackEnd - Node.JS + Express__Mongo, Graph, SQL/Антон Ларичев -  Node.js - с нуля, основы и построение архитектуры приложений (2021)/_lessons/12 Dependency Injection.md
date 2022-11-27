@@ -1,6 +1,7 @@
 ## 068 Разбор DI и IOC
 
-
+DI - dependency injection
+IOC - inversion of control
 
 
 
