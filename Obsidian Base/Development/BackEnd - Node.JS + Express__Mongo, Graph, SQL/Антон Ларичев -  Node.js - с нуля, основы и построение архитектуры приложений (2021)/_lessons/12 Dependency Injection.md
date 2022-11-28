@@ -183,6 +183,96 @@ console.log(new User().id);
 
 
 
+```TS
+function Component(id: number) {
+	console.log("init Component");
+	return (target: Function) => {
+		console.log("run Component");
+		target.prototype.id = id;
+	};
+}
+
+function Logger() {
+	console.log("init Logger");
+	return (target: Function) => {
+		console.log("run Logger");
+	};
+}
+
+@Logger()
+@Component(1)
+export class User {
+	id: number;
+
+	updateId(newId: number): number {
+		this.id = newId;
+		return this.id;
+	}
+}
+
+console.log(new User().id);
+```
+
+![](_png/Pasted%20image%2020221128101632.png)
+
+
+
+
+```TS
+
+// код ...
+
+// это декоратор метода
+function Method(
+	// сам объект
+	target: Object,
+	// имя метода
+	propertyKey: string,
+	propertyDescriptor: PropertyDescriptor
+) {
+	// тут выводим название метода
+	console.log(propertyKey);
+	// тут мы сохраняем старый метод
+	const oldValue = propertyDescriptor.value;
+	// тут уже мы можем поменять работу функции
+	propertyDescriptor.value = function (...args: unknown[]) {
+		// oldValue(); // таким образом мы можем вызвать исходный метод
+
+		// умножит переданный id на 10, если он является числом
+		if (typeof args[0] === "number") {
+			return args[0] * 10;
+		}
+		return args;
+	};
+}
+
+@Logger()
+@Component(1)
+export class User {
+	id: number;
+
+	@Method
+	updateId(newId: number): number {
+		this.id = newId;
+		return this.id;
+	}
+}
+
+console.log(new User().id);
+console.log(new User().updateId(2)); // 20
+```
+
+![](_png/Pasted%20image%2020221128103112.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
