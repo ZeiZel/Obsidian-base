@@ -382,7 +382,9 @@ console.log(new User().updateId(2)); // 20
 
 
 
-
+```bash
+npm i reflect-metadata
+```
 
 
 
