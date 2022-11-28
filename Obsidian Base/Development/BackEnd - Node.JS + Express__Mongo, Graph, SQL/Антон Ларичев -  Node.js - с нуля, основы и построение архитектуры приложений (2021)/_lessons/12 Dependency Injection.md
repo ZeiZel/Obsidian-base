@@ -132,6 +132,56 @@ export class App {
 
 ## 069 Декораторы
 
+Всю информацию о декораторах можно найти тут: [Декораторы](../../../TypeScript/_lessons/10%20Декораторы.md)
+
+
+
+```TS
+function Component(target: Function) {
+	console.log(target);
+}
+
+@Component
+export class User {
+	id: number;
+
+	updateId(newId: number): number {
+		this.id = newId;
+		return this.id;
+	}
+}
+```
+
+![](_png/Pasted%20image%2020221128100946.png)
+
+
+
+
+```TS
+function Component(id: number) {
+	console.log("init");
+	return (target: Function) => {
+		console.log("run");
+		target.prototype.id = id;
+	};
+}
+
+@Component(1)
+export class User {
+	id: number;
+
+	updateId(newId: number): number {
+		this.id = newId;
+		return this.id;
+	}
+}
+
+console.log(new User().id);
+```
+
+![](_png/Pasted%20image%2020221128101453.png)
+
+
 
 
 
