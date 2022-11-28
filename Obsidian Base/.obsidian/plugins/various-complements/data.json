@@ -63,14 +63,6 @@
         }
       }
     },
-    "config": {
-      "config": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1666976261270
-        }
-      }
-    },
     "Prettier": {
       "Prettier": {
         "internalLink": {
@@ -684,6 +676,22 @@
         "currentFile": {
           "count": 3,
           "lastUpdated": 1669571592632
+        }
+      }
+    },
+    "манипуцляции": {
+      "манипуцляции": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669626245838
+        }
+      }
+    },
+    "@Component": {
+      "@Component": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669626438970
         }
       }
     }

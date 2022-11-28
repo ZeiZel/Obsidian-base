@@ -127,14 +127,13 @@ export class App {
 
 ![](_png/Pasted%20image%2020221127210210.png)
 
-
-
-
 ## 069 Декораторы
 
 Всю информацию о декораторах можно найти тут: [Декораторы](../../../TypeScript/_lessons/10%20Декораторы.md)
 
+Сам декоратор представляет из себя обёртку, которая получает тот объект, над которым будут проводиться манипуляции и далее модифицирует поведение этого объекта
 
+Декоратор класса. Он принимает в себя таргет - сам класс и позволяет выполнить какие-либо манипуляции над классом или же просто выполнить что-то вместе с классом. 
 
 ```TS
 function Component(target: Function) {
@@ -154,8 +153,8 @@ export class User {
 
 ![](_png/Pasted%20image%2020221128100946.png)
 
-
-
+И чтобы мы могли изменять свойства нашего класса, мы можем получить функцию и вернуть её же обратно, но модифицированную, как показано ниже в примере. 
+Тут мы поменяли внутреннее свойство класса на переданное в декоратор. Декоратор так же сейчас записывается не через `@Component`, а через `@Component(значение)`
 
 ```TS
 function Component(id: number) {
@@ -181,7 +180,8 @@ console.log(new User().id);
 
 ![](_png/Pasted%20image%2020221128101453.png)
 
-
+Так же мы можем оборачивать наши объекты сразу в несколько декораторов. Будет идти порядок выполнения снизу вверх в случае классов.
+В остальных случаях - сверху вниз
 
 ```TS
 function Component(id: number) {
@@ -215,8 +215,7 @@ console.log(new User().id);
 
 ![](_png/Pasted%20image%2020221128101632.png)
 
-
-
+Декоратор методов. Так же мы можем вовсе переопределить логику работы методов внутри классов. Декоратор позволяет сохранить изначальную работу метода и просто её дополнить, либо переопределить вовсе.
 
 ```TS
 
@@ -264,19 +263,114 @@ console.log(new User().updateId(2)); // 20
 
 ![](_png/Pasted%20image%2020221128103112.png)
 
+Тут уже представлена работа всех декораторов, включая декораторы свойства и параметра метода 
 
+`полный листинг`
+```TS
+// Декоратор класса
+function Component(id: number) {
+	console.log("init Component");
 
+	// чтобы поменять значение свойства класса, нужно вернуть функцию этого класса
+	return (target: Function) => {
+		console.log("run Component");
+		// передаём значение во внутреннее свойство класса
+		target.prototype.id = id;
+	};
+}
 
+// это второй декоратор класса - логгер
+function Logger() {
+	console.log("init Logger");
 
+	// возвращает сам класс и выводит лог
+	return (target: Function) => {
+		console.log("run Logger");
+	};
+}
 
+// это декоратор метода
+function Method(
+	// сам объект
+	target: Object,
+	// имя метода
+	propertyKey: string,
+	propertyDescriptor: PropertyDescriptor
+) {
+	// тут выводим название метода
+	console.log(propertyKey);
+	// тут мы сохраняем старый метод
+	const oldValue = propertyDescriptor.value;
+	// тут уже мы можем поменять работу функции
+	propertyDescriptor.value = function (...args: unknown[]) {
+		// oldValue(); // таким образом мы можем вызвать исходный метод
 
+		// умножит переданный id на 10, если он является числом
+		if (typeof args[0] === "number") {
+			return args[0] * 10;
+		}
+		return args;
+	};
+}
 
+// декоратор для свойства класса
+function Prop(target: Object, propertyKey: string) {
+	let value: number;
 
+	// геттер для проперти
+	const getter = () => {
+		console.log("get");
+		return value;
+	};
 
+	// сеттер для проперти
+	const setter = (newValue: number) => {
+		console.log("set");
+		value = newValue;
+	};
 
+	// переопределяем геттер и сеттер для значения
+	Object.defineProperty(target, propertyKey, {
+		get: getter,
+		set: setter,
+	});
+}
 
+// декоратор для параметра функции
+function Param(
+	target: Object,
+	propertyKey: string,
+	// индекс конкретного параметра функции
+	index: number
+) {
+	console.log(propertyKey, index);
+}
 
+@Logger() // срабатывает вторым
+@Component(1) // срабатывает первым
+export class User {
+	// декоратор свойства
+	@Prop id: number;
 
+	// декоратор метода + декоратор параметра метода
+	@Method
+	updateId(@Param newId: number): number {
+		this.id = newId;
+		return this.id;
+	}
+}
+
+console.log(new User().id);
+console.log(new User().updateId(2)); // 20
+```
+
+Это декоратор для свойства класса
+
+![](_png/Pasted%20image%2020221128115216.png)
+
+А тут работа декоратора для аргумента метода
+
+![](_png/Pasted%20image%2020221128115455.png)
 
 ## 070 Metadata Reflection
 
