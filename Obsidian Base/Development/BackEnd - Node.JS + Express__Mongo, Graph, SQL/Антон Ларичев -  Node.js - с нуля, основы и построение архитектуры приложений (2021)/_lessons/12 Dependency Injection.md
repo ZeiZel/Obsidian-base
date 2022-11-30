@@ -433,13 +433,16 @@ function Inject(key: string) {}
 
 function Prop(target: Object, name: string) {}
 
+// обозначаем класс "C"
 @Injectable("C")
 export class C {
 	@Prop prop: number;
 }
 
+// обозначаем класс "D"
 @Injectable("D")
 export class D {
+	// тут идёт связывание инстанса класса "C" с параметром, который передаётся в конструктор
 	constructor(@Inject('C') c: C) {}
 }
 ```
