@@ -450,6 +450,9 @@ export class D {
 ## 071 Внедряем InversifyJS
 
 
+```bash
+npm i inversify
+```
 
 
 

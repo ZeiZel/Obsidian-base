@@ -20245,6 +20245,13 @@ var IsomorphicGit = class extends GitManager {
       return diff2;
     }
   }
+  async getLastCommitTime() {
+    const repo = this.getRepo();
+    const oid = await this.resolveRef("HEAD");
+    const commit2 = await isomorphic_git_default.readCommit({ ...repo, oid });
+    const date = commit2.commit.committer.timestamp;
+    return new Date(date * 1e3);
+  }
   getFileStatusResult(row) {
     const status2 = this.status_mapping[`${row[this.HEAD]}${row[this.WORKDIR]}${row[this.STAGE]}`];
     return {
@@ -24441,6 +24448,12 @@ var SimpleGit = class extends GitManager {
   async diff(file, commit1, commit2) {
     return await this.git.diff([`${commit1}..${commit2}`, "--", file]);
   }
+  async getLastCommitTime() {
+    const res = await this.git.log({ n: 1 }, (err) => this.onError(err));
+    if (res != null && res.latest != null) {
+      return new Date(res.latest.date);
+    }
+  }
   isGitInstalled() {
     const command = (0, import_child_process2.spawnSync)(this.plugin.localStorage.getGitPath() || "git", ["--version"], {
       stdio: "ignore"
@@ -24511,14 +24524,24 @@ var ObsidianGitSettingsTab = class extends import_obsidian7.PluginSettingTab {
           new import_obsidian7.Notice("Please specify a valid number.");
         }
       }));
-      new import_obsidian7.Setting(containerEl).setName(`Auto Backup after Filechange`).setDesc(`If turned on, do auto ${commitOrBackup} every ${plugin.settings.autoSaveInterval} minutes after last change. This also prevents auto ${commitOrBackup} while editing a file. If turned off, it's independent from last the change.`).addToggle((toggle) => toggle.setValue(plugin.settings.autoBackupAfterFileChange).onChange((value) => {
-        plugin.settings.autoBackupAfterFileChange = value;
-        plugin.saveSettings();
-        plugin.clearAutoBackup();
-        if (plugin.settings.autoSaveInterval > 0) {
-          plugin.startAutoBackup(plugin.settings.autoSaveInterval);
-        }
-      }));
+      if (!plugin.settings.setLastSaveToLastCommit)
+        new import_obsidian7.Setting(containerEl).setName(`Auto Backup after file change`).setDesc(`If turned on, do auto ${commitOrBackup} every ${plugin.settings.autoSaveInterval} minutes after last change. This also prevents auto ${commitOrBackup} while editing a file. If turned off, it's independent from last the change.`).addToggle((toggle) => toggle.setValue(plugin.settings.autoBackupAfterFileChange).onChange((value) => {
+          plugin.settings.autoBackupAfterFileChange = value;
+          this.display();
+          plugin.saveSettings();
+          plugin.clearAutoBackup();
+          if (plugin.settings.autoSaveInterval > 0) {
+            plugin.startAutoBackup(plugin.settings.autoSaveInterval);
+          }
+        }));
+      if (!plugin.settings.autoBackupAfterFileChange)
+        new import_obsidian7.Setting(containerEl).setName(`Auto ${commitOrBackup} after lastest commit`).setDesc(`If turned on, set last auto ${commitOrBackup} time to lastest commit`).addToggle((toggle) => toggle.setValue(plugin.settings.setLastSaveToLastCommit).onChange(async (value) => {
+          plugin.settings.setLastSaveToLastCommit = value;
+          plugin.saveSettings();
+          this.display();
+          plugin.clearAutoBackup();
+          await plugin.setUpAutoBackup();
+        }));
       if (plugin.settings.differentIntervalCommitAndPush) {
         new import_obsidian7.Setting(containerEl).setName(`Vault push interval (minutes)`).setDesc("Push changes every X minutes. Set to 0 (default) to disable.").addText((text2) => text2.setValue(String(plugin.settings.autoPushInterval)).onChange((value) => {
           if (!isNaN(Number(value))) {
@@ -24951,7 +24974,8 @@ var DEFAULT_SETTINGS = {
   changedFilesInStatusBar: false,
   showedMobileNotice: false,
   refreshSourceControlTimer: 7e3,
-  showBranchStatusBar: true
+  showBranchStatusBar: true,
+  setLastSaveToLastCommit: false
 };
 var GIT_VIEW_CONFIG = {
   type: "git-view",
@@ -30333,6 +30357,7 @@ function instance5($$self, $$props, $$invalidate) {
         if (commitMessage !== plugin.settings.commitMessage) {
           $$invalidate(2, commitMessage = "");
         }
+        plugin.setUpAutoBackup();
       }).finally(triggerRefresh);
     }
   }
@@ -31099,22 +31124,7 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
           if (this.settings.autoPullOnBoot) {
             this.promiseQueue.addTask(() => this.pullChangesFromRemote());
           }
-          const lastAutos = await this.loadLastAuto();
-          if (this.settings.autoSaveInterval > 0) {
-            const now2 = new Date();
-            const diff2 = this.settings.autoSaveInterval - Math.round((now2.getTime() - lastAutos.backup.getTime()) / 1e3 / 60);
-            this.startAutoBackup(diff2 <= 0 ? 0 : diff2);
-          }
-          if (this.settings.differentIntervalCommitAndPush && this.settings.autoPushInterval > 0) {
-            const now2 = new Date();
-            const diff2 = this.settings.autoPushInterval - Math.round((now2.getTime() - lastAutos.push.getTime()) / 1e3 / 60);
-            this.startAutoPush(diff2 <= 0 ? 0 : diff2);
-          }
-          if (this.settings.autoPullInterval > 0) {
-            const now2 = new Date();
-            const diff2 = this.settings.autoPullInterval - Math.round((now2.getTime() - lastAutos.pull.getTime()) / 1e3 / 60);
-            this.startAutoPull(diff2 <= 0 ? 0 : diff2);
-          }
+          this.setUpAutos();
           break;
         default:
           console.log("Something weird happened. The 'checkRequirements' result is " + result);
@@ -31186,6 +31196,7 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
     if (!await this.isAllInitialized())
       return;
     const filesUpdated = await this.pull();
+    this.setUpAutoBackup();
     if (!filesUpdated) {
       this.displayMessage("Everything is up-to-date");
     }
@@ -31290,6 +31301,7 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
         roughly = true;
         committedFiles = changedFiles.length;
       }
+      this.setUpAutoBackup();
       this.displayMessage(`Committed${roughly ? " approx." : ""} ${committedFiles} ${committedFiles > 1 ? "files" : "file"}`);
     } else {
       this.displayMessage("No changes to commit");
@@ -31447,6 +31459,42 @@ var ObsidianGit = class extends import_obsidian23.Plugin {
       }
     }
     return true;
+  }
+  async setUpAutoBackup() {
+    if (this.settings.setLastSaveToLastCommit) {
+      this.clearAutoBackup();
+      const lastCommitDate = await this.gitManager.getLastCommitTime();
+      if (lastCommitDate) {
+        this.localStorage.setLastAutoBackup(lastCommitDate.toString());
+      }
+    }
+    if (!this.timeoutIDBackup && !this.onFileModifyEventRef) {
+      const lastAutos = await this.loadLastAuto();
+      if (this.settings.autoSaveInterval > 0) {
+        const now2 = new Date();
+        const diff2 = this.settings.autoSaveInterval - Math.round((now2.getTime() - lastAutos.backup.getTime()) / 1e3 / 60);
+        this.startAutoBackup(diff2 <= 0 ? 0 : diff2);
+      }
+    }
+  }
+  async setUpAutos() {
+    this.setUpAutoBackup();
+    const lastAutos = await this.loadLastAuto();
+    if (this.settings.differentIntervalCommitAndPush && this.settings.autoPushInterval > 0) {
+      const now2 = new Date();
+      const diff2 = this.settings.autoPushInterval - Math.round((now2.getTime() - lastAutos.push.getTime()) / 1e3 / 60);
+      this.startAutoPush(diff2 <= 0 ? 0 : diff2);
+    }
+    if (this.settings.autoPullInterval > 0) {
+      const now2 = new Date();
+      const diff2 = this.settings.autoPullInterval - Math.round((now2.getTime() - lastAutos.pull.getTime()) / 1e3 / 60);
+      this.startAutoPull(diff2 <= 0 ? 0 : diff2);
+    }
+  }
+  clearAutos() {
+    this.clearAutoBackup();
+    this.clearAutoPush();
+    this.clearAutoPull();
   }
   startAutoBackup(minutes) {
     const time = (minutes != null ? minutes : this.settings.autoSaveInterval) * 6e4;
