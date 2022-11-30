@@ -387,12 +387,62 @@ npm i reflect-metadata
 ```
 
 
-7:24
 
+```TS
+import "reflect-metadata";
 
+function Test(target: Function) {
+	// сохранение метадаты под ключом "a" значение 1 под нашим классом
+	Reflect.defineMetadata("a", 1, target);
 
+	// получение метаданных под ключом "a" от нашего класса
+	const meta = Reflect.getMetadata("a", target);
 
+	console.log(meta);
+}
 
+@Test
+export class C {}
+```
+
+![](_png/Pasted%20image%2020221130150042.png)
+
+Вкупе с этой настройкой компилятора ТС, у нас будет переноситься проверка типов и в наш рантайм (будет работать после компиляции)
+
+`tsconfig.json`
+```JSON
+"emitDecoratorMetadata": true,
+```
+
+Ну и сейчас нужно объяснить связь декораторов и метаданных. Дело в том, что мы можем вызвать декораторы под определённый инстанс класса и делать DI с помощью вызова декоратора, который инджектит инстанс класса при получении конструктором другого класса. То есть идёт связывание классов друг с другом через метаданные, которые сохраняются при вызове декоратора, вызываемого под параметры конструктора или под класс.   
+
+```TS
+import "reflect-metadata";
+
+// Pseudocode
+
+function Injectable(key: string) {
+	return (target: Function) => {
+		Reflect.defineMetadata(key, 1, target);
+		const meta = Reflect.getMetadata(key, target);
+		console.log(meta);
+	};
+}
+
+function Inject(key: string) {}
+
+function Prop(target: Object, name: string) {}
+
+@Injectable("C")
+export class C {
+	@Prop prop: number;
+}
+
+@Injectable("D")
+export class D {
+	constructor(@Inject('C') c: C) {}
+}
+```
 
 ## 071 Внедряем InversifyJS
 
