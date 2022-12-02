@@ -550,6 +550,22 @@
           "lastUpdated": 1669982565548
         }
       }
+    },
+    "TYPES": {
+      "TYPES": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669986826384
+        }
+      }
+    },
+    "inversify": {
+      "inversify": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669987474070
+        }
+      }
     }
   }
 }

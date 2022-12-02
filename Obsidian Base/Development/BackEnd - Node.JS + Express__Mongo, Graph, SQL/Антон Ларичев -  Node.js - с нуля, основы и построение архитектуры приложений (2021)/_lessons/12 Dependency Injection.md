@@ -449,15 +449,45 @@ export class D {
 
 ## 071 Внедряем InversifyJS
 
-
+В первую очередь, нужно установить `inversify` в проект
 
 ```bash
 npm i inversify
 ```
 
+Тут будут храниться символы, по которым будет происходить связывание наших компонентов внутри контейнера
 
+`types.ts`
+```TS
+export const TYPES = {
+	Application: Symbol.for('Application'),
+	ILogger: Symbol.for('ILogger'),
+	UserController: Symbol.for('UserController'),
+	ExceptionFilter: Symbol.for('ExceptionFilter'),
+};
+```
 
+Далее в основном файле приложения мы можем наконец создать контейнер, внутри которого будет происходить связывание класса с его идентификатором (в качестве которого выступает символ `TYPES`)
 
+`main.ts`
+```TS
+// Контейнер - это коробка, в которую мы будем вкладывать биндинги символов на конкретную реализацию, а потом будем переиспользовать
+const appContainer = new Container();
+
+// Тут уже будут лежать биндинги того, что мы хотим реализовать
+// Тут мы указали, что для интерфейса ILogger будет соответствовать LoggerService через символ TYPES.ILogger
+appContainer.bind<ILogger>(TYPES.ILogger).to(LoggerService);
+appContainer.bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
+appContainer.bind<UserController>(TYPES.UserController).to(UserController);
+appContainer.bind<App>(TYPES.Application).to(App);
+
+// Тут уже мы достаём из контейнера наш компонент App
+const app = appContainer.get<App>(TYPES.Application);
+
+app.init();
+
+export { app, appContainer };
+```
 
 Так же для реализации связывания, мы можем подставить в качестве дженерика не интерфейс, а сам класс, если мы подразумеваем, что фильтры будут идти отдельными компонентами.
 
@@ -466,6 +496,109 @@ npm i inversify
 appContainer
 	.bind<ExceptionFilter>(TYPES.ExceptionFilter)
 	.to(ExceptionFilter);
+```
+
+Далее нам нужно произвести инжек всех зависимостей от основного приложения, чтобы они попали в контейнер и до них можно было достучаться во время использования контейнера инверсифая
+
+`logger.service.ts`
+```TS
+// данный декоратор говорит, что мы можем положить данный класс в контейнер
+// то есть пока мы не передали аргументы, то мы не реализуем никакой связи с символами
+@injectable()
+export class LoggerService implements ILogger {
+	public logger: Logger<string>;
+
+	// code ...
+```
+
+Так же нужно произвести инжект всех зависимостей параметров, которые должны быть доступны внутри контейнера
+
+`exception.filter.ts`
+```TS
+@injectable()
+export class ExceptionFilter implements IExceptionFilter {
+	// inject - это декоратор, который принимает то, что нужно заинджектить
+	constructor(@inject(TYPES.ILogger) private logger: ILogger) {
+	}
+
+	// code...
+```
+
+`users.controller.ts`
+```TS
+@injectable()
+export class UserController extends BaseController {
+	constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
+		super(loggerService);
+		this.bindRoutes([
+			{
+				path: "/register",
+				method: "post",
+				func: this.register,
+			},
+			{
+				path: "/login",
+				method: "post",
+				func: this.login,
+			},
+		]);
+	}
+
+	// code ...
+```
+
+`base.controller.ts`
+```TS
+// этот класс нужно так же заинджектить, так как им расширяется users.controller
+@injectable()
+export abstract class BaseController {
+	private readonly _router: Router;
+
+	constructor(private logger: ILogger) {
+		this._router = Router();
+	}
+
+	// code ...
+```
+
+`app.ts`
+```TS
+// делаем основной класс тоже внедряемым
+@injectable()
+export class App {
+	app: Express;
+	server: Server;
+	port: number;
+
+	constructor(
+		// И тут меняем все наши зависимости с использованием декорирования
+		@inject(TYPES.ILogger) private logger: ILogger,
+		@inject(TYPES.UserController) private userController: UserController,
+		@inject(TYPES.ExceptionFilter) private exceptionFilter: ExceptionFilter
+	) {
+		this.app = express();
+		this.port = 8000;
+	}
+
+	// code ...
+```
+
+`common > base.controller.ts`
+```TS
+export abstract class BaseController {
+	private readonly _router: Router;
+
+	constructor(private logger: ILogger) {
+		this._router = Router();
+	}
+
+	// code ...
+```
+
+Далее, чтобы всё заработало, нужно добавить данный импорт во все файлы, в которых был использован `inject` из библиотеки `inversify` 
+
+```TS
+import 'reflect-metadata';
 ```
 
 
