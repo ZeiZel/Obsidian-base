@@ -515,19 +515,22 @@ export class LoggerService implements ILogger {
 
 `exception.filter.ts`
 ```TS
-@injectable()
-export class ExceptionFilter implements IExceptionFilter {
-	// inject - это декоратор, который принимает то, что нужно заинджектить
-	constructor(@inject(TYPES.ILogger) private logger: ILogger) {
-	}
+import 'reflect-metadata';
 
+@injectable()
+export class ExeptionFilter implements IExeptionFilter {
+	// inject - это декоратор, который принимает то, что нужно заинджектить
+	constructor(@inject(TYPES.ILogger) private logger: ILogger) { }
 	// code...
 ```
+
+Так же нужно упомянуть, что имена параметров и классов не стоит повторять, так как они могут конфликтовать в контейнере
 
 `users.controller.ts`
 ```TS
 @injectable()
 export class UserController extends BaseController {
+	// меняем имя logger на loggerService, чтобы не было конфликтов внутри контейнера
 	constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
 		super(loggerService);
 		this.bindRoutes([
@@ -561,6 +564,8 @@ export abstract class BaseController {
 	// code ...
 ```
 
+И в основном классе приложения нужно так же заинжектить все параметры и сам класс
+
 `app.ts`
 ```TS
 // делаем основной класс тоже внедряемым
@@ -588,6 +593,7 @@ export class App {
 export abstract class BaseController {
 	private readonly _router: Router;
 
+	// Здесь должен быть интерфейс ILogger
 	constructor(private logger: ILogger) {
 		this._router = Router();
 	}
@@ -601,7 +607,16 @@ export abstract class BaseController {
 import 'reflect-metadata';
 ```
 
+И теперь можно убедиться, что наше приложение работает. 
 
+![](_png/Pasted%20image%2020221202164135.png)
+![](_png/Pasted%20image%2020221202164137.png)
+
+>[!note] Итог:
+> - В итоге мы заменили наш DI на ручной биндинг контроллера.
+> - Основным плюсом такого подходя является то, что мы можем в любой момент времени получить любой инстанс объекта через `get`. 
+> - Если у нас где-то появится новый нджектэбл, то нам не придётся его прокидывать вручную. Нам нужно будет только один раз сделать `bind` контейнера и в том месте, где нужно будет подставить тип, мы сможем его подставить через `@inject(TYPES.тип)`
+> - Такой подход позволяет нам легко менять сервисы - достаточно просто поменять его в `.to(Сервис)` и у нас всё будет работать.
 
 ## 072 Упражнение - Улучшаем DI
 
