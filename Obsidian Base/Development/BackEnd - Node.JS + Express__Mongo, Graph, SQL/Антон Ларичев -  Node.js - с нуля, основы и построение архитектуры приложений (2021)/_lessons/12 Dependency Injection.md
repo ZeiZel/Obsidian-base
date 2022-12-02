@@ -620,8 +620,83 @@ import 'reflect-metadata';
 
 ## 072 Упражнение - Улучшаем DI
 
+Далее наше приложение может сильно разрастись и количество биндингов будет выходить за рамки 30 и 40 штук. Для решения проблемы с большим количеством биндингов, которая возникает во время разработки, был придуман модуль контейнера
 
+`main.ts`
+```TS
+appContainer.bind<ILogger>(TYPES.ILogger).to(LoggerService);
+appContainer.bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
+appContainer.bind<UserController>(TYPES.UserController).to(UserController);
+appContainer.bind<App>(TYPES.Application).to(App);
+```
 
+Вот так выглядит обновлённая версия проекта с собранными биндингами. Так же мы можем экспортировать эти биндинги, чтобы не хранить их в одном месте, а распределить по проекту и удобно разделять их, чтобы в будущем можно было удобно различать их и модифицировать
 
+`main.ts`
+```TS
+// Это функция, которая будет совершать биндинги инверсифая
+export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
+	bind<ILogger>(TYPES.ILogger).to(LoggerService);
+	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
+	bind<UserController>(TYPES.UserController).to(UserController);
+	bind<App>(TYPES.Application).to(App);
+});
 
+function bootstrap() {
+	const appContainer = new Container();
+
+	// уже тут мы просто загрузим все биндинги, которые реализовали ранее
+	appContainer.load(appBindings);
+
+	const app = appContainer.get<App>(TYPES.Application);
+	app.init();
+
+	// возвращаем сформированный контейнер и приложение
+	return { app, appContainer };
+}
+
+// экспортируем переменные, полученные из функции
+export const { app, appContainer } = bootstrap();
+```
+
+И далее нужно немного улучшить наш DI и реализовать интерфейс для контроллера пользователей. Он будет иметь логин и регистрацию. 
+
+`users.controller.interface.ts`
+```TS
+import { NextFunction, Request, Response } from 'express';
+
+export interface IUserController {
+	login: (req: Request, res: Response, next: NextFunction) => void;
+	register: (req: Request, res: Response, next: NextFunction) => void;
+}
+```
+
+В самом контроллере нам нужно вместе с экстендом от базового модуля ещё и заимплементироваться от интерфейса. Чтобы можно было одновременно сделать и то, и то, нужно сначала произвести `extends`, а уже потом `implements`
+
+`users.controller.ts`
+```TS
+// imports...
+import { IUserController } from './users.controller.interface';
+
+@injectable()
+export class UserController extends BaseController implements IUserController {
+	constructor(
+		@inject(TYPES.ILogger) private loggerService: ILogger
+	) {
+		super(loggerService);
+		this.bindRoutes([
+			{ path: '/register', method: 'post', func: this.register },
+			{ path: '/login', method: 'post', func: this.login },
+		])
+	}
+
+	login(req: Request, res: Response, next: NextFunction) {
+		next(new HTTPError(401, 'ошибка авторизации', 'login'));
+	}
+
+	register(req: Request, res: Response, next: NextFunction) {
+		this.ok(res, 'register');
+	}
+}
+```
 
