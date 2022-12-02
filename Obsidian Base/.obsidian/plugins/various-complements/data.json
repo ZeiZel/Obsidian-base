@@ -47,86 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "компоненты": {
-      "компоненты": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1667127829578
-        }
-      }
-    },
-    "package": {
-      "package": {
-        "currentFile": {
-          "count": 6,
-          "lastUpdated": 1667044801115
-        }
-      }
-    },
-    "Prettier": {
-      "Prettier": {
-        "internalLink": {
-          "count": 1,
-          "lastUpdated": 1667030267604
-        }
-      }
-    },
-    "eslint": {
-      "eslint": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667042458440
-        }
-      }
-    },
-    "eslint-loader": {
-      "eslint-loader": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667042461747
-        }
-      }
-    },
-    "CommonJS": {
-      "CommonJS": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667053895753
-        }
-      }
-    },
-    "Главным": {
-      "Главным": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667054570929
-        }
-      }
-    },
-    "преймуществом": {
-      "преймуществом": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667054572563
-        }
-      }
-    },
-    "Modules": {
-      "Modules": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667054576440
-        }
-      }
-    },
-    "characters": {
-      "characters": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1667057192013
-        }
-      }
-    },
     "непосредственно": {
       "непосредственно": {
         "currentFile": {
@@ -135,107 +55,11 @@
         }
       }
     },
-    "ReactDOM": {
-      "ReactDOM": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667060107321
-        }
-      }
-    },
-    "отрисовку": {
-      "отрисовку": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667060114767
-        }
-      }
-    },
-    "мобильных": {
-      "мобильных": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667060116774
-        }
-      }
-    },
-    "устройств": {
-      "устройств": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667060118446
-        }
-      }
-    },
-    "React": {
-      "React": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667060123502
-        }
-      }
-    },
-    "какое-то": {
-      "какое-то": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1667142033166
-        }
-      }
-    },
-    "значение": {
-      "значение": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667129286725
-        }
-      }
-    },
-    "className": {
-      "className": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667141130432
-        }
-      }
-    },
     "post-item": {
       "post-item": {
         "currentFile": {
           "count": 3,
           "lastUpdated": 1667633105041
-        }
-      }
-    },
-    "PostItem": {
-      "PostItem": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667141717864
-        }
-      }
-    },
-    "неотслеживаемые": {
-      "неотслеживаемые": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1667232161363
-        }
-      }
-    },
-    "ORIG_HEAD": {
-      "ORIG_HEAD": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1667233721052
-        }
-      }
-    },
-    "какой-то_коммит": {
-      "какой-то_коммит": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667316621677
         }
       }
     },
@@ -716,6 +540,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1669626760938
+        }
+      }
+    },
+    "Какой-то": {
+      "Какой-то": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1669982565548
         }
       }
     }
