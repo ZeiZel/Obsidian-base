@@ -174,6 +174,37 @@ npm i -D nodemon ts-node
 
 
 
+```JSON
+{
+	"sourceMap": true,
+}
+```
+
+`.vscode > launch.json`
+```JSON
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "nodemon",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
+			"restart": true,
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
+		}
+	]
+}
+```
+
+
+
+
+
+
+
+
 
 
 
