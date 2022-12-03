@@ -1,11 +1,11 @@
 {
-  "obsidian-prism-theme@@dark-accent-color-preset": "pt-accent-color-blue-dt",
+  "obsidian-prism-theme@@dark-accent-color-preset": "pt-accent-color-cyan-dt",
   "obsidian-prism-theme@@accent-style-dt": "pt-accent-style-borderandfilled-dt",
   "obsidian-prism-theme@@pt-icons-accent": true,
   "obsidian-prism-theme@@scroll-bar-size": 10,
   "obsidian-prism-theme@@highlight-text-accent-dt": "pt-highlight-text-light-dt",
   "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-raven-dt",
-  "obsidian-prism-theme@@file-line-width": 1035,
+  "obsidian-prism-theme@@file-line-width": 920,
   "sanctum@@file-line-width": 70,
   "obsidian-prism-theme@@color-schemes-lt": "pt-color-scheme-periwinkle-lt",
   "obsidian-prism-theme@@pt-font-disable-ligatures": false,
@@ -24,10 +24,17 @@
   "obsidian-prism-theme@@pt-disable-blur": true,
   "obsidian-prism-theme@@status-bar-preset-dt": "pt-status-bar-default-dt",
   "obsidian-prism-theme@@status-bar-background-color-dt": "#F3E8E8",
-  "obsidian-prism-theme@@status-bar-text-color-dt": "pt-status-bar-text-accent-dt",
+  "obsidian-prism-theme@@status-bar-text-color-dt": "pt-status-bar-text-light-dt",
   "obsidian-prism-theme@@pt-titlebar-hide-text": false,
   "obsidian-prism-theme@@nav-header-left-sidebar-position": "pt-nav-header-left-sidebar-position-bottom",
   "obsidian-prism-theme@@nav-header-left-sidebar-alignment": "pt-nav-header-left-sidebar-align-center",
   "obsidian-prism-theme@@radius-s": 4,
-  "obsidian-prism-theme@@radius-m": 8
+  "obsidian-prism-theme@@radius-m": 8,
+  "com-github-birneee-obsidian-adwaita@@adwaita-mod": "adwaita-mod-always",
+  "com-github-birneee-obsidian-adwaita@@adwaita-mod-scale": 1,
+  "com-github-birneee-obsidian-adwaita@@adwaita-mod-right-margin": 8,
+  "com-github-birneee-obsidian-adwaita@@adwaita-colors": "adwaita-colors-always",
+  "com-github-birneee-obsidian-adwaita@@adwaita-font": "adwaita-font-always",
+  "com-github-birneee-obsidian-adwaita@@adwaita-icon": "adwaita-icons-always",
+  "com-github-birneee-obsidian-adwaita@@adwaita-tabs": "adwaita-tabs-always"
 }
