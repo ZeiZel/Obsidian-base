@@ -63,14 +63,6 @@
         }
       }
     },
-    "деструктурировать": {
-      "деструктурировать": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667565580739
-        }
-      }
-    },
     "PostForm": {
       "PostForm": {
         "currentFile": {
@@ -588,6 +580,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1670083334025
+        }
+      }
+    },
+    "Request": {
+      "Request": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670163557577
+        }
+      }
+    },
+    "UserLoginDto": {
+      "UserLoginDto": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670163712410
         }
       }
     }
