@@ -55,38 +55,6 @@
         }
       }
     },
-    "post-item": {
-      "post-item": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1667633105041
-        }
-      }
-    },
-    "PostForm": {
-      "PostForm": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667634123464
-        }
-      }
-    },
-    "onChange": {
-      "onChange": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667637504351
-        }
-      }
-    },
-    "осуществляется": {
-      "осуществляется": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1667642169667
-        }
-      }
-    },
     "FOREIGN": {
       "FOREIGN": {
         "currentFile": {
@@ -604,6 +572,14 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1670172901766
+        }
+      }
+    },
+    "pipeline": {
+      "pipeline": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670248302357
         }
       }
     }
