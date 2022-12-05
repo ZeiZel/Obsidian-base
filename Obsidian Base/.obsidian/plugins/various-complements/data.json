@@ -590,6 +590,22 @@
           "lastUpdated": 1670258386713
         }
       }
+    },
+    "class-transformer": {
+      "class-transformer": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670258712760
+        }
+      }
+    },
+    "class-validator": {
+      "class-validator": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670258723477
+        }
+      }
     }
   }
 }
