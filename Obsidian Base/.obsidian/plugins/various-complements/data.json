@@ -606,6 +606,22 @@
           "lastUpdated": 1670258723477
         }
       }
+    },
+    "inSingletonScope": {
+      "inSingletonScope": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670310037578
+        }
+      }
+    },
+    "service": {
+      "service": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670310377465
+        }
+      }
     }
   }
 }
