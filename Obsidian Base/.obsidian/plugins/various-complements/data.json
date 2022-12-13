@@ -63,59 +63,11 @@
         }
       }
     },
-    "application": {
-      "application": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668266264300
-        }
-      }
-    },
-    "userData": {
-      "userData": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668266818274
-        }
-      }
-    },
-    "devtools": {
-      "devtools": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668320771730
-        }
-      }
-    },
     "ipcRenderer": {
       "ipcRenderer": {
         "currentFile": {
           "count": 3,
           "lastUpdated": 1668792148396
-        }
-      }
-    },
-    "электрон": {
-      "электрон": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668339191152
-        }
-      }
-    },
-    "Electron": {
-      "Electron": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668339321049
-        }
-      }
-    },
-    "десктоп-приложение": {
-      "десктоп-приложение": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668340460989
         }
       }
     },
@@ -628,6 +580,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1670865881268
+        }
+      }
+    },
+    "инициализацию": {
+      "инициализацию": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670948970418
+        }
+      }
+    },
+    "package": {
+      "package": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1670950748298
         }
       }
     }
