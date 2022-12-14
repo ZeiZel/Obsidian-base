@@ -56,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md",
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md",
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md"
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md"
               }
             }
           },
@@ -190,12 +190,12 @@
     "width": 306.5,
     "collapsed": true
   },
-  "active": "2242e12ebb202869",
+  "active": "ffb7791cf9e705b4",
   "lastOpenFiles": [
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/16 Авторизация.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md",
-    "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/TypeScript/_lessons/10 Декораторы.md",
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md",
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/16 Авторизация.md",
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
     "Whats Learning/_lessons/PWA.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
