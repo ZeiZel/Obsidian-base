@@ -55,27 +55,11 @@
         }
       }
     },
-    "рендерер-процесс": {
-      "рендерер-процесс": {
-        "currentFile": {
-          "count": 6,
-          "lastUpdated": 1668350603144
-        }
-      }
-    },
     "ipcRenderer": {
       "ipcRenderer": {
         "currentFile": {
           "count": 3,
           "lastUpdated": 1668792148396
-        }
-      }
-    },
-    "nodeIntegration": {
-      "nodeIntegration": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668408075924
         }
       }
     },
@@ -594,8 +578,16 @@
     "package": {
       "package": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1671030409629
+        }
+      }
+    },
+    "Самом": {
+      "Самом": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1670950748298
+          "lastUpdated": 1671030524492
         }
       }
     }
