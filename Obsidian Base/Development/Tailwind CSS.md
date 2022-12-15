@@ -120,15 +120,38 @@ function App() {
 `h-screen` - `height: 100vw`
 `h-full` - `height: 100%`
 
-
+![](_png/Pasted%20image%2020221215195516.png)
 
 ## hover, focus, before, after... 
 
+`bg-purple-500` - так же мы можем укзывать цвета для `bg`
+`bg-opacity-60` - и непрозрачность тоже
 
+- `hover:конечный-итог` - действие, которое должно происходить при наведении
+`hover:bg-opacity-100`
+- `hover/focus/before/after:конечный-итог` - так же со всеми остальными элементами
 
+![](_png/Pasted%20image%2020221215195830.png)
+![](_png/Pasted%20image%2020221215195831.png)
 
-
-
+```JSX
+function App() {
+	return (
+		<div className='App border border-emerald-600 rounded-md m-10 p-4'>
+			<h1 className='text-4xl font-bold text-center text-gray-600'>
+				Hello Tailwind CSS
+			</h1>
+			<button 
+				className='block mt-10 mx-auto px-4 py-2 
+				bg-purple-500 bg-opacity-60 rounded-lg 
+				hover:bg-opacity-100'
+			>
+				Login
+			</button>
+		</div>
+	);
+}
+```
 
 
 ## Transition 
