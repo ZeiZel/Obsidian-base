@@ -32,24 +32,12 @@
             }
           },
           {
-            "id": "87fbb170a24eacee",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Решение проблемных вопросов/Prisma to SQL Server.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "fe20dd1b2e06a0db",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DesktopDev/Electron/ElectronJS.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
                 "mode": "source",
                 "source": false
               }
@@ -92,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -158,7 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -175,7 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -198,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md"
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md"
               }
             }
           },
@@ -226,17 +214,17 @@
     "width": 306.5,
     "collapsed": true
   },
-  "active": "2242e12ebb202869",
+  "active": "fe20dd1b2e06a0db",
   "lastOpenFiles": [
-    "Development/Решение проблемных вопросов/Prisma to SQL Server.md",
+    "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
+    "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md",
+    "Development/Решение проблемных вопросов/Prisma to SQL Server.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/11 Первый шаг к архитектуре.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/12 Dependency Injection.md",
     "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md",
-    "Development/Tailwind CSS.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md"
+    "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.21 Что такое состояние открепленной головы. Detached HEAD.md"
   ]
 }
