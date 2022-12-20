@@ -210,17 +210,115 @@ function App() {
 
 
 
+`App.js`
+```JSX
+import styles from './App.module.scss';
+
+function App() {
+	return (
+		<div className={`App ${styles.parent}`}>
+			<h1 className={styles.heading}>Hello Tailwind CSS</h1>
+			<button className={styles.button}>Login</button>
+		</div>
+	);
+}
+
+export default App;
+```
 
 
+
+`App.module.scss`
+```SCSS
+.parent {
+	@apply border border-emerald-600 rounded-md m-10 p-4;
+
+	.heading {
+		@apply text-4xl font-bold text-center text-gray-600;
+	}
+
+	.button {
+		@apply block mt-10 mx-auto px-4 py-2 bg-green-500 bg-opacity-60 rounded-lg md:bg-purple-500 dark:bg-rose-500 transition-all;
+
+		&:hover {
+			@apply bg-green-900;
+		}
+	}
+}
+```
 
 
 ## Пример на верстке формы авторизации 
 
 
 
+`App.js`
+```JSX
+import { useState } from 'react';
+import styles from './App.module.scss';
+
+function App() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	return (
+		<div className={`App ${styles.parent}`}>
+			<h1 className={styles.heading}>Hello Tailwind CSS</h1>
+			<div>
+				<input
+					className={styles.input}
+					placeholder='Login'
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
+				<input
+					className={styles.input}
+					placeholder='Password'
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<button className={styles.button}>Login</button>
+			</div>
+		</div>
+	);
+}
+
+export default App;
+```
 
 
+`App.module.scss`
+```SCSS
+.parent {
+	@apply mx-auto mt-0 w-80;
 
+	.heading {
+		@apply text-2xl font-bold text-center text-white my-6;
+	}
+
+	> div {
+		@apply shadow-2xl rounded-sm overflow-hidden;
+
+		.input {
+			@apply block w-full py-3 px-4 bg-white bg-opacity-10 border-r-2 border-transparent placeholder:text-slate-500 outline-none text-slate-50 transition-all;
+
+			&:focus {
+				@apply border-slate-400;
+			}
+		}
+
+		.button {
+			@apply block w-full py-2.5 bg-orange-500 text-white transition-all font-bold text-lg;
+
+			&:hover {
+				@apply bg-orange-600;
+			}
+		}
+	}
+}
+```
+
+![](_png/Pasted%20image%2020221220185019.png)
 
 
 ## Tailwind Config 
