@@ -323,19 +323,160 @@ export default App;
 
 ## Tailwind Config 
 
+Первым делом, мы можем указать значения в `theme`, которые должны присутствовать в нашем проекте. Если мы начнём их указывать прямо в теме, то других значений этой группы присутствовать больше не будет
+
+```JS
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+	// если будем писать прямо тут, то мы заменяем функционал
+	theme: {
+		// заменяем все цвета на подставленные
+		colors: {
+			primary: 'red',
+		},
+		extend: {},
+	},
+	plugins: [],
+};
+```
+
+![](_png/Pasted%20image%2020221220190011.png)
+
+Однако, если писать не просто в темы, а в `extend`, то все дефолтные значения останутся
+
+```JS
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+
+	theme: {
+		// расширяем функционал
+		extend: {
+			colors: {
+				primary: 'red',
+			},
+			spacing: {
+				0.5: '0.12rem',
+			},
+		},
+	},
+	plugins: [],
+};
+```
+
+![](_png/Pasted%20image%2020221220190213.png)
+
+Так же мы можем заменять дефолтные значения на свои, прописав это значение и поменяв свойство `DEFAULT`
+
+```JS
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+
+	theme: {
+		extend: {
+			transitionTimingFunction: {
+				DEFAULT: 'ease-in-out',
+			},
+			transitionDuration: {
+				DEFAULT: '400ms',
+			},
+		},
+	},
+	plugins: [],
+};
+```
+![](_png/Pasted%20image%2020221220190954.png)
+
+А уже таким образом мы можем добавлять шаблоны для наших значений
+
+```JS
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+
+	theme: {
+		extend: {
+			transitionTimingFunction: {
+				DEFAULT: 'ease-in-out',
+			},
+			transitionDuration: {
+				DEFAULT: '400ms',
+			},
+			// значение по точкам
+			keyframes: {
+				// название шаблона
+				fadeIn: {
+					from: {
+						opacity: 0,
+					},
+					to: {
+						opacity: 1,
+					},
+				},
+			},
+			// тут уже добавим к группе animation ...
+			animation: {
+				// ... новое значение fade
+				fade: 'fadeIn 0.5s ease-in-out'
+			}
+		},
+	},
+	plugins: [],
+};
+```
+![](_png/Pasted%20image%2020221220192254.png)
 
 
 
+```JS
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 
-
+	theme: {
+		extend: {
+			zIndex: {
+				1: '1',
+				2: '2',
+			},
+		},
+	},
+	plugins: [],
+};
+```
 
 
 ## Плагины 
 
 
+```bash
+npm i -D @tailwindcss/typography
+```
 
+```JS
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+	theme: {
+		extend: {},
+	},
+	plugins: [require('@tailwindcss/typography')],
+};
+```
 
-
+```HTML
+<article class='prose lg:prose-xl'>
+	<h1>Garlic bread with cheese: What the science tells us</h1>
+	<p>
+		For years parents have espoused the health benefits of eating garlic bread with cheese to
+		their children, with the food earning such an iconic status in our culture that kids will
+		often dress up as warm, cheesy loaf for Halloween.
+	</p>
+	<p>
+		But a recent study shows that the celebrated appetizer may be linked to a series of rabies
+		cases springing up around the country.
+	</p>
+</article>
+```
 
 
 
@@ -343,25 +484,87 @@ export default App;
 
 
 
+```JS
+/** @type {import('tailwindcss').Config} */
+import plugin from 'tailwindcss/plugin';
 
+module.exports = {
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+	theme: {
+		extend: {},
+	},
+	plugins: [
+		plugin(({ addComponents, theme, addUtilities }) => {
+			// тут мы инициализируем компонент
+			addComponents({
+				'.btn-primary': {
+					// пишем стили
+					// тут мы берём стили из tailwind
+					backgroundColor: theme('colors.orange.500'),
 
+					// а тут пишем стили самостоятельно
+					color: 'white',
+					padding: '10px 0',
+					display: 'block',
+					width: '100%',
+					fontSize: 18,
+					fontWeight: 'bold',
 
+					// это стиль-псевдокласс
+					'&:hover': {
+						backgroundColor: theme('colors.orange.600'),
+					},
+				},
+			});
+		}),
+	],
+};
+```
 
+```SCSS
+.button {
+	@apply btn-primary transition-all;
+
+	&:hover {
+		@apply bg-orange-600;
+	}
+}
+```
 
 ## Кастомная утилита
 
+Утилита - это небольшое дополнение, а не целый компонент
 
+```JS
+plugins: [
+		plugin(({ addComponents, theme, addUtilities }) => {
+			// тут мы инициализируем компонент
+			addComponents({
+				'.btn-primary': {
+					// пишем стили
+					// тут мы берём стили из tailwind
+					backgroundColor: theme('colors.orange.500'),
 
+					// а тут пишем стили самостоятельно
+					color: 'white',
+					padding: '10px 0',
+					display: 'block',
+					width: '100%',
+					fontSize: 18,
+					fontWeight: 'bold',
 
-
-
-
-
-## Нововведения в 3 версии
-
-
-
-
-
-
-
+					// это стиль-псевдокласс
+					'&:hover': {
+						backgroundColor: theme('colors.orange.600'),
+					},
+				},
+			});
+			// тут уже мы добавляем утилитку
+			addUtilities({
+				'.textShadow': {
+					textShadow: '1px 1px rgba(0, 0, 0, 0.4)',
+				},
+			});
+		}),
+	],
+```
