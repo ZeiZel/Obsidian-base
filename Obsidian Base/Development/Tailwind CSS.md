@@ -156,27 +156,43 @@ function App() {
 
 ## Transition 
 
+`transition`
+`transition-[colors/opacity/shadow/transform]`
+`transition-all`
 
+`delay-[число]` - задержка анимации
 
+`ease-in-out` - тип анимации
 
-
+![](_png/Pasted%20image%2020221220161739.png)
 
 
 
 ## Анимации 
 
 
+`animate-[анимация]`
+`animate-spin`
 
-
-
-
+![](_png/Pasted%20image%2020221220162015.png)
 
 
 ## Адаптация - медиа запросы
 
 
 
+```JSX
+<div className='App border border-emerald-600 rounded-md m-10 p-4'>
+	<h1 className='text-4xl font-bold text-center text-gray-600'>Hello Tailwind CSS</h1>
+	<button className='block mt-10 mx-auto px-4 py-2 bg-green-500 bg-opacity-60 rounded-lg md:bg-purple-500'>
+		Login
+	</button>
+</div>
+```
 
+![](_png/Pasted%20image%2020221220162335.png)
+
+![](_png/Pasted%20image%2020221220162341.png)
 
 
 
@@ -184,10 +200,9 @@ function App() {
 ## Темный режим 
 
 
+`dark:[какое-то свойство]` - применит определённые настройки, если на ПК установлена тёмная тема
 
-
-
-
+![](_png/Pasted%20image%2020221220162517.png)
 
 
 ## @apply и module.scss 

@@ -55,142 +55,6 @@
         }
       }
     },
-    "ipcRenderer": {
-      "ipcRenderer": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1668792148396
-        }
-      }
-    },
-    "javascript": {
-      "javascript": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1668536074083
-        }
-      }
-    },
-    "components": {
-      "components": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1668583481964
-        }
-      }
-    },
-    "index-файл": {
-      "index-файл": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668536078202
-        }
-      }
-    },
-    "stylesheets": {
-      "stylesheets": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668583445526
-        }
-      }
-    },
-    "javascripts": {
-      "javascripts": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668583477536
-        }
-      }
-    },
-    "entries": {
-      "entries": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668583485166
-        }
-      }
-    },
-    "electron": {
-      "electron": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668697116608
-        }
-      }
-    },
-    "toastify-js": {
-      "toastify-js": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668704185558
-        }
-      }
-    },
-    "resize-img": {
-      "resize-img": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668788556173
-        }
-      }
-    },
-    "WebAssembly": {
-      "WebAssembly": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668922148585
-        }
-      }
-    },
-    "require": {
-      "require": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1668923718090
-        }
-      }
-    },
-    "__dirname": {
-      "__dirname": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668923582920
-        }
-      }
-    },
-    "__filename": {
-      "__filename": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668923599892
-        }
-      }
-    },
-    "removeListener": {
-      "removeListener": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668930585942
-        }
-      }
-    },
-    "removeAllListeners": {
-      "removeAllListeners": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668930590160
-        }
-      }
-    },
-    "Библиотека": {
-      "Библиотека": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1668936293728
-        }
-      }
-    },
     "представляет": {
       "представляет": {
         "currentFile": {
@@ -588,6 +452,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1671030524492
+        }
+      }
+    },
+    "transition": {
+      "transition": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1671542131635
         }
       }
     }
