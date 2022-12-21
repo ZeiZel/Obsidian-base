@@ -44,7 +44,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Tailwind CSS.md",
+                "file": "Development/Prisma ORM.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Tailwind CSS.md",
+                "file": "Development/Prisma ORM.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Tailwind CSS.md"
+                "file": "Development/Prisma ORM.md"
               }
             }
           },
@@ -189,14 +189,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3643b47478965864",
+  "active": "d341feffe366d583",
   "lastOpenFiles": [
+    "Development/Tailwind CSS.md",
     "Development/Prisma ORM.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_lessons/ORM-системы.md",
     "Whats Learning/_lessons/JavaScript.md",
     "Whats Learning/_lessons/Базы Данных.md",
-    "Development/Tailwind CSS.md",
     "Без названия 1.canvas",
     "Без названия.canvas",
     "2022-12-21.md",
