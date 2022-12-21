@@ -44,7 +44,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Prisma ORM.md",
+                "file": "Development/Tailwind CSS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Prisma ORM.md",
+                "file": "Development/Tailwind CSS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Prisma ORM.md"
+                "file": "Development/Tailwind CSS.md"
               }
             }
           },
@@ -180,26 +180,26 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "switcher:Меню быстрого перехода": false,
       "graph:Граф": false,
       "canvas:Create new canvas": false,
       "daily-notes:Сегодняшняя заметка": false,
       "templates:Вставить шаблон": false,
-      "command-palette:Открыть палитру команд": false
+      "command-palette:Открыть палитру команд": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d341feffe366d583",
+  "active": "3643b47478965864",
   "lastOpenFiles": [
+    "Development/Prisma ORM.md",
+    "Whats Learning/О чём база~.md",
+    "Whats Learning/_lessons/ORM-системы.md",
+    "Whats Learning/_lessons/JavaScript.md",
+    "Whats Learning/_lessons/Базы Данных.md",
     "Development/Tailwind CSS.md",
     "Без названия 1.canvas",
     "Без названия.canvas",
     "2022-12-21.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
-    "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/16 Авторизация.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/14 Второй шаг к архитектуре.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/15 Работа с базой данных.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/17 Тесты.md"
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md"
   ]
 }
