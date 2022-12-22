@@ -20,18 +20,6 @@
             }
           },
           {
-            "id": "3643b47478965864",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Tailwind CSS.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "d341feffe366d583",
             "type": "leaf",
             "state": {
@@ -42,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "92dc2e15f0b5a459",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Tailwind CSS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -193,13 +193,13 @@
   "lastOpenFiles": [
     "Development/Tailwind CSS.md",
     "Development/Prisma ORM.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_lessons/ORM-системы.md",
     "Whats Learning/_lessons/JavaScript.md",
     "Whats Learning/_lessons/Базы Данных.md",
     "Без названия 1.canvas",
     "Без названия.canvas",
-    "2022-12-21.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md"
+    "2022-12-21.md"
   ]
 }
