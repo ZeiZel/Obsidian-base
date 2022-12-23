@@ -574,6 +574,30 @@
           "lastUpdated": 1671793454124
         }
       }
+    },
+    "deleteMany": {
+      "deleteMany": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671807611338
+        }
+      }
+    },
+    "include": {
+      "include": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671808552734
+        }
+      }
+    },
+    "select": {
+      "select": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671808557919
+        }
+      }
     }
   }
 }

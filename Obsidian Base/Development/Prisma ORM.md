@@ -389,6 +389,126 @@ enum Role {
 
 ## Client Create Operations 
 
+Производим небольшие изменения в таблице, чтобы пользователь сам ссылался на свой настройки и чтобы в настройках хранилось только `id` пользователя
+
+`prisma.scheme`
+```TS
+model User {
+  id                String           @id @default(uuid())
+  name              String
+  age               Int
+  email             String?
+  role              Role             @default(BASIC)
+  writtenPosts      Post[]           @relation("WrittenPosts")
+  favouritePosts    Post[]           @relation("FavoritePosts")
+  userPreferences   UserPreferences? @relation(fields: [userPreferencesId], references: [id])
+  userPreferencesId String?          @unique
+
+  @@unique([age, name])
+  @@index([email])
+}
+
+model UserPreferences {
+  id           String  @id @default(uuid())
+  emailUpdates Boolean
+  user         User?
+}
+```
+
+Функция `deleteMany()` удаляет все записи из таблицы выделенной модели. 
+Функция `create()` позволяет создать нам нового пользователя. Вложенное в неё свойство `create`, которое помещается внутри полей других таблиц, позволяет создать новую запись другой таблицы и связать их сразу. Свойство `include` позволяет вывести вместе с самим объектом, который мы выводим в консоль ещё и данные по связанным с ним объектам.
+
+`script.ts`
+```TS
+// импортируем клиент призмы
+import { PrismaClient, User } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+const main = async (): Promise<void> => {
+	// очищаем базу данных
+	prisma.user.deleteMany();
+
+	// добавляем нового пользователя
+	const user: User = await prisma.user.create({
+		data: {
+			age: 19,
+			email: 'valera2003lvov@yandex.ru',
+			name: 'Valery',
+			role: 'ADMIN',
+			// так же тут мы можем создать отсюда новый объект, связанный с основным
+			userPreferences: {
+				// через объект create
+				create: {
+					emailUpdates: true,
+				},
+			},
+		},
+		// включаем в вывод эти данные
+		include: {
+			userPreferences: true,
+		},
+	});
+
+	console.log(user);
+};
+
+main()
+	.catch((e) => console.error(e.message))
+	.finally(async () => await prisma.$disconnect());
+```
+
+![](_png/Pasted%20image%2020221223175834.png)
+
+Так же мы имеем свойство `select`, которое позволяет вывести отдельные части данных моделей. 
+Можно пользоваться только `include` или `select` и только в функции `create()`
+
+```TS
+const main = async (): Promise<void> => {
+	// очищаем базу данных
+	prisma.user.deleteMany();
+
+	// добавляем нового пользователя
+	const userModel: User = await prisma.user.create({
+		data: {
+			age: 19,
+			email: 'valera2003lvov@yandex.ru',
+			name: 'Valery',
+			role: 'ADMIN',
+			// так же тут мы можем создать отсюда новый объект, связанный с основным
+			userPreferences: {
+				// через объект create
+				create: {
+					emailUpdates: true,
+				},
+			},
+		},
+		// включаем в вывод эти данные
+		select: {
+			name: true,
+			userPreferences: {
+				select: {
+					id: true,
+				},
+			},
+		},
+	});
+
+	console.log(userModel);
+};
+```
+
+![](_png/Pasted%20image%2020221223180815.png)
+
+Так же мы можем выводить дополнительные данные по производимым запросам в нашу базу
+
+```TS
+import { PrismaClient, User } from '@prisma/client';
+
+const prisma = new PrismaClient({ log: ['query'] });
+```
+
+![](_png/Pasted%20image%2020221223181252.png)
 
 
 
