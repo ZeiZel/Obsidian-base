@@ -1,5 +1,17 @@
 #ORM #Prisma 
 
+## Решение проблем
+
+###### Если редактор не видит обновлённые типы после generate
+
+Если слово `data` подчёркнуто и не показываются новые типы, то нужно с *ctrl* тыкнуть по функции `create()`, чтобы редактор подгрузил типы и увидел обновления модели
+
+![](_png/Pasted%20image%2020221223142845.png)
+
+Так выглядит конечный файл
+
+![](_png/Pasted%20image%2020221223142848.png)
+
 ## Project Setup 
 
 Первым делом, нужно установить все нужные модули для нашего проекта
@@ -92,7 +104,7 @@ model User {
 
 ## Prisma Migration Basics 
 
-Далее нам нужно инициализировать миграцию. Миграция - это процесс подключения к базе и создания в ней статичной модели (создание таблиц и связей между ними), которую мы описали в призме
+Далее нам нужно инициализировать миграцию. Миграция - это процесс подключения к базе и создания в ней статичной модели (создание таблиц и связей между ними), которую мы описали в призме. Этот процесс обязателен после добавления новых моделей.
 
 `migrate` - функция, которая осуществляет миграцию
 `dev` - тут мы определяем, что миграция осуществляется в режиме разработчика
@@ -304,23 +316,76 @@ model UserPreferences {
 
 ## Model Attributes 
 
-26:19
+###### Атрибуты полей
+Если установить для поля атрибут `@unique`, то это поле будет всегда уникальным
 
+Если для поля `updatedAt` установить атрибут `@updatedAt`, то значение всегда будет всегда равно своему значению
 
+Атрибут `@default()` всегда устанавливает значение по умолчанию. Конкретно если написать  `@default(now())` для `createdAt`, то для этого поля всегда будет устанавливаться значение времени на сейчас
 
+###### Атрибуты блока
+Записываются они через `@@` и пишутся в самом конце. 
+Конкретно в приведённом ниже примере мы указали, что не может быть двоих пользователей с одинаковым возрастом и именем через `@@unique([])`. Так же через атрибут `@@index` мы добавляем таблицу с индексом для электронной почты
 
+```TS
+model User {
+  id              String           @id @default(uuid())
+  name            String
+  age             Int
+  email           String?
+  isAdmin         Boolean
+  writtenPosts    Post[]           @relation("WrittenPosts")
+  favouritePosts  Post[]           @relation("FavoritePosts")
+  UserPreferences UserPreferences?
 
+  @@unique([age, name])
+  @@index([email])
+}
+```
 
+Так же мы можем сделать составной идентификатор для таблицы вместо использования `id`. Конкретно тут будет создана новая таблица, в которой будет реализован составной идентификатор, указывающий на определённую запись в этой таблице постов 
+
+```TS
+model Post {
+  // id             String     @id @default(uuid())
+  title          String
+  averageRating  Float
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  author         User       @relation("WrittenPosts", fields: [authorId], references: [id])
+  authorId       String
+  favouritedBy   User?      @relation("FavoritePosts", fields: [favouritedById], references: [id])
+  favouritedById String?
+  categories     Category[]
+
+  @@id([title, authorId])
+}
+```
 
 ## Enums 
 
+Объект `enum` представляет из себя статичный набор данных, которые мы можем положить в качестве значений в поле. То есть положить мы можем в поле только то, что указали в `enum`. Тип поля определяется как название `enum` и так же можно присвоить дефолтное значение из этого перечисления
 
+```TS
+model User {
+  id              String           @id @default(uuid())
+  name            String
+  age             Int
+  email           String?
+  role            Role             @default(BASIC)
+  writtenPosts    Post[]           @relation("WrittenPosts")
+  favouritePosts  Post[]           @relation("FavoritePosts")
+  UserPreferences UserPreferences?
 
+  @@unique([age, name])
+  @@index([email])
+}
 
-
-
-
-
+enum Role {
+  BASIC
+  ADMIN
+}
+```
 
 ## Client Create Operations 
 
