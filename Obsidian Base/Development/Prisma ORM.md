@@ -427,7 +427,7 @@ const prisma = new PrismaClient();
 
 const main = async (): Promise<void> => {
 	// очищаем базу данных
-	prisma.user.deleteMany();
+	await prisma.user.deleteMany();
 
 	// добавляем нового пользователя
 	const user: User = await prisma.user.create({
@@ -466,7 +466,7 @@ main()
 ```TS
 const main = async (): Promise<void> => {
 	// очищаем базу данных
-	prisma.user.deleteMany();
+	await prisma.user.deleteMany();
 
 	// добавляем нового пользователя
 	const userModel: User = await prisma.user.create({
@@ -510,17 +510,41 @@ const prisma = new PrismaClient({ log: ['query'] });
 
 ![](_png/Pasted%20image%2020221223181252.png)
 
+Функция `createMany()` позволяет создать сразу несколько пользователей
 
+```TS
+const main = async () => {
+	await prisma.user.deleteMany();
 
+	const user = await prisma.user.createMany({
+		data: [
+			{
+				age: 19,
+				email: 'valera2003lvov@yandex.ru',
+				name: 'Valery',
+				role: 'ADMIN',
+			},
+			{
+				age: 22,
+				email: 'alaera@yandex.ru',
+				name: 'Sal',
+				role: 'BASIC',
+			},
+		],
+	});
 
+	console.log(user);
+};
+```
 
+И тут нам выходит число созданных записей
 
-
+![](_png/Pasted%20image%2020221223185311.png)
 
 ## Client Read Operations
 
 
-
+40:23
 
 
 
