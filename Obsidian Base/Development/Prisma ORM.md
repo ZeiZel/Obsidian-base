@@ -618,36 +618,251 @@ const user = await prisma.user.findMany({
 ```
 ![](_png/Pasted%20image%2020221224150617.png)
 
-Уже свойство `take` определяет то, сколько записей мы максимально возьмём из всех выбранных 
+Так же мы имеем дополнительно три свойства для сортировки наших полученных результатов:
+- `orderBy` - сортирует полученные записи по определённому полю в выбранном порядке
+- свойство `take` берёт первое определённое количество из полученных записей
+- `skip` - пропускает первую запись
 
 ```TS
 const user = await prisma.user.findMany({
 	where: {
 		name: 'Sally',
 	},
-	take: 2, // выведет две записи
+	// отсортировать
+	orderBy: {
+		// возраст
+		age: 'asc', // по возрастанию
+	},
+	take: 2, // получаем первых двух пользователей
+	skip: 1, // и пропускаем первого одного
 });
 ```
 
-
-
-
-
-
 ## Advanced Filtering 
 
+Так же мы можем искать значения, которые мы можем передавать в качестве значений-объектов для более продвинутого поиска нужных нам данных
 
+`equals` будет искать значения равные введённому
 
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет значение, которое равно данному
+		name: { equals: 'Sally' }, // 2
+	},
+});
 
+console.log(user.length);
+```
 
+`not` ищет значения не равные введённому
 
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет значение, которое не равно данному
+		name: { not: 'Sally' }, // 3
+	},
+});
 
+console.log(user.length);
+```
 
+`in` ищет значения ровно в данном диапазоне, который мы ввели
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет значение, которое входит в данный диапазон значений 
+		name: { in: ['Sally', 'Sal', 'Valery'] }, // 5
+	},
+});
+
+console.log(user.length);
+```
+
+`notIn` ищет значения, которые не входят в данный диапазон
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет значение, которое не входит в данный диапазон значений 
+		name: { notIn: ['Sally', 'Sal', 'Valery'] }, // 0
+	},
+});
+
+console.log(user.length);
+```
+
+`lt` ищет значения меньше введённого
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sal',
+		// ищет значение, которое меньше...
+		age: { lt: 20 }, // 1
+	},
+});
+
+console.log(user.length);
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sal',
+		// значение больше, чем...
+		age: { gt: 20 }, // 1
+	},
+});
+
+console.log(user.length);
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sal',
+		// значение, которое больше или равно данному
+		age: { gte: 20 }, // 1
+	},
+});
+
+console.log(user.length);
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sal',
+		// значение, которое меньше или равно данному
+		age: { lte: 20 }, // 1
+	},
+});
+
+console.log(user.length);
+```
+
+Дальше идут свойства, которые ищут не полностью всё значение, а только совпадения
+- `contains` - ищет поля, где имеющиеся данные схожи с введёнными 
+- `endsWith` - ищет поля, где данные заканчиваются данной строкой
+- `startsWith` - ищет поля, где данные начинаются с данной строки
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет по содержимому, которое может находиться в определённом поле таблицы 
+		email: { contains: '@yandex.ru' },
+	},
+});
+
+console.log(user.length);
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет строку, которая кончается данным содержимым
+		email: { endsWith: '@yandex.ru' }, // 4
+	},
+});
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// ищет строку, которая начинается данным содержимым
+		email: { startsWith: '@yandex.ru' }, // 0
+	},
+});
+```
+
+Дальше идут свойства условий:
+- `AND` - ищет значения, которые удовлетворяют всем фильтрам
+- `OR` - ищет значения, которые могут удовлетворять одному из фильтров
+- `NOT` - ищет значения, которые не совпадают фильтру поиска
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// вернёт пересечение условий - выполняются оба
+		AND: [ // 3
+			{ email: { endsWith: '@yandex.ru' } }, 
+			{ name: { contains: 'Sal' } }
+		],
+	},
+});
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// вернёт пересечение условий - выполняется одно из двух
+		OR: [ // 5
+			{ email: { endsWith: '@yandex.ru' } }, 
+			{ name: { contains: 'Sal' } }
+		],
+	},
+});
+
+/// Или так
+
+const user = await prisma.user.findMany({
+	where: {
+		OR: [
+			{ email: { endsWith: '@yandex.ru' } }, 
+			{ email: { startsWith: 'alaera' } }
+		],
+	},
+});
+```
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		// вернёт только обратные значения введённому
+		NOT: { email: { endsWith: '@yandex.ru' } }, // 0
+	},
+});
+```
 
 ## Relationship Filtering 
 
+Так же мы можем искать значения по связям, которые реализованы в наших моделях
 
+```TS
+const main = async () => {
+	const user = await prisma.user.findMany({
+		where: {
+			// ищем пользователей с полем userPreferences
+			userPreferences: {
+				// в котором включены уведомления
+				emailUpdates: true,
+			},
+		},
+	});
 
+	console.log(user.length);
+};
+```
+
+Так же мы имеем свойства для поиска определённых значений внутри связанных полей:
+- `every` - ищет значения, где каждая связь имеет определённое значение
+- `none` - 
+- `some` - выведет некоторые 
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		writtenPosts: {
+			every: {
+				title: 'Test',
+			},
+		},
+	},
+});
+```
 
 
 
