@@ -1139,13 +1139,38 @@ const user = await prisma.user.create({
 
 Мы имеем два метода: `delete` и `deleteMany`
 
+Когда мы используем функцию `delete`, нам нужно искать определённую запись по уникальному полю (у нас это почта)
 
+```TS
+const main = async () => {
+	const user = await prisma.user.delete({
+		where: {
+			email: 'sal@yandex.ru',
+		},
+	});
 
+	console.log(user);
+};
+```
 
+![](_png/Pasted%20image%2020221224183651.png)
 
+![](_png/Pasted%20image%2020221224183625.png)
 
+![](_png/Pasted%20image%2020221224183628.png)
 
+Ну и так же мы можем удалить множество пользователей с использованием `deleteMany` по заданному условию
 
+```TS
+const main = async () => {
+	const user = await prisma.user.deleteMany({
+		where: {
+			age: { gt: 20 },
+		},
+	});
 
+	console.log(user); // { count: 2 }
+};
+```
 
-
+![](_png/Pasted%20image%2020221224183817.png)
