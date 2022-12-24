@@ -54,6 +54,18 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "beff4687ba55e4c6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 Стили в React. Готовые библиотеки компонентов со стилями.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
         "currentTab": 2
@@ -203,15 +215,15 @@
   },
   "active": "beabd2e1767d61e7",
   "lastOpenFiles": [
+    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/NextJS - основы.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 Стили в React. Готовые библиотеки компонентов со стилями.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/Tailwind CSS.md",
     "Whats Learning/_lessons/FrontEnd.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/NextJS - основы.md",
     "Whats Learning/О чём база~.md",
-    "Whats Learning/RoadMap/RoadMap.md",
-    "Без названия.canvas",
-    "Development/_png/Pasted image 20221218133616.png",
-    "Development/Prisma ORM.md",
-    "Development/_png/Pasted image 20221215193604.png",
-    "Development/Решение проблемных вопросов/Prisma to SQL Server.md"
+    "Whats Learning/RoadMap/RoadMap.md"
   ]
 }
