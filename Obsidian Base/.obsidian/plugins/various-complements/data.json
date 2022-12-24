@@ -55,38 +55,6 @@
         }
       }
     },
-    "представлен": {
-      "представлен": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669221428408
-        }
-      }
-    },
-    "package-lock": {
-      "package-lock": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669288180854
-        }
-      }
-    },
-    "devDependencies": {
-      "devDependencies": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669289286977
-        }
-      }
-    },
-    "peerDependencies": {
-      "peerDependencies": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669289291076
-        }
-      }
-    },
     "weather": {
       "weather": {
         "currentFile": {
@@ -604,6 +572,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1671810799220
+        }
+      }
+    },
+    "age_name": {
+      "age_name": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671882561502
+        }
+      }
+    },
+    "findFirst": {
+      "findFirst": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671883009674
         }
       }
     }

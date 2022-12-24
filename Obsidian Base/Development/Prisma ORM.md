@@ -543,8 +543,82 @@ const main = async () => {
 
 ## Client Read Operations
 
+Выполнение операций по поиску клиентов
 
-40:23
+`findQunique()` - выполняет поиск по базе данных на основе ключа
+
+```TS
+const main = async () => {
+	// поиск одного пользователя
+	const user = await prisma.user.findUnique({
+		// поиск пользователя по заданным параметрам
+		where: {
+			email: 'alaera@yandex.ru',
+		},
+		// так же сюда можно вставить select или include
+	});
+
+	console.log(user);
+};
+```
+
+Так же так как мы указали в модели `@@unique([age, name])`, то мы сможем найти по уникальным значениям определённую запись в базе по уникальной сгенерированной записи `age_name`
+
+```TS
+const main = async () => {
+	const user = await prisma.user.findUnique({
+		where: {
+			age_name: {
+				age: 19,
+				name: 'Valery',
+			},
+		},
+	});
+
+	console.log(user);
+};
+```
+
+Функция `findFirst` находит первую попавшуюся запись
+
+```TS
+const main = async () => {
+	const user = await prisma.user.findFirst({
+		where: {
+			name: 'Sal',
+		},
+	});
+
+	console.log(user);
+};
+```
+
+![](_png/Pasted%20image%2020221224145611.png)
+
+Функция `findMany()` найдёт все записи, которые соответствуют условию (возвращает массив)
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sally',
+	},
+});
+```
+![](_png/Pasted%20image%2020221224150424.png)
+
+Свойство `distinct` позволяет нам выводить только уникальные значения по определённым полям
+
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sally',
+	},
+	distinct: ['name'],
+});
+```
+![](_png/Pasted%20image%2020221224150617.png)
+
+
 
 
 
