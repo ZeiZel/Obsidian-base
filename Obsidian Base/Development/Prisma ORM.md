@@ -2,7 +2,7 @@
 
 ## Решение проблем
 
-###### Если редактор не видит обновлённые типы после generate
+###### 1) Если редактор не видит обновлённые типы после generate
 
 Если слово `data` подчёркнуто и не показываются новые типы, то нужно с *ctrl* тыкнуть по функции `create()`, чтобы редактор подгрузил типы и увидел обновления модели
 
@@ -11,6 +11,30 @@
 Так выглядит конечный файл
 
 ![](_png/Pasted%20image%2020221223142848.png)
+
+##### 2) Подключение призмы к SQL Server
+
+Ссылки на решение проблемы:
+- [Настройки SQL Server]](https://vk.com/away.php?to=https%3A%2F%2Fgithub.com%2Ftypeorm%2Ftypeorm%2Fissues%2F2133&cc_key=)  
+- [Проверка подключения через JetBrains](https://vk.com/away.php?to=https%3A%2F%2Fwww.jetbrains.com%2Fhelp%2Fdatagrip%2Fconnecting-to-sql-server-express-localdb.html%23step-2-create-the-localdb-connection&cc_key=)  
+- [Решение небезопасного подключения](https://vk.com/away.php?to=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F60226370%2Fcertificate-error-when-connecting-to-sql-server&cc_key=)
+
+Всё должно быть подключено
+
+![](_png/Pasted%20image%2020221218133605.png)
+
+Должен быть включён TCP/IP
+
+![](_png/Pasted%20image%2020221218133616.png)
+
+Выполняем все инструкции jetbrains по их ссылке. 
+
+![](_png/Pasted%20image%2020221218174908.png)
+
+В `datagrip` составляем запрос на подключение внутри окна `ctrl+alt+shift+s`
+
+![](_png/Pasted%20image%2020221218132823.png)
+
 
 ## Project Setup 
 
@@ -886,7 +910,11 @@ const user = await prisma.post.findMany({
 
 ## Client Update Operations 
 
-Так же нам обязательно нужна будет операция для изменения данных
+Так же нам обязательно нужна будет операция для изменения данных. Конкретно мы имеем функции `update` и `updateMany` - где первая обновляет одного пользователя, а вторая всех, кого найдёт.
+
+Первым делом мы должны передать условие `where`, по которому будет искаться пользователь, а уже далее нужно будет ввести новые данные в `data`.
+
+Важной особенностью является то, что `update` позволяет менять данные только по идентификатору (уникальному полю), а `updateMany` по любому
 
 ```TS
 const main = async () => {
@@ -976,6 +1004,19 @@ const main = async () => {
 };
 ```
 
+![](_png/Pasted%20image%2020221224173445.png)
+
+Так же нужно упомянуть, что у нас есть операции `increment`, `decrement`, `multiply` и `divide`
+
+```TS
+data: {
+	age: {
+		multiply: 5,
+	},
+},
+```
+
+![](_png/Pasted%20image%2020221224173527.png)
 
 
 
