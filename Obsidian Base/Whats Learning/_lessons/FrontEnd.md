@@ -1,5 +1,5 @@
 ## **FrontEnd**
-#React #Angular #Vue #Svelte #Redux #Mobx #Vuex #NgRx #ContextAPI #FrontEnd
+#React #Angular #Vue #Svelte #Redux #Mobx #Vuex #NgRx #ContextAPI #FrontEnd #Framework
 
 Учить какой-либо из фреймворков - обязательно. Так же к ним в придачу учим технологию для определения состояний
 ![](_png/Pasted%20image%2020220907172307.png)
