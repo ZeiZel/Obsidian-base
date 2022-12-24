@@ -618,7 +618,16 @@ const user = await prisma.user.findMany({
 ```
 ![](_png/Pasted%20image%2020221224150617.png)
 
+Уже свойство `take` определяет то, сколько записей мы максимально возьмём из всех выбранных 
 
+```TS
+const user = await prisma.user.findMany({
+	where: {
+		name: 'Sally',
+	},
+	take: 2, // выведет две записи
+});
+```
 
 
 
