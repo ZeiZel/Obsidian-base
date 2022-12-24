@@ -886,9 +886,95 @@ const user = await prisma.post.findMany({
 
 ## Client Update Operations 
 
+Так же нам обязательно нужна будет операция для изменения данных
+
+```TS
+const main = async () => {
+	// обновляем одну запись
+	const user = await prisma.user.update({
+		// которая удовлетворяет данным условиям
+		where: {
+			email: 'sally@test3.com',
+		},
+		// устанавливаем новые данные
+		data: {
+			email: 'sally@test4.com',
+		},
+		// так же тут можно дописать select или include 
+	});
+
+	console.log(user);
+};
+```
+
+![](_png/Pasted%20image%2020221224172527.png)
 
 
 
+```TS
+const main = async () => {
+	// обновляем все записи
+	const user = await prisma.user.updateMany({ // { count: 2 }
+		// которые удовлетворяют заданным условиям
+		where: {
+			name: 'Sally',
+		},
+		// устанавливаем новые данные
+		data: {
+			name: 'newSally',
+		},
+		// тут уже нельзя дописать select и include 
+	});
+
+	console.log(user);
+};
+```
+
+
+
+```TS
+const main = async () => {
+	// обновляем одну запись
+	const user = await prisma.user.updateMany({
+		// { count: 2 }
+		// которая удовлетворяет данным условиям
+		where: {
+			name: 'Valery',
+		},
+		// устанавливаем новые данные
+		data: {
+			age: {
+				increment: 1,
+			},
+		},
+	});
+
+	console.log(user);
+};
+```
+
+
+
+```TS
+const main = async () => {
+	// обновляем одну запись
+	const user = await prisma.user.update({
+		// { count: 2 }
+		// которая удовлетворяет данным условиям
+		where: {
+			email: 'valera2003lvov@yandex.ru',
+		},
+		// устанавливаем новые данные
+		data: {
+			age: {
+				increment: 1,
+			},
+		},
+	});
+
+	console.log(user);
+};
+```
 
 
 
