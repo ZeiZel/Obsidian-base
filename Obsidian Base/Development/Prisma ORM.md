@@ -35,7 +35,6 @@
 
 ![](_png/Pasted%20image%2020221218132823.png)
 
-
 ## Project Setup 
 
 Первым делом, нужно установить все нужные модули для нашего проекта
@@ -1018,22 +1017,127 @@ data: {
 
 ![](_png/Pasted%20image%2020221224173527.png)
 
-
-
-
 ## Connect Existing Relationships 
 
+Так же мы имеем возможность подключать к себе уже существующие компоненты, которые мы предопределили заранее
 
+Для начала создадим новый идентификатор настроек пользователя
 
+```TS
+const preference = await prisma.userPreferences.create({
+	data: {
+		emailUpdates: true,
+	},
+});
 
+console.log(preference);
 
+// { id: '69c3a16a-6ea2-4f5f-a29a-727ae9ab5d5a', emailUpdates: true }
+```
 
+Мы можем создать новые настройки пользователя через `create`
 
+```TS
+const main = async () => {
+	const user = await prisma.user.update({
+		where: {
+			email: 'valera2003lvov@yandex.ru',
+		},
+		data: {
+			userPreferences: {
+				create: {
+					emailUpdates: true,
+				},
+			},
+		},
+	});
 
+	console.log(user);
+};
+```
+
+![](_png/Pasted%20image%2020221224175817.png)
+
+Так же мы можем подключить уже существующие настройки через `connect`
+
+```TS
+const main = async () => {
+	const user = await prisma.user.update({
+		where: {
+			email: 'valera2003lvov@yandex.ru',
+		},
+		data: {
+			userPreferences: {
+				connect: {
+					id: '69c3a16a-6ea2-4f5f-a29a-727ae9ab5d5a',
+				},
+			},
+		},
+	});
+
+	console.log(user);
+};
+```
+
+![](_png/Pasted%20image%2020221224175924.png)
+
+Выводим настройки
+
+```TS
+const main = async () => {
+	const user = await prisma.user.findFirst({
+		where: {
+			name: 'Valery',
+		},
+		include: { userPreferences: true },
+	});
+
+	console.log(user);
+};
+```
+
+![](_png/Pasted%20image%2020221224180251.png)
+
+Так же мы можем отключиться от внешних полученных данных с использованием свойства `disconnect`
+
+```TS
+const main = async () => {
+	const user = await prisma.user.update({
+		where: {
+			email: 'valera2003lvov@yandex.ru',
+		},
+		data: {
+			userPreferences: {
+				disconnect: true,
+			},
+		},
+	});
+
+	console.log(user);
+};
+```
+
+![](_png/Pasted%20image%2020221224180348.png)
+
+Так же мы можем произвести `connect` сразу при создании нового пользователя
+
+```TS
+const user = await prisma.user.create({
+	data: {
+		name: "Kyle",
+		age: 13,
+		userPreferences: {
+			connect: {
+				id: "69c3a16a-6ea2-4f5f-a29a-727ae9ab5d5a"
+			},
+		},
+	},
+});
+```
 
 ## Client Delete Operations
 
-
+Мы имеем два метода: `delete` и `deleteMany`
 
 
 
