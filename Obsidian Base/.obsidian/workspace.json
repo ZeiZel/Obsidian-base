@@ -47,12 +47,8 @@
             "id": "f2cd9c86be25ce02",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Решение проблемных вопросов/Prisma to SQL Server.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ],
@@ -203,15 +199,15 @@
   },
   "active": "d341feffe366d583",
   "lastOpenFiles": [
-    "Development/Решение проблемных вопросов/Prisma to SQL Server.md",
+    "Development/_png/Pasted image 20221218133616.png",
     "Development/Prisma ORM.md",
+    "Development/_png/Pasted image 20221215193604.png",
+    "Development/Решение проблемных вопросов/Prisma to SQL Server.md",
     "Development/Tailwind CSS.md",
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_lessons/ORM-системы.md",
     "Whats Learning/_lessons/JavaScript.md",
-    "Whats Learning/_lessons/Базы Данных.md",
-    "Без названия 1.canvas",
-    "Без названия.canvas"
+    "Whats Learning/_lessons/Базы Данных.md"
   ]
 }

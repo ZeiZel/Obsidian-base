@@ -34,7 +34,7 @@
 - [ ] Вторая галка
 - [ ] А нужна ли третья?
 
-[[Obsidian UI]] - относительная ссылка (работает только внутри обсидиана)
+[Obsidian UI](Obsidian%20UI.md) - относительная ссылка (работает только внутри обсидиана)
 [Obsidian UI](Obsidian%20UI.md) - абсолютная ссылка (более предпочтительный вариант)
 
 [Справочник по Docs Markdown](https://docs.microsoft.com/ru-ru/contribute/markdown-reference)
