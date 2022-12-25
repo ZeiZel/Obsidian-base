@@ -666,16 +666,16 @@
     "getServerSideProps": {
       "getServerSideProps": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671986700473
+          "count": 2,
+          "lastUpdated": 1671989167287
         }
       }
     },
     "getStaticProps": {
       "getStaticProps": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671986766505
+          "count": 2,
+          "lastUpdated": 1671989173972
         }
       }
     },
@@ -684,6 +684,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1671987181597
+        }
+      }
+    },
+    "revalidate": {
+      "revalidate": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671989185314
+        }
+      }
+    },
+    "tailwind": {
+      "tailwind": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671990124501
         }
       }
     }

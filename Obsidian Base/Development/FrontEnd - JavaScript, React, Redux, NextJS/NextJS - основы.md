@@ -221,9 +221,11 @@ http://localhost:3000/api/cards
 import {cards} from "../../../app/data";  
   
 export default function handler(req, res) {  
-    res.status(200).json(cards.find(card => card.id === req.query.id));  
+    res.status(200).json(cards.find(card => card._id === req.query.id));  
 }
 ```
+
+![](_png/Pasted%20image%2020221225202102.png)
 
 ## getServerSideProps 
 
@@ -265,17 +267,99 @@ export const getServerSideProps = async () => {
 
 Вкупе с методом выше так же используют `getStaticPaths`, который подгружает пути данных  
 
+Вот так выглядит структура:
+![](_png/Pasted%20image%2020221225202548.png)
 
+Первым делом заменим в индексе `getServerSideProps` на `getStaticProps` и добавим параметр `revalidate`, чтобы производить валидацю данных
 
+`index.js`
+```JSX
+export const getStaticProps = async () => {
+	const response = await fetch('http://localhost:3000/api/cards');
+	const cards = await response.json();
 
+	return {
+		props: {
+			cards
+		},
+		revalidate: 10
+	};
+}
+```
+
+И теперь создадим страницу, которая будет генерироваться на основании переданных нами данных. 
+То есть по запросу `id`, который будет возвращать определённую карту, будет выводиться страница, которая выведет данную карту
+
+`[id].jsx`
+```JSX
+import React from 'react';
+
+const Card = ({card}) => {
+    return (
+        <div>
+            {card.number}
+        </div>
+    );
+};
+
+export const getStaticPaths = async () => {
+    const response = await fetch('http://localhost:3000/api/cards');
+    const cards = await response.json();
+
+    const paths = cards.map(c => ({params: {id: c._id}}))
+
+    return {paths, fallback: "blocking"}
+}
+
+export const getStaticProps = async ({params}) => {
+    const response = await fetch(`http://localhost:3000/api/cards/${params.id}`);
+    const card = await response.json();
+
+    return {
+        props: {
+            card
+        },
+        revalidate: 10
+    };
+}
+
+export default Card;
+```
+
+И теперь по запросу `http://localhost:3000/card/first-card` минуя `api` мы можем получить интересующие нас данные
+
+![](_png/Pasted%20image%2020221225202345.png)
 
 ## Tailwind CSS
 
 
+```bash
+npm i -D tailwindcss postcss autoprefixer
 
+npx tailwindcss init -p
+```
 
+`tailwind.config.js`
+```JS
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
-
+`globals.scss`
+```SCSS
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
 ## Практика Next.js 
 
@@ -286,3 +370,8 @@ export const getServerSideProps = async () => {
 
 
 ## У меня не получилась сборка проекта
+
+
+
+
+
