@@ -105,7 +105,7 @@ export default function Document() {
 		<Html lang='en'>
 			<Head>
 				<link rel='preconnect' href='https://fonts.googleapis.com' />
-				<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+				<link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin="true" />
 				<link
 					href='https://fonts.googleapis.com/css2?family=Sevillana&display=swap'
 					rel='stylesheet'
@@ -136,16 +136,21 @@ export default function Document() {
 
 ## Установка SCSS 
 
+Просто устанавливаем модуль сасс
 
 ```bash
 npm i sass
 ```
 
+Переименовываем файлы в `scss`
+
+![|400](_png/Pasted%20image%2020221225181206.png)
+
+И далее меняем импорты
+
 ```JS
 import styles from '../styles/Home.module.scss';
 ```
-
-![|400](_png/Pasted%20image%2020221225181206.png)
 
 ## Создание своего API на next.js 
 
