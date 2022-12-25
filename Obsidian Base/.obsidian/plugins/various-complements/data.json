@@ -63,14 +63,6 @@
         }
       }
     },
-    "writeFile": {
-      "writeFile": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669308794254
-        }
-      }
-    },
     "возвращает": {
       "возвращает": {
         "currentFile": {
@@ -668,6 +660,30 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1671894783304
+        }
+      }
+    },
+    "getServerSideProps": {
+      "getServerSideProps": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671986700473
+        }
+      }
+    },
+    "getStaticProps": {
+      "getStaticProps": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671986766505
+        }
+      }
+    },
+    "getStaticPaths": {
+      "getStaticPaths": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1671987181597
         }
       }
     }

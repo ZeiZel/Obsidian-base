@@ -155,30 +155,115 @@ import styles from '../styles/Home.module.scss';
 ## Создание своего API на next.js 
 
 
+![](_png/Pasted%20image%2020221225192726.png)
 
 
+`data.js`
+```JS
+export const cards = [
+    {
+        _id: "first-card",
+        balance: 44_834_342,
+        number: "4568 6456 7875 6567",
+        color: "Black",
+    },
+    {
+        _id: "second-card",
+        balance: 44_834,
+        number: "4567 3456 9875 4567",
+        color: "0095FF",
+    }
+];
+```
 
+Это общий запрос, который выполняется при запросе без определённого `id` карточки
 
+`index.js`
+```JS
+import {cards} from "../../../app/data";  
+  
+export default function handler(req, res) {  
+    res.status(200).json(cards);  
+}
+```
+
+Сейчас мы можем себе позволить проверить получаемый `id` карточки
+
+`[id].js`
+```JS
+import {cards} from "../../../app/data";  
+  
+export default function handler(req, res) {  
+    console.log(req.query.id)  
+  
+    res.status(200).json(cards);  
+}
+```
+
+В ответе мы получаем:
+
+```md
+// Ссылка на запрос
+http://localhost:3000/api/cards
+
+// ответ от сервера
+[{"_id":"first-card","balance":44834342,"number":"4568 6456 7875 6567","color":"Black"},{"_id":"second-card","balance":44834,"number":"4567 3456 9875 4567","color":"0095FF"}]
+```
+
+В логе мы получаем: 
+
+![](_png/Pasted%20image%2020221225191340.png)
+
+И вот так будет выглядеть выполняемый запрос при вводе карточки. Он будет возвращать только данные по карточке
+
+`[id].js`
+```JS
+import {cards} from "../../../app/data";  
+  
+export default function handler(req, res) {  
+    res.status(200).json(cards.find(card => card.id === req.query.id));  
+}
+```
 
 ## getServerSideProps 
 
+Мы можем получать через `getServerSideProps` свойства с сервера, чтобы применять их у себя на странице. Это не самый эффективный вариант для работы приложения, так как на каждый запрос пользователя будет напрягаться сервер. 
+Более актуальным вариантом взаимодействия с сервером является `getStaticProps`
 
+```JSX
+export default function Home({cards}) {
 
+	console.log(cards) // выводим карточки в консоль
 
+	return (
+		<>
+			{ /// CODE ... }
+		</>
+	);
+}
 
+// получение пропсов с сервера
+export const getServerSideProps = async () => {
+	const response = await fetch('http://localhost:3000/api/cards');
+	const cards = await response.json();
 
+	return {
+		props: {
+			cards
+		}
+	};
+}
+```
+
+![](_png/Pasted%20image%2020221225194445.png)
 
 ## getStaticProps
 
-
-
-
-
-
+Уже `getStaticProps` подгружает данные для клиента при загрузке страницы ровно один раз и выдаёт ему уже сформированные данные.
 
 ## getStaticPaths 
 
-
+Вкупе с методом выше так же используют `getStaticPaths`, который подгружает пути данных  
 
 
 
