@@ -690,8 +690,24 @@
     "classnames": {
       "classnames": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1672055097694
+        }
+      }
+    },
+    "component": {
+      "component": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1672050959015
+          "lastUpdated": 1672054751522
+        }
+      }
+    },
+    "module": {
+      "module": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1672054762716
         }
       }
     }
