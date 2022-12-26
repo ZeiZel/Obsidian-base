@@ -47,38 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "непосредственно": {
-      "непосредственно": {
-        "currentFile": {
-          "count": 5,
-          "lastUpdated": 1669390827338
-        }
-      }
-    },
-    "weather": {
-      "weather": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1669390103786
-        }
-      }
-    },
-    "возвращает": {
-      "возвращает": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669387021944
-        }
-      }
-    },
-    "mosco": {
-      "mosco": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669390406388
-        }
-      }
-    },
     "callback": {
       "callback": {
         "currentFile": {
@@ -700,6 +668,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1671990124501
+        }
+      }
+    },
+    "className": {
+      "className": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1672040873948
         }
       }
     }

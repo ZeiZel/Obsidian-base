@@ -343,10 +343,7 @@ npx tailwindcss init -p
 ```JS
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './app/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
@@ -363,12 +360,115 @@ module.exports = {
 
 ## Практика Next.js 
 
+Так выглядит структура:
 
+![](_png/Pasted%20image%2020221226104347.png)
 
+Это компонент отдельной карточки. Тут используются:
+- Стили как через `className`, так и через `style`
+- Тег некста `<Link>`
+- Тег некста `<Image>`
 
+`app > cards > CardItem.jsx`
+```JSX
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
+const CardItem = ({ card }) => {
+	return (
+		// тут находится вся наша карточка
+		<div
+			className="w-5/6 mx-auto rounded-xl p-5 mb-3 text-white overflow-hidden bg-sky-700"
+			style={{
+				background: card.color,
+			}}
+		>
+			{/* а тут всю карточку делаем ссылкой */}
+			{/* тут используется тег некста - Link */}
+			<Link href={`/card/${card.id}`}>
+				{/* Это уже тег некста - Image, который позволяет нам вставить нормально изображение. Так же некст сам преобразует нужным образом изображение */}
+				<Image
+					src={
+						'https://www.seekpng.com/png/detail/136-1366968_mastercard-download-png-mastercard-credit-card-png.png'
+					}
+					alt="Mastercard Download Png - Mastercard Credit Card Png@seekpng.com"
+					width={40}
+					height={30}
+				/>
 
+				<div
+					className="mt-6 mb-1 opacity-50"
+					style={{
+						fontSize: 11,
+					}}
+				>
+					Current Balance
+				</div>
+				<div>
+					{/* Эта настройка преобразует полученное число в денежную валюту - рубли */}
+					{card.balance.toLocaleString('ru-Ru', {
+						currency: 'RUB',
+						style: 'currency',
+					})}
+				</div>
 
+				<div className="mt-6 text-xs">{card.number}</div>
+			</Link>
+		</div>
+	);
+};
+
+export default CardItem;
+```
+
+Тут уже мы будем выводить страницу по переходу на отдельную определённую карточку по клику
+
+`pages > card > [id].jsx`
+```JSX
+import Link from 'next/link';
+import React from 'react';
+import CardItem from '../../app/cards/CardItem';
+
+const Card = ({ card }) => {
+	return (
+		<div>
+			<Meta title={`Карточка ${card._id}`} description="" />
+
+			<main className="w-1/2 mx-auto mt-10">
+				<CardItem card={card} />
+			</main>
+
+			<Link href="/">
+				<p>Back home</p>
+			</Link>
+		</div>
+	);
+};
+
+export const getStaticPaths = async () => {
+	const response = await fetch('http://localhost:3000/api/cards');
+	const cards = await response.json();
+
+	const paths = cards.map((c) => ({ params: { id: c._id } }));
+
+	return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps = async ({ params }) => {
+	const response = await fetch(`http://localhost:3000/api/cards/${params.id}`);
+	const card = await response.json();
+
+	return {
+		props: {
+			card,
+		},
+		revalidate: 10,
+	};
+};
+
+export default Card;
+```
 
 Чтобы мы могли загружать с помощью тега `<Image>` изображения со сторонних ресурсов, нужно добавить их в домены внутри конфига
 *Чтобы увидеть изменения на сайте при изменениях в конфиге, нужно перезапустить сборку в консоли*
@@ -386,24 +486,41 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
+Тут мы выводим все наши карты на страницу из массива переданных карт в компонент `Home`
 
-29:21
+`pages > index.js`
+```JSX
+export default function Home({ cards }) {
+	return (
+		<>
+			<Meta title="Главная" description="Описание страницы" />
+
+			<main className="w-1/2 mx-auto mt-10">
+				{cards.map((card) => (
+					<CardItem key={card._id} card={card} />
+				))}
+			</main>
+		</>
+	);
+}
+
+export const getStaticProps = async () => {
+	const response = await fetch('http://localhost:3000/api/cards');
+	const cards = await response.json();
+
+	return {
+		props: {
+			cards,
+		},
+		revalidate: 10,
+	};
+};
+
+```
 
 
+И вот так будет выглядеть итоговая страница:
+- Выводятся все карточки, которые добавим в `data.js`
+- Переход по карточкам работать не будет (для этого нужно пилить отдельно бэк)
 
-
-
-
-
-
-
-
-
-
-
-## У меня не получилась сборка проекта
-
-
-
-
-
+![](_png/Pasted%20image%2020221226104211.png)
