@@ -369,6 +369,38 @@ module.exports = {
 
 
 
+
+Чтобы мы могли загружать с помощью тега `<Image>` изображения со сторонних ресурсов, нужно добавить их в домены внутри конфига
+*Чтобы увидеть изменения на сайте при изменениях в конфиге, нужно перезапустить сборку в консоли*
+
+`next.config.js`
+```JS
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ['www.seekpng.com'],
+  },
+}
+
+module.exports = nextConfig
+```
+
+
+29:21
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## У меня не получилась сборка проекта
 
 
