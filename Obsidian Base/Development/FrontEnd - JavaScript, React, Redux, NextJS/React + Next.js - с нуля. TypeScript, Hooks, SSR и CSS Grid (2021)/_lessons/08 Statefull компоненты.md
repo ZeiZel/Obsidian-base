@@ -48,15 +48,47 @@
 
 ![](_png/Pasted%20image%2020221227133745.png)
 
+Добавим небольшой код, в котором мы определим состояние счётчика и будем имеющимися двумя кнопками менять это состояние.
+Конкретно функция `setCounter()` позволяет нам поменять внутри себя значение `counter`. Данная функция принимает в себя значение состояния и возвращает всегда новый объект (старое значение состояния утилизируется) 
 
+`index.tsx`
+```JSX
+import { useState } from 'react';
+import { Button, Htag, Paragraph, Tag } from '../components';
 
+export default function Home(): JSX.Element {
+	const [counter, setCounter] = useState<number>(0);
 
+	return (
+		<>
+			<Htag tag="h1">{counter}</Htag>
+			<Button appearance="primary" arrow="right" onClick={() => setCounter((x)=>++x)}>
+				Кнопка прибавления числа
+			</Button>
+			<Button appearance="ghost" arrow="down" onClick={() => setCounter((x) => --x)}>
+				Кнопка убавления числа
+			</Button>
+			<Paragraph size="l">БОЛЬШОЙ: Текста очень много</Paragraph>
+			<Paragraph size="m">СРЕДНИЙ: Текста очень много</Paragraph>
+			<Paragraph size="s">МАЛЕНЬКИЙ: Текста очень много</Paragraph>
+			<Tag color="green" size="m">
+				-10000
+			</Tag>
+			<Tag size="m" color="primary" href="www.google.com">
+				Google
+			</Tag>
+		</>
+	);
+}
+```
 
+И теперь можно покликать на кнопки, что позволит уменьшить и увеличить значение данного счётчика
 
+![](_png/Pasted%20image%2020221227135206.png)
 
+Если вместо `useState` мы попытаемся использовать обычное изменение значения, то у нас ничего не получится. Дело будет заключаться в том, что хук даёт распоряжение реакту перерендерить само значение и связанные с ним компоненты и поэтому они на странице обновятся. При обычном изменении значения реакт не будет знать, что страницу нужно перерендерить и значение не будет перед нами меняться
 
-
-
+![](_png/Pasted%20image%2020221227134848.png)
 
 ### 003 useEffect
 

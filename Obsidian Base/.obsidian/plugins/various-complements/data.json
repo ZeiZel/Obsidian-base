@@ -674,8 +674,16 @@
     "useState": {
       "useState": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1672138138014
+        }
+      }
+    },
+    "setCounter": {
+      "setCounter": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1672136862719
+          "lastUpdated": 1672138372575
         }
       }
     }
