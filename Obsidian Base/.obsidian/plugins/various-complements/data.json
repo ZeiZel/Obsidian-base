@@ -47,59 +47,11 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "callback": {
-      "callback": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669444072436
-        }
-      }
-    },
     "middleware": {
       "middleware": {
         "currentFile": {
           "count": 5,
           "lastUpdated": 1670773352672
-        }
-      }
-    },
-    "постобработчик": {
-      "постобработчик": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669451030592
-        }
-      }
-    },
-    "Dependency": {
-      "Dependency": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669459809121
-        }
-      }
-    },
-    "Injection": {
-      "Injection": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669459814576
-        }
-      }
-    },
-    "controller": {
-      "controller": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669474243477
-        }
-      }
-    },
-    "Fragment": {
-      "Fragment": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1669539136734
         }
       }
     },
@@ -716,6 +668,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1672071380085
+        }
+      }
+    },
+    "useState": {
+      "useState": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1672136862719
         }
       }
     }
