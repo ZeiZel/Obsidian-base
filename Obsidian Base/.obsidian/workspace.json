@@ -66,9 +66,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "81d38f7ec736f808",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/NextJS - основы.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "bceb443c6fc04f88",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -134,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
+                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -151,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
+                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md"
+                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md"
               }
             }
           },
@@ -213,17 +237,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3c2a9ba9b18d1327",
+  "active": "bceb443c6fc04f88",
   "lastOpenFiles": [
+    "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
+    "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
+    "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+    "Development/DesktopDev/Electron/_lessons/5 Renderer Process API.md",
+    "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
+    "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/NextJS - основы.md",
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/08 Statefull компоненты.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
-    "Development/Tailwind CSS.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 Стили в React. Готовые библиотеки компонентов со стилями.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/005 Красивое оповещение пользователя.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/003 Фундаментальные принципы Реакта.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/11 - (Бонус из Практического курса) Реальный проект на JS в классическом стиле.md"
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md"
   ]
 }
