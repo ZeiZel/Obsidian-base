@@ -188,11 +188,100 @@ npm install eslint-plugin-react-hooks --save-dev
 
 ### 006 Компонент рейтинга - 1
 
+Пропсы будут в себя принимать проверку на то, изменяемый ли это рейтинг, само число рейтинга и возможность установки своего рейтинга
 
+`Raiting.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
+export interface IRatingProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	isEditable?: boolean;
+	rating: number;
+	setRating?: (rating: number) => void;
+}
+```
 
+Стили для иконки рейтинга:
 
+`Raiting.module.scss`
+```SCSS
+.filled {
+	fill: var(--primary) !important;
+}
 
+.star {
+	margin-right: 5px;
+	cursor: pointer;
+}
+```
+
+Сам компонент будет через `useState` хранить в себе элементы рейтинга, а `useEffect` будет триггерить создание массива рейтинга
+
+`Raiting.tsx`
+```TSX
+import React, { useEffect, useState } from 'react';
+import { IRatingProps } from './Rating.props';
+import styles from './Rating.module.scss';
+import cn from 'classnames';
+import Image from 'next/image';
+
+export const Rating = ({
+	rating,
+	setRating,
+	isEditable = false,
+	...props
+}: IRatingProps): JSX.Element => {
+	// заполняем массив пустыми JSX-элементами
+	const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
+
+	// вызвать срабатывание генерации массива звёздочек будет useEffect
+	useEffect(() => {
+		constructRating(rating);
+	}, [rating]);
+
+	// тут мы конструируем новый массив с текущим количеством звёзд
+	const constructRating = (currentRating: number) => {
+		// это новый массив из элементов со звёздочкой
+		const updatedArray = ratingArray.map((r: JSX.Element, i: number) => {
+			return (
+				<Image
+					src="/star.svg"
+					width={20}
+					height={20}
+					alt="img"
+					className={cn(styles.star, {
+						[styles.filled]: i < currentRating,
+					})}
+				/>
+			);
+		});
+
+		// устанавливаем обновлённый массив в рейтинг
+		setRatingArray(updatedArray);
+	};
+
+	return (
+		<div {...props}>
+			{ratingArray.map((r, i) => (
+				<span key={i}>{r}</span>
+			))}
+		</div>
+	);
+};
+```
+
+`index.ts`
+```TS
+export * from './Rating/Rating';
+```
+
+`index.tsx`
+```TSX
+<Rating rating={4} />
+```
+
+![](_png/Pasted%20image%2020221227173617.png)
 
 ### 007 Компонент рейтинга - 2
 
