@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -158,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+                "file": "Development/Tailwind CSS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+                "file": "Development/Tailwind CSS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -198,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/4 Main Process API.md"
+                "file": "Development/Tailwind CSS.md"
               }
             }
           },
@@ -237,11 +237,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "bceb443c6fc04f88",
+  "active": "92dc2e15f0b5a459",
   "lastOpenFiles": [
+    "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
     "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
     "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
-    "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
     "Development/DesktopDev/Electron/_lessons/5 Renderer Process API.md",
     "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
