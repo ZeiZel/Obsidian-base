@@ -267,7 +267,7 @@ model Post {
 
 1) **Отношения один ко многим**
 
-
+У пользователя может быть много постов. В постах указываем связь по столбцу внутри модели поста и связываем с полем пользователя
 
 ```TS
 model User {
@@ -290,18 +290,39 @@ model Post {
 }
 ```
 
+Тут представлена ещё одна разновидность отношений `1 ко многим`, где у пользователя есть его написанные посты и любимые посты. Тут, чтобы призма поняла, какой столбец с каким связывается, нужно указать наименование конкретной связи. 
+
+```TS
+model User {
+  id      String  @id @default(uuid())
+  name    String
+  email   String?
+  isAdmin Boolean
+
+  writtenPosts   Post[] @relation("WrittenPosts")
+  favouritePosts Post[] @relation("FavoritePosts")
+
+  UserPreferences UserPreferences?
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  rating1   Float
+  createdAt DateTime
+  updatedAt DateTime
+
+  author   User   @relation("WrittenPosts", fields: [authorId], references: [id])
+  authorId String
+
+  favouritedBy   User?   @relation("FavoritePosts", fields: [favouritedById], references: [id])
+  favouritedById String?
+}
+```
+
 2) **Отношения многие ко многим**
 
-
-
-Конкретно тут для создания связи пользователя и его постов используются поля `writtenPosts` и `favouritePosts`, которые имеют тип `Posts[]` - массив постов.
-Чтобы связать пользователя и его посты, нужно создать поле для связи, в котором нужно указать поле кода внутри модели (`fields: [поле]`) и ссылку на поле в модели, с которой мы связываемся 
-(`references:[внешнее_поле]`)
-
-
-
 Если нужно будет делать отношение многие ко многим, то нам не нужно будет выстраивать ссылки с отношениями. Тут мы просто указываем массив одних объектов, которые ссылаются на массив других объектов.
-При реализации таких отношений создаётся отдельная таблица, которая связывает данные сущности.
+При реализации таких отношений призма создаёт отдельную таблицу, которая связывает данные сущности.
 
 ```TS
 model Post {
@@ -317,11 +338,7 @@ model Category {
 
 3) **Отношения один к одному**
 
-Далее вместо использования `json` для сохранения пользовательских настроек, сделаем отдельную таблицу, которая будет сохранять эти значения. 
-Сделаем для настроек отдельную модель.
-Теперь нам нужно для каждого пользователя связать его одни настройки.
-
-При автоматическом создании наш `UserPreferences` будет иметь модификатор `[]` - его заменяем на `?`, чтобы связь осталась только `1 к 1`. Так же `userId` имеет атрибут `@unique`, так как одни настройки пользователя должны иметь ровно одного уникального пользователя 
+У каждого пользователя есть свои уникальные настройки. Чтобы предпочтение было уникальным, нужно указать, что мы ссылаемся на необязательное поле `?` и идентификатор в таблице, на которую ссылаемся должен иметь атрибут уникальности `@unique`
 
 ```TS
 model User {
@@ -329,14 +346,14 @@ model User {
   name            String
   email           String?
   isAdmin         Boolean
-  writtenPosts    Post[]           @relation("WrittenPosts")
-  favouritePosts  Post[]           @relation("FavoritePosts")
+  
   UserPreferences UserPreferences?
 }
 
 model UserPreferences {
   id           String  @id @default(uuid())
   emailUpdates Boolean
+  
   user         User    @relation(fields: [userId], references: [id])
   userId       String  @unique
 }
