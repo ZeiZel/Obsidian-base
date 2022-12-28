@@ -267,9 +267,7 @@ model Post {
 
 1) **Отношения один ко многим**
 
-Конкретно тут для создания связи пользователя и его постов используются поля `writtenPosts` и `favouritePosts`, которые имеют тип `Posts[]` - массив постов.
-Чтобы связать пользователя и его посты, нужно создать поле для связи, в котором нужно указать поле кода внутри модели (`fields: [поле]`) и ссылку на поле в модели, с которой мы связываемся 
-(`references:[внешнее_поле]`)
+
 
 ```TS
 model User {
@@ -277,8 +275,8 @@ model User {
   name           String
   email          String?
   isAdmin        Boolean
-  writtenPosts   Post[]  @relation("WrittenPosts")
-  favouritePosts Post[]  @relation("FavoritePosts")
+  
+  posts           Post[]
 }
 
 model Post {
@@ -286,14 +284,21 @@ model Post {
   rating1        Float
   createdAt      DateTime
   updatedAt      DateTime
-  author         User     @relation("WrittenPosts", fields: [authorId], references: [id])
+  
+  author         User     @relation(fields: [authorId], references: [id])
   authorId       String
-  favouritedBy   User?     @relation("FavoritePosts", fields: [favouritedById], references: [id])
-  favouritedById String?
 }
 ```
 
 2) **Отношения многие ко многим**
+
+
+
+Конкретно тут для создания связи пользователя и его постов используются поля `writtenPosts` и `favouritePosts`, которые имеют тип `Posts[]` - массив постов.
+Чтобы связать пользователя и его посты, нужно создать поле для связи, в котором нужно указать поле кода внутри модели (`fields: [поле]`) и ссылку на поле в модели, с которой мы связываемся 
+(`references:[внешнее_поле]`)
+
+
 
 Если нужно будет делать отношение многие ко многим, то нам не нужно будет выстраивать ссылки с отношениями. Тут мы просто указываем массив одних объектов, которые ссылаются на массив других объектов.
 При реализации таких отношений создаётся отдельная таблица, которая связывает данные сущности.

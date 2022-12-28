@@ -710,6 +710,14 @@
           "lastUpdated": 1672153233820
         }
       }
+    },
+    "posts": {
+      "posts": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1672242440611
+        }
+      }
     }
   }
 }
