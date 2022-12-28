@@ -90,9 +90,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1927dc78c0c349a9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -142,7 +154,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 374.5110321044922
+    "width": 387.0110321044922
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -158,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Tailwind CSS.md",
+                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -175,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Tailwind CSS.md",
+                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -198,7 +210,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Tailwind CSS.md"
+                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md"
               }
             }
           },
@@ -237,17 +249,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "92dc2e15f0b5a459",
+  "active": "1927dc78c0c349a9",
   "lastOpenFiles": [
+    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
     "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+    "Development/Tailwind CSS.md",
     "Development/DesktopDev/Electron/_lessons/3 Разработка с Electron.js.md",
     "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
     "Development/DesktopDev/Electron/_lessons/5 Renderer Process API.md",
     "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/NextJS - основы.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md"
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md"
   ]
 }
