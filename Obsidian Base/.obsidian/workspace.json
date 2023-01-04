@@ -56,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Envirompment/WebStorm.md",
+                "file": "Envirompment/DataGrip.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Envirompment/WebStorm.md",
+                "file": "Envirompment/DataGrip.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Envirompment/WebStorm.md"
+                "file": "Envirompment/DataGrip.md"
               }
             }
           },
@@ -201,10 +201,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8770f750eb04dad2",
+  "active": "b4cdf3db61974325",
   "lastOpenFiles": [
-    "Envirompment/DataGrip.md",
     "Envirompment/WebStorm.md",
+    "Envirompment/DataGrip.md",
     "Development/Tailwind CSS.md",
     "Development/SOLID принципы.md",
     "Development/REST API.md",
