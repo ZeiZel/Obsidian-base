@@ -186,7 +186,46 @@ npm install eslint-plugin-react-hooks --save-dev
 
 ![](_png/Pasted%20image%2020221227160550.png)
 
-### 006 Компонент рейтинга - 1
+### 006 Компонент рейтинга
+
+Так выглядит структура рейтинга:
+
+![](_png/Pasted%20image%2020230105173334.png)
+
+Добавим в вебпак возможность парсить svg иконки, которые были добавлены прямо в `jsx` файлы
+
+`next.config.js`
+```JS
+module.exports = {
+	images: {
+		domains: ['courses-top.ru']
+	},
+	webpack(config, options) {
+		config.module.rules.push({
+			loader: '@svgr/webpack',
+			issuer: /\.[jt]sx?$/,
+			options: {
+				prettier: false,
+				svgo: true,
+				svgoConfig: {
+					plugins: [{
+						name: 'preset-default',
+						params: {
+							override: {
+								removeViewBox: false
+							}
+						}
+					}],
+				},
+				titleProp: true,
+			},
+			test: /\.svg$/,
+		});
+
+		return config;
+	},
+};
+```
 
 Пропсы будут в себя принимать проверку на то, изменяемый ли это рейтинг, само число рейтинга и возможность установки своего рейтинга
 
@@ -194,7 +233,7 @@ npm install eslint-plugin-react-hooks --save-dev
 ```TS
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-export interface IRatingProps
+export interface RatingProps 
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	isEditable?: boolean;
 	rating: number;
@@ -206,12 +245,15 @@ export interface IRatingProps
 
 `Raiting.module.scss`
 ```SCSS
-.filled {
-	fill: var(--primary) !important;
+.filled svg {
+	fill: var(--primary);
 }
 
-.star {
+.star svg {
 	margin-right: 5px;
+}
+
+.editable {
 	cursor: pointer;
 }
 ```
@@ -220,18 +262,13 @@ export interface IRatingProps
 
 `Raiting.tsx`
 ```TSX
-import React, { useEffect, useState } from 'react';
-import { IRatingProps } from './Rating.props';
-import styles from './Rating.module.scss';
+import { RatingProps } from './Rating.props';
+import styles from './Rating.module.css';
 import cn from 'classnames';
-import Image from 'next/image';
+import StarIcon from './star.svg';
+import { useEffect, useState, KeyboardEvent } from 'react';
 
-export const Rating = ({
-	rating,
-	setRating,
-	isEditable = false,
-	...props
-}: IRatingProps): JSX.Element => {
+export const Rating = ({ isEditable = false, rating, setRating, ...props }: RatingProps): JSX.Element => {
 	// заполняем массив пустыми JSX-элементами
 	const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
 
@@ -245,49 +282,97 @@ export const Rating = ({
 		// это новый массив из элементов со звёздочкой
 		const updatedArray = ratingArray.map((r: JSX.Element, i: number) => {
 			return (
-				<Image
-					src="/star.svg"
-					width={20}
-					height={20}
-					alt="img"
+				<span
 					className={cn(styles.star, {
 						[styles.filled]: i < currentRating,
+						[styles.editable]: isEditable
 					})}
-				/>
+					onMouseEnter={() => changeDispay(i + 1)}
+					onMouseLeave={() => changeDispay(rating)}
+					onClick={() => onClick(i + 1)}
+				>
+					<StarIcon
+
+						tabIndex={isEditable ? 0 : -1}
+						onKeyDown={(e: KeyboardEvent<SVGElement>) => isEditable && handleSpace(i + 1, e)}
+					/>
+				</span>
+
 			);
 		});
-
+		
 		// устанавливаем обновлённый массив в рейтинг
 		setRatingArray(updatedArray);
 	};
 
+	const changeDispay = (i: number) => {
+		if (!isEditable) {
+			return;
+		}
+		constructRating(i);
+	};
+
+	const onClick = (i: number) => {
+		if (!isEditable || !setRating) {
+			return;
+		}
+		setRating(i);
+	};
+
+	const handleSpace = (i: number, e: KeyboardEvent<SVGElement>) => {
+		if (e.code != 'Space' || !setRating) {
+			return;
+		}
+		setRating(i);
+	};
+
 	return (
 		<div {...props}>
-			{ratingArray.map((r, i) => (
-				<span key={i}>{r}</span>
-			))}
+			{ratingArray.map((r, i) => (<span key={i}>{r}</span>))}
 		</div>
 	);
 };
 ```
 
+Экспортируем наш рейтинг из индекс-файла, чтобы до него можно было ближе достать из страниц некста
+
 `index.ts`
 ```TS
+export * from './Htag/Htag';
+export * from './Button/Button';
+export * from './P/P';
+export * from './Tag/Tag';
+// добавляем рейтинг
 export * from './Rating/Rating';
 ```
 
+И мы должны расположить компонент рейтинга на основной странице приложения 
+
 `index.tsx`
 ```TSX
-<Rating rating={4} />
+export default function Home(): JSX.Element {
+	const [rating, setRating] = useState<number>(4);
+
+	return (
+		<>
+			<Htag tag='h1'>Заголовок</Htag>
+			<Button appearance='primary' arrow='right'>Кнопка</Button>
+			<Button appearance='ghost' arrow='down'>Кнопка</Button>
+			<P size='l'>Большой</P>
+			<P>Средний</P>
+			<P size='s'>Маленький</P>
+			<Tag size='s'>Ghost</Tag>
+			<Tag size='m' color='red'>Red</Tag>
+			<Tag size='s' color='green'>Green</Tag>
+			<Tag color='primary'>Green</Tag>
+			
+			{/* вставляем рейтинг на основную страницу */}
+			<Rating rating={rating} isEditable setRating={setRating} />
+		</>
+	);
+}
 ```
 
-![](_png/Pasted%20image%2020221227173617.png)
+Теперь мы имеем рейтинг, который изначально = 4,  и который мы можем спокойно менять
 
-### 007 Компонент рейтинга - 2
-
-
-
-
-
-
-
+![](_png/Pasted%20image%2020230105173905.png)
