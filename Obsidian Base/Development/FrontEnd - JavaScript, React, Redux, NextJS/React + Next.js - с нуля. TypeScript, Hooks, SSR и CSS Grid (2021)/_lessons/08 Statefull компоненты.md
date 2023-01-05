@@ -284,11 +284,15 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
 			return (
 				<span
 					className={cn(styles.star, {
+						// завёздочки заполняются до i, пока он не б
 						[styles.filled]: i < currentRating,
 						[styles.editable]: isEditable
 					})}
+					// фукнция при наведении мыши
 					onMouseEnter={() => changeDispay(i + 1)}
+					// функция, которая сработает при уходе мыши - покажет исходный рейтинг
 					onMouseLeave={() => changeDispay(rating)}
+					// при клике рейтинг установится в данное число, которое мы выбрали
 					onClick={() => onClick(i + 1)}
 				>
 					<StarIcon
@@ -305,13 +309,18 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
 		setRatingArray(updatedArray);
 	};
 
+	// функция изменения отображения
 	const changeDispay = (i: number) => {
+		// Если компонент не редактируется, то просто возвращаемся
 		if (!isEditable) {
 			return;
 		}
+
+		// перестраиваем рейтинг, если он редактируемый 
 		constructRating(i);
 	};
 
+	// 
 	const onClick = (i: number) => {
 		if (!isEditable || !setRating) {
 			return;
