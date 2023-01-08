@@ -241,7 +241,7 @@ export interface RatingProps
 }
 ```
 
-Стили для иконки рейтинга:
+Стили для иконки рейтинга (тут стили сделаны с учётом того, что иконка находится внутри `<span>`):
 
 `Raiting.module.scss`
 ```SCSS
@@ -258,7 +258,7 @@ export interface RatingProps
 }
 ```
 
-Сам компонент будет через `useState` хранить в себе элементы рейтинга, а `useEffect` будет триггерить создание массива рейтинга
+Сам компонент будет через `useState` хранить в себе элементы рейтинга, а `useEffect` будет триггерить создание массива рейтинга. 
 
 `Raiting.tsx`
 ```TSX
@@ -266,6 +266,7 @@ import { RatingProps } from './Rating.props';
 import styles from './Rating.module.css';
 import cn from 'classnames';
 import StarIcon from './star.svg';
+// нужно обратить внимание, что у реакта есть свой ивент на нажатие клавиш и пользоваться тут нужно им
 import { useEffect, useState, KeyboardEvent } from 'react';
 
 export const Rating = ({ isEditable = false, rating, setRating, ...props }: RatingProps): JSX.Element => {
@@ -296,8 +297,9 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
 					onClick={() => onClick(i + 1)}
 				>
 					<StarIcon
-
+						{/* устанавливаем индекс таба для его нормальной работы */}
 						tabIndex={isEditable ? 0 : -1}
+						{/* при нажатии кнопки, если компонент редактируемый, то у нас срабатывает функция хэндла пробела */}
 						onKeyDown={(e: KeyboardEvent<SVGElement>) => isEditable && handleSpace(i + 1, e)}
 					/>
 				</span>
@@ -320,21 +322,28 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
 		constructRating(i);
 	};
 
-	// 
+	// эта фукнция будет отвечать за установку рейтинга
 	const onClick = (i: number) => {
+		// если рейитнг нередактируемый и у него нет установки рейтинга, то ничего не далаем 
 		if (!isEditable || !setRating) {
 			return;
 		}
+		// в противном случае - устанавливаем новый рейтинг
 		setRating(i);
 	};
 
+	// эта функция позволит нам переходить внутри рейтинга по табу и выбираать нужное значение через пробел
 	const handleSpace = (i: number, e: KeyboardEvent<SVGElement>) => {
+		// если нажали не space, то выходим из функции
 		if (e.code != 'Space' || !setRating) {
 			return;
 		}
+	
+		// в противном случае, нам нужно будет установить новый рейтинг 
 		setRating(i);
 	};
 
+	// и тут мы возвращаем массив звёздочек рейтинга
 	return (
 		<div {...props}>
 			{ratingArray.map((r, i) => (<span key={i}>{r}</span>))}
@@ -342,6 +351,10 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
 	);
 };
 ```
+
+Добавили мы `<StarIcon/>` внутрь `<span><span/>` для того, чтобы курсор поинтер оставался на протяжении всего хождения по рейтингу (если оставить просто иконки, то поинтер будет спадать в марджинах между иконками)
+
+![](_png/Pasted%20image%2020230108194437.png)
 
 Экспортируем наш рейтинг из индекс-файла, чтобы до него можно было ближе достать из страниц некста
 
@@ -360,6 +373,7 @@ export * from './Rating/Rating';
 `index.tsx`
 ```TSX
 export default function Home(): JSX.Element {
+	// установим изначальное состояние для рейтинга
 	const [rating, setRating] = useState<number>(4);
 
 	return (
