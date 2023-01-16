@@ -21,12 +21,87 @@
 
 ## 002 Layout
 
+Определимся с тем, что у нас есть  макете:
+- Боковая панель (которая скрывается на мобильной версии сайта)
+- основная контентная панель
+- Футер
+- Хедер (который показывается на мобилке)
+
+![](_png/Pasted%20image%2020230116103605.png)
+
+Элементы лейаута можно расположить в отдельной папке и выделить как отдельные элементы
+
+![](_png/Pasted%20image%2020230116110821.png)
 
 
 
+`Layout.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 
+export interface ILayoutProps {
+	children: ReactNode;
+}
+```
 
+`Layout.tsx`
+```TSX
+import React from 'react';
+import styles from 'Layout.module.css';
+import cn from 'classnames';
+import { ILayoutProps } from './Layout.props';
+import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
+import { Sidebar } from './Sidebar/Sidebar';
 
+export const Layout = ({ children }: ILayoutProps) => {
+	return (
+		<>
+			<Header />
+			<div>
+				<Sidebar />
+				<div>{children}</div>
+			</div>
+			<Footer />
+		</>
+	);
+};
+```
+
+И теперь мы можем обернуть наш основной код в `Layout` компонент
+
+`index.tsx`
+```TSX
+export default function Home(): JSX.Element {
+	const [rating, setRating] = useState<number>(4);
+
+	return (
+		<Layout>
+			<Htag tag='h1'>Заголовок</Htag>
+			<Button appearance='primary' arrow='right'>
+				Кнопка
+			</Button>
+			<Button appearance='ghost' arrow='down'>
+				Кнопка
+			</Button>
+			<P size='l'>Большой</P>
+			<P>Средний</P>
+			<P size='s'>Маленький</P>
+			<Tag size='s'>Ghost</Tag>
+			<Tag size='m' color='red'>
+				Red
+			</Tag>
+			<Tag size='s' color='green'>
+				Green
+			</Tag>
+			<Tag color='primary'>Green</Tag>
+			<Rating rating={rating} isEditable setRating={setRating} />
+		</Layout>
+	);
+}
+```
+
+![](_png/Pasted%20image%2020230116110734.png)
 
 ## 003 Пишем HOC withLayout
 
