@@ -171,12 +171,121 @@ export default function Home(): JSX.Element {
 
 ## 003 Пишем HOC withLayout
 
-Теперь уже будет писаться сам `HOC` компонент, который будет дополнять наш макет дополнительным функционалом 
+Теперь уже будет писаться сам `HOC` компонент, который будет дополнять наш макет дополнительным функционалом. 
 
+Конкретно сейчас будем экспортировать компонент `withLayout`, который в себя принимает другой компонент `Component` и рендерит его внутри `Layout` 
 
+`Layout.tsx`
+```TSX
+import React, { FunctionComponent } from 'react';
+import styles from 'Layout.module.css';
+import cn from 'classnames';
+import { ILayoutProps } from './Layout.props';
+import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
+import { Sidebar } from './Sidebar/Sidebar';
 
+const Layout = ({ children }: ILayoutProps) => {
+	return (
+		<>
+			<Header />
+			<div>
+				<Sidebar />
+				<div>{children}</div>
+			</div>
+			<Footer />
+		</>
+	);
+};
 
+export const withLayout = <T extends Record<string, unknown>>(Component: FunctionComponent<T>) => {
+	return function withLayoutComponent(props: T): JSX.Element {
+		return (
+			<Layout>
+				<Component {...props} />
+			</Layout>
+		);
+	};
+};
+```
 
+==Как было:==
 
+Мы оборачивали все внутренности компонента `Home` внутрь `Layout`
 
+*Тут изначально мы экспортируем дефолтно нашу функцию, которая рендерится первой (ввиду того, что она индексная).*
 
+`pages > index.tsx`
+```TSX
+import React, { useState } from 'react';
+import { Button, Htag, P, Rating, Tag } from '../components';
+import { Layout } from '../layout/Layout';
+
+export default function Home(): JSX.Element {
+	const [rating, setRating] = useState<number>(4);
+
+	return (
+		<Layout>
+			<Htag tag='h1'>Заголовок</Htag>
+			<Button appearance='primary' arrow='right'>
+				Кнопка
+			</Button>
+			<Button appearance='ghost' arrow='down'>
+				Кнопка
+			</Button>
+			<P size='l'>Большой</P>
+			<P>Средний</P>
+			<P size='s'>Маленький</P>
+			<Tag size='s'>Ghost</Tag>
+			<Tag size='m' color='red'>
+				Red
+			</Tag>
+			<Tag size='s' color='green'>
+				Green
+			</Tag>
+			<Tag color='primary'>Green</Tag>
+			<Rating rating={rating} isEditable setRating={setRating} />
+		</Layout>
+	);
+}
+```
+
+==Как стало:==
+Сейчас мы рендерим дефолтно нашу функцию, которая была вложена в другой `HOC`-компонент. 
+Тут мы вкладываем сам компонент в `HOC`, а не его внутренности в другой такой же компонент (не в обычный функциональный, а в `HOC`)
+
+```TSX
+import React, { useState } from 'react';
+import { Button, Htag, P, Rating, Tag } from '../components';
+import { withLayout } from '../layout/Layout';
+
+function Home(): JSX.Element {
+	const [rating, setRating] = useState<number>(4);
+
+	return (
+		<>
+			<Htag tag='h1'>Заголовок</Htag>
+			<Button appearance='primary' arrow='right'>
+				Кнопка
+			</Button>
+			<Button appearance='ghost' arrow='down'>
+				Кнопка
+			</Button>
+			<P size='l'>Большой</P>
+			<P>Средний</P>
+			<P size='s'>Маленький</P>
+			<Tag size='s'>Ghost</Tag>
+			<Tag size='m' color='red'>
+				Red
+			</Tag>
+			<Tag size='s' color='green'>
+				Green
+			</Tag>
+			<Tag color='primary'>Green</Tag>
+			<Rating rating={rating} isEditable setRating={setRating} />
+		</>
+	);
+}
+
+export default withLayout(Home);
+```
