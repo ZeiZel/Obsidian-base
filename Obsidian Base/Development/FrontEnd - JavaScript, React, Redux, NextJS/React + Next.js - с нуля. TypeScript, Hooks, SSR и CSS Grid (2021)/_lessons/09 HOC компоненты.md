@@ -27,23 +27,85 @@
 - Футер
 - Хедер (который показывается на мобилке)
 
+Чтобы поддерживать одинаковый макет на всех страницах, мы можем создать отдальный компонент, который будет определять, как уже будет выглядеть наш макет. Конкретно: он отобразит, как элементы должны будут располагаться на странице.
+
 ![](_png/Pasted%20image%2020230116103605.png)
 
-Элементы лейаута можно расположить в отдельной папке и выделить как отдельные элементы
+Элементы лейаута можно расположить в отдельной папке, а не складировать вместе с компонентами
 
 ![](_png/Pasted%20image%2020230116110821.png)
 
 
 
+
+```TSX
+/// Footer props
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export interface IFooterProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+/// Footer .tsx
+import React from 'react';
+import styles from 'Header.module.css';
+import cn from 'classnames';
+import { IFooterProps } from './Footer.props';
+
+export const Footer = ({ ...props }: IFooterProps) => {
+	return <div {...props}>Footer</div>;
+};
+
+
+
+/// Header props
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+export interface IHeaderProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+/// Header .tsx
+import React from 'react';
+import styles from 'Header.module.css';
+import cn from 'classnames';
+import { IHeaderProps } from './Header.props';
+
+export const Header = ({ ...props }: IHeaderProps) => {
+	return <div {...props}>Header</div>;
+};
+
+
+
+/// Sidebar props
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export interface ISidebarProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+/// Sidebar .tsx
+import React from 'react';
+import styles from 'Sidebar.module.css';
+import cn from 'classnames';
+import { ISidebarProps } from './Sidebar.props';
+
+export const Sidebar = ({ ...props }: ISidebarProps) => {
+	return <div {...props}>Sidebar</div>;
+};
+```
+
+А уже так выглядит сам `Layout`:
+
+Экстендить данные пропсы див-элементами мы не будем, чтобы сохранять относительную прозрачность данного компонента
+
 `Layout.props.ts`
 ```TS
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export interface ILayoutProps {
 	children: ReactNode;
 }
 ```
 
+Конкретно тут в качестве параметра `children` будут приниматься все компоненты и вставляться в `div`
+ 
 `Layout.tsx`
 ```TSX
 import React from 'react';
@@ -68,7 +130,7 @@ export const Layout = ({ children }: ILayoutProps) => {
 };
 ```
 
-И теперь мы можем обернуть наш основной код в `Layout` компонент
+И теперь мы можем обернуть наш основной код в `Layout` компонент, который принимает в себя все остальные компоненты системы
 
 `index.tsx`
 ```TSX
