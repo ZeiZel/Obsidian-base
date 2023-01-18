@@ -534,6 +534,22 @@
           "lastUpdated": 1674040690698
         }
       }
+    },
+    "grid-column": {
+      "grid-column": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674050488122
+        }
+      }
+    },
+    "grid-column-start": {
+      "grid-column-start": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1674050496327
+        }
+      }
     }
   }
 }
