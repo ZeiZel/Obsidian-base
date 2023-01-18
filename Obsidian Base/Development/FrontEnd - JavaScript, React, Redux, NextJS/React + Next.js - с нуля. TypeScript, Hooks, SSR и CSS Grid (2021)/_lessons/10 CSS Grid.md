@@ -222,19 +222,102 @@ body {
 
 ![](_png/Pasted%20image%2020230118124600.png)
 
+Свойство `justify-items` определяет расположение элементов по оси `X`
+`stretch` - свойство по умолчанию
 
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
 
+	justify-items: stretch;
+}
+```
+![](_png/Pasted%20image%2020230118135716.png)
 
+Так же мы можем задать любую другую сторону через `left/right` или `flex`
+Небольшое дополнение: *значения left и flex-start имеют немного разное значение. Если нам нужно будет сделать мультиязычный сайт (например, на английском и арабском), то старт для арабов будет справа (справа-налево), а для англо-саксов слева (чтение слева-направо)* 
 
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
 
+	justify-items: left; /* или flex-start */
+}
+```
 
+![](_png/Pasted%20image%2020230118135209.png)
 
+`center` отцентрирует объекты
 
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
 
+	justify-items: center;
+}
+```
+![](_png/Pasted%20image%2020230118135638.png)
 
+Дальше идёт свойство `align-items`, которое меняет положение объекта по оси `Y`
 
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
+	justify-items: stretch;
 
+	align-items: flex-end;
+}
+```
 
+`flex-end`
+![](_png/Pasted%20image%2020230118140020.png)
+
+`center`
+![](_png/Pasted%20image%2020230118140107.png)
+
+`flex-start` - прибьёт элементы кверху ячеек
+![](_png/Pasted%20image%2020230118140209.png)
+
+`stretch` - столбцы растянуты
+![](_png/Pasted%20image%2020230118140215.png)
+
+Свойство `align-content` уже двигает не просто сами элементы внутри ячеек сетки, а деформирует саму сетку
+
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
+
+	align-content: flex-end;
+}
+```
+
+`flex-start`
+![](_png/Pasted%20image%2020230118140544.png)
+
+`flex-end`
+![](_png/Pasted%20image%2020230118140547.png)
+
+`center`
+![](_png/Pasted%20image%2020230118140550.png)
+
+`space-around` - создаёт равномерные отступы между всеми элементами, включая отступы от начала таблицы
+![](_png/Pasted%20image%2020230118140816.png)
+
+`space-between` - создаёт отступы только между элементами сетки без отступов от таблицы
+![](_png/Pasted%20image%2020230118140819.png)
+
+`space-evenly` - создаёт равномерные отступы в пространстве
+![](_png/Pasted%20image%2020230118141021.png)
 
 
 
