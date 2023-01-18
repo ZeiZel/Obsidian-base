@@ -319,13 +319,35 @@ body {
 `space-evenly` - создаёт равномерные отступы в пространстве
 ![](_png/Pasted%20image%2020230118141021.png)
 
+`justify-content` работает ровно так же как и прошлое, но по горизонтали
 
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
 
+	justify-content: center;
+}
+```
 
+Дальше уже идут свойства, которые позволят расположить элементы отдельно конкретно под себя:
+- `align-self` - выравнит элемент по вертикали
+- `justify-self` - выравнит по горизонтали
 
+```CSS
+.container {
+	display: grid;
+	height: 500px;
+	border: 2px solid white;
+}
 
-
-
+.c1 {
+	justify-self: end;
+	align-self: start;
+}
+```
+![](_png/Pasted%20image%2020230118141703.png)
 
 ## 004 Распределение ячеек
 
