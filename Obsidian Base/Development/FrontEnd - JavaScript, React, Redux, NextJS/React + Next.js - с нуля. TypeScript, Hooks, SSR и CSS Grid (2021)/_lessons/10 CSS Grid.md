@@ -351,6 +351,35 @@ body {
 
 ## 004 Распределение ячеек
 
+Начальный сетап:
+
+```CSS
+.container {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: 100px;
+}
+
+.container > div {
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+	border: 2px solid #fe7a71;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+```
+
+![](_png/Pasted%20image%2020230118153805.png)
+
+
+
+
+
+
+
 
 
 
