@@ -462,6 +462,30 @@
           "lastUpdated": 1673882533225
         }
       }
+    },
+    "grid-template-columns": {
+      "grid-template-columns": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674033726605
+        }
+      }
+    },
+    "repeat": {
+      "repeat": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674034498603
+        }
+      }
+    },
+    "grid-auto-rows": {
+      "grid-auto-rows": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674034546555
+        }
+      }
     }
   }
 }
