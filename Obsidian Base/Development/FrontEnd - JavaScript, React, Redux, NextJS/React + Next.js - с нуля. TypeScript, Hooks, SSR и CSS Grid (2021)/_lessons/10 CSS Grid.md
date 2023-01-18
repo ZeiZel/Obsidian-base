@@ -1,3 +1,5 @@
+#CSS #CSSGrid 
+
 ## 001 Обзор модуля
 
 >[!info] Плюсы `CSS Grid`:
@@ -74,6 +76,109 @@ body {
 ```
 
 ![](_png/Pasted%20image%2020230118103818.png)
+
+
+
+
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+}
+```
+
+![](_png/Pasted%20image%2020230118115338.png)
+
+
+
+
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: 10% auto 10%;
+}
+```
+
+![](_png/Pasted%20image%2020230118115434.png)
+
+
+
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+}
+```
+
+![](_png/Pasted%20image%2020230118115557.png)
+
+
+
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 200px 200px;
+}
+```
+
+![](_png/Pasted%20image%2020230118115749.png)
+
+Но как можно увидеть, если не описать свойства для всех колонок, которые в будущем могут появиться, то они будут иметь дефолтный размер (под размер контента)
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 200px 200px; /* широкими остаются только первые две колонки */
+}
+```
+
+![](_png/Pasted%20image%2020230118115859.png)
+
+Свойство `grid-auto-rows` позволяет назначить для всех незатронутых другими свойствами строк своё значение размеров
+Мы изменили размер первых двух строк на 120 пикселей, а все остальные уже будут по 50 пикселей
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 120px 120px;
+	grid-auto-rows: 50px;
+}
+```
+
+![](_png/Pasted%20image%2020230118120201.png)
+
+
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+```
+
+![](_png/Pasted%20image%2020230118120755.png)
+
+![](_png/Pasted%20image%2020230118120759.png)
+
+![](_png/Pasted%20image%2020230118120801.png)
+
+
+
+```CSS
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+```
+
+![](_png/Pasted%20image%2020230118120952.png)
 
 
 
