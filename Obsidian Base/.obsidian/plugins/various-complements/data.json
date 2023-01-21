@@ -47,94 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "присутствовать": {
-      "присутствовать": {
-        "currentFile": {
-          "count": 4,
-          "lastUpdated": 1671552322842
-        }
-      }
-    },
-    "transition": {
-      "transition": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1671542131635
-        }
-      }
-    },
-    "DEFAULT": {
-      "DEFAULT": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671552632416
-        }
-      }
-    },
-    "@default": {
-      "@default": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671639537998
-        }
-      }
-    },
-    "autoincrement": {
-      "autoincrement": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671639545716
-        }
-      }
-    },
-    "migrate": {
-      "migrate": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671639660379
-        }
-      }
-    },
-    "инициализировать": {
-      "инициализировать": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671643267563
-        }
-      }
-    },
-    "Tailwind": {
-      "Tailwind": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671643607706
-        }
-      }
-    },
-    "тэилвинд": {
-      "тэилвинд": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671645598631
-        }
-      }
-    },
-    "addComponents": {
-      "addComponents": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671645712650
-        }
-      }
-    },
-    "addUtilities": {
-      "addUtilities": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671645767003
-        }
-      }
-    },
     "Unsupported": {
       "Unsupported": {
         "currentFile": {
@@ -548,6 +460,14 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1674050496327
+        }
+      }
+    },
+    "grid-template": {
+      "grid-template": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674293474873
         }
       }
     }

@@ -464,14 +464,160 @@ c1 {
 
 ## 005 Template-area
 
+Начальный тесплейт:
+
+```CSS
+.container {
+	display: grid;
+	padding: 10px;
+	
+	gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+```
+
+![](_png/Pasted%20image%2020230121115328.png)
+
+Свойство `grid-area` позволяет указать на какой линии начинать и на какой заканчивать:
+*начало по вертикали / начало по горизонтали / конец по вертикали / конец по горизонтали*
+
+```CSS
+.container {
+	display: grid;
+
+	padding: 10px;
+
+	gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+.header {
+	grid-area: 1 / 1 / 3 / 4;
+}
+```
+
+![](_png/Pasted%20image%2020230121115304.png)
 
 
 
 
 
+```CSS
+.container {
+	display: grid;
+	padding: 10px;
+
+	gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+
+	grid-template-areas:
+		'header header header'
+		'sidebar body body'
+		'footer footer footer';
+}
+
+.header {
+	grid-area: header;
+}
+
+.sidebar {
+	grid-area: sidebar;
+}
+
+.body {
+	grid-area: body;
+}
+
+.footer {
+	grid-area: footer;
+}
+```
+
+![](_png/Pasted%20image%2020230121122146.png)
 
 
 
+
+
+```CSS
+@media (max-width: 720px) {
+	.container {
+		display: grid;
+		padding: 10px;
+
+		gap: 10px;
+		grid-template-columns: 1fr 1fr 1fr;
+
+		grid-template-areas:
+			'header header header'
+			'body body body'
+			'sidebar sidebar sidebar'
+			'footer footer footer';
+	}
+}
+```
+
+![](_png/Pasted%20image%2020230121122458.png)
+
+Либо мы можем сделать вообще одноколоночную сетку и получить тот же результат, что представлен выше
+
+```CSS
+@media (max-width: 720px) {
+	.container {
+		display: grid;
+		padding: 10px;
+
+		gap: 10px;
+		grid-template-columns: 1fr;
+
+		grid-template-areas:
+			'header'
+			'body'
+			'sidebar'
+			'footer';
+	}
+}
+```
+
+
+
+
+```CSS
+.container {
+	display: grid;
+	padding: 10px;
+
+	gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+
+	grid-template-areas:
+		'header header header'
+		'sidebar body body'
+		'. footer footer';
+}
+```
+![](_png/Pasted%20image%2020230121122744.png)
+
+Чтобы упростить и ускорить запись, можно воспользоваться записью `grid-template`, которая принимает в себя: 
+*шаблон строки* **размер в px** / *распределение колонок*    
+
+```CSS
+.container {
+	display: grid;
+	padding: 10px;
+
+	gap: 10px;
+	grid-template:
+		'header header header' 100px
+		'sidebar body body' 150px
+		'. footer footer' 200px
+		/ 1fr 1fr 1fr;
+}
+```
+
+![](_png/Pasted%20image%2020230121123015.png)
 
 ## 006 Лучшие практики
 
