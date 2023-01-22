@@ -742,7 +742,9 @@ export const withLayout = <T extends Record<string, unknown>>(Component: Functio
 
 
 
-
+```bash
+npm i date-fns
+```
 
 
 
