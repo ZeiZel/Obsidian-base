@@ -740,16 +740,72 @@ export const withLayout = <T extends Record<string, unknown>>(Component: Functio
 
 ## 008 Упражнение - Вёрстка footer
 
-
+Установим модуль для форматирования даты
 
 ```bash
 npm i date-fns
 ```
 
+Сюда будут добавлены просто три даты. 
+Для поддержания даты прав на сайт, будет создаваться всегда новая дата, от которой мы будем брать только год с помощью функции `format()`.
+Чтобы при нажатии на ссылку, она открывалась в другом окне, нужно добавить в неё `target='_blank'`
 
+`Footer.tsx`
+```TSX
+import React from 'react';
+import styles from './Footer.module.css';
+import cn from 'classnames';
+import { IFooterProps } from './Footer.props';
+import { format } from 'date-fns';
 
+export const Footer = ({ className, ...props }: IFooterProps) => {
+	return (
+		<footer className={cn(className, styles.footer)} {...props}>
+			<div>OwlTop © 2020 - {format(new Date(), 'yyyy')} Все права защищены</div>
+			<a href='#' target='_blank'>
+				Пользовательское соглашение
+			</a>
+			<a href='#' target='_blank'>
+				Политика конфиденциальности
+			</a>
+		</footer>
+	);
+};
+```
 
+Тут мы поделили сетку футера на три колонки, которые в планшетной версии трансформируются в одну. Так же добавлена анимация на наведение мышки.
 
+`Footer.module.css`
+```CSS
+.footer {
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	gap: 10px 40px;
 
+	color: var(--white);
+	font-size: 16px;
+	line-height: 20px;
 
+	background: var(--primary);
+	padding: 25px 30px;
+}
 
+.footer a:hover {
+	transition: all 0.2s;
+	color: var(--gray);
+}
+
+@media (max-width: 765px) {
+	.footer {
+		grid-template-columns: 1fr;
+	}
+}
+```
+
+Версия для десктопа (не имеет хедера, но имеет сайдбар)
+
+![](_png/Pasted%20image%2020230122170747.png)
+
+Версия для планшетов (имеет хедер, но без сайдбара)
+
+![](_png/Pasted%20image%2020230122170754.png)

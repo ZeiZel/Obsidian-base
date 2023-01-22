@@ -47,22 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "Unsupported": {
-      "Unsupported": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671726826901
-        }
-      }
-    },
-    "userId": {
-      "userId": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671729825909
-        }
-      }
-    },
     "@unique": {
       "@unique": {
         "currentFile": {
@@ -468,6 +452,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1674293474873
+        }
+      }
+    },
+    "target": {
+      "target": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674396602273
         }
       }
     }
