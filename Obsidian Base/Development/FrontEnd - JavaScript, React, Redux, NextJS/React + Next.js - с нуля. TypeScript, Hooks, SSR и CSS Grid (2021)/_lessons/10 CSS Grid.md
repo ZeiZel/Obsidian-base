@@ -636,6 +636,34 @@ c1 {
 
 ## 007 Вёрстка layout
 
+Первым делом нужно добавить стили в компонент `Layout` и так же вместо фрагмента сейчас использовать `wrapper` для всего контента
+
+`Layout.tsx`
+```TSX
+const Layout = ({ children }: ILayoutProps) => {
+	return (
+		<div className={styles.wrapper}>
+			<Header className={styles.header} />
+			<Sidebar className={styles.sidebar} />
+			<div className={styles.body}>{children}</div>
+			<Footer className={styles.footer} />
+		</div>
+	);
+};
+
+export const withLayout = <T extends Record<string, unknown>>(Component: FunctionComponent<T>) => {
+	return function withLayoutComponent(props: T): JSX.Element {
+		return (
+			<Layout>
+				<Component {...props} />
+			</Layout>
+		);
+	};
+};
+```
+
+Далее нужно сверстать сетку и адаптив страницы.
+
 Глобально на странице мы имеем 3 строки: 
 - `Header` - скрыт на десктопах, занимает ширину равную контентной части
 - `Sidebar`/`Body` - сама контентная часть
@@ -650,18 +678,65 @@ c1 {
 - Пустую для растягивания (самая правая)
 Пустые колонки будут иметь размер `auto`, чтобы они спокойно растягивались под ширину экрана пользователя. В них не будет никакого контента - они предназначены лишь для возможности растягивания страницы
 
+`Layout.module.css`
+```CSS
+.wrapper {
+	display: grid;
 
+	/* Растянет сетку на всю страницу */
+	min-height: 100vh;
 
+	/* определит ширину колонок - слева и справа для растягивания сайта */
+	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
+	/* определит высоту колонок - хедер и футер под размер контента */
+	grid-template-rows: auto 1fr auto;
+	/* определит шаблон расположения колонок - точки остаются под растягиваемые колонки*/
+	grid-template-areas:
+		'. header header .'
+		'. sidebar body .'
+		'footer footer footer footer';
+}
 
+.header {
+	/* скроем заголовок на десктопах */
+	display: none;
+	grid-area: header;
+}
 
+.body {
+	grid-area: body;
+}
 
+.sidebar {
+	grid-area: sidebar;
+}
 
+.footer {
+	grid-area: footer;
+}
 
+/* Адаптив под мобилки */
+@media (max-width: 765px) {
+	/* тут нужно перестроить колонки, так как после удаления сайдбара остаётся пустое пространство */
+	.wrapper {
+		grid-template-columns: minmax(320px, 1fr);
+		grid-template-areas:
+			'header'
+			'body'
+			'footer';
+	}
 
+	/* Показываем наш хедер */
+	.header {
+		display: block;
+	}
 
-
-
-
+	/* Скрываем сайдбар */
+	.sidebar {
+		display: none;
+	}
+}
+```
 
 ## 008 Упражнение - Вёрстка footer
 
