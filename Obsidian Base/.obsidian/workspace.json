@@ -166,6 +166,7 @@
   },
   "active": "684a7a77852c1d53",
   "lastOpenFiles": [
+    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
     "Development/Tailwind CSS.md",
@@ -174,7 +175,6 @@
     "Envirompment/DataGrip.md",
     "Development/SOLID принципы.md",
     "Development/REST API.md",
-    "Development/Prisma ORM.md",
-    "Development/NextJS - основы.md"
+    "Development/Prisma ORM.md"
   ]
 }
