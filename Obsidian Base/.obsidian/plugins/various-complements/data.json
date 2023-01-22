@@ -226,8 +226,8 @@
     "getStaticProps": {
       "getStaticProps": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1671989173972
+          "count": 6,
+          "lastUpdated": 1674407051875
         }
       }
     },
@@ -338,8 +338,8 @@
     "NextJS": {
       "NextJS": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672153233820
+          "count": 2,
+          "lastUpdated": 1674406093685
         }
       }
     },
@@ -476,6 +476,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1674404347612
+        }
+      }
+    },
+    "preview": {
+      "preview": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674406857005
         }
       }
     }
