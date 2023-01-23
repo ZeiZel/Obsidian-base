@@ -197,13 +197,15 @@ NEXT_PUBLIC_DOMAIN=https://owltop.ru
 
 ![](_png/Pasted%20image%2020230123141235.png)
 
-
-
-
-
 ## 004 Использование getStaticProps
 
 
+
+![](_png/Pasted%20image%2020230123142328.png)
+
+
+
+![](_png/Pasted%20image%2020230123142332.png)
 
 
 
