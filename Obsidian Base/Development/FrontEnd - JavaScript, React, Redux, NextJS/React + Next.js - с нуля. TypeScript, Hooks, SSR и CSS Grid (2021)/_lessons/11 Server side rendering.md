@@ -22,11 +22,11 @@
 
 ![](_png/Pasted%20image%2020230122172838.png)
 
-Создадим файл с локальными данными окружения и запишем в него домен
+Создадим файл с локальными данными окружения и запишем в него домен, по которому будем получать нужные для нас данные с сервера
 
 `.emv.local`
 ```env
-NEXT_PUBLIC_DOMAIN=https://owltop.ru
+NEXT_PUBLIC_DOMAIN=https://courses-top.ru
 ```
 
 ## 002 Как работает SSR
@@ -199,19 +199,139 @@ NEXT_PUBLIC_DOMAIN=https://owltop.ru
 
 ## 004 Использование getStaticProps
 
-
+Нужно написать `getStaticProps`, который бы получал элементы меню и дал нам их вывести
 
 ![](_png/Pasted%20image%2020230123142328.png)
 
-
+Элементы меню располагаются на сервере и по запросу возвращаются нам
 
 ![](_png/Pasted%20image%2020230123142332.png)
 
+Первым делом, нужно установить модуль, который будет осуществлять запросы на сервер
 
+```bash
+npm i axios
+```
 
+*Примечание*: можно написать интерфейсы для описания меню так:
 
+`src / interfaces / menu.interface.ts`
+```TS
+export interface Id {
+	secondCategory: string;
+}
 
+export interface Page {
+	alias: string;
+	title: string;
+	_id: string;
+	category: string;
+}
 
+export interface RootObject {
+	_id: Id;
+	pages: Page[];
+}
+```
+
+А можно убрать дополнительный уровень вложенности и не возиться с ним
+
+`src / interfaces / menu.interface.ts`
+```TS
+export interface Page {
+	alias: string;
+	title: string;
+	_id: string;
+	category: string;
+}
+
+export interface RootObject {
+	_id: {
+		secondCategory: string;
+	};
+	pages: Page[];
+}
+```
+
+На нашей главной странице создаём функцию `getStaticProps`, которая будет получать с сервера по определённому запросу тела нужные нам значения.
+Так же определим интерфейс `HomeProps`, который будет представлять пропсы главной страницы а также будет использоваться для дженерика функции `getStaticProps`.
+Далее на главной странице через функцию `map()` нужно вывести наши элементы меню
+
+`index.tsx`
+```TSX
+import { GetStaticProps } from 'next';
+import React, { useState } from 'react';
+import { Button, Htag, P, Rating, Tag } from '../components';
+import { withLayout } from '../layout/Layout';
+import axios from 'axios';
+import { MenuItem } from '../interfaces/menu.interface';
+
+// 3
+// сюда передаём пропсы, которые получили из гетСтатикПропсов
+function Home({ menu }: HomeProps): JSX.Element {
+	const [rating, setRating] = useState<number>(4);
+
+	return (
+		<>
+			<Htag tag='h1'>Заголовок</Htag>
+			<Button appearance='primary' arrow='right'>Кнопка</Button>
+			<Button appearance='ghost' arrow='down'>Кнопка</Button>
+			<P size='l'>Большой</P>
+			<P>Средний</P>
+			<P size='s'>Маленький</P>
+			<Tag size='s'>Ghost</Tag>
+			<Tag size='m' color='red'>Red</Tag>
+			<Tag size='s' color='green'>Green</Tag>
+			<Tag color='primary'>Green</Tag>
+			<Rating rating={rating} isEditable setRating={setRating} />
+
+			{/* Тут уже будет производиться вывод элементов меню, полученных с сервера через гетСтатикПропс */}	
+			<ul>
+				{menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
+			</ul>
+		</>
+	);
+}
+
+export default withLayout(Home);
+
+// 1
+// функция getStaticProps имеет тип GetStaticProps
+// GetStaticProps<тип> принимает в себя тип пропсов, которые принимает компонент Home
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+	
+	// запомним индекс первой категории`
+	const firstCategory = 0;
+	
+	// тут сразу переименуем полученную data в menu
+	const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+		firstCategory
+	});
+
+	// вернём меню
+	return {
+		props: {
+			menu,
+			firstCategory
+		}
+	};
+};
+
+// 2
+// чтобы не было ошибки, нужно добавить екстенд от рекорда
+interface HomeProps extends Record<string, unknown> {
+	menu: MenuItem[];
+	firstCategory: number;
+}
+```
+
+По итогу мы получаем страницу, на которую мы выводим наши пункты меню
+
+![](_png/Pasted%20image%2020230124181839.png)
+
+Тут уже находятся исходные данные, которые после отработки JS позволяют провести гидратацию 
+
+![](_png/Pasted%20image%2020230124181535.png)
 
 ## 005 Использование getStaticPaths
 

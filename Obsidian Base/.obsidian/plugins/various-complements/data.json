@@ -55,166 +55,6 @@
         }
       }
     },
-    "createdAt": {
-      "createdAt": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671792981875
-        }
-      }
-    },
-    "@@unique": {
-      "@@unique": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671793254008
-        }
-      }
-    },
-    "@@index": {
-      "@@index": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671793343240
-        }
-      }
-    },
-    "идентификатором": {
-      "идентификатором": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671793454124
-        }
-      }
-    },
-    "deleteMany": {
-      "deleteMany": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1671896581353
-        }
-      }
-    },
-    "include": {
-      "include": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1671891964140
-        }
-      }
-    },
-    "select": {
-      "select": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1671891960728
-        }
-      }
-    },
-    "createMany": {
-      "createMany": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671810799220
-        }
-      }
-    },
-    "age_name": {
-      "age_name": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671882561502
-        }
-      }
-    },
-    "findFirst": {
-      "findFirst": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671883009674
-        }
-      }
-    },
-    "orderBy": {
-      "orderBy": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671885478318
-        }
-      }
-    },
-    "equals": {
-      "equals": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671887416390
-        }
-      }
-    },
-    "startsWith": {
-      "startsWith": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671887674338
-        }
-      }
-    },
-    "userPreferences": {
-      "userPreferences": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671888465933
-        }
-      }
-    },
-    "every": {
-      "every": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671888691811
-        }
-      }
-    },
-    "increment": {
-      "increment": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671892555015
-        }
-      }
-    },
-    "decimal": {
-      "decimal": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671892558599
-        }
-      }
-    },
-    "multiply": {
-      "multiply": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671892568108
-        }
-      }
-    },
-    "updateMany": {
-      "updateMany": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1671892913996
-        }
-      }
-    },
-    "disconnect": {
-      "disconnect": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671894783304
-        }
-      }
-    },
     "getServerSideProps": {
       "getServerSideProps": {
         "currentFile": {
@@ -226,8 +66,8 @@
     "getStaticProps": {
       "getStaticProps": {
         "currentFile": {
-          "count": 6,
-          "lastUpdated": 1674407051875
+          "count": 8,
+          "lastUpdated": 1674573649310
         }
       }
     },
@@ -484,6 +324,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1674406857005
+        }
+      }
+    },
+    "гетСтатикПропсов": {
+      "гетСтатикПропсов": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674572791809
+        }
+      }
+    },
+    "HomeProps": {
+      "HomeProps": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674573618734
         }
       }
     }
