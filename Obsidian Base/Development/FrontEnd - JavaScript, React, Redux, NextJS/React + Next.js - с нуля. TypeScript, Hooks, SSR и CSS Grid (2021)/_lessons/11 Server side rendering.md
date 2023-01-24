@@ -338,4 +338,155 @@ interface HomeProps extends Record<string, unknown> {
 
 
 
+`src / interfaces / page.interface.ts`
+```TS
+export enum TopLevelCategory {
+	Courses,
+	Services,
+	Books,
+	Products
+}
+
+export interface TopPageAdvantage {
+	_id: string;
+	title: string;
+	description: string;
+}
+
+export interface HhData {
+	_id: string;
+	count: number;
+	juniorSalary: number;
+	middleSalary: number;
+	seniorSalary: number;
+	updatedAt: Date;
+}
+
+export interface TopPageModel {
+	tags: string[];
+	_id: string;
+	secondCategory: string;
+	alias: string;
+	title: string;
+	category: string;
+	seoText: string;
+	tagsTitle: string;
+	metaTitle: string;
+	metaDescription: string;
+	firstCategory: TopLevelCategory;
+	advantages: TopPageAdvantage[];
+	createdAt: Date;
+	updatedAt: Date;
+	hh: HhData;
+}
+```
+
+
+
+`src / interfaces / product.interface.ts`
+```TS
+export interface ProductCharacteristic {
+	value: string;
+	name: string;
+}
+
+export interface ReviewModel {
+	_id: string;
+	name: string;
+	title: string;
+	description: string;
+	rating: number;
+	createdAt: Date;
+}
+
+export interface ProductModel {
+	_id: string;
+	categories: string[];
+	tags: string[];
+	title: string;
+	link: string;
+	price: number;
+	credit: number;
+	oldPrice: number;
+	description: string;
+	characteristics: ProductCharacteristic[];
+	createdAt: Date;
+	updatedAt: Date;
+	__v: number;
+	image: string;
+	initialRating: number;
+	reviews: ReviewModel[];
+	reviewCount: number;
+	reviewAvg?: number;
+	advantages: string;
+}
+```
+
+
+
+`pages / courses / [alias].tsx`
+```TSX
+import { GetStaticPaths, GetStaticPathsContext, GetStaticProps, GetStaticPropsContext } from 'next';
+import React, { useState } from 'react';
+import { withLayout } from '../../layout/Layout';
+import axios from 'axios';
+import { MenuItem } from '../../interfaces/menu.interface';
+import { TopPageModel } from '../../interfaces/page.interface';
+import { ParsedUrlQuery } from 'node:querystring';
+import { ProductModel } from '../../interfaces/product.interface';
+
+const firstCategory = 0;
+
+function Course({ menu, page, products }: CourseProps): JSX.Element {
+	return (
+		<>
+			{products && products.length}
+		</>
+	);
+}
+
+export default withLayout(Course);
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+		firstCategory
+	});
+	return {
+		paths: menu.flatMap(m => m.pages.map(p => '/courses/' + p.alias)),
+		fallback: true
+	};
+};
+
+export const getStaticProps: GetStaticProps<CourseProps> = async ({ params }: GetStaticPropsContext<ParsedUrlQuery>) => {
+	if (!params) {
+		return {
+			notFound: true
+		};
+	}
+	const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+		firstCategory
+	});
+	const { data: page } = await axios.get<TopPageModel>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/byAlias/' + params.alias);
+	const { data: products } = await axios.post<ProductModel[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/product/find', {
+		category: page.category,
+		limit: 10
+	});
+
+	return {
+		props: {
+			menu,
+			firstCategory,
+			page,
+			products
+		}
+	};
+};
+
+interface CourseProps extends Record<string, unknown> {
+	menu: MenuItem[];
+	firstCategory: number;
+	page: TopPageModel;
+	products: ProductModel[];
+}
+```
 
