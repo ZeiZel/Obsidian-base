@@ -335,6 +335,9 @@ interface HomeProps extends Record<string, unknown> {
 
 ## 005 Использование getStaticPaths
 
+Чтобы быстро перевести ответ от сервера в интерфейсы TS, можно поискать сайты *"JSON to TS"*
+
+![](_png/Pasted%20image%2020230124184015.png)
 
 
 
