@@ -278,6 +278,14 @@
           "lastUpdated": 1674750348249
         }
       }
+    },
+    "useContext": {
+      "useContext": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1674751504399
+        }
+      }
     }
   }
 }
