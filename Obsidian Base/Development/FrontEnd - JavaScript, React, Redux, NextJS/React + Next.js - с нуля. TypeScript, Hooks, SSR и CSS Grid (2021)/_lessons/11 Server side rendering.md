@@ -351,6 +351,7 @@ interface HomeProps extends Record<string, unknown> {
 ![](_png/Pasted%20image%2020230126144223.png)
 
 Чтобы мы могли получить нужный нам курс по ссылке `site.com/courses/Photoshop`, то нам нужно создавать эту страницу в одноимённой папке. 
+Если мы пишем название страницы в скобках `[]`, то это скажет нексту, что название будет генерироваться автоматически 
 
 ![|400](_png/Pasted%20image%2020230126144248.png)
 
@@ -358,10 +359,15 @@ interface HomeProps extends Record<string, unknown> {
 
 ![](_png/Pasted%20image%2020230124184015.png)
 
+Примерно таким способом:
 
+![](_png/Pasted%20image%2020230126145752.png)
+
+Интерфейс для описания данных, которые принимает в себя страница, которая генерируется под определённый алиас
 
 `src / interfaces / page.interface.ts`
 ```TS
+// перечисления для значения firstCategory (по которой выводятся категории)
 export enum TopLevelCategory {
 	Courses,
 	Services,
@@ -375,6 +381,7 @@ export interface TopPageAdvantage {
 	description: string;
 }
 
+// Данные с хедхантера
 export interface HhData {
 	_id: string;
 	count: number;
@@ -384,6 +391,7 @@ export interface HhData {
 	updatedAt: Date;
 }
 
+// Модель страницы
 export interface TopPageModel {
 	tags: string[];
 	_id: string;
