@@ -411,15 +411,17 @@ export interface TopPageModel {
 }
 ```
 
-
+Далее представлен интерфейс продукта
 
 `src / interfaces / product.interface.ts`
 ```TS
+// характеристика продукта
 export interface ProductCharacteristic {
 	value: string;
 	name: string;
 }
 
+// Модель обзора продукта (отзыв на курс)
 export interface ReviewModel {
 	_id: string;
 	name: string;
@@ -429,6 +431,7 @@ export interface ReviewModel {
 	createdAt: Date;
 }
 
+// Модель продукта
 export interface ProductModel {
 	_id: string;
 	categories: string[];
