@@ -55,91 +55,11 @@
         }
       }
     },
-    "getServerSideProps": {
-      "getServerSideProps": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1671989167287
-        }
-      }
-    },
     "getStaticProps": {
       "getStaticProps": {
         "currentFile": {
-          "count": 8,
-          "lastUpdated": 1674573649310
-        }
-      }
-    },
-    "getStaticPaths": {
-      "getStaticPaths": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671987181597
-        }
-      }
-    },
-    "revalidate": {
-      "revalidate": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671989185314
-        }
-      }
-    },
-    "tailwind": {
-      "tailwind": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1671990124501
-        }
-      }
-    },
-    "className": {
-      "className": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672040873948
-        }
-      }
-    },
-    "имя_модуля": {
-      "имя_модуля": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672045083320
-        }
-      }
-    },
-    "classnames": {
-      "classnames": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1672055097694
-        }
-      }
-    },
-    "component": {
-      "component": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672054751522
-        }
-      }
-    },
-    "module": {
-      "module": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672054762716
-        }
-      }
-    },
-    "font-size": {
-      "font-size": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672071380085
+          "count": 9,
+          "lastUpdated": 1674750302269
         }
       }
     },
@@ -348,6 +268,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1674574600901
+        }
+      }
+    },
+    "getStaticPaths": {
+      "getStaticPaths": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674750348249
         }
       }
     }

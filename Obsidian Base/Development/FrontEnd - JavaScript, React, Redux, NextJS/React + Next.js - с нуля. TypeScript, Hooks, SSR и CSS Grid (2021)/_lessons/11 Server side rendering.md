@@ -455,14 +455,13 @@ export interface ProductModel {
 }
 ```
 
+И тут уже представлен код, который позволит нам переходить по ссылкам продуктов и получать разные результаты.
 
+Функция `getStaticProps` возвращает нам данные по страницам, на которые мы заходим и по продуктам, которые мы ищем.
+
+Функция `getStaticPaths` сгенерирует статичные пути для всех курсов, которые может вернуть нам сервер
 
 `pages / courses / [alias].tsx`
-```TSX
-
-```
-
-
 ```TSX
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import React, { useState } from 'react';
@@ -475,8 +474,8 @@ import { ProductModel } from '../../interfaces/product.interface';
 
 const firstCategory = 0;
 
-function Course({ menu }: CourseProps): JSX.Element {
-	return <></>;
+function Course({ menu, page, products }: CourseProps): JSX.Element {
+	return <>{products && products.length}</>;
 }
 
 export default withLayout(Course);
@@ -544,4 +543,16 @@ interface CourseProps extends Record<string, unknown> {
 	page: TopPageModel;
 	products: ProductModel[];
 }
+```
+
+И по переходу по нужному нам курсу, мы получим количество его продуктов
+
+![](_png/Pasted%20image%2020230126191511.png)
+
+Чтобы можно было сгенерировать сайт заранее и выдавать именно кеш, то можно вписать данные строчки:
+
+```bash
+npm run build
+
+npm run start
 ```
