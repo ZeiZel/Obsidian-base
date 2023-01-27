@@ -63,38 +63,6 @@
         }
       }
     },
-    "useState": {
-      "useState": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1672138138014
-        }
-      }
-    },
-    "setCounter": {
-      "setCounter": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672138372575
-        }
-      }
-    },
-    "useEffect": {
-      "useEffect": {
-        "currentFile": {
-          "count": 4,
-          "lastUpdated": 1672152013465
-        }
-      }
-    },
-    "Raiting": {
-      "Raiting": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672151876941
-        }
-      }
-    },
     "NextJS": {
       "NextJS": {
         "currentFile": {
@@ -284,6 +252,54 @@
         "currentFile": {
           "count": 3,
           "lastUpdated": 1674751504399
+        }
+      }
+    },
+    "IAppContext": {
+      "IAppContext": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1674831431476
+        }
+      }
+    },
+    "{children": {
+      "{children": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674829459571
+        }
+      }
+    },
+    "ReactNode": {
+      "ReactNode": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674829464653
+        }
+      }
+    },
+    "firstCategory": {
+      "firstCategory": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674831459970
+        }
+      }
+    },
+    "layout": {
+      "layout": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674832210498
+        }
+      }
+    },
+    "Sidebar": {
+      "Sidebar": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1674832218411
         }
       }
     }
