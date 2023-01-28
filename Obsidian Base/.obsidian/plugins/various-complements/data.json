@@ -47,14 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "@unique": {
-      "@unique": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1672245416369
-        }
-      }
-    },
     "getStaticProps": {
       "getStaticProps": {
         "currentFile": {
@@ -68,14 +60,6 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1674406093685
-        }
-      }
-    },
-    "posts": {
-      "posts": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1672242440611
         }
       }
     },
@@ -308,6 +292,38 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1674833844789
+        }
+      }
+    },
+    "buildFirstLevel": {
+      "buildFirstLevel": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674918376048
+        }
+      }
+    },
+    "buildSecondLevel": {
+      "buildSecondLevel": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674918381433
+        }
+      }
+    },
+    "buildThirdLevel": {
+      "buildThirdLevel": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674918386535
+        }
+      }
+    },
+    "firstLevelMenu": {
+      "firstLevelMenu": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1674918447163
         }
       }
     }
