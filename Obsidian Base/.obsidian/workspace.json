@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,14 +25,25 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b590c7136cf3de21",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -115,7 +126,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +149,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md"
               }
             }
           },
@@ -177,17 +188,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3ac8dfe34140ef10",
+  "active": "684a7a77852c1d53",
   "lastOpenFiles": [
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/02 Настройка окружения.md",
-    "Development/BackEnd - Node.JS + Express__Mongo, Graph, SQL/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/01 Введение.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
-    "Development/FrontEnd - JavaScript, React, Redux, NextJS/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
-    "Development/Tailwind CSS.md"
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/7. RabbitMQ.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/02 Настройка окружения.md"
   ]
 }
