@@ -342,6 +342,30 @@
           "lastUpdated": 1675005002220
         }
       }
+    },
+    "уровнем": {
+      "уровнем": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675081694582
+        }
+      }
+    },
+    "openSecondLevel": {
+      "openSecondLevel": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675081909863
+        }
+      }
+    },
+    "secondLevelBlockOpened": {
+      "secondLevelBlockOpened": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675082404297
+        }
+      }
     }
   }
 }
