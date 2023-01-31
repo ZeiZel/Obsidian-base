@@ -3,25 +3,25 @@
 
 
 ### Computer Science
-![](computer-science-1.png)
+![](_png/computer-science-1.png)
 
 ### BackEnd
-![](backend-1.png)
+![](_png/backend-1.png)
 
 ### FrontEnd
-![](frontend-1.png)
+![](_png/frontend-1.png)
 
 ### JavaScript
-![](javascript-1.png)
+![](_png/javascript-1.png)
 
 ### TypeScript
-![](typescript-1.png)
+![](_png/typescript-1.png)
 
 ### React
-![](react-1.png)
+![](_png/react-1.png)
 
 ### NodeJS
-![](nodejs-1.png)
+![](_png/nodejs-1.png)
 
 ### GraphQL
-![](graphql-1.png)
+![](_png/graphql-1.png)

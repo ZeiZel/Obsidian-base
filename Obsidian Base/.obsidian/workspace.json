@@ -47,6 +47,16 @@
             "id": "023828d5664cf3c4",
             "type": "leaf",
             "state": {
+              "type": "image",
+              "state": {
+                "file": "Whats Learning/RoadMap/_png/backend-1.png"
+              }
+            }
+          },
+          {
+            "id": "326cc5175f5aa74a",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
                 "file": "Whats Learning/RoadMap/RoadMap.md",
@@ -56,7 +66,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -201,17 +211,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "023828d5664cf3c4",
+  "active": "326cc5175f5aa74a",
   "lastOpenFiles": [
+    "Whats Learning/RoadMap/_png/react-1.png",
+    "Whats Learning/RoadMap/RoadMap.md",
+    "Whats Learning/RoadMap/_png/backend-1.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/14 Страница продуктов.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Без названия.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/03 TypeScript.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md"
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md"
   ]
 }
