@@ -1,4 +1,27 @@
 ![](_png/Roadmap.pdf)
 
 
-![](_png/47d3822681b0a52829085d2bdd8460ff.png)
+
+### Computer Science
+![](computer-science-1.png)
+
+### BackEnd
+![](backend-1.png)
+
+### FrontEnd
+![](frontend-1.png)
+
+### JavaScript
+![](javascript-1.png)
+
+### TypeScript
+![](typescript-1.png)
+
+### React
+![](react-1.png)
+
+### NodeJS
+![](nodejs-1.png)
+
+### GraphQL
+![](graphql-1.png)
