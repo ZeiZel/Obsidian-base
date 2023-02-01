@@ -58,8 +58,8 @@
     "NextJS": {
       "NextJS": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1674406093685
+          "count": 3,
+          "lastUpdated": 1675271335232
         }
       }
     },
@@ -412,6 +412,30 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1675269136891
+        }
+      }
+    },
+    "микросервисов": {
+      "микросервисов": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675269856064
+        }
+      }
+    },
+    "монорепозиторием": {
+      "монорепозиторием": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1675271323546
+        }
+      }
+    },
+    "поддерживать": {
+      "поддерживать": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675271452809
         }
       }
     }
