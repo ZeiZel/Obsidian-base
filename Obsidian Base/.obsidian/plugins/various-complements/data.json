@@ -478,6 +478,38 @@
           "lastUpdated": 1675427447320
         }
       }
+    },
+    "useClass": {
+      "useClass": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675432637212
+        }
+      }
+    },
+    "@Injectable": {
+      "@Injectable": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675433022607
+        }
+      }
+    },
+    "GenerateSrvice": {
+      "GenerateSrvice": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1675433415343
+        }
+      }
+    },
+    "forRoot": {
+      "forRoot": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675433757941
+        }
+      }
     }
   }
 }
