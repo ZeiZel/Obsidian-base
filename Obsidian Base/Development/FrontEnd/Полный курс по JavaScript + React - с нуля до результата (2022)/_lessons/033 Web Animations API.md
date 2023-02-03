@@ -39,6 +39,7 @@ const phoneAnimation = images[0].animate([
     iterations: Infinity  
 });
 ```
+
 ![](_png/Pasted%20image%2020221022114245.png)
 
 Анимация имеет 4 состояния (`PlayState`):
@@ -85,4 +86,5 @@ btnPhone.addEventListener('click', () => {
     }  
 })
 ```
+
 ![](_png/Pasted%20image%2020221022115706.png)
