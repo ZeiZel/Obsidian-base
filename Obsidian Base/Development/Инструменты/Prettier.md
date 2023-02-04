@@ -18,7 +18,7 @@ npm install --global prettier
   "arrowParens": "avoid", // если в стрелочной функции один аргумент, то его нужно удалять  
   "semi": true, // точка с запятой в конце  
   "trailingComma": "all", // ставить точку с запятов в конце  
-  "useTabs": true  // использовать табы
+  "useTabs": true  /* использовать табы */
 }
 ```
 
