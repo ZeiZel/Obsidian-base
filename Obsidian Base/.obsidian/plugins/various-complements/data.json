@@ -218,8 +218,8 @@
     "interface": {
       "interface": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674574600901
+          "count": 2,
+          "lastUpdated": 1675516511657
         }
       }
     },
@@ -596,6 +596,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1675516222155
+        }
+      }
+    },
+    "components": {
+      "components": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675516436732
+        }
+      }
+    },
+    "NestJS": {
+      "NestJS": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675519726936
         }
       }
     }
