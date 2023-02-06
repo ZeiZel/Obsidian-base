@@ -602,8 +602,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675516436732
+          "count": 2,
+          "lastUpdated": 1675675383393
         }
       }
     },
@@ -716,6 +716,14 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1675670464821
+        }
+      }
+    },
+    "index": {
+      "index": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675675391374
         }
       }
     }
