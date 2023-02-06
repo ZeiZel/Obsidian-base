@@ -218,8 +218,8 @@
     "interface": {
       "interface": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1675604977940
+          "count": 5,
+          "lastUpdated": 1675682352393
         }
       }
     },
@@ -732,6 +732,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1675678003388
+        }
+      }
+    },
+    "product": {
+      "product": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675682349899
         }
       }
     }
