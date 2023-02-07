@@ -274,8 +274,8 @@
     "layout": {
       "layout": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674832210498
+          "count": 2,
+          "lastUpdated": 1675775124486
         }
       }
     },
@@ -740,6 +740,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1675682349899
+        }
+      }
+    },
+    "width": {
+      "width": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675774640538
+        }
+      }
+    },
+    "height": {
+      "height": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1675774642708
         }
       }
     }
