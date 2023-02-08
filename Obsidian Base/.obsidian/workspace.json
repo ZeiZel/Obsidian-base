@@ -78,17 +78,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "60ff8a273de270b8",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -154,6 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -170,6 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -191,7 +185,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md"
+              }
             }
           },
           {
@@ -231,6 +227,8 @@
   },
   "active": "aa4fe56689b0fc48",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
+    "Licenses/Лицензии.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Создание нового проекта.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
@@ -238,8 +236,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/14 Страница продуктов.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/12 Контекст.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/03 TypeScript.md"
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md"
   ]
 }
