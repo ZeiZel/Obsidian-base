@@ -596,6 +596,155 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
 ![](_png/Pasted%20image%2020230209140300.png)
 
+И поэтому вернём обратно обычное взаимодействие с деревом. Однако тут сохраняется проблема в том, что мы используем два разных `useState`, хотя могли бы сократить запись
+
+```TSX
+export const PostList = () => {
+	const [postsData, setPostsData] = useState([
+		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
+		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
+	]);
+
+	const [title, setTitle] = useState<string>('');
+	const [body, setBody] = useState<string>('');
+
+	const addNewPost = (event: any): void => {
+		event.preventDefault();
+
+		// получаем текущие значения из useState
+		const newPost = {
+			id: `${Date.now()}`,
+			title,
+			body,
+		};
+
+		// не мутируем массив - вставляем старый массив и добавляем новый элемент
+		setPostsData([...postsData, newPost]);
+
+		// Очищаем инпуты
+		setTitle('');
+		setBody('');
+	};
+
+	return (
+		<div className={styles.wrapper}>
+			<div className={styles.formBlock}>
+				<form className={styles.form}>
+					<Input
+						value={title}
+						onChange={e => setTitle(e.target.value)}
+						className={styles.form__input}
+						type='text'
+						placeholder={'Название поста'}
+					/>
+					<Input
+						value={body}
+						onChange={e => setBody(e.target.value)}
+						className={styles.form__input}
+						type='text'
+						placeholder={'Описание поста'}
+					/>
+					<Button
+						className={styles.form__button}
+						buttonType={'purple'}
+						onClick={addNewPost}
+					>
+						Добавить пост
+					</Button>
+				</form>
+			</div>
+			<div className={styles.list}>
+				{postsData.map(p => (
+					<PostItem key={p.id} title={p.title}>
+						{p.body}
+					</PostItem>
+				))}
+			</div>
+		</div>
+	);
+};
+```
+
+Тут представлена более лаконичная запись с использованием одного `useState` и сокращённой функцией `addNewPost`
+
+```TSX
+import React, { useRef, useState } from 'react';
+import styles from './PostList.module.scss';
+import { PostItem } from '@/components/PostItem/PostItem';
+import { Input } from '@/components/Input/Input';
+import { Button } from '@/components';
+
+export const PostList = () => {
+	const [postsData, setPostsData] = useState([
+		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
+		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
+	]);
+
+	const [post, setPost] = useState<{ title: string; body: string }>({
+		title: '',
+		body: '',
+	});
+
+	const addNewPost = (event: any): void => {
+		event.preventDefault();
+
+		// добавляем новое значение
+		setPostsData([...postsData, { ...post, id: `${Date.now()}` }]);
+
+		// очищаем инпуты
+		setPost({
+			title: '',
+			body: '',
+		});
+	};
+
+	return (
+		<div className={styles.wrapper}>
+			<div className={styles.formBlock}>
+				<form className={styles.form}>
+					<Input
+						value={post.title}
+						// сюда закидываем старый пост и перезатираем нужное поле
+						onChange={e => setPost({ ...post, title: e.target.value })}
+						className={styles.form__input}
+						type='text'
+						placeholder={'Название поста'}
+					/>
+					<Input
+						value={post.body}
+						// сюда закидываем старый пост и перезатираем нужное поле
+						onChange={e => setPost({ ...post, body: e.target.value })}
+						className={styles.form__input}
+						type='text'
+						placeholder={'Описание поста'}
+					/>
+					<Button
+						className={styles.form__button}
+						buttonType={'purple'}
+						onClick={addNewPost}
+					>
+						Добавить пост
+					</Button>
+				</form>
+			</div>
+			<div className={styles.list}>
+				{postsData.map(p => (
+					<PostItem key={p.id} title={p.title}>
+						{p.body}
+					</PostItem>
+				))}
+			</div>
+		</div>
+	);
+};
+```
+
+Итог: добавление нового поста работает
+
+![](_png/Pasted%20image%2020230209142928.png)
+
 ## 57:35 ➝ React Devtools. Инструменты разработчика React
 
 
