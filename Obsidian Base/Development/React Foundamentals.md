@@ -266,6 +266,8 @@ export interface PostItemProps
 
 Вместо принимаемого объекта десутруктуризации `{ language, children }` мы бы могли просто написать `props`, но вытащить сразу нужные значения - это самый оптимальный способ взаимодействия, чтобы сразу видеть получаемые параметры
 
+Так же, чтобы передать сразу все остальные пропсы, которые мы вложим в компонент, можно использовать `...props` при получении `props` и в самом JSX указать, что мы выкладываем все пропсы в этот элемент: `<div {...props}>`. Такой подход более актуален, когда мы создаём свои компоненты кнопок, инпутов и остальных простых элементов.
+
 `PostItem.tsx`
 ```TSX
 export const PostItem = ({ title, children, className, ...props }: PostItemProps) => {  
@@ -345,39 +347,265 @@ export const Posts = () => {
 
 ![](_png/Pasted%20image%2020230209124444.png)
 
-## 41:50 ➝ Форма создания поста. Управляемые и неуправляемые компоненты
-
-
-
-
-
-
-
 ## 42:30 ➝ Создание UI библиотеки. Первые компоненты. CSS модули. Пропс children
 
+Обычно в своей работе придётся часто создавать свою UI-библиотеку под каждый сайт, который мы будем реализовывать.
 
+Компонент кнопки:
 
+`Button.tsx`
+```TSX
+import React from 'react';
+import styles from './Button.module.scss';
+import cn from 'classnames';
+import { ButtonProps } from './Button.props';
 
+export const Button = ({
+	buttonType = 'gray',
+	className,
+	children,
+	...props
+}: ButtonProps): JSX.Element => {
+	return (
+		<button
+			{/* в зависимости от переданного атрибута стиля, будет присваиваться свой стиль для кнопки */}
+			className={cn(styles.button, className, {
+				[styles.gray]: buttonType == 'gray',
+				[styles.ghost]: buttonType == 'ghost',
+				[styles.purple]: buttonType == 'purple',
+			})}
+			
+		{/* сюда будут передаваться все остальные пропсы, которые мы припишем к кнопке */}
+			{...props}
+		>
+			{/* тут будет находиться значение переданное между тегами компонента */}
+			{children}
+		</button>
+	);
+};
+```
 
+Тут мы опишем те параметры, которые должна принимать в себя кнопка. Чтобы описать получаемые атрибуты, мы должны расширить интерфейс от `DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>`, где мы расширяемся от `Button`.
 
+`Button.props.ts`
+```TS
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+
+export interface ButtonProps
+	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+	children: ReactNode;
+	buttonType: 'gray' | 'purple' | 'ghost';
+}
+```
+
+Стили кнопки:
+
+`Button.module.css`
+```CSS
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+	padding: 20px;
+
+	width: 100%;
+
+	border: none;
+	border-radius: 8px;
+
+	font-size: 16px;
+	font-weight: 700;
+
+	color: white;
+
+	cursor: pointer;
+}
+
+.gray {
+	grid-area: reduce;
+	background: var(--anti-accent);
+	transition: all 0.2s;
+
+	&:hover {
+		background: var(--anti-accent-hover);
+		transform: translateY(-4px);
+	}
+
+	&:active {
+		background: var(--anti-accent-clicked);
+		transform: translateY(4px);
+	}
+}
+
+.purple {
+	grid-area: increase;
+	background: var(--primary);
+	transition: all 0.2s;
+
+	&:hover {
+		background: var(--primary-hover);
+		transform: translateY(-4px);
+	}
+
+	&:active {
+		background: var(--primary-clicked);
+		transform: translateY(4px);
+	}
+}
+
+.ghost {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+
+	width: 100px;
+	height: 20px;
+
+	grid-area: increase;
+	background: none;
+	transition: all 0.2s;
+
+	border: 2px dashed var(--anti-accent);
+	border-radius: 2px;
+
+	&:hover {
+		background: var(--anti-accent-hover);
+		transform: translateY(-4px);
+	}
+
+	&:active {
+		transform: translateY(4px);
+	}
+}
+```
 
 ## 50:00 ➝ Предотвращаем обновление страницы при submit формы
 
+Чтобы предотвратить срабатывание дефолтной перезагрузки страницы, нужно использовать на ивенте данного элемента отключение поведения браузера `preventDefault()`
 
-
-
-
-
+```TS
+const addNewPost = (event): void => {  
+   event.preventDefault();  
+};
+```
 
 ## 50:45 ➝ хук useRef. Доступ к DOM элементу. Неуправляемый компонент
 
+Ниже приведены примеры управляемого и неуправляемого компонента:
+
+1) Управляемый:
+- Управляемый компонент имеет подконтрольное значение
+- Это состояние связано с компонентом через значение
+
+2) Неуправляемый компонент:
+- Не имеет подконтрольного значения
+- Для получения доступа к нему используется отдельный хук `useRef`
+
+Порядок использования рефа:
+- Инициализируем `useRef`
+- Передаём в атриьбут `ref` проинициализированный `useRef`
+- Оборачиваем сам компонент в своей внутренней реализации в  `forwardRef`
+- Прокидываем `ref` внутрь реализации компонента
+
+```TSX
+export const PostList = () => {
+	const [postsData, setPostsData] = useState([
+		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
+		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
+	]);
+
+	const [title, setTitle] = useState<string>('');
+
+	// хук референса на объект DOM-дерева
+	const bodyInputRef = useRef<HTMLInputElement>(null);
+
+	const addNewPost = (event: any): void => {
+		event.preventDefault();
+
+		// выводим текущий объект, если он есть ?
+		console.log(bodyInputRef.current?.value);
+	};
+
+	return (
+		<div className={styles.wrapper}>
+			<div className={styles.formBlock}>
+				<form className={styles.form}>
 
 
 
 
+					{/* управляемый компонент */}
+					<Input
+						value={title}
+						onChange={e => setTitle(e.target.value)}
+						className={styles.form__input}
+						type='text'
+						placeholder={'Название поста'}
+					/>
+					{/* неуправляемый компонент */}
+					<Input
+						// навешиваем ссылку рефа
+						ref={bodyInputRef}
+						className={styles.form__input}
+						type='text'
+						placeholder={'Описание поста'}
+					/>
 
+
+
+
+					<Button
+						className={styles.form__button}
+						buttonType={'purple'}
+						onClick={addNewPost}
+					>
+						Добавить пост
+					</Button>
+				</form>
+			</div>
+			<div className={styles.list}>
+				{postsData.map(p => (
+					<PostItem key={p.id} title={p.title}>
+						{p.body}
+					</PostItem>
+				))}
+			</div>
+		</div>
+	);
+};
+```
+
+Далее сам компонент `<Input>` нужно обернуть в `forwardRef` полностью (всю функцию обернуть внутрь `( )` скобок) и передать внутрь компонента дополнительное свойство `ref`. Само свойство `ref` нужно вложить в качестве атрибута внутрь нашего компонента 
+
+`Input.tsx`
+```TSX
+// оборачиваем функцию полностью в forwardRef и вкладываем дополнительный параметр ref
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+	({ className, ...props }: InputProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+		// здесь передаём в качестве атрибута ссылку рефа ref={ref}
+		return <input ref={ref} className={cn(className, styles.input)} {...props} />;
+	},
+);
+
+```
+
+И по итогу, мы сможем увидеть в консоли, что реф даёт нам доступ к значению данного инпута
+
+![](_png/Pasted%20image%2020230209140300.png)
 
 ## 57:35 ➝ React Devtools. Инструменты разработчика React
+
+
+
+
+
+
+
+
+
 
 
 
