@@ -237,6 +237,10 @@ export class ClassCounter extends Component<any, any> {
 
 ![](_png/Pasted%20image%2020230209121529.png)
 
+Так же стили можно указывать через атрибут `style`, внутрь которого мы передаём объект со стилями
+
+![](_png/Pasted%20image%2020230209125215.png)
+
 ## 34:30 ➝ Props. Аргументы компонента. 
 
 Свойства, которые мы передаём в компонент, называются `props`
@@ -248,13 +252,12 @@ export class ClassCounter extends Component<any, any> {
 
 `PostItem.props.ts`
 ```TSX
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
-
-export interface PostItemProps
-	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> 
-	{
-	children: ReactNode;
-	language: string;
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
+  
+export interface PostItemProps  
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
+   children: ReactNode;  
+   title: string;  
 }
 ```
 
@@ -262,12 +265,12 @@ export interface PostItemProps
 
 `PostItem.tsx`
 ```TSX
-export const PostItem = ({ language, children, className, ...props }: PostItemProps) => {  
+export const PostItem = ({ title, children, className, ...props }: PostItemProps) => {  
    return (  
       <div className={cn(styles.wrapper, className)} {...props}>  
          <div className={styles.post}>  
             <div className={styles.post__content}>  
-               <h2>{language}</h2>  
+               <h2>{title}</h2>  
                <Paragraph size={'l'}>{children}</Paragraph>  
             </div>  
             <Button buttonType={'purple'} className={styles.post__button}>  
@@ -281,20 +284,53 @@ export const PostItem = ({ language, children, className, ...props }: PostItemPr
 
 Передаются пропсы ровно таким же образом, как и атрибуты. В случае с ==TS== компилятор нам подскажет, какие значения мы можем вставить в данный элемент компонент
 
-`Posts.tsx`
+`PostList.tsx`
+```TSX
+export const Posts = () => {  
+   const [postsData, setPostsData] = useState([
+		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
+		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
+	]); 
+  
+   return (  
+      <div>  
+         {postsData.map(p => (  
+            <PostItem key={p.id} title={p.title}>  
+               {p.body}  
+            </PostItem>  
+         ))}  
+      </div>  
+   );  
+};
+```
+
+Так же мы можем вывести `props` в консоль и увидим, что это просто объект с данными, которые мы передали в компонент извне
+
+![](_png/Pasted%20image%2020230209123659.png)
+
+## 36:55 ➝ Работы со списками. Преобразование массива объектов в массив React элементов
+
+Когда нам нужно вывести массив элементов с определённой структурой, мы можем воспользоваться функциями JS внутри JSX. Для этого функции нужно вписать внутрь `{ }` скобок. 
+
+Для перебора массива можно воспользоваться функцией `map()`.
+
+Когда мы создаём списки, обязательно для всех элементов нужно указать уникальный ключ и передать его через атрибут `key`. Для ключа обычно не стоит использовать индекс элемента в массиве - это плохая практика, так как он может поменяться после изменения размера массива. Рекомендуется использовать какой-либо статичный индекс. Это поможет реакту запомнить элемент массива и не перерисовывать все выведенные элементы.
+
+`PostList.tsx`
 ```TSX
 export const Posts = () => {
-	const postsData = [
-		{ id: 1, language: 'Javascript', children: 'Лучший язык на Земле' },
-		{ id: 2, language: 'C#', children: 'Лучший язык на Земле' },
-		{ id: 3, language: 'Python', children: 'Лучший язык на Земле' },
-	];
+	const [postsData, setPostsData] = useState([
+		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
+		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
+	]);
 
 	return (
 		<div>
 			{postsData.map(p => (
-				<PostItem key={p.id} language={p.language}>
-					{p.children}
+				<PostItem key={p.id} title={p.title}>
+					{p.body}
 				</PostItem>
 			))}
 		</div>
@@ -302,13 +338,9 @@ export const Posts = () => {
 };
 ```
 
-## 36:55 ➝ Работы со списками. Преобразование массива объектов в массив React элементов
+И примерно так мы получим итоговый массив наших элементов
 
-
-
-
-
-
+![](_png/Pasted%20image%2020230209124444.png)
 
 ## 41:50 ➝ Форма создания поста. Управляемые и неуправляемые компоненты
 
