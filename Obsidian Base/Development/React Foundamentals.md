@@ -39,17 +39,61 @@ npm start
 
 ## 16:10 ➝ Что такое JSX?
 
+==JSX== - это препроцессор, который ==babel== переводит в обычный ==JS== 
 
-
-
-
-
+![](_png/Pasted%20image%2020230209095251.png)
 
 ## 18:11 ➝ Компонент App. Работа с состоянием. UseState
 
+Задача: нам нужно сделать счётчик, который при нажатии на кнопку будет увеличивать значение. 
+
+В примере ниже Реакт не позволит обновлять значение, так как мы будем отправлять изменение значения в JS (`clg` покажет, что значение меняется внутри JS), а не в дерево Реакта.
+
+Нам нужно будет вызвать в реакте перерендер нужного нам значения на странице.
+
+![](_png/Pasted%20image%2020230209100002.png)
+
+Хук `useState()` возвращает значение с состоянием и функцию для его обновления.
+
+Во время первоначального рендеринга возвращаемое состояние (`state`) совпадает со значением, переданным в качестве первого аргумента (`initialState`).
+
+Функция `setState` используется для обновления состояния. Она принимает новое значение состояния и ставит в очередь повторный рендер компонента.
+
+```TSX
+export const State = (): JSX.Element => {
+	let [counter, setCounter] = useState<number>(0);
+
+	return (
+		<div>
+			<Link href={'/'}>
+				<Button buttonType={'ghost'}>Обратно</Button>
+			</Link>
+			<div className={styles.wrapper}>
+				<h2 className={styles.title}>Счётчик:</h2>
+				<h1 className={styles.num}>{counter}</h1>
+				<Button
+					buttonType={'gray'}
+					className={styles.reduce}
+					onClick={() => setCounter(counter--)}
+				>
+					Уменьшить
+				</Button>
+				<Button
+					buttonType={'purple'}
+					className={styles.increase}
+					onClick={() => setCounter(counter++)}
+				>
+					Увеличить
+				</Button>
+			</div>
+		</div>
+	);
+};
+```
 
 
 
+![](_png/Pasted%20image%2020230209095936.png)
 
 
 
