@@ -747,25 +747,136 @@ export const PostList = () => {
 
 ## 57:35 ➝ React Devtools. Инструменты разработчика React
 
+React DevTools - необходимый плагин в работе, который позволит просмотреть дерево элементов страницы, влияние изменения стейта компонентов 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](_png/Pasted%20image%2020230209143449.png)
 
 ## 59:15 ➝ Обмен данными между компонентами. От родителя к ребенку. От ребенка к родителю.
 
+Мы можем передавать функции четырьмя разными способами:
+- Самый простой стандартный - это от родителя к ребёнку
+- От ребёнка к родителю выполняется через callback-фукнцию
+- Между дочерними компонентами (через родительский)
+- И глобально в различные компоненты проекта (зачастую через контекст) 
 
+![](_png/Pasted%20image%2020230209144317.png)
 
+Первым делом, нужно выделить форму добавления нового поста в отдельный компонент. И тут нам понадобится реализовать передачу пропсов от дочернего элемента к родительскому. 
+
+Передаём через `create={createPost}` функцию от родительского элемента к дочерней форме на добавление поста.
+
+И передаём функцию `remove={removePost}` для удаления поста, но уже непосредственно в айтем поста
+
+`PostList.tsx`
+```TSX
+import React, { useRef, useState } from 'react';
+import styles from './PostList.module.scss';
+import { PostItem } from '@/components/PostItem/PostItem';
+import { Input } from '@/components/Input/Input';
+import { Button } from '@/components';
+import { PostForm } from '@/components/PostForm/PostForm';
+
+export const PostList = () => {
+	const [postsData, setPostsData] = useState([
+		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
+		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
+	]);
+
+	// коллбэк функция, которую передаём в дочерний элемент
+	const createPost = (newPost: { id: string; title: string; body: string }): void => {
+		setPostsData([...postsData, newPost]);
+	};
+
+	return (
+		<div className={styles.wrapper}>
+			<PostForm create={createPost} />
+			<div className={styles.list}>
+				{postsData.map(p => (
+					<PostItem key={p.id} title={p.title}>
+						{p.body}
+					</PostItem>
+				))}
+			</div>
+		</div>
+	);
+};
+```
+
+Сейчас нужно разбить логику так, чтобы можно было передать внутрь дочернего компонента функцию от родительского компонента
+
+`PostForm.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export interface PostFormProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	create: (newPost: { id: string; title: string; body: string }) => void;
+}
+```
+
+Далее тут вызваем функцию из родительского компонента `create()` в дочернем элементе
+
+`PostForm.tsx`
+```TSX
+import React, { useState } from 'react';
+import styles from './PostForm.module.scss';
+import { Input } from '@/components/Input/Input';
+import { Button } from '@/components';
+import { PostFormProps } from '@/components/PostForm/PostForm.props';
+
+export const PostForm = ({ create }: PostFormProps) => {
+	const [post, setPost] = useState<{ title: string; body: string }>({
+		title: '',
+		body: '',
+	});
+
+	const addNewPost = (event: any): void => {
+		event.preventDefault();
+
+		const newPost = {
+			...post,
+			id: `${Date.now()}`,
+		};
+
+		// вызываем функцию родителя, в которую передаём новый пост
+		create(newPost);
+
+		setPost({
+			title: '',
+			body: '',
+		});
+	};
+
+	return (
+		<div className={styles.formBlock}>
+			<form className={styles.form}>
+				<Input
+					value={post.title}
+					onChange={e => setPost({ ...post, title: e.target.value })}
+					className={styles.form__input}
+					type='text'
+					placeholder={'Название поста'}
+				/>
+				<Input
+					value={post.body}
+					onChange={e => setPost({ ...post, body: e.target.value })}
+					className={styles.form__input}
+					type='text'
+					placeholder={'Описание поста'}
+				/>
+				<Button className={styles.form__button} buttonType={'purple'} onClick={addNewPost}>
+					Добавить пост
+				</Button>
+			</form>
+		</div>
+	);
+};
+```
+
+Новые посты всё так же добавляются!
+
+![](_png/Pasted%20image%2020230209145631.png)
 
 
 
