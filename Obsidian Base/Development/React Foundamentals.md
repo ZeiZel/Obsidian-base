@@ -769,38 +769,46 @@ React DevTools - необходимый плагин в работе, котор
 
 `PostList.tsx`
 ```TSX
-import React, { useRef, useState } from 'react';
-import styles from './PostList.module.scss';
-import { PostItem } from '@/components/PostItem/PostItem';
-import { Input } from '@/components/Input/Input';
-import { Button } from '@/components';
-import { PostForm } from '@/components/PostForm/PostForm';
-
-export const PostList = () => {
-	const [postsData, setPostsData] = useState([
+export const PostList = () => {  
+   const [postsData, setPostsData] = useState<IPost[]>([
 		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
 		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
 		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
-	]);
-
-	// коллбэк функция, которую передаём в дочерний элемент
-	const createPost = (newPost: { id: string; title: string; body: string }): void => {
-		setPostsData([...postsData, newPost]);
-	};
-
-	return (
-		<div className={styles.wrapper}>
-			<PostForm create={createPost} />
-			<div className={styles.list}>
-				{postsData.map(p => (
-					<PostItem key={p.id} title={p.title}>
-						{p.body}
-					</PostItem>
-				))}
-			</div>
-		</div>
-	);
+	]); 
+  
+   // коллбэк функция для создания поста, которую передаём в дочерний элемент  
+   const createPost = (newPost: IPost): void => {  
+      setPostsData([...postsData, newPost]);  
+   };  
+  
+   // коллбэк функция для удаления поста, которую передаём в дочерний элемент  
+   const removePost = (post: IPost): void => {  
+      // в стейт вернём новый массив, который будет отфильтрован через filter  
+      setPostsData(postsData.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <PostForm create={createPost} />  
+         <div className={styles.list}>  
+            {postsData.map(p => (  
+               <PostItem remove={removePost} key={p.id} post={p} />  
+            ))}  
+         </div>  
+      </div>  
+   );  
 };
+```
+
+Тут представлен интерфейс поста в отдельном файле
+
+`PostList.interface.ts`
+```TS
+export interface IPost {
+	id: string;
+	title: string;
+	body: string;
+}
 ```
 
 Сейчас нужно разбить логику так, чтобы можно было передать внутрь дочернего компонента функцию от родительского компонента
@@ -808,10 +816,25 @@ export const PostList = () => {
 `PostForm.props.ts`
 ```TS
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { IPost } from '@/page-components/PostList/PostList.interface';
 
 export interface PostFormProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-	create: (newPost: { id: string; title: string; body: string }) => void;
+	create: (newPost: IPost) => void;
+}
+```
+
+Уже сам отдельный элемент будет в себя принимать функцию удаления поста по полученному посту и сам пост
+
+`PostItem.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { IPost } from '@/page-components/PostList/PostList.interface';
+
+export interface PostItemProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	post: IPost;
+	remove: (post: IPost) => void;
 }
 ```
 
@@ -874,20 +897,63 @@ export const PostForm = ({ create }: PostFormProps) => {
 };
 ```
 
+Далее переходим в элемент отдельного поста. Тут кнопкой вызываем функцию удаления поста, передавая в неё полный пост: `() => remove(post)`
+
+`PostItem.tsx`
+```TSX
+export const PostItem = ({ remove, post, className, ...props }: PostItemProps) => {
+	return (
+		<div className={cn(styles.wrapper, className)} {...props}>
+			<div className={styles.post}>
+				<div className={styles.post__content}>
+					<h2>{post.title}</h2>
+					<Paragraph size={'l'}>{post.body}</Paragraph>
+				</div>
+				<Button
+					onClick={() => remove(post)}
+					buttonType={'purple'}
+					className={styles.post__button}
+				>
+					Удалить пост
+				</Button>
+			</div>
+		</div>
+	);
+};
+```
+
 Новые посты всё так же добавляются!
 
 ![](_png/Pasted%20image%2020230209145631.png)
 
+Удаление поста так же работает:
 
+![](_png/Pasted%20image%2020230209152231.png)
 
 
 ## 01:04:20 ➝ Отрисовка по условию
 
+Отрисовка по условию выполняется крайне просто - через тернарный оператор:
 
+`PostList.tsx`
+```TSX
+return (
+	<div className={styles.wrapper}>
+		<PostForm create={createPost} />
+		<div className={styles.list}>
+			{postsData.length ? (
+				postsData.map(p => <PostItem remove={removePost} key={p.id} post={p} />)
+			) : (
+				<h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>
+			)}
+		</div>
+	</div>
+);
+```
 
+При удалении всех постов, у нас вылезет надпись:
 
-
-
+![](_png/Pasted%20image%2020230209152926.png)
 
 ## 01:05:30 ➝ Сортировка. Выпадающий список
 
