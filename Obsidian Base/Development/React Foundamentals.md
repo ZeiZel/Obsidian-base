@@ -47,7 +47,7 @@ npm start
 
 Задача: нам нужно сделать счётчик, который при нажатии на кнопку будет увеличивать значение. 
 
-В примере ниже Реакт не позволит обновлять значение, так как мы будем отправлять изменение значения в JS (`clg` покажет, что значение меняется внутри JS), а не в дерево Реакта.
+В примере ниже Реакт не понимает, что нужно обновлять значение в определённом компоненте, так как мы подобной функцией отправляем изменение значения в JS (`clg` покажет, что значение меняется внутри JS), а не в дерево Реакта.
 
 Нам нужно будет вызвать в реакте перерендер нужного нам значения на странице.
 
@@ -91,27 +91,75 @@ export const State = (): JSX.Element => {
 };
 ```
 
-
+При увеличении значения счётчика, число увеличивается, а при уменьшении - уменьшается.
 
 ![](_png/Pasted%20image%2020230209095936.png)
 
-
-
 ## 22:25 ➝ Управляемый инпут
 
+Управляемый компонент - это компонент, значение которого мы можем изменить, изменив состояние
 
+```TSX
+export const ControlledInput = (): JSX.Element => {
+	let [value, setValue] = useState<string>('Значение');
 
+	return (
+		<div>
+			<Link href={'/'}>
+				<Button buttonType={'ghost'}>Обратно</Button>
+			</Link>
+			<div className={styles.wrapper}>
+				<h1>{value}</h1>
+				<Input
+					value={value}
+					placeholder={'Пиши в меня:)'}
+					onChange={e => setValue(e.target.value)}
+				/>
+			</div>
+		</div>
+	);
+};
+```
 
+Мы связали состояние `<h1>` с тем, что находится в инпуте
 
-
+![](_png/Pasted%20image%2020230209103422.png)
 
 ## 24:07 ➝ Первый функциональный компонент
 
+- Компоненты мы создаём в папке `components`
+- Файл компонента и функция компонента всегда именуются в ==PascalCase==
+- Компоненты всегда должны возвращать `JSX.Element`
 
+![](_png/Pasted%20image%2020230209103714.png)
 
+И теперь данный функциональный компонент `<Button>` можно использовать в любом месте проекта. Этих компонентов можно навставлять сколько угодно и они будут независимыми друг от друга
 
+```TSX
+import { Button } from '@/components';  
+  
+function Home() {  
+   return (  
+      <div className={styles.wrapper}>  
+         <h1>React фундаментальный</h1>  
+         <div className={styles.links}>  
+            <Link href={'fundamentals/state'}>  
+               <Button buttonType={'purple'}>Состояния React</Button>  
+            </Link>  
+            <Link href={'fundamentals/controlledInput'}>  
+	            <Button buttonType={'purple'}>Управляемый инпут</Button>  
+				<Button buttonType={'purple'}>Управляемый инпут</Button>  
+				<Button buttonType={'purple'}>Управляемый инпут</Button>  
+				<Button buttonType={'purple'}>Управляемый инпут</Button>  
+				<Button buttonType={'purple'}>Управляемый инпут</Button>
+            </Link>  
+         </div>  
+      </div>  
+   );  
+}
+```
 
-
+![](_png/Pasted%20image%2020230209110019.png)
 
 ## 26:40 ➝ Первый классовый компонент
 
