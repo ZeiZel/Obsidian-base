@@ -959,9 +959,26 @@ return (
 
 
 
+`Select.props.ts`
+```TS
+
+```
 
 
 
+`Select.tsx`
+```TSX
+
+```
+
+
+
+`PostList.tsx`
+```TSX
+
+```
+
+1:10:03
 
 ## 01:12:00 ➝ Поиск. Фильтрация.
 
