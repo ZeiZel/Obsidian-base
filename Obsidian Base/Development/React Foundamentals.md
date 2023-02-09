@@ -223,24 +223,84 @@ export class ClassCounter extends Component<any, any> {
 
 - Хуки используются только на верхнем уровне вложенности. Их нельзя вкладывать в условия, циклы и другие функции.
 
-
-
-
 ## 31:10 ➝ Стили. CSS. Классы
 
+Для наименования классов в React используют атрибут `className`, так как слово `class` уже зарезервировано под классы.
 
+Мы можем просто именовать классы стилей наших элементов стандартным способом
 
+![](_png/Pasted%20image%2020230209121509.png)
 
+А можем использовать модули для описания стилей. В этом случае нужно:
+- В названии файла стилей указать `.module`
+- В `className` указать класс через очку от импортированных стилей
 
-
+![](_png/Pasted%20image%2020230209121529.png)
 
 ## 34:30 ➝ Props. Аргументы компонента. 
 
+Свойства, которые мы передаём в компонент, называются `props`
 
+В рамках ==React== при использовании его вместе с TS мы обязаны использовать интерфейсы для наших получаемых пропсов (чтобы всегда понимать, что компонент получает). 
+Интерфейсы для компонентов мы обычно расширяем с помощью `DetailedHTMLProps` и уточняем, какие атрибуты он должен принимать через `HTMLAttributes`. 
+В данном случае, мы расширяем компонент от дива, чтобы была возможность в него передать `className`. 
+Так же мы указываем `children` с типом `ReactNode` - это те данные, которые мы вкладываем между открывающим и закрывающим тегом
 
+`PostItem.props.ts`
+```TSX
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 
+export interface PostItemProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> 
+	{
+	children: ReactNode;
+	language: string;
+}
+```
 
+Вместо принимаемого объекта десутруктуризации `{ language, children }` мы бы могли просто написать `props`, но вытащить сразу нужные значения - это самый оптимальный способ взаимодействия, чтобы сразу видеть получаемые параметры
 
+`PostItem.tsx`
+```TSX
+export const PostItem = ({ language, children, className, ...props }: PostItemProps) => {  
+   return (  
+      <div className={cn(styles.wrapper, className)} {...props}>  
+         <div className={styles.post}>  
+            <div className={styles.post__content}>  
+               <h2>{language}</h2>  
+               <Paragraph size={'l'}>{children}</Paragraph>  
+            </div>  
+            <Button buttonType={'purple'} className={styles.post__button}>  
+               Удалить пост  
+            </Button>  
+         </div>  
+      </div>  
+   );  
+};
+```
+
+Передаются пропсы ровно таким же образом, как и атрибуты. В случае с ==TS== компилятор нам подскажет, какие значения мы можем вставить в данный элемент компонент
+
+`Posts.tsx`
+```TSX
+export const Posts = () => {
+	const postsData = [
+		{ id: 1, language: 'Javascript', children: 'Лучший язык на Земле' },
+		{ id: 2, language: 'C#', children: 'Лучший язык на Земле' },
+		{ id: 3, language: 'Python', children: 'Лучший язык на Земле' },
+	];
+
+	return (
+		<div>
+			{postsData.map(p => (
+				<PostItem key={p.id} language={p.language}>
+					{p.children}
+				</PostItem>
+			))}
+		</div>
+	);
+};
+```
 
 ## 36:55 ➝ Работы со списками. Преобразование массива объектов в массив React элементов
 
