@@ -39,7 +39,7 @@ npm start
 
 ## 16:10 ➝ Что такое JSX?
 
-==JSX== - это препроцессор, который ==babel== переводит в обычный ==JS== 
+==JSX== - это препроцессор, который ==babel== переводит в обычный ==JS==
 
 ![](_png/Pasted%20image%2020230209095251.png)
 
@@ -136,7 +136,7 @@ export const ControlledInput = (): JSX.Element => {
 И теперь данный функциональный компонент `<Button>` можно использовать в любом месте проекта. Этих компонентов можно навставлять сколько угодно и они будут независимыми друг от друга
 
 ```TSX
-import { Button } from '@/components';  
+import { Button } from '@/components';  // импортируем кнопку
   
 function Home() {  
    return (  
@@ -147,6 +147,7 @@ function Home() {
                <Button buttonType={'purple'}>Состояния React</Button>  
             </Link>  
             <Link href={'fundamentals/controlledInput'}>  
+	            {/* добавляем кнопку на страницу */}
 	            <Button buttonType={'purple'}>Управляемый инпут</Button>  
 				<Button buttonType={'purple'}>Управляемый инпут</Button>  
 				<Button buttonType={'purple'}>Управляемый инпут</Button>  
@@ -163,16 +164,64 @@ function Home() {
 
 ## 26:40 ➝ Первый классовый компонент
 
+Классовый компонент использует внутри себя методы
 
+```TSX
+import React, { Component } from 'react';
+import styles from './ClassCounter.module.scss';
+import cn from 'classnames';
+import { ClassCounterProps } from './ClassCounter.props';
+import { Button } from '@/components';
 
+export class ClassCounter extends Component<any, any> {
+	constructor(props: ClassCounter) {
+		super(props);
+		this.state = {
+			count: 0,
+		};
 
+		// здесь мы должны вернуть потерянный контекст выполнения для методов
+		this.increment = this.increment.bind(this);
+		this.decrement = this.decrement.bind(this);
+	}
 
+	increment(): void {
+		this.setState({
+			count: this.state.count + 1,
+		});
+	}
 
+	decrement(): void {
+		this.setState({
+			count: this.state.count - 1,
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>{this.state.count}</h1>
+				<Button buttonType={'purple'} onClick={this.increment}>
+					inc
+				</Button>
+				<Button buttonType={'gray'} onClick={this.decrement}>
+					dec
+				</Button>
+			</div>
+		);
+	}
+}
+```
+
+И так выглядит каунтер:
+
+![](_png/Pasted%20image%2020230209113714.png)
 
 ## 30:25 ➝ Что такое хуки? useState, useEffect
 
+==Хук== - это функция, которую предоставляет React для использования в функциональных компонентах или в своих собственных хуках
 
-
+- Хуки используются только на верхнем уровне вложенности. Их нельзя вкладывать в условия, циклы и другие функции.
 
 
 
