@@ -1112,43 +1112,13 @@ export const PostList = () => {
 const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```
 
+>[!warning] Далее структура проекта была немного реорганизована и теперь главным компонентом будет компонен страницы  `Posts.tsx`
 
-Далее структура проекта была немного реорганизована и теперь главным компонентом будет компонен страницы  `Posts.tsx`
+В самом компоненте `Posts.tsx` мы создадим общее состояние под поиск, где `filter` будет отвечать за строку запроса `query` и компонент селекта `sort`.
 
+Далее используется две функции `sortPosts` и `sortedAndSearchedPosts`, которые фильтруют массив (первый по селекту, второй по запросу) и кешируют эту сортировку. Функция `sortPosts` удалена, так как её заменяют две вышеописанные функции.
 
-
-
-
-`components / PostFilter.tsx`
-```TSX
-export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {  
-   return (  
-      <div className={styles.wrapper}>  
-         <Input  
-            className={styles.search}  
-            placeholder={'Поиск...'}  
-            value={filter.query}  
-            onChange={e => setFilter({ ...filter, query: e.target.value })}  
-         />  
-  
-         <Divider />  
-  
-         <Select  
-            value={filter.sort}  
-            onChange={(selectedSort: 'title' | 'body') =>  
-               setFilter({ ...filter, sort: selectedSort })  
-            }  
-            defaultValue={'Сортировка'}  
-            options={[  
-               { value: 'title', name: 'По заголовку' },  
-               { value: 'body', name: 'По описанию' },  
-            ]}  
-         />  
-      </div>  
-   );  
-};
-```
-
+Далее мы вызваем три компонента: форму, фильтр и генерацию списка постов.
 
 `page-components / Posts.tsx`
 ```TSX
@@ -1200,12 +1170,103 @@ export const Posts = () => {
 };
 ```
 
+Далее идёт компонент `PostList`, который принимает в себя функцию для удаления поста и массив постов.
 
+`components / PostList / PostList.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
+import { IPost } from '@/page-components/Posts/Posts.interface';  
+  
+export interface PostListProps  
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
+   remove: (post: IPost) => void;  
+   posts: IPost[];  
+}
+```
 
+Тут выводится список постов, в каждый из которых передаётся своя функция для их удаления
 
+`components / PostList / PostList.tsx`
+```TSX
+export const PostList = ({ remove, posts, className, ...props }: PostListProps) => {  
+   return (  
+      <div className={cn(styles.wrapper, className)} {...props}>  
+         {/* выводим полностью отфильтрованный конечный массив */}  
+         {posts.length ? (  
+            posts.map(p => <PostItem remove={remove} key={p.id} post={p} />)  
+         ) : (  
+            <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>  
+         )}  
+      </div>  
+   );  
+};
+```
 
+Далее идёт фильтр постов, который в себя принимает пропс фильтра по интерфейсу `IFilter` и функцию `setFilter`, которая устанавливает новый фильтр.
 
+Сам интерфейс `IFilter` представляет из себя интерфейс стейта фильтра из главного компонента
 
+`components / PostFilter / PostFilter.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
+import { IPost } from '@/page-components/Posts/Posts.interface';  
+  
+export interface IPostFilterProps  
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
+   filter: IFilter;  
+   setFilter: (filter: IFilter) => void;  
+}  
+  
+export interface IFilter {  
+   sort: 'title' | 'body';  
+   query: string;  
+}
+```
+
+Данный компонент выполняет фильтрацию по инпуту и по селекту
+
+`components / PostFilter / PostFilter.tsx`
+```TSX
+export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {  
+   return (  
+      <div className={styles.wrapper}>  
+         <Input  
+            className={styles.search}  
+            placeholder={'Поиск...'}  
+            value={filter.query}  
+            onChange={e => setFilter({ ...filter, query: e.target.value })}  
+         />  
+  
+         <Divider />  
+  
+         <Select  
+            value={filter.sort}  
+            onChange={(selectedSort: 'title' | 'body') =>  
+               setFilter({ ...filter, sort: selectedSort })  
+            }  
+            defaultValue={'Сортировка'}  
+            options={[  
+               { value: 'title', name: 'По заголовку' },  
+               { value: 'body', name: 'По описанию' },  
+            ]}  
+         />  
+      </div>  
+   );  
+};
+```
+
+Сделаем поиск по ширине экрана
+
+`components / PostFilter / PostFilter.module.css`
+```CSS
+.search {  
+   width: 100%;  
+}
+```
+
+Итог: теперь работает поиск по строке запроса 
+
+![](_png/Pasted%20image%2020230210160219.png)
 
 
 ## 01:23:50 ➝ Модальное окно. Переиспользуемый UI компонент
