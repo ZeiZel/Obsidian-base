@@ -957,28 +957,122 @@ return (
 
 ## 01:05:30 ➝ Сортировка. Выпадающий список
 
-
+Первым делом, нужно реализовать компонент сортировки. Он будет в себя принимать массив опций, дефолтную опцию и определённое выбранное значение пользователем 
 
 `Select.props.ts`
 ```TS
-
+import { DetailedHTMLProps, HTMLAttributes } from 'react';  
+  
+export interface SelectProps  
+   extends DetailedHTMLProps<HTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {  
+   options: { value: string; name: string }[];  
+   defaultValue: string;  
+   value: string;  
+}
 ```
 
-
+Компонент селекта выводит массив переданных в него опций и триггерит переданную в него функцию `onChange` при выборе определённого селекта
 
 `Select.tsx`
 ```TSX
-
+import React from 'react';  
+import cn from 'classnames';  
+import styles from './Select.module.scss';  
+import { SelectProps } from '@/components/Select/Select.props';  
+  
+export const Select = ({  
+   defaultValue,  
+   options,  
+   className,  
+   value,  
+   onChange,  
+   ...props  
+}: SelectProps): JSX.Element => {  
+   return (  
+      <select  
+         value={value}  
+         onChange={event => onChange(event.target.value)}  
+         className={styles.select}  
+      >         
+	    <option disabled value=''>  
+            {defaultValue}  
+		</option>  
+         {options.map(option => (  
+            <option key={option.value} value={option.value}>  
+               {option.name}  
+            </option>  
+         ))}  
+      </select>  
+   );  
+};
 ```
 
-
+В главном компоненте мы создали функцию `sortPosts`, которую и передаём в дочерний компонент селекта. Внутри функции мы устанавливаем тип селекшена  `setSelectedSort` и производим сравнение списков через `localeCompare`.
 
 `PostList.tsx`
 ```TSX
-
+export const PostList = () => {  
+   const [postsData, setPostsData] = useState<IPost[]>([  
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
+   ]);  
+  
+   // состояние для элемента сортировки select  
+   const [selectedSort, setSelectedSort] = useState<'title' | 'body' | ''>('');  
+  
+   // коллбэк функция для создания поста, которую передаём в дочерний элемент  
+   const createPost = (newPost: IPost): void => {  
+      setPostsData([...postsData, newPost]);  
+   };  
+  
+   // коллбэк функция для удаления поста, которую передаём в дочерний элемент  
+   const removePost = (post: IPost): void => {  
+      // в стейт вернём новый массив, который будет отфильтрован через filter  
+      setPostsData(postsData.filter(p => p.id !== post.id));  
+   };  
+  
+   // функция для сортировки постов  
+   const sortPosts = (sort: 'title' | 'body'): void => {  
+      setSelectedSort(sort);  
+  
+      // тут мы сортируем массив, не мутируя его состояние напрямую  
+      setPostsData([...postsData].sort((a, b) => a[sort].localeCompare(b[sort])));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <PostForm create={createPost} />  
+  
+         <Divider />  
+         <Select  
+            value={selectedSort}  
+            onChange={sortPosts}  
+            defaultValue={'Сортировка'}  
+            options={[  
+               { value: 'title', name: 'По заголовку' },  
+               { value: 'body', name: 'По описанию' },  
+            ]}  
+         />  
+  
+         <div className={styles.list}>  
+            {postsData.length ? (  
+               postsData.map(p => <PostItem remove={removePost} key={p.id} post={p} />)  
+            ) : (  
+               <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>  
+            )}  
+         </div>  
+      </div>  
+   );  
+};
 ```
 
-1:10:03
+Оба вида сортировки:
+
+![](_png/Pasted%20image%2020230210072952.png)
+
+![](_png/Pasted%20image%2020230210072955.png)
+
 
 ## 01:12:00 ➝ Поиск. Фильтрация.
 
