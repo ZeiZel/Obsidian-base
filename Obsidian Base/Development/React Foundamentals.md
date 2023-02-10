@@ -217,6 +217,27 @@ export class ClassCounter extends Component<any, any> {
 
 ![](_png/Pasted%20image%2020230209113714.png)
 
+
+## Сокращение путей импортов до компонентов
+
+Так же ну нужно забывать, что при создании компонента в папке `components`, мы можем экспортировать удобно эти компоненты из папки, чтобы использовать в других папках (`pages` или `page-components`)
+
+`components / index.ts`
+```TS
+export * from './Button/Button';  
+export * from './Divider/Divider';  
+export * from './Input/Input';  
+export * from './Select/Select';  
+export * from './Paragraph/Paragraph';  
+export * from './ClassCounter/ClassCounter';  
+export * from './PostItem/PostItem';  
+export * from './PostForm/PostForm';  
+export * from './PostFilter/PostFilter';  
+export * from './PostList/PostList';
+```
+
+После подобного экспорта, мы сможем получать доступ к данным компонентам, просто обратившись через: `import { нужный_компонент } from './components'` 
+
 ## 30:25 ➝ Что такое хуки? useState, useEffect
 
 ==Хук== - это функция, которую предоставляет React для использования в функциональных компонентах или в своих собственных хуках
@@ -1074,7 +1095,7 @@ export const PostList = () => {
 ![](_png/Pasted%20image%2020230210072955.png)
 
 
-## 01:15:10 ➝ useMemo. Мемоизация. Кеширование
+## 01:15:10 ➝ useMemo. Мемоизация. Кеширование. Поиск. Фильтрация.
 
 Хук `useMemo` возвращает мемоизированное значение.
 
@@ -1084,11 +1105,100 @@ export const PostList = () => {
 
 Эта оптимизация помогает избежать дорогостоящих вычислений при каждом рендере.
 
+Нужно помнить, что функция, переданная `useMemo`, запускается во время рендеринга. Не нужно делать там ничего, что обычно не делается во время рендеринга. Например, все побочные эффекты должен выполнять `useEffect`, а не `useMemo`.
+
+`example:`
 ```TSX
 const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```
 
-Нужно помнить, что функция, переданная `useMemo`, запускается во время рендеринга. Не делайте там ничего, что вы обычно не делаете во время рендеринга. Например, побочные эффекты принадлежат `useEffect`, а не `useMemo`.
+
+Далее структура проекта была немного реорганизована и теперь главным компонентом будет компонен страницы  `Posts.tsx`
+
+
+
+
+
+`components / PostFilter.tsx`
+```TSX
+export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {  
+   return (  
+      <div className={styles.wrapper}>  
+         <Input  
+            className={styles.search}  
+            placeholder={'Поиск...'}  
+            value={filter.query}  
+            onChange={e => setFilter({ ...filter, query: e.target.value })}  
+         />  
+  
+         <Divider />  
+  
+         <Select  
+            value={filter.sort}  
+            onChange={(selectedSort: 'title' | 'body') =>  
+               setFilter({ ...filter, sort: selectedSort })  
+            }  
+            defaultValue={'Сортировка'}  
+            options={[  
+               { value: 'title', name: 'По заголовку' },  
+               { value: 'body', name: 'По описанию' },  
+            ]}  
+         />  
+      </div>  
+   );  
+};
+```
+
+
+`page-components / Posts.tsx`
+```TSX
+import React, { useMemo, useRef, useState } from 'react';  
+import styles from './Posts.module.scss';  
+import { PostFilter } from '@/components';  
+import { PostForm } from '@/components';  
+import { PostList } from '@/components';  
+import { IPost } from '@/page-components/Posts/Posts.interface';  
+import { IFilter } from '@/components/PostFilter/PostFilter.props';  
+  
+export const Posts = () => {  
+   const [posts, setPosts] = useState<IPost[]>([  
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
+   ]);  
+  
+   // состояние селекта и строки поиска  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+  
+   // получаем отсортированный массив  
+   const sortedPosts = useMemo<IPost[]>(() => {  
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));  
+   }, [filter.sort, posts]);  
+  
+   // сортируем массив по строке поиска  
+   const sortedAndSearchedPosts = useMemo<IPost[]>(() => {  
+      return sortedPosts.filter(post =>  
+         post.title.toLowerCase().includes(filter.query.toLowerCase()),  
+      );  
+   }, [filter.query, sortedPosts]);  
+  
+   const createPost = (newPost: IPost): void => {  
+      setPosts([...posts, newPost]);  
+   };  
+  
+   const removePost = (post: IPost): void => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <PostForm create={createPost} />  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
+      </div>  
+   );  
+};
+```
 
 
 
