@@ -1279,15 +1279,118 @@ export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {
 
 ![](_png/Pasted%20image%2020230210183829.png)
 
-Либо можно воспользоваться функцией `cn()` из внешнего модуля `classnames`, которая упростит взаимодействие с навешиванием классов на элементы
 
 
 
+`components / Modal / Modal.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
+  
+export interface IModalProps  
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
+   children: ReactNode;  
+   visible: boolean;  
+   setVisible: (visible: boolean) => void;  
+}
+```
 
+Тут уже представлен компонент `Modal`, который и реализует под собой открытие модального окна по состоянию, переданному от родителя.
 
+Так же тут показано, как можно воспользоваться функцией `cn()` из внешнего модуля `classnames`, которая упростит взаимодействие с навешиванием классов на элементы.
 
+Тут нужно сказать, что функция `e.stopPropagation()` (которая вложена в дочерний элемент обёртки) предотвращает выполнение остальных функций, срабатывание которых повешено на данный элемент или его родителей. Конкретно в данном случае, он не даёт закрыться модальному окну при клике на него (функция закрытия работает не только на родителе изначально, но и на ребёнке)
 
+`components / Modal / Modal.tsx`
+```TSX
+import React from 'react';  
+import styles from './Modal.module.scss';  
+import cn from 'classnames';  
+import { IModalProps } from '@/components/Modal/Modal.props';  
+  
+export const Modal = ({ children, className, visible, setVisible, ...props }: IModalProps): JSX.Element => {  
+   return (  
+      <div  
+         className={cn(styles.modal, className, {  
+            [styles.active]: visible,  
+            [styles.disabled]: !visible,  
+         })}  
+         onClick={() => setVisible(false)}  
+      >         
+         <div 
+	         className={styles.modal__content} 
+	         onClick={e => e.stopPropagation()}
+	    > 		 
+            {children}  
+         </div>  
+      </div>  
+   );  
+};
+```
 
+- В родительский компонент нужно добавить состояние, которое будет контролировать видимость модального окна.
+- Далее в функцию `createPost()` добавим закрытие модального окна при добавлении нового поста
+-  В рендере передаём дополнительную кнопку, внутри которой и будет находиться само модальное окно
+
+`page-components / Posts.tsx`
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState<IPost[]>([  
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
+   ]);  
+  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+  
+   // состояние модального окна  
+   const [modal, setModal] = useState(false);  
+  
+   const sortedPosts = useMemo<IPost[]>(() => {  
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));  
+   }, [filter.sort, posts]);  
+  
+   const sortedAndSearchedPosts = useMemo<IPost[]>(() => {  
+      return sortedPosts.filter(post =>  
+         post.title.toLowerCase().includes(filter.query.toLowerCase()),  
+      );  
+   }, [filter.query, sortedPosts]);  
+  
+   const createPost = (newPost: IPost): void => {  
+      setPosts([...posts, newPost]);  
+  
+      // после создания модалки, оно закроется  
+      setModal(false);  
+   };  
+  
+   const removePost = (post: IPost): void => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button 
+	         className={styles.button} 
+	         buttonType={'purple'} 
+	         onClick={() => setModal(true)}
+	     >  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+  
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
+      </div>  
+   );  
+};
+```
+
+Итог:
+
+![](_png/Pasted%20image%2020230210193135.png)
 
 
 ## 01:30:23 ➝ Анимации. React transition group
