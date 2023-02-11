@@ -1453,50 +1453,183 @@ export const PostList = ({ remove, posts, className, ...props }: PostListProps) 
 
 Когда наш компонент начинает хранить большое количество логики, нужно его декомпозировать и выделять его функции в хелперы или даже отдельные хуки.
 
+Тут будут храниться отдельные хуки, которые мы выцепили из основного компонента создания постов.
 
+`hooks / usePosts.ts`
+```TS
+import { useMemo } from 'react';  
+import { IPost } from '@/page-components/Posts/Posts.interface';  
+  
+const useSortedPosts = (posts: IPost[], sort: 'title' | 'body') => {  
+   return useMemo<IPost[]>(() => {  
+      return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]));  
+   }, [sort, posts]);  
+};  
+  
+export const usePosts = (posts: IPost[], sort: 'title' | 'body', query: string) => {  
+   const sortedPosts = useSortedPosts(posts, sort);  
+  
+   return useMemo<IPost[]>(() => {  
+      return sortedPosts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()));  
+   }, [query, sortedPosts]);  
+};
+```
 
+В самом компоненте мы просто вызваем сортировку постов
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+`page-components / Posts.tsx`
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState<IPost[]>([  
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
+   ]);  
+  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+  
+   const [modal, setModal] = useState(false);  
+  
+   // сортировка массива постов  
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
+  
+   const createPost = (newPost: IPost): void => {  
+      setPosts([...posts, newPost]);  
+  
+      setModal(false);  
+   };  
+  
+   const removePost = (post: IPost): void => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+  
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
+      </div>  
+   );  
+};
+```
 
 
 ## 01:36:20 ➝ Работа с сервером. Axios
 
+Первым делом, установим модуль по работе с сервером `axios`, который позволит просто отправлять запросы на получение данных на сервер
 
-
-
-
+```bash
+npm i axios 
+```
 
 
 ## 01:38:40 ➝ Жизненный цикл компонента. useEffect
 
+Жизненный цикл компонента React делится на 4 части:
+- Инициализация (компонент получает пропсы и состояния)
+- Монтирование (вешаем слушатели события, генерим компонент)
+- Обновление (производим какие-либо действия над компонентом)
+- Размонтирование (удаляем компонент / отписываемся от слушателей события, очищаем глобальное хранилище)
 
+![](_png/Pasted%20image%2020230211084156.png)
 
+И тут мы подходим к использованию хука `useEffect`, который позволит выполнять действия под определённые стадии монтировки компонента
 
+![](_png/Pasted%20image%2020230211085036.png)
 
+В главном компоненте получим массив постов с сервера через `fetchPosts` и сохраним его в стейт наших постов. Вызвана эта функция будет через `useEffect`, который в представленном сетапе будет выполнять действие ровно один раз - при загрузке компонента
 
+`page-components / Posts.tsx`
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState('');  
+  
+   const fetchPosts = async () => {  
+      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');  
+      setPosts(posts.data);  
+   };  
+  
+   useEffect(() => {  
+      fetchPosts();  
+   }, []);  
+  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+  
+   const [modal, setModal] = useState(false);  
+  
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
+  
+   const createPost = (newPost: IPost): void => {  
+      setPosts([...posts, newPost]);  
+  
+      setModal(false);  
+   };  
+  
+   const removePost = (post: IPost): void => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+  
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
+      </div>  
+   );  
+};
+```
+
+Итог: мы получили посты с сервера и сразу их отрендерили, так как через `useEffect` вызвали функцию получения постов
+
+![](_png/Pasted%20image%2020230211084604.png)
 
 ## 01:43:08 ➝ API. PostService
 
+Чтобы упростить свою работу с сервером через внесение дополнительной абстракции, можно сделать отдельное API на фронте, которое будет получать наши посты с сервера.
 
+Создадим класс со статичной функцией и будем уже использовать эту конструкцию для работы с сервером
 
+`API / post.service.ts`
+```TS
+import axios from 'axios/index';  
+  
+export default class PostService {  
+   static async getAll() {  
+      try {  
+         const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');  
+         return posts.data;  
+      } catch (e: unknown) {  
+         console.error(e);  
+      }  
+   }  
+}
+```
 
+И теперь мы можем получить посты более лаконичным и понятным способом
 
-
+`page-components / Posts.tsx`
+```TSX
+const fetchPosts = async () => {
+	const posts = await PostService.getAll();
+	setPosts(posts);
+};
+```
 
 ## 01:44:45 ➝ Индикация загрузки данных с сервера
 
