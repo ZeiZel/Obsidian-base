@@ -2142,7 +2142,9 @@ export const Posts = () => {
 
 
 
-
+```bash
+npm i react-router-dom
+```
 
 
 
