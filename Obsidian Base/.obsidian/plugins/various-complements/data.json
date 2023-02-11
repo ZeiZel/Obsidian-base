@@ -602,8 +602,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 8,
-          "lastUpdated": 1676091547838
+          "count": 9,
+          "lastUpdated": 1676131320922
         }
       }
     },
@@ -1004,6 +1004,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676129142906
+        }
+      }
+    },
+    "Pages": {
+      "Pages": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676131323379
+        }
+      }
+    },
+    "Pagination": {
+      "Pagination": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1676131328413
         }
       }
     }
