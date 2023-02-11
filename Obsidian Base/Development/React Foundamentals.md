@@ -1782,6 +1782,7 @@ export const useFetching = (callback: Function): [Function, boolean, string] => 
 
 Так же сделаем вывод ошибки, если таковая будет иметься через `postsError`
 
+`page-components / Posts.tsx`
 ```TSX
 export const Posts = () => {  
    const [posts, setPosts] = useState('');  
@@ -1824,7 +1825,7 @@ export const Posts = () => {
   
          <PostFilter filter={filter} setFilter={setFilter} />  
 
-		{postsError.length && <h1>Произошла ошибка {postsError}</h1>}
+		{postsError && <h1>Произошла ошибка {postsError}</h1>}
 
          {isPostLoading ? (  
             <div className={styles.loadPosition}>  
@@ -1847,6 +1848,20 @@ export const Posts = () => {
 
 
 ## 01:54:15➝ Постраничный вывод. Пагинация (pagination)
+
+Выводить сразу на одной странице 100 постов - это не самая лучшая идея. Если данные посты будут иметь ещё и фотографии, то загрузка страницы будет долгой и устройство пользователя так же будет сильно нагружено. 
+
+Сейчас стоит воспользоваться пагинацией - постраничной загрузкой страниц. 
+
+Домен `jsonplaceholder` позволяет по определённым параметрам выводить лимитированное количество постов и менять страницу. В хедере (`x-total-count`) так же указывается максимальное количество постов, которое может выдать запрос
+
+![](_png/Pasted%20image%2020230211170221.png)
+
+
+
+
+
+
 
 
 
