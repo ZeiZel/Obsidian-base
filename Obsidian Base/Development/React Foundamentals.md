@@ -1897,7 +1897,10 @@ export const getPagesArray = (totalPages: number) => {
 
 В хуке `useFetching` мы так же получаем заголовок от ответа и вызываем функцию `getPageCount`, которая делит заголовок на лимит и получает количество страниц, а уже дальше `setTotalPages` устанавливает это количество в качестве количества страниц.
 
-Потом в `pagesArray` мы получаем
+Потом в `pagesArray` мы получаем массив страниц (1, 2, 3...).
+
+И уже в функции `changePage` мы осуществляем фетчинг новых постов на странице. Эту функцию вызывает компонент `Button`. 
+Кнопки рендерятся в зависимости от количества элементов в массиве `pagesArray`.
 
 `page-components / Posts.tsx`
 ```TSX
@@ -1962,7 +1965,8 @@ export const Posts = () => {
                className={styles.list}  
                posts={sortedAndSearchedPosts}  
                remove={removePost}  
-            />         )}  
+            />         
+        )}  
 
 
 		{/* тут уже мы выводим кнопки со страницами */}
