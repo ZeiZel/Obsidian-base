@@ -1395,13 +1395,78 @@ export const Posts = () => {
 
 ## 01:30:23 ➝ Анимации. React transition group
 
+Одним из способов добавить анимацию в реакт является `react-transition-group`, который мы можем использовать как компоненты реакта
 
+```bash
+npm install react-transition-group --save &&
+npm install --save @types/react-transition-group
+```
 
+Тут нужно обернуть группу элементов в `TransitionGroup` а каждый отдельный элемент в `CSSTransition` (в этот же элемент нужно передать свойство ключа, так как он располагается выше, чем `PostItem`)
 
+`components / PostList / PostList.tsx`
+```TSX
+import { TransitionGroup, CSSTransition } from 'react-transition-group';  
+  
+export const PostList = ({ remove, posts, className, ...props }: PostListProps) => {  
+   return (  
+      <div className={cn(styles.wrapper, className)} {...props}>  
+         {posts.length ? (  
+            <TransitionGroup className='post-list'>  
+               {posts.map(p => (  
+                  <CSSTransition key={p.id} timeout={500} classNames='post'>  
+                     <PostItem remove={remove} post={p} />  
+                  </CSSTransition>  
+               ))}  
+            </TransitionGroup>  
+         ) : (  
+            <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>  
+         )}  
+      </div>  
+   );  
+};
+```
 
+Стили компонента: 
+`CSSTransition` мы наименовали как `post` и поэтому в определённых состояниях нужно наименовать начальный элемент как `post`
+
+```CSS
+.post-enter {  
+   opacity: 0;  
+}  
+.post-enter-active {  
+   opacity: 1;  
+   transition: all 0.2s ease-in;  
+}  
+.post-exit {  
+   opacity: 1;  
+}  
+.post-exit-active {  
+   opacity: 0;  
+   transform: rotateY(-350deg);  
+   transition: all 0.2s ease-in;  
+}
+```
 
 
 ## 01:33:40 ➝ Декомпозиция. Кастомные хуки
+
+Когда наш компонент начинает хранить большое количество логики, нужно его декомпозировать и выделять его функции в хелперы или даже отдельные хуки.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
