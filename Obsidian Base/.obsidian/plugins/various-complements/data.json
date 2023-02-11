@@ -290,8 +290,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 5,
-          "lastUpdated": 1676123518701
+          "count": 7,
+          "lastUpdated": 1676129337512
         }
       }
     },
@@ -794,8 +794,8 @@
     "useState": {
       "useState": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675941750458
+          "count": 3,
+          "lastUpdated": 1676129080847
         }
       }
     },
@@ -986,8 +986,24 @@
     "changePage": {
       "changePage": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1676129293064
+        }
+      }
+    },
+    "избежать": {
+      "избежать": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1676128427756
+          "lastUpdated": 1676129130985
+        }
+      }
+    },
+    "DOM-дерева": {
+      "DOM-дерева": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676129142906
         }
       }
     }
