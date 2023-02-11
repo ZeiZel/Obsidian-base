@@ -1605,18 +1605,16 @@ export const Posts = () => {
 
 Создадим класс со статичной функцией и будем уже использовать эту конструкцию для работы с сервером
 
+Заранее стоит сказать, что обрабатывать ошибку тут - плохой подход, поэтому переловим ошибку в другом месте кода ->
+
 `API / post.service.ts`
 ```TS
-import axios from 'axios/index';  
+import axios from 'axios';  
   
 export default class PostService {  
    static async getAll() {  
-      try {  
-         const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');  
-         return posts.data;  
-      } catch (e: unknown) {  
-         console.error(e);  
-      }  
+      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');  
+      return posts.data;  
    }  
 }
 ```
@@ -1633,26 +1631,219 @@ const fetchPosts = async () => {
 
 ## 01:44:45 ➝ Индикация загрузки данных с сервера
 
+Мы создали состояние `isPostLoading`, которое будет отвечать за состояние загрузки постов. В функции `fetchPosts` добавим изменение этого состояния (так как через него идёт получение данных с сервера). И далее в `render` укажем, что отображать сообщение о загрузке нужно пока его состояние не перейдёт в `false`
 
+`page-components / Posts.tsx`
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState('');  
+  
+   const fetchPosts = async () => {  
+      // сейчас посты только начнут загрузку, поэтому нужно показать загрузку  
+      setIsPostLoading(true);  
+      const posts = await PostService.getAll();  
+      setPosts(posts);  
+  
+      // здесь уже посты загружены  
+      setIsPostLoading(false);  
+   };  
+  
+   useEffect(() => {  
+      fetchPosts();  
+   }, []);  
+    
+   // состояние для загрузки постов  
+   const [isPostLoading, setIsPostLoading] = useState(false);  
+  
+   /// CODE ...
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+  
+         {isPostLoading ? (  
+            <h1>Идёт загрузка...</h1>  
+         ) : (  
+            <PostList  
+               className={styles.list}  
+               posts={sortedAndSearchedPosts}  
+               remove={removePost}  
+            />         
+	    )}  
+      </div>  
+   );  
+};
+```
 
+Итог:
 
-
+![](_png/Pasted%20image%2020230211160817.png)
 
 
 ## 01:46:20 ➝ Компонент Loader. Анимации
 
+Компонент лоадера будет представлять из себя обычный `<div>`
 
+`components / Loader / Loader.tsx`
+```TSX
+export const Loader = ({ children, className }: ILoaderProps) => {
+	return <div className={cn(styles.loader, className)}>{children}</div>;
+};
+```
 
+А анимация будет бесконечной и реализованной через обычный ==CSS==
 
+`components / Loader / Loader.module.SCSS`
+```SCSS
+.loader {  
+   display: flex;  
+   align-items: center;  
+   justify-items: center;  
+  
+   text-align: center;  
+  
+   width: 100px;  
+   height: 100px;  
+  
+   border-radius: 50%;  
+   border: 3px dashed var(--primary);  
+  
+   animation: rotate 1s linear infinite;  
+   transition: all 0.2s;  
+}  
+  
+@keyframes rotate {  
+   from {  
+      transform: rotate(0deg) scale(1);  
+   }  
+  
+   to {      transform: rotate(360deg) scale(1.2);  
+   }  
+}
+```
 
+Теперь останется только вставить крутилку на страницу
 
+`page-components / Posts.tsx`
+```TSX
+{isPostLoading ? (
+	<div className={styles.loadPosition}>
+		<Loader>Идёт загрузка...</Loader>
+	</div>
+) : (
+	<PostList
+		className={styles.list}
+		posts={sortedAndSearchedPosts}
+		remove={removePost}
+	/>
+)}
+```
+
+Итог: получена крутилка, которая оповещает о загрузке
+
+![](_png/Pasted%20image%2020230211163000.png)
 
 ## 01:49:25 ➝ Кастомный хук useFetching(). Обработка ошибок
 
+Далее нам нужно сделать хук, который будет получать функцию и выполнять её, а так же будет контролировать состояние спиннера загрузки и перехватывать ошибку, если таковая придёт на страницу
 
+`hooks / useFetching.ts`
+```TS
+import { useState } from 'react';  
+  
+export const useFetching = (callback: Function): [Function, boolean, string] => {  
+   const [isLoading, setIsLoading] = useState<boolean>(false);  
+   const [error, setError] = useState<string>('');  
+  
+   const fetching = async (): Promise<void> => {  
+      try {  
+         setIsLoading(true);  
+         await callback();  
+      } catch (e: unknown) {  
+         setError(e.message as string);  
+      } finally {  
+         setIsLoading(false);  
+      }  
+   };  
+  
+   return [fetching, isLoading, error];  
+};
+```
 
+И теперь в родительском компоненте используем хук `useFetching`, который позволит нам убрать отслеживание состояния загрузки внутри родительского компонента
 
+Так же сделаем вывод ошибки, если таковая будет иметься через `postsError`
 
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState('');  
+
+	// Используем хук для 
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
+      const posts = await PostService.getAll();  
+      setPosts(posts);  
+   });  
+  
+   useEffect(() => {  
+      fetchPosts();  
+   }, []);  
+  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+  
+   const [modal, setModal] = useState(false);  
+  
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
+  
+   const createPost = (newPost: IPost): void => {  
+      setPosts([...posts, newPost]);  
+  
+      setModal(false);  
+   };  
+  
+   const removePost = (post: IPost): void => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+
+		{postsError.length && <h1>Произошла ошибка {postsError}</h1>}
+
+         {isPostLoading ? (  
+            <div className={styles.loadPosition}>  
+               <Loader>Идёт загрузка...</Loader>  
+            </div>  
+         ) : (  
+            <PostList  
+               className={styles.list}  
+               posts={sortedAndSearchedPosts}  
+               remove={removePost}  
+            />         )}  
+      </div>  
+   );  
+};
+```
+
+Если мы не сможем получить посты с сервера, то увидим вот такую ошибку:
+
+![](_png/Pasted%20image%2020230211165703.png)
 
 
 ## 01:54:15➝ Постраничный вывод. Пагинация (pagination)

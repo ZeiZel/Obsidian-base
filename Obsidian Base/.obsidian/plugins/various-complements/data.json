@@ -290,8 +290,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1676094809916
+          "count": 5,
+          "lastUpdated": 1676123518701
         }
       }
     },
@@ -924,6 +924,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676095420470
+        }
+      }
+    },
+    "fetchPosts": {
+      "fetchPosts": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676121059754
+        }
+      }
+    },
+    "useFetching": {
+      "useFetching": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1676123609885
         }
       }
     }
