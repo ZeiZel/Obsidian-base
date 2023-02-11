@@ -1858,15 +1858,136 @@ export const Posts = () => {
 ![](_png/Pasted%20image%2020230211170221.png)
 
 
+`API / post.service.ts`
+```TS
+import axios from 'axios';  
+  
+export default class PostService {  
+   static async getAll(limit: number = 10, page: number = 1) {  
+      return await axios.get('https://jsonplaceholder.typicode.com/posts', {  
+         params: {  
+            _limit: limit,  
+            _page: page,  
+         },  
+      });  
+   }  
+}
+```
 
 
+`utilities / pages.utilities.ts`
+```TS
+// тут мы получаем количество страниц в зависимости от общего количества постов и их максимального количества на странице  
+export const getPageCount = (totalCount: number, limit: number): number => {  
+   // вернём число страниц, округлённое в большую сторону  
+   return Math.ceil(totalCount / limit);  
+};  
+  
+// тут мы создадим массив страниц, которые будут выводить посты  
+export const getPagesArray = (totalPages: number) => {  
+   let result: number[] = [];  
+   for (let i = 0; i < totalPages; i++) {  
+      result.push(i + 1);  
+   }  
+   return result;  
+};
+```
+
+Уже в основном компоненте страницы мы создаём три новых состояния, которые будут отвечать за общее количество страниц, лимит постов на странице и за саму страницу.
+
+В хуке `useFetching` мы так же получаем заголовок от ответа и вызываем функцию `getPageCount`, которая делит заголовок на лимит и получает количество страниц, а уже дальше `setTotalPages` устанавливает это количество в качестве количества страниц.
+
+Потом в `pagesArray` мы получаем
+
+`page-components / Posts.tsx`
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState('');  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+   const [modal, setModal] = useState(false);  
+  
+   // состояние, которое хранит общее колчиество постов  
+   const [totalPages, setTotalPages] = useState<number>(0);  
+   // состояние лимита постов  
+   const [limit, setLimit] = useState<number>(10);  
+   // состояние страницы постов  
+   const [page, setPage] = useState<number>(1);  
+  
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
+      const response = await PostService.getAll(limit, page);  
+      setPosts(response.data);  
+  
+      // общее количество постов получаем из хедера запроса  
+      const totalCount = response.headers['x-total-count'];  
+  
+      // получаем общее количество страниц  
+      setTotalPages(getPageCount(totalCount, limit));  
+   });  
+  
+   // получаем массив номеров страниц  
+   let pagesArray: number[] = getPagesArray(totalPages);  
+  
+   // тут мы будем устанавливать в состояние выбранную страницу пользователя  
+   const changePage = (page: number) => {  
+      setPage(page);  
+      fetchPosts();  
+   };  
+  
+   useEffect(() => {  
+      fetchPosts();  
+   }, []);  
+  
+   /// CODE ... 
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+  
+         {postsError && <h1>Произошла ошибка {postsError}</h1>}  
+  
+         {isPostLoading ? (  
+            <div className={styles.loadPosition}>  
+               <Loader>Идёт загрузка...</Loader>  
+            </div>  
+         ) : (  
+            <PostList  
+               className={styles.list}  
+               posts={sortedAndSearchedPosts}  
+               remove={removePost}  
+            />         )}  
 
 
+		{/* тут уже мы выводим кнопки со страницами */}
+         <div className={styles.buttonBlock}>  
+            {pagesArray.map(p => (  
+               <Button  
+                  onClick={() => changePage(p)}  
+                  key={p}  
+                  className={cn(styles.buttonPage, {  
+                     [styles.buttonPage__current]: page === p,  
+                  })}  
+                  buttonType={'gray'}  
+               >  
+                  {p}  
+               </Button>  
+            ))}  
+         </div>  
+      </div>  
+   );  
+};
+```
 
+Мы реализовали подгрузку новых постов на странице, но тут мы столкнулись с проблемой, что при переходе на разные страницы, у нас загружается прошлая выбранная страница
 
-
-
-
+![](_png/Pasted%20image%2020230211180636.png)
 
 
 ## 02:06:20 ➝ Обьяснение механизма изменения состояния
