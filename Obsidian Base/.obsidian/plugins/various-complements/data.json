@@ -1022,6 +1022,14 @@
           "lastUpdated": 1676131328413
         }
       }
+    },
+    "return": {
+      "return": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676182562447
+        }
+      }
     }
   }
 }

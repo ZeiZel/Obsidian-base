@@ -2192,12 +2192,144 @@ npm i react-router-dom
 
 ## 02:47:10 ➝ Бесконечная лента. Динамическая пагинация. useObserver
 
-
+Сейчас нужно написать хук, который позволит нам наблюдать, дошли ли мы до определённого блока на странице, чтобы спокойно загрузить следующую порцию контента.
 
 Свойство `isIntersecting` у `observer` отвечает за то, в зоне видимости ли наш элемент
 
+`hooks / useObserver.ts`
+```TS
+import { useEffect, useRef } from 'react';  
+  
+export const useObserver = (ref, canLoad: boolean, isLoading: boolean, callback: Function) => {  
+   // тут будет храниться сам обзёрвер  
+   const observer = useRef();  
+  
+   // второй эффект будет отвечать за отслеживание элемента, который будет триггерить загрузку постов  
+   useEffect(() => {  
+      // если мы загружаемся, то новый обзёрвер создавать сейчас не нужно  
+      if (isLoading) return;  
+  
+      // если обзёрвер за чем-то уже следит, то нужно убрать с него все слежки на данный момент времени  
+      if (observer.current) observer.current?.disconnect();  
+  
+      const callbackObserver = (entries, observer) => {  
+         // если объект в зоне видимости и если номер текущей страницы меньше общего количества страниц  
+         if (entries[0].isIntersecting && canLoad) {  
+            // то изменяем номер страницы  
+            callback();  
+         }  
+      };  
+  
+      // инициализируем новый обзёрвер  
+      observer.current = new IntersectionObserver(callbackObserver);  
+      // выбираем отслеживаемый элемент  
+      observer.current.observe(ref.current);  
+  
+      // срабатывать эффект должен только тогда, когда изменилось состояние загрузки страницы  
+   }, [isLoading]);  
+};
+```
+
+В `return` добавляем див-пустышку, который будет просто иметь в себе референс `lastElement`, за которым и будет следить обзёрвер. Далее нам просто нужно вызвать самописный хук `useObserver` и передать в него нужные параметры
+
+`page-components / Posts.tsx`
+```TSX
+export const Posts = () => {  
+   const [posts, setPosts] = useState('');  
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
+   const [modal, setModal] = useState(false);  
+  
+   const [totalPages, setTotalPages] = useState<number>(0);  
+   const [limit, setLimit] = useState<number>(10);  
+   const [page, setPage] = useState<number>(1);  
+  
+   // тут мы будем хранить ссылку на последний элемент страницы, чтобы при достижении его, у нас подгружались новые посты  
+   const lastElement = useRef<HTMLDivElement>();  
+  
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
+      const response = await PostService.getAll(limit, page);  
+  
+      // подгружает не просто новые посты, а добавляет подгруженные в общий массив постов  
+      setPosts([...posts, ...response.data]);  
+  
+      const totalCount = response.headers['x-total-count'];  
+  
+      setTotalPages(getPageCount(totalCount, limit));  
+   });  
+  
+   const changePage = (page: number) => {  
+      setPage(page);  
+   };  
+  
+   // тут воспользуемся кастомным хуком для отслеживания конца страницы  
+   useObserver(lastElement, page < totalPages, isPostLoading, () => {  
+      setPage(page + 1);  
+   });  
+  
+   useEffect(() => {  
+      fetchPosts();  
+   }, [page, limit]);  
+  
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
+  
+   const createPost = (newPost: IPost): void => {  
+      setPosts([...posts, newPost]);  
+  
+      setModal(false);  
+   };  
+  
+   const removePost = (post: IPost): void => {  
+      setPosts(posts.filter(p => p.id !== post.id));  
+   };  
+  
+   return (  
+      <div className={styles.wrapper}>  
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
+            Создать пост  
+         </Button>  
+  
+         <Modal visible={modal} setVisible={setModal}>  
+            <PostForm create={createPost} />  
+         </Modal>  
+  
+         <PostFilter filter={filter} setFilter={setFilter} />  
+  
+         <Select  
+            defaultValue={'Количество элементов на странице'}  
+            options={[  
+               { value: 5, name: '5' },  
+               { value: 10, name: '10' },  
+               { value: 25, name: '25' },  
+               { value: -1, name: 'Все' },  
+            ]}  
+            value={limit}  
+            onChange={value => setLimit(value)}  
+         />  
+  
+         {postsError && <h1>Произошла ошибка {postsError}</h1>}  
+  
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
+  
+         {/* это наблюдаемый div */}  
+         <div ref={lastElement} style={{ height: 1 }} />  
+  
+         {isPostLoading && (  
+            <div className={styles.loadPosition}>  
+               <Loader>Идёт загрузка...</Loader>  
+            </div>  
+         )}  
+  
+         <Pagination totalPages={totalPages} page={page} changePage={changePage} />  
+      </div>  
+   );  
+};
+```
 
 
 При достижении невидимого `div`, у нас срабатывает функция закинутая в `observer`
 
 ![](_png/Pasted%20image%2020230212083303.png)
+
+Теперь, при достижении низа страницы, у нас автоматически подгружаются новые посты и перелистываются страницы
+
+![](_png/Pasted%20image%2020230212091807.png)
