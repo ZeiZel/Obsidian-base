@@ -602,8 +602,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 11,
-          "lastUpdated": 1676285980197
+          "count": 12,
+          "lastUpdated": 1676292104587
         }
       }
     },
@@ -690,8 +690,8 @@
     "Input": {
       "Input": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675669471290
+          "count": 2,
+          "lastUpdated": 1676292090091
         }
       }
     },
@@ -714,8 +714,8 @@
     "textarea": {
       "textarea": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675670464821
+          "count": 3,
+          "lastUpdated": 1676291880741
         }
       }
     },
@@ -1052,6 +1052,54 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1676286283861
+        }
+      }
+    },
+    "useForm": {
+      "useForm": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676291463426
+        }
+      }
+    },
+    "register": {
+      "register": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676291586681
+        }
+      }
+    },
+    "formState": {
+      "formState": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676291771756
+        }
+      }
+    },
+    "Console": {
+      "Console": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676293575588
+        }
+      }
+    },
+    "Control": {
+      "Control": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676293580149
+        }
+      }
+    },
+    "Controller": {
+      "Controller": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676293582096
         }
       }
     }
