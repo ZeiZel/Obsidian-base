@@ -175,28 +175,46 @@ export const Menu = (): JSX.Element => {
 
 ## 004 Анимация сортировки
 
+Чтобы функциональный компонент можно было начать использовать для моушена, нужно обернуть сам компонент в `forwardRef()` и уже потом всю эту конструкцию обернуть в `motion()`
 
+`components / Product / Product.tsx`
+```TSX
+import { motion } from 'framer-motion';
 
+// сначала продукт оборачиваем в forwardRef, а потом оборачиваем в motion  
+export const Product = motion(  
+   forwardRef(  
+      (  
+         { product, className, ...props }: ProductProps,  
+         ref: ForwardedRef<HTMLDivElement>,  
+      ): JSX.Element => {  
+         
+		/// CODE ...
 
+         // Тут передаём в корень компонента ссылку на ref  
+         return (  
+            <div ref={ref} className={className} {...props}>  
+               /// CODE ...
+            </div>  
+         );  
+      },  
+   ),  
+);
+```
 
+И далее на самом компоненте мы можем вызвать атрибуты присущие компонентам `motion`. Тут нам нужно установить анимацию при изменении `layout`
 
+`page-components / TopPageComponent / TopPageComponent.tsx`
+```TSX
+<div>  
+   {sortedProducts &&  
+      sortedProducts.map(p => <Product layout key={p._id} product={p} />)}  
+</div>
+```
 
+И теперь наши карточки красиво заанимированы на перемещение между друг другом при изменении сортировки продуктов
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](_png/Pasted%20image%2020230214194929.png)
 
 ## 005 Пишем свой hook
 
