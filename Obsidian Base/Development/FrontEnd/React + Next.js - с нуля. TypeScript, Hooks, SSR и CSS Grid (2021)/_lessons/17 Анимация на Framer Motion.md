@@ -66,31 +66,129 @@ npm i framer-motion
 Сейчас уже нам нужно изменить второй уровень:
 - уберём раскрытие элемента списка по классу (если бы мы пытались анимировать список через CSS, то нужно было бы делать меню в 100вх и потом переводить в 0, но тут мы будем использовать фреймер)
 - добавим на него моушн
-
-Тут нужно сразу описать проблему, с которой мы можем столкнуться, если не укажем `overflow: hidden`
-
-![](_png/Pasted%20image%2020230214183924.png)
-
-
-
+- далее нужно описать варианты анимаций для родительского элемента и дочернего элемента
+- далее в родительском элементе указываем варианты анимаций, инишл, анимэйт и лейаут
+- Далее дочерний элемент ссылки оборачиваем в `<motion.div>` и ему просто указываем варианты анимаций (они унаследуются от родительского элемента)
 
 `layout / Sidebar / Sidebar.tsx`
 ```TSX
-
+export const Menu = (): JSX.Element => {  
+   const { menu, setMenu, firstCategory } = useContext(AppContext);  
+   const router = useRouter();  
+  
+   // варианты анимаций  
+   const variants = {  
+      // скрыт  
+      hidden: {  
+         marginBottom: 0,  
+      },  
+      // видимый  
+      visible: {  
+         // накидываем стили  
+         marginBottom: 20,  
+         // условия внутри анимации  
+         transition: {  
+            when: 'beforeChildren', // перед дочерними элементами  
+            staggerChildren: 0.1, // с определённым оффсетом  
+         },  
+      },  
+   };  
+  
+   const variantsChildren = {  
+      hidden: { opacity: 0, height: 0 },  
+      visible: { opacity: 1, height: 29 },  
+   };  
+  
+   /// CODE ...
+  
+   const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {  
+      return (  
+         <div className={styles.secondBlock}>  
+            {menu.map(m => {  
+               if (m.pages.map(p => p.alias).includes(router.asPath.split('/')[2])) {  
+                  m.isOpened = true;  
+               }  
+               return (  
+                  <div key={m._id.secondCategory}>  
+                     <div  
+                        className={styles.secondLevel}  
+                        onClick={() => openSecondLevel(m._id.secondCategory)}  
+                     >  
+                        {m._id.secondCategory}  
+                     </div>  
+  
+                     {/* родительский элемент для третьего уровня меню */}  
+                     <motion.div
+	                    {/* срабатывает анимация при изменении лейаута */}    
+                        layout  
+                        {/* начальное состояние анимации */}  
+                        initial={m.isOpened ? 'visible' : 'hidden'}  
+                        {/* изменение стилей в зависимости от состояния стейта */}  
+                        animate={m.isOpened ? 'visible' : 'hidden'}  
+                        {/* варианты анимаций */}  
+                        variants={variants}  
+                        className={cn(styles.secondLevelBlock)}  
+                     >  
+                        {buildThirdLevel(m.pages, menuItem.route)}  
+                     </motion.div>  
+                  </div>  
+               );  
+            })}  
+         </div>  
+      );  
+   };  
+  
+   const buildThirdLevel = (pages: PageItem[], route: string) => {  
+      return pages.map(p => (  
+		 {/* тут мы закидываем просто варианы состояний */}  
+         <motion.div variants={variantsChildren} key={p._id}>  
+            <Link  
+               href={`/${route}/${p.alias}`}  
+               className={cn(styles.thirdLevel, {  
+                  [styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath,  
+               })}  
+            >  
+               {p.category}  
+            </Link>  
+         </motion.div>  
+      ));  
+   };  
+  
+   return <div className={styles.menu}>{buildFirstLevel()}</div>;  
+};
 ```
 
+Тут нужно сразу описать проблему, с которой мы можем столкнуться, если не укажем `overflow: hidden`. При нажатии на элемент второго уровня, мы тыкнем на самом деле на другой элемент, который мы не видим, но располагается над требуемым для нас элементом (непрозрачность для третьего уровня стоит в 0)
 
+![](_png/Pasted%20image%2020230214183924.png)
 
+`layout / Sidebar / Sidebar.module.css`
+```CSS
+.secondLevelBlock {  
+   overflow: hidden;  
+}
+```
 
+И теперь можно увидеть последовательную анимацию на странице, которая проходит оффсетом через JS 
 
-
-
-
-
-
-
+![](_png/Pasted%20image%2020230214191824.png)
 
 ## 004 Анимация сортировки
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
