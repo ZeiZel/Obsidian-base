@@ -274,8 +274,8 @@
     "layout": {
       "layout": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675775124486
+          "count": 3,
+          "lastUpdated": 1676387370276
         }
       }
     },
@@ -1108,6 +1108,30 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1676299222337
+        }
+      }
+    },
+    "transition": {
+      "transition": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676384894164
+        }
+      }
+    },
+    "animate": {
+      "animate": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676385521308
+        }
+      }
+    },
+    "initial": {
+      "initial": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676385527148
         }
       }
     }
