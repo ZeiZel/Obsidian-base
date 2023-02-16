@@ -218,13 +218,43 @@ export const Product = motion(
 
 ## 005 Пишем свой hook
 
+Все хуки переносим в папку `hooks`. Именуются все хуки с `use`.
 
+Сейчас нам нужно сделать хук, который будет вычислять наше положение на странице по оси Y для того, чтобы сделать в будущем стрелку скролла обратно вверх страницы.
 
+`hooks / useScrollY.ts`
+```TS
+import { useEffect, useState } from 'react';  
+  
+export const useScrollY = (): number => {  
+   // чтобы сделать привязку к window, нужно понимать, где мы сейчас находимся  
+   // данная переменная будет отмечать то, где мы находимся, и будет true только тогда, когда мы в браузере   const isBrowser = typeof window !== 'undefined';  
+  
+   const [scrollY, setScrollY] = useState<number>(0);  
+  
+   // эта функция будет отслеживать смещение по Y в браузере  
+   const handleScroll = () => {  
+      // если мы в браузере, то возвращаем смещение по Y. Если нет, то возвращаем 0.  
+      const currentScrollY = isBrowser ? window.scrollY : 0;  
+      setScrollY(currentScrollY);  
+   };  
+  
+   // данная функция подписывается на событие, а потом  
+   useEffect(() => {  
+      // подписываемся на скролл  
+      window.addEventListener('scroll', handleScroll, { passive: true });  
+  
+      // и отписываемся при анмаунте  
+      return () => window.removeEventListener('scroll', handleScroll);  
+   }, []);  
+  
+   return scrollY;  
+};
+```
 
+И теперь мы можем отслеживать скролл на странице
 
-
-
-
+![](_png/Pasted%20image%2020230216091702.png) ![](_png/Pasted%20image%2020230216091706.png)
 
 ## 006 useAnimation
 
