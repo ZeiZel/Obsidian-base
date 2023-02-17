@@ -71,59 +71,11 @@
         }
       }
     },
-    "grid-template-columns": {
-      "grid-template-columns": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674033726605
-        }
-      }
-    },
-    "repeat": {
-      "repeat": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674034498603
-        }
-      }
-    },
     "grid-auto-rows": {
       "grid-auto-rows": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1674052593513
-        }
-      }
-    },
-    "justify-items": {
-      "justify-items": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674039448594
-        }
-      }
-    },
-    "flex-end": {
-      "flex-end": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674039962011
-        }
-      }
-    },
-    "flex-start": {
-      "flex-start": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674039971057
-        }
-      }
-    },
-    "align-content": {
-      "align-content": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674039982337
         }
       }
     },
@@ -1180,6 +1132,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676619323569
+        }
+      }
+    },
+    "Layout": {
+      "Layout": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676635137585
+        }
+      }
+    },
+    "Header": {
+      "Header": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1676635145388
         }
       }
     }

@@ -567,10 +567,106 @@ export const Up = (): JSX.Element => {
 
 
 
+`Layout / Header / Header.tsx`
+```TSX
+export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {  
+   // это состояние открытости меню  
+   const [isOpened, setIsOpened] = useState<boolean>(false);  
+  
+   // тут мы получаем роутер по страницам  
+   const router = useRouter();  
+  
+   // при изменении роута (при выборе страницы из меню), скрывается меню  
+   useEffect(() => {  
+      setIsOpened(false);  
+   }, [router]);  
+  
+   // варианты анимаций  
+   const variants = {  
+      opened: {  
+         opacity: 1,  
+         x: 0,  
+         transition: {  
+            stiffness: 90,  
+         },  
+      },  
+      closed: {  
+         opacity: 0,  
+         x: '100%',  
+      },  
+   };  
+  
+   return (  
+      <header className={cn(className, styles.header)} {...props}>  
+         <Logo />  
+         <ButtonIcon icon={'menu'} appearance={'white'} onClick={() => setIsOpened(true)} />  
+         <motion.div  
+            className={styles.mobileMenu}  
+            variants={variants}  
+            initial={'closed'}  
+            animate={isOpened ? 'opened' : 'closed'}  
+         >  
+            <Sidebar />  
+            <ButtonIcon  
+               className={styles.menuClose}  
+               icon={'close'}  
+               appearance={'white'}  
+               onClick={() => setIsOpened(false)}  
+            />  
+         </motion.div>  
+      </header>  
+   );  
+};
+```
 
+Стили для хедера:
+- Переносим скрытие хедера из стилей лейаута в стили хедера
+- стилизуем состояние самого хедера, показанного меню и скрытого меню 
 
+`Layout / Header / Header.module.css`
+```CSS
+/* обычно хедер скрыт */  
+.header {  
+   display: none;  
+}  
+  
+.mobileMenu {  
+   position: fixed;  
+   top: 0;  
+   bottom: 0;  
+   left: 0;  
+   right: 0; /* чтобы меню растянулось на всю ширину */  
+   z-index: 10;  
+  
+   padding: 20px 10px;  
+  
+   /* чтобы меню можно было пролистывать вниз и вверх */  
+   overflow-y: scroll;  
+  
+   background: #F5F6F8;  
+}  
+  
+.menuClose {  
+   position: fixed;  
+   z-index: 11;  
+   top: 15px;  
+   right: 15px;  
+}  
+  
+/* показываем хедер на мобильном разрешении */  
+@media (max-width: 765px) {  
+   .header {  
+      display: grid;  
+      grid-template-columns: 1fr 40px;  
+      gap: 10px;  
+      padding: 15px 15px 0 15px;  
+   }  
+}
+```
 
+Итог: так выглядит интерфейс мобильного меню и хедера
 
+![](_png/Pasted%20image%2020230217145937.png) ![](_png/Pasted%20image%2020230217145940.png)
 
 
 ## 010 Жесты и MotionValues
