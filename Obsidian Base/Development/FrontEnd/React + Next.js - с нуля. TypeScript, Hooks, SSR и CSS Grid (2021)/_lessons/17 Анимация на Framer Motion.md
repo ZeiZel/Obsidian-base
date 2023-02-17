@@ -671,24 +671,105 @@ export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
 
 ## 010 Жесты и MotionValues
 
+[Жесты](https://www.framer.com/motion/gestures/) во `framer-motion` описываются достаточно просто и все они делятся на несколько групп:
+- `hover`
+- `focus`
+- `tap`
+- `pan`
+- `drag`
 
+Например, при наведении элемент будет увеличиваться, а при нажатии - уменьшаться
 
+```TSX
+<motion.button
+  whileHover={{
+    scale: 1.2,
+    transition: { duration: 1 },
+  }}
+  whileTap={{ scale: 0.9 }}
+/>
+```
 
+[Motion values](https://www.framer.com/motion/motionvalue/) - это подписки на величины анимаций, которые у нас изменяются
 
+Например, мы можем подписаться на изменение определённого значения и выполнить определённую анимацию
 
+```TSX
+import { motion, useMotionValue } from "framer-motion"
 
+export function MyComponent() {
+  const x = useMotionValue(0)
+  return <motion.div style={{ x }} />
+}
+```
+
+Заранее, чтобы можно было обернуть логику в моушн-кнопку, нужно исключить из пропсов 5 атрибутов, которые конфликтуют с моушн-кнопкой. Исключить определённые свойства можно через `Omit<>`
+
+`components / Button / Button.props.ts`
+```TS
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';  
+  
+export interface ButtonProps  
+   extends Omit<  
+      DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,  
+      'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag' | 'ref'  
+   > {  
+   children: ReactNode;  
+   appearance: 'primary' | 'ghost';  
+   arrow?: 'right' | 'down' | 'none';  
+}
+```
+
+Далее уже тут оборачиваем логику в `<motion.div>` и навешиваем атрибут `whileHover`, который сработает при наведении на кнопку
+
+`components / Button / Button.tsx`
+```TSX
+import styles from './Button.module.css';  
+import { ButtonProps } from './Button.props';  
+import ArrowIcon from './arrow.svg';  
+import cn from 'classnames';  
+import { motion } from 'framer-motion';  
+  
+export const Button = ({  
+   appearance,  
+   arrow = 'none',  
+   children,  
+   className,  
+   ...props  
+}: ButtonProps): JSX.Element => {  
+   return (  
+      <motion.button  
+         className={cn(styles.button, className, {  
+            [styles.primary]: appearance == 'primary',  
+            [styles.ghost]: appearance == 'ghost',  
+         })}  
+         whileHover={{ scale: 1.02 }}  
+         {...props}  
+      >         
+	     {children}  
+         {arrow != 'none' && (  
+            <span  
+               className={cn(styles.arrow, {  
+                  [styles.down]: arrow == 'down',  
+               })}  
+            >               
+	            <ArrowIcon />  
+            </span>  
+         )}  
+      </motion.button>  
+   );  
+};
+```
+
+Так реализуется подписка на изменение определённого значения анимации
+
+![](_png/Pasted%20image%2020230217152602.png)
+
+И теперь при изменении объекта, на каждый кадр будет показано наше изменение размера объекта
+
+![](_png/Pasted%20image%2020230217152605.png)
 
 
 ## 011 Производительность
 
-
-
-
-
-
-
-
-
-
-
-
+Протестировать сайт можно в ==Android Studio== или ==XCode== 
