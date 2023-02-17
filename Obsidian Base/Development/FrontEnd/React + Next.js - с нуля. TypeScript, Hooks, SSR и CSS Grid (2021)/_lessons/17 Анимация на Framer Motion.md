@@ -431,20 +431,137 @@ export const Product = motion( forwardRef( ( { product, className, ...props }: P
 
 ## 008 Динамическая иконка
 
+Сейчас нужно реализовать компонент, который в зависимости от переданного текста будет определять нужную иконку и подставлять её. 
 
+Типизация компонента не самая обычная и будет представлена таким образом:
 
+`components / ButtonIcon / ButtonIcon.props.ts`
+```TS
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';  
+import menu from './menu.svg';  
+import up from './up.svg';  
+import close from './close.svg';  
+
+// этот объект будет хранить в себе иконки, которые мы импортировали в пропсы
+export const icons = {  
+   menu,  
+   up,  
+   close,  
+};  
+
+// тут мы создадим типы по ключам, которые находятся в объекте
+export type iconName = keyof typeof icons;  
+  
+export interface ButtonIconProps  
+   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {  
+   appearance: 'primary' | 'white';  
+   // тут будут доступными значениями ключи объекта с иконками
+   icon: iconName;  
+}
+```
+
+И теперь мы получили типы по названию ключей
 
 ![](_png/Pasted%20image%2020230217101417.png)
 
+Так будет выглядеть сам компонент выбора иконки: 
+- Мы получаем иконки из объекта, который указали в `ButtonIcon.props.ts` по ключу имени иконки
+- Вставляем данную иконку в вёрстку
 
+`components / ButtonIcon / ButtonIcon.tsx`
+```TSX
+import styles from './ButtonIcon.module.css';  
+import { ButtonIconProps, icons } from './ButtonIcon.props';  
+import cn from 'classnames';  
+  
+export const ButtonIcon = ({  
+   appearance,  
+   icon,  
+   className,  
+   ...props  
+}: ButtonIconProps): JSX.Element => {  
+   // берём из объекта с иконками в пропсах нужное нам значение по ключу  
+   const IconComponent = icons[icon];  
+  
+   return (  
+      <button  
+         className={cn(styles.button, className, {  
+            [styles.primary]: appearance == 'primary',  
+            [styles.white]: appearance == 'white',  
+         })}  
+         {...props}  
+      >         
+	      <IconComponent />  
+      </button>  
+   );  
+};
+```
 
+Тут мы опишем стили для иконок
 
+`components / ButtonIcon / ButtonIcon.module.css`
+```CSS
+.button {  
+   width: 40px;  
+   height: 40px;  
+  
+   border: none;  
+   border-radius: 10px;  
+  
+   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);  
+  
+   cursor: pointer;  
+}  
+  
+.primary {  
+   background-color: var(--primary);  
+}  
+  
+/* у svg и всех вложенных элементов */  
+.primary svg * {  
+   fill: var(--white);  
+}  
+  
+.primary:hover {  
+   background-color: var(--primary-hover);  
+}  
+  
+.white {  
+   background-color: var(--white);  
+}  
+  
+.white svg * {  
+   fill: var(--primary);  
+}  
+  
+.white:hover {  
+   background-color: var(--primary);  
+}  
+  
+.white:hover svg * {  
+   fill: var(--white);  
+}
+```
 
+И теперь нам нужно просто перенести иконку с изображением в компонент `Up`. В него мы вставим `ButtonIcon` и перенесём событие `onClick` на эту иконку (так как она внутри реализована как кнопка)
 
+`components / Up / Up.tsx`
+```TSX
+export const Up = (): JSX.Element => {  
+   
+   // CODE ... 
+  
+   return (  
+      <motion.div className={styles.up} animate={controls} initial={{ opacity: 0 }}>  
+         <ButtonIcon icon={'menu'} appearance={'white'} onClick={scrollToTop} />  
+      </motion.div>  
+   );  
+};
+```
 
+Итог: мы имеем настраиваемое изображение на иконках
 
-
-
+![](_png/Pasted%20image%2020230217102905.png)
 
 ## 009 Мобильное меню
 
