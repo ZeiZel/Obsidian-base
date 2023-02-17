@@ -267,10 +267,11 @@ export const useScrollY = (): number => {
 ![](_png/Pasted%20image%2020230217084443.png)
 
 Далее нужно будет реализовать кнопку, которая будет поднимать пользователя в самый верх страницы:
-- сначала делаем вёрстку моушн-кнопки, в начале которая будет невидимой и присваиваем ей контрол в кач
 - получаем контрол
 - получаем положение по `y`
-- `useEffect` будет менять анимацию кнопки 
+- `useEffect` будет менять анимацию кнопки, которая висит на `controls`
+- функция `scrollToTop` будет возвращать пользователя на самый верх страницы
+- далее делаем вёрстку моушн-кнопки, в начале которая будет невидимой. Присваиваем ей `controls` в качестве анимации. И так же навешиваем возвращение в самый верх страницы
 
 `components / Up / Up.tsx`
 ```TSX
@@ -368,18 +369,74 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 
 ![](_png/Pasted%20image%2020230217092108.png) ![](_png/Pasted%20image%2020230217092111.png)
 
-
 ## 007 Упражнение - Анимация отзывов
 
+Когда мы будем пытаться анимировать саму карточку, мы можем столкнуться с проблемой, что у нас будет схлопываться только сама карточка, а пэддинги останутся, что создаст много проблем со скачущей анимацией (если мы попытаемся анимировать пэддинги). Поэтому лучше сейчас в моушн-див обернуть всю карточку 
+
+![](_png/Pasted%20image%2020230217092946.png)
+
+Оборачиваем карточку в `motion.div` и анимации через классы `close` и `open` убираем. Анимации мы зададим через варианты, где и укажем стили
+
+`components / Product / Product.tsx`
+```TSX
+export const Product = motion( forwardRef( ( { product, className, ...props }: ProductProps, ref: ForwardedRef<HTMLDivElement> ): JSX.Element => {  
+         
+         /// CODE ....
+  
+         // варианты конечного вида карточки  
+         const variants = {  
+            visible: { opacity: 1, height: 'auto' },  
+            hidden: { opacity: 0, height: 0 },  
+         };  
+  
+         // Тут передаём в корень компонента ссылку на ref  
+         return (  
+            <div ref={ref} className={className} {...props}>  
+               
+
+				/// CODE ....
 
 
+               {/* моушн-див с карточкой */}  
+               <motion.div  
+                  variants={variants}  
+                  initial={'hidden'}  
+                  animate={isReviewOpened ? 'visible' : 'hidden'}  
+               >  
+                  <Card ref={reviewRef} color='blue' className={styles.reviews}>  
+                     {product.reviews.map(r => (  
+                        <div key={r._id}>  
+                           <Review review={r} />  
+                           <Divider />  
+                        </div>  
+                     ))}  
+                     <ReviewForm productId={product._id} />  
+                  </Card>  
+               </motion.div>  
+            </div>  
+         );  
+      },  
+   ),  
+);
+```
 
+Тут мы вместо  `close` и `open` оставим один класс `reviews`, который и будет скрывать все элементы внутри себя и будет иметь пэддинги  
 
-
-
-
+```CSS
+.reviews {  
+   overflow: hidden;  
+   padding: 30px;  
+}
+```
 
 ## 008 Динамическая иконка
+
+
+
+
+![](_png/Pasted%20image%2020230217101417.png)
+
+
 
 
 
