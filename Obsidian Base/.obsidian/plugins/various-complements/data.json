@@ -290,8 +290,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 7,
-          "lastUpdated": 1676129337512
+          "count": 8,
+          "lastUpdated": 1676615061311
         }
       }
     },
@@ -602,8 +602,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 15,
-          "lastUpdated": 1676302659925
+          "count": 16,
+          "lastUpdated": 1676614770594
         }
       }
     },
@@ -1138,8 +1138,8 @@
     "motion": {
       "motion": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676393583201
+          "count": 3,
+          "lastUpdated": 1676612609277
         }
       }
     },
@@ -1148,6 +1148,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676528256867
+        }
+      }
+    },
+    "useAnimation": {
+      "useAnimation": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676612543937
+        }
+      }
+    },
+    "framer-motion": {
+      "framer-motion": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676612555029
         }
       }
     }

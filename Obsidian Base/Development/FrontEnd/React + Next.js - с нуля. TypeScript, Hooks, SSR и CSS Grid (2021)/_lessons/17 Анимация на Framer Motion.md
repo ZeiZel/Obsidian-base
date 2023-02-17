@@ -258,12 +258,115 @@ export const useScrollY = (): number => {
 
 ## 006 useAnimation
 
+Хук `useAnimation` пришёл из `framer-motion` и он возвращает контрол, благодаря которому можно стартовать анимации относительно какого-то состояния определённого `motion`-элемента  
 
+![](_png/Pasted%20image%2020230217084214.png)
 
+Так же сам контрол возвращает `Promise`, благодаря чему можно будет построить сложные анимации, зависящие друг от друга
 
+![](_png/Pasted%20image%2020230217084443.png)
 
+Далее нужно будет реализовать кнопку, которая будет поднимать пользователя в самый верх страницы:
+- сначала делаем вёрстку моушн-кнопки, в начале которая будет невидимой и присваиваем ей контрол в кач
+- получаем контрол
+- получаем положение по `y`
+- `useEffect` будет менять анимацию кнопки 
 
+`components / Up / Up.tsx`
+```TSX
+export const Up = (): JSX.Element => {  
+   const controls = useAnimation();  
+   const Y = useScrollY();  
+  
+   useEffect(() => {  
+      controls.start({ opacity: Y / document.body.scrollHeight });  
+   }, [Y, controls]);  
+  
+   // функция прокрутки в самый верх  
+   const scrollToTop = () => {  
+      // тут мы имеем спокойный доступ к window, так как он вызывается непосредственно на самой странице  
+      window.scrollTo({  
+         top: 0,  
+         behavior: 'smooth',  
+      });  
+   };  
+  
+   return (  
+      <motion.button  
+         className={styles.up}  
+         onClick={scrollToTop}  
+         animate={controls}  
+         initial={{ opacity: 0 }}  
+      >         
+	      <UpIcon />  
+      </motion.button>  
+   );  
+};
+```
 
+Стили кнопки:
+
+`components / Up / Up.module.css`
+```CSS
+.up {  
+   position: fixed;  
+   bottom: 30px;  
+   right: 30px;  
+  
+   display: flex;  
+   justify-content: center;  
+   align-items: center;  
+  
+   width: 40px;  
+   height: 40px;  
+  
+   border: none;  
+   border-radius: 10px;  
+  
+   background: var(--primary);  
+   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);  
+  
+   cursor: pointer;  
+  
+   transition: all .2s;  
+}  
+  
+.up:hover {  
+   background: var(--primary-hover);  
+}  
+  
+.up:active {  
+   transform: translate(0px, 4px);  
+}
+```
+
+Сократим путь экспорта до элемента
+
+`components / index.ts`
+```TS
+export * from './Up/Up';
+```
+
+Добавим кнопку в лейаут страницы
+
+`layout / Layout.tsx`
+```TSX
+const Layout = ({ children }: LayoutProps): JSX.Element => {  
+   return (  
+      <div className={styles.wrapper}>  
+         <Header className={styles.header} />  
+         <Sidebar className={styles.sidebar} />  
+         <div className={styles.body}>{children}</div>  
+         <Footer className={styles.footer} />  
+         <Up />  
+      </div>  
+   );  
+};
+```
+
+Данная кнопка выглядит примерно таким образом:
+
+![](_png/Pasted%20image%2020230217092108.png) ![](_png/Pasted%20image%2020230217092111.png)
 
 
 ## 007 Упражнение - Анимация отзывов
