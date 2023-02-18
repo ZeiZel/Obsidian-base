@@ -37,6 +37,30 @@ npx create-react-app .
 npm start
 ```
 
+Начальной страницей, которая запускает весь рендер приложения является `index.js`, который рендерится в root диве `index.html` документа
+
+`public > index.html`
+```HTML
+<body>
+  <noscript>
+	  You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+</body>
+```
+
+`src > index.js`
+```TSX
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(
+    <App/>,
+  document.getElementById('root')
+);
+```
+
 ## 16:10 ➝ Что такое JSX?
 
 ==JSX== - это препроцессор, который ==babel== переводит в обычный ==JS==
@@ -2140,34 +2164,211 @@ export const Posts = () => {
 
 ## 02:12:00 ➝ React router. Постраничная навигация. BrowserRouter, Route, Switch, Redirect
 
-
+Устанавливаем роутер для реакта
 
 ```bash
 npm i react-router-dom
 ```
 
+Теперь мы немного переструктурируем приложение:
+- Создадим папку `pages`, которая будет хранить не отдельные компоненты, а целые страницы, которые будут располагаться в приложении
+- Компонент `App`, который является стартовой точкой приложения, будет хранить в себе `BrowserRouter`, который будет отслеживать все роуты в приложении
+- Чтобы определить страницу в качестве отдельного роута, нужно поместить компонент страницы в компонент отдельного роута `Route`. Сам `Route` внутрь себя принимает компонент для роутинга и путь, по которому страница должна отрисовываться
+
+![](_png/Pasted%20image%2020230218182525.png)
+![](_png/Pasted%20image%2020230218182528.png)
+
+Теперь, чтобы реализовать полноценный роутинг и переход между страницами, нужно использовать компонент `Link`, который принимает путь `to`, который, в свою очередь, определяет, куда нужно перейти на странице.
+
+Уже представленная реализация позволит нам переходить со страницы на страницу без перезагрузки страницы
+
+![](_png/Pasted%20image%2020230218182818.png)
+![](_png/Pasted%20image%2020230218182820.png)
+
+Далее, чтобы мы могли перемещаться по роутам и обрабатывать несуществующие страницы, нужно добавить компонент `Switch`, в котором передать компонент `Redirect`, который уже будет перенаправлять нас на другую страницу, если та, на которую мы переходим, не будет существовать
+
+![](_png/Pasted%20image%2020230218183348.png)
+
+И так выглядит страница ошибки при переходе не несуществующую страницу
+
+`pages > Error.jsx`
+```JSX
+import React from 'react';
+
+const Error = () => {
+    return (
+        <div>
+            <h1 style={{color: 'red'}}>
+                Вы перешли на несуществующую страницу!
+            </h1>
+        </div>
+    );
+};
+
+export default Error;
+```
+
+Так же можно перенести всю логику роутинга в отдельный компонент
+
+![](_png/Pasted%20image%2020230218183653.png)
+
+![](_png/Pasted%20image%2020230218183724.png)
 
 
 
+## 02:22:00 ➝ Динамическая навигация. useHistory, useParams. Загрузка комментариев к посту
+
+И далее нам нужно реализовать роуты под каждый отдельный пост, чтобы можно было просмотреть по нему детальную информацию
+
+Тут нужно уже воспользоваться хуком `useHistory`, который предоставляет реакт-роутер-дом. Этот хук позволяет нам реализовать переход по страницам без компонента `Link`. Конкретно мы можем воспользоваться методом `push` для генерации роутов по нашим постам. Переход будет осуществляться без помощи ссылок - мы нажали на кнопку и перешли на нужную страницу 
+
+`components / PostItem.jsx`
+```JSX
+const PostItem = (props) => {
+    const router = useHistory()
+
+    return (
+        <div className="post">
+            <div className="post__content">
+                <strong>{props.post.id}. {props.post.title}</strong>
+                <div>
+                    {props.post.body}
+                </div>
+            </div>
+            <div className="post__btns">
+                <MyButton onClick={() => router.push(`/posts/${props.post.id}`)}>
+                    Открыть
+                </MyButton>
+                <MyButton onClick={() => props.remove(props.post)}>
+                    Удалить
+                </MyButton>
+            </div>
+        </div>
+    );
+};
+```
+
+И сейчас наш роут заносится в поисковую строку, но ничего не происходит, так как роут поста не был создан
+
+![](_png/Pasted%20image%2020230218184215.png)
+
+Создадим временную страницу отдельного поста
+
+![](_png/Pasted%20image%2020230218184524.png)
+
+И далее в компоненте с роутами нужно реализовать переход на динамическую страницу. Чтобы указать, что параметр страницы динамический, нужно в ссылке указать `:id` двоеточие. 
+
+Так же у нас используется два роута, которые начинаются на `/posts`. Чтобы избежать конфликтов, нужно передать атрибут `exact`
+
+![](_png/Pasted%20image%2020230218184510.png)
+
+Далее нам нужно подгружать информацию по посту (его имя, текст и так далее)
+
+Первым делом, нужно добавить в API метод, который будет получать один определённый пост с сервера `getById` и его комментарии `getCommentsByPostId`, которые будут получать `id` поста
+
+`src > API > PostService.js`
+```JSX
+import axios from "axios";
+
+export default class PostService {
+    static async getAll(limit = 10, page = 1) {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+            params: {
+                _limit: limit,
+                _page: page
+            }
+        })
+        return response;
+    }
+
+    static async getById(id) {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
+        return response;
+    }
+
+    static async getCommentsByPostId(id) {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+        return response;
+    }
+}
+```
+
+Далее идёт хук `useParams`, который тоже идёт из реакт-роутер-дом и позволяет получать пропсы определённого элемента
 
 
+```JSX
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useFetching } from '../hooks/useFetching';
+import PostService from '../API/PostService';
+import Loader from '../components/UI/Loader/Loader';
 
+const PostIdPage = () => {
+	// хук получения пропсов
+	const params = useParams();
+	// это состояние будет хранить то, что нам вернёт сервер
+	const [post, setPost] = useState({});
 
+	// тут уже будут располагаться комментарии поста
+	const [comments, setComments] = useState([]);
 
+	// этот хук вернёт нам один пост по переданному id
+	const [fetchPostById, isLoading, error] = useFetching(async (id) => {
+		// получаем пост с сервера
+		const response = await PostService.getById(id);
+		// устанавливаем данные поста в состояние поста
+		setPost(response.data);
+	});
 
+	// тут мы фетчим комментарии поста
+	const [fetchComments, isComLoading, comError] = useFetching(async (id) => {
+		// получаем пост с сервера
+		const response = await PostService.getCommentsByPostId(id);
+		// устанавливаем комментарии в состояние
+		setComments(response.data);
+	});
 
+	// эффект будет фетчить нужные нам данные при первой загрузке страницы
+	useEffect(() => {
+		// тут он будет получать данные по посту
+		fetchPostById(params.id);
+		// тут мы будем получить данные по комментариям к посту
+		fetchComments(params.id);
+	}, []);
 
+	return (
+		<div>
+			<h1>Вы открыли страницу поста c ID = {params.id}</h1>
 
-## 02:22:00 ➝ Динамическая навигация. useHistory, useParams
+			{/* так же нужно обработать загрузку поста */}
+			{isLoading ? (
+				<Loader />
+			) : (
+				<div>
+					{post.id}. {post.title}
+				</div>
+			)}
+			<h1>Комментарии</h1>
 
+			{/* и загрузку комментариев к посту */}
+			{isComLoading ? (
+				<Loader />
+			) : (
+				<div>
+					{comments.map((comm) => (
+						<div key={comm.id} style={{ marginTop: 15 }}>
+							<h5>{comm.email}</h5>
+							<div>{comm.body}</div>
+						</div>
+					))}
+				</div>
+			)}
+		</div>
+	);
+};
 
-
-
-
-
-
-## 02:29:30 ➝ Загрузка комментариев к посту
-
+export default PostIdPage;
+```
 
 
 

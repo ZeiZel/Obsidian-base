@@ -1206,6 +1206,62 @@
           "lastUpdated": 1676721256850
         }
       }
+    },
+    "несуществующую": {
+      "несуществующую": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1676734586899
+        }
+      }
+    },
+    "useHistory": {
+      "useHistory": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676735224119
+        }
+      }
+    },
+    "useParams": {
+      "useParams": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676735573964
+        }
+      }
+    },
+    "реакт-роутер-дом": {
+      "реакт-роутер-дом": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676735599687
+        }
+      }
+    },
+    "PostService": {
+      "PostService": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676735729444
+        }
+      }
+    },
+    "getById": {
+      "getById": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676736398883
+        }
+      }
+    },
+    "getCommentsByPostId": {
+      "getCommentsByPostId": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676736405873
+        }
+      }
     }
   }
 }
