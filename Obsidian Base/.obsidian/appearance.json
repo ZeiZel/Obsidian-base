@@ -4,5 +4,6 @@
   "cssTheme": "Mado Miniflow",
   "accentColor": "#6b7fd1",
   "nativeMenus": false,
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "interfaceFontFamily": "Montserrat,Arial,Consolas"
 }

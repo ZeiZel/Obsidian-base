@@ -70,5 +70,6 @@
   "mado-miniflow@@toggle-wave-background": false,
   "mado-miniflow@@toggle-tab-design": true,
   "mado-miniflow@@toggle-note-radius": true,
-  "mado-miniflow@@toggle-note-animation": true
+  "mado-miniflow@@toggle-note-animation": true,
+  "mado-miniflow@@toggle-highlight-type": "THT-background"
 }
