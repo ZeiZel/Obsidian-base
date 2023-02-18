@@ -71,46 +71,6 @@
         }
       }
     },
-    "grid-auto-rows": {
-      "grid-auto-rows": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1674052593513
-        }
-      }
-    },
-    "align-self": {
-      "align-self": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674040672509
-        }
-      }
-    },
-    "justify-self": {
-      "justify-self": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674040690698
-        }
-      }
-    },
-    "grid-column": {
-      "grid-column": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1674050549502
-        }
-      }
-    },
-    "grid-column-start": {
-      "grid-column-start": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1674050496327
-        }
-      }
-    },
     "grid-template": {
       "grid-template": {
         "currentFile": {
@@ -242,8 +202,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 8,
-          "lastUpdated": 1676615061311
+          "count": 9,
+          "lastUpdated": 1676698471502
         }
       }
     },
@@ -554,8 +514,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 17,
-          "lastUpdated": 1676637352841
+          "count": 19,
+          "lastUpdated": 1676697718199
         }
       }
     },
@@ -1196,6 +1156,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676649340285
+        }
+      }
+    },
+    "табиндекс": {
+      "табиндекс": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676698455206
         }
       }
     }
