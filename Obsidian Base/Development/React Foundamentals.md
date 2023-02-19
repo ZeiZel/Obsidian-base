@@ -2375,28 +2375,202 @@ export default PostIdPage;
 
 ## 02:33:10 ➝ Улучшаем навигацию. Приватные и публичные маршруты
 
+Первым делом, чтобы сократить количество описанных роутов в ретёрне компонента роутинга, можно вынести определённые данные, которые принимает `Route` в отдельный массив объектов
+
+![](_png/Pasted%20image%2020230219072727.png)
+
+Далее в компоненте с роутингом просто вывести все роуты через мапу
+
+![](_png/Pasted%20image%2020230219072729.png)
+
+Сейчас нужно описать все приватные и публичные маршруты на странице
+
+`src > router > index.js`
+```JSX
+import About from "../pages/About";
+import Posts from "../pages/Posts";
+import PostIdPage from "../pages/PostIdPage";
+import Login from "../pages/Login";
 
 
+export const privateRoutes = [
+    {path: '/about', component: About, exact: true},
+    {path: '/posts', component: Posts, exact: true},
+    {path: '/posts/:id', component: PostIdPage, exact: true},
+]
 
+export const publicRoutes = [
+    {path: '/login', component: Login, exact: true},
+]
+```
 
+И чтобы выводить только публичные или только приватные маршруты, мы можем по тернарному оператору выводить разные конструкции с разными роутами 
 
+Если `isAuth = false`, то будет рендериться только один маршрут - `Login`
 
-
-
-
-
-
+![](_png/Pasted%20image%2020230219073344.png)
 
 ## 02:38:00 ➝ useContext. Глобальные данные. Авторизация пользователя
 
 
 
+![](_png/Pasted%20image%2020230219074115.png)
 
 
 
+`src > context > index.js`
+```JS
+import {createContext} from 'react'
+
+export const AuthContext = createContext(null);
+```
 
 
 
+`src > App.jsx`
+```JSX
+function App() {
+    // состояние зарегистрированности пользователя
+    const [isAuth, setIsAuth] = useState(false);
+    // 
+    const [isLoading, setLoading] = useState(true);
+
+    // эффект будет получать один раз при загрузке состояние пользователя - есть вход или нет его
+    useEffect(() => {
+        if (localStorage.getItem('auth')) {
+            setIsAuth(true)
+        }
+
+        // так же загрузка сейчас отключается
+        setLoading(false);
+    }, [])
+
+    return (
+        // далее создаём тут провайдер от контекста и оборачиваем в него всё приложение
+        // в атрибут value указываем, какие данные будет хранить в себе контекст
+        <AuthContext.Provider value={{
+            isAuth,
+            setIsAuth,
+            isLoading
+        }}>
+            <BrowserRouter>
+                <Navbar/>
+                <AppRouter/>
+            </BrowserRouter>
+        </AuthContext.Provider>
+    )
+}
+
+export default App;
+```
+
+
+
+`src > components > AppRouter.jsx`
+```JSX
+const AppRouter = () => {
+    // получаем из глобального контекста состояние входа пользователя и состояние загрузки
+	const { isAuth, isLoading } = useContext(AuthContext);
+
+    // идёт загрузка, если страница до сих пор загружается
+	if (isLoading) {
+		return <Loader />;
+	}
+
+	return isAuth ? (
+		<Switch>
+			{privateRoutes.map((route) => (
+				<Route component={route.component} path={route.path} exact={route.exact} key={route.path} />
+			))}
+			<Redirect to='/posts' />
+		</Switch>
+	) : (
+		<Switch>
+			{publicRoutes.map((route) => (
+				<Route component={route.component} path={route.path} exact={route.exact} key={route.path} />
+			))}
+			<Redirect to='/login' />
+		</Switch>
+	);
+};
+
+export default AppRouter;
+```
+
+
+
+`src > page > Login.jsx`
+```JSX
+import React, {useContext} from 'react';
+import MyInput from "../components/UI/input/MyInput";
+import MyButton from "../components/UI/button/MyButton";
+import {AuthContext} from "../context";
+
+const Login = () => {
+    // состояние входа в систему мы получаем из глобального контекста
+    const {isAuth, setIsAuth} = useContext(AuthContext);
+
+    // эта функция будет определять, что пользователь залогинен
+    const login = event => {
+        // предотвращаем перезагрузку от формы
+        event.preventDefault();
+
+        // устанавливаем состояние
+        setIsAuth(true);
+
+        // в локальне хранилище помещаем true
+        localStorage.setItem('auth', 'true')
+    }
+
+    return (
+        <div>
+            <h1>Страница для логина</h1>
+            {/* форма логина */}
+            <form onSubmit={login}>
+                <MyInput type="text" placeholder="Введите логин"/>
+                <MyInput type="password" placeholder="Введите пароль"/>
+                <MyButton>Войти</MyButton>
+            </form>
+        </div>
+    );
+};
+
+export default Login;
+```
+
+
+
+`src > components > Navbar.jsx`
+```JSX
+import React, {useContext} from 'react';
+import {Link} from "react-router-dom";
+import MyButton from "../button/MyButton";
+import {AuthContext} from "../../../context";
+
+const Navbar = () => {
+    const {isAuth, setIsAuth} = useContext(AuthContext);
+
+    // при выходе с сайта аутентификация тоже слетает
+    const logout = () => {
+        setIsAuth(false);
+        localStorage.removeItem('auth')
+    }
+
+    return (
+        <div className="navbar">
+            <MyButton onClick={logout}>
+                Выйти
+            </MyButton>
+            <div className="navbar__links">
+                <Link to="/about">О сайте</Link>
+                <Link to="/posts">Посты</Link>
+            </div>
+        </div>
+    );
+};
+
+export default Navbar;
+```
 
 
 
