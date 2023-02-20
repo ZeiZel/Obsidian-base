@@ -71,14 +71,6 @@
         }
       }
     },
-    "grid-template": {
-      "grid-template": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674293474873
-        }
-      }
-    },
     "target": {
       "target": {
         "currentFile": {
@@ -1332,6 +1324,18 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676783675523
+        }
+      }
+    },
+    "Redis": {
+      "Redis": {
+        "internalLink": {
+          "count": 1,
+          "lastUpdated": 1676895279485
+        },
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676895582962
         }
       }
     }
