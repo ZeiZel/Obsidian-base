@@ -71,5 +71,7 @@
   "mado-miniflow@@toggle-tab-design": true,
   "mado-miniflow@@toggle-note-radius": true,
   "mado-miniflow@@toggle-note-animation": true,
-  "mado-miniflow@@toggle-highlight-type": "THT-background"
+  "mado-miniflow@@toggle-highlight-type": "THT-background",
+  "mado-miniflow@@toggle-scrollbar": false,
+  "mado-miniflow@@toggle-scrollbar-overlay": true
 }

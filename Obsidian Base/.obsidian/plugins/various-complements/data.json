@@ -1354,6 +1354,22 @@
           "lastUpdated": 1676960026016
         }
       }
+    },
+    "aria-label": {
+      "aria-label": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676970789156
+        }
+      }
+    },
+    "aria-labelledby": {
+      "aria-labelledby": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676970820000
+        }
+      }
     }
   }
 }
