@@ -506,8 +506,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 24,
-          "lastUpdated": 1676975936277
+          "count": 25,
+          "lastUpdated": 1676978325824
         }
       }
     },
@@ -1090,8 +1090,8 @@
     "Layout": {
       "Layout": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1676649082274
+          "count": 5,
+          "lastUpdated": 1676978006013
         }
       }
     },
@@ -1390,8 +1390,24 @@
     "скринридера": {
       "скринридера": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1676977175940
+          "count": 5,
+          "lastUpdated": 1676977312206
+        }
+      }
+    },
+    "landmarks": {
+      "landmarks": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676977499709
+        }
+      }
+    },
+    "Search": {
+      "Search": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676978331949
         }
       }
     }
