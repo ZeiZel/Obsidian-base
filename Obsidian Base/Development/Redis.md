@@ -26,9 +26,19 @@ sudo apt-get install redis
 
 ```bash
 redis-server
+
+// или таким способом: 
+
+sudo service redis-server start
 ```
 
 ![](_png/Pasted%20image%2020230221083853.png)
+
+Чтобы отключить сервер, можно воспользоваться командой `shutdown`
+
+```bash
+redis-cli shutdown NOSAVE
+```
 
 Далее открываем второй терминал WSL и переходим к CLI Редиса:
 
