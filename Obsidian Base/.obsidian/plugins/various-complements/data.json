@@ -378,8 +378,8 @@
     "зависимости": {
       "зависимости": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675427447320
+          "count": 2,
+          "lastUpdated": 1676986322372
         }
       }
     },
@@ -506,8 +506,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 26,
-          "lastUpdated": 1676979321463
+          "count": 28,
+          "lastUpdated": 1676986013646
         }
       }
     },
@@ -594,8 +594,8 @@
     "Input": {
       "Input": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676292090091
+          "count": 4,
+          "lastUpdated": 1676985966392
         }
       }
     },
@@ -1010,8 +1010,8 @@
     "ReviewForm": {
       "ReviewForm": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1676616937827
+          "count": 4,
+          "lastUpdated": 1676986002376
         }
       }
     },
@@ -1390,8 +1390,8 @@
     "скринридера": {
       "скринридера": {
         "currentFile": {
-          "count": 5,
-          "lastUpdated": 1676977312206
+          "count": 6,
+          "lastUpdated": 1676986062133
         }
       }
     },
@@ -1408,6 +1408,30 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676978331949
+        }
+      }
+    },
+    "скринридеру": {
+      "скринридеру": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676986205756
+        }
+      }
+    },
+    "редактируемости": {
+      "редактируемости": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676986326692
+        }
+      }
+    },
+    "оповещений": {
+      "оповещений": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676987483920
         }
       }
     }
