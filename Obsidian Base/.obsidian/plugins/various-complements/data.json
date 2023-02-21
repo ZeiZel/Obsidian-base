@@ -506,8 +506,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 21,
-          "lastUpdated": 1676782558959
+          "count": 24,
+          "lastUpdated": 1676975936277
         }
       }
     },
@@ -674,8 +674,8 @@
     "Product": {
       "Product": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1676616832215
+          "count": 6,
+          "lastUpdated": 1676975940591
         }
       }
     },
@@ -1186,8 +1186,8 @@
     "скринридером": {
       "скринридером": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676720611209
+          "count": 3,
+          "lastUpdated": 1676974811093
         }
       }
     },
@@ -1358,16 +1358,40 @@
     "aria-label": {
       "aria-label": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676970789156
+          "count": 2,
+          "lastUpdated": 1676975622879
         }
       }
     },
     "aria-labelledby": {
       "aria-labelledby": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1676974985706
+        }
+      }
+    },
+    "sortName}": {
+      "sortName}": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1676970820000
+          "lastUpdated": 1676974964398
+        }
+      }
+    },
+    "aria-hidden": {
+      "aria-hidden": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1676975142334
+        }
+      }
+    },
+    "скринридера": {
+      "скринридера": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1676975690837
         }
       }
     }
