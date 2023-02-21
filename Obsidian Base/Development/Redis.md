@@ -38,6 +38,10 @@ sudo service redis-server start
 
 ```bash
 redis-cli shutdown NOSAVE
+
+// или...
+
+sudo service redis-server stop
 ```
 
 Далее открываем второй терминал WSL и переходим к CLI Редиса:
@@ -130,72 +134,3 @@ clear
 - `HEXISTS` - проверить существование ключа в хеше
 
 ![](_png/Pasted%20image%2020230221085951.png)
-
-## Node.js Example
-
-###### Начальный стек:
-
-```bash
-npm i express cors axios
-```
-
-
-`server.js`
-```JS
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-
-const app = express();
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
-app.get('/photos', async (req, res) => {
-	const albumId = req.query.albumId;
-
-	const { data } = await axios.get('https://jsonplaceholder.typicode.com/photos', {
-		params: { albumId },
-	});
-
-	res.json(data);
-});
-
-app.get('/photos/:id', async (req, res) => {
-	const { data } = await axios.get(`https://jsonplaceholder.typicode.com/photos/${req.params.id}`);
-
-	res.json(data);
-});
-
-app.listen(3000);
-```
-
-
-![](_png/Pasted%20image%2020230221093147.png)
-
-![](_png/Pasted%20image%2020230221093355.png)
-
-###### Работа с Redis
-
-
-
-```bash
-npm i redis
-```
-
-
-
-
-
-
-
-
-Если мы будем работать с редисом в продакшене, то нам обязательно нужно будет указать его хост, но так как мы работаем на локальном хосте, то `url` мы не передаём 
-
-```JS
-const redisClient = Redis.createClient({ url: "хост" });
-```
-
-
-
-
-
