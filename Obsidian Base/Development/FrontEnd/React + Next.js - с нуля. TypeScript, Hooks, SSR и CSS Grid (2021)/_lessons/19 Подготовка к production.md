@@ -162,22 +162,48 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
 
 Husky - если говорить грубо, то это хуки для гита. Мы можем подписаться на определённые действия с гитом (на те же коммиты) и выполнять определённые действия внутри нашего проекта (например, прогон линтеров)
 
+Устанавливаем husky:
+
 ```bash
 npm i -D husky
 ```
 
+Далее нужно установить скрипт `prepare`, который установит нам хаски в проект:
 
+```JSON
+"scripts": {  
+   "prepare": "husky install",  
+   "dev": "next dev",  
+   "debug": "NODE_OPTIONS='--inspect' next dev",  
+   "build": "next build",  
+   "start": "next start",  
+   "stylelint": "stylelint \"**/*.css\" --fix"
+},
+```
 
+Запускаем его и получаем папку с `.husky`:
 
+```bash
+npm run prepare
+```
 
+Далее мы можем добавить файл, который будет содержать команды, выполняемые в определённый промежуток через выполнение хаски.
+Конкретно тут мы добавляем процедуру, которая будет выполняться перед коммитом 
 
+```bash
+npx husky add .husky/pre-commit "npm test"
+```
 
+![](_png/Pasted%20image%2020230222085554.png)
 
+Поменяем тест на выполнение команды стайллинта. И теперь перед каждым коммитом будет прогоняться стайллинт.
 
-
-
-
-
+```
+#!/usr/bin/env sh  
+. "$(dirname -- "$0")/_/husky.sh"  
+  
+npm run stylelint
+```
 
 ## 004 Next export
 
