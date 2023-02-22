@@ -20,4 +20,5 @@
 [17 Анимация на Framer Motion](_lessons/17%20Анимация%20на%20Framer%20Motion.md)
 [18 Доступность](_lessons/18%20Доступность.md)
 [19 Подготовка к production](_lessons/19%20Подготовка%20к%20production.md)
+[20 Дополнения](_lessons/20%20Дополнения.md)
 [Ссылки](_lessons/Ссылки.md)
