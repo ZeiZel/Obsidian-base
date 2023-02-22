@@ -207,15 +207,130 @@ npm run stylelint
 
 ## 004 Next export
 
+Перед тем, как билдить приложение, нужно исправить несколько ошибок:
 
+Нужно использовать роутер не полученный из приложения, а импортированный из некста
 
+`pages / _app.tsx`
+```TSX
+import Router from 'next/router';
 
+Router.events.on('routeChangeComplete', (url: string) => {  
+   if (typeof window !== 'undefined') {  
+      ym('hit', url);  
+   }  
+});  
+  
+function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {  
+   return (  
+      <>  
+         <Head>  
+            <title>MyTop - наш лучший топ</title>  
+            <link rel='icon' href='/favicon.ico' />  
+            <link rel='preconnect' href='https://fonts.gstatic.com' />  
+            <link rel='preconnect' href='https://mc.yandex.ru' />  
+            <link  
+               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'  
+               rel='stylesheet'  
+            />  
+            <meta  
+               property={'og:url'}  
+               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}  
+            />  
+            <meta property={'og:locale'} content={'ru_RU'} />  
+         </Head>  
+         <YMInitializer accounts={[]} options={{ webvisor: true, defer: true }} version={'2'} />  
+         <Component {...pageProps} />  
+      </>  
+   );  
+}
+```
 
+Далее тут нужно производить подмену мета-данных страницы только если мы получили с сервера страницы и продукты
 
+`pages / [type] / [alias].tsx`
+```TSX
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {  
+   return (  
+      <>  
+         {page && products && (  
+            <>  
+               <Head>  
+                  <title>{page.metaTitle}</title>  
+                  <meta name={'description'} content={page.metaDescription} />  
+                  <meta property={'og:title'} content={page.metaTitle} />  
+                  <meta property={'og:description'} content={page.metaDescription} />  
+                  <meta property={'og:type'} content={'article'} />  
+               </Head>  
+               <TopPageComponent  
+                  firstCategory={firstCategory}  
+                  page={page}  
+                  products={products}  
+               />  
+               ;  
+            </>  
+         )}  
+      </>  
+   );  
+}
+```
 
+Далее нужно добавить скрипт для `export` из некста
 
+```JSON
+"scripts": {  
+   "prepare": "husky install",  
+   "dev": "next dev",  
+   "export": "next export",  
+   "debug": "NODE_OPTIONS='--inspect' next dev",  
+   "build": "next build",  
+   "start": "next start",  
+   "stylelint": "stylelint \"**/*.css\" --fix"
+},
+```
 
+Последовательность выполнения операций:
+- `build` - билдит приложение некста в папку `.next`
+- `export` - берёт сбилженное приложение и экспортирует в папку `out`, где лежит статический полностью рабочий сайт, который можно закинуть на сервер и пользоваться им
 
+```bash
+npm run build
+npm run export
+```
+
+Однако при выполнении команды `export` мы получим ошибку, так как мы не можем пользоваться серверными возможностями некста:
+- нужно убрать компонент `Image`
+
+![](_png/Pasted%20image%2020230222092949.png)
+
+Далее нужно будет убрать возможность производить `fallback` страницы
+
+![](_png/Pasted%20image%2020230222093210.png)
+
+И теперь выполняем последовательно команды:
+
+![](_png/Pasted%20image%2020230222093319.png)
+
+![](_png/Pasted%20image%2020230222093321.png)
+
+И на выходе мы получим просто фронт-енд приложение со статическими страничками
+
+![](_png/Pasted%20image%2020230222093446.png)
+
+У нас нет преимуществ NextJS:
+- Нет оптимизированных изображений
+- Нет фонового обновления данных
+- Нет добавления новых страниц, если добавляются роуты
+
+![](_png/Pasted%20image%2020230222093449.png)
+
+Итог:
+
+>[!note] Использовать такой подход можно в нескольких случаях:
+> - Если нам нужен просто статический сайт
+> - Если страницы обновляются не часто и можно делать билд под обновления
+
+В противном случае нужно поднимать сервер некста, чтобы страницы работали со всеми фичами
 
 ## 005 Страницы 404, 500
 
