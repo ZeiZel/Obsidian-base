@@ -466,20 +466,23 @@ EXPOSE 3000
 - Импорт парсера должен происходить из `querystring`, а не из `node:querystring`
 ![](_png/Pasted%20image%2020230222114110.png)
 
-
 Далее запускаем сборку контейнера:
 
 ```bash
 docker build -t top-app-front .
 ```
 
+![](_png/Pasted%20image%2020230222120743.png)
 
+И через данную команду можно посмотреть доступные образы докера, которые мы создали
 
+```bash
+docker images
+```
 
+![](_png/Pasted%20image%2020230222120838.png)
 
-
-
-
+![](_png/Pasted%20image%2020230222120920.png)
 
 ## 007 Запуск через docker-compose
 
