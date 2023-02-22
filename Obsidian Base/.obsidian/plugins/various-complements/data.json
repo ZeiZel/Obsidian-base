@@ -1434,6 +1434,38 @@
           "lastUpdated": 1677044874825
         }
       }
+    },
+    "dockerfile": {
+      "dockerfile": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677052647995
+        }
+      }
+    },
+    "Dockerfile": {
+      "Dockerfile": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677052732838
+        }
+      }
+    },
+    "WORKDIR": {
+      "WORKDIR": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677052925167
+        }
+      }
+    },
+    "директирию": {
+      "директирию": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677052933021
+        }
+      }
     }
   }
 }
