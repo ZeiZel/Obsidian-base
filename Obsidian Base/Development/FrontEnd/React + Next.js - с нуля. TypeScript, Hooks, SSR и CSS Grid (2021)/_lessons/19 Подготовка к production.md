@@ -334,15 +334,76 @@ npm run export
 
 ## 005 Страницы 404, 500
 
+Чтобы заменить страницы 404 и 500, нам нужно воспользоваться стандартными именами `404.tsx` внутри папки страниц (мы заменяем стандартный элемент ошибки)
 
+`pages / 404.tsx`
+```TSX
+import React from 'react';  
+import { withLayout } from '../layout/Layout';  
+import { Htag } from '../components';  
+  
+export const Error404 = (): JSX.Element => {  
+   return (  
+      <>  
+         <Htag tag={'h1'}>Ошибка 404</Htag>  
+      </>  
+   );  
+};  
+  
+export default withLayout(Error404);
+```
 
+`pages / 500.tsx`
+```TSX
+import React from 'react';  
+import { withLayout } from '../layout/Layout';  
+import { Htag } from '../components';  
+  
+export const Error500 = (): JSX.Element => {  
+   return (  
+      <>  
+         <Htag tag={'h1'}>Ошибка 500</Htag>  
+      </>  
+   );  
+};  
+  
+export default withLayout(Error500);
+```
 
+Так выглядит структура страниц:
 
+![](_png/Pasted%20image%2020230222100801.png)
 
+Далее тут будем выводить страницу с ошибкой, если у нас не будет пропсов продуктов и страниц
 
+`pages / [type] / [alias].tsx`
+```TSX
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {  
+   if (!page || !products) {  
+      return <Error404 />;  
+   }  
+  
+   return (  
+      <>  
+         <Head>  
+            <title>{page.metaTitle}</title>  
+            <meta name={'description'} content={page.metaDescription} />  
+            <meta property={'og:title'} content={page.metaTitle} />  
+            <meta property={'og:description'} content={page.metaDescription} />  
+            <meta property={'og:type'} content={'article'} />  
+         </Head>  
+         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />  
+      </>  
+   );  
+}
+```
 
+![](_png/Pasted%20image%2020230222100519.png)
 
+Однако нужно сказать, что у нас остаётся возможность использовать некстовские ошибки, если их импортировать:
 
+![](_png/Pasted%20image%2020230222100631.png)
+![](_png/Pasted%20image%2020230222100633.png)
 
 ## 006 Сборка контейнера Docker
 
