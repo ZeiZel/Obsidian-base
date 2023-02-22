@@ -1506,6 +1506,14 @@
           "lastUpdated": 1677062977538
         }
       }
+    },
+    "configService": {
+      "configService": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677069833313
+        }
+      }
     }
   }
 }
