@@ -71,38 +71,6 @@
         }
       }
     },
-    "target": {
-      "target": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674396602273
-        }
-      }
-    },
-    "Prettier": {
-      "Prettier": {
-        "internalLink": {
-          "count": 1,
-          "lastUpdated": 1674403858016
-        }
-      }
-    },
-    "Отсутствие": {
-      "Отсутствие": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674404347612
-        }
-      }
-    },
-    "preview": {
-      "preview": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674406857005
-        }
-      }
-    },
     "гетСтатикПропсов": {
       "гетСтатикПропсов": {
         "currentFile": {
@@ -1448,6 +1416,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1676996316566
+        }
+      }
+    },
+    "description": {
+      "description": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677042901108
+        }
+      }
+    },
+    "инициализирует": {
+      "инициализирует": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677044874825
         }
       }
     }
