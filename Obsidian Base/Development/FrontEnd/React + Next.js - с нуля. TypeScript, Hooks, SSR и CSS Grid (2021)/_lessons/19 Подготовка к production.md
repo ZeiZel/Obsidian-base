@@ -532,8 +532,76 @@ docker ps
 
 ## 008 Github actions
 
+==Github Actions== - это пайплайны, которые позволяют автоматизировать наши процессы. Конкретно нам нужно автоматизировать сборку проекта при выгрузке его на гитхаб.
 
+Первым делом нужно создать такую структуру пути, чтобы у нас работали наши окружения гитхаба
 
+![|600](_png/Pasted%20image%2020230222131543.png)
 
+Далее описываем то окружение, которое нам нужно:
+- name - имя нашего окружения
+- on - описываем на каком действии триггерится окружение
+	- push - при пуше на гитхаб
+		- branches - выбираем ветку или ветки
+- jobs - действия, которые будут осуществляться
+	- build - сборка проекта
+		- runs-on - запуск на какой ОС
+		- steps - шаги, которые нужно выполнить для действия
+			- uses - какую ветку используем
+			- name - название того экшена, который мы используем
+			- uses - указываем гитхаб экшена, который мы используем (можно использовать чужие экшены, а можно свои)
+			- with - указывает параметры выполнения экшена (у каждого экшена свои параметры)
+				- name - состоит из самого имени на гитхабе, имени профиля, имени репозитория и конечного названия пакета, который будет опубликован на гитхабе
 
+`.github / workflows / main.yml`
+```YML
+name: Publish Docker  
+  
+# Controls when the action will run. Triggers the workflow on push or pull request  
+# events but only for the master branch  
+on:  
+  push:  
+    branches: [ main ]  
+  
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - uses: actions/checkout@master  
+      - name: Publish to Registry  
+        uses: elgohr/Publish-Docker-Github-Action@master  
+        with:  
+          registry: docker.pkg.github.com  
+          name: docker.pkg.github.com/alaricode/top-app-demo/top-app-demo  
+          username: ${{ secrets.DOCKER_USERNAME }}  
+          password: ${{ secrets.DOCKER_PASSWORD }}  
+          tags: "develop"
+```
 
+Поля `password` и `username` задаются в секретах в самом гитхабе
+
+![](_png/Pasted%20image%2020230222132731.png)
+
+При пуше на гитхаб мы увидим такую жёлтую точку, которая скажет нам, что сейчас запущен экшен
+
+![](_png/Pasted%20image%2020230222133020.png)
+
+Запущенные экшены можно увидеть во вкладке с экшенами
+
+![](_png/Pasted%20image%2020230222133023.png)
+
+После того, как экшен будет выполнен, мы увидим, что у нас в наличии имеется пакет с докером
+
+![](_png/Pasted%20image%2020230222133206.png)
+
+И тут можно увидеть путь до докерного файла
+
+![](_png/Pasted%20image%2020230222133213.png)
+
+И теперь в ямле `Dockerfile` нужно указать путь до образа на гитхабе
+
+![](_png/Pasted%20image%2020230222133402.png)
+
+И потом при сборке композа будет скачиваться образ
+
+![](_png/Pasted%20image%2020230222133524.png)
