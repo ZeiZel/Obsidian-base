@@ -409,6 +409,9 @@ function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
 
 
 
+```bash
+npm run build
+```
 
 
 
