@@ -362,8 +362,8 @@
     "@Injectable": {
       "@Injectable": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675433022607
+          "count": 2,
+          "lastUpdated": 1677075857680
         }
       }
     },
@@ -1512,6 +1512,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1677069833313
+        }
+      }
+    },
+    "Middleware": {
+      "Middleware": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677075251503
+        }
+      }
+    },
+    "Interceptors": {
+      "Interceptors": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677075313328
         }
       }
     }
