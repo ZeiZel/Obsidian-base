@@ -94,8 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 428.5110321044922,
-    "collapsed": true
+    "width": 428.5110321044922
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -192,15 +191,15 @@
   },
   "active": "5f1771caf571935b",
   "lastOpenFiles": [
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
+    "Books/Чистый код/Чистый Код - Роберт Мартин.md",
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+    "Development/DevOps/Полный курс Docker/Docker - Полный курс Docker.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/029 Заключение модуля.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/028 Поля классов и static.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 Стили в React. Готовые библиотеки компонентов со стилями.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/026 Стили в React. Styled Components.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/025 Стили в React. Динамические классы и стили.md"
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/028 Поля классов и static.md"
   ]
 }
