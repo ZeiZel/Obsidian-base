@@ -2,11 +2,11 @@
 В первую очередь нам нужно научить вебпак компилировать SCSS, установив плагин
 
 ```bash
-npm i sass --save
+npm install sass
 
 // или
 
-npm install sass-loader node-sass --save-dev
+npm i -D sass-loader node-sass
 ```
 
 Чтобы подключить sass-файл со стилями, нам нужно его непосредственно подключить к компоненту реакта

@@ -28,7 +28,8 @@ const buttons = buttonsData.map(({name, label, colored}) => {
     );  
 })
 ```
-![](_png/Pasted%20image%2020221023174358.png)
+
+![|500](_png/Pasted%20image%2020221023174358.png)
 
 Желательно такие условия выносить в отдельную переменную, чтобы не портить код
 

@@ -67,6 +67,7 @@ export const Button = styled.button`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);  
 `;
 ```
+
 `index.js`
 ```JSX
 import App, {Btn, Field, Header, Button} from './App';  
