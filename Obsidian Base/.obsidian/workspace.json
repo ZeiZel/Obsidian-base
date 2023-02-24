@@ -38,23 +38,13 @@
               "type": "markdown",
               "state": {
                 "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
-              }
-            }
-          },
-          {
-            "id": "0e93371844cfe190",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.1.15"
               }
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -199,7 +189,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0e93371844cfe190",
+  "active": "5f1771caf571935b",
   "lastOpenFiles": [
     "Books/Чистый код/Чистый Код - Роберт Мартин.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
