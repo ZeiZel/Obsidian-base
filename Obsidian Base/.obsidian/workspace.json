@@ -42,9 +42,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "0e93371844cfe190",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.1.15"
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -180,16 +190,16 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "canvas:Создать новый холст": false,
       "switcher:Меню быстрого перехода": false,
       "graph:Граф": false,
-      "canvas:Create new canvas": false,
       "daily-notes:Сегодняшняя заметка": false,
       "templates:Вставить шаблон": false,
       "command-palette:Открыть палитру команд": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5f1771caf571935b",
+  "active": "0e93371844cfe190",
   "lastOpenFiles": [
     "Books/Чистый код/Чистый Код - Роберт Мартин.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
