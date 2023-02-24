@@ -73,7 +73,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "prettier",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -90,12 +90,12 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 428.5110321044922
+    "width": 428.5110321044922,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -190,7 +190,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5f1771caf571935b",
+  "active": "aa4fe56689b0fc48",
   "lastOpenFiles": [
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
