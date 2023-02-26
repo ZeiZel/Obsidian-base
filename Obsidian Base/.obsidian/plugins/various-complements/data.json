@@ -47,14 +47,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "getStaticProps": {
-      "getStaticProps": {
-        "currentFile": {
-          "count": 9,
-          "lastUpdated": 1674750302269
-        }
-      }
-    },
     "NextJS": {
       "NextJS": {
         "currentFile": {
@@ -71,35 +63,11 @@
         }
       }
     },
-    "гетСтатикПропсов": {
-      "гетСтатикПропсов": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674572791809
-        }
-      }
-    },
-    "HomeProps": {
-      "HomeProps": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674573618734
-        }
-      }
-    },
     "interface": {
       "interface": {
         "currentFile": {
           "count": 6,
           "lastUpdated": 1676299224883
-        }
-      }
-    },
-    "getStaticPaths": {
-      "getStaticPaths": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674750348249
         }
       }
     },
@@ -119,27 +87,11 @@
         }
       }
     },
-    "{children": {
-      "{children": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674829459571
-        }
-      }
-    },
     "ReactNode": {
       "ReactNode": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1675935354690
-        }
-      }
-    },
-    "firstCategory": {
-      "firstCategory": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674831459970
         }
       }
     },
@@ -1528,6 +1480,30 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1677075313328
+        }
+      }
+    },
+    "Codewars": {
+      "Codewars": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677425800582
+        }
+      }
+    },
+    "numberChecker": {
+      "numberChecker": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677427072315
+        }
+      }
+    },
+    "numberOfFilms": {
+      "numberOfFilms": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1677427120058
         }
       }
     }
