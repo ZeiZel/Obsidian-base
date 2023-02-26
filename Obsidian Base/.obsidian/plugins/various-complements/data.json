@@ -1506,6 +1506,22 @@
           "lastUpdated": 1677427120058
         }
       }
+    },
+    "getElementsById": {
+      "getElementsById": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677430385355
+        }
+      }
+    },
+    "getElementsByTagName": {
+      "getElementsByTagName": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677430638425
+        }
+      }
     }
   }
 }
