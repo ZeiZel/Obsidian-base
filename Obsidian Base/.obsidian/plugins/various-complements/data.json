@@ -1470,8 +1470,24 @@
     "boxesGet": {
       "boxesGet": {
         "currentFile": {
+          "count": 3,
+          "lastUpdated": 1677687254366
+        }
+      }
+    },
+    "псевдомассивах": {
+      "псевдомассивах": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1677687106504
+          "lastUpdated": 1677687268254
+        }
+      }
+    },
+    "defineProperty": {
+      "defineProperty": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1677688140413
         }
       }
     }
