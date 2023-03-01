@@ -34,6 +34,8 @@ settings:
         id: tab-autohide
         title: Auto hide tab bar
         title.zh: 自动隐藏 tab栏
+        description: Mac users can adjust the position of the traffic light using the 'Electron Window Tweaker' plugin
+        description.zh: Mac 用户可以使用 “Electron Window Tweaker” 插件来调整左上角红绿灯的位置
         type: class-toggle
     - 
         id: Ribbon-autohide
@@ -2745,10 +2747,39 @@ settings:
         title.zh: 关闭 全宽表格
         type: class-toggle
     - 
-        id: DB-table-bg-color-unify
-        title: Unify background color
-        title.zh: 统一背景颜色
-        type: class-toggle
+        id: DB-table-bg-color
+        title: background color
+        title.zh: 背景颜色
+        type: class-select
+        allowEmpty: false
+        default: DB-table-bg-color-default
+        options:
+            -   label: Default
+                value: DB-table-bg-color-default
+            -   label: Adapt to lower background
+                value: DB-table-bg-color-adapt
+            -   label: Unify background color
+                value: DB-table-bg-color-unify
+    - 
+        id: Projects
+        title: Projects
+        type: heading
+        collapsed: true
+        level: 3
+    - 
+        id: Projects-bg-color
+        title: background color
+        title.zh: 背景颜色
+        type: class-select
+        allowEmpty: false
+        default: Projects-bg-color-default
+        options:
+            -   label: Default
+                value: Projects-bg-color-default
+            -   label: Adapt to lower background
+                value: Projects-bg-color-adapt
+            -   label: Unify background color
+                value: Projects-bg-color-unify
     - 
         id: Surfing
         title: Surfing
@@ -6045,12 +6076,14 @@ body:not(.is-mobile) input[type=range]:focus-visible::-webkit-slider-thumb {
 body:not(.is-mobile) textarea:not(.kanban-plugin__item-input, .kanban-plugin__lane-input):focus,
 body:not(.is-mobile) input[type='text']:not(.mk-cell-text):focus,
 body:not(.is-mobile) input[type='search']:focus,
+body:not(.is-mobile).theme-dark input[type='search']:focus,
 body:not(.is-mobile) input[type='email']:focus,
 body:not(.is-mobile) input[type='password']:focus,
 body:not(.is-mobile) input[type='number']:focus,
 body:not(.is-mobile) textarea:not(.kanban-plugin__item-input, .kanban-plugin__lane-input):focus-visible,
 body:not(.is-mobile) input[type='text']:not(.mk-cell-text):focus-visible,
 body:not(.is-mobile) input[type='search']:focus-visible,
+body:not(.is-mobile).theme-dark input[type='search']:focus-visible,
 body:not(.is-mobile) input[type='email']:focus-visible,
 body:not(.is-mobile) input[type='password']:focus-visible,
 body:not(.is-mobile) input[type='number']:focus-visible {
@@ -6058,13 +6091,14 @@ body:not(.is-mobile) input[type='number']:focus-visible {
     box-shadow: 0 0 0 4px var(--background-modifier-active-hover);
 }
 
+/*
 body:not(.is-mobile) input[type='search'] {
     box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 0 4px rgba(0, 0, 0, .025);
 }
 
 body:not(.is-mobile).theme-dark input[type='search'] {
     box-shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 0 4px rgba(0, 0, 0, .1);
-}
+}*/
 
 .view-header input {
     box-shadow: none !important;
@@ -8273,14 +8307,35 @@ body.DB-table-bg-color-unify .database-plugin__table {
     --background-secondary: transparent;
 }
 
+body.DB-table-bg-color-adapt .database-plugin__navbar,
+body.DB-table-bg-color-adapt .database-plugin__table {
+    --background-primary: transparent;
+    --background-secondary: rgba(var(--mono-rgb-100), 0.025);
+}
+
 body.DB-table-bg-color-unify .database-plugin__th:hover,
-body.DB-table-bg-color-unify .data-input:hover {
+body.DB-table-bg-color-unify .data-input:hover,
+body.DB-table-bg-color-adapt .database-plugin__th:hover,
+body.DB-table-bg-color-adapt .data-input:hover {
     --background-modifier-hover: rgba(var(--mono-rgb-100), 0.025);
     --background-secondary: var(--background-modifier-hover);
 }
 
 .database-plugin__pagination-button:hover {
     background-color: var(--interactive-hover);
+}
+
+/* Projects */
+body.Projects-bg-color-unify .projects-container.svelte-gr1f73 {
+    --background-primary: transparent;
+    --background-secondary: transparent;
+    --tab-background-active: var(--background-primary);
+}
+
+body.Projects-bg-color-adapt .projects-container.svelte-gr1f73 {
+    --background-primary: transparent;
+    --background-secondary: rgba(var(--mono-rgb-100), 0.025);
+    --tab-background-active: var(--background-primary);
 }
 
 /*style settings*/

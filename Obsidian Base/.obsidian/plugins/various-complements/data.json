@@ -103,75 +103,11 @@
         }
       }
     },
-    "buildFirstLevel": {
-      "buildFirstLevel": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674918376048
-        }
-      }
-    },
-    "buildSecondLevel": {
-      "buildSecondLevel": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675079513419
-        }
-      }
-    },
-    "buildThirdLevel": {
-      "buildThirdLevel": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674918386535
-        }
-      }
-    },
     "firstLevelMenu": {
       "firstLevelMenu": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1675093622937
-        }
-      }
-    },
-    "isOpened": {
-      "isOpened": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1674977563189
-        }
-      }
-    },
-    "useRouter": {
-      "useRouter": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675005002220
-        }
-      }
-    },
-    "уровнем": {
-      "уровнем": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675081694582
-        }
-      }
-    },
-    "openSecondLevel": {
-      "openSecondLevel": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675081909863
-        }
-      }
-    },
-    "secondLevelBlockOpened": {
-      "secondLevelBlockOpened": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675082404297
         }
       }
     },
@@ -1504,6 +1440,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1677430638425
+        }
+      }
+    },
+    "DOMContentLoaded": {
+      "DOMContentLoaded": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677684735931
         }
       }
     }
