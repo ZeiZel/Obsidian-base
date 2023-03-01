@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/004 (д) Живые коллекции и полезные методы.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/004 (д) Живые коллекции и полезные методы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/004 (д) Живые коллекции и полезные методы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md"
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/004 (д) Живые коллекции и полезные методы.md"
               }
             }
           },
@@ -199,8 +199,11 @@
   },
   "active": "08883b3047e3f8c6",
   "lastOpenFiles": [
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 (д) Оператор нулевого слияния (Nullish, ) ES11.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/003 (д) Оператор опциональной цепочки (.) ES11.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 (д) Оператор нулевого слияния (Nullish, ) ES11.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/010 () BigInt.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/011 Дополнительные ссылки.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/001 Про дополнительную информацию по основам.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
@@ -222,9 +225,6 @@
     "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.8 Если у вас ошибка при отправке вашего проекта на GitHub.md",
     "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.7 Отправка проекта GitHub.md",
     "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.4 Устанавливаем систему git на наш компьютер.md",
-    "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.3 Как редактировать файлы через терминал.md",
-    "Development/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/_lessons/2.2 Базовые команды в терминале.md",
-    "Development/NextJS - основы.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227153035.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227151702.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227151649.png",
