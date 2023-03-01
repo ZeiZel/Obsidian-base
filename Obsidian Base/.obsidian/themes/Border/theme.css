@@ -46,6 +46,16 @@ settings:
         title.zh: 自动隐藏 底部状态栏
         type: class-toggle
     - 
+        id: nav-header-autohide
+        title: Auto hide header icons in sidepane
+        title.zh: 自动隐藏 侧边面板中的头部按钮
+        type: class-toggle
+    - 
+        id: tab-title-bar-fixed
+        title: Always display tab title bar
+        title.zh: 始终显示标签页标题栏
+        type: class-toggle
+    - 
         id: file-explorer
         title: File explorer
         title.zh: 文件列表
@@ -113,25 +123,6 @@ settings:
         title.zh: 启用 增强的大纲样式
         description: from https://github.com/subframe7536/obsidian-theme-maple, author:@subframe7536
         type: class-toggle
-    - 
-        id: tab-title-bar
-        title: Tab title bar
-        title.zh: 标签页标题栏
-        type: heading
-        collapsed: true
-        level: 3
-    - 
-        id: tab-title-bar-select
-        title: tab title bar
-        title.zh: 标签页标题栏
-        type: class-select
-        allowEmpty: false
-        default: tab-title-bar-autohide
-        options:
-            -   label: fixed(obsidian default)
-                value: tab-title-bar-fixed
-            -   label: autohide
-                value: tab-title-bar-autohide
     - 
         id: New-tab
         title: New tab
@@ -477,15 +468,15 @@ settings:
         level: 3
     - 
         id: mod-left-split-background-header-light
-        title: Left sidebar background
-        title.zh: 左侧栏背景
+        title: Left sidepane background
+        title.zh: 左侧面板背景
         type: heading
         collapsed: ture
         level: 4
     - 
         id: mod-left-split-background-select-light
-        title: Left sidebar background(light mode)
-        title.zh: 左侧栏背景（亮色模式）
+        title: Left sidepane background(light mode)
+        title.zh: 左侧面板背景（亮色模式）
         type: class-select
         allowEmpty: false
         default: mod-left-split-background-secondary-light
@@ -502,8 +493,8 @@ settings:
                 value: mod-left-split-background-CSS-light
     - 
 		id: background-mod-left-split-light
-		title: Customize left sidebar background color (light mode)
-        title.zh: 自定义 左侧栏 背景色（亮色模式）
+		title: Customize left sidepane background color (light mode)
+        title.zh: 自定义 左侧面板 背景色（亮色模式）
 		type: variable-color
         opacity: ture
         format: hex
@@ -514,39 +505,39 @@ settings:
         default: '#'
     - 
         id: background-mod-left-CSS-light
-        title: Left sidebar background (light mode)
-        title.zh: 左侧栏background（亮色模式）
+        title: Left sidepane background (light mode)
+        title.zh: 左侧面板background（亮色模式）
         description: Input any CSS background value
         description.zh: 输入任意 CSS background 值
         type: variable-text
         default: rgba(255, 255, 255, 0.5);
     - 
         id: background-mod-left-CSS-blend-mode-light
-        title: Left sidebar background-blend-mode (light mode)
-        title.zh: 左侧栏background-blend-mode（亮色模式）
+        title: Left sidepane background-blend-mode (light mode)
+        title.zh: 左侧面板background-blend-mode（亮色模式）
         description: Input any CSS background-blend-mode value
         description.zh: 输入任意 CSS background-blend-mode 值
         type: variable-text
         default: normal;
     - 
         id: background-mod-left-CSS-backdrop-filter-light
-        title: Left sidebar backdrop-filter (light mode)
-        title.zh: 左侧栏backdrop-filter（亮色模式）
+        title: Left sidepane backdrop-filter (light mode)
+        title.zh: 左侧面板backdrop-filter（亮色模式）
         description: Input any CSS backdrop-filter value
         description.zh: 输入任意 CSS backdrop-filter 值
         type: variable-text
         default: blur(32px);
     - 
         id: mod-right-split-background-header-light
-        title: Right sidebar background
-        title.zh: 右侧栏背景
+        title: Right sidepane background
+        title.zh: 右侧面板背景
         type: heading
         collapsed: ture
         level: 4
     - 
         id: mod-right-split-background-select-light
-        title: Right sidebar background (light mode)
-        title.zh: 右侧栏背景（亮色模式）
+        title: Right sidepane background (light mode)
+        title.zh: 右侧面板背景（亮色模式）
         type: class-select
         allowEmpty: false
         default: mod-right-split-background-primary-light
@@ -563,8 +554,8 @@ settings:
                 value: mod-right-split-background-CSS-light
     - 
 		id: background-mod-right-split-light
-		title: Customize right sidebar background color(light mode)
-        title.zh: 自定义 右侧栏 背景色（亮色模式）
+		title: Customize right sidepane background color(light mode)
+        title.zh: 自定义 右侧面板 背景色（亮色模式）
 		type: variable-color
         opacity: ture
         format: hex
@@ -575,39 +566,39 @@ settings:
         default: '#'
     - 
         id: background-mod-right-CSS-light
-        title: Right sidebar background (light mode)
-        title.zh: 右侧栏background（亮色模式）
+        title: Right sidepane background (light mode)
+        title.zh: 右侧面板background（亮色模式）
         description: Input any CSS background value
         description.zh: 输入任意 CSS background 值
         type: variable-text
         default: rgba(255, 255, 255, 0.5);
     - 
         id: background-mod-right-CSS-blend-mode-light
-        title: Right sidebar background-blend-mode (light mode)
-        title.zh: 右侧栏background-blend-mode（亮色模式）
+        title: Right sidepane background-blend-mode (light mode)
+        title.zh: 右侧面板background-blend-mode（亮色模式）
         description: Input any CSS background-blend-mode value
         description.zh: 输入任意 CSS background-blend-mode 值
         type: variable-text
         default: normal;
     - 
         id: background-mod-right-CSS-backdrop-filter-light
-        title: Right sidebar backdrop-filter (light mode)
-        title.zh: 右侧栏backdrop-filter（亮色模式）
+        title: Right sidepane backdrop-filter (light mode)
+        title.zh: 右侧面板backdrop-filter（亮色模式）
         description: Input any CSS backdrop-filter value
         description.zh: 输入任意 CSS backdrop-filter 值
         type: variable-text
         default: blur(32px);
     - 
         id: mod-root-split-background-header-light
-        title: Middle space background
-        title.zh: 中间栏背景
+        title: Middle pane background
+        title.zh: 中间面板背景
         type: heading
         collapsed: ture
         level: 4
     - 
         id: mod-root-split-background-select-light
-        title: Middle space background (light mode)
-        title.zh: 中间栏背景（亮色模式）
+        title: Middle pane background (light mode)
+        title.zh: 中间面板背景（亮色模式）
         type: class-select
         allowEmpty: false
         default: mod-root-split-background-primary-light
@@ -624,8 +615,8 @@ settings:
                 value: mod-root-split-background-CSS-light
     - 
 		id: background-mod-root-split-light
-		title: Customize middle space background color(light mode)
-        title.zh: 自定义 中间栏 背景色（亮色模式）
+		title: Customize Middle pane background color(light mode)
+        title.zh: 自定义 中间面板 背景色（亮色模式）
 		type: variable-color
         opacity: ture
         format: hex
@@ -636,24 +627,24 @@ settings:
         default: '#'
     - 
         id: background-mod-root-CSS-light
-        title: middle space background (light mode)
-        title.zh: 中间栏background（亮色模式）
+        title: Middle pane background (light mode)
+        title.zh: 中间面板background（亮色模式）
         description: Input any CSS background value
         description.zh: 输入任意 CSS background 值
         type: variable-text
         default: rgba(255, 255, 255, 0.5);
     - 
         id: background-mod-root-CSS-blend-mode-light
-        title: middle space background-blend-mode (light mode)
-        title.zh: 中间栏background-blend-mode（亮色模式）
+        title: Middle pane background-blend-mode (light mode)
+        title.zh: 中间面板background-blend-mode（亮色模式）
         description: Input any CSS background-blend-mode value
         description.zh: 输入任意 CSS background-blend-mode 值
         type: variable-text
         default: normal;
     - 
         id: background-mod-root-CSS-backdrop-filter-light
-        title: middle space backdrop-filter (light mode)
-        title.zh: 中间栏backdrop-filter（亮色模式）
+        title: Middle pane backdrop-filter (light mode)
+        title.zh: 中间面板backdrop-filter（亮色模式）
         description: Input any CSS backdrop-filter value
         description.zh: 输入任意 CSS backdrop-filter 值
         type: variable-text
@@ -1083,7 +1074,7 @@ settings:
         description: shadow of toggle track
         description.zh: 开关滑轨的阴影
         type: variable-text
-        default: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 2px var(--background-primary), 0px 2px 2px rgba(0, 0, 0, 0.05)
+        default: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 0px var(--background-primary), 0px 2px 4px rgba(0, 0, 0, 0.04)
     - 
         id: toggle-track-hovered-shadow-light
         title: toggle-track-hovered-shadow(light mode)
@@ -1091,7 +1082,7 @@ settings:
         description: background shadow of toggle track(hovered)
         description.zh: 开关滑轨的阴影（鼠标悬停时）
         type: variable-text
-        default: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 2px var(--background-primary), 0px 2px 2px rgba(0, 0, 0, 0.05)
+        default: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 0px var(--background-primary), 0px 2px 4px rgba(0, 0, 0, 0.04)
 
 */
 
@@ -1235,15 +1226,15 @@ settings:
         level: 3
     - 
         id: mod-left-split-background-header-dark
-        title: Left sidebar background
-        title.zh: 左侧栏背景
+        title: Left sidepane background
+        title.zh: 左侧面板背景
         type: heading
         collapsed: ture
         level: 4
     - 
         id: mod-left-split-background-select-dark
-        title: Left sidebar background(dark mode)
-        title.zh: 左侧栏背景（暗色模式）
+        title: Left sidepane background(dark mode)
+        title.zh: 左侧面板背景（暗色模式）
         type: class-select
         allowEmpty: false
         default: mod-left-split-background-secondary-dark
@@ -1260,8 +1251,8 @@ settings:
                 value: mod-left-split-background-CSS-dark
     - 
 		id: background-mod-left-split-dark
-		title: Customize left sidebar background color (dark mode)
-        title.zh: 自定义 左侧栏 背景色（暗色模式）
+		title: Customize left sidepane background color (dark mode)
+        title.zh: 自定义 左侧面板 背景色（暗色模式）
 		type: variable-color
         opacity: ture
         format: hex
@@ -1272,39 +1263,39 @@ settings:
         default: '#'
     - 
         id: background-mod-left-CSS-dark
-        title: Left sidebar background (dark mode)
-        title.zh: 左侧栏background（暗色模式）
+        title: Left sidepane background (dark mode)
+        title.zh: 左侧面板background（暗色模式）
         description: Input any CSS background value
         description.zh: 输入任意 CSS background 值
         type: variable-text
         default: rgba(0,0,0,0.5);
     - 
         id: background-mod-left-CSS-blend-mode-dark
-        title: Left sidebar background-blend-mode (dark mode)
-        title.zh: 左侧栏background-blend-mode（暗色模式）
+        title: Left sidepane background-blend-mode (dark mode)
+        title.zh: 左侧面板background-blend-mode（暗色模式）
         description: Input any CSS background-blend-mode value
         description.zh: 输入任意 CSS background-blend-mode 值
         type: variable-text
         default: normal;
     - 
         id: background-mod-left-CSS-backdrop-filter-dark
-        title: Left sidebar backdrop-filter (dark mode)
-        title.zh: 左侧栏backdrop-filter（暗色模式）
+        title: Left sidepane backdrop-filter (dark mode)
+        title.zh: 左侧面板backdrop-filter（暗色模式）
         description: Input any CSS backdrop-filter value
         description.zh: 输入任意 CSS backdrop-filter 值
         type: variable-text
         default: blur(32px);
     - 
         id: mod-right-split-background-header-dark
-        title: Right sidebar background
-        title.zh: 右侧栏背景
+        title: Right sidepane background
+        title.zh: 右侧面板背景
         type: heading
         collapsed: ture
         level: 4
     - 
         id: mod-right-split-background-select-dark
-        title: Right sidebar background(dark mode)
-        title.zh: 右侧栏背景（暗色模式）
+        title: Right sidepane background(dark mode)
+        title.zh: 右侧面板背景（暗色模式）
         type: class-select
         allowEmpty: false
         default: mod-right-split-background-primary-dark
@@ -1321,8 +1312,8 @@ settings:
                 value: mod-right-split-background-CSS-dark
     - 
 		id: background-mod-right-split-dark
-		title: Customize right sidebar background color(dark mode)
-        title.zh: 自定义 右侧栏 背景色（暗色模式）
+		title: Customize right sidepane background color(dark mode)
+        title.zh: 自定义 右侧面板 背景色（暗色模式）
 		type: variable-color
         opacity: ture
         format: hex
@@ -1333,39 +1324,39 @@ settings:
         default: '#'
     - 
         id: background-mod-right-CSS-dark
-        title: Right sidebar background (dark mode)
-        title.zh: 右侧栏background（暗色模式）
+        title: Right sidepane background (dark mode)
+        title.zh: 右侧面板background（暗色模式）
         description: Input any CSS background value
         description.zh: 输入任意 CSS background 值
         type: variable-text
         default: rgba(0,0,0,0.5);
     - 
         id: background-mod-right-CSS-blend-mode-dark
-        title: Right sidebar background-blend-mode (dark mode)
-        title.zh: 右侧栏background-blend-mode（暗色模式）
+        title: Right sidepane background-blend-mode (dark mode)
+        title.zh: 右侧面板background-blend-mode（暗色模式）
         description: Input any CSS background-blend-mode value
         description.zh: 输入任意 CSS background-blend-mode 值
         type: variable-text
         default: normal;
     - 
         id: background-mod-right-CSS-backdrop-filter-dark
-        title: Right sidebar backdrop-filter (dark mode)
-        title.zh: 右侧栏backdrop-filter（暗色模式）
+        title: Right sidepane backdrop-filter (dark mode)
+        title.zh: 右侧面板backdrop-filter（暗色模式）
         description: Input any CSS backdrop-filter value
         description.zh: 输入任意 CSS backdrop-filter 值
         type: variable-text
         default: blur(32px);
     - 
         id: mod-root-split-background-header-dark
-        title: Middle space background
-        title.zh: 中间栏背景
+        title: Middle pane background
+        title.zh: 中间面板背景
         type: heading
         collapsed: ture
         level: 4
     - 
         id: mod-root-split-background-select-dark
-        title: Middle space background (dark mode)
-        title.zh: 中间栏背景（暗色模式）
+        title: Middle pane background (dark mode)
+        title.zh: 中间面板背景（暗色模式）
         type: class-select
         allowEmpty: false
         default: mod-root-split-background-primary-dark
@@ -1382,8 +1373,8 @@ settings:
                 value: mod-root-split-background-CSS-dark
     - 
 		id: background-mod-root-split-dark
-		title: Customize middle space background color (dark mode)
-        title.zh: 自定义 中间栏 背景色（暗色模式）
+		title: Customize Middle pane background color (dark mode)
+        title.zh: 自定义 中间面板 背景色（暗色模式）
 		type: variable-color
         opacity: ture
         format: hex
@@ -1394,24 +1385,24 @@ settings:
         default: '#'
     - 
         id: background-mod-root-CSS-dark
-        title: middle space background (dark mode)
-        title.zh: 中间栏background（暗色模式）
+        title: Middle pane background (dark mode)
+        title.zh: 中间面板background（暗色模式）
         description: Input any CSS background value
         description.zh: 输入任意 CSS background 值
         type: variable-text
         default: rgba(0,0,0,0.5);
     - 
         id: background-mod-root-CSS-blend-mode-dark
-        title: middle space background-blend-mode (dark mode)
-        title.zh: 中间栏background-blend-mode（暗色模式）
+        title: Middle pane background-blend-mode (dark mode)
+        title.zh: 中间面板background-blend-mode（暗色模式）
         description: Input any CSS background-blend-mode value
         description.zh: 输入任意 CSS background-blend-mode 值
         type: variable-text
         default: normal;
     - 
         id: background-mod-root-CSS-backdrop-filter-dark
-        title: middle space backdrop-filter (dark mode)
-        title.zh: 中间栏backdrop-filter（暗色模式）
+        title: Middle pane backdrop-filter (dark mode)
+        title.zh: 中间面板backdrop-filter（暗色模式）
         description: Input any CSS backdrop-filter value
         description.zh: 输入任意 CSS backdrop-filter 值
         type: variable-text
@@ -1866,16 +1857,25 @@ settings:
         collapsed: false
         level: 3
     - 
-        id: line-hover-indicator-enabled
-        title: Enable hovered line indicator
+        id: line-hover-indicator-disable
+        title: Disable hovered line indicator
         description: "Note: This feature requires your **installer** version(not APP current version) > v1.1.8. If not, you can download and re-install obsidian.Check **installer** version in “Settings-About-APP“"
         description.zh: "注意：此特性需要**安装程序**版本（不是指APP当前版本） > v1.1.8。如果不是，可以重新下载安装obsidian。可以在“设置-关于-APP”处查看**安装程序**版本"
-        title.zh: 启用 悬停行指示器
+        title.zh: 禁用 悬停行指示器
         type: class-toggle
+    - 
+		id: hover-indicator-color
+		title: Customize hovered line indicator color
+        title.zh: 自定义悬停行指示器颜色
+		type: variable-themed-color
+		opacity: true
+		format: hex
+		default-light: '#'
+		default-dark: '#'
     - 
         id: line-active-disable
         title: Disable active line hightlight
-        title.zh: 禁用行高亮
+        title.zh: 禁用 行高亮
         type: class-toggle
     - 
         id: line-active-bg-color
@@ -1912,6 +1912,12 @@ settings:
         title: Restore the collapse icon before header
         title.zh: 还原标题前的折叠图标
         type: class-toggle
+    - 
+		id: heading-indicator-off
+		title: Remove headings indicator
+		title.zh: 移除标题左侧的指示器
+		type: class-toggle
+		default: false
     - 
 		id: Inline-title
 		title: Inline Title
@@ -2591,6 +2597,31 @@ settings:
         type: heading
         collapsed: true
         level: 3
+	- 
+		id: table-header-color
+		title: Customize table header color
+        title.zh: 自定义 表头颜色（亮色模式）
+		type: variable-themed-color
+		opacity: true
+		format: hex
+		default-light: '#'
+		default-dark: '#'
+    - 
+        id: table-header-background-light
+        title: Customize table header background (light mode)
+        title.zh: 自定义 表头背景（亮色模式）
+        description: Input any CSS background value
+        description.zh: 输入任意 CSS background 值
+        type: variable-text
+        default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
+    - 
+        id: table-header-background-dark
+        title: Customize table header background (dark mode)
+        title.zh: 自定义 表头背景（暗色模式）
+        description: Input any CSS background value
+        description.zh: 输入任意 CSS background 值
+        type: variable-text
+        default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
     - 
         id: table-width-select
         title: Table width
@@ -2630,6 +2661,52 @@ settings:
         title.zh: 关闭图像缩放
         description: from https://github.com/kepano/obsidian-minimal, author:@kepano
         type: class-toggle
+    - 
+        id: Code-heading
+        title: Code
+        title.zh: 代码
+        type: heading
+        collapsed: true
+        level: 3
+    - 
+        id: code-background-light
+        title: Customize code background (light mode)
+        title.zh: 自定义 代码块背景（亮色模式）
+        description: Input any CSS background value
+        description.zh: 输入任意 CSS background 值
+        type: variable-text
+        default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
+    - 
+        id: code-background-dark
+        title: Customize code background (dark mode)
+        title.zh: 自定义 代码块背景（暗色模式）
+        description: Input any CSS background value
+        description.zh: 输入任意 CSS background 值
+        type: variable-text
+        default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
+    - 
+        id: Blockquote-heading
+        title: Blockquote
+        title.zh: 块引用
+        type: heading
+        collapsed: true
+        level: 3
+    - 
+        id: blockquote-background-light
+        title: Customize blockquote background (light mode)
+        title.zh: 自定义 块引用背景（亮色模式）
+        description: Input any CSS background value
+        description.zh: 输入任意 CSS background 值
+        type: variable-text
+        default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
+    - 
+        id: blockquote-background-dark
+        title: Customize blockquote background (dark mode)
+        title.zh: 自定义 块引用背景（暗色模式）
+        description: Input any CSS background value
+        description.zh: 输入任意 CSS background 值
+        type: variable-text
+        default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
 
 */
 
@@ -2863,7 +2940,8 @@ body:not(.accent-color-custom-dark) .setting-item[data-id=accent-dark],
 body:not(.table-width-customized) .setting-item[data-id=table-width],
 body.file-icon-remove .setting-item[data-id=colorful-folder],
 body.file-icon-remove .setting-item[data-id=file-icon-color-select],
-body:not(.new-tab-image-customize) .setting-item[data-id=new-tab-image] {
+body:not(.new-tab-image-customize) .setting-item[data-id=new-tab-image],
+body.line-hover-indicator-disable .setting-item[data-id=hover-indicator-color] {
     display: none;
 }
 
@@ -4625,6 +4703,35 @@ body:not(.is-mobile):not(.is-popout-window).Ribbon-autohide.mod-macos:has(.works
     transition: width var(--anim-duration-fast) var(--anim-duration-superfast) var(--anim-motion-swing);
 }
 
+/*nav header autohide*/
+body:not(.is-mobile).nav-header-autohide :is(.workspace-leaf-content, .view-content)>.nav-header {
+    height: 16px;
+    opacity: 0;
+    transition: height var(--anim-duration-moderate) var(--anim-duration-slow) var(--anim-motion-swing), opacity var(--anim-duration-moderate) var(--anim-duration-slow) var(--anim-motion-swing);
+}
+
+body:not(.is-mobile).nav-header-autohide :is(.workspace-leaf-content, .view-content)>.nav-header:hover,
+body:not(.is-mobile).nav-header-autohide .workspace-tab-header-container:hover~.workspace-tab-container :is(.workspace-leaf-content, .view-content)>.nav-header,
+body:not(.is-mobile):not(.tab-title-bar-fixed).nav-header-autohide .mod-root .workspace-leaf-content[data-type="backlink"] .view-header:hover~.view-content>.nav-header {
+    height: 44px;
+    opacity: 1;
+    transition: height var(--anim-duration-fast) var(--anim-duration-superfast) var(--anim-motion-swing), opacity var(--anim-duration-fast) var(--anim-duration-superfast) var(--anim-motion-swing);
+}
+
+body:not(.is-mobile).nav-header-autohide :is(.workspace-leaf-content, .view-content)>.nav-header .nav-buttons-container {
+    transform: translateY(-22px);
+    opacity: 0;
+    transition: transform var(--anim-duration-moderate) var(--anim-duration-slow) var(--anim-motion-swing), opacity var(--anim-duration-moderate) var(--anim-duration-slow) var(--anim-motion-swing);
+}
+
+body:not(.is-mobile).nav-header-autohide :is(.workspace-leaf-content, .view-content)>.nav-header:hover .nav-buttons-container,
+body:not(.is-mobile).nav-header-autohide .workspace-tab-header-container:hover~.workspace-tab-container :is(.workspace-leaf-content, .view-content)>.nav-header .nav-buttons-container,
+body:not(.is-mobile):not(.tab-title-bar-fixed).nav-header-autohide .mod-root .workspace-leaf-content[data-type="backlink"] .view-header:hover~.view-content>.nav-header .nav-buttons-container {
+    transform: translateY(0px);
+    opacity: 1;
+    transition: transform var(--anim-duration-fast) var(--anim-duration-superfast) var(--anim-motion-swing), opacity var(--anim-duration-fast) var(--anim-duration-superfast) var(--anim-motion-swing);
+}
+
 /* ====== workspace mod root====== */
 /* ====== stack mod===== */
 .workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container :is(.workspace-tab-header, .workspace-tab-header-inner, .view-header, .view-content) {
@@ -5126,15 +5233,6 @@ input.wb-search-bar {
 /* ====== workspace mod side====== */
 .nav-header {
     padding: var(--size-2-3);
-}
-
-.mod-left-split .workspace-leaf-content,
-.mod-right-split .workspace-leaf-content {
-    gap: var(--size-2-1);
-}
-
-.workspace-leaf-content[data-type="starred"] .item-list {
-    padding-top: 12px;
 }
 
 .nav-header~.search-input-container {
@@ -5838,8 +5936,8 @@ body:not(.setting-item-title-icon-remove):not(.is-phone) .vertical-tab-header-gr
 
     --toggle-track-shadow: var(--toggle-track-shadow-light);
     --toggle-track-hovered-shadow: var(--toggle-track-hovered-shadow-light);
-    --toggle-track-shadow-light: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 2px var(--background-primary), 0px 2px 2px rgba(0, 0, 0, 0.05);
-    --toggle-track-hovered-shadow-light: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 2px var(--background-primary), 0px 2px 2px rgba(0, 0, 0, 0.05);
+    --toggle-track-shadow-light: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 0px var(--background-primary), 0px 2px 4px rgba(0, 0, 0, 0.04);
+    --toggle-track-hovered-shadow-light: inset 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 1px 0px var(--background-primary), 0px 2px 4px rgba(0, 0, 0, 0.04);
 
     --interactive-normal: var(--interactive-normal-light);
     --interactive-hover: var(--interactive-hover-light);
@@ -5942,30 +6040,30 @@ body:not(.is-mobile) input[type=range]:focus-visible::-webkit-slider-thumb {
     border-color: var(--slider-thumb-border-color);
 }
 
-/*input*/
-textarea,
-input[type='text'],
-input[type='search'],
-input[type='email'],
-input[type='password'],
-input[type='number'] {
-    border: var(--input-border-width) solid var(--divider-color);
-}
+/* input */
 
 body:not(.is-mobile) textarea:not(.kanban-plugin__item-input, .kanban-plugin__lane-input):focus,
-body:not(.is-mobile) input[type='text']:focus,
+body:not(.is-mobile) input[type='text']:not(.mk-cell-text):focus,
 body:not(.is-mobile) input[type='search']:focus,
 body:not(.is-mobile) input[type='email']:focus,
 body:not(.is-mobile) input[type='password']:focus,
 body:not(.is-mobile) input[type='number']:focus,
 body:not(.is-mobile) textarea:not(.kanban-plugin__item-input, .kanban-plugin__lane-input):focus-visible,
-body:not(.is-mobile) input[type='text']:focus-visible,
+body:not(.is-mobile) input[type='text']:not(.mk-cell-text):focus-visible,
 body:not(.is-mobile) input[type='search']:focus-visible,
 body:not(.is-mobile) input[type='email']:focus-visible,
 body:not(.is-mobile) input[type='password']:focus-visible,
 body:not(.is-mobile) input[type='number']:focus-visible {
     border: 1px solid var(--color-accent);
     box-shadow: 0 0 0 4px var(--background-modifier-active-hover);
+}
+
+body:not(.is-mobile) input[type='search'] {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 0 4px rgba(0, 0, 0, .025);
+}
+
+body:not(.is-mobile).theme-dark input[type='search'] {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 0 4px rgba(0, 0, 0, .1);
 }
 
 .view-header input {
@@ -5976,8 +6074,8 @@ body:not(.is-mobile) input.prompt-input,
 body:not(.is-mobile) input.prompt-input:hover,
 body:not(.is-mobile) input.prompt-input:focus,
 body:not(.is-mobile) input.prompt-input:focus-visible {
-    border: none;
-    box-shadow: none;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 body:not(.is-phone) input.prompt-input,
@@ -6080,6 +6178,115 @@ input.prompt-input {
 
 body.tab-autohide .notice-container {
     top: 6px;
+}
+
+body:not(.is-mobile) .app-container::before {
+    content: "ℹ️Manually re-install obsidian to update your installer version and remove this notification.";
+    position: absolute;
+    right: 16px;
+    top: 44px;
+    background-color: var(--background-modifier-message);
+    border-radius: var(--radius-m);
+    box-shadow: 0 2px 8px var(--background-modifier-box-shadow);
+    color: #FAFAFA;
+    font-size: var(--font-ui-small);
+    line-height: var(--line-height-tight);
+    padding: 0.75em 1em 0.75em 1em;
+    max-width: 300px;
+    margin-bottom: 14px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    cursor: var(--cursor);
+    z-index: var(--layer-notice);
+    -webkit-animation: notice-slide-up 20s ease-in-out forwards;
+    animation: notice-slide-up 20s ease-in-out forwards;
+}
+
+@-webkit-keyframes notice-slide-up {
+
+    0% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+        opacity: 1;
+        z-index: var(--layer-notice);
+    }
+
+
+    98% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+        opacity: 1;
+        z-index: var(--layer-notice);
+    }
+
+
+    99% {
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+        opacity: 0;
+        z-index: var(--layer-notice);
+    }
+
+    100% {
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+
+
+@keyframes notice-slide-up {
+
+    0% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+        opacity: 1;
+        z-index: var(--layer-notice);
+    }
+
+
+    98% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+        opacity: 1;
+        z-index: var(--layer-notice);
+    }
+
+
+    99% {
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+        opacity: 0;
+        z-index: var(--layer-notice);
+    }
+
+    100% {
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+
+body:not(.is-mobile).tab-autohide .app-container::before {
+    top: 16px;
+}
+
+body:not(.is-mobile) .app-container:has(.workspace):before {
+    display: none;
+}
+
+body:not(.is-mobile):not(.css-settings-manager) .app-container::before {
+    content: "ℹ️Manually re-install obsidian to update your installer version and remove this notification. ℹ️Highly recommended for use with style settings plugin.";
+}
+
+body:not(.is-mobile):not(.css-settings-manager) .app-container:has(.workspace)::before {
+    content: "ℹ️Highly recommended for use with style settings plugin.";
+    display: unset;
 }
 
 /* tooltip */
@@ -6271,11 +6478,11 @@ body {
     --h1-indicator-color: var(--h1-color);
 }
 
-.is-live-preview .HyperMD-header .cm-header.cm-header-1 {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-1 {
     padding-left: 6px;
 }
 
-.is-live-preview .HyperMD-header-1::before {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-1::before {
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -6293,8 +6500,8 @@ body {
     position: relative;
 }
 
-.markdown-rendered h1::before,
-.markdown-preview-view h1::before {
+body:not(.heading-indicator-off) .markdown-rendered h1::before,
+body:not(.heading-indicator-off) .markdown-preview-view h1::before {
     flex-shrink: 0;
     flex-grow: 0;
     margin-right: 6px;
@@ -6355,11 +6562,11 @@ body:not(.collapse-icon-restore) .markdown-preview-view h1 .is-collapsed .collap
     --h2-indicator-color: var(--h2-color);
 }
 
-.is-live-preview .HyperMD-header .cm-header.cm-header-2 {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-2 {
     padding-left: 6px;
 }
 
-.is-live-preview .HyperMD-header-2::before {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-2::before {
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -6377,8 +6584,8 @@ body:not(.collapse-icon-restore) .markdown-preview-view h1 .is-collapsed .collap
     position: relative;
 }
 
-.markdown-rendered h2::before,
-.markdown-preview-view h2::before {
+body:not(.heading-indicator-off) .markdown-rendered h2::before,
+body:not(.heading-indicator-off) .markdown-preview-view h2::before {
     flex-shrink: 0;
     flex-grow: 0;
     margin-right: 6px;
@@ -6440,11 +6647,11 @@ body:not(.collapse-icon-restore) .markdown-preview-view h2 .is-collapsed .collap
     --h3-indicator-color: var(--h3-color);
 }
 
-.is-live-preview .HyperMD-header .cm-header.cm-header-3 {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-3 {
     padding-left: 6px;
 }
 
-.is-live-preview .HyperMD-header-3::before {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-3::before {
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -6462,8 +6669,8 @@ body:not(.collapse-icon-restore) .markdown-preview-view h2 .is-collapsed .collap
     position: relative;
 }
 
-.markdown-rendered h3::before,
-.markdown-preview-view h3::before {
+body:not(.heading-indicator-off) .markdown-rendered h3::before,
+body:not(.heading-indicator-off) .markdown-preview-view h3::before {
     flex-shrink: 0;
     flex-grow: 0;
     margin-right: 6px;
@@ -6523,11 +6730,11 @@ body:not(.collapse-icon-restore) .markdown-preview-view h3 .is-collapsed .collap
     --h4-indicator-color: var(--h4-color);
 }
 
-.is-live-preview .HyperMD-header .cm-header.cm-header-4 {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-4 {
     padding-left: 6px;
 }
 
-.is-live-preview .HyperMD-header-4::before {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-4::before {
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -6545,8 +6752,8 @@ body:not(.collapse-icon-restore) .markdown-preview-view h3 .is-collapsed .collap
     position: relative;
 }
 
-.markdown-rendered h4::before,
-.markdown-preview-view h4::before {
+body:not(.heading-indicator-off) .markdown-rendered h4::before,
+body:not(.heading-indicator-off) .markdown-preview-view h4::before {
     flex-shrink: 0;
     flex-grow: 0;
     margin-right: 6px;
@@ -6607,11 +6814,11 @@ body:not(.collapse-icon-restore) .markdown-preview-view h4 .is-collapsed .collap
     --h5-indicator-color: var(--h5-color);
 }
 
-.is-live-preview .HyperMD-header .cm-header.cm-header-5 {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-5 {
     padding-left: 6px;
 }
 
-.is-live-preview .HyperMD-header-5::before {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-5::before {
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -6630,8 +6837,8 @@ body:not(.collapse-icon-restore) .markdown-preview-view h4 .is-collapsed .collap
     position: relative;
 }
 
-.markdown-rendered h5::before,
-.markdown-preview-view h5::before {
+body:not(.heading-indicator-off) .markdown-rendered h5::before,
+body:not(.heading-indicator-off) .markdown-preview-view h5::before {
     flex-shrink: 0;
     flex-grow: 0;
     margin-right: 6px;
@@ -6693,11 +6900,11 @@ body:not(.collapse-icon-restore) .markdown-preview-view h5 .is-collapsed .collap
     --h6-indicator-color: var(--h6-color);
 }
 
-.is-live-preview .HyperMD-header .cm-header.cm-header-6 {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-6 {
     padding-left: 6px;
 }
 
-.is-live-preview .HyperMD-header-6::before {
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-6::before {
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -6715,8 +6922,8 @@ body:not(.collapse-icon-restore) .markdown-preview-view h5 .is-collapsed .collap
     position: relative;
 }
 
-.markdown-rendered h6::before,
-.markdown-preview-view h6::before {
+body:not(.heading-indicator-off) .markdown-rendered h6::before,
+body:not(.heading-indicator-off) .markdown-preview-view h6::before {
     flex-shrink: 0;
     flex-grow: 0;
     margin-right: 6px;
@@ -6851,15 +7058,22 @@ body .markdown-source-view .cm-scroller .cm-line:not(.HyperMD-codeblock) {
 }
 
 /* ====== hover indicator ====== */
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, :has(.mk-note-footer)),
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:not(.el-embed-image, .mod-header, .mod-footer, :has(.collapse-indicator, .mk-header)) {
+
+/*general*/
+
+body {
+    --hover-indicator-color: var(--color-accent);
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, :has(.mk-note-footer)),
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:not(.el-embed-image, .mod-header, .mod-footer, :has(.collapse-indicator, .mk-header)) {
     position: relative;
 }
 
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent)::after,
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, :has(.mk-note-footer, .collapse-indicator))::after,
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:is(.el-ul, .el-ol)::after,
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:not(.el-embed-image, .mod-header, .mod-footer, :has(.collapse-indicator, .mk-header))::after {
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent)::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, :has(.mk-note-footer, .collapse-indicator))::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:is(.el-ul, .el-ol)::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:not(.el-embed-image, .mod-header, .mod-footer, :has(.collapse-indicator, .mk-header))::after {
     content: "";
     position: absolute;
     left: -12px;
@@ -6867,15 +7081,91 @@ body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] 
     width: 3px;
     height: 0;
     border-radius: 10px;
-    background: var(--color-accent);
+    background: var(--hover-indicator-color);
     opacity: 1;
 }
 
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent):hover::after,
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, :has(.mk-note-footer, .collapse-indicator)):hover::after,
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:is(.el-ul, .el-ol):hover::after,
-body.line-hover-indicator-enabled .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:not(.el-embed-image, .mod-header, .mod-footer, :has(.collapse-indicator, .mk-header)):hover::after {
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent):hover::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, :has(.mk-note-footer, .collapse-indicator)):hover::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:is(.el-ul, .el-ol):hover::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .markdown-preview-sizer>div:not(.el-embed-image, .mod-header, .mod-footer, :has(.collapse-indicator, .mk-header)):hover::after {
     height: calc(100% - 6px);
+}
+
+/* num */
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:not(.HyperMD-list-line-1):after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::after {
+    background: unset !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -12px !important;
+    top: 0px !important;
+    height: 100% !important;
+    width: 3px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: var(--hover-indicator-color);
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:not(.HyperMD-list-line-1):hover::after,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end):hover:after {
+    opacity: 1 !important;
+}
+
+/* code */
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer,
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-codeblock-end {
+    counter-reset: code-line;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::after {
+    counter-increment: code-line;
+    content: counter(code-line) !important;
+}
+
+/* list */
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:not(.HyperMD-list-line-1):after {
+    content: "";
+    text-indent: 0px !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-2::after {
+    content: "2" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-3::after {
+    content: "3" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-4::after {
+    content: "4" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-5::after {
+    content: "5" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-6::after {
+    content: "6" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-7::after {
+    content: "7" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-8::after {
+    content: "8" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-9::after {
+    content: "9" !important;
+}
+
+body:not(.line-hover-indicator-disable) .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-10::after {
+    content: "10" !important;
 }
 
 /* ====== cursor color ====== */
@@ -7258,17 +7548,20 @@ body {
     --blockquote-font-style: normal;
     --blockquote-color: inherit;
     --blockquote-background-color: transparent;
+    --blockquote-background-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    --blockquote-background-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-body .markdown-source-view .cm-scroller .cm-line.HyperMD-quote,
-.markdown-rendered blockquote {
+.theme-light .markdown-source-view .cm-scroller .cm-line.HyperMD-quote,
+.theme-light .markdown-rendered blockquote {
     border-radius: var(--radius-s);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    background: var(--blockquote-background-light);
 }
 
-body.theme-dark .markdown-source-view .cm-scroller .cm-line.HyperMD-quote,
+.theme-dark .markdown-source-view .cm-scroller .cm-line.HyperMD-quote,
 .theme-dark .markdown-rendered blockquote {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    border-radius: var(--radius-s);
+    background: var(--blockquote-background-dark);
 }
 
 .markdown-rendered blockquote,
@@ -7365,17 +7658,19 @@ body {
 
 body {
     --code-background: transparent;
+    --code-background-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    --code-background-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-kbd,
-.cm-s-obsidian span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight),
-.cm-s-obsidian span.cm-inline-code,
-:not(pre)>code,
-.cm-s-obsidian div.HyperMD-codeblock-begin-bg,
-.cm-s-obsidian div.HyperMD-codeblock-end-bg,
-.cm-s-obsidian div.HyperMD-codeblock-bg,
-.markdown-rendered pre {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+.theme-light kbd,
+.theme-light .cm-s-obsidian span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight),
+.theme-light .cm-s-obsidian span.cm-inline-code,
+.theme-light :not(pre)>code,
+.theme-light .cm-s-obsidian div.HyperMD-codeblock-begin-bg,
+.theme-light .cm-s-obsidian div.HyperMD-codeblock-end-bg,
+.theme-light .cm-s-obsidian div.HyperMD-codeblock-bg,
+.theme-light .markdown-rendered pre {
+    background: var(--code-background-light);
 }
 
 .theme-dark kbd,
@@ -7386,12 +7681,12 @@ kbd,
 .theme-dark .cm-s-obsidian div.HyperMD-codeblock-end-bg,
 .theme-dark .cm-s-obsidian div.HyperMD-codeblock-bg,
 .theme-dark .markdown-rendered pre {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    background: var(--code-background-dark);
 }
 
-.cm-s-obsidian span.cm-inline-code.cm-hmd-indented-code,
-.theme-dark .cm-s-obsidian span.cm-inline-code.cm-hmd-indented-code {
-    background-image: unset;
+.theme-light .cm-s-obsidian span.cm-inline-code span.cm-inline-code.cm-hmd-indented-code,
+.theme-dark .cm-s-obsidian span.cm-inline-code span.cm-inline-code.cm-hmd-indented-code {
+    background: unset;
 }
 
 @media (hover: hover) {
@@ -7440,6 +7735,8 @@ body:not(.line-active-disable) .markdown-source-view .cm-scroller .cm-line.cm-ac
 /* ======table ====== */
 body {
     --table-header-background: transparent;
+    --table-header-background-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    --table-header-background-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
     --table-header-background-hover: var(--background-modifier-hover);
     --table-row-background-hover: var(--background-modifier-hover);
     --table-header-weight: var(--font-semibold);
@@ -7447,23 +7744,23 @@ body {
     --table-width: 88cqw;
 }
 
-.markdown-rendered thead tr {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+.theme-light .markdown-rendered thead tr {
+    background: var(--table-header-background-light);
 }
 
 @media (hover: hover) {
-    .markdown-rendered thead tr:hover {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    .theme-light .markdown-rendered thead tr:hover {
+        background: var(--table-header-background-light);
     }
 }
 
 .theme-dark .markdown-rendered thead tr {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    background: var(--table-header-background-dark);
 }
 
 @media (hover: hover) {
     .theme-dark .markdown-rendered thead tr:hover {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.16' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+        background: var(--table-header-background-dark);
     }
 }
 
@@ -7482,7 +7779,8 @@ body:not(.table-width-obsidian-default) :is(.markdown-rendered, .markdown-source
     container-type: inline-size;
 }
 
-body.table-width-customized :is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) .el-table {
+body.table-width-customized .markdown-source-view.mod-cm6.is-live-preview .cm-content>div.cm-embed-block:has(>table),
+body.table-width-customized .markdown-rendered .markdown-preview-sizer>div:has(>table) {
     overflow: auto;
     width: var(--table-width) !important;
     margin-left: calc((var(--table-width) - 100%) / -2) !important;
@@ -7491,10 +7789,14 @@ body.table-width-customized :is(.markdown-rendered, .markdown-source-view.mod-cm
 /* ===== image ====== */
 
 /*  image hover effect */
+.markdown-source-view.mod-cm6 .cm-content>.internal-embed {
+    contain: unset !important;
+}
+
 @media (hover: hover) {
 
     .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>img:hover,
-    .workspace-leaf-content[data-type="markdown"] .view-content .image-embed img:hover {
+    .workspace-leaf-content[data-type="markdown"] .view-content .cm-content .image-embed img:hover {
         outline-offset: 2px;
         outline: 2px solid var(--background-modifier-border-hover);
         border-radius: var(--radius-s);
@@ -8028,44 +8330,88 @@ body:not(.is-mobile) .workspace-leaf-content[data-type="style-settings"] .view-c
     padding-bottom: 8px;
 }
 
-.setting-item.style-settings-heading[data-id=Components] .style-settings-collapse-indicator::after {
-    content: "\1F9F1";
+.setting-item.style-settings-heading[data-id=Info] .style-settings-collapse-indicator::after {
+    content: "";
     margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='%2309244B' d='M9 1.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15ZM9 3a6 6 0 1 0 0 12A6 6 0 0 0 9 3Zm-.008 4.5c.419 0 .758.34.758.758V12.1a.75.75 0 0 1-.375 1.4h-.367a.757.757 0 0 1-.758-.758V9a.75.75 0 1 1 0-1.5h.742ZM9 5.25a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+}
+
+.setting-item.style-settings-heading[data-id=Components] .style-settings-collapse-indicator::after {
+    content: "";
+    margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M4.125 6.375 6.75 9l-2.625 2.625L1.5 9l2.625-2.625ZM9 1.5l2.625 2.625L9 6.75 6.375 4.125 9 1.5Zm4.875 4.875L16.5 9l-2.625 2.625L11.25 9l2.625-2.625ZM9 11.25l2.625 2.625L9 16.5l-2.625-2.625L9 11.25Z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
 }
 
 .setting-item.style-settings-heading[data-id=Appearance-light] .style-settings-collapse-indicator::after {
-    content: "\1F31E";
+    content: "";
     margin-left: var(--size-4-2);
-}
-
-.setting-item.style-settings-heading[data-id=Appearance-light] .style-settings-collapse-indicator .style-settings-collapse-indicator::after {
-    content: "\1F31E";
-    margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='black' d='M9 3a.726.726 0 0 1-.535-.216.723.723 0 0 1-.215-.534V1.5c0-.213.072-.391.216-.535A.723.723 0 0 1 9 .75a.73.73 0 0 1 .535.216.723.723 0 0 1 .215.534v.75c0 .212-.072.39-.216.534A.723.723 0 0 1 9 3Zm0 14.25a.726.726 0 0 1-.535-.216.723.723 0 0 1-.215-.534v-.75c0-.213.072-.391.216-.535A.723.723 0 0 1 9 15a.73.73 0 0 1 .535.216.723.723 0 0 1 .215.534v.75a.73.73 0 0 1-.216.535.723.723 0 0 1-.534.215Zm6.75-7.5a.726.726 0 0 1-.535-.216A.723.723 0 0 1 15 9c0-.213.072-.391.216-.535a.723.723 0 0 1 .534-.215h.75a.73.73 0 0 1 .535.216.723.723 0 0 1 .215.534c0 .212-.072.39-.216.534a.723.723 0 0 1-.534.216h-.75Zm-14.25 0a.726.726 0 0 1-.535-.216A.723.723 0 0 1 .75 9c0-.213.072-.391.216-.535A.723.723 0 0 1 1.5 8.25h.75a.73.73 0 0 1 .535.216A.723.723 0 0 1 3 9c0 .212-.072.39-.216.534a.723.723 0 0 1-.534.216H1.5Zm12-5.25a.688.688 0 0 1-.206-.507c0-.2.068-.38.206-.543l.262-.282a.68.68 0 0 1 .525-.225.74.74 0 0 1 .544.225.79.79 0 0 1 .235.554.638.638 0 0 1-.235.534l-.281.262a.699.699 0 0 1-.515.207.732.732 0 0 1-.535-.225ZM3.169 14.83a.784.784 0 0 1-.234-.553.645.645 0 0 1 .234-.535l.28-.262a.7.7 0 0 1 .517-.206.73.73 0 0 1 .534.225.7.7 0 0 1 .206.516.762.762 0 0 1-.206.534l-.263.281a.68.68 0 0 1-.525.225.74.74 0 0 1-.543-.225Zm10.575 0-.263-.281a.7.7 0 0 1-.206-.516.73.73 0 0 1 .225-.534.7.7 0 0 1 .516-.207c.206 0 .384.07.534.207l.281.262a.68.68 0 0 1 .225.525.74.74 0 0 1-.225.544.787.787 0 0 1-.553.235.641.641 0 0 1-.534-.235ZM3.45 4.5l-.281-.263a.68.68 0 0 1-.225-.525.74.74 0 0 1 .225-.544.787.787 0 0 1 .553-.234.638.638 0 0 1 .534.234l.263.282a.7.7 0 0 1 .206.516.728.728 0 0 1-.225.534.688.688 0 0 1-.506.206.821.821 0 0 1-.544-.206Zm5.55 9c-1.25 0-2.313-.438-3.188-1.313S4.5 10.25 4.5 9c0-1.25.437-2.313 1.312-3.188S7.75 4.5 9 4.5c1.25 0 2.312.437 3.187 1.312S13.5 7.75 13.5 9c0 1.25-.438 2.312-1.313 3.187S10.25 13.5 9 13.5ZM9 12c.837 0 1.547-.291 2.128-.873C11.71 10.546 12 9.837 12 9c0-.838-.29-1.547-.872-2.129C10.546 6.29 9.837 6 9 6c-.838 0-1.547.29-2.129.872C6.29 7.453 6 8.162 6 9c0 .837.29 1.547.872 2.128C7.454 11.71 8.162 12 9 12Z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
 }
 
 .setting-item.style-settings-heading[data-id=Appearance-dark] .style-settings-collapse-indicator::after {
-    content: "\1F31A";
+    content: "";
     margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='%2309244B' fill-rule='evenodd' d='M9.358 3.41a.758.758 0 0 1 .822-1.057A6.752 6.752 0 0 1 9 15.75a6.752 6.752 0 0 1-6.647-5.57.758.758 0 0 1 1.056-.822 4.5 4.5 0 0 0 5.949-5.949Zm1.803.803a6 6 0 0 1-6.947 6.947A5.252 5.252 0 0 0 14.25 9a5.252 5.252 0 0 0-3.09-4.787ZM4.174 5.787l.047.104c.205.423.527.779.929 1.023l.074.044a.05.05 0 0 1 0 .089l-.074.043c-.402.245-.724.6-.929 1.024l-.047.104a.053.053 0 0 1-.098 0l-.047-.104A2.445 2.445 0 0 0 3.1 7.09l-.074-.043a.05.05 0 0 1 0-.089l.074-.044c.402-.244.724-.6.929-1.023l.047-.104a.053.053 0 0 1 .098 0Zm2.123-3.644a.085.085 0 0 1 .155 0l.076.166c.326.674.84 1.24 1.478 1.629l.118.07a.081.081 0 0 1 0 .14l-.118.07a3.891 3.891 0 0 0-1.554 1.795.085.085 0 0 1-.155 0l-.076-.166a3.892 3.892 0 0 0-1.477-1.629l-.118-.07a.081.081 0 0 1 0-.14l.118-.07a3.892 3.892 0 0 0 1.477-1.629l.076-.166Z' clip-rule='evenodd'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
 }
 
 .setting-item.style-settings-heading[data-id=Editor] .style-settings-collapse-indicator::after {
-    content: "\1F4DD";
+    content: "";
     margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='%2309244B' d='M9.75 2.25a.75.75 0 0 1 .087 1.495l-.087.005h-6v10.5h10.5v-6a.75.75 0 0 1 1.495-.087l.005.087v6a1.5 1.5 0 0 1-1.388 1.496l-.112.004H3.75a1.5 1.5 0 0 1-1.496-1.388l-.004-.112V3.75a1.5 1.5 0 0 1 1.388-1.496l.112-.004h6Zm4.682.257a.75.75 0 0 1 1.123.99l-.062.071-7.425 7.425a.75.75 0 0 1-1.123-.99l.062-.07 7.425-7.425Z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
 }
 
 .setting-item.style-settings-heading[data-id=Mobile] .style-settings-collapse-indicator::after {
-    content: "\1F4F1";
+    content: "";
     margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='%2309244B' d='M12.75 1.5a1.5 1.5 0 0 1 1.496 1.388L14.25 3v12a1.5 1.5 0 0 1-1.388 1.496l-.112.004h-7.5a1.5 1.5 0 0 1-1.496-1.388L3.75 15V3a1.5 1.5 0 0 1 1.388-1.496L5.25 1.5h7.5Zm0 1.5h-7.5v12h7.5V3Zm-3.375 9c.184 0 .337.133.369.308l.006.067v.75a.375.375 0 0 1-.308.369l-.067.006h-.75a.375.375 0 0 1-.369-.308l-.006-.067v-.75c0-.184.133-.337.308-.369L8.625 12h.75Z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
 }
 
 .setting-item.style-settings-heading[data-id=Plugin] .style-settings-collapse-indicator::after {
-    content: "\1F9E9";
+    content: "";
     margin-left: var(--size-4-2);
-}
-
-.setting-item.style-settings-heading[data-id=Info] .style-settings-collapse-indicator::after {
-    content: "\2139";
-    margin-left: var(--size-4-2);
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-muted);
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3e%3cg clip-path='url(%23a)'%3e%3cpath fill='black' fill-rule='evenodd' d='M7.875 3a1.104 1.104 0 0 0-.988 1.597l.122.244a.8.8 0 0 1-.717 1.158H3.75a.75.75 0 0 0-.75.75v.896c1.365-.082 2.625.998 2.625 2.48 0 1.48-1.26 2.56-2.625 2.479v1.645a.75.75 0 0 0 .75.75h1.645c-.081-1.365.999-2.625 2.48-2.625 1.481 0 2.561 1.26 2.48 2.625h.895a.75.75 0 0 0 .75-.75v-2.542a.801.801 0 0 1 1.159-.717l.243.122a1.105 1.105 0 1 0 0-1.975l-.243.122a.8.8 0 0 1-1.16-.717V6.749a.75.75 0 0 0-.75-.75H9.458a.801.801 0 0 1-.717-1.158l.123-.244a1.104 1.104 0 0 0-.988-1.598ZM5.298 4.5c-.237-1.513.922-3 2.577-3 1.654 0 2.814 1.487 2.577 3h.798a2.25 2.25 0 0 1 2.25 2.25v.797c1.513-.237 3 .923 3 2.577s-1.487 2.814-3 2.577v1.548a2.25 2.25 0 0 1-2.25 2.25H9.445a.794.794 0 0 1-.732-1.11l.063-.147a.981.981 0 1 0-1.803 0l.064.148a.796.796 0 0 1-.732 1.11H3.75a2.25 2.25 0 0 1-2.25-2.25v-2.556a.796.796 0 0 1 1.11-.732l.148.064a.982.982 0 0 0 1.25-1.367.981.981 0 0 0-1.25-.436l-.149.064a.796.796 0 0 1-1.11-.732V6.749A2.25 2.25 0 0 1 3.75 4.5h1.549Z' clip-rule='evenodd'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='a'%3e%3cpath fill='white' d='M0 0h18v18H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
 }
 
 
