@@ -106,7 +106,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 333.5
+    "width": 307.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -195,7 +195,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 309.5
+    "width": 299.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -210,6 +210,10 @@
   },
   "active": "7db4552e0dcc3970",
   "lastOpenFiles": [
+    "Books/_png/Pasted image 20230302200938.png",
+    "Books/_png/Pasted image 20230302200922.png",
+    "Books/_png/Pasted image 20230302200558.png",
+    "Books/_png",
     "Books/Создание микросервиссов - Сэм Ньюмэн.md",
     "Books/Чистый код/Чистый Код - Роберт Мартин.md",
     "Books/Чистый код/_lessons/Содержательные имена.md",
@@ -239,12 +243,9 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Новый проект и работа с сервером.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/02 Настройка окружения.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/01 Введение.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227153035.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227151702.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227151649.png",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227150038.png",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227145704.png",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227145223.png"
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230227150038.png"
   ]
 }
