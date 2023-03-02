@@ -103,22 +103,6 @@
         }
       }
     },
-    "firstLevelMenu": {
-      "firstLevelMenu": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675093622937
-        }
-      }
-    },
-    "try-catch": {
-      "try-catch": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675093254850
-        }
-      }
-    },
     "Computer Science": {
       "Computer Science": {
         "internalLink": {
@@ -1488,6 +1472,30 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677688140413
+        }
+      }
+    },
+    "RandomChar": {
+      "RandomChar": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677771750867
+        }
+      }
+    },
+    "getCharacter": {
+      "getCharacter": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677771912956
+        }
+      }
+    },
+    "_transformCharacter": {
+      "_transformCharacter": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677771953342
         }
       }
     }
