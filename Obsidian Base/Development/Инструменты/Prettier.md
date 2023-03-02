@@ -10,15 +10,28 @@ npm install --global prettier
 
 Настройки ==prettier==:
 
+- `tabWidth` - ширина табуляции
+- `useTabs` - использовать табы
+- `singleQuote` - одинарные ковычки  
+- `jsxSingleQuote` - одинарные кавычки в jsx
+- `arrowParens` - если в стрелочной функции один аргумент, то его нужно удалять
+- `semi` - точка с запятой в конце
+- `trailingComma` - ставить запятую в конце (у объектов)
+- `printWidth` - максимальная длина строки
+- `bracketSpacing` - будет оставлять по пробелу отступов внутри объектов `{ имя }`
+- `endOfLine` - окончание строк будет оставаться по умолчанию
+
 ```JSON
 {  
-  "tabWidth": 4, // ширина табуляции  
-  "singleQuote": true, // одинарные ковычки  
-  "jsxSingleQuote": true, //  одинарные кавычки в jsx
-  "arrowParens": "avoid", // если в стрелочной функции один аргумент, то его нужно удалять  
-  "semi": true, // точка с запятой в конце  
-  "trailingComma": "all", // ставить точку с запятов в конце  
-  "useTabs": true  /* использовать табы */
+  "useTabs": true,  
+  "tabWidth": 4,  
+  "printWidth": 100,  
+  "trailingComma": "all",  
+  "singleQuote": true,  
+  "jsxSingleQuote": true,  
+  "semi": true,  
+  "bracketSpacing": true,  
+  "endOfLine": "auto"  
 }
 ```
 
