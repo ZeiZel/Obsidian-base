@@ -1498,6 +1498,22 @@
           "lastUpdated": 1677771953342
         }
       }
+    },
+    "onCharLoaded": {
+      "onCharLoaded": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677772240559
+        }
+      }
+    },
+    "sliceDescription": {
+      "sliceDescription": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677772351860
+        }
+      }
     }
   }
 }
