@@ -1546,6 +1546,30 @@
           "lastUpdated": 1677843651479
         }
       }
+    },
+    "componentDidMount": {
+      "componentDidMount": {
+        "currentFile": {
+          "count": 5,
+          "lastUpdated": 1677848241591
+        }
+      }
+    },
+    "componentDidUpdate": {
+      "componentDidUpdate": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677846514562
+        }
+      }
+    },
+    "componentWillUnmount": {
+      "componentWillUnmount": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677846528469
+        }
+      }
     }
   }
 }
