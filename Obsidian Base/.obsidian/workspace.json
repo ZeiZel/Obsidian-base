@@ -54,9 +54,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "b4f0ec0b9c5ab53d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Инструменты/VSCode.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -85,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "prettier",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -102,8 +114,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -123,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Books/Грокаем алгоритмы.md",
+                "file": "Development/Инструменты/VSCode.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -140,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Books/Грокаем алгоритмы.md",
+                "file": "Development/Инструменты/VSCode.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -163,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Books/Грокаем алгоритмы.md"
+                "file": "Development/Инструменты/VSCode.md"
               }
             }
           },
@@ -210,11 +221,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "7db4552e0dcc3970",
+  "active": "b4f0ec0b9c5ab53d",
   "lastOpenFiles": [
+    "Books/Грокаем алгоритмы.md",
+    "Development/Инструменты/VSCode.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/004 Хороший тон приложения (спиннер, ошибки...).md",
-    "Books/Грокаем алгоритмы.md",
     "Development/Инструменты/Prettier.md",
     "Books/_png/Pasted image 20230302200938.png",
     "Books/_png/Pasted image 20230302200922.png",
