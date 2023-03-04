@@ -1527,6 +1527,22 @@
           "lastUpdated": 1677945389250
         }
       }
+    },
+    "charId": {
+      "charId": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677947584151
+        }
+      }
+    },
+    "charInfo": {
+      "charInfo": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677947586397
+        }
+      }
     }
   }
 }
