@@ -1,6 +1,8 @@
 {
   "strategy": "default",
+  "cedictPath": "./cedict_ts.u8",
   "matchStrategy": "prefix",
+  "fuzzyMatch": true,
   "maxNumberOfSuggestions": 10,
   "maxNumberOfWordsAsPhrase": 3,
   "minNumberOfCharactersTriggered": 0,
@@ -10,6 +12,11 @@
   "disableSuggestionsDuringImeOn": false,
   "insertAfterCompletion": true,
   "firstCharactersDisableSuggestions": ":/^",
+  "useCommonPrefixCompletionOfSuggestion": false,
+  "patternsToSuppressTrigger": [
+    "^~~~.*",
+    "^```.*"
+  ],
   "showMatchStrategy": false,
   "showComplementAutomatically": false,
   "showIndexingStatus": false,
@@ -38,6 +45,12 @@
   "enableInternalLinkComplement": true,
   "suggestInternalLinkWithAlias": false,
   "excludeInternalLinkPathPrefixPatterns": "",
+  "updateInternalLinksOnSave": true,
+  "insertAliasTransformedFromDisplayedInternalLink": {
+    "enabled": false,
+    "beforeRegExp": "",
+    "after": ""
+  },
   "enableFrontMatterComplement": true,
   "frontMatterComplementMatchStrategy": "inherit",
   "insertCommaAfterFrontMatterCompletion": false,
@@ -47,14 +60,6 @@
   },
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "NextJS": {
-      "NextJS": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1675271335232
-        }
-      }
-    },
     "interface": {
       "interface": {
         "currentFile": {
@@ -111,91 +116,11 @@
         }
       }
     },
-    "микросервис": {
-      "микросервис": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675235284756
-        }
-      }
-    },
-    "Микросервисы": {
-      "Микросервисы": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675235353474
-        }
-      }
-    },
-    "бизнес-задачам": {
-      "бизнес-задачам": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675268318570
-        }
-      }
-    },
-    "Монорепозиторий": {
-      "Монорепозиторий": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675269136891
-        }
-      }
-    },
     "микросервисов": {
       "микросервисов": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677078423927
-        }
-      }
-    },
-    "монорепозиторием": {
-      "монорепозиторием": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1675271323546
-        }
-      }
-    },
-    "поддерживать": {
-      "поддерживать": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675271452809
-        }
-      }
-    },
-    "top-page": {
-      "top-page": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675322717715
-        }
-      }
-    },
-    "Tslint": {
-      "Tslint": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675316492409
-        }
-      }
-    },
-    "перенаправить": {
-      "перенаправить": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675317954190
-        }
-      }
-    },
-    "controller": {
-      "controller": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675323707243
         }
       }
     },
@@ -1106,8 +1031,8 @@
     "компоненте": {
       "компоненте": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676783108062
+          "count": 2,
+          "lastUpdated": 1677944945410
         }
       }
     },
@@ -1568,6 +1493,38 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1677846528469
+        }
+      }
+    },
+    "selectedChar": {
+      "selectedChar": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677944961733
+        }
+      }
+    },
+    "onSelectedChar": {
+      "onSelectedChar": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677944986970
+        }
+      }
+    },
+    "charList": {
+      "charList": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677944999188
+        }
+      }
+    },
+    "updateChar": {
+      "updateChar": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677945389250
         }
       }
     }
