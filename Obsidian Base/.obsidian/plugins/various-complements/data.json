@@ -1543,6 +1543,22 @@
           "lastUpdated": 1677947586397
         }
       }
+    },
+    "component": {
+      "component": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677947859529
+        }
+      }
+    },
+    "componentDidCatch": {
+      "componentDidCatch": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1677947861205
+        }
+      }
     }
   }
 }
