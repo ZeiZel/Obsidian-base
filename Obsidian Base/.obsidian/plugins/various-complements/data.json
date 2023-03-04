@@ -1547,16 +1547,24 @@
     "component": {
       "component": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677947859529
+          "count": 3,
+          "lastUpdated": 1677949790681
         }
       }
     },
     "componentDidCatch": {
       "componentDidCatch": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677947861205
+          "count": 2,
+          "lastUpdated": 1677950166021
+        }
+      }
+    },
+    "ErrorBoundary": {
+      "ErrorBoundary": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1677950249086
         }
       }
     }
