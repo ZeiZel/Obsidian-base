@@ -879,8 +879,8 @@
     "display": {
       "display": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676647536165
+          "count": 2,
+          "lastUpdated": 1678002538473
         }
       }
     },
@@ -1547,8 +1547,8 @@
     "component": {
       "component": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1677949790681
+          "count": 4,
+          "lastUpdated": 1678002711152
         }
       }
     },
@@ -1573,6 +1573,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1677993494185
+        }
+      }
+    },
+    "disabled": {
+      "disabled": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678002540120
         }
       }
     }
