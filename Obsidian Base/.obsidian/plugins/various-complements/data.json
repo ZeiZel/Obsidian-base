@@ -132,91 +132,11 @@
         }
       }
     },
-    "useClass": {
-      "useClass": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675432637212
-        }
-      }
-    },
     "@Injectable": {
       "@Injectable": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677075857680
-        }
-      }
-    },
-    "GenerateSrvice": {
-      "GenerateSrvice": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675433415343
-        }
-      }
-    },
-    "forRoot": {
-      "forRoot": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675433757941
-        }
-      }
-    },
-    "version": {
-      "version": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438888019
-        }
-      }
-    },
-    "container_name": {
-      "container_name": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438930745
-        }
-      }
-    },
-    "restart": {
-      "restart": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438940568
-        }
-      }
-    },
-    "environment": {
-      "environment": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438944128
-        }
-      }
-    },
-    "ports": {
-      "ports": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438947223
-        }
-      }
-    },
-    "volumes": {
-      "volumes": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438951200
-        }
-      }
-    },
-    "command": {
-      "command": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675438954663
         }
       }
     },
@@ -1605,6 +1525,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678026563825
+        }
+      }
+    },
+    "воспользоваться": {
+      "воспользоваться": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678093873538
         }
       }
     }
