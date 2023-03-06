@@ -37,7 +37,7 @@ class Counter extends Component {
                 </button>
                 
                 {/* тут мы вызваем рендер одного компонента внутри другого и передаём в него нужный пропс */}
-                {this.props.some(this.state.counter)}
+                {this.props.render(this.state.counter)}
             </>
         )
     }
@@ -48,7 +48,7 @@ function App() {
     <Wrapper>
     
 		{/* тут мы используем подход, когда независимый компонент передаёт состояние в другой независимый компонент */}
-        <Counter some={counter => (
+        <Counter render={counter => (
             <Message counter={counter}/>
         )}/>
 
@@ -76,3 +76,10 @@ function App() {
 export default App;
 ```
 
+
+
+![](_png/Pasted%20image%2020230306164617.png)
+
+
+>[!note] Такой подход называется Render-props, когда мы передаём внутрь одного компонента в качестве пропса другой компонент на отрисовку
+> - При таком подходе мы передаём в компонент функцию, которая при вызове возвращает вёрстку и на вход принимает аргументы от родителя 
