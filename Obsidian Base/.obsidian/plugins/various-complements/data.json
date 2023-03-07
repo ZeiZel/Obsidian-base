@@ -164,22 +164,6 @@
         }
       }
     },
-    "NestJS": {
-      "NestJS": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675519726936
-        }
-      }
-    },
-    "priceRu": {
-      "priceRu": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675528686505
-        }
-      }
-    },
     "Advantages": {
       "Advantages": {
         "currentFile": {
@@ -351,8 +335,8 @@
     "useState": {
       "useState": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1676129080847
+          "count": 4,
+          "lastUpdated": 1678205977602
         }
       }
     },
@@ -1525,6 +1509,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678117708617
+        }
+      }
+    },
+    "autoplay": {
+      "autoplay": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678205067738
+        }
+      }
+    },
+    "колбэк-функцию": {
+      "колбэк-функцию": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678206453818
         }
       }
     }
