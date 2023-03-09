@@ -95,8 +95,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 11,
-          "lastUpdated": 1678258393355
+          "count": 13,
+          "lastUpdated": 1678377182962
         }
       }
     },
@@ -180,14 +180,6 @@
         }
       }
     },
-    "outline-color": {
-      "outline-color": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675669589121
-        }
-      }
-    },
     "Textarea": {
       "Textarea": {
         "currentFile": {
@@ -201,46 +193,6 @@
         "currentFile": {
           "count": 3,
           "lastUpdated": 1676291880741
-        }
-      }
-    },
-    "index": {
-      "index": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675675391374
-        }
-      }
-    },
-    "TopPage": {
-      "TopPage": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675678003388
-        }
-      }
-    },
-    "product": {
-      "product": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675682349899
-        }
-      }
-    },
-    "width": {
-      "width": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675774640538
-        }
-      }
-    },
-    "height": {
-      "height": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675774642708
         }
       }
     },
@@ -1307,8 +1259,8 @@
     "componentDidMount": {
       "componentDidMount": {
         "currentFile": {
-          "count": 6,
-          "lastUpdated": 1678258246839
+          "count": 8,
+          "lastUpdated": 1678377041897
         }
       }
     },
