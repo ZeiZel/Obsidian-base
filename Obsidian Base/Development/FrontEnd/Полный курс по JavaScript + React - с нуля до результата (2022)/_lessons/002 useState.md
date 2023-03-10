@@ -109,7 +109,7 @@ const SliderFunction = (props) => {
 					</button>
 					<button
 						className='btn btn-primary me-2'
-						// изменяем состояние слайдера через встроенную функцию
+			// изменяем состояние слайдера через встроенную функцию
 						onClick={() => setSlide(slide + 1)}
 					>
 						+1

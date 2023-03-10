@@ -80,7 +80,6 @@
   "Components@@tab-autohide": false,
   "Components@@Ribbon-autohide": false,
   "Components@@status-bar-autohide": false,
-  "Components@@CTA-BTN-disable": true,
   "Components@@file-names-untrim": true,
   "Components@@folder-font-bold": true,
   "Components@@file-icon-remove": false,
@@ -92,5 +91,9 @@
   "Appearance-dark@@card-layout-open-dark": true,
   "Appearance-dark@@theme-dark-style-select": "theme-dark-background-default",
   "Editor@@line-active-bg-color": "line-active-bg-color-default",
-  "Editor@@file-line-width-customize": "1070px"
+  "Editor@@file-line-width": "1020px",
+  "Components@@tab-title-bar-fixed": true,
+  "Components@@nav-header-autohide": false,
+  "Components@@CTA-BTN-enable": false,
+  "Mobile@@card-layout-pad-open": false
 }
