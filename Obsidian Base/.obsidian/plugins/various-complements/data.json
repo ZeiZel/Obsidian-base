@@ -95,8 +95,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 13,
-          "lastUpdated": 1678377182962
+          "count": 14,
+          "lastUpdated": 1678429084961
         }
       }
     },
@@ -1421,6 +1421,14 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1678426640492
+        }
+      }
+    },
+    "возвращает": {
+      "возвращает": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678428500878
         }
       }
     }
