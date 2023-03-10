@@ -95,8 +95,8 @@
     "useEffect": {
       "useEffect": {
         "currentFile": {
-          "count": 15,
-          "lastUpdated": 1678430253248
+          "count": 16,
+          "lastUpdated": 1678433648737
         }
       }
     },
@@ -191,8 +191,8 @@
     "textarea": {
       "textarea": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1676291880741
+          "count": 4,
+          "lastUpdated": 1678434463590
         }
       }
     },
@@ -1429,6 +1429,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678428500878
+        }
+      }
+    },
+    "ДОМ-элементам": {
+      "ДОМ-элементам": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678433586857
+        }
+      }
+    },
+    "current": {
+      "current": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678433667812
         }
       }
     }
