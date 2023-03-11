@@ -100,14 +100,6 @@
         }
       }
     },
-    "Computer Science": {
-      "Computer Science": {
-        "internalLink": {
-          "count": 2,
-          "lastUpdated": 1675840247264
-        }
-      }
-    },
     "микросервисов": {
       "микросервисов": {
         "currentFile": {
@@ -204,35 +196,11 @@
         }
       }
     },
-    "ReviewProps": {
-      "ReviewProps": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675840718977
-        }
-      }
-    },
-    "ReviewModel": {
-      "ReviewModel": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675840722133
-        }
-      }
-    },
     "useState": {
       "useState": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1678205977602
-        }
-      }
-    },
-    "Element": {
-      "Element": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675928296110
+          "count": 5,
+          "lastUpdated": 1678530061037
         }
       }
     },
