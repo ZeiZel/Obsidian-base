@@ -76,14 +76,6 @@
         }
       }
     },
-    "ReactNode": {
-      "ReactNode": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1675935354690
-        }
-      }
-    },
     "layout": {
       "layout": {
         "currentFile": {
@@ -209,38 +201,6 @@
         "currentFile": {
           "count": 4,
           "lastUpdated": 1676035997480
-        }
-      }
-    },
-    "HTMLAttributes": {
-      "HTMLAttributes": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675935160576
-        }
-      }
-    },
-    "children": {
-      "children": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675935350146
-        }
-      }
-    },
-    "Свойства": {
-      "Свойства": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1675940503619
-        }
-      }
-    },
-    "localeCompare": {
-      "localeCompare": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676003756675
         }
       }
     },
@@ -1413,6 +1373,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678433667812
+        }
+      }
+    },
+    "validateInput": {
+      "validateInput": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678604570076
+        }
+      }
+    },
+    "colorInput": {
+      "colorInput": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678606103009
         }
       }
     }
