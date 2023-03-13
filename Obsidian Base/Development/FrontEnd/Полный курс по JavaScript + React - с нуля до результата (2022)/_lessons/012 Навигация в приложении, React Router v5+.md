@@ -134,6 +134,37 @@ export default AppHeader;
 
 ![](_png/Pasted%20image%2020230313104540.png)![](_png/Pasted%20image%2020230313104538.png)
 
+Так же мы имеем функцию `redirect`, которая при определённых условиях позволяет заредиректить пользователя (например, если он не залогинен или определённой ссылки не существует)
+
+```JS
+import { redirect } from "react-router-dom";
+
+const loader = async () => {
+  const user = await getUser();
+  if (!user) {
+    return redirect("/login");
+  }
+  return null;
+};
+```
+
+Так же мы имеем атрибут `NavLink`, который позволяет нам стилизовать активную ссылку
+
+```JS
+import { NavLink } from "react-router-dom";
+
+<NavLink
+  to="/messages"
+  className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "active" : ""
+  }
+>
+  Messages
+</NavLink>;
+```
+
+
+
 
 
 
