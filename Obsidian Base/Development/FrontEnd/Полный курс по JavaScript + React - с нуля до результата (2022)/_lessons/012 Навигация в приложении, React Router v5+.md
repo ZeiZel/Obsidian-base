@@ -195,6 +195,106 @@ const AppHeader = () => {
 
 ![](_png/Pasted%20image%2020230313115234.png)
 
+И далее мы можем вынести страницы в отдельные компоненты и поместить их в папку `pages`
+
+`src > components > pages > ComicsList.js`
+```JS
+import React from 'react';
+import AppBanner from '../appBanner/AppBanner';
+import ComicsList from '../comicsList/ComicsList';
+
+const ComicsPage = () => {
+	return (
+		<>
+			<AppBanner />
+			<ComicsList />
+		</>
+	);
+};
+
+export default ComicsPage;
+```
+
+`src > components > pages > MainPage.js`
+```JS
+import React, { useState } from 'react';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import RandomChar from '../randomChar/RandomChar';
+import CharList from '../charList/CharList';
+import CharInfo from '../charInfo/CharInfo';
+import decoration from '../../resources/img/vision.png';
+
+const MainPage = () => {
+	const [selectedChar, setSelectedChar] = useState(null);
+
+	const onCharSelected = (id) => {
+		setSelectedChar(id);
+	};
+
+	return (
+		<>
+			<ErrorBoundary>
+				<RandomChar />
+			</ErrorBoundary>
+			<div className='char__content'>
+				<ErrorBoundary>
+					<CharList onCharSelected={onCharSelected} />
+				</ErrorBoundary>
+				<ErrorBoundary>
+					<CharInfo charId={selectedChar} />
+				</ErrorBoundary>
+			</div>
+			<img className='bg-decoration' src={decoration} alt='vision' />
+		</>
+	);
+};
+
+export default MainPage;
+```
+
+А далее экспортировать их через `index.js`, который сократит до них путь
+
+`src > components > pages > index.js`
+```JS
+import MainPage from './MainPage';
+import ComicsPage from './ComicsPage';
+
+export { MainPage, ComicsPage };
+```
+
+И тут используем импорт
+
+`src > components > app > App.js`
+```JS
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import AppHeader from '../appHeader/AppHeader';
+// импортируем страницы из одного файла
+import { ComicsPage, MainPage } from '../pages';
+
+const App = () => {
+	return (
+		<Router>
+			<div className='app'>
+				<AppHeader />
+				<main>
+					<Switch>
+						<Route exact path={'/'}>
+							<MainPage />
+						</Route>
+						<Route exact path={'/comics'}>
+							<ComicsPage />
+						</Route>
+					</Switch>
+				</main>
+			</div>
+		</Router>
+	);
+};
+
+export default App;
+```
+
 
 
 
