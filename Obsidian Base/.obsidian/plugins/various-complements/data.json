@@ -135,8 +135,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 33,
-          "lastUpdated": 1678697361144
+          "count": 37,
+          "lastUpdated": 1678714349989
         }
       }
     },
@@ -247,8 +247,8 @@
     "service": {
       "service": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676128133516
+          "count": 2,
+          "lastUpdated": 1678713937969
         }
       }
     },
@@ -1323,8 +1323,8 @@
     "marvel": {
       "marvel": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678631334634
+          "count": 2,
+          "lastUpdated": 1678713940815
         }
       }
     },
@@ -1371,8 +1371,8 @@
     "comics": {
       "comics": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678701015029
+          "count": 3,
+          "lastUpdated": 1678713847120
         }
       }
     },
@@ -1389,6 +1389,30 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678701793744
+        }
+      }
+    },
+    "comicsList": {
+      "comicsList": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1678714320952
+        }
+      }
+    },
+    "appHeader": {
+      "appHeader": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1678714332836
+        }
+      }
+    },
+    "pages": {
+      "pages": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678714351772
         }
       }
     }
