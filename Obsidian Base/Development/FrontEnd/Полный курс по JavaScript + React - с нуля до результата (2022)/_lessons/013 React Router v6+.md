@@ -62,9 +62,11 @@ const AppHeader = () => {
 				<ul>
 					<li>
 						<NavLink
+							// вставляем вместо exact
 							end
+							// можно так передать стили
 							style={({ isActive }) => 
-								(isActive ? { color: '#9F0013' } : {})}
+								({ color: isActive ? '#9F0013' : 'inherit' })}
 							to={'/'}
 						>
 							Characters
@@ -74,6 +76,7 @@ const AppHeader = () => {
 					<li>
 						<NavLink
 							end
+							// а можно так
 							style={({ isActive }) => 
 								(isActive ? { color: '#9F0013' } : {})}
 							to={'/comics'}
