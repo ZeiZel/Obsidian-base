@@ -18,6 +18,7 @@ npm i react-router-dom@5.3.4
 - В `BrowserRouter` (который переименовали в `Router`) поместим всё наше приложение
 - А в отдельный `Route` поместим компоненты, которые должны рендериться на отдельной странице
 
+`components > app > App.js`
 ```JS
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -148,22 +149,51 @@ const loader = async () => {
 };
 ```
 
-Так же мы имеем атрибут `NavLink`, который позволяет нам стилизовать активную ссылку. Его особенностью является наличие атрибута `ActiveStyle` 
+Так же мы имеем атрибут `NavLink`, который позволяет нам стилизовать активную ссылку. Его особенностью является наличие атрибута `activeStyle` 
 
+Однако, когда мы добавляем стили для наших элементов, стоит добавлять атрибут `exact`, чтобы стили применялись не ко всем элементам сразу, а только к нужным
+
+`components > appHeader > AppHeader.js`
 ```JS
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from 'react-router-dom';
 
-<NavLink
-  to="/messages"
-  className={({ isActive, isPending }) =>
-    isPending ? "pending" : isActive ? "active" : ""
-  }
->
-  Messages
-</NavLink>;
+const AppHeader = () => {
+	return (
+		<header className='app__header'>
+			<h1 className='app__title'>
+				<Link to={'/'}>
+					<span>Marvel</span> information portal
+				</Link>
+			</h1>
+			<nav className='app__menu'>
+				<ul>
+					<li>
+						<NavLink 
+							exact 
+							activeStyle={{ color: '#9F0013' }} 
+							to={'/'}
+						>	
+							Characters
+						</NavLink>
+					</li>
+					/
+					<li>
+						<NavLink 
+							exact 
+							activeStyle={{ color: '#9F0013' }} 
+							to={'/comics'}
+						>
+							Comics
+						</NavLink>
+					</li>
+				</ul>
+			</nav>
+		</header>
+	);
+};
 ```
 
-
+![](_png/Pasted%20image%2020230313115234.png)
 
 
 
