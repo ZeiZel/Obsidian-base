@@ -196,78 +196,6 @@
         }
       }
     },
-    "className": {
-      "className": {
-        "currentFile": {
-          "count": 4,
-          "lastUpdated": 1676035997480
-        }
-      }
-    },
-    "Posts": {
-      "Posts": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676034187129
-        }
-      }
-    },
-    "sortPosts": {
-      "sortPosts": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676034384146
-        }
-      }
-    },
-    "sortedAndSearchedPosts": {
-      "sortedAndSearchedPosts": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676034317313
-        }
-      }
-    },
-    "PostList": {
-      "PostList": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676091533258
-        }
-      }
-    },
-    "IFilter": {
-      "IFilter": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676034740569
-        }
-      }
-    },
-    "setFilter": {
-      "setFilter": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676034681498
-        }
-      }
-    },
-    "TransitionGroup": {
-      "TransitionGroup": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676091956983
-        }
-      }
-    },
-    "CSSTransition": {
-      "CSSTransition": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676091967724
-        }
-      }
-    },
     "представлен": {
       "представлен": {
         "currentFile": {
@@ -1413,6 +1341,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678631878288
+        }
+      }
+    },
+    "AppHeader": {
+      "AppHeader": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1678693441625
+        }
+      }
+    },
+    "BrowserRouter": {
+      "BrowserRouter": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678693659593
         }
       }
     }
