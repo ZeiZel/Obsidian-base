@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Навигация в приложении, React Router v5+.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Навигация в приложении, React Router v5+.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Навигация в приложении, React Router v5+.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Навигация в приложении, React Router v5+.md"
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md"
               }
             }
           },
@@ -207,6 +207,10 @@
   },
   "active": "5f1771caf571935b",
   "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313130658.png",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313124515.png",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Навигация в приложении, React Router v5+.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313115234.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313104540.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313104538.png",
@@ -216,9 +220,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313103402.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313103346.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313102913.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313102910.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230313095231.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/011 (д) useTransition, useDeferredValue и другие нововведения React 18+.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/010 Что такое batching и как он работает в React 18+.md",
@@ -242,7 +243,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Render-props паттерн.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 Что такое ref и зачем он нужен.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/014 Порталы.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/010 Вставка элементов через props.children.md",
     "Books/_png"
   ]
 }

@@ -1367,6 +1367,30 @@
           "lastUpdated": 1678697391400
         }
       }
+    },
+    "comics": {
+      "comics": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678701015029
+        }
+      }
+    },
+    "deadpool": {
+      "deadpool": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678701017463
+        }
+      }
+    },
+    "NavLink": {
+      "NavLink": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678701793744
+        }
+      }
     }
   }
 }
