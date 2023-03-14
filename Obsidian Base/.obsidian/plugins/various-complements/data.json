@@ -1327,6 +1327,30 @@
           "lastUpdated": 1678804627181
         }
       }
+    },
+    "Component": {
+      "Component": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1678809128957
+        }
+      }
+    },
+    "shouldComponentUpdate": {
+      "shouldComponentUpdate": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1678809135645
+        }
+      }
+    },
+    "PureComponent": {
+      "PureComponent": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678809108039
+        }
+      }
     }
   }
 }
