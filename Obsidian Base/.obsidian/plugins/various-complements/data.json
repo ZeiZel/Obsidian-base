@@ -135,8 +135,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 37,
-          "lastUpdated": 1678714349989
+          "count": 38,
+          "lastUpdated": 1678801309233
         }
       }
     },
@@ -196,38 +196,6 @@
         }
       }
     },
-    "представлен": {
-      "представлен": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676094819332
-        }
-      }
-    },
-    "дополнительное": {
-      "дополнительное": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676095420470
-        }
-      }
-    },
-    "fetchPosts": {
-      "fetchPosts": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676121059754
-        }
-      }
-    },
-    "useFetching": {
-      "useFetching": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1676128288593
-        }
-      }
-    },
     "jsonplaceholder": {
       "jsonplaceholder": {
         "currentFile": {
@@ -236,83 +204,11 @@
         }
       }
     },
-    "utilities": {
-      "utilities": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676128112211
-        }
-      }
-    },
     "service": {
       "service": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1678713937969
-        }
-      }
-    },
-    "getPageCount": {
-      "getPageCount": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676128308722
-        }
-      }
-    },
-    "setTotalPages": {
-      "setTotalPages": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676128327630
-        }
-      }
-    },
-    "changePage": {
-      "changePage": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676129293064
-        }
-      }
-    },
-    "избежать": {
-      "избежать": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676129130985
-        }
-      }
-    },
-    "DOM-дерева": {
-      "DOM-дерева": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676129142906
-        }
-      }
-    },
-    "Pages": {
-      "Pages": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676131323379
-        }
-      }
-    },
-    "Pagination": {
-      "Pagination": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676131328413
-        }
-      }
-    },
-    "return": {
-      "return": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676182562447
         }
       }
     },
@@ -1413,6 +1309,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1678714351772
+        }
+      }
+    },
+    "default": {
+      "default": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678800087047
         }
       }
     }
