@@ -291,12 +291,86 @@ function App() {
 export default App;
 ```
 
+- Таким образом можно изменить состояние через функцию, переданную внутри контекста
+- Теперь нам везде так же нужно передавать функцию `forceChangeMail` (меняет стейт), чтобы не было ошибок
+
+```JS
+/// Input.js
+export const Input = (props) => {
+	// подписываемся на определённый контекст
+	const context = useContext(dataContext);
+
+	return (
+		<input
+			value={context.mail}
+			type='email'
+			className='form-control'
+			id='exampleFormControlInput1'
+			placeholder='name@example.com'
+			// при фокусе будет меняться состояние
+			onFocus={context.forceChangeMail}
+		/>
+	);
+};
 
 
+/// App.js
+const { Provider } = dataContext;
 
+function App() {
+	const [data, setData] = useState({
+		mail: 'name@example.com',
+		text: 'some text',
+		forceChangeMail, // здесь передаём функцию
+	});
 
+	// функция будет менять данные в стейте при фокусе
+	function forceChangeMail() {
+		setData({ ...data, mail: 'changed@mail.com' });
+	}
 
+	return (
+		<Provider value={data}>
+			<Form text={data.text} />
+			<button
+				onClick={() =>
+					setData({
+						mail: 'name@example.com',
+						text: 'another text',
+						forceChangeMail, // здесь передаём функцию
+					})
+				}
+			>
+				Click me
+			</button>
+		</Provider>
+	);
+}
+```
 
+![](_png/Pasted%20image%2020230315131336.png)
+![](_png/Pasted%20image%2020230315131338.png)
 
+Так же нужно сказать, что если мы в `Provider` не передаём атрибут `value`, то он будет равняться `undefind`, что вызовет ошибки
+
+![](_png/Pasted%20image%2020230315132352.png)
+
+![](_png/Pasted%20image%2020230315132342.png)
+
+Однако, если убрать провайдера, то мы будем получать данные по умолчанию из контекста
+
+![](_png/Pasted%20image%2020230315132457.png)
+
+![](_png/Pasted%20image%2020230315132423.png)
+
+![](_png/Pasted%20image%2020230315132419.png)
+
+И чтобы не получать ошибок, нужно добавлять все новые значения в значения по умолчанию контекста
+
+![](_png/Pasted%20image%2020230315132942.png)
+
+Так же в провайдера не стоит передавать объекты напрямую, так как такая запись будет ухудшать оптимизацию проекта
+
+![](_png/Pasted%20image%2020230315133138.png)
 
 
