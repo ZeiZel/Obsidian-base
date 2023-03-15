@@ -183,7 +183,113 @@ const Input = (props) => {
 };
 ```
 
+- так же приложение можно разбить на модули с контекстом
+- контекстов может быть несколько в приложении
+- провайдеры можно вкладывать в провайдеры, чтобы добавлять дополнительно контекст
 
+```JS
+/// context.js - тут хранится сам контекст приложения
+import { createContext } from 'react';
+
+export const dataContext = createContext({
+	mail: 'name@example.com',
+	text: 'some text',
+});
+
+
+/// Input.js - тут хранится отдельный компонент инпута
+import { useContext } from 'react';
+import { dataContext } from './context';
+
+export const Input = (props) => {
+	const context = useContext(dataContext);
+
+	return (
+		<input
+			value={context.mail}
+			type='email'
+			className='form-control'
+			id='exampleFormControlInput1'
+			placeholder='name@example.com'
+		/>
+	);
+};
+
+
+/// Form.js - компонент формы
+import { memo } from 'react';
+import { Container } from 'react-bootstrap';
+import { Input } from './Input';
+
+export const Form = memo((props) => {
+	console.log('render Form');
+
+	return (
+		<Container>
+			<form className='w-50 border mt-5 p-3 m-auto'>
+				<div className='mb-3'>
+					<label 
+						htmlFor='exampleFormControlInput1' 
+						className='form-label mt-3'
+					>	
+						Email address
+					</label>
+					<Input />
+				</div>
+				<div className='mb-3'>
+					<label 
+						htmlFor='exampleFormControlTextarea1' 
+						className='form-label'
+					>	
+						Example textarea
+					</label>
+					<textarea
+						value={props.text}
+						className='form-control'
+						id='exampleFormControlTextarea1'
+						rows='3'
+					></textarea>
+				</div>
+			</form>
+		</Container>
+	);
+});
+
+
+/// App.js - главный компонент приложения
+import { useState } from 'react';
+import './App.css';
+
+import { dataContext } from './context';
+import { Form } from './Form';
+
+const { Provider } = dataContext;
+
+function App() {
+	const [data, setData] = useState({
+		mail: 'name@example.com',
+		text: 'some text',
+	});
+
+	return (
+		<Provider value={data}>
+			<Form text={data.text} />
+			<button
+				onClick={() =>
+					setData({
+						mail: 'name@example.com',
+						text: 'another text',
+					})
+				}
+			>
+				Click me
+			</button>
+		</Provider>
+	);
+}
+
+export default App;
+```
 
 
 
