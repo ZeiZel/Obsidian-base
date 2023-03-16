@@ -284,6 +284,41 @@ export default Form;
 
 
 
-
+```JS
+// хук Формика
+const formik = useFormik({
+	initialValues: {
+		name: '',
+		email: '',
+		amount: 0,
+		currency: '',
+		text: '',
+		terms: false,
+	},
+	// тут мы должны описать схему валидации
+	validationSchema: Yup.object({
+		// поле name
+		name: Yup.string() // тип - строка
+			.min(2, 'Имя должно иметь больше двух символов!') // минимальная длина и сообщение
+			.required('Обязательное поле'), // обязательно к заполнению
+		email: Yup.string()
+			.email('Нужно ввести корректную почту!')
+			.required('Обязательное поле'),
+		amount: Yup.number()
+			.min(5, 'Пожертвование не меньше 5 уе')
+			.max(1000, 'Пожертвование не больше 1000 уе')
+			.required('Обязательное поле'),
+		currency: Yup.string().required('Выберите валюту'),
+		text: Yup.string(), // необязательное поле
+		terms: Yup.boolean()
+			.oneOf([true], 'Необходимо согласие') // тут значение будет валидным, если оно равно одному из указанных в массиве
+			.required('Подтвердите согласие'),
+	}),
+	onSubmit: (values) => {
+		// данная функция выведет лог с объектом, который переведён в понятную строку
+		console.log(JSON.stringify(values, null, 2));
+	},
+});
+```
 
 
