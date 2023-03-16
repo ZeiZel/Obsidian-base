@@ -9,12 +9,6 @@ npm i formik
 - `validate` - атрибут, который хранит функцию валидации форм
 - `onSubmit` - атрибут, который хранит функцию, срабатывающую при отправке формы
 
-Самый простой вариант валидации - это использовать стороннюю библиотеку, которая поможет избежать рутинных процессов
-
-```bash
-npm i yup
-```
-
 Тут представлен пример классического использования формика на странице:
 
 ```JS
@@ -282,43 +276,153 @@ export default Form;
 
 ![](_png/Pasted%20image%2020230316185150.png)
 
+Самый простой вариант валидации - это использовать стороннюю библиотеку, которая поможет избежать рутинных процессов, а именно - Yup. Он уже имеет много методов для валидации данных в себе и очень прост в использовании.
 
+```bash
+npm i yup
+```
+
+Тут показан пример, заданный в `validationSchema` (функция валидации данных находится второй по списку!). Все значения описаны в объекте схемы и через чейн вызваются функции проверки данных с формы. Сам Юп возвращает один объект ошибки, который работает подобно нашей самостоятельной реализации выше
 
 ```JS
-// хук Формика
-const formik = useFormik({
-	initialValues: {
-		name: '',
-		email: '',
-		amount: 0,
-		currency: '',
-		text: '',
-		terms: false,
-	},
-	// тут мы должны описать схему валидации
-	validationSchema: Yup.object({
-		// поле name
-		name: Yup.string() // тип - строка
-			.min(2, 'Имя должно иметь больше двух символов!') // минимальная длина и сообщение
-			.required('Обязательное поле'), // обязательно к заполнению
-		email: Yup.string()
-			.email('Нужно ввести корректную почту!')
-			.required('Обязательное поле'),
-		amount: Yup.number()
-			.min(5, 'Пожертвование не меньше 5 уе')
-			.max(1000, 'Пожертвование не больше 1000 уе')
-			.required('Обязательное поле'),
-		currency: Yup.string().required('Выберите валюту'),
-		text: Yup.string(), // необязательное поле
-		terms: Yup.boolean()
-			.oneOf([true], 'Необходимо согласие') // тут значение будет валидным, если оно равно одному из указанных в массиве
-			.required('Подтвердите согласие'),
-	}),
-	onSubmit: (values) => {
-		// данная функция выведет лог с объектом, который переведён в понятную строку
-		console.log(JSON.stringify(values, null, 2));
-	},
-});
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+const Form = () => {
+	// хук Формика
+	const formik = useFormik({
+		initialValues: {
+			name: '',
+			email: '',
+			amount: 0,
+			currency: '',
+			text: '',
+			terms: false,
+		},
+		// тут мы должны описать схему валидации
+		validationSchema: Yup.object({
+			// поле name
+			name: Yup.string() // тип - строка
+				.min(2, 'Имя должно иметь больше двух символов!') // минимальная длина и сообщение
+				.required('Обязательное поле'), // обязательно к заполнению
+			email: Yup.string()
+				.email('Нужно ввести корректную почту!')
+				.required('Обязательное поле'),
+			amount: Yup.number()
+				.min(5, 'Пожертвование не меньше 5 уе')
+				.max(1000, 'Пожертвование не больше 1000 уе')
+				.required('Обязательное поле'),
+			currency: Yup.string().required('Выберите валюту'),
+			text: Yup.string(), // необязательное поле
+			terms: Yup.boolean()
+				.oneOf([true], 'Необходимо согласие') // тут значение будет валидным, если оно равно одному из указанных в массиве
+				.required('Подтвердите согласие'),
+		}),
+		onSubmit: (values) => {
+			// данная функция выведет лог с объектом, который переведён в понятную строку
+			console.log(JSON.stringify(values, null, 2));
+		},
+	});
+
+	return (
+		<form
+			className='form'
+			// сюда передаём функцию, которая будет перехватывать сабмит из формы
+			onSubmit={formik.handleSubmit}
+		>
+			<h2>Отправить пожертвование</h2>
+			<label htmlFor='name'>Ваше имя</label>
+			<input
+				id='name'
+				name='name'
+				type='text'
+				// это значение будет связано с состоянием внутри формика
+				value={formik.values.name}
+				// эта функция будет отслеживать какие данные и в какой форме поменялись
+				onChange={formik.handleChange}
+				// сообщает формику, трогал ли пользователь данную форму
+				onBlur={formik.handleBlur}
+			/>
+			{/* вывод ошибки */}
+			{formik.errors.name && formik.touched.name ? (
+				<div style={{ color: 'red' }}>{formik.errors.name}</div>
+			) : null}
+			<label htmlFor='email'>Ваша почта</label>
+			<input
+				id='email'
+				name='email'
+				type='email'
+				value={formik.values.email}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+			/>
+			{formik.errors.email && formik.touched.email ? (
+				<div style={{ color: 'red' }}>{formik.errors.email}</div>
+			) : null}
+			<label htmlFor='amount'>Количество</label>
+			<input
+				id='amount'
+				name='amount'
+				type='number'
+				value={formik.values.amount}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+			/>
+			{formik.errors.amount && formik.touched.amount ? (
+				<div style={{ color: 'red' }}>{formik.errors.amount}</div>
+			) : null}
+			<label htmlFor='currency'>Валюта</label>
+			<select
+				id='currency'
+				name='currency'
+				value={formik.values.currency}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+			>
+				<option value=''>Выберите валюту</option>
+				<option value='USD'>USD</option>
+				<option value='UAH'>UAH</option>
+				<option value='RUB'>RUB</option>
+			</select>
+			{formik.errors.currency && formik.touched.currency ? (
+				<div style={{ color: 'red' }}>{formik.errors.currency}</div>
+			) : null}
+			<label htmlFor='text'>Ваше сообщение</label>
+			<textarea
+				id='text'
+				name='text'
+				value={formik.values.text}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+			/>
+			{formik.errors.text && formik.touched.text ? (
+				<div style={{ color: 'red' }}>{formik.errors.text}</div>
+			) : null}
+			<label
+				className='checkbox'
+				value={formik.values.terms}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+			>
+				<input name='terms' type='checkbox' />
+				Соглашаетесь с политикой конфиденциальности?
+			</label>
+			{formik.errors.terms && formik.touched.terms ? (
+				<div style={{ color: 'red' }}>{formik.errors.terms}</div>
+			) : null}
+			<button type='submit'>Отправить</button>
+		</form>
+	);
+};
+
+export default Form;
 ```
+
+И так выглядят все реакции на ошибки в форме:
+
+![](_png/Pasted%20image%2020230316193936.png)
+
+
+
 
 
