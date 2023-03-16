@@ -1,8 +1,21 @@
 
+```bash
+npm i formik
+```
+
 ==Formik== - это популярная библиотека под ==React== по работе с формами на странице.
 
 - `initialValue` - важный начальный атрибут для компонента `Formik`. В него мы вписываем связанные имена с инпутами в виде ключей и их данные являются начальными значениями. Связь устанавливается с формами через атрибут внутри формы `name` или `id`
 - `validate` - атрибут, который хранит функцию валидации форм
+- `onSubmit` - атрибут, который хранит функцию, срабатывающую при отправке формы
+
+Самый простой вариант валидации - это использовать стороннюю библиотеку, которая поможет избежать рутинных процессов
+
+```bash
+npm i yup
+```
+
+Тут представлен пример классического использования формика на странице:
 
 ```JS
 import React from 'react';
@@ -74,6 +87,62 @@ const Basic = () => (
 
 export default Basic;
 ```
+
+Так же формик предоставляет готовые компоненты `Form`, `Field`, `ErrorMessage`, которые можно использовать в проекте вместо стандартных форм:
+
+```JS
+ // Render Prop
+ import React from 'react';
+ import { Formik, Form, Field, ErrorMessage } from 'formik';
+ 
+ const Basic = () => (
+   <div>
+     <h1>Any place in your app!</h1>
+     <Formik
+       initialValues={{ email: '', password: '' }}
+       validate={values => {
+         const errors = {};
+         if (!values.email) {
+           errors.email = 'Required';
+         } else if (
+           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+         ) {
+           errors.email = 'Invalid email address';
+         }
+         return errors;
+       }}
+       onSubmit={(values, { setSubmitting }) => {
+         setTimeout(() => {
+           alert(JSON.stringify(values, null, 2));
+           setSubmitting(false);
+         }, 400);
+       }}
+     >
+       {({ isSubmitting }) => (
+         <Form>
+           <Field type="email" name="email" />
+           <ErrorMessage name="email" component="div" />
+           <Field type="password" name="password" />
+           <ErrorMessage name="password" component="div" />
+           <button type="submit" disabled={isSubmitting}>
+             Submit
+           </button>
+         </Form>
+       )}
+     </Formik>
+   </div>
+ );
+ 
+ export default Basic;
+```
+
+
+
+```JS
+
+```
+
+![](_png/Pasted%20image%2020230316174234.png)
 
 
 
