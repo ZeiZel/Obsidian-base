@@ -1,5 +1,5 @@
 
-React Transition Group - классический модуль для создания анимаций в реакте.
+**React Transition Group** - классический модуль для создания анимаций в React.
 
 Компонент `Transition`. Он принимает в себя на вход `nodeRef` (элемент ссылки), `in` (элемент появляется или исчезает со страницы) и `timeout` (длительность анимации)
 
@@ -196,7 +196,114 @@ function App() {
 
 Далее идёт компонент `CSSTransition`. Его отличительная особенность заключается в том, что мы не должны передавать состояния внутрь компонента и рендерить весь компонент через функцию тоже не нужно. Этот компонент работает с готовыми стилями и производит анимацию на её основе.
 
+Данный компонент принимает в себя атрибут classNames, где указывается начальное наименование стилей, которые относятся к этому компоненту и далее они воспроизводятся в зависимости от их префикса:
+- `-enter`
+- `-enter-active`
+- `-exit`
+- `-exit-active`
 
+```JS
+const Modal = ({ showModal, setShowTrigger, onClose }) => {
+	// длительность
+	const duration = 300;
 
-ёёё
+	return (
+		<CSSTransition
+			in={showModal}
+			timeout={duration}
+			onEnter={() => setShowTrigger(false)}
+			onExited={() => setShowTrigger(true)}
+			// базовый className
+			classNames={'modal'}
+			// для решения проблем с обрывом анимации
+			mountOnEnter
+			unmountOnExit
+		>
+			<div className='modal mt-5 d-block'>
+				<div className='modal-dialog'>
+					<div className='modal-content'>
+						<div className='modal-header'>
+							<h5 className='modal-title'>Typical modal window</h5>
+							<button
+								onClick={() => onClose(false)}
+								type='button'
+								className='btn-close'
+								aria-label='Close'
+							></button>
+						</div>
+						<div className='modal-body'>
+							<p>Modal body content</p>
+						</div>
+						<div className='modal-footer'>
+							<button onClick={() => onClose(false)} type='button' className='btn btn-secondary'>
+								Close
+							</button>
+							<button onClick={() => onClose(false)} type='button' className='btn btn-primary'>
+								Save changes
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</CSSTransition>
+	);
+};
+```
 
+```CSS
+/* дефолтное состояние компонента */
+/* лучше не использовать такой подход, а просто атрибутами в компоненте транзишена указать mountOnEnter и unmountOnExit */
+/* .modal {
+  visibility: hidden;
+  opacity: 0;
+} */
+
+/* начало появления компонента */
+.modal-enter {
+  opacity: 0;
+}
+
+/* конечное состояние анимации компонента */
+.modal-enter-active {
+  visibility: visible;
+  opacity: 1;
+  transition: all 300ms;
+}
+
+/* указываем конечное состояние компонента */
+.modal-enter-done {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-exit {
+  opacity: 1;
+}
+
+/* конечное состояние вышедшего компонента */
+.modal-exit-active {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 300ms;
+}
+
+```
+
+Далее идут два компоненты - `SwitchTransition` и `TransitionGroup` - это компоненты, которые модифицируют поведение первых двух
+
+Основной особенностью `SwitchTransition` является переключение режимов анимации через атрибут `mode`:
+
+- `out-in` - запускает анимацию и дожидаётся её окончания перед тем, как запустить анимацию другого компонента
+
+![](_png/Pasted%20image%2020230316142123.png)
+
+- `in-out` - сначала дожидается анимации появления второго компонента и только потом удаляет первый компонент со страницы
+
+![](_png/Pasted%20image%2020230316142141.png)
+![](_png/Pasted%20image%2020230316142144.png)
+
+Компонент `TransitionGroup` занимается оборачиванием других компонентов анимации.
+
+Конкретно в этом компоненте обычно разворачивают остальные компоненты транзишена из массива. Так же он позволяет не указывать атрибут `in`, так как этот компонент отслеживает начало всех анимаций.
+
+![](_png/Pasted%20image%2020230316142630.png)
