@@ -51,8 +51,9 @@ const Basic = () => (
             name="email" // имя, которое связывает с initialValues
             onChange={handleChange} // действие при изменении
             onBlur={handleBlur} // действие при снятии фокуса
-            value={values.email} // связывание значение
+            value={values.email} // связывание значения
           />
+          {/* отображаем ошибку, если такая появилась */}
           {errors.email && touched.email && errors.email}
           <input
             type="password"
