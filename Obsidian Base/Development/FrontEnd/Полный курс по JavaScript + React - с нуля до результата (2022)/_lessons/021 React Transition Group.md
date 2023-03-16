@@ -117,14 +117,86 @@ export default App;
 
 ![](_png/Pasted%20image%2020230316125004.png)
 
+Например, нам нужно скрыть кнопку, которая является триггером для модального окна
+
+```JS
+const Modal = ({ showModal, setShowTrigger, onClose }) => {
+	// длительность
+	const duration = 300;
+
+	// базовые стили
+	const defaultStyle = {
+		transition: `all ${duration}ms ease-in-out`,
+		opacity: 0,
+		visibility: 'hidden',
+	};
+
+	// стили на разных этапах перехода
+	const transitionStyles = {
+		entering: { opacity: 1, visibility: 'visible' },
+		entered: { opacity: 1, visibility: 'visible' },
+		exiting: { opacity: 0, visibility: 'hidden' },
+		exited: { opacity: 0, visibility: 'hidden' },
+	};
+
+	return (
+		<Transition in={showModal} timeout={duration} onEnter={() => setShowTrigger(false)} onExited={() => setShowTrigger(true)}>
+			{(state) => (
+				<div className='modal mt-5 d-block' style={{ ...defaultStyle, ...transitionStyles[state] }}>
+					<div className='modal-dialog'>
+						<div className='modal-content'>
+							<div className='modal-header'>
+								<h5 className='modal-title'>Typical modal window</h5>
+								<button
+									onClick={() => onClose(false)}
+									type='button'
+									className='btn-close'
+									aria-label='Close'
+								></button>
+							</div>
+							<div className='modal-body'>
+								<p>Modal body content</p>
+							</div>
+							<div className='modal-footer'>
+								<button onClick={() => onClose(false)} type='button' className='btn btn-secondary'>
+									Close
+								</button>
+								<button onClick={() => onClose(false)} type='button' className='btn btn-primary'>
+									Save changes
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+		</Transition>
+	);
+};
+
+function App() {
+	const [showModal, setShowModal] = useState(false);
+	const [showTrigger, setShowTrigger] = useState(true);
+
+	return (
+		<Container>
+			<Modal showModal={showModal} setShowTrigger={setShowTrigger} onClose={setShowModal} />
+			{showTrigger ? (
+				<button type='button' className='btn btn-warning mt-5' onClick={() => setShowModal(true)}>
+					Open Modal
+				</button>
+			) : null}
+		</Container>
+	);
+}
+```
+
+![](_png/Pasted%20image%2020230316130500.png)
+
+![](_png/Pasted%20image%2020230316130502.png)
+
+Далее идёт компонент `CSSTransition`. Его отличительная особенность заключается в том, что мы не должны передавать состояния внутрь компонента и рендерить весь компонент через функцию тоже не нужно. Этот компонент работает с готовыми стилями и производит анимацию на её основе.
 
 
 
-
-
-
-
-
-
-
+ёёё
 
