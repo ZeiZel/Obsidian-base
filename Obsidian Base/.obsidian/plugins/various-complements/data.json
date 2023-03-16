@@ -1327,6 +1327,14 @@
           "lastUpdated": 1678965163273
         }
       }
+    },
+    "handleBlur": {
+      "handleBlur": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1678980962623
+        }
+      }
     }
   }
 }
