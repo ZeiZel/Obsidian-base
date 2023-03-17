@@ -529,7 +529,113 @@ export default FormInput;
 
 
 
+```JS
+import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import * as Yup from 'yup';
 
+const CustomInput = ({ label, ...props }) => {
+	// данный хук позволит присвоить данные из формика в наши инпуты
+	// field - хранит в себе пропсы формика (включая события onChange, onBlur, onValue)
+	// meta - хранит метаданные с ошибками и был ли использован данный инпут
+	const [field, meta] = useField(props);
 
+	return (
+		<>
+			<label htmlFor={props.name}>{label}</label>
+			<input {...props} {...field} />
+			{meta.touched && meta.error ? <div className={'error'}>{meta.error}</div> : null}
+		</>
+	);
+};
 
+const CustomCheckbox = ({ children, ...props }) => {
+	// тут дополнительно разворачиваем тип инпута как чекбокс
+	const [field, meta] = useField({ ...props, type: 'checkbox' });
+
+	return (
+		<>
+			{/* лейбл без атрибута htmlFor, так как инпут внутри */}
+			<label className='checkbox'>
+				<input type='checkbox' {...props} {...field} />
+				{children}
+			</label>
+			{meta.touched && meta.error ? <div className={'error'}>{meta.error}</div> : null}
+		</>
+	);
+};
+
+const CustomTextarea = ({ label, ...props }) => {
+	const [field, meta] = useField({ ...props, type: 'textarea' });
+
+	return (
+		<>
+			<label htmlFor={props.name}>{label}</label>
+			<textarea {...props} {...field} />
+			{meta.touched && meta.error ? <div className={'error'}>{meta.error}</div> : null}
+		</>
+	);
+};
+
+const FormInput = () => {
+	return (
+		<Formik
+			initialValues={{
+				name: '',
+				email: '',
+				amount: 0,
+				currency: '',
+				text: '',
+				terms: false,
+			}}
+			validationSchema={Yup.object({
+				name: Yup.string()
+					.min(2, 'Имя должно иметь больше двух символов!')
+					.required('Обязательное поле'),
+				email: Yup.string()
+					.email('Нужно ввести корректную почту!')
+					.required('Обязательное поле'),
+				amount: Yup.number()
+					.min(5, 'Пожертвование не меньше 5 уе')
+					.max(1000, 'Пожертвование не больше 1000 уе')
+					.required('Обязательное поле'),
+				currency: Yup.string().required('Выберите валюту'),
+				text: Yup.string(),
+				terms: Yup.boolean()
+					.oneOf([true], 'Необходимо согласие')
+					.required('Подтвердите согласие'),
+			})}
+			onSubmit={(values) => {
+				console.log(JSON.stringify(values, null, 2));
+			}}
+		>
+			<Form className='form'>
+				<h2>Отправить пожертвование</h2>
+				<CustomInput label={'Ваше имя'} id='name' name='name' type='text' />
+				<CustomInput label={'Ваша почта'} id='email' name='email' type='email' />
+				<CustomInput label={'Количество'} id='amount' name='amount' type='number' />
+
+				<Field id='currency' name='currency' as={'select'}>
+					<option value=''>Выберите валюту</option>
+					<option value='USD'>USD</option>
+					<option value='UAH'>UAH</option>
+					<option value='RUB'>RUB</option>
+				</Field>
+				<ErrorMessage name={'currency'} className={'error'} component={'div'} />
+
+				<CustomTextarea label={'Ваше сообщение'} id='text' name='text' />
+
+				<CustomCheckbox name={'terms'}>
+					Соглашаетесь с политикой конфиденциальности?
+				</CustomCheckbox>
+
+				<button type='submit'>Отправить</button>
+			</Form>
+		</Formik>
+	);
+};
+
+export default FormInput;
+```
+
+![](_png/Pasted%20image%2020230317092327.png)
 
