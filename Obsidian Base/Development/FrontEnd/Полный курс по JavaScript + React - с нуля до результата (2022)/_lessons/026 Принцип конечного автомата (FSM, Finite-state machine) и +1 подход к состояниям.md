@@ -27,8 +27,10 @@
 import { useState, useCallback } from 'react';
 
 export const useHttp = () => {
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
+	
+	// Эти две строки больше НЕ НУЖНЫ, так как мы больше не используем данные состояния, а перекладываем всю ответственность на состояние process
+	// const [loading, setLoading] = useState(false);
+	// const [error, setError] = useState(null);
 
 	// тут будет находиться состояние процесса
 	// начальное - ожидание
@@ -170,26 +172,234 @@ const CharInfo = (props) => {
 
 `component > charList > CharList.js`
 ```JS
+// !!!
+export const setContent = (process, Component, newItemLoading) => {
+	switch (process) {
+		case 'waiting':
+			return <Spinner />;
+		case 'loading':
+			// если у нас грузятся новые элементы, то оставляем список, если нет, то показываем спиннер
+			return newItemLoading ? <Component /> : <Spinner />;
+		case 'confirmed':
+			return <Component />;
+		case 'error':
+			return <ErrorMessage />;
+		default:
+			throw new Error('Unexpected process state in this case');
+	}
+};
 
+const CharList = (props) => {
+	const [charList, setCharList] = useState([]);
+	const [newItemLoading, setnewItemLoading] = useState(false);
+	const [offset, setOffset] = useState(210);
+	const [charEnded, setCharEnded] = useState(false);
+
+	const { loading, error, getAllCharacters, process, setProcess } = useMarvelService();
+
+	useEffect(() => {
+		onRequest(offset, true);
+	}, []);
+
+	const onRequest = (offset, initial) => {
+		initial ? setnewItemLoading(false) : setnewItemLoading(true);
+		getAllCharacters(offset)
+			.then(onCharListLoaded)
+			// !!
+			.then(() => setProcess('confirmed'));
+	};
+
+	/// CODE ...
+
+	return (
+		<div className='char__list'>
+			{/* !!! */}
+			{setContent(process, () => renderItems(charList), newItemLoading)}
+			<button
+				disabled={newItemLoading}
+				style={{ display: charEnded ? 'none' : 'block' }}
+				className='button button__main button__long'
+				onClick={() => onRequest(offset)}
+			>
+				<div className='inner'>load more</div>
+			</button>
+		</div>
+	);
+};
 ```
 
-
-
-
-
-Код мы оптимизировали и компонент информации о персонаже так же работает
+Код мы оптимизировали и компонент информации о персонаже так же работает и список персонажей тоже
 
 ![](_png/Pasted%20image%2020230317182024.png)
 
+Список комиксов так же переводим в стейт-машину
 
+`component > comicsList > ComicsList.js`
+```JS
+// !!
+export const setContent = (process, Component, newItemLoading) => {
+	switch (process) {
+		case 'waiting':
+			return <Spinner />;
+		case 'loading':
+			return newItemLoading ? <Component /> : <Spinner />;
+		case 'confirmed':
+			return <Component />;
+		case 'error':
+			return <ErrorMessage />;
+		default:
+			throw new Error('Unexpected process state in this case');
+	}
+};
 
+const ComicsList = () => {
+	const [comicsList, setComicsList] = useState([]);
+	const [newItemLoading, setnewItemLoading] = useState(false);
+	const [offset, setOffset] = useState(0);
+	const [comicsEnded, setComicsEnded] = useState(false);
 
+	const { getAllComics, process, setProcess } = useMarvelService();
 
+	useEffect(() => {
+		onRequest(offset, true);
+	}, []);
 
+	const onRequest = (offset, initial) => {
+		initial ? setnewItemLoading(false) : setnewItemLoading(true);
+		getAllComics(offset)
+			.then(onComicsListLoaded)
+			// !!!
+			.then(() => setProcess('confirmed'));
+	};
 
+	/// CODE ...
 
+	return (
+		<div className='comics__list'>
+			{setContent(process, () => renderItems(comicsList), newItemLoading)}
+			<button
+				disabled={newItemLoading}
+				style={{ display: comicsEnded ? 'none' : 'block' }}
+				className='button button__main button__long'
+				onClick={() => onRequest(offset)}
+			>
+				<div className='inner'>load more</div>
+			</button>
+		</div>
+	);
+};
+```
 
+![](_png/Pasted%20image%2020230317191931.png)
 
+Далее модифицируем компонент рандомного персонажа
+
+`component > randomChar > RandomChar.js`
+```JS
+const RandomChar = () => {
+	const [char, setChar] = useState(null);
+	const { getCharacter, clearError, process, setProcess } = useMarvelService();
+
+	useEffect(() => {
+		updateChar();
+		const timerId = setInterval(updateChar, 60000);
+
+		return () => {
+			clearInterval(timerId);
+		};
+	}, []);
+
+	const onCharLoaded = (char) => {
+		setChar(char);
+	};
+
+	const updateChar = () => {
+		clearError();
+		const id = Math.floor(Math.random() * (1011400 - 1011000)) + 1011000;
+		getCharacter(id)
+			.then(onCharLoaded)
+			// !!!
+			.then(() => setProcess('confirmed'));
+	};
+
+	return (
+		<div className='randomchar'>
+			{setContent(process, View, char)}
+			<div className='randomchar__static'>
+				<p className='randomchar__title'>
+					Random character for today!
+					<br />
+					Do you want to get to know him better?
+				</p>
+				<p className='randomchar__title'>Or choose another one</p>
+				<button onClick={updateChar} className='button button__main'>
+					<div className='inner'>try it</div>
+				</button>
+				<img src={mjolnir} alt='mjolnir' className='randomchar__decoration' />
+			</div>
+		</div>
+	);
+};
+
+const View = ({ data }) => {
+	const { name, description, thumbnail, homepage, wiki } = data;
+	
+	/// CODE ...
+};
+
+export default RandomChar;
+```
+
+![](_png/Pasted%20image%2020230317192504.png)
+
+И так же можно установить машину состояний для отдельных страниц комиксов и персонажей
+
+`components > pages > SinglePage.js`
+```JS
+const SinglePage = ({ Component, dataType }) => {
+	const { id } = useParams();
+	const [data, setData] = useState(null);
+	const { getComic, getCharacter, clearError, process, setProcess } = useMarvelService();
+
+	useEffect(() => {
+		updateData();
+	}, [id]);
+
+	const updateData = () => {
+		clearError();
+
+		switch (dataType) {
+			case 'comic':
+				getComic(id)
+					.then(onDataLoaded)
+					// !!
+					.then(() => setProcess('confirmed'));
+				break;
+			case 'character':
+				getCharacter(id)
+					.then(onDataLoaded)
+					// !!
+					.then(() => setProcess('confirmed'));
+		}
+	};
+
+	// устанавливаем в состояние
+	const onDataLoaded = (data) => {
+		setData(data);
+	};
+
+	return (
+		<>
+			<AppBanner />
+			{setContent(process, Component, data)}
+		</>
+	);
+};
+```
+
+![](_png/Pasted%20image%2020230317193116.png)
+
+![](_png/Pasted%20image%2020230317193119.png)
 
 
 
