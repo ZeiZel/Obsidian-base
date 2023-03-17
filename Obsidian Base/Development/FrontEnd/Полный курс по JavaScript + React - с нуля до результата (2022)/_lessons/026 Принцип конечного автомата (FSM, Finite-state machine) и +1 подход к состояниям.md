@@ -22,16 +22,17 @@
 
 Модифицируем хук, который выполняет получение данных с сервера. В него на каждый из этапов будем устанавливать состояние процесса, который будет вызвать определённый рендер в компонентах
 
+Первым делом, мы можем удалить состояния `loading` и `error` из хука и так же установку этих состояний внутри хука
+
 `hooks > http.hook.js`
 ```JS
 import { useState, useCallback } from 'react';
 
 export const useHttp = () => {
-	
 	// Эти две строки больше НЕ НУЖНЫ, так как мы больше не используем данные состояния, а перекладываем всю ответственность на состояние process
 	// const [loading, setLoading] = useState(false);
 	// const [error, setError] = useState(null);
-
+	
 	// тут будет находиться состояние процесса
 	// начальное - ожидание
 	const [process, setProcess] = useState('waiting');
@@ -43,7 +44,6 @@ export const useHttp = () => {
 			body = null,
 			headers = { 'Content-Type': 'application/json' },
 		) => {
-			setLoading(true);
 			// тут происходит загрузка
 			setProcess('loading');
 
@@ -56,12 +56,8 @@ export const useHttp = () => {
 
 				const data = await response.json();
 
-				setLoading(false);
 				return data;
 			} catch (e) {
-				setLoading(false);
-				setError(e.message);
-
 				// так же состояние может принять в себя ошибку
 				setProcess('error');
 				throw e;
@@ -71,13 +67,11 @@ export const useHttp = () => {
 	);
 
 	const clearError = useCallback(() => {
-		setError(null);
-
 		// тут так же будет стоять ожидание
 		setProcess('waiting');
 	}, []);
 
-	return { loading, request, error, clearError, process, setProcess };
+	return { request, clearError, process, setProcess };
 };
 ```
 
@@ -86,13 +80,11 @@ export const useHttp = () => {
 `service > MarvelService.js`
 ```JS
 const useMarvelService = () => {
-	const { loading, request, error, clearError, process, setProcess } = useHttp();
+	const { request, clearError, process, setProcess } = useHttp();
 
 	/// CODE ...
 
 	return {
-		loading,
-		error,
 		clearError,
 		getAllCharacters,
 		getCharacterByName,
