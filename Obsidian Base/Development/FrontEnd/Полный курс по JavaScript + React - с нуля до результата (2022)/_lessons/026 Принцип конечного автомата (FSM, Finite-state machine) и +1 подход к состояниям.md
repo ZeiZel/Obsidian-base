@@ -112,7 +112,7 @@ import Spinner from '../components/spinner/Spinner';
 import ErrorMessage from '../components/errorMessage/ErrorMessage';
 
 // по состоянию процесса компонент будет рендерить разные части интерфейса
-export const setContent = (process, data, Component) => {
+export const setContent = (process, Component, data) => {
 	switch (process) {
 		case 'waiting':
 			return <Skeleton />;
@@ -158,13 +158,24 @@ const CharInfo = (props) => {
 		setChar(char);
 	};
 
-	return <div className='char__info'>{setContent(process, char, View)}</div>;
+	return <div className='char__info'>{setContent(process, View, char)}</div>;
 };
 ```
 
 Так же стоит переименовать пропс, получаемый в компоненте на тот, что передаётся внутри свича
 
 ![](_png/Pasted%20image%2020230317175349.png)
+
+Тут так же пришлось решать проблему с тем, что в списке во время загрузки отображалось `null` (это приводит к тому, что мы поднимаемся вверх страницы и заново приходится скроллить вниз по списку). Эту проблему можно было решить только переписав функцию установки контента, где мы в загрузке показываем старый список или спиннер (если старых элементов списка нет)
+
+`component > charList > CharList.js`
+```JS
+
+```
+
+
+
+
 
 Код мы оптимизировали и компонент информации о персонаже так же работает
 
