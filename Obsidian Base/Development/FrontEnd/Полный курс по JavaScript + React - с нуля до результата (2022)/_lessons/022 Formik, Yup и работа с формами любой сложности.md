@@ -422,6 +422,113 @@ export default Form;
 
 ![](_png/Pasted%20image%2020230316193936.png)
 
+Так же вместо того, чтобы писать везде одинаковые атрибуты, можно просто вставлять деструктурированный вызов функции `getFieldProps('имя_поля')`, который вернёт все нужные атрибуты в инпут 
+
+![](_png/Pasted%20image%2020230317081521.png)
+
+Далее, чтобы использовать компоненты самого формика, нужно будет переписать код на классическое поведение без хука 
+
+- Нам нужно будет удалить все использования переменной `formik`
+- Перенести все данные из хука в компонент `Formik`
+- Убрать хук
+- Убрать все лишние атрибуты из инпутов
+- Переименовать инпуты в `Field`
+- Вместо условных конструкций с выводом ошибки написать вывод через `ErrorMessage`
+
+```JS
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+const FormInput = () => {
+	return (
+		<Formik
+			initialValues={{
+				name: '',
+				email: '',
+				amount: 0,
+				currency: '',
+				text: '',
+				terms: false,
+			}}
+			validationSchema={Yup.object({
+				name: Yup.string()
+					.min(2, 'Имя должно иметь больше двух символов!')
+					.required('Обязательное поле'),
+				email: Yup.string()
+					.email('Нужно ввести корректную почту!')
+					.required('Обязательное поле'),
+				amount: Yup.number()
+					.min(5, 'Пожертвование не меньше 5 уе')
+					.max(1000, 'Пожертвование не больше 1000 уе')
+					.required('Обязательное поле'),
+				currency: Yup.string().required('Выберите валюту'),
+				text: Yup.string(),
+				terms: Yup.boolean()
+					.oneOf([true], 'Необходимо согласие')
+					.required('Подтвердите согласие'),
+			})}
+			onSubmit={(values) => {
+				console.log(JSON.stringify(values, null, 2));
+			}}
+		>
+			<Form className='form'>
+				<h2>Отправить пожертвование</h2>
+				<label htmlFor='name'>Ваше имя</label>
+				<Field id='name' name='name' type='text' />
+				<ErrorMessage name={'name'} className={'error'} component={'div'} />
+				<label htmlFor='email'>Ваша почта</label>
+				<Field id='email' name='email' type='email' />
+				<ErrorMessage name={'email'} className={'error'} component={'div'} />
+				<label htmlFor='amount'>Количество</label>
+				<Field id='amount' name='amount' type='number' />
+				<ErrorMessage name={'amount'} className={'error'} component={'div'} />
+				<label htmlFor='currency'>Валюта</label>
+				<Field id='currency' name='currency' as={'select'}>
+					<option value=''>Выберите валюту</option>
+					<option value='USD'>USD</option>
+					<option value='UAH'>UAH</option>
+					<option value='RUB'>RUB</option>
+				</Field>
+				<ErrorMessage name={'currency'} className={'error'} component={'div'} />
+				<label htmlFor='text'>Ваше сообщение</label>
+				<Field id='text' name='text' as={'textarea'} />
+				<ErrorMessage name={'text'} className={'error'} component={'div'} />
+				<label className='checkbox'>
+					<Field name='terms' type='checkbox' />
+					Соглашаетесь с политикой конфиденциальности?
+				</label>
+				<ErrorMessage name={'terms'} className={'error'} component={'div'} />
+				<button type='submit'>Отправить</button>
+			</Form>
+		</Formik>
+	);
+};
+
+export default FormInput;
+```
+
+В итоге мы имеем ровно такую же форму, но более оптимизированную по коду
+
+![](_png/Pasted%20image%2020230317084928.png)
+
+Когда мы говорим про чистую работу с формиком, то он сам подставляет все нужные значения в формы, которые мы обозначили как `Field`. Сам Field - это общее поле, которое можно через атрибут `as` указать как другое поле (селект или текстэриа)
+
+![](_png/Pasted%20image%2020230317082730.png)
+
+Так же и с полем ошибки - использовать готовый компонент `ErrorMessage` куда более простой и быстрый вариант. Оно в себя принимает:
+- `name` - имя поля, к которому привязывается ошибка
+- `component` - тег, которым оно отрендерится на странице
+
+![](_png/Pasted%20image%2020230317083203.png)
+
+Так же есть другой вариант отобразить ошибку - расположить функцию по отрисовке внутри компонента
+
+```JS
+<ErrorMessage name="email">{msg => <div>{msg}</div>}</ErrorMessage>
+```
+
+
+
 
 
 
