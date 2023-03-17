@@ -963,8 +963,8 @@
     "component": {
       "component": {
         "currentFile": {
-          "count": 10,
-          "lastUpdated": 1679070586641
+          "count": 11,
+          "lastUpdated": 1679071783516
         }
       }
     },
@@ -1315,8 +1315,8 @@
     "CharSearchForm": {
       "CharSearchForm": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679045492521
+          "count": 2,
+          "lastUpdated": 1679071769234
         }
       }
     },
@@ -1357,6 +1357,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679070741301
+        }
+      }
+    },
+    "стейт-машину": {
+      "стейт-машину": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679071830349
         }
       }
     }
