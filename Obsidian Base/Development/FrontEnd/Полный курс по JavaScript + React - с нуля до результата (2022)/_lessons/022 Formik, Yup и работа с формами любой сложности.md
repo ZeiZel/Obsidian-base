@@ -527,7 +527,9 @@ export default FormInput;
 <ErrorMessage name="email">{msg => <div>{msg}</div>}</ErrorMessage>
 ```
 
-
+Ну и так же формик предоставляет хук `useField`, который позволяет нам сделать свои шаблоны под повторяющиеся формы на странице. Сам хук в себя принимает пропсы, а возвращает кортеж из значений:
+- `field` - хранит в себе пропсы формика (включая события `onChange`, `onBlur` и `onValue`)
+- `meta` - хранит метаданные с ошибками и был ли использован данный инпут
 
 ```JS
 import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
@@ -535,8 +537,6 @@ import * as Yup from 'yup';
 
 const CustomInput = ({ label, ...props }) => {
 	// данный хук позволит присвоить данные из формика в наши инпуты
-	// field - хранит в себе пропсы формика (включая события onChange, onBlur, onValue)
-	// meta - хранит метаданные с ошибками и был ли использован данный инпут
 	const [field, meta] = useField(props);
 
 	return (
@@ -638,4 +638,3 @@ export default FormInput;
 ```
 
 ![](_png/Pasted%20image%2020230317092327.png)
-
