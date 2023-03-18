@@ -212,14 +212,6 @@
         }
       }
     },
-    "useScrollY": {
-      "useScrollY": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676528256867
-        }
-      }
-    },
     "useAnimation": {
       "useAnimation": {
         "currentFile": {
@@ -1365,6 +1357,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679071830349
+        }
+      }
+    },
+    "перерендеривается": {
+      "перерендеривается": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679123039378
         }
       }
     }
