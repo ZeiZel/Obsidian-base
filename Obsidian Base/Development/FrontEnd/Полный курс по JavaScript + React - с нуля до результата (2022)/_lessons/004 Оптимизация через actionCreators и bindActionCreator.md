@@ -55,7 +55,7 @@ subscribe(updateCounter);
 
 const incDispatch = () => dispatch(inc());
 const decDispatch = () => dispatch(dec());
-const rndDispatch = () => dispatch(rnd(value));
+const rndDispatch = (value) => dispatch(rnd(value));
 
 document.getElementById('inc').addEventListener('click', incDispatch);
 document.getElementById('dec').addEventListener('click', decDispatch);
