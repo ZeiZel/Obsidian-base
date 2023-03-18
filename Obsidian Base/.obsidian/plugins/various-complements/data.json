@@ -1375,6 +1375,14 @@
           "lastUpdated": 1679138231792
         }
       }
+    },
+    "bindActionCreators": {
+      "bindActionCreators": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679143474764
+        }
+      }
     }
   }
 }

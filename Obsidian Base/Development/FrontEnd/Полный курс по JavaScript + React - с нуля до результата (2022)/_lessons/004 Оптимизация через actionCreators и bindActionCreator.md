@@ -106,8 +106,35 @@ const decDispatch = bindActionCreators(dec, dispatch);
 const rndDispatch = bindActionCreators(rnd, dispatch);
 ```
 
+Так же мы можем сделать привязку нескольких функций через одну функцию `bindActionCreators`, но уже через объект
 
+`index.js`
+```JS
+const { incDispatch, decDispatch, rndDispatch } = bindActionCreators(
+	{
+		incDispatch: inc,
+		decDispatch: dec,
+		rndDispatch: rnd,
+	},
+	dispatch,
+);
 
+document.getElementById('inc').addEventListener('click', incDispatch);
+document.getElementById('dec').addEventListener('click', decDispatch);
+document.getElementById('rnd').addEventListener('click', () => {
+	const value = Math.floor(Math.random() * 10);
+	rndDispatch(value);
+});
+```
 
+Можно ещё сильнее сократить запись, если импортировать не все именованные импорты по отдельность, а импортировать целый объект и его вложить первым аргументом
 
+`index.js`
+```JS
+// import { dec, inc, rnd } from './actions';
+import * as actions from './actions';
 
+const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
+```
+
+![](_png/Pasted%20image%2020230318155520.png)
