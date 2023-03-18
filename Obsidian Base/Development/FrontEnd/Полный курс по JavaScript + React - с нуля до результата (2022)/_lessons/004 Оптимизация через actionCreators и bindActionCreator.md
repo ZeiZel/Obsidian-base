@@ -83,9 +83,9 @@ const bindActionCreator =
 	(...args) =>
 		dispatch(creator(...args));
 
-const incDispatch = () => bindActionCreator(inc, dispatch);
-const decDispatch = () => bindActionCreator(dec, dispatch);
-const rndDispatch = () => bindActionCreator(rnd, dispatch);
+const incDispatch = bindActionCreator(inc, dispatch);
+const decDispatch = bindActionCreator(dec, dispatch);
+const rndDispatch = bindActionCreator(rnd, dispatch);
 
 document.getElementById('inc').addEventListener('click', incDispatch);
 document.getElementById('dec').addEventListener('click', decDispatch);
@@ -95,9 +95,16 @@ document.getElementById('rnd').addEventListener('click', () => {
 });
 ```
 
+Однако в редаксе уже есть подобная функция `bindActionCreators`, которая за нас создаёт подобный связыватель
 
+`index.js`
+```JS
+import { createStore, bindActionCreators } from 'redux';
 
-
+const incDispatch = bindActionCreators(inc, dispatch);
+const decDispatch = bindActionCreators(dec, dispatch);
+const rndDispatch = bindActionCreators(rnd, dispatch);
+```
 
 
 
