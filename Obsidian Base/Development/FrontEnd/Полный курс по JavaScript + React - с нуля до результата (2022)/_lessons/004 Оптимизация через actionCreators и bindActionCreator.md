@@ -65,6 +65,40 @@ document.getElementById('rnd').addEventListener('click', () => {
 });
 ```
 
+Однако очень часто разработчики для простоты использования кода создавали функцию `bindActionCreator`, которая возвращала уже сбинженную функцию диспэтча для вызова в других местах
+
+`index.js`
+```JS
+const store = createStore(reducer);
+const { dispatch, subscribe, getState } = store;
+
+const updateCounter = () => {
+	document.getElementById('counter').textContent = getState().value;
+};
+
+subscribe(updateCounter);
+
+const bindActionCreator =
+	(creator, dispatch) =>
+	(...args) =>
+		dispatch(creator(...args));
+
+const incDispatch = () => bindActionCreator(inc, dispatch);
+const decDispatch = () => bindActionCreator(dec, dispatch);
+const rndDispatch = () => bindActionCreator(rnd, dispatch);
+
+document.getElementById('inc').addEventListener('click', incDispatch);
+document.getElementById('dec').addEventListener('click', decDispatch);
+document.getElementById('rnd').addEventListener('click', () => {
+	const value = Math.floor(Math.random() * 10);
+	rndDispatch(value);
+});
+```
+
+
+
+
+
 
 
 
