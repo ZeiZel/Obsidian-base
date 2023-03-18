@@ -123,6 +123,166 @@ store.dispatch({ type: 'INC' });
 > - Эта функция должна быть чистой и зависеть только от приходящего в неё стейта и экшена
 > - Она должна вовзвращать один и тот же результат при одинаковых аргументах и не иметь никаких побочных эффектов (никаких логов, запросов на сервер, генераций случайных чисел и никакой работы с ДОМ-деревом)
 
+Вёрстка кнопок
+
+```HTML
+<div id="rooter" class="jumbotron">
+	<h1 id="counter">0</h1>
+	<button id="dec" class="btn btn-primary1">DEC</button>
+	<button id="inc" class="btn btn-primary1">INC</button>
+	<button id="rnd" class="btn btn-primary1">RND</button>
+</div>
+```
+
+Стили
+
+```CSS
+.jumbotron {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 99vh;
+  height: 99vh;
+}
+```
+
+И использование редакса на странице:
+
+```JS
+// начальное состояние
+const initialState = 0;
+
+// функция изменения стейта
+const reducer = (state = 0, action) => {
+	switch (action.type) {
+		case 'INC':
+			return state + 1;
+		case 'DEC':
+			return state - 1;
+		case 'RND':
+			return state * action.payload;
+		default:
+			return state;
+	}
+
+	return 0;
+};
+
+// это стор, который хранит функцию-редьюсер и все стейты
+const store = createStore(reducer);
+
+const updateCounter = () => {
+	document.getElementById('counter').textContent = store.getState();
+};
+
+// подписка позволяет вызывать функцию, которая будет срабатывать каждый раз при изменении стейта внутри стора
+store.subscribe(updateCounter);
+
+document.getElementById('inc').addEventListener('click', () => {
+	store.dispatch({ type: 'INC' });
+});
+
+document.getElementById('dec').addEventListener('click', () => {
+	store.dispatch({ type: 'DEC' });
+});
+
+document.getElementById('rnd').addEventListener('click', () => {
+	const value = Math.floor(Math.random() * 10);
+	store.dispatch({ type: 'RND', payload: value });
+});
+```
+
+![](_png/Pasted%20image%2020230318124952.png)
+
+Отдельно нужно сказать, что так делать нельзя и выше было показано, что мы передали это значение через свойство `payload` (полезная нагрузка)
+
+![](_png/Pasted%20image%2020230318124144.png)
+
+И так же в ==Redux== используется `actionCreator` функция, которая генерирует экшены. Они используются для более безопасного применения редьюсера, чтобы он возвращает не стейт по дефолтному проходу, а ошибку, если мы передали неправильный объект
+
+```JS
+// actionCreater'ы, которые создают экшены для редьюсера
+const inc = () => ({ type: 'INC' });
+const dec = () => ({ type: 'DEC' });
+const rnd = (value) => ({ type: 'RND', payload: value });
+
+document.getElementById('inc').addEventListener('click', () => {
+	store.dispatch(inc());
+});
+
+document.getElementById('dec').addEventListener('click', () => {
+	store.dispatch(dec());
+});
+
+document.getElementById('rnd').addEventListener('click', () => {
+	const value = Math.floor(Math.random() * 10);
+	store.dispatch(rnd(value));
+});
+```
+
+Но так же мы будем часто работать с данными в виде объекта, поэтому и писать придётся код соблюдая иммутабельность:
+- переводим начальный стейт в объект
+- меняем редьюсер на работу со стейтом по принципу иммутабельности (разворачиваем старый объект и добавляем новые данные)
+- далее из стора нужно будет получить не целый объект, а одно значение `store.getState().value` 
+
+```JS
+// начальное состояние
+const initialState = { value: 0 };
+
+// функция изменения стейта
+const reducer = (state = initialState, action) => {
+	switch (action.type) {
+		case 'INC':
+			return { ...state, value: state.value + 1 };
+		case 'DEC':
+			return { ...state, value: state.value - 1 };
+		case 'RND':
+			return { ...state, value: state.value * action.payload };
+		default:
+			return state;
+	}
+
+	return 0;
+};
+
+// это стор, который хранит функцию-редьюсер и все стейты
+const store = createStore(reducer);
+
+const updateCounter = () => {
+	document.getElementById('counter').textContent = store.getState().value;
+};
+
+// подписка позволяет вызывать функцию, которая будет срабатывать каждый раз при изменении стейта внутри стора
+store.subscribe(updateCounter);
+
+// actionCreater'ы, которые создают экшены для редьюсера
+const inc = () => ({ type: 'INC' });
+const dec = () => ({ type: 'DEC' });
+const rnd = (value) => ({ type: 'RND', payload: value });
+
+document.getElementById('inc').addEventListener('click', () => {
+	store.dispatch(inc());
+});
+
+document.getElementById('dec').addEventListener('click', () => {
+	store.dispatch(dec());
+});
+
+document.getElementById('rnd').addEventListener('click', () => {
+	const value = Math.floor(Math.random() * 10);
+	store.dispatch(rnd(value));
+});
+```
+
+![](_png/Pasted%20image%2020230318132037.png)
+
+
+
+
+
+
+
 
 
 
