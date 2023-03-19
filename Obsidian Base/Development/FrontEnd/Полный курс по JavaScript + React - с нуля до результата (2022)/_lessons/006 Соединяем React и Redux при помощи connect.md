@@ -7,19 +7,150 @@
 - меньше бойлерплейта
 - сложнее тестировать, чем обычный коннект
 - проще в понимании
-- может быть баг с **"Зомби детьми"**
+- может быть баг с [**"Зомби детьми"**](https://vadim-budarin.medium.com/react-%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%BD%D0%BE-%D0%BE-zombie-children-and-stale-props-d31247ea08)
 - более корректен в плане написания кода, но менее производительный
 
 
+Работает `connect` по следующей цепочке:
+- внутри приложения какой-либо компонент задиспетчил (изменил стейт) какое-либо действие
+-  глобальное состояние изменилось
+- провайдер отлавливает изменение и даёт сигнал всем компонентам, которые находятся внутри
+- дальше запускается `connect` от провайдера
+- запускается функция `mapStateToProps`
+- и если пропсы компонента поменялись, то весь компонент будет перерисован
+
+Далее нужно реализовать контроль состояния в нашем каунтере
+
+Для начала, можно перенести логику по генерации рандомного значения прямо в `actionCreator`-функцию 
+
+`actions.js`
+```JS
+export const inc = () => ({ type: 'INC' });
+export const dec = () => ({ type: 'DEC' });
+export const rnd = () => ({ type: 'RND', payload: Math.floor(Math.random() * 10) });
+```
 
 
 
+`Counter.js`
+```JS
+import React from 'react';
+import './counter.css';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
+
+const Counter = ({ counter, inc, dec, rnd }) => {
+	return (
+		<div className='wrapper'>
+			<h1>{counter}</h1>
+			<button className='btn' onClick={dec}>
+				DEC
+			</button>
+			<button className='btn' onClick={inc}>
+				INC
+			</button>
+			<button className='btn' onClick={rnd}>
+				RND
+			</button>
+		</div>
+	);
+};
+
+// эта функция будет вытаскивать нужные пропсы для нашего компонента и передавать их в него
+// она принимает в себя глобальный стейт, который описан в index.js
+const mapStateToProps = (state) => {
+	// возвращает объект со свойствами, которые нужно вытащить из стейта
+	return { counter: state.value };
+};
+
+// данная функция передаёт внутрь коннекта функции-диспетчи
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(actions, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+```
+
+Функция коннекта принимает в себя 4 необязательных значения:
+- mapStateToProps в виде функции, которая запросит данные из стейта
+- mapDispatchToProps в виде функции, которая сгенерирует объект с диспетчами или в виде объекта (коннект сам распарсит объект и сделает из него нужные функции)
+
+```JS
+function connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)
+```
+
+Функция `mapStateToProps` применяется для получения данных из стейта и используется внутри коннектора. Она должна быть чистой и синхронной, как функция-редьюсер
+
+![](_png/Pasted%20image%2020230319103748.png)
+
+Функция `mapDispatchToProps` уже имеет предназначение формировать в себе нужные диспэтчи под определённые компоненты
+
+Тут так же нужно сказать, что у нас есть 4 варианта реализации данной функции в зависимости от степени абстракции:
+
+```JS
+import { inc, dec, rnd } from '../actions';
+
+// данная функция передаёт внутрь коннекта функции-диспетчи
+const mapDispatchToProps = (dispatch) => {
+	return {
+		inc: () => dispatch(inc()),
+		dec: () => dispatch(dec()),
+		rnd: () => {
+			const value = Math.floor(Math.random() * 10);
+			dispatch(rnd(value));
+		},
+	};
+};
+
+/// ИЛИ ...
+
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
+
+const mapDispatchToProps = (dispatch) => {
+	const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
+
+	return {
+		inc,
+		dec,
+		rnd: () => {
+			const value = Math.floor(Math.random() * 10);
+			rnd(value);
+		},
+	};
+};
+
+/// ИЛИ ...
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
+
+const mapDispatchToProps = (dispatch) => {
+	const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
+
+	return {
+		inc,
+		dec,
+		rnd,
+	};
+};
+
+/// ИЛИ...
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(actions, dispatch);
+};
+```
+
+Однако дальше нужно сказать, что вторым аргументом `connect` может получить не только функцию, где мы сами разбиваем `actionCreator'ы`, а просто передать объект, который уже функция коннекта сама разберёт
+
+`Counter.js`
+```JS
+import * as actions from '../actions';
+
+export default connect(mapStateToProps, actions)(Counter);
+```
 
 
-
-
-
-
-
+![](_png/Pasted%20image%2020230319111532.png)
 
 
