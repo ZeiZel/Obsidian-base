@@ -1403,8 +1403,8 @@
     "actionCreator": {
       "actionCreator": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679213613248
+          "count": 3,
+          "lastUpdated": 1679214600531
         }
       }
     },
@@ -1413,6 +1413,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679213656629
+        }
+      }
+    },
+    "mapDispatchToProps": {
+      "mapDispatchToProps": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679214631958
         }
       }
     }
