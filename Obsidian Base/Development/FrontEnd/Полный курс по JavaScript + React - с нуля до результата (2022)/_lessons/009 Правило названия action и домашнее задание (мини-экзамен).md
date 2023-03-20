@@ -105,7 +105,7 @@ export const heroesFetchingError = () => {
 }
 ```
 
-
+Тут располагается хук отправки запроса на сервер
 
 `src > hooks > http.hook.js`
 ```JS
@@ -146,7 +146,7 @@ export const useHttp = () => {
 }
 ```
 
-
+Тут уже располагается вся основная часть приложения
 
 `src > index.js`
 ```JS
@@ -169,7 +169,7 @@ ReactDOM.render(
 );
 ```
 
-
+Это основной компонент `App`
 
 `src > components > app > App.js`
 ```JS
