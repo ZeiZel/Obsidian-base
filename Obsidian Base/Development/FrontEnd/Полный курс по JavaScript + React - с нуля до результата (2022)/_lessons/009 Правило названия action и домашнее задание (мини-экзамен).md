@@ -355,7 +355,7 @@ const HeroesFilters = () => {
 export default HeroesFilters;
 ```
 
-Тут представлена вёрстка формы для добавления персонажей без логики:
+Тут представлена вёрстка формы для добавления персонажей без логики
 
 `components > heroesAddForm > HeroesAddForm.js`
 ```JS
