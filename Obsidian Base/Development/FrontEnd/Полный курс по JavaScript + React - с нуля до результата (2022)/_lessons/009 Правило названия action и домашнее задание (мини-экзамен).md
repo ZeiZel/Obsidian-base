@@ -1,4 +1,8 @@
 
+Структура проекта выглядит примерно следующим образом:
+
+![](_png/Pasted%20image%2020230320165258.png)
+
 Это тот файл приложения, который будет шэриться через `json-server` и от которого будут выводиться новые посты
 
 `heroses.json`
@@ -50,12 +54,14 @@ export default store;
 
 Все типы экшенов должны быть написаны заглавными буквами. Если они относятся к запросам на сервер, то мы имеем состояние отправки запроса на сервер, полученного ответа от сервера или ошибки.
 
+Второй кейс редьюсера так же в качестве `payload` принимает в себя список героев, который будет отображаться на странице
+
 `src > reducer > index.js`
 ```JS
 const initialState = {
-    heroes: [],
-    heroesLoadingStatus: 'idle',
-    filters: []
+    heroes: [], // герои
+    heroesLoadingStatus: 'idle', // начальный статус загрузки
+    filters: [] // фильтры просмотра
 }
 
 const reducer = (state = initialState, action) => {
@@ -84,6 +90,8 @@ export default reducer;
 ```
 
 А уже тут описаны экшены редакса.
+
+Экщен `heroesFetched` принимает в себя так же список героев, который пришёл от сервера и сохраняет его в состояние.
 
 `src > actions > index.js`
 ```JS
@@ -206,12 +214,14 @@ export default App;
 npm i concurrently
 ```
 
+И так теперь выглядит сдвоенный запрос:
+
 `package.json`
 ```JSON
 "start": "concurrently \"react-scripts start\" \"npx json-server heroes.json --port 3001\"",
 ```
 
-
+Это компонент, который выводит список элементов карточек героев
 
 `components > heroesList > HeroesList.js`
 ```JS
@@ -222,11 +232,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { heroesFetching, heroesFetched, heroesFetchingError } from '../../actions';
 import HeroesListItem from '../heroesListItem/HeroesListItem';
 import Spinner from '../spinner/Spinner';
-
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
 
 // список персонажей
 const HeroesList = () => {
@@ -277,6 +282,60 @@ const HeroesList = () => {
 
 export default HeroesList;
 ```
+
+А это компонент самой карточки
+
+`components > heroesListItem > HeroesListItem.js`
+```JS
+const HeroesListItem = ({name, description, element}) => {
+    // тут будет храниться класс, который попадёт в айтем
+    let elementClassName;
+
+    // тут мы присваиваем класс по выбранному элементу
+    switch (element) {
+        case 'fire':
+            elementClassName = 'bg-danger bg-gradient';
+            break;
+        case 'water':
+            elementClassName = 'bg-primary bg-gradient';
+            break;
+        case 'wind':
+            elementClassName = 'bg-success bg-gradient';
+            break;
+        case 'earth':
+            elementClassName = 'bg-secondary bg-gradient';
+            break;
+        default:
+            elementClassName = 'bg-warning bg-gradient';
+    }
+
+    return (
+        <li 
+            className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}``}>
+            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg" 
+                 className="img-fluid w-25 d-inline" 
+                 alt="unknown hero" 
+                 style={{'objectFit': 'cover'}}/>
+            <div className="card-body">
+                
+                <h3 className="card-title">{name}</h3>
+                <p className="card-text">{description}</p>
+            </div>
+            <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
+                <button type="button" className="btn-close btn-close" aria-label="Close"></button>
+            </span>
+        </li>
+    )
+}
+
+export default HeroesListItem;
+```
+
+
+
+
+
+
 
 
 
