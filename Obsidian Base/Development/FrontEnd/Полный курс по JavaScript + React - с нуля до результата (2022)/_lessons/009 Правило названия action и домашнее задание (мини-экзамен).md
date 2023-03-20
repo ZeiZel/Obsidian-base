@@ -331,9 +331,9 @@ const HeroesListItem = ({name, description, element}) => {
 export default HeroesListItem;
 ```
 
+И так выглядит итоговое приложение:
 
-
-
+![](_png/Pasted%20image%2020230320165750.png)
 
 
 
