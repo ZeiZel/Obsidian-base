@@ -331,17 +331,30 @@ const HeroesListItem = ({name, description, element}) => {
 export default HeroesListItem;
 ```
 
-И так выглядит итоговое приложение:
+Тут уже находится вёрстка компонента смена активностей классов: 
+
+`components > heroesFilters > HeroesFilters.js`
+```JS
+const HeroesFilters = () => {
+    return (
+        <div className="card shadow-lg mt-4">
+            <div className="card-body">
+                <p className="card-text">Отфильтруйте героев по элементам</p>
+                <div className="btn-group">
+                    <button className="btn btn-outline-dark active">Все</button>
+                    <button className="btn btn-danger">Огонь</button>
+                    <button className="btn btn-primary">Вода</button>
+                    <button className="btn btn-success">Ветер</button>
+                    <button className="btn btn-secondary">Земля</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default HeroesFilters;
+```
+
+И так выглядит итоговое приложение, которое нужно дорабатывать, чтобы оно отправляло запросы на `json-server`, создавало новых персонажей, меняло стейт и фильтровало персонажей по элементам:
 
 ![](_png/Pasted%20image%2020230320165750.png)
-
-
-
-
-
-
-
-
-
-
-

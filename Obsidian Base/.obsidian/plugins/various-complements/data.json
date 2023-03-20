@@ -228,35 +228,11 @@
         }
       }
     },
-    "ARIA-атрибуты": {
-      "ARIA-атрибуты": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676720411169
-        }
-      }
-    },
-    "ДОМ-дерева": {
-      "ДОМ-дерева": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676720515291
-        }
-      }
-    },
     "скринридером": {
       "скринридером": {
         "currentFile": {
           "count": 3,
           "lastUpdated": 1676974811093
-        }
-      }
-    },
-    "девтулз": {
-      "девтулз": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676721256850
         }
       }
     },
@@ -1347,8 +1323,8 @@
     "json-server": {
       "json-server": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679304301964
+          "count": 2,
+          "lastUpdated": 1679321566025
         }
       }
     }
