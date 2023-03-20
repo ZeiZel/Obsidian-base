@@ -46,7 +46,7 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 export default store;
 ```
 
-Редьюсер редакса
+Редьюсер редакса. Пока он один, но в дальнейшем будет пополняться их количество
 
 `src > reducer > index.js`
 ```JS
@@ -105,7 +105,7 @@ export const heroesFetchingError = () => {
 }
 ```
 
-Тут располагается хук отправки запроса на сервер
+Хук отправки запроса на сервер будет возвращать один ответ от сервера
 
 `src > hooks > http.hook.js`
 ```JS
@@ -138,11 +138,12 @@ export const useHttp = () => {
         // setProcess('loading');
     // }, []);
 
-    return {request, 
-            // clearError, 
-            // process, 
-            // setProcess
-        }
+    return {
+	    request, 
+		// clearError, 
+		// process, 
+		// setProcess
+    }
 }
 ```
 
