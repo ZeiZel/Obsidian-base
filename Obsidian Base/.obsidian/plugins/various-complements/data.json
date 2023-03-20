@@ -135,8 +135,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 39,
-          "lastUpdated": 1679152951783
+          "count": 40,
+          "lastUpdated": 1679305308314
         }
       }
     },
@@ -204,46 +204,6 @@
         }
       }
     },
-    "motion": {
-      "motion": {
-        "currentFile": {
-          "count": 4,
-          "lastUpdated": 1676616853103
-        }
-      }
-    },
-    "useAnimation": {
-      "useAnimation": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676612543937
-        }
-      }
-    },
-    "framer-motion": {
-      "framer-motion": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1676635821718
-        }
-      }
-    },
-    "ButtonIcon": {
-      "ButtonIcon": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676619314437
-        }
-      }
-    },
-    "onClick": {
-      "onClick": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676619323569
-        }
-      }
-    },
     "Layout": {
       "Layout": {
         "currentFile": {
@@ -260,67 +220,11 @@
         }
       }
     },
-    "слабовидящих": {
-      "слабовидящих": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676641225711
-        }
-      }
-    },
-    "клавиатуры": {
-      "клавиатуры": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676645633611
-        }
-      }
-    },
-    "line-height": {
-      "line-height": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676645892016
-        }
-      }
-    },
     "display": {
       "display": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1678002538473
-        }
-      }
-    },
-    "skipLink": {
-      "skipLink": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676649120528
-        }
-      }
-    },
-    "skipContentAction": {
-      "skipContentAction": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676649340285
-        }
-      }
-    },
-    "табиндекс": {
-      "табиндекс": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676698455206
-        }
-      }
-    },
-    "SortEnum": {
-      "SortEnum": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676700007389
         }
       }
     },
@@ -1437,6 +1341,14 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1679226319211
+        }
+      }
+    },
+    "json-server": {
+      "json-server": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679304301964
         }
       }
     }

@@ -46,7 +46,9 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 export default store;
 ```
 
-Редьюсер редакса. Пока он один, но в дальнейшем будет пополняться их количество
+Редьюсер редакса. Пока он один, но в дальнейшем будет пополняться их количество.
+
+Все типы экшенов должны быть написаны заглавными буквами. Если они относятся к запросам на сервер, то мы имеем состояние отправки запроса на сервер, полученного ответа от сервера или ошибки.
 
 `src > reducer > index.js`
 ```JS
@@ -81,7 +83,7 @@ const reducer = (state = initialState, action) => {
 export default reducer;
 ```
 
-А уже тут описаны экшены редакса
+А уже тут описаны экшены редакса.
 
 `src > actions > index.js`
 ```JS
@@ -197,6 +199,86 @@ const App = () => {
 
 export default App;
 ```
+
+Чтобы запустить два сервера вместе (react и json-server), нужно будет установить дополнительную библиотеку, которая позволяет запустить две команды одновременно: 
+
+```bash
+npm i concurrently
+```
+
+`package.json`
+```JSON
+"start": "concurrently \"react-scripts start\" \"npx json-server heroes.json --port 3001\"",
+```
+
+
+
+`components > heroesList > HeroesList.js`
+```JS
+import { useHttp } from '../../hooks/http.hook';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { heroesFetching, heroesFetched, heroesFetchingError } from '../../actions';
+import HeroesListItem from '../heroesListItem/HeroesListItem';
+import Spinner from '../spinner/Spinner';
+
+// Задача для этого компонента:
+// При клике на "крестик" идет удаление персонажа из общего состояния
+// Усложненная задача:
+// Удаление идет и с json файла при помощи метода DELETE
+
+// список персонажей
+const HeroesList = () => {
+	// из глобального хранилища получаем героев и статус их загрузки
+	const { heroes, heroesLoadingStatus } = useSelector((state) => state);
+	const dispatch = useDispatch(); // получаем диспетч
+	const { request } = useHttp(); // получаем хук запроса на сервер
+
+	// при загрузке страницы
+	useEffect(() => {
+		// устанавливаем состояние в загрузку
+		dispatch(heroesFetching());
+
+		// отправляем запрос на сервер на получение персонажей
+		request('http://localhost:3001/heroes')
+			.then((data) => dispatch(heroesFetched(data))) // герои получены
+			.catch(() => dispatch(heroesFetchingError())); // получили ошибку с сервера
+	}, []);
+
+    // если герои загружаются
+	if (heroesLoadingStatus === 'loading') {
+		// то возвращаем загрузку
+        return <Spinner />; 
+        
+        // если ошибка 
+	} else if (heroesLoadingStatus === 'error') {
+        // то возвращаем ошибку
+		return <h5 className='text-center mt-5'>Ошибка загрузки</h5>;
+	}
+
+    // рендер списка героев
+	const renderHeroesList = (arr) => {
+		if (arr.length === 0) {
+			return <h5 className='text-center mt-5'>Героев пока нет</h5>;
+		}
+
+		return arr.map(({ id, ...props }) => {
+			return <HeroesListItem key={id} {...props} />;
+		});
+	};
+
+    // элементы списка героев
+	const elements = renderHeroesList(heroes);
+	
+    // возвращаем список героев
+    return <ul>{elements}</ul>;
+};
+
+export default HeroesList;
+```
+
+
 
 
 
