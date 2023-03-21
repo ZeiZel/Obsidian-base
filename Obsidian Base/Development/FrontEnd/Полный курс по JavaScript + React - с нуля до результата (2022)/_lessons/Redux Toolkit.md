@@ -106,7 +106,12 @@ const addTodo = createAction('todos/add', function prepare(text) {
 - начальное состояние
 - `builder`, который позволяет строить `reducer` за счёт встроенных в него трёх функций
 
+`builder` использует три функции:
+- `addCase` - добавляет кейс в свитчер редьюсера
+- `addDefaultCase` - устанавливает дефолтный кейс выполнения
+- `addMatcher` - позволяет фильтровать входящие экшены
 
+И так выглядит реализация нашего редьюсера героев через `createReducer`:
 
 `reducers > heroes.js`
 ```JS
@@ -178,7 +183,12 @@ export const heroCreated = createAction('HERO_CREATED');
 export const heroDeleted = createAction('HERO_DELETED');
 ```
 
+Так же у нас есть вариант использовать более короткий способ создания редьюсеров через объект. Такой способ уже не работает с TS.
 
+`reducers > heroes.js`
+```JS
+
+```
 
 
 

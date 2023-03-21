@@ -1331,8 +1331,8 @@
     "createReducer": {
       "createReducer": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1679407405640
+          "count": 4,
+          "lastUpdated": 1679410743443
         }
       }
     },
@@ -1341,6 +1341,22 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1679401828996
+        }
+      }
+    },
+    "addCase": {
+      "addCase": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679410657462
+        }
+      }
+    },
+    "addDefaultCase": {
+      "addDefaultCase": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679410659972
         }
       }
     }
