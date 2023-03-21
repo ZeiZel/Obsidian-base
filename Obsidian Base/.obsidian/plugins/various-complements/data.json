@@ -1267,8 +1267,8 @@
     "combineReducers": {
       "combineReducers": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679378776980
+          "count": 2,
+          "lastUpdated": 1679379641278
         }
       }
     }
