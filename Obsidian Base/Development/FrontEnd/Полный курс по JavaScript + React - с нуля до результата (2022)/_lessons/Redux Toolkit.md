@@ -187,10 +187,34 @@ export const heroDeleted = createAction('HERO_DELETED');
 
 `reducers > heroes.js`
 ```JS
-
+export const heroes = createReducer(
+	// начальное состояние
+	initialState,
+	// карта действий (кейсы)
+	{
+		[heroesFetching]: (state) => {
+			state.heroesLoadingStatus = 'loading';
+		},
+		[heroesFetched]: (state, action) => {
+			state.heroes = action.payload;
+			state.heroesLoadingStatus = 'idle';
+		},
+		[heroesFetchingError]: (state, action) => {
+			state.heroesLoadingStatus = 'error';
+		},
+		[heroCreated]: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		[heroDeleted]: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+	// массив функций сравнения
+	[],
+	// действие по умолчанию
+	() => {},
+);
 ```
-
-
 
 ## Redux Toolkit `createSlice()`
 
