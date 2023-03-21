@@ -108,14 +108,57 @@ const addTodo = createAction('todos/add', function prepare(text) {
 
 
 
-`reducers > heros.js`
+`reducers > heroes.js`
 ```JS
+import { createReducer } from '@reduxjs/toolkit';
 
+import {
+	heroesFetching,
+	heroesFetched,
+	heroesFetchingError,
+	heroCreated,
+	heroDeleted,
+} from '../actions';
+
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
+
+export const heroes = createReducer(initialState, (builder) => {
+	// вызываем объект билдера
+	builder
+		// создаём отдельный кейс как в switch-case
+		.addCase(
+			// action кейса
+			heroesFetching,
+			// reducer
+			(state, action) => {
+				// меняем состояние напрямую
+				state.heroesLoadingStatus = 'loading';
+			},
+		)
+		.addCase(heroesFetched, (state, action) => {
+			state.heroes = action.payload;
+			state.heroesLoadingStatus = 'idle';
+		})
+		.addCase(heroesFetchingError, (state, action) => {
+			state.heroesLoadingStatus = 'error';
+		})
+		.addCase(heroCreated, (state, action) => {
+			state.heroes.push(action.payload);
+		})
+		.addCase(heroDeleted, (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		})
+		.addDefaultCase(() => {});
+});
 ```
 
 > Так же нужно отметить, что внутри функций `builder` используется библиотека `ImmerJS`, которая сама отвечает за сохранение логики иммутабельности в проекте. То есть мы можем писать визуально проект с мутациями, а библиотека сама переведёт код в иммутабельные сущности.
 > Такой подход будет работать ровно до тех пор, пока мы ничего не возвращаем из этих функций через `return`
 
+Однако функция `createReducer` требует для работы, чтобы все экшены были написаны с помощью `createAction`
 
 `actions > index.js`
 ```JS
