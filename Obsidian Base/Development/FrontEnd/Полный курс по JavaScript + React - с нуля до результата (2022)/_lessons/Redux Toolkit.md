@@ -102,9 +102,38 @@ const addTodo = createAction('todos/add', function prepare(text) {
 
 Функция `reducer` зачастую представляет из себя очень много блоков `switch-case` и много вложенных конструкций, которые нужно редактировать в глубине, что усложняет разработку
 
+Для упрощения создания `reducer` была добавлена функция `createReducer`, которая принимает в себя:
+- начальное состояние
+- `builder`, который позволяет строить `reducer` за счёт встроенных в него трёх функций
 
 
 
+`reducers > heros.js`
+```JS
+
+```
+
+> Так же нужно отметить, что внутри функций `builder` используется библиотека `ImmerJS`, которая сама отвечает за сохранение логики иммутабельности в проекте. То есть мы можем писать визуально проект с мутациями, а библиотека сама переведёт код в иммутабельные сущности.
+> Такой подход будет работать ровно до тех пор, пока мы ничего не возвращаем из этих функций через `return`
+
+
+`actions > index.js`
+```JS
+import { createAction } from '@reduxjs/toolkit';
+
+export const fetchHeroes = (request) => (dispatch) => {
+	dispatch(heroesFetching());
+	request('http://localhost:3001/heroes')
+		.then((data) => dispatch(heroesFetched(data)))
+		.catch(() => dispatch(heroesFetchingError()));
+};
+
+export const heroesFetching = createAction('HEROES_FETCHING');
+export const heroesFetched = createAction('HEROES_FETCHED');
+export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR');
+export const heroCreated = createAction('HERO_CREATED');
+export const heroDeleted = createAction('HERO_DELETED');
+```
 
 
 
