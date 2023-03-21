@@ -1327,6 +1327,22 @@
           "lastUpdated": 1679396585816
         }
       }
+    },
+    "createReducer": {
+      "createReducer": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679401264753
+        }
+      }
+    },
+    "createAction": {
+      "createAction": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679401828996
+        }
+      }
     }
   }
 }

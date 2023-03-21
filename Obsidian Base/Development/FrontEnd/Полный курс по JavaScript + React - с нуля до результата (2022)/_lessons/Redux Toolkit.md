@@ -48,15 +48,51 @@ export default store;
 
 ## Redux Toolkit `createAction()`
 
+Функция `createAction()` позволяет автоматически выполнять операцию по созданию экшена
 
+Функция принимает в себя:
+- тип действия 
+- вспомогательную функцию
 
+И далее тут нужно сказать, что данная функция автоматически обрабатывает поступающие в неё данные. Т.е. если вызвать `heroesFetched` и передать в него аргумент, то он автоматически отправится в поле `payload`
 
+Ниже представлены две реализации экшенов - классическая и через `createAction` и обе из них работают полностью взаимозаменяемо
 
+```JS
+export const heroesFetching = () => {
+	return {
+		type: 'HEROES_FETCHING',
+	};
+};
 
+export const heroesFetched = (heroes) => {
+	return {
+		type: 'HEROES_FETCHED',
+		payload: heroes,
+	};
+};
 
+// ИЛИ ...
 
+export const heroesFetching = createAction('HEROES_FETCHING');
+export const heroesFetched = createAction('HEROES_FETCHED');
+```
 
+> Тут уже стоит отметить, что в `reducer` стоит передавать только одно поле payload. Таким образом будет проще читать код и воспринимать его. Остальные побочные действия лучше делать вне `reducer`.
 
+И вот пример, когда мы вторым аргументом передаём дополнительную функцию, которая осуществляет возврат обогащённого `payload`, который уже будет содержать не просто переданные данные, а ещё и сгенерированные нами
+
+```JS
+const addTodo = createAction('todos/add', function prepare(text) {
+  return {
+    payload: {
+      text,
+      id: nanoid(),
+      createdAt: new Date().toISOString(),
+    },
+  }
+})
+```
 
 ## Redux Toolkit `createReducer()`
 
@@ -72,7 +108,7 @@ export default store;
 
 ## Redux Toolkit `createSlice()`
 
-
+Данная функция объединяет функции `createAction` и `createReducer` в одно
 
 
 
