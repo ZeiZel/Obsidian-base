@@ -1083,8 +1083,8 @@
     "dispatch": {
       "dispatch": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1679392562224
+          "count": 4,
+          "lastUpdated": 1679393102906
         }
       }
     },
@@ -1275,8 +1275,32 @@
     "middleware": {
       "middleware": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679392931146
+        }
+      }
+    },
+    "createStore": {
+      "createStore": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679392989775
+        }
+      }
+    },
+    "applyMiddleware": {
+      "applyMiddleware": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1679392586719
+          "lastUpdated": 1679392949161
+        }
+      }
+    },
+    "compose": {
+      "compose": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679392993712
         }
       }
     }
