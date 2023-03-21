@@ -100,7 +100,7 @@ const addTodo = createAction('todos/add', function prepare(text) {
 
 ## Redux Toolkit `createReducer()`
 
-
+Функция `reducer` зачастую представляет из себя очень много блоков `switch-case` и много вложенных конструкций, которые нужно редактировать в глубине, что усложняет разработку
 
 
 
