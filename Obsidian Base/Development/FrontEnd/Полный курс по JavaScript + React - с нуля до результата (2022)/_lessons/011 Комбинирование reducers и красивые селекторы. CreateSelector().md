@@ -151,6 +151,63 @@ const someState = useSelector((state) => ({
 }));
 ```
 
+Откорректируем логику филтрации героев.
+Но тут мы встретимся с такой проблемой, что каждый раз при нажатии кнопки фильтрации, у нас будет воспроизводиться перерендер компонента. Это происходит из-за того, что каждый раз у нас вызывается `useSelector()` при изменении глобального стейта.
 
+`components > heroesList > HeroesList.js`
+```JS
+const HeroesList = () => {  
+   const filteredHeroes = useSelector((state) => {  
+      if (state.filters.activeFilter === 'all') {  
+	      console.log('render');
+         return state.heroes.heroes;  
+      } else {  
+         return state.heroes.heroes.filter(  
+            (item) => item.element === state.filters.activeFilter,  
+         );  
+      }  
+   });
 
+	/// CODE ...
+```
 
+![](_png/Pasted%20image%2020230321092911.png)
+
+Чтобы решить данную проблему, нужно мемоизировать функцию вызова `useSelector()`
+
+```bash
+npm i reselect
+```
+
+Данный модуль позволяет нам вызвать по определённым правилам функцию `useSelector`. То есть мы создаём массив запросов в селектор первым аргументом, а вторым аргументом берём полученные значения и используем их в функции, которую хотели использовать в селекторе. 
+После вышеописанных манипуляций просто помещаем функцию реселекта внутрь `useSelector` 
+
+`components > heroesList > HeroesList.js`
+```JS
+import { createSelector } from 'reselect';
+
+/// CODE ...
+
+// эта функция будет вызвать useSelector по заданным правилам и будет мемоизировать значение  
+const filteredHeroesSelector = createSelector(  
+   // вызываем срабатывание двух селекторов  
+   // получаем сам активный фильтр и массив героев   [(state) => state.filters.activeFilter, (state) => state.heroes.heroes],  
+   // производим операции над результатами двух вызванных селекторов  
+   (filter, heroes) => {  
+      if (filter === 'all') {  
+         console.log('render');  
+         return heroes;  
+      } else {  
+         return heroes.filter((item) => item.element === filter);  
+      }  
+   },  
+);  
+  
+const filteredHeroes = useSelector(filteredHeroesSelector);
+
+/// CODE ...
+```
+
+Теперь рендер вызвается только тогда, когда данные в стейте изменяются
+
+![](_png/Pasted%20image%2020230321094503.png)
