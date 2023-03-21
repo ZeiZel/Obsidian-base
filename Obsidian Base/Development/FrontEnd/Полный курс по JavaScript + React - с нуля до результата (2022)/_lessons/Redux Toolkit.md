@@ -83,6 +83,8 @@ export const heroesFetched = createAction('HEROES_FETCHED');
 И вот пример, когда мы вторым аргументом передаём дополнительную функцию, которая осуществляет возврат обогащённого `payload`, который уже будет содержать не просто переданные данные, а ещё и сгенерированные нами
 
 ```JS
+import { createAction, nanoid } from '@reduxjs/toolkit'
+
 const addTodo = createAction('todos/add', function prepare(text) {
   return {
     payload: {
@@ -93,6 +95,8 @@ const addTodo = createAction('todos/add', function prepare(text) {
   }
 })
 ```
+
+> Тут так же стоит отметить, что в **RTK** была добавлена функция `nanoid`, которая генерирует уникальный идентификатор для объекта
 
 ## Redux Toolkit `createReducer()`
 
