@@ -373,8 +373,14 @@ createSlice({
 
 ## Redux Toolkit `createAsyncThunk()`
 
+Функция `createAsyncThunk()` позволяет сделать асинхронный `actionCreator`, который будет вести себя ровно так же, как и при использовании обычного `redux-thunk`. 
+Использование данной функции является приоритетным, так как при таком запросе `heroes/fetchHeroes` функция возвращает нам три экшена, которые поделены на:
+-   `pending`: `'heroes/fetchHeroes/pending'`
+-   `fulfilled`: `'heroes/fetchHeroes/fulfilled'`
+-   `rejected`: `'heroes/fetchHeroes/rejected'`
+Такой подход позволит нам не обрабатывать три разных состояния функции.
 
-
+Сам `reducer`, который мы создали через `createAsyncThunk` будет передаваться в основной `reducer` уже как четвёртый аргумент - объект `extraReducers`
 
 
 

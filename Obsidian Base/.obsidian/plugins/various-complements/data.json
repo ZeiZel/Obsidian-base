@@ -244,18 +244,6 @@
         }
       }
     },
-    "Redis": {
-      "Redis": {
-        "internalLink": {
-          "count": 1,
-          "lastUpdated": 1676895279485
-        },
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676895582962
-        }
-      }
-    },
     "имя_списка": {
       "имя_списка": {
         "currentFile": {
@@ -1315,8 +1303,8 @@
     "actionCreators": {
       "actionCreators": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1679468848495
+          "count": 4,
+          "lastUpdated": 1679491050749
         }
       }
     },
@@ -1347,8 +1335,16 @@
     "extraReducers": {
       "extraReducers": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679493023487
+        }
+      }
+    },
+    "createAsyncThunk": {
+      "createAsyncThunk": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1679470425769
+          "lastUpdated": 1679492994363
         }
       }
     }
