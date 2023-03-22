@@ -378,18 +378,132 @@ createSlice({
 -   `pending`: `'heroes/fetchHeroes/pending'`
 -   `fulfilled`: `'heroes/fetchHeroes/fulfilled'`
 -   `rejected`: `'heroes/fetchHeroes/rejected'`
-Такой подход позволит нам не обрабатывать три разных состояния функции.
+Такой подход позволит нам не обрабатывать три разных состояния функции самостоятельно, а перекладывать это на функционал тулкита.
+
+> Тут нужно отметить, что из данной функции мы должны возвращать `Promise`, который функция сама и обработает по трём состояниям
 
 Сам `reducer`, который мы создали через `createAsyncThunk` будет передаваться в основной `reducer` уже как четвёртый аргумент - объект `extraReducers`
 
+Тут мы создали функцию `fetchHeroes`, которая заменит `fetchHeroes` находящийся в `actions`. Далее нужно будет обработать три состояния `fetchHeroes` уже внутри самого `heroesSlice`, передав внутрь `extraReducers`
 
+`components > heroesList > heroesSlice.js``
+```JS
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useHttp } from '../../hooks/http.hook';
 
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
 
+export const fetchHeroes = createAsyncThunk(
+	// название среза / тип действия
+	'heroes/fetchHeroes',
+	// асинхронная функция
+	// 1 арг - то, что приходит при диспетче
+	// 2 арг - thunkAPI (dispatch, getState)
+	async () => {
+		const { request } = useHttp();
+		return await request('http://localhost:3001/heroes');
+	},
+);
 
+const heroesSlice = createSlice({
+	name: 'heroes',
+	initialState,
+	reducers: {
+		// а тут мы удалим heroesFetching, heroesFetched, heroesFetchingError, так как функционал перенесён в fetchHeroes
+		heroCreated: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		heroDeleted: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+	extraReducers: (builder) => {
+		builder
+			// добавляем формирование запроса
+			.addCase(fetchHeroes.pending, (state) => {
+				state.heroesLoadingStatus = 'loading'; // состояние загрузки
+			})
+			// запрос выполнен
+			.addCase(fetchHeroes.fulfilled, (state, action) => {
+				state.heroes = action.payload; // данные, полученные с сервера попадут сюда
+				state.heroesLoadingStatus = 'idle'; // состояние ожидания
+			})
+			// запрос отклонён
+			.addCase(fetchHeroes.rejected, (state, action) => {
+				state.heroesLoadingStatus = 'error'; //
+			});
+	},
+});
 
+const { actions, reducer } = heroesSlice;
 
+export const { heroCreated, heroDeleted, heroesFetched, heroesFetchingError, heroesFetching } =
+	actions;
+export default reducer;
+```
+
+Теперь тут меняем импорты
+
+`components > heroesList > HeroesList.js`
+```JS
+import { heroDeleted, fetchHeroes } from './heroesSlice';
+```
+
+Ну и так же из нашего хука `useHttp` нужно убрать `useCallback`, так как это приведёт к ошибке
+
+![](_png/Pasted%20image%2020230322171400.png)
+
+```JS
+export const useHttp = () => {
+	// убрать useCallback
+	const request = async (
+		url,
+		method = 'GET',
+		body = null,
+		headers = { 'Content-Type': 'application/json' },
+	) => {
+		try {
+			const response = await fetch(url, { method, body, headers });
+
+			if (!response.ok) {
+				throw new Error(`Could not fetch ${url}, status: ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			return data;
+		} catch (e) {
+			throw e;
+		}
+	};
+
+	return {
+		request,
+	};
+};
+```
+
+И теперь всё работает и функция за нас реализовала сразу три состояния стейта
+
+![](_png/Pasted%20image%2020230322171929.png)
 
 ## Redux Toolkit `createEntityAdapter()`
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

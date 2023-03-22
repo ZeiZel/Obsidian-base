@@ -135,8 +135,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 41,
-          "lastUpdated": 1679468751149
+          "count": 43,
+          "lastUpdated": 1679494340617
         }
       }
     },
@@ -799,8 +799,8 @@
     "useCallback": {
       "useCallback": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1679330871700
+          "count": 5,
+          "lastUpdated": 1679494589604
         }
       }
     },
@@ -1327,8 +1327,8 @@
     "HeroesList": {
       "HeroesList": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1679468771423
+          "count": 3,
+          "lastUpdated": 1679494302175
         }
       }
     },
@@ -1345,6 +1345,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679492994363
+        }
+      }
+    },
+    "heroesList": {
+      "heroesList": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679494310119
+        }
+      }
+    },
+    "heroesSlice": {
+      "heroesSlice": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679494379473
         }
       }
     }
