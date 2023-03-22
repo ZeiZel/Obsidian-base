@@ -318,6 +318,27 @@ export const fetchHeroes = (request) => (dispatch) => {
 
 
 
+```JS
+import { createSlice, nanoid } from '@reduxjs/toolkit'
+
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState: [],
+  reducers: {
+    addTodo: {
+      // это та стандартная функция, которую мы просто помещаем в экшен
+      reducer: (state, action) => {
+        state.push(action.payload)
+      },
+      // а это дополнительное действие для формирования самого payload
+      prepare: (text) => {
+        const id = nanoid()
+        return { payload: { id, text } }
+      },
+    },
+  },
+})
+```
 
 
 
