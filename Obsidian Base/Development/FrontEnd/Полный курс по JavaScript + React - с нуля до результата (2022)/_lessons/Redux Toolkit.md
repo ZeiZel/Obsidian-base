@@ -316,7 +316,9 @@ export const fetchHeroes = (request) => (dispatch) => {
 
 ![](_png/Pasted%20image%2020230322095937.png)
 
-
+Если нам нужно будет не только получить, но и обогатить `payload`, то можно будет добавить передать в экшен два объекта:
+- `reducer` - это сам обработчик
+- `prepare` - обработчик, который обогащает `payload`
 
 ```JS
 import { createSlice, nanoid } from '@reduxjs/toolkit'
@@ -327,6 +329,7 @@ const todosSlice = createSlice({
   reducers: {
     addTodo: {
       // это та стандартная функция, которую мы просто помещаем в экшен
+      // тут мы получаем и стейт и экшен для передачи payload
       reducer: (state, action) => {
         state.push(action.payload)
       },
@@ -340,8 +343,33 @@ const todosSlice = createSlice({
 })
 ```
 
+Если нам нужно изменить стейт уже в другом компоненте из нашего, то мы можем воспользоваться для этого `extraReducers`
 
+```JS
+import { createAction, createSlice } from '@reduxjs/toolkit'
+import { incrementBy, decrement } from './actions'
 
+function isRejectedAction(action) {
+  return action.type.endsWith('rejected')
+}
+
+createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(incrementBy, (state, action) => {
+      })
+      .addCase(decrement, (state, action) => {})
+      .addMatcher(
+        isRejectedAction,
+        (state, action) => {}
+      )
+      .addDefaultCase((state, action) => {})
+  },
+})
+```
 
 ## Redux Toolkit `createAsyncThunk()`
 
