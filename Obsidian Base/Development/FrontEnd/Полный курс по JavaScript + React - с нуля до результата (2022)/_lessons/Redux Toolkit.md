@@ -218,9 +218,103 @@ export const heroes = createReducer(
 
 ## Redux Toolkit `createSlice()`
 
-Данная функция объединяет функции `createAction` и `createReducer` в одно
+- Данная функция объединяет функции `createAction` и `createReducer` в одно
+- Обычно она располагается рядом с файлом, к которому она и относится
+- В конец названия файла обычно добавляется суффикс `Slice` 
 
+Функция `createSlice` принимает в себя 4 аргумента:
+- `name` - пространство имён создаваемых действий (имя среза). Это имя *будет являться префиксом для всех имён экшенов*, которые мы будем передавать в качестве ключа внутри объекта `reducers`
+- `initialState` - начальное состояние
+- `reducers` - объект с обработчиками
+- `extraReducers` - объект с редьюсерами другого среза (обычно используется для обновления объекта, относящегося к другому слайсу)
 
+Конкретно тут был создан срез `actionCreators` и `reducer` для героев в одном файле рядом с самим компонентом 
+
+`components > heroesList > HeroesList.js`
+```JS
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
+
+const heroesSlice = createSlice({
+	// пространство имён, в котором будут происходить все экшены
+	name: 'heroes',
+	// начальное состояние
+	initialState,
+	reducers: {
+		// свойство генерирует экшен
+		// а значение генерирует действие редьюсера
+		heroesFetching: (state) => {
+			state.heroesLoadingStatus = 'loading';
+		},
+		heroesFetched: (state, action) => {
+			state.heroes = action.payload;
+			state.heroesLoadingStatus = 'idle';
+		},
+		heroesFetchingError: (state, action) => {
+			state.heroesLoadingStatus = 'error';
+		},
+		heroCreated: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		heroDeleted: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+});
+
+const { actions, reducer } = heroesSlice;
+
+export const { heroCreated, heroDeleted, heroesFetched, heroesFetchingError, heroesFetching } =
+	actions;
+export default reducer;
+```
+
+И далее импортируем наш `reducer` в `store`
+
+`store > index.js`
+```JS
+import heroes from '../components/heroesList/heroesSlice';
+
+const store = configureStore({
+	reducer: { heroes, filters },
+	devTools: process.env.NODE_ENV === 'development',
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stringMiddleware),
+});
+```
+
+Теперь всё то, что относится к `actionCreators` героев можно удалить из файла экшенов и импортировать нужные зависимости для работы функции `fetchHeroes`
+
+`actions > index.js`
+```JS
+import {
+	heroCreated,
+	heroDeleted,
+	heroesFetched,
+	heroesFetchingError,
+	heroesFetching,
+} from '../components/heroesList/heroesSlice';
+
+export const fetchHeroes = (request) => (dispatch) => {
+	dispatch(heroesFetching());
+	request('http://localhost:3001/heroes')
+		.then((data) => dispatch(heroesFetched(data)))
+		.catch(() => dispatch(heroesFetchingError()));
+};
+
+/// CODE ...
+```
+
+Далее нужно поправить некоторые импорты в `HeroesList` и в `HeroesAddForm`
+
+И теперь мы имеем работающее приложение, которое мы переписали на более коротком синтаксисе.
+
+Однако тут стоит сказать, что теперь наши действия были переименованы под образ `createSlice`, где обозначается пространство выполняемых действий экшеном (`heroes`) и сам `actionCreator` (`heroesFetching`) 
+
+![](_png/Pasted%20image%2020230322095937.png)
 
 
 

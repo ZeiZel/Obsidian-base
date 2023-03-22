@@ -135,8 +135,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 40,
-          "lastUpdated": 1679305308314
+          "count": 41,
+          "lastUpdated": 1679468751149
         }
       }
     },
@@ -236,67 +236,11 @@
         }
       }
     },
-    "аутентификация": {
-      "аутентификация": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1676783633912
-        }
-      }
-    },
-    "отображать": {
-      "отображать": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676782986518
-        }
-      }
-    },
     "компоненте": {
       "компоненте": {
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677944945410
-        }
-      }
-    },
-    "находимся": {
-      "находимся": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676783141411
-        }
-      }
-    },
-    "появилась": {
-      "появилась": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676783351506
-        }
-      }
-    },
-    "атрибут": {
-      "атрибут": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676783530948
-        }
-      }
-    },
-    "аутентификации": {
-      "аутентификации": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676783669932
-        }
-      }
-    },
-    "хранилища": {
-      "хранилища": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1676783675523
         }
       }
     },
@@ -1357,6 +1301,46 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679410659972
+        }
+      }
+    },
+    "createSlice": {
+      "createSlice": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679468638350
+        }
+      }
+    },
+    "actionCreators": {
+      "actionCreators": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1679468848495
+        }
+      }
+    },
+    "fetchHeroes": {
+      "fetchHeroes": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679467786610
+        }
+      }
+    },
+    "heroesFetched": {
+      "heroesFetched": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679468695478
+        }
+      }
+    },
+    "HeroesList": {
+      "HeroesList": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679468771423
         }
       }
     }
