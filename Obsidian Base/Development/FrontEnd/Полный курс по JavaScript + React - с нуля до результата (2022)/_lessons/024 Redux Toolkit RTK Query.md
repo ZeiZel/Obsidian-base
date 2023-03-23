@@ -9,7 +9,7 @@ RTK Qeury и React Query концептуально меняют подход к
 ![](_png/Pasted%20image%2020230323152622.png)
 
 Далее потребуются две основные функции для работы с Query:
-- `createAPI` - полностью описывает поведение RTK Query
+- `createApi` - полностью описывает поведение RTK Query
 - `fetchBaseQuery` - модифицированная функция `fetch()`
 
 
