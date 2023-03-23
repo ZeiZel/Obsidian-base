@@ -1406,6 +1406,14 @@
           "lastUpdated": 1679564282781
         }
       }
+    },
+    "selectAll": {
+      "selectAll": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679567231531
+        }
+      }
     }
   }
 }
