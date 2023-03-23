@@ -17,4 +17,3 @@
 [015 Redux-thunk](015%20Redux-thunk.md)
 [Redux Toolkit](Redux%20Toolkit.md)
 [024 Redux Toolkit RTK Query](024%20Redux%20Toolkit%20RTK%20Query.md)
-[025 Что дальше](025%20Что%20дальше.md)
