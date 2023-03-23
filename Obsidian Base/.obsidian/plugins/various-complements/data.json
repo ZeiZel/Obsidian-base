@@ -1446,6 +1446,54 @@
           "lastUpdated": 1679580663287
         }
       }
+    },
+    "сформированный": {
+      "сформированный": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679582357902
+        }
+      }
+    },
+    "createApi": {
+      "createApi": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679582646869
+        }
+      }
+    },
+    "reducerPath": {
+      "reducerPath": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679582666333
+        }
+      }
+    },
+    "baseUrl": {
+      "baseUrl": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679582734166
+        }
+      }
+    },
+    "fetchBaseQuery": {
+      "fetchBaseQuery": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679582757083
+        }
+      }
+    },
+    "endpoints": {
+      "endpoints": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679582807853
+        }
+      }
     }
   }
 }

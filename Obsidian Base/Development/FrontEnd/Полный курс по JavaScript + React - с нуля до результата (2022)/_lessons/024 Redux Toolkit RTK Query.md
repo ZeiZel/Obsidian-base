@@ -12,7 +12,14 @@ RTK Qeury и React Query концептуально меняют подход к
 - `createApi` - полностью описывает поведение RTK Query
 - `fetchBaseQuery` - модифицированная функция `fetch()`
 
-
+Чтобы начать работать с данной библиотекой, нужно будет написать будущее АПИ общения с RTK Query:
+- Пишем функцию `createApi`, которая описывает взаимодействие с библиотекой и передаём в неё объект
+	- `reducerPath` будет указывать то пространство имён, в котором происходят все запросы
+	- `baseQuery` описывает полностью базовые параметры запроса на сервер
+		- функция `fetchBaseQuery` выполняет функцию фетча, но хранит дополнительные параметры для ртк
+		- `baseUrl` принимает строку для обращения к серверу
+	- `endpoints` хранит функцию, которая возвращает объект с теми запросами и изменениями, что мы можем вызвать
+		- свойство объекта будет входить в имя хука, который будет сгенерирован. Если мы имеем имя `getHeroes`, то библиотека сформирует хук `useGetHeroesQuery`
 
 `api > apiSlice.js`
 ```JS
@@ -42,7 +49,7 @@ export const apiSlice = createApi({
 export const { useGetHeroesQuery } = apiSlice;
 ```
 
-
+Далее нужно сконфигурировать хранилище
 
 `store > index.js`
 ```JS
@@ -65,7 +72,9 @@ const store = configureStore({
 });
 ```
 
+И уже тут мы можем воспользоваться хуком, который сгенерировал Query. Через хук `useGetHeroesQuery` мы получаем все те промежуточные состояния, которые могут быть присвоены запросы, который приходит с сервера
 
+> Так же нужно упомянуть, что все те данные, что мы получили с сервера будут кешироваться в браузере на определённое время
 
 `components > heroesList > HeroesList.js`
 ```JS
@@ -83,6 +92,21 @@ const HeroesList = () => {
 		error, // переменная с ошибкой
 	} = useGetHeroesQuery();
 
+	// получаем доступ к выбранному пользователем фильтру
+	const activeFilter = useSelector((state) => state.filters.activeFilter);
+
+	// это фильтр героев, которых мы получили с сервера
+	const filteredHeroes = useMemo(() => {
+		// создаём копию массива персонажей
+		const filteredHeroes = heroes.slice();
+
+		if (activeFilter === 'all') {
+			return filteredHeroes;
+		} else {
+			return filteredHeroes.filter((item) => item.element === activeFilter);
+		}
+	}, [heroes, activeFilter]);
+
 	/// CODE ...
 
 	if (isLoading) {
@@ -93,8 +117,8 @@ const HeroesList = () => {
 
 	/// CODE ...
 
-	// и сюда подставляем переменную из
-	const elements = renderHeroesList(heroes);
+	// и сюда подставляем отсортированных персонажей  
+	const elements = renderHeroesList(filteredHeroes);
 	return <TransitionGroup component='ul'>{elements}</TransitionGroup>;
 };
 
@@ -102,7 +126,7 @@ export default HeroesList;
 ```
 
 
-
+![](_png/Pasted%20image%2020230323174138.png)
 
 
 
