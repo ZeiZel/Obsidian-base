@@ -582,9 +582,24 @@ const heroesSlice = createSlice({
 -   `selectTotal`: возвращает общее количество объектов, сохраняемых в этом состоянии.
 -   `selectById`: учитывая состояние и идентификатор объекта, возвращает объект с этим идентификатором или `undefined`.
 
+Если мы использем селекторы в глобальной областивидимости, то нам нужно будет самостоятельно указывать, с чем именно должна работать данная команда
 
+```JS
+const store = configureStore({
+  reducer: {
+    books: booksReducer,
+  },
+})
 
+const simpleSelectors = booksAdapter.getSelectors()
+const globalizedSelectors = booksAdapter.getSelectors((state) => state.books)
 
+// указываем конкретный объект, с которым будет работать селектор
+const bookIds = simpleSelectors.selectIds(store.getState().books)
+
+// уже этот селектор знает, с каким объектом в стейте он имеет дело
+const allBooks = globalizedSelectors.selectAll(store.getState())
+```
 
 
 
