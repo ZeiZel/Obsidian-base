@@ -19,7 +19,7 @@ RTK Qeury и React Query концептуально меняют подход к
 		- функция `fetchBaseQuery` выполняет функцию фетча, но хранит дополнительные параметры для ртк
 		- `baseUrl` принимает строку для обращения к серверу
 	- `endpoints` хранит функцию, которая возвращает объект с теми запросами и изменениями, что мы можем вызвать
-		- свойство объекта будет входить в имя хука, который будет сгенерирован. Если мы имеем имя `getHeroes`, то библиотека сформирует хук `useGetHeroesQuery`
+		- свойство объекта будет входить в имя хука, который будет сгенерирован. Если мы имеем имя `getHeroes`, то библиотека сформирует хук `useGetHeroes[Query/Mutation]` (суффикс уже будет зависеть от типа того, что делает хук - просто запрос или мутация данных)
 
 `api > apiSlice.js`
 ```JS
@@ -49,7 +49,9 @@ export const apiSlice = createApi({
 export const { useGetHeroesQuery } = apiSlice;
 ```
 
-Далее нужно сконфигурировать хранилище
+Далее нужно сконфигурировать хранилище:
+- чтобы добавить новый reduce, нужно в качестве свойства указать динамическую строку `apiSlice.reducerPath` и указать значение переменной самого редьюсера `apiSlice.reducer`
+- далее добавляем `middleware` для обработки специфических запросов RTK Query
 
 `store > index.js`
 ```JS
@@ -125,8 +127,51 @@ const HeroesList = () => {
 export default HeroesList;
 ```
 
+И наше приложение работает теперь так же, как и до изменений - список героев нормально получается с сервера
 
 ![](_png/Pasted%20image%2020230323174138.png)
+
+
+
+`api > apiSlice.js`
+```JS
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+	reducerPath: 'api',
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:3001',
+	}),
+	endpoints: (builder) => ({
+		getHeroes: builder.query({
+			query: () => '/heroes',
+		}),
+		createHero: builder.mutation({
+			query: (hero) => ({
+				url: '/heroes',
+				method: 'POST',
+				body: hero,
+			}),
+		}),
+	}),
+});
+
+export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
+```
+
+И далее можно будет применить данный хук мутации 
+
+![](_png/Pasted%20image%2020230323182350.png)
+
+
+
+
+
+
+
+
+
+
 
 
 

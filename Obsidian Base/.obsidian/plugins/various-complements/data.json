@@ -1210,8 +1210,8 @@
     "middleware": {
       "middleware": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1679392931146
+          "count": 3,
+          "lastUpdated": 1679583120605
         }
       }
     },
@@ -1492,6 +1492,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679582807853
+        }
+      }
+    },
+    "Query": {
+      "Query": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679583134948
         }
       }
     }
