@@ -3,6 +3,8 @@
   "cedictPath": "./cedict_ts.u8",
   "matchStrategy": "prefix",
   "fuzzyMatch": true,
+  "matchingWithoutEmoji": true,
+  "treatAccentDiacriticsAsAlphabeticCharacters": false,
   "maxNumberOfSuggestions": 10,
   "maxNumberOfWordsAsPhrase": 3,
   "minNumberOfCharactersTriggered": 0,
@@ -58,6 +60,7 @@
     "maxDaysToKeepHistory": 30,
     "maxNumberOfHistoryToKeep": 0
   },
+  "disableOnMobile": false,
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
     "interface": {
@@ -135,8 +138,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 43,
-          "lastUpdated": 1679494340617
+          "count": 44,
+          "lastUpdated": 1679562855485
         }
       }
     },
@@ -1343,24 +1346,64 @@
     "createAsyncThunk": {
       "createAsyncThunk": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679492994363
+          "count": 2,
+          "lastUpdated": 1679562720319
         }
       }
     },
     "heroesList": {
       "heroesList": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679494310119
+          "count": 2,
+          "lastUpdated": 1679562872163
         }
       }
     },
     "heroesSlice": {
       "heroesSlice": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679562858336
+        }
+      }
+    },
+    "createEntityAdapter": {
+      "createEntityAdapter": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679563017689
+        }
+      }
+    },
+    "initialState": {
+      "initialState": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1679494379473
+          "lastUpdated": 1679562910715
+        }
+      }
+    },
+    "CRUD-операциями": {
+      "CRUD-операциями": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679563006325
+        }
+      }
+    },
+    "setAll": {
+      "setAll": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679564108184
+        }
+      }
+    },
+    "getSelectors": {
+      "getSelectors": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679564282781
         }
       }
     }
