@@ -178,6 +178,50 @@ export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
 
 
 
+`api > apiSlice.js`
+```JS
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+	reducerPath: 'api',
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:3001',
+	}),
+	// тут мы задаём, какие метки (теги) существуют
+	tagTypes: ['Heroes'],
+	endpoints: (builder) => ({
+		getHeroes: builder.query({
+			query: () => '/heroes',
+			// указываем, когда данные запрашиваются при помощи обычного запроса
+			providesTags: ['Heroes'], // а тут мы подцепляемся к тегам - функция триггерится от тегов
+		}),
+		createHero: builder.mutation({
+			query: (hero) => ({
+				url: '/heroes',
+				method: 'POST',
+				body: hero,
+			}),
+			// если мы мутировали эти данные, то по какой метке мы должны получить эти данные
+			invalidatesTags: ['Heroes'], // а тут мы указываем, что именно нужно обновить повторно, когда данные изменились
+		}),
+	}),
+});
+
+export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
+```
+
+И теперь всё работает - при создании нового персонажа триггерится функция обновления списка персонажей на фронте
+
+![](_png/Pasted%20image%2020230323184202.png)
+
+
+
+
+
+
+
+
+
 
 
 

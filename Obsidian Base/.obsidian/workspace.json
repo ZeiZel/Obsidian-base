@@ -85,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';  export const apiSlice = createApi({ \treducerPath: 'api', \tbaseQuery: fetchBaseQuery({ \t\tbaseUrl: 'http://localhost:3001', \t}), \t// тут мы задаём, какие метки (теги) существуют \ttagTypes: ['Heroes'], \tendpoints: (builder) => ({ \t\tgetHeroes: builder.query({ \t\t\tquery: () => '/heroes', \t\t\t// указываем, когда данные запрашиваются при помощи обычного запроса \t\t\tprovidesTags: ['Heroes'], // а тут мы подцепляемся к тегам - функция триггерится от тегов \t\t}), \t\tcreateHero: builder.mutation({ \t\t\tquery: (hero) => ({ \t\t\t\turl: '/heroes', \t\t\t\tmethod: 'POST', \t\t\t\tbody: hero, \t\t\t}), \t\t\t// если мы мутировали эти данные, то по какой метке мы должны получить эти данные \t\t\tinvalidatesTags: ['Heroes'], // а тут мы указываем, что именно нужно обновить повторно, когда данные изменились \t\t}), \t}), });  export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -219,6 +219,7 @@
   },
   "active": "54d32e24f7fc507c",
   "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323184202.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323182901.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323182350.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323181925.png",
@@ -238,7 +239,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323141001.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323135737.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323134547.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/_png/Pasted image 20230323134059.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/015 Redux-thunk.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/014 Middleware.md",
