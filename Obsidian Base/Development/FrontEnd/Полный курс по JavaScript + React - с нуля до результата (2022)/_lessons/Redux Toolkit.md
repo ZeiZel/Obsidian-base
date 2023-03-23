@@ -492,7 +492,7 @@ export const useHttp = () => {
 
 ## Redux Toolkit `createEntityAdapter()`
 
-
+Функция `createEntityAdapter()` позволит создавать готовый объект с часто-выполняемыми CRUD-операциями в `reducer`
 
 
 
