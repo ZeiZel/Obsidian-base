@@ -138,8 +138,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 44,
-          "lastUpdated": 1679562855485
+          "count": 45,
+          "lastUpdated": 1679589753917
         }
       }
     },
@@ -1330,8 +1330,8 @@
     "HeroesList": {
       "HeroesList": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1679494302175
+          "count": 4,
+          "lastUpdated": 1679589759266
         }
       }
     },
@@ -1354,16 +1354,16 @@
     "heroesList": {
       "heroesList": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1679562872163
+          "count": 3,
+          "lastUpdated": 1679589766502
         }
       }
     },
     "heroesSlice": {
       "heroesSlice": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1679562858336
+          "count": 4,
+          "lastUpdated": 1679589756476
         }
       }
     },
