@@ -1414,6 +1414,30 @@
           "lastUpdated": 1679567231531
         }
       }
+    },
+    "круд-функций": {
+      "круд-функций": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679569941373
+        }
+      }
+    },
+    "entitie": {
+      "entitie": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679569983456
+        }
+      }
+    },
+    "reselect": {
+      "reselect": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679570109447
+        }
+      }
     }
   }
 }
