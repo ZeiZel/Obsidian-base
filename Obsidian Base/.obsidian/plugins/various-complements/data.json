@@ -106,8 +106,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 45,
-          "lastUpdated": 1679589753917
+          "count": 46,
+          "lastUpdated": 1679666449582
         }
       }
     },
@@ -156,14 +156,6 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677944945410
-        }
-      }
-    },
-    "configService": {
-      "configService": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677069833313
         }
       }
     },
@@ -1244,6 +1236,14 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1679659187193
+        }
+      }
+    },
+    "CardProps": {
+      "CardProps": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679666457817
         }
       }
     }
