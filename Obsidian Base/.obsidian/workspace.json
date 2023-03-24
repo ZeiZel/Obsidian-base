@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/XState.md",
+                "file": "Development/FrontEnd/State machine - XState.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/XState.md",
+                "file": "Development/FrontEnd/State machine - XState.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/XState.md",
+                "file": "Development/FrontEnd/State machine - XState.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/XState.md"
+                "file": "Development/FrontEnd/State machine - XState.md"
               }
             }
           },
@@ -209,7 +209,7 @@
   "lastOpenFiles": [
     "Development/Apollo + GraphQL.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
-    "Development/FrontEnd/XState.md",
+    "Development/FrontEnd/State machine - XState.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/Практический модуль.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/Redux Toolkit.md",
