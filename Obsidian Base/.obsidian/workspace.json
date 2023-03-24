@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Типизация TypeScript в React.md",
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Типизация TypeScript в React.md",
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Типизация TypeScript в React.md",
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Типизация TypeScript в React.md"
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md"
               }
             }
           },
