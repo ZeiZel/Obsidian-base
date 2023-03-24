@@ -20,6 +20,18 @@
             }
           },
           {
+            "id": "0dad026b4231e711",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Типизация TypeScript в React.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "50ef9e911dd56133",
             "type": "leaf",
             "state": {
@@ -43,7 +55,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -109,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/TypeScript/_lessons/03 Основные типы.md",
+                "file": "Development/Типизация TypeScript в React.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -126,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/TypeScript/_lessons/03 Основные типы.md",
+                "file": "Development/Типизация TypeScript в React.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/03 Основные типы.md"
+                "file": "Development/Типизация TypeScript в React.md"
               }
             }
           },
@@ -204,8 +217,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "41d4404cc69d784b",
+  "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/TypeScript/_lessons/03 Основные типы.md",
     "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -221,7 +235,6 @@
     "Development/TypeScript/_lessons/04 Продвинутые типы.md",
     "Development/TypeScript/_lessons/05 Классы.md",
     "Development/TypeScript/_lessons/07 Generics.md",
-    "Development/TypeScript/_lessons/03 Основные типы.md",
     "Без названия.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
     "Development/Apollo + GraphQL.md",
