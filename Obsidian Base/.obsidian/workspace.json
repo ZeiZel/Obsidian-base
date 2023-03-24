@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md"
+                "file": "Development/Типизация TypeScript в React, Redux Toolkit.md"
               }
             }
           },
@@ -229,8 +229,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0eda3077eb723c79",
+  "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/01 Введение.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230324150849.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230324150125.png",
@@ -238,7 +239,6 @@
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230324144836.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230324143626.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/_lessons/03 Основные типы.md",
     "Development/TypeScript/TypeScript.md",
