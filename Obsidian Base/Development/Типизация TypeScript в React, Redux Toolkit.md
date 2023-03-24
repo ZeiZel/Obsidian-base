@@ -234,9 +234,47 @@ export default App;
 ## Компонент UserItem.
 
 
+`components > UserItem > UserItemProps.tsx`
+```TS
+import { IUser } from '../../types';
+
+export interface IUserItemProps {
+	user: IUser;
+}
+```
+
+
+`components > UserItem > UserItem.tsx`
+```TSX
+import React, { FC } from 'react';
+import { IUserItemProps } from './UserItemProps';
+
+const UserItem: FC<IUserItemProps> = ({ user }) => {
+	return (
+		<div key={user.id} style={{ padding: 15, border: '1px solid gray' }}>
+			{user.id}. {user.name} ({user.email}) проживает в {user.address.city}/
+			{user.address.street}
+		</div>
+	);
+};
+
+export default UserItem;
+```
 
 
 
+`components > UserList > UserList.tsx`
+```TSX
+const UserList: FC<IUserList> = ({ users }) => {
+	return (
+		<div>
+			{users.map((user) => (
+				<UserItem user={user} />
+			))}
+		</div>
+	);
+};
+```
 
 
 ## Типизация запроса axios. Типизация хука UseState()
