@@ -103,14 +103,6 @@
         }
       }
     },
-    "docker-compose": {
-      "docker-compose": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677057504742
-        }
-      }
-    },
     "components": {
       "components": {
         "currentFile": {
@@ -164,78 +156,6 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677944945410
-        }
-      }
-    },
-    "dockerfile": {
-      "dockerfile": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677052647995
-        }
-      }
-    },
-    "Dockerfile": {
-      "Dockerfile": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677062071870
-        }
-      }
-    },
-    "WORKDIR": {
-      "WORKDIR": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677052925167
-        }
-      }
-    },
-    "директирию": {
-      "директирию": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677052933021
-        }
-      }
-    },
-    "querystring": {
-      "querystring": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677055294876
-        }
-      }
-    },
-    "Github": {
-      "Github": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677060807446
-        }
-      }
-    },
-    "автоматизировать": {
-      "автоматизировать": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677060829232
-        }
-      }
-    },
-    "workflow": {
-      "workflow": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677061039469
-        }
-      }
-    },
-    "StyleLint": {
-      "StyleLint": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677062977538
         }
       }
     },
@@ -1308,6 +1228,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679643411203
+        }
+      }
+    },
+    "устройствах": {
+      "устройствах": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679658436208
+        }
+      }
+    },
+    "отсутствие": {
+      "отсутствие": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679659187193
         }
       }
     }
