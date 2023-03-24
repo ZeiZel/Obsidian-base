@@ -130,6 +130,7 @@ export default App;
 
 ![](_png/Pasted%20image%2020230324173039.png)
 
+
 ## Компонент UserList. IUser, IAddress
 
 
