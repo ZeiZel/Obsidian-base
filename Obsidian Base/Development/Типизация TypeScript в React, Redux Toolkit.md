@@ -474,6 +474,14 @@ export default App;
 
 ## Типизация событий. MouseEvents, DragEvents, ChangeEvents
 
+> Очен
+
+Для атрибута `onChange` в TS присвоен тип `ChangeEvent<T>`, который в качестве дженерик-типа принимает тот тег, к которому применяется типизация
+
+
+
+
+
 
 
 
