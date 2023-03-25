@@ -605,7 +605,9 @@ const EventsEx: FC = (): JSX.Element => {
 
 ## Типизация react-router-dom. UseHistory, useParams, BrowserRouter
 
+Далее нам нужно будет реализовать многостраничность с помощью `react-router-dom` библиотеки
 
+Для начала, нужно в `UserItem` добавить функцию, которая возвращала бы персонажа при клике
 
 `components > UserItem > UserItemProps.ts`
 ```TSX
@@ -639,6 +641,7 @@ const UserItem: FC<IUserItemProps> = ({ user, onClick }) => {
 export default UserItem;
 ```
 
+Это главная страница, с которой можно перейти на нужные ссылки
 
 `components > pages > MainPage.tsx`
 ```TSX
@@ -657,7 +660,7 @@ const MainPage: FC = () => {
 export default MainPage;
 ```
 
-
+Это компонент страницы с тудушками
 
 `components > pages > TodosPage.tsx`
 ```TSX
@@ -693,7 +696,9 @@ const TodosPage: FC = () => {
 export default TodosPage;
 ```
 
+![](_png/Pasted%20image%2020230325170657.png)
 
+Это компонент списка пользователей
 
 `components > pages > UsersPage.tsx`
 ```TSX
@@ -735,6 +740,7 @@ const UsersPage: FC = () => {
 export default UsersPage;
 ```
 
+Это компонент отдельной страницы пользователя
 
 `components > pages > UserItemPage.tsx`
 ```TSX
@@ -787,9 +793,9 @@ type Params = 'a' | 'b' | 'c';
 const params = useParams<Params>();
 ```
 
+Тут мы уже должны реализовать пути перехода ссылок в приложении
 
-
-
+`components > App > App.tsx`
 ```TSX
 import React, { FC } from 'react';
 import './App.css';
