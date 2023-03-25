@@ -87,27 +87,11 @@
         }
       }
     },
-    "микросервисов": {
-      "микросервисов": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677078423927
-        }
-      }
-    },
-    "@Injectable": {
-      "@Injectable": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677075857680
-        }
-      }
-    },
     "components": {
       "components": {
         "currentFile": {
-          "count": 47,
-          "lastUpdated": 1679670223184
+          "count": 48,
+          "lastUpdated": 1679739832204
         }
       }
     },
@@ -156,22 +140,6 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1677944945410
-        }
-      }
-    },
-    "Middleware": {
-      "Middleware": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677075251503
-        }
-      }
-    },
-    "Interceptors": {
-      "Interceptors": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677075313328
         }
       }
     },
@@ -1276,6 +1244,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679674163403
+        }
+      }
+    },
+    "TodoItem": {
+      "TodoItem": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679739840615
         }
       }
     }

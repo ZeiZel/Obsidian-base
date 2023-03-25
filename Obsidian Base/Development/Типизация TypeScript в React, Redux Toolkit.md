@@ -338,11 +338,139 @@ export default App;
 
 ## Переиспользуемый компонент List. Generics, Обобщенные типы в typescript
 
+Создадим ещё один глобальный интерфейс тудушки
+
+`types > index.ts`
+```TS
+export interface ITodo {
+	id: number;
+	title: string;
+	completed: boolean;
+}
+```
+
+И создадим общий компонент, который будет принимать в себя массив элементов динамического типа `<T>` и будет принимать в себя функцию для рендера одного элемента 
+
+Данный компонент `List` будет рендерить любой массив элементов, который в него передали. Таким образом, мы создаём компонент с использованием обобщённых типов
+
+`components > List > ListProps.ts`
+```TS
+import { ReactNode } from 'react';
+
+export interface IListProps<T> {
+	items: T[];
+	renderItem: (item: T) => ReactNode;
+}
+```
+
+`components > List > List.tsx`
+```TSX
+import React, { FC } from 'react';
+import { IListProps } from './ListProps';
+
+export default function List<T>(props: IListProps<T>) {
+	return <div>{props.items.map(props.renderItem)}</div>;
+}
+```
+
+Тут мы создаём компонент с отдельной тудушкой
+
+`components > TodoItem > TodoItemProps.tsx`
+```TS
+import { ITodo } from '../../types';
+
+export interface ITodoItemProps {
+	todo: ITodo;
+}
+```
+
+`components > TodoItem > TodoItem.tsx`
+```TSX
+import React, { FC } from 'react';
+import { ITodoItemProps } from './TodoItemProps';
+
+const TodoItem: FC<ITodoItemProps> = ({ todo }) => {
+	return (
+		<div>
+			<input type='checkbox' checked={todo.completed} />
+			{todo.id}. {todo.title}
+		</div>
+	);
+};
+
+export default TodoItem;
+```
+
+А тут уже подставляем компонент `List` для обоих массивов списков (персонажей и тудушек)
+
+`components > App > App.tsx`
+```TSX
+import React, { FC, useEffect, useState } from 'react';
+import Card from '../Card/Card';
+import { CardVariant } from '../Card/CardProps';
+import { ITodo, IUser } from '../../types';
+import axios from 'axios';
+import List from '../List/List';
+import UserItem from '../UserItem/UserItem';
+import TodoItem from '../TodoItem/TodoItem';
+import './App.css';
+
+const App: FC = (): JSX.Element => {
+	const [users, setUsers] = useState<IUser[]>([]);
+	const [todos, setTodos] = useState<ITodo[]>([]);
+
+	async function fetchUsers() {
+		try {
+			const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
+			setUsers(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	async function fetchTodos() {
+		try {
+			const response = await axios.get<ITodo[]>(
+				'https://jsonplaceholder.typicode.com/todos?_limit=10',
+			);
+			setTodos(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	useEffect(() => {
+		fetchUsers();
+		fetchTodos();
+	}, []);
+
+	return (
+		<div className={'wrapper'}>
+			<Card
+				width={'400px'}
+				height={'400px'}
+				variant={CardVariant.OUTLINED}
+				onClick={() => console.log('Card')}
+			>
+				<button>Workink!</button>
+			</Card>
+			<List
+				items={users}
+				renderItem={(user: IUser) => <UserItem user={user} key={user.id} />}
+			/>
+			<List
+				items={todos}
+				renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />}
+			/>
+		</div>
+	);
+};
+
+export default App;
+```
 
 
-
-
-
+![](_png/Pasted%20image%2020230325132146.png)
 
 ## Типизация событий. MouseEvents, DragEvents, ChangeEvents
 
