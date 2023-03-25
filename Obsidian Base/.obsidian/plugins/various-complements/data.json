@@ -90,8 +90,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 48,
-          "lastUpdated": 1679739832204
+          "count": 49,
+          "lastUpdated": 1679748601033
         }
       }
     },
@@ -1252,6 +1252,54 @@
         "currentFile": {
           "count": 2,
           "lastUpdated": 1679739840615
+        }
+      }
+    },
+    "onDrag": {
+      "onDrag": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679748042163
+        }
+      }
+    },
+    "onDrop": {
+      "onDrop": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679748045033
+        }
+      }
+    },
+    "onDragOver": {
+      "onDragOver": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679748048784
+        }
+      }
+    },
+    "onDragLeave": {
+      "onDragLeave": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679748051953
+        }
+      }
+    },
+    "EventsEx": {
+      "EventsEx": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1679748608995
+        }
+      }
+    },
+    "EventHandler": {
+      "EventHandler": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679748606617
         }
       }
     }

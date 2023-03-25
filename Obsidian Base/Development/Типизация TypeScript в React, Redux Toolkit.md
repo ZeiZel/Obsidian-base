@@ -478,22 +478,129 @@ export default App;
 
 Для атрибута `onChange` в TS присвоен тип `ChangeEvent<T>`, который в качестве дженерик-типа принимает тот тег, к которому применяется типизация
 
+Для всех событий drag и drop используется один тип:
+- `onDrag` - `DragEvent`
+- `onDrop` - `DragEvent`
+- `onDragOver` - `DragEvent`
+- `onDragLeave` - `DragEvent`
 
+`components > EventsEx > EventsEx.tsx`
+```TSX
+import React, { ChangeEvent, EventHandler, FC, useState } from 'react';
 
+const EventsEx: FC = (): JSX.Element => {
+	const [value, setValue] = useState<string>('');
+	const [isDrag, setIsDrag] = useState<boolean>(false);
 
+	// будет записывать в стейт значение из инпута
+	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(e.target.value);
+	};
 
+	// будет выводить стейт в консоль
+	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+		console.log(value);
+	};
 
+	// при попытке драга, будет выводиться лог в консоль
+	const dragHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		console.log('DRAG');
+	};
+
+	// будет срабатывать при 
+	const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDrag(false);
+		console.log('DROP');
+	};
+
+	const leaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDrag(false);
+		console.log('LEAVE');
+	};
+
+	const dragWithPreventHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDrag(true);
+		console.log('DRAG OVER');
+	};
+
+	return (
+		<div>
+			<input type='text' value={value} onChange={changeHandler} />
+			<button onClick={clickHandler}>Button</button>
+			<div
+				onDrag={dragHandler}
+				draggable
+				style={{
+					width: 200,
+					height: 200,
+					backgroundColor: 'pink',
+					margin: '15px 0px 15px 0px',
+				}}
+			></div>
+			<div
+				// сработает при попытке дропа в блок
+				onDrop={dropHandler}
+				// сработает, когда мы покинем блок
+				onDragLeave={leaveHandler}
+				// при нахождении внутри блока
+				onDragOver={dragWithPreventHandler}
+				style={{ width: 200, height: 200, backgroundColor: isDrag ? 'pink' : 'blue' }}
+			></div>
+		</div>
+	);
+};
+
+export default EventsEx;
+```
+
+Введённая строка из инпута при нажатии на кнопку попадает в консоль
 
 ![](_png/Pasted%20image%2020230325142206.png)
 
+А уже тут при драге первого блока на второй меняется цвет последнего 
+
+![](_png/Pasted%20image%2020230325153242.png)
+
+![](_png/Pasted%20image%2020230325153245.png)
 
 
 ## Типизация хука useRef. Неуправляемый компонент
 
+`useRef` принимает внутрь дженерика тип элемента, с которым он взаимодействует
 
+`components > EventsEx > EventsEx.tsx`
+```TSX
+import React, { ChangeEvent, EventHandler, FC, useRef, useState } from 'react';
 
+const EventsEx: FC = (): JSX.Element => {
+	const [value, setValue] = useState<string>('');
+	const [isDrag, setIsDrag] = useState<boolean>(false);
 
+	const inputRef = useRef<HTMLInputElement>(null);
 
+	// будет выводить стейт в консоль
+	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+		console.log(inputRef.current?.value);
+	};
+
+	/// CODE ...
+
+	return (
+		<div>
+			<input ref={inputRef} type='text' placeholder={'Неуправляемый'} />
+			<input type='text' value={value} onChange={changeHandler} placeholder={'Управляемый'} />
+			
+			/// CODE ...
+
+		</div>
+	);
+};
+```
+
+![](_png/Pasted%20image%2020230325154842.png)
 
 
 ## Типизация react-router-dom. UseHistory, useParams, BrowserRouter
