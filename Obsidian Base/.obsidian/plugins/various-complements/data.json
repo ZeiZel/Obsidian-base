@@ -90,8 +90,8 @@
     "components": {
       "components": {
         "currentFile": {
-          "count": 49,
-          "lastUpdated": 1679748601033
+          "count": 50,
+          "lastUpdated": 1679752647842
         }
       }
     },
@@ -1300,6 +1300,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679748606617
+        }
+      }
+    },
+    "useParams": {
+      "useParams": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679751725190
+        }
+      }
+    },
+    "UseHistory": {
+      "UseHistory": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679752256927
         }
       }
     }

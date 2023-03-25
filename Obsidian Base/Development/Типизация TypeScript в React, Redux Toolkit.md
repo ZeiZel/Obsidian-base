@@ -607,7 +607,231 @@ const EventsEx: FC = (): JSX.Element => {
 
 
 
+`components > UserItem > UserItemProps.ts`
+```TSX
+import { IUser } from '../../types';
 
+export interface IUserItemProps {
+	user: IUser;
+	onClick: (user: IUser) => void;
+}
+```
+
+
+`components > UserItem > UserItem.tsx`
+```TSX
+import React, { FC } from 'react';
+import { IUserItemProps } from './UserItemProps';
+
+const UserItem: FC<IUserItemProps> = ({ user, onClick }) => {
+	return (
+		<div
+			onClick={() => onClick(user)}
+			key={user.id}
+			style={{ padding: 15, border: '1px solid gray' }}
+		>
+			{user.id}. {user.name} ({user.email}) проживает в {user.address.city}/
+			{user.address.street}
+		</div>
+	);
+};
+
+export default UserItem;
+```
+
+
+`components > pages > MainPage.tsx`
+```TSX
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+
+const MainPage: FC = () => {
+	return (
+		<div>
+			<Link to={'/users'}>Пользователи</Link>
+			<Link to={'/todos'}>Тудушки</Link>
+		</div>
+	);
+};
+
+export default MainPage;
+```
+
+
+
+`components > pages > TodosPage.tsx`
+```TSX
+import React, { FC, useEffect, useState } from 'react';
+import { ITodo } from '../../types';
+import axios from 'axios';
+import TodoItem from '../TodoItem/TodoItem';
+import List from '../List/List';
+
+const TodosPage: FC = () => {
+	const [todos, setTodos] = useState<ITodo[]>([]);
+
+	async function fetchTodos() {
+		try {
+			const response = await axios.get<ITodo[]>(
+				'https://jsonplaceholder.typicode.com/todos?_limit=10',
+			);
+			setTodos(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	useEffect(() => {
+		fetchTodos();
+	}, []);
+
+	return (
+		<List items={todos} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />} />
+	);
+};
+
+export default TodosPage;
+```
+
+
+
+`components > pages > UsersPage.tsx`
+```TSX
+import React, { FC, useEffect, useState } from 'react';
+import axios from 'axios';
+import { IUser } from '../../types';
+import UserItem from '../UserItem/UserItem';
+import List from '../List/List';
+import { useNavigate } from 'react-router-dom';
+
+const UsersPage: FC = () => {
+	const [users, setUsers] = useState<IUser[]>([]);
+
+	const navigate = useNavigate();
+
+	async function fetchUsers() {
+		try {
+			const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
+			setUsers(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	useEffect(() => {
+		fetchUsers();
+	}, []);
+
+	return (
+		<List
+			items={users}
+			renderItem={(user: IUser) => (
+				<UserItem onClick={() => navigate(`${user.id}`)} user={user} key={user.id} />
+			)}
+		/>
+	);
+};
+
+export default UsersPage;
+```
+
+
+`components > pages > UserItemPage.tsx`
+```TSX
+import React, { FC, useEffect, useState } from 'react';
+import { IUser } from '../../types';
+import axios from 'axios';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+
+interface IUserItemPageParams {
+	id: string;
+}
+
+const UserItemPage: FC = () => {
+	const [user, setUser] = useState<IUser | null>(null);
+	const params = useParams<keyof IUserItemPageParams>();
+	const navigate = useNavigate();
+
+	async function fetchUser() {
+		try {
+			const response = await axios.get<IUser>(
+				'https://jsonplaceholder.typicode.com/users/' + params.id,
+			);
+			setUser(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	useEffect(() => {
+		fetchUser();
+	}, []);
+
+	return (
+		<div>
+			<button onClick={() => navigate('/users')}>back</button>
+			<h1>Страница пользователя {user?.name}</h1>
+			<h4>Проживает в {user?.address.city}</h4>
+		</div>
+	);
+};
+
+export default UserItemPage;
+```
+
+Тут нужно сказать, что `useParams` в дженерик принимает строку с тем ключом, который к нему придёт, поэтому выше используется `keyof` от интерфейса
+
+```TS
+type Params = 'a' | 'b' | 'c';
+// ...
+const params = useParams<Params>();
+```
+
+
+
+
+```TSX
+import React, { FC } from 'react';
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import TodosPage from '../pages/TodosPage';
+import UsersPage from '../pages/UsersPage';
+import MainPage from '../pages/MainPage';
+import UserItemPage from '../pages/UserItemPage';
+import TodoItemPage from '../pages/TodoItemPage';
+
+const App: FC = (): JSX.Element => {
+	return (
+		<BrowserRouter>
+			<div>
+				<Routes>
+					<Route path={'/'} element={<MainPage />} />
+					<Route path={'/todos'} element={<TodosPage />} />
+					<Route path={'/users'} element={<UsersPage />} />
+					<Route path={'/users/:id'} element={<UserItemPage />} />
+					<Route path={'/todos/:id'} element={<TodoItemPage />} />
+				</Routes>
+			</div>
+		</BrowserRouter>
+	);
+};
+
+export default App;
+```
+
+На главной странице мы имеем две ссылки на разные списки:
+
+![](_png/Pasted%20image%2020230325165441.png)
+
+Первая ссылка переводит на список пользователей
+
+По каждому отдельному пользователю можно нажать и перейти на его страницу
+
+![](_png/Pasted%20image%2020230325165455.png)
+
+После перехода на страницу появится краткая информация по пользователю. Кнопка *back* вернёт обратно на список пользователей
+
+![](_png/Pasted%20image%2020230325165516.png)
 
 
 ## Типизация Redux Toolkit

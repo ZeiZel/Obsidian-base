@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
                 "mode": "source",
                 "source": false
               }
@@ -231,25 +231,27 @@
   },
   "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230325165516.png",
+    "Development/_png/Pasted image 20230325165458.png",
+    "Development/_png/Pasted image 20230325165455.png",
+    "Development/_png/Pasted image 20230325165445.png",
+    "Development/_png/Pasted image 20230325165441.png",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
+    "Development/Типизация TypeScript в React, Redux Toolkit.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/_png/Pasted image 20230325154842.png",
     "Development/_png/Pasted image 20230325153245.png",
     "Development/_png/Pasted image 20230325153242.png",
     "Development/_png/Pasted image 20230325142206.png",
     "Development/_png/Pasted image 20230325132146.png",
     "Development/_png/Pasted image 20230324191212.png",
-    "Development/_png/Pasted image 20230324180442.png",
-    "Development/_png/Pasted image 20230324173039.png",
-    "Development/_png/Pasted image 20230324172016.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/01 Введение.md",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230324150849.png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230324150125.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
-    "Development/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/_lessons/03 Основные типы.md",
     "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
@@ -266,8 +268,6 @@
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
     "Development/Apollo + GraphQL.md",
     "Development/FrontEnd/State machine - XState.md",
-    "Development/TypeScript/_lessons/02 Настройка окружения.md",
-    "Development/TypeScript/_lessons/01 Введение.md",
     "Books/_png"
   ]
 }

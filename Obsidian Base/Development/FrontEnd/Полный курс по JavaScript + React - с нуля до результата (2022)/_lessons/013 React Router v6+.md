@@ -13,6 +13,58 @@ npm i react-router-dom@latest
 
 > Теперь вместо хука `useHistory` нужно использовать `useNavigate`
 
+Теперь мы пишем не так: 
+
+```TS
+const history = useHistory();
+
+/// CODE ...
+
+<button onClick={() => history.push('/')}>BACK</button>
+```
+
+А так:
+
+```TSX
+import { Link, useNavigate, useParams } from 'react-router-dom';
+
+interface IUserItemPageParams {
+	id: string;
+}
+
+const UserItemPage: FC = () => {
+	const [user, setUser] = useState<IUser | null>(null);
+	const params = useParams();
+
+	// используем навигацию
+	const navigate = useNavigate();
+
+	async function fetchUser() {
+		try {
+			const response = await axios.get<IUser>(
+				'https://jsonplaceholder.typicode.com/users/' + params.id,
+			);
+			setUser(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	useEffect(() => {
+		fetchUser();
+	}, []);
+
+	return (
+		<div>
+			{/* перемещаемся в нужное место */}
+			<button onClick={() => navigate('/users')}>back</button>
+			<h1>Страница пользователя {user?.name}</h1>
+			<h4>Проживает в {user?.address.city}</h4>
+		</div>
+	);
+};
+```
+
 > Хук `useRouteMatch` заменили на `useMatch`
 
 > Компонент `Prompt` больше не поддерживается
