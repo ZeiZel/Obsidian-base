@@ -607,7 +607,7 @@ const EventsEx: FC = (): JSX.Element => {
 
 Далее нам нужно будет реализовать многостраничность с помощью `react-router-dom` библиотеки
 
-Для начала, нужно в `UserItem` добавить функцию, которая возвращала бы персонажа при клике
+Для начала, нужно в `UserItem` установить обязательным наличие функции `onClick`, с помощью которой дальше мы будем навигироваться через `useNavigate` и переходить на страницу отдельного пользователя
 
 `components > UserItem > UserItemProps.ts`
 ```TSX
@@ -618,7 +618,6 @@ export interface IUserItemProps {
 	onClick: (user: IUser) => void;
 }
 ```
-
 
 `components > UserItem > UserItem.tsx`
 ```TSX
@@ -700,6 +699,8 @@ export default TodosPage;
 
 Это компонент списка пользователей
 
+Тут уже задаём при клике по элементу списка навигирование на отдельную страницу с данными по пользователю 
+
 `components > pages > UsersPage.tsx`
 ```TSX
 import React, { FC, useEffect, useState } from 'react';
@@ -755,7 +756,10 @@ interface IUserItemPageParams {
 
 const UserItemPage: FC = () => {
 	const [user, setUser] = useState<IUser | null>(null);
+
+	// получаем параметры из ссылки
 	const params = useParams<keyof IUserItemPageParams>();
+	// получаем доступ к функции назначения ссылок на переходы в браузере
 	const navigate = useNavigate();
 
 	async function fetchUser() {
@@ -775,6 +779,7 @@ const UserItemPage: FC = () => {
 
 	return (
 		<div>
+			{/* устанавливаем ссылку для возвращения по кнопке */}
 			<button onClick={() => navigate('/users')}>back</button>
 			<h1>Страница пользователя {user?.name}</h1>
 			<h4>Проживает в {user?.address.city}</h4>
@@ -844,5 +849,31 @@ export default App;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Типизация асинхронного Redux Toolkit
+
+
+
+
+
+
+
+
+
+
+
+
+
 
