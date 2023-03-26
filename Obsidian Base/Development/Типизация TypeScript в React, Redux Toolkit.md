@@ -1000,7 +1000,7 @@ export default todoSlice.reducer;
 
 ![](_png/Pasted%20image%2020230326163554.png)
 
-
+Используем вместо хука `useDispatch` наш кастомный типизированный `useAppDispatch()`
 
 `components > TodoItem.tsx`
 ```TSX
@@ -1033,7 +1033,7 @@ const TodoItem: FC<ITodoItemProps> = ({ id, title, completed }) => {
 export default TodoItem;
 ```
 
-
+И так же используем вместо `useSelector` типизированную версию `useAppSelector()`
 
 `components > TodoList.tsx`
 ```TSX
@@ -1048,7 +1048,8 @@ const TodoList: FC = () => {
       <ul>{todos.map((todo) => (  
             <TodoItem key={todo.id} {...todo} />  
          ))}  
-      </ul>   );  
+      </ul>   
+	);  
 };  
   
 export default TodoList;
@@ -1057,6 +1058,37 @@ export default TodoList;
 И благодаря тому, что `useAppSelector` знает, что находится внутри стора, то мы всегда можем получить актуальное значение из него (работает автокомплит, видны типы)
 
 ![](_png/Pasted%20image%2020230326165400.png)
+
+Ну и простая типизация компонента:
+
+`components > NewTodoForm.tsx`
+```TSX
+import { FC } from 'react';
+
+interface INewTodoItemProps {
+	value: string;
+	updateText: (arg: string) => void;
+	handleAction: () => void;
+}
+
+const NewTodoForm: FC<INewTodoItemProps> = ({ value, updateText, handleAction }) => {
+	return (
+		<label>
+			<input
+				placeholder='new todo'
+				value={value}
+				onChange={(e) => updateText(e.target.value)}
+			/>
+			<button onClick={handleAction}>Add todo</button>
+		</label>
+	);
+};
+
+export default NewTodoForm;
+```
+
+
+
 
 
 
