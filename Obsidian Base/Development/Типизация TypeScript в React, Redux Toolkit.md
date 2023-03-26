@@ -1129,12 +1129,238 @@ export default App;
 
 ## Типизация асинхронного Redux Toolkit
 
+Стандартный Thunk в [проекте](https://github.com/michey85/redux-toolkit-todo/blob/asyncthunk/src/store/todoSlice.js) выглядел подобным образом:
 
+`store > todoSlice.js`
+```JS
+/// CODE ...
 
+export const fetchTodos = createAsyncThunk(
+    'todos/fetchTodos',
+    async function(_, {rejectWithValue}) {
+        try {
+	        // делаем запрос на сервер
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10');
 
+			// если ответ не океюшный, то выплёвываем ошибку
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
 
+			// это наши данные
+            const data = await response.json();
 
+			// возвращаем данные
+            return data;
+        } catch (error) {
+	        // в противном случае выплёвываем ошибку
+            return rejectWithValue(error.message);
+        }
+    }
+);
 
+/// CODE ...
+
+const todoSlice = createSlice({
+    name: 'todos',
+    initialState: {
+        todos: [],
+        status: null,
+        error: null,
+    },
+    reducers: {
+        addTodo(state, action) {
+            state.todos.push(action.payload);
+        },
+        toggleComplete(state, action) {
+            const toggledTodo = state.todos.find(todo => todo.id === action.payload.id);
+            toggledTodo.completed = !toggledTodo.completed;
+        },
+        removeTodo(state, action) {
+            state.todos = state.todos.filter(todo => todo.id !== action.payload.id);
+        }
+    },
+    extraReducers: {
+        [fetchTodos.pending]: (state) => {
+            state.status = 'loading';
+            state.error = null;
+        },
+        [fetchTodos.fulfilled]: (state, action) => {
+            state.status = 'resolved';
+            state.todos = action.payload;
+        },
+        [fetchTodos.rejected]: setError,
+        [deleteTodo.rejected]: setError,
+        [toggleStatus.rejected]: setError,
+    },
+});
+```
+
+И тут уже типизируем все асинхронные функции редакса:
+
+`store > todoSlice.tsx`
+```TSX
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { stat } from 'fs';
+
+type Todo = {
+	id: string;
+	title: string;
+	completed: boolean;
+};
+
+type TodosState = {
+	list: Todo[];
+	loading: boolean;
+	error: string | null;
+};
+
+// запрос на сервер на получение списка задач
+// дженерик - то, что получаем с сервера / первый аргумент функции (опции) / типизируем второй аргумент функции Thunk'а (чтобы они были не unknown)
+export const fetchTodos = createAsyncThunk<Todo[], undefined, { rejectValue: string }>(
+	'todos/fetchTodos',
+	async function (_, { rejectWithValue }) {
+		const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10');
+
+		if (!response.ok) {
+			return rejectWithValue('Server Error!');
+		}
+
+		const data = await response.json();
+
+		return data;
+	},
+);
+
+// удаление задачи
+export const deleteTodo = createAsyncThunk<string, string, { rejectValue: string }>(
+	'todos/deleteTodo',
+	async function (id, { rejectWithValue }) {
+		const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+			method: 'DELETE',
+		});
+
+		if (!response.ok) {
+			return rejectWithValue("Can't delete task. Server error.");
+		}
+
+		return id;
+	},
+);
+
+// переключение статуса задачи
+export const toggleStatus = createAsyncThunk<
+	Todo,
+	string,
+	{ rejectValue: string; state: { todos: TodosState } }
+>('todos/toggleStatus', async function (id, { rejectWithValue, dispatch, getState }) {
+	const todo = getState().todos.list.find((todo) => todo.id === id);
+
+	if (todo) {
+		const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				completed: !todo.completed,
+			}),
+		});
+
+		if (!response.ok) {
+			return rejectWithValue("Can't toggle status. Server error.");
+		}
+
+		return (await response.json()) as Todo;
+	}
+
+	return rejectWithValue('No such todo in list');
+});
+
+// добавление нового todo
+export const addNewTodo = createAsyncThunk<Todo, string, { rejectValue: string }>(
+	'todos/addNewTodo',
+	async function (text, { rejectWithValue, dispatch }) {
+		const todo = {
+			title: text,
+			userId: 1,
+			completed: false,
+		};
+
+		const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(todo),
+		});
+
+		if (!response.ok) {
+			return rejectWithValue("Can't add task");
+		}
+
+		// Возвратом от сервера будет одна задача из списка
+		return (await response.json()) as Todo;
+	},
+);
+
+const initialState: TodosState = { list: [], loading: false, error: null };
+
+const todoSlice = createSlice({
+	name: 'todos',
+	initialState,
+	reducers: {},
+	// сюда уже стоит передать наши асинхронные редьсюеры
+	// тут уже стоит использовать не объект для реализации функций редьюсера, а builder
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchTodos.pending, ({ error, loading }, action) => {
+				loading = true;
+				error = null;
+			})
+			.addCase(fetchTodos.fulfilled, (state, action) => {
+				state.list = action.payload;
+				state.loading = false;
+			})
+			.addCase(fetchTodos.rejected, (state, action) => {
+				state.loading = false;
+				state.error = 'Error';
+			})
+			.addCase(addNewTodo.pending, (state, action) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(addNewTodo.fulfilled, (state, action) => {
+				state.list.push(action.payload);
+			})
+			.addCase(toggleStatus.fulfilled, (state, action) => {
+				const toggleTodo = state.list.find((todo) => todo.id === action.payload.id);
+				if (toggleTodo) {
+					toggleTodo.completed = !toggleTodo.completed;
+				}
+			})
+			.addCase(deleteTodo.fulfilled, (state, action) => {
+				state.list = state.list.filter((todo) => todo.id === action.payload);
+			})
+			// реализуем reject для всех состояний
+			.addMatcher(isError, (state, action: PayloadAction<string>) => {
+				state.loading = false;
+				state.error = action.payload;
+			});
+	},
+});
+
+// эта функция будет проверять, прилетела ли нам ошибка
+function isError(action: AnyAction) {
+	return action.type.endsWith('rejected');
+}
+
+export default todoSlice.reducer;
+```
+
+- Первый тип - это возвращаемое значение из функции
+- Второй тип - это тот `action.payload`, который попадает в функцию 
+- Третий тип - это те функции, которые мы вытаскиваем из Thunk'а
 
 ![](_png/Pasted%20image%2020230326182559.png)
 
