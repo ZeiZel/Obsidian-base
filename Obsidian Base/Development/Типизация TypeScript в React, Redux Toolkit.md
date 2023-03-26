@@ -1002,14 +1002,56 @@ export default todoSlice.reducer;
 
 
 
+`components > TodoItem.tsx`
 ```TSX
+import { useAppDispatch } from '../hooks';
+import { toggleComplete, removeTodo } from '../store/todoSlice';
+import { FC } from 'react';
 
+interface ITodoItemProps {
+	id: string;
+	title: string;
+	completed: boolean;
+}
+
+const TodoItem: FC<ITodoItemProps> = ({ id, title, completed }) => {
+	const dispatch = useAppDispatch();
+
+	return (
+		<li>
+			<input
+				type='checkbox'
+				checked={completed}
+				onChange={() => dispatch(toggleComplete(id))}
+			/>
+			<span>{title}</span>
+			<span onClick={() => dispatch(removeTodo(id))}>&times;</span>
+		</li>
+	);
+};
+
+export default TodoItem;
 ```
 
 
 
+`components > TodoList.tsx`
 ```TSX
-
+import TodoItem from './TodoItem';  
+import { FC } from 'react';  
+import { useAppSelector } from '../hooks';  
+  
+const TodoList: FC = () => {  
+   const todos = useAppSelector((state) => state.todos.list);  
+  
+   return (  
+      <ul>{todos.map((todo) => (  
+            <TodoItem key={todo.id} {...todo} />  
+         ))}  
+      </ul>   );  
+};  
+  
+export default TodoList;
 ```
 
 И благодаря тому, что `useAppSelector` знает, что находится внутри стора, то мы всегда можем получить актуальное значение из него (работает автокомплит, видны типы)
