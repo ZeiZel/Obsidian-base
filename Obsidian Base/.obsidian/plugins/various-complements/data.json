@@ -1342,6 +1342,22 @@
           "lastUpdated": 1679837867585
         }
       }
+    },
+    "useAppDispatch": {
+      "useAppDispatch": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679838719720
+        }
+      }
+    },
+    "useAppSelector": {
+      "useAppSelector": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1679838722864
+        }
+      }
     }
   }
 }
