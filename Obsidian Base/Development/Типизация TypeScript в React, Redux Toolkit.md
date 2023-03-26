@@ -870,17 +870,44 @@ root.render(
 reportWebVitals();
 ```
 
+В самом `store` нужно будет только создать два типа, которые будут переиспользоваться внутри приложения (внутри кастомных хуков, которые будут типизировать стандартные функции `react-redux`)
 
-
+`store > index.ts`
 ```TS
+import { configureStore } from '@reduxjs/toolkit';
+import todoReducer from './todoSlice';
 
+const store = configureStore({
+	reducer: {
+		todos: todoReducer,
+	},
+});
+
+export default store;
+
+// RootState будет равен возвращаемому типу из store.getState
+// то есть RootState будет принимать в себя ровно тот тип, который хранит объект хранилища
+export type RootState = ReturnType<typeof store.getState>;
+
+// тут мы определяем тип диспетча
+export type AppDispatch = typeof store.dispatch;
 ```
 
 Типизация `useDispatch` и `useSelector` занимает достаточно приличное время, и чтобы не типизировать каждый раз хуки из `react-redux`, можно сделать свои кастомные типизированные хуки
 
 `hooks > index.ts`
 ```TS
+// импортируем хуки для создания кастомных хуков
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
+// импортируем типы из стора
+import type { AppDispatch, RootState } from '../store';
+
+// принято добавлять App в кастомные хуки, заменяющие оригинальные хуки библиотеки
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+// теперь useSelector будет знать всё о структуре нашего приложения
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 ```
 
 Так выглядит нетипизированный срез:
@@ -919,10 +946,65 @@ export default todoSlice.reducer;
 
 Таким образом мы типизируем срез:
 
+С помощью `PayloadAction` мы можем задать тип приходящего значения в `payload` 
+
 `store > todoSlice.ts`
 ```TS
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+// типизация addTodo пуша
+type Todo = {
+	id: string;
+	title: string;
+	completed: boolean;
+};
+
+// типизация initialState
+type TodosState = {
+	list: Todo[];
+};
+
+const initialState: TodosState = { list: [] };
+
+const todoSlice = createSlice({
+	name: 'todos',
+	initialState,
+	reducers: {
+		// добавление тудушки
+		addTodo(state, action: PayloadAction<string>) {
+			state.list.push({
+				id: new Date().toISOString(),
+				title: action.payload,
+				completed: false,
+			});
+		},
+		// переключение выполненности
+		toggleComplete(state, action: PayloadAction<string>) {
+			const toggledTodo = state.list.find((todo) => todo.id === action.payload);
+			// только если элемент toggledTodo не undefined, то поменяем состояние выполненности
+			if (toggledTodo) toggledTodo.completed = !toggledTodo.completed;
+		},
+		// удаление тудушки по id, который приходит в виде строки
+		removeTodo(state, action: PayloadAction<string>) {
+			state.list = state.list.filter((todo) => todo.id !== action.payload);
+		},
+	},
+});
+
+export const { addTodo, toggleComplete, removeTodo } = todoSlice.actions;
+
+export default todoSlice.reducer;
 ```
+
+И теперь рут будет всегда знать, что должно находиться внутри него  
+
+![](_png/Pasted%20image%2020230326163554.png)
+
+
+
+
+
+
 
 
 
