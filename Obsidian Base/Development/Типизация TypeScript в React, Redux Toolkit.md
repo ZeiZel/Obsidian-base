@@ -1364,9 +1364,84 @@ export default todoSlice.reducer;
 
 ![](_png/Pasted%20image%2020230326182559.png)
 
+Теперь нужно тут заменить старый функционал на `toggleStatus` и `deleteTodo`
 
+`components > TodoItem.tsx`
+```TSX
+import { useAppDispatch } from '../hooks';
+import { toggleStatus, deleteTodo } from '../store/todoSlice';
+import { FC } from 'react';
 
+interface ITodoItemProps {
+	id: string;
+	title: string;
+	completed: boolean;
+}
 
+const TodoItem: FC<ITodoItemProps> = ({ id, title, completed }) => {
+	const dispatch = useAppDispatch();
 
+	return (
+		<li>
+			<input
+				type='checkbox'
+				checked={completed}
+				onChange={() => dispatch(toggleStatus(id))}
+			/>
+			<span>{title}</span>
+			<span onClick={() => dispatch(deleteTodo(id))}>&times;</span>
+		</li>
+	);
+};
 
+export default TodoItem;
+```
 
+И тут добавляем новые функции запроса на сервер для получения задач `fetchTodos` и добавления новых задач `addNewTodo`
+
+`App.tsx`
+```TSX
+import { useEffect, useState } from 'react';
+
+import { fetchTodos, addNewTodo } from './store/todoSlice';
+import NewTodoForm from './components/NewTodoForm';
+import TodoList from './components/TodoList';
+
+import './App.css';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { useSelector } from 'react-redux';
+
+function App() {
+	const [text, setText] = useState<string>('');
+	const { loading, error } = useAppSelector((state) => state.todos);
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(fetchTodos());
+	}, [dispatch]);
+
+	const handleAction = () => {
+		if (text.trim().length) {
+			dispatch(addNewTodo(text));
+			setText('');
+		}
+	};
+
+	return (
+		<div className='App'>
+			<NewTodoForm value={text} updateText={setText} handleAction={handleAction} />
+
+			{loading && <h2>Loading...</h2>}
+			{error && <h2>An error occurred: {error}</h2>}
+
+			<TodoList />
+		</div>
+	);
+}
+
+export default App;
+```
+
+И теперь наше приложение полностью построено на асинхронных функциях
+
+![](_png/Pasted%20image%2020230326191752.png)
