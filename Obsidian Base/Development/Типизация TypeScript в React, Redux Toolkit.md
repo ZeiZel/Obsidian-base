@@ -1087,12 +1087,44 @@ const NewTodoForm: FC<INewTodoItemProps> = ({ value, updateText, handleAction })
 export default NewTodoForm;
 ```
 
+Тут так же нужно будет передать `payload` вне скобок `{}` и использовать `useAppDispatch()`
 
+`App.tsx`
+```TSX
+import { useState } from 'react';
 
+import { addTodo } from './store/todoSlice';
+import NewTodoForm from './components/NewTodoForm';
+import TodoList from './components/TodoList';
 
+import './App.css';
+import { useAppDispatch } from './hooks';
 
+function App() {
+	const [text, setText] = useState<string>('');
+	const dispatch = useAppDispatch();
 
+	const handleAction = () => {
+		if (text.trim().length) {
+			dispatch(addTodo(text));
+			setText('');
+		}
+	};
 
+	return (
+		<div className='App'>
+			<NewTodoForm value={text} updateText={setText} handleAction={handleAction} />
+			<TodoList />
+		</div>
+	);
+}
+
+export default App;
+```
+
+И теперь тудушка работает так, как должна
+
+![](_png/Pasted%20image%2020230326171059.png)
 
 
 ## Типизация асинхронного Redux Toolkit
