@@ -847,16 +847,82 @@ export default App;
 
 ## Типизация Redux Toolkit
 
+Типизации в индексном файле почти нет
+
+`index.tsx`
+```TSX
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+import { Provider } from 'react-redux';
+import store from './store';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+);
+
+reportWebVitals();
+```
 
 
 
+```TS
 
+```
 
+Типизация `useDispatch` и `useSelector` занимает достаточно приличное время, и чтобы не типизировать каждый раз хуки из `react-redux`, можно сделать свои кастомные типизированные хуки
 
+`hooks > index.ts`
+```TS
 
+```
 
+Так выглядит нетипизированный срез:
 
+`store > todoSlice.js`
+```JS
+import { createSlice } from '@reduxjs/toolkit';
 
+const todoSlice = createSlice({
+	name: 'todos',
+	initialState: {
+		todos: [],
+	},
+	reducers: {
+		addTodo(state, action) {
+			state.todos.push({
+				id: new Date().toISOString(),
+				title: action.payload.text,
+				completed: false,
+			});
+		},
+		toggleComplete(state, action) {
+			const toggledTodo = state.todos.find((todo) => todo.id === action.payload.id);
+			toggledTodo.completed = !toggledTodo.completed;
+		},
+		removeTodo(state, action) {
+			state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
+		},
+	},
+});
+
+export const { addTodo, toggleComplete, removeTodo } = todoSlice.actions;
+
+export default todoSlice.reducer;
+```
+
+Таким образом мы типизируем срез:
+
+`store > todoSlice.ts`
+```TS
+
+```
 
 
 
