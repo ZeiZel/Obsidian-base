@@ -845,7 +845,7 @@ export default App;
 ![](_png/Pasted%20image%2020230325165516.png)
 
 
-## Типизация Redux Toolkit
+## Типизация Redux Toolkit / React-Redux
 
 Типизации в индексном файле почти нет
 
@@ -1135,6 +1135,8 @@ export default App;
 
 
 
+
+![](_png/Pasted%20image%2020230326182559.png)
 
 
 

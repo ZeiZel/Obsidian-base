@@ -1,4 +1,4 @@
-# **Udemy - TypeScript с нуля - полный курс и паттерны проектирования**
+# Udemy - TypeScript с нуля - полный курс и паттерны проектирования
 #TypeScript #JavaScript 
 
 [01 Введение](_lessons/01%20Введение.md)

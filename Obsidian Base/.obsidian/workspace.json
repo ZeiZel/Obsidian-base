@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/03 Основные типы.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';  export const apiSlice = createApi({ \treducerPath: 'api', \tbaseQuery: fetchBaseQuery({ \t\tbaseUrl: 'http://localhost:3001', \t}), \t// тут мы задаём, какие метки (теги) существуют \ttagTypes: ['Heroes'], \tendpoints: (builder) => ({ \t\tgetHeroes: builder.query({ \t\t\tquery: () => '/heroes', \t\t\t// указываем, когда данные запрашиваются при помощи обычного запроса \t\t\tprovidesTags: ['Heroes'], // а тут мы подцепляемся к тегам - функция триггерится от тегов \t\t}), \t\tcreateHero: builder.mutation({ \t\t\tquery: (hero) => ({ \t\t\t\turl: '/heroes', \t\t\t\tmethod: 'POST', \t\t\t\tbody: hero, \t\t\t}), \t\t\t// если мы мутировали эти данные, то по какой метке мы должны получить эти данные \t\t\tinvalidatesTags: ['Heroes'], // а тут мы указываем, что именно нужно обновить повторно, когда данные изменились \t\t}), \t}), });  export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -231,6 +231,14 @@
   },
   "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230326182559.png",
+    "Development/TypeScript/TypeScript.md",
+    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
+    "Development/TypeScript/_lessons/09 Служебные типы.md",
+    "Development/TypeScript/_lessons/04 Продвинутые типы.md",
+    "Development/TypeScript/_lessons/03 Основные типы.md",
+    "Development/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/_png/Pasted image 20230326171059.png",
     "Development/_png/Pasted image 20230326165400.png",
     "Development/_png/Pasted image 20230326165148.png",
@@ -242,15 +250,11 @@
     "Development/_png/Pasted image 20230325165445.png",
     "Development/_png/Pasted image 20230325165441.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
-    "Development/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/_png/Pasted image 20230325154842.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/01 Введение.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
-    "Development/TypeScript/_lessons/03 Основные типы.md",
-    "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
@@ -261,13 +265,9 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/005 (д) Тип данных Symbol.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 ClassList и делегирование событий.md",
-    "Development/TypeScript/_lessons/04 Продвинутые типы.md",
     "Development/TypeScript/_lessons/05 Классы.md",
     "Development/TypeScript/_lessons/07 Generics.md",
     "Без названия.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
-    "Development/Apollo + GraphQL.md",
-    "Development/FrontEnd/State machine - XState.md",
     "Books/_png"
   ]
 }
