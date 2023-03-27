@@ -20,18 +20,6 @@
             }
           },
           {
-            "id": "0dad026b4231e711",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Тестирование JavaScript.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "50ef9e911dd56133",
             "type": "leaf",
             "state": {
@@ -56,12 +44,12 @@
             }
           },
           {
-            "id": "0eda3077eb723c79",
+            "id": "0dad026b4231e711",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+                "file": "Development/Тестирование JavaScript.md",
                 "mode": "source",
                 "source": false
               }
@@ -134,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Тестирование JavaScript.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -151,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Тестирование JavaScript.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Тестирование JavaScript.md"
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md"
               }
             }
           },
@@ -229,21 +217,36 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0dad026b4231e711",
+  "active": "50ef9e911dd56133",
   "lastOpenFiles": [
-    "Development/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/TypeScript.md",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/013 React Router v6+.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/007 Fetch API.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/014 Создаем навигацию для слайдов.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/034 Event loop, подробная работа асинхронных и синхронных операций.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Подробно про npm и проект. JSON-server.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/020 Инкапсуляция.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 (д) Создание своих ошибок.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Создаем слайдер на сайте. Вариант 1 - простой.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/003 (д) Оператор опциональной цепочки (.) ES11.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 () Set.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/040 Навигация по DOM - элементам, data-атрибуты, преимущество forof.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/023 Практика , ч3. Используем функции.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/018 Практика, ч2. Применяем условия и циклы.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Задачи с собеседований на понимание основ.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/006 (д) Разница между объектами и массивами и неочевидные синтаксические возможности.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/007 Простое общение с пользователем.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/014 Условия.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/001 Что такое JS и как его подключить к странице.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/01 - Подготовка к работе.md",
     "Development/_png/Pasted image 20230326191752.png",
     "Development/_png/Pasted image 20230326182559.png",
-    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
-    "Development/TypeScript/_lessons/09 Служебные типы.md",
-    "Development/TypeScript/_lessons/04 Продвинутые типы.md",
-    "Development/TypeScript/_lessons/03 Основные типы.md",
     "Development/_png/Pasted image 20230326171059.png",
     "Development/_png/Pasted image 20230326165400.png",
     "Development/_png/Pasted image 20230326165148.png",
@@ -252,21 +255,7 @@
     "Development/_png/Pasted image 20230325165516.png",
     "Development/_png/Pasted image 20230325165458.png",
     "Development/_png/Pasted image 20230325165455.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/01 Введение.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
-    "Development/TypeScript/_lessons/10 Декораторы.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/02 Настройка окружения.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/03 TypeScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/005 (д) Тип данных Symbol.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 ClassList и делегирование событий.md",
-    "Development/TypeScript/_lessons/05 Классы.md",
-    "Development/TypeScript/_lessons/07 Generics.md",
-    "Без названия.md",
     "Books/_png"
   ]
 }

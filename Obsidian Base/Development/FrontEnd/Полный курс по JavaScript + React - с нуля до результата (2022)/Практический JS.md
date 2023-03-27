@@ -1,7 +1,6 @@
 # Полный курс по JavaScript + React - с нуля до результата (2022)
 #JavaScript #React #FrontEnd #Redux
 
-[01 - Подготовка к работе](_lessons/01%20-%20Подготовка%20к%20работе.md)
 [02 - Основы JavaScript](_lessons/02%20-%20Основы%20JavaScript.md)
 [03 - Дополнительные основы JavaScript](_lessons/03%20-%20Дополнительные%20основы%20JavaScript.md)
 [04 - JavaScript в работе](_lessons/04%20-%20JavaScript%20в%20работе.md)
