@@ -138,7 +138,6 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 }
 ```
 
-
 ### 004 Компонент Document
 
 Если будут вопросы: https://nextjs.org/docs/advanced-features/custom-document
