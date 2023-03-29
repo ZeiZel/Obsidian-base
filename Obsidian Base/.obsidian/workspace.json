@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/03 Основные типы.md",
+                "file": "Development/TypeScript/_lessons/09 Служебные типы.md",
                 "mode": "source",
                 "source": false
               }
@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -158,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Тестирование JavaScript.md",
+                "file": "Development/TypeScript/_lessons/09 Служебные типы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Тестирование JavaScript.md",
+                "file": "Development/TypeScript/_lessons/09 Служебные типы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -198,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Тестирование JavaScript.md"
+                "file": "Development/TypeScript/_lessons/09 Служебные типы.md"
               }
             }
           },
@@ -253,11 +253,18 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0dad026b4231e711",
+  "active": "41d4404cc69d784b",
   "lastOpenFiles": [
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-    "Development/TypeScript/_lessons/03 Основные типы.md",
     "Development/TypeScript/TypeScript.md",
+    "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
+    "Development/TypeScript/_lessons/07 Generics.md",
+    "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
+    "Development/TypeScript/_lessons/05 Классы.md",
+    "Development/TypeScript/_lessons/04 Продвинутые типы.md",
+    "Development/TypeScript/_lessons/03 Основные типы.md",
+    "Development/Тестирование JavaScript.md",
+    "Development/_png/Pasted image 20230329161022.png",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
     "Development/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
@@ -265,7 +272,6 @@
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230329155252.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "SelfDevelopment/Scrum. Революционный метод управления проектами.md",
-    "Development/Тестирование JavaScript.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/React Foundamentals.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -277,11 +283,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/20 – Модули.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/18 - Тернарный оператор.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/17 - Условные инструкции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/16 – Деструктуризация.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/14 – Инструкции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/13 - Обработка ошибок.md",
     "SelfDevelopment/_png/Pasted image 20230329103556.png",
     "Development/_png/Pasted image 20230329102900.png",
     "Development/_png/Pasted image 20230329102802.png",
@@ -290,7 +291,6 @@
     "Development/_png/Pasted image 20230329102003.png",
     "Development/_png/Pasted image 20230329101737.png",
     "Development/_png/Pasted image 20230329101511.png",
-    "Development/_png/Pasted image 20230329100640.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
     "Books/_png"
   ]

@@ -1350,6 +1350,30 @@
           "lastUpdated": 1680084141218
         }
       }
+    },
+    "tsconfig": {
+      "tsconfig": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680097594329
+        }
+      }
+    },
+    "extends": {
+      "extends": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680098448616
+        }
+      }
+    },
+    "readonly": {
+      "readonly": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680099011306
+        }
+      }
     }
   }
 }
