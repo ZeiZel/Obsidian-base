@@ -1390,6 +1390,22 @@
           "lastUpdated": 1680100002113
         }
       }
+    },
+    "setInterval": {
+      "setInterval": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680100538924
+        }
+      }
+    },
+    "WeakSet": {
+      "WeakSet": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680100840069
+        }
+      }
     }
   }
 }
