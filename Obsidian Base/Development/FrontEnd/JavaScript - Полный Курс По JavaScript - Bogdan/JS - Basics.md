@@ -1,4 +1,4 @@
-# **JavaScript -** **Полный** **Курс** **По** **JavaScript**
+# JavaScript - Полный Курс По JavaScript
 #JavaScript
 
 [01 – Введение](_lessons/01%20–%20Введение.md)

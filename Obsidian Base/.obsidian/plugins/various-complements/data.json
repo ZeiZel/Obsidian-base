@@ -143,46 +143,6 @@
         }
       }
     },
-    "Codewars": {
-      "Codewars": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677425800582
-        }
-      }
-    },
-    "numberChecker": {
-      "numberChecker": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677427072315
-        }
-      }
-    },
-    "numberOfFilms": {
-      "numberOfFilms": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677427120058
-        }
-      }
-    },
-    "getElementsById": {
-      "getElementsById": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677430385355
-        }
-      }
-    },
-    "getElementsByTagName": {
-      "getElementsByTagName": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677430638425
-        }
-      }
-    },
     "DOMContentLoaded": {
       "DOMContentLoaded": {
         "currentFile": {
@@ -1364,6 +1324,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1679845705554
+        }
+      }
+    },
+    "Скриншотные": {
+      "Скриншотные": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680073397823
+        }
+      }
+    },
+    "Интеграционное": {
+      "Интеграционное": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680072965002
         }
       }
     }

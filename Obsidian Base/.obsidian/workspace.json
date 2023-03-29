@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "41d4404cc69d784b",
+            "id": "afcc0b511ad2c1b5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/TypeScript.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "mode": "source",
                 "source": false
               }
@@ -32,12 +32,36 @@
             }
           },
           {
+            "id": "2f5c5614a25aeebe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/React Foundamentals.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "41d4404cc69d784b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/TypeScript/TypeScript.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "f83a9069043ced12",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "mode": "source",
                 "source": false
               }
@@ -54,21 +78,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "60740b19eec972b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Правило названия action и домашнее задание (мини-экзамен).md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -97,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "json-server",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -114,8 +126,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -135,7 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Правило названия action и домашнее задание (мини-экзамен).md",
+                "file": "Development/Тестирование JavaScript.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -152,7 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Правило названия action и домашнее задание (мини-экзамен).md",
+                "file": "Development/Тестирование JavaScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -175,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Правило названия action и домашнее задание (мини-экзамен).md"
+                "file": "Development/Тестирование JavaScript.md"
               }
             }
           },
@@ -230,10 +241,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "60740b19eec972b9",
+  "active": "0dad026b4231e711",
   "lastOpenFiles": [
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
+    "Development/_png/Pasted image 20230329100640.png",
+    "Development/_png/Pasted image 20230329100412.png",
+    "Development/_png/Pasted image 20230329100050.png",
+    "Development/React Foundamentals.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/Тестирование JavaScript.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Правило названия action и домашнее задание (мини-экзамен).md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/04 Старт проекта.md",
@@ -241,8 +261,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/03 TypeScript.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/02 Настройка окружения.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/007 Fetch API.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/014 Создаем навигацию для слайдов.md",
@@ -253,11 +271,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/020 Инкапсуляция.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 (д) Создание своих ошибок.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/012 Создаем слайдер на сайте. Вариант 1 - простой.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/003 (д) Оператор опциональной цепочки (.) ES11.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 () Set.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/040 Навигация по DOM - элементам, data-атрибуты, преимущество forof.md",
     "Development/_png/Pasted image 20230326191752.png",
     "Development/_png/Pasted image 20230326182559.png",
     "Development/_png/Pasted image 20230326171059.png",
@@ -266,8 +279,6 @@
     "Development/_png/Pasted image 20230326163554.png",
     "Development/_png/Pasted image 20230325170657.png",
     "Development/_png/Pasted image 20230325165516.png",
-    "Development/_png/Pasted image 20230325165458.png",
-    "Development/_png/Pasted image 20230325165455.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
     "Books/_png"
   ]
