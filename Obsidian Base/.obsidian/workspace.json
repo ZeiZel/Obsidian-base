@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "mode": "source",
                 "source": false
               }
@@ -158,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -198,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/11 Модульность и библиотеки.md"
+                "file": "Development/TypeScript/TypeScript.md"
               }
             }
           },
@@ -255,7 +255,12 @@
   },
   "active": "41d4404cc69d784b",
   "lastOpenFiles": [
+    "Development/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
     "Development/TypeScript/TypeScript.md",
+    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/TypeScript/_lessons/09 Служебные типы.md",
     "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
@@ -269,7 +274,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230329155252.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
@@ -279,10 +283,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/01 Введение.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/23 - Асинхронные функции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/22 – Промисы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/21 - Классы и прототипы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/20 – Модули.md",
     "SelfDevelopment/_png/Pasted image 20230329103556.png",
     "Development/_png/Pasted image 20230329102900.png",
     "Development/_png/Pasted image 20230329102802.png",
