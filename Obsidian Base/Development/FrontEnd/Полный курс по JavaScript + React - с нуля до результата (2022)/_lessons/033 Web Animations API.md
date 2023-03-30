@@ -1,12 +1,9 @@
 
 ==Web Animations API== - это API, который связывает анимации JS и CSS. То есть в него мы передаём сначала ключевые кадры как в CSS, а уже потом передаём опции, которые влияют на эту анимацию
 
-
 ```JS
 animate(keyframes, options)
 ```
-
-
 
 ```JS
 document.getElementById("tunnel").animate([
@@ -43,10 +40,10 @@ const phoneAnimation = images[0].animate([
 ![](_png/Pasted%20image%2020221022114245.png)
 
 Анимация имеет 4 состояния (`PlayState`):
-- idle
-- running
-- paused
-- finished
+- `idle`
+- `running`
+- `paused`
+- `finished`
 
 Тут уже представлена полноценная реализация этой анимации со стейтами паузы, а так же с несколькими изменяемыми свойствами. Это более удобный вариант нежели чем создание такой же анимации через CSS
 
