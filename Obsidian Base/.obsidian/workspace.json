@@ -116,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -166,7 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 336.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -182,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/SOLID принципы.md",
+                "file": "Development/Тестирование JavaScript.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -199,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/SOLID принципы.md",
+                "file": "Development/Тестирование JavaScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -222,7 +222,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/SOLID принципы.md"
+                "file": "Development/Тестирование JavaScript.md"
               }
             }
           },
@@ -277,8 +277,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3bb02da6ba68b255",
+  "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/SOLID принципы.md",
     "Development/_png/Pasted image 20230331173942.png",
     "Development/_png/Pasted image 20230331173404.png",
     "Development/_png/Pasted image 20230331165300.png",
@@ -289,10 +290,8 @@
     "Development/_png/Pasted image 20230331155340.png",
     "Development/_png/Pasted image 20230331155312.png",
     "Development/_png/Pasted image 20230331155306.png",
-    "Development/_png/Pasted image 20230331155303.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/CI-CD.md",
-    "Development/SOLID принципы.md",
     "Development/Тестирование JavaScript.md",
     "Development/React Foundamentals.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
