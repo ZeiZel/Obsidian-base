@@ -796,28 +796,30 @@ const createDependencyContainer = (router: Router, store, httpRequest: HttpReque
 
 ![](_png/Pasted%20image%2020230331173942.png)
 
-
-
-
-Полный код:
+Тут представлена работа сразу с несколькими сервисами. Представленная реализация работы с несколькими клиентами позволяет нам не писать логику работы под один определённый сервис - мы можем начать работать с любым из них. 
 
 ```TS
+// базовый интерфейс для всех музыкальных сервисов
 interface MusicApi {
   getTracks: () => void;
 }
 
+// первый музыкальный сервис
 class YandexMusicApi implements MusicApi {
   getTracks(): void {}
 }
 
+// второй музыкальный сервис
 class SpotifyApi implements MusicApi {
   getTracks(): void {}
 }
 
+// третий музыкальный сервис
 class VKMusicApi implements MusicApi {
   getTracks(): void {}
 }
 
+// класс музыкального клиента, который вызвает нужный клиент - это определённая абстракция / звено между АПИ клиента и музыкального сервиса
 class MusicClient implements MusicApi {
   client: MusicApi;
 
@@ -830,27 +832,11 @@ class MusicClient implements MusicApi {
   }
 }
 
+// входная точка в приложение
 const MusicApp = () => {
+  // тут мы определяем, с каким клиентом сейчас мы хотим работать 
   const API = new MusicClient(new SpotifyApi())
 
   API.getTracks()
 }
-
-
-interface HttpClient {}
-
-
-class Axios implements HttpClient {
-  request() {
-    fetch
-    XMLHttpRequest()
-    node-fetch
-    node http module
-  }
-}
 ```
-
-### SOLID итоги
-
-
-
