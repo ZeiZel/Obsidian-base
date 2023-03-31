@@ -682,12 +682,9 @@ const FullForeignRequisitesForm = () => {
 
 ![](_png/Pasted%20image%2020230331165300.png)
 
+Тут мы разбили приложение, которое предоставляет SSR. Конкретно тут реализуется роутинг на сервере и на клиенте. 
 
-
-
-
-
-Конечный код:
+Серверный роутер должен принимать подготовитель ссылок и парсер ссылок. На фронте же нужно получить роут и отрендерить его - сам роутер (для навигации) и парсер ссылок
 
 ```TS
 enum Route {
@@ -825,9 +822,7 @@ const MusicApp = () => {
 }
 
 
-interface HttpClient {
-
-}
+interface HttpClient {}
 
 
 class Axios implements HttpClient {
@@ -839,15 +834,6 @@ class Axios implements HttpClient {
   }
 }
 ```
-
-
-
-
-
-
-
-
-
 
 ### SOLID итоги
 
