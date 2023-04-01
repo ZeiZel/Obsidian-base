@@ -267,6 +267,8 @@
   },
   "active": "b947132e4d8132d4",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230401163053.png",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230401163025.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/02 Настройка окружения.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/01 Введение.md",
@@ -293,7 +295,6 @@
     "Programming Principes/_png/Pasted image 20230331173942.png",
     "Programming Principes/_png/Pasted image 20230331173404.png",
     "Programming Principes/_png/Pasted image 20230331165300.png",
-    "Programming Principes/_png/Pasted image 20230331165258.png",
     "Programming Principes/CI-CD.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/06 Движок V8.md",
@@ -304,7 +305,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/034 Event loop, подробная работа асинхронных и синхронных операций.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
     "Books/_png"
   ]
