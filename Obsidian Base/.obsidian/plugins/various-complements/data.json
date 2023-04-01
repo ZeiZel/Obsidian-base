@@ -135,54 +135,6 @@
         }
       }
     },
-    "DOMContentLoaded": {
-      "DOMContentLoaded": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677684735931
-        }
-      }
-    },
-    "querySelector": {
-      "querySelector": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677687048846
-        }
-      }
-    },
-    "getElementByClassName": {
-      "getElementByClassName": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677687079778
-        }
-      }
-    },
-    "boxesGet": {
-      "boxesGet": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1677687254366
-        }
-      }
-    },
-    "псевдомассивах": {
-      "псевдомассивах": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677687268254
-        }
-      }
-    },
-    "defineProperty": {
-      "defineProperty": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677688140413
-        }
-      }
-    },
     "RandomChar": {
       "RandomChar": {
         "currentFile": {
@@ -1448,6 +1400,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680272308176
+        }
+      }
+    },
+    "AppModule": {
+      "AppModule": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680352436434
         }
       }
     }
