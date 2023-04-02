@@ -135,54 +135,6 @@
         }
       }
     },
-    "RandomChar": {
-      "RandomChar": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677771750867
-        }
-      }
-    },
-    "getCharacter": {
-      "getCharacter": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677771912956
-        }
-      }
-    },
-    "_transformCharacter": {
-      "_transformCharacter": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677771953342
-        }
-      }
-    },
-    "onCharLoaded": {
-      "onCharLoaded": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677772240559
-        }
-      }
-    },
-    "sliceDescription": {
-      "sliceDescription": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677772351860
-        }
-      }
-    },
-    "Бинарный": {
-      "Бинарный": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677776601175
-        }
-      }
-    },
     "ErrorMessage": {
       "ErrorMessage": {
         "currentFile": {
@@ -1424,6 +1376,62 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680366491749
+        }
+      }
+    },
+    "forRoot": {
+      "forRoot": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680433565491
+        }
+      }
+    },
+    "docker-compose": {
+      "docker-compose": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680431918508
+        }
+      }
+    },
+    "деструктурированный": {
+      "деструктурированный": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680432431908
+        }
+      }
+    },
+    "typegoose": {
+      "typegoose": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680433126191
+        }
+      }
+    },
+    "import": {
+      "import": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680434008652
+        }
+      }
+    },
+    "inject": {
+      "inject": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680434014170
+        }
+      }
+    },
+    "ConfigService": {
+      "ConfigService": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680434099747
         }
       }
     }
