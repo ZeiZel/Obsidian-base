@@ -1258,8 +1258,8 @@
     "extends": {
       "extends": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1680098448616
+          "count": 2,
+          "lastUpdated": 1680443274005
         }
       }
     },
@@ -1440,6 +1440,54 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680434448223
+        }
+      }
+    },
+    "Typegoose": {
+      "Typegoose": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1680444449172
+        }
+      }
+    },
+    "TypegooseModule": {
+      "TypegooseModule": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680443032757
+        }
+      }
+    },
+    "forFeature": {
+      "forFeature": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680443052055
+        }
+      }
+    },
+    "TimeStamp": {
+      "TimeStamp": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680443276324
+        }
+      }
+    },
+    "интерфейс": {
+      "интерфейс": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680443441555
+        }
+      }
+    },
+    "TypeScript": {
+      "TypeScript": {
+        "internalLink": {
+          "count": 1,
+          "lastUpdated": 1680444205709
         }
       }
     }
