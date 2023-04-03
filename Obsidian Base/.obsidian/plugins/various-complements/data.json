@@ -1570,6 +1570,14 @@
           "lastUpdated": 1680521521023
         }
       }
+    },
+    "enableCors": {
+      "enableCors": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680522633629
+        }
+      }
     }
   }
 }
