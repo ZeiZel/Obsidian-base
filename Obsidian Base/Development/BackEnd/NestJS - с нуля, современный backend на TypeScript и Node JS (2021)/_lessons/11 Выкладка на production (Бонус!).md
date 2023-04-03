@@ -1,1 +1,28 @@
-## 11 Выкладка на production (Бонус!)
+
+## 001 Сборка Docker
+
+
+
+
+
+
+
+## 002 Docker-compose
+
+
+
+
+
+
+
+## 003 GitHub actions
+
+
+
+
+
+
+
+
+
+
