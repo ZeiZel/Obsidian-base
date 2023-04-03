@@ -1406,8 +1406,8 @@
     "ConfigService": {
       "ConfigService": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1680434099747
+          "count": 3,
+          "lastUpdated": 1680534984423
         }
       }
     },
@@ -1486,8 +1486,8 @@
     "constants": {
       "constants": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1680520917721
+          "count": 3,
+          "lastUpdated": 1680534344258
         }
       }
     },
@@ -1582,8 +1582,16 @@
     "JWT-токен": {
       "JWT-токен": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1680525756239
+          "count": 3,
+          "lastUpdated": 1680535547828
+        }
+      }
+    },
+    "ConfigModule": {
+      "ConfigModule": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680534978860
         }
       }
     }
