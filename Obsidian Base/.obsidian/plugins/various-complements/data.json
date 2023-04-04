@@ -1526,8 +1526,8 @@
     "JWT-токен": {
       "JWT-токен": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1680535547828
+          "count": 4,
+          "lastUpdated": 1680595370760
         }
       }
     },
@@ -1560,6 +1560,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680594148210
+        }
+      }
+    },
+    "Authorization": {
+      "Authorization": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680595523597
+        }
+      }
+    },
+    "Bearer": {
+      "Bearer": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680595534812
         }
       }
     }
