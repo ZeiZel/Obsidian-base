@@ -127,14 +127,6 @@
         }
       }
     },
-    "компоненте": {
-      "компоненте": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677944945410
-        }
-      }
-    },
     "ErrorMessage": {
       "ErrorMessage": {
         "currentFile": {
@@ -159,22 +151,6 @@
         }
       }
     },
-    "selectedChar": {
-      "selectedChar": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677944961733
-        }
-      }
-    },
-    "onSelectedChar": {
-      "onSelectedChar": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677944986970
-        }
-      }
-    },
     "charList": {
       "charList": {
         "currentFile": {
@@ -191,43 +167,11 @@
         }
       }
     },
-    "charId": {
-      "charId": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677947584151
-        }
-      }
-    },
-    "charInfo": {
-      "charInfo": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1677947586397
-        }
-      }
-    },
     "component": {
       "component": {
         "currentFile": {
           "count": 11,
           "lastUpdated": 1679071783516
-        }
-      }
-    },
-    "componentDidCatch": {
-      "componentDidCatch": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677950166021
-        }
-      }
-    },
-    "ErrorBoundary": {
-      "ErrorBoundary": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1677950249086
         }
       }
     },
@@ -1406,8 +1350,8 @@
     "ConfigService": {
       "ConfigService": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1680534984423
+          "count": 4,
+          "lastUpdated": 1680589626278
         }
       }
     },
@@ -1590,8 +1534,24 @@
     "ConfigModule": {
       "ConfigModule": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680589574575
+        }
+      }
+    },
+    "PassportStrategy": {
+      "PassportStrategy": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1680534978860
+          "lastUpdated": 1680589470377
+        }
+      }
+    },
+    "JwtAuthGuard": {
+      "JwtAuthGuard": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680589791421
         }
       }
     }
