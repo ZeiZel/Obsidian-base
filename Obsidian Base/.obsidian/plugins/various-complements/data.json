@@ -1562,6 +1562,62 @@
           "lastUpdated": 1680620805404
         }
       }
+    },
+    "@IsOptional": {
+      "@IsOptional": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626340338
+        }
+      }
+    },
+    "@ValidateNested": {
+      "@ValidateNested": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626352734
+        }
+      }
+    },
+    "@IsArray": {
+      "@IsArray": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626362168
+        }
+      }
+    },
+    "deleteById": {
+      "deleteById": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626542052
+        }
+      }
+    },
+    "findById": {
+      "findById": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626551937
+        }
+      }
+    },
+    "create": {
+      "create": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626565329
+        }
+      }
+    },
+    "patchById": {
+      "patchById": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680626590296
+        }
+      }
     }
   }
 }
