@@ -1626,6 +1626,14 @@
           "lastUpdated": 1680793589956
         }
       }
+    },
+    "@nestjs": {
+      "@nestjs": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680793815761
+        }
+      }
     }
   }
 }
