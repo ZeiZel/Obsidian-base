@@ -78,12 +78,43 @@ docker-compose up -d
 
 ## 003 GitHub actions
 
+Тут мы описываем действия гита при пуше в него
 
+`.github > workflows > main.yml`
+```YML
+name: Publish Docker
 
+on:
+  push:
+    branches: [main]
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Publish to registy
+        uses: elgohr/Publish-Docker-Github-Action@main
+        with:
+          registry: docker.pkg.github.com
+          name: docker.pkg.github.com/ZeiZel/nest-api/nest-api
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "develop"
+```
 
+А уже в образе нашего приложения в `image` указываем ссылку до сформированного образа гитом
 
-
-
-
-
+`docker-compose.yml`
+```YML
+version: '3'
+services:
+  top.api:
+    image: docker.pkg.github.com/zeizel/nest-api/nest-api:develop
+    container_name: top-api
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./.env:/opt/app/.env
+```
