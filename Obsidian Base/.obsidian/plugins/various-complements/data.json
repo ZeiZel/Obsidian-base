@@ -1634,6 +1634,14 @@
           "lastUpdated": 1680793815761
         }
       }
+    },
+    "upload": {
+      "upload": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680794772069
+        }
+      }
     }
   }
 }
