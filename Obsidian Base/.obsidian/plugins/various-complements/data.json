@@ -114,8 +114,8 @@
     "service": {
       "service": {
         "currentFile": {
-          "count": 2,
-          "lastUpdated": 1678713937969
+          "count": 3,
+          "lastUpdated": 1680775887124
         }
       }
     },
@@ -143,14 +143,6 @@
         }
       }
     },
-    "charList": {
-      "charList": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1678117706113
-        }
-      }
-    },
     "updateChar": {
       "updateChar": {
         "currentFile": {
@@ -164,22 +156,6 @@
         "currentFile": {
           "count": 11,
           "lastUpdated": 1679071783516
-        }
-      }
-    },
-    "воспользоваться": {
-      "воспользоваться": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678093873538
-        }
-      }
-    },
-    "CharList": {
-      "CharList": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678117708617
         }
       }
     },
@@ -1382,8 +1358,8 @@
     "constants": {
       "constants": {
         "currentFile": {
-          "count": 3,
-          "lastUpdated": 1680534344258
+          "count": 4,
+          "lastUpdated": 1680775922450
         }
       }
     },
