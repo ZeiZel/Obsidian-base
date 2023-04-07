@@ -1674,6 +1674,14 @@
           "lastUpdated": 1680850585020
         }
       }
+    },
+    "TelegramService": {
+      "TelegramService": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680850671570
+        }
+      }
     }
   }
 }

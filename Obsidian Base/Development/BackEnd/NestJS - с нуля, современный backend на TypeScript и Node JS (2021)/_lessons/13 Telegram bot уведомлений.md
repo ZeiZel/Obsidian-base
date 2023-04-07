@@ -209,7 +209,7 @@ export class AppModule {}
 export class ReviewModule {}
 ```
 
-
+Далее нам нужно инжектнуть `TelegramService` в контроллер обзоров и тут же вызвать отправку сообщения через метод `notify`
 
 `src > review > review.controller.ts`
 ![](_png/Pasted%20image%2020230407094037.png)
