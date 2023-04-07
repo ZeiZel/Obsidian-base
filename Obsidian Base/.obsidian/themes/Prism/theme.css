@@ -1,5 +1,5 @@
 /*
-    Prism Theme for Obsidian.md (Version: 3.2.1)
+    Prism Theme for Obsidian.md (Version: 3.2.2)
     > A Comprehensive, Highly-Customisable and Elegant Light/Dark Theme for Obsidian.md
 
     Source: https://github.com/damiankorcz/Obsidian-Prism
@@ -430,7 +430,6 @@ body {
   --checklist-done-color: var(--interactive-accent-tint);
   --checkbox-border-color-hover: var(--interactive-accent-tint);
   --blockquote-border-color: var(--window-border);
-  --blockquote-border-thickness: 4px;
   --ribbon-background-collapsed: var(--background-secondary);
   --titlebar-background-focused: var(--background-secondary);
   --header-height: 41px;
@@ -1078,7 +1077,7 @@ body.pt-titlebar-hide-text .titlebar .titlebar-text {
   min-height: unset;
 }
 :is(.pt-nav-header-left-sidebar-position-bottom .workspace-split.mod-left-split,
-.pt-nav-header-right-sidebar-position-bottom .workspace-split.mod-right-split, .pt-nav-header-left-sidebar-position-bottom .workspace-drawer.mod-left, .pt-nav-header-right-sidebar-position-bottom .workspace-drawer.mod-right) :is(.nav-files-container, .workspace-leaf-content[data-type=tag] .tag-container, .workspace-leaf-content[data-type=backlink] .backlink-pane, .workspace-leaf-content[data-type=search] .search-results-children, .workspace-leaf-content[data-type=starred] .item-list, .workspace-leaf-content[data-type=dictionary-view] .contents, .workspace-leaf-content[data-type=dangling-links] .view-content .container) {
+.pt-nav-header-right-sidebar-position-bottom .workspace-split.mod-right-split, .pt-nav-header-left-sidebar-position-bottom .workspace-drawer.mod-left, .pt-nav-header-right-sidebar-position-bottom .workspace-drawer.mod-right) :is(.nav-files-container, .workspace-leaf-content[data-type=tag] .tag-container, .workspace-leaf-content[data-type=backlink] .backlink-pane, .workspace-leaf-content[data-type=starred] .item-list, .workspace-leaf-content[data-type=dictionary-view] .contents, .workspace-leaf-content[data-type=dangling-links] .view-content .container, .workspace-leaf-content[data-type=bookmarks] .bookmarks-container) {
   padding-bottom: calc(38px + 2 * var(--scroll-bar-size));
 }
 
@@ -1353,7 +1352,7 @@ body.is-mobile.theme-dark .prompt {
   font-size: 14px;
   font-weight: 600;
   color: var(--interactive-accent-text);
-  content: "Prism 3.2.1";
+  content: "Prism 3.2.2";
   border: 1px solid var(--window-border);
   border-radius: var(--radius-s);
 }
@@ -1643,7 +1642,7 @@ select.dropdown {
   background-color: white;
 }
 .theme-dark select.dropdown {
-  background-color: var(--background-primary);
+  background-color: var(--background-secondary-alt);
 }
 select.dropdown:hover {
   border-color: var(--interactive-accent-tint);
@@ -1869,6 +1868,7 @@ body:not(.css-settings-manager) .workspace-split.mod-left-split::before {
 }
 
 .menu {
+  padding: var(--size-4-1);
   background: var(--background-secondary);
   border-color: var(--window-border);
   box-shadow: var(--shadow-l);
@@ -1953,6 +1953,7 @@ div.notice-container div.notice {
 .nav-action-button.is-active,
 .vertical-tab-nav-item.is-active,
 .nav-file-title.is-active,
+.tree-item-self.is-active,
 .suggestion-hotkey,
 .workspace-leaf div.workspace-leaf-content[data-type=file-tree-view] div.oz-nav-file.is-active,
 .workspace-drawer.is-pinned .workspace-drawer-header-icon.mod-pin {
@@ -1979,7 +1980,8 @@ button.mod-cta {
   color: var(--highlight-text-normal);
 }
 
-:is(.pcr-button, button.mod-cta, button.mod-warning, .modal button:not(.mod-cta):not(.mod-warning), .graph-control-content button, .setting-hotkey, .flair.mod-pop, .community-item .flair, button.copy-code-button, .modal-setting-nav-bar .clickable-icon, .document-search-button, .side-dock-ribbon-action.is-active[aria-label="Start/stop recording"]) {
+:is(.pcr-button, button.mod-cta, button.mod-warning, .modal button:not(.mod-cta):not(.mod-warning), .graph-control-content button, .setting-hotkey, .flair.mod-pop, .community-item .flair, button.copy-code-button, .modal-setting-nav-bar .clickable-icon, .document-search-button, .side-dock-ribbon-action.is-active[aria-label="Start/stop recording"]),
+.clickable-icon[aria-label="Search settings"] {
   border: var(--accent-border-width) solid;
   border-radius: var(--radius-s);
 }
@@ -2003,15 +2005,21 @@ button.mod-cta {
   color: var(--interactive-accent-hover);
 }
 
+.clickable-icon[aria-label="Search settings"] {
+  border-color: transparent;
+}
+
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header.is-active,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .workspace-tab-header.is-active,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .nav-action-button.is-active,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .vertical-tab-nav-item.is-active,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .nav-file-title.is-active,
+:is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .tree-item-self.is-active,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .suggestion-hotkey,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .workspace-leaf div.workspace-leaf-content[data-type=file-tree-view] div.oz-nav-file.is-active,
 :is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .workspace-drawer.is-pinned .workspace-drawer-header-icon.mod-pin,
-:is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .canvas-help .setting-hotkey {
+:is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .canvas-help .setting-hotkey,
+:is(.theme-dark.pt-accent-style-plain-dt, .theme-light.pt-accent-style-plain-lt) .clickable-icon[aria-label="Search settings"].is-active {
   background-color: var(--background-primary);
   border-color: var(--window-border);
 }
@@ -2096,10 +2104,12 @@ button.mod-cta {
 :is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .nav-action-button.is-active,
 :is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .vertical-tab-nav-item.is-active,
 :is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .nav-file-title.is-active,
+:is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .tree-item-self.is-active,
 :is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .suggestion-hotkey,
 :is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .workspace-leaf div.workspace-leaf-content[data-type=file-tree-view] div.oz-nav-file.is-active,
 :is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .workspace-drawer.is-pinned .workspace-drawer-header-icon.mod-pin,
-:is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .canvas-help .setting-hotkey {
+:is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .canvas-help .setting-hotkey,
+:is(.theme-dark.pt-accent-style-border-dt, .theme-light.pt-accent-style-border-lt) .clickable-icon[aria-label="Search settings"].is-active {
   background-color: var(--background-primary);
   border-color: var(--interactive-accent-tint);
 }
@@ -2190,10 +2200,12 @@ button.mod-cta {
 :is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .nav-action-button.is-active,
 :is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .vertical-tab-nav-item.is-active,
 :is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .nav-file-title.is-active,
+:is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .tree-item-self.is-active,
 :is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .suggestion-hotkey,
 :is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .workspace-leaf div.workspace-leaf-content[data-type=file-tree-view] div.oz-nav-file.is-active,
 :is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .workspace-drawer.is-pinned .workspace-drawer-header-icon.mod-pin,
-:is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .canvas-help .setting-hotkey {
+:is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .canvas-help .setting-hotkey,
+:is(.theme-dark.pt-accent-style-filled-dt, .theme-light.pt-accent-style-filled-lt) .clickable-icon[aria-label="Search settings"].is-active {
   background-color: var(--interactive-accent-base);
   border-color: transparent;
 }
@@ -2283,10 +2295,12 @@ button.mod-cta {
 :is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .nav-action-button.is-active,
 :is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .vertical-tab-nav-item.is-active,
 :is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .nav-file-title.is-active,
+:is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .tree-item-self.is-active,
 :is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .suggestion-hotkey,
 :is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .workspace-leaf div.workspace-leaf-content[data-type=file-tree-view] div.oz-nav-file.is-active,
 :is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .workspace-drawer.is-pinned .workspace-drawer-header-icon.mod-pin,
-:is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .canvas-help .setting-hotkey {
+:is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .canvas-help .setting-hotkey,
+:is(.theme-dark.pt-accent-style-borderandfilled-dt, .theme-light.pt-accent-style-borderandfilled-lt) .clickable-icon[aria-label="Search settings"].is-active {
   background-color: var(--interactive-accent-base);
   border-color: var(--interactive-accent-tint);
 }
@@ -2529,6 +2543,9 @@ a.tag:hover {
 .theme-dark .code-block-flair {
   background-color: var(--background-secondary);
 }
+.markdown-source-view.mod-cm6 .code-block-flair {
+  padding: 0 var(--size-4-2);
+}
 
 :is(.markdown-source-view.mod-cm6.is-live-preview .cm-content .HyperMD-quote, .markdown-rendered blockquote) {
   padding: var(--size-4-2) var(--size-4-4);
@@ -2538,10 +2555,6 @@ a.tag:hover {
 }
 .theme-dark :is(.markdown-source-view.mod-cm6.is-live-preview .cm-content .HyperMD-quote, .markdown-rendered blockquote) {
   background-color: var(--background-secondary);
-}
-
-.markdown-source-view.mod-cm6.is-live-preview .cm-content .HyperMD-quote {
-  padding-left: var(--size-4-6) !important;
 }
 
 :is(.theme-light.pt-highlight-text-color-lt, .theme-dark.pt-highlight-text-color-dt) span.cm-link {
@@ -2646,6 +2659,13 @@ ul > li.task-list-item .task-list-item-checkbox {
   padding: var(--size-4-2) var(--size-4-4);
   background-color: var(--background-secondary);
   border-bottom: 1px solid var(--window-border);
+}
+
+.internal-embed.internal-embed.canvas-embed, .internal-embed.pdf-embed {
+  border: 1px solid var(--window-border);
+}
+.internal-embed .markdown-embed-content {
+  padding: var(--size-4-4);
 }
 
 .file-embed.mod-empty {
@@ -3271,7 +3291,10 @@ input.prompt-input:hover, input.prompt-input:focus, input.prompt-input:focus-vis
   padding-left: unset;
 }
 .workspace-leaf-content[data-type=file-explorer] .nav-folder.mod-root > .nav-folder-children {
-  padding: var(--size-4-1);
+  padding: 0 var(--size-4-1);
+}
+.workspace-leaf-content[data-type=file-explorer] .tree-item .tree-item-self {
+  padding-left: var(--size-4-2);
 }
 
 .nav-folder.mod-root .nav-folder > .nav-folder-children {
@@ -3496,26 +3519,34 @@ body:not(.is-grabbing) .nav-folder-title.is-being-dragged,
   margin-left: var(--file-explorer-left-margin);
 }
 
-.nav-header ~ .search-input-container {
-  width: 100%;
-  height: var(--header-height);
+.search-result-container {
+  padding: var(--size-4-1);
+}
+
+.search-row {
+  padding: var(--size-4-1);
   margin: unset;
   background-color: var(--background-secondary);
   border-bottom: 1px solid var(--window-border);
 }
-.workspace-drawer .nav-header ~ .search-input-container {
-  width: 100%;
-  height: unset;
+
+.search-info-container {
+  background-color: var(--background-secondary);
 }
 
-.search-input-container input {
-  width: -webkit-fill-available;
-  width: fill-available;
-  margin: var(--size-4-1);
+.search-params {
+  padding: var(--size-4-1) var(--size-4-4);
+  margin: unset;
+  margin-top: -1px;
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--window-border);
 }
 
-.search-result-container {
-  padding: var(--size-4-1);
+.search-results-info {
+  padding: var(--size-4-1) var(--size-4-2) var(--size-4-2) var(--size-4-2);
+  margin: unset;
+  margin-top: -1px;
+  background-color: var(--background-secondary);
 }
 
 .search-result-file-matched-text {
@@ -3536,26 +3567,10 @@ body:not(.is-grabbing) .nav-folder-title.is-being-dragged,
   background-color: var(--background-secondary-alt);
 }
 
-.search-result-hover-button {
-  padding: var(--size-2-1);
-}
-.search-result-hover-button svg.svg-icon {
-  width: 14px;
-  height: 14px;
-}
-
-.search-result-file-match-replace-button {
-  padding: 0 var(--size-4-1);
-}
-
 .internal-query .search-result-container {
   padding: var(--size-4-2) var(--size-4-1);
   background-color: unset;
   border-radius: unset;
-}
-
-.search-input-container::before {
-  left: var(--size-4-4);
 }
 
 .suggestion-container.mod-search-suggestion {
@@ -3604,7 +3619,7 @@ body:not(.is-grabbing) .nav-folder-title.is-being-dragged,
   padding-left: var(--size-4-1);
 }
 .workspace-leaf-content[data-type=starred] .nav-file-icon {
-  padding-right: var(--size-4-2);
+  padding-right: var(--size-4-1);
   margin: unset;
 }
 
@@ -3909,6 +3924,22 @@ body.theme-dark {
   transform: translateX(4px);
 }
 
+.workspace-leaf-content[data-type=bookmarks] .bookmarks-container {
+  flex-grow: 1;
+  padding-top: var(--size-4-1);
+  padding-right: var(--size-4-1);
+  padding-left: var(--size-4-1);
+  overflow-y: auto;
+}
+.workspace-leaf-content[data-type=bookmarks] .tree-item-icon {
+  width: unset;
+  padding-right: var(--size-4-1);
+}
+
+body:not(.is-grabbing) .workspace-leaf-content[data-type=bookmarks] .tree-item-self.is-active:hover {
+  color: var(--interactive-accent-hover);
+}
+
 .pt-custom-vault-banner .nav-folder-title[data-path="/"] {
   align-items: center;
   min-width: -webkit-fill-available;
@@ -3930,11 +3961,12 @@ body.theme-dark {
   color: var(--nav-item-color-hover);
   background-color: var(--nav-item-background-hover);
 }
-.pt-custom-vault-banner .nav-folder-title[data-path="/"] .nav-folder-collapse-indicator {
+.pt-custom-vault-banner .nav-folder-title[data-path="/"]::before {
   display: block;
   width: 28px;
   height: 28px;
   margin: 6px;
+  content: "";
   background-image: var(--custom-vault-banner-icon-url);
   background-repeat: no-repeat;
   background-position: center;
@@ -4235,7 +4267,7 @@ body:not(.is-mobile) div.workspace-leaf-content[data-type=style-settings] .view-
 }
 .setting-item.style-settings-info-text[data-id=theme-info-buttons] .styleSettingsButtonEmoji,
 .setting-item.style-settings-info-text[data-id=support-buttons] .styleSettingsButtonEmoji {
-  margin-right: var(--size-4-2);
+  margin-right: var(--size-4-1);
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "EmojiOne Color", "Android Emoji", sans-serif;
 }
 
@@ -4252,7 +4284,7 @@ body:not(.is-mobile) div.workspace-leaf-content[data-type=style-settings] .view-
 .styleSettingsButton a {
   width: 100%;
   height: 100%;
-  padding: var(--size-4-1) var(--size-4-3);
+  padding: var(--size-4-1) var(--size-4-3) var(--size-4-1) var(--size-4-2);
   text-decoration-line: unset;
   vertical-align: baseline;
 }
@@ -5349,9 +5381,11 @@ body:not(.is-frameless):not(.qe-hide-breadcrumbs) .status-bar {
 }
 .settings-search-container .settings-search-input {
   padding: unset;
+  margin: var(--size-4-1);
 }
 .settings-search-container .search-input-container::before {
   top: calc((var(--input-height) - var(--search-icon-size)) / 2);
+  left: var(--size-4-3);
 }
 .settings-search-container .vertical-tab-nav-item {
   border: unset;
@@ -8661,7 +8695,6 @@ settings:
         description: This option removes the title from pinned tabs and adds back the default file icon for the markdown files. Helps reduce the horizontal space wasted by pinned tabs. You can still see the title when you hover over the icon. NOTE - This option requires Installer Version 1.1.9+ due to use of CSS `has()`. Also, might not work on certain Mobile clients.
         default: false
         type: class-toggle
-
     -
         id: theme-info
         title: Theme Info

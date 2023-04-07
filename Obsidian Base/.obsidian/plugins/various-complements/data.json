@@ -1366,8 +1366,8 @@
     "beforeEach": {
       "beforeEach": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1680498058913
+          "count": 2,
+          "lastUpdated": 1680871647657
         }
       }
     },
@@ -1760,6 +1760,38 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680864218111
+        }
+      }
+    },
+    "beforeAll": {
+      "beforeAll": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680871645361
+        }
+      }
+    },
+    "afterEach": {
+      "afterEach": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680871650673
+        }
+      }
+    },
+    "afterAll": {
+      "afterAll": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680871654322
+        }
+      }
+    },
+    "expect": {
+      "expect": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680871694980
         }
       }
     }

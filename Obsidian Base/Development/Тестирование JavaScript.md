@@ -124,6 +124,117 @@ describe('validateValue', () => {
 
 ![](_png/Pasted%20image%2020230407144333.png)
 
+Так же дальше мы можем попробовать сравнить массивы:
+
+`mapArrToString.js`
+```JS
+const mapArrToString = (arr) => {
+	return arr.filter((item) => Number.isInteger(item)).map(String);
+};
+
+module.exports = mapArrToString;
+```
+
+Тут мы уже используем другие функции jest:
+- `toEqual` проводит глубокое сравнение объектов и позволяет сравнить массивы и объекты (если попробовать через `toBe`, то он выдаст феил, так как он будет сравнивать ссылки, а не значения)
+- чейн `not` инвертирует результат следующей операции (если у нас значения не эквивалентны, то `not` выдаст, что они эквивалентны)
+
+`mapArrToString.spec.js`
+```JS
+const mapArrToString = require('./mapArrToString');
+
+describe('mapArrToString', () => {
+	it('Переданы корректные значения - success', () => {
+		expect(mapArrToString([1, 2, 3])).toEqual(['1', '2', '3']);
+	});
+
+	it('Сместь из значений - fail', () => {
+		expect(mapArrToString([1, 2, 3, null, undefined, 'asdasd'])).toEqual(['1', '2', '3']);
+	});
+
+	it('Пустой массив - success', () => {
+		expect(mapArrToString([])).toEqual([]);
+	});
+
+	it('Генерация значений - fail', () => {
+		expect(mapArrToString([])).not.toEqual([1, 2, 3]);
+	});
+});
+```
+
+Далее реализуем функционал возведения в степень
+
+`square.js`
+```JS
+const square = (value) => {
+	return value * value;
+};
+
+module.exports = square;
+```
+
+Так же условий сравнения в методе `expect` крайне большое количество и все из них можно посмотреть в [документации](https://jestjs.io/ru/docs/expect)
+
+Так же jest предоставляет нам 4 функции, которые выполняют побочные действия между тестами:
+- `beforeAll` 
+- `beforeEach` 
+- `afterAll`  
+- `afterEach`
+
+`square.spec.js`
+```JS
+const square = require('./square');
+
+describe('validateValue', () => {
+	let mockValue;
+
+	// выполняется перед всеми тестами
+	beforeAll(() => {
+		mockValue = 3;
+		console.log(mockValue);
+	});
+
+	// выполняется перед каждым тестом
+	beforeEach(() => {
+		mockValue++;
+		console.log(mockValue);
+	});
+
+	it('Успешное значение - success', () => {
+		expect(square(2)).toBe(4);
+	});
+
+	it('Три теста - success', () => {
+		expect(square(2)).toBeLessThan(5);
+		expect(square(2)).toBeGreaterThan(3);
+		expect(square(2)).not.toBeUndefined();
+	});
+
+	// выполняется после всех тестов
+	afterEach(() => {
+		mockValue++;
+		console.log(mockValue);
+	});
+
+	// выполняется после всех тестов
+	afterAll(() => {
+		mockValue = 0;
+		console.log(mockValue);
+	});
+});
+```
+
+И теперь каждый тест триггерит изменение нашего значения вышеописанными методами
+
+![](_png/Pasted%20image%2020230407154600.png)
+
+
+
+
+
+
+
+
 
 
 
