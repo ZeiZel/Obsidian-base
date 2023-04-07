@@ -1262,16 +1262,16 @@
     "ConfigService": {
       "ConfigService": {
         "currentFile": {
-          "count": 4,
-          "lastUpdated": 1680589626278
+          "count": 6,
+          "lastUpdated": 1680850533921
         }
       }
     },
     "useFactory": {
       "useFactory": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1680434448223
+          "count": 2,
+          "lastUpdated": 1680850549219
         }
       }
     },
@@ -1286,8 +1286,8 @@
     "TypegooseModule": {
       "TypegooseModule": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1680443032757
+          "count": 2,
+          "lastUpdated": 1680850144554
         }
       }
     },
@@ -1632,6 +1632,46 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680842638036
+        }
+      }
+    },
+    "telegram": {
+      "telegram": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680849349445
+        }
+      }
+    },
+    "ITelegramOptions": {
+      "ITelegramOptions": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680850044213
+        }
+      }
+    },
+    "getTelegramConfig": {
+      "getTelegramConfig": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680850560971
+        }
+      }
+    },
+    "Telegraf": {
+      "Telegraf": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680850581756
+        }
+      }
+    },
+    "TelegramModule": {
+      "TelegramModule": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680850585020
         }
       }
     }
