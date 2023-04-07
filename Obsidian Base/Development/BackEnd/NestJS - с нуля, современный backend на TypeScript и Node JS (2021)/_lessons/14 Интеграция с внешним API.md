@@ -280,7 +280,9 @@ export class HhDataDto {
 ## 3. HttpModule
 
 
-
+```bash
+npm i @nestjs/axios
+```
 
 
 
