@@ -359,6 +359,10 @@ const getData = async () => {
 
 
 
+`getData.spec.js`
+```JS
+
+```
 
 
 
