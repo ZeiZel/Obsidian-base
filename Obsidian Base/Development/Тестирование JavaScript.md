@@ -60,10 +60,69 @@
 
 ## Практика. unit тесты с JEST
 
+Устанавливаем в проект библиотеку для тестирования Jest
 
+```bash
+npm i -D jest
+```
 
+Далее напишем функцию, которую нужно проверить
 
+`validateValue.js`
+```JS
+const validateValue = (value) => {  
+    if (value < 0 || value > 100) {  
+        return false;  
+    }  
+  
+    return true;  
+}  
+  
+module.exports = validateValue;
+```
 
+И далее нам нужно написать сами тесты для функции:
+- `test()` (мы так же можем писать `it()` который является алиасом для `test()`) принимает в себя имя и функцию, которая будет исполнять тестирование
+- `expect()` - основная функция, которая используется в тестах - в ней мы описываем, что мы ожидаем от выполнения операции. Внутрь неё передаём операцию и дальше по чейну нужно выбрать одну из функций-проверки
+- `toBe()` принимает в себя то значение, которое должно оказаться в expect для успешного прохождения проверки
+
+`validateValue.spec.js`
+```JS
+const validateValue = require('./validateValue');  
+  
+test('Валидация значения', () => {  
+    expect(validateValue(50)).toBe(true);  
+});
+```
+
+![](_png/Pasted%20image%2020230407143051.png)
+
+Так же мы можем описать сразу несколько тестов для нужного нам функционала:
+
+`validateValue.spec.js`
+```JS
+const validateValue = require('./validateValue');
+
+describe('validateValue', () => {
+    test('Валидация значения', () => {
+        expect(validateValue(50)).toBe(true);
+    });
+
+    it('Валидация значения - -1 - fail', () => {
+        expect(validateValue(-1)).toBe(false);
+    });
+
+    it('Валидация значения - 101 - fail', () => {
+        expect(validateValue(101)).toBe(false);
+    });
+});
+```
+
+![](_png/Pasted%20image%2020230407143945.png)
+
+Так же проверяем пограничные значения
+
+![](_png/Pasted%20image%2020230407144333.png)
 
 
 

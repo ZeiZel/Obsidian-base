@@ -104,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -170,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+                "file": "Development/Тестирование JavaScript.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -187,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+                "file": "Development/Тестирование JavaScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -210,7 +210,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md"
+                "file": "Development/Тестирование JavaScript.md"
               }
             }
           },
@@ -265,21 +265,22 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aef152b325f02bad",
+  "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230407144333.png",
+    "Development/_png/Pasted image 20230407143945.png",
+    "Development/_png/Pasted image 20230407143051.png",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/14 Интеграция с внешним API.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407133500.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407132324.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407131650.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407130402.png",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407101336.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407100720.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407100008.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407094037.png",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407093205.png",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407093203.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/11 Выкладка на production (Бонус!).md",
