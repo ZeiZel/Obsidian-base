@@ -315,11 +315,33 @@ describe('validateValue', () => {
 ## Юнит тестирование асинхронных функций. Мокаем данные. Snapshots
 
 
+`delay.js`
+```JS
+const delay = (callback, ms) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(callback());
+		}, ms);
+	});
+};
+
+module.exports = delay;
+```
 
 
+`delay.spec.js`
+```JS
+const delay = require('./delay');
 
+describe('mapArrToString', () => {
+	it('delay - success', async () => {
+		const sum = await delay(() => 4 + 4, 1000);
+		expect(sum).toBe(8);
+	});
+});
+```
 
-
+![](_png/Pasted%20image%2020230407163326.png)
 
 
 
