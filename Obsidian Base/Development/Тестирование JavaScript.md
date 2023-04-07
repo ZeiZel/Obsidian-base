@@ -314,6 +314,7 @@ describe('validateValue', () => {
 
 ## Юнит тестирование асинхронных функций. Мокаем данные. Snapshots
 
+Реализуем функцию, которая принимает в себя колбэк и время ожидания
 
 `delay.js`
 ```JS
@@ -328,6 +329,7 @@ const delay = (callback, ms) => {
 module.exports = delay;
 ```
 
+И чтобы протестировать её достаточно просто воспользоваться async/await операторами
 
 `delay.spec.js`
 ```JS
@@ -343,9 +345,17 @@ describe('mapArrToString', () => {
 
 ![](_png/Pasted%20image%2020230407163326.png)
 
+Дальше уже пойдёт функция получения данных с сервера
 
-
-
+`getData.js`
+```JS
+const axios = require('axios');  
+  
+const getData = async () => {  
+   const response = await axios.get('https://jsonplaceholder.typicode.com/users');  
+   const userIds = response.data.map((user) => user.id);  
+};
+```
 
 
 
