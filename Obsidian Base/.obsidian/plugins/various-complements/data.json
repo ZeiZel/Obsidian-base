@@ -159,22 +159,6 @@
         }
       }
     },
-    "autoplay": {
-      "autoplay": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678205067738
-        }
-      }
-    },
-    "колбэк-функцию": {
-      "колбэк-функцию": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678206453818
-        }
-      }
-    },
     "useCallback": {
       "useCallback": {
         "currentFile": {
@@ -1640,6 +1624,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680794772069
+        }
+      }
+    },
+    "телеграмом": {
+      "телеграмом": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680842638036
         }
       }
     }
