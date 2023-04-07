@@ -228,17 +228,103 @@ describe('validateValue', () => {
 
 ![](_png/Pasted%20image%2020230407154600.png)
 
+###### Моковые данные
 
+Модифицируем нашу функцию таким образом, чтобы она возводила числов в степень через метод и могла не вызвать эту функцию, если число = 1 
 
+`square.js`
+```JS
+const square = (value) => {
+	if (value === 1) return 1;
+	return Math.pow(value, 2);
+};
 
+module.exports = square;
+```
 
+Для того, чтобы посмотреть сколько раз вызовется определённая функция, мы можем:
+- воспользоваться `jest.spyOn`, куда мы передадим библиотеку, за которой следим и её метод
+- далее нам нужно вызвать целевую функцию
+- и далее в `expect` передать наше моковое значение, где чейном проверяем количество вызовов
 
+`square.spec.js`
+```JS
+const square = require('./square');  
+  
+describe('validateValue', () => {  
+   it('Успешное значение - success', () => {  
+      const spyMathPow = jest.spyOn(Math, 'pow');  
+      square(2);  
+      expect(spyMathPow).toBeCalledTimes(1);  
+   });  
+});
+```
 
+![](_png/Pasted%20image%2020230407160412.png)
 
+Однако тут нужно сказать, что моковые значения в Jest копятся и не делятся на тесты, поэтому второй шан тест уже выдал ошибку 
 
+`square.spec.js`
+```JS
+const square = require('./square');  
+  
+describe('validateValue', () => {  
+   it('Успешное значение - success', () => {  
+      const spyMathPow = jest.spyOn(Math, 'pow');  
+      square(2);  
+      expect(spyMathPow).toBeCalledTimes(1);  
+   });  
+  
+   it('Успешное значение - success', () => {  
+      const spyMathPow = jest.spyOn(Math, 'pow');  
+      square(1);  
+      expect(spyMathPow).toBeCalledTimes(0);  
+   });  
+});
+```
 
+![](_png/Pasted%20image%2020230407160452.png)
+
+Чтобы определить нормальное поведение, нужно будет после каждого теста чистить моковые данные с помощью `jest.clearAllMocks()` 
+
+`square.spec.js`
+```JS
+const square = require('./square');  
+  
+describe('validateValue', () => {  
+   it('Успешное значение - success', () => {  
+      const spyMathPow = jest.spyOn(Math, 'pow');  
+      square(2);  
+      expect(spyMathPow).toBeCalledTimes(1);  
+   });  
+  
+   it('Успешное значение - success', () => {  
+      const spyMathPow = jest.spyOn(Math, 'pow');  
+      square(1);  
+      expect(spyMathPow).toBeCalledTimes(0);  
+   });  
+  
+   afterEach(() => {  
+      jest.clearAllMocks();  
+   });  
+});
+```
+
+![](_png/Pasted%20image%2020230407160704.png)
 
 ## Юнит тестирование асинхронных функций. Мокаем данные. Snapshots
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

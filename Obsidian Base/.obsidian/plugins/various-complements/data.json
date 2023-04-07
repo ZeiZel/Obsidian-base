@@ -1774,8 +1774,8 @@
     "afterEach": {
       "afterEach": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1680871650673
+          "count": 2,
+          "lastUpdated": 1680872853069
         }
       }
     },
@@ -1790,8 +1790,16 @@
     "expect": {
       "expect": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1680872617745
+        }
+      }
+    },
+    "spyMathPow": {
+      "spyMathPow": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1680871694980
+          "lastUpdated": 1680872559658
         }
       }
     }
