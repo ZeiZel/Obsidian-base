@@ -281,7 +281,7 @@ export class HhDataDto {
 
 
 ```bash
-npm i @nestjs/axios
+npm i @nestjs/axios axios
 ```
 
 
