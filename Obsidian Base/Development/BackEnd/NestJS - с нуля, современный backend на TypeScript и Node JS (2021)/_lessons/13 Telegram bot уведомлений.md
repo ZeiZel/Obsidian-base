@@ -38,20 +38,7 @@ nest g service telegram --no-spec
 
 
 
-
-
-
-
-
-
-## 3. Реализация forRootAsync
-
-
-
-
-
-
-
+![](_png/Pasted%20image%2020230407081000.png)
 
 
 
