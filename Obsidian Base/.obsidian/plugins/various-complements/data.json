@@ -135,14 +135,6 @@
         }
       }
     },
-    "componentDidUpdate": {
-      "componentDidUpdate": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1678258252652
-        }
-      }
-    },
     "updateChar": {
       "updateChar": {
         "currentFile": {
@@ -1800,6 +1792,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680872559658
+        }
+      }
+    },
+    "getData": {
+      "getData": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680939055303
         }
       }
     }
