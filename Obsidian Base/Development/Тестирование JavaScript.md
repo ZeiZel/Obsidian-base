@@ -471,15 +471,68 @@ describe('Тесты', () => {
 
 ## Тестирование React приложений. React Testing library
 
+Создадим простой компонент:
 
+`App.js`
+```JSX
+function App() {
+	return (
+		<div className='App'>
+			<h1>Hello</h1>
+			<button>Button</button>
+			<input type='text' placeholder={'input value'} />
+		</div>
+	);
+}
 
+export default App;
+```
 
+И далее познакомимся с некоторыми особенностями тестирования в реакте:
+- `render()` - функция, которая рендерит нужный нам элемент на странице
+- `screen` - объект, который хранит в себе вёрстку, которая должна пойти на страницу
+	- `getByText` - получение элемента по тексту внутри него
+	- `getByRole` - получение элемента по его роли на странице (инпут, кнопка, артикль)
+	- `getByPlaceholderText` - получение элемента по тексту плейсхолдера
+- `toBeInTheDocument` - проверяет, что элемент должен находиться на странице
 
+`App.test.js`
+```JS
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
+// сам тест
+test('renders react', () => {
+	// сюда передаём компонент, который нужно протестировать
+	render(<App />);
 
+	// тут мы записываем наше ожидание на экране (получаем вёрстку по определённому тексту)
+	const helloWorldElement = screen.getByText(/hello/i); // ищем по тексту
+	const btn = screen.getByRole('button'); // ищем по семантическим тегам
+	const input = screen.getByPlaceholderText(/input value/i); // ищем по тексту в плейсхолдере
 
+	// передаём ожидание и проверяем, что это должно быть в документе
+	expect(helloWorldElement).toBeInTheDocument();
+	expect(btn).toBeInTheDocument();
+	expect(input).toBeInTheDocument();
 
+	// тут мы так же можем сгенерировать снепшот инпута
+	expect(input).toMatchSnapshot();
 
+	// тут же мы можем вывести разметку в консоль
+	screen.debug();
+});
+```
+
+При использовании `screen.debug()` вся вёрстка, которая попадает в `screen`, будет находиться в консоли
+
+![](_png/Pasted%20image%2020230408114510.png)
+
+И примерно таким образом выглядят снепшоты элементов
+
+![](_png/Pasted%20image%2020230408114752.png)
+
+д
 
 
 

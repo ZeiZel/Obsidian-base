@@ -5,8 +5,8 @@
   "fuzzyMatch": true,
   "matchingWithoutEmoji": true,
   "treatAccentDiacriticsAsAlphabeticCharacters": false,
-  "maxNumberOfSuggestions": 10,
-  "maxNumberOfWordsAsPhrase": 3,
+  "maxNumberOfSuggestions": 20,
+  "maxNumberOfWordsAsPhrase": 2,
   "minNumberOfCharactersTriggered": 0,
   "minNumberOfWordsTriggeredPhrase": 1,
   "complementAutomatically": true,
@@ -1800,6 +1800,46 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680939055303
+        }
+      }
+    },
+    "getBy": {
+      "getBy": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680944133666
+        }
+      }
+    },
+    "getByText": {
+      "getByText": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680944135865
+        }
+      }
+    },
+    "getByRole": {
+      "getByRole": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680944141659
+        }
+      }
+    },
+    "getByPlaceholderText": {
+      "getByPlaceholderText": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680944147433
+        }
+      }
+    },
+    "toBeInTheDocument": {
+      "toBeInTheDocument": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680944156794
         }
       }
     }
