@@ -345,26 +345,127 @@ describe('mapArrToString', () => {
 
 ![](_png/Pasted%20image%2020230407163326.png)
 
-Дальше уже пойдёт функция получения данных с сервера
+Дальше уже пойдёт функция получения данных с сервера, выделения из них id и перевода их в строки
 
 `getData.js`
 ```JS
-const axios = require('axios');  
-  
-const getData = async () => {  
-   const response = await axios.get('https://jsonplaceholder.typicode.com/users');  
-   const userIds = response.data.map((user) => user.id);  
+const axios = require('axios');
+const mapArrToString = require('../mapArrToString/mapArrToString');
+
+const getData = async () => {
+	try {
+		const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+		const userIds = response.data.map((user) => user.id);
+		return mapArrToString(userIds);
+	} catch (e) {
+		console.error(e);
+	}
 };
+
+module.exports = getData;
 ```
 
+Тут нам потребуется уже замокать результат выполнения функции:
+- `jest.mock()` - мокает модуль, котрый мы используем
+- `mockReturnValue()` - передаёт те данные, которые должна вернуть вызываемая нами функция
 
+Конкретно в данном примере
+- сначала мокаем модуль `axios`, 
+- затем вызываем его до выполнения нашей функции, которую мы проверяем с передачей замоканных данных
+- вызываем функцию, которую мы проверяем
+- экспектим данные
 
 `getData.spec.js`
 ```JS
+const axios = require('axios');
+const getData = require('./getData');
 
+// мокаем использование модуля аксиоса
+jest.mock('axios');
+
+describe('Тесты', () => {
+	let response;
+
+	beforeEach(() => {
+		response = {
+			data: [
+				{
+					id: 1,
+					name: 'Leanne Graham',
+					username: 'Bret',
+					email: 'Sincere@april.biz',
+					address: {
+						street: 'Kulas Light',
+						suite: 'Apt. 556',
+						city: 'Gwenborough',
+						zipcode: '92998-3874',
+						geo: {
+							lat: '-37.3159',
+							lng: '81.1496',
+						},
+					},
+					phone: '1-770-736-8031 x56442',
+					website: 'hildegard.org',
+					company: {
+						name: 'Romaguera-Crona',
+						catchPhrase: 'Multi-layered client-server neural-net',
+						bs: 'harness real-time e-markets',
+					},
+				},
+				{
+					id: 2,
+					name: 'Ervin Howell',
+					username: 'Antonette',
+					email: 'Shanna@melissa.tv',
+					address: {
+						street: 'Victor Plains',
+						suite: 'Suite 879',
+						city: 'Wisokyburgh',
+						zipcode: '90566-7771',
+						geo: {
+							lat: '-43.9509',
+							lng: '-34.4618',
+						},
+					},
+					phone: '010-692-6593 x09125',
+					website: 'anastasia.net',
+					company: {
+						name: 'Deckow-Crist',
+						catchPhrase: 'Proactive didactic contingency',
+						bs: 'synergize scalable supply-chains',
+					},
+				},
+			],
+		};
+	});
+
+	it('Корректный результат', async () => {
+		// вставляем в результат работы функции моковые данные
+		axios.get.mockReturnValue(response);
+
+		// вызываем саму функцию getData
+		const data = await getData();
+
+		// проверям количество раз срабатываний функции axios внутри getData
+		expect(axios.get).toBeCalledTimes(1);
+
+		// проверяем полученные данные
+		expect(data).toEqual(['1', '2']);
+	});
+});
 ```
 
 
+![](_png/Pasted%20image%2020230408101549.png)
+
+
+
+
+![](_png/Pasted%20image%2020230408102126.png)
+
+![](_png/Pasted%20image%2020230408102054.png)
+
+![](_png/Pasted%20image%2020230408102207.png)
 
 ## Тестирование React приложений. React Testing library
 

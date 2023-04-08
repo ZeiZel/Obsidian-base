@@ -102,6 +102,18 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "894b61b3aa215f79",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
         "currentTab": 7
@@ -267,19 +279,21 @@
   },
   "active": "0dad026b4231e711",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/02 Настройка VM на Linux.md",
+    "Development/Тестирование JavaScript.md",
+    "Development/_png/Pasted image 20230408102207.png",
+    "Development/_png/Pasted image 20230408102126.png",
+    "Development/_png/Pasted image 20230408102054.png",
+    "Development/_png/Pasted image 20230408101549.png",
     "Development/_png/Pasted image 20230407163326.png",
     "Development/_png/Pasted image 20230407160704.png",
     "Development/_png/Pasted image 20230407160452.png",
     "Development/_png/Pasted image 20230407160412.png",
     "Development/_png/Pasted image 20230407154600.png",
     "Development/_png/Pasted image 20230407154148.png",
-    "Development/_png/Pasted image 20230407144333.png",
-    "Development/_png/Pasted image 20230407143945.png",
-    "Development/_png/Pasted image 20230407143051.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/14 Интеграция с внешним API.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407133500.png",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/_png/Pasted image 20230407132324.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
@@ -294,7 +308,6 @@
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/07 Валидация данных.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
-    "Development/Тестирование JavaScript.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/02 Настройка окружения.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/01 Введение.md",
     "_lessons/03 Введение в TypeScript.md",
@@ -302,8 +315,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/TypeScript/TypeScript.md",
     "Development/React Foundamentals.md",
-    "Development/Github Actions.md",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Programming Principes/_png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
     "Books/_png"
