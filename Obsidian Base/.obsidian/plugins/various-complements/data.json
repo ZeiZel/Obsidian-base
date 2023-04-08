@@ -1842,6 +1842,30 @@
           "lastUpdated": 1680944156794
         }
       }
+    },
+    "queryBy": {
+      "queryBy": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680947393987
+        }
+      }
+    },
+    "findByText": {
+      "findByText": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680949387323
+        }
+      }
+    },
+    "toHaveStyle": {
+      "toHaveStyle": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1680949761163
+        }
+      }
     }
   }
 }

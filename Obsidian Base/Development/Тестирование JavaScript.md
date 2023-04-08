@@ -532,20 +532,81 @@ test('renders react', () => {
 
 ![](_png/Pasted%20image%2020230408114752.png)
 
-д
-
-
-
-
-
-
-
-
-
-
 ## findBy, getBy, queryBy. Пример с useEffect. Асинхронный код
 
+Функции выборки делятся на следующие группы:
+- `getBy...` - находит и возвращает элемент, но если не находит, то прокидывает ошибку и тест завершается с фейлом (`getAll...` возвращает массив элементов)
+- `queryBy...` - находит и возвращает элемент, но если элемент не найден, то он нам даёт в этом просто убедиться присвоив в переменную `null` (`queryAll...` возвращает массив элементов)
+- `findBy...` - работает как `queryBy...`, но возвращает промис от поиска, то есть работает асинхронно (`findAll...` возвращает массив элементов)
 
+`App.test.js`
+```JS
+test('renders react', () => {  
+   render(<App />);  
+   const helloWorldElement = screen.queryByText(/helloswrld/i);  
+   expect(helloWorldElement).toBeNull();  
+});
+```
+
+![](_png/Pasted%20image%2020230408130427.png)
+
+Уже в данном примере мы проводим поиск через `findByText`, который позволяет проверить наш асинхронный код появления текста `text` на странице 
+
+```JSX
+function App() {  
+   const [data, setData] = useState(null);  
+  
+   useEffect(() => {  
+      setTimeout(() => {  
+         setData({});  
+      }, 100);  
+   }, []);  
+  
+   return (  
+      <div className='App'>  
+         {data && <div>text</div>}  
+         <h1>Hello</h1>  
+         <button>Button</button>  
+         <input type='text' placeholder={'input value'} />  
+      </div>  
+   );  
+}
+```
+
+```JSX
+describe('Test App', () => {  
+   test('renders react', async () => {  
+      render(<App />);  
+      const text = await screen.findByText(/text/i);  
+      expect(text).toBeInTheDocument();  
+   });  
+});
+```
+
+![](_png/Pasted%20image%2020230408131916.png)
+
+Так же, чтобы проверить наличие определённых стилей на элементе, мы можем воспользоваться `toHaveStyle()`
+
+```JSX
+describe('Test App', () => {
+	test('renders react', async () => {
+		render(<App />);
+		const text = await screen.findByText(/text/i);
+		expect(text).toBeInTheDocument();
+		expect(text).toHaveStyle({ color: 'red' });
+	});
+});
+```
+
+
+
+```JSX
+
+```
+
+```JSX
+
+```
 
 
 
