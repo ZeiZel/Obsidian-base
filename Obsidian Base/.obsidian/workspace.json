@@ -114,9 +114,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "71dac2f3041be87f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SelfDevelopment/Как учиться учиться.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 9
       }
     ],
     "direction": "vertical"
@@ -145,7 +157,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "forEach",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -162,8 +174,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -183,7 +194,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Тестирование JavaScript.md",
+                "file": "SelfDevelopment/Как учиться учиться.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -200,7 +211,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Тестирование JavaScript.md",
+                "file": "SelfDevelopment/Как учиться учиться.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -223,7 +234,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Тестирование JavaScript.md"
+                "file": "SelfDevelopment/Как учиться учиться.md"
               }
             }
           },
@@ -278,8 +289,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0dad026b4231e711",
+  "active": "71dac2f3041be87f",
   "lastOpenFiles": [
+    "Development/Тестирование JavaScript.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -292,7 +304,6 @@
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/08 Приложение 1 - CLI прогноз погоды.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
-    "Development/Тестирование JavaScript.md",
     "Development/_png/Pasted image 20230408131916.png",
     "Development/_png/Pasted image 20230408131853.png",
     "Development/_png/Pasted image 20230408130427.png",
