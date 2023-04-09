@@ -600,14 +600,72 @@ describe('Test App', () => {
 
 ## Тестирование событий. onClick, onChange, onInput. FireEvent, userEvent
 
+Далее реализуем переключение состояния отображения элемента (если `toggle` активен, то будет показываться элемент)
 
+Так же тут будет передан `data-testid`, который позволит получить доступ к элементу через присвоенный ему `id`
 
 ```JSX
+import { useEffect, useState } from 'react';
 
+function App() {
+	const [data, setData] = useState(null);
+	const [toggle, setToggle] = useState(false);
+
+	const onClick = () => setToggle((toggle) => !toggle);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setData({});
+		}, 100);
+	}, []);
+
+	return (
+		<div className='App'>
+			{toggle && <div data-testid={'toggle-element'}>Toggle text</div>}
+			{data && <div style={{ color: 'red' }}>text</div>}
+			<h1>Hello</h1>
+			<button data-testid={'toggle-button'} onClick={onClick}>
+				Toggle
+			</button>
+			<input type='text' placeholder={'input value'} />
+		</div>
+	);
+}
+
+export default App;
 ```
 
-```JSX
+Далее тут мы будем проверять работу тугглера кнопки:
+- `getByTestId` позволяет получать элементы по ранее описанному атрибуту `data-testid`
+- `fireEvent` позволяет триггерить определённые ивенты на выбранных нами элементах
+- тут мы используем `queryByTestId` потому что элемент пропадает со страницы и значение будет закономерно `null`. Вынести один раз в переменную наш элемент, который исчезает нельзя и нам нужно будет его каждый раз получать через вызов `screen.queryByTestId('toggle-element')`
 
+```JSX
+import { fireEvent, render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('Test App', () => {
+	test('Toggle button Event', async () => {
+		render(<App />);
+
+		// тут мы получаем элемент со страницы по data-testid
+		const btn = screen.getByTestId('toggle-button');
+
+		// изначально элемента на странице нет, поэтому тут стоит использовать query
+		// ожидаем, что элемента на странице пока нет
+		expect(screen.queryByTestId('toggle-element')).toBeNull();
+
+		// проверяем ивент клика по кнопке
+		fireEvent.click(btn);
+
+		// ожидаем, что элемент уже есть на странице после клика по кнопке
+		expect(screen.queryByTestId('toggle-element')).toBeInTheDocument();
+
+		// тут уже проверяем, что элемента на странице нет после клика
+		fireEvent.click(btn);
+		expect(screen.queryByTestId('toggle-element')).toBeNull();
+	});
+});
 ```
 
 

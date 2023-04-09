@@ -127,14 +127,6 @@
         }
       }
     },
-    "componentDidMount": {
-      "componentDidMount": {
-        "currentFile": {
-          "count": 8,
-          "lastUpdated": 1678377041897
-        }
-      }
-    },
     "updateChar": {
       "updateChar": {
         "currentFile": {
@@ -156,14 +148,6 @@
         "currentFile": {
           "count": 5,
           "lastUpdated": 1679494589604
-        }
-      }
-    },
-    "возвращает": {
-      "возвращает": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678428500878
         }
       }
     },
@@ -1864,6 +1848,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1680949761163
+        }
+      }
+    },
+    "data-testid": {
+      "data-testid": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1681032316584
         }
       }
     }
