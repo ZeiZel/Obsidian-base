@@ -598,19 +598,26 @@ describe('Test App', () => {
 });
 ```
 
-
-
-```JSX
-
-```
-
-```JSX
-
-```
-
-
-
 ## Тестирование событий. onClick, onChange, onInput. FireEvent, userEvent
+
+
+
+```JSX
+
+```
+
+```JSX
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
