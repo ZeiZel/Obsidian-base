@@ -71,14 +71,6 @@
         }
       }
     },
-    "useEffect": {
-      "useEffect": {
-        "currentFile": {
-          "count": 16,
-          "lastUpdated": 1678433648737
-        }
-      }
-    },
     "components": {
       "components": {
         "currentFile": {
@@ -92,14 +84,6 @@
         "currentFile": {
           "count": 5,
           "lastUpdated": 1678881108956
-        }
-      }
-    },
-    "textarea": {
-      "textarea": {
-        "currentFile": {
-          "count": 4,
-          "lastUpdated": 1678434463590
         }
       }
     },
@@ -148,22 +132,6 @@
         "currentFile": {
           "count": 5,
           "lastUpdated": 1679494589604
-        }
-      }
-    },
-    "ДОМ-элементам": {
-      "ДОМ-элементам": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678433586857
-        }
-      }
-    },
-    "current": {
-      "current": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678433667812
         }
       }
     },
@@ -1856,6 +1824,14 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1681032316584
+        }
+      }
+    },
+    "JwtStrategy": {
+      "JwtStrategy": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1681135881567
         }
       }
     }
