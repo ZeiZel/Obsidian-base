@@ -57,7 +57,6 @@ module.exports = {
 
 ## Отступы (margin, padding, borders) 
 
-
 `m-10` - `margin:10rem`
 `mx-10` - сделает марджин по оси `x`
 `my-10` - сделает марджин по оси `y`
