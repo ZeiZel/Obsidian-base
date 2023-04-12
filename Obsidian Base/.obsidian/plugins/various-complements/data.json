@@ -135,22 +135,6 @@
         }
       }
     },
-    "validateInput": {
-      "validateInput": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678604570076
-        }
-      }
-    },
-    "colorInput": {
-      "colorInput": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678606103009
-        }
-      }
-    },
     "marvel": {
       "marvel": {
         "currentFile": {
@@ -167,59 +151,11 @@
         }
       }
     },
-    "clearError": {
-      "clearError": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678631878288
-        }
-      }
-    },
-    "AppHeader": {
-      "AppHeader": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1678693441625
-        }
-      }
-    },
-    "BrowserRouter": {
-      "BrowserRouter": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678693659593
-        }
-      }
-    },
-    "exact": {
-      "exact": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678697391400
-        }
-      }
-    },
     "comics": {
       "comics": {
         "currentFile": {
           "count": 3,
           "lastUpdated": 1678713847120
-        }
-      }
-    },
-    "deadpool": {
-      "deadpool": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678701017463
-        }
-      }
-    },
-    "NavLink": {
-      "NavLink": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1678701793744
         }
       }
     },
@@ -1832,6 +1768,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1681135881567
+        }
+      }
+    },
+    "userEvent": {
+      "userEvent": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1681310136653
+        }
+      }
+    },
+    "fireEvent": {
+      "fireEvent": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1681310169245
         }
       }
     }

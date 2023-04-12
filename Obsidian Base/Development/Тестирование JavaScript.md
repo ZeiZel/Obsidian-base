@@ -670,18 +670,77 @@ describe('Test App', () => {
 
 
 
+```JSX
+<h1 data-testid={'value-elem'}>{value}</h1>
+<input
+	type='text'
+	placeholder={'input value...'}
+	onChange={(e) => setValue(e.target.value)}
+/>
+```
 
+```JSX
+describe('Test App', () => {  
+   test('Input Event', async () => {  
+      render(<App />);  
+  
+      // получаем инпут  
+      const input = await screen.getByPlaceholderText(/input value/i);  
+  
+      // ожидаем, что в заголовке нет текста  
+      expect(screen.queryByTestId('value-elem')).toContainHTML('');  
+  
+      // передаём событие  
+      fireEvent.input(input, {  
+         // сюда прилетает инпут  
+         target: { value: '1234' },  
+      });  
+  
+      // ожидаем текст  
+      expect(screen.queryByTestId('value-elem')).toContainHTML('1234');  
+   });  
+});
+```
 
+Так же у нас имеется модуль `userEvent`, который выполняет полноценные действия пользователя на странице (двойной клик, наведение мыши, вставка и так далее). Он уже выполняет не искусственные действия, как `fireEvent`, а реальные действия пользователя
 
+![](_png/Pasted%20image%2020230412172336.png)
 
+И примерно так будет выглядеть данный тест, но уже с `userEvent`:
 
+```JSX
+describe('Test App', () => {
+	test('Input Event', async () => {
+		render(<App />);
 
+		// получаем инпут
+		const input = await screen.getByPlaceholderText(/input value/i);
 
+		// ожидаем, что в заголовке нет текста
+		expect(screen.queryByTestId('value-elem')).toContainHTML('');
 
+		// передаём событие
+		userEvent.type(input, '1234');
 
-
+		// ожидаем текст
+		expect(screen.queryByTestId('value-elem')).toContainHTML('1234');
+	});
+});
+```
 
 ## Тестирование компонента с асинхронной загрузкой данных с сервера
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
