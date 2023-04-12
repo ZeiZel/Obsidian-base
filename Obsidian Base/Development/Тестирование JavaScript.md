@@ -668,7 +668,7 @@ describe('Test App', () => {
 });
 ```
 
-
+Тут с помощью `fireEvent.input` идёт проверка ввода значения в поле ввода. С помощью `toContainHTML` можно проверить, содержит ли данный HTML-элемент нужное нам значение
 
 ```JSX
 <h1 data-testid={'value-elem'}>{value}</h1>
@@ -733,7 +733,71 @@ describe('Test App', () => {
 
 
 
+```JSX
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
+const Users = () => {
+	const [users, setUsers] = useState([]);
+
+	const loadUsers = async () => {
+		const { data } = await axios.get('https://jsonplaceholder.typicode.com/users');
+		setUsers(data);
+	};
+
+	useEffect(() => {
+		loadUsers();
+	}, []);
+
+	return (
+		<div>
+			{users.map((user) => (
+				<div key={user.id} data-testid={'user-item'}>
+					{user.name}
+				</div>
+			))}
+		</div>
+	);
+};
+
+export default Users;
+```
+
+```JSX
+import { render, screen } from '@testing-library/react';
+import Users from './Users';
+import axios from 'axios';
+
+jest.mock('axios');
+
+describe('Users tests', () => {
+	let response;
+
+	beforeEach(() => {
+		response = {
+			data: [
+				{
+					id: 1,
+					name: 'Leanne Graham',
+				},
+				{
+					id: 2,
+					name: 'Ervin Howell',
+				},
+			],
+		};
+	});
+
+	it('should load users', () => {
+		axios.get.mockReturnValue(response);
+		render(<Users />);
+		const users = screen.findAllByTestId('user-item');
+		expect(users.length).toBe(2);
+		expect(axios.get).toBeCalledTimes(1);
+		screen.debug();
+	});
+});
+```
 
 
 

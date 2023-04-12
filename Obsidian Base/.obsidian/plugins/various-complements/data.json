@@ -1782,8 +1782,16 @@
     "fireEvent": {
       "fireEvent": {
         "currentFile": {
+          "count": 2,
+          "lastUpdated": 1681311678674
+        }
+      }
+    },
+    "toContainHTML": {
+      "toContainHTML": {
+        "currentFile": {
           "count": 1,
-          "lastUpdated": 1681310169245
+          "lastUpdated": 1681311704594
         }
       }
     }
