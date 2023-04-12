@@ -801,6 +801,8 @@ describe('Users tests', () => {
 
 ## Интеграционное тестирование в связке с react router dom v6
 
+###### Тестируем переход по ссылкам
+
 Начальная сборка для тестирования роутинга:
 - две страницы
 - роутинг в `App`
@@ -886,6 +888,45 @@ describe('Router Tests', () => {
    });  
 });
 ```
+
+###### Тестируем попадание на страницу Not Found
+
+Страница ошибки:
+
+```JSX
+const ErrorPage = () => {  
+   return <div data-testid={'not-found-page'}>Error</div>;  
+};  
+  
+export default ErrorPage;
+```
+
+Добавляем роут на переход по неизвестной ссылке `/*`, по которому будет выпадать страница 404
+
+```JSX
+<Routes>  
+   <Route path={'/'} element={<MainPage />} />  
+   <Route path={'/about'} element={<AboutPage />} />  
+   <Route path={'/*'} element={<ErrorPage />} />  
+</Routes>
+```
+
+И в тесте мы можем сразу указать страницу, на которой мы должны отрендериться через передачу атрибута `initialEntries` в `MemoryRouter`
+
+```JS
+it('error page', () => {  
+   render(  
+      <MemoryRouter initialEntries={['/asfd']}>  
+         <App />  
+      </MemoryRouter>,  
+   );  
+  
+   expect(screen.getByTestId('not-found-page')).toBeInTheDocument();  
+});
+```
+
+
+
 
 
 
