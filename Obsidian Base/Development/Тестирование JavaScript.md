@@ -799,18 +799,94 @@ describe('Users tests', () => {
 });
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 ## Интеграционное тестирование в связке с react router dom v6
+
+Начальная сборка для тестирования роутинга:
+- две страницы
+- роутинг в `App`
+- `BrowserRouter` в `index`
+
+```JSX
+const MainPage = () => {
+	return <div data-testid={'main-page'}>MAIN PAGE</div>;
+};
+
+export default MainPage;
+```
+
+```JSX
+const AboutPage = () => {
+	return <div data-testid={'about-page'}>ABOUT PAGE</div>;
+};
+
+export default AboutPage;
+```
+
+```JSX
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+	<React.StrictMode>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</React.StrictMode>,
+);
+```
+
+```JSX
+const App = () => {
+	return (
+		<div>
+			<Link to={'/'} data-testid={'main-link'}>
+				main
+			</Link>
+			<Link to={'/about'} data-testid={'about-link'}>
+				about
+			</Link>
+			<Routes>
+				<Route path={'/'} element={<MainPage />} />
+				<Route path={'/about'} element={<AboutPage />} />
+			</Routes>
+		</div>
+	);
+};
+
+export default App;
+```
+
+И таким способом мы можем проверить наш роутинг:
+- в компонент `MemoryRouter` помещаем рендеримый компонент
+- далее через `userEvent.click` переходим по страницам
+
+```JSX
+import { render, screen } from '@testing-library/react';  
+import App from './App';  
+import userEvent from '@testing-library/user-event';  
+import { MemoryRouter } from 'react-router-dom';  
+  
+describe('Router Tests', () => {  
+   it('should run on links', () => {  
+      render(  
+         <MemoryRouter>  
+            <App />  
+         </MemoryRouter>,  
+      );  
+      const mainLink = screen.getByTestId('main-link');  
+      const aboutLink = screen.getByTestId('about-link');  
+  
+      userEvent.click(aboutLink); // переходим по первой ссылке  
+  
+      // ожидаем элемент страницы      
+      expect(screen.getByTestId('about-page')).toBeInTheDocument();  
+  
+      userEvent.click(mainLink); // переходим по второй ссылке  
+  
+      // ожидаем элемент главной страницы      
+      expect(screen.getByTestId('main-page')).toBeInTheDocument();  
+   });  
+});
+```
+
 
 
 
