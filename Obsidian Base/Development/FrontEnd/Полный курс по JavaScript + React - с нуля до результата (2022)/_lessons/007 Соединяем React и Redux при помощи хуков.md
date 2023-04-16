@@ -34,7 +34,7 @@ const Counter = () => {
 export default Counter;
 ```
 
-![](_png/Pasted%20image%2020230319150927.png)
+![](_png/9f466fd78259bd9344abe48b067f1da6.png)
 
 Отличия `useSelector` от `mapStateToProps`:
 - хук возвращает всё, что угодно, а не только то, что идёт на пропсы

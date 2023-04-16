@@ -128,7 +128,7 @@ class CharList extends Component {
 export default CharList;
 ```
 
-![](_png/Pasted%20image%2020230304184204.png)
+![](_png/0b3ba9aedad35bfd1e4a21fe385a70e9.png)
 
 Так же добавим получение комиксов с сервера
 
@@ -277,6 +277,6 @@ export default CharInfo;
 
 Итог: до нажатия на персонажей - отображается скелетон, а уже при нажатии на персонажа, у нас подгружаются данные в `info` для отображения 
 
-![](_png/Pasted%20image%2020230304184648.png)
+![](_png/096e22d52877a5e98ae62cf558001a3b.png)
 
-![](_png/Pasted%20image%2020230304184431.png)
+![](_png/228eca658d646bbce53f3eb42ceb1003.png)

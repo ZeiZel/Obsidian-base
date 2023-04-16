@@ -88,7 +88,7 @@ function connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)
 
 То есть функция будет получать данное начальное установленное значение
 
-![](_png/Pasted%20image%2020230319103748.png)
+![](_png/1fa07a3b516072f4ab32e05d0707024d.png)
 
 Функция `mapDispatchToProps` уже имеет предназначение формировать в себе нужные диспэтчи под определённые компоненты
 
@@ -160,11 +160,11 @@ export default connect(mapStateToProps, actions)(Counter);
 
 Итог: каунтер наконец-то работает
 
-![](_png/Pasted%20image%2020230319111532.png)
+![](_png/e12d92fafa10e54a1c58754f22f60dbf.png)
 
 Ну и так выглядит функция с использованием классового компонента:
 
-![](_png/Pasted%20image%2020230319112822.png)
+![](_png/a49dd5e847f7e232cf59e1b30cf9b0ed.png)
 
 
 

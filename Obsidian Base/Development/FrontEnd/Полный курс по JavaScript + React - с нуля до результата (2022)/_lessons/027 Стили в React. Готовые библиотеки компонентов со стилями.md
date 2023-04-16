@@ -30,7 +30,7 @@ const BootstrapTest = () => {
 export default BootstrapTest;
 ```
 
-![](_png/Pasted%20image%2020221024182616.png)
+![](_png/f3c43af364c21433e33ec71645bb9a22.png)
 
 Использование в основном файле:
 

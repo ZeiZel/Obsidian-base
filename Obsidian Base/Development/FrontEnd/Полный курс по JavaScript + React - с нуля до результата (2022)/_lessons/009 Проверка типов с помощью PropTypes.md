@@ -18,7 +18,7 @@ CharInfo.propTypes = {
 
 И если у нас будет свойство `charId: PropTypes.string`, то мы получим подобную ошибку 
 
-![](_png/Pasted%20image%2020230305153836.png)
+![](_png/45113abc724b59562fcc439edc8e634d.png)
 
 
 

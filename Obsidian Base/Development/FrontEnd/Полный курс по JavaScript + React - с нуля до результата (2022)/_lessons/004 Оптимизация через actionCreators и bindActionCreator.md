@@ -137,4 +137,4 @@ import * as actions from './actions';
 const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
 ```
 
-![](_png/Pasted%20image%2020230318155520.png)
+![](_png/b9acfef5b2151f52493c0eb34a8d5b05.png)

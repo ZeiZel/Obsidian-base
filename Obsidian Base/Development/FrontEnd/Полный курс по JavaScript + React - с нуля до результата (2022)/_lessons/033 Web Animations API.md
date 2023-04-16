@@ -37,7 +37,7 @@ const phoneAnimation = images[0].animate([
 });
 ```
 
-![](_png/Pasted%20image%2020221022114245.png)
+![](_png/afe78c3f244acaade0fbc84b97ad3331.png)
 
 Анимация имеет 4 состояния (`PlayState`):
 - `idle`
@@ -84,4 +84,4 @@ btnPhone.addEventListener('click', () => {
 })
 ```
 
-![](_png/Pasted%20image%2020221022115706.png)
+![](_png/64115dc08b8e7997632fb3b66761b310.png)
