@@ -1,7 +1,7 @@
 ## **JavaScript**
 #JavaScript 
 
-![](_png/Pasted%20image%2020220907172255.png)
+![](_png/e5c9a4807fbc554141383572047d9ffd.png)
 
 Материал:
 [JS - Basics](../../Development/FrontEnd/JavaScript%20-%20Полный%20Курс%20По%20JavaScript%20-%20Bogdan/JS%20-%20Basics.md)

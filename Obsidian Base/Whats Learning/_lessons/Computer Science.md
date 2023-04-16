@@ -1,3 +1,3 @@
 # Карта CS
 
-![](_png/Pasted%20image%2020220924113305.png)
+![](_png/c5a6b9a5a7f24afbe810523e7d82afea.png)
