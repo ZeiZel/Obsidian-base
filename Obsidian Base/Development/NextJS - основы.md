@@ -24,18 +24,18 @@ npx create-next-app@latest
 - `public` - папка с ресурсами проекта
 - `styles` - стили проекта
 
-![](_png/Pasted%20image%2020221224200400.png)
+![](_png/7f5093702cb4426bca190bb973fc800e.png)
 
 ## Проект, который будем делать
 
-![](_png/Pasted%20image%2020221224200143.png)
+![](_png/40b0a8864c4c2be24b6110ca5c0e53c8.png)
 
 ## Роутинг 
 
 Первым делом можно отметить возможность создания динамических страниц. В страницу подкладывается переменная для генерации её под определённый подставленный объект.
 Шаблон записывается в `[]` скобочках
 
-![](_png/Pasted%20image%2020221224200801.png)
+![](_png/a5d0e983095f6f83b393d0e2913e4d24.png)
 
 Пропсы компонент `App` получает из кастомного документа `_document.jsx`, который можно создать для определения метаданных наших страниц
 
@@ -52,7 +52,7 @@ export default function App({ Component, pageProps }) {
 
 Примерно в этом месте мы можем реализовать все сторонние компоненты и дополнения для системы
 
-![](_png/Pasted%20image%2020221225175250.png)
+![](_png/cb21a076c5483b75756d91ff6a953fc6.png)
 
 Это сам компонент метаданных в приложении
 
@@ -86,13 +86,13 @@ export default function Home() {
 }
 ```
 
-![](_png/Pasted%20image%2020221225174943.png)
+![](_png/808139728aa7c770a872c338927f70eb.png)
 
 ## Кастомный document.js
 
 Создаём в качестве страниц наше представление документа. Оно показывает, в каком порядке будут располагаться элементы на странице
 
-![](_png/Pasted%20image%2020221225180801.png)
+![](_png/633130e6147242b036beafdaf7259263.png)
 
 Здесь сначала располагается начальная структура документа, а уже затем можно добавлять остальные элементы страницы (те же шрифты)
 
@@ -132,7 +132,7 @@ export default function Document() {
 }
 ```
 
-![](_png/Pasted%20image%2020221225180522.png)
+![](_png/be14819a177075da6a6250fcc462541d.png)
 
 ## Установка SCSS 
 
@@ -144,7 +144,7 @@ npm i sass
 
 Переименовываем файлы в `scss`
 
-![|400](_png/Pasted%20image%2020221225181206.png)
+![|400](_png/c6c46fe69981b5559843955f2bddd426.png)
 
 И далее меняем импорты
 
@@ -155,7 +155,7 @@ import styles from '../styles/Home.module.scss';
 ## Создание своего API на next.js 
 
 
-![](_png/Pasted%20image%2020221225192726.png)
+![](_png/f4ea737fe7e20a63a9e392bce02b9d64.png)
 
 
 `data.js`
@@ -212,7 +212,7 @@ http://localhost:3000/api/cards
 
 В логе мы получаем: 
 
-![](_png/Pasted%20image%2020221225191340.png)
+![](_png/a4a5df1a02100b76edc6b63efa31cbe9.png)
 
 И вот так будет выглядеть выполняемый запрос при вводе карточки. Он будет возвращать только данные по карточке
 
@@ -225,7 +225,7 @@ export default function handler(req, res) {
 }
 ```
 
-![](_png/Pasted%20image%2020221225202102.png)
+![](_png/25878d49f9a35345228bb7f845efff5d.png)
 
 ## getServerSideProps 
 
@@ -257,7 +257,7 @@ export const getServerSideProps = async () => {
 }
 ```
 
-![](_png/Pasted%20image%2020221225194445.png)
+![](_png/b82622cb0de0ddb05acbbda692deb92a.png)
 
 ## getStaticProps
 
@@ -268,7 +268,7 @@ export const getServerSideProps = async () => {
 Вкупе с методом выше так же используют `getStaticPaths`, который подгружает пути данных  
 
 Вот так выглядит структура:
-![](_png/Pasted%20image%2020221225202548.png)
+![](_png/df5310ef4bedceed7176bad2ca9fee35.png)
 
 Первым делом заменим в индексе `getServerSideProps` на `getStaticProps` и добавим параметр `revalidate`, чтобы производить валидацю данных
 
@@ -328,7 +328,7 @@ export default Card;
 
 И теперь по запросу `http://localhost:3000/card/first-card` минуя `api` мы можем получить интересующие нас данные
 
-![](_png/Pasted%20image%2020221225202345.png)
+![](_png/fd4029e7563c3054d9fa6d8ac9f2d198.png)
 
 ## Tailwind CSS
 
@@ -362,7 +362,7 @@ module.exports = {
 
 Так выглядит структура:
 
-![](_png/Pasted%20image%2020221226104347.png)
+![](_png/a6387fbdd2290388fb3af8fe68e24a19.png)
 
 Это компонент отдельной карточки. Тут используются:
 - Стили как через `className`, так и через `style`
@@ -523,4 +523,4 @@ export const getStaticProps = async () => {
 - Выводятся все карточки, которые добавим в `data.js`
 - Переход по карточкам работать не будет (для этого нужно пилить отдельно бэк)
 
-![](_png/Pasted%20image%2020221226104211.png)
+![](_png/51762a24fea1d2849091185e31baa549.png)

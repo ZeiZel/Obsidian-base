@@ -43,17 +43,17 @@ module.exports = {
 
 Это расширение, которое добавит автокомплит под ==Tailwind==
 
-![](_png/Pasted%20image%2020221215191401.png)
+![](_png/b61a7aa8615acbd5d5b3720d31dbf037.png)
 
 Остальные два плагина нужны для нормальной работы препроцессора, который компилирует тэилвинд
 
-![](_png/Pasted%20image%2020221215191329.png)
+![](_png/fdbf38d450fd0dedcc161251964c6cdd.png)
 
-![](_png/Pasted%20image%2020221215191650.png)
+![](_png/2f5abbb800da341ff101233832e40939.png)
 
 Идентифицируем файл как тэилвиндовский
 
-![](_png/Pasted%20image%2020221215192327.png)
+![](_png/45f917b06e22b1cc7666d6d5029198f9.png)
 
 ## Отступы (margin, padding, borders) 
 
@@ -90,7 +90,7 @@ function App() {
 `border-цвет-насыщенность` - создаст рамку определённого цвета
 `rounded-модификатор` - скруглит рамку
 
-![](_png/Pasted%20image%2020221215193015.png)
+![](_png/607c251b5e0442b71e440e515386db34.png)
 
 ## Шрифт (размер, цвет, жирность) 
 
@@ -100,7 +100,7 @@ function App() {
 `text-center` - центрирование текста
 `text-цвет-насыщенность` - изменение цвета текста
 
-![](_png/Pasted%20image%2020221215193604.png)
+![](_png/9568843bde740709dff97954ba73339f.png)
 
 ## Ширина, высота 
 
@@ -112,7 +112,7 @@ function App() {
 `h-screen` - `height: 100vw`
 `h-full` - `height: 100%`
 
-![](_png/Pasted%20image%2020221215195516.png)
+![](_png/be96d2012ac0127aa89e236b713851cb.png)
 
 ## hover, focus, before, after... 
 
@@ -123,8 +123,8 @@ function App() {
 `hover:bg-opacity-100` - непрозрачность фона при наведении = `100%`
 - `hover/focus/before/after:конечный-итог` - так же со всеми остальными элементами
 
-![](_png/Pasted%20image%2020221215195830.png)
-![](_png/Pasted%20image%2020221215195831.png)
+![](_png/a5827261bc2a966e372f190028f17412.png)
+![](_png/bdcd3842f58c9e9be15488e53cca8d62.png)
 
 ```JSX
 function App() {
@@ -156,14 +156,14 @@ function App() {
 
 `ease-in-out` - тип анимации
 
-![](_png/Pasted%20image%2020221220161739.png)
+![](_png/5301a859be66e678fc5dda13987908c6.png)
 
 ## Анимации 
 
 `animate-[анимация]` - позволяет задать заранее определённую (заготовленню) анимацию
 `animate-spin` - анимация кручения объекта
 
-![](_png/Pasted%20image%2020221220162015.png)
+![](_png/e68acd8e7a2c47898dd04a53ae0564d1.png)
 
 ## Адаптация - медиа запросы
 
@@ -178,15 +178,15 @@ function App() {
 </div>
 ```
 
-![](_png/Pasted%20image%2020221220162335.png)
+![](_png/31298ae3c1e60b8a755a240a716aed2d.png)
 
-![](_png/Pasted%20image%2020221220162341.png)
+![](_png/2fbc57a40c8c485f84e95797be31295d.png)
 
 ## Темный режим 
 
 `dark:[какое-то свойство]` - применит определённые настройки, если на ПК установлена тёмная тема
 
-![](_png/Pasted%20image%2020221220162517.png)
+![](_png/26195efec567ffea805f70f90f4be5ce.png)
 
 
 ## @apply и module.scss 
@@ -301,7 +301,7 @@ export default App;
 ```
 
 
-![](_png/Pasted%20image%2020221220185019.png)
+![](_png/8d1513c31b22ed8f4fed6222adcabb41.png)
 
 
 ## Tailwind Config 
@@ -324,7 +324,7 @@ module.exports = {
 };
 ```
 
-![](_png/Pasted%20image%2020221220190011.png)
+![](_png/9fea0c45f0ee6a474751168979bed118.png)
 
 Однако, если писать не просто в темы, а в `extend`, то все дефолтные значения останутся
 
@@ -348,7 +348,7 @@ module.exports = {
 };
 ```
 
-![](_png/Pasted%20image%2020221220190213.png)
+![](_png/7a973461566c2177d8be0c8f2b104e6b.png)
 
 Так же мы можем заменять дефолтные значения на свои, прописав это значение и поменяв свойство `DEFAULT`
 
@@ -370,7 +370,7 @@ module.exports = {
 	plugins: [],
 };
 ```
-![](_png/Pasted%20image%2020221220190954.png)
+![](_png/314348d4a876c1d4299dd087f1c5ad86.png)
 
 А уже таким образом мы можем добавлять шаблоны для наших значений
 
@@ -408,7 +408,7 @@ module.exports = {
 	plugins: [],
 };
 ```
-![](_png/Pasted%20image%2020221220192254.png)
+![](_png/ae1d1caf2c1e1069ac16045e2a120f07.png)
 
 Так же тут мы можем указать свои маленькие значения `z-index`, если нам понадобятся (так как в тэилвинде они идут, начиная с 10)
 

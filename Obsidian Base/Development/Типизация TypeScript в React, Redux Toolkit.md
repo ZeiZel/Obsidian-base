@@ -58,7 +58,7 @@ const App = () => {
 export default App;
 ```
 
-![](_png/Pasted%20image%2020230324172016.png)
+![](_png/0f946737b0644232a60da3dfaadb9701.png)
 
 
 ## React.FunctionComponent. React.FC
@@ -139,7 +139,7 @@ const App: FC = (): JSX.Element => {
 export default App;
 ```
 
-![](_png/Pasted%20image%2020230324173039.png)
+![](_png/4ff0c221adfbfbe9b0848f628657c952.png)
 
 
 ## Компонент UserList. IUser, IAddress
@@ -240,7 +240,7 @@ const App: FC = (): JSX.Element => {
 export default App;
 ```
 
-![](_png/Pasted%20image%2020230324180442.png)
+![](_png/34fc96b1520a218f56f1235f301bd530.png)
 
 ## Компонент UserItem.
 
@@ -334,7 +334,7 @@ const App: FC = (): JSX.Element => {
 export default App;
 ```
 
-![](_png/Pasted%20image%2020230324191212.png)
+![](_png/45ff26349b3f3168cdee328dd7a802d2.png)
 
 ## Переиспользуемый компонент List. Generics, Обобщенные типы в typescript
 
@@ -470,7 +470,7 @@ export default App;
 ```
 
 
-![](_png/Pasted%20image%2020230325132146.png)
+![](_png/b6c17c16efe836ba747f2a843fc3a4b8.png)
 
 ## Типизация событий. MouseEvents, DragEvents, ChangeEvents
 
@@ -558,13 +558,13 @@ export default EventsEx;
 
 Введённая строка из инпута при нажатии на кнопку попадает в консоль
 
-![](_png/Pasted%20image%2020230325142206.png)
+![](_png/569ca78bb0fc3e43df1442ca2ec479e1.png)
 
 А уже тут при драге первого блока на второй меняется цвет последнего 
 
-![](_png/Pasted%20image%2020230325153242.png)
+![](_png/aa2da136c6b6d8a8e5a9dbcb58bcbfd3.png)
 
-![](_png/Pasted%20image%2020230325153245.png)
+![](_png/539498718ece924de56363d971859826.png)
 
 
 ## Типизация хука useRef. Неуправляемый компонент
@@ -600,7 +600,7 @@ const EventsEx: FC = (): JSX.Element => {
 };
 ```
 
-![](_png/Pasted%20image%2020230325154842.png)
+![](_png/84ad9d36f87993dd777a1553d7022a05.png)
 
 
 ## Типизация react-router-dom. UseHistory, useParams, BrowserRouter
@@ -695,7 +695,7 @@ const TodosPage: FC = () => {
 export default TodosPage;
 ```
 
-![](_png/Pasted%20image%2020230325170657.png)
+![](_png/72a4d5ab6851c20146a23edcc2abb570.png)
 
 Это компонент списка пользователей
 
@@ -832,17 +832,17 @@ export default App;
 
 На главной странице мы имеем две ссылки на разные списки:
 
-![](_png/Pasted%20image%2020230325165441.png)
+![](_png/925c9bf3ac89bf58d8ad43aefd04e245.png)
 
 Первая ссылка переводит на список пользователей
 
 По каждому отдельному пользователю можно нажать и перейти на его страницу
 
-![](_png/Pasted%20image%2020230325165455.png)
+![](_png/b101eba144a92bb6e33dce0a62975817.png)
 
 После перехода на страницу появится краткая информация по пользователю. Кнопка *back* вернёт обратно на список пользователей
 
-![](_png/Pasted%20image%2020230325165516.png)
+![](_png/4ed6c690864ec946d95c2abb7a273026.png)
 
 
 ## Типизация Redux Toolkit / React-Redux
@@ -998,7 +998,7 @@ export default todoSlice.reducer;
 
 И теперь рут будет всегда знать, что должно находиться внутри него  
 
-![](_png/Pasted%20image%2020230326163554.png)
+![](_png/2b2c1a9cefd03aef327c086b8ddae756.png)
 
 Используем вместо хука `useDispatch` наш кастомный типизированный `useAppDispatch()`
 
@@ -1057,7 +1057,7 @@ export default TodoList;
 
 И благодаря тому, что `useAppSelector` знает, что находится внутри стора, то мы всегда можем получить актуальное значение из него (работает автокомплит, видны типы)
 
-![](_png/Pasted%20image%2020230326165400.png)
+![](_png/993a8a1e0b1ac9455bce8a2841f9cd15.png)
 
 Ну и простая типизация компонента:
 
@@ -1124,7 +1124,7 @@ export default App;
 
 И теперь тудушка работает так, как должна
 
-![](_png/Pasted%20image%2020230326171059.png)
+![](_png/2da6f51c527248f829a21eaa7aeb6cfd.png)
 
 
 ## Типизация асинхронного Redux Toolkit
@@ -1362,7 +1362,7 @@ export default todoSlice.reducer;
 - Второй тип - это тот `action.payload`, который попадает в функцию 
 - Третий тип - это те функции, которые мы вытаскиваем из Thunk'а
 
-![](_png/Pasted%20image%2020230326182559.png)
+![](_png/35cb78f077839483d1c2ee168d6cd8f7.png)
 
 Теперь нужно тут заменить старый функционал на `toggleStatus` и `deleteTodo`
 
@@ -1444,4 +1444,4 @@ export default App;
 
 И теперь наше приложение полностью построено на асинхронных функциях
 
-![](_png/Pasted%20image%2020230326191752.png)
+![](_png/9093003d41c69235c6d919ad0a31efca.png)
