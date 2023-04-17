@@ -147,6 +147,8 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 2) даёт возможность добавить класс в `body`, если потребуется 
 3) даёт нам возможность работать со структурой документа
 
+Так же нужно отметить, что используется только на сервере
+
 `_document.tsx`
 ```TSX
 import Document, {Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps} from "next/document";
