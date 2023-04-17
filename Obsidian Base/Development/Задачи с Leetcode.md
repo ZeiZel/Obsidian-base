@@ -197,6 +197,7 @@ console.log(merge(data2));
 - если наоборот, то двигаем левый маркер правее
 
 ![](_png/a6375ac0e1c1e9983aa9167bb1e97658.png)
+![](_png/Pasted%20image%2020230417091212.png)
 
 ```JS
 
