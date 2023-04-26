@@ -63,14 +63,6 @@
   "disableOnMobile": false,
   "showLogAboutPerformanceInConsole": false,
   "selectionHistoryTree": {
-    "components": {
-      "components": {
-        "currentFile": {
-          "count": 54,
-          "lastUpdated": 1679846947765
-        }
-      }
-    },
     "service": {
       "service": {
         "currentFile": {
@@ -87,59 +79,11 @@
         }
       }
     },
-    "useSelector": {
-      "useSelector": {
-        "currentFile": {
-          "count": 7,
-          "lastUpdated": 1679839475293
-        }
-      }
-    },
-    "useDispatch": {
-      "useDispatch": {
-        "currentFile": {
-          "count": 3,
-          "lastUpdated": 1679839447693
-        }
-      }
-    },
     "json-server": {
       "json-server": {
         "currentFile": {
           "count": 3,
           "lastUpdated": 1680152533345
-        }
-      }
-    },
-    "помощью": {
-      "помощью": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679837867585
-        }
-      }
-    },
-    "useAppDispatch": {
-      "useAppDispatch": {
-        "currentFile": {
-          "count": 2,
-          "lastUpdated": 1679840016384
-        }
-      }
-    },
-    "useAppSelector": {
-      "useAppSelector": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679838722864
-        }
-      }
-    },
-    "todoSlice": {
-      "todoSlice": {
-        "currentFile": {
-          "count": 1,
-          "lastUpdated": 1679845705554
         }
       }
     },
@@ -1014,8 +958,8 @@
     "MemoryRouter": {
       "MemoryRouter": {
         "currentFile": {
-          "count": 1,
-          "lastUpdated": 1681318941030
+          "count": 3,
+          "lastUpdated": 1682487345434
         }
       }
     },
@@ -1040,6 +984,22 @@
         "currentFile": {
           "count": 1,
           "lastUpdated": 1682438013734
+        }
+      }
+    },
+    "AppRouter": {
+      "AppRouter": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1682488874406
+        }
+      }
+    },
+    "Модифицируем": {
+      "Модифицируем": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1682489090928
         }
       }
     }

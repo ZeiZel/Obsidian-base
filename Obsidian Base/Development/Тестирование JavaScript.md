@@ -952,7 +952,9 @@ export default UserDetailsPage;
 `App.js`
 ![](_png/Pasted%20image%2020230426083141.png)
 
+И для того, чтобы протестировать пользователя придётся уже вынести  внутрь `MemoryRouter` оба роута, по которым мы хотим переходить, так как наш компонент `App` не рендерится и мы из него не можем перейти на нужную страницу `user`. Так же нужно будет указать `/user` в путях `MemoryRouter`, чтобы сразу попасть на нужную нам страницу
 
+`Users.tests.js`
 ```JS
 import { getByTestId, render, screen } from '@testing-library/react';
 import Users from './Users';
@@ -985,6 +987,7 @@ describe('Users tests', () => {
 		};
 	});
 
+	// очищаем моки перед каждым применением axios
 	afterEach(() => {
 		jest.clearAllMocks();
 	});
@@ -999,7 +1002,7 @@ describe('Users tests', () => {
 	});
 
 	// пишем переход на страницу отдельного пользователя
-	it('test open user page', () => {
+	it('test open user page', async () => {
 		axios.get.mockReturnValue(response);
 		render(
 			<MemoryRouter initialEntries={['/users']}>
@@ -1009,7 +1012,7 @@ describe('Users tests', () => {
 				</Routes>
 			</MemoryRouter>,
 		);
-		const users = screen.findAllByTestId('user-item');
+		const users = await screen.findAllByTestId('user-item');
 		expect(users.length).toBe(3);
 		userEvent.click(users[2]);
 		expect(getByTestId('user-page')).toBeInTheDocument();
@@ -1018,6 +1021,159 @@ describe('Users tests', () => {
 ```
 
 ## Хелпер для удобного тестирования роутинга
+
+Первым делом, вынесем всё наше дерево роутинга в отдельный компонент
+
+`src > router > AppRouter.jsx`
+```JSX
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import MainPage from '../pages/MainPage';
+import Users from '../Users/Users';
+import UserDetailsPage from '../pages/UserDetailsPage';
+import AboutPage from '../pages/AboutPage';
+import ErrorPage from '../pages/ErrorPage';
+
+const AppRouter = () => {
+	return (
+		<Routes>
+			<Route path={'/'} element={<MainPage />} />
+			<Route path={'/users'} element={<Users />} />
+			<Route path={'/users/:id'} element={<UserDetailsPage />} />
+			<Route path={'/about'} element={<AboutPage />} />
+			<Route path={'/*'} element={<ErrorPage />} />
+		</Routes>
+	);
+};
+
+export default AppRouter;
+```
+
+Далее создадим хелпер, который будет в себя принимать ту конструкцию, которая требуется для тестирования нужных роутов приложения
+
+`src > test > helpers > renderWithRouter.jsx
+```JSX
+import { MemoryRouter } from 'react-router-dom';
+import AppRouter from '../../router/AppRouter';
+
+export const renderWithRouter = (component, initialRoute = '/') => {
+	return (
+		<MemoryRouter initialEntries={[initialRoute]}>
+			<AppRouter />
+			{component}
+		</MemoryRouter>
+	);
+};
+```
+
+ Так выглядит целевой компонент для тестирования:
+
+`Users.jsx`
+```JSX
+const Users = () => {
+	const [users, setUsers] = useState([]);
+
+	const loadUsers = async () => {
+		const resp = await axios.get('https://jsonplaceholder.typicode.com/users');
+		setUsers(resp.data);
+	};
+
+	useEffect(() => {
+		loadUsers();
+	}, []);
+
+	return (
+		<div data-testid='users-page'>
+			{users.map((user) => (
+				<Link to={`/users/${user.id}`} key={user.id} data-testid='user-item'>
+					{user.name}
+				</Link>
+			))}
+		</div>
+	);
+};
+```
+
+Тут оставляем компонент с роутами
+
+`App.jsx`
+```JSX
+const App = () => {
+	return (
+		<div>
+			<Link to={'/'} data-testid={'main-link'}>
+				main
+			</Link>
+			<Link to={'/about'} data-testid={'about-link'}>
+				about
+			</Link>
+			<Link to={'/users'} data-testid={'about-link'}>
+				users
+			</Link>
+			<AppRouter />
+		</div>
+	);
+};
+```
+
+Теперь в тестах для запуска тестирования нужного роута, достаточно обернуть нужный компонент в `renderWithRouter()` хелпер
+
+`Users.test.js`
+```JS
+import { render, screen } from '@testing-library/react';
+import Users from './Users';
+import axios from 'axios';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
+import { renderWithRouter } from '../test/helpers/renderWithRouter';
+
+jest.mock('axios');
+
+describe('USERS TEST', () => {
+	let response;
+	beforeEach(() => {
+		response = {
+			data: [
+				{
+					id: 1,
+					name: 'Leanne Graham',
+				},
+				{
+					id: 2,
+					name: 'Ervin Howell',
+				},
+				{
+					id: 3,
+					name: 'Clementine Bauch',
+				},
+			],
+		};
+	});
+
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	test('renders learn react link', async () => {
+		axios.get.mockReturnValue(response);
+		render(<Users />);
+		const users = await screen.findAllByTestId('user-item');
+		expect(users.length).toBe(3);
+		expect(axios.get).toBeCalledTimes(1);
+		screen.debug();
+	});
+
+	test('test redirect to details page', async () => {
+		axios.get.mockReturnValue(response);
+		render(renderWithRouter(<Users />));
+		const users = await screen.findAllByTestId('user-item');
+		expect(users.length).toBe(3);
+		userEvent.click(users[0]);
+		expect(screen.getByTestId('users-page')).toBeInTheDocument();
+	});
+});
+```
+
 
 
 
