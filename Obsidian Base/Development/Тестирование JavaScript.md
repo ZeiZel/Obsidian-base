@@ -1174,12 +1174,100 @@ describe('USERS TEST', () => {
 });
 ```
 
+###### Тестирование навбара приложения
 
+Навбар будет хранить просто ссылки по страницам в нашем приложении реакта
 
+`Navbar.jsx`
+```JSX
+import React from 'react';
+import { Link } from 'react-router-dom';
 
+const Navbar = () => {
+	return (
+		<div>
+			<Link to={'/'} data-testid={'main-link'}>
+				main
+			</Link>
+			<Link to={'/about'} data-testid={'about-link'}>
+				about
+			</Link>
+			<Link to={'/users'} data-testid={'users-link'}>
+				users
+			</Link>
+		</div>
+	);
+};
 
+export default Navbar;
+```
+
+В основном компоненте приложения добавляем наш навбар
+
+`App.js`
+```JSX
+const App = () => {
+	return (
+		<div>
+			<Navbar />
+			<AppRouter />
+		</div>
+	);
+};
+```
+
+И тут пишем отдельные тейки тестирования под срабатывание разных роутов 
+
+`Navbar.test.js`
+```JSX
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import { renderWithRouter } from '../../test/helpers/renderWithRouter';
+import Navbar from './Navbar';
+
+describe('navbar test', () => {
+	it('test main link', () => {
+		render(renderWithRouter(<Navbar />));
+
+		const mainLink = screen.getByTestId('main-link');
+
+		userEvent.click(mainLink);
+		expect(screen.getByTestId('main-page')).toBeInTheDocument();
+	});
+
+	it('test users link', () => {
+		render(renderWithRouter(<Navbar />));
+
+		const usersLink = screen.getByTestId('users-link');
+
+		userEvent.click(usersLink);
+		expect(screen.getByTestId('users-page')).toBeInTheDocument();
+	});
+
+	it('test about link', () => {
+		render(renderWithRouter(<Navbar />));
+
+		const aboutLink = screen.getByTestId('about-link');
+
+		userEvent.click(aboutLink);
+		expect(screen.getByTestId('about-page')).toBeInTheDocument();
+	});
+});
+```
 
 ## Интеграционное тестирование в связке с Redux toolkit
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
