@@ -1257,26 +1257,216 @@ describe('navbar test', () => {
 
 ## Интеграционное тестирование в связке с Redux toolkit
 
+Первым делом, нам нужно создать стор
 
+`store > store.js`
+```JS
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import counterReducer from './reducers/counterReducer';
 
+const rootReducer = combineReducers({
+	counter: counterReducer,
+});
 
+export const createReduxStore = (initialState = {}) => {
+	return configureStore({
+		reducer: rootReducer,
+		preloadedState: initialState,
+	});
+};
+```
 
+Далее нужно будет создать срез, который вернёт нам редьюсер и два экшена
 
+`store > selectors > counterReducer.js
+```JS
+import { createSlice } from '@reduxjs/toolkit';
 
+export const counterSlice = createSlice({
+	name: 'counter',
+	initialState: {
+		value: 0,
+	},
+	reducers: {
+		increment: (state) => {
+			state.value += 1;
+		},
+		decrement: (state) => {
+			state.value -= 1;
+		},
+	},
+});
 
+export const { increment, decrement } = counterSlice.actions;
 
+export default counterSlice.reducer;
+```
 
+Тут мы реализуем селектор, по которому мы будем получать значение
 
+`store > selectors > getCounterValue > getCounterValue.js
+```JS
+// стоит подстраховаться и в селектор доставить проверку через nullish и подставлять 0
+export const getCounterValue = (state) => state?.counter?.value || 0;
+```
 
+Тут мы должны вложить всё приложение в провайдер, который уже и будет распространять состояние по проекту
 
+`index.js`
+```JS
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+	<React.StrictMode>
+		<Provider store={createReduxStore()}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Provider>
+	</React.StrictMode>,
+);
+```
 
+Это компонент счётчика
 
+`components > Counter > Counter.jsx`
+```JS
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCounterValue } from '../../store/reducers/selectors/getCounterValue/getCounterValue';
+import { increment, decrement } from '../../store/reducers/counterReducer';
+
+const Counter = () => {
+	const dispatch = useDispatch();
+	const value = useSelector(getCounterValue);
+
+	const onIncrement = () => {
+		dispatch(increment());
+	};
+
+	const onDecrement = () => {
+		dispatch(decrement());
+	};
+
+	return (
+		<div>
+			<h1 data-testid={'value-title'}>{value}</h1>
+			<button data-testid={'increment-button'} onClick={onIncrement}>
+				inc
+			</button>
+			<button data-testid={'decrement-button'} onClick={onDecrement}>
+				dec
+			</button>
+		</div>
+	);
+};
+
+export default Counter;
+```
+
+Это компонент, в котором располагается счётчик
+
+`pages > MainPage.jsx`
+```JSX
+const MainPage = () => {
+	return (
+		<div data-testid={'main-page'}>
+			MAIN PAGE
+			<Counter />
+		</div>
+	);
+};
+```
 
 
 ## Тестируем селектор
 
+Чтобы протестировать селектор, можно просто складывать в него различные значения и на выходе он просо должен вернуть нам то же значение
 
+- пустой массив равен 0, так как в срезе изначально стоит 0
+- если вложим значение, то оно и будет находиться в селекторе
 
+`store > selectors > getCounterValue > getCounterValue.test.js
+```JS
+import { getCounterValue } from './getCounterValue';
+
+describe('getCounterValue', () => {
+	it('empty value', () => {
+		expect(getCounterValue({})).toBe(0);
+	});
+
+	it('filled value', () => {
+		expect(
+			getCounterValue({
+				counter: {
+					value: 100,
+				},
+			}),
+		).toBe(100);
+	});
+});
+```
+
+Далее мы тестируем функции из среза. 
+
+- если мы ничего не передали в стейт, то значение будет идти от 0 при каждом действии
+- если мы что-то передали в стейт, то на него будет действовать экшен (`increment`, `decrement`)
+
+`store > selectors > counterReducer.test.js
+```JS
+import counterReducer, { decrement, increment } from './counterReducer';
+
+describe('counterReducer', () => {
+	it('empty state', () => {
+		expect(counterReducer(undefined, increment())).toEqual({ value: 1 });
+		expect(counterReducer(undefined, decrement())).toEqual({ value: -1 });
+	});
+
+	it('increment', () => {
+		expect(counterReducer({ value: 0 }, increment())).toEqual({ value: 1 });
+	});
+
+	it('decrement', () => {
+		expect(counterReducer({ value: 0 }, decrement())).toEqual({ value: -1 });
+	});
+});
+```
+
+Далее тестируем сам компонент счётчика.
+
+- Чтобы достучаться до него и проверить редакс, нужно передать компонент внутри провайдера
+- В провайдере можно задать начальное значение стейта, если нужно
+- `render()` можно использовать просто как функцию и доставать все методы выборки с помощью screen, а можно достать из render его функции выборки и использовать их без обращения к screen (как удобнее, так и делаем, но во втором случае мы не сможем пользоваться выборкой из screen)
+
+`components > Counter > Counter.test.jsx``
+```JS
+import Counter from './Counter';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { createReduxStore } from '../../store/store';
+
+describe('Counter component', () => {
+	it('increment', () => {
+		const { getByTestId } = render(
+			<Provider
+				store={createReduxStore({
+					counter: { value: 10 },
+				})}
+			>
+				<Counter />
+			</Provider>,
+		);
+
+		const incrementButton = getByTestId('increment-button');
+
+		expect(getByTestId('value-title')).toHaveTextContent('10');
+
+		userEvent.click(incrementButton);
+
+		expect(getByTestId('value-title')).toHaveTextContent('11');
+	});
+});
+```
 
 
 ## Хелпер для удобного тестирования компонентов, в которых используется Redux
