@@ -913,6 +913,8 @@ export default ErrorPage;
 
 И в тесте мы можем сразу указать страницу, на которой мы должны отрендериться через передачу атрибута `initialEntries` в `MemoryRouter`
 
+Конкретно тут написан любой роут, которого нет в приложении, чтобы отрендерился роут ошибки
+
 ```JS
 it('error page', () => {  
    render(  
@@ -925,13 +927,95 @@ it('error page', () => {
 });
 ```
 
+###### Тестирование перехода на сгенерированные страницы
+
+Первым делом, создадим страницу отдельного пользователя (данные для всех будут одинаковыми и статичными)
+
+`pages > UserDetailsPage.jsx`
+```JSX
+import React from 'react';  
+  
+const UserDetailsPage = () => {  
+return <div data-testid={'user-page'}>User Details Page</div>;  
+};  
+  
+export default UserDetailsPage;
+```
+
+Список пользователей будет сгенерирован ссылкой
+
+`Users.js`
+![](_png/Pasted%20image%2020230426083154.png)
+
+Добавляем ссылку на нужного пользователя
+
+`App.js`
+![](_png/Pasted%20image%2020230426083141.png)
 
 
+```JS
+import { getByTestId, render, screen } from '@testing-library/react';
+import Users from './Users';
+import axios from 'axios';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import UserDetailsPage from '../pages/UserDetailsPage';
+import React from 'react';
 
+jest.mock('axios');
 
+describe('Users tests', () => {
+	let response;
+	beforeEach(() => {
+		response = {
+			data: [
+				{
+					id: 1,
+					name: 'Leanne Graham',
+				},
+				{
+					id: 2,
+					name: 'Ervin Howell',
+				},
+				{
+					id: 3,
+					name: 'Clementine Bauch',
+				},
+			],
+		};
+	});
 
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
 
+	it('should load users', () => {
+		axios.get.mockReturnValue(response);
+		render(<Users />);
+		const users = screen.findAllByTestId('user-item');
+		expect(users.length).toBe(3);
+		expect(axios.get).toBeCalledTimes(1);
+		screen.debug();
+	});
 
+	// пишем переход на страницу отдельного пользователя
+	it('test open user page', () => {
+		axios.get.mockReturnValue(response);
+		render(
+			<MemoryRouter initialEntries={['/users']}>
+				<Routes>
+					<Route path={'/users'} element={<Users />} />
+					<Route path={'/users/:id'} element={<UserDetailsPage />} />
+				</Routes>
+			</MemoryRouter>,
+		);
+		const users = screen.findAllByTestId('user-item');
+		expect(users.length).toBe(3);
+		userEvent.click(users[2]);
+		expect(getByTestId('user-page')).toBeInTheDocument();
+	});
+});
+```
 
 ## Хелпер для удобного тестирования роутинга
 
