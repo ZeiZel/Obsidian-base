@@ -1034,6 +1034,14 @@
           "lastUpdated": 1682523103475
         }
       }
+    },
+    "Counter": {
+      "Counter": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1682524990333
+        }
+      }
     }
   }
 }

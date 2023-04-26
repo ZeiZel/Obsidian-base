@@ -1435,7 +1435,8 @@ describe('counterReducer', () => {
 
 - Чтобы достучаться до него и проверить редакс, нужно передать компонент внутри провайдера
 - В провайдере можно задать начальное значение стейта, если нужно
-- `render()` можно использовать просто как функцию и доставать все методы выборки с помощью screen, а можно достать из render его функции выборки и использовать их без обращения к screen (как удобнее, так и делаем, но во втором случае мы не сможем пользоваться выборкой из screen)
+- `render()` можно использовать просто как функцию и доставать все методы выборки с помощью screen, а можно достать из render его функции выборки и использовать их без обращения к `screen` (как удобнее, так и делаем, но во втором случае мы не сможем пользоваться выборкой из `screen`)
+- функция сравнения `toHaveTextContent` позволяет нам найти содержание текста в определённом элементе
 
 `components > Counter > Counter.test.jsx``
 ```JS
@@ -1468,11 +1469,87 @@ describe('Counter component', () => {
 });
 ```
 
-
 ## Хелпер для удобного тестирования компонентов, в которых используется Redux
 
+Мы можем создать такой же хелпер, который и создавали для роутинга, но для редакса
 
+Однако, мы можем в хелперах заранее возвращать сгенерированный ответ от `render`, а не делать рендер в тесте
 
+`test > helpers > renderWithRedux.js`
+```JSX
+import { createReduxStore } from '../../store/store';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+
+export const renderWithRedux = (component, initialState = {}) => {
+	const store = createReduxStore(initialState);
+
+	return render(<Provider store={store}>{component}</Provider>);
+};
+```
+
+И использовть его для тестирования
+
+`Counter.test.js`
+```JSX
+describe('Counter component', () => {
+	it('increment', () => {
+		const { getByTestId } = renderWithRedux(<Counter />, { counter: { value: 10 } });
+
+		const incrementButton = getByTestId('increment-button');
+
+		expect(getByTestId('value-title')).toHaveTextContent('10');
+
+		userEvent.click(incrementButton);
+
+		expect(getByTestId('value-title')).toHaveTextContent('11');
+	});
+});
+```
+
+И так уже будет выглядеть хелпер для тестирования роутинга и редакса одновременно 
+
+`test > helpers > renderTestApp.js`
+```JSX
+import { render } from '@testing-library/react';
+import { createReduxStore } from '../../store/store';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+
+export const renderTestApp = (component, options) => {
+	const store = createReduxStore(options?.initialState);
+
+	return render(
+		<Provider store={store}>
+			<MemoryRouter initialEntries={[options?.route]}>{component}</MemoryRouter>
+		</Provider>,
+	);
+};
+```
+
+А так выглядит его применение в приложениях:
+
+`Counter.test.js`
+```JSX
+describe('Counter component', () => {
+	it('increment', () => {
+		const { getByTestId } = renderTestApp(<Counter />, {
+			route: '/',
+			initialState: {
+				counter: { value: 10 },
+			},
+		});
+
+		const incrementButton = getByTestId('increment-button');
+
+		expect(getByTestId('value-title')).toHaveTextContent('10');
+
+		userEvent.click(incrementButton);
+
+		expect(getByTestId('value-title')).toHaveTextContent('11');
+	});
+});
+```
 
 
 ## e2e тесты с WebdriverIO
