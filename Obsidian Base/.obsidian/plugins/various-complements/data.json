@@ -1042,6 +1042,22 @@
           "lastUpdated": 1682524990333
         }
       }
+    },
+    "E2E-тесты": {
+      "E2E-тесты": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1682584572310
+        }
+      }
+    },
+    "WebdriverIO": {
+      "WebdriverIO": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1682584650634
+        }
+      }
     }
   }
 }
