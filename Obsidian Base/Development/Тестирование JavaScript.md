@@ -1573,6 +1573,37 @@ npm init wdio .
 ![](_png/Pasted%20image%2020230427120800.png)
 
 
+`pages > HelloWorld.jsx`
+```JSX
+import React, { useState } from 'react';
+
+const HelloWorld = () => {
+	const [value, setValue] = useState('');
+	const [visible, setVisible] = useState(false);
+
+	const toggle = () => value === 'hello' && setVisible((prevState) => !prevState);
+	const onChange = (e) => setValue(e.target.value);
+
+	return (
+		<div>
+			<input onChange={onChange} id={'search'} type='text' />
+			<button id={'toggle'} onClick={toggle}>
+				Hello World
+			</button>
+			{visible && <h1 id={'hello'}>Hello World</h1>}
+		</div>
+	);
+};
+
+export default HelloWorld;
+```
+
+
+
+![](_png/Pasted%20image%2020230427123719.png)
+
+
+
 
 
 
@@ -1580,7 +1611,82 @@ npm init wdio .
 
 
 
+`tests > pages > page.js`
+```JS
+module.exports = class Page {
+	open(path) {
+		// открываем выбранный браузер
+		return browser.url(`https://localhost:3000/${path}`);
+	}
+};
+```
 
+
+
+`tests > pages > hello.e2e.js`
+```JS
+const Page = require('./page');
+
+class HelloPage extends Page {
+	// получаем кнопку со страницы
+	get toggleButton() {
+		return $('#toggle');
+	}
+
+	// получаем инпут со страницы
+	get searchInput() {
+		return $('#search');
+	}
+
+	// получаем тайтл со страницы
+	get helloTitle() {
+		return $('#hello');
+	}
+
+	// метод для ввода данных в поиск и запуска тугглера для отображения тайтла
+	async toggleTitleWithInput(text) {
+		await this.searchInput.setValue(text);
+		await this.toggleButton.click();
+	}
+
+	// по этой ссылке мы открываем страницу
+	open() {
+		// вызываем метод родительского класса
+		return super.open('hello');
+	}
+}
+
+module.exports = new HelloPage();
+```
+
+
+
+`tests > e2e > hello.e2e.js`
+```JS
+const HelloPage = require('../pages/hello.page');
+
+describe('hello page', () => {
+	it('test', async () => {
+		// открываем страницу для теста 
+		await HelloPage.open();
+		// выполняем метод
+		await HelloPage.toggleTitleWithInput('hello');
+		// ожидаем, что на странице должен быть тайтл
+		await expect(HelloPage.helloTitle).toBeExisting();
+
+		// если ещё раз тыкнем на тугглер
+		await HelloPage.toggleButton.click();
+		// то у нас не должно быть тайтла на странице
+		await expect(HelloPage.helloTitle).not.toBeExisting();
+	});
+});
+```
+
+
+
+```bash
+npm run wdio -- --spec tests/e2e/hello.e2e.js
+```
 
 ## Пример е2е теста с асинхронным кодом
 
