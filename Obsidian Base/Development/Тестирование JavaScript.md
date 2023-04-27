@@ -1563,15 +1563,23 @@ E2E-тесты, в свою очередь, уже будут запускать
 npm init wdio .
 ```
 
-![](_png/Pasted%20image%2020230427120447.png)
+Так выглядит спек установки вебдрайвера: 
+
+![](_png/Pasted%20image%2020230427145803.png)
+
+Далее добавляем порт в конфиг
 
 ![](_png/Pasted%20image%2020230427120547.png)
 
+И так же у нас появилась папка с готовыми тестами
+
 ![](_png/Pasted%20image%2020230427120636.png)
 
+Тут появится команда запуска тестов 
 
 ![](_png/Pasted%20image%2020230427120800.png)
 
+Создадим страницу, которая будет выполнять функционал тугглера текста
 
 `pages > HelloWorld.jsx`
 ```JSX
@@ -1598,13 +1606,13 @@ const HelloWorld = () => {
 export default HelloWorld;
 ```
 
-
+И добавляем её роут
 
 ![](_png/Pasted%20image%2020230427123719.png)
 
 ## PageObject паттерн
 
-
+В данном файле находится главный класс, который будет предоставлять метод открытия компонента в браузере
 
 `tests > pages > page.js`
 ```JS
@@ -1616,7 +1624,9 @@ module.exports = class Page {
 };
 ```
 
+Далее пишем текст для страницы приветствия, где мы сначала получаем нужные элементы для взаимодействия, а затем пишем сами тесовые методы, которые должны будут выполниться
 
+Получение элементов происходит через конструкцию `$()`, в которую мы, используя селекторы `$, #, .`, получаем нужные нам элементы 
 
 `tests > pages > hello.e2e.js`
 ```JS
@@ -1654,7 +1664,7 @@ class HelloPage extends Page {
 module.exports = new HelloPage();
 ```
 
-
+В данном файле уже описываем сам тест, используя методы класса
 
 `tests > e2e > hello.e2e.js`
 ```JS
@@ -1677,7 +1687,7 @@ describe('hello page', () => {
 });
 ```
 
-
+Запускаем тест
 
 ```bash
 npm run wdio -- --spec tests/e2e/hello.e2e.js
@@ -1685,7 +1695,7 @@ npm run wdio -- --spec tests/e2e/hello.e2e.js
 
 ## Пример е2е теста с асинхронным кодом
 
-
+Пишем компонент получения списка пользователей
 
 `components > UsersForTest > UsersForTest.js`
 ```JSX
@@ -1729,7 +1739,7 @@ const UsersForTest = () => {
 export default UsersForTest;
 ```
 
-
+Далее создаём отдельный компонент пользователя
 
 `components > UsersForTest > User.js
 ```JSX
@@ -1749,13 +1759,14 @@ const User = ({ user, onDelete }) => {
 export default User;
 ```
 
-
+Далее добавляем путь в роутер
 
 `router > AppRouter.jsx`
 ![](_png/Pasted%20image%2020230427134448.png)
 
+Далее тут создаём метод страницы пользователей 
 
-`tests > pages > hello.e2e.js`
+`tests > pages > users.page.js`
 ```JS
 const Page = require('./page');
 
@@ -1822,7 +1833,7 @@ class UsersPage extends Page {
 module.exports = new UsersPage();
 ```
 
-
+А тут пишем сам тест, который будет проверять выполнение методов страницы 
 
 `tests > e2e > users.e2e.js
 ```JS
@@ -1842,70 +1853,20 @@ describe('user list', () => {
 
 ## Скриншотные тесты storybook и loki js
 
-
+Для начала, установим в проект storybook
 
 ```bash
 npx sb init
 ```
 
-
+Далее создастся подобная структура папки с историей
 
 ![](_png/Pasted%20image%2020230427140952.png)
 
+И тут мы можем запустить сторибук
 
 ![](_png/Pasted%20image%2020230427135629.png)
 
-
-
-
-
+В интерфейсе сторибука мы можем просматривать отдельно каждый из наших компонентов и их спецификации для изменения
 
 ![](_png/Pasted%20image%2020230427140843.png)
-
-
-
-```bash
-npm i -D loki
-npx loki init
-```
-
-
-
-`package.json`
-```JSON
-"loki": {
-    "configurations": {
-      "chrome.laptop": {
-        "target": "chrome.docker",
-        "width": 1366,
-        "height": 768,
-        "deviceScaleFactor": 1,
-        "mobile": false
-      },
-      "chrome.iphone7": {
-        "target": "chrome.docker",
-        "preset": "iPhone 7"
-      }
-    }
-  }
-```
-
-Данная команда выполнит тест, который в первый раз пройдёт успешно и он снимет скриншоты со всех состояний storybook
-
-```bash
-npx loki test
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
