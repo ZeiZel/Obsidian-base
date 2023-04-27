@@ -1551,7 +1551,6 @@ describe('Counter component', () => {
 });
 ```
 
-
 ## e2e тесты с WebdriverIO
 
 
