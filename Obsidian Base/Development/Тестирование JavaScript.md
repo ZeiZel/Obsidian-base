@@ -1602,11 +1602,6 @@ export default HelloWorld;
 
 ![](_png/Pasted%20image%2020230427123719.png)
 
-
-
-
-
-
 ## PageObject паттерн
 
 
@@ -1692,7 +1687,158 @@ npm run wdio -- --spec tests/e2e/hello.e2e.js
 
 
 
+`components > UsersForTest > UsersForTest.js`
+```JSX
+import React, { useEffect, useState } from 'react';
+import User from './Users';
 
+const UsersForTest = () => {
+	const [users, setUsers] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		setIsLoading(true);
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then((response) => response.json())
+			.then((json) => {
+				setTimeout(() => {
+					setUsers(json);
+					setIsLoading(false);
+				}, 1000);
+			});
+	}, []);
+
+	const onDelete = (id) => {
+		setUsers(users.filter((user) => user.id !== id));
+	};
+
+	return (
+		<div>
+			{isLoading && <h1 id='users-loading'>Идет загрузка...</h1>}
+			{users.length && (
+				<div id='users-list'>
+					{users.map((user) => (
+						<User onDelete={onDelete} user={user} />
+					))}
+				</div>
+			)}
+		</div>
+	);
+};
+
+export default UsersForTest;
+```
+
+
+
+`components > UsersForTest > User.js
+```JSX
+import React from 'react';
+
+const User = ({ user, onDelete }) => {
+	return (
+		<div>
+			{user.name}
+			<button id='user-delete' onClick={() => onDelete(user.id)}>
+				delete
+			</button>
+		</div>
+	);
+};
+
+export default User;
+```
+
+
+
+`router > AppRouter.jsx`
+![](_png/Pasted%20image%2020230427134448.png)
+
+
+`tests > pages > hello.e2e.js`
+```JS
+const Page = require('./page');
+
+class UsersPage extends Page {
+	// получаем тайтл о загрузке пользователей
+	get loadingTitle() {
+		return $('#users-loading');
+	}
+
+	// получаем список пользователей
+	get usersList() {
+		return $('#users-list');
+	}
+
+	// получаем компоненты пользователей
+	get usersItems() {
+		// react$ - получаем один компонент
+		// react$$ - получаем массив компонентов
+		return browser.react$$('User');
+	}
+
+	// функция для проверки загрузки данных
+	async loadData() {
+		try {
+			// открываем приложение
+			await this.open();
+			// ждём, чтобы получить сначала компонент о загрузке данных с сервера
+			await this.loadingTitle.waitForDisplayed({ timeout: 2000 });
+			// далее 2 секунды ждём, чтобы получить выведенный список пользователей
+			await this.usersList.waitForDisplayed({ timeout: 2000 });
+		} catch (e) {
+			throw new Error('Не удалось загрузить пользователей');
+		}
+	}
+
+	// функция удаления одного пользователя
+	async deleteUser() {
+		try {
+			// получаем список компонентов списка пользователей
+			const usersCount = await this.usersItems.length;
+
+			// если списка нет, то выведем ошибку
+			if (!usersCount) throw new Error('Пользователи не найдены');
+
+			// получаем первый компонент списка пользователей и нажимаем на его кнопку удаления
+			await this.usersItems[0].$('#user-delete').click();
+
+			const usersCountAfterDelete = await this.usersItems.length;
+
+			if (usersCount - usersCountAfterDelete !== 1)
+				throw new Error(
+					'Пользователь не был удалён, либо был удалён более чем 1 пользователь',
+				);
+		} catch (e) {
+			throw new Error('Не удалось удалить пользователя. ' + e.message);
+		}
+	}
+
+	open() {
+		return super.open('users-test');
+	}
+}
+
+module.exports = new UsersPage();
+```
+
+
+
+`tests > e2e > users.e2e.js
+```JS
+const UsersPage = require('../pages/users.page');
+
+describe('user list', () => {
+	it('load users', async () => {
+		await UsersPage.loadData();
+	});
+
+	it('delete user', async () => {
+		await UsersPage.loadData();
+		await UsersPage.deleteUser();
+	});
+});
+```
 
 ## Скриншотные тесты storybook и loki js
 
