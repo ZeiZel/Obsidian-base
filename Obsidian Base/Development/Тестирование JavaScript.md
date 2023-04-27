@@ -1844,6 +1844,64 @@ describe('user list', () => {
 
 
 
+```bash
+npx sb init
+```
+
+
+
+![](_png/Pasted%20image%2020230427140952.png)
+
+
+![](_png/Pasted%20image%2020230427135629.png)
+
+
+
+
+
+
+![](_png/Pasted%20image%2020230427140843.png)
+
+
+
+```bash
+npm i -D loki
+npx loki init
+```
+
+
+
+`package.json`
+```JSON
+"loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7"
+      }
+    }
+  }
+```
+
+Данная команда выполнит тест, который в первый раз пройдёт успешно и он снимет скриншоты со всех состояний storybook
+
+```bash
+npx loki test
+```
+
+
+
+
+
+
+
 
 
 
