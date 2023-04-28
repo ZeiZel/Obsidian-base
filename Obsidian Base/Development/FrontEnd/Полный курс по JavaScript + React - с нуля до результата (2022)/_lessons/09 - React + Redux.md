@@ -2048,31 +2048,1408 @@ export default HeroesFilters;
 ![](_png/f73b65d8851223cf2b61023d552c47a4.png)
 
 
-##
+## 011 Комбинирование reducers и красивые селекторы. CreateSelector()
+
+
+При разрастании приложения увеличивается и количество действий, которые должен контролировать реакт. Если экшены можно спокойно разделить по папкам и обращаться конкретно к нужным, то данное разрастание не позволит спокойно поделить функцию-редьюсер
+
+В нашем приложении достаточно логичным будет отделить логику работы с персонажами и фильтрами. Однако мы сталкиваемся с тем, что фильтры так же используют состояние персонажей, чтобы контролировать их список.
+
+![](_png/68f0062f0d1040d2a1a1be1318ac1a58.png)
+
+Чтобы сократить код и разбить логику, можно:
+- разделить логику редьюсера через функцию `combineReducers`
+- вынести фильтрацию внутрь компонента, чтобы разбить логику стейтов
+
+Тут мы выносим фильтрацию полученных данных из стейта и теперь её не нужно проводить внутри редьюсера
+
+`components > heroesList > HeroesList.js`
+```JS
+const HeroesList = () => {
+	const filteredHeroes = useSelector((state) => {
+		if (state.activeFilter === 'all') {
+			return state.heroes;
+		} else {
+			return state.heroes.filter((item) => state.heroes === state.activeFilter);
+		}
+	});
+
+	// сейчас отсюда достаём просто статус загрузки
+	const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus);
+
+	/// CODE ...
+```
+
+Теперь нам не нужно данное состояние
+
+![](_png/d8db1749a7d26bae78fe9519ad62e31c.png)
+
+И данная фильтрация в редьюсере
+
+![](_png/42dd7a34895f58fbfe0582280f88f756.png)
+
+Вынесем из главного `reducer` логику по работе с персонажами и его стейты в отдельный файл
+
+`reducers > heroes.js`
+```JS
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
+
+export const heroes = (state = initialState, action) => {
+	switch (action.type) {
+		case 'HEROES_FETCHING':
+			return {
+				...state,
+				heroesLoadingStatus: 'loading',
+			};
+		case 'HEROES_FETCHED':
+			return {
+				...state,
+				heroes: action.payload,
+				heroesLoadingStatus: 'idle',
+			};
+		case 'HEROES_FETCHING_ERROR':
+			return {
+				...state,
+				heroesLoadingStatus: 'error',
+			};
+		// Самая сложная часть - это показывать новые элементы по фильтрам
+		// при создании или удалении
+		case 'HERO_CREATED':
+			return {
+				...state,
+				heroes: [...state.heroes, action.payload],
+			};
+		case 'HERO_DELETED':
+			return {
+				...state,
+				heroes: state.heroes.filter((item) => item.id !== action.payload),
+			};
+		default:
+			return state;
+	}
+};
+```
+
+Тут уже будем хранить логику фильтрации
+
+`reducers > filters.js`
+```JS
+const initialState = {
+	filters: [],
+	filtersLoadingStatus: 'idle',
+	activeFilter: 'all',
+};
+
+export const filters = (state = initialState, action) => {
+	switch (action.type) {
+		case 'FILTERS_FETCHING':
+			return {
+				...state,
+				filtersLoadingStatus: 'loading',
+			};
+		case 'FILTERS_FETCHED':
+			return {
+				...state,
+				filters: action.payload,
+				filtersLoadingStatus: 'idle',
+			};
+		case 'FILTERS_FETCHING_ERROR':
+			return {
+				...state,
+				filtersLoadingStatus: 'error',
+			};
+		case 'ACTIVE_FILTER_CHANGED':
+			return {
+				...state,
+				activeFilter: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+```
+
+И тут через функцию `combineReducers` объединяем две функции редьюсера в один внутри объекта. Теперь обычный `reducer` не нужен и его можно будет удалить
+
+`store > index.js`
+```JS
+import { createStore, combineReducers } from 'redux';
+import { heroes } from '../reducers/heroes';
+import { filters } from '../reducers/filters';
+
+const store = createStore(
+	combineReducers({ heroes, filters }),
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
+
+export default store;
+```
+
+И теперь, после манипуляций с объединением редьюсеров, нужно будет вытаскивать нужные объекты из объектов, которые были названы и переданы в `combineReducers`
+
+![](_png/713f723dda34b77f5021e44c63b95440.png)
+
+И вот уже с таким синтаксисом мы можем импортировать поля из нескольких объектов
+Однако такой подход приводит к тому, что компонент будет перерисовываться при каждом изменении стейта
+*Такой вариант не стоит использовать в проекте, так как он не оптимизирован*
+
+```JS
+const someState = useSelector((state) => ({  
+   activeFilter: state.filters.activeFilter,  
+   heroes: state.heroes.heroes,  
+}));
+```
+
+Откорректируем логику филтрации героев.
+Но тут мы встретимся с такой проблемой, что каждый раз при нажатии кнопки фильтрации, у нас будет воспроизводиться перерендер компонента. Это происходит из-за того, что каждый раз у нас вызывается `useSelector()` при изменении глобального стейта.
+
+`components > heroesList > HeroesList.js`
+```JS
+const HeroesList = () => {  
+   const filteredHeroes = useSelector((state) => {  
+      if (state.filters.activeFilter === 'all') {  
+	      console.log('render');
+         return state.heroes.heroes;  
+      } else {  
+         return state.heroes.heroes.filter(  
+            (item) => item.element === state.filters.activeFilter,  
+         );  
+      }  
+   });
+
+	/// CODE ...
+```
+
+![](_png/4cda56fec96d93c17978b77606666abf.png)
+
+Чтобы решить данную проблему, нужно мемоизировать функцию вызова `useSelector()`
+
+```bash
+npm i reselect
+```
+
+Данный модуль позволяет нам вызвать по определённым правилам функцию `useSelector`. То есть мы создаём массив запросов в селектор первым аргументом, а вторым аргументом берём полученные значения и используем их в функции, которую хотели использовать в селекторе. 
+После вышеописанных манипуляций просто помещаем функцию реселекта внутрь `useSelector` 
+
+`components > heroesList > HeroesList.js`
+```JS
+import { createSelector } from 'reselect';
+
+/// CODE ...
+
+// эта функция будет вызвать useSelector по заданным правилам и будет мемоизировать значение  
+const filteredHeroesSelector = createSelector(  
+   // вызываем срабатывание двух селекторов  
+   // получаем сам активный фильтр и массив героев   [(state) => state.filters.activeFilter, (state) => state.heroes.heroes],  
+   // производим операции над результатами двух вызванных селекторов  
+   (filter, heroes) => {  
+      if (filter === 'all') {  
+         console.log('render');  
+         return heroes;  
+      } else {  
+         return heroes.filter((item) => item.element === filter);  
+      }  
+   },  
+);  
+  
+const filteredHeroes = useSelector(filteredHeroesSelector);
+
+/// CODE ...
+```
+
+Теперь рендер вызвается только тогда, когда данные в стейте изменяются
+
+![](_png/5e09e8e34adefe980e8d2bb292c5b57d.png)
+
+
+## 012 Про сложность реальной разработки
+
+Реальные приложения требуют от разработчика большое количество знаний - это сложно, но нужна практика
+
+![](_png/84bad1784457eafb73324452c2809751.png)
+
+> **Спасибо за внимание**
+
+
+## 013 Store enhancers
+
+
+==Store enhancers== - это дополнительный функционал, который упрощает взаимодействие с хранилищем. Зачастую просто используют сторонние *npm-пакеты*, но так же можно написать и свой функционал улучшителя.
+
+Так же частным случаем энхэнсеров является `middleware` функции, которые так же передаются в стор.
+
+Конкретно для нашего проекта можно сделать простой энхэнсер, который модифицирует работу диспэтча. Он будет в себя принимать не только объект с определённым действием, но и принимать строку с экшен тайптом.
+
+Тут уже нужно сказать, что самих улучшителей стора может быть большое количество и поэтому их часто передают внутри функции `compose`, которая объединяет их в один. Однако так же нужно будет соблюдать последовательно передачи функций, так как они будут модифицировать логику последовательно. Конкретно в данном случае, строку с подключением к редакс-девтулзу стоит поместить в конец списка.
+
+```JS
+import { createStore, combineReducers, compose } from 'redux';
+import { heroes } from '../reducers/heroes';
+import { filters } from '../reducers/filters';
+
+const enhancer =
+	(createStore) =>
+	// сюда попадают аргументы для функции
+	(...args) => {
+		// тут мы передаём в функцию стора аргументы и вызваем её
+		const store = createStore(...args);
+
+		// это старый диспетч, который будет срабатывать, когда мы передаём объект
+		const oldDispatch = store.dispatch;
+
+		// переопределяем стандартный диспетч, который будет работать с текстом
+		store.dispatch = (action) => {
+			if (typeof action === 'string') {
+				return oldDispatch({ type: action });
+			}
+
+			// если была передана не строка, то имитируем стандартную работу
+			return oldDispatch(action);
+		};
+
+		return store;
+	};
+
+const store = createStore(
+	combineReducers({ heroes, filters }),
+	compose(
+		enhancer, 
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	),
+);
+
+export default store;
+```
+
+Приложение так же работает, но теперь у нас есть возможность передавать в диспетч и просто строку с действием
+
+![](_png/dd400bb592bce412f86ea5d95b35788c.png)
+
+
+## 014 Middleware
+
+
+==Middleware== - это `enhancer`, который занимается улучшением только `dispatch`. Так же зачастую пользуются уже готовыми middleware, которые предоставляет коммьюнити npm
+
+Конкретно тут сделаем посредника, который позволить `dispatch` принимать не только объекты, но и строки 
+
+`store > index.js`
+```JS
+// функция-посредник, которая работает только на dispatch
+// сюда автоматически будет попадать две сущности из store - dispatch, getState
+const stringMiddleware =
+	({ dispatch, getState }) =>
+	// потом здесь мы буем принимать dispatch
+	(dispatch) =>
+	// а это уже по-факту и есть новая функция dispatch с изменением функционала
+	(action) => {
+		if (typeof action === 'string') {
+			return dispatch({ type: action });
+		}
+
+		return dispatch(action);
+	};
+```
+
+- первым аргументом можно так же ничего не передавать, потому что нам не всегда нужен `store`
+- обычно, функцию `dispatch` называют `next`, так как будет вызываться следующая функция из `middleware`
+
+`store > index.js`
+```JS
+const stringMiddleware =
+	() =>
+	(next) =>
+	(action) => {
+		if (typeof action === 'string') {
+			return next({ type: action });
+		}
+
+		return next(action);
+	};
+```
+
+Чтобы применять `middleware` в `createStore`, нужно будет воспользоваться функцией `applyMiddleware`, которая будет применять посредника. 
+
+Чтобы вернуть подключение к редакс-девтулзу, можно опять же обернуть весь второй аргумент `createStore` в функцию `compose()`
+
+`store > index.js`
+```JS
+const store = createStore(
+	combineReducers({ heroes, filters }),
+	compose(
+		applyMiddleware(stringMiddleware),
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+	),
+);
+```
+
+
+## 015 Redux-thunk
+
+
+Основная задача модуля `redux-thunk` передавать функцию, которая потом будет производить асинхронную операцию
+
+Устанавливаем пакет в проект. 
+
+```bash
+npm i redux-thunk
+```
+
+И далее, чтобы убедиться, что он работает, можно просто попробовать передать `actionCreater` функцию в `dispatch` без вызова:
+
+`components > heroesList > HeroesList.js`
+```JS
+// функция получения персонажей с сервера
+useEffect(() => {  
+   dispatch(heroesFetching); // передаём функцию экшена без вызова
+   request('http://localhost:3001/heroes')  
+      .then((data) => dispatch(heroesFetched(data)))  
+      .catch(() => dispatch(heroesFetchingError()));  
+}, []);
+```
+
+Так же мы можем расширять наши экшены, так как в их вложенную функцию может автоматически поступать dispatch, над которым мы можем проводить различные манипуляции. 
+Конкретно тут будет срабатывать передача данных в стейт через определённый промежуток времени.
+
+`actions > index.js`
+```JS
+// когда мы вызываем функцию, она возвращает функцию, принимающую в себя dispatch  
+// dispatch приходит в функцию автоматически, так как мы используем thunk middleware  
+export const activeFilterChanged = (filter) => (dispatch) => {  
+   setTimeout(() => {  
+      dispatch({  
+         type: 'ACTIVE_FILTER_CHANGED',  
+         payload: filter,  
+      });  
+   }, 1000);  
+};
+```
+
+Но так же мы можем и упростить себе жизнь тем, что мы можем вызвать логику диспетча прямо внутри самой папки экшенов. 
+Конкретно, мы можем вынести запрос на получение персонажей и занесение их в стейт прямо из экшенов. Там нам не нужно будет импортировать и экспортировать отдельные экшены - можно будет ими просто воспользоваться.
+
+`actions > index.js`
+```JS
+export const fetchHeroes = (request) => (dispatch) => {
+	dispatch(heroesFetching());
+	request('http://localhost:3001/heroes')
+		.then((data) => dispatch(heroesFetched(data)))
+		.catch(() => dispatch(heroesFetchingError()));
+};
+```
+
+![](_png/8b54a08985f63e69d276dd56f4cd93ad.png)
+
+И тут далее в самом компоненте уже можем воспользоваться одним экшеном, который сам занесёт данные по персонажам в стейт, передав в него функцию совершения реквеста
+
+`components > heroesList > HeroesList.js`
+```JS
+import { fetchHeroes, heroDeleted } from '../../actions';
+
+const HeroesList = () => {
+	/// CODE ...
+	
+	const { request } = useHttp();
+
+	useEffect(() => {
+		dispatch(fetchHeroes(request));
+	}, []);
+```
+
+
+## Redux Toolkit
+
+#RTK #Redux #ReduxToolkit
+
+
+Проблемы больших проектов на обычном редакса:
+- очень много *boilerplates* при создании `actionCreators` и `reducers`
+- при большом количестве `enhancers` и `middlewares` функция по созданию `store` сильно разрастается 
+
+**Redux Toolkit** включает в себя набор инструментов для более простой и быстрой работы с `states` и `store`. 
+
+Та же функция `createSelector` была переэкспортирована из модуля **Reselect** в **RTK** 
+
+### Redux Toolkit `configureStore()`
+
+Функция `configureStore` предназначена для того, чтобы удобно автоматически регулировать `reducers`, подключать `middlewares` или `enhancers` и автоматически подключать **redux devtools** без дополнительных строк кода  
+
+В тулкит так же включены изначально самые популярные `middlewares`:
+- *Serializability Middlweware* - проверяет, чтобы в стейте были только те значения, которые должны быть в сторе
+- *Immutability Middlweware* - предназначен для обнаружения мутаций, которые могут быть в сторе
+- *Thunk Middlweware* - позволяет в экшены автоматически получать `dispatch`
+
+И уже так будет выглядеть создание нового `store` с использованием **RTK** 
+
+`store > index.js`
+```JS
+import { heroes } from '../reducers/heroes';
+import { filters } from '../reducers/filters';
+import { configureStore } from '@reduxjs/toolkit';
+
+const stringMiddleware = () => (next) => (action) => {
+	if (typeof action === 'string') {
+		return next({ type: action });
+	}
+
+	return next(action);
+};
+
+const store = configureStore({
+	// подключаем редьюсеры
+	reducer: { heroes, filters },
+	// подключаем девтулз
+	devTools: process.env.NODE_ENV === 'development',
+	// подключаем все стандартные middleware (включая thunk) и наши собственные
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stringMiddleware),
+});
+
+export default store;
+```
+
+### Redux Toolkit `createAction()`
+
+Функция `createAction()` позволяет автоматически выполнять операцию по созданию экшена
+
+Функция принимает в себя:
+- тип действия 
+- вспомогательную функцию
+
+И далее тут нужно сказать, что данная функция автоматически обрабатывает поступающие в неё данные. Т.е. если вызвать `heroesFetched` и передать в него аргумент, то он автоматически отправится в поле `payload`
+
+Ниже представлены две реализации экшенов - классическая и через `createAction` и обе из них работают полностью взаимозаменяемо
+
+```JS
+export const heroesFetching = () => {
+	return {
+		type: 'HEROES_FETCHING',
+	};
+};
+
+export const heroesFetched = (heroes) => {
+	return {
+		type: 'HEROES_FETCHED',
+		payload: heroes,
+	};
+};
+
+// ИЛИ ...
+
+export const heroesFetching = createAction('HEROES_FETCHING');
+export const heroesFetched = createAction('HEROES_FETCHED');
+```
+
+> Тут уже стоит отметить, что в `reducer` стоит передавать только одно поле payload. Таким образом будет проще читать код и воспринимать его. Остальные побочные действия лучше делать вне `reducer`.
+
+И вот пример, когда мы вторым аргументом передаём дополнительную функцию, которая осуществляет возврат обогащённого `payload`, который уже будет содержать не просто переданные данные, а ещё и сгенерированные нами
+
+```JS
+import { createAction, nanoid } from '@reduxjs/toolkit'
+
+const addTodo = createAction('todos/add', function prepare(text) {
+  return {
+    payload: {
+      text,
+      id: nanoid(),
+      createdAt: new Date().toISOString(),
+    },
+  }
+})
+```
+
+> Тут так же стоит отметить, что в **RTK** была добавлена функция `nanoid`, которая генерирует уникальный идентификатор для объекта
+
+### Redux Toolkit `createReducer()`
+
+Функция `reducer` зачастую представляет из себя очень много блоков `switch-case` и много вложенных конструкций, которые нужно редактировать в глубине, что усложняет разработку
+
+Для упрощения создания `reducer` была добавлена функция `createReducer`, которая принимает в себя:
+- начальное состояние
+- `builder`, который позволяет строить `reducer` за счёт встроенных в него трёх функций
+
+`builder` использует три функции:
+- `addCase` - добавляет кейс в свитчер редьюсера
+- `addDefaultCase` - устанавливает дефолтный кейс выполнения
+- `addMatcher` - позволяет фильтровать входящие экшены
+
+И так выглядит реализация нашего редьюсера героев через `createReducer`:
+
+`reducers > heroes.js`
+```JS
+import { createReducer } from '@reduxjs/toolkit';
+
+import {
+	heroesFetching,
+	heroesFetched,
+	heroesFetchingError,
+	heroCreated,
+	heroDeleted,
+} from '../actions';
+
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
+
+export const heroes = createReducer(initialState, (builder) => {
+	// вызываем объект билдера
+	builder
+		// создаём отдельный кейс как в switch-case
+		.addCase(
+			// action кейса
+			heroesFetching,
+			// reducer
+			(state, action) => {
+				// меняем состояние напрямую
+				state.heroesLoadingStatus = 'loading';
+			},
+		)
+		.addCase(heroesFetched, (state, action) => {
+			state.heroes = action.payload;
+			state.heroesLoadingStatus = 'idle';
+		})
+		.addCase(heroesFetchingError, (state, action) => {
+			state.heroesLoadingStatus = 'error';
+		})
+		.addCase(heroCreated, (state, action) => {
+			state.heroes.push(action.payload);
+		})
+		.addCase(heroDeleted, (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		})
+		.addDefaultCase(() => {});
+});
+```
+
+> Так же нужно отметить, что внутри функций `builder` используется библиотека `ImmerJS`, которая сама отвечает за сохранение логики иммутабельности в проекте. То есть мы можем писать визуально проект с мутациями, а библиотека сама переведёт код в иммутабельные сущности.
+> Такой подход будет работать ровно до тех пор, пока мы ничего не возвращаем из этих функций через `return`
+
+Однако функция `createReducer` требует для работы, чтобы все экшены были написаны с помощью `createAction`
+
+`actions > index.js`
+```JS
+import { createAction } from '@reduxjs/toolkit';
+
+export const fetchHeroes = (request) => (dispatch) => {
+	dispatch(heroesFetching());
+	request('http://localhost:3001/heroes')
+		.then((data) => dispatch(heroesFetched(data)))
+		.catch(() => dispatch(heroesFetchingError()));
+};
+
+export const heroesFetching = createAction('HEROES_FETCHING');
+export const heroesFetched = createAction('HEROES_FETCHED');
+export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR');
+export const heroCreated = createAction('HERO_CREATED');
+export const heroDeleted = createAction('HERO_DELETED');
+```
+
+Так же у нас есть вариант использовать более короткий способ создания редьюсеров через объект. Такой способ уже не работает с TS.
+
+`reducers > heroes.js`
+```JS
+export const heroes = createReducer(
+	// начальное состояние
+	initialState,
+	// карта действий (кейсы)
+	{
+		[heroesFetching]: (state) => {
+			state.heroesLoadingStatus = 'loading';
+		},
+		[heroesFetched]: (state, action) => {
+			state.heroes = action.payload;
+			state.heroesLoadingStatus = 'idle';
+		},
+		[heroesFetchingError]: (state, action) => {
+			state.heroesLoadingStatus = 'error';
+		},
+		[heroCreated]: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		[heroDeleted]: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+	// массив функций сравнения
+	[],
+	// действие по умолчанию
+	() => {},
+);
+```
+
+### Redux Toolkit `createSlice()`
+
+- Данная функция объединяет функции `createAction` и `createReducer` в одно
+- Обычно она располагается рядом с файлом, к которому она и относится
+- В конец названия файла обычно добавляется суффикс `Slice` 
+
+Функция `createSlice` принимает в себя 4 аргумента:
+- `name` - пространство имён создаваемых действий (имя среза). Это имя *будет являться префиксом для всех имён экшенов*, которые мы будем передавать в качестве ключа внутри объекта `reducers`
+- `initialState` - начальное состояние
+- `reducers` - объект с обработчиками
+- `extraReducers` - объект с редьюсерами другого среза (обычно используется для обновления объекта, относящегося к другому слайсу)
+
+Конкретно тут был создан срез `actionCreators` и `reducer` для героев в одном файле рядом с самим компонентом 
+
+`components > heroesList > HeroesList.js`
+```JS
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
+
+const heroesSlice = createSlice({
+	// пространство имён, в котором будут происходить все экшены
+	name: 'heroes',
+	// начальное состояние
+	initialState,
+	reducers: {
+		// свойство генерирует экшен
+		// а значение генерирует действие редьюсера
+		heroesFetching: (state) => {
+			state.heroesLoadingStatus = 'loading';
+		},
+		heroesFetched: (state, action) => {
+			state.heroes = action.payload;
+			state.heroesLoadingStatus = 'idle';
+		},
+		heroesFetchingError: (state, action) => {
+			state.heroesLoadingStatus = 'error';
+		},
+		heroCreated: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		heroDeleted: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+});
+
+const { actions, reducer } = heroesSlice;
+
+export const { heroCreated, heroDeleted, heroesFetched, heroesFetchingError, heroesFetching } =
+	actions;
+export default reducer;
+```
+
+И далее импортируем наш `reducer` в `store`
+
+`store > index.js`
+```JS
+import heroes from '../components/heroesList/heroesSlice';
+
+const store = configureStore({
+	reducer: { heroes, filters },
+	devTools: process.env.NODE_ENV === 'development',
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stringMiddleware),
+});
+```
+
+Теперь всё то, что относится к `actionCreators` героев можно удалить из файла экшенов и импортировать нужные зависимости для работы функции `fetchHeroes`
+
+`actions > index.js`
+```JS
+import {
+	heroCreated,
+	heroDeleted,
+	heroesFetched,
+	heroesFetchingError,
+	heroesFetching,
+} from '../components/heroesList/heroesSlice';
+
+export const fetchHeroes = (request) => (dispatch) => {
+	dispatch(heroesFetching());
+	request('http://localhost:3001/heroes')
+		.then((data) => dispatch(heroesFetched(data)))
+		.catch(() => dispatch(heroesFetchingError()));
+};
+
+/// CODE ...
+```
+
+Далее нужно поправить некоторые импорты в `HeroesList` и в `HeroesAddForm`
+
+И теперь мы имеем работающее приложение, которое мы переписали на более коротком синтаксисе.
+
+Однако тут стоит сказать, что теперь наши действия были переименованы под образ `createSlice`, где обозначается пространство выполняемых действий экшеном (`heroes`) и сам `actionCreator` (`heroesFetching`) 
+
+![](_png/928c9f86e25941eb218bc5527a83b9d6.png)
+
+Если нам нужно будет не только получить, но и обогатить `payload`, то можно будет добавить передать в экшен два объекта:
+- `reducer` - это сам обработчик
+- `prepare` - обработчик, который обогащает `payload`
+
+```JS
+import { createSlice, nanoid } from '@reduxjs/toolkit'
+
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState: [],
+  reducers: {
+    addTodo: {
+      // это та стандартная функция, которую мы просто помещаем в экшен
+      // тут мы получаем и стейт и экшен для передачи payload
+      reducer: (state, action) => {
+        state.push(action.payload)
+      },
+      // а это дополнительное действие для формирования самого payload
+      prepare: (text) => {
+        const id = nanoid()
+        return { payload: { id, text } }
+      },
+    },
+  },
+})
+```
+
+Если нам нужно изменить стейт уже в другом компоненте из нашего, то мы можем воспользоваться для этого `extraReducers`
+
+```JS
+import { createAction, createSlice } from '@reduxjs/toolkit'
+import { incrementBy, decrement } from './actions'
+
+function isRejectedAction(action) {
+  return action.type.endsWith('rejected')
+}
+
+createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(incrementBy, (state, action) => {
+      })
+      .addCase(decrement, (state, action) => {})
+      .addMatcher(
+        isRejectedAction,
+        (state, action) => {}
+      )
+      .addDefaultCase((state, action) => {})
+  },
+})
+```
+
+### Redux Toolkit `createAsyncThunk()`
+
+Функция `createAsyncThunk()` позволяет сделать асинхронный `actionCreator`, который будет вести себя ровно так же, как и при использовании обычного `redux-thunk`. 
+Использование данной функции является приоритетным, так как при таком запросе `heroes/fetchHeroes` функция возвращает нам три экшена, которые поделены на:
+-   `pending`: `'heroes/fetchHeroes/pending'`
+-   `fulfilled`: `'heroes/fetchHeroes/fulfilled'`
+-   `rejected`: `'heroes/fetchHeroes/rejected'`
+Такой подход позволит нам не обрабатывать три разных состояния функции самостоятельно, а перекладывать это на функционал тулкита.
+
+> Тут нужно отметить, что из данной функции мы должны возвращать `Promise`, который функция сама и обработает по трём состояниям
+
+Сам `reducer`, который мы создали через `createAsyncThunk` будет передаваться в основной `reducer` уже как четвёртый аргумент - объект `extraReducers`
+
+Тут мы создали функцию `fetchHeroes`, которая заменит `fetchHeroes` находящийся в `actions`. Далее нужно будет обработать три состояния `fetchHeroes` уже внутри самого `heroesSlice`, передав внутрь `extraReducers`
+
+`components > heroesList > heroesSlice.js``
+```JS
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useHttp } from '../../hooks/http.hook';
+
+const initialState = {
+	heroes: [],
+	heroesLoadingStatus: 'idle',
+};
+
+export const fetchHeroes = createAsyncThunk(
+	// название среза / тип действия
+	'heroes/fetchHeroes',
+	// асинхронная функция
+	// 1 арг - то, что приходит при диспетче
+	// 2 арг - thunkAPI (dispatch, getState)
+	async () => {
+		const { request } = useHttp();
+		return await request('http://localhost:3001/heroes');
+	},
+);
+
+const heroesSlice = createSlice({
+	name: 'heroes',
+	initialState,
+	reducers: {
+		// а тут мы удалим heroesFetching, heroesFetched, heroesFetchingError, так как функционал перенесён в fetchHeroes
+		heroCreated: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		heroDeleted: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+	extraReducers: (builder) => {
+		builder
+			// добавляем формирование запроса
+			.addCase(fetchHeroes.pending, (state) => {
+				state.heroesLoadingStatus = 'loading'; // состояние загрузки
+			})
+			// запрос выполнен
+			.addCase(fetchHeroes.fulfilled, (state, action) => {
+				state.heroes = action.payload; // данные, полученные с сервера попадут сюда
+				state.heroesLoadingStatus = 'idle'; // состояние ожидания
+			})
+			// запрос отклонён
+			.addCase(fetchHeroes.rejected, (state, action) => {
+				state.heroesLoadingStatus = 'error'; //
+			});
+	},
+});
+
+const { actions, reducer } = heroesSlice;
+
+export const { heroCreated, heroDeleted, heroesFetched, heroesFetchingError, heroesFetching } =
+	actions;
+export default reducer;
+```
+
+Теперь тут меняем импорты
+
+`components > heroesList > HeroesList.js`
+```JS
+import { heroDeleted, fetchHeroes } from './heroesSlice';
+```
+
+Ну и так же из нашего хука `useHttp` нужно убрать `useCallback`, так как это приведёт к ошибке
+
+![](_png/f5e8735862a0aa71845b3d2e6429623e.png)
+
+```JS
+export const useHttp = () => {
+	// убрать useCallback
+	const request = async (
+		url,
+		method = 'GET',
+		body = null,
+		headers = { 'Content-Type': 'application/json' },
+	) => {
+		try {
+			const response = await fetch(url, { method, body, headers });
+
+			if (!response.ok) {
+				throw new Error(`Could not fetch ${url}, status: ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			return data;
+		} catch (e) {
+			throw e;
+		}
+	};
+
+	return {
+		request,
+	};
+};
+```
+
+И теперь всё работает и функция за нас реализовала сразу три состояния стейта
+
+![](_png/a2aa6d12a19cd056d81681593c930c3c.png)
+
+### Redux Toolkit `createEntityAdapter()`
+
+Функция `createEntityAdapter()` позволит создавать готовый объект с часто-выполняемыми CRUD-операциями в `reducer`
+
+В самом начале в файле со слайсом нужно создать сам адаптер и переписать создание `initialState` под адаптер
+
+Так же мы можем внутрь адаптера вложить свойства, которые мы не хотим обрабатывать через него (`heroesLoadingStatus`), а хотим обработать самостоятельно
+
+`components > heroesList > heroesSlice.js`
+```JS
+// создаём адаптер
+const heroesAdapter = createEntityAdapter();
+
+// создаём начальное состояние
+const initialState = heroesAdapter.getInitialState({
+	heroesLoadingStatus: 'idle',
+});
+```
+
+Если вывести адаптер в консоль, то он будет иметь в себе объект, который будет хранить все попадающие внутрь него сущности и идентификаторы. Так же он будет отображать все те поля, которые мы передали как объект внутрь адаптера - уже с ними можно будет работать отдельно без круд-функций адаптера
+
+![](_png/a75f75aecfb62a2c77cf2737ba445232.png)
+
+Так же нужно сказать, что функция `createEntityAdapter` принимает в себя объект с переопределением начальных функций 
+
+```JS
+const booksAdapter = createEntityAdapter({
+  // тут мы указываем, что будем брать id не из book.id, а из book.bookId
+  selectId: (book) => book.bookId,
+  // тут мы производим сортировку всех книг по тайтлам
+  sortComparer: (a, b) => a.title.localeCompare(b.title),
+})
+```
+
+CRUD-операции, которые предоставляет `createEntityAdapter`:
+
+-   `addOne`: принимает один объект и добавляет его, если он еще не присутствует.
+-   `addMany`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и добавляет их, если они еще не присутствуют.
+-   `setOne`: принимает отдельный объект и добавляет или заменяет его
+-   `setMany`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и добавляет или заменяет их.
+-   `setAll`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и заменяет все существующие сущности значениями в массиве.
+-   `removeOne`: принимает единственное значение идентификатора объекта и удаляет объект с этим идентификатором, если он существует.
+-   `removeMany`: принимает массив значений идентификатора объекта и удаляет каждый объект с этими идентификаторами, если они существуют.
+-   `removeAll`: удаляет все объекты из объекта состояния сущности.
+-   `updateOne`: принимает "объект обновления", содержащий идентификатор объекта, и объект, содержащий одно или несколько новых значений поля для обновления внутри `changes` поля, и выполняет поверхностное обновление соответствующего объекта.
+-   `updateMany`: принимает массив объектов обновления и выполняет мелкие обновления для всех соответствующих объектов.
+-   `upsertOne`: принимает единую сущность. Если объект с таким идентификатором существует, он выполнит поверхностное обновление, и указанные поля будут объединены в существующий объект, а любые совпадающие поля будут перезаписывать существующие значения. Если объект не существует, он будет добавлен.
+-   `upsertMany`: принимает массив объектов или объект в форме`Record<EntityId, T>`, который будет слегка изменен.
+
+> Все вышеописанные методы следуют принципу **нормализации данных**. Они производят действия над данными по определённым условиям, если они существуют/не существуют
+
+Реализуем добавление персонажей в массив через адаптер. Для этого нам может подойти функция `setAll`, в которая будет являться местом, куда помещаем все данные, а вторым аргументом данные для помещения.
+
+`components > heroesList > heroesSlice.js`
+```JS
+const heroesSlice = createSlice({
+	name: 'heroes',
+	initialState,
+	reducers: {
+		heroCreated: (state, action) => {
+			state.heroes.push(action.payload);
+		},
+		heroDeleted: (state, action) => {
+			state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+		},
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchHeroes.pending, (state) => {
+				state.heroesLoadingStatus = 'loading';
+			})
+			.addCase(fetchHeroes.fulfilled, (state, action) => {
+				state.heroesLoadingStatus = 'idle';
+				// устанавливаем все полученные данные в стейт
+				// первый аргумент - место, куда помещаем все данные
+				// второй - что помещаем
+				heroesAdapter.setAll(state, action.payload); // state.heroes = action.payload;
+			})
+			.addCase(fetchHeroes.rejected, (state, action) => {
+				state.heroesLoadingStatus = 'error';
+			});
+	},
+});
+```
+
+Все данные, которые мы помещаем в стейт, отправляются в объект `entities`
+
+![](_png/838dba72d7e496e5a9eac9a666c22523.png)
+
+Чтобы работать с данным объектом и получать из него нужные сущности, нужно воспользоваться функциями выбора. Адаптер выбранной сущности содержит метод `getSelectors()`, которая предоставляет функционал селекторов уже знающих как считывать содержимое этой сущности:
+
+-   `selectIds`: возвращает массив с идентификаторами `state.ids`.
+-   `selectEntities`: возвращает объект `state.entities`.
+-   `selectAll`: возвращает массив объектов с идентификаторами `state.ids`.
+-   `selectTotal`: возвращает общее количество объектов, сохраняемых в этом состоянии.
+-   `selectById`: учитывая состояние и идентификатор объекта, возвращает объект с этим идентификатором или `undefined`.
+
+Если мы использем селекторы в глобальной областивидимости, то нам нужно будет самостоятельно указывать, с чем именно должна работать данная команда
+
+```JS
+const store = configureStore({
+  reducer: {
+    books: booksReducer,
+  },
+})
+
+const simpleSelectors = booksAdapter.getSelectors()
+const globalizedSelectors = booksAdapter.getSelectors((state) => state.books)
+
+// указываем конкретный объект, с которым будет работать селектор
+const bookIds = simpleSelectors.selectIds(store.getState().books)
+
+// уже этот селектор знает, с каким объектом в стейте он имеет дело
+const allBooks = globalizedSelectors.selectAll(store.getState())
+```
+
+И теперь нам нужно добавить функционал по вытаскиванию всех элементов из стейта. Сделать это легко - мы просто из файла со слайсом будем экспортировать функцию `selectAll`, которую привяжем к `state.heroes`
+
+`components > heroesList > heroesSlice.js`
+```JS
+// и теперь все функции для получения значений из стейта, которые мы используем, будут обращаться к героям
+export const { selectAll } = heroesAdapter.getSelectors((state) => state.heroes);
+```
+
+Вторым аргументом в листе мы возвращали с помощью отдельной функции список всех персонажей. Теперь же можно вернуть всё с помощью функции-селектора 
+
+![](_png/3b1dcbbe9d3115bc569138e3d10f890a.png)
+
+И теперь приложение работает, так как на фронт попадает тот массив, который нам и был нужен
+
+![](_png/4fe429e457b0b096433ae22a082492f3.png)
+
+Если мы попытаемся вывести массив с логами о героях, то тут можно увидеть, что в первые две смены состояния были пустые, но дальше мы получили массив с объектами
+
+![](_png/b5f6eee8d55d775765e6641d7ce884cb.png)
+
+И теперь можно переписать все операции модификации стейта на круд-операции из самого адаптера. 
+
+Тут нужно сказать, что данные по `reducer`, действия над которыми происходят в пространстве имён `heroes`, будут помещаться в `state.entities.heroes`. Однако напрямую с ними взаимодействовать не придётся, так как мы их можем автоматически достать через селекторы
+
+![](_png/d7ca6c837f83da2fb7a80ca60a94c84f.png)
+
+Ну и так же можно оптимизировать код и создавать селекторы (библиотека `Reselect`) уже внутри самого слайса
+
+![](_png/d1e56a6b02d41a3f5baabb4c5d9b0849.png)
+
+![](_png/9665f64d38892294cbf40dd93bf30f3b.png)
+
+
+>[!success] Вышеописанный подход с использованием ==Redux== позволяет нам скрывать логическую часть работы с данными от самого компонента, который эти данные отображает. Теперь ==View== работает отдельно и занимается только отображением данных без какого-либо их преобразования.
+
+
+## 024 Redux Toolkit RTK Query
+
+
+RTK Qeury и React Query концептуально меняют подход к использованию данных в приложении. Они предлагают не изменять глобальные состояния, а оперировать загруженными данными
+
+Сейчас наше взаимодействие выглядит так:
+- мы отправляем запрос на сервер
+- мы получаем данные с сервера
+- отправляем изменение состояния в стейт
+
+![](_png/706e2ba2e0a4288f02cb4f0c3f2112ea.png)
+
+Далее потребуются две основные функции для работы с Query:
+- `createApi` - полностью описывает поведение RTK Query
+- `fetchBaseQuery` - модифицированная функция `fetch()`
+
+Чтобы начать работать с данной библиотекой, нужно будет написать будущее АПИ общения с RTK Query:
+- Пишем функцию `createApi`, которая описывает взаимодействие с библиотекой и передаём в неё объект
+	- `reducerPath` будет указывать то пространство имён, в котором происходят все запросы
+	- `baseQuery` описывает полностью базовые параметры запроса на сервер
+		- функция `fetchBaseQuery` выполняет функцию фетча, но хранит дополнительные параметры для ртк
+		- `baseUrl` принимает строку для обращения к серверу
+	- `endpoints` хранит функцию, которая возвращает объект с теми запросами и изменениями, что мы можем вызвать
+		- свойство объекта будет входить в имя хука, который будет сгенерирован. Если мы имеем имя `getHeroes`, то библиотека сформирует хук `useGetHeroes[Query/Mutation]` (суффикс уже будет зависеть от типа того, что делает хук - просто запрос или мутация данных)
+
+`api > apiSlice.js`
+```JS
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+// эта функция генерирует хуки (эндпоинты) на каждое наше действие
+// так же она генерирует и редьюсер (как createSlice)
+export const apiSlice = createApi({
+	// путь к редьюсеру
+	reducerPath: 'api',
+	// формирование базового запроса
+	baseQuery: fetchBaseQuery({
+		// тут указываем ссылку до сервера
+		baseUrl: 'http://localhost:3001',
+	}),
+	// тут указываем те операции, которые будем проводить по базовому адресу (получение, отправка, удаление данных)
+	// query - запросы, которые получают данные и сохраняют их
+	// mutation - запросы на изменение данных на сервере
+	endpoints: (builder) => ({
+		// тут мы просто хотим получить героев с сервера
+		getHeroes: builder.query({
+			query: () => '/heroes',
+		}),
+	}),
+});
+
+export const { useGetHeroesQuery } = apiSlice;
+```
+
+Далее нужно сконфигурировать хранилище:
+- чтобы добавить новый reduce, нужно в качестве свойства указать динамическую строку `apiSlice.reducerPath` и указать значение переменной самого редьюсера `apiSlice.reducer`
+- далее добавляем `middleware` для обработки специфических запросов RTK Query
+
+`store > index.js`
+```JS
+import { apiSlice } from '../api/apiSlice';
+
+const store = configureStore({
+	reducer: { 
+		heroes, 
+		filters, 
+		// добавляем reducer, сформированный через RTK Query
+		[apiSlice.reducerPath]: apiSlice.reducer 
+	},
+	devTools: process.env.NODE_ENV === 'development',
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(
+			stringMiddleware, 
+			// передаём сюда middleware для обработки запросов RTK Query
+			apiSlice.middleware
+		),
+});
+```
+
+И уже тут мы можем воспользоваться хуком, который сгенерировал Query. Через хук `useGetHeroesQuery` мы получаем все те промежуточные состояния, которые могут быть присвоены запросы, который приходит с сервера
+
+> Так же нужно упомянуть, что все те данные, что мы получили с сервера будут кешироваться в браузере на определённое время
+
+`components > heroesList > HeroesList.js`
+```JS
+import { heroDeleted, fetchHeroes, filteredHeroesSelector } from './heroesSlice';
+import { useGetHeroesQuery } from '../../api/apiSlice';
+
+const HeroesList = () => {
+	const {
+		// тут нужно установить значение по умолчанию, так как это асинхронный код
+		data: heroes = [], // получаем данные, которые запишем в переменную heroes
+		isUninitialized, // если true, то запрос вообще не был отправлен
+		isFetching, // состояние отправленного запроса
+		isLoading, // состояние загрузки
+		isError, // состояние ошибки
+		error, // переменная с ошибкой
+	} = useGetHeroesQuery();
+
+	// получаем доступ к выбранному пользователем фильтру
+	const activeFilter = useSelector((state) => state.filters.activeFilter);
+
+	// это фильтр героев, которых мы получили с сервера
+	const filteredHeroes = useMemo(() => {
+		// создаём копию массива персонажей
+		const filteredHeroes = heroes.slice();
+
+		if (activeFilter === 'all') {
+			return filteredHeroes;
+		} else {
+			return filteredHeroes.filter((item) => item.element === activeFilter);
+		}
+	}, [heroes, activeFilter]);
+
+	/// CODE ...
+
+	if (isLoading) {
+		return <Spinner />;
+	} else if (isError) {
+		return <h5 className='text-center mt-5'>Ошибка загрузки</h5>;
+	}
+
+	/// CODE ...
+
+	// и сюда подставляем отсортированных персонажей  
+	const elements = renderHeroesList(filteredHeroes);
+	return <TransitionGroup component='ul'>{elements}</TransitionGroup>;
+};
+
+export default HeroesList;
+```
+
+И наше приложение работает теперь так же, как и до изменений - список героев нормально получается с сервера
+
+![](_png/536f36b1b7120d7201d86593d4237fe5.png)
+
+Далее добавим запрос на мутацию стейта, который будет отправлять на сервер запрос на добавление персонажа в список
+
+`api > apiSlice.js`
+```JS
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+	reducerPath: 'api',
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:3001',
+	}),
+	endpoints: (builder) => ({
+		getHeroes: builder.query({
+			query: () => '/heroes',
+		}),
+		createHero: builder.mutation({
+			query: (hero) => ({
+				url: '/heroes',
+				method: 'POST',
+				body: hero,
+			}),
+		}),
+	}),
+});
+
+export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
+```
+
+И далее можно будет применить данный хук мутации в коде:
+- хук возвращает массив из двух объектов:
+	- функция отправки мутации данных
+	- объект со статусом обработки запроса (тот же объект, что и у `query`)
+- далее можно будет применить функцию отправки героя на сервер и передать в него нового героя
+- и для нормальной работы всех обработчиков (объект из второго аргумента) используется функция `unwrap()`
+
+![](_png/5839c1ef0223fb5b458bc89e6855ce7b.png)
+
+Однако после отправки запроса на сервер, мы не получаем на главной странице нового списка персонажей с нашим созданным героем.
+
+Чтобы исправить данную ситуацию, нам нужно будет использовать наш стейт `api` и обновлять стейт на фронте, когда мы получаем актуальные данные с сервера
+
+Чтобы подвязать выполнение одних запросов под другие, нужно использовать теги в `createApi`
+
+![](_png/418ea3c74724db6334644b6a86743e01.png)
+
+И теперь тут правим ситуацию:
+- объявляем глобально в АПИ поле `tagTypes`, которое принимает в себя массив тегов, которые будут использоваться для общения между методами
+- добавляем в первый запрос `providesTags` и тег, по которому будет оповещаться данный метод, чтобы он сработал при изменении данных
+- добавляем в запрос мутации `invalidatesTags`, который будет отправлять в хранилище тегов запрос, откуда на все подписанные методы с подходящими тегами будет приходить уведомление о переиспользовании
+
+`api > apiSlice.js`
+```JS
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+	reducerPath: 'api',
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:3001',
+	}),
+	// тут мы задаём, какие метки (теги) существуют
+	tagTypes: ['Heroes'],
+	endpoints: (builder) => ({
+		getHeroes: builder.query({
+			query: () => '/heroes',
+			// указываем, когда данные запрашиваются при помощи обычного запроса
+			providesTags: ['Heroes'], // а тут мы подцепляемся к тегам - функция триггерится от тегов
+		}),
+		createHero: builder.mutation({
+			query: (hero) => ({
+				url: '/heroes',
+				method: 'POST',
+				body: hero,
+			}),
+			// если мы мутировали эти данные, то по какой метке мы должны получить эти данные
+			invalidatesTags: ['Heroes'], // а тут мы указываем, что именно нужно обновить повторно, когда данные изменились
+		}),
+	}),
+});
+
+export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
+```
+
+И теперь всё работает - при создании нового персонажа триггерится функция обновления списка персонажей на фронте
+
+![](_png/8a45a2d40886061b454479142418d1d5.png)
 
 
 
-##
 
+`api > apiSlice.js`
+```JS
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+export const apiSlice = createApi({
+	reducerPath: 'api',
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:3001',
+	}),
+	tagTypes: ['Heroes'],
+	endpoints: (builder) => ({
+		getHeroes: builder.query({
+			query: () => '/heroes',
+			providesTags: ['Heroes'],
+		}),
+		createHero: builder.mutation({
+			query: (hero) => ({
+				url: '/heroes',
+				method: 'POST',
+				body: hero,
+			}),
+			invalidatesTags: ['Heroes'],
+		}),
+		deleteHero: builder.mutation({
+			query: (id) => ({
+				url: `/heroes/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['Heroes'],
+		}),
+	}),
+});
 
-##
+export const { 
+	useGetHeroesQuery, 
+	useCreateHeroMutation, 
+	useDeleteHeroMutation 
+} = apiSlice;
+```
 
+![](_png/0ea8700404eb10bfbdfbac9a694ccaaf.png)
 
-[001 Основные принципы Redux. Теория](001%20Основные%20принципы%20Redux.%20Теория.md)
-[002 Основные принципы Redux. Практика](002%20Основные%20принципы%20Redux.%20Практика.md)
-[003 Чистые функции](003%20Чистые%20функции.md)
-[004 Оптимизация через actionCreators и bindActionCreator](004%20Оптимизация%20через%20actionCreators%20и%20bindActionCreator.md)
-[005 Добавим React в проект](005%20Добавим%20React%20в%20проект.md)
-[006 Соединяем React и Redux при помощи connect](006%20Соединяем%20React%20и%20Redux%20при%20помощи%20connect.md)
-[007 Соединяем React и Redux при помощи хуков](007%20Соединяем%20React%20и%20Redux%20при%20помощи%20хуков.md)
-[008 Redux devtools](008%20Redux%20devtools.md)
-[009 Правило названия action и домашнее задание (мини-экзамен)](009%20Правило%20названия%20action%20и%20домашнее%20задание%20(мини-экзамен).md)
-[010 Разбор самых сложных моментов](010%20Разбор%20самых%20сложных%20моментов.md)
-[011 Комбинирование reducers и красивые селекторы. CreateSelector()](011%20Комбинирование%20reducers%20и%20красивые%20селекторы.%20CreateSelector().md)
-[012 Про сложность реальной разработки](012%20Про%20сложность%20реальной%20разработки.md)
-[013 Store enhancers](013%20Store%20enhancers.md)
-[014 Middleware](014%20Middleware.md)
-[015 Redux-thunk](015%20Redux-thunk.md)
-[Redux Toolkit](Redux%20Toolkit.md)
-[024 Redux Toolkit RTK Query](024%20Redux%20Toolkit%20RTK%20Query.md)
+![](_png/4955ea8761d104fcf028b311ae19172e.png)
+
+И по итогу мы теперь можем удалить весь `heroesSlice.js`, который использовался для реализации управления состояниями 
+
+И теперь список персонажей выглядит таком образом:
+
+`components > heroesList > HeroesList.js`
+```JS
+import { useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+import HeroesListItem from '../heroesListItem/HeroesListItem';
+import Spinner from '../spinner/Spinner';
+
+import './heroesList.scss';
+
+import { useGetHeroesQuery, useDeleteHeroMutation } from '../../api/apiSlice';
+
+const HeroesList = () => {
+	const {
+		data: heroes = [],
+		isUninitialized,
+		isFetching,
+		isLoading,
+		isError,
+		error,
+	} = useGetHeroesQuery();
+
+	const activeFilter = useSelector((state) => state.filters.activeFilter);
+
+	const filteredHeroes = useMemo(() => {
+		const filteredHeroes = heroes.slice();
+
+		if (activeFilter === 'all') {
+			return filteredHeroes;
+		} else {
+			return filteredHeroes.filter((item) => item.element === activeFilter);
+		}
+	}, [heroes, activeFilter]);
+
+	const [deleteHero] = useDeleteHeroMutation();
+
+	const onDelete = useCallback((id) => {
+		deleteHero(id);
+	}, []);
+
+	if (isLoading) {
+		return <Spinner />;
+	} else if (isError) {
+		return <h5 className='text-center mt-5'>Ошибка загрузки</h5>;
+	}
+
+	const renderHeroesList = (arr) => {
+		if (arr.length === 0) {
+			return (
+				<CSSTransition timeout={0} classNames='hero'>
+					<h5 className='text-center mt-5'>Героев пока нет</h5>
+				</CSSTransition>
+			);
+		}
+
+		return arr.map(({ id, ...props }) => {
+			return (
+				<CSSTransition key={id} timeout={500} classNames='hero'>
+					<HeroesListItem {...props} onDelete={() => onDelete(id)} />
+				</CSSTransition>
+			);
+		});
+	};
+
+	const elements = renderHeroesList(filteredHeroes);
+	return <TransitionGroup component='ul'>{elements}</TransitionGroup>;
+};
+
+export default HeroesList;
+```
+
+>[!success] И сейчас можно сделать следующие выводы:
+> - RTK Query предлагает нам не пользоваться каким-либо единственным хранилищем состояния, а пользоваться активным взаимодействием с сервером для актуализации данных 
+> - В браузере же данные хранятся только в кешированном формате (то есть тех данных, что хранится просто в нашем стейте просто нет - они в памяти браузера)
