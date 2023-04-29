@@ -1,0 +1,310 @@
+{
+  "main": {
+    "id": "8475e15555e5e09e",
+    "type": "split",
+    "children": [
+      {
+        "id": "3d4721bbec1aa65f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1a91a81effc8a399",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "afcc0b511ad2c1b5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "50ef9e911dd56133",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2f5c5614a25aeebe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/React Foundamentals.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "41d4404cc69d784b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/TypeScript/TypeScript.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f83a9069043ced12",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2c521457825bd3c3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "aef152b325f02bad",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "99b6551c3fc03820",
+    "type": "split",
+    "children": [
+      {
+        "id": "2e0bbca9fd1196c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa4fe56689b0fc48",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "700cceaa0d0435b1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6456f0ea52ffc2f2",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 336.5
+  },
+  "right": {
+    "id": "628c89310a05dc8a",
+    "type": "split",
+    "children": [
+      {
+        "id": "5b17912229af37b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "77cb4cd4ba30c0ce",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "15a31e3ddd7451b1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6b50ab8c7e63a240",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2bea1110aa5cdb10",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md"
+              }
+            }
+          },
+          {
+            "id": "b7c70d46107b4865",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "ef13b8b253b517d4",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "75aed6dbb0d7603b",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "128918fa839481d3",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 401.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "50ef9e911dd56133",
+  "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+    "Development/Тестирование JavaScript.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/Tailwind CSS.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/React Foundamentals.md",
+    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/08 Statefull компоненты.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
+    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/027 (д) Создание своих ошибок.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/036 Работаем с готовым кодом.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Макро и микрозадачи.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/034 Event loop, подробная работа асинхронных и синхронных операций.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/033 Web Animations API.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/032 JS анимации, requestAnimationFrame.md",
+    "Development/_png/Pasted image 20230427145803.png",
+    "Development/_png/Pasted image 20230427145800.png",
+    "Development/_png/Pasted image 20230427140952.png",
+    "Development/_png/Pasted image 20230427140843.png",
+    "Development/_png/Pasted image 20230427135629.png",
+    "Development/_png/Pasted image 20230427134448.png",
+    "Development/_png/Pasted image 20230427123719.png",
+    "Development/_png/Pasted image 20230427120800.png",
+    "Development/_png/Pasted image 20230427120636.png",
+    "Development/_png/Pasted image 20230427120547.png",
+    "_lessons",
+    "Programming Principes/_png",
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
+    "Books/_png"
+  ]
+}
