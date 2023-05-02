@@ -111,6 +111,7 @@ db.users.find()
 ```shell
 db.users.find({age: 25, name: 'Masya'})
 ```
+
 ```JSON
 { 
 	_id: ObjectId("6324b047183b76a3589dcc11"),  
@@ -192,7 +193,7 @@ db.users.find().sort({age: -1})
 
 ### find.limit - Ограничение по количеству получаемых документов
 
-Функция **limit()** позволяет нам ограничить число получаемых записей
+Функция `limit()` позволяет нам ограничить число получаемых записей
 
 ```shell
 db.users.find().limit(2)
