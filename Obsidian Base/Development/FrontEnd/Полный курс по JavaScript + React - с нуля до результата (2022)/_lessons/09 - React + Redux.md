@@ -2850,7 +2850,7 @@ createSlice({
 
 Тут мы создали функцию `fetchHeroes`, которая заменит `fetchHeroes` находящийся в `actions`. Далее нужно будет обработать три состояния `fetchHeroes` уже внутри самого `heroesSlice`, передав внутрь `extraReducers`
 
-`components > heroesList > heroesSlice.js``
+`components > heroesList > heroesSlice.js`
 ```JS
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useHttp } from '../../hooks/http.hook';
