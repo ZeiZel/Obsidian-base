@@ -115,7 +115,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -189,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -206,7 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -229,7 +230,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md"
               }
             }
           },
@@ -283,8 +284,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "1a91a81effc8a399",
+  "active": "f83a9069043ced12",
   "lastOpenFiles": [
+    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
@@ -310,7 +312,6 @@
     "Development/Tailwind CSS.md",
     "Development/TypeScript/TypeScript.md",
     "Development/React Foundamentals.md",
-    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/_png/Pasted image 20230427145803.png",
     "Development/_png/Pasted image 20230427145800.png",
     "Development/_png/Pasted image 20230427140952.png",
