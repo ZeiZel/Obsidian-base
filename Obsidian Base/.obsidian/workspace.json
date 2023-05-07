@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
-                "mode": "preview",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -68,12 +68,12 @@
             }
           },
           {
-            "id": "f83a9069043ced12",
+            "id": "4f3a4f1eea59aa4c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/REST API.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/REST API.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/REST API.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/REST API.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md"
               }
             }
           },
@@ -249,18 +249,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "f83a9069043ced12",
+  "active": "4f3a4f1eea59aa4c",
   "lastOpenFiles": [
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
+    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/REST API.md",
     "Development/_png/Pasted image 20230507142359.png",
     "Development/_png/Pasted image 20230507142348.png",
     "Development/_png/Pasted image 20230507142338.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
     "Development/Без названия.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
-    "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
-    "Development/TypeScript/TypeScript.md",
     "Development/React Foundamentals.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
@@ -286,7 +287,6 @@
     "Development/_png/Pasted image 20230427135629.png",
     "Development/_png/Pasted image 20230427134448.png",
     "Development/_png/Pasted image 20230427123719.png",
-    "Development/_png/Pasted image 20230427120800.png",
     "_lessons",
     "Programming Principes/_png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
