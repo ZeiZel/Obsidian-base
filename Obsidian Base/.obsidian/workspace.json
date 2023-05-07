@@ -66,9 +66,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "04119ccdef79c228",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -142,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md"
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md"
               }
             }
           },
@@ -236,12 +248,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "04119ccdef79c228",
   "lastOpenFiles": [
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/23 - Асинхронные функции.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/22 – Промисы.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
     "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
@@ -264,9 +279,6 @@
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/10 Продвинутые темы.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/05 Работа с базой данных.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/11 Выкладка на production (Бонус!).md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
     "Development/_png/Pasted image 20230427145803.png",
     "Development/_png/Pasted image 20230427145800.png",
     "Development/_png/Pasted image 20230427140952.png",
