@@ -85,8 +85,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md",
-                "mode": "preview",
+                "file": "Design/DaVinci Resolve/Modules/1 Введение.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md",
+                "file": "Design/DaVinci Resolve/Modules/1 Введение.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md",
+                "file": "Design/DaVinci Resolve/Modules/1 Введение.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md"
+                "file": "Design/DaVinci Resolve/Modules/1 Введение.md"
               }
             }
           },
@@ -247,7 +247,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 291.5
+    "width": 291.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -262,8 +263,30 @@
   },
   "active": "e42e51c3bc280283",
   "lastOpenFiles": [
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
+    "Design/DaVinci Resolve/Modules/_png/Pasted image 20230513141624.png",
+    "Design/DaVinci Resolve/Modules/_png/Pasted image 20230513141409.png",
+    "Design/DaVinci Resolve/Modules/_png/Pasted image 20230513140918.png",
+    "Design/DaVinci Resolve/Modules/_png",
+    "Design/DaVinci Resolve/Modules/Без названия.md",
+    "Design/DaVinci Resolve/Modules/10 Вкладка Deliver. Экспорт материала.md",
+    "Design/DaVinci Resolve/Modules/9 Вкладка Fairlight. Работа со звуком.md",
+    "Design/DaVinci Resolve/Modules/8 Модуль 8. Вкладка Fusion.md",
+    "Design/DaVinci Resolve/Modules/7 Вкладка Color. Стилизация видео и локальные коррекции.md",
+    "Design/DaVinci Resolve/Modules/6 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров.md",
+    "Design/DaVinci Resolve/Modules/5 ПРАКТИКА. Монтаж разных жанров.md",
+    "Design/DaVinci Resolve/Modules/4 Вкладка Cut. Сбор чернового монтажа.md",
+    "Design/DaVinci Resolve/Modules/2 Вкладка Media. Импорт материала и организация проекта.md",
+    "Design/DaVinci Resolve/Modules/1 Введение.md",
+    "Design/DaVinci Resolve/Modules/3 Вкладка edit монтаж.md",
+    "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Modules",
+    "flaticon.com.md",
+    "Design/DaVinci Resolve",
+    "Design",
+    "consistant-report.md",
+    "Без названия.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/13 Telegram bot уведомлений.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
     "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
     "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
@@ -272,32 +295,14 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/14 Страница продуктов.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/23 - Асинхронные функции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/22 – Промисы.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
-    "Development/TypeScript/TypeScript.md",
-    "Development/REST API.md",
     "Development/_png/Pasted image 20230507142359.png",
     "Development/_png/Pasted image 20230507142348.png",
     "Development/_png/Pasted image 20230507142338.png",
-    "Development/Без названия.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
-    "Development/React Foundamentals.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/_png/Pasted image 20230427145803.png",
     "Development/_png/Pasted image 20230427145800.png",
     "Development/_png/Pasted image 20230427140952.png",
     "Development/_png/Pasted image 20230427140843.png",
     "Development/_png/Pasted image 20230427135629.png",
-    "Development/_png/Pasted image 20230427134448.png",
-    "Development/_png/Pasted image 20230427123719.png",
     "_lessons",
     "Programming Principes/_png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
