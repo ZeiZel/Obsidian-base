@@ -11,4 +11,4 @@
 [Вёрстка Basic](../../Development/HTML+CSS__Git+NPM/Базовая%20вёрстка/Вёрстка%20Basic.md)
 [Вёрстка PRO](../../Development/HTML+CSS__Git+NPM/Вёрстка%20PRO/Вёрстка%20PRO.md)
 [Pug](../../Development/HTML+CSS__Git+NPM/PUG/Pug.md)
-[Tailwind CSS](../../Development/Tailwind%20CSS.md)
+[Tailwind CSS](../../Development/FrontEnd/Tailwind%20CSS.md)
