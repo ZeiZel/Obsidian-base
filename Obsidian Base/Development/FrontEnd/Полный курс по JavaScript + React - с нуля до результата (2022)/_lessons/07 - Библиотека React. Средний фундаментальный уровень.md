@@ -1418,7 +1418,7 @@ export default CharList;
 
 
 ## 009 Проверка типов с помощью PropTypes
-
+#PropTypes
 
 Установка модуля:
 
