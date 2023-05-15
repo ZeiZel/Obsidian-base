@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Development/FrontEnd/MobX.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Development/FrontEnd/MobX.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Development/FrontEnd/MobX.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md"
+                "file": "Development/FrontEnd/MobX.md"
               }
             }
           },
@@ -189,6 +189,7 @@
   },
   "active": "50ef9e911dd56133",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/_png/Pasted image 20230515075851.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230515075454.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230515075252.png",
@@ -199,9 +200,7 @@
     "Design/DaVinci Resolve/_png/Pasted image 20230514192754.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230514192706.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230514192614.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230514192432.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Development/FrontEnd/Storybook.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Проверка типов с помощью PropTypes.md",
     "Development/FrontEnd/Vue.md",
