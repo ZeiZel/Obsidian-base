@@ -18,8 +18,57 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "916dec0738567e88",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6c47d45274e6f175",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9f8b14943e1c8e59",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2821c296668ca368",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -93,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md"
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md"
               }
             }
           },
@@ -187,8 +236,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "916dec0738567e88",
   "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/_png/Pasted image 20230515183414.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230515183125.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230515182259.png",
@@ -198,10 +252,8 @@
     "Design/DaVinci Resolve/_png/Pasted image 20230515171815.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230515171719.png",
     "Development/FrontEnd/MobX.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/_png/Pasted image 20230515075851.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230515075454.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230515075252.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "Development/FrontEnd/Storybook.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Проверка типов с помощью PropTypes.md",
@@ -210,8 +262,6 @@
     "Development/Без названия.md",
     "Development/FrontEnd/NextJS - основы.md",
     "Development/RxJS.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/15 Компонент продукта.md",
     "consistant-report.md",
     "Design/DaVinci Resolve/Modules/10 Вкладка Deliver. Экспорт материала.md",
@@ -225,7 +275,6 @@
     "Design/DaVinci Resolve/Modules/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Modules/1 Введение.md",
     "Design/DaVinci Resolve/_png",
-    "Design/DaVinci Resolve/Modules/Без названия.md",
     "Design/DaVinci Resolve/Modules",
     "Design/DaVinci Resolve",
     "Design",
