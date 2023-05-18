@@ -79,8 +79,7 @@
               }
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -154,7 +153,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+                "file": "Design/DaVinci Resolve/Davinci resolve.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +170,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
+                "file": "Design/DaVinci Resolve/Davinci resolve.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +193,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md"
+                "file": "Design/DaVinci Resolve/Davinci resolve.md"
               }
             }
           },
@@ -248,8 +247,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d2317fc73e725221",
+  "active": "50ef9e911dd56133",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/_png/Pasted image 20230518102649.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518102118.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518102035.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518101917.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518101800.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518101722.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518101630.png",
+    "Design/DaVinci Resolve/_png/Pasted image 20230518101608.png",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
@@ -259,13 +267,6 @@
     "Design/DaVinci Resolve/_png/Pasted image 20230517184023.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230517183910.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230517183117.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517181512.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517181417.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517175329.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517175155.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517175104.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517175026.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230517174818.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
@@ -284,8 +285,6 @@
     "Design/DaVinci Resolve/Modules/10 Вкладка Deliver. Экспорт материала.md",
     "Design/DaVinci Resolve/Modules/9 Вкладка Fairlight. Работа со звуком.md",
     "Design/DaVinci Resolve/Modules/8 Модуль 8. Вкладка Fusion.md",
-    "Design/DaVinci Resolve/Modules/7 Вкладка Color. Стилизация видео и локальные коррекции.md",
-    "Design/DaVinci Resolve/Modules/6 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров.md",
     "Design/DaVinci Resolve/_png",
     "Design/DaVinci Resolve/Modules",
     "Design/DaVinci Resolve",
