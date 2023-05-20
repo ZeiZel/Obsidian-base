@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
                 "mode": "source",
                 "source": false
               }
@@ -153,7 +153,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -170,7 +170,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -193,7 +193,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md"
+                "file": "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md"
               }
             }
           },
@@ -247,10 +247,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "50ef9e911dd56133",
   "lastOpenFiles": [
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230520182510.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230520182135.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230520182104.png",
+    "Design/DaVinci Resolve/Модули/_png",
     "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
     "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
@@ -268,8 +272,6 @@
     "Design/DaVinci Resolve/_png/Pasted image 20230520174703.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230520174617.png",
     "Design/DaVinci Resolve/_png/Pasted image 20230520174351.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230520173745.png",
-    "Design/DaVinci Resolve/_png/Pasted image 20230520173558.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
@@ -285,7 +287,6 @@
     "Development/FrontEnd/Storybook.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Проверка типов с помощью PropTypes.md",
     "Development/FrontEnd/Vue.md",
-    "Development/FrontEnd/Web Vitals.md",
     "Design/DaVinci Resolve/_png",
     "Design/DaVinci Resolve/Modules",
     "Design/DaVinci Resolve",
