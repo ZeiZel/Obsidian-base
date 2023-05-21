@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "mode": "preview",
                 "source": false
               }
@@ -165,7 +165,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -182,7 +182,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -205,7 +205,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md"
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
               }
             }
           },
@@ -262,11 +262,12 @@
   "active": "50ef9e911dd56133",
   "lastOpenFiles": [
     "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
+    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Модули/1 Введение.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
-    "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521090551.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521085838.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521085458.png",
@@ -277,7 +278,6 @@
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521084717.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521084121.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521084000.png",
-    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Модули/_png",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
