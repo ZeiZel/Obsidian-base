@@ -83,8 +83,12 @@
             "id": "81efa1ac84cdfaa6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
@@ -162,6 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -178,6 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -199,7 +205,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md"
+              }
             }
           },
           {
@@ -254,6 +262,8 @@
   },
   "active": "81efa1ac84cdfaa6",
   "lastOpenFiles": [
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Модули/1 Введение.md",
@@ -297,7 +307,6 @@
     "Design",
     "_lessons",
     "Programming Principes/_png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png",
-    "Books/_png"
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png"
   ]
 }
