@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Design/DaVinci Resolve/Davinci resolve.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -78,8 +78,17 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "81efa1ac84cdfaa6",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -153,7 +162,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -170,7 +178,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -192,9 +199,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md"
-              }
+              "state": {}
             }
           },
           {
@@ -247,8 +252,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "81efa1ac84cdfaa6",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+    "Design/DaVinci Resolve/Модули/1 Введение.md",
     "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521090551.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521085838.png",
@@ -262,13 +270,10 @@
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521084000.png",
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Модули/_png",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
-    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
-    "Design/DaVinci Resolve/Модули/1 Введение.md",
     "Design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
     "Design/DaVinci Resolve/Модули",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
