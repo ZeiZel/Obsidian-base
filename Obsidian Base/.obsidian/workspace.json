@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
                 "mode": "source",
                 "source": false
               }
@@ -161,8 +161,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 336.5,
-    "collapsed": true
+    "width": 336.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -178,7 +177,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -195,7 +194,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +217,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md"
+                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md"
               }
             }
           },
@@ -259,7 +258,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 291.5
+    "width": 291.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -274,19 +274,18 @@
   },
   "active": "50ef9e911dd56133",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523164057.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163948.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163748.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163747.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163045.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163043.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523075259.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523074905.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523074837.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523074404.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523073931.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523073408.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523073129.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523072602.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523072150.png",
     "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
-    "SelfDevelopment/Курс HR-аналитика/_png/Pasted image 20230522175406.png",
-    "SelfDevelopment/Курс HR-аналитика/_png/Pasted image 20230522175242.png",
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
