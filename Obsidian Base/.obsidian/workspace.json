@@ -98,13 +98,12 @@
               "type": "markdown",
               "state": {
                 "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 7
+        ]
       }
     ],
     "direction": "vertical"
@@ -179,7 +178,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -196,7 +195,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -219,7 +218,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md"
+                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md"
               }
             }
           },
@@ -273,10 +272,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8b03c0c35a974999",
+  "active": "50ef9e911dd56133",
   "lastOpenFiles": [
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523073931.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523073408.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523073129.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523072602.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523072150.png",
     "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "SelfDevelopment/Курс HR-аналитика/_png/Pasted image 20230522175406.png",
     "SelfDevelopment/Курс HR-аналитика/_png/Pasted image 20230522175242.png",
     "SelfDevelopment/Курс HR-аналитика/_png",
@@ -289,10 +293,6 @@
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521181627.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521181447.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521181302.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521181134.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521181050.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521180929.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230521180858.png",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
     "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
