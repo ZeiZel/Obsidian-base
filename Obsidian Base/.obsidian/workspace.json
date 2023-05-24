@@ -102,8 +102,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "355430d7fc968b81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Whats Learning/RoadMap/RoadMap.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -177,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
+                "file": "Whats Learning/RoadMap/RoadMap.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -194,7 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
+                "file": "Whats Learning/RoadMap/RoadMap.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -217,7 +230,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md"
+                "file": "Whats Learning/RoadMap/RoadMap.md"
               }
             }
           },
@@ -272,8 +285,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "355430d7fc968b81",
   "lastOpenFiles": [
+    "Whats Learning/О чём база~.md",
+    "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523164057.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163948.png",
@@ -304,7 +319,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Модули/_png",
-    "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
     "Design/DaVinci Resolve/Модули",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
