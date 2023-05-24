@@ -102,21 +102,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "355430d7fc968b81",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Whats Learning/RoadMap/RoadMap.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -190,7 +178,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Whats Learning/RoadMap/RoadMap.md",
+                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -207,7 +195,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Whats Learning/RoadMap/RoadMap.md",
+                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -230,7 +218,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Whats Learning/RoadMap/RoadMap.md"
+                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md"
               }
             }
           },
@@ -285,8 +273,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "355430d7fc968b81",
+  "active": "8b03c0c35a974999",
   "lastOpenFiles": [
+    "Whats Learning/RoadMap/RoadMap.md",
     "Whats Learning/О чём база~.md",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
@@ -327,7 +316,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Design/DaVinci Resolve/_png",
     "Design/DaVinci Resolve/Modules",
     "Design/DaVinci Resolve",
