@@ -49,9 +49,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
                 "mode": "source",
                 "source": false
+              }
+            }
+          },
+          {
+            "id": "df60f111e135da17",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.3.4"
               }
             }
           },
@@ -104,7 +114,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -178,7 +188,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -195,7 +205,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +228,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md"
               }
             }
           },
@@ -273,11 +283,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8b03c0c35a974999",
+  "active": "df60f111e135da17",
   "lastOpenFiles": [
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+    "Development/FrontEnd/React Foundamentals.md",
+    "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
+    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Whats Learning/RoadMap/RoadMap.md",
     "Whats Learning/О чём база~.md",
-    "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523164057.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163948.png",
@@ -289,17 +303,14 @@
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523074905.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523074837.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523074404.png",
-    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
     "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
-    "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
     "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
@@ -315,7 +326,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "Design/DaVinci Resolve/_png",
     "Design/DaVinci Resolve/Modules",
     "Design/DaVinci Resolve",
