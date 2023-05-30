@@ -844,7 +844,7 @@ export default App;
 
 ![](_png/4ed6c690864ec946d95c2abb7a273026.png)
 
-
+---
 ## Типизация Redux Toolkit / React-Redux
 
 Типизации в индексном файле почти нет
@@ -1126,7 +1126,7 @@ export default App;
 
 ![](_png/2da6f51c527248f829a21eaa7aeb6cfd.png)
 
-
+---
 ## Типизация асинхронного Redux Toolkit
 
 Стандартный Thunk в [проекте](https://github.com/michey85/redux-toolkit-todo/blob/asyncthunk/src/store/todoSlice.js) выглядел подобным образом:
