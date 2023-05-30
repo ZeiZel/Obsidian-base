@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
+                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
                 "mode": "source",
                 "source": false
               }
@@ -103,7 +103,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -177,7 +178,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
+                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -194,7 +195,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
+                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -217,7 +218,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md"
+                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md"
               }
             }
           },
@@ -272,8 +273,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "8b03c0c35a974999",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529155641.png",
+    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529155606.png",
+    "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529121258.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529120229.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529114911.png",
@@ -281,23 +288,16 @@
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529114429.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529114427.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529114217.png",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
-    "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529113819.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529113538.png",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/FrontEnd/React Foundamentals.md",
-    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Whats Learning/RoadMap/RoadMap.md",
     "Whats Learning/О чём база~.md",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523164057.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230523163948.png",
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
