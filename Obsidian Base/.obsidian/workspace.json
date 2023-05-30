@@ -102,9 +102,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "3f37a1d27df0f412",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Tips&Tricks/Visually Hidden.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -178,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+                "file": "Development/Tips&Tricks/Visually Hidden.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -195,7 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+                "file": "Development/Tips&Tricks/Visually Hidden.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +230,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md"
+                "file": "Development/Tips&Tricks/Visually Hidden.md"
               }
             }
           },
@@ -273,10 +285,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8b03c0c35a974999",
+  "active": "3f37a1d27df0f412",
   "lastOpenFiles": [
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+    "Development/Tips&Tricks/Visually Hidden.md",
+    "Development/Tips&Tricks",
     "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529155641.png",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230529155606.png",
     "Design/DaVinci Resolve/Davinci resolve.md",
@@ -318,7 +332,6 @@
     "Design/DaVinci Resolve/_png",
     "Design/DaVinci Resolve/Modules",
     "Design/DaVinci Resolve",
-    "Design",
-    "_lessons"
+    "Design"
   ]
 }
