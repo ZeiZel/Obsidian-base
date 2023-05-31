@@ -54,8 +54,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "d028c2e88aab8432",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Real-time клиент-серверное взаимодействие.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -129,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+                "file": "Development/Real-time клиент-серверное взаимодействие.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -146,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+                "file": "Development/Real-time клиент-серверное взаимодействие.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -169,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md"
+                "file": "Development/Real-time клиент-серверное взаимодействие.md"
               }
             }
           },
@@ -223,8 +236,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "d028c2e88aab8432",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230531124844.png",
+    "Development/_png/Pasted image 20230531124519.png",
+    "Development/_png/Pasted image 20230531124129.png",
+    "Development/Real-time клиент-серверное взаимодействие.md",
+    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
@@ -237,8 +255,6 @@
     "Development/_png/Pasted image 20230530140014.png",
     "Development/_png/Pasted image 20230530140004.png",
     "Development/_png/Pasted image 20230530135908.png",
-    "Development/_png/Pasted image 20230530135902.png",
-    "Development/_png/Pasted image 20230530135854.png",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
@@ -249,7 +265,6 @@
     "Development/Tips&Tricks/Visually Hidden.md",
     "Development/Tips&Tricks",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
-    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Whats Learning/RoadMap/RoadMap.md",
@@ -262,7 +277,6 @@
     "Design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
     "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
-    "Design/DaVinci Resolve/Модули/4 Вкладка Cut. Сбор чернового монтажа.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Модули/_png",
     "Design/DaVinci Resolve/Модули",
