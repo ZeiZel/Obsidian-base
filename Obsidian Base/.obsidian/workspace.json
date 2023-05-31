@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "mode": "source",
                 "source": false
               }
@@ -54,21 +54,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "800c452a38b804a1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Architecture.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -142,7 +129,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Architecture.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +146,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Architecture.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +169,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Architecture.md"
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md"
               }
             }
           },
@@ -236,8 +223,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "800c452a38b804a1",
+  "active": "50ef9e911dd56133",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
+    "Development/Architecture.md",
     "Development/_png/Pasted image 20230530142949.png",
     "Development/_png/Pasted image 20230530141052.png",
     "Development/_png/Pasted image 20230530141042.png",
@@ -248,22 +239,17 @@
     "Development/_png/Pasted image 20230530135908.png",
     "Development/_png/Pasted image 20230530135902.png",
     "Development/_png/Pasted image 20230530135854.png",
-    "Development/_png/Pasted image 20230530135843.png",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
     "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
-    "Development/Architecture.md",
     "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Development/Tips&Tricks/Visually Hidden.md",
     "Development/Tips&Tricks",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
-    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Whats Learning/RoadMap/RoadMap.md",
