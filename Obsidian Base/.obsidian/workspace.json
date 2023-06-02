@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
                 "mode": "source",
                 "source": false
               }
@@ -109,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "cn()",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -134,7 +134,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -154,7 +155,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +172,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +195,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md"
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md"
               }
             }
           },
@@ -248,10 +249,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "cf5b4e5970b2a467",
   "lastOpenFiles": [
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
     "Development/Real-time клиент-серверное взаимодействие.md",
     "Development/_png/Pasted image 20230531124844.png",
     "Development/_png/Pasted image 20230531124519.png",
@@ -279,7 +283,6 @@
     "Development/Tips&Tricks",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
     "Design/DaVinci Resolve/Модули/5 ПРАКТИКА. Монтаж разных жанров.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Whats Learning/RoadMap/RoadMap.md",
     "Whats Learning/О чём база~.md",
     "SelfDevelopment/Курс HR-аналитика/_png",
@@ -287,8 +290,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "Design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
-    "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Модули/_png",
     "Design/DaVinci Resolve/Модули",
