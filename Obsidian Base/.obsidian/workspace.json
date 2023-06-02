@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md"
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md"
               }
             }
           },
@@ -248,8 +248,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "cf5b4e5970b2a467",
+  "active": "aa4fe56689b0fc48",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
     "Development/Real-time клиент-серверное взаимодействие.md",
     "Development/_png/Pasted image 20230531124844.png",
@@ -288,7 +289,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
     "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Модули/_png",
     "Design/DaVinci Resolve/Модули",
