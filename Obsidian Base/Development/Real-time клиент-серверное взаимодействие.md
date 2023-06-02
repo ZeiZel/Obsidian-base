@@ -126,13 +126,105 @@ export default LongPulling;
 
 ![](_png/Pasted%20image%2020230531124519.png)
 
+На сервере мы создаём специальный заголовок, который определит, что наши запросы имеют постоянный характер и создаём многоповторный ивент, который будет записывать ответ специальным образом
 
+```JS
+const express = require('express');
+const cors = require('cors');
+const events = require('events');
+const PORT = 5000;
 
+const emitter = new events.EventEmitter();
 
+const app = express();
 
+app.use(cors());
+app.use(express.json());
 
+app.get('/connect', (req, res) => {
+	// тут мы задаём заголовок, что связь у нас будет постоянная
+	res.writeHead(200, {
+		Connection: 'keep-alive',
+		'Content-Type': 'text/event-stream',
+		'Cache-Control': 'no-cache',
+	});
 
+	// этот же ивент может срабатывать множество раз, поэтому меняем once на on
+	emitter.on('newMessage', (message) => {
+		// тут мы обязательно оборачиваем строку в такой шаблон, чтобы она принялась классом EventSource
+		res.write(`data: ${JSON.stringify(message)} \n\n`);
+	});
+});
 
+app.post('/new-messages', (req, res) => {
+	const message = req.body;
+	emitter.emit('newMessage', message);
+	res.status(200);
+});
+
+app.listen(PORT, () => console.log(`server started on PORT ${PORT}`));
+```
+
+На клиенте нужно поменять функцию `subscribe()`, которая будет работать с классом `EventSource`, который, в свою очередь, уже будет отслеживать получение сообщений 
+
+```JSX
+import React, { useEffect, useState } from 'react';
+import './styles.css';
+import axios from 'axios';
+
+const EventSourcing = () => {
+	const [messages, setMessages] = useState([]);
+	const [value, setValue] = useState('');
+
+	useEffect(() => {
+		subscribe();
+	}, []);
+
+	const subscribe = async () => {
+		// создаём ивентсурс с ссылкой на коннекшн-контроллер
+		const eventSource = new EventSource(`http://localhost:5000/connect`);
+
+		// тут мы каждый раз при получении сообщения выполняем действие
+		eventSource.onmessage = function (event) {
+			const message = JSON.parse(event.data);
+			setMessages((prev) => [message, ...prev]);
+		};
+	};
+
+	const sendMessage = async () => {
+		await axios.post('http://localhost:5000/new-messages', {
+			message: value,
+			id: Date.now(),
+		});
+	};
+
+	return (
+		<div>
+			<div>
+				<h2>EventSourcing</h2>
+
+				<div className='form'>
+					<input value={value} onChange={(e) => setValue(e.target.value)} type='text' />
+					<button onClick={sendMessage}>Отправить</button>
+				</div>
+				<div className='messages'>
+					{messages.map((mess) => (
+						<div className='message' key={mess.id}>
+							{mess.message}
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default EventSourcing;
+```
+
+И наш чат всё так же продолжает работать, но теперь посредством передачи сырых данных
+
+![](_png/Pasted%20image%2020230602180753.png)
 
 
 ## WebSockets
