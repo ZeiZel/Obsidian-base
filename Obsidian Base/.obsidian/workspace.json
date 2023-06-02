@@ -66,9 +66,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "cf5b4e5970b2a467",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -142,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md",
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md",
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md"
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md"
               }
             }
           },
@@ -236,12 +248,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d028c2e88aab8432",
+  "active": "cf5b4e5970b2a467",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
+    "Development/Real-time клиент-серверное взаимодействие.md",
     "Development/_png/Pasted image 20230531124844.png",
     "Development/_png/Pasted image 20230531124519.png",
     "Development/_png/Pasted image 20230531124129.png",
-    "Development/Real-time клиент-серверное взаимодействие.md",
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
@@ -254,7 +267,6 @@
     "Development/_png/Pasted image 20230530140024.png",
     "Development/_png/Pasted image 20230530140014.png",
     "Development/_png/Pasted image 20230530140004.png",
-    "Development/_png/Pasted image 20230530135908.png",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
