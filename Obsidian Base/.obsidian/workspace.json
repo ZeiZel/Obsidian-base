@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md",
+                "file": "Development/Структуры даных.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md",
+                "file": "Development/Структуры даных.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md",
+                "file": "Development/Структуры даных.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Real-time клиент-серверное взаимодействие.md"
+                "file": "Development/Структуры даных.md"
               }
             }
           },
@@ -238,6 +238,11 @@
   },
   "active": "d028c2e88aab8432",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230603092533.png",
+    "Development/_png/Pasted image 20230603092333.png",
+    "Development/Real-time клиент-серверное взаимодействие.md",
+    "Development/Структуры даных.md",
+    "Development/_png/Pasted image 20230603083147.png",
     "Development/_png/Pasted image 20230602180753.png",
     "Development/_png/Pasted image 20230602180736.png",
     "Development/_png/Pasted image 20230602163830.png",
@@ -246,7 +251,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
-    "Development/Real-time клиент-серверное взаимодействие.md",
     "Development/_png/Pasted image 20230531124844.png",
     "Development/_png/Pasted image 20230531124519.png",
     "Development/_png/Pasted image 20230531124129.png",
@@ -257,9 +261,6 @@
     "Development/Architecture.md",
     "Development/_png/Pasted image 20230530142949.png",
     "Development/_png/Pasted image 20230530141052.png",
-    "Development/_png/Pasted image 20230530141042.png",
-    "Development/_png/Pasted image 20230530140031.png",
-    "Development/_png/Pasted image 20230530140024.png",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
@@ -276,7 +277,6 @@
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "Design/DaVinci Resolve/Модули/_png",
     "Design/DaVinci Resolve/Модули",

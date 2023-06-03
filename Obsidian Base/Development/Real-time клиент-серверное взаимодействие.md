@@ -237,13 +237,162 @@ export default EventSourcing;
 
 ![](_png/Pasted%20image%2020230531124844.png)
 
-Изначально WebSocket создаётся для одного человека на одно подключение и сообщение по-умолчанию будет передаваться только самому пользователю. Чтобы оно отправлялось сразу обоим людям в чате, нужно создать широковещатель.
+Изначально нам нужно поднять отдельный сервер вебсокетов
 
+Далее мы описываем события, при которых будут срабатывать сокеты. 
 
+Изначально WebSocket создаётся для одного человека на одно подключение и сообщение по-умолчанию будет передаваться только самому пользователю. Чтобы оно отправлялось сразу обоим людям в чате, нужно создать широковещатель `broadcastMessage()`.
 
+```JS
+const ws = require('ws');
 
+// запускаем сервер вебсокетов
+const wss = new ws.Server(
+	{
+		port: 5000,
+	},
+	() => console.log(`Server started on 5000`)
+);
 
+// при подлючении сокета
+wss.on('connection', function connection(ws) {
+	// при отпрвке сообщения
+	ws.on('message', function (message) {
+		// мы получаем сообщение с клиента
+		message = JSON.parse(message);
+		
+		// и при разных событиях в сообщении (есть событие подключения и просто отправки сообщения), будем выполнять "разные" действия
+		switch (message.event) {
+			case 'message':
+				broadcastMessage(message);
+				break;
+			case 'connection':
+				broadcastMessage(message);
+				break;
+		}
+	});
+});
 
+// распространяем сообщение по пользователям
+function broadcastMessage(message, id) {
+	// перебираем всех клиентов
+	wss.clients.forEach((client) => {
+		// каждый клиент является вебсокетом и можно каждому отправить сообщение
+		client.send(JSON.stringify(message));
+	});
+}
+```
 
+На клиенте нужно уже будет описать подключение к сокетам и описать реакции сокета на его разные состояния (ошибка, подключение и так далее)
+
+```JSX
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+
+const WebSock = () => {
+	const [messages, setMessages] = useState([]);
+	const [value, setValue] = useState('');
+	const [connected, setConnected] = useState(false);
+	const [username, setUsername] = useState('');
+
+	// чтобы не потерять сокет при перерендере, присваиваем его в реф
+	const socket = useRef();
+
+	function connect() {
+		// присваиваем сюда сокет
+		socket.current = new WebSocket('ws://localhost:5000');
+
+		// при открытии сокета
+		socket.current.onopen = () => {
+			setConnected(true);
+
+			// сообщение о подключении пользователя к сокетам
+			const message = {
+				event: 'connection',
+				username,
+				id: Date.now(),
+			};
+
+			// отправит сообщение на сервер
+			socket.current.send(JSON.stringify(message));
+
+			console.log('Socket подключен');
+		};
+
+		// при получении сообщения от сокета
+		socket.current.onmessage = (event) => {
+			const message = JSON.parse(event.data);
+			setMessages((prev) => [message, ...prev]);
+		};
+
+		// при закрытии сокета
+		socket.current.onclose = () => {
+			console.log('Socket закрыт');
+		};
+
+		// при ошибке в сокете
+		socket.current.onerror = () => {
+			console.log('Socket произошла ошибка');
+		};
+	}
+
+	const sendMessage = async () => {
+		const message = {
+			username,
+			message: value,
+			id: Date.now(),
+			event: 'message',
+		};
+		socket.current.send(JSON.stringify(message));
+		setValue('');
+	};
+
+	if (!connected) {
+		return (
+			<div className='center'>
+				<div className='form'>
+					<input
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						type='text'
+						placeholder='Введите ваше имя'
+					/>
+					<button onClick={connect}>Войти</button>
+				</div>
+			</div>
+		);
+	}
+
+	return (
+		<div className='center'>
+			<div>
+				<div className='form'>
+					<input value={value} onChange={(e) => setValue(e.target.value)} type='text' />
+					<button onClick={sendMessage}>Отправить</button>
+				</div>
+				<div className='messages'>
+					{messages.map((mess) => (
+						<div key={mess.id}>
+							{mess.event === 'connection' ? (
+								<div className='connection_message'>
+									Пользователь {mess.username} подключился
+								</div>
+							) : (
+								<div className='message'>
+									{mess.username}. {mess.message}
+								</div>
+							)}
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default WebSock;
+```
+
+![](_png/Pasted%20image%2020230603083147.png)
 
 
