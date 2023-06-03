@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Структуры даных.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Структуры даных.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Структуры даных.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Структуры даных.md"
+                "file": "Development/Алгоритмы и Структуры даных.md"
               }
             }
           },
@@ -238,6 +238,8 @@
   },
   "active": "d028c2e88aab8432",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230603150726.png",
+    "Development/_png/Pasted image 20230603150649.png",
     "Development/_png/Pasted image 20230603135949.png",
     "Development/_png/Pasted image 20230603100622.png",
     "Development/_png/Pasted image 20230603094131.png",
@@ -247,10 +249,8 @@
     "Development/_png/Pasted image 20230603092533.png",
     "Development/_png/Pasted image 20230603092333.png",
     "Development/Real-time клиент-серверное взаимодействие.md",
-    "Development/Структуры даных.md",
+    "Development/Алгоритмы и Структуры даных.md",
     "Development/_png/Pasted image 20230603083147.png",
-    "Development/_png/Pasted image 20230602180753.png",
-    "Development/_png/Pasted image 20230602180736.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
