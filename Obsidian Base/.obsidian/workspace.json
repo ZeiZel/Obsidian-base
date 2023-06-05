@@ -13,20 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+                "file": "Design/DaVinci Resolve/Davinci resolve.md",
                 "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "916dec0738567e88",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/React Foundamentals.md",
-                "mode": "preview",
                 "source": false
               }
             }
@@ -56,31 +44,15 @@
             }
           },
           {
-            "id": "d028c2e88aab8432",
+            "id": "fbfc3677a82c34fc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Алгоритмы и Структуры даных.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "78a066d53e842809",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -154,7 +126,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Алгоритмы и Структуры даных.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +142,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Алгоритмы и Структуры даных.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -193,9 +163,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Development/Алгоритмы и Структуры даных.md"
-              }
+              "state": {}
             }
           },
           {
@@ -248,10 +216,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d028c2e88aab8432",
+  "active": "fbfc3677a82c34fc",
   "lastOpenFiles": [
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Development/Алгоритмы и Структуры даных.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
     "Development/_png/Pasted image 20230605160658.png",
     "Development/_png/Pasted image 20230605154645.png",
     "Development/_png/Pasted image 20230605154631.png",
@@ -268,18 +240,14 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
-    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Development/Architecture.md",
     "Development/FrontEnd/React Foundamentals.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
     "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
-    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Development/Tips&Tricks/Visually Hidden.md",
     "Development/Tips&Tricks",
     "Design/DaVinci Resolve/Модули/8 Вкладка Fusion.md",
