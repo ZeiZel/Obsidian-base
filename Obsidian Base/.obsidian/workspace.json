@@ -25,7 +25,31 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "73dfb459cb55f347",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "027375ccd9dffeba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,14 +73,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
-                "mode": "preview",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
+                "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -130,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md"
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md"
               }
             }
           },
@@ -211,7 +235,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 291.5
+    "width": 331.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -224,20 +248,35 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "81efa1ac84cdfaa6",
+  "active": "4a3af46d28562194",
   "lastOpenFiles": [
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/16 Редизайн проекта.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/15 Модели ветвления GIT.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/14 e2e cypress тесты.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/13 Арх-ые правила eslint.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/12 Popover.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/11 Генератор слоев.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/10 Виртуализация.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/9 Троттлинг.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/8 Профили.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/7 Статьи, комментарии.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/6 Модуль профиля.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/5 Асинк редюссеры.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/04 – Объекты.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/05 - Мутация объектов.md",
-    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
-    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
-    "Development/Алгоритмы и Структуры даных.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
     "Development/_png/Pasted image 20230605160658.png",
     "Development/_png/Pasted image 20230605154645.png",
     "Development/_png/Pasted image 20230605154631.png",
@@ -248,20 +287,6 @@
     "Development/_png/Pasted image 20230605115312.png",
     "Development/_png/Pasted image 20230604093607.png",
     "Development/_png/Pasted image 20230604092427.png",
-    "Development/Real-time клиент-серверное взаимодействие.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/06 Тесты.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/09 Авторизация.md",
-    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
-    "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
-    "Development/Architecture.md",
-    "Development/FrontEnd/React Foundamentals.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 2. Git и GitHub/Git и GitHub.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
-    "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/Tips&Tricks",
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
@@ -270,7 +295,6 @@
     "Design/DaVinci Resolve/Модули",
     "Design/DaVinci Resolve/_png",
     "Design/DaVinci Resolve/Modules",
-    "Design/DaVinci Resolve",
-    "Design"
+    "Design/DaVinci Resolve"
   ]
 }
