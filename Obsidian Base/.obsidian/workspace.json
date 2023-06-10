@@ -44,18 +44,6 @@
             }
           },
           {
-            "id": "027375ccd9dffeba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "8b03c0c35a974999",
             "type": "leaf",
             "state": {
@@ -86,6 +74,18 @@
               "type": "markdown",
               "state": {
                 "file": "Development/RxJS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e8b69cad5db6df18",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Vue.md",
                 "mode": "source",
                 "source": false
               }
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/RxJS.md",
+                "file": "Development/FrontEnd/Vue.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/RxJS.md",
+                "file": "Development/FrontEnd/Vue.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/RxJS.md"
+                "file": "Development/FrontEnd/Vue.md"
               }
             }
           },
@@ -260,8 +260,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "4ef1f0a9001737e8",
+  "active": "e8b69cad5db6df18",
   "lastOpenFiles": [
+    "Development/FrontEnd/_png/Pasted image 20230610103351.png",
+    "Development/FrontEnd/_png/Pasted image 20230610102928.png",
+    "Development/FrontEnd/_png/Pasted image 20230610102827.png",
+    "Development/FrontEnd/_png/Pasted image 20230610102649.png",
+    "Development/FrontEnd/_png/Pasted image 20230610101650.png",
+    "Development/RxJS.md",
     "Development/_png/Pasted image 20230609163629.png",
     "Development/_png/Pasted image 20230609163619.png",
     "Development/_png/Pasted image 20230609163607.png",
@@ -291,14 +297,8 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/_png/Pasted image 20230605160658.png",
     "Development/_png/Pasted image 20230605154645.png",
-    "Development/_png/Pasted image 20230605154631.png",
-    "Development/_png/Pasted image 20230605154137.png",
-    "Development/_png/Pasted image 20230605153428.png",
-    "Development/_png/Pasted image 20230605120642.png",
-    "Development/_png/Pasted image 20230605120613.png",
     "Development/Tips&Tricks",
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
