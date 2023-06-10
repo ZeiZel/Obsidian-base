@@ -34,12 +34,38 @@ Pipe получает операторы - чистые функции
 ## RxJs fromEvent search input. Оптимизируй запросы на сервер в несколько строк с RxJS
 
 
+`main.ts`
+```TS
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+
+import './rxjs.lesson';
+
+platformBrowserDynamic()
+	.bootstrapModule(AppModule)
+	.catch((err) => console.error(err));
+```
 
 
 
+`rxjs.lesson.ts`
+```JS
+import { Observable } from 'rxjs';
 
+// суффикс $ обозначает, что это Observable
+const search$ = new Observable((observer) => {
+	console.log('Start in observable');
 
+	observer.next(1);
+	observer.next(2);
+	observer.next(3);
 
+	console.log('End in observable');
+});
+
+console.log('Start subscribe');
+```
 
 
 
