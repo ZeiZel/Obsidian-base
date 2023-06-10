@@ -34,6 +34,7 @@ Pipe получает операторы - чистые функции
 ## RxJs fromEvent search input. Оптимизируй запросы на сервер в несколько строк с RxJS
 
 
+
 `main.ts`
 ```TS
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

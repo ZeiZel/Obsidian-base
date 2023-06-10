@@ -20,18 +20,6 @@
             }
           },
           {
-            "id": "81efa1ac84cdfaa6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "73dfb459cb55f347",
             "type": "leaf",
             "state": {
@@ -44,55 +32,19 @@
             }
           },
           {
-            "id": "8b03c0c35a974999",
+            "id": "81efa1ac84cdfaa6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4a3af46d28562194",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4ef1f0a9001737e8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/RxJS.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e8b69cad5db6df18",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Vue.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -166,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/RxJS.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/RxJS.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/RxJS.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md"
               }
             }
           },
@@ -260,9 +212,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "4ef1f0a9001737e8",
+  "active": "81efa1ac84cdfaa6",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+    "Development/RxJS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Development/FrontEnd/Vue.md",
+    "Development/WebSocket.md",
     "Development/FrontEnd/_png/Pasted image 20230610114759.png",
     "Development/FrontEnd/_png/Pasted image 20230610114705.png",
     "Development/FrontEnd/_png/Pasted image 20230610111842.png",
@@ -272,16 +230,10 @@
     "Development/FrontEnd/_png/Pasted image 20230610102827.png",
     "Development/FrontEnd/_png/Pasted image 20230610102649.png",
     "Development/FrontEnd/_png/Pasted image 20230610101650.png",
-    "Development/RxJS.md",
     "Development/_png/Pasted image 20230609163629.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/Без названия.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
-    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/16 Редизайн проекта.md",

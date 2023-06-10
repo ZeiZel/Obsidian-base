@@ -1,10 +1,3 @@
-## 1 Webpack. Введение в арх-ру. Code splitting. Css Modules
-
-
-
-
-
-
 
 ### 1 Начало разработки Основы Webpack. Добавляем TypeScript Метка
 
