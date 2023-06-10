@@ -20,36 +20,131 @@
 
 ## Начало разработки. Создание проекта
 
-
+Устанавливаем CLI от Vue и создаём с его помощью проект
 
 ```bash
 npm i -g @vue/cli
 vue create <project>
 ```
 
+И таким образом будет выглядеть стоковый проект
 
-
-
+![](_png/Pasted%20image%2020230610105902.png)
 
 ## Компонент App
 
+В основном файле JS мы подключаем корневой компонент, в который и будут складываться все компоненты
 
+`src > main.js`
+```JS
+import { createApp } from 'vue';
+import App from './components/App.vue';
 
+createApp(App).mount('#app');
+```
+
+И таким образом выглядит стоковый компонент vue:
+- `template` - шаблон компонента
+- `script` - скрипты компонента
+- `style` - стили компонента
+
+`src > components > App.vue`
+```vue
+// Single File Component
+
+<template>
+	<!-- HTML code -->
+</template>
+
+<script setup>
+	// JS code
+</script>
+
+<style scoped>
+	/* CSS code */
+</style>
+```
 
 ## Интерполяция
 
+Внутрь двойных скобок `{{ переменная }}` мы можем помещать переменные из `this` скоупа
 
+`src > components > App.vue`
+```vue
+<template>
+	<div>
+		<h2>Количество лайков {{ likes }}</h2>
+		<button>+</button>
+	</div>
+</template>
 
+<script>
+export default {
+	data() {
+		return {
+			likes: 0,
+		};
+	},
+};
+</script>
+
+<style>
+h1 {
+	font-family: Montserratm, sans-serif;
+}
+</style>
+```
+
+![](_png/Pasted%20image%2020230610111842.png)
 
 ## Methods. V-ON. Слушатели событий
 
+Из скрипта мы можем экспортировать методы, которые мы будем использовать внутри событий вёрстки. Чтобы подключить события вью, мы можем воспользоваться конструкцией `v-on:` или его аналогом `@`
 
+`src > components > App.vue`
+```vue
+<template>
+	<div>
+		<h2>Лайки {{ likes }}</h2>
+		<h2>Дизлайки {{ dislikes }}</h2>
+		<div>
+			<button v-on:click="addLike">+</button>
+			<button @click="addDislike">-</button>
+		</div>
+	</div>
+</template>
 
+<script>
+export default {
+	data() {
+		return {
+			likes: 0,
+			dislikes: 0,
+		};
+	},
+	methods: {
+		addLike() {
+			this.likes += 1;
+		},
+		addDislike() {
+			this.dislikes += 1;
+		},
+	},
+};
+</script>
+
+<style>
+h1 {
+	font-family: Montserratm, sans-serif;
+}
+</style>
+```
+
+![](_png/Pasted%20image%2020230610114705.png)
 
 ## Vue devtools. Инструменты разработчика
 
-
-
+![](_png/Pasted%20image%2020230610114759.png)
 
 ## Cтили
 
