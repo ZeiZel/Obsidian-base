@@ -261,38 +261,197 @@ export const CountryService = {
 
 ## События onSuccess, onError
 
+Так же события `onSuccess` и `onError` очень удобно использовать внутри query для реагирования на получение или на ошибку, так как эту логику взаимодействия мы описываем прямо внутри TanStack запросов
 
+```TSX
+const [arrayCountries, setArrayCountries] = useState<ICountry[]>([]);
 
-
-
+const { data } = useQuery(
+'countries',
+() => CountryService.getAll(), {
+	onSuccess: ({ data }) => {
+		setArrayCountries(data);
+	},
+	onError: (error) => alert(error?.message),
+});
+```
 
 ## Трансформация данных (select)
 
+`select` позволяет изменить уже существующие данные и обработать их нужным для нас образом
 
+```TSX
+const { isLoading, data: countries } = useQuery(
+	'country list',
+	() => CountryService.getAll(),
+	{
+		onError: (error: any) => {
+			alert(error.message)
+		},
+		select: ({ data }): ICountry[] =>
+			data.map(country => ({
+				...country,
+				title: country.title + ' !',
+			})),
+	}
+)
+```
 
-
-
+![](_png/Pasted%20image%2020230611132452.png)
 
 ## Кастомный хук
 
+Так же хорошей практикой является реализация хуков для получение определённых данных через `react-query`
 
+`app > hooks > useCountries.ts`
+```TSX
+import { useQuery } from 'react-query'
+import { CountryService, ICountry } from '../services/country.service'
 
+export const useCountries = () => {
+	const { isLoading, data: countries } = useQuery(
+		'country list',
+		() => CountryService.getAll(),
+		{
+			onError: (error: any) => {
+				alert(error.message)
+			},
+			select: ({ data }): ICountry[] =>
+				data.map(country => ({
+					...country,
+					title: country.title + ' !',
+				})),
+		}
+	)
 
+	return { isLoading, countries }
+}
+```
 
+Использование:
+
+`pages > index.tsx`
+```TSX
+const Home: NextPage = () => {
+	const { isLoading, countries } = useCountries();
+
+	return (
+		<div className={styles.container}>
+			<main className={styles.main}>
+				<h1 className={styles.title}>React Query</h1>
+
+				{isLoading ? (
+					<div>Loading...</div>
+				) : countries?.length ? (
+					<div className={styles.grid}>
+						{countries.map(country => (
+							<div className={styles.card} key={country.id}>
+								<Image
+									alt={country.title}
+									width={294}
+									height={208}
+									src={country.image}
+								/>
+								<h2>{country.title}</h2>
+								<p>
+									<b>Population:</b> {country.population}
+								</p>
+							</div>
+						))}
+					</div>
+				) : (
+					<div>Elements not found</div>
+				)}
+			</main>
+		</div>
+	);
+};
+```
+
+![](_png/Pasted%20image%2020230611135140.png)
 
 ## Передать аргумент в useQuery (подгрузка по ID)
 
+Уже таким образом будет выглядеть хук с передачей в него `id`
 
+`app > hooks > useCountry.ts`
+```TSX
+import { useQuery } from 'react-query'
+import { CountryService, ICountry } from '../services/country.service'
 
+// внутрь хука передаём id искомого элемента
+export const useCountry = (id?: string) => {
+	const { isLoading, data: country } = useQuery(
+		// сюда передаём id вторым аргументом
+		['country list', id],
+		() => CountryService.getById(id || ''),
+		{
+			onError: (error: any) => {
+				alert(error.message)
+			},
+			select: ({ data }): ICountry => data,
+			// будем совершать поиск элемента только если у него есть id
+			enabled: !!id,
+		}
+	)
 
+	return { isLoading, country }
+}
+```
 
+И так выглядит использование хука с передачей аргумента
+
+`pages > country > [id].tsx`
+```TSX
+import { NextPage } from 'next'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useCountry } from '../../app/hooks/useCountry'
+
+import styles from '../../styles/Home.module.css'
+
+const Country: NextPage = () => {
+	const { query } = useRouter()
+
+	const { country, isLoading } = useCountry(String(query?.id))
+
+	return (
+		<div className={styles.container}>
+			{isLoading ? (
+				<div>Loading...</div>
+			) : (
+				<main className={styles.main}>
+					<h1 className={styles.title}>{country?.title}</h1>
+					<div className={styles.grid}>
+						<div className={styles.card}>
+							<Image
+								alt={country?.title}
+								width={294}
+								height={208}
+								src={country?.image || ''}
+							/>
+							<h2>{country?.title}</h2>
+							<p>
+								<b>Population:</b> {country?.population}
+							</p>
+						</div>
+					</div>
+				</main>
+			)}
+		</div>
+	)
+}
+
+export default Country
+```
+
+![](_png/Pasted%20image%2020230611135118.png)
 
 ## GET запрос по кнопке "refetch"
 
+Если мы хотим реализовать переполучение данных, чтобы пользователь сам запрашивал их по своему усмотрению, то из query можно вытащить метод `refetch`, который можно передать в качестве onClick в кнопку 
 
-
-
-
+![](_png/Pasted%20image%2020230611135636.png)
 
 ## Devtools
 
