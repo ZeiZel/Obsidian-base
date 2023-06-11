@@ -118,6 +118,75 @@ export default App;
 
 ## useQuery Basics
 
+Первым делом стоит сказать, что функция запроса по умолчанию в себя принимает объект, который содержит некоторые метаданные и ключи, которые могут пригодиться в запросе  
+
+```TSX
+const postsQuery = useQuery({
+	queryKey: ['posts'],
+	queryFn: (obj) =>
+		wait(1000).then(() => {
+			console.log(obj);
+			return [...posts];
+		}),
+});
+```
+
+![](_png/Pasted%20image%2020230611090249.png)
+
+Мы можем проверить статус так же здесь
+
+![](_png/Pasted%20image%2020230611090651.png)
+
+Так же все запросы, на которые мы получили ответ, будут кешироваться в памяти и при перезагрузке страницы сначала отобразятся закешированные данные, а уже потом, в фоне, будут подгружаться новые данные, которые затем отобразятся 
+
+![](_png/Pasted%20image%2020230611091138.png)
+
+Чтобы данные оставались актуальными нужное нам количество времени (например, перезагружать список постов только раз в 5 минут, а не каждый раз при переходе на страницу), то можно указать, как для всего приложения время устаревания данных:
+
+`index.tsx`
+```TSX
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 1000 * 60 * 5,
+		},
+	},
+});
+```
+
+Так и указать время устаревания для отдельного хука запроса с помощью `staleTime`:
+
+`App.tsx`
+```TSX
+const postsQuery = useQuery({
+	queryKey: ['posts'],
+	queryFn: (obj) =>
+		wait(1000).then(() => {
+			console.log(obj);
+			return [...posts];
+		}),
+	staleTime: 1000
+});
+```
+
+Так же с помощью `refetchInterval` мы можем явно указать раз в какое время нужно заново загружать данные:
+
+`App.tsx`
+```TSX
+const postsQuery = useQuery({
+	queryKey: ['posts'],
+	queryFn: (obj) =>
+		wait(1000).then(() => {
+			console.log(obj);
+			return [...posts];
+		}),
+	staleTime: 1000,
+	refetchInterval: 5000,
+});
+```
+
+
+
 
 
 ## useMutation Basics
