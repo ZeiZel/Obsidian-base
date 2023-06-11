@@ -221,21 +221,93 @@ const postsQuery = useQuery({
 	const { data, isError, isLoading, isSuccess, isFetching, refetch, status} = useQuery();
 ```
 
-## Настройки проекта
+## Настройки проекта, типизация с Typescript
 
-Изначально стоит 
+Изначально стоит забиндить сервис, который будет работать с запросами в приложении
 
+`app > services > country.service.ts`
+```TS
+import axios from 'axios'
 
+// дефолтный url для запросов
+const API_URL = 'http://localhost:3004'
 
+// устанавливаем в аксиос базовый url для запросов
+axios.defaults.baseURL = API_URL
 
-## TypeScript
+// опишем интерфейс приходящих данных, который подхватится и TanStack Query
+export interface ICountry {
+	id: number
+	title: string
+	population: string
+	image: string
+}
+
+// методы запросов
+export const CountryService = {
+	async getAll() {
+		return axios.get<ICountry[]>('/countries')
+	},
+	async getById(id: string) {
+		return axios.get<ICountry>(`/countries/${id}`)
+	},
+	async create(data: ICountry) {
+		return axios.post('/countries', data, {
+			headers: { 'Content-Type': 'application/json' },
+		})
+	},
+}
+```
+
 ## События onSuccess, onError
+
+
+
+
+
+
 ## Трансформация данных (select)
+
+
+
+
+
+
 ## Кастомный хук
+
+
+
+
+
+
 ## Передать аргумент в useQuery (подгрузка по ID)
+
+
+
+
+
+
 ## GET запрос по кнопке "refetch"
+
+
+
+
+
+
 ## Devtools
+
+
+
+
+
+
 ## useMutation
+
+
+
+
+
+
 
 
 
