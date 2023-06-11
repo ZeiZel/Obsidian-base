@@ -461,15 +461,108 @@ export default Country
 
 ## useMutation
 
+Для совершения мутации используется хук `useMutation`, который отправляет запросы на изменение данных на сервере
 
+`pages > create-country.tsx`
+```TSX
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useMutation } from 'react-query'
 
+import styles from '../styles/Home.module.css'
+import { CountryService, ICountry } from '../app/services/country.service'
 
+const CreateCountry: NextPage = () => {
+	// начальные данные для формы
+	const [data, setData] = useState<ICountry>({
+		id: 5,
+		image: '/images/new-zeeland.jpeg',
+		population: '',
+		title: '',
+	} as ICountry);
 
+	// тут берём метод переадресации
+	const { push } = useRouter();
 
+	// тут мы пользуемся запросом на мутацию данных - добавление новой страны
+	const { isLoading, mutateAsync } = useMutation(
+		'create country',
+		// сюда мы можем спокойно передать нужные данные
+		(data: ICountry) => CountryService.create(data),
+		{
+			onSuccess: () => {
+				push('/'); // переадресация на главную
+			},
+			onError: (error: any) => {
+				alert(error.message);
+			},
+		}
+	);
 
+	// тут мы будем вызывать запрос на мутацию данных при отправке формы
+	const handleSubmit = async (e: any) => {
+		e.preventDefault()
+		await mutateAsync(data)
+	};
 
+	return (
+		<div className={styles.container}>
+			<main className={styles.main}>
+				<h1 className={styles.title}>Create country</h1>
+				<div className={styles.grid}>
+					<div className={styles.card}>
+						<form onSubmit={handleSubmit}>
+							<input
+								placeholder='Enter id'
+								value={data.id}
+								onChange={e =>
+									setData({
+										...data,
+										id: +e.target.value,
+									})
+								}
+							/>
+							<input
+								placeholder='Enter image'
+								value={data.image}
+								onChange={e =>
+									setData({
+										...data,
+										image: e.target.value,
+									})
+								}
+							/>
+							<input
+								placeholder='Enter title'
+								value={data.title}
+								onChange={e =>
+									setData({
+										...data,
+										title: e.target.value,
+									})
+								}
+							/>
+							<input
+								placeholder='Enter population'
+								value={data.population}
+								onChange={e =>
+									setData({
+										...data,
+										population: e.target.value,
+									})
+								}
+							/>
+							{/* блокируем кнопку, пока идёт загрузка */}
+							<button disabled={isLoading}>Create</button>
+						</form>
+					</div>
+				</div>
+			</main>
+		</div>
+	)
+}
 
-
-
-
+export default CreateCountry
+```
 
