@@ -116,7 +116,33 @@ export default App;
 
 ![](_png/Pasted%20image%2020230611083957.png)
 
-## useQuery Basics
+## Глобальные настройки
+
+Глобальные настройки задаются внутри `QueryClient`, который мы задаём в корневом компоненте. Мы можем задавать опции для `queries` и `mutations`.
+
+`_app.tsx`
+```TSX
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+		},
+	},
+})
+
+function MyApp({ Component, pageProps }: AppProps) {
+	return (
+		<QueryClientProvider client={queryClient}>
+			<Component {...pageProps} />
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
+	)
+}
+```
+
+## useQuery 
 
 Первым делом стоит сказать, что функция запроса по умолчанию в себя принимает объект, который содержит некоторые метаданные и ключи, которые могут пригодиться в запросе  
 
@@ -189,38 +215,27 @@ const postsQuery = useQuery({
 
 ![](_png/Pasted%20image%2020230611100403.png)
 
-## useMutation Basics
+Тут показаны самые частые данные, которые берутся из запроса
 
+```TSX
+	const { data, isError, isLoading, isSuccess, isFetching, refetch, status} = useQuery();
+```
 
+## Настройки проекта
 
-![](_png/Pasted%20image%2020230611104215.png)
-
-## Пагинация
-
-
-
-
-## Бесконечный скролл
-
-
-
-## useQueries Hook
-
-
-
-## Prefetching
+Изначально стоит 
 
 
 
 
-## Initial/Placeholder Data
-
-
-
-
-
-
-
+## TypeScript
+## События onSuccess, onError
+## Трансформация данных (select)
+## Кастомный хук
+## Передать аргумент в useQuery (подгрузка по ID)
+## GET запрос по кнопке "refetch"
+## Devtools
+## useMutation
 
 
 
