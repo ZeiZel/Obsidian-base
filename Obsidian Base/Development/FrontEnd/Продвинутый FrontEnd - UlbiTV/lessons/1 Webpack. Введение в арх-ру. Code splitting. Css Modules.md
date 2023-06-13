@@ -454,6 +454,11 @@ export default (env: BuildEnv) => {
 
 
 
+```bash
+npm i react react-dom
+npm i -D @types/react @types/react-dom
+```
+
 
 
 
