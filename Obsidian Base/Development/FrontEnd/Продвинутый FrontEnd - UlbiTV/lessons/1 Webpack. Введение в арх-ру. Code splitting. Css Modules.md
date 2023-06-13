@@ -551,14 +551,6 @@ h1 {
 npm install --save-dev mini-css-extract-plugin
 ```
 
-Так же вместо `style-loader` вставляем лоадер экстрактора
-
-![](_png/Pasted%20image%2020230613165403.png)
-
-И теперь чанки с css-файлами будут отделяться от JS
-
-![](_png/Pasted%20image%2020230613165727.png)
-
 
 
 
