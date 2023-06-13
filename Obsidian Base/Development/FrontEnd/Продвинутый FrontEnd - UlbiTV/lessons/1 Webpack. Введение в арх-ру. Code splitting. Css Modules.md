@@ -545,14 +545,116 @@ h1 {
 
 ### 5 Настраиваем css modules
 
+Цель: реализовать подключение модульных и глобальных стилей
 
+```TSX
+import React from 'react';
+import styles from './App.module.scss';
+
+export const App = () => {
+	return (
+		<div className='app'>
+			<h1 className={styles.title}>Hello, world!~~~~~</h1>
+		</div>
+	);
+};
+```
+
+![](_png/Pasted%20image%2020230613181223.png)
+
+Первым делом нужно установить экстрактор, который будет отделять чанки 
 
 ```bash
 npm install --save-dev mini-css-extract-plugin
 ```
 
+Далее в конфигурацию плагинов нужно добавить `MiniCssExtractPlugin`, внутри которого нужно будет определить наименования собранных css-файлов
 
+`config > build > buildPlugins.ts`
+```TS
+import { WebpackPluginInstance, ProgressPlugin } from 'webpack';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import { BuildOptions } from './types/config';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+export function buildPlugins({ paths }: BuildOptions): WebpackPluginInstance[] {
+	return [
+		// то плагин, который будет показывать прогресс сборки
+		new ProgressPlugin(),
+		// это плагин, который будет добавлять самостоятельно скрипт в наш index.html
+		new HTMLWebpackPlugin({
+			// указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте
+			template: paths.html,
+		}),
+		// этот плагин будет отвечать за отделение чанков с css от файлов JS
+		new MiniCssExtractPlugin({
+			filename: 'css/[name].[contenthash:8].css',
+			chunkFilename: 'css/[name].[contenthash:8].css',
+		}),
+	];
+}
+```
+
+В лоадерах нужно настроить `style-loader` и экстрактор, чтобы они работали в разно время (прод/дев) и нужно настроить `css-loader`, чтобы он поддерживал модули в названиях файлов и транспилировал их в объекты, которые поддерживаются JS
+
+`config > build > buildLoaders.ts`
+```TS
+import { RuleSetRule } from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BuildOptions } from './types/config';
+
+export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
+	// так как порядок некоторых лоадеров важен, то важные лоадеры можно выносить в отдельные переменные
+	const typescriptLoader = {
+		test: /\.tsx?$/,
+		use: 'ts-loader',
+		exclude: /node_modules/,
+	};
+
+	const stylesLoader = {
+		test: /\.s[ac]ss$/i,
+		use: [
+			// в зависимости от режима разработки будет применяться разный лоадер
+			isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+			// так же лоадеры можно передавать в виде объектов, если нужно к ним добавить опции
+			{
+				loader: 'css-loader',
+				options: {
+					// включаем поддержку модулей у лоадера
+					modules: {
+						// включаем модульные стили (классы с именами asdWQSsaQ) только если они содержат в названии module
+						auto: (resPath: string) => !!resPath.includes('.module.'),
+						localIdentName: isDev
+							? '[path][name]__[local]--[hash:base64:8]'
+							: '[hash:base64:8]',
+					},
+				},
+			},
+			'sass-loader',
+		],
+	};
+
+	return [typescriptLoader, stylesLoader];
+}
+```
+
+Так же нужно добавить глобальные типы, которые определят то, что находится внутри импортируемых модулей стилей - без этого TS не поймёт, что импортируется из модульных стилей
+
+`src > global.d.ts`
+```TS
+declare module '*.scss' {
+	interface IClassNames {
+		[className: string]: string;
+	}
+	const classNames: IClassNames;
+	export = classNames;
+}
+```
+
+И теперь работают все стили приложения
+
+![](_png/Pasted%20image%2020230613181243.png)
 
 ### 6 Роутинг Code splitting Lazy Suspence метка
 
