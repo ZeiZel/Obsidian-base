@@ -10,11 +10,16 @@
 
 ```bash
 npm install webpack webpack-cli --save-dev
+npm i -D html-webpack-plugin
 ```
 
 
+```bash
+npm install --save-dev typescript ts-loader
+```
 
 
+![](_png/Pasted%20image%2020230613112643.png)
 
 
 
