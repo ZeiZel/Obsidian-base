@@ -323,6 +323,9 @@ export default webpackConfig;
 
 
 
+```bash
+npm i -D webpack-dev-server @types/webpack-dev-server
+```
 
 
 
