@@ -140,7 +140,8 @@ export default webpackConfig;
     // современные модули
     "module": "ESNext",
     "target": "es5",
-    "jsx": "react",
+    // устанавливаем данное значение, чтобы не было необходимости импортировать React
+    "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
     // позволяет использовать обычные импорты вместо CommonJS
@@ -452,20 +453,111 @@ export default (env: BuildEnv) => {
 
 ### 4 Подключаем React и настраиваем css в webpack метка
 
-
+Устанавливаем зависимости реакта
 
 ```bash
 npm i react react-dom
 npm i -D @types/react @types/react-dom
 ```
 
+Устанавливаем зависимости лоадеров
 
+```bash
+npm install sass-loader sass webpack style-loader css-loader --save-dev
+```
 
+Далее нужно добавить правила для лоадеров в конфиг `buildLoaders()`
 
+`config > build > buildLoaders.ts`
+```TS
+import { RuleSetRule } from 'webpack';
+
+export function buildLoaders(): RuleSetRule[] {
+	// так как порядок некоторых лоадеров важен, то важные лоадеры можно выносить в отдельные переменные
+	const typescriptLoader = {
+		test: /\.tsx?$/,
+		use: 'ts-loader',
+		exclude: /node_modules/,
+	};
+
+	const stylesLoader = {
+		test: /\.s[ac]ss$/i,
+		use: [
+			// Creates `style` nodes from JS strings
+			'style-loader',
+			// Translates CSS into CommonJS
+			'css-loader',
+			// Compiles Sass to CSS
+			'sass-loader',
+		],
+	};
+
+	return [typescriptLoader, stylesLoader];
+}
+```
+
+Корневой компонент, которому мы поменяли расширение на TSX
+
+`src > index.tsx`
+```TSX
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { App } from './components/app/App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+	<StrictMode>
+		<App />
+	</StrictMode>,
+);
+```
+
+Так же нужно не забывать менять путь к entry-файлу в приложении
+
+![](_png/Pasted%20image%2020230613163119.png)
+
+Сам компонент с подключенными стилями
+
+`src > components > app > App.tsx`
+```TSX
+import React from 'react';
+import './App.scss';
+
+export const App = () => {
+	return (
+		<div>
+			<h1>Hello, world!</h1>
+		</div>
+	);
+};
+```
+
+Стили
+
+`src > components > app > App.scss
+```SCSS
+h1 {
+	font-size: 74px;
+}
+```
+
+![](_png/Pasted%20image%2020230613162855.png)
 
 ### 5 Настраиваем css modules
 
 
+
+```bash
+npm install --save-dev mini-css-extract-plugin
+```
+
+Так же вместо `style-loader` вставляем лоадер экстрактора
+
+![](_png/Pasted%20image%2020230613165403.png)
+
+И теперь чанки с css-файлами будут отделяться от JS
+
+![](_png/Pasted%20image%2020230613165727.png)
 
 
 
