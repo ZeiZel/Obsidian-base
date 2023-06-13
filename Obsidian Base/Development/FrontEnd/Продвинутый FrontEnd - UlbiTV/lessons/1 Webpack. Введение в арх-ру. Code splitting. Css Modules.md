@@ -321,14 +321,134 @@ export default webpackConfig;
 
 ### 3 Webpack-dev-server. Переменные окружения (env)
 
-
+Установим модуль девсервера для вебпака
 
 ```bash
 npm i -D webpack-dev-server @types/webpack-dev-server
 ```
 
+Далее нужно будет создать отдельную функцию конфига под сервер
 
+`config > build > buildDevServer.ts`
+```TS
+import { BuildOptions } from './types/config';
+import { Configuration } from 'webpack-dev-server';
 
+export function buildDevServer(options: BuildOptions): Configuration {
+	return {
+		port: options.port, // порт
+		// open: true // автоматически будет открывать страницу в браузере
+	};
+}
+```
+
+Добавляем в основной конфиг два свойства:
+- devtool - будет формировать мэпы внутри файлов 
+- devServer - хранит конфиг для девсервера. Если мы находимся в продакшене, то нам не нужен конфиг
+
+`config > build > buildWebpackConfig.ts`
+```TS
+import { Configuration } from 'webpack';
+import { BuildOptions } from './types/config';
+import { buildLoaders } from './buildLoaders';
+import { buildResolvers } from './buildResolvers';
+import { buildPlugins } from './buildPlugins';
+import { buildDevServer } from './buildDevServer';
+
+export function buildWebpackConfig(options: BuildOptions): Configuration {
+	const { mode, paths, isDev } = options;
+
+	return {
+		mode: mode,
+		entry: paths.entry,
+		output: {
+			filename: '[name].[contenthash].js',
+			path: paths.build,
+			clean: true,
+		},
+		module: {
+			rules: buildLoaders(),
+		},
+		resolve: buildResolvers(),
+		plugins: buildPlugins(options),
+		// позволяет показать, где в коде произошла ошибка
+		devtool: isDev ? 'inline-source-map' : undefined,
+		// будет запускать девсервер, который будет рефрешить страницу
+		devServer: isDev ? buildDevServer(options) : undefined,
+	};
+}
+```
+
+Добавим в конфиг `BuildEnv`, который будет отвечать за попадаемые переменные окружения и добавим порт в `BuildOptions`, на котором будет запускаться приложение
+
+`config > build > types > config.ts`
+```TS
+// режим, в котором мы находимся
+export type BuildMode = 'production' | 'development';
+
+// это будет объект со строками путей
+export interface BuildPaths {
+	entry: string;
+	build: string;
+	html: string;
+}
+
+// интерфейс переменных окружения, которые будут попадать в конфиг
+export interface BuildEnv {
+	mode: BuildMode;
+	port: number;
+}
+
+// опции, которые будет принимать вебпак
+export interface BuildOptions {
+	mode: BuildMode;
+	paths: BuildPaths;
+	isDev: boolean;
+	port: number;
+}
+```
+
+Чтобы переменные окружения попадали в конфиг, его нужно обернуть в функцию, которая будет принимать в себя `env`. После уже можно будет воспользоваться данными переменными и задать порт для приложения
+
+`webpack.config.ts`
+```TS
+import path from 'path';
+import { Configuration } from 'webpack';
+import { buildWebpackConfig } from './config/build/buildWebpackConfig';
+import { BuildEnv, BuildPaths } from './config/build/types/config';
+
+export default (env: BuildEnv) => {
+	const paths: BuildPaths = {
+		build: path.resolve(__dirname, 'build'),
+		entry: path.resolve(__dirname, 'src', 'index.ts'),
+		html: path.resolve(__dirname, 'public', 'index.html'),
+	};
+
+	const mode = env.mode || 'development';
+	const isDev = mode === 'development';
+	const PORT = env.port || 3000;
+
+	const webpackConfig: Configuration = buildWebpackConfig({
+		mode,
+		paths,
+		isDev,
+		port: PORT,
+	});
+
+	return webpackConfig;
+};
+```
+
+Теперь можно добавить три команды, которые будут выполнять разную сборку проекта
+
+`package.json`
+```JSON
+"scripts": {
+	"start": "webpack serve --env port=3000",
+	"build:prod": "webpack --env mode=production",
+	"build:dev": "webpack --env mode=development"
+},
+```
 
 ### 4 Подключаем React и настраиваем css в webpack метка
 
