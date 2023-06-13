@@ -3,6 +3,19 @@
 
 
 
+```bash
+ npm init -y
+```
+
+
+```bash
+npm install webpack webpack-cli --save-dev
+```
+
+
+
+
+
 
 
 
