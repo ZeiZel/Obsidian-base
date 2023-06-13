@@ -163,7 +163,11 @@ export default webpackConfig;
 
 ### 2 Декомпозиция конфига. Опции конфигурации
 
+Далее перед нами встанет задача разбить конфигурацию вебпака на несколько разных файлов, чтобы было проще поддерживать разрастающийся конфиг
 
+Первым делом нужно будет описать типы тех данных, что будет принимать в себя конфиг:
+- типы режима (разработка | продакшн)
+- пути
 
 `config > build > types > config.ts`
 ```TS
@@ -185,11 +189,108 @@ export interface BuildOptions {
 }
 ```
 
+Далее нам нужно будет вынести плагины в отдельную функцию, которая будет принимать в себя объект конфига и брать из него пути, чтобы сослаться на html
 
+`config > build > buildPlugins.ts`
+```TS
+import { WebpackPluginInstance, ProgressPlugin } from 'webpack';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import { BuildOptions } from './types/config';
 
+export function buildPlugins({ paths }: BuildOptions): WebpackPluginInstance[] {
+	return [
+		// то плагин, который будет показывать прогресс сборки
+		new ProgressPlugin(),
+		// это плагин, который будет добавлять самостоятельно скрипт в наш index.html
+		new HTMLWebpackPlugin({
+			// указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте
+			template: paths.html,
+		}),
+	];
+}
+```
 
+Далее нужно будет вынести лоадеры в отдельный файл, так как их будет много. 
 
+Некоторые лоадеры нужно будет вынести в константы, чтобы было проще отслеживать последовательность их выполнения (потому что это может играть роль в работе приложения)
 
+`config > build > buildLoaders.ts`
+```TS
+import { RuleSetRule } from 'webpack';
+
+export function buildLoaders(): RuleSetRule[] {
+	
+	const typescriptLoader = {
+		test: /\.tsx?$/,
+		use: 'ts-loader',
+		exclude: /node_modules/,
+	};
+
+	return [typescriptLoader];
+}
+```
+
+Далее выносим резолверы в отдельную функцию
+
+`config > build > buildResolvers.ts`
+```TS
+import { ResolveOptions } from 'webpack';
+
+export function buildResolvers(): ResolveOptions {
+	return {
+		// указываем расширения
+		extensions: ['.tsx', '.ts', '.js'],
+	};
+}
+```
+
+Выносим остальную часть конфига в отдельную функцию, которая будет принимать в себя опции конфига. Тут же и вызываем все функции для сборки остальных частей конфига вебпака
+
+`config > build > buildWebpackConfig.ts`
+```TS
+import { Configuration } from 'webpack';
+import { BuildOptions } from './types/config';
+import { buildLoaders } from './buildLoaders';
+import { buildResolvers } from './buildResolvers';
+import { buildPlugins } from './buildPlugins';
+
+export function buildWebpackConfig(options: BuildOptions): Configuration {
+	const { mode, paths } = options;
+
+	return {
+		// режим сборки проекта - для разработки
+		mode: mode,
+		// входная точка в приложение
+		entry: paths.entry,
+		// настройки того куда и как будет производиться сборка приложения
+		output: {
+			// имя файла для запуска собранного приложения
+			// [name] - выберет дефолтное имя по пути
+			// [contenthash] - будет добавлять хеш в название, чтобы браузер не сохранял закешированный файл
+			filename: '[name].[contenthash].js',
+			// тут будет находиться скомпилированный файл
+			path: paths.build,
+			// очищает неиспользуемые файлы
+			clean: true,
+		},
+		// тут находятся подключения дополнительных модулей
+		module: {
+			// тут будут добавляться лоадеры, которые обрабатывают файлы вне js (ts, png, jpeg, svg...)
+			rules: buildLoaders(),
+		},
+		// тут мы указываем те файлы, при импорте которых мы не будем указывать расширения
+		// import Component from './component'
+		resolve: buildResolvers(),
+		// плагины для сборки вебпака
+		plugins: buildPlugins(options),
+	};
+}
+```
+
+В основном файле конфига добавляем переменные путей и разработки, чтобы можно было их контролировать из одного места и вызываем `buildWebpackConfig()`, чтобы собрать вебпак конфиг
+
+`webpack.config.ts`
 ```TS
 import path from 'path';
 import { Configuration } from 'webpack';
