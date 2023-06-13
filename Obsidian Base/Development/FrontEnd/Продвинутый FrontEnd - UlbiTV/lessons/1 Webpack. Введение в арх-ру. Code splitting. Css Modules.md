@@ -16,6 +16,10 @@ npm i -D html-webpack-plugin
 
 Далее идёт настройка конфига вебпака
 
+В `output` свойство `filename` отвечает за название того файла, который будет генерироваться. Конкретно тут используются шаблоны, конфигурирующие стандартное имя для файла и хеш: 
+- `[name]` - выберет дефолтное имя по пути
+- `[contenthash]` - будет добавлять хеш в название, чтобы браузер не сохранял закешированный файл
+
 `webpack.config.js`
 ```JS
 const path = require('path');
@@ -129,6 +133,8 @@ export default webpackConfig;
 ```JSON
 {
   "compilerOptions": {
+	// постановка всех путей от начала папки проекта
+	"baseUrl": ".",
     "outDir": "./dist/",
     "noImplicitAny": true,
     // современные модули
@@ -159,9 +165,58 @@ export default webpackConfig;
 
 
 
+`config > build > types > config.ts`
+```TS
+// режим, в котором мы находимся
+export type BuildMode = 'production' | 'development';
+
+// это будет объект со строками путей
+export interface BuildPaths {
+	entry: string;
+	build: string;
+	html: string;
+}
+
+// опции, которые будет принимать вебпак
+export interface BuildOptions {
+	mode: BuildMode;
+	paths: BuildPaths;
+	isDev: boolean;
+}
+```
 
 
 
+
+
+
+```TS
+import path from 'path';
+import { Configuration } from 'webpack';
+import { buildWebpackConfig } from './config/build/buildWebpackConfig';
+import { BuildPaths } from './config/build/types/config';
+
+const paths: BuildPaths = {
+	build: path.resolve(__dirname, 'build'),
+	entry: path.resolve(__dirname, 'src', 'index.ts'),
+	html: path.resolve(__dirname, 'public', 'index.html'),
+};
+
+const mode = 'development';
+const isDev = mode === 'development';
+
+const webpackConfig: Configuration = buildWebpackConfig({
+	mode,
+	paths,
+	isDev,
+});
+
+export default webpackConfig;
+```
+
+И примерно так выглядит проект в конце:
+
+![](_png/Pasted%20image%2020230613134205.png)
 
 ### 3 Webpack-dev-server. Переменные окружения (env)
 
