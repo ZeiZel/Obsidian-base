@@ -784,10 +784,219 @@ export const App = () => {
 
 ### 7 Организация стилей. Добавляем темы
 
+Цель: нам нужно организовать стили между разными файлами, организовать быструю смену тем
 
+В приложении будут использоватся css-переменные вместо переменных SASS.
 
+Стили будут распределены подобным образом (reset.scss находится [тут](../../../Tips&Tricks/Reset&Reboot.md)):
 
+`src > styles > index.scss`
+```SCSS
+@import "./variables/global";
 
+@import "./default/base";
+@import "./default/reset";
+
+@import "./themes/dark";
+@import "./themes/light";
+
+.app {
+	font: var(--font-m);
+
+	background: var(--bg-color);
+	color: var(--primary-color);
+
+	min-height: 100vh;
+}
+
+.button {
+	padding: 10px;
+
+	border: 1px solid black;
+}
+```
+
+`src > styles > variables > global.scss`
+```SCSS
+:root {
+	--font-family-main: Montserrat, Roboto, sans-serif;
+
+	--font-size-m: 16px;
+	--font-line-m: 24px;
+	--font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+
+	--font-size-l: 24px;
+	--font-line-l: 32px;
+	--font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+}
+```
+
+`src > styles > themes > light.scss`
+```SCSS
+.app.light {
+	--bg-color: #fff;
+
+	--accent-color: #d4c17f;
+	--primary-color: #242b33;
+	--secondary-color: #e7e7e7;
+}
+```
+
+`src > styles > themes > dark.scss`
+```SCSS
+.app.dark {
+	--bg-color: #242b33;
+
+	--accent-color: #d4c17f;
+	--primary-color: #fff;
+	--secondary-color: #e7e7e7;
+}
+```
+
+И первым делом, что нужно сделать для глобального сохранения состояния темы - это создать контекст, который будет в себе хранить функцию смены темы и само значение темы 
+
+`src > theme > ThemeContext.ts`
+```TS
+import { createContext } from 'react';
+
+// перечисление возможных вариантов темы
+export enum Theme {
+	LIGHT = 'light',
+	DARK = 'dark',
+}
+
+export interface IThemeContextProps {
+	theme?: Theme;
+	setTheme?: (theme: Theme) => void;
+}
+
+// глобальный контекст
+export const ThemeContext = createContext<IThemeContextProps>({});
+
+// ключ, по которому будем доставать тему из локального хранилища
+export const LOCAL_STORAGE_THEME_KEY = 'theme';
+```
+
+Далее нужно будет реализовать провайдер контекста, в который мы обернём всё приложение
+
+`src > theme > ThemeProvider.ts`
+```TSX
+import React, { DetailedHTMLProps, FC, HTMLAttributes, ReactNode, useMemo, useState } from 'react';
+import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from './ThemeContext';
+
+// тут мы получаем саму тему из локального хранилища, и если её нет, то устанавливается светлая по умолчанию
+const defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
+
+export interface ThemeProviderProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+	children: ReactNode;
+}
+
+const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+	const [theme, setTheme] = useState<Theme>(defaultTheme);
+
+	// мемоизируем объект, чтобы каждый раз при перерендере он не соаздавался заново
+	const defaultProps = useMemo(() => ({
+			theme,
+			setTheme: setTheme,
+		}),
+		[theme],
+	);
+
+	return (
+		<ThemeContext.Provider value={defaultProps}>
+			{children}
+		</ThemeContext.Provider>
+	);
+};
+
+export default ThemeProvider;
+```
+
+И уже потом оборачиваем всё приложение в провайдер
+
+`src > index.tsx`
+```TSX
+const root = createRoot(document.getElementById('root'));
+root.render(
+	<StrictMode>
+		<BrowserRouter>
+			<ThemeProvider>
+				<App />
+			</ThemeProvider>
+		</BrowserRouter>
+	</StrictMode>,
+);
+```
+
+Тут реализован хук получения функции изменения темы и самой темы
+
+`src > theme > useTheme.tsx
+```TSX
+import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from './ThemeContext';
+import { useContext } from 'react';
+
+export interface IUseTheme {
+	toggleTheme: () => void;
+	theme: Theme;
+}
+
+export function useTheme(): IUseTheme {
+	const { theme, setTheme } = useContext(ThemeContext);
+
+	const toggleTheme = () => {
+		const newTheme = theme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
+		setTheme(newTheme);
+		localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
+	};
+
+	return { toggleTheme, theme };
+}
+```
+
+И далее просто получаем функцию смены темы и саму тему в корневом компоненте приложения 
+
+`src > components > app > App.tsx`
+```TSX
+import React, { Suspense } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import cn from 'classnames';
+import styles from './App.module.scss';
+import '../../styles/index.scss';
+import { MainPageAsync } from '../../pages/MainPage/MainPage.async';
+import { AboutPageAsync } from '../../pages/AboutPage/AboutPage.async';
+import { Theme } from '../../theme/ThemeContext';
+import { useTheme } from '../../theme/useTheme';
+
+export const App = () => {
+	const { toggleTheme, theme } = useTheme();
+
+	return (
+		<div
+			className={cn('app', {
+				['light']: theme === Theme.LIGHT,
+				['dark']: theme === Theme.DARK,
+			})}
+		>
+			<button className={'button'} onClick={toggleTheme}>
+				toggle
+			</button>
+			<Link to={'/'}>Главная</Link>
+			<Link to={'/about'}>О нас</Link>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Routes>
+					<Route path={'/'} element={<MainPageAsync />} />
+					<Route path={'/about'} element={<AboutPageAsync />} />
+				</Routes>
+			</Suspense>
+		</div>
+	);
+};
+```
+
+В итоге мы имеем смену темы по кнопке и сохранение её в локальном хранилище
+
+![](_png/Pasted%20image%2020230614110952.png)
 
 ### 8 classNames создаем git репозиторий
 
