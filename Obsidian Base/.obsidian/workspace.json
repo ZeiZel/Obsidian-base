@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
                 "mode": "source",
                 "source": false
               }
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md"
               }
             }
           },
@@ -189,21 +189,13 @@
               "type": "git-view",
               "state": {}
             }
-          },
-          {
-            "id": "b3a4be60c448e795",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {}
-            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 283.5
+    "width": 430.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -216,12 +208,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "47c9fc7a70a387f5",
+  "active": "2bea1110aa5cdb10",
   "lastOpenFiles": [
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 3. Необходимые технологии для веб-разработчика и продвинутая практика.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 2. Ускорение работы в несколько раз.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 1. Погружение в тему создания web-продуктов. Изучение основ HTML и CSS.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Вёрстка PRO.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 1. Подготовка, повторение, первые анимации/Подготовка, повторение, первые анимации.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка PRO/Глава 4. Adaptive design/Adaptive Design.md",
@@ -246,7 +239,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614080140.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614074324.png",
     "Design/DaVinci Resolve/Davinci resolve.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/Git.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613181243.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613181223.png",
