@@ -1060,8 +1060,9 @@ export const App = () => {
 
 ### 10 Архитектура. Начинаем внедрять. Основы метка
 
+Первым делом, нужно настроить абсолютные пути в самом конфиге TS
 
-
+`tsconfig.json`
 ```JSON
 // постановка всех путей от начала папки проекта
 "baseUrl": ".",
@@ -1075,6 +1076,7 @@ export const App = () => {
 
 
 
+`config > build > types > config.ts
 ```TS
 export interface BuildPaths {
 	entry: string;
@@ -1086,6 +1088,7 @@ export interface BuildPaths {
 
 
 
+`webpack.config.ts
 ```TS
 export default (env: BuildEnv) => {
 	const paths: BuildPaths = {
@@ -1112,7 +1115,7 @@ export default (env: BuildEnv) => {
 
 
 
-
+`config > build > buildResolvers.ts`
 ```TS
 import { ResolveOptions } from 'webpack';
 import { BuildOptions } from './types/config';
@@ -1135,18 +1138,21 @@ export function buildResolvers(options: BuildOptions): ResolveOptions {
 
 
 
+`pages > MainPage > index.ts`
 ```TS
 export { MainPageAsync as MainPage } from './ui/MainPage.async';
 ```
 
 
 
+`pages > AboutPage > index.ts`
 ```TS
 export { AboutPageAsync as AboutPage } from './ui/AboutPage.async';
 ```
 
 
 
+`src > app > App.tsx`
 ```TSX
 import { MainPage } from 'pages/MainPage';
 import { AboutPage } from 'pages/AboutPage';
@@ -1172,7 +1178,7 @@ export const App = () => {
 };
 ```
 
-
+Теперь проект выглядит следующим образом:
 
 ![](_png/Pasted%20image%2020230614152908.png)
 
