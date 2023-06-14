@@ -189,9 +189,17 @@
               "type": "git-view",
               "state": {}
             }
+          },
+          {
+            "id": "b3a4be60c448e795",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {}
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -208,7 +216,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "47c9fc7a70a387f5",
+  "active": "b3a4be60c448e795",
   "lastOpenFiles": [
     "Development/Tips&Tricks/Reset&Reboot.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
