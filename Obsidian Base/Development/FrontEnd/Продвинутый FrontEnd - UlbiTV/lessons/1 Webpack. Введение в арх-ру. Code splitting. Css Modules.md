@@ -1049,16 +1049,130 @@ export const App = () => {
 
 В данном проекте будет использоваться архитектура [FSD](https://feature-sliced.design/ru/docs/get-started/overview), которая предоставляет оптимальную организацию проекта фронтенд приложения
 
-
-
+[FSD](../../../Architecture.md) предоставляет архитектуру, которая делит приложение на 7 компонентов, каждое из которых делится на слайсы:
+1. `shared` — переиспользуемый код, не имеющий отношения к специфике приложения/бизнеса.(например, UIKit, libs, API)
+2. `entities` (сущности) — бизнес-сущности.(например, User, Product, Order)
+3. `features` (фичи) — взаимодействия с пользователем, действия, которые несут бизнес-ценность для пользователя.(например, SendComment, AddToCart, UsersSearch)
+4. `widgets` (виджеты) — композиционный слой для соединения сущностей и фич в самостоятельные блоки(например, IssuesList, UserProfile).
+5. `pages` (страницы) — композиционный слой для сборки полноценных страниц из сущностей, фич и виджетов.
+6. `processes` (процессы, устаревший слой) — сложные сценарии, покрывающие несколько страниц.(например, авторизация)
+7. `app` — настройки, стили и провайдеры для всего приложения.
 
 ### 10 Архитектура. Начинаем внедрять. Основы метка
 
 
 
+```JSON
+// постановка всех путей от начала папки проекта
+"baseUrl": ".",
+// настраивает абсолютный импорт начиная с папки src
+"paths": {
+	"*": [
+		"./src/*"
+	]
+},
+```
+
+
+
+```TS
+export interface BuildPaths {
+	entry: string;
+	build: string;
+	html: string;
+	src: string;
+}
+```
+
+
+
+```TS
+export default (env: BuildEnv) => {
+	const paths: BuildPaths = {
+		build: path.resolve(__dirname, 'build'),
+		entry: path.resolve(__dirname, 'src', 'index.tsx'),
+		html: path.resolve(__dirname, 'public', 'index.html'),
+		src: path.resolve(__dirname, 'src'),
+	};
+
+	const mode = env.mode || 'development';
+	const isDev = mode === 'development';
+	const PORT = env.port || 3000;
+
+	const webpackConfig: Configuration = buildWebpackConfig({
+		mode,
+		paths,
+		isDev,
+		port: PORT,
+	});
+
+	return webpackConfig;
+};
+```
 
 
 
 
+```TS
+import { ResolveOptions } from 'webpack';
+import { BuildOptions } from './types/config';
 
+export function buildResolvers(options: BuildOptions): ResolveOptions {
+	return {
+		// указываем расширения файлов, которые не нужно будет указывать при импорте
+		extensions: ['.tsx', '.ts', '.js', '.scss'],
+		// абсолютные пути будут приоритетнее
+		preferAbsolute: true,
+		// абсолютные пути, от которых идут импорты
+		modules: [options.paths.src, 'node_modules'],
+		// основной файл для каждой папки
+		mainFields: ['index'],
+		// настройки обозначений абсолютных путей - тут просто будет путь
+		alias: {},
+	};
+}
+```
+
+
+
+```TS
+export { MainPageAsync as MainPage } from './ui/MainPage.async';
+```
+
+
+
+```TS
+export { AboutPageAsync as AboutPage } from './ui/AboutPage.async';
+```
+
+
+
+```TSX
+import { MainPage } from 'pages/MainPage';
+import { AboutPage } from 'pages/AboutPage';
+
+export const App = () => {
+	const { toggleTheme, theme } = useTheme();
+
+	return (
+		<div className={classNames('app', {}, [theme])}>
+			<button className={'button'} onClick={toggleTheme}>
+				toggle
+			</button>
+			<Link to={'/'}>Главная</Link>
+			<Link to={'/about'}>О нас</Link>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Routes>
+					<Route path={'/'} element={<MainPage />} />
+					<Route path={'/about'} element={<AboutPage />} />
+				</Routes>
+			</Suspense>
+		</div>
+	);
+};
+```
+
+
+
+![](_png/Pasted%20image%2020230614152908.png)
 
