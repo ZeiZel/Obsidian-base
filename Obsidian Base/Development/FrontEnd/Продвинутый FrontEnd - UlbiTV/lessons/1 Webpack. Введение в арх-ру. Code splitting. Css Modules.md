@@ -1074,7 +1074,7 @@ export const App = () => {
 },
 ```
 
-
+Далее нужно добавить в интерфейс свойство базового пути конфига
 
 `config > build > types > config.ts
 ```TS
@@ -1086,7 +1086,7 @@ export interface BuildPaths {
 }
 ```
 
-
+И далее добавим путь до папки `src`
 
 `webpack.config.ts
 ```TS
@@ -1113,7 +1113,7 @@ export default (env: BuildEnv) => {
 };
 ```
 
-
+Этот путь нужен был для настройки конфига `buildResolvers`, в котором нужно указать настройки абсолютных путей (`preferAbsolute`, `modules`, `mainFields`, `alias`)
 
 `config > build > buildResolvers.ts`
 ```TS
@@ -1136,21 +1136,23 @@ export function buildResolvers(options: BuildOptions): ResolveOptions {
 }
 ```
 
+Далее нужно перекомпоновать проект следующим образом:
 
+![](_png/Pasted%20image%2020230614152908.png)
+
+Все компоненты страниц, которые связаны с отображением, идут в папку `ui`. Из неё экспортируем асинхронный компонент, который будем использовать в `App`
 
 `pages > MainPage > index.ts`
 ```TS
 export { MainPageAsync as MainPage } from './ui/MainPage.async';
 ```
 
-
-
 `pages > AboutPage > index.ts`
 ```TS
 export { AboutPageAsync as AboutPage } from './ui/AboutPage.async';
 ```
 
-
+И далее редактируем импорты и имена компонентов
 
 `src > app > App.tsx`
 ```TSX
@@ -1177,8 +1179,3 @@ export const App = () => {
 	);
 };
 ```
-
-Теперь проект выглядит следующим образом:
-
-![](_png/Pasted%20image%2020230614152908.png)
-
