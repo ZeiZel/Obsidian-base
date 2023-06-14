@@ -669,12 +669,118 @@ Code Splitting, Lazy Loading, Async Chunks - это всё механизмы п
 
 Конкретно мы имеем SPA и несколько страниц в рамках него и их всех стоило бы подгружать ровно тогда, когда он на них перейдёт. 
 
-В обычном случае у нас генер 
+В обычном случае у нас генерируется один бандл со всеми страницами, а нужно, чтобы генерировалось несколько 
 
 ![](_png/Pasted%20image%2020230614074324.png)
 
+Оборачиваем всё приложение в `BrowserRouter`, чтобы работали роуты 
 
+`src > index.tsx`
+```TSX
+import { BrowserRouter } from 'react-router-dom';
 
+const root = createRoot(document.getElementById('root'));
+root.render(
+	<StrictMode>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</StrictMode>,
+);
+```
+
+Далее нужно добавить опцию `historyApiFallback`, чтобы проксировать все запросы через index. Это нужно, чтобы страница не выдавала ошибку при перезагрузке, если это не стартовая страница
+
+`config > build > buildDevServer.ts
+```TS
+import { BuildOptions } from './types/config';
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+
+export function buildDevServer(options: BuildOptions): DevServerConfiguration {
+	return {
+		port: options.port, // порт
+		// open: true, // автоматически будет открывать страницу в браузере
+		// данная команда позволяет проксиовать запросы через index страницу, чтобы при обновлении страницы не выпадала ошибка
+		historyApiFallback: true,
+	};
+}
+```
+
+Далее нужно реализовать две страницы в приложении
+
+`src > pages > AboutPage.tsx`
+```TSX
+import React from 'react';
+
+const AboutPage = () => {
+	return <div>AboutPage</div>;
+};
+
+export default AboutPage;
+```
+
+`src > pages > MainPage.tsx`
+```TSX
+import React from 'react';
+
+const MainPage = () => {
+	return <div>MainPage</div>;
+};
+
+export default MainPage;
+```
+
+И тут же мы создадим их lazy-варианты, чтобы они подгружались только тогда, когда мы на них заходим
+
+Такой подход будет говорить webpack, что мы хотим выделить эти страницы в отдельные бандлы, чтобы они подгружались только при необходимости
+
+`src > pages > AboutPage.async.tsx`
+```TSX
+import { lazy } from 'react';
+
+export const AboutPageAsync = lazy(() => import('./AboutPage'));
+```
+
+`src > pages > MainPage.async.tsx`
+```TSX
+import { lazy } from 'react';
+
+export const MainPageAsync = lazy(() => import('./MainPage'));
+```
+
+И в корневом компоненте `App` нужно реализовать сам роутинг. 
+
+Вместо обычных страниц, нужно использовать их асинхронные версии, чтобы они уходили в отдельный бандл.
+
+Реакт обязует нас использовать компонент `Suspense` вместе с асинхронными компонентами, чтобы пользователь знал, что идёт подзагрузка страницы. 
+
+`src > components > app > App.tsx`
+```TSX
+import React, { Suspense } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import styles from './App.module.scss';
+import { MainPageAsync } from '../../pages/MainPage/MainPage.async';
+import { AboutPageAsync } from '../../pages/AboutPage/AboutPage.async';
+
+export const App = () => {
+	return (
+		<div className='app'>
+			<Link to={'/'}>Главная</Link>
+			<Link to={'/about'}>О нас</Link>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Routes>
+					<Route path={'/'} element={<MainPageAsync />} />
+					<Route path={'/about'} element={<AboutPageAsync />} />
+				</Routes>
+			</Suspense>
+		</div>
+	);
+};
+```
+
+И теперь у нас подгружается только те страницы, на которые мы зашли
+
+![](_png/Pasted%20image%2020230614080140.png)
 
 ### 7 Организация стилей. Добавляем темы
 
