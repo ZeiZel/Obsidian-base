@@ -1000,14 +1000,54 @@ export const App = () => {
 
 ### 8 classNames создаем git репозиторий
 
+Цель: реализовать свой хелпер для добавления нескольких классов
 
+Ниже представлена реализация замены библиотеке `classnames`, которая будет принимать в себя классы по условию и массив различных классов
 
+`src > helpers > classNames > classNames.ts`
+```TS
+type Mods = Record<string, string | boolean>;
 
+export function classNames(mainClass: string, mods: Mods, additional: string[]): string {
+	return [
+		mainClass,
+		...additional,
+		// тут мы переводим объект в массив, элементы которого будут состоять из [key, value], фильтруем его и возвращаем только ключи (названия классов)
+		...Object.entries(mods)
+			.filter(([key, value]) => !!value)
+			.map(([key, value]) => key),
+	].join(' ');
+}
+```
 
+Тут представлено использование функции
+
+`src > components > app > App.tsx
+```TSX
+export const App = () => {
+	const { toggleTheme, theme } = useTheme();
+
+	return (
+		<div className={classNames('app', {}, [theme])}>
+			<button className={'button'} onClick={toggleTheme}>
+				toggle
+			</button>
+			<Link to={'/'}>Главная</Link>
+			<Link to={'/about'}>О нас</Link>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Routes>
+					<Route path={'/'} element={<MainPageAsync />} />
+					<Route path={'/about'} element={<AboutPageAsync />} />
+				</Routes>
+			</Suspense>
+		</div>
+	);
+};
+```
 
 ### 9 Архитектура. введение. Теория
 
-
+В данном проекте будет использоваться архитектура [FSD](https://feature-sliced.design/ru/docs/get-started/overview), которая предоставляет оптимальную организацию проекта фронтенд приложения
 
 
 

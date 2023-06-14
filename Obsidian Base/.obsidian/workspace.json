@@ -208,8 +208,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "2bea1110aa5cdb10",
+  "active": "47c9fc7a70a387f5",
   "lastOpenFiles": [
+    "Development/Architecture.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 3. Необходимые технологии для веб-разработчика и продвинутая практика.md",
@@ -229,7 +231,6 @@
     "Development/FrontEnd/Без названия.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/Tips&Tricks/Reset&Reboot.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614110952.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
@@ -248,7 +249,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613162855.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613134205.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/02 Настройка VM на Linux.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons",
     "Development/Tips&Tricks",
     "SelfDevelopment/Курс HR-аналитика/_png",
