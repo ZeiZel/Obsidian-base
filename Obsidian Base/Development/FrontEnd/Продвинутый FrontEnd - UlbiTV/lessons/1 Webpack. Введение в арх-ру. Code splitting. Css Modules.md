@@ -658,7 +658,20 @@ declare module '*.scss' {
 
 ### 6 Роутинг Code splitting Lazy Suspence метка
 
+Первым делом нужно установить роутер и его 
 
+```bash
+npm i react-router-dom
+npm i -D @types/react-router-dom
+```
+
+Code Splitting, Lazy Loading, Async Chunks - это всё механизмы подгрузки данных на страницу по необходимости. 
+
+Конкретно мы имеем SPA и несколько страниц в рамках него и их всех стоило бы подгружать ровно тогда, когда он на них перейдёт. 
+
+В обычном случае у нас генер 
+
+![](_png/Pasted%20image%2020230614074324.png)
 
 
 
