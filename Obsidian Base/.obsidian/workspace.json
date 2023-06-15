@@ -49,26 +49,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7bcb89bac4094970",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Architecture.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -142,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Architecture.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Architecture.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Architecture.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md"
               }
             }
           },
@@ -193,21 +181,13 @@
               "type": "advanced-tables-toolbar",
               "state": {}
             }
-          },
-          {
-            "id": "76913dbc1a9662c2",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {}
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 430.5
+    "width": 328.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -220,13 +200,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "76913dbc1a9662c2",
+  "active": "47c9fc7a70a387f5",
   "lastOpenFiles": [
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614152908.png",
     "Development/Architecture.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614152908.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 3. Необходимые технологии для веб-разработчика и продвинутая практика.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 2. Ускорение работы в несколько раз.md",

@@ -1129,7 +1129,7 @@ export function buildResolvers(options: BuildOptions): ResolveOptions {
 		// абсолютные пути, от которых идут импорты
 		modules: [options.paths.src, 'node_modules'],
 		// основной файл для каждой папки
-		mainFields: ['index'],
+		// mainFields: ['index'], // не работает react-router из-за этого свойства
 		// настройки обозначений абсолютных путей - тут просто будет путь
 		alias: {},
 	};
