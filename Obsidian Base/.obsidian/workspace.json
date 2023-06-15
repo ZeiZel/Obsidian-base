@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "mode": "source",
                 "source": false
               }
@@ -55,8 +55,7 @@
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -130,7 +129,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +146,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +169,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Davinci resolve.md"
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md"
               }
             }
           },
@@ -183,7 +182,7 @@
             }
           },
           {
-            "id": "5b9c12899b4ad30c",
+            "id": "469a7aae29c19686",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -208,8 +207,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5b9c12899b4ad30c",
+  "active": "469a7aae29c19686",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Davinci resolve.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
@@ -241,7 +241,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614080140.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614074324.png",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613181243.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613181223.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613165727.png",
