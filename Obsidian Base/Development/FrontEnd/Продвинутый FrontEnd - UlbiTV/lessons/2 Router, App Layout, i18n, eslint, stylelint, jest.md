@@ -1,7 +1,7 @@
 
 ### 11 AppRouter. Конфиг для роутера
 
-Первым делом нужно реализовать конфиг для роутера, который будет содержать пути 
+Первым делом нужно реализовать конфиг для роутера, который будет содержать пути и элементы роутов
 
 `src > shared > config > routeConfig > routeConfig.tsx`
 ```TSX
@@ -9,16 +9,19 @@ import { RouteProps } from 'react-router-dom';
 import { MainPage } from 'pages/MainPage';
 import { AboutPage } from 'pages/AboutPage';
 
+// ключи путей
 export enum AppRoutes {
 	MAIN = 'main',
 	ABOUT = 'about',
 }
 
+// роуты по ключам
 export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.MAIN]: '/',
 	[AppRoutes.ABOUT]: '/about',
 };
 
+// тут содержится информация о пропсах, которые будут попадать в роутер
 export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.MAIN]: {
 		path: RoutePath.main,
@@ -31,9 +34,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 };
 ```
 
+Далее нужно реализовать отдельный провайдер с роутером, который будет генерировать массив роутов приложения
 
-
-`src > app > providers > ui > AppRouter.tsx`
+`src > app > providers > router > ui > AppRouter.tsx`
 ```TSX
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -52,13 +55,14 @@ export const AppRouter = () => {
 };
 ```
 
+Экспортируем роутер
 
-
-`src > app > providers > index.ts`
+`src > app > providers > router > index.ts`
 ```TS
 export { AppRouter } from './ui/AppRouter';
 ```
 
+И просто используем роуты в корневом файле
 
 `src > app > App.tsx`
 ```TSX
@@ -78,9 +82,14 @@ export const App = () => {
 };
 ```
 
-
-
 ### 12 Navbar. Шаблоны для разработки. Первый UI Kit компонент
+
+
+
+
+
+
+
 
 
 
