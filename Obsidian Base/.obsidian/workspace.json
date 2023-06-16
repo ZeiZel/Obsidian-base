@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Design/DaVinci Resolve/Davinci resolve.md",
                 "mode": "source",
                 "source": false
               }
@@ -54,8 +54,17 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "30b2dc260b856103",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -84,7 +93,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "переход",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -109,8 +118,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -130,7 +138,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +154,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -169,9 +175,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
-              }
+              "state": {}
             }
           },
           {
@@ -208,13 +212,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "50ef9e911dd56133",
+  "active": "30b2dc260b856103",
   "lastOpenFiles": [
-    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/5 Асинк редюссеры.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
+    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/Architecture.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614152908.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules/Модуль 4. CSS Grid и сайт-портфолио.md",
@@ -235,11 +243,7 @@
     "Development/FrontEnd/Без названия.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
-    "Development/Tips&Tricks/Reset&Reboot.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614110952.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "Development/DesktopDev/Electron/_lessons/5 Renderer Process API.md",
-    "Development/MobileDev/React Native 2020. Мобильная разработка на JavaScript/_lessons/5 Управление состоянием c Context.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614080140.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230614074324.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230613181243.png",
