@@ -191,7 +191,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -208,7 +208,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "47c9fc7a70a387f5",
+  "active": "2bea1110aa5cdb10",
   "lastOpenFiles": [
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
