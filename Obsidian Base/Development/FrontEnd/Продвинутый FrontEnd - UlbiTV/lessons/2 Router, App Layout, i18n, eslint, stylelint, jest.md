@@ -242,6 +242,14 @@ export const App = () => {
 
 
 
+```bash
+npm install @svgr/webpack --save-dev
+```
+
+```bash
+npm install file-loader --save-dev
+```
+
 
 
 ### 14 Sidebar. Layout приложения Метка
