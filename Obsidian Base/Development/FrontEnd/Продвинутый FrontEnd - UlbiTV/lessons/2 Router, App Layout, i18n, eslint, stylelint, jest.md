@@ -240,19 +240,210 @@ export const App = () => {
 
 ### 13 Svg loader. File loader. Button UI kit
 
-
+Пакет для подключения SVG в приложение
 
 ```bash
 npm install @svgr/webpack --save-dev
 ```
 
+Пакет для подключения изображений и файлов в приложение
+
 ```bash
 npm install file-loader --save-dev
 ```
 
+В лоадеры нужно добавить правила для svg и файлов остальных изображений
 
+`config > build > buildLoaders.ts`
+```TS
+export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
+	// так как порядок некоторых лоадеров важен, то важные лоадеры можно выносить в отдельные переменные
+	const typescriptLoader = {
+		test: /\.tsx?$/,
+		use: 'ts-loader',
+		exclude: /node_modules/,
+	};
+
+	// лоадер для SVG изображений
+	const svgLoader = {
+		test: /\.svg$/,
+		use: ['@svgr/webpack'],
+	};
+
+	// лоадер для добавления изображений в проект
+	const fileLoader = {
+		test: /\.(png|jpe?g|gif)$/i,
+		use: [
+			{
+				loader: 'file-loader',
+			},
+		],
+	};
+
+	const stylesLoader = {
+		test: /\.s[ac]ss$/i,
+		use: [
+			// в зависимости от режима разработки будет применяться разный лоадер
+			isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+			// так же лоадеры можно передавать в виде объектов, если нужно к ним добавить опции
+			{
+				loader: 'css-loader',
+				options: {
+					// включаем поддержку модулей у лоадера
+					modules: {
+						// включаем модульные стили (классы с именами asdWQSsaQ) только если они содержат в названии module
+						auto: (resPath: string) => !!resPath.includes('.module.'),
+						localIdentName: isDev
+							? '[path][name]__[local]--[hash:base64:8]'
+							: '[hash:base64:8]',
+					},
+				},
+			},
+			'sass-loader',
+		],
+	};
+
+	return [typescriptLoader, stylesLoader, svgLoader, fileLoader];
+}
+```
+
+Так же нужно додавить типы для подключаемых файлов 
+
+`src > app > types > global.d.ts`
+```TS
+declare module '*.svg' {
+	const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+	export default content;
+}
+
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+```
+
+Кастомный компонент кнопки
+
+`src > shared > ui > Button > Button.tsx`
+```TSX
+import React, { FC } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import styles from './Button.module.scss';
+import { IButtonProps } from 'shared/ui/Button/Button.props';
+
+export const Button: FC<IButtonProps> = ({ theme, className, children, ...props }) => {
+	return (
+		<button className={classNames(styles.button, {}, [className, styles[theme]])} {...props}>
+			{children}
+		</button>
+	);
+};
+```
+`src > shared > ui > Button > Button.props.ts`
+```TS
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+
+export enum ThemeButton {
+	CLEAR = 'clear',
+}
+
+export interface IButtonProps
+	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+	children: ReactNode;
+	theme?: ThemeButton;
+}
+```
+`src > shared > ui > Button > Button.module.scss`
+```SCSS
+.button {
+	cursor: pointer;
+}
+
+.clear {
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: none;
+}
+```
+
+Кастомный компонент переключателя темы
+
+`src > widgets > ThemeSwitcher > ui > ThemeSwitcher.tsx`
+```TSX
+export const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ className }) => {
+	const { toggleTheme, theme } = useTheme();
+
+	return (
+		<Button
+			theme={ThemeButton.CLEAR}
+			className={classNames(styles.button, {}, [className])}
+			onClick={toggleTheme}
+		>
+			{theme === Theme.LIGHT ? <LightIcon /> : <DarkIcon />}
+		</Button>
+	);
+};
+```
+`src > widgets > ThemeSwitcher > ui > ThemeSwitcher.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+
+export interface IThemeSwitcherProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+```
+`src > widgets > ThemeSwitcher > index.ts`
+```TS
+export { ThemeSwitcher } from './ui/ThemeSwitcher';
+```
+
+Добавляем компонент переключения тем в навигационное меню
+
+`src > widgets > Navbar > ui > Navbar.tsx`
+```TSX
+export const Navbar = ({ className }: INavbarProps) => {
+	return (
+		<nav className={classNames(styles.navbar, {}, [className])}>
+			<ThemeSwitcher />
+			<div className={styles.navbar__links}>
+				<AppLink theme={AppLinkTheme.SECONDARY} to={'/'}>
+					Главная
+				</AppLink>
+				<AppLink theme={AppLinkTheme.SECONDARY} to={'/about'}>
+					О нас
+				</AppLink>
+			</div>
+		</nav>
+	);
+};
+```
+
+И теперь так чисто выглядит корневой компонент приложения
+
+`src > app > App.tsx`
+```TSX
+export const App = () => {
+	const { theme } = useTheme();
+
+	return (
+		<div className={classNames('app', {}, [theme])}>
+			<Navbar className={'navbar'} />
+			<AppRouter />
+		</div>
+	);
+};
+```
+
+![](_png/Pasted%20image%2020230622103421.png)
 
 ### 14 Sidebar. Layout приложения Метка
+
+
+
+
+
+
+
+
 
 
 
