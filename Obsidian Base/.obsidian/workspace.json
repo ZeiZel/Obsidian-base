@@ -20,6 +20,18 @@
             }
           },
           {
+            "id": "1938ae3712febd7c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "5cd023c28eb2c5b7",
             "type": "leaf",
             "state": {
@@ -80,15 +92,31 @@
             }
           },
           {
-            "id": "a6b82fda9ba28d51",
+            "id": "b1fb306ebcd1f6c6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "374b8e60fd13b437",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+                "mode": "preview",
+                "source": false
+              }
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -162,6 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -178,6 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -199,7 +229,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md"
+              }
             }
           },
           {
@@ -236,20 +268,27 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "a6b82fda9ba28d51",
+  "active": "1938ae3712febd7c",
   "lastOpenFiles": [
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/WEB-Development.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
     "Development/Tips&Tricks/Контент в миксинах.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
     "Development/Tips&Tricks/Поиск динамического класса.md",
     "Development/Tips&Tricks/_png/Pasted image 20230623095038.png",
     "Development/Tips&Tricks/_png/Pasted image 20230623095021.png",
     "Development/Tips&Tricks/_png",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-    "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/TypeScript/TypeScript.md",
     "Development/Git.md",
     "Development/Cypress.md",
     "Development/_png/Pasted image 20230622113254.png",
@@ -263,13 +302,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/07 - Области видимости.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/05 - Мутация объектов.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/16 – Деструктуризация.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/10 - Оператор разделения на свойства.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/01 – Введение.md",
-    "Development/FrontEnd/Профилирование React.md",
     "Development/FrontEnd/_png/Pasted image 20230621142317.png",
     "Development/FrontEnd/_png/Pasted image 20230621142306.png",
     "Development/FrontEnd/_png/Pasted image 20230621142259.png",

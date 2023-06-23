@@ -1,5 +1,5 @@
 # Верстка и создание веб сайтов 2022 - с нуля до результата (2022)
-#HTML #CSS #Adaptive #Bootstrap #Figma #SASS #SCSS #FlexBox #BEM 
+#HTML #CSS #Adaptive #Bootstrap #Figma #SASS #SCSS #FlexBox #BEM #CSSGrid 
 
 [Основы HTML и CSS](Глава%201.%20Основы%20HTML%20и%20CSS/Основы%20HTML%20и%20CSS.md)
 [Погружение в HTML и CSS](Глава%202.%20Погружение%20в%20HTML%20и%20CSS/Погружение%20в%20HTML%20и%20CSS.md)
