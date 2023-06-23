@@ -78,8 +78,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "09423ed48a671552",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Tips&Tricks/Поиск динамического класса.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -153,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+                "file": "Development/Tips&Tricks/Поиск динамического класса.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -170,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+                "file": "Development/Tips&Tricks/Поиск динамического класса.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -193,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md"
+                "file": "Development/Tips&Tricks/Поиск динамического класса.md"
               }
             }
           },
@@ -231,14 +244,18 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "47c9fc7a70a387f5",
+  "active": "09423ed48a671552",
   "lastOpenFiles": [
+    "Development/Tips&Tricks/_png/Pasted image 20230623095038.png",
+    "Development/Tips&Tricks/_png/Pasted image 20230623095021.png",
+    "Development/Tips&Tricks/_png",
+    "Development/Tips&Tricks/Поиск динамического класса.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/TypeScript/TypeScript.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/Git.md",
     "Development/Cypress.md",
     "Development/_png/Pasted image 20230622113254.png",
@@ -265,10 +282,7 @@
     "Development/FrontEnd/_png/Pasted image 20230621142248.png",
     "Development/FrontEnd/_png/Pasted image 20230621142240.png",
     "Development/FrontEnd/_png/Pasted image 20230621142230.png",
-    "Development/FrontEnd/_png/Pasted image 20230621142218.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/01 Введение.md",
-    "Development/FrontEnd/React Foundamentals.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png",
@@ -277,7 +291,6 @@
     "SelfDevelopment/Курс HR-аналитика/_png",
     "SelfDevelopment/Курс HR-аналитика",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
-    "Design/DaVinci Resolve/Модули/_png",
-    "Design/DaVinci Resolve/Модули"
+    "Design/DaVinci Resolve/Модули/_png"
   ]
 }
