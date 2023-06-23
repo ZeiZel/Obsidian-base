@@ -9,7 +9,6 @@
 [07 Node Package Manager](_lessons/07%20Node%20Package%20Manager.md)
 [08 Приложение 1 - CLI прогноз погоды](_lessons/08%20Приложение%201%20-%20CLI%20прогноз%20погоды.md)
 [09 Приложение 2 - API с ExpressJS](_lessons/09%20Приложение%202%20-%20API%20с%20ExpressJS.md)
-[10 Переход на TypeScript](_lessons/10%20Переход%20на%20TypeScript.md)
 [11 Первый шаг к архитектуре](_lessons/11%20Первый%20шаг%20к%20архитектуре.md)
 [12 Dependency Injection](_lessons/12%20Dependency%20Injection.md)
 [13 Отладка и watch](_lessons/13%20Отладка%20и%20watch.md)
