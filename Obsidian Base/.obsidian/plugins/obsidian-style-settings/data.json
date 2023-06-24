@@ -42,7 +42,6 @@
   "jotter@@colorful-tooltips": true,
   "jotter@@color-scheme": "ct-keeper",
   "anuppuccin-theme-settings@@anp-autohide-titlebar": false,
-  "anuppuccin-theme-settings@@anp-floating-status-bar": true,
   "anuppuccin-theme-settings@@anp-toggle-metadata": false,
   "anuppuccin-theme-settings@@anp-toggle-scrollbars": false,
   "anuppuccin-theme-settings@@anp-hide-status-bar": false,
@@ -95,5 +94,7 @@
   "Components@@tab-title-bar-fixed": true,
   "Components@@nav-header-autohide": false,
   "Components@@CTA-BTN-enable": false,
-  "Mobile@@card-layout-pad-open": false
+  "Mobile@@card-layout-pad-open": false,
+  "id@@colorblind_protan-deutan": true,
+  "id@@colorblind_tritan": true
 }
