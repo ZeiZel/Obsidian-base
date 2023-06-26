@@ -736,7 +736,7 @@ export default {
 
 ![](_png/Pasted%20image%2020230626105004.png)
 
-
+И далее стоит разбить пост в отдельный компонент, а список постов в другой
 
 `PostItem.vue`
 ```vue
@@ -804,19 +804,97 @@ export default {
 <style scoped></style>
 ```
 
-
-
 ## Библиотека UI компонентов
 
+Если мы хотим создать компонент, внутрь которого можно будет поместить какой-либо текст, то нам нужно будет вложить в него тег `slot`, который означает, что все вложенные внутрь компонента элементы будут помещаться в данном месте
 
+`components > ui > UiButton.vue`
+```vue
+<template>
+	<button>
+		<slot></slot>
+	</button>
+</template>
 
+<script>
+export default {};
+</script>
+
+<style scoped>
+button {
+	padding: 5px;
+
+	color: #8951fd;
+
+	border: 1px solid #8951fd;
+
+	background: none;
+
+	cursor: pointer;
+}
+</style>
+```
+
+Так же нужно упомянуть, что все стили и классы, которые мы помещаем в компонент, применяются на корневой элемент внутри компонента 
+
+![](_png/Pasted%20image%2020230626113039.png)
 
 ## Глобальная регистрация компонента
 
+Чтобы не импортировать каждый раз компонент UI в другие компоненты, можно глобально зарегистрировать компонент
 
+Для этого нужно сначала дать имя самому компоненту
 
+`components > ui > UiButton.vue
+```vue
+<template>
+	<button>
+		<slot></slot>
+	</button>
+</template>
+
+<script>
+export default {
+	name: 'ui-button',
+};
+</script>
+```
+
+Далее нужно экспортировать массив компонентов
+
+`components > ui > index.js`
+```JS
+import UiButton from '@/components/ui/UiButton.vue';
+
+export default [UiButton];
+```
+
+И уже затем нужно глобально к приложению эти компоненты подцепить через итерацию массива
+
+`src > main.js`
+```JS
+import { createApp } from 'vue';
+import App from './components/App.vue';
+import components from '@/components/ui';
+
+const app = createApp(App);
+
+components.forEach((component) => {
+	app.component(component.name, component);
+});
+
+app.mount('#app');
+```
+
+И теперь можно спокойно использовать компонент в приложении без импорта его во все файлы
+
+![](_png/Pasted%20image%2020230626114640.png)
 
 ## Подробно о V-MODEL
+
+![](_png/Pasted%20image%2020230626114921.png)
+![](_png/Pasted%20image%2020230626114924.png)
+
 
 
 
@@ -1002,3 +1080,9 @@ export default {
 
 
 ##  Composition API
+
+
+
+
+
+
