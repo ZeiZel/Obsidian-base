@@ -364,7 +364,9 @@ export default {
 
 ## Модификаторы stop, prevent
 
-Далее реализуем метод `createPost`, через который будем добавлять новые посты. Но тут всит
+Далее реализуем метод `createPost`, через который будем добавлять новые посты. Но тут встаёт проблема, что страница перезагружается при отправке формы. 
+
+Чтобы исправить вышеописанную проблему, можно передать в функцию `event` и прописать `stopPropagation` или `preventDefault`, но вью предоставляет модификатор `@submit`, который в себе имеет `prevent`, останавливающий выполнение ивентов при сабмите формы
 
 ```vue
 <template>
@@ -425,24 +427,234 @@ export default {
 </script>
 ```
 
+![](_png/Pasted%20image%2020230626085304.png)
 
+## Декомпозиция. Создаем переиспользуемые компоненты. Props. Передаем данные в компонент
 
-## Декомпозиция. Создаем переиспользуемые компоненты
+Первым делом вынесем список постов. Он должен будет извне принимать список постов. Чтобы указать принимаемые пропсы в компонент, нужно указать внутрь `props` нужное значение, прописать его типы и указать обязателен ли этот пропс 
 
+`PostList.vue`
+```vue
+<template>
+	<div class="post" v-for="post in posts" v-bind:key="post.id">
+		<div><strong>Название</strong> {{ post.title }}</div>
+		<div><strong>Описание</strong> {{ post.body }}</div>
+	</div>
+</template>
 
+<script>
+export default {
+	props: {
+		posts: {
+			type: Array,
+			required: true,
+		},
+	},
+};
+</script>
 
+<style scoped>
+.post {
+	padding: 15px;
+	margin-top: 15px;
 
-## Props. Передаем данные в компонент
+	border: 2px solid #8951fd;
+}
+</style>
+```
 
+Компонент формы, который пока не может создавать новые посты
 
+`PostForm.vue`
+```vue
+<template>
+	<form action="" @submit.prevent>
+		<h4>Создать пост</h4>
+		<input
+			v-bind:value="post.title"
+			@input="post.title = $event.target.value"
+			type="text"
+			class="input"
+			placeholder="название"
+		/>
+		<input
+			v-bind:value="post.body"
+			@input="post.body = $event.target.value"
+			type="text"
+			class="input"
+			placeholder="описание"
+		/>
+		<button>Добавить</button>
+	</form>
+</template>
 
+<script>
+export default {
+	data() {
+		return {
+			post: {
+				title: '',
+				body: '',
+			},
+		};
+	},
+};
+</script>
+
+<style scoped>
+.input {
+	display: flex;
+
+	width: 50%;
+
+	padding: 5px;
+	margin: 15px 0;
+
+	border: 1px solid #8951fd;
+}
+</style>
+```
+
+И теперь, чтобы подключить дочерние компоненты в целевой, нужно:
+1) Импортировать нужные компоненты в скриптах
+2) Проинициализировать их в блоке `components`
+3) Добавить их в в сам компонент в темплейте
+
+Чтобы передать пропсы внутрь компонента, нужно через `v-bind` прописать те пропсы, которые принимает компонент и указать объект с пропсами.
+Так же, чтобы кратко записать биндинг достаточно написать вместо `v-bind` просто `:`
+
+`App.vue`
+```vue
+<template>
+	<div class="app">
+		<post-form />
+		<post-list :posts="posts" />
+	</div>
+</template>
+
+<script>
+import PostList from '@/components/PostList.vue';
+import PostForm from '@/components/PostForm.vue';
+
+export default {
+	components: {
+		PostForm,
+		PostList,
+	},
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+		};
+	},
+};
+</script>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Montserratm, sans-serif;
+}
+
+.app {
+	padding: 15px;
+}
+
+button {
+	padding: 5px;
+
+	color: #8951fd;
+
+	border: 1px solid #8951fd;
+}
+</style>
+```
+
+> [!warning] Пропсы изменять в дочернем компоненте нельзя. Нужно их изменять в родительском и передавать в готовом виде уже в дочерний!
 
 ## V-MODEL
 
+Стандартное двусторонне связывание предусматривает под собой написание правильных событий и атрибутов и постоянное повторение данной записи. 
 
+![](_png/Pasted%20image%2020230626094209.png)
 
+Можно упростить связывание через указание простого атрибута `v-model`, который за нас реализует указание правильных событий, атрибутов, функций присвоения значений.
+
+Так же далее создадим заново функцию создания поста. 
+
+Сейчас перед нами встаёт задача передачи данных для создания нового поста в компонент со списком постов
+
+`PostList.vue`
+```vue
+<template>
+	<form action="" @submit.prevent>
+		<h4>Создать пост</h4>
+		<input 
+			v-model="post.title" 
+			type="text" 
+			class="input" 
+			placeholder="название" 
+		/>
+		<input 
+			v-model="post.body" 
+			type="text" 
+			class="input" 
+			placeholder="описание" 
+		/>
+		<button @click="createPost">Добавить</button>
+	</form>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			post: {
+				title: '',
+				body: '',
+			},
+		};
+	},
+	methods: {
+		createPost() {
+			this.post.id = Date.now();
+
+			this.posts.push(newPost);
+
+			this.title = '';
+			this.body = '';
+		},
+	},
+};
+</script>
+
+<style scoped>
+.input {
+	display: flex;
+
+	width: 50%;
+
+	padding: 5px;
+	margin: 15px 0;
+
+	border: 1px solid #8951fd;
+}
+</style>
+```
 
 ## $emit. Обмен данными между дочерним и родительским компонентом
+
+
+
+
+
+
+
 
 
 
