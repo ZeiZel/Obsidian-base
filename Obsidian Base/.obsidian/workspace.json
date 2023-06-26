@@ -126,9 +126,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "cb85968a479eea45",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/RxJS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 9
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -202,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Vue.md",
+                "file": "Development/RxJS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -219,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Vue.md",
+                "file": "Development/RxJS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -242,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Vue.md"
+                "file": "Development/RxJS.md"
               }
             }
           },
@@ -280,8 +292,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "76c81bcd1e364eb5",
+  "active": "cb85968a479eea45",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20230626152619.png",
+    "Development/FrontEnd/Vue.md",
     "Development/FrontEnd/_png/Pasted image 20230626145352.png",
     "Development/FrontEnd/_png/Pasted image 20230626141349.png",
     "Development/FrontEnd/_png/Pasted image 20230626125734.png",
@@ -292,7 +306,6 @@
     "Development/FrontEnd/_png/Pasted image 20230626114921.png",
     "Development/FrontEnd/_png/Pasted image 20230626114640.png",
     "Development/FrontEnd/_png/Pasted image 20230626113039.png",
-    "Development/FrontEnd/_png/Pasted image 20230626105004.png",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -317,7 +330,6 @@
     "_lessons/10 Переход на TypeScript.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/Tips&Tricks/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",

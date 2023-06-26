@@ -30,45 +30,52 @@ Pipe получает операторы - чистые функции
 
 ![](_png/Pasted%20image%2020230609163629.png)
 
+## 1. Как работает RxJS
 
-## RxJs fromEvent search input. Оптимизируй запросы на сервер в несколько строк с RxJS
+Основной идеей работы RxJS является подписка на определённые события и реагирование на них. 
 
+Конкретно в примере мы создаём подписку, которая триггерит подписанные на неё функции раз в секунду. 
 
+Через `subscribe` мы подписываемся на эмиттер события и выполняем код раз в определённое время.
 
-`main.ts`
 ```TS
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Component } from '@angular/core';
+import { interval } from 'rxjs';
 
-import { AppModule } from './app/app.module';
+@Component({
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+	constructor() {
+		const intervalStream$ = interval(1000);
 
-import './rxjs.lesson';
-
-platformBrowserDynamic()
-	.bootstrapModule(AppModule)
-	.catch((err) => console.error(err));
+		intervalStream$.subscribe((value) => {
+			console.log(value);
+		});
+	}
+}
 ```
 
+![](_png/Pasted%20image%2020230626152619.png)
+
+## 2. Оптимизация стримов
 
 
-`rxjs.lesson.ts`
-```JS
-import { Observable } from 'rxjs';
-
-// суффикс $ обозначает, что это Observable
-const search$ = new Observable((observer) => {
-	console.log('Start in observable');
-
-	observer.next(1);
-	observer.next(2);
-	observer.next(3);
-
-	console.log('End in observable');
-});
-
-console.log('Start subscribe');
-```
 
 
+## 3. Как использовать операторы
+
+
+
+
+## 4. Создание своего стрима
+
+
+
+
+## 5. Как работает Subject
 
 
 
