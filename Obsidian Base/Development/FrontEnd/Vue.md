@@ -1034,24 +1034,162 @@ export default {
 
 ##  Отрисовка по условию
 
+Для отрисовки определённых блоков по условию у нас есть три разных атрибута:
+- `v-if `- отрендерит, если условие будет удовлетворено
+- `v-else-if`
+- `v-else` - отрендерит, если прошлое условие не будет удовлетворено
 
+Эти атрибуты вставляют нужный код, если он будет соответствовать условию.
 
+`PostList.vue`
+```vue
+<template>
+	<div v-if="posts.length !== 0">
+		<h2>Список постов</h2>
+		<post-item
+			v-for="post in posts"
+			:key="post.id"
+			:post="post"
+			@remove="$emit('remove', post)"
+		/>
+	</div>
+	<div v-else-if="posts.length === 0">
+		<h2>Постов нет</h2>
+	</div>
+	<div v-else>
+		<h2>Произошла ошибка</h2>
+	</div>
+</template>
+```
 
+![](_png/Pasted%20image%2020230626141349.png)
 
+Так же у нас есть атрибут, который просто скрывает элемент, если он не соответствует условию - `v-show`
 
-
-
-
-
+```vue
+<template>
+	<div v-show="posts.length !== 0">
+		<h2>Список постов</h2>
+		<post-item
+			v-for="post in posts"
+			:key="post.id"
+			:post="post"
+			@remove="$emit('remove', post)"
+		/>
+	</div>
+	<div v-show="posts.length === 0">
+		<h2>Постов нет</h2>
+	</div>
+</template>
+```
 
 
 ##  Модальное окно
 
 
 
+```vue
+<template>
+	<div class="modal" v-if="show" @click="hideDialog">
+		<div class="modal__content" @click.stop>
+			<slot></slot>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	name: 'modal-window',
+	props: {
+		show: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	methods: {
+		hideDialog() {
+			this.$emit('update:show', false);
+		},
+	},
+};
+</script>
+
+<style scoped>
+.modal {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+
+	display: flex;
+
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+	min-height: 100px;
+	min-width: 300px;
+
+	margin: auto;
+	padding: 20px;
+
+	background: white;
+
+	border-radius: 12px;
+}
+</style>
+```
 
 
 
+```vue
+<template>
+	<div class="app">
+		<ui-button @click="showDialog">Добавить пост</ui-button>
+		<modal-window v-model:show="dialogVisible">
+			<post-form @create="createPost" />
+		</modal-window>
+		<post-list :posts="posts" @remove="removePost" />
+	</div>
+</template>
+
+<script>
+import PostList from '@/components/PostList.vue';
+import PostForm from '@/components/PostForm.vue';
+import UiButton from '@/components/ui/UiButton.vue';
+export default {
+	components: {
+		UiButton,
+		PostForm,
+		PostList,
+	},
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+			dialogVisible: false,
+		};
+	},
+	methods: {
+		createPost(post, second, third) {
+			console.log(second);
+			console.log(third);
+			this.posts.push(post);
+		},
+		removePost(post) {
+			this.posts = this.posts.filter((p) => p.id !== post.id);
+		},
+		showDialog() {
+			this.dialogVisible = true;
+		},
+	},
+};
+</script>
+```
 
 
 ##  Модификаторы V-MODEL
