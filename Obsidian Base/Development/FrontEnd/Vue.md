@@ -954,12 +954,83 @@ export default {
 
 ##  Удаление поста. Ключи KEY в цикле
 
+Чтобы реализовать возможность удаления поста, нам нужно заэмиттить событие, которое будет возвращать пост наверх из самого элемента поста по клику на кнопку удаления поста
 
+`PostItem.vue`
+```vue
+<template>
+	<div class="post">
+		<div>
+			<div><strong>Название</strong> {{ post.title }}</div>
+			<div><strong>Описание</strong> {{ post.body }}</div>
+		</div>
+		<div class="post__buttons">
+			<ui-button @click="$emit('remove', post)">Удалить</ui-button>
+		</div>
+	</div>
+</template>
+```
 
+И далее мы принимаем из события `remove` пост и заново его передаём вверх
 
+`PostList.vue`
+```vue
+<template>
+	<div>
+		<h2>Список постов</h2>
+		<post-item
+			v-for="post in posts"
+			:key="post.id"
+			:post="post"
+			@remove="$emit('remove', post)"
+		/>
+	</div>
+</template>
+```
 
+Теперь мы можем в родительском компоненте затриггерить функцию удаления поста, в которую сразу попадёт пропс с постом и позволит отрисовать новый массив постов без поста с определённым `id` 
 
+`App.vue`
+```vue
+<template>
+	<div class="app">
+		<post-form @create="createPost" />
+		<post-list :posts="posts" @remove="removePost" />
+	</div>
+</template>
 
+<script>
+import PostList from '@/components/PostList.vue';
+import PostForm from '@/components/PostForm.vue';
+export default {
+	components: {
+		PostForm,
+		PostList,
+	},
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+		};
+	},
+	methods: {
+		createPost(post, second, third) {
+			console.log(second);
+			console.log(third);
+			this.posts.push(post);
+		},
+		removePost(post) {
+			this.posts = this.posts.filter((p) => p.id !== post.id);
+		},
+	},
+};
+</script>
+```
+
+![](_png/Pasted%20image%2020230626125734.png)
 
 ##  Отрисовка по условию
 
