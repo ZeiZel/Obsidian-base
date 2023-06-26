@@ -153,7 +153,14 @@ export class AppComponent {
 
 ## 4. Создание своего стрима
 
+Мы можем создать свой стрим с помощью класса `Observable`. Внутрь него мы передаём определённую функцию, внутри которой мы можем определять поведение потока
 
+Конкретно мы имеем три метода:
+- `next` - триггерит срабатывание первого коллбека внутри `subscribe`
+- `complete` - показывает, что запрос выполнен (и триггерит третий коллбэка)
+- `error` - вызывает ошибку внутри обзёрвера (и триггерит второй коллбэка)
+
+Так же метод `subscribe()` у стрима принимает три функции, которые выполняются по вызову одного из трёх состояний внутри обзервера
 
 ```TS
 import { Component } from '@angular/core';
@@ -187,9 +194,9 @@ export class AppComponent {
 		});
 
 		this.sub = stream$.subscribe(
-			(value) => console.log(`Next: ${value}`),
-			(error) => console.log(`Error: ${error}`),
-			() => console.log('Complete'),
+			(value) => console.log(`Next: ${value}`), // next
+			(error) => console.log(`Error: ${error}`), // error
+			() => console.log('Complete'), // complete
 		);
 	}
 
@@ -203,17 +210,51 @@ export class AppComponent {
 
 ## 5. Как работает Subject
 
+Класс `Subject` позволяет создать стрим, которому можно протипизировать принимаемое значение и описать выполняемую операцию над данным аргументом
 
+С помощью метода `next` мы триггерим срабатывание коллбэка 
 
+```TS
+import { Component } from '@angular/core';
+import { Subscription, Subject } from 'rxjs';
 
+@Component({
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+	sub: Subscription;
+	stream$: Subject<number> = new Subject<number>();
+	counter: number = 0;
 
+	constructor() {
+		this.sub = this.stream$.subscribe((value) => {
+			console.log('Subscribe', value);
+		});
+	}
 
+	stop() {
+		this.sub.unsubscribe();
+	}
 
+	next() {
+		this.counter += 1;
+		this.stream$.next(this.counter);
+	}
+}
+```
 
+Вызываем метод
 
+```HTML
+<div class='container'>
+	<h1>RxJS</h1>
+	<button class='btn' (click)='stop()'>Stop Interval</button>
+	<button class='btn btn-danger' (click)='next()'>Next value</button>
+</div>
+```
 
+И теперь мы можем триггерить функцию, которая будет вызваться по сабскрайбу
 
-
-
-
-
+![](_png/Pasted%20image%2020230626183630.png)
