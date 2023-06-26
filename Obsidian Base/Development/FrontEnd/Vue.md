@@ -148,26 +148,282 @@ h1 {
 
 ## Cтили
 
+Флаг `scoped` говорит нам о том, что стили будут сохраняться в одном компоненте и не будут уходить в глобалку
 
+```vue
+<template>
+	<div class="post">
+		<div><strong>Название</strong> JavaScript</div>
+		<div><strong>Описание</strong> JS - универсальный язык</div>
+	</div>
+	<div class="post">
+		<div><strong>Название</strong> JavaScript</div>
+		<div><strong>Описание</strong> JS - универсальный язык</div>
+	</div>
+</template>
 
+<script>
+export default {
+	data() {
+		return {
+			likes: 0,
+			dislikes: 0,
+		};
+	},
+	methods: {
+		addLike() {
+			this.likes += 1;
+		},
+		addDislike() {
+			this.dislikes += 1;
+		},
+	},
+};
+</script>
+
+<style scoped>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Montserratm, sans-serif;
+}
+
+.post {
+	padding: 15px;
+	margin-top: 15px;
+
+	border: 2px solid #8951fd;
+}
+</style>
+```
+
+![](_png/Pasted%20image%2020230626075131.png)
 
 ## Отрисовка в цикле. Директива V-FOR
 
+Для создания итерируемой конструкции для перебора имеющихся данных во вью существует две директивы:
+- `v-for` - в ней мы указываем, перебор какого массива будет
+- `v-bind:key` - присваиваем ключ для каждого элемента перебора
 
+```vue
+<template>
+	<div class="post" v-for="post in posts" v-bind:key="post.id">
+		<div><strong>Название</strong> {{ post.title }}</div>
+		<div><strong>Описание</strong> {{ post.body }}</div>
+	</div>
+</template>
 
+<script>
+export default {
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+		};
+	},
+	methods: {},
+};
+</script>
 
-## Создание нового поста
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Montserratm, sans-serif;
+}
 
+.post {
+	padding: 15px;
+	margin-top: 15px;
 
+	border: 2px solid #8951fd;
+}
+</style>
+```
 
+![](_png/Pasted%20image%2020230626081058.png)
 
 ## Двустороннее связывание
 
+Для реализации добавления поста на страницу, нужно сначала реализовать двусторонне связывание, которое позволит синхронизировать данные из инпутов с данными компонента
 
+Конкретно для связывания данных во вью используется `v-bind`, который привязывает одни данные под другие
 
+И так же нам нужен будет атрибут `@input`, который хранит в себе метод присвоения определённых данных из формы на странице к форме вью (он будет передавать наши введённые данные в данные компонента)
+
+```vue
+<template>
+	<div class="app">
+		<form action="">
+			<h4>Создать пост</h4>
+			<input
+				v-bind:value="title"
+				@input="inputTitle"
+				type="text"
+				class="input"
+				placeholder="название"
+			/>
+			<input
+				v-bind:value="body"
+				@input="inputBody"
+				type="text"
+				class="input"
+				placeholder="описание"
+			/>
+			<button @click="createPost">Добавить</button>
+		</form>
+		<div class="post" v-for="post in posts" v-bind:key="post.id">
+			<div><strong>Название</strong> {{ post.title }}</div>
+			<div><strong>Описание</strong> {{ post.body }}</div>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+			title: '',
+			body: '',
+		};
+	},
+	methods: {
+		createPost() {},
+		inputTitle(event) {
+			this.title = event.target.value;
+		},
+		inputBody(event) {
+			this.body = event.target.value;
+		},
+	},
+};
+</script>
+```
+
+![](_png/Pasted%20image%2020230626083925.png)
+
+Так же можно сократить запись и вместо отдельного метода просто указать, что мы приравниваем нужное нам значение к зарезервированному ивенту `$event.target.value` 
+
+```vue
+<template>
+	<div class="app">
+		<form action="">
+			<h4>Создать пост</h4>
+			<input
+				v-bind:value="title"
+				@input="title = $event.target.value"
+				type="text"
+				class="input"
+				placeholder="название"
+			/>
+			<input
+				v-bind:value="body"
+				@input="body = $event.target.value"
+				type="text"
+				class="input"
+				placeholder="описание"
+			/>
+			<button @click="createPost">Добавить</button>
+		</form>
+		<div class="post" v-for="post in posts" v-bind:key="post.id">
+			<div><strong>Название</strong> {{ post.title }}</div>
+			<div><strong>Описание</strong> {{ post.body }}</div>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+			title: '',
+			body: '',
+		};
+	},
+	methods: {
+		createPost() {},
+	},
+};
+</script>
+```
 
 ## Модификаторы stop, prevent
 
+Далее реализуем метод `createPost`, через который будем добавлять новые посты. Но тут всит
+
+```vue
+<template>
+	<div class="app">
+		<form action="" @submit.prevent>
+			<h4>Создать пост</h4>
+			<input
+				v-bind:value="title"
+				@input="title = $event.target.value"
+				type="text"
+				class="input"
+				placeholder="название"
+			/>
+			<input
+				v-bind:value="body"
+				@input="body = $event.target.value"
+				type="text"
+				class="input"
+				placeholder="описание"
+			/>
+			<button @click="createPost">Добавить</button>
+		</form>
+		<div class="post" v-for="post in posts" v-bind:key="post.id">
+			<div><strong>Название</strong> {{ post.title }}</div>
+			<div><strong>Описание</strong> {{ post.body }}</div>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+			title: '',
+			body: '',
+		};
+	},
+	methods: {
+		createPost(event) {
+			const newPost = {
+				id: Date.now(),
+				title: this.title,
+				body: this.body,
+			};
+
+			this.posts.push(newPost);
+
+			this.title = '';
+			this.body = '';
+		},
+	},
+};
+</script>
+```
 
 
 
