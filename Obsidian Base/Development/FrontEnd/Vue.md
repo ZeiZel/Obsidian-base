@@ -1066,6 +1066,7 @@ export default {
 
 Так же у нас есть атрибут, который просто скрывает элемент, если он не соответствует условию - `v-show`
 
+`PostList.vue`
 ```vue
 <template>
 	<div v-show="posts.length !== 0">
@@ -1083,11 +1084,11 @@ export default {
 </template>
 ```
 
-
 ##  Модальное окно
 
+Само модальное окно. Мы его отображаем, если пропс `show` будет `true`. Скрывать модальное окно мы будем через поднятие состояния вверх через эмиттер. 
 
-
+`components > ui > ModalWindow.vue`
 ```vue
 <template>
 	<div class="modal" v-if="show" @click="hideDialog">
@@ -1141,8 +1142,9 @@ export default {
 </style>
 ```
 
+В родительском компоненте отображать модалку будем через использование функции `showDialog` и пропса `show`, который двусторонне связываем и передаём локальное значение `dialogVisible`
 
-
+`App.vue`
 ```vue
 <template>
 	<div class="app">
@@ -1191,6 +1193,7 @@ export default {
 </script>
 ```
 
+![](_png/Pasted%20image%2020230626145352.png)
 
 ##  Модификаторы V-MODEL
 
