@@ -892,14 +892,71 @@ app.mount('#app');
 
 ## Подробно о V-MODEL
 
+Во второй версии Vue на весь компонент распространялся только один `v-model`. В третьей версии мы можем указать конкретно к чему мы хотим указать двусторонне связывание. Однако, если мы не укажем с чем мы хотим связать значения, то по умолчанию связывание будет с пропсом `modelValue` компонента
+
 ![](_png/Pasted%20image%2020230626114921.png)
 ![](_png/Pasted%20image%2020230626114924.png)
 
+Чтобы реализовать связывание по стандартному modelValue без указания конкретного значения через атрибут, мы можем написать такой код и сбиндить значение инпута со значением модели через событие, которое будет срабатывать на `update`
 
+`components > ui > UiInput.vue
+```vue
+<template>
+	<input 
+	:value="modelValue" // 1
+	@input="updateInput" // 2
+	class="input" type="text" />
+</template>
 
+<script>
+export default {
+	name: 'ui-input',
+	props: {
+		modelValue: [String, Number], // 3
+	},
+	methods: {
+		updateInput(event) {
+			this.$emit('update:modelValue', event.target.value); // 4
+		},
+	},
+};
+</script>
+```
 
+![](_png/Pasted%20image%2020230626121701.png)
+
+Если мы хотим своё кастомное значение, то мы можем указать своё кастомное значение для связывания нашего кастомного компонента инпута 
+
+`components > ui > UiInput.vue
+```vue
+<template>
+	<input :value="value" @input="updateInput" class="input" type="text" />
+</template>
+
+<script>
+export default {
+	name: 'ui-input',
+	props: {
+		value: [String, Number],
+	},
+	methods: {
+		updateInput(event) {
+			this.$emit('update:value', event.target.value);
+		},
+	},
+};
+</script>
+```
+И при указании модели, нужно будет дополнить связывание атрибутом `value` 
+![](_png/Pasted%20image%2020230626121636.png)
+
+![](_png/Pasted%20image%2020230626121559.png)
 
 ##  Удаление поста. Ключи KEY в цикле
+
+
+
+
 
 
 
