@@ -649,13 +649,160 @@ export default {
 
 ## $emit. Обмен данными между дочерним и родительским компонентом
 
+Передать данные от ребёнка к родителю напрямую - не получится. Чтобы совершить данное действие придётся воспользоваться событием, на которое нужно будет подписать родителя, чтобы тот получил данные из ребёнка.
+
+Для этого нужно будет воспользоваться `$emit`. В него мы передаём название события первым аргументом, а последующими передаём данные, которые попадут в функцию, которая будет подписана на данное событие
+
+В форме постов мы создаём метод `createPost` внутри которого эмитим ивент, в который передаём новый пост, а так же ещё несколько пропсов для примера.
+
+`PostForm.vue`
+```vue
+<template>
+	<form action="" @submit.prevent>
+		<h4>Создать пост</h4>
+		<input v-model="post.title" type="text" class="input" placeholder="название" />
+		<input v-model="post.body" type="text" class="input" placeholder="описание" />
+		<button @click="createPost">Добавить</button>
+	</form>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			post: {
+				title: '',
+				body: '',
+			},
+		};
+	},
+	methods: {
+		createPost() {
+			this.post.id = Date.now();
+
+			this.$emit('create', this.post, 'second', 'third');
+
+			this.post = {
+				title: '',
+				body: '',
+			};
+		},
+	},
+};
+</script>
+```
+
+Чтобы воспользоваться ивентом, нужно:
+- На компонент, который эмитит событие, нужно навесить атрибут `@имя_события = функция_которая_примет_пропсы`
+- В родительском компоненте создаём метод, который уже из описанного в темплейте события будет принимать пропсы
+
+`App.vue`
+```vue
+<template>
+	<div class="app">
+		<post-form @create="createPost" />
+		<post-list :posts="posts" />
+	</div>
+</template>
+
+<script>
+import PostList from '@/components/PostList.vue';
+import PostForm from '@/components/PostForm.vue';
+
+export default {
+	components: {
+		PostForm,
+		PostList,
+	},
+	data() {
+		return {
+			posts: [
+				{ id: 1, title: 'JavaScript', body: 'JS - is universal language' },
+				{ id: 2, title: 'C#', body: 'C# - is beautiful language' },
+				{ id: 3, title: 'Java', body: 'Java - is banking language' },
+			],
+		};
+	},
+	methods: {
+		createPost(post, second, third) {
+			console.log(second);
+			console.log(third);
+			this.posts.push(post);
+		},
+	},
+};
+</script>
+```
+
+![](_png/Pasted%20image%2020230626105004.png)
 
 
 
+`PostItem.vue`
+```vue
+<template>
+	<div class="post">
+		<div>
+			<div><strong>Название</strong> {{ post.title }}</div>
+			<div><strong>Описание</strong> {{ post.body }}</div>
+		</div>
+		<div class="post__buttons">
+			<button>Удалить</button>
+		</div>
+	</div>
+</template>
 
+<script>
+export default {
+	props: {
+		post: {
+			type: Object,
+			required: true,
+		},
+	},
+};
+</script>
 
+<style scoped>
+.post {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
+	padding: 15px;
+	margin-top: 15px;
 
+	border: 2px solid #8951fd;
+}
+</style>
+```
+`PostList.vue`
+```vue
+<template>
+	<div>
+		<h2>Список постов</h2>
+		<post-item v-for="post in posts" :key="post.id" :post="post" />
+	</div>
+</template>
+
+<script>
+import PostItem from '@/components/PostItem.vue';
+
+export default {
+	components: {
+		PostItem,
+	},
+	props: {
+		posts: {
+			type: Array,
+			required: true,
+		},
+	},
+};
+</script>
+
+<style scoped></style>
+```
 
 
 
