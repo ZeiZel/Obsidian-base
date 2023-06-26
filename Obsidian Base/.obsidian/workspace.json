@@ -133,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
                 "mode": "source",
                 "source": false
               }
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md"
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md"
               }
             }
           },
@@ -294,8 +294,23 @@
   },
   "active": "0fc6bedb86e0e8d5",
   "lastOpenFiles": [
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/15. Практика. Создание блога.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/14. Анимации.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/13. Интеграционное тестирование.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/12. Unit тестирование.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/11. Дополнительные возможности.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/10. Как работают модули.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/9. Мультистраничность с роутингом.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/8. Работа с сервером (HttpClient).md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/7. Формы и валидация.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/6. Сервисы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/5. Пайпы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/4. Директивы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/FrontEnd/Angular 9. Теория и Практика",
     "Development/FrontEnd/Vue.md",
     "Development/RxJS.md",
@@ -316,21 +331,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/12 - Функциональные выражения и стрелочные функции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/11 - Конкатенация строк.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/06 – Функции.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/05 - Мутация объектов.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
-    "Development/Tips&Tricks/Reset&Reboot.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/08 Приложение 1 - CLI прогноз погоды.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/05 Многопоточность.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/04 Как работает Node.js_.md",
-    "_lessons/10 Переход на TypeScript.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
     "Development/Tips&Tricks/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
@@ -338,7 +338,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons",
     "Development/Tips&Tricks",
     "SelfDevelopment/Курс HR-аналитика/_png",
-    "SelfDevelopment/Курс HR-аналитика",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV"
+    "SelfDevelopment/Курс HR-аналитика"
   ]
 }
