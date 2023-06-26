@@ -62,15 +62,102 @@ export class AppComponent {
 
 ## 2. Оптимизация стримов
 
+Если мы никак не будем контролировать и отключать стримы, то у нас они будут постоянно активны и постоянно копиться. Прошлый пример будет работать постоянно, пока страница активна. 
 
+Чтобы исправить данную проблему, мы можем сохранить объект стрима в поле с типом `Subscription`, чтобы иметь возможность отписаться от стрима через `unsubscribe()` 
 
+```TS
+import { Component } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+
+@Component({
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+	sub: Subscription;
+
+	constructor() {
+		const intervalStream$ = interval(1000);
+
+		this.sub = intervalStream$.subscribe((value) => {
+			console.log(value);
+		});
+	}
+
+	stop() {
+		this.sub.unsubscribe();
+	}
+}
+```
+
+Кнопка будет вызывать срабатывание метода остановки интервала
+
+```HTML
+<div class='container'>
+	<h1>RxJS</h1>
+	<button class='btn' (click)='stop()'>Stop Interval</button>
+</div>
+```
+
+И теперь кнопка останавливает интервал
+
+![](_png/Pasted%20image%2020230626155734.png)
 
 ## 3. Как использовать операторы
 
+В RxJS присутствует огромное множество операторов, которые могут разными способами обрабатывать данные и сам стрим
 
+Чейн `pipe()` принимает в себя операторы, которые и будут работать над нашими данными
 
+Конкретно в данном примере в пайп попадает два оператора, из которых:
+- `filter` - фильтрует проходящие дальше данные
+- `map` - видоизменяет данные
+
+```TS
+import { Component } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+
+@Component({
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+	sub: Subscription;
+
+	constructor() {
+		const intervalStream$ = interval(1000);
+
+		this.sub = intervalStream$
+			.pipe(
+				filter((value) => value % 2 === 0),
+				map((value) => `Mapped ${value}`),
+			)
+			.subscribe((value) => {
+				console.log(value);
+			});
+	}
+
+	stop() {
+		this.sub.unsubscribe();
+	}
+}
+```
+
+И теперь у нас выходят в консоль только чётные замапленные данные
+
+![](_png/Pasted%20image%2020230626162626.png)
 
 ## 4. Создание своего стрима
+
+
+
+
+
+
 
 
 
