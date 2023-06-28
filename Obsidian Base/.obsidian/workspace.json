@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
                 "mode": "preview",
                 "source": false
               }
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md"
               }
             }
           },
@@ -295,6 +295,7 @@
   "active": "d4d3fface19018ba",
   "lastOpenFiles": [
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627182757.png",
