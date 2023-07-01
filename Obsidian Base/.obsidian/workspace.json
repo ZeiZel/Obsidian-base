@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "mode": "preview",
                 "source": false
               }
@@ -140,7 +140,7 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md"
               }
             }
           },
@@ -292,8 +292,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0fc6bedb86e0e8d5",
+  "active": "d4d3fface19018ba",
   "lastOpenFiles": [
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230701080655.png",
@@ -301,8 +306,6 @@
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230630190255.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/TypeScript/TypeScript.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627182757.png",
@@ -327,11 +330,9 @@
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/6. Сервисы.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/5. Пайпы.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/4. Директивы.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/FrontEnd/Angular 9. Теория и Практика",
     "Development/FrontEnd/Vue.md",
-    "Development/RxJS.md",
     "Development/Tips&Tricks/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
