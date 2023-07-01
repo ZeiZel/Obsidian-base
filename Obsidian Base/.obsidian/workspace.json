@@ -133,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
                 "mode": "source",
                 "source": false
               }
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md"
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md"
               }
             }
           },
@@ -294,6 +294,10 @@
   },
   "active": "0fc6bedb86e0e8d5",
   "lastOpenFiles": [
+    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230701080655.png",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230701080036.png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230630190255.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/TypeScript/TypeScript.md",
@@ -301,7 +305,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627182757.png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627182708.png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627125213.png",
@@ -311,7 +314,6 @@
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627083654.png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png/Pasted image 20230627083641.png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png",
-    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/15. Практика. Создание блога.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/14. Анимации.md",
@@ -330,9 +332,6 @@
     "Development/FrontEnd/Angular 9. Теория и Практика",
     "Development/FrontEnd/Vue.md",
     "Development/RxJS.md",
-    "Development/_png/Pasted image 20230626183630.png",
-    "Development/_png/Pasted image 20230626165501.png",
-    "Development/_png/Pasted image 20230626162626.png",
     "Development/Tips&Tricks/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
