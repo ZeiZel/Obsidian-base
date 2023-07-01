@@ -85,8 +85,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-                "mode": "preview",
+                "file": "Development/Tips&Tricks/Progress Bar.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+                "file": "Development/Tips&Tricks/Progress Bar.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+                "file": "Development/Tips&Tricks/Progress Bar.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md"
+                "file": "Development/Tips&Tricks/Progress Bar.md"
               }
             }
           },
@@ -294,8 +294,10 @@
   },
   "active": "d4d3fface19018ba",
   "lastOpenFiles": [
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
+    "Development/Tips&Tricks/_png/Pasted image 20230701130240.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/Tips&Tricks/Progress Bar.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/12 Работа с файлами.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
@@ -330,9 +332,7 @@
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/6. Сервисы.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/5. Пайпы.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/4. Директивы.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/FrontEnd/Angular 9. Теория и Практика",
-    "Development/FrontEnd/Vue.md",
     "Development/Tips&Tricks/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
