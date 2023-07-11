@@ -2767,19 +2767,13 @@ settings:
 		type: variable-text
 		default: 700px
     - 
-		id: paragraph-spacing-editing
-		title: Paragraph spacing (editing mode)
-        title.zh:  段落间距（编辑模式）
-		type: variable-text
-		default: 0em
-    - 
-		id: paragraph-spacing
+		id: p-spacing
 		title: Paragraph spacing (Reading mode)
         title.zh:  段落间距（阅读模式）
 		type: variable-text
 		default: 1em
     - 
-		id: paragraph-spacing-br
+		id: p-spacing-br
 		title: Paragraph spacing also takes effect after a line break (Reading mode)
 		title.zh: 段间距也对换行后的内容生效（阅读模式）
 		type: class-toggle
@@ -3956,23 +3950,34 @@ body {
 }
 
 /* background - transparent */
+body {
+    --tab-background-active: transparent;
+    --tab-container-background: transparent;
+    --titlebar-background: transparent;
+    --titlebar-background-focused: transparent;
+}
+
+.sidebar-toggle-button,
+.workspace-tabs.mod-top,
+body.is-focused .sidebar-toggle-button,
+body.is-focused .workspace-tabs.mod-top {
+    --tab-container-background: transparent;
+}
 
 body:not(.is-mobile) .workspace-tabs:not(.mod-stacked) .workspace-leaf,
 body:not(.is-mobile) .workspace-tabs:not(.mod-stacked) .workspace-leaf-content,
 body:not(.is-mobile) .workspace-tabs:not(.mod-stacked) .view-header:not(.animate),
 body:not(.is-mobile) .workspace-tabs:not(.mod-stacked) .view-content:not(.vignette-radial, .vignette-linear, .animate),
-.sidebar-toggle-button,
 .mod-left-split .workspace-tab-header.has-active-menu,
 .mod-right-split .workspace-tab-header.has-active-menu,
 body:not(.is-mobile) .workspace-tab-header-container,
-.workspace>.workspace-split,
-.workspace-tabs.mod-top {
+.workspace>.workspace-split {
     background-color: transparent !important;
 }
 
+body:not(.is-mobile) .app-container,
 body:not(.is-mobile) .workspace,
-.workspace-ribbon.mod-left:before,
-body:not(.is-translucent):not(.is-mobile) .sidebar-toggle-button.mod-left {
+.workspace-ribbon.mod-left:before {
     background-color: transparent;
 }
 
@@ -3994,10 +3999,20 @@ body:not(.is-mobile) .view-header-title-container:not(.mod-at-end):after {
 }
 
 /* background - underlying */
-
-body:not(.is-mobile) .app-container {
-    background-color: var(--background-underlying);
+body:not(.is-mobile) {
+    background: var(--background-underlying);
 }
+
+body.theme-light:not(.is-mobile).background-underlying-CSS-light {
+    background: var(--background-underlying-CSS-light, --background-underlying) !important;
+    background-blend-mode: var(--background-underlying-CSS-blend-mode-light) !important;
+}
+
+body.theme-dark:not(.is-mobile).background-underlying-CSS-dark {
+    background: var(--background-underlying-CSS-dark, --background-underlying) !important;
+    background-blend-mode: var(--background-underlying-CSS-blend-mode-dark) !important;
+}
+
 
 body.background-underlying-defalut-light.theme-light,
 body.background-underlying-defalut-dark.theme-dark {
@@ -4012,15 +4027,6 @@ body.background-underlying-Color-dark.theme-dark {
     --background-underlying: var(--background-underlying-dark) !important;
 }
 
-body.theme-light:not(.is-mobile).background-underlying-CSS-light .app-container {
-    background: var(--background-underlying-CSS-light, --background-underlying) !important;
-    background-blend-mode: var(--background-underlying-CSS-blend-mode-light) !important;
-}
-
-body.theme-dark:not(.is-mobile).background-underlying-CSS-dark .app-container {
-    background: var(--background-underlying-CSS-dark, --background-underlying) !important;
-    background-blend-mode: var(--background-underlying-CSS-blend-mode-dark) !important;
-}
 
 /* foreground - underlying */
 body {
@@ -4039,6 +4045,7 @@ body {
     --text-faint: var(--on-border-light);
 
     --titlebar-text-color: var(--text-muted);
+    --titlebar-text-color-focused: var(--text-muted);
     --tab-text-color-active: var(--text-muted);
     --tab-text-color-focused: var(--text-muted);
     --tab-text-color-focused-active: var(--text-muted);
@@ -4062,6 +4069,7 @@ body {
     --text-faint: var(--on-border-dark);
 
     --titlebar-text-color: var(--text-muted);
+    --titlebar-text-color-focused: var(--text-muted);
     --tab-text-color-active: var(--text-muted);
     --tab-text-color-focused: var(--text-muted);
     --tab-text-color-focused-active: var(--text-muted);
@@ -4276,6 +4284,8 @@ body:not(.is-mobile).theme-dark:not(.card-layout-open-dark).mod-root-split-backg
     --divider-color: var(--background-modifier-border);
 }
 
+.is-translucent:not(.is-fullscreen) .titlebar,
+.is-translucent:not(.is-fullscreen) .app-container,
 .is-translucent .workspace-ribbon::after,
 .is-translucent:not(.is-fullscreen) .workspace-tabs.mod-top,
 .is-translucent .workspace-split.mod-horizontal.mod-left-split,
@@ -4284,7 +4294,7 @@ body:not(.is-mobile).theme-dark:not(.card-layout-open-dark).mod-root-split-backg
     background-color: transparent !important;
 }
 
-.is-translucent:not(.is-fullscreen) .app-container {
+.is-translucent:not(.is-fullscreen) {
     background-color: var(--workspace-background-translucent) !important;
 }
 
@@ -4519,19 +4529,20 @@ body:not(.is-mobile).card-highlight-dark.card-layout-open-dark.theme-dark .mod-r
 /* scrollbar */
 body {
     /* Scrollbars */
-    --scrollbar-active-thumb-bg: rgba(var(--mono-rgb-100), 0.15);
     --scrollbar-bg: rgba(var(--mono-rgb-100), 0);
-    --scrollbar-thumb-bg: rgba(var(--mono-rgb-100), 0.15);
+    --scrollbar-thumb-bg: rgba(var(--mono-rgb-100), 0.1);
+    --scrollbar-active-thumb-bg: rgba(var(--mono-rgb-100), 0.15);
 }
 
-body:not(.native-scrollbars) ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+body:not(.native-scrollbars) ::-webkit-scrollbar,
+body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
 }
 
-body.is-mobile:not(.native-scrollbars) ::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
+body:not(.native-scrollbars) ::-webkit-scrollbar-thumb,
+body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
 }
 
 .mobile-toolbar-options-container::-webkit-scrollbar {
@@ -4554,44 +4565,11 @@ body:not(.native-scrollbars):not(.is-mobile) ::-webkit-scrollbar-thumb:active {
     background-color: var(--scrollbar-active-thumb-bg) !important;
 }
 
-body:not(.native-scrollbars) ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: var(--radius-l);
-    border: 2px solid transparent;
-    border-width: 0px 3px 0px 3px;
-}
-
-body:not(.native-scrollbars) ::-webkit-scrollbar-thumb:hover {
-    -webkit-border-radius: var(--radius-l);
-    border: 2px solid transparent;
-    border-width: 0px 0px 0px 0px;
-}
-
-body.is-mobile:not(.native-scrollbars) ::-webkit-scrollbar-thumb,
-body.is-mobile:not(.native-scrollbars) ::-webkit-scrollbar-thumb:hover {
-    -webkit-border-radius: var(--radius-l);
-    border: 2px solid transparent;
-    border-width: 0px 0px 0px 0px;
-}
-
 body:not(.native-scrollbars) .workspace-leaf-content:is([data-type="surfing-view"], [data-type="graph"], [data-type="localgraph"]) ::-webkit-scrollbar,
 body:not(.native-scrollbars).scrollbar-hide ::-webkit-scrollbar {
     display: none;
 }
 
-body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar {
-    width: 16px;
-    height: 16px
-}
-
-body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar-thumb {
-    -webkit-border-radius: var(--radius-l);
-    border: 6px solid transparent;
-}
-
-body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar-thumb:hover {
-    -webkit-border-radius: var(--radius-l);
-    border: 4px solid transparent;
-}
 
 /*off scrollbar space occupancy, from https://github.com/subframe7536/obsidian-theme-maple, author:@subframe7536  */
 body:not(.is-mobile).scrollbar-space-occupation-off :is(.mk-file-tree>div>div),
@@ -4601,7 +4579,6 @@ body:not(.is-mobile).scrollbar-space-occupation-off :is(.vertical-tab-header, .v
 
 /* ====== titlebar ===== */
 body:not(.is-translucent) .titlebar-text {
-    background-color: var(--background-underlying);
     opacity: 1;
 }
 
@@ -4641,7 +4618,6 @@ body.mod-windows .titlebar .titlebar-button.mod-close:focus {
     background-color: var(--background-modifier-hover);
 }
 
-
 .titlebar-button-container.mod-right .titlebar-button:last-of-type {
     margin-right: 0px;
 }
@@ -4678,13 +4654,21 @@ body.is-hidden-frameless .titlebar-button-container.mod-right {
     -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><defs><style>.cls-1{fill:none;}.cls-2{fill-rule:evenodd;}</style></defs><path class="cls-2" d="M4,11c0-.55,.45-1,1-1h6c.55,0,1,.45,1,1s-.45,1-1,1H5c-.55,0-1-.45-1-1Z"/><rect class="cls-1" width="16" height="16"/></svg>');
 }
 
+@media (hover: hover) {
+    .titlebar-button:hover {
+        background-color: transparent;
+    }
+}
 
 /* ====== status bar====== */
 
+body {
+    --status-bar-background: transparent;
+    --status-bar-border-color: transparent;
+    --status-bar-border-width: 0;
+}
 
 .status-bar {
-    border: none;
-    background-color: transparent;
     padding: 0 16px 0 0;
     width: calc(100% - 44px);
     min-height: 16px;
@@ -4712,7 +4696,12 @@ body.is-hidden-frameless .titlebar-button-container.mod-right {
 }
 
 .mod-macos.is-hidden-frameless:not(.is-popout-window) .sidebar-toggle-button.mod-right {
-    padding-right: 16px;
+    padding-right: 0px;
+    position: unset;
+}
+
+.mod-macos.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+    padding-right: 0px;
 }
 
 body:not(.is-hidden-frameless):not(.is-popout-window) .sidebar-toggle-button.mod-right {
@@ -6869,38 +6858,26 @@ body {
 }
 
 /* ====== editor ====== */
-/* paragraph spacing */
-body {
-    --paragraph-spacing: 1em;
-    --paragraph-spacing-editing: 0em;
-}
+/* Paragraphs */
 
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view blockquote,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view ol,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view p,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view ul {
-    margin-block-start: var(--paragraph-spacing);
-    margin-block-end: var(--paragraph-spacing);
-}
-
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view ol ol,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view ol ul,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view ul ol,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view ul ul,
-.workspace-leaf-content[data-type="markdown"] .markdown-preview-view li p {
-    margin-block-start: 0em;
-    margin-block-end: 0em
-}
-
-body.paragraph-spacing-br :is(.markdown-preview-view, .markdown-rendered) p>br {
+body.p-spacing-br :is(.markdown-preview-view, .markdown-rendered) p>br {
     content: " ";
-    margin-top: var(--paragraph-spacing);
+    margin-top: var(--p-spacing);
     display: block;
 }
 
-.markdown-source-view :is(.cm-line + .cm-line) {
-    padding-top: calc(var(--paragraph-spacing-editing) / 2);
-    padding-bottom: calc(var(--paragraph-spacing-editing) / 2);
+.cm-s-obsidian .cm-line.HyperMD-header {
+    padding-top: 0;
+    margin-top: var(--p-spacing) !important;
+}
+
+.cm-s-obsidian .cm-line.HyperMD-header+.cm-line:not(.HyperMD-header):not(:has(>br:only-child)) {
+    padding-top: 0;
+    margin-top: var(--p-spacing-empty) !important;
+}
+
+.markdown-source-view.mod-cm6 .cm-content>div:first-of-type {
+    margin-top: 0 !important;
 }
 
 
@@ -8482,6 +8459,11 @@ svg.spreadsheet {
 .workspace-tab-header-container svg.lucide-hash {
     background-color: currentColor;
     -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.b{fill:none;}</style></defs><rect class="b" width="24" height="24"/><g><circle cx="8.5" cy="8.5" r="2"/><path d="M21.77,12.98c-.15-.37-.37-.7-.66-.98L13,3.89c-.57-.57-1.33-.88-2.14-.89h-3.86c-1.05,0-2.08,.43-2.83,1.17-.74,.74-1.17,1.77-1.17,2.83v3.86c0,.81,.31,1.57,.89,2.14l8.11,8.11c.28,.28,.61,.5,.98,.66,.37,.15,.76,.23,1.16,.23s.79-.08,1.16-.23c.37-.15,.7-.38,.98-.66l4.83-4.83c.28-.28,.51-.61,.66-.98,.15-.37,.23-.76,.23-1.16s-.08-.79-.23-1.16Zm-1.85,1.55c-.05,.12-.12,.24-.22,.33l-4.84,4.84c-.09,.09-.21,.17-.33,.22-.25,.11-.54,.1-.79,0-.12-.05-.24-.13-.33-.22L5.3,11.58c-.19-.19-.3-.45-.3-.72v-3.86c0-.53,.21-1.04,.58-1.41s.89-.59,1.42-.59h3.86c.28,0,.53,.11,.73,.3l8.12,8.12c.1,.1,.17,.21,.22,.33,.05,.13,.08,.26,.08,.39s-.03,.27-.08,.39Z"/></g></svg>')
+}
+
+.workspace-tab-header-container svg.lucide-bookmark {
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M16%202H8a3%203%200%200%200-3%203v16a1%201%200%200%200%201.5.87l5.5-3.18%205.5%203.18a1%201%200%200%200%20.5.13%201%201%200%200%200%20.5-.13A1%201%200%200%200%2019%2021V5a3%203%200%200%200-3-3Zm1%2017.27-4.5-2.6a1%201%200%200%200-1%200L7%2019.27V5a1%201%200%200%201%201-1h8a1%201%200%200%201%201%201v14.27Z%22%2F%3E%3C%2Fsvg%3E");
 }
 
 .workspace-tab-header-container svg.lucide-layout-grid {
