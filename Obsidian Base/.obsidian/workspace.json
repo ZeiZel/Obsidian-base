@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
                 "mode": "preview",
                 "source": false
               }
@@ -190,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -207,7 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -230,7 +230,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md"
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md"
               }
             }
           },
@@ -271,6 +271,10 @@
   "active": "5cd023c28eb2c5b7",
   "lastOpenFiles": [
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/18 - Тернарный оператор.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/17 - Условные инструкции.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/16 – Деструктуризация.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
     "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/14 – Инструкции.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/13 - Обработка ошибок.md",
@@ -304,10 +308,6 @@
     "Development/Mobile",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/15 Компонент продукта.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/13 Роутинг.md",
-    "Development/WebSockets/WebSockets.md",
     "Development/WebSockets",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons",
