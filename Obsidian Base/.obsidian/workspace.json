@@ -305,8 +305,11 @@
   },
   "active": "47c9fc7a70a387f5",
   "lastOpenFiles": [
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/01.Настройка окружения.md",
+    "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png/Pasted image 20230713134634.png",
+    "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/Senior JS.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/00.Введение.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/Практический модуль.md",
@@ -327,10 +330,8 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/22 – Промисы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/21 - Классы и прототипы.md",
     "Development/TypeScript/TypeScript.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/TypeScript/_lessons/04 Продвинутые типы.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
-    "Development/MobileDev/React Native.md",
     "Development/MobileDev/_png/Pasted image 20230702190631.png",
     "Development/MobileDev/_png/Pasted image 20230702190102.png",
     "Development/MobileDev/_png/Pasted image 20230702184116.png",
@@ -340,7 +341,6 @@
     "Development/MobileDev/_png/Pasted image 20230702144353.png",
     "Development/MobileDev/_png/Pasted image 20230702144330.png",
     "Development/MobileDev/_png/Pasted image 20230702144303.png",
-    "Development/MobileDev/_png/Pasted image 20230702144028.png",
     "Development/MobileDev/_png",
     "Development/Mobile",
     "Development/WebSockets",
@@ -349,7 +349,6 @@
     "Development/FrontEnd/Angular 9. Теория и Практика",
     "Development/Tips&Tricks/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png"
+    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development"
   ]
 }
