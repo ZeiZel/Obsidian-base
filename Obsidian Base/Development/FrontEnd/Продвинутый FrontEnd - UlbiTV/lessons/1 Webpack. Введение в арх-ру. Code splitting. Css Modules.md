@@ -333,7 +333,7 @@ npm i -D webpack-dev-server @types/webpack-dev-server
 `config > build > buildDevServer.ts`
 ```TS
 import { BuildOptions } from './types/config';
-import { Configuration } from 'webpack-dev-server';
+import { Configuration } from 'webpack-dev-server'; // импортируем конфигурацию отсюда
 
 export function buildDevServer(options: BuildOptions): Configuration {
 	return {
@@ -596,7 +596,7 @@ export function buildPlugins({ paths }: BuildOptions): WebpackPluginInstance[] {
 }
 ```
 
-В лоадерах нужно настроить `style-loader` и экстрактор, чтобы они работали в разно время (прод/дев) и нужно настроить `css-loader`, чтобы он поддерживал модули в названиях файлов и транспилировал их в объекты, которые поддерживаются JS
+В лоадерах нужно настроить `style-loader` и экстрактор, чтобы они работали в разное время (прод/дев) и нужно настроить `css-loader`, чтобы он поддерживал модули в названиях файлов и транспилировал их в объекты, которые поддерживаются JS
 
 `config > build > buildLoaders.ts`
 ```TS
