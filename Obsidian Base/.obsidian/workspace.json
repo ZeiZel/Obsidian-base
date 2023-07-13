@@ -134,13 +134,13 @@
               "type": "markdown",
               "state": {
                 "file": "Development/Алгоритмы и Структуры даных.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming Principes/SOLID принципы.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming Principes/SOLID принципы.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming Principes/SOLID принципы.md"
+                "file": "Development/Алгоритмы и Структуры даных.md"
               }
             }
           },
@@ -292,8 +292,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "454d06a1147a9275",
+  "active": "892fe28c468fa145",
   "lastOpenFiles": [
+    "Programming Principes/SOLID принципы.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -319,7 +320,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/11 - (Бонус из Практического курса) Реальный проект на JS в классическом стиле.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/002 Настраиваем сборку проекта и разбираемся с ТЗ.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/003 Работа с модальными окнами.md",
     "Development/MobileDev/_png/Pasted image 20230702190631.png",
     "Development/MobileDev/_png/Pasted image 20230702190102.png",
     "Development/MobileDev/_png/Pasted image 20230702184116.png",
