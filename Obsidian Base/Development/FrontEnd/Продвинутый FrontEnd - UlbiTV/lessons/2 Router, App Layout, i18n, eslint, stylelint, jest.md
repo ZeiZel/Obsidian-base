@@ -437,17 +437,135 @@ export const App = () => {
 
 ### 14 Sidebar. Layout приложения Метка
 
+Добавляем компонент сайдбара и перемещаем в него кнопку смены темы. Так же анимируем скрытие сайдбара через накладываемый стиль коллапса
 
+`src > widgets > Sidebar > ui > Sidebar > Sidebar.tsx`
+```TSX
+import React, { useState } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import styles from './Sidebar.module.scss';
+import { ISidebarProps } from './Sidebar.props';
+import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 
+export const Sidebar = ({ className }: ISidebarProps) => {
+	const [collapsed, setCollapsed] = useState<boolean>(false);
 
+	const onToggle = () => setCollapsed((prev) => !prev);
 
+	return (
+		<div className={classNames(styles.sidebar, { [styles.collapsed]: collapsed }, [className])}>
+			<button onClick={onToggle}>toggle</button>
+			<div className={styles.switchers}>
+				<ThemeSwitcher />
+				{/* LanguageSwitcher */}
+			</div>
+		</div>
+	);
+};
+```
+`src > widgets > Sidebar > ui > Sidebar > Sidebar.props.ts`
+```TS
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
+export interface ISidebarProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+```
+`src > widgets > Sidebar > ui > Sidebar > Sidebar.module.scss`
+```SCSS
+.sidebar {
+	position: relative;
 
+	height: calc(100vh - var(--navbar-height));
+	width: var(--sidebar-width);
 
+	background: var(--inverted-bg-color);
 
+	transition: all .3s ease;
+}
 
+.collapsed {
+	width: var(--sidebar-width-collpased);
+}
 
+.switchers {
+	position: absolute;
+	bottom: 29px;
 
+	display: flex;
+	justify-content: center;
+
+	width: 100%;
+}
+```
+`src > widgets > Sidebar > index.ts`
+```TS
+export { Sidebar } from './ui/Sidebar/Sidebar';
+```
+
+В роутере приложения элемент нужно обернуть во враппер страницы, который имеет свойство `flex-grow`, чтобы он занимал полностью размер своей флекс-колонки
+
+`src > app > providers > router > ui > AppRouter.tsx
+```TSX
+export const AppRouter = () => {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<Routes>
+				{Object.values(routeConfig).map(({ path, element }) => (
+					<Route
+						key={path}
+						path={path}
+						element={
+							<Suspense fallback={<div>Loading...</div>}>
+								<div className={'page-wrapper'}>{element}</div>
+							</Suspense>
+						}
+					/>
+				))}
+			</Routes>
+		</Suspense>
+	);
+};
+```
+
+Добавляем переменные размеров сайдбара
+
+`src > app > variables > global.scss`
+```SCSS
+:root {
+	--font-family-main: Montserrat, Roboto, sans-serif;
+
+	--font-size-m: 16px;
+	--font-line-m: 24px;
+	--font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+
+	--font-size-l: 24px;
+	--font-line-l: 32px;
+	--font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+
+	--navbar-height: 50px;
+	--sidebar-width: 300px;
+	--sidebar-width-collpased: 80px;
+}
+```
+
+Добавляем стили для отображения сайдбара и деления страницы на 2 части
+
+`src > app > index.scss`
+```SCSS
+.content-page {
+	display: flex;
+}
+
+.page-wrapper {
+	flex-grow: 1;
+
+	width: 100%;
+
+	padding: 20px;
+}
+```
+
+![](_png/Pasted%20image%2020230716113955.png)
 
 ### 15 i18n Интернационализация. Define plugin. Плагин для переводов
 
