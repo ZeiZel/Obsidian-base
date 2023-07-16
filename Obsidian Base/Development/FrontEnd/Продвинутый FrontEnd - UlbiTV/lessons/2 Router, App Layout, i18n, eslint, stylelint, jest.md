@@ -307,7 +307,7 @@ export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
 }
 ```
 
-Так же нужно додавить типы для подключаемых файлов 
+Так же нужно добавить типы для подключаемых файлов 
 
 `src > app > types > global.d.ts`
 ```TS
@@ -386,10 +386,10 @@ export const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ className }) => {
 ```
 `src > widgets > ThemeSwitcher > ui > ThemeSwitcher.props.ts`
 ```TS
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 export interface IThemeSwitcherProps
-	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {}
 ```
 `src > widgets > ThemeSwitcher > index.ts`
 ```TS

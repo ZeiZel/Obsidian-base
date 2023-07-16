@@ -534,7 +534,7 @@ export const App = () => {
 
 Стили
 
-`src > components > app > App.scss
+`src > components > app > App.scss`
 ```SCSS
 h1 {
 	font-size: 74px;
