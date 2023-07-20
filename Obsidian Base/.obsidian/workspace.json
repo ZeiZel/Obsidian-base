@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
                 "mode": "source",
                 "source": false
               }
@@ -201,7 +201,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -218,7 +218,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -241,7 +241,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md"
               }
             }
           },
@@ -281,6 +281,7 @@
   },
   "active": "47c9fc7a70a387f5",
   "lastOpenFiles": [
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
@@ -298,7 +299,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
     "Development/Алгоритмы и Структуры даных.md",
     "Development/FrontEnd/Tailwind CSS.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/Практический модуль.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230716113955.png",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/02.Верстка (Опционально).md",
