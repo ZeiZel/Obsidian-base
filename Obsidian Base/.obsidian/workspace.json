@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "mode": "preview",
                 "source": false
               }
@@ -62,7 +62,7 @@
               "type": "markdown",
               "state": {
                 "file": "Development/FrontEnd/React Foundamentals.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -128,7 +128,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -202,7 +202,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+                "file": "Development/FrontEnd/React Foundamentals.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -219,7 +219,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
+                "file": "Development/FrontEnd/React Foundamentals.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -242,7 +242,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md"
+                "file": "Development/FrontEnd/React Foundamentals.md"
               }
             }
           },
@@ -280,7 +280,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "48c958706ae37357",
+  "active": "28536df6c8e46b59",
   "lastOpenFiles": [
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
