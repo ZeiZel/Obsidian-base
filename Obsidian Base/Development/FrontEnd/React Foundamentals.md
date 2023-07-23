@@ -1661,6 +1661,8 @@ const fetchPosts = async () => {
 ```TSX
 export const Posts = () => {  
    const [posts, setPosts] = useState('');  
+   // состояние для загрузки постов  
+   const [isPostLoading, setIsPostLoading] = useState(false);  
   
    const fetchPosts = async () => {  
       // сейчас посты только начнут загрузку, поэтому нужно показать загрузку  
@@ -1676,9 +1678,6 @@ export const Posts = () => {
       fetchPosts();  
    }, []);  
     
-   // состояние для загрузки постов  
-   const [isPostLoading, setIsPostLoading] = useState(false);  
-  
    /// CODE ...
   
    return (  
