@@ -126,6 +126,18 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "9a7c472d63803b7e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
         "currentTab": 9
@@ -282,6 +294,10 @@
   },
   "active": "4dc1f32f105f1efa",
   "lastOpenFiles": [
+    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+    "Development/FrontEnd/Vue.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/Алгоритмы и Структуры даных.md",
@@ -306,9 +322,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/05 Компоненты Head и Document.md",
-    "Development/FrontEnd/Tailwind CSS.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/Практический модуль.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230716113955.png",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png/Pasted image 20230713182016.png",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png/Pasted image 20230713181539.png",
