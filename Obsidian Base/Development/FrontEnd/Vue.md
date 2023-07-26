@@ -897,15 +897,16 @@ app.mount('#app');
 ![](_png/Pasted%20image%2020230626114921.png)
 ![](_png/Pasted%20image%2020230626114924.png)
 
-Чтобы реализовать связывание по стандартному modelValue без указания конкретного значения через атрибут, мы можем написать такой код и сбиндить значение инпута со значением модели через событие, которое будет срабатывать на `update`
+Чтобы реализовать связывание по стандартному `modelValue` без указания конкретного значения через атрибут, мы можем написать такой код и сбиндить значение инпута со значением модели через событие, которое будет срабатывать на `update`
 
-`components > ui > UiInput.vue
+`components > ui > UiInput.vue`
 ```vue
 <template>
 	<input 
-	:value="modelValue" // 1
-	@input="updateInput" // 2
-	class="input" type="text" />
+		:value="modelValue" // 1
+		@input="updateInput" // 2
+		class="input" type="text" 
+	/>
 </template>
 
 <script>
