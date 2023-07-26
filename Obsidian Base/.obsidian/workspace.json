@@ -114,17 +114,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "9488e0c59f43c49a",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
           }
         ],
-        "currentTab": 9
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -198,6 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -214,6 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -235,7 +229,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Development/Алгоритмы и Структуры даных.md"
+              }
             }
           },
           {
@@ -272,7 +268,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9488e0c59f43c49a",
+  "active": "892fe28c468fa145",
   "lastOpenFiles": [
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/TypeScript/TypeScript.md",
