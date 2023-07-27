@@ -114,9 +114,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "d5727045911324c0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Vue.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 9
       }
     ],
     "direction": "vertical"
@@ -190,7 +202,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
+                "file": "Development/FrontEnd/Vue.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -207,7 +219,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
+                "file": "Development/FrontEnd/Vue.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -230,7 +242,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md"
+                "file": "Development/FrontEnd/Vue.md"
               }
             }
           },
@@ -268,8 +280,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "48c958706ae37357",
+  "active": "d5727045911324c0",
   "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
@@ -297,7 +310,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20230716113955.png",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png/Pasted image 20230713182016.png",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png/Pasted image 20230713181539.png",
