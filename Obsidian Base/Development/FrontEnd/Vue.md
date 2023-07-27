@@ -1198,27 +1198,140 @@ export default {
 
 ##  Модификаторы V-MODEL
 
+Модификаторы добавляются через точку и модифицируют конечную функциональность `v-model.trim.number`. `trim` срезает пробелы, а `number` переводит значение сразу к числу
 
+`App.vue`
+```vue
+<template>  
+    <div class="app">  
+       <h1>Страница с постами</h1>  
+       <input type="text" v-model.trim.number="modificatorValue" />  
+       <ui-button style="margin: 15px 0" @click="showDialog">Добавить пост</ui-button>  
+       <modal-window v-model:show="dialogVisible">  
+          <post-form @create="createPost" />  
+       </modal-window>  
+       <post-list :posts="posts" @remove="removePost" />  
+    </div>  
+</template>  
+  
+<script>  
+import PostList from '@/components/PostList.vue';  
+import PostForm from '@/components/PostForm.vue';  
+import UiButton from '@/components/ui/UiButton.vue';  
+export default {  
+    components: {  
+       UiButton,  
+       PostForm,  
+       PostList,  
+    },  
+    data() {  
+       return {  
+          posts: [  
+             { id: 1, title: 'JavaScript', body: 'JS - is universal language' },  
+             { id: 2, title: 'C#', body: 'C# - is beautiful language' },  
+             { id: 3, title: 'Java', body: 'Java - is banking language' },  
+          ],  
+          dialogVisible: false,  
+          modificatorValue: '',  
+       };  
+    },  
+    methods: {  
+       createPost(post, second, third) {  
+          console.log(second);  
+          console.log(third);  
+          this.posts.push(post);  
+       },  
+       removePost(post) {  
+          this.posts = this.posts.filter((p) => p.id !== post.id);  
+       },  
+       showDialog() {  
+          this.dialogVisible = true;  
+       },  
+    },  
+};  
+</script>
+```
 
-
-
-
+![](_png/Pasted%20image%2020230727144826.png)
 
 
 ##  Работа с сервером. Получаем посты. Axios
 
+Добавляем метод `fetchPosts`, который будет срабатывать при нажатии кнопки. Все полученные данные с сервера будут сразу заноситься в свойство `posts`
 
+`App.vue`
+```vue
+<template>
+	<div class="app">
+		<h1>Страница с постами</h1>
+		<ui-button @click="fetchPosts">Получить посты</ui-button>
+		<ui-button style="margin: 15px 0" @click="showDialog">Добавить пост</ui-button>
+		<modal-window v-model:show="dialogVisible">
+			<post-form @create="createPost" />
+		</modal-window>
+		<post-list :posts="posts" @remove="removePost" />
+	</div>
+</template>
 
+<script>
+import PostList from '@/components/PostList.vue';
+import PostForm from '@/components/PostForm.vue';
+import UiButton from '@/components/ui/UiButton.vue';
+import axios from 'axios';
+export default {
+	components: {
+		UiButton,
+		PostForm,
+		PostList,
+	},
+	data() {
+		return {
+			posts: [],
+			dialogVisible: false,
+		};
+	},
+	methods: {
+		createPost(post, second, third) {
+			console.log(second);
+			console.log(third);
+			this.posts.push(post);
+		},
+		removePost(post) {
+			this.posts = this.posts.filter((p) => p.id !== post.id);
+		},
+		showDialog() {
+			this.dialogVisible = true;
+		},
+		async fetchPosts() {
+			try {
+				const { data } = await axios.get(
+					'https://jsonplaceholder.typicode.com/posts?_limit=10',
+				);
+				this.posts = data;
+			} catch (e) {
+				throw new Error(e);
+			}
+		},
+	},
+};
+</script>
+```
 
-
-
-
+![](_png/Pasted%20image%2020230727150033.png)
 
 ##  Жизненный цикл компонента
 
+У нас есть достаточное количество различных хуков, которые работают на протяжении всего цикла существования vue-компонента:
+- `beforeCreate` - вызывается перед созданием компонента. То есть тут ещё не инициализировались события и жизненный цикл
+- `created` - тут уже стоит вызывать условия на проверки и что-то инициализировать. В этот момент в компонент добавляются инъекции и реактивность
+- `beforeMount` - отрабатывает до того, как элемент встроится в дом-дерево
+- `mounted` - отработает после встраивания
+- `beforeUpdate` - до обновления
+- `updated` - выполняется после обновления компонента
+- `beforeDestroy` - до уничтожения компонента
+- `destroyed` - после его уничтожения из дом-дерева
 
-
-
+![](_png/Pasted%20image%2020230727152418.png)
 
 
 
