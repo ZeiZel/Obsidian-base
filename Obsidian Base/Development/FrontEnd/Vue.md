@@ -1333,17 +1333,75 @@ export default {
 
 ![](_png/Pasted%20image%2020230727152418.png)
 
-
-
-
 ##  Индикатор загрузки данных
 
+Первым делом нужно вызывать загрузку постов в хуке `mounted`, который при монтировке компонента подгрузит нужные данные
 
+Далее зададим поле `isPostsLoading`, которое будем менять внутри функции `fetchPosts`. Данное поле будет использоваться для условия отображения 
 
+`App.vue`
+```vue
+<template>
+	<div class="app">
+		<h1>Страница с постами</h1>
+		<ui-button style="margin: 15px 0" @click="showDialog">Добавить пост</ui-button>
+		<modal-window v-model:show="dialogVisible">
+			<post-form @create="createPost" />
+		</modal-window>
+		<post-list :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+		<div v-else>Идёт загрузка...</div>
+	</div>
+</template>
 
+<script>
+import PostList from '@/components/PostList.vue';
+import PostForm from '@/components/PostForm.vue';
+import axios from 'axios';
+export default {
+	components: {
+		PostForm,
+		PostList,
+	},
+	data() {
+		return {
+			posts: [],
+			dialogVisible: false,
+			isPostsLoading: false,
+		};
+	},
+	methods: {
+		createPost(post, second, third) {
+			console.log(second);
+			console.log(third);
+			this.posts.push(post);
+		},
+		removePost(post) {
+			this.posts = this.posts.filter((p) => p.id !== post.id);
+		},
+		showDialog() {
+			this.dialogVisible = true;
+		},
+		async fetchPosts() {
+			try {
+				this.isPostsLoading = true;
 
-
-
+				const { data } = await axios.get(
+					'https://jsonplaceholder.typicode.com/posts?_limit=10',
+				);
+				this.posts = data;
+			} catch (e) {
+				throw new Error(e);
+			} finally {
+				this.isPostsLoading = false;
+			}
+		},
+	},
+	mounted() {
+		this.fetchPosts();
+	},
+};
+</script>
+```
 
 ##  Выпадающий список. Сортировка постов
 
