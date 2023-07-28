@@ -134,10 +134,26 @@
 
 На обработку текста в одинарных кавычках уходит в два раза меньше памяти, чем на двойные 
 
+`index.php`
+```php
+<?php  
+	$string = 'Hello';  
+	  
+	echo "vars: " . $string . '<br>';  
+	echo "vars: $string" . '<br>';  
+	echo 'vars: $string' . '<br>'; // в '' переменные не будут работать  
+	echo "<input type=\"text\" />" . '<br>'; //  
+	echo strlen($string) . '<br>'; // выведет длину строки  
+	echo trim(" saviour ") . '<br>'; // уберёт все лишние пробелы 
+	echo strtolower($string) . '<br>'; // приводит к нижнему регистру - если есть кириллица, то стоит использовать mb_strtolower  
+	echo strtoupper($string) . '<br>'; // приводит к верхнему регистру - если есть кириллица, то стоит использовать mb_strtoupper  
+	echo md5("some string") // кеширует строку (лучше применять для паролей)  
+?>
+```
 
+![](_png/Pasted%20image%2020230728165302.png)
 
-
-
+## Условные операторы
 
 
 
