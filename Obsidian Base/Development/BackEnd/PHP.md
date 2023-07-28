@@ -40,8 +40,54 @@
 
 ## Переменные и типы данных
 
+Все переменные мы начинаем записывать с `$`. 
 
+Мы имеем 4 основных типа данных:
+- int
+- float
+- string
+- boolean
 
+В PHP присутствует динамическая типизация, когда в определённых моментах тип данных переменной может подстроиться под операцию. Так же int переменной можно присвоить string данные.
+
+Чтобы обозначить константу, можно воспользоваться функцией `define()` или синтаксисом `const`
+
+`index.php`
+```php
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <?php
+        define('VALUE', 20);
+        const VALUE_AGE = 30;
+        echo VALUE . '<br>';
+        echo VALUE_AGE . '<br>';
+
+        $number = 5; // int
+        $number = 45;
+        $num = 0;
+        $name = 'Valery'; // string
+        $cof = 0.891; // float
+        $bool = true; // boolean
+
+        echo $number . ' ' . $num;
+
+        $a = 0.5;
+        $b = "0.5";
+
+        echo $a + $b; // 1 - нет строгой типизации, поэтому строка переведётся в число
+        echo $a + floatval($b); // 1 - перевод в float
+    ?>
+</body>
+</html>
+```
 
 
 

@@ -114,33 +114,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "360e29beb243054c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/Ruby.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6fc0c120f371307b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/PHP.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 10
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -214,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -231,7 +207,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +230,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP.md"
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md"
               }
             }
           },
@@ -292,16 +268,21 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "6fc0c120f371307b",
+  "active": "b1fb306ebcd1f6c6",
   "lastOpenFiles": [
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/13 Отладка и watch.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/11 Первый шаг к архитектуре.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/12 Dependency Injection.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
+    "Development/Алгоритмы и Структуры даных.md",
+    "Development/BackEnd/Ruby.md",
+    "Development/BackEnd/PHP.md",
     "Development/BackEnd/_png/Pasted image 20230727193450.png",
     "Development/BackEnd/_png/Pasted image 20230727191454.png",
-    "Development/BackEnd/PHP.md",
-    "Development/BackEnd/Ruby.md",
     "Development/BackEnd/_png/Pasted image 20230727171142.png",
     "Development/BackEnd/_png/Pasted image 20230727170528.png",
     "Development/BackEnd/_png/Pasted image 20230727163255.png",
-    "Development/Алгоритмы и Структуры даных.md",
     "Development/FrontEnd/Vue.md",
     "Development/FrontEnd/_png/Pasted image 20230727152418.png",
     "Development/FrontEnd/_png/Pasted image 20230727150033.png",
@@ -323,13 +304,8 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Design/DaVinci Resolve/Модули/6 - 7 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров. Стилизация видео и локальные коррекции.md",
     "Design/DaVinci Resolve/Модули/_png/Pasted image 20230723173950.png",
-    "Design/DaVinci Resolve/Модули/_png/Pasted image 20230723173821.png",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Development/TypeScript/_lessons/03 Основные типы.md",
-    "Development/TypeScript/_lessons/04 Продвинутые типы.md",
-    "Development/FrontEnd/React Foundamentals.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
     "Development/MobileDev/_png",
     "Development/Mobile",
