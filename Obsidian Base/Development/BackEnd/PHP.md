@@ -1,4 +1,6 @@
 
+# Основы PHP
+
 ## Локальный сервер. Вывод информации и комментарии
 
 В PhpStorm есть свой сервер, который запускается, если мы укажем путь до интерпретатора php, который можно скачать [тут](https://windows.php.net/download#php-8.2)
@@ -987,90 +989,270 @@ else
     echo "переменная message не определена";
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Функция `empty()` проверяет переменную на "пустоту". "Пустая" переменная - это переменная, значение которой равно `null`, `0`, `false` или пустой строке - в этом случае функция `empty()` возвращает true
+
+```php
+<?php
+$message = "";
+if(empty($message))
+    echo "переменная message не определена";
+else
+    echo $message;
+?>
+```
+
+С помощью функции `unset()` мы можем уничтожить переменную:
+
+```php
+<?php
+	$a=20;
+	echo $a; // 20
+	unset($a);
+	echo $a; // ошибка, переменная не определена
+?>
+```
+
+
+## Получение и установка типа переменной. Преобразование типов
+
+Для получения типа переменной применяется функция `gettype()`, которая возвращает название типа переменной
+
+```php
+<?php
+	$a = 10;
+	$b = "10";
+	echo gettype($a); // integer
+	echo "<br>";
+	echo gettype($b);  // string
+?>
+```
+
+Так же есть специальные функции, которые проверяют значение на соответствие определённым типам данных:
+
+- `is_integer($a)`
+- `is_string($a)`
+- `is_double($a)`
+- `is_numeric($a)`
+- `is_bool($a)`
+- `is_scalar($a)`
+- `is_null($a)`
+- `is_array($a)
+- `is_object($a)`
+
+С помощью функции `settype()` можно установить для переменной определенный тип. Если удалось установить тип, то функция возвращает `true`, если нет - то значение `false`.
+
+```php
+<?php
+	$a = 10.7;
+	settype($a, "integer");
+	echo $a; // 10
+?>
+```
+
+Так же мы можем явно преобразовывать типы
+
+```php
+$boolVar = false;
+$intVar = (int)$boolVar; // 0
+echo "boolVar = $boolVar<br>intVar = $intVar";
+```
+
+В PHP могут применяться следующие преобразования:
+
+- (int), (integer): преобразование в int (в целое число)
+- (bool), (boolean): преобразование в bool
+- (float), (double), (real): преобразование в float
+- (string): преобразование в строку
+- (array): преобразование в массив
+- (object): преобразование в object
+
+## Операции с массивами
+
+Функция `is_array()` проверяет, является ли переменная массивом, и если является, то возвращает true, иначе возвращает false.
+
+```php
+$users = ["Tom", "Bob", "Sam"];
+$isArray = is_array($users);
+echo ($isArray==true)?"это массив":"это не массив";
+```
+
+Функция count() и sizeof() получают количество элементов массива
+
+```php
+$users = ["Tom", "Bob", "Sam"];
+$number = count($users);
+// то же самое, что
+// $number = sizeof($users);
+echo "В массиве users $number элемента/ов";
+```
+
+Функция shuffle перемешивает элементы массивы случайным образом:
+
+```php
+$users = ["Tom", "Bob", "Sam", "Alice"];
+shuffle($users);
+print_r($users);
+// один из возможных вариантов
+//Array ( [0] => Bob [1] => Tom [2] => Alice [3] => Sam )
+```
+
+Функция compact позволяет создать из набора переменных ассоциативный массив, где ключами будут имена переменных:
+
+```php
+<?php
+ 
+$model = "Apple II";
+$producer = "Apple";
+$year = 1978;
+ 
+$data = compact("model", "producer", "year");
+print_r($data);
+// получится следующий вывод
+// Array ( [model] => Apple II [producer] => Apple [year] => 1978 ) 
+?>
+```
+
+Для сортировки по возрастанию используется функция `asort()`. Эта функция сортирует автоматически по порядку возрастания (или по алфавиту)
+
+Так же мы можем определить варианты сортировки:
+- `SORT_REGULAR`: автоматический выбор сортировки
+- `SORT_NUMERIC`: числовая сортировка
+- `SORT_STRING`: сортировка по алфавиту
+
+```php
+$users = ["Tom", "Bob", "Sam", "Alice"];
+asort($users);
+print_r($users);
+// вывод отсортированного массива
+// Array ( [3] => Alice [1] => Bob [2] => Sam [0] => Tom )
+
+asort($users, SORT_STRING); // выбираем сортировку по алфавит
+```
+
+Функция `asort` производит сортировку по значениям элементов, но также существует и еще и сортировка по ключам. Она представлена функцией `ksort`
+
+```php
+$states = ["Spain" => "Madrid", "France" => "Paris", "Germany" => "Berlin", ];
+asort($states);
+print_r($states);
+// массив после asort   - сортировка по значениям элементов
+// Array ( [Germany] => Berlin [Spain] => Madrid [France] => Paris ) 
+ 
+ksort($states);
+print_r($states);
+// массив после ksort - сортировка по ключам элементов
+//  Array ( [France] => Paris [Germany] => Berlin [Spain] => Madrid )
+```
+
+Функция `natsort()` выполняет естественную сортировку, проверяя значение полностью, а не первый символ
+
+```php
+<?php
+$os = array("Windows 7", "Windows 8", "Windows 10");
+natsort($os);
+print_r($os);
+// результат
+// Array ( [0] => Windows 7 [1] => Windows 8 [2] => Windows 10) 
+?>
+```
+
+implode — Объединяет элементы массива в строку
+
+```php
+$array = ['имя', 'почта', 'телефон'];
+var_dump(implode(",", $array)); // string(32) "имя,почта,телефон"
+```
+
+
+# Отправка данных на сервер
+
+## Получение данных из строки запроса
+
+Строка запроса представляет набор параметров, которые помещаются в адресе после вопросительного знака. При этом каждый параметр определяет название и значение. Например, в адресе:
+
+`http://localhost/user.php?name=Tom&age=36`
+
+Из вышеописанного запросы мы можем получить нужные нам параметры через использование глобального ассоциативного массива `$_GET`, который хранит параметры адресной строки
+
+```php
+<?php
+$name = "не определено";
+$age = "не определен";
+if(isset($_GET["name"])){
+    $name = $_GET["name"];
+}
+if(isset($_GET["age"])){
+    $age = $_GET["age"];
+}
+echo "Имя: $name <br> Возраст: $age";
+?>
+```
+
+![](_png/Pasted%20image%2020230729125433.png)
+
+
+## Отправка форм
+
+Чтобы отправить данные из формы, нужно указать первым делом:
+- в `form` action с папкой, где хранится скрипт и method, который описывает тип запроса
+- в `input` нужно указать атрибут name
+
+`index.php`
+```php
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="user.php" method="POST">
+        <label for="name">
+            <input type="text" id="name" name="name" placeholder="Имя">
+        </label>
+        <label for="age">
+            <input type="text" id="age" name="age" placeholder="Возраст">
+        </label>
+        <button>
+            Отправить
+        </button>
+    </form>
+</body>
+</html>
+```
+
+В самом скрипте с запросом, нужно воспользоваться глобальным массивом `$_POST`, который хранит данные, отправленные через POST-запрос
+
+`user.php`
+```php
+<?php
+$name = "Не определено";
+$age = "Не определено";
+
+if(isset($_POST["name"])) {
+    $name = $_POST["name"];
+}
+
+if(isset($_POST["age"])) {
+    $age = $_POST["age"];
+}
+
+echo '<h2>' . "Имя: $name </br> Возраст: $age" . '</h2>';
+?>
+```
+
+![](_png/Pasted%20image%2020230729130859.png)
+
+![](_png/Pasted%20image%2020230729130902.png)
+
+## Безопасность данных
+
+Наша прошлая форма позволяет встраивать JS-скрипты в наш документ и воспроизводить их. Это очень опасно, так как может быть встроен вредоносный код.
+
+![](_png/Pasted%20image%2020230729131850.png)
 
 
 
