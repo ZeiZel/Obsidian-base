@@ -1395,8 +1395,74 @@ if(isset($_POST["courses"]))
 </form>
 ```
 
+## Практика
 
 
+`index.php`
+```php
+<form action="input.php" method="POST">
+	<label for='firstname'>Введите имя:<br>
+		<input type="text" name="firstname" id='firstname' />
+	</label>
+	<label for='eduform'>Форма обучения: <br>
+		<input type="radio" name="eduform" id="eduform" value="очно" />очно <br>
+		<input type="radio" name="eduform" id="eduform" value="заочно" />заочно <br>
+	</label>
+	<label for='hostel'>Требуется общежитие:<br>
+		<input type="checkbox" name="hostel" id='hostel' />Да <br>
+	</label>
+	<label for='courses[]'>Выберите курсы: <br>
+		<select id='courses[]' name="courses[]" size="5" multiple="multiple">
+			<option value="ASP.NET">ASP.NET</option>
+			<option value="PHP">PHP</option>
+			<option value="Ruby">RUBY</option>
+			<option value="Python">Python</option>
+			<option value="Java">Java</option>
+		</select><br>
+	</label>
+	<label for='comment'>Краткий комментарий: <br>
+		<textarea name="comment" id="comment" maxlength="200"></textarea><br>
+	</label>
+	<button>Отправить</button>
+</form>
+```
+
+`input.php`
+```php
+<?php
+if (isset($_POST["firstname"])
+    && isset($_POST["eduform"])
+    && isset($_POST["courses"])
+    && isset($_POST["comment"])
+) {
+    $name = htmlentities($_POST["firstname"]);
+    $eduform = htmlentities($_POST["eduform"]);
+    $hostel = "нет";
+    if (isset($_POST["hostel"])) $hostel = "да";
+    $comment = htmlentities($_POST["comment"]);
+    $courses = $_POST["courses"];
+
+    $output = "
+    Имя: $name
+    Форма обучения: $eduform
+    Общежитие: $hostel
+    Комментарий: $comment
+    <ul>
+    ";
+
+    foreach ($courses as $item) {
+        $output .= "<li>Запись на курс $item</li>";
+    }
+
+    $output .= "</ul>";
+
+    echo $output;
+} else {
+    echo "Введённые данные некорректны";
+}
+```
+
+## Отправка файлов на сервер
 
 
 
