@@ -136,13 +136,40 @@ puts(x.to_i + y);
 
 ## Массивы и ассоциативные массивы
 
+Массивы создаются через ключевое слово `Array`. 
 
+Ассоциативные массивы создаются внутри `{}` и пары ключ-значение заносятся через `=>`
 
+```rb
+arr = Array[1, 2, 3, 4, true, "Oleg"];
+arrNames = Array['Oleg', 'Anton', 'Vladislav'];
 
+puts(arr); # выведет весь массив
+puts(arrNames[0]); # выведет один элемент
+puts(arrNames[1, 2]); # выведет диапазон
 
+list = Array.new; # создаём пустой массив без элементов
+list[0] = 1;
+list[4] = 4;
+puts list.length(); # длина массива
+puts list.reverse(); # выведет массив в обратном порядке
+puts list.include? 1; # будет искать элемент в массиве
 
+#ассоциативный массив
+countries = {
+    "RU" => "Russia",
+    1 => "Australia",
+    :US => "United States"
+};
 
+puts countries["RU"]; # выводим ассоциативное значение
+puts countries[1];
+puts countries[:US];
+```
 
+![](_png/Pasted%20image%2020230729173632.png)
+
+## Методы и оператор return
 
 
 
