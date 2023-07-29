@@ -1254,38 +1254,146 @@ echo '<h2>' . "Имя: $name </br> Возраст: $age" . '</h2>';
 
 ![](_png/Pasted%20image%2020230729131850.png)
 
+Чтобы избежать подобных проблем с безопасностью, рекомендуется применять функцию `htmlentities()` (так же есть похожая на неё `htmlspecialchars()`)
 
+```php
+$name = "не определено";
+$age = "не определен";
+if(isset($_POST["name"])){
+  
+    $name = htmlentities($_POST["name"]);
+}
+if(isset($_POST["age"])){
+  
+    $age = htmlentities($_POST["age"]);
+}
+echo "Имя: $name <br> Возраст: $age";
+```
 
+Еще одна функция - функция `strip_tags()` позволяет полностью исключить теги html
 
+## Отправка массивов
 
+Чтобы отправить массив, нам нужно в атрибуте `name` указать целевой массив и ключ отправляемого значения
 
+`index.php`
+```php
+<?php
+if(isset($_POST["users"])){
 
+	$firstUser = $_POST["users"]["first"];
+	$secondUser = $_POST["users"]["second"];
+	$thirdUser = $_POST["users"]["third"];
+	echo "$firstUser<br>$secondUser<br>$thirdUser";
+}
+?>
+<h3>Форма ввода данных</h3>
+<form method="POST">
+	<label for="users[first]">
+		User 1: <input type="text" name="users[first]" />
+	</label>
+	<label for="users[second]">
+		User 2: <input type="text" name="users[second]" /></label>
+	<label for="users[third]">
+		User 3: <input type="text" name="users[third]" />
+	</label>
+	<button>Отправить</button>
+</form>
+```
 
+## Работа с полями ввода форм
 
+### Checkbox
 
+Чтобы отправить данные по чекбоксу на сервер, нужно задать атрибут `name`. Чтобы отправить кастомное значение от чекбокса, то нам нужно использовать `value` (то значение, которое пойдёт на сервер)
 
+```php
+<?php
+if (isset($_POST["technologies"])) {
 
+    $technologies = $_POST["technologies"];
+    foreach ($technologies as $item) echo "$item<br />";
+}
+?>
+<h3>Форма ввода данных</h3>
+<form method="POST">
+	<label for="technologies[1]">ASP.NET: <input type="checkbox" id="technologies[1]" name="technologies[]" value="ASP.NET" /></label>
+	<label for="technologies[2]">PHP: <input type="checkbox" id="technologies[2]" name="technologies[]" value="PHP" /></label>
+	<label for="technologies[3]">Node.js: <input type="checkbox" id="technologies[3]" name="technologies[]" value="Node.js" /></label>
+	<input type="submit" value="Отправить">
+</form>
+```
 
+![](_png/Pasted%20image%2020230729140401.png)
 
+### radiobutton
 
+```php
+<?php
+if(isset($_POST["course"]))
+{
+    $course = $_POST["course"];
+    echo $course;
+}
+?>
+<h3>Форма ввода данных</h3>
+<form method="POST">
+    <input type="radio" name="course" value="ASP.NET" />ASP.NET <br>
+    <input type="radio" name="course" value="PHP" />PHP <br>
+    <input type="radio" name="course" value="Node.js" />Node.js <br>
+    <input type="submit" value="Отправить">
+</form>
+```
 
+![](_png/Pasted%20image%2020230729140651.png)
 
+### Select
 
+Если нам нужно отправить одно значение из списка `select`
 
+```php
+<?php
+if(isset($_POST["course"]))
+{
+    $course = $_POST["course"];
+    echo $course;
+}
+?>
+<h3>Форма ввода данных</h3>
+<form method="POST">
+    <select name="course" size="1">
+        <option value="ASP.NET">ASP.NET</option>
+        <option value="PHP">PHP</option>
+        <option value="Ruby">RUBY</option>
+        <option value="Python">Python</option>
+    </select>
+    <input type="submit" value="Отправить">
+</form>
+```
 
+![](_png/Pasted%20image%2020230729140944.png)
 
+Если нам нужно будет отправить массив значений:
 
-
-
-
-
-
-
-
-
-
-
-
+```php
+<?php
+if(isset($_POST["courses"]))
+{
+    $courses = $_POST["courses"];
+    foreach($courses as $item) echo "$item<br>";
+}
+?>
+<h3>Форма ввода данных</h3>
+<form method="POST">
+    <select name="courses[]" size="4" multiple="multiple">
+        <option value="ASP.NET">ASP.NET</option>
+        <option value="PHP">PHP</option>
+        <option value="Ruby">RUBY</option>
+        <option value="Python">Python</option>
+    </select><br>
+    <input type="submit" value="Отправить">
+</form>
+```
 
 
 
