@@ -1464,26 +1464,71 @@ if (isset($_POST["firstname"])
 
 ## Отправка файлов на сервер
 
+Чтобы загрузить файл на сервер, нам надо использовать форму с параметром `enctype="multipart/form-data"` и массив `$_FILES`
+
+Массив `$_FILES` является двухмерным
+
+Так как элемент для загрузки файла на форме имеет name="filename", то данный файл мы можем получить с помощью выражения `$_FILES["filename"]`
+
+- `$_FILES["file"]["name"]`: имя файла
+- `$_FILES["file"]["type"]`: тип содержимого файла, например, image/jpeg
+- `$_FILES["file"]["size"]:` размер файла в байтах
+- `$_FILES["file"]["tmp_name"]`: имя временного файла, сохраненного на сервере
+- `$_FILES["file"]["error"]:` код ошибки при загрузке
+
+```php
+<?php
+if ($_FILES && $_FILES["filename"]["error"] == UPLOAD_ERR_OK)
+{
+    $name = $_FILES["filename"]["name"];
+    move_uploaded_file($_FILES["filename"]["tmp_name"], $name);
+    echo "Файл загружен";
+}
+?>
+<h2>Загрузка файла</h2>
+<form method="post" enctype="multipart/form-data">
+	Выберите файл: <input type="file" name="filename" size="10" /><br /><br />
+	<input type="submit" value="Загрузить" />
+</form>
+```
+
+Также мы можем указать другой путь, например, допустим, на сервере есть папка "upload", тогда, чтобы загружать в нее файлы, необходимо указать соответствующий путь
+
+```php
+if ($_FILES && $_FILES["filename"]["error"]== UPLOAD_ERR_OK)
+{
+    $name = "upload/" . $_FILES["filename"]["name"];
+    move_uploaded_file($_FILES["filename"]["tmp_name"], $name);
+    echo "Файл загружен";
+}
+```
+
+Данный код позволит загрузить нам сразу несколько файлов
+
+```php
+if($_FILES)
+{
+    foreach ($_FILES["uploads"]["error"] as $key => $error) {
+        if ($error == UPLOAD_ERR_OK) {
+            $tmp_name = $_FILES["uploads"]["tmp_name"][$key];
+            $name = $_FILES["uploads"]["name"][$key];
+            move_uploaded_file($tmp_name, "$name");
+        }
+    }
+    echo "Файлы загружены";
+}
+?>
+<h2>Загрузка файла</h2>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="uploads[]" /><br />
+    <input type="file" name="uploads[]" /><br />
+    <input type="file" name="uploads[]" /><br />
+    <input type="submit" value="Загрузить" />
+</form>
+```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Объектно-ориентированное программирование
 
 
 

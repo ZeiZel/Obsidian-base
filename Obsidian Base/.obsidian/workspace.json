@@ -126,9 +126,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "80fc1b7c1e03df41",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Ruby.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 9
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -202,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Ruby.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -219,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Ruby.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -242,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP.md"
+                "file": "Development/BackEnd/Ruby.md"
               }
             }
           },
@@ -280,8 +292,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "491dd1bb3934c2e9",
+  "active": "80fc1b7c1e03df41",
   "lastOpenFiles": [
+    "Development/BackEnd/_png/Pasted image 20230729170106.png",
+    "Development/BackEnd/_png/Pasted image 20230729165636.png",
+    "Development/BackEnd/PHP.md",
+    "[.md",
     "Development/BackEnd/_png/Pasted image 20230729140944.png",
     "Development/BackEnd/_png/Pasted image 20230729140651.png",
     "Development/BackEnd/_png/Pasted image 20230729140401.png",
@@ -291,10 +307,7 @@
     "Development/BackEnd/_png/Pasted image 20230729125433.png",
     "Development/BackEnd/_png/Pasted image 20230729105725.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "Development/BackEnd/PHP.md",
     "Development/BackEnd/_png/Pasted image 20230729095906.png",
-    "Development/BackEnd/_png/Pasted image 20230729095105.png",
-    "Development/BackEnd/_png/Pasted image 20230729094821.png",
     "Development/Алгоритмы и Структуры даных.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
@@ -317,7 +330,6 @@
     "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
     "Development/MobileDev/_png",
     "Development/Mobile",
