@@ -324,6 +324,8 @@ for ($i =1, $j=1; $i + $j < 10; $i++, $j+=2)
 
 ### while
 
+выполняет цикл пока условие `true`
+
 ```php
 <?php
 $counter = 1;
@@ -335,7 +337,9 @@ while($counter<10)
 ?>
 ```
 
+### do-while
 
+Сначала выполняет хотя бы один раз
 
 ```php
 <?php
@@ -349,16 +353,349 @@ while($counter<10)
 ?>
 ```
 
+### continue / break
+
+`continue` - пропускает итерацию цикла
+`break`  - прекращает выполнение цикла
+
+```php
+<?php
+for ($i = 1; $i < 10; $i++)
+{
+    if($i==5)
+    {
+        continue;
+    }
+    echo "Квадрат числа $i равен " . $i * $i . "<br/>";
+}
+?>
+
+<?php
+for ($i = 1; $i < 10; $i++)
+{
+    $result = $i * $i;
+    if($result>80)
+    {
+        break;
+    }
+    echo "Квадрат числа $i равен $result <br/>";
+}
+?>
+```
+
+## Вложенные циклы
+
+попробуем вывести таблицу со значениями
+
+```php
+<table>
+<?php
+for ($i = 1; $i < 10; $i++)
+{
+    echo "<tr>";
+    for ($j = 1; $j < 10; $j++)
+    {
+        echo "<td>" . $i * $j . "</td>";
+    }
+    echo "</tr>";
+}
+?>
+</table>
+```
+
+![](_png/Pasted%20image%2020230729092755.png)
 
 
+## Массивы
+
+Таким образом мы можем задать массив
+
+```php
+$numbers = [1, 2, 3, 4];
+$numbers = array(1, 2, 3, 4);
+```
+
+Таким образом заменить и вывести элемент
+
+```php
+<?php
+	$numbers = [1, 4, 9, 16];
+	$numbers[1] = 6;
+	echo $numbers[1];   // 6
+?>
+```
+
+Добавление нового элемента в конец массива
+
+```php
+<?php
+	$numbers = [1, 4, 9, 16];
+	$numbers[] = 25;
+	echo $numbers[4];   // 25
+?>
+```
+
+Оператор `=>` позволяет сопоставить ключ со значением
+
+```php
+$numbers = [1, 4, 9, 16];
+$numbers = [0=>1, 1=>4, 2=>9, 3=>16];
+
+// тут индекс пойдёт с 4
+$numbers = [4=> 16, 25, 36, 49, 64];
+```
+
+### Перебор массива
+
+Перебрать массив можно через стандартный цикл `for`
+
+```php
+<?php
+	$users = ["Tom", "Sam", "Bob", "Alice"];
+	$num = count($users);
+	for($i=0; $i < $num; $i++)
+	{
+	    echo "$users[$i] <br />";
+	}
+?>
+```
+
+И так же существует специальный `foreach`, который пройдётся по любому массиву (самый надёжный вариант)
+
+```php
+<?php
+	$users = [1 => "Tom", 4 => "Sam", 5 => "Bob", 21 => "Alice"];
+	foreach($users as $element)
+	{
+	    echo "$element<br />";
+	}
+?>
+```
+
+Так же мы можем достать ключи значений
+
+```php
+<?php
+$users = [1 => "Tom", 4 => "Sam", 5 => "Bob", 21 => "Alice"];
+foreach($users as $key => $value)
+{
+    echo "$key - $value<br />";
+}
+?>
+```
+
+### Ассоциативный массив
+
+Данный вид массивов подразумевает под собой использование в качестве ключа строки
+
+```php
+$countries = ["Germany" => "Berlin", "France" => "Paris", "Spain" => "Madrid"];
+$countries["Italy"] = "Rome";   // определяем новый элемент с ключом "Italy"
+echo $countries["Italy"]; // Rome
+```
+
+Перебирать такой массив так же можно через `foreach`
+
+```php
+<?php
+$words = ["red" => "красный", "blue" => "синий", "green" => "зеленый"];
+ 
+foreach($words as $english => $russian)
+{
+    echo "$english : $russian<br />";
+}
+?>
+```
+
+### Смешанные массивы
+
+Так же мы можем использовать сразу и строки и числа для задания массива
+
+```php
+$data = [1=> "Tom", "id132" => "Sam", 56 => "Bob"];
+echo $data[1];  // Tom
+echo "<br />";
+echo $data["id132"];    // Sam
+```
+
+### Многомерные массивы
+
+Данные массивы представляют из себя массив в массиве
+
+```php
+$families = [["Tom", "Alice"], ["Bob", "Kate"]];
+echo $families[0][0] . "<br />";  //Tom
+echo $families[0][1] . "<br />";  //Alice
+echo $families[1][0] . "<br />";  //Bob
+echo $families[1][1];   //Kate
+```
+
+Перебор данного массива выглядит следующим образом:
+
+```php
+<table>
+<?php
+	$families = [["Tom", "Alice"], ["Bob", "Kate"], ["Sam", "Mary"]];
+	foreach ($families as $family)
+	{
+	    echo "<tr>";
+	    foreach ($family as $user)
+	    {
+	        echo "<td>$user</td>";
+	    }
+	    echo "</tr>";
+	}
+?>
+</table>
+```
+
+![](_png/Pasted%20image%2020230729094821.png)
+
+Пример многомерного ассоциативного массива:
+
+```php
+<?php
+    $gadgets = array(
+        "phones" => array("apple" => "iPhone 12",
+            "samsung" => "Samsung S20",
+            "nokia" => "Nokia 8.3"),
+        "tablets" => array("lenovo" => "Lenovo Yoga Smart Tab",
+            "samsung" => "Samsung Galaxy Tab S5",
+            "apple" => "Apple iPad Pro"));
+
+    foreach ($gadgets as $gadget => $items) {
+        echo "<h1>" . strtoupper($gadget) . "</h1>";
+
+        echo '<ul>';
+
+        foreach ($items as $key => $value) {
+            echo "<li>$key: $value</li>";
+        }
+
+        echo '</ul>';
+    }
+?>
+```
+
+![](_png/Pasted%20image%2020230729095906.png)
 
 
+## Функции
 
+### Создание функции
 
+```php
+<?php
+	function hello()
+	{
+	    echo "Hello PHP";
+	}
+	 
+	hello();    // вызов функции
+?>
+```
 
+### Параметры функции
 
+Так же после `=` мы можем указать дефолтное значение для параметра функции
 
+```php
+<?php
+function displayInfo($name, $age = 18)
+{
+    echo "<div>Имя: $name <br />Возраст: $age</div><hr>";
+}
+ 
+displayInfo("Tom", 36);
+displayInfo("Bob");
+displayInfo("Sam", 28);
+?>
+```
 
+### Именованные параметры
+
+Так же при передаче параметра в функцию, мы можем не добавлять их по позиции, а просто написать имя параметра и передать его внутрь
+
+```php
+<?php
+	function displayInfo($name, $age = 18)
+	{
+	    echo "<div>Имя: $name <br />Возраст: $age</div><hr>";
+	}
+	 
+	displayInfo(age: 23, name: "Bob");
+	displayInfo(name: "Tom", age: 36);
+	displayInfo(name: "Alice");
+?>
+```
+
+### Переменное количество параметров
+
+Создаём функцию, которая будет принимать студента и его оценки - выводим студента и средний балл
+
+```php
+function getAverageScore($name, ...$scores)
+{
+    $result = 0.0;
+    foreach($scores as $score) {
+        $result += $score;
+    }
+    $result = $result / count($scores);
+    echo "<p>$name: $result</p>";
+}
+getAverageScore("Tom", 5, 5, 4, 5);
+getAverageScore("Bob", 4, 3, 4, 4, 4);
+```
+
+### Возвращение значений и оператор return
+
+Если в функции нет оператора `return`, то она в любом случае вернёт `null`
+
+```php
+<?php
+function add($a, $b)
+{
+    return $a + $b;
+}
+ 
+$result = add(5, 6);
+echo $result;           // 11
+?>
+```
+
+### Анонимные функции
+
+Анонимная функция объявляется без обозначения имени. Её так же можно присвоить к определённой переменной, чтобы использовать
+
+```php
+<?php
+	$sum = function($a, $b)
+	{
+	    return $a + $b;
+	};
+	$number = $sum(5, 11);  //16
+	echo $number;
+?>
+```
+
+Зачастую, анонимные функции используют для передачи внутрь других функций
+
+```php
+<?php
+	function welcome($message)
+	{
+	    $message();
+	}
+	$goodMorning = function() { echo "<h3>Доброе утро</h3>"; };
+	$goodEvening = function() { echo "<h3>Добрый вечер</h3>"; };
+	 
+	welcome($goodMorning);          // Доброе утро
+	welcome($goodEvening);          // Добрый вечер
+	welcome(function(){ echo "<h3>Привет</h3>"; }); // Привет
+?>
+```
+
+### Замыкания / Closure
 
 
 
