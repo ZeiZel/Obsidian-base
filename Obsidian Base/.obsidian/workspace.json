@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
                 "mode": "preview",
                 "source": false
               }
@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
                 "mode": "preview",
                 "source": false
               }
@@ -139,7 +139,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -213,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -230,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -253,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md"
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md"
               }
             }
           },
@@ -291,11 +292,22 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d3ee6172e2116f6c",
+  "active": "48c958706ae37357",
   "lastOpenFiles": [
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/FrontEnd/React Foundamentals.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/Bootstrap.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/Адаптивная вёрстка.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
     "Development/BackEnd/Ruby.md",
     "Development/BackEnd/_png/Pasted image 20230729173632.png",
     "Development/BackEnd/PHP.md",
@@ -309,7 +321,6 @@
     "Development/BackEnd/_png/Pasted image 20230729130902.png",
     "Development/BackEnd/_png/Pasted image 20230729130859.png",
     "Development/BackEnd/_png/Pasted image 20230729125433.png",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/Алгоритмы и Структуры даных.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
@@ -319,15 +330,6 @@
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/11 Первый шаг к архитектуре.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/13 Отладка и watch.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/12 Dependency Injection.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
-    "Development/FrontEnd/Vue.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-    "Development/TypeScript/TypeScript.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
     "Development/MobileDev/_png",
     "Development/Mobile",
