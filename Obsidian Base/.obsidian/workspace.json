@@ -61,8 +61,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
-                "mode": "source",
+                "file": "Development/TypeScript/TypeScript.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -164,7 +164,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -238,7 +238,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -255,7 +255,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+                "file": "Development/Алгоритмы и Структуры даных.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -278,7 +278,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
+                "file": "Development/Алгоритмы и Структуры даных.md"
               }
             }
           },
@@ -316,14 +316,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "7f7abe55db5c6243",
+  "active": "892fe28c468fa145",
   "lastOpenFiles": [
     "Development/TypeScript/TypeScript.md",
-    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
     "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
     "Programming Principes/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
     "Development/BackEnd/Ruby.md",
-    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
     "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
     "Programming Principes/SOLID принципы.md",
     "Development/Алгоритмы и Структуры даных.md",
