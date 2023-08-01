@@ -2021,6 +2021,197 @@ $tom->age = 22;             // значение свойства $age можно
 echo "Name: $tom->name";  // получить значение свойства $name можно
 ```
 
+Начиная с версии 8.2 PHP позволяет определять классы для чтения. Такой класс определяется с помощью ключевого слова readonly. Свойства таких классов по умолчанию являются свойствами, доступными только для чтения. Это гарантирует, что никакое из свойств объекта не сможет изменить значение. 
+
+При этом для свойств класса для чтения также надо явным образом указывать тип данных. Кроме того, при наследовании производный класс также должен быть классом только для чтения.
+
+```php
+<?php
+readonly class Person
+{ 
+    public function __construct(public string $name, public int $age)
+    {}
+}
+$tom = new Person("Tom", 38);
+// получить значения свойств можно
+echo "Name: $tom->name  Age: $tom->age";  // Name: Tom Age: 38
+// изменить значения свойств нельзя
+// $tom->name = "Tomas";  // !ошибка
+?>
+```
+
+
+# Базовые возможности PHP
+
+## Подключение внешних файлов
+
+Подключением внешних файлов занимается 5 разных инструкций:
+- `include` - подключает полностью весь файл
+- `include_once` - позволяет подключить файл только единожды, чтобы не было ошибки с повторными импортами
+- `require` - подключает полностью весь файл, но если файла не окажется, то программа перестанет работать
+- `require_once` - выполняет require, но подключает файл только один раз
+- `spl_autoload_register()` - это функция для автоматической загрузки нужного нам модуля
+
+`welcome.php`
+```php
+<?php
+$greeting = "Welcome!";
+```
+
+`index.php`
+```php
+<?php
+	include "welcome.php";
+	echo $greeting;
+?>
+```
+
+## Пространства имен
+
+Пространства имен позволяют избежать конфликта имен и сгруппировать функционал. Внутри пространства имен могут быть размещены классы, интерфейсы, функции и константы.
+
+Если какая-та конструкция (например, класс или функция) определена вне любого пространства имен, то считается, что она расположена в глобальном пространстве имен.
+
+Стоит учитывать, что определение пространства имен должно быть расположено выше любого другого кода или разметки html.
+
+```php
+<?php
+namespace base;
+class Person
+{
+    public $name;
+    function __construct($name) { $this->name = $name; }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>METANIT.COM</title>
+<meta charset="utf-8" />
+</head>
+<body>
+<?php
+$tom = new Person("Tom");
+echo $tom->name;
+?>
+</body>
+</html>
+```
+
+Тут находится пример использования класса из одного пространства имён в другом. Делается это через обращение `\пространсто\Класс`
+
+`person.php`
+```php
+<?php
+namespace base;
+class Person
+{
+    public $name;
+    function __construct($name) { $this->name = $name; }
+}
+?>
+```
+`index.php`
+```php
+<?php
+namespace work;
+include "Person.php";
+$tom = new \base\Person("Tom");
+echo $tom->name;
+?>
+```
+
+Так же пространства имён могут быть вложенными
+
+```php
+<?php
+namespace base\classes;
+class Person
+{
+    public $name;
+    function __construct($name) { $this->name = $name; }
+}
+?>
+```
+
+```php
+<?php
+namespace work;
+include "Person.php";
+$tom = new \base\classes\Person("Tom");
+echo $tom->name;
+?>
+```
+
+Так же мы можем указать псевдоним для определённого объекта из пространства имён через конструкцию `use`. Через запятую можно указать несколько подобных импортов
+
+```php
+<?php
+namespace work;
+include "Person.php";
+ 
+use \base\classes\Person as User, \base\classes\Employee as Employee;
+ 
+$tom = new User("Tom");
+echo $tom->name . "<br>";
+$sam = new Employee("Sam");
+echo $sam->name;
+?>
+```
+
+Чтобы подключить константы и функции из другого пространства имён, нужно указать это в `use const / function`
+
+```php
+<?php
+namespace work;
+include "Person.php";
+ 
+use \base\classes\Person;
+use const \base\classes\adminName;
+use function \base\classes\printPerson;
+ 
+$tom = new Person(adminName);
+printPerson($tom);  // Odmen
+?>
+```
+
+## Типизация данных
+
+- `bool`: допустимые значения true и false
+- `float`: значение должно число с плавающей точкой
+- `int`: значение должно представлять целое число
+- `string`: значение должно представлять строку
+- `mixed`: любое значение
+- `callable`: значение должно представлять функцию
+- `array`: значение должно представлять массив
+- `iterable`: значение должно представлять массив или класс, который реализует интерфейс Traversable. Применяется при переборе в цикле foreach
+- Имя класса: объект должен представлять данный класс или его производные классы
+- Имя интерфейса: объект должен представлять класс, который реализует данный интерфейс
+- `Self`: объект должен представлять тот же класс или его производный класс. Может использоваться только внутри класса.
+- `parent`: объект должен представлять родительский класс данного класса. Может использоваться только внутри класса.
+
+Типизация функции: 
+
+```php
+function sum(array $numbers, callable $condition)
+{
+    $result = 0;
+    foreach($numbers as $number){
+        if($condition($number))
+        {
+            $result += $number; 
+        }
+    }
+    return $result;
+}
+ 
+ 
+$isPositive = function($n){ return $n > 0;};
+ 
+$myNumbers = [-2, -1, 0, 1, 2, 3, 4, 5];
+$positiveSum = sum($myNumbers, $isPositive);
+echo $positiveSum;  // 15
+```
 
 
 
@@ -2042,24 +2233,181 @@ echo "Name: $tom->name";  // получить значение свойства 
 
 
 
+# Обработка исключений
+
+## Конструкция try catch finally
+
+В конструкцию try-catch мы можем обернуть код, который может выдать ошибку. В параметры блока `catch` мы передаём тип ошибки и саму ошибку 
+
+```php
+try
+{
+    // код, который может вызвать исключение
+    $a = 5;
+    $b = 0;
+    $result = $a / $b;
+    echo $result;
+}
+catch(DivisionByZeroError $ex)
+{
+    // обработка исключения
+    echo "Произошло исключение:<br>";
+    echo $ex . "<br>";
+}
+echo "Конец работы программы";
+```
+
+### Типы ошибок
+
+Сразу нужно сказать, что в PHP существует множество ошибок, которые разделены по определённым интерфейсам. Мы можем конкретизировать ошибки продвигаясь ниже вглубь реализаций ошибок
+
+![](_png/Pasted%20image%2020230801171421.png)
+
+### Чейн catch
+
+Конструкция try..catch позволяет определить несколько блоков catch - для обработки различных типов ошибок и исключений
+
+Блоки catch с более конкретными типами ошибок и исключений должны идти в начале, а более с более общими типа - в конце
+
+```php
+try
+{
+    $result = 5 / 0;
+    echo $result;
+}
+catch(DivisionByZeroError $ex)
+{
+    echo "На ноль делить нельзя";
+}
+catch(ArithmeticError $ex)
+{
+    echo "Ошибка при выполнении арифметической операции";
+}
+catch(Error $ex)
+{
+    echo "Произошла ошибка";
+}
+catch(Throwable $ex)
+{
+    echo "Ошибка при выполнении программы";
+}
+```
+
+### Получение информации об ошибках и исключениях
+
+Интерфейс Throwable предоставляет ряд методов, которые позволяют получить некоторую информацию о возникшем исключении:
+
+- `getMessage()`: возвращает сообщение об ошибке
+- `getCode()`: возвращает код исключения
+- `getFile()`: возвращает название файла, в котором возникла ошибка
+- `getLine()`: возвращает номер строки, в которой возникла ошибка
+- `getTrace()`: возвращает трассировку стека
+- `getTraceAsString()`: возвращает трассировку стека в виде строки
+
+```php
+try
+{
+    $result = 5 / 0;
+    echo $result;
+}
+catch(DivisionByZeroError $ex)
+{
+    echo "Сообщение об ошибке: " . $ex->getMessage() . "<br>";
+    echo "Файл: " . $ex->getFile() . "<br>";
+    echo "Номер строки: " . $ex->getLine() . "<br>";
+}
+```
+
+### finally
+
+Данный блок выполняется всегда
+
+```php
+try
+{
+    $result = 5 / 0;
+    echo $result . "<br>";
+}
+catch(Throwable $ex)
+{
+    echo "Ошибка при выполнении программы<br>";
+}
+finally
+{
+    echo "Блок finally<br>";
+}
+echo "Конец работы программы";
+```
+
+## Генерация исключений
+
+Генерировать исключения самостоятельно можно через `throw new Exception`
+
+```php
+class Person
+{
+    private $name, $age;
+    function __construct($name, $age)
+    {
+        if($age < 0)
+        {
+            throw new Exception("Недействительный возраст");
+        }
+        $this->name = $name;
+        $this->age = $age;
+    }
+    function printInfo()
+    {
+        echo "Name: $this->name<br>Age: $this->age";
+    }
+}
+$tom = new Person("Tom", -105);
+$tom->printInfo();
+```
+
+Так же мы можем сделать свой класс ошибки, который будет экстендится от класса ошибки. Это можно применять для специфических ошибок и переиспользования кода
+
+```php
+class PersonInvalidAgeException extends Exception
+{
+    function __construct($age)
+    {
+        $this -> message = "Недействительный возраст: $age. Возраст должен быть в диапазоне от 0 до 120";
+    }
+}
+class Person
+{
+    private $name, $age;
+    function __construct($name, $age)
+    {
+        $this->name = $name;
+        if($age < 0)
+        {
+            throw new PersonInvalidAgeException($age);
+        }
+        $this->age = $age;
+    }
+    function printInfo()
+    {
+        echo "Name: $this->name<br>Age: $this->age";
+    }
+}
+ 
+try
+{
+    $tom = new Person("Tom", -105);
+    $tom->printInfo();
+}
+catch(PersonInvalidAgeException $ex)
+{
+    echo $ex -> getMessage();
+}
+```
 
 
+# Работа с файловой системой
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Чтение и запись файлов
 
 
 
