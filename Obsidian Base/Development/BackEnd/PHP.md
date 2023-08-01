@@ -138,30 +138,6 @@
 ?>
 ```
 
-
-## Строковые операции
-
-На обработку текста в одинарных кавычках уходит в два раза меньше памяти, чем на двойные 
-
-`index.php`
-```php
-<?php  
-	$string = 'Hello';  
-	  
-	echo "vars: " . $string . '<br>';  
-	echo "vars: $string" . '<br>';  
-	echo 'vars: $string' . '<br>'; // в '' переменные не будут работать  
-	echo "<input type=\"text\" />" . '<br>'; //  
-	echo strlen($string) . '<br>'; // выведет длину строки  
-	echo trim(" saviour ") . '<br>'; // уберёт все лишние пробелы 
-	echo strtolower($string) . '<br>'; // приводит к нижнему регистру - если есть кириллица, то стоит использовать mb_strtolower  
-	echo strtoupper($string) . '<br>'; // приводит к верхнему регистру - если есть кириллица, то стоит использовать mb_strtoupper  
-	echo md5("some string") // кеширует строку (лучше применять для паролей)  
-?>
-```
-
-![](_png/Pasted%20image%2020230728165302.png)
-
 ## Условные операторы
 
 Операции сравнения:
@@ -2190,10 +2166,10 @@ printPerson($tom);  // Odmen
 - `Self`: объект должен представлять тот же класс или его производный класс. Может использоваться только внутри класса.
 - `parent`: объект должен представлять родительский класс данного класса. Может использоваться только внутри класса.
 
-Типизация функции: 
+Типизация функции (принимает массив, функцию и возвращает число): 
 
 ```php
-function sum(array $numbers, callable $condition)
+function sum(array $numbers, callable $condition) : int
 {
     $result = 0;
     foreach($numbers as $number){
@@ -2213,22 +2189,132 @@ $positiveSum = sum($myNumbers, $isPositive);
 echo $positiveSum;  // 15
 ```
 
+Типизация полей класса
 
+```php
+class Person {    
+    public $name;
+    public int $age;
+}
+```
 
+>[!warning] PHP 8 
 
+Так же в PHP присутствует union тип, который позволяет через `|` передать в качестве аргумента функции один из двух типов
 
+```php
+function sum(int|float $n1, int|float $n2,): int|float
+{
+    return $n1 + $n2;
+}
+echo sum(4, 5);         // 9
+echo "<br>";
+echo sum(2.5, 3.7);     // 6.2
+```
 
+## Работа со строками
 
+Запись `<<< МЕТКА ... МЕТКА;` позволяет вывести многострочный текст
 
+```php
+$name = "Tom";
+$age = 36;
+$s = <<< USER
+Name = $name
+Age = $age
+USER;
+echo $s; // Name = Tom Age = 36
+```
 
+Обращение к символам строки
 
+```php
+$str = "Hello Tom";
+ 
+echo $str[0];// получим первый символ - H
+```
 
+Функция `strpos($str, $search)` возвращает позицию подстроки или символа `$search` в строке `$str` или значение `false`, если строка `$str` не содержит подстроки `$search`
 
+Для кириллицы стоит использовать `mb_strpos()`
 
+```php
+$input = "This is the end"; 
+$search = "is";
+$position = strpos($input, $search); // 2
+if($position!==false)
+{
+    echo "Позиция подстроки '$search' в строке '$input': $position";
+}
+```
 
+Функция `strrpos()` во многом аналогична функции `strpos()`, только ищет позицию не первого, а последнего вхождения подстроки в строку (опять же для кириллицы стоит использовать `mb_strrpos()`)
 
+```php
+$input = "This is the end"; 
+$search = "is";
+$position = strrpos($input, $search); // 5
+```
 
+Дополнительные операции:
 
+`index.php`
+```php
+<?php  
+	$string = 'Hello';  
+	  
+	echo "vars: " . $string . '<br>';  
+	echo "vars: $string" . '<br>';  
+	echo 'vars: $string' . '<br>'; // в '' переменные не будут работать  
+	echo "<input type=\"text\" />" . '<br>'; //  
+	echo strlen($string) . '<br>'; // выведет длину строки  
+	echo trim(" saviour ") . '<br>'; // уберёт все лишние пробелы 
+	echo strtolower($string) . '<br>'; // приводит к нижнему регистру - если есть кириллица, то стоит использовать mb_strtolower  
+	echo strtoupper($string) . '<br>'; // приводит к верхнему регистру - если есть кириллица, то стоит использовать mb_strtoupper  
+	echo md5("some string") // кеширует строку (лучше применять для паролей)  
+?>
+```
+
+Применяя функцию `substr($str, $start [, $length])`, можно получить из одной строки ее определенную часть. Данная функция обрезает строку `$str`, начиная c символа в позиции `$start` до конца строки. С помощью дополнительного необязательного параметра `$length` можно задать количество вырезаемых символов
+
+```php
+$input = "The world is mine!"; 
+$subinput1 = substr($input, 2);
+$subinput2 = substr($input, 2, 6);
+echo $subinput1;
+echo "<br>";
+echo $subinput2;
+```
+
+Для замены определенной части строки применяется функция `str_replace($old, $new, $input)`. Эта функция заменяет в строке `$input` все вхождения подстроки `$old` на подстроку `$new` с учетом регистра
+
+```php
+$input = "Мама мыла раму"; 
+$input = str_replace("мы", "ши", $input);
+echo $input;
+```
+
+`explode` разделяет строку в массив (аналог функции `split` в javascript),  
+`implode` объединяет массив в строку (аналог функции `join` в javascript).
+
+```php
+<?php
+	$string = "Oleg is coming soon";
+
+	foreach (explode(" ", $string) as $item) {
+		echo "$item <br>";
+	}
+
+	$fruits = ["apple", "banana"];
+	echo implode(", ", $fruits);
+?>
+```
+
+![](_png/Pasted%20image%2020230801182040.png)
+
+## Работа с cookie
+
+## Сессии
 
 
 
