@@ -1624,6 +1624,221 @@ $sam -> displayInfo();
 
 ## Анонимные классы
 
+Анонимные классы - это классы, которые не имеют имени. Обычно такие классы полезны, если нам необходимо один раз создать объект подобного класса. И больше этот класс не будет использоваться.
+
+```php
+<?php
+$person = new class("Bob", 34) {
+     
+    function __construct(public $name, public $age)
+    {
+        $this->name = $name;
+    }
+    function displayInfo()
+    {
+        echo "Name: $this->name; Age: $this->age<br>";
+    }
+};
+$person -> displayInfo();
+?>
+```
+
+## Наследование
+
+PHP так же предоставляет возможность экстендить классы через ключевое слово `extends`. От родительского класса будут передаваться методы и поля. 
+
+Чтобы переопределить нужный метод, мы можем просто написать этот же метод ещё раз в дочернем классе и переписать его функционал.
+
+Если нам нужно вызвать срабатывание метода родительского класса, то мы можем прописать `parent::нужный_метод` - так же будет вызваться и конструктор.
+
+```php
+class Person
+{ 
+    public $name;
+    function __construct($name)
+    {
+        $this->name = $name;
+    }
+    function displayInfo()
+    {
+        echo "Имя: $this->name<br>";
+    }
+}
+
+class Employee extends Person 
+{
+    public $company;
+    function __construct($name, $company)
+    {
+        Person::__construct($name);
+        $this->company = $company;
+    }
+    function displayInfo()
+    {
+        Person::displayInfo();
+        echo "Работает в $this->company<br>";
+    }
+}
+class Manager{}
+ 
+$tom = new Employee("Tom", "Microsoft");
+ 
+$tom instanceof Employee;   // true
+$tom instanceof Person;     // true
+$tom instanceof Manager;    // false
+```
+
+## Модификаторы доступа
+
+С помощью специальных модификаторов можно задать область видимости для свойств и методов класса. В PHP есть три таких модификатора:
+
+- `public`: можно обращаться извне к свойствам и методам
+- `protected`: доступ только в текущем классе и наследникам
+- `private`: доступ только в текущем классе
+
+Вот базовый класс, который имеет у себя методы с разными модификаторами:
+
+```php
+class Person
+{
+    private $privateA ="private";
+    public  $publicA = "public";
+    protected $protectedA = "protected";
+     
+    private function getPrivateMethod()
+    {
+        echo "private method <br />";
+    }
+      
+    protected function getProtectedMethod()
+    {
+        echo "protected method <br />";
+    }
+      
+    public function getPublicMethod()
+    {
+        echo "public method <br />";
+    }
+    function test()
+    {
+        $this->getPrivateMethod();
+        $this->getProtectedMethod();
+        $this->getPublicMethod();
+         
+        echo "$this->privateA <br />";
+        echo "$this->protectedA <br />";
+        echo "$this->publicA <br />";
+    }
+}
+```
+
+И тут представлена возможность использования данных методов:
+
+```php
+class Employee extends Person
+{
+    function test()
+    {
+        //echo $this->privateA; // нельзя, так как privateA - private в классе-родителе
+        echo $this->protectedA;
+        echo $this->publicA; 
+        //$this->getPrivateMethod(); // нельзя, так как private в классе-родителе
+        $this->getProtectedMethod();
+        $this->getPublicMethod();
+    }
+}
+```
+
+Использование вне классов:
+
+```php
+$person = new Person;
+// $person->getPrivateMethod(); // недоступно, так как private
+// $person->getProtectedMethod(); // недоступно, так как protected
+$person->getPublicMethod(); 
+// echo $person->privateA; // недоступно, так как private
+// echo $person->protectedA; // недоступно, так как protected
+echo $person->publicA;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
