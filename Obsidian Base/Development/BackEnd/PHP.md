@@ -1761,57 +1761,265 @@ $person->getPublicMethod();
 echo $person->publicA;
 ```
 
+## Статические методы и свойства
 
+Статические методы и свойства начинаются с ключевого слова `static` 
 
+При обращении к статическим методам и свойствам используется имя класса и оператор `::`, вместо операции доступа `->`, так как статический метод относится ко всему классу, а не к конкретному объекту этого класса.
 
+Стоит отметить, что в статических методах мы можем обращаться только к статическим свойствам и методам. Но не можем обращаться к НЕстатическим свойствам и методам через `$this`
 
+```php
+<?php
+class MyClass {
+    public static $staticProperty = 'Static Property';
 
+    public $nonStaticProperty = 'Non-Static Property';
 
+    public static function staticMethod() {
+        echo self::$staticProperty; // Обращение к статическому свойству
+        echo "<br>";
+        
+        $obj = new self();
+        echo $obj->nonStaticProperty; // Обращение к нестатическому свойству
+        echo "<br>";
+    }
+}
 
+MyClass::staticMethod(); // Вызов статического метода класса
+?>
+```
 
+## Интерфейсы
 
+ Интерфейс - это контракт, который говорит, что класс обязательно реализует определенный функционал
 
+```php
+<?php
+interface Messenger
+{
+    function send();
+}
+interface EmailMessenger extends Messenger
+{
+     
+}
+class SimpleEmailMessenger implements EmailMessenger 
+{
+    function send()
+    {
+        echo "Отправка сообщения на email.";
+    }
+}
+$outlook = new SimpleEmailMessenger();
+$outlook->send();
+?>
+```
 
+Конкретно в классе мы должны реализовать весь функционал из интерфейсов. Интерфейсы можно расширять от других интерфейсов. Классы могут имплементировать в себя несколько интерфейсов.
 
+```php
+interface Person {
+	function Work();
+}
 
+interface Programmer extends Person {
+	function writeCode();
+}
 
+interface Devops extends Person {
+	function deploy();
+}
 
+class ProgrammerWorker implements Programmer, Devops {
+	public function Work()
+	{
+		// TODO: Implement Work() method.
+	}
 
+	public function writeCode()
+	{
+		// TODO: Implement writeCode() method.
+	}
 
+	public function deploy()
+	{
+		// TODO: Implement deploy() method.
+	}
+}
+```
 
+## Абстрактные классы и методы
 
+Абстрактный класс представляет частичную реализацию для классов-наследников.
 
+Абстрактный класс определяется с помощью модификатора `abstract`, который ставится перед именем класса
 
+```php
+<?php
+	abstract class Messenger
+	{
+	    protected $name;
+	    function __construct($name)
+	    { 
+	        $this->name = $name;
+	    }
+	    abstract function send($message);
+	    function close()
+	    {
+	        echo "Выход из мессенджера...";
+	    }
+	}
+	 
+	class EmailMessenger extends Messenger 
+	{
+	    function send($message)
+	    {
+	        echo "$this->name отправляет сообщение: $message<br>";
+	    }
+	}
+	$outlook = new EmailMessenger("Outlook");
+	$outlook->send("Hello PHP 8");
+	$outlook -> close();
+?>
+```
 
+## Traits
 
+Трейты - это группа с методами, которые мы можем использовать внутри классов. Обозначается группа через использование `trait`. Применяется внутри класса через использование оператора `use` 
 
+```php
+trait Printer
+{
+    public function printSimpleText($text) { echo "$text<br>"; }
+    public function printHeaderText($text) { echo "<h2>$text<h2>"; }
+}
+ 
+class Message
+{
+    use Printer;
+}
 
+$myMessage = new Message();
+$myMessage->printSimpleText("Hello World!");
+$myMessage->printHeaderText("Hello PHP 8");
+```
 
+Так же трейты перезатирают наследуемые методы от других классов
 
+```php
+class Data
+{
+    function print() { echo "Print from Data"; }
+}
+trait Printer
+{
+    function print() { echo "Print from Printer"; }
+}
+ 
+class Message extends Data
+{
+    use Printer;
+}
 
+$myMessage = new Message();
+$myMessage->print();     // Print from Printer
+```
 
+## Копирование объектов классов
 
+При присваивании объекта класса другой переменной создается новая ссылка на тот же объект
 
+```php
+class Person{     
+    public $name;
+    function __construct($name){
+         
+        $this->name = $name;
+    }
+}
 
+$tom = new Person("Tom");
+$bob = $tom;
+$bob->name = "Bob";
+echo $tom->name; // Bob
+```
 
+Однако такое поведение может быть нежелательным, если мы хотим, чтобы после копирования переменные представляли независимые друг от друга объекты. И для этого PHP предоставляет оператор `clone`
 
+```php
+class Person{
+     
+    public $name;
+    function __construct($name){
+         
+        $this->name = $name;
+    }
+}
+$tom = new Person("Tom");
+$bob = clone $tom;      // копируем объект из $tom в переменную $bob
+$bob->name = "Bob";
+echo $tom->name; // Tom
+```
 
+Так же мы можем копировать и вложенные внутрь объекты через задание специального метода внутри класса `__clone`, который стриггерится во время клонирования класса
 
+```php
+class Company{
+     
+    public $name;
+    function __construct($name){ $this->name = $name; }
+}
+class Person{
+     
+    public $name, $company;
+    function __construct($name, $company)
+    { 
+        $this->name = $name; 
+        $this->company = $company;
+    }
+    function __clone()
+    {
+        $this->company = clone $this->company;
+    }
+}
+$microsoft = new Company("Microsoft");
+$tom = new Person("Tom", $microsoft);
+ 
+$bob = clone $tom;      // копируем объект из $tom в переменную $bob
+$bob->name = "Bob";
+$bob->company->name = "Google";   // изменяем у Боба название компании
+$bob->languages[0] = "french";
+echo $tom->company->name; // Microsoft - у Тома НЕ изменилась компания
+```
 
+## Свойства и классы для чтения
 
+>[!warning] Это функционал PHP версии 8.1 - 8.2
 
+Иногда необходимы свойства, которые не должны менять своего значения. Подобные свойства предваряются ключевым словом readonly. Это позволяет гарантировать, что значение свойства не изменится.
 
+ Таким свойствам можно передать значение только один раз внутри класса, в котором они определены (обычно это делается в конструкторе класса)
 
-
-
-
-
-
-
-
-
-
-
+```php
+class Person
+{ 
+    public readonly string $name;
+    public $age;
+       
+    public function __construct($name, $age)
+    {
+        $this->name = $name;
+        $this->age = $age;
+    }
+}
+$tom = new Person("Tom", 38);
+$tom->age = 22;             // значение свойства $age можно поменять
+ 
+// $tom->name = "Bob";     // значение свойства $name нельзя поменять, так как оно только для чтения
+ 
+echo "Name: $tom->name";  // получить значение свойства $name можно
+```
 
 
 
