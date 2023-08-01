@@ -1,4 +1,6 @@
 
+# Ruby
+
 ## Знакомство с языком Ruby
 
 Проверка версии ruby
@@ -323,24 +325,89 @@ rescue
 end
 ```
 
+## Объекты и классы (ООП)
+
+Классы объявляются с помощью ключевого слова `class`. Конструктор вызывается с помощью `initialize`. Чтобы инициализировать новый инстанс класса, нужно записать `Имя_класса.new(значения для конструктора)`
+
+Применение символа `@` перед именем переменной в Ruby позволяет ей стать экземплярной переменной, которая будет доступна в пределах текущего объекта класса
+
+С помощью `attr_accessor` мы указываем те поля, которые будут присутствовать в классе (так же можно их не указывать, если мы сразу будем их инициализировать в конструкторе)
 
 ```ruby
 class Person
-  def initialize(name, age)
-    @name = name
-    @age = age
+    attr_accessor :name, :age
+  
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  
+    def say_hello
+      puts "Привет, меня зовут #{@name} и мне #{@age} лет."
+    end
   end
-
-  def say_hello
-    puts "Привет, меня зовут #{@name} и мне #{@age} лет."
-  end
-end
-
+  
 person = Person.new("Алиса", 25)
 person.say_hello
 ```
 
+## Наследование, модули
 
+Класс может наследовать свойства и методы от другого класса, который называется «родительским» или «суперклассом», используя ключевое слово `class` и оператор `<`
+
+```ruby
+class Animal
+  def speak
+    puts "I can speak!"
+  end
+end
+
+class Dog < Animal
+  def bark
+    puts "Woof!"
+  end
+end
+
+dog = Dog.new
+dog.speak   # I can speak!
+dog.bark    # Woof!
+```
+
+## Импорты
+
+Первый файл с классом
+
+`file1.rb`
+```ruby
+class ClassA
+  def method_a
+    puts "Hello from ClassA"
+  end
+end
+```
+
+И далее, во втором файле, мы используем `require_relative` которым и импортируем файл целиком, чтобы использовать его внутри целевого модуля 
+
+`file2.rb`
+```ruby
+require_relative 'file1'
+
+class ClassB
+  def initialize
+    @instance_of_a = ClassA.new
+  end
+
+  def method_b
+    @instance_of_a.method_a
+  end
+end
+
+instance_of_b = ClassB.new
+instance_of_b.method_b
+```
+
+
+# Ruby on Rails
 
 
 
