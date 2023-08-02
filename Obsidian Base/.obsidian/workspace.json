@@ -174,19 +174,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "ba1a2228b631bc41",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.3.7"
-              }
-            }
           }
         ],
-        "currentTab": 14
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -340,8 +330,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "ba1a2228b631bc41",
+  "active": "20b5050a341d1421",
   "lastOpenFiles": [
+    "Development/BackEnd/_png/Pasted image 20230802085053.png",
+    "Development/BackEnd/_png/Pasted image 20230802084223.png",
+    "Development/BackEnd/_png/Pasted image 20230802084220.png",
     "Development/BackEnd/PHP.md",
     "Development/BackEnd/_png/Pasted image 20230801182040.png",
     "Development/BackEnd/_png/Pasted image 20230801171421.png",
@@ -375,8 +368,6 @@
     "Development/BackEnd/_png/Pasted image 20230729165636.png",
     "Development/BackEnd/_png/Pasted image 20230729140944.png",
     "Development/BackEnd/_png/Pasted image 20230729140651.png",
-    "Development/BackEnd/_png/Pasted image 20230729140401.png",
-    "Development/BackEnd/_png/Pasted image 20230729131850.png",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
     "Development/MobileDev/_png",
     "Development/Mobile",
