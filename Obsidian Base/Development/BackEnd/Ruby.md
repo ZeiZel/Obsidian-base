@@ -465,13 +465,36 @@ rails server
 
 ## Модели, миграции, ORM, CRUD
 
+Каждая модель у нас отвечает за таблицу в базе данных
 
+![](_png/Pasted%20image%2020230802161504.png)
 
+Для генерации модели 
 
+```bash
+rails generate model User name:string registration_date:date
+rails generate model Category key:string:name description:text
+rails generate model Post title:string body:text category:references image:string
+rails generate model Comment rating:integer body:text created_at:date post:references
+```
 
+После создания каждой модели, у нас в `db/migrate` создаются миграции, которые пойдут на сервер
 
+```rb
+class CreateCategories < ActiveRecord::Migration[7.0]
+  def change
+    create_table :categories do |t|
+      t.string :key
+      t.string :name
+      t.text :description
 
+      t.timestamps
+    end
+  end
+end
+```
 
+Далее очень важной частью являются миграции. Миграции описывают структуру изменений в БД.
 
 
 
