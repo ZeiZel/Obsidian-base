@@ -164,7 +164,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 12
       }
     ],
     "direction": "vertical"
@@ -238,7 +238,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Golang.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -255,7 +255,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Golang.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -278,7 +278,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP.md"
+                "file": "Development/BackEnd/Golang.md"
               }
             }
           },
@@ -316,15 +316,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "491dd1bb3934c2e9",
+  "active": "20b5050a341d1421",
   "lastOpenFiles": [
+    "Development/BackEnd/PHP.md",
     "Development/BackEnd/Ruby.md",
     "Development/BackEnd/_png/Pasted image 20230802161504.png",
     "Development/BackEnd/_png/Pasted image 20230802154110.png",
     "Development/BackEnd/_png/Pasted image 20230802154108.png",
     "Development/BackEnd/_png/Pasted image 20230802153619.png",
     "Development/BackEnd/_png/Pasted image 20230802152626.png",
-    "Development/BackEnd/PHP.md",
     "Development/BackEnd/Golang.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/PHP + React - Админка.md",
