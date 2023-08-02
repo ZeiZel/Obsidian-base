@@ -176,7 +176,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 12
       }
     ],
     "direction": "vertical"
@@ -250,7 +250,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Ruby.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -267,7 +267,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/Ruby.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -290,7 +290,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP.md"
+                "file": "Development/BackEnd/Ruby.md"
               }
             }
           },
@@ -328,14 +328,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "491dd1bb3934c2e9",
+  "active": "80fc1b7c1e03df41",
   "lastOpenFiles": [
+    "Development/BackEnd/PHP.md",
     "Development/BackEnd/Golang.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/PHP + React - Админка.md",
     "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
-    "Development/BackEnd/PHP.md",
     "Development/BackEnd/Ruby.md",
     "Development/BackEnd/_png/Pasted image 20230802114236.png",
     "Development/BackEnd/_png/Pasted image 20230802104511.png",
