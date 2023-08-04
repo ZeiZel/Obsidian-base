@@ -145,7 +145,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/PHP/RESTful API.md",
+                "file": "Development/BackEnd/PHP/YII2.md",
                 "mode": "source",
                 "source": false
               }
@@ -238,7 +238,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP/RESTful API.md",
+                "file": "Development/BackEnd/PHP/YII2.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -255,7 +255,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP/RESTful API.md",
+                "file": "Development/BackEnd/PHP/YII2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -278,7 +278,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP/RESTful API.md"
+                "file": "Development/BackEnd/PHP/YII2.md"
               }
             }
           },
@@ -318,9 +318,10 @@
   },
   "active": "491dd1bb3934c2e9",
   "lastOpenFiles": [
-    "Development/BackEnd/PHP/_png",
     "Development/BackEnd/PHP/PHP.md",
+    "Development/BackEnd/PHP/YII2.md",
     "Development/BackEnd/PHP/RESTful API.md",
+    "Development/BackEnd/PHP/_png",
     "Development/BackEnd/PHP",
     "Development/BackEnd/Golang.md",
     "Development/BackEnd/_png/Pasted image 20230803090801.png",
@@ -362,7 +363,6 @@
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/_png",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons",
     "Development/FrontEnd/Angular 9. Теория и Практика",
-    "Development/Tips&Tricks/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules"
+    "Development/Tips&Tricks/_png"
   ]
 }
