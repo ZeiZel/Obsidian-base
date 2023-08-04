@@ -145,8 +145,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
-                "mode": "preview",
+                "file": "Development/BackEnd/PHP/RESTful API.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -238,7 +238,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/PHP/RESTful API.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -255,7 +255,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP.md",
+                "file": "Development/BackEnd/PHP/RESTful API.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -278,7 +278,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP.md"
+                "file": "Development/BackEnd/PHP/RESTful API.md"
               }
             }
           },
@@ -318,9 +318,12 @@
   },
   "active": "491dd1bb3934c2e9",
   "lastOpenFiles": [
+    "Development/BackEnd/PHP/_png",
+    "Development/BackEnd/PHP/PHP.md",
+    "Development/BackEnd/PHP/RESTful API.md",
+    "Development/BackEnd/PHP",
     "Development/BackEnd/Golang.md",
     "Development/BackEnd/_png/Pasted image 20230803090801.png",
-    "Development/BackEnd/PHP.md",
     "Development/BackEnd/Ruby.md",
     "Development/BackEnd/_png/Pasted image 20230802161504.png",
     "Development/BackEnd/_png/Pasted image 20230802154110.png",
@@ -331,9 +334,9 @@
     "Development/PHP + React - Админка.md",
     "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
-    "Development/BackEnd/_png/Pasted image 20230802114236.png",
-    "Development/BackEnd/_png/Pasted image 20230802104511.png",
-    "Development/BackEnd/_png/Pasted image 20230802104452.png",
+    "Development/BackEnd/PHP/_png/Pasted image 20230802114236.png",
+    "Development/BackEnd/PHP/_png/Pasted image 20230802104511.png",
+    "Development/BackEnd/PHP/_png/Pasted image 20230802104452.png",
     "Development/BackEnd/_png/Pasted image 20230802101959.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
     "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
@@ -352,7 +355,6 @@
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/03 - Дополнительные основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/05 - Продвинутый JavaScript.md",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
     "Development/MobileDev/_png",
     "Development/Mobile",
@@ -361,7 +363,6 @@
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons",
     "Development/FrontEnd/Angular 9. Теория и Практика",
     "Development/Tips&Tricks/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development"
+    "Development/FrontEnd/HTML+CSS__Git+NPM/WEB-Development/modules"
   ]
 }
