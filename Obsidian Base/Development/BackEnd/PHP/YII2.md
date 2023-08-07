@@ -41,8 +41,6 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic папка
 - vendor - папка с зависимостями
 - **views** - папка с шаблонами и видами (layout хранит шаблоны, site хранит виды)
 
-
-
 ## Контроллеры
 
 
