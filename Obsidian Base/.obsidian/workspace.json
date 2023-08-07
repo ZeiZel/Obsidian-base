@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "mode": "preview",
                 "source": false
               }
@@ -239,7 +239,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -256,7 +256,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -279,7 +279,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md"
               }
             }
           },
@@ -320,7 +320,11 @@
   },
   "active": "d4d3fface19018ba",
   "lastOpenFiles": [
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/08 Statefull компоненты.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/07 Простые компоненты.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/06 Figma для разработчика.md",
@@ -342,10 +346,7 @@
     "Development/Тестирование JavaScript.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/04 Docker image.md",
-    "Development/BackEnd/PHP/YII2.md",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806095901.png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/03 Базовые понятия Docker.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806095449.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806095423.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806094902.png",
@@ -355,7 +356,6 @@
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806092455.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806080224.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230805131709.png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/02 Настройка VM на Linux.md",
     "Development/BackEnd/PHP/_png",
     "Development/BackEnd/PHP",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
