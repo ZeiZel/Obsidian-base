@@ -16,4 +16,4 @@
 [13 Структурные паттерны](_lessons/13%20Структурные%20паттерны.md)
 [14 Поведенческие паттерны](_lessons/14%20Поведенческие%20паттерны.md)
 [15 Проект - Утилита выполнения команд](_lessons/15%20Проект%20-%20Утилита%20выполнения%20команд.md)
-[Типизация TypeScript в React, Redux Toolkit](../FrontEnd/Типизация%20TypeScript%20в%20React,%20Redux%20Toolkit.md)
+[Типизация TypeScript в React, Redux Toolkit](_lessons/Типизация%20TypeScript%20в%20React,%20Redux%20Toolkit.md)
