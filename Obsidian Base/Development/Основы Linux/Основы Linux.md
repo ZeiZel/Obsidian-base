@@ -1,4 +1,4 @@
-
+#Linux #DevOps 
 
 [Введение](_lessons/Введение.md)
 [Работа с SHELL](_lessons/Работа%20с%20SHELL.md)
@@ -10,12 +10,3 @@
 [Сеть в Linux](_lessons/Сеть%20в%20Linux.md)
 [Хранение](_lessons/Хранение.md)
 [Службы](_lessons/Службы.md)
-
-
-
-
-
-
-
-
-

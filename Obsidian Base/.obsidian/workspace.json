@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "mode": "preview",
                 "source": false
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Введение.md",
+                "file": "Development/Основы Linux/Основы Linux.md",
                 "mode": "source",
                 "source": false
               }
@@ -239,7 +239,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Введение.md",
+                "file": "Development/Основы Linux/Основы Linux.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -256,7 +256,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Введение.md",
+                "file": "Development/Основы Linux/Основы Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -279,7 +279,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Введение.md"
+                "file": "Development/Основы Linux/Основы Linux.md"
               }
             }
           },
@@ -320,11 +320,13 @@
   },
   "active": "c5bd051fb9e328b9",
   "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+    "Development/Основы Linux/Основы Linux.md",
+    "Development/Основы Linux/_lessons/Введение.md",
     "Development/Основы Linux/_lessons/_png/Pasted image 20230808145129.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20230808145003.png",
     "Development/Основы Linux/_lessons/_png",
-    "Development/Основы Linux/Основы Linux.md",
-    "Development/Основы Linux/_lessons/Введение.md",
     "Development/Основы Linux/_lessons/Хранение.md",
     "Development/Основы Linux/_lessons",
     "Development/Основы Linux/_lessons/Службы.md",
@@ -338,8 +340,6 @@
     "Development/BackEnd/PHP/PHP.md",
     "Development/FrontEnd/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/TypeScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
@@ -358,7 +358,6 @@
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806094405.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806093636.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806092455.png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806080224.png",
     "Development/BackEnd/PHP/_png",
     "Development/BackEnd/PHP",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
