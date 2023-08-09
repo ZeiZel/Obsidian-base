@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
                 "mode": "preview",
                 "source": false
               }
@@ -176,7 +176,7 @@
             }
           }
         ],
-        "currentTab": 13
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -234,7 +234,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 258.5
+    "width": 258.5,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -250,7 +251,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Python.md",
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -267,7 +268,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Python.md",
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -290,7 +291,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Python.md"
+                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md"
               }
             }
           },
@@ -329,20 +330,22 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "1bcae87cda492ee6",
+  "active": "b1fb306ebcd1f6c6",
   "lastOpenFiles": [
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/12 Dependency Injection.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/13 Отладка и watch.md",
+    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/11 Первый шаг к архитектуре.md",
+    "Development/Python.md",
     "Development/_png/Pasted image 20230809075822.png",
     "Development/_png/Pasted image 20230808184540.png",
-    "Development/Python.md",
     "Development/Основы Linux/Основы Linux.md",
     "Development/TypeScript/TypeScript.md",
     "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/20 Дополнения.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/12 Dependency Injection.md",
-    "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/_lessons/09 Приложение 2 - API с ExpressJS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
     "Development/Основы Linux/_lessons/Введение.md",
@@ -362,14 +365,12 @@
     "Development/BackEnd/PHP/PHP.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/11 Server side rendering.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/10 CSS Grid.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/09 HOC компоненты.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806095901.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806095449.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806095423.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806094902.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806094744.png",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806094405.png",
-    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/_png/Pasted image 20230806093636.png",
     "Development/BackEnd/PHP/_png",
     "Development/BackEnd/PHP",
     "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
