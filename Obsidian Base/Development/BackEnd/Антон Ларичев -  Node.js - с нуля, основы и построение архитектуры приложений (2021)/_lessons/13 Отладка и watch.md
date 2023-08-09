@@ -1,6 +1,6 @@
 ## 073 Eslint и prettier
 
-Установи `prettier` и `eslint` вместе с плагинами, парсерами и конфигами
+Установим `prettier` и `eslint` вместе с плагинами, парсерами и конфигами
 
 ```bash
 npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier typescript
