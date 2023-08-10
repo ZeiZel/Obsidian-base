@@ -1,6 +1,6 @@
 {
   "baseFontSize": 22,
-  "translucency": false,
+  "translucency": true,
   "cssTheme": "Border",
   "accentColor": "#6b7fd1",
   "nativeMenus": false,
