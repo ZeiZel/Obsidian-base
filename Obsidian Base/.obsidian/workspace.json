@@ -181,14 +181,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+                "file": "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "df32a11f72f45cbe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/GIT/Git.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 14
+        "currentTab": 15
       }
     ],
     "direction": "vertical"
@@ -246,8 +258,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 258.5,
-    "collapsed": true
+    "width": 258.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -263,7 +274,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+                "file": "Development/GIT/Git.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -280,7 +291,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+                "file": "Development/GIT/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -303,7 +314,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md"
+                "file": "Development/GIT/Git.md"
               }
             }
           },
@@ -342,9 +353,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "36c4e2a3916102c5",
+  "active": "df32a11f72f45cbe",
   "lastOpenFiles": [
+    "Development/GIT",
     "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/7. RabbitMQ.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/6. Обмен сообщениями.md",
@@ -368,8 +381,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/04 – Объекты.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/03 - Переменные и типы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/02 - Самое важное в JavaScript и console.log.md",
-    "Development/TypeScript/TypeScript.md",
     "Development/_png/Pasted image 20230809075822.png",
     "Development/_png/Pasted image 20230808184540.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20230808145129.png",
