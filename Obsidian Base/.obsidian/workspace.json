@@ -270,7 +270,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 258.5,
+    "width": 355.5,
     "collapsed": true
   },
   "right": {
@@ -368,8 +368,10 @@
   },
   "active": "13af0afc4abb7bd8",
   "lastOpenFiles": [
-    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md",
     "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
     "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
     "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
@@ -392,8 +394,6 @@
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
     "Development/Основы Linux/_lessons/Введение.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230811153524.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230811153435.png",
     "Development/GIT",
