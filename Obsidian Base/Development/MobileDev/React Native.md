@@ -81,26 +81,83 @@ Metro Bundler позволяет интерпретировать любой с�
 
 ![](_png/Pasted%20image%2020230702190631.png)
 
-## Приступаем к разработке приложения
+## Начальная разработка приложения и стилизация
 
 
 
+`App.js`
+```JSX
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+// import './styles.css'
 
+export default function App() {
+	return (
+		<View style={styles.container}>
+			<Text style={styles.textStyles}>Hello</Text>
+			<Text
+				style={{
+					fontSize: 16,
+				}}
+			>
+				world!
+			</Text>
+			<StatusBar style='auto' />
+		</View>
+	);
+}
 
+const styles = StyleSheet.create({
+	container: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '100%',
+		height: '100%',
+	},
+	textStyles: {
+		color: 'purple',
+		fontSize: 24,
+	},
+});
+```
 
-## Про стандартную стилизацию в React Native
-
-
-
-
-
+![](_png/Pasted%20image%2020230814140416.png)
 
 ## Устанавливаем styled-components для стилизации компонентов
 
 
 
+```bash
+npm i styled-components
+```
 
 
+
+```JSX
+import { View } from 'react-native';
+import styled from 'styled-components/native';
+
+const Post = styled.View`
+	padding: 15px;
+
+	width: 100px;
+	height: 100px;
+
+	background: red;
+	border-radius: 15px;
+`;
+
+export default function App() {
+	return (
+		<View>
+			<Post />
+		</View>
+	);
+}
+```
+
+![](_png/Pasted%20image%2020230814141601.png)
 
 ## Пробуем создать компонент с помощью styled-components
 
