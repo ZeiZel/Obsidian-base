@@ -205,7 +205,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
+                "file": "Development/DesktopDev/Electron/ElectronJS.md",
                 "mode": "source",
                 "source": false
               }
@@ -287,7 +287,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
+                "file": "Development/DesktopDev/Electron/ElectronJS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -304,7 +304,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
+                "file": "Development/DesktopDev/Electron/ElectronJS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -327,7 +327,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/2 Начало работы.md"
+                "file": "Development/DesktopDev/Electron/ElectronJS.md"
               }
             }
           },
@@ -368,7 +368,12 @@
   },
   "active": "13af0afc4abb7bd8",
   "lastOpenFiles": [
+    "Development/DesktopDev/Electron/_lessons/Упаковка и публикация приложений.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
+    "Development/DesktopDev/Electron/_lessons/4 Main Process API.md",
+    "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
+    "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
     "Development/MobileDev/React Native.md",
     "Development/Основы Linux/_lessons/Работа с SHELL.md",
@@ -389,13 +394,8 @@
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
     "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230811153524.png",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20230811153435.png",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
-    "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
     "Development/GIT",
     "Development/_png/Pasted image 20230809075822.png",
     "Development/_png/Pasted image 20230808184540.png",
