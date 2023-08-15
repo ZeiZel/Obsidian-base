@@ -171,22 +171,88 @@ export default function App() {
 
 ![](_png/Pasted%20image%2020230815071521.png)
 
+Создаём пост в отдельном файле
 
+Так же тут нужно обратить внимание, что для отображения изображений, нужно использовать компонент `Image`
 
+`components / Post / Post.jsx`
+```JSX
+import styled from 'styled-components/native';
 
-## Создаем файл Post.jsx с кодом статьи
+const PostView = styled.View`
+	display: flex;
+	flex-direction: row;
 
+	padding: 15px;
 
+	/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); - так написать нельзя в styled-components */
+	border-bottom-width: 1px;
+	border-bottom-color: rgba(0, 0, 0, 0.1);
+	border-bottom-style: solid;
+`;
 
+const PostDetails = styled.View`
+	justify-content: center;
+`;
 
+const PostImage = styled.Image`
+	margin-right: 12px;
+	width: 100px;
+	height: 100px;
+	border-radius: 12px;
+`;
 
+const PostTitle = styled.Text`
+	font-size: 16px;
+	font-weight: 700;
+`;
 
-## Используем сайт MockAPI для хранения статей
+const PostDate = styled.Text`
+	font-size: 12px;
+	color: rgba(0, 0, 0, 0.4);
+`;
 
+export const Post = ({ title, imageUri, createdAt }) => {
+	return (
+		<PostView>
+			<PostImage
+				source={{
+					uri: imageUri,
+				}}
+			/>
+			<PostDetails>
+				<PostTitle>{title}</PostTitle>
+				<PostDate>{createdAt}</PostDate>
+			</PostDetails>
+		</PostView>
+	);
+};
+```
 
+И далее используем данный компонент с обычной передачей пропсов
 
+`App.js`
+```JSX
+import { StatusBar, View } from 'react-native';
+import { Post } from './components/Post/Post';
 
+export default function App() {
+	return (
+		<View>
+			<Post
+				title={'yes'}
+				createdAt={'yes'}
+				imageUri={
+					'https://media.kg-portal.ru/anime/j/jojosbizarreadventurediamondisunbreakable/images/jojosbizarreadventurediamondisunbreakable_32.jpg'
+				}
+			/>
+			<StatusBar theme={'auto'} />
+		</View>
+	);
+}
+```
 
+![](_png/Pasted%20image%2020230815083925.png)
 
 ## Устанавливаем Axios и делаем запрос на получение статей
 
