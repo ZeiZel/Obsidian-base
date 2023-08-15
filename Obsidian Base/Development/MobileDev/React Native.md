@@ -256,24 +256,146 @@ export default function App() {
 
 ## Устанавливаем Axios и делаем запрос на получение статей
 
+Воспользуемся mockAPI для генерации данных. 
 
+Далее мы просто воспользуемся `useEffect` и `useState`, как в обычном реакте, чтобы получить данные и отобразить их через `map`.
 
+Так же отдельно можно отметить, что мы можем выводить сообщение об ошибке, если воспользуемся `Alert` 
 
+`App.js`
+```JSX
+import { Alert, StatusBar, View } from 'react-native';
+import { Post } from './components/Post/Post';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';
+
+export default function App() {
+	const [posts, setPosts] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get(API)
+			.then(({ data }) => setPosts(data))
+			.catch((e) => Alert.alert('Ошибка', 'Не получается получить статьи!'));
+
+		console.log(posts);
+	}, []);
+
+	return (
+		<View>
+			{posts.map((post) => (
+				<Post
+					key={post.id}
+					title={post.title}
+					imageUri={post.imageUrl}
+					createdAt={post.createdAt}
+				/>
+			))}
+			<StatusBar theme={'auto'} />
+		</View>
+	);
+}
+```
+
+Тут нужно отметить, что без `flex: 1` текст будет уходить за границы экрана
+
+![](_png/Pasted%20image%2020230815092313.png)
 
 ## Как правильно рендерить список с возможностью скролла (FlatList)
 
+Однако для рендера экрана, который будет поддерживать скролл, нужно будет воспользоваться компонентом `FlatList`, который предоставит нам рендер большого списка. 
 
+Атрибут `data` принимает в себя сам массив данных, а атрибут `renderItem` уже принимает в себя объект с полем `item`, в котором и хранятся наши данные. Тут нам для отрисовки не нужно передавать атрибут `key` в компонент, так как `FlatList` делает это автоматически
 
+`App.js`
+```JSX
+import { Alert, FlatList, StatusBar, View } from 'react-native';
+import { Post } from './components/Post/Post';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';
 
+export default function App() {
+	const [posts, setPosts] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get(API)
+			.then(({ data }) => setPosts(data))
+			.catch((e) => Alert.alert('Ошибка', 'Не получается получить статьи!'));
+	}, []);
+
+	return (
+		<View>
+			<FlatList
+				data={posts}
+				renderItem={({ item }) => (
+					<Post title={item.title} imageUri={item.imageUrl} createdAt={item.createdAt} />
+				)}
+			/>
+
+			<StatusBar theme={'auto'} />
+		</View>
+	);
+}
+```
 
 ## Делаем рендер иконки загрузки контента (ActivityIndicator)
 
+Сделать иконку загрузки мы можем через использование компонента `ActivityIndicator` и `useState`, который будет хранить статус загрузки изменяемый в `fetchPosts`
 
+`App.js`
+```JSX
+import { Alert, FlatList, StatusBar, View, Text, ActivityIndicator } from 'react-native';
+import { Post } from './components/Post/Post';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';
 
+export default function App() {
+	const [posts, setPosts] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
+	const fetchPosts = () => {
+		setIsLoading(true);
+		axios
+			.get(API)
+			.then(({ data }) => setPosts(data))
+			.catch((e) => Alert.alert('Ошибка', 'Не получается получить статьи!'))
+			.finally(() => setIsLoading(false));
+	};
+
+	useEffect(fetchPosts, []);
+
+	if (isLoading) {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<ActivityIndicator style={{ marginBottom: 15 }} size={'large'} />
+				<Text>Загрузка...</Text>
+			</View>
+		);
+	}
+
+	return (
+		<View>
+			<FlatList
+				data={posts}
+				renderItem={({ item }) => (
+					<Post title={item.title} imageUri={item.imageUrl} createdAt={item.createdAt} />
+				)}
+			/>
+
+			<StatusBar theme={'auto'} />
+		</View>
+	);
+}
+```
+
+![](_png/Pasted%20image%2020230815095527.png)
 
 ## Перезагрузка контента по свайпу (RefreshController)
 
