@@ -399,17 +399,94 @@ export default function App() {
 
 ## Перезагрузка контента по свайпу (RefreshController)
 
+Далее нам нужно реализовать функционал, когда по свайпу сверху вниз, мы будем подгружать новые данные пользователя
 
+Для этого уже используется атрибут `refreshControl` внутри `FlatList` и компонент `RefreshControl`
 
+`refreshing` - boolean обновления данных
+`onRefresh` - отвечает за действие во время перезагрузки
 
+```JSX
+import {  
+    Alert,  
+    FlatList,  
+    StatusBar,  
+    View,  
+    Text,  
+    ActivityIndicator,  
+    RefreshControl,  
+} from 'react-native';  
+import { Post } from './components/Post/Post';  
+import { useEffect, useState } from 'react';  
+import axios from 'axios';  
+  
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';  
+  
+export default function App() {  
+    const [posts, setPosts] = useState([]);  
+    const [isLoading, setIsLoading] = useState(true);  
+  
+    const fetchPosts = () => {  
+       setIsLoading(true);  
+       axios  
+          .get(API)  
+          .then(({ data }) => setPosts(data))  
+          .catch((e) => Alert.alert('Ошибка', 'Не получается получить статьи!'))  
+          .finally(() => setIsLoading(false));  
+    };  
+  
+    useEffect(fetchPosts, []);  
+  
+    if (isLoading) {  
+       return (  
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>  
+             <ActivityIndicator style={{ marginBottom: 15 }} size={'large'} />  
+             <Text>Загрузка...</Text>  
+          </View>  
+       );  
+    }  
+  
+    return (  
+       <View>          
+	       <FlatList  
+             refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPosts} />}  
+             data={posts}  
+             renderItem={({ item }) => (  
+                <Post title={item.title} imageUri={item.imageUrl} createdAt={item.createdAt} />  
+             )}  
+          />  
+  
+          <StatusBar theme={'auto'} />  
+       </View>  
+    );  
+}
+```
 
+![](_png/Pasted%20image%2020230815132916.png)
 
 ## Делаем статью кликабельной (TouchableOpacity)
 
+Для отслеживания нажатия на элемент и реагирования на это действие, мы можем использовать `TouchableOpacity` - он автоматически будет менять отображение при нажатии на элемент и так же через `onPress` позволит вызывать функционал 
 
+```JSX
+<FlatList
+	refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPosts} />}
+	data={posts}
+	renderItem={({ item }) => (
+		<TouchableOpacity onPress={/* тут можно поместить действие при клике */}>
+			<Post
+				title={item.title}
+				imageUri={item.imageUrl}
+				createdAt={item.createdAt}
+			/>
+		</TouchableOpacity>
+	)}
+/>
+```
 
+И теперь происходит изменение opacity у активного элемента, на который кликают
 
-
+![](_png/Pasted%20image%2020230815133256.png)
 
 ## Переносим код отображения статьей в HomeScreen
 
