@@ -488,41 +488,247 @@ export default function App() {
 
 ![](_png/Pasted%20image%2020230815133256.png)
 
-## Переносим код отображения статьей в HomeScreen
-
-
-
-
-
-
 ## Создаем экран отображения полной статьи FullPostScreen
 
+Далее стоит разделить приложение на отдельные страницы, которые принято называть скринами и далее реализуем страницу отдельного поста
 
+`screens > PostScreen.jsx`
+```JSX
+import { ActivityIndicator, Alert, Text, View } from 'react-native';  
+import styled from 'styled-components/native';  
+import { useEffect, useState } from 'react';  
+import axios from 'axios';  
+import { Loading } from '../components/Loading/Loading';  
+  
+const PostImage = styled.Image`  
+    width: 100%;    height: 250px;  
+    margin-bottom: 20px;  
+    border-radius: 15px;`;  
+  
+const PostText = styled.Text`  
+    font-size: 18px;    line-height: 24px;`;  
+  
+const PostTitle = styled.Text`  
+    font-size: 24px;    font-weight: 700;    line-height: 24px;`;  
+  
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';  
+  
+export const PostScreen = () => {  
+    const [post, setPost] = useState([]);  
+    const [isLoading, setIsLoading] = useState(true);  
+  
+    const fetchPosts = () => {  
+       setIsLoading(true);  
+       axios  
+          .get(API + '/1')  
+          .then(({ data }) => setPost(data))  
+          .catch((e) => Alert.alert('Ошибка', 'Не получается получить статью!'))  
+          .finally(() => setIsLoading(false));  
+    };  
+  
+    useEffect(fetchPosts, []);  
+  
+    if (isLoading) {  
+       return <Loading />;  
+    }  
+  
+    return (  
+       <View style={{ padding: 20 }}>  
+          <PostTitle>{post.title}</PostTitle>  
+          <PostImage             source={{  
+                uri: post.imageUrl,  
+             }}  
+          />  
+          <PostText>{post.text}</PostText>  
+       </View>  
+    );  
+};
+```
 
-
-
+![](_png/Pasted%20image%2020230817111318.png)
 
 ## Подключаем роутинг с помощью React Navigation
 
+Для реализации стандартной навигации потребуются следующие пакеты:
 
+```bash
+npm i @react-navigation/native @react-navigation/native-stack react-native-screens react-native-safe-area-context react-native-gesture-handler
+```
 
+И уже таким образом реализуется навигация по приложению. Все имена роутов должны быть уникальными. Самый верхний скрин отобразится первым. В `options` мы передаём тот заголовок, который отобразится на странице приложения
 
+`screens > Navigation.jsx`
+```JSX
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { HomeScreen } from './HomeScreen';
+import { PostScreen } from './PostScreen';
 
+const Stack = createNativeStackNavigator();
+
+export const Navigation = () => {
+	return (
+		/* нужен для корректного отображения скринов */
+		<NavigationContainer>
+			{/* аналог routes */}
+			<Stack.Navigator>
+				<Stack.Screen component={HomeScreen} name={'Home'} options={{ title: 'Новости' }} />
+				<Stack.Screen component={PostScreen} name={'Post'} options={{ title: 'Пост' }} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
+};
+```
+
+И далее нам нужно в главном компоненте передать чистый навигатор без всяких обёрток и статусбара, так как за нас всё настроить навигационный контейнер
+
+`App.js`
+```JSX
+import { Navigation } from './screens/Navigation';
+
+export default function App() {
+	return <Navigation />;
+}
+```
+
+![](_png/Pasted%20image%2020230817114457.png)
 
 ## Делаем переход на экран полной записи при клике на статью
 
+Первым делом нужно получить объект `navigation` из пропсов, который попадает туда из роутера приложения. Этот объект хранит функции для работы с роутингом нашего приложения. Далее нужно на `TouchableOpacity` повесить функцию `navigate` 
+
+`screens > HomeScreen.jsx`
+```JSX
+import {
+	Alert,
+	FlatList,
+	View,
+	Text,
+	ActivityIndicator,
+	RefreshControl,
+	TouchableOpacity,
+} from 'react-native';
+import { Post } from '../components/Post/Post';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Loading } from '../components/Loading/Loading';
+
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';
+
+export const HomeScreen = ({ navigation }) => {
+	const [posts, setPosts] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	const fetchPosts = () => {
+		setIsLoading(true);
+		axios
+			.get(API)
+			.then(({ data }) => setPosts(data))
+			.catch((e) => Alert.alert('Ошибка', 'Не получается получить статьи!'))
+			.finally(() => setIsLoading(false));
+	};
+
+	useEffect(fetchPosts, []);
+
+	if (isLoading) {
+		return <Loading />;
+	}
+
+	return (
+		<View>
+			<FlatList
+				refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPosts} />}
+				data={posts}
+				renderItem={({ item }) => (
+					<TouchableOpacity onPress={() => navigation.navigate('Post', { id: item.id })}>
+						<Post
+							title={item.title}
+							imageUri={item.imageUrl}
+							createdAt={item.createdAt}
+						/>
+					</TouchableOpacity>
+				)}
+			/>
+		</View>
+	);
+};
+```
 
 
 
+`screens > PostScreen.jsx`
+```JSX
+import { ActivityIndicator, Alert, Text, View } from 'react-native';
+import styled from 'styled-components/native';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Loading } from '../components/Loading/Loading';
 
+const PostImage = styled.Image`
+	width: 100%;
+	height: 250px;
 
-## Обрезаем заголовки статей для корректного отображения списка
+	margin-bottom: 20px;
 
+	border-radius: 15px;
+`;
 
+const PostText = styled.Text`
+	font-size: 18px;
+	line-height: 24px;
+`;
 
+const PostTitle = styled.Text`
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 24px;
 
+	margin-bottom: 20px;
+`;
 
+const API = 'https://64db11b4593f57e435b06489.mockapi.io/api/posts/hasles';
 
+export const PostScreen = ({ route, navigation }) => {
+	const [post, setPost] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
+	// достаём те параметры, которые сюда передал родитель
+	const { id } = route.params;
 
+	const fetchPosts = () => {
+		setIsLoading(true);
+		axios
+			.get(API + `/${id}`)
+			.then(({ data }) => setPost(data))
+			.catch((e) => Alert.alert('Ошибка', 'Не получается получить статью!'))
+			.finally(() => setIsLoading(false));
 
+		// тут мы можем указать тот же объект options, что и в роутере
+		navigation.setOptions({
+			title: post.title,
+		});
+	};
+
+	useEffect(fetchPosts, []);
+
+	if (isLoading) {
+		return <Loading />;
+	}
+
+	return (
+		<View style={{ padding: 20 }}>
+			<PostTitle>{post.title}</PostTitle>
+			<PostImage
+				source={{
+					uri: post.imageUrl,
+				}}
+			/>
+			<PostText>{post.text}</PostText>
+		</View>
+	);
+};
+```
+
+И теперь мы можем с родительского экрана перейти в дочерний и имеем возможность выйти из нужного нам места
+
+![](_png/Pasted%20image%2020230817115728.png)
