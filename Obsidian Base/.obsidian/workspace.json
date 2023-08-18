@@ -331,12 +331,20 @@
             "id": "469a7aae29c19686",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "9ef8a14236cf90a0",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {}
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -354,7 +362,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "df32a11f72f45cbe",
+  "active": "9ef8a14236cf90a0",
   "lastOpenFiles": [
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/MobileDev/React Native.md",
