@@ -43,6 +43,8 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic папка
 
 ## Контроллеры
 
+### Создание контроллера
+
 В папке с контроллерами нам нужно создавать одноимённые контроллеры, которые будут обозначать определённый маршрут. В них мы вкладываем функции, которые начинаются с `action` и уже дальше будет идти имя роута, который мы вызываем в url-строке
 
 `controllers / PostCommentController.php`
@@ -112,6 +114,83 @@ class TestController extends Controller {
 
 ![](_png/Pasted%20image%2020230821100632.png)
 
+Таким образом мы можем просто передавать параметры в контроллер через Get-запрос
+
+`controllers / TestController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class TestController extends Controller {
+
+    public $defaultAction = 'my-test';
+
+    public function actionIndex($name, $age = 30) {
+        return $name . ' ' . $age;
+    }
+
+    public function actionMyTest() {
+        return __METHOD__;
+    }
+
+}
+```
+
+![](_png/Pasted%20image%2020230821115222.png)
+
+### Вызов экшенов
+
+Так же внутри контролерров в методе `actions()` мы можем присваивать определённым роутам контроллеров выполнение определённых функций. Тут в контроллере `test` по роуту `test` будет выводиться текст `'Action runner'`
+
+`components / HelloAction.php`
+```PHP
+<?php
+
+namespace components;
+
+use yii\base\Action;
+
+class HelloAction extends Action
+{
+    public function run() {
+        return 'Action runner';
+    }
+}
+```
+
+`controllers / TestController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class TestController extends Controller {
+
+    public $defaultAction = 'my-test';
+
+    public function actions() {
+        return [
+            'test' => 'app\components\HelloAction'
+        ];
+    }
+
+    public function actionIndex($name, $age = 30) {
+        return $name . ' ' . $age;
+    }
+
+    public function actionMyTest() {
+        return __METHOD__;
+    }
+
+}
+```
+
+## Представления (Виды - View)
 
 
 
@@ -120,9 +199,6 @@ class TestController extends Controller {
 
 
 
-
-
-## Представления
 
 
 
@@ -155,7 +231,7 @@ class TestController extends Controller {
 
 
 
-## Модели
+## Модели (Model)
 
 
 
