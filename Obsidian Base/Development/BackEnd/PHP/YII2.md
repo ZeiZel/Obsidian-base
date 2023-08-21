@@ -43,6 +43,48 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic папка
 
 ## Контроллеры
 
+В папке с контроллерами нам нужно создавать одноимённые контроллеры, которые будут обозначать определённый маршрут. В них мы вкладываем функции, которые начинаются с `action` и уже дальше будет идти имя роута, который мы вызываем в url-строке
+
+`controllers / PostCommentController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class PostCommentController extends Controller
+{
+    public function actionIndex() {
+        return __METHOD__;
+    }
+}
+```
+
+![](_png/Pasted%20image%2020230821095015.png)
+
+Так же мы можем отделять контроллеры в отдельные модули. Тут нам нужно будет указать папку дополнительно в неймспейсе `\admin`
+
+`controllers / admin / MyController.php`
+```PHP
+<?php
+
+namespace app\controllers\admin;
+
+use yii\web\Controller;
+
+class MyController extends Controller
+{
+
+    public function actionIndex() {
+        return __METHOD__;
+    }
+
+}
+```
+
+![](_png/Pasted%20image%2020230821100024.png)
+
 
 
 ## Представления
