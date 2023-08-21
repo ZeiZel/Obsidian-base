@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
                 "mode": "preview",
                 "source": false
               }
@@ -211,7 +211,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -286,7 +287,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -303,7 +304,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -326,7 +327,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md"
+                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md"
               }
             }
           },
@@ -373,8 +374,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d3ee6172e2116f6c",
+  "active": "9bdf60a446a6fde3",
   "lastOpenFiles": [
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
+    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
     "Development/BackEnd/PHP/YII2.md",
@@ -408,9 +412,6 @@
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
     "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/Основы Linux/Основы Linux.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/06 - Библиотека React. Базовый уровень.md",
-    "Development/FrontEnd/React Foundamentals.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",
