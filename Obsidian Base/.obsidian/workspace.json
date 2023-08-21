@@ -275,7 +275,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/Git.md",
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -292,7 +292,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/Git.md",
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -315,7 +315,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/Git.md"
+                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md"
               }
             }
           },
