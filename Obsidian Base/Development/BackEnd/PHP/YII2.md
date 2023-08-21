@@ -85,6 +85,41 @@ class MyController extends Controller
 
 ![](_png/Pasted%20image%2020230821100024.png)
 
+Так же мы можем не указывать имя метода контроллера, если он `Index` или если мы запишем в качестве дефолтного контроллера другой через `$defaultAction` 
+
+`controllers / TestController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class TestController extends Controller {
+
+    public $defaultAction = 'my-test';
+
+    public function actionIndex() {
+        return 'Main Worker';
+    }
+
+    public function actionMyTest() {
+        return __METHOD__;
+    }
+
+}
+```
+
+![](_png/Pasted%20image%2020230821100632.png)
+
+
+
+
+
+
+
+
+
 
 
 ## Представления
