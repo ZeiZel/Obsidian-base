@@ -192,6 +192,8 @@ class TestController extends Controller {
 
 ## Представления (Виды - View)
 
+### Использование View
+
 Yii предоставляет нам возможность рендерить страницы пользователю на основе определённых видов.
 
 Конкретно у нас есть 4 методя для реализации данной задумки:
@@ -244,6 +246,8 @@ class TestController extends Controller {
 
 ![](_png/Pasted%20image%2020230823193535.png)
 
+### Рендер View во View
+
 Так же мы можем рендерить одни вью в других вью
 
 `views / test / inc.php`
@@ -261,6 +265,72 @@ class TestController extends Controller {
 <?= this->render('inc') ?>
 ```
 
+![](_png/Pasted%20image%2020230823201829.png)
+
+### Передача параметров внутрь View
+
+Таким образом мы можем передавать данные во вью:
+
+первый вариант:
+`controllers / TestController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class TestController extends Controller {
+
+    public function actionIndex() {
+        return $this->render('index', [
+            'name' => 'Alex',
+            'age' => 34
+        ]);
+    }
+
+    public function actionMyTest() {
+        return __METHOD__;
+    }
+
+}
+```
+Второй вариант:
+```PHP
+public function actionIndex($name = 'Guest', $age = 30) {
+	return $this->render('index', compact('name', 'age'));
+}
+```
+
+`views / test / index.php`
+```PHP
+<h1>Hello, man</h1>
+<?= $name ?>
+<?= $age ?>
+```
+
+Отличия при использовании слешей при обращении к виду:
+
+![](_png/Pasted%20image%2020230823201237.png)
+
+И по вышеописанному алгоритму мы можем подключить любой другой файл с использованием наших заветных `//`
+
+`views / test / index.php`
+```PHP
+<h1>Hello, man</h1>  
+<?= $this->render('inc') ?>  
+<?= $this->render('//data/about.html') ?>  
+<?= $name ?>  
+<?= $age ?>
+```
+
+`views / data / about.html`
+```PHP
+<h2>No words about me</h2>  
+<p>So close...</p>
+```
+
+![](_png/Pasted%20image%2020230823202601.png)
 
 
 
