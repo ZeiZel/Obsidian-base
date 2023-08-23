@@ -4,203 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "3d4721bbec1aa65f",
+        "id": "d085ae9dff973aa8",
         "type": "tabs",
         "children": [
           {
-            "id": "d3ee6172e2116f6c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9bdf60a446a6fde3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/JS - Basics.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "48c958706ae37357",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "28536df6c8e46b59",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/React Foundamentals.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7f7abe55db5c6243",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/TypeScript/TypeScript.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d4d3fface19018ba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b16d639f42b3e50d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/Антон Ларичев -  Node.js - с нуля, основы и построение архитектуры приложений (2021)/Node.js - с нуля, основы и построение архитектуры приложений.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "488ab0ae817b960c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/NestJS - с нуля.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "454d06a1147a9275",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Programming Principes/SOLID принципы.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "892fe28c468fa145",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Алгоритмы и Структуры даных.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8f6e73dfc479ebba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Тестирование JavaScript.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "71741df2f534c949",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Programming Principes/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c5bd051fb9e328b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Основы Linux/Основы Linux.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5a820d51f7842ea5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "df32a11f72f45cbe",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/GIT/Git.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "447d264fbecd0e87",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/PHP/PHP.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4f85d923715cd760",
+            "id": "b123042e97b1918d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -210,21 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "73f1ba0b34915eb9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 14
+        ]
       }
     ],
     "direction": "vertical"
@@ -299,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/Git.md",
+                "file": "Development/BackEnd/PHP/YII2.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -316,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/Git.md",
+                "file": "Development/BackEnd/PHP/YII2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -339,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/Git.md"
+                "file": "Development/BackEnd/PHP/YII2.md"
               }
             }
           },
@@ -386,13 +181,20 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "df32a11f72f45cbe",
+  "active": "b123042e97b1918d",
   "lastOpenFiles": [
+    "Development/BackEnd/PHP/_png/Pasted image 20230823193535.png",
+    "Development/BackEnd/PHP/_png/Pasted image 20230823192806.png",
+    "Development/BackEnd/PHP/_png/Pasted image 20230823192057.png",
+    "Development/BackEnd/PHP/_png/Pasted image 20230823192021.png",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+    "Development/BackEnd/PHP/YII2.md",
+    "Development/BackEnd/PHP/PHP.md",
+    "Development/GIT/Git.md",
     "Development/Основы Linux/Основы Linux.md",
     "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -410,20 +212,13 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/22 – Промисы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/21 - Классы и прототипы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
-    "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/15 – Массивы.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
-    "Development/BackEnd/PHP/YII2.md",
     "Development/BackEnd/PHP/_png/Pasted image 20230821115222.png",
     "Development/BackEnd/PHP/_png/Pasted image 20230821100632.png",
     "Development/BackEnd/PHP/_png/Pasted image 20230821100024.png",
     "Development/BackEnd/PHP/_png/Pasted image 20230821095015.png",
-    "Development/BackEnd/PHP/PHP.md",
     "Development/MobileDev/_png/Pasted image 20230817115728.png",
     "Development/MobileDev/_png/Pasted image 20230817114457.png",
     "Development/MobileDev/_png/Pasted image 20230817111318.png",
-    "Development/MobileDev/_png/Pasted image 20230815133256.png",
-    "Development/MobileDev/_png/Pasted image 20230815132916.png",
-    "Development/MobileDev/_png/Pasted image 20230815095527.png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",

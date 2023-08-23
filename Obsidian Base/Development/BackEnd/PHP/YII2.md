@@ -192,10 +192,74 @@ class TestController extends Controller {
 
 ## Представления (Виды - View)
 
+Yii предоставляет нам возможность рендерить страницы пользователю на основе определённых видов.
 
+Конкретно у нас есть 4 методя для реализации данной задумки:
+- render - отрисовывает заранее заданный вид
+- renderAjax - отрисовывает страницу по AJAX запросу и подключает JS/CSS к файлу
+- renderPartial
+- renderFile - отрисовывает файл
 
+Если нам нужно отрендерить элемент, то мы должны в подцеплённый к виду контроллер вписать метод, который будет соответствовать имени вида, который он рендерит
 
+![](_png/Pasted%20image%2020230823192806.png)
 
+И тут нам нужно сразу поговорить про то, что все виды мы вставляем в шаблоны, которые принимают в себя виды. Вверху вид хедера, снизу - футер, а в центре - изменяемая контентная часть
+
+![](_png/Pasted%20image%2020230823192021.png)
+
+И таким образом мы в тестовом контроллере сделали `actionIndex()`, который будет по роуту `\test` вызывать 
+
+`controllers / TestController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class TestController extends Controller {
+
+//    public function actions() {
+//        return [
+//            'test' => 'app\components\HelloAction'
+//        ];
+//    }
+
+    public function actionIndex() {
+        return $this->render('index');
+    }
+
+    public function actionMyTest() {
+        return __METHOD__;
+    }
+
+}
+```
+
+`views / test / index.php`
+```PHP
+<h1>Hello, man</h1>
+```
+
+![](_png/Pasted%20image%2020230823193535.png)
+
+Так же мы можем рендерить одни вью в других вью
+
+`views / test / inc.php`
+```PHP
+<p>
+    <code>
+        <?= __FILE__ ?>
+    </code>
+</p>
+```
+
+`views / test / index.php`
+```PHP
+<h1>Hello, man</h1>
+<?= this->render('inc') ?>
+```
 
 
 
