@@ -332,6 +332,46 @@ public function actionIndex($name = 'Guest', $age = 30) {
 
 ![](_png/Pasted%20image%2020230823202601.png)
 
+Так же у нас есть возможность передавать данные из контроллера во вью в обход прямой передачи 
+
+`controllers / TestController.php`
+```PHP
+<?php
+
+namespace app\controllers;
+
+use yii\web\Controller;
+
+class TestController extends Controller {
+
+    public $score = 1200;
+
+    public function actionIndex() {
+        \Yii::$app->view->params['title'] = 'Title';
+
+        return $this->render('index', [
+            'name' => 'Alex',
+            'age' => 34
+        ]);
+    }
+
+    public function actionMyTest() {
+        return __METHOD__;
+    }
+
+}
+```
+
+`views / test / index.php`
+```PHP
+<h1>Hello, man</h1>
+<p><?= $this->context->score ?></p>
+<p><?= $this->params['title'] ?></p>
+```
+
+
+
+
 
 
 
