@@ -158,12 +158,20 @@
             "id": "9ef8a14236cf90a0",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "95a22018811faa02",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {}
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 7
       }
     ],
     "direction": "horizontal",
@@ -172,16 +180,16 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Меню быстрого перехода": false,
-      "graph:Граф": false,
-      "canvas:Создать новый холст": false,
-      "daily-notes:Сегодняшняя заметка": false,
-      "templates:Вставить шаблон": false,
-      "command-palette:Открыть палитру команд": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "b123042e97b1918d",
+  "active": "95a22018811faa02",
   "lastOpenFiles": [
     "Development/BackEnd/PHP/_png/Pasted image 20230823202601.png",
     "Development/BackEnd/PHP/_png/Pasted image 20230823201829.png",
