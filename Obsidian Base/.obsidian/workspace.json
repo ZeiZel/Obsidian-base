@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "d085ae9dff973aa8",
+        "id": "d885d943cd22d41c",
         "type": "tabs",
         "children": [
           {
-            "id": "b123042e97b1918d",
+            "id": "cf4356331def7632",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/PHP/YII2.md",
+                "file": "Development/Architecture.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 355.5,
-    "collapsed": true
+    "width": 288.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/PHP/YII2.md",
+                "file": "Development/Architecture.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -111,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/PHP/YII2.md",
+                "file": "Development/Architecture.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/PHP/YII2.md"
+                "file": "Development/Architecture.md"
               }
             }
           },
@@ -189,17 +188,21 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "95a22018811faa02",
+  "active": "cf4356331def7632",
   "lastOpenFiles": [
-    "Development/BackEnd/PHP/_png/Pasted image 20230823202601.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230823201829.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230823201237.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230823193535.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230823192806.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230823192057.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230823192021.png",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+    "Development/_png/Pasted image 20230908180404.png",
+    "Development/_png/Pasted image 20230908180303.png",
+    "Development/_png/Pasted image 20230908180131.png",
+    "Development/_png/Pasted image 20230908175835.png",
+    "Development/_png/Pasted image 20230908175134.png",
+    "Development/_png/Pasted image 20230908172837.png",
+    "Development/_png/Pasted image 20230908172717.png",
+    "Development/_png/Pasted image 20230908171934.png",
+    "Development/_png/Pasted image 20230908171355.png",
+    "Development/_png/Pasted image 20230908171329.png",
+    "Development/_png/Pasted image 20230908171317.png",
     "Development/BackEnd/PHP/YII2.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/BackEnd/PHP/PHP.md",
     "Development/GIT/Git.md",
     "Development/Основы Linux/Основы Linux.md",
@@ -223,10 +226,6 @@
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/22 – Промисы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/21 - Классы и прототипы.md",
     "Development/FrontEnd/JavaScript - Полный Курс По JavaScript - Bogdan/_lessons/19 – Циклы.md",
-    "Development/BackEnd/PHP/_png/Pasted image 20230821115222.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230821100632.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230821100024.png",
-    "Development/BackEnd/PHP/_png/Pasted image 20230821095015.png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",
