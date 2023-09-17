@@ -38,7 +38,7 @@
               "type": "markdown",
               "state": {
                 "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               }
             }
@@ -56,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md"
               }
             }
           },
@@ -217,7 +217,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -234,12 +234,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "e9dd5964441aaf50",
+  "active": "70d79d3f44707df8",
   "lastOpenFiles": [
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
+    "Development/NVim.md",
     "Development/_png/Pasted image 20230917110459.png",
     "Development/_png/Pasted image 20230916210748.png",
-    "Development/NVim.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/Architecture.md",
@@ -260,7 +260,6 @@
     "Development/_png/Pasted image 20230908180303.png",
     "Development/_png/Pasted image 20230908180131.png",
     "Development/_png/Pasted image 20230908175835.png",
-    "Development/_png/Pasted image 20230908175134.png",
     "Development/BackEnd/PHP/YII2.md",
     "Development/BackEnd/PHP/PHP.md",
     "Development/GIT/Git.md",
