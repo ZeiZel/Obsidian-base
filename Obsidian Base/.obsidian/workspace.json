@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "mode": "preview",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md"
+                "file": "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md"
               }
             }
           },
@@ -260,6 +260,7 @@
   },
   "active": "9011799382a0e416",
   "lastOpenFiles": [
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "Development/TypeScript/_lessons/05 Классы.md",
@@ -296,7 +297,6 @@
     "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/Продвинутая верстка SASS  БЭМ  FlexBox.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/Погружение в HTML и CSS.md",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",
