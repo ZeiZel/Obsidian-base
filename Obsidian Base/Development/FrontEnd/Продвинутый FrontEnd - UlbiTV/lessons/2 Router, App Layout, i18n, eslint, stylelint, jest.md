@@ -571,6 +571,10 @@ export const AppRouter = () => {
 
 
 
+```bash
+npm install react-i18next i18next --save
+```
+
 
 
 
