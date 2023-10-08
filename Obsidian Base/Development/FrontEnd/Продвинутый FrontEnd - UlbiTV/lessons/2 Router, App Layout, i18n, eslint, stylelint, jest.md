@@ -575,8 +575,11 @@ export const AppRouter = () => {
 npm install react-i18next i18next --save
 ```
 
-Далее нам нужно прокинуть в приложение глобальную переменную. Сделать мы это можем через Webpack 
+Далее нам нужно прокинуть в приложение глобальную переменную. Сделать мы это можем через Webpack. Сделать мы можем это с помощью `DefinePlugin` плагина, который предоставляет вебпак.
 
+Конкретно нам понадобится переменная `__IS_DEV__`, которая будет отвечать за наличие режим разработки, который определяется из вебпака
+
+`build > config > buildPlugins.ts`
 ```TS
 export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInstance[] => {
 	return [
@@ -599,12 +602,144 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInsta
 		}),
 	];
 };
-
 ```
 
+Далее нужно объявить эти переменные глобально для ТС
 
+`app > types > global.d.ts`
+```TS
+declare const __IS_DEV__: boolean;
+declare const __API__: string;
+```
 
+Далее нужно написать конфиг для интернационализатора. Сам конфиг представляет из себя декодер языка, поддержку реакта и подгрузку языков с сервера по запросу пользователя на смену языка
 
+`shared > config > i18n > i18n.ts`
+```TS
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+import Backend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+i18n.use(Backend)
+	.use(LanguageDetector)
+	.use(initReactI18next)
+	.init({
+		fallbackLng: 'ru',
+		debug: __IS_DEV__,
+
+		interpolation: {
+			escapeValue: false,
+		},
+	});
+
+export default i18n;
+```
+
+Далее нужно глобально поместить `i18n` в корень приложения (помещаем сам файл полностью) и обернуть всю динамику в `Suspense`, так как переводы будут подгружаться чанками
+
+`index.tsx`
+```TSX
+import '@/shared/config/i18n/i18n';
+
+const root = createRoot(document.getElementById('root') as HTMLElement);
+
+if (!root) {
+	throw new Error('В приложение не вмонтирован root div !!');
+}
+
+root.render(
+	<BrowserRouter>
+		<ThemeProvider>
+			<StrictMode>
+				<Suspense fallback={<Skeleton />}>
+					<App />
+				</Suspense>
+			</StrictMode>
+		</ThemeProvider>
+	</BrowserRouter>,
+);
+```
+
+Далее нам нужно создать переводы для приложения и указать ключ, по которому можно добраться до текста и значение
+
+`public > locales > ru > translation.json`
+```JSON
+{
+	"translate": "Перевод",
+	"Sample": "Пример русского текста"
+}
+```
+`public > locales > en > translation.json`
+```JSON
+{
+	"translate": "Translate",
+	"Sample": "Sample eng text"
+}
+```
+
+Сейчас нам остаётся только реализовать смену языка из приложения таким вот кодом:
+
+```TSX
+const App = () => {
+	const { theme } = useTheme();
+
+	const { t, i18n } = useTranslation();
+
+	const handleToggleLanguage = () => {
+		i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
+	};
+
+	return (
+		<div className={cn('app', theme)}>
+			<Navbar />
+			<div>
+				{/* тут нам нужно указать ключи нужных нам значений */}
+				<button onClick={handleToggleLanguage}>{t('translate')}</button>
+				<p>{t('Sample')}</p>
+			</div>
+			<div className='content-page'>
+				<Sidebar />
+				<AppRouter />
+			</div>
+		</div>
+	);
+};
+```
+
+И сейчас у нас меняется язык и работает перевод
+
+![](_png/Pasted%20image%2020231008151744.png)
+
+Но при каждой смене языка, пользователь будет грузить абсолютно весь перевод, который у нас находится в файле `translation.json`. Чтобы избежать этой проблемы, нам нужно создать отдельный файл с переводами 
+
+`public > locales > ru > about.json`
+```JSON
+{
+	"About": "О приложении"
+}
+```
+`public > locales > en > about.json`
+```JSON
+{
+    "About": "About Page"
+}
+```
+
+И указать пространство имён, которое будет использоваться для переводов на странице.
+
+```TSX
+const AboutPage = () => {
+	const { t } = useTranslation('about');
+
+	return (
+		<div>
+			<div className={'about'}>{t('About')}</div>
+		</div>
+	);
+};
+```
 
 
 
