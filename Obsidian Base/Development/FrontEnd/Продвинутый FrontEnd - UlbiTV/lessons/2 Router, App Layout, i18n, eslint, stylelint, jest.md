@@ -569,15 +569,38 @@ export const AppRouter = () => {
 
 ### 15 i18n Интернационализация. Define plugin. Плагин для переводов
 
-
+Первым делом нужно установить зависимости интернационализатора
 
 ```bash
 npm install react-i18next i18next --save
 ```
 
+Далее нам нужно прокинуть в приложение глобальную переменную. Сделать мы это можем через Webpack 
 
+```TS
+export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInstance[] => {
+	return [
+		// то плагин, который будет показывать прогресс сборки
+		new ProgressPlugin(),
+		// это плагин, который будет добавлять самостоятельно скрипт в наш index.html
+		new HTMLWebpackPlugin({
+			// указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте
+			template: paths.html,
+		}),
+		// этот плагин будет отвечать за отделение чанков с css от файлов JS
+		new MiniCssExtractPlugin({
+			filename: 'css/[name].[contenthash:8].css',
+			chunkFilename: 'css/[name].[contenthash:8].css',
+		}),
+		// этот плагин позволяет прокидывать глобальные переменные в приложение
+		new DefinePlugin({
+			__IS_DEV__: JSON.stringify(isDev),
+			__API__: JSON.stringify('https://' /* api_path */),
+		}),
+	];
+};
 
-
+```
 
 
 
