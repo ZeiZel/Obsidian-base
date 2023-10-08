@@ -747,9 +747,78 @@ const AboutPage = () => {
 
 ### 16 Webpack hot module replacement
 
+Далее нам нужно будет добавить горячее замещение модулей в вебпаке. А именно, мы добавим замещение как React-кода, так и CSS-изменений
 
+Нужно установить отдельный плагин, который поддерживает горячее замещение компонентов системы
 
+```bash
+npm install -D @pmmmwh/react-refresh-webpack-plugin react-refresh
+```
 
+Далее нужно включить хот-релоад в дев-сервере
+
+`config > build > buildDevServer.ts`
+```TS
+import { BuildOptions } from './types/config';  
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';  
+  
+export function buildDevServer(options: BuildOptions): DevServerConfiguration {  
+    return {  
+        port: options.port, // порт  
+        // open: true, // автоматически будет открывать страницу в браузере        // данная команда позволяет проксиовать запросы через index страницу, чтобы при обновлении страницы не выпадала ошибка        historyApiFallback: true,  
+        // данный параметр используется для горяей замены модулей  
+        hot: true  
+    };  
+}
+```
+
+И так же нужно добавить два плагина `HotModuleReplacementPlugin`, который идёт в пакете с webpack и `ReactRefreshWebpackPlugin`, который установили отдельно. 
+
+Теперь замещение пакетов происходит в реальном времени
+
+`config > build > buildPlugins.ts`
+```TS
+import { WebpackPluginInstance, ProgressPlugin, DefinePlugin, HotModuleReplacementPlugin } from 'webpack';  
+import HTMLWebpackPlugin from 'html-webpack-plugin';  
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';  
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';  
+import { BuildOptions } from './types/config';  
+  
+export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInstance[] => {  
+    const plugins = [  
+       // то плагин, который будет показывать прогресс сборки  
+       new ProgressPlugin(),  
+       // это плагин, который будет добавлять самостоятельно скрипт в наш index.html  
+       new HTMLWebpackPlugin({  
+          // указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте  
+          template: paths.html,  
+       }),  
+       // этот плагин будет отвечать за отделение чанков с css от файлов JS  
+       new MiniCssExtractPlugin({  
+          filename: 'css/[name].[contenthash:8].css',  
+          chunkFilename: 'css/[name].[contenthash:8].css',  
+       }),  
+       // этот плагин позволяет прокидывать глобальные переменные в приложение  
+       new DefinePlugin({  
+          __IS_DEV__: JSON.stringify(isDev),  
+          __API__: JSON.stringify('https://' /* api_path */),  
+       }),  
+    ];  
+  
+    if (isDev) {  
+       plugins.push(  
+          // данный плагин уже нужен для рефреша реакт-компонентов  
+          new ReactRefreshWebpackPlugin(),  
+       );  
+       plugins.push(  
+          // данный плагин отвечает за горячую замену модулей без перезагрузки приложения  
+          new HotModuleReplacementPlugin(),  
+       );  
+    }  
+  
+    return plugins;  
+};
+```
 
 ### 17 Babel. Extract plugin [optional]
 
