@@ -32,12 +32,14 @@
             }
           },
           {
-            "id": "a3165ed9aa3a46d5",
+            "id": "3716b0ce70f2165a",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.4.16"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -220,7 +222,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "a3165ed9aa3a46d5",
+  "active": "3716b0ce70f2165a",
   "lastOpenFiles": [
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
