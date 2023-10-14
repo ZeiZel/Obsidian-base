@@ -44,12 +44,12 @@
             }
           },
           {
-            "id": "cd77352a6c76f80f",
+            "id": "7830ea75a2e23b3a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Tips&Tricks/Reset&Reboot.md",
+                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
                 "mode": "source",
                 "source": false
               }
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Tips&Tricks/Reset&Reboot.md",
+                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Tips&Tricks/Reset&Reboot.md",
+                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Tips&Tricks/Reset&Reboot.md"
+                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md"
               }
             }
           },
@@ -234,9 +234,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "cd77352a6c76f80f",
+  "active": "7830ea75a2e23b3a",
   "lastOpenFiles": [
+    "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
+    "Development/Tips&Tricks/Reset&Reboot.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231008160225.png",
@@ -253,7 +255,6 @@
     "Development/_png/Pasted image 20230916210748.png",
     "Development/Architecture.md",
     "Development/GIT/GitFlow.md",
-    "Development/Tips&Tricks/Reset&Reboot.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/GIT/_png/Pasted image 20230916105007.png",
