@@ -32,24 +32,24 @@
             }
           },
           {
-            "id": "3716b0ce70f2165a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "7830ea75a2e23b3a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "46061d36ff167fcb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/18 Доступность.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "композиция",
+                "query": "visually",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -110,7 +110,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -130,7 +131,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/18 Доступность.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +148,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/18 Доступность.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +171,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md"
+                "file": "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/18 Доступность.md"
               }
             }
           },
@@ -234,8 +235,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "7830ea75a2e23b3a",
+  "active": "46061d36ff167fcb",
   "lastOpenFiles": [
+    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/Tips&Tricks/Reset&Reboot.md",
@@ -272,7 +274,6 @@
     "Development/GIT/Git.md",
     "Development/Основы Linux/Основы Linux.md",
     "Development/Основы Linux/_lessons/Работа с SHELL.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",
