@@ -66,9 +66,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1dfc662c5759b521",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -97,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "nvim",
+                "query": "electron",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -127,8 +139,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 288.5,
-    "collapsed": true
+    "width": 288.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -144,7 +155,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -161,7 +172,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -184,7 +195,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md"
               }
             }
           },
@@ -249,8 +260,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9996e2aa4ceb3534",
+  "active": "1dfc662c5759b521",
   "lastOpenFiles": [
+    "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
+    "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
+    "Development/NVim.md",
     "Development/_png/Pasted image 20231028181622.png",
     "Development/_png/Pasted image 20231028180829.png",
     "Development/_png/Pasted image 20231028174457.png",
@@ -261,7 +275,6 @@
     "Development/_png/Pasted image 20231028170645.png",
     "Development/_png/Pasted image 20231028170415.png",
     "Development/_png/Pasted image 20231028165035.png",
-    "Development/_png/Pasted image 20231028164908.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/17 Анимация на Framer Motion.md",
@@ -273,7 +286,6 @@
     "Development/Tips&Tricks/Reset&Reboot.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/React + Next.js - с нуля.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
-    "Development/NVim.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/03 Базовые понятия Docker.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/09 - React + Redux.md",
@@ -287,7 +299,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/GIT/_png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/10 Виртуализация.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",
