@@ -80,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -155,7 +155,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
+                "file": "Development/NVim.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -172,7 +172,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
+                "file": "Development/NVim.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -195,7 +195,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md"
+                "file": "Development/NVim.md"
               }
             }
           },
@@ -260,8 +260,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "1dfc662c5759b521",
+  "active": "9996e2aa4ceb3534",
   "lastOpenFiles": [
+    "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
     "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
     "Development/NVim.md",
@@ -298,7 +299,6 @@
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/GIT/_png",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/10 Виртуализация.md",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
     "Development/Основы Linux/_lessons",
