@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
                 "mode": "source",
                 "source": false
               }
@@ -109,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "electron",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -134,8 +134,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -155,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -172,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -195,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md"
               }
             }
           },
@@ -262,10 +261,11 @@
   },
   "active": "9996e2aa4ceb3534",
   "lastOpenFiles": [
+    "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/NVim.md",
     "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
     "Development/DesktopDev/Electron/_lessons/2 Начало работы.md",
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
-    "Development/NVim.md",
     "Development/_png/Pasted image 20231028181622.png",
     "Development/_png/Pasted image 20231028180829.png",
     "Development/_png/Pasted image 20231028174457.png",
@@ -297,7 +297,6 @@
     "Development/Architecture.md",
     "Development/GIT/GitFlow.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
