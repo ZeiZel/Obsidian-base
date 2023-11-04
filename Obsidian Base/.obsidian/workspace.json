@@ -226,7 +226,7 @@
             "id": "95a22018811faa02",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {}
             }
           },
@@ -239,9 +239,17 @@
                 "sortOrder": "frequency"
               }
             }
+          },
+          {
+            "id": "8fcaf08ee777ac01",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {}
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 9
       }
     ],
     "direction": "horizontal",
@@ -259,7 +267,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9996e2aa4ceb3534",
+  "active": "8fcaf08ee777ac01",
   "lastOpenFiles": [
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/NVim.md",
