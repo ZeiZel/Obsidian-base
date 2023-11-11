@@ -886,8 +886,10 @@ npm init @eslint/config
 
 Так же дополнительно можно установить некоторые правила
 
+Последнее правило будет подсвечивать те места где текст получается не из `i18n`, а просто вписан
+
 ```bash
-npm install --save-dev eslint eslint-plugin-unicorn
+npm install --save-dev eslint eslint-plugin-unicorn eslint-plugin-i18next
 ```
 
 И так уже выглядит начальный конфиг
@@ -912,6 +914,7 @@ module.exports = {
        'plugin:@typescript-eslint/recommended',  
        'plugin:react/recommended',  
        'prettier',  
+       "plugin:i18next/recommended"  
     ],  
     overrides: [  
        {  
@@ -941,6 +944,7 @@ module.exports = {
        "unicorn",  
        'import',  
        'react',  
+       'i18next',  
        'react-hooks',  
        'jsx-a11y',  
        '@typescript-eslint',  
@@ -948,7 +952,9 @@ module.exports = {
     /* настройка правил  */  
     'rules': {  
        'no-undef': 'warn',  
+       /* нельзя использовать объявленные ранее имена (даже внутри другого скоупа) */  
        'no-shadow': 'warn',  
+       /* неиспользуемые переменные запрещены */  
        'no-unused-vars': 'warn',  
        'no-underscore-dangle': 'off',  
        'react/prop-types': 0,  
@@ -956,6 +962,9 @@ module.exports = {
        'react/function-component-definition': 'off',  
        'import/no-unresolved': 'off',  
        'react-hooks/rules-of-hooks': 'error',  
+       /* запрещает просто вводить текст в JSX - можно только через перевод */  
+       "i18next/no-literal-string": ['error', { markupOnly: true }],  
+       /* неиспользуемые переменные запрещены (TS) */  
        '@typescript-eslint/no-unused-vars': 'warn'  
     },  
 };
@@ -970,13 +979,13 @@ module.exports = {
 
 ### 19 Stylelint. Plugin for i18next
 
-
+Далее нам нужно установить линтер для проверки стилей
 
 ```bash
 npm install --save-dev stylelint stylelint-config-standard stylelint-config-standard-scss stylelint-scss
 ```
 
-
+Конфигурация:
 
 `.stylelintrc`
 ```JSON
@@ -995,14 +1004,12 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-config-stan
 }
 ```
 
-
+Скрипт линтера
 
 `package.json`
 ```JSON
 "stylelint": "stylelint \"**/*.scss\" --fix",
 ```
-
-
 
 ### 20 Тестовая среда. Настраиваем Jest. Пишем первый тест Метка
 
