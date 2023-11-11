@@ -1015,6 +1015,29 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-config-stan
 
 
 
+```bash
+npm install --save-dev jest
+npm install --save-dev @types/jest
+jest --init
+```
+
+![](_png/Pasted%20image%2020231111172530.png)
+
+`.eslintrc.js`
+```JS
+env: {
+	browser: true,
+	es2021: true,
+	jest: true,
+},
+```
+
+
+
+
+
+
+
 
 
 ### 21 Несуществующие маршруты. Лоадер для загрузки страниц
