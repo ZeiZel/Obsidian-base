@@ -951,21 +951,29 @@ module.exports = {
     ],  
     /* настройка правил  */  
     'rules': {  
-       'no-undef': 'warn',  
-       /* нельзя использовать объявленные ранее имена (даже внутри другого скоупа) */  
-       'no-shadow': 'warn',  
-       /* неиспользуемые переменные запрещены */  
-       'no-unused-vars': 'warn',  
-       'no-underscore-dangle': 'off',  
-       'react/prop-types': 0,  
-       'react/jsx-props-no-spreading': 'warn',  
-       'react/function-component-definition': 'off',  
-       'import/no-unresolved': 'off',  
-       'react-hooks/rules-of-hooks': 'error',  
-       /* запрещает просто вводить текст в JSX - можно только через перевод */  
-       "i18next/no-literal-string": ['error', { markupOnly: true }],  
-       /* неиспользуемые переменные запрещены (TS) */  
-       '@typescript-eslint/no-unused-vars': 'warn'  
+	    /*  
+		* проверяет максимальную длину строки    
+		* если комментарий, то игнорирует    
+		*  */    
+		'max-len': ['error', { code: 100, ignoreComments: true }],
+		'no-undef': 'warn',  
+		/* 
+		* нельзя использовать объявленные ранее имена 
+		* (даже внутри другого скоупа)
+		* */  
+		'no-shadow': 'warn',  
+		/* неиспользуемые переменные запрещены */  
+		'no-unused-vars': 'warn',  
+		'no-underscore-dangle': 'off',  
+		'react/prop-types': 0,  
+		'react/jsx-props-no-spreading': 'warn',  
+		'react/function-component-definition': 'off',  
+		'import/no-unresolved': 'off',  
+		'react-hooks/rules-of-hooks': 'error',  
+		/* запрещает просто вводить текст в JSX - можно только через перевод */  
+		"i18next/no-literal-string": ['error', { markupOnly: true }],  
+		/* неиспользуемые переменные запрещены (TS) */  
+		'@typescript-eslint/no-unused-vars': 'warn'  
     },  
 };
 ```
@@ -1013,15 +1021,20 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-config-stan
 
 ### 20 Тестовая среда. Настраиваем Jest. Пишем первый тест Метка
 
-
+Устанавливаем 
+- jest
+- типы к нему
+- поддержка тайпскрипта
+- окружение браузера
 
 ```bash
-npm install --save-dev jest
-npm install --save-dev @types/jest
+npm install --save-dev jest @types/jest @babel/preset-typescript jest-environment-jsdom
 jest --init
 ```
 
 ![](_png/Pasted%20image%2020231111172530.png)
+
+Тут мы добавляем jest в eslint, чтобы линтер не ругался на не импортированные файлы  
 
 `.eslintrc.js`
 ```JS
@@ -1032,13 +1045,18 @@ env: {
 },
 ```
 
+Далее нужно добавить обработку тайпскрипта, чтобы джест мог читать абсолютные импорты и работал с типами
 
+`.babel.config.js`
+```JS
+module.exports = {
+	presets: ['@babel/preset-env', '@babel/preset-typescript'],
+};
+```
 
+Прогонка тестов
 
-
-
-
-
+![](_png/Pasted%20image%2020231111183607.png)
 
 ### 21 Несуществующие маршруты. Лоадер для загрузки страниц
 
@@ -1046,7 +1064,23 @@ env: {
 
 
 
+
+
+
+
+
+
+
+
+
+
 ### 22 Дополнение к модулю
+
+
+
+
+
+
 
 
 

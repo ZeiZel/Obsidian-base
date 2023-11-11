@@ -89,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 288.5
+    "width": 287.5110321044922
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -196,8 +196,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 302.5,
-    "collapsed": true
+    "width": 327.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -212,10 +211,11 @@
   },
   "active": "07be73f418411286",
   "lastOpenFiles": [
+    "Development/GIT/GitFlow.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231111183607.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231111172530.png",
     "Development/Tips&Tricks/Reset&Reboot.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/2 Router, App Layout, i18n, eslint, stylelint, jest.md",
-    "Development/GIT/GitFlow.md",
     "conflict-files-obsidian-git.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
@@ -234,8 +234,6 @@
     "Development/_png/Pasted image 20231028171211.png",
     "Development/_png/Pasted image 20231028170927.png",
     "Development/_png/Pasted image 20231028170645.png",
-    "Development/_png/Pasted image 20231028170415.png",
-    "Development/_png/Pasted image 20231028165035.png",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/17 Анимация на Framer Motion.md",
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
