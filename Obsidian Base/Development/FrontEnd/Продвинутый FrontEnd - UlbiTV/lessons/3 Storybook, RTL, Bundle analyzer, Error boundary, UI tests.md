@@ -1,5 +1,12 @@
 ---
 tags:
+  - "#ErrorBoundary"
+  - "#BundleAnalyzer"
+  - "#ReactTestingLibrary"
+  - "#Storybook"
+  - "#Loki"
+  - "#CI"
+  - "#Screenshot"
 ---
 
 
