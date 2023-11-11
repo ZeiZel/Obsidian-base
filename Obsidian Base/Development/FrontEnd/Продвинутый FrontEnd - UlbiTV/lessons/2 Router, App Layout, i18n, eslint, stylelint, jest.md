@@ -822,9 +822,59 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInsta
 
 ### 17 Babel. Extract plugin [optional]
 
+Сейчас нам нужно установить `babel-plugin-i18next-extract`, чтобы экстрактить переводы в отдельные файлы по языкам 
 
+Так же мы установили `@babel/preset-env` нужно установить пакет который включает преобразование js для новых стандартов ES
 
+```bash
+npm install --save-dev babel-loader @babel/core @babel/preset-env babel-plugin-i18next-extract
+```
 
+Далее добавляем такой конфиг, который уже включает в себя все установленные плагины
+
+`buildLoaders.ts`
+```TS
+/* лоадер, который позволит использовать бейбел */  
+const babelLoader = {  
+    test: /\.(js|jsx|tsx)$/,  
+    exclude: /node_modules/,  
+    use: {  
+       loader: 'babel-loader',  
+       options: {  
+          presets: ['@babel/preset-env'],  
+          plugins: [  
+             [  
+                'i18next-extract',  
+                {  
+                   locales: ['ru', 'en'],  
+                   keyAsDefaultValue: true,  
+                },  
+             ],  
+          ],  
+       },  
+    },  
+};  
+  
+/*  
+* typescriptLoader должен идти после babelLoader  
+* */  
+return [fileLoader, svgLoader, babelLoader, typescriptLoader, stylesLoader];
+```
+
+>[!note] По поводу лоадера для React
+> Если бы мы не использовали typescriptLoader и писали проект на JS, то нам бы пришлось устанавливать `babel/preset-react`, чтобы поднимать наш проект
+
+Далее нам нужно настроить плагины
+
+`babel.config.json`
+```JSON
+{  
+    "presets": ["@babel/preset-env"],  
+    "plugins": [  
+       "i18next-extract"  
+    ]  
+}
+```
 
 ### 18 Настраиваем EsLint. Исправляем ошибки
 
