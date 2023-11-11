@@ -884,15 +884,117 @@ return [fileLoader, svgLoader, babelLoader, typescriptLoader, stylesLoader];
 npm init @eslint/config
 ```
 
-
+Так же дополнительно можно установить некоторые правила
 
 ```bash
 npm install --save-dev eslint eslint-plugin-unicorn
 ```
 
+И так уже выглядит начальный конфиг
 
+`.eslint.cjs`
+```JS
+module.exports = {  
+    root: true,  
+    parser: '@typescript-eslint/parser',  
+    env: {  
+       'browser': true,  
+       'es2021': true,  
+    },  
+    settings: {  
+       react: {  
+          version: 'detect',  
+       },  
+    },  
+    /* расширения конфига */  
+    extends: [  
+       'eslint:recommended',  
+       'plugin:@typescript-eslint/recommended',  
+       'plugin:react/recommended',  
+       'prettier',  
+    ],  
+    overrides: [  
+       {  
+          'env': {  
+             'node': true,  
+          },  
+          'files': [  
+             '.eslintrc.{js,cjs}',  
+          ],  
+          'parserOptions': {  
+             'sourceType': 'script',  
+          },  
+       },  
+    ],  
+    /* опции для парсера */  
+    'parserOptions': {  
+       'ecmaVersion': 'latest',  
+       'sourceType': 'module',  
+    },  
+    /* объявление глобальных переменных, которые доступны во всём приложении */  
+    globals: {  
+       __API__: true,  
+       __IS_DEV__: true,  
+    },  
+    /* подключение внешних плагинов */  
+    'plugins': [  
+       "unicorn",  
+       'import',  
+       'react',  
+       'react-hooks',  
+       'jsx-a11y',  
+       '@typescript-eslint',  
+    ],  
+    /* настройка правил  */  
+    'rules': {  
+       'no-undef': 'warn',  
+       'no-shadow': 'warn',  
+       'no-unused-vars': 'warn',  
+       'no-underscore-dangle': 'off',  
+       'react/prop-types': 0,  
+       'react/jsx-props-no-spreading': 'warn',  
+       'react/function-component-definition': 'off',  
+       'import/no-unresolved': 'off',  
+       'react-hooks/rules-of-hooks': 'error',  
+       '@typescript-eslint/no-unused-vars': 'warn'  
+    },  
+};
+```
+
+И так же можно добавить скрипт,  который будет прогоняться при каждом запуске
+
+`package.json`
+```JSON
+"lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" --quiet"
+```
 
 ### 19 Stylelint. Plugin for i18next
+
+
+
+```bash
+npm install --save-dev stylelint stylelint-config-standard-scss
+```
+
+
+.stylelintrc
+```JSON
+{  
+    "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],  
+    "plugins": ["stylelint-scss"],  
+    "rules": {  
+       "selector-class-pattern": null,  
+       "property-no-unknown": null,  
+       "no-invalid-double-slash-comments": null,  
+       "no-descending-specificity": null,  
+       "font-family-no-duplicate-names": null,  
+       "function-no-unknown": null,  
+       "block-no-empty": null  
+    }  
+}
+```
+
+
 
 
 
