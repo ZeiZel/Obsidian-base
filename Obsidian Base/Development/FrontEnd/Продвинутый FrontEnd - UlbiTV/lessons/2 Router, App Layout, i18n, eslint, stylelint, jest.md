@@ -973,11 +973,12 @@ module.exports = {
 
 
 ```bash
-npm install --save-dev stylelint stylelint-config-standard-scss
+npm install --save-dev stylelint stylelint-config-standard stylelint-config-standard-scss stylelint-scss
 ```
 
 
-.stylelintrc
+
+`.stylelintrc`
 ```JSON
 {  
     "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],  
@@ -996,7 +997,10 @@ npm install --save-dev stylelint stylelint-config-standard-scss
 
 
 
-
+`package.json`
+```JSON
+"stylelint": "stylelint \"**/*.scss\" --fix",
+```
 
 
 
