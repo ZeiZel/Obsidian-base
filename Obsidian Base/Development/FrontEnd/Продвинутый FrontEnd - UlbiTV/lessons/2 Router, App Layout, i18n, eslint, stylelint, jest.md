@@ -878,7 +878,17 @@ return [fileLoader, svgLoader, babelLoader, typescriptLoader, stylesLoader];
 
 ### 18 Настраиваем EsLint. Исправляем ошибки
 
+Можно легко и быстро настроить `eslint` через инит-функцию для него:
 
+```bash
+npm init @eslint/config
+```
+
+
+
+```bash
+npm install --save-dev eslint eslint-plugin-unicorn
+```
 
 
 
