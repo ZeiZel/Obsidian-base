@@ -1,36 +1,93 @@
 
 ### 11 AppRouter. Конфиг для роутера
 
-Первым делом нужно реализовать конфиг для роутера, который будет содержать пути и элементы роутов
+Сейчас нужно реализовать конфиг для нашего будущего роутера
+
+Первым делом нужно определить пути, которые будут доступны в нашем приложении
+
+`src / app / providers / router / model / const / appRoutes.const.ts`
+```TSX
+export enum AppRoutes {  
+    MAIN = 'main',  
+    ABOUT = 'about',  
+    LOGIN = 'login',  
+    FORBIDDEN = 'forbidden',  
+    NOT_FOUND = 'not_found',  
+}
+```
+
+Далее нужно написать пути, которые будут использоваться в самом роутере
+
+`src / shared / const / paths.const.ts`
+```TS
+export const getRouteMain = () => '/';
+export const getRouteLogin = () => '/login';
+export const getRouteAbout = () => '/about';
+export const getRouteForbidden = () => '/forbidden';
+export const getRouteNotFound = () => '*';
+```
+
+Далее нужно расширить пропсы, которые будут описывать роутер. Конкретно мы добавим свойство, которое будет отвечать за доступность роута неавторизованному пользователю (сама авторизация будет реализована за счёт перехватчика состояния авторизации в будущей заметке (для этого будет использоваться `RequireAuth`))
+
+`src/app/providers/router/model/types/routes.type.ts`
+```TS
+import { RouteProps } from 'react-router-dom';  
+  
+export type AppRouteProps = RouteProps & { authOnly: boolean };
+```
+
+Далее нужно написать сам конфиг, который будет содержать все нужные пропсы для роута приложения
 
 `src > shared > config > routeConfig > routeConfig.tsx`
 ```TSX
-import { RouteProps } from 'react-router-dom';
-import { MainPage } from 'pages/MainPage';
-import { AboutPage } from 'pages/AboutPage';
-
-// ключи путей
-export enum AppRoutes {
-	MAIN = 'main',
-	ABOUT = 'about',
-}
-
-// роуты по ключам
-export const RoutePath: Record<AppRoutes, string> = {
-	[AppRoutes.MAIN]: '/',
-	[AppRoutes.ABOUT]: '/about',
-};
-
-// тут содержится информация о пропсах, которые будут попадать в роутер
-export const routeConfig: Record<AppRoutes, RouteProps> = {
-	[AppRoutes.MAIN]: {
-		path: RoutePath.main,
-		element: <MainPage />,
-	},
-	[AppRoutes.ABOUT]: {
-		path: RoutePath.about,
-		element: <AboutPage />,
-	},
+import React from 'react';  
+import { AppRouteProps } from '../model/types';  
+import { AppRoutes } from '../model/const';  
+/* pages */  
+import { MainPageAsync } from '@/pages/MainPage';  
+import { AboutPageAsync } from '@/pages/AboutPage';  
+import { LoginPageAsync } from '@/pages/LoginPage';  
+import { ForbiddenPageAsync } from '@/pages/ForbiddenPage';  
+import { NotFoundPageAsync } from '@/pages/NotFoundPage';  
+/* route const */  
+import {  
+    /* data */  
+    getRouteMain,  
+    getRouteAbout,  
+    /* auth */  
+    getRouteLogin,  
+    /* service */  
+    getRouteForbidden,  
+    getRouteNotFound,  
+} from '@/shared/const';  
+  
+/* тут мы храним все роуты приложения */  
+export const routeConfig: Record<AppRoutes, AppRouteProps> = {  
+    [AppRoutes.MAIN]: {  
+       path: getRouteMain(),  
+       element: <MainPageAsync />,  
+       authOnly: true,  
+    },  
+    [AppRoutes.ABOUT]: {  
+       path: getRouteAbout(),  
+       element: <AboutPageAsync />,  
+       authOnly: true,  
+    },  
+    [AppRoutes.LOGIN]: {  
+       path: getRouteLogin(),  
+       element: <LoginPageAsync />,  
+       authOnly: true,  
+    },  
+    [AppRoutes.FORBIDDEN]: {  
+       path: getRouteForbidden(),  
+       element: <ForbiddenPageAsync />,  
+       authOnly: true,  
+    },  
+    [AppRoutes.NOT_FOUND]: {  
+       path: getRouteNotFound(),  
+       element: <NotFoundPageAsync />,  
+       authOnly: true,  
+    },  
 };
 ```
 
@@ -38,22 +95,34 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 
 `src > app > providers > router > ui > AppRouter.tsx`
 ```TSX
-import React, { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { routeConfig } from 'shared/config/routeConfig/routeConfig';
-
-export const AppRouter = () => {
-	return (
-		<Suspense fallback={<div>Loading...</div>}>
-			<Routes>
-				{Object.values(routeConfig).map(({ path, element }) => (
-					<Route key={path} path={path} element={element} />
-				))}
-			</Routes>
-		</Suspense>
-	);
+import React, { Suspense } from 'react';  
+import { Route, Routes } from 'react-router-dom';  
+import { routeConfig } from '@/app/providers/router/config/routeConfig';  
+import { Loader } from '@/shared/ui';  
+  
+export const AppRouter = () => {  
+	return (  
+	  <Routes>  
+		 {Object.values(routeConfig).map(({ element, path }) => (  
+			<Route                   key={path}  
+			   path={path}  
+			   element={  
+				  <Suspense fallback={<Loader />}>  
+					 <div className='page-wrapper'>{element}</div>  
+				  </Suspense>  
+			   }  
+			/>  
+		 ))}  
+	  </Routes>  
+    );  
 };
 ```
+
+Так же в саспенс бал добавлен лоадер, который будет показываться при загрузке страницы.
+
+Сам лоадер взят [отсюда](https://cssloaders.github.io/)
+
+![](_png/Pasted%20image%2020231111200744.png)
 
 Экспортируем роутер
 
@@ -81,6 +150,15 @@ export const App = () => {
 	);
 };
 ```
+
+React-Router определяет роут `*` как любое другое значение, что позволит нам определить страницу `NotFound`
+
+![](_png/Pasted%20image%2020231111195149.png)
+
+>[!info] Итоги
+> - Был реализован конфиг для роутов
+> - Были обработаны несуществующие маршруты (`NotFoundPage` - `*`)
+> - В будущем будет реализован `RequireAuth.tsx`, который будет отлавливать неавторизованного пользователя и бросать его на страницу логина
 
 ### 12 Navbar. Шаблоны для разработки. Первый UI Kit компонент
 
@@ -1057,33 +1135,3 @@ module.exports = {
 Прогонка тестов
 
 ![](_png/Pasted%20image%2020231111183607.png)
-
-### 21 Несуществующие маршруты. Лоадер для загрузки страниц
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 22 Дополнение к модулю
-
-
-
-
-
-
-
-
-
-
-
-
