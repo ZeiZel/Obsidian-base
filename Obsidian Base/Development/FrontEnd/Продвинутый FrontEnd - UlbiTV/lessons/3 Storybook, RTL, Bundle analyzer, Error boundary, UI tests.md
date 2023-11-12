@@ -146,10 +146,56 @@ export const ErrorButton = () => {
 
 
 
+```bash
+npm install --save-dev webpack-bundle-analyzer @types/webpack-bundle-analyzer
+```
 
 
+
+`config / build / buildPlugins.ts`
+```TS
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
+const plugins = [  
+    // то плагин, который будет показывать прогресс сборки  
+    new ProgressPlugin(),  
+    // это плагин, который будет добавлять самостоятельно скрипт в наш index.html  
+    new HTMLWebpackPlugin({  
+       // указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте  
+       template: paths.html,  
+    }),  
+    // этот плагин будет отвечать за отделение чанков с css от файлов JS  
+    new MiniCssExtractPlugin({  
+       filename: 'css/[name].[contenthash:8].css',  
+       chunkFilename: 'css/[name].[contenthash:8].css',  
+    }),  
+    // этот плагин позволяет прокидывать глобальные переменные в приложение  
+    new DefinePlugin({  
+       __IS_DEV__: JSON.stringify(isDev),  
+       __API__: JSON.stringify('https://' /* api_path */),  
+    }),  
+    /* данный плагин анализирует размеры собираемых пакетов */  
+	new BundleAnalyzerPlugin({  
+	    /*  
+	    * отключаем автоматические открытие анализатора    
+	    * он будет открываться по ссылке из терминала    * */    
+	    * openAnalyzer: false,  
+	}),
+];
+```
+
+![](_png/Pasted%20image%2020231112121408.png)
 
 ## 24 React Testing Library. Тесты на компоненты метка
+
+Первым делом нужно устранить данную проблему с нечитабельностью абсолютных импортов:
+
+![](_png/Pasted%20image%2020231112123644.png)
+
+
+
+
+
 
 
 
