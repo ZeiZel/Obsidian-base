@@ -192,10 +192,30 @@ const plugins = [
 
 ![](_png/Pasted%20image%2020231112123644.png)
 
+Чтобы тесты работали через команды npm, нужно в `package.json` добавить следующие настройки: 
+
+```JSON
+"jest": {
+	"moduleNameMapper": {
+		"^@/(.*)$": "<rootDir>/src/$1"
+	}
+}
+```
+
+Так же эти же настройки нужно добавить в `jest.config.ts`, чтобы тесты запускались из `husky`:
+
+```TS
+/* настройки для запуска тестов с ипользованием абсолютных импортов */  
+moduleNameMapper: {  
+    '^@/(.*)$': '<rootDir>/src/$1',  
+},
+```
 
 
 
-
+```bash
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+```
 
 
 
