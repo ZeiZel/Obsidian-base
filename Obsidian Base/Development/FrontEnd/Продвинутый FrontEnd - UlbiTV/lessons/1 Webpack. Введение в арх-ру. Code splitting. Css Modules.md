@@ -131,30 +131,39 @@ export default webpackConfig;
 
 `tsconfig.json`
 ```JSON
-{
-  "compilerOptions": {
-	// постановка всех путей от начала папки проекта
-	"baseUrl": ".",
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    // современные модули
-    "module": "ESNext",
-    "target": "es5",
-    // устанавливаем данное значение, чтобы не было необходимости импортировать React
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "moduleResolution": "node",
-    // позволяет использовать обычные импорты вместо CommonJS
-    "esModuleInterop": true,
-    // убирает потребность писать * as для импорта нодовских пакетов
-    "allowSyntheticDefaultImports": true
-  },
-  // настройки импортов нодовских плагинов
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+{  
+    "compilerOptions": {  
+       // постановка всех путей от начала папки проекта  
+       "baseUrl": ".",  
+       "paths": {  
+          "@/*": ["./src/*"]  
+       },  
+       "outDir": "./dist/",  
+       "noImplicitAny": true,  
+       // современные модули  
+       "module": "ESNext",  
+       "target": "es5",  
+       // устанавливаем данное значение, чтобы не было необходимости импортировать React  
+       "jsx": "react-jsx",  
+       "allowJs": true,  
+       "strict": true,  
+       "moduleResolution": "node",  
+       "esModuleInterop": true,  
+       // позволяет использовать обычные импорты вместо CommonJS  
+       "isolatedModules": true,  
+       // убирает потребность писать * as для импорта нодовских пакетов  
+       "allowSyntheticDefaultImports": true  
+    },  
+    "include": [  
+       "./src/**/*.ts",  
+       "./src/**/*.tsx"  
+    ],  
+    // настройки импортов нодовских плагинов  
+    "ts-node": {  
+       "compilerOptions": {  
+          "module": "CommonJS"  
+       }  
+    }  
 }
 ```
 

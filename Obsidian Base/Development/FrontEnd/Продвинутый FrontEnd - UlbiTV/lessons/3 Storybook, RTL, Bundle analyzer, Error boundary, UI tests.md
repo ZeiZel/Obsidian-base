@@ -144,13 +144,13 @@ export const ErrorButton = () => {
 
 ## 23 Анализ размера банда. BundleAnalyzer
 
-
+Первым делом нужно установить зависимости
 
 ```bash
 npm install --save-dev webpack-bundle-analyzer @types/webpack-bundle-analyzer
 ```
 
-
+Далее нам нужно будет добавить плагин для анализа бандла в билд
 
 `config / build / buildPlugins.ts`
 ```TS
@@ -219,6 +219,137 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom @babel/p
 
 
 
+`config / jest / jest.config.ts`
+```TS
+import type { Config } from 'jest';
+
+const config: Config = {
+	/* устанавливаем сюда глобальные переменные */
+	globals: {
+		__IS_DEV__: true,
+		__API__: '',
+		__PROJECT__: 'jest',
+	},
+	/* очищаем моковые данные */
+	clearMocks: true,
+	/*
+	 * корневая точка
+	 * мы её настраиваем так как
+	 * */
+	rootDir: '../../',
+	modulePaths: ['<rootDir>src'],
+	/* разворачиваемся в браузере */
+	testEnvironment: 'jsdom',
+	/* настройки для запуска тестов с ипользованием
+	 * - абсолютных импортов
+	 * - стилей
+	 * */
+	moduleNameMapper: {
+		'^@/(.*)$': '<rootDir>/src/$1',
+		'\\.s?css$': 'identity-obj-proxy',
+		/* чтобы работали svg, их нужно заменить на моковый компонент */
+		'\\.svg': '<rootDir>/config/jest/jestEmptyComponent.tsx',
+	},
+	moduleDirectories: ['node_modules', '<rootDir>/'],
+	/* эту директорию не трогаем */
+	coveragePathIgnorePatterns: ['\\\\node_modules\\\\'],
+	/* доступные расширения файлов */
+	moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
+	/* регулярка, по которой находим файлы с тестами */
+	testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],
+	/* тут мы определяем путь до файла с сетапмами джеста */
+	setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
+	/* тут настроен репорт для проходок тестов */
+	reporters: [
+		'default',
+		[
+			'jest-html-reporters',
+			{
+				publicPath: '<rootDir>/reports/unit',
+				filename: 'report.html',
+				// openReport: true,
+				inlineSource: true,
+			},
+		],
+	],
+};
+
+export default config;
+```
+
+
+
+`tsconfig.json`
+```JSON
+"include": [
+	"./config/jest/setupTests.ts",
+	"./src/**/*.ts",
+	"./src/**/*.tsx"
+],
+```
+
+
+
+`babel.config.js`
+```JS
+module.exports = {
+	presets: [
+		'@babel/preset-env',
+		'@babel/preset-typescript',
+		['@babel/preset-react', { runtime: 'automatic' }],
+	],
+};
+```
+
+
+
+`src / shared / ui / Button / ui / Button.test.tsx`
+```TSX
+import { render, screen } from '@testing-library/react';
+import { Button, ThemeButton } from '@/shared/ui';
+
+describe('Button', () => {
+	test('button text', () => {
+		render(<Button>TEST</Button>);
+		expect(screen.getByText('TEST')).toBeInTheDocument();
+	});
+
+	test('button classname', () => {
+		render(<Button theme={ThemeButton.CLEAR}>TEST</Button>);
+		expect(screen.getByText('TEST')).toHaveClass('clear');
+	});
+});
+```
+
+
+
+`config / jest / jestEmptyComponent.tsx`
+```TSX
+import React from 'react';
+
+const jestEmptyComponent = function () {
+	return <div />;
+};
+
+export default jestEmptyComponent;
+```
+
+
+
+```TSX
+import { render, screen } from '@testing-library/react';
+import { withTranslation } from 'react-i18next';
+import { Sidebar } from '@/widgets';
+
+describe('Sidebar', () => {
+	test('toggle sidebar', () => {
+		/* компоненты, которые используют перевод нужно обернуть в withTranslation */
+		const SidebarWithTranslation = withTranslation()(Sidebar);
+		render(<SidebarWithTranslation />);
+		expect(screen.getByTestId('sidebar')).toBeInTheDocument();
+	});
+});
+```
 
 
 Чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
