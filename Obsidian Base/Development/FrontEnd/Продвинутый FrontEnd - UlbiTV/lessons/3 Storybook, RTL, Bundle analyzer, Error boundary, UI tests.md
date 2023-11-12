@@ -214,11 +214,16 @@ moduleNameMapper: {
 
 
 ```bash
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install --save-dev @testing-library/react @testing-library/jest-dom @babel/preset-react identity-obj-proxy
 ```
 
 
 
+
+
+Чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
+
+![](_png/Pasted%20image%2020231112143914.png)
 
 
 
