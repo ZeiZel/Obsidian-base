@@ -192,32 +192,23 @@ const plugins = [
 
 ![](_png/Pasted%20image%2020231112123644.png)
 
-Чтобы тесты работали через команды npm, нужно в `package.json` добавить следующие настройки: 
-
-```JSON
-"jest": {
-	"moduleNameMapper": {
-		"^@/(.*)$": "<rootDir>/src/$1"
-	}
-}
-```
-
-Так же эти же настройки нужно добавить в `jest.config.ts`, чтобы тесты запускались из `husky`:
-
-```TS
-/* настройки для запуска тестов с ипользованием абсолютных импортов */  
-moduleNameMapper: {  
-    '^@/(.*)$': '<rootDir>/src/$1',  
-},
-```
-
-
+Далее устанавливаем необходимые библиотеки для тестирования фронта
 
 ```bash
 npm install --save-dev @testing-library/react @testing-library/jest-dom @babel/preset-react identity-obj-proxy
 ```
 
+Далее нам нужно создать такой сетап файл, который будет импортировать данные зависимости в тесты
 
+`config / jest / jest.setup.ts`
+```TS
+/* виртуальный дом, который будет собираться в тестах */
+import '@testing-library/jest-dom';
+/* Рантайм для работы джеста с асинхронностью */
+import 'regenerator-runtime/runtime';
+```
+
+Собираем такой конфиг:
 
 `config / jest / jest.config.ts`
 ```TS
@@ -245,6 +236,7 @@ const config: Config = {
 	 * - стилей
 	 * */
 	moduleNameMapper: {
+		/* эта настройка нужна для поддержки абсолютных импортов */
 		'^@/(.*)$': '<rootDir>/src/$1',
 		'\\.s?css$': 'identity-obj-proxy',
 		/* чтобы работали svg, их нужно заменить на моковый компонент */
@@ -277,7 +269,7 @@ const config: Config = {
 export default config;
 ```
 
-
+В тс конфиг добавляем путь до сетапа джеста
 
 `tsconfig.json`
 ```JSON
@@ -288,7 +280,7 @@ export default config;
 ],
 ```
 
-
+В бейбел добавляем пресет для работы реакта в тестах
 
 `babel.config.js`
 ```JS
@@ -301,7 +293,7 @@ module.exports = {
 };
 ```
 
-
+И пишем самый простой тест для проверки работы тестов
 
 `src / shared / ui / Button / ui / Button.test.tsx`
 ```TSX
@@ -321,7 +313,7 @@ describe('Button', () => {
 });
 ```
 
-
+Так же нужно написать заглушку, которая будет заменять svg в проекте на себя
 
 `config / jest / jestEmptyComponent.tsx`
 ```TSX
@@ -334,7 +326,7 @@ const jestEmptyComponent = function () {
 export default jestEmptyComponent;
 ```
 
-
+Далее пишем тесты для 
 
 ```TSX
 import { render, screen } from '@testing-library/react';
@@ -355,8 +347,6 @@ describe('Sidebar', () => {
 Чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
 
 ![](_png/Pasted%20image%2020231112143914.png)
-
-
 
 ## 25 Настраиваем Storybook. Декораторы. Стори кейсы на компоненты
 
