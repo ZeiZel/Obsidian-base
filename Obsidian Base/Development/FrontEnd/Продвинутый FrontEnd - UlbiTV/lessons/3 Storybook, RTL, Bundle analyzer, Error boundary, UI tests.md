@@ -335,14 +335,13 @@ import { Sidebar } from '@/widgets';
 
 describe('Sidebar', () => {
 	test('toggle sidebar', () => {
-		/* компоненты, которые используют перевод нужно обернуть в withTranslation */
+	/* компоненты, которые используют перевод нужно обернуть в withTranslation */
 		const SidebarWithTranslation = withTranslation()(Sidebar);
 		render(<SidebarWithTranslation />);
 		expect(screen.getByTestId('sidebar')).toBeInTheDocument();
 	});
 });
 ```
-
 
 Чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
 
