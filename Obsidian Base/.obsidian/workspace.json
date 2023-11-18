@@ -177,7 +177,7 @@
             "id": "95a22018811faa02",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {}
             }
           },
@@ -190,9 +190,17 @@
                 "sortOrder": "frequency"
               }
             }
+          },
+          {
+            "id": "2dbb24f19fbc6a5b",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {}
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 9
       }
     ],
     "direction": "horizontal",
@@ -209,7 +217,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "07be73f418411286",
+  "active": "2dbb24f19fbc6a5b",
   "lastOpenFiles": [
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/1 Webpack. Введение в арх-ру. Code splitting. Css Modules.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
