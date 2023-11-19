@@ -188,88 +188,97 @@ const plugins = [
 
 ## 24 React Testing Library. Тесты на компоненты метка
 
-Первым делом нужно устранить данную проблему с нечитабельностью абсолютных импортов:
-
-![](_png/Pasted%20image%2020231112123644.png)
-
-Далее устанавливаем необходимые библиотеки для тестирования фронта
+Чтобы подготовить тесты в приложении, нужно установить следующие зависимости
 
 ```bash
-npm install --save-dev @testing-library/react @testing-library/jest-dom @babel/preset-react identity-obj-proxy
+npm install --save-dev 
+	jest
+	@testing-library/react 
+	@testing-library/jest-dom 
+	@babel/preset-react 
+	identity-obj-proxy 
+	regenerator-runtime
 ```
 
-Далее нам нужно создать такой сетап файл, который будет импортировать данные зависимости в тесты
+Далее нам нужно создать такой сетап файл, который будет импортировать данные зависимости во все тесты
 
 `config / jest / jest.setup.ts`
 ```TS
 /* виртуальный дом, который будет собираться в тестах */
 import '@testing-library/jest-dom';
-/* Рантайм для работы джеста с асинхронностью */
+/* рантайм для работы джеста с асинхронностью */
 import 'regenerator-runtime/runtime';
 ```
 
-Собираем такой конфиг:
+И так же нужно реализовать заглушку, которая будет вставляться вместо svg изображений
+
+`config / jest / jestEmptyComponent.tsx`
+```TSX
+import React from 'react';
+
+const jestEmptyComponent = function () {
+	return <div />;
+};
+
+export default jestEmptyComponent;
+```
+
+Собираем такой конфиг джеста:
 
 `config / jest / jest.config.ts`
 ```TS
-import type { Config } from 'jest';
-
-const config: Config = {
-	/* устанавливаем сюда глобальные переменные */
-	globals: {
-		__IS_DEV__: true,
-		__API__: '',
-		__PROJECT__: 'jest',
-	},
-	/* очищаем моковые данные */
-	clearMocks: true,
-	/*
-	 * корневая точка
-	 * мы её настраиваем так как
-	 * */
-	rootDir: '../../',
-	modulePaths: ['<rootDir>src'],
-	/* разворачиваемся в браузере */
-	testEnvironment: 'jsdom',
-	/* настройки для запуска тестов с ипользованием
-	 * - абсолютных импортов
-	 * - стилей
-	 * */
-	moduleNameMapper: {
-		/* эта настройка нужна для поддержки абсолютных импортов */
-		'^@/(.*)$': '<rootDir>/src/$1',
-		'\\.s?css$': 'identity-obj-proxy',
-		/* чтобы работали svg, их нужно заменить на моковый компонент */
-		'\\.svg': '<rootDir>/config/jest/jestEmptyComponent.tsx',
-	},
-	moduleDirectories: ['node_modules', '<rootDir>/'],
-	/* эту директорию не трогаем */
-	coveragePathIgnorePatterns: ['\\\\node_modules\\\\'],
-	/* доступные расширения файлов */
-	moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
-	/* регулярка, по которой находим файлы с тестами */
-	testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],
-	/* тут мы определяем путь до файла с сетапмами джеста */
-	setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
-	/* тут настроен репорт для проходок тестов */
-	reporters: [
-		'default',
-		[
-			'jest-html-reporters',
-			{
-				publicPath: '<rootDir>/reports/unit',
-				filename: 'report.html',
-				// openReport: true,
-				inlineSource: true,
-			},
-		],
-	],
-};
-
+import type { Config } from 'jest';  
+  
+const config: Config = {  
+    /* устанавливаем сюда глобальные переменные */  
+    globals: {  
+       __IS_DEV__: true,  
+       __API__: '/test/api',  
+       __PROJECT__: 'jest',  
+    },  
+    /* очищаем моковые данные */  
+    clearMocks: true,  
+    /*  
+     * корневая точка     * мы её настраиваем так как     * */    rootDir: '../../',  
+    modulePaths: ['<rootDir>src'],  
+    /* разворачиваемся в браузере */  
+    testEnvironment: 'jsdom',  
+    /* настройки для запуска тестов с ипользованием  
+     * - абсолютных импортов     * - стилей     * */    moduleNameMapper: {  
+       /* эта настройка нужна для поддержки абсолютных импортов */  
+       '^@/(.*)$': '<rootDir>/src/$1',  
+       '\\.s?css$': 'identity-obj-proxy',  
+       /* чтобы работали svg, их нужно заменить на моковый компонент */  
+       '\\.(svg|png|jpg)': '<rootDir>/config/jest/jestEmptyComponent.tsx',  
+    },  
+    moduleDirectories: ['node_modules', '<rootDir>/'],  
+    /* эту директорию не трогаем */  
+    coveragePathIgnorePatterns: ['\\\\node_modules\\\\'],  
+    /* доступные расширения файлов */  
+    moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],  
+    /* регулярка, по которой находим файлы с тестами */  
+    testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],  
+    /* тут мы определяем путь до файла с сетапмами джеста */  
+    setupFilesAfterEnv: ['<rootDir>config/jest/jest.setup.ts'],  
+    /* тут настроен репорт для проходок тестов */  
+    reporters: [  
+       'default',  
+       [  
+          'jest-html-reporters',  
+          {  
+             publicPath: '<rootDir>/reports/unit',  
+             filename: 'report.html',  
+             // openReport: true,  
+             inlineSource: true,  
+          },  
+       ],  
+    ],  
+};  
+  
 export default config;
 ```
 
-В тс конфиг добавляем путь до сетапа джеста
+В тс конфиг добавляем путь до сетапа джеста, который будет прокидываться в джест-тесты. Вместе с сетапом нужно будет добавить и все остальные ts-файлы, так как в них не будут работать обычные неабсолютные импорты
 
 `tsconfig.json`
 ```JSON
@@ -293,66 +302,312 @@ module.exports = {
 };
 ```
 
+Ну и так же нужно отключить для определённых файлов правила. Конкретно тут стоит начать с того, что можно отключить правила тех же переводов для тестов
+
+`.eslintrc.cjs`
+```JS
+overrides: [
+	{
+		'env': {
+			'node': true,
+		},
+		'files': [
+			'.eslintrc.{js,cjs}',
+			'**/src/**/*.test.{ts,tsx}',
+		],
+		'parserOptions': {
+			'sourceType': 'script',
+		},
+		rules: {
+			'i18next/no-literal-string': 'off',
+		},
+	},
+],
+```
+
+Далее нужно написать конфиг `i18n` для тестов 
+
+`src / shared / config / i18n / i18n.tests.ts`
+```TS
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+i18n.use(initReactI18next).init({
+	lng: 'ru',
+	fallbackLng: 'ru',
+	debug: false,
+	resources: { ru: { translations: {} } },
+});
+
+export default i18n;
+```
+
+Далее подготовим хелпер, в который будем оборачивать компоненты для тестирования и в нём нужно будет подготовить метод для тестирования компонентов и с переводами
+
+`src / shared / lib / helpers / testRenderer.helper.tsx`
+```TSX
+import { ReactNode } from 'react';
+import { render } from '@testing-library/react';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '@/shared/config/i18n/i18n.tests';
+
+export class TestRendererHelper {
+	public static withTranslation(component: ReactNode) {
+		return render(<I18nextProvider i18n={i18n}>{component}</I18nextProvider>);
+	}
+}
+```
+
+Для тестирования самих компонентов нужно будет им навесить `data-testid` атрибуты
+
+```TSX
+export const Sidebar = ({ className }: ISidebarProps) => {
+	const { t } = useTranslation('ui');
+	const [collapsed, setCollapsed] = useState<boolean>(false);
+
+	const onToggle = () => setCollapsed((prev) => !prev);
+
+	return (
+		<div
+			data-testid={'sidebar'}
+			className={cn(styles.sidebar, className, { [styles.collapsed]: collapsed })}
+		>
+			<button data-testid={'sidebar-toggle'} onClick={onToggle}>
+				{t('toggle')}
+			</button>
+			<div className={styles.switchers}>
+				<ThemeSwitcher />
+				<LanguageSwitcher />
+			</div>
+		</div>
+	);
+};
+```
+
 И пишем самый простой тест для проверки работы тестов
 
 `src / shared / ui / Button / ui / Button.test.tsx`
 ```TSX
-import { render, screen } from '@testing-library/react';
-import { Button, ThemeButton } from '@/shared/ui';
-
-describe('Button', () => {
-	test('button text', () => {
-		render(<Button>TEST</Button>);
-		expect(screen.getByText('TEST')).toBeInTheDocument();
-	});
-
-	test('button classname', () => {
-		render(<Button theme={ThemeButton.CLEAR}>TEST</Button>);
-		expect(screen.getByText('TEST')).toHaveClass('clear');
-	});
+import { render, screen } from '@testing-library/react';  
+import { Button, ThemeButton } from '@/shared/ui';  
+  
+describe('Button', () => {  
+    test('button text', () => {  
+       render(<Button>TEST</Button>);  
+       expect(screen.getByText('TEST')).toBeInTheDocument();  
+    });  
+  
+    test('button classname', () => {  
+       render(<Button theme={ThemeButton.CLEAR}>TEST</Button>);  
+       expect(screen.getByText('TEST')).toHaveClass('clear');  
+    });  
 });
 ```
 
-Так же нужно написать заглушку, которая будет заменять svg в проекте на себя
+И вот так уже выглядит сам тестовый сьют, который включает в себя обёртку для приложений с переводами
 
-`config / jest / jestEmptyComponent.tsx`
+`src / widgets / Sidebar / ui / Sidebar.test.tsx`
 ```TSX
-import React from 'react';
-
-const jestEmptyComponent = function () {
-	return <div />;
-};
-
-export default jestEmptyComponent;
-```
-
-Далее пишем тесты для 
-
-```TSX
-import { render, screen } from '@testing-library/react';
-import { withTranslation } from 'react-i18next';
-import { Sidebar } from '@/widgets';
-
-describe('Sidebar', () => {
-	test('toggle sidebar', () => {
-	/* компоненты, которые используют перевод нужно обернуть в withTranslation */
-		const SidebarWithTranslation = withTranslation()(Sidebar);
-		render(<SidebarWithTranslation />);
-		expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-	});
+import { fireEvent, screen } from '@testing-library/react';  
+import { Sidebar } from '@/widgets';  
+import { TestRendererHelper } from '@/shared/lib/helpers';  
+  
+describe('Sidebar', () => {  
+    /** проверяем, отрендерен ли сайдбар */  
+    test('render sidebar', () => {  
+       /* компоненты, которые используют перевод нужно обернуть в хок withTranslation или обернуть в провайдер, как тут */  
+       TestRendererHelper.withTranslation(<Sidebar />);  
+       expect(screen.getByTestId('sidebar')).toBeInTheDocument();  
+    });  
+  
+    /** проверяем, свёрнут ли сайдбар */  
+    test('toggle sidebar', () => {  
+       TestRendererHelper.withTranslation(<Sidebar />);  
+       const toggleBtn = screen.getByTestId('sidebar-toggle');  
+       const sidebar = screen.getByTestId('sidebar');  
+       fireEvent.click(toggleBtn);  
+       expect(sidebar).toHaveClass('collapsed');  
+    });  
 });
 ```
 
-Чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
-
-![](_png/Pasted%20image%2020231112143914.png)
+>[!note] Так же нужно упомянуть, чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
+> ![](_png/Pasted%20image%2020231112143914.png)
 
 ## 25 Настраиваем Storybook. Декораторы. Стори кейсы на компоненты
 
+Мы можем вручную установить множество пакетов
 
+```bash
+npm i 
+	@storybook/addon-actions 
+	@storybook/addon-essentials 
+	@storybook/addon-interactions 
+	@storybook/addon-links 
+	@storybook/react 
+	@storybook/react-webpack5 
+	@storybook/testing-library
+	storybook-addon-mock  
+	storybook-addon-themes
+```
 
+Или просто запустить установщик:
 
+```bash
+npx sb init --builder webpack5
+```
 
+Если у нас уже в проекте есть старый сторибук, то можно будет запустить данную команду и сторибук обновится
+
+```bash
+npx storybook@next automigrate
+```
+
+Далее нам нужно будет сконфигурировать
+
+`config / storybook / main.ts`
+```TS
+import { Configuration, DefinePlugin, RuleSetRule } from 'webpack';
+import path from 'path';
+import { buildCssLoader } from '../build/loader/style.loader';
+
+const config = {
+	stories: ['../../src/**/*.stories.@(js|jsx|ts|tsx)'],
+	addons: [
+		'@storybook/addon-links',
+		'@storybook/addon-essentials',
+		'@storybook/addon-interactions',
+		'storybook-addon-mock',
+		'storybook-addon-themes',
+	],
+	framework: {
+		name: '@storybook/react-webpack5',
+		options: {},
+	},
+	core: {},
+	docs: {
+		autodocs: true,
+	},
+	webpackFinal: async (config: Configuration) => {
+		const paths = {
+			build: '',
+			html: '',
+			entry: '',
+			src: path.resolve(__dirname, '..', '..', 'src'),
+			locales: '',
+			buildLocales: '',
+		};
+		config!.resolve!.modules!.push(paths.src);
+		config!.resolve!.extensions!.push('.ts', '.tsx');
+		config!.resolve!.alias = {
+			...config!.resolve!.alias,
+			'@': paths.src,
+		};
+
+		/* если в каком-либо правиле есть svg, то мы вернём старый объект и заэксклюдим svg в правиле */
+		config!.module!.rules = config!.module!.rules!.map(
+			// @ts-ignore
+			(rule: RuleSetRule) => {
+				if (/svg/.test(rule.test as string)) {
+					return { ...rule, exclude: /\.svg$/i };
+				}
+
+				return rule;
+			},
+		);
+
+		/* а тут уже доавим свгр, который преобразует svg */
+		config!.module!.rules.push({
+			test: /\.svg$/,
+			use: ['@svgr/webpack'],
+		});
+		config!.module!.rules.push(buildCssLoader(true));
+
+		config!.plugins!.push(
+			new DefinePlugin({
+				__IS_DEV__: JSON.stringify(true),
+				__API__: JSON.stringify('https://testapi.ru'),
+				__PROJECT__: JSON.stringify('storybook'),
+			}),
+		);
+
+		return config;
+	},
+};
+
+export default config;
+```
+
+Так же мы можем настроить то превью, которое будет находиться у нас во вьюпорту при отображении компонента
+
+`config / storybook / preview.tsx`
+```TS
+import { Theme } from '../../src/app/providers/ThemeProvider';
+import {
+	withRouterDecorator,
+	withStyleDecorator,
+	withSuspenseDecorator,
+	withThemeDecorator,
+} from '../../src/shared/lib';
+
+export const parameters = {
+	actions: { argTypesRegex: '^on[A-Z].*' },
+	controls: {
+		matchers: {
+			color: /(background|color)$/i,
+			date: /Date$/,
+		},
+	},
+	layout: 'centered',
+	themes: {
+		default: Theme.LIGHT,
+		list: [
+			{ name: Theme.LIGHT, class: Theme.LIGHT, color: '#aeaeae' },
+			{ name: Theme.DARK, class: Theme.DARK, color: '#2a2a2a' },
+		],
+	},
+	decorators: [
+		withStyleDecorator,
+		withSuspenseDecorator,
+		withRouterDecorator,
+		withThemeDecorator(Theme.DARK),
+	],
+};
+```
+
+И далее нам нужно будет написать сторис-кейсы, которые будут отображать наши компоненты
+
+`src / shared / ui / Button / ui / Button.stories.ts`
+```TSX
+import { Meta, StoryObj } from '@storybook/react';
+import { Button } from './Button';
+import { IButtonProps } from './Button.props';
+import { EButtonType } from '../model';
+
+const meta: Meta<typeof Button> = {
+	title: 'Components/UI/Button',
+	component: Button,
+	decorators: [],
+};
+export default meta;
+
+type Story = StoryObj<typeof Button> & IButtonProps;
+
+export const Primary: Story = {
+	args: {
+		children: 'Кнопка основная',
+		appearance: EButtonType.PRIMARY,
+	},
+};
+```
+
+И далее запускаем сторибук данными командами
+
+`package.json`
+```JSON
+"storybook": "storybook dev -p 6006 -c ./config/storybook"
+"storybook:build": "storybook build -c ./config/storybook"
+```
 
 ## 26 Скриншотные тесты. Loki. Регрессионное UI тестирование
 
