@@ -724,10 +724,50 @@ export interface IButtonProps extends ButtonProps {
 
 ## 26 Скриншотные тесты. Loki. Регрессионное UI тестирование
 
+Первым делом нужно установить локи и указать ему путь до сторибука
 
+```bash
+npm i -D loki
+npx loki init --config ./config/storybook/
+```
 
+После чего в пакейдже появится такая конфигурация
 
+`package.json`
+```JSON
+"loki": {  
+    "configurations": {  
+       "chrome.laptop": {  
+          "target": "chrome.docker",  
+          "width": 1366,  
+          "height": 768,  
+          "deviceScaleFactor": 1,  
+          "mobile": false  
+       },  
+       "chrome.iphone7": {  
+          "target": "chrome.docker",  
+          "preset": "iPhone 7"  
+       }  
+    }  
+}
+```
 
+Сразу забиндим старт тестов и аппрув изменний в тестировании (первая команда прогонит тексты, а вторая подтвердит, что все отличия нам подходят в проекте нам подходят)
+
+`package.json`
+```JSON
+"test:ui": "npx loki test",
+"test:ui:ok": "npx loki approve",
+```
+
+Далее нужно запустить сторибук и докер, в котором поднимется браузер, и можно будет стартануть локи-тексты
+
+```bash
+npm run storybook
+npm run test:ui
+```
+
+Теперь в папке `current` будут находиться скриншоты того ui, который мы прогнали в первый раз. Если ui изменится в каком-либо компоненте, то тест упадёт с ошибкой в определённом компоненте и скриншоты изменений попадут в папку `differences`.
 
 ## 27 CI pipeline. Автоматизация прогона тестов метка
 
