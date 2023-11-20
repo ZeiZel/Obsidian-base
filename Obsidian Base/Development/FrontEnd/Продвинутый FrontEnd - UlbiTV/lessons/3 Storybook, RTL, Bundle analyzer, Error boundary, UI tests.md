@@ -469,8 +469,13 @@ npx storybook@next automigrate
 ```TS
 import { Configuration, DefinePlugin, RuleSetRule } from 'webpack';
 import path from 'path';
-import { buildCssLoader } from '../build/loader/style.loader';
+import { buildStyleLoader } from '../build/loader/style.loader';
+import { buildFileLoader } from '../build/loader/file.loader';
 
+/*
+ * конфиг был прогнан через команду:
+ * npx storybook@next automigrate
+ * */
 const config = {
 	stories: ['../../src/**/*.stories.@(js|jsx|ts|tsx)'],
 	addons: [
@@ -516,12 +521,8 @@ const config = {
 			},
 		);
 
-		/* а тут уже доавим свгр, который преобразует svg */
-		config!.module!.rules.push({
-			test: /\.svg$/,
-			use: ['@svgr/webpack'],
-		});
-		config!.module!.rules.push(buildCssLoader(true));
+		config!.module!.rules.push(buildStyleLoader(true));
+		config!.module!.rules.push(buildFileLoader());
 
 		config!.plugins!.push(
 			new DefinePlugin({
@@ -536,6 +537,51 @@ const config = {
 };
 
 export default config;
+```
+
+Далее нам нужно написать декораторы, которые будут обогащать наши вложенные компоненты сторибука
+
+`src / shared / lib / storybook / decorators / Router.decorator.tsx`
+```TSX
+import { StoryFn } from '@storybook/react';
+import { BrowserRouter } from 'react-router-dom';
+
+export const withRouterDecorator = (StoryComponent: StoryFn) => (
+	<BrowserRouter>
+		<StoryComponent />
+	</BrowserRouter>
+);
+```
+`src / shared / lib / storybook / decorators / Style.decorator.tsx`
+```TSX
+import { StoryFn } from '@storybook/react';  
+import '../../../../app/styles/index.scss';  
+  
+export const withStyleDecorator = (Story: StoryFn) => <Story />;
+```
+`src / shared / lib / storybook / decorators / Suspense.decorator.tsx`
+```TSX
+import { StoryFn } from '@storybook/react';  
+import { Suspense } from 'react';  
+  
+export const withSuspenseDecorator = (StoryComponent: StoryFn) => (  
+    <Suspense>  
+       <StoryComponent />  
+    </Suspense>  
+);
+```
+`src / shared / lib / storybook / decorators / Theme.decorator.tsx`
+```TSX
+import { StoryFn } from '@storybook/react';  
+import { Theme, ThemeProvider } from '../../../../app/providers/ThemeProvider';  
+  
+export const withThemeDecorator = (theme: Theme) => (StoryComponent: StoryFn) => (  
+    <ThemeProvider>  
+       <div className={`app ${theme}`}>  
+          <StoryComponent />  
+       </div>  
+    </ThemeProvider>  
+);
 ```
 
 Так же мы можем настроить то превью, которое будет находиться у нас во вьюпорту при отображении компонента
@@ -566,6 +612,7 @@ export const parameters = {
 			{ name: Theme.DARK, class: Theme.DARK, color: '#2a2a2a' },
 		],
 	},
+	/* сюда вставляем декораторы */
 	decorators: [
 		withStyleDecorator,
 		withSuspenseDecorator,
@@ -575,30 +622,96 @@ export const parameters = {
 };
 ```
 
+И так же можно написать общий декоратор, в который можно обернуть отдельные компоненты
+
+`src / shared / lib / storybook / withDecorators.tsx`
+```TSX
+import { StoryFn } from '@storybook/react';  
+import { BrowserRouter } from 'react-router-dom';  
+import React, { Suspense } from 'react';  
+import { Theme, ThemeProvider } from '@/app/providers/ThemeProvider';  
+  
+export const withDecorators =  
+    (theme: Theme = Theme.LIGHT) =>  
+    (StoryComponent: StoryFn) => (  
+       <BrowserRouter>  
+          <Suspense>  
+             <ThemeProvider>  
+                <div className={`app ${theme}`}>  
+                   <StoryComponent />  
+                </div>  
+             </ThemeProvider>  
+          </Suspense>  
+       </BrowserRouter>  
+    );
+```
+
 И далее нам нужно будет написать сторис-кейсы, которые будут отображать наши компоненты
 
 `src / shared / ui / Button / ui / Button.stories.ts`
 ```TSX
-import { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
-import { IButtonProps } from './Button.props';
-import { EButtonType } from '../model';
-
-const meta: Meta<typeof Button> = {
-	title: 'Components/UI/Button',
-	component: Button,
-	decorators: [],
+import { Meta, StoryObj } from '@storybook/react';  
+import { Button } from './Button';  
+import { EButtonType } from '../model';  
+import { withDecorators } from '@/shared/lib';  
+import { Theme } from '@/app/providers/ThemeProvider';  
+  
+const meta: Meta<typeof Button> = {  
+    title: 'Components/UI/Button',  
+    component: Button,
+    /* а сюда уже можно будет добавить декораторы */
+    decorators: [withDecorators(Theme.LIGHT)],  
+};  
+export default meta;  
+  
+type Story = StoryObj<typeof Button>;  
+  
+export const Primary: Story = {  
+    render: (args) => <Button {...args} />,  
+    args: {  
+       children: 'Кнопка основная',  
+       appearance: EButtonType.PRIMARY,  
+    },  
 };
-export default meta;
+```
 
-type Story = StoryObj<typeof Button> & IButtonProps;
+Так же стоит упомянуть, что стоит оставлять JSDoc комментарии для компонента и его пропсов
 
-export const Primary: Story = {
-	args: {
-		children: 'Кнопка основная',
-		appearance: EButtonType.PRIMARY,
-	},
+`src / shared / ui / Button / ui / Button.tsx`
+```TSX
+/** Основная кнопка приложения */  
+export const Button: FC<IButtonProps> = ({  
+    className,  
+    children,  
+    appearance = EButtonType.PRIMARY,  
+    size = 'm',  
+    ...props  
+}: IButtonProps) => {  
+    return (  
+       <button  
+          className={cn(  
+             styles.button,  
+             className,  
+             styles[`appearance__${appearance}`],  
+             styles[`size__${size}`],  
+          )}  
+          {...props}  
+       >          {children}  
+       </button>  
+    );  
 };
+```
+`src / shared / ui / Button / ui / Button.props.ts`
+```TSX
+import { EButtonType } from '../model';  
+import { ButtonProps } from '@/shared/lib';  
+  
+export interface IButtonProps extends ButtonProps {  
+    /** Тема кнопки */  
+    appearance?: EButtonType;  
+    /** Размер кнопки */  
+    size: 's' | 'm' | 'l';  
+}
 ```
 
 И далее запускаем сторибук данными командами
