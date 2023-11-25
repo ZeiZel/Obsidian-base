@@ -760,7 +760,7 @@ npx loki init --config ./config/storybook/
 "test:ui:ok": "npx loki approve",
 ```
 
-Далее нужно запустить сторибук и докер, в котором поднимется браузер, и можно будет стартануть локи-тексты
+Далее нужно запустить сторибук (на основе которого и будут прогоняться скриншот-тесты локи) и докер (в котором поднимется браузер), и можно будет стартануть локи-тексты
 
 ```bash
 npm run storybook
@@ -771,14 +771,39 @@ npm run test:ui
 
 ## 27 CI pipeline. Автоматизация прогона тестов метка
 
+Перед тем, как сделать коммит, нам нужно прогнать нужные проверки на нашем компьютере и для этого нужно будет husky
 
+```bash
+npm i -D husky
+```
+
+Далее нужно добавить две команды:
+- Установка хаски для триггера перед коммитом
+- Запуск локи на статичном билде сторибука
 
 `package.json`
 ```JSON
-"test:ui:ci": "npx loki && --requireReference --reactUri file:./storybook-static",
+"prepare": "husky install",
+"test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
 ```
 
+Далее нужно будет в хаски добавить линтеры, которые будут прогоняться перед коммитом
 
+`.husky / pre-commit`
+```bash
+#!/usr/bin/env sh  
+. "$(dirname -- "$0")/_/husky.sh"  
+  
+npm run lint:fix:all  
+npm run test:unit  
+npm run storybook:build  
+npm run test:ui:ci
+```
+
+И далее нужно будет добавить Github Actions, которые уже будут прогоняться на серверах гитхаба. 
+Тут нужно будет сделать джоб `checks`, который будет выполнять определённую последовательность действий. 
+
+Так как для работы локи нужно поднять сторибук, то перед запуском CI Loki, нужно будет сбилдить сторибук 
 
 `.github / workflows / main.yml`
 ```YML
@@ -821,6 +846,7 @@ jobs:
         run: npm run test:ui:ci
 ```
 
+![](_png/Pasted%20image%2020231125201124.png)
 
 ## 28 Сайдбар. Состояния кнопки. UI Screenshot test report
 
