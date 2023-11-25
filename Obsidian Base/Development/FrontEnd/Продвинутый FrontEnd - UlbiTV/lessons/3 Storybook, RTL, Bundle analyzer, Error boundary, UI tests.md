@@ -773,7 +773,53 @@ npm run test:ui
 
 
 
+`package.json`
+```JSON
+"test:ui:ci": "npx loki && --requireReference --reactUri file:./storybook-static",
+```
 
+
+
+`.github / workflows / main.yml`
+```YML
+name: building project  
+  
+on:  
+  push:  
+    branches: [ main ]  
+  pull_request:  
+    branches: [ main ]  
+  
+jobs:  
+  # Джоб проверки проекта  
+  checks:  
+    runs-on: ubuntu-latest  
+    strategy:  
+      matrix:  
+        node-version: [ 20.x ]  
+    steps:  
+      - uses: actions/checkout@v2  
+      - name: Staring Node.js ${{ matrix.node-version }}  
+        uses: actions/setup-node@v1  
+        with:  
+          node-version: ${{ matrix.node-version }}  
+      - name: install deps  
+        run: npm i  
+      - name: build project  
+        run: npm run build:prod  
+      - name: up storybook  
+        run: npm run storybook:build  
+      - name: lint prettier  
+        run: npm run lint:prettier:fix  
+      - name: lint stylelint  
+        run: npm run lint:stylelint:fix  
+      - name: lint eslint  
+        run: npm run lint:eslint:fix  
+      - name: unit tests  
+        run: npm run test:unit  
+      - name: unit ui  
+        run: npm run test:ui:ci
+```
 
 
 ## 28 Сайдбар. Состояния кнопки. UI Screenshot test report
