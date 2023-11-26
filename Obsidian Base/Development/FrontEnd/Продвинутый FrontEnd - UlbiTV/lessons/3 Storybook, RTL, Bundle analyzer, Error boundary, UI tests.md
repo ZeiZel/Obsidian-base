@@ -342,19 +342,53 @@ i18n.use(initReactI18next).init({
 export default i18n;
 ```
 
-Далее подготовим хелпер, в который будем оборачивать компоненты для тестирования и в нём нужно будет подготовить метод для тестирования компонентов и с переводами
+Далее подготовим хелпер-провайдер, в который будем оборачивать компоненты для тестирования. Этот хелпер уже будет иметь моковый браузер-роутер, редакс-стейт, провайдер переводов и темы 
 
-`src / shared / lib / helpers / testRenderer.helper.tsx`
+`src / shared / lib / tests / testRenderComponent.tsx`
 ```TSX
-import { ReactNode } from 'react';
-import { render } from '@testing-library/react';
-import { I18nextProvider } from 'react-i18next';
-import i18n from '@/shared/config/i18n/i18n.tests';
-
-export class TestRendererHelper {
-	public static withTranslation(component: ReactNode) {
-		return render(<I18nextProvider i18n={i18n}>{component}</I18nextProvider>);
-	}
+import { ReducersMapObject } from '@reduxjs/toolkit';  
+import { render } from '@testing-library/react';  
+import React, { ReactNode } from 'react';  
+import { I18nextProvider } from 'react-i18next';  
+import { MemoryRouter } from 'react-router-dom';  
+import { StoreProvider } from '@/app/providers/StoreProvider';  
+import { Theme, ThemeProvider } from '@/app/providers/ThemeProvider';  
+import i18n from '../../config/i18n/i18n.tests';  
+import { IDivAttributes } from '../types/baseProps.type';  
+import { StateSchema } from '../types/state.schema';  
+  
+/** необязательные опции, которые нужны для запуска провайдеров тестов */  
+export interface IRenderOptions {  
+    route: string;  
+    initialState: DeepPartial<StateSchema>;  
+    asyncReducers: DeepPartial<ReducersMapObject<StateSchema>>;  
+    theme: Theme;  
+}  
+  
+export interface ITestRenderProviderProps extends IDivAttributes, DeepPartial<IRenderOptions> {}  
+  
+/** провайдер для рендера компонентов из тестов */  
+export const TestRenderProvider = ({  
+    children,  
+    route = '/',  
+    theme = Theme.LIGHT,  
+    asyncReducers,  
+    initialState,  
+}: ITestRenderProviderProps) => {  
+    return (  
+       <MemoryRouter initialEntries={[route]}>  
+          <StoreProvider>  
+             <I18nextProvider i18n={i18n}>  
+                <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>  
+             </I18nextProvider>  
+          </StoreProvider>  
+       </MemoryRouter>  
+    );  
+};  
+  
+/** функция рендера компонентов тестов */  
+export function testComponent(component: ReactNode, options?: IRenderOptions) {  
+    return render(<TestRenderProvider {...options}>{component}</TestRenderProvider>);  
 }
 ```
 
@@ -389,7 +423,7 @@ export const Sidebar = ({ className }: ISidebarProps) => {
 `src / shared / ui / Button / ui / Button.test.tsx`
 ```TSX
 import { render, screen } from '@testing-library/react';  
-import { Button, ThemeButton } from '@/shared/ui';  
+import { Button, EButtonType } from '@/shared/ui';  
   
 describe('Button', () => {  
     test('button text', () => {  
@@ -398,31 +432,31 @@ describe('Button', () => {
     });  
   
     test('button classname', () => {  
-       render(<Button theme={ThemeButton.CLEAR}>TEST</Button>);  
-       expect(screen.getByText('TEST')).toHaveClass('clear');  
+       render(<Button appearance={EButtonType.PRIMARY}>TEST</Button>);  
+       expect(screen.getByText('TEST')).toHaveClass('button appearance__primary size__m');  
     });  
 });
 ```
 
-И вот так уже выглядит сам тестовый сьют, который включает в себя обёртку для приложений с переводами
+И вот так уже выглядит сам тестовый сьют, который включает в себя обёртку для приложений с переводами, браузером, редаксом и остальными провайдерами
 
 `src / widgets / Sidebar / ui / Sidebar.test.tsx`
 ```TSX
 import { fireEvent, screen } from '@testing-library/react';  
-import { Sidebar } from '@/widgets';  
-import { TestRendererHelper } from '@/shared/lib/helpers';  
+import { Sidebar } from '@/widgets/Sidebar';  
+import { testComponent } from '@/shared/lib';  
   
 describe('Sidebar', () => {  
     /** проверяем, отрендерен ли сайдбар */  
     test('render sidebar', () => {  
        /* компоненты, которые используют перевод нужно обернуть в хок withTranslation или обернуть в провайдер, как тут */  
-       TestRendererHelper.withTranslation(<Sidebar />);  
+       testComponent(<Sidebar />);  
        expect(screen.getByTestId('sidebar')).toBeInTheDocument();  
     });  
   
     /** проверяем, свёрнут ли сайдбар */  
     test('toggle sidebar', () => {  
-       TestRendererHelper.withTranslation(<Sidebar />);  
+       testComponent(<Sidebar />);  
        const toggleBtn = screen.getByTestId('sidebar-toggle');  
        const sidebar = screen.getByTestId('sidebar');  
        fireEvent.click(toggleBtn);  
@@ -805,6 +839,8 @@ npm run test:ui:ci
 
 Так как для работы локи нужно поднять сторибук, то перед запуском CI Loki, нужно будет сбилдить сторибук 
 
+Так же нужно будет прописать условие `if: always()`, которое заставит прогонять полностью все тесты даже тогда, когда у нас что-то в последовательности упало 
+
 `.github / workflows / main.yml`
 ```YML
 name: building project  
@@ -834,26 +870,82 @@ jobs:
         run: npm run build:prod  
       - name: up storybook  
         run: npm run storybook:build  
-      - name: lint prettier  
-        run: npm run lint:prettier:fix  
+        if: always()  
       - name: lint stylelint  
         run: npm run lint:stylelint:fix  
+        if: always()  
       - name: lint eslint  
         run: npm run lint:eslint:fix  
+        if: always()  
       - name: unit tests  
         run: npm run test:unit  
+        if: always()  
       - name: unit ui  
-        run: npm run test:ui:ci
+        run: npm run test:ui:ci  
+        if: always()
 ```
 
 ![](_png/Pasted%20image%2020231125201124.png)
 
-## 28 Сайдбар. Состояния кнопки. UI Screenshot test report
+## 28 UI Screenshot test report
 
+Первым делом нам нужно установить пакет, который генерирует сайт из json
 
+```bash
+npm i -D reg-cli
+```
 
+Далее нам нужно будет триггерить скрипт, который соберёт все локи скриншоты в json-файл. А уже тот собранный `json` будет переведён через `reg-cli` в `index.html`, который уже и можно будет открыть в браузере
 
+`scripts / generate-visual-json-report.js`
+```JS
+const { readdir, writeFile } = require('fs');  
+const { join: joinPath, relative } = require('path');  
+const { promisify } = require('util');  
+  
+const asyncReaddir = promisify(readdir);  
+const writeFileAsync = promisify(writeFile);  
+  
+/** путь до локи скришотов */  
+const lokiDir = joinPath(__dirname, '..', '.loki');  
+/** текущие скришоты */  
+const actualDir = joinPath(lokiDir, 'current');  
+/** референсы скришотов */  
+const expectedDir = joinPath(lokiDir, 'reference');  
+/** отличия между скриншотами */  
+const diffDir = joinPath(lokiDir, 'difference');  
+  
+(async function main() {  
+    const diffs = await asyncReaddir(diffDir);  
+  
+    await writeFileAsync(  
+       joinPath(lokiDir, 'report.json'),  
+       JSON.stringify({  
+          newItems: [],  
+          deletedItems: [],  
+          passedItems: [],  
+          failedItems: diffs,  
+          expectedItems: diffs,  
+          actualItems: diffs,  
+          diffItems: diffs,  
+          actualDir: relative(lokiDir, actualDir),  
+          expectedDir: relative(lokiDir, expectedDir),  
+          diffDir: relative(lokiDir, diffDir),  
+       }),  
+    );  
+})();
+```
 
+Далее нам нужно будет собрать `test:ui:report` репорт по тестам локи
 
+`package.json`
+```JSON
+"test:ui": "npx loki test",  
+"test:ui:approve": "npx loki approve",  
+"test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",  
+"test:ui:json": "node scripts/generate-visual-json-report.js",  
+"test:ui:html": "reg-cli --from .loki/report.json --report .loki/report.html",  
+"test:ui:report": "npm run test:ui:json && npm run test:ui:html",
+```
 
-
+![](_png/Pasted%20image%2020231126204905.png)
