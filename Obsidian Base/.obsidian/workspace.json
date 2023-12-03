@@ -31,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -123,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md"
               }
             }
           },
@@ -218,8 +217,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "19fe0b93bdd08afe",
+  "active": "07be73f418411286",
   "lastOpenFiles": [
+    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
@@ -241,7 +241,6 @@
     "Development/GIT/GitFlow.md",
     "Development/Tips&Tricks/Reset&Reboot.md",
     "conflict-files-obsidian-git.md",
-    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/16 Работа с формами.md",
     "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
