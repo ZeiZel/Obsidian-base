@@ -377,7 +377,7 @@ export const TestRenderProvider = ({
 }: ITestRenderProviderProps) => {  
     return (  
        <MemoryRouter initialEntries={[route]}>  
-          <StoreProvider>  
+          <StoreProvider initialState={initialState} asyncReducers={asyncReducers}>
              <I18nextProvider i18n={i18n}>  
                 <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>  
              </I18nextProvider>  
