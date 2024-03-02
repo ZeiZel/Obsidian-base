@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "13ebbb16cdb39e0c",
+        "id": "d9deb0b634f1fdc2",
         "type": "tabs",
         "children": [
           {
-            "id": "82bf53bceab92f8b",
+            "id": "f193ef0fc22916d8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/MobX.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/MobX.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/MobX.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/MobX.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md"
               }
             }
           },
@@ -194,7 +194,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 268.5
+    "width": 268.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -207,12 +208,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "82bf53bceab92f8b",
+  "active": "f193ef0fc22916d8",
   "lastOpenFiles": [
-    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
+    "Development/FrontEnd/MobX.md",
+    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/5 Асинк редюссеры.md",
     "Development/TypeScript/TypeScript.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
@@ -244,7 +246,6 @@
     "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/18 Доступность.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/_lessons/03 Базовые понятия Docker.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
