@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
+                "file": "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md"
               }
             }
           },
@@ -220,6 +220,7 @@
   "lastOpenFiles": [
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/1 Введение.md",
+    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/5 Асинк редюссеры.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
@@ -253,7 +254,6 @@
     "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
     "Development/FrontEnd/React Foundamentals.md",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/17 Анимация на Framer Motion.md",
-    "Development/BackEnd/NestJS - с нуля, современный backend на TypeScript и Node JS (2021)/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
