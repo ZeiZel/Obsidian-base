@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "6189c06e8bda4481",
+        "id": "30a67238dfd648b6",
         "type": "tabs",
         "children": [
           {
-            "id": "7133de77909bb2a7",
+            "id": "1d4095e2d1a39513",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Mongo DB.md",
+                "file": "SelfDevelopment/Excalidraw.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.5
+    "width": 389.5,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -93,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/Mongo DB.md",
+                "file": "SelfDevelopment/Excalidraw.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/Mongo DB.md",
+                "file": "SelfDevelopment/Excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Mongo DB.md"
+                "file": "SelfDevelopment/Excalidraw.md"
               }
             }
           },
@@ -170,7 +171,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 341.5
+    "width": 341.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -183,8 +185,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "7133de77909bb2a7",
+  "active": "1d4095e2d1a39513",
   "lastOpenFiles": [
+    "SelfDevelopment/Excalidraw.md",
+    "SelfDevelopment/Storytelling.md",
+    "SelfDevelopment/Как учиться учиться.md",
+    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
+    "SelfDevelopment/Карьерный чит/Карьерный чит.md",
+    "Development/BackEnd/Mongo DB.md",
     "Development/BackEnd/Ruby.md",
     "Development/BackEnd/Prisma ORM.md",
     "Development/Real-time клиент-серверное взаимодействие.md",
@@ -206,12 +214,6 @@
     "_Obsidian/_lessons/Obsidian UI.md",
     "_Obsidian/Obsidian.md",
     "Development/TypeScript/_lessons/07 Generics.md",
-    "_lessons/10 Переход на TypeScript.md",
-    "_lessons/03 Введение в TypeScript.md",
-    "English/English.md",
-    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
-    "Design/DaVinci Resolve/Модули/1 Введение.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231202204003.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231126204905.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231125201124.png",
