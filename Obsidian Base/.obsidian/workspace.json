@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "3d8c57d2712f45e4",
+        "id": "6189c06e8bda4481",
         "type": "tabs",
         "children": [
           {
-            "id": "daf8d030a04b55d3",
+            "id": "7133de77909bb2a7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/10 Декораторы.md",
+                "file": "Development/BackEnd/Mongo DB.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/TypeScript/_lessons/10 Декораторы.md",
+                "file": "Development/BackEnd/Mongo DB.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/TypeScript/_lessons/10 Декораторы.md",
+                "file": "Development/BackEnd/Mongo DB.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/10 Декораторы.md"
+                "file": "Development/BackEnd/Mongo DB.md"
               }
             }
           },
@@ -183,10 +183,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "ff21713a3aed5004",
+  "active": "7133de77909bb2a7",
   "lastOpenFiles": [
-    "Development/TypeScript/_lessons/09 Служебные типы.md",
+    "Development/BackEnd/Ruby.md",
+    "Development/BackEnd/Prisma ORM.md",
+    "Development/Real-time клиент-серверное взаимодействие.md",
+    "Development/Architecture.md",
+    "Development/NVim.md",
+    "Whats Learning/_lessons/Микросервисная архитектура.md",
+    "Whats Learning/О чём база~.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
+    "Development/TypeScript/_lessons/09 Служебные типы.md",
     "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
     "Development/Основы Linux/_lessons/Введение.md",
     "Development/Основы Linux/Основы Linux.md",
@@ -205,13 +212,6 @@
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/1 Введение.md",
-    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/5 Асинк редюссеры.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/Продвинутый FrontEnd - UlbiTV.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/4 Работа с данными.md",
-    "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
-    "Development/FrontEnd/MobX.md",
-    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231202204003.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231126204905.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231125201124.png",
