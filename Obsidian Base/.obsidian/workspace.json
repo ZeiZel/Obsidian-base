@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "054ffa0e21aa7703",
+        "id": "e4a7fefb6f5413bb",
         "type": "tabs",
         "children": [
           {
-            "id": "a878090a7564de72",
+            "id": "95fb9baf7785fb5a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Figma/Figma.md",
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Figma/Figma.md",
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Figma/Figma.md",
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Figma/Figma.md"
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md"
               }
             }
           },
@@ -184,10 +184,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "95fb9baf7785fb5a",
   "lastOpenFiles": [
-    "Figma/_lessons",
+    "Development/Основы Linux/_lessons/_png/Pasted image 20240613193158.png",
+    "Development/Основы Linux/Основы Linux.md",
+    "Development/Основы Linux/_lessons/Введение.md",
+    "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
     "Figma/Figma.md",
+    "Figma/_lessons",
     "Figma",
     "Development/Figma/Figma.md",
     "Development/Figma/_lesson/Глава 4. Сложные интерфейсы.md",
@@ -210,9 +214,6 @@
     "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/TypeScript/_lessons/09 Служебные типы.md",
     "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
-    "Development/Основы Linux/_lessons/Введение.md",
-    "Development/Основы Linux/Основы Linux.md",
-    "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "_assets/technical-support.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231202204003.png",
     "Development/FrontEnd/Продвинутый FrontEnd - UlbiTV/lessons/_png/Pasted image 20231126204905.png",
@@ -230,7 +231,6 @@
     "Development/Основы Linux",
     "Development/BackEnd/PHP/_png",
     "Development/BackEnd/PHP",
-    "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png",
-    "Development/MobileDev/_png"
+    "Development/FrontEnd/Владилен Минин - JavaScript. Стань Senior Frontend Разработчиком (2020)/_lesson/_png"
   ]
 }
