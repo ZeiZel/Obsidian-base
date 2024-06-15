@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "9f398908624aa3b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -93,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md"
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md"
               }
             }
           },
@@ -184,8 +197,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "95fb9baf7785fb5a",
+  "active": "9f398908624aa3b9",
   "lastOpenFiles": [
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
+    "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613204122.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613203730.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613203631.png",
@@ -196,7 +211,6 @@
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613200440.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613200201.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613200111.png",
-    "Development/Основы Linux/_lessons/_png/Pasted image 20240613195745.png",
     "Development/Основы Linux/Основы Linux.md",
     "Development/Основы Linux/_lessons/Введение.md",
     "Development/DevOps/Docker + Ansible - с нуля, деплой и управление Swarm/Docker+Ansible.md",
@@ -223,7 +237,6 @@
     "Whats Learning/О чём база~.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/TypeScript/_lessons/09 Служебные типы.md",
-    "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
