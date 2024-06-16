@@ -42,9 +42,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "298451c9b519ef23",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/MobileDev/React Native.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b4de2d316a14904d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/NX.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -73,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "react-na",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -98,7 +122,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -118,7 +143,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/MobileDev/React Native.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -135,7 +160,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/MobileDev/React Native.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -158,7 +183,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/MobileDev/React Native.md"
               }
             }
           },
@@ -209,11 +234,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5eafaa5eace5a777",
+  "active": "298451c9b519ef23",
   "lastOpenFiles": [
-    "Development/Основы Linux/_lessons/Работа с SHELL.md",
-    "Development/NVim.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
+    "Development/NX.md",
+    "Development/NVim.md",
+    "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613204122.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613203730.png",
@@ -248,7 +274,6 @@
     "Development/Architecture.md",
     "Whats Learning/_lessons/Микросервисная архитектура.md",
     "Whats Learning/О чём база~.md",
-    "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
