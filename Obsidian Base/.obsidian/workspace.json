@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/MobileDev/React Native.md",
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/MobileDev/React Native.md",
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/MobileDev/React Native.md"
+                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md"
               }
             }
           },
