@@ -4,71 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "e4a7fefb6f5413bb",
+        "id": "b17348b4a76e0fd8",
         "type": "tabs",
         "children": [
           {
-            "id": "95fb9baf7785fb5a",
+            "id": "837282ae828699ea",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5eafaa5eace5a777",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/NVim.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9f398908624aa3b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "298451c9b519ef23",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/MobileDev/React Native.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b4de2d316a14904d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/NX.md",
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -126,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.5
+    "width": 389.5,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -142,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md",
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Основы Linux/_lessons/Работа с SHELL.md"
+                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
               }
             }
           },
@@ -233,12 +185,16 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "837282ae828699ea",
   "lastOpenFiles": [
+    "Design/DaVinci Resolve/Davinci resolve.md",
+    "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
+    "Design/DaVinci Resolve/Модули/1 Введение.md",
+    "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
+    "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
     "Development/NX.md",
     "Development/NVim.md",
-    "Development/Основы Linux/_lessons/Работа с SHELL.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613204122.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613203730.png",
@@ -269,10 +225,6 @@
     "Development/BackEnd/Mongo DB.md",
     "Development/BackEnd/Ruby.md",
     "Development/BackEnd/Prisma ORM.md",
-    "Development/Real-time клиент-серверное взаимодействие.md",
-    "Development/Architecture.md",
-    "Whats Learning/_lessons/Микросервисная архитектура.md",
-    "Whats Learning/О чём база~.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
