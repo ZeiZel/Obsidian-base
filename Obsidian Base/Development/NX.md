@@ -51,16 +51,189 @@ npx nx g @nx/react:lib common-components
 npx nx g @nx/js:lib functions
 ```
 
-
-
-```bash
+И на данный момент мы имеем следующую структуру:
 
 ```
+|__ apps
+|    |__ admin
+|    |__ admin-e2e
+|    |__ backend
+|    |__ backend-e2e
+|    |__ customer
+|    |__ customer-e2e
+|__ libs
+|    |__ custom-components
+|    |__ functions
+```
 
+Так же мы можем отобразить граф взаимосвязей в проекте
 
+```
+npx nx graph
+```
+![](_png/Pasted%20image%2020240619205026.png)
 
+Далее мы можем воспользоваться встроенным генератором из nx и сделать react-компонент, который будет доступен сразу в обоих наших react-проектах 
 
+```bash
+npx nx g @nx/react:component header \
+--project=common-components --export
+```
 
+`libs/common-components/src/lib/header/header.tsx`
+```TSX
+import styles from './header.module.css';
 
+/* eslint-disable-next-line */
+export interface HeaderProps {
+  text: string;
+}
+
+export function Header(props: HeaderProps) {
+  return (
+    <header>{props.text}</header>
+  );
+}
+
+export default Header;
+```
+
+Сразу нужно сказать, что все пакеты, которые мы устанавливаем на несколько проектов используются во всех наших приложениях. Тут стоит аккуратнее выбирать зависимости, потому что они будут одинаковы для всех пакетов
+
+```
+npm install axios cors date-fns
+```
+
+Далее нам нужно немного сделать тестовое приложение, которое будет иметь взаимосвязи внутри монорепозитория
+
+`apps/admin/src/app/app.tsx`
+```TSX
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import styles from './app.module.css';
+
+import { Header } from '@myorg/common-components';
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
+
+export function App() {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/admin').then((response) => {
+      setMessage(response.data);
+    });
+  }, []);
+
+  return (
+    <div>
+      <Header text="Welcome to admin!" />
+      <p>{message}</p>
+    </div>
+  );
+}
+
+export default App;
+```
+`apps/customer/src/app/app.tsx`
+```TSX
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import styles from './app.module.css';
+
+import { Header } from '@myorg/common-components';
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
+
+export function App() {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/customer').then((response) => {
+      setMessage(response.data);
+    });
+  }, []);
+
+  return (
+    <div>
+      <Header text="Welcome to customer!" />
+      <p>{message}</p>
+    </div>
+  );
+}
+
+export default App;
+```
+
+`libs/functions/src/lib/functions.ts`
+```TS
+import { format } from 'date-fns';
+
+export function currentDate(): string {
+  return format(new Date(), 'yyyy-MM-dd');
+}
+```
+
+`apps/backend/src/main.ts`
+```TS
+import express from 'express';
+import { currentDate } from '@myorg/functions';
+import cors from 'cors';
+
+const host = process.env.HOST ?? 'localhost';
+const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+
+const app = express();
+app.use(cors({ origin: '*' }));
+
+app.get('/customer', (req, res) => {
+  res.send(`[ customer ] ${currentDate()}`);
+});
+
+app.get('/admin', (req, res) => {
+  res.send(`[ admin ] ${currentDate()}`);
+});
+
+app.listen(port, host, () => {
+  console.log(`[ ready ] http://${host}:${port}`);
+});
+```
+
+И теперь мы имеем следующие зависимости
+
+![](_png/Pasted%20image%2020240619210139.png)
+
+Далее в разных терминалах мы можем засёрвить наши приложения
+
+```
+npx nx serve backend
+npx nx serve admin
+npx nx serve customer
+```
+
+![](_png/Pasted%20image%2020240619210406.png)
+
+## Механизм отслеживания изменений
+
+С помощью гита выделяем изменения в проекте
+
+```bash
+git add .
+git commit -m "Initial commit"
+```
+
+Далее мы можем запустить проверку графом, какие элементы системы были подвержены изменениям
+
+```bash
+npx nx affected:graph
+```
+
+![](_png/Pasted%20image%2020240619210808.png)
+
+Данная команда позволяет произвести тестирование на те компоненты, которые были подвержены изменениям
+
+```bash
+npx nx affected -t test
+```
 
 
