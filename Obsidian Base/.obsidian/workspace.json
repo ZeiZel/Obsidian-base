@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "b17348b4a76e0fd8",
+        "id": "f54ac535cb069804",
         "type": "tabs",
         "children": [
           {
-            "id": "837282ae828699ea",
+            "id": "81cd5aa52203a50d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Development/NX.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.5,
-    "collapsed": true
+    "width": 389.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Development/NX.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -111,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
+                "file": "Development/NX.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
+                "file": "Development/NX.md"
               }
             }
           },
@@ -185,8 +184,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "837282ae828699ea",
+  "active": "81cd5aa52203a50d",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20240619195230.png",
+    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
     "Design/DaVinci Resolve/Модули/1 Введение.md",
@@ -223,8 +224,6 @@
     "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "SelfDevelopment/Карьерный чит/Карьерный чит.md",
     "Development/BackEnd/Mongo DB.md",
-    "Development/BackEnd/Ruby.md",
-    "Development/BackEnd/Prisma ORM.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
