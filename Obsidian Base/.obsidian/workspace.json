@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md"
+                "file": "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md"
               }
             }
           },
@@ -199,6 +199,10 @@
   },
   "active": "99d293140d85d276",
   "lastOpenFiles": [
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/_png/Pasted image 20240622174543.png",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
@@ -215,7 +219,6 @@
     "Design/DaVinci Resolve/Модули/1 Введение.md",
     "Design/DaVinci Resolve/Модули/9 Вкладка Fairlight. Работа со звуком.md",
     "Development/Основы Linux/_lessons/Работа с SHELL.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
     "Development/NVim.md",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613204122.png",
     "Development/Основы Linux/_lessons/_png/Pasted image 20240613203730.png",
@@ -234,9 +237,6 @@
     "Development/BackEnd/Golang.md",
     "Development/Посадка верстки и создание тем на CMS WordPress/CMS WordPress.md",
     "SelfDevelopment/Excalidraw.md",
-    "SelfDevelopment/Storytelling.md",
-    "SelfDevelopment/Как учиться учиться.md",
-    "SelfDevelopment/Курс HR-аналитика/HR-аналитика.md",
     "Development/GIT/_png",
     "Development/GIT",
     "Development/Основы Linux/_lessons/_png",
