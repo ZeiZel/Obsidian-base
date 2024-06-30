@@ -30,9 +30,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1ac68f7abbbd88d2",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.6.5"
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -205,7 +215,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "fd983803f68ac80e",
+  "active": "99d293140d85d276",
   "lastOpenFiles": [
     "Development/Linux/_lessons/_png/Pasted image 20240718181806.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181708.png",
