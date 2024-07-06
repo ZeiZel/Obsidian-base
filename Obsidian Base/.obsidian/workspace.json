@@ -90,7 +90,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.5
+    "width": 205.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -174,12 +174,20 @@
             "id": "ff21713a3aed5004",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "e1edc62e42d27165",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {}
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "horizontal",
@@ -199,6 +207,7 @@
   },
   "active": "99d293140d85d276",
   "lastOpenFiles": [
+    "Development/NX.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
@@ -211,7 +220,6 @@
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
-    "Development/NX.md",
     "Development/PNPM.md",
     "Development/_png/Pasted image 20240619210808.png",
     "Development/_png/Pasted image 20240619210406.png",
