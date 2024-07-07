@@ -1,4 +1,31 @@
 
+## Настройка терминала
+
+В качестве базы будет использоваться Alacrity
+
+Для него нам нужно будет создать конфиг:
+
+`~/.config/alacritty/alacritty.toml`
+```bash
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding.x = 20
+padding.y = 20
+
+decorations = "Buttonless" 
+opacity = 0.92
+blur = true
+
+[font]
+normal.family = "JetBrainsMono Nerd Font"
+size = 22.0
+```
+
+
+## NVIM
+
 >[!danger] NVim не воспринимает русскую раскладку и с ней вообще не работает!
 
 Использовать будем [AstroNVim](https://astronvim.com/)
