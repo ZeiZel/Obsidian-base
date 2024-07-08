@@ -25,6 +25,39 @@ normal.family = "JetBrainsMono Nerd Font"
 size = 22.0
 ```
 
+## Настройки VIM
+
+Первым делом, зададим строкам диагностики дополнительные иконки из наших иконок шрифтов. Позволить себе мы это можем, так как используем `nerd font` и вставляем нужные иконки под нужный тип сообщения.
+
+`lua > options.lua`
+```lua
+require "nvchad.options"
+
+-- основные знаки, которыми будут подсвечиваться сообщения
+local signs = { Error = " ", Warn = " ", Hint = "", Info = " " }
+-- логика использования иконок
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+```
+
+Дальше идёт конфиг маппингов, в котором можно задать под определённый режим определённую операцию. Первый блок - режим, второй - сочетание, третий - аналог. Дальше идёт описание команды, которое можно увидеть в окне подсказки (одиночное нажатие на клавишу действия и некоторое вреия удержания).
+
+`mappings.lua`
+```lua
+require "nvchad.mappings"
+
+-- add yours here
+
+local map = vim.keymap.set
+
+map("n", ";", ":", { desc = "CMD enter command mode" })
+map("i", "jk", "<ESC>")
+
+-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+```
+
 ## NVIM
 
 >[!danger] NVim не воспринимает русскую раскладку и с ней вообще не работает!
