@@ -77,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 312.5,
-    "collapsed": true
+    "width": 312.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -175,7 +174,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -195,6 +194,7 @@
   },
   "active": "81cd5aa52203a50d",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20240709212050.png",
     "Development/_png/Pasted image 20240709210928.png",
     "Development/_png/Pasted image 20240709203519.png",
     "Development/_png/Pasted image 20240709195914.png",
@@ -213,7 +213,6 @@
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
     "Development/PNPM.md",
     "Development/_png/Pasted image 20240619210808.png",
-    "Development/_png/Pasted image 20240619210406.png",
     "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Design/DaVinci Resolve/Модули/2 Вкладка Media. Импорт материала и организация проекта.md",
