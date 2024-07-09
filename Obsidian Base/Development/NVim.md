@@ -25,7 +25,9 @@ normal.family = "JetBrainsMono Nerd Font"
 size = 22.0
 ```
 
-## Настройки VIM
+## Настройки VIM (nvchad)
+
+Конфиг находится в `~./.config/nvim`
 
 Первым делом, зададим строкам диагностики дополнительные иконки из наших иконок шрифтов. Позволить себе мы это можем, так как используем `nerd font` и вставляем нужные иконки под нужный тип сообщения.
 
@@ -44,7 +46,7 @@ end
 
 Дальше идёт конфиг маппингов, в котором можно задать под определённый режим определённую операцию. Первый блок - режим, второй - сочетание, третий - аналог. Дальше идёт описание команды, которое можно увидеть в окне подсказки (одиночное нажатие на клавишу действия и некоторое вреия удержания).
 
-`mappings.lua`
+`lua > mappings.lua`
 ```lua
 require "nvchad.mappings"
 
@@ -58,11 +60,436 @@ map("i", "jk", "<ESC>")
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 ```
 
+Тут уже находится конфиг самого `nvchad`, котоырй достаточно просто настраивать
+
+`lua > chadrc.lua`
+```lua
+-- This file  needs to have same structure as nvconfig.lua
+-- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
+
+---@type ChadrcConfig
+local M = {}
+
+M.ui = {
+  theme = "github_dark",
+  transparency = true,
+  statusline = {
+    theme = "vscode_colored",
+  },
+  nvdash = {
+    load_on_startup = true,
+    header = {
+      "Welcome home, Varery",
+      "Thanks for nice <...>"
+    },
+  },
+
+  hl_override = {
+    Comment = { italic = true },
+    ["@comment"] = { italic = true },
+    DiffChange = {
+      bg = "#464414",
+      fg = "none",
+    },
+    DiffAdd = {
+      bg = "#103507",
+      fg = "none",
+    },
+    DiffRemoved = {
+      bg = "#461414",
+      fg = "none",
+    },
+  },
+}
+
+return M
+```
+
+Настройки форматтиеров чада
+
+`lua > configs > conform.lua`
+```lua
+local options = {
+  formatters_by_ft = {
+    lua = { "stylua" },
+    css = { "prettier" },
+    html = { "prettier" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    javascriptreact = { "prettier" },
+  },
+
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+}
+
+require("conform").setup(options)
+```
+
+Далее идёт конфиг для еслинта
+
+`lua > configs > lint.lua`
+```lua
+require("lint").linters_by_ft = {
+  javascript = { "eslint_d" },
+  typescript = { "eslint_d" },
+  typescriptreact = { "eslint_d" },
+  javascriptreact = { "eslint_d" },
+}
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+```
+
+И тут находится оверрайды для типов поддерживаемых наших файлов
+
+`lua > configs > overrides.lua`
+```lua
+local M = {}
+
+M.treesitter = {
+  ensure_installed = {
+    "vim",
+    "lua",
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "tsx",
+    "c",
+    "markdown",
+    "markdown_inline",
+    "prisma",
+    "go",
+  },
+  indent = {
+    enable = true,
+  },
+}
+
+M.mason = {
+  ensure_installed = {
+    "lua-language-server",
+    "css-lsp",
+    "html-lsp",
+    "typescript-language-server",
+    "deno",
+    "prettier",
+    "eslint_d",
+    "clangd",
+    "clang-format",
+    "node-debug2-adapter",
+    "gopls",
+    "gradle_ls",
+  },
+}
+
+-- git support in nvimtree
+M.nvimtree = {
+  git = {
+    enable = true,
+  },
+
+  renderer = {
+    highlight_git = true,
+    icons = {
+      show = {
+        git = true,
+      },
+    },
+  },
+}
+
+return M
+```
+
+Тут находится конфиг lsp серверов для нашей апы
+
+`lua > configs > lspconfig.lua`
+```lua
+local configs = require("nvchad.configs.lspconfig")
+
+local on_attach = configs.on_attach
+local on_init = configs.on_init
+local capabilities = configs.capabilities
+
+local lspconfig = require "lspconfig"
+
+-- if you just want default config for the servers then put them in a table
+local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "gradle_ls" }
+
+local function organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = { vim.api.nvim_buf_get_name(0) },
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = "Organize Imports",
+      },
+    },
+    settings = {
+      gopls = {
+        completeUnimported = true,
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+        }
+      }
+    }
+  }
+  lspconfig.prismals.setup {}
+end
+```
+
+Настройка и добавление плагинов устроена достаточно просто. 
+
+- Первым аргументом идёт `<имя автора>/<имя плагина>`
+- Дальше ивент, при котором срабатывает плагин
+- А в конце находится конфиг плагина. Сами конфиги лучше создавать в папке `configs`, чтобы не загромождать файл с плагинами   
+
+`lua > plugins > init.lua`
+```lua
+return {
+  {
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    config = function()
+      require "configs.conform"
+    end,
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+  },
+  {
+    "stevearc/dressing.nvim",
+    lazy = false,
+    opts = {},
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
+    end,
+  },
+  { "nvim-neotest/nvim-nio" },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
+        "html-lsp",
+        "css-lsp",
+        "prettier",
+        "eslint-lsp",
+        "gopls",
+        "js-debug-adapter",
+        "typescript-language-server",
+      },
+    },
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "typescript",
+        "javascript",
+        "go",
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = "VeryLazy",
+    config = function()
+      require "configs.lint"
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "configs.lspconfig"
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
+  -- {
+  --   "jackMort/ChatGPT.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("chatgpt").setup {}
+  --   end,
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  -- },
+  {
+    "nvim-neotest/neotest",
+    event = "VeryLazy",
+    config = function()
+      require("neotest").setup {
+        adapters = {
+          require "neotest-jest" {
+            jestCommand = "npm test --",
+            jestConfigFile = "jest.config.ts",
+            env = { CI = true },
+            cwd = function(path)
+              return vim.fn.getcwd()
+            end,
+          },
+        },
+      }
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "haydenmeade/neotest-jest",
+    },
+  },
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      local ok, dap = pcall(require, "dap")
+      if not ok then
+        return
+      end
+      dap.configurations.typescript = {
+        {
+          type = "node2",
+          name = "node attach",
+          request = "attach",
+          program = "${file}",
+          cwd = vim.fn.getcwd(),
+          sourceMaps = true,
+          protocol = "inspector",
+        },
+      }
+      dap.adapters.node2 = {
+        type = "executable",
+        command = "node-debug2-adapter",
+        args = {},
+      }
+    end,
+    dependencies = {
+      "mxsdev/nvim-dap-vscode-js",
+    },
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("dapui").setup()
+
+      local dap, dapui = require "dap", require "dapui"
+
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open {}
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close {}
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close {}
+      end
+    end,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+  },
+  {
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup {
+        library = { plugins = { "nvim-dap-ui" }, types = true },
+      }
+    end,
+  },
+  { "tpope/vim-fugitive" },
+  { "rbong/vim-flog", dependencies = {
+    "tpope/vim-fugitive",
+  }, lazy = false },
+  { "sindrets/diffview.nvim", lazy = false },
+  {
+    "ggandor/leap.nvim",
+    lazy = false,
+    config = function()
+      require("leap").add_default_mappings(true)
+    end,
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    lazy = false,
+  },
+  {
+    "folke/trouble.nvim",
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    config = function()
+      require("todo-comments").setup()
+    end,
+  }, -- To make a plugin not be loaded
+  {
+    "Exafunction/codeium.vim",
+    lazy = false,
+  },
+}
+```
+
+
+
 ## NVIM
 
 >[!danger] NVim не воспринимает русскую раскладку и с ней вообще не работает!
-
-Использовать будем [AstroNVim](https://astronvim.com/)
 
 В Vim существует 5 режимов:
 - normal - просмотр кода
@@ -204,6 +631,19 @@ map("i", "jk", "<ESC>")
 
 ## Интерфейсные команды 
 
+`lead + e` - откроет проводник и позволит сразу в него перейти
+
+![](_png/Pasted%20image%2020240709195914.png)
+
+`ctrl + h / l` - позволяет переключаться между окнами слева / справа
+
+![](_png/Pasted%20image%2020231028171211.png)
+
+`a` - позволит создать новый файл
+`r` - позволит переименовать файл
+
+![](_png/Pasted%20image%2020240709203519.png)
+
 `lead + ff` - откроет телескоп, который быстро найдёт нам все нужные файлы
 
 ![](_png/Pasted%20image%2020231028163855.png)
@@ -232,10 +672,6 @@ map("i", "jk", "<ESC>")
 `lead + /` - комментирование кода
 
 ![](_png/Pasted%20image%2020231028170927.png)
-
-`ctrl + h / l` - позволяет переключаться между окнами слева / справа
-
-![](_png/Pasted%20image%2020231028171211.png)
 
 `lead + f / w` - поиск по слову 
 
