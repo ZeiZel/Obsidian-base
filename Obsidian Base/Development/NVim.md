@@ -25,11 +25,14 @@ normal.family = "JetBrainsMono Nerd Font"
 size = 22.0
 ```
 
+Далее устанавливаем zsh на нашу систему, если не установлен и указываем в качестве дефолтного терминала
 
 ```bash
 sudo apt install zsh
 chsh -s $(which zsh)
 ```
+
+Далее нужно добавить данный конфиг для zsh
 
 `~/.zshrc`
 ```rc
@@ -175,7 +178,19 @@ function htt() {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 ```
 
+И склонировать репозитории с плагинами `git z docker fzf thefuck zsh-autosuggestions history` (строчка `plugins = (...)`) в папку `~/.oh-my-zsh/custom/plugins`
 
+```
+https://github.com/nvbn/thefuck?tab=readme-ov-file#installation
+https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#homebrew
+https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
+https://github.com/agkozak/zsh-z
+https://github.com/unixorn/fzf-zsh-plugin?tab=readme-ov-file#oh-my-zsh
+```
+
+````
+brew install eza
+````
 
 ## Настройки VIM (nvchad)
 
