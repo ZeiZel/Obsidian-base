@@ -183,9 +183,10 @@ function htt() {
 ```
 https://github.com/nvbn/thefuck?tab=readme-ov-file#installation
 https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#homebrew
-https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
 https://github.com/agkozak/zsh-z
 https://github.com/unixorn/fzf-zsh-plugin?tab=readme-ov-file#oh-my-zsh
+
+https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
 ```
 
 ````
@@ -843,6 +844,12 @@ end, { expr = true })
 ## Работа со словами
 
 `space + r + a` - переименовать слово глобально
+
+![](_png/Pasted%20image%2020240711200240.png)
+
+`c + w` - режим редактирования слова. В нём мы сразу переходим в режим редактирования и удаляем искомое нами слово. Если сделать просто `d + w`, то мы останемся в нормальном режиме
+
+Чтобы быстро скопировать слово, мы можем воспользоваться `v + i + w + y`. В этой последовательности добавилось  слово `i` (inside), которое позволяет выполнить операцию внутри слова.
 
 
 
