@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "ab623bb15dc4f022",
+        "id": "53e55be6106f6f7c",
         "type": "tabs",
         "children": [
           {
-            "id": "178e951305ac364c",
+            "id": "c6e5b4844901cd7b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/FrontEnd/MobX.md",
+                "file": "Development/NX.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 545.5
+    "width": 330.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/FrontEnd/MobX.md",
+                "file": "Development/NX.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/FrontEnd/MobX.md",
+                "file": "Development/NX.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/MobX.md"
+                "file": "Development/NX.md"
               }
             }
           },
@@ -192,8 +192,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "178e951305ac364c",
+  "active": "c6e5b4844901cd7b",
   "lastOpenFiles": [
+    "Development/FrontEnd/MobX.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/fa96da5460ba74bc30b3d64a4c661083.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/fa7437dbd4780cdb757258e230c7092d.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/f260c1f778729349e7167291f5e82d34.png",
@@ -204,7 +205,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/e4c9002745b7fda22339e6888a83590c.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/e0ae9cb3f885896d625efefc9950d13c.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/d83ef20fdd7bf3ca7d97803cf85b91c9.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/c9fd08d7e4837c5aca120fd0db487a06.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки/Ссылки.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/Bootstrap.md",
