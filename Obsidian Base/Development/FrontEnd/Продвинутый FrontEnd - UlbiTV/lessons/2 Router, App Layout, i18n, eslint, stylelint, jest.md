@@ -122,7 +122,7 @@ export const AppRouter = () => {
 
 Сам лоадер взят [отсюда](https://cssloaders.github.io/)
 
-![](_png/Pasted%20image%2020231111200744.png)
+![](_png/b908f7d0ea01b7eceda305f7f089e435.png)
 
 Экспортируем роутер
 
@@ -153,7 +153,7 @@ export const App = () => {
 
 React-Router определяет роут `*` как любое другое значение, что позволит нам определить страницу `NotFound`
 
-![](_png/Pasted%20image%2020231111195149.png)
+![](_png/310f87da81a3b63ad6e7f30daf267ce9.png)
 
 >[!info] Итоги
 > - Был реализован конфиг для роутов
@@ -310,11 +310,11 @@ export const App = () => {
 
 Добавляем инвертированные цвета в глобальные стили цветов
 
-![](_png/Pasted%20image%2020230620143436.png)
+![](_png/214931455f5c15f76eb5e797b0879f89.png)
 
 И навбар так же теперь меняет цвета на противоположные
 
-![](_png/Pasted%20image%2020230620143504.png)
+![](_png/f9e74451ad7a957b62b94b7bb85bfec8.png)
 
 ### 13 Svg loader. File loader. Button UI kit
 
@@ -511,7 +511,7 @@ export const App = () => {
 };
 ```
 
-![](_png/Pasted%20image%2020230622103421.png)
+![](_png/b6e606efe1916b1bb390e2bf9f782605.png)
 
 ### 14 Sidebar. Layout приложения Метка
 
@@ -643,7 +643,7 @@ export const AppRouter = () => {
 }
 ```
 
-![](_png/Pasted%20image%2020230716113955.png)
+![](_png/1d5583f115ff50b7315a717591be8dd1.png)
 
 ### 15 i18n Интернационализация. Define plugin. Плагин для переводов
 
@@ -788,7 +788,7 @@ const App = () => {
 
 И сейчас у нас меняется язык и работает перевод
 
-![](_png/Pasted%20image%2020231008151744.png)
+![](_png/0ce633011b4e6611e9f08592810244e4.png)
 
 Но при каждой смене языка, пользователь будет грузить абсолютно весь перевод, который у нас находится в файле `translation.json`. Чтобы избежать этой проблемы, нам нужно создать отдельный файл с переводами 
 
@@ -821,7 +821,7 @@ const AboutPage = () => {
 
 Так же благодаря плагину `i18n support` мы можем отслеживать отсутствующие ключи и добавлять перевод в интересующие нас файлы
 
-![](_png/Pasted%20image%2020231008160225.png)
+![](_png/4aa81a39e119b633251633c068e57aca.png)
 
 ### 16 Webpack hot module replacement
 
@@ -1110,7 +1110,7 @@ npm install --save-dev jest @types/jest @babel/preset-typescript jest-environmen
 jest --init
 ```
 
-![](_png/Pasted%20image%2020231111172530.png)
+![](_png/7236c64652c010824bbbfe286a8d23e2.png)
 
 Тут мы добавляем jest в eslint, чтобы линтер не ругался на не импортированные файлы  
 
@@ -1134,4 +1134,4 @@ module.exports = {
 
 Прогонка тестов
 
-![](_png/Pasted%20image%2020231111183607.png)
+![](_png/fa901412b303e6243c839c7201652c95.png)

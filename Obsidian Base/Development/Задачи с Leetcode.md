@@ -197,7 +197,7 @@ console.log(merge(data2));
 - если наоборот, то двигаем левый маркер правее
 
 ![](_png/a6375ac0e1c1e9983aa9167bb1e97658.png)
-![](_png/Pasted%20image%2020230417091212.png)
+![](_png/3c0704ffe9ff21a30f15232829b883b1.png)
 
 ```JS
 const height1 = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
@@ -248,5 +248,5 @@ console.log(trap(height1));
 console.log(trap(height2));
 ```
 
-![|400](_png/Pasted%20image%2020230417101445.png)
+![|400](_png/2a8de53f9756e94af6bffd54b6e3b795.png)
 

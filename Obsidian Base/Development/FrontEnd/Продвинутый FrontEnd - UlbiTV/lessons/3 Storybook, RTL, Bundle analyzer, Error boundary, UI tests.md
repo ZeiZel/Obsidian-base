@@ -140,7 +140,7 @@ export const ErrorButton = () => {
 };
 ```
 
-![](_png/Pasted%20image%2020231112102522.png)
+![](_png/936abb064cfd914bdc2356e7a31079cb.png)
 
 ## 23 Анализ размера банда. BundleAnalyzer
 
@@ -184,7 +184,7 @@ const plugins = [
 ];
 ```
 
-![](_png/Pasted%20image%2020231112121408.png)
+![](_png/cfe517bdca87f4dc04da1d211e8c2dd1.png)
 
 ## 24 React Testing Library. Тесты на компоненты метка
 
@@ -466,7 +466,7 @@ describe('Sidebar', () => {
 ```
 
 >[!note] Так же нужно упомянуть, чтобы тесты прогонялись внутри вебшторма, нужно так же настроить его раннер тестов
-> ![](_png/Pasted%20image%2020231112143914.png)
+> ![](_png/06acab7ea41d76bfbed88e036979e0e5.png)
 
 ## 25 Настраиваем Storybook. Декораторы. Стори кейсы на компоненты
 
@@ -885,7 +885,7 @@ jobs:
         if: always()
 ```
 
-![](_png/Pasted%20image%2020231125201124.png)
+![](_png/488c4d70a197cc45c74e66e43c4889e6.png)
 
 ## 28 UI Screenshot test report
 
@@ -948,4 +948,4 @@ const diffDir = joinPath(lokiDir, 'difference');
 "test:ui:report": "npm run test:ui:json && npm run test:ui:html",
 ```
 
-![](_png/Pasted%20image%2020231126204905.png)
+![](_png/82435c20922d05c038d32884bab1d372.png)

@@ -43,4 +43,4 @@ export default function App({ Component, pageProps }: AppProps) {
 
 И теперь у нас имеется прогрессбар
 
-![](_png/Pasted%20image%2020230701130240.png)
+![](_png/084accfa7c4d7bff2589d104ce283487.png)
