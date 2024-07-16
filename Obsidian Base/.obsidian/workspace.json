@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "fd983803f68ac80e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Linux/_lessons/Работа с SHELL.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -93,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NX.md",
+                "file": "Development/Linux/_lessons/Работа с SHELL.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -110,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NX.md",
+                "file": "Development/Linux/_lessons/Работа с SHELL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NX.md"
+                "file": "Development/Linux/_lessons/Работа с SHELL.md"
               }
             }
           },
@@ -192,19 +205,22 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "c6e5b4844901cd7b",
+  "active": "fd983803f68ac80e",
   "lastOpenFiles": [
+    "Development/Linux/_lessons/_png/Pasted image 20240716193556.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716193506.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716191317.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716191212.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716190945.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716190144.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716185648.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716185537.png",
+    "Development/Linux/Основы Linux.md",
+    "Development/NX.md",
     "Development/FrontEnd/MobX.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/fa96da5460ba74bc30b3d64a4c661083.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/fa7437dbd4780cdb757258e230c7092d.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/f260c1f778729349e7167291f5e82d34.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/eed000f29ab3c93b25ee0ff8805abaaf.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/ed5d1300202ca707b636a16033b2a122.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/ecbd664c202e098ee44f96e9c2d94f44.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/e5557ce72f5a759842447417f05f5552.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/e4c9002745b7fda22339e6888a83590c.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/e0ae9cb3f885896d625efefc9950d13c.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/d83ef20fdd7bf3ca7d97803cf85b91c9.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки/Ссылки.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/Bootstrap.md",
@@ -226,19 +242,16 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/PUG/Pug.md",
     "Development/FrontEnd/NextJS - основы.md",
     "Development/Linux/_lessons/Работа с SHELL.md",
-    "Development/Linux/Основы Linux.md",
     "Development/Linux/_lessons/Введение.md",
     "Development/Linux/_lessons/Особенности BASH.md",
     "Development/Linux/_lessons/Доступ и права.md",
     "Development/NVim.md",
-    "Development/NX.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
-    "Development/PNPM.md",
-    "Design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
+    "Development/PNPM.md"
   ]
 }
