@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Работа с SHELL.md",
+                "file": "Development/Linux/_lessons/Структура Linux.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Работа с SHELL.md",
+                "file": "Development/Linux/_lessons/Структура Linux.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Работа с SHELL.md",
+                "file": "Development/Linux/_lessons/Структура Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Работа с SHELL.md"
+                "file": "Development/Linux/_lessons/Структура Linux.md"
               }
             }
           },
@@ -207,20 +207,21 @@
   },
   "active": "fd983803f68ac80e",
   "lastOpenFiles": [
-    "Development/Linux/_lessons/_png/Pasted image 20240716193556.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716193506.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716191317.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716191212.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716190945.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716190144.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716185648.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240716185537.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716202412.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716202058.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716201550.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716201534.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716201408.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716201026.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716200702.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716200409.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716195919.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716195836.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240716195445.png",
     "Development/Linux/Основы Linux.md",
+    "Development/Linux/_lessons/Работа с SHELL.md",
     "Development/NX.md",
     "Development/FrontEnd/MobX.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/fa96da5460ba74bc30b3d64a4c661083.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/fa7437dbd4780cdb757258e230c7092d.png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png/f260c1f778729349e7167291f5e82d34.png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки/Ссылки.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/Bootstrap.md",
@@ -241,7 +242,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/PUG/Pug.md",
     "Development/FrontEnd/NextJS - основы.md",
-    "Development/Linux/_lessons/Работа с SHELL.md",
     "Development/Linux/_lessons/Введение.md",
     "Development/Linux/_lessons/Особенности BASH.md",
     "Development/Linux/_lessons/Доступ и права.md",
