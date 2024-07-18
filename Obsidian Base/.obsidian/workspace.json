@@ -30,19 +30,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "1ac68f7abbbd88d2",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.6.5"
-              }
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -215,22 +205,23 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "99d293140d85d276",
+  "active": "fd983803f68ac80e",
   "lastOpenFiles": [
+    "Development/Linux/_lessons/_png/Pasted image 20240718193518.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240718193411.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240718193318.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240718193055.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240718193041.png",
+    "Development/Linux/_lessons/Структура Linux.md",
+    "Development/Linux/_lessons/_png/Pasted image 20240718191230.png",
+    "Development/NX.md",
     "Development/Linux/_lessons/_png/Pasted image 20240718181806.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181708.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181628.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181542.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181519.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718181330.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718181057.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718180945.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718175409.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718175214.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718175025.png",
     "Development/Linux/Основы Linux.md",
     "Development/Linux/_lessons/Работа с SHELL.md",
-    "Development/NX.md",
     "Development/FrontEnd/MobX.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки/Ссылки.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png",
@@ -261,7 +252,6 @@
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md",
-    "Development/PNPM.md"
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md"
   ]
 }
