@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "e938d41144bdad33",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -106,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md",
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -123,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md",
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md"
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md"
               }
             }
           },
@@ -205,21 +217,26 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "fd983803f68ac80e",
+  "active": "e938d41144bdad33",
   "lastOpenFiles": [
+    "Development/DevOps/Kybernetes + Helm/_lessons/_png/Pasted image 20240720070535.png",
+    "Development/DevOps/Kybernetes + Helm/_lessons/_png",
+    "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons",
+    "Development/DevOps/Kybernetes + Helm",
+    "Development/Linux/_lessons/Структура Linux.md",
     "Development/Linux/_lessons/_png/Pasted image 20240718193518.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718193411.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718193318.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718193055.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718193041.png",
-    "Development/Linux/_lessons/Структура Linux.md",
     "Development/Linux/_lessons/_png/Pasted image 20240718191230.png",
     "Development/NX.md",
     "Development/Linux/_lessons/_png/Pasted image 20240718181806.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181708.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181628.png",
     "Development/Linux/_lessons/_png/Pasted image 20240718181542.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240718181519.png",
     "Development/Linux/Основы Linux.md",
     "Development/Linux/_lessons/Работа с SHELL.md",
     "Development/FrontEnd/MobX.md",
@@ -237,9 +254,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/PUG/Pug.md",
     "Development/FrontEnd/NextJS - основы.md",
@@ -250,8 +264,6 @@
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/3. Нотация описания архитектуры.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/2.Настройка окружения.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/1. Введение.md"
+    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/4. Переход к микросервисам.md"
   ]
 }
