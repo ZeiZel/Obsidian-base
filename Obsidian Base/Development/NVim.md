@@ -12,17 +12,24 @@
 [env]
 TERM = "xterm-256color"
 
-[window]
-padding.x = 20
-padding.y = 20
+[font]
+size = 13.0
 
-decorations = "Buttonless" 
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[window]
+decorations = "Buttonless"
 opacity = 0.92
 blur = true
 
-[font]
-normal.family = "JetBrainsMono Nerd Font"
-size = 22.0
+[window.padding]
+x = 0
+y = 0
+
+[selection]
+save_to_clipboard = true
 ```
 
 Далее устанавливаем zsh на нашу систему, если не установлен и указываем в качестве дефолтного терминала
