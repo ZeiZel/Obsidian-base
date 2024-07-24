@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -126,7 +126,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5
+    "width": 299.5,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -142,7 +143,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Сеть в Linux.md",
+                "file": "Development/NVim.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +160,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Сеть в Linux.md",
+                "file": "Development/NVim.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +183,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Сеть в Linux.md"
+                "file": "Development/NVim.md"
               }
             }
           },
@@ -249,8 +250,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "fd983803f68ac80e",
+  "active": "67a56db9f2179208",
   "lastOpenFiles": [
+    "Development/Linux/_lessons/Сеть в Linux.md",
     "Development/Linux/_lessons/_png/Pasted image 20240721174550.png",
     "Development/Linux/_lessons/_png/Pasted image 20240721173652.png",
     "Development/Linux/_lessons/_png/Pasted image 20240721173246.png",
@@ -263,7 +265,6 @@
     "Development/Linux/_lessons/_png/Pasted image 20240721163318.png",
     "Development/Linux/_lessons/_png/Pasted image 20240721163012.png",
     "Development/Linux/_lessons/_png/Pasted image 20240721162802.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240721162522.png",
     "Development/NX.md",
     "Development/NVim.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
