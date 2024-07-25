@@ -224,6 +224,13 @@ tmux
 
 ![](_png/Pasted%20image%2020240724202652.png)
 
+##### Команды tmux
+
+Удаление сессии
+
+`tmux kill-session -t <имя>` - удаление сессии
+`tmux kill-server` - удаление сервера tmux
+
 ## Настройки VIM (nvchad)
 
 Конфиг находится в `~./.config/nvim`

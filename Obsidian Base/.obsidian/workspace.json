@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Сеть в Linux.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "mode": "source",
                 "source": false
               }
@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -126,8 +126,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5,
-    "collapsed": true
+    "width": 299.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -143,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -160,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -183,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/Linux/_lessons/Хранение.md"
               }
             }
           },
@@ -250,8 +249,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "67a56db9f2179208",
+  "active": "fd983803f68ac80e",
   "lastOpenFiles": [
+    "Development/Linux/_lessons/_png/Pasted image 20240725191527.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725191348.png",
+    "Development/Linux/_lessons/Управление пакетами.md",
+    "Development/Linux/_lessons/Сеть в Linux.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+    "Development/NVim.md",
     "Development/_png/Pasted image 20240724205201.png",
     "Development/_png/Pasted image 20240724205149.png",
     "Development/_png/Pasted image 20240724204855.png",
@@ -261,14 +266,8 @@
     "Development/_png/Pasted image 20240724203233.png",
     "Development/_png/Pasted image 20240724202854.png",
     "Development/_png/Pasted image 20240724202652.png",
-    "Development/Linux/_lessons/Сеть в Linux.md",
-    "Development/Linux/_lessons/_png/Pasted image 20240721174550.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240721173652.png",
     "Development/Linux/Основы Linux.md",
-    "Development/Linux/_lessons/Управление пакетами.md",
     "Development/NX.md",
-    "Development/NVim.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/Linux/_lessons/Структура Linux.md",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
