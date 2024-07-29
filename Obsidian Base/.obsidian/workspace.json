@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Управление пакетами.md",
+                "file": "Development/Linux/_lessons/Структура Linux.md",
                 "mode": "source",
                 "source": false
               }
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Управление пакетами.md",
+                "file": "Development/Linux/_lessons/Структура Linux.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Управление пакетами.md",
+                "file": "Development/Linux/_lessons/Структура Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Управление пакетами.md"
+                "file": "Development/Linux/_lessons/Структура Linux.md"
               }
             }
           },
@@ -231,6 +231,8 @@
   },
   "active": "fd983803f68ac80e",
   "lastOpenFiles": [
+    "Development/Linux/_lessons/Управление пакетами.md",
+    "Development/Linux/_lessons/Хранение.md",
     "Development/Linux/Основы Linux.md",
     "Development/Linux/_lessons/Структура Linux.md",
     "Development/Linux/_lessons/_png/Pasted image 20240720173001.png",
@@ -274,7 +276,6 @@
     "Development/Linux/_lessons/Введение.md",
     "Development/Linux/_lessons/Особенности BASH.md",
     "Development/Linux/_lessons/Доступ и права.md",
-    "Development/NVim.md",
-    "Development/BackEnd/Антон Ларичев - Microservices - паттерны и практика построения микросервисов (2022)/_lessons/5. Монорепозитории.md"
+    "Development/NVim.md"
   ]
 }
