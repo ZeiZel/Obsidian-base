@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md"
+                "file": "Development/Linux/_lessons/Хранение.md"
               }
             }
           },
@@ -251,11 +251,13 @@
   },
   "active": "fd983803f68ac80e",
   "lastOpenFiles": [
-    "Development/Linux/_lessons/Особенности BASH.md",
+    "Development/Linux/Основы Linux.md",
     "Development/Linux/_lessons/Доступ и права.md",
+    "Development/Linux/_lessons/Особенности BASH.md",
+    "Development/Linux/_lessons/Управление пакетами.md",
+    "Development/Linux/_lessons/Введение.md",
     "Development/Linux/_lessons/Службы.md",
     "Development/Linux/_lessons/Структура Linux.md",
-    "Development/Linux/_lessons/Управление пакетами.md",
     "Development/Linux/_lessons/Хранение.md",
     "Development/Linux/_lessons/_png/Pasted image 20240728203533.png",
     "Development/Linux/_lessons/_png/Pasted image 20240728203406.png",
@@ -270,7 +272,6 @@
     "Development/Linux/_lessons/Сеть в Linux.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/NVim.md",
-    "Development/Linux/Основы Linux.md",
     "Development/NX.md",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
@@ -295,7 +296,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/Основы HTML и CSS.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/PUG/Pug.md"
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Вёрстка Basic.md"
   ]
 }
