@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "mode": "source",
                 "source": false
               }
@@ -50,6 +50,18 @@
               "type": "markdown",
               "state": {
                 "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "67a56db9f2179208",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/NVim.md",
                 "mode": "source",
                 "source": false
               }
@@ -114,7 +126,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 330.5
+    "width": 299.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -130,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md",
+                "file": "Development/Linux/_lessons/Хранение.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Структура Linux.md"
+                "file": "Development/Linux/_lessons/Хранение.md"
               }
             }
           },
@@ -206,12 +218,20 @@
             "id": "e1edc62e42d27165",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "31cdd27cf633565f",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {}
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 8
       }
     ],
     "direction": "horizontal",
@@ -231,29 +251,31 @@
   },
   "active": "fd983803f68ac80e",
   "lastOpenFiles": [
+    "Development/Linux/_lessons/_png/Pasted image 20240725202824.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725202648.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725202118.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725201811.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725201504.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725201002.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725200808.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725200115.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725195735.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725195410.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240725194733.png",
     "Development/Linux/_lessons/Управление пакетами.md",
-    "Development/Linux/_lessons/Хранение.md",
+    "Development/Linux/_lessons/Сеть в Linux.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+    "Development/NVim.md",
     "Development/Linux/Основы Linux.md",
+    "Development/NX.md",
     "Development/Linux/_lessons/Структура Linux.md",
-    "Development/Linux/_lessons/_png/Pasted image 20240720173001.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720172523.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720172321.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720172106.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720143734.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720143709.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720143643.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720143453.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720143211.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240720143052.png",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Docker + Ansible/_lessons/01 Введение.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
-    "Development/NX.md",
     "Development/Linux/_lessons/Работа с SHELL.md",
     "Development/FrontEnd/MobX.md",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки/Ссылки.md",
@@ -274,8 +296,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/PUG/Pug.md",
     "Development/FrontEnd/NextJS - основы.md",
     "Development/Linux/_lessons/Введение.md",
-    "Development/Linux/_lessons/Особенности BASH.md",
-    "Development/Linux/_lessons/Доступ и права.md",
-    "Development/NVim.md"
+    "Development/Linux/_lessons/Особенности BASH.md"
   ]
 }

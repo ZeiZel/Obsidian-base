@@ -12,17 +12,24 @@
 [env]
 TERM = "xterm-256color"
 
-[window]
-padding.x = 20
-padding.y = 20
+[font]
+size = 13.0
 
-decorations = "Buttonless" 
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[window]
+decorations = "Buttonless"
 opacity = 0.92
 blur = true
 
-[font]
-normal.family = "JetBrainsMono Nerd Font"
-size = 22.0
+[window.padding]
+x = 0
+y = 0
+
+[selection]
+save_to_clipboard = true
 ```
 
 Далее устанавливаем zsh на нашу систему, если не установлен и указываем в качестве дефолтного терминала
@@ -35,10 +42,7 @@ chsh -s $(which zsh)
 Далее нужно добавить данный конфиг для zsh
 
 `~/.zshrc`
-```rc
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+```bash
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -49,105 +53,13 @@ export ZSH="$HOME/.oh-my-zsh"
 export KUBECONFIG=/Users/alaricode/.kube/purple-cluster_kubeconfig.yaml
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git z docker fzf thefuck zsh-autosuggestions history)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# The next line updates PATH for client-keystone-auth.
 if [ -f '/Users/alaricode/vk-cloud-solutions/path.bash.inc' ]; then source '/Users/alaricode/vk-cloud-solutions/path.bash.inc'; fi
 
 # bun completions
@@ -192,6 +104,132 @@ https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
 ````
 brew install eza
 ````
+
+## TMUX
+
+Условно за `leader` в tmux отвечает сочетание `ctrl + b`. В конфиге сочетание изменится на `ctrl+a`.
+
+Первым дело нужно установить сам плагин
+
+```bash
+brew isntall tmux
+```
+
+Далее нужно будет скопировать пакетный менеджер tmux
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Потом нужно удалить все сессии tmux
+
+```bash
+tmux
+tmux kill-server
+```
+
+Далее нужно будет скопировать конфиг
+
+`~/.tmux.conf`
+```bash
+set -g default-terminal "screen-256color"
+
+# Основной префикс
+set -g prefix C-a
+
+# Сортировка по имени
+bind s choose-tree -sZ -O name
+
+# Изменение индексов
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Переназначение клавиш
+unbind %
+bind | split-window -h # | разделит вертикально
+
+unbind '"'
+bind - split-window -v # - разделит горизонтально
+
+unbind r
+bind r source-file ~/.tmux.conf
+
+bind -r j resize-pane -D 5
+bind -r k resize-pane -U 5
+bind -r l resize-pane -R 5
+bind -r h resize-pane -L 5
+
+bind -r m resize-pane -Z
+
+set -g mouse on
+
+set-window-option -g mode-keys vi
+
+bind-key -T copy-mode-vi 'v' send -X begin-selection 
+bind-key -T copy-mode-vi 'y' send -X copy-selection 
+
+unbind -T copy-mode-vi MouseDragEnd1Pane
+# Плагины
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+## бесшовное переключение между окнами вима и tmux
+set -g @plugin 'christoomey/vim-tmux-navigator'
+## настройка красивой сессии
+set -g @plugin 'jimeh/tmux-themepack'
+# следующие 3 плагина сохраняют сессии даже после перезагрузки ПК
+set -g @plugin 'tmux-plugins/tmux-resurrect' 
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-sessionist'
+
+set -g @themepack 'powerline/default/purple'
+
+set -g @resurrect-capture-pane-contents 'on'
+set -g @continuum-restore 'on'
+
+# Старт менеджера плагинов
+run '~/.tmux/plugins/tpm/tpm'
+```
+
+Для установки всех плагинов нужно использовать: `tmux` и потом `leader + shift + i`.
+
+Переход в tmux осуществляется следующей одноимённой командой
+
+```bash
+tmux
+```
+
+`leader + s` - открывает окно с сессиями терминалов. В нижнем окне можно кратко просмотреть сессию.
+
+Одинним из способов создать новую сессию может стать ввод в этом окне команды `new -s <имя>`
+
+![](_png/Pasted%20image%2020240724202854.png)
+
+`leader + shift + c` - создание новой сессии
+`leader + shift ) или (` - переключение между сессиями
+`leader + g` - позволяет включить поиск нужной сессии. Нужно, чтобы долго не искать нужную
+`leader + shift + ,` - переименование вкладки
+
+![](_png/Pasted%20image%2020240724204855.png)
+
+`leader + c` - создать новую вкладку
+`leader + 0...9` - перейти в нужную вкладку
+
+![](_png/Pasted%20image%2020240724204528.png)
+
+Так же кроме ==сессий== и ==вкладок== мы можем делать ==сплиты== с помощью `leader + | и -` (кастомные сочетания)
+
+![](_png/Pasted%20image%2020240724205201.png)
+
+`leader + ctrl + s` - сохранение текущего окружения
+
+![](_png/Pasted%20image%2020240724202652.png)
+
+##### Команды tmux
+
+Удаление сессии
+
+`tmux kill-session -t <имя>` - удаление сессии
+`tmux kill-server` - удаление сервера tmux
 
 ## Настройки VIM (nvchad)
 
