@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md",
+                "file": "Development/Linux/_lessons/Особенности BASH.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md",
+                "file": "Development/Linux/_lessons/Особенности BASH.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md",
+                "file": "Development/Linux/_lessons/Особенности BASH.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/_lessons/Доступ и права.md"
+                "file": "Development/Linux/_lessons/Особенности BASH.md"
               }
             }
           },
@@ -251,6 +251,8 @@
   },
   "active": "fd983803f68ac80e",
   "lastOpenFiles": [
+    "Development/Linux/Основы Linux.md",
+    "Development/Linux/_lessons/Доступ и права.md",
     "Development/Linux/_lessons/_png/Pasted image 20240803175517.png",
     "Development/Linux/_lessons/_png/Pasted image 20240803174642.png",
     "Development/Linux/_lessons/_png/Pasted image 20240803174446.png",
@@ -261,9 +263,6 @@
     "Development/Linux/_lessons/_png/Pasted image 20240803171539.png",
     "Development/Linux/_lessons/_png/Pasted image 20240803171355.png",
     "Development/Linux/_lessons/_png/Pasted image 20240803170306.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240803162116.png",
-    "Development/Linux/Основы Linux.md",
-    "Development/Linux/_lessons/Доступ и права.md",
     "Development/Linux/_lessons/Управление пакетами.md",
     "Development/Linux/_lessons/Хранение.md",
     "Development/Linux/_lessons/Особенности BASH.md",
