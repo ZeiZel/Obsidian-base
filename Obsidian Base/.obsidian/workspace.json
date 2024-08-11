@@ -126,7 +126,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5
+    "width": 299.5,
+    "collapsed": true
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -251,17 +252,17 @@
   },
   "active": "fd983803f68ac80e",
   "lastOpenFiles": [
-    "Development/Linux/_lessons/_png/Pasted image 20240810144806.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810144420.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810144408.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810144052.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810143853.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810143819.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810142547.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810133131.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810132654.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810132645.png",
-    "Development/Linux/_lessons/_png/Pasted image 20240810132111.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811164239.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811163857.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811163239.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811163021.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811162655.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811161947.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811161413.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811160816.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811160352.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811155950.png",
+    "Development/Linux/_lessons/_png/Pasted image 20240811155705.png",
     "Development/Linux/_lessons/Структура Linux.md",
     "Development/Linux/_lessons/Службы.md",
     "Development/Linux/_lessons/Сеть в Linux.md",
