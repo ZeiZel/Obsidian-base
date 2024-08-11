@@ -1,5 +1,5 @@
 
->[!info] Всю актуальную информацию по установке докера всегда можно найти в [официальной документации](https://docs.docker.com/engine/install/)
+>[!info] Всю актуальную информацию по установке докера всегда можно найти в [официальной документации](https://docs.docker.com/engine/install/) а так же шагах [после установки](https://docs.docker.com/engine/install/linux-postinstall/)
 
 ## Настройка Docker
 
