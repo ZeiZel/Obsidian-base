@@ -56,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md"
               }
             }
           },
@@ -237,8 +237,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "67a56db9f2179208",
+  "active": "8289cfaf2301fc4c",
   "lastOpenFiles": [
+    "Development/NVim.md",
     "Development/_png/Pasted image 20240817200033.png",
     "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817192509.png",
@@ -247,13 +248,11 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817190824.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817190707.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817185221.png",
-    "Development/NVim.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817153200.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817151253.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817145333.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817143736.png",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Docker + Ansible/_lessons/03 Базовые понятия Docker.md",
