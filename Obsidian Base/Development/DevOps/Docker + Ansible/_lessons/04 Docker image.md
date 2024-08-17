@@ -266,11 +266,6 @@ CMD ["node", "./dist/apps/api/main.js"]
 
 ![](_png/Pasted%20image%2020240817201804.png)
 
-
-
-
-
-
 ## 006 Анализируем image
 
 
