@@ -255,12 +255,17 @@ docker run -d --name api test:latest
 ```bash
 FROM node:14-alpine3.10
 WORKDIR /opt/app
-ADD *.json .
+ADD *.json ./
 RUN npm i
 ADD . .
 RUN npm run build api
 CMD ["node", "./dist/apps/api/main.js"]
 ```
+
+И теперь наше изображение стало весть в два раза меньше при тех же вводных, а так же у нас закэшировались все шаги до билда, что позволит пропустить этап с установкой зависимостей при каждой новой сборке приложения.
+
+![](_png/Pasted%20image%2020240817201804.png)
+
 
 
 
