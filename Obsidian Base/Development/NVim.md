@@ -105,6 +105,12 @@ https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
 brew install eza
 ````
 
+## ZSH
+
+`ctrl+r` - включает поиск по командам
+
+![](_png/Pasted%20image%2020240817200033.png)
+
 ## TMUX
 
 Условно за `leader` в tmux отвечает сочетание `ctrl + b`. В конфиге сочетание изменится на `ctrl+a`.
