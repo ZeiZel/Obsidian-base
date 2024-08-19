@@ -319,23 +319,62 @@ CMD ["node", "./dist/main.js"]
 
 ## 008 Упражнение - Сборка go проекта
 
+Сейчас завернём приложение на Go, которое просто выводит сообщение о своём запуске на определённом порту
 
+`go.mod`
+```go
+module docker-demo-2
 
+go 1.15
+```
+`main.go`
+```go
+package main
 
+import (
+	"fmt"
+	"net/http"
+)
+func main() {
+	fmt.Print("Go проект запущенный в Docker слушает на 9000 порту")
+		handler := HttpHandler{}
+		http.ListenAndServe(":9000", handler)
+}
 
+type HttpHandler struct{}
+func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	data := []byte("Hello World!")
+	res.Write(data)
+}
+```
 
+Для начала просто соберём приложение
 
+```bash
+brew install go
+go build
+./docker-demo-2
+```
 
+![](_png/Pasted%20image%2020240819193321.png)
 
+Далее нужно будет его перенести в докер, там собрать и запустить. Для этого воспользуемся `golang:alpine` системой для поднятия образа и уже внутри неё соберём бинарник. Сам по себе бинарник мы собираем под определённую систему, поэтому ничего страшного не будет, если следующий билд мы соберём из `scratch` и в нём просто запустим наш бинарник
 
+```Dockerfile
+FROM golang:alpine as build
+WORKDIR /go/bin
+ADD . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
 
+FROM scratch
+COPY --from=build ./go/bin/docker-demo-2 ./go/bin/docker-demo-2
+ENTRYPOINT ["./go/bin/docker-demo-2"]
+EXPOSE 9000
+```
 
+Далее остаётся только сбилдить и запустить образ
 
-
-
-
-
-
-
-
-
+```bash
+docker build -t go-api:latest .
+docker run --name go-api-demo -d go-api
+```
