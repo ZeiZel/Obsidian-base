@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md"
+                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md"
               }
             }
           },
@@ -252,6 +252,20 @@
   "active": "7360392589b3d748",
   "lastOpenFiles": [
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/15. Заключение.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/14. Использование Charts.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/13. Управление репозиторием.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/12. Продвинутые шаблоны.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/11. Шаблоны.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/10. Знакомство с Helm.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/9. Эксплуатация.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/8. Секреты.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/7. Volumes.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/6. Работа с сетью.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/5. Работа с объектами.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/4. Первый pod.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png/Pasted image 20240821203021.png",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
@@ -273,19 +287,6 @@
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Docker + Ansible/_lessons/03 Базовые понятия Docker.md",
-    "Development/DevOps/Docker + Ansible/_lessons/13 Ansible - продвинутые темы.md",
-    "Development/DevOps/Docker + Ansible/_lessons/14 Deploy приложения на кластер.md",
-    "Development/DevOps/Docker + Ansible/_lessons/01 Введение.md",
-    "Development/NX.md",
-    "Development/Linux/_lessons/Сеть в Linux.md",
-    "Development/Linux/_lessons/Структура Linux.md",
-    "Development/Linux/_lessons/Службы.md",
-    "Development/Linux/Основы Linux.md",
-    "Development/Linux/_lessons/Особенности BASH.md",
-    "Development/Linux/_lessons/Доступ и права.md",
-    "Development/Linux/_lessons/Управление пакетами.md",
-    "Development/Linux/_lessons/Хранение.md",
-    "Development/Linux/_lessons/Введение.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
