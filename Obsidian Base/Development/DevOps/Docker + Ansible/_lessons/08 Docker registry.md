@@ -1,1 +1,46 @@
-## 08 Docker registry
+
+
+
+## Работа docker-registry
+
+
+
+
+
+
+
+
+
+
+
+## GitHub registry
+
+
+
+
+
+
+
+
+
+
+
+## Поднимаем свой registry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
