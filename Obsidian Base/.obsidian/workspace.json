@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
+                "file": "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
                 "mode": "source",
                 "source": false
               }
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
+                "file": "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
+                "file": "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md"
+                "file": "Development/DevOps/Docker + Ansible/Docker+Ansible.md"
               }
             }
           },
@@ -239,6 +239,9 @@
   },
   "active": "8289cfaf2301fc4c",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
+    "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240819193349.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240819193321.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240819192118.png",
@@ -247,14 +250,11 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817201804.png",
     "Development/NVim.md",
     "Development/_png/Pasted image 20240817200033.png",
-    "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817192509.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817192419.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817191224.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817190824.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
-    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Docker + Ansible/_lessons/03 Базовые понятия Docker.md",
     "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
