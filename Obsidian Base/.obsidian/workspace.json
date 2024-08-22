@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
                 "mode": "source",
                 "source": false
               }
@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
+                "file": "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
                 "mode": "source",
                 "source": false
               }
@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
               }
             }
           },
@@ -249,8 +249,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "7360392589b3d748",
+  "active": "8289cfaf2301fc4c",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822083349.png",
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822083247.png",
+    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/15. Заключение.md",
@@ -268,7 +271,6 @@
     "Development/DevOps/Kybernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png/Pasted image 20240821203021.png",
-    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
@@ -283,10 +285,8 @@
     "Development/NVim.md",
     "Development/_png/Pasted image 20240817200033.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817192509.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240817192419.png",
     "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
-    "Development/DevOps/Docker + Ansible/_lessons/03 Базовые понятия Docker.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
