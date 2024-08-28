@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Базовые команды.md",
+                "file": "Development/GIT/_lessons/Начало работы с Git.md",
                 "mode": "source",
                 "source": false
               }
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Базовые команды.md",
+                "file": "Development/GIT/_lessons/Начало работы с Git.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Базовые команды.md",
+                "file": "Development/GIT/_lessons/Начало работы с Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Базовые команды.md"
+                "file": "Development/GIT/_lessons/Начало работы с Git.md"
               }
             }
           },
@@ -275,11 +275,14 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/GIT/_lessons/_png/Pasted image 20240828194508.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240828194456.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240828193704.png",
+    "Development/GIT/Git.md",
+    "Development/GIT/_lessons/Базовые команды.md",
     "Development/GIT/_lessons/_png/Pasted image 20240828160337.png",
     "Development/GIT/_lessons/_png/Pasted image 20240828160325.png",
     "Development/GIT/_lessons/_png/Pasted image 20240828160310.png",
-    "Development/GIT/Git.md",
-    "Development/GIT/_lessons/Базовые команды.md",
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
     "Development/GIT/_lessons/Введение.md",
@@ -299,9 +302,6 @@
     "Development/BackEnd/Prisma ORM.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092934.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092906.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092735.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092731.png",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
