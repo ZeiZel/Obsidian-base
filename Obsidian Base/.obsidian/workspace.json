@@ -73,8 +73,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim.md",
-                "mode": "preview",
+                "file": "Development/GIT/Git.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/GIT/Git.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim.md",
+                "file": "Development/GIT/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim.md"
+                "file": "Development/GIT/Git.md"
               }
             }
           },
@@ -263,6 +263,10 @@
   },
   "active": "67a56db9f2179208",
   "lastOpenFiles": [
+    "Development/GIT/_png/Pasted image 20240828151511.png",
+    "Development/GIT/_png/Pasted image 20240828151459.png",
+    "Development/GIT/_png/Pasted image 20240828151449.png",
+    "Development/NVim.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_png/Pasted image 20240828103634.png",
     "Whats Learning/_png",
@@ -276,8 +280,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092721.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092719.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822091934.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822091506.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822091246.png",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
@@ -298,7 +300,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
-    "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
