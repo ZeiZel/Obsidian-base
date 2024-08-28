@@ -32,6 +32,18 @@
             }
           },
           {
+            "id": "4bba4758f4cb3f61",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Whats Learning/О чём база~.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "7360392589b3d748",
             "type": "leaf",
             "state": {
@@ -68,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -142,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+                "file": "Whats Learning/О чём база~.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+                "file": "Whats Learning/О чём база~.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
+                "file": "Whats Learning/О чём база~.md"
               }
             }
           },
@@ -249,8 +261,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8289cfaf2301fc4c",
+  "active": "4bba4758f4cb3f61",
   "lastOpenFiles": [
+    "Whats Learning/_png/Pasted image 20240828103634.png",
+    "Whats Learning/_png",
+    "Whats Learning/_lessons/ORM-системы.md",
+    "Development/BackEnd/Prisma ORM.md",
+    "Whats Learning/О чём база~.md",
+    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092934.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092906.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822092735.png",
@@ -261,7 +279,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822091506.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822091246.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822083349.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20240822083247.png",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
@@ -281,12 +298,8 @@
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
-    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
     "Development/DevOps/Docker + Ansible/_lessons/04 Docker image.md",
-    "Development/NVim.md",
-    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/19 Подготовка к production.md",
-    "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
@@ -295,7 +308,6 @@
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/_png",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 3. Figma/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Статьи и ссылки"
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 1. Основы HTML и CSS/_png"
   ]
 }
