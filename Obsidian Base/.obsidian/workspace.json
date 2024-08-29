@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Начало работы с Git.md",
+                "file": "Development/GIT/_lessons/Ветки и изменения.md",
                 "mode": "source",
                 "source": false
               }
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Начало работы с Git.md",
+                "file": "Development/GIT/_lessons/Ветки и изменения.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Начало работы с Git.md",
+                "file": "Development/GIT/_lessons/Ветки и изменения.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Начало работы с Git.md"
+                "file": "Development/GIT/_lessons/Ветки и изменения.md"
               }
             }
           },
@@ -275,6 +275,7 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/GIT/_lessons/Начало работы с Git.md",
     "Development/GIT/_lessons/_png/Pasted image 20240829171404.png",
     "Development/GIT/_lessons/_png/Pasted image 20240829171301.png",
     "Development/GIT/_lessons/_png/Pasted image 20240829170219.png",
@@ -285,7 +286,6 @@
     "Development/GIT/_lessons/_png/Pasted image 20240829123203.png",
     "Development/GIT/_lessons/_png/Pasted image 20240828205237.png",
     "Development/GIT/_lessons/_png/Pasted image 20240828194508.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240828194456.png",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Базовые команды.md",
     "Development/GIT/_lessons/_png",
@@ -295,7 +295,6 @@
     "Development/GIT/_lessons/Продвинутая работа.md",
     "Development/GIT/_lessons/Удаление.md",
     "Development/GIT/_lessons/Ветки и изменения.md",
-    "Development/GIT/_lessons/Начало работы с Git.md",
     "Development/NVim.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_png",
