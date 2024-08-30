@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
+                "file": "Development/GIT/_lessons/Удаление.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
+                "file": "Development/GIT/_lessons/Удаление.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
+                "file": "Development/GIT/_lessons/Удаление.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Удалённый репозиторий.md"
+                "file": "Development/GIT/_lessons/Удаление.md"
               }
             }
           },
@@ -257,20 +257,20 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/GIT/Git.md",
+    "Development/GIT/_lessons/Ветки и изменения.md",
+    "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/GIT/_lessons/_png/Pasted image 20240830111547.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830111430.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830111354.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830110942.png",
-    "Development/GIT/Git.md",
     "Development/GIT/_lessons/Продвинутая работа.md",
-    "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/GIT/_lessons/Удаление.md",
     "Development/NVim.md",
-    "Development/GIT/_lessons/Ветки и изменения.md",
     "Development/GIT/_lessons/Начало работы с Git.md",
     "Development/GIT/_lessons/Базовые команды.md",
     "Development/GIT/_lessons/_png/Pasted image 20240830090940.png",
@@ -279,7 +279,6 @@
     "Development/GIT/_lessons/_png/Pasted image 20240830084846.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830084811.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830084427.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240830083642.png",
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
     "Development/GIT/_lessons/Введение.md",
