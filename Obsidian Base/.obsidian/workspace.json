@@ -97,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "ssh",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -122,8 +122,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -258,7 +257,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "bd3f8e6ff234b8c1",
+  "active": "aa4fe56689b0fc48",
   "lastOpenFiles": [
     "Development/GIT/_lessons/_png/Pasted image 20240830111547.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830111430.png",
