@@ -68,31 +68,19 @@
             }
           },
           {
-            "id": "67a56db9f2179208",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/GIT/Git.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "bd3f8e6ff234b8c1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Ветки и изменения.md",
+                "file": "Development/GIT/_lessons/Удаление.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -166,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Ветки и изменения.md",
+                "file": "Development/GIT/_lessons/Удаление.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Ветки и изменения.md",
+                "file": "Development/GIT/_lessons/Удаление.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Ветки и изменения.md"
+                "file": "Development/GIT/_lessons/Удаление.md"
               }
             }
           },
@@ -275,6 +263,13 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/NVim.md",
+    "Development/GIT/_lessons/Удаление.md",
+    "Development/GIT/_lessons/Ветки и изменения.md",
+    "Development/GIT/_lessons/Начало работы с Git.md",
+    "Development/GIT/_lessons/Базовые команды.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
+    "Development/GIT/Git.md",
     "Development/GIT/_lessons/_png/Pasted image 20240830090940.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830090914.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830085008.png",
@@ -285,18 +280,11 @@
     "Development/GIT/_lessons/_png/Pasted image 20240830083439.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830080713.png",
     "Development/GIT/_lessons/_png/Pasted image 20240829181845.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240829181015.png",
-    "Development/GIT/_lessons/Начало работы с Git.md",
-    "Development/GIT/Git.md",
-    "Development/GIT/_lessons/Базовые команды.md",
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
     "Development/GIT/_lessons/Введение.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/GIT/_lessons/Продвинутая работа.md",
-    "Development/GIT/_lessons/Удаление.md",
-    "Development/GIT/_lessons/Ветки и изменения.md",
-    "Development/NVim.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_png",
     "Whats Learning/_lessons/ORM-системы.md",
