@@ -7,5 +7,6 @@
   "useMarkdownLinks": true,
   "alwaysUpdateLinks": true,
   "spellcheck": true,
-  "showFrontmatter": true
+  "showFrontmatter": true,
+  "vimMode": true
 }
