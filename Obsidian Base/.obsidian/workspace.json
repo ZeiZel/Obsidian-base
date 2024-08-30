@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/Zustand.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/Zustand.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/Zustand.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md"
+                "file": "Development/Zustand.md"
               }
             }
           },
@@ -259,6 +259,9 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/_png/Pasted image 20240830195706.png",
+    "Development/GIT/_lessons/Удаление.md",
+    "Development/Zustand.md",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Ветки и изменения.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
@@ -269,7 +272,6 @@
     "Development/GIT/_lessons/Продвинутая работа.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
-    "Development/GIT/_lessons/Удаление.md",
     "Development/NVim.md",
     "Development/GIT/_lessons/Начало работы с Git.md",
     "Development/GIT/_lessons/Базовые команды.md",
@@ -296,7 +298,6 @@
     "Development/DevOps/Kybernetes + Helm/_lessons/11. Шаблоны.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/10. Знакомство с Helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/9. Эксплуатация.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/8. Секреты.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
