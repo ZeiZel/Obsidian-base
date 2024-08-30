@@ -97,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "ssh",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -122,7 +122,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -259,8 +260,13 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/GIT/_lessons/_png/Pasted image 20240830111547.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240830111430.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240830111354.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240830110942.png",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Продвинутая работа.md",
+    "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/GIT/_lessons/Удаление.md",
@@ -275,13 +281,9 @@
     "Development/GIT/_lessons/_png/Pasted image 20240830084811.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830084427.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830083642.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240830083439.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240830080713.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240829181845.png",
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
     "Development/GIT/_lessons/Введение.md",
-    "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_png",
     "Whats Learning/_lessons/ORM-системы.md",
@@ -297,7 +299,6 @@
     "Development/DevOps/Kybernetes + Helm/_lessons/10. Знакомство с Helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/9. Эксплуатация.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/8. Секреты.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/7. Volumes.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
