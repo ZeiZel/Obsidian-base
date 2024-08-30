@@ -56,31 +56,19 @@
             }
           },
           {
-            "id": "e938d41144bdad33",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "bd3f8e6ff234b8c1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md",
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -154,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md",
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md",
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md"
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md"
               }
             }
           },
@@ -272,12 +260,14 @@
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
     "Development/GIT/Git.md",
+    "Development/GIT/_lessons/Продвинутая работа.md",
+    "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
+    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/GIT/_lessons/Удаление.md",
     "Development/NVim.md",
     "Development/GIT/_lessons/Ветки и изменения.md",
     "Development/GIT/_lessons/Начало работы с Git.md",
     "Development/GIT/_lessons/Базовые команды.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/GIT/_lessons/_png/Pasted image 20240830090940.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830090914.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830085008.png",
@@ -292,14 +282,12 @@
     "Development/GIT/_lessons",
     "Development/GIT/_lessons/Введение.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
-    "Development/GIT/_lessons/Продвинутая работа.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_png",
     "Whats Learning/_lessons/ORM-системы.md",
     "Development/BackEnd/Prisma ORM.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
-    "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/15. Заключение.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/14. Использование Charts.md",
