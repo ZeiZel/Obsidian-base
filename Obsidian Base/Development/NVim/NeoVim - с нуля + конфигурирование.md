@@ -131,6 +131,8 @@ https://github.com/unixorn/fzf-zsh-plugin?tab=readme-ov-file#oh-my-zsh
 https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
 ```
 
+Далее устанавливаем [brew](https://brew.sh/)
+
 ````
 brew install eza
 ````
