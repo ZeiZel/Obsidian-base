@@ -8,36 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "c6e5b4844901cd7b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/NX.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "8289cfaf2301fc4c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4bba4758f4cb3f61",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Whats Learning/О чём база~.md",
+                "file": "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
                 "mode": "source",
                 "source": false
               }
@@ -73,14 +49,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -154,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md"
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
               }
             }
           },
@@ -251,12 +227,11 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 341.5,
-    "collapsed": true
+    "width": 341.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -269,11 +244,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "a058dce016cc6ba9",
+  "active": "2bea1110aa5cdb10",
   "lastOpenFiles": [
-    "Development/Zustand.md",
-    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+    "Development/NVim/_png/Pasted image 20240901115203.png",
+    "Development/NVim/_png/Pasted image 20240901115145.png",
+    "Development/NVim/_png",
     "Development/GIT/_lessons/Удаление.md",
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "Development/NVim",
+    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
+    "Whats Learning/О чём база~.md",
+    "Development/NX.md",
+    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+    "Development/Zustand.md",
     "Development/GIT/_lessons/_png/Pasted image 20240830202220.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830201835.png",
     "Development/GIT/_lessons/_png/Pasted image 20240830201609.png",
@@ -292,29 +275,22 @@
     "Development/NVim.md",
     "Development/GIT/_lessons/Начало работы с Git.md",
     "Development/GIT/_lessons/Базовые команды.md",
-    "Development/GIT/_lessons/_png/Pasted image 20240830090940.png",
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
     "Development/GIT/_lessons/Введение.md",
-    "Whats Learning/О чём база~.md",
     "Whats Learning/_png",
     "Whats Learning/_lessons/ORM-системы.md",
     "Development/BackEnd/Prisma ORM.md",
-    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/15. Заключение.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/14. Использование Charts.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/13. Управление репозиторием.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/12. Продвинутые шаблоны.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/11. Шаблоны.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/10. Знакомство с Helm.md",
-    "Development/DevOps/Kybernetes + Helm/_lessons/9. Эксплуатация.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons",
     "Development/DevOps/Kybernetes + Helm",
     "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 6. Библиотека bootstrap/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 4. Продвинутая верстка SASS  БЭМ  FlexBox/_png",
-    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 2. Погружение в HTML и CSS/_png"
+    "Development/FrontEnd/HTML+CSS__Git+NPM/Базовая вёрстка/Глава 5. Адаптивная верстка/_png"
   ]
 }
