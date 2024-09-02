@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/GIT/_lessons/Продвинутая работа.md",
                 "mode": "source",
                 "source": false
               }
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/GIT/_lessons/Продвинутая работа.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md",
+                "file": "Development/GIT/_lessons/Продвинутая работа.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Удаление.md"
+                "file": "Development/GIT/_lessons/Продвинутая работа.md"
               }
             }
           },
@@ -282,6 +282,10 @@
   },
   "active": "c9d77fe269af2906",
   "lastOpenFiles": [
+    "Development/GIT/Git.md",
+    "Development/GIT/_lessons/Удалённый репозиторий.md",
+    "Development/GIT/_lessons/Продвинутая работа.md",
+    "Development/GIT/_lessons/Удаление.md",
     "Development/GIT/_lessons/_png/Pasted image 20240902152741.png",
     "Development/GIT/_lessons/_png/Pasted image 20240902152001.png",
     "Development/GIT/_lessons/_png/Pasted image 20240902145331.png",
@@ -292,18 +296,15 @@
     "Development/GIT/_lessons/_png/Pasted image 20240902142037.png",
     "Development/GIT/_lessons/_png/Pasted image 20240902141932.png",
     "Development/GIT/_lessons/_png/Pasted image 20240902141920.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240902141917.png",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Задачи с собеседований на понимание основ.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/018 Практика, ч2. Применяем условия и циклы.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "Development/GIT/_lessons/Удаление.md",
     "Development/Zustand.md",
     "Development/Agile.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
-    "Development/GIT/Git.md",
     "Development/NVim.md",
     "Development/NVim/_png",
     "Development/NVim",
@@ -312,8 +313,6 @@
     "Development/NX.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/GIT/_lessons/Ветки и изменения.md",
-    "Development/GIT/_lessons/Удалённый репозиторий.md",
-    "Development/GIT/_lessons/Продвинутая работа.md",
     "Development/DevOps/Kybernetes + Helm/Kubernetes + helm.md",
     "Development/DevOps/Kybernetes + Helm/_lessons/Введение.md",
     "Development/GIT/_lessons/Начало работы с Git.md",
