@@ -267,7 +267,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 444.5
+    "width": 343.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -282,6 +282,7 @@
   },
   "active": "c9d77fe269af2906",
   "lastOpenFiles": [
+    "Development/GIT/_lessons/_png/Pasted image 20240903163639.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903163131.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903162629.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903161543.png",
@@ -292,7 +293,6 @@
     "Development/GIT/_lessons/_png/Pasted image 20240903155547.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903145027.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903145007.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240903144943.png",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Продвинутая работа.md",
     "Development/GIT/_lessons/Удаление.md",
