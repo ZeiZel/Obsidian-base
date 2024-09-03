@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md",
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
                 "mode": "source",
                 "source": false
               }
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md",
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md",
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/GIT/_lessons/Продвинутая работа.md"
+                "file": "Development/GIT/_lessons/Удалённый репозиторий.md"
               }
             }
           },
@@ -282,6 +282,11 @@
   },
   "active": "c9d77fe269af2906",
   "lastOpenFiles": [
+    "Development/GIT/_lessons/_png/Pasted image 20240903145027.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240903145007.png",
+    "Development/GIT/_lessons/_png/Pasted image 20240903144943.png",
+    "Development/GIT/Git.md",
+    "Development/GIT/_lessons/Продвинутая работа.md",
     "Development/GIT/_lessons/_png/Pasted image 20240903144814.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903144646.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903144231.png",
@@ -290,12 +295,7 @@
     "Development/GIT/_lessons/_png/Pasted image 20240903141152.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903141032.png",
     "Development/GIT/_lessons/_png/Pasted image 20240903140933.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240903140051.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240903140031.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240903140020.png",
     "Development/GIT/_lessons/Удаление.md",
-    "Development/GIT/_lessons/Продвинутая работа.md",
-    "Development/GIT/Git.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Задачи с собеседований на понимание основ.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
