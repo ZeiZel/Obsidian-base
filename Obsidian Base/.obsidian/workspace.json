@@ -56,24 +56,24 @@
             }
           },
           {
-            "id": "283698d4ccddd7e5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Agile.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "3aa2932528edd426",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Development/NVim.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "283698d4ccddd7e5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Agile.md",
                 "mode": "source",
                 "source": false
               }
@@ -270,18 +270,21 @@
   },
   "active": "a058dce016cc6ba9",
   "lastOpenFiles": [
+    "Development/NVim/_png/Pasted image 20240904191216.png",
+    "Development/NVim/_png/Pasted image 20240904191149.png",
+    "Development/NVim/_png/Pasted image 20240904191102.png",
+    "Development/NVim.md",
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "Development/NVim/_png/Pasted image 20240904190709.png",
+    "Development/NVim/_png/Pasted image 20240904190513.png",
+    "Development/NVim/_png/Pasted image 20240904190450.png",
+    "Development/NVim/_png/Pasted image 20240904190417.png",
     "Development/Agile.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/GIT/_lessons/_png/Pasted image 20240904093720.png",
     "Development/GIT/_lessons/_png/Pasted image 20240904093550.png",
     "Development/GIT/_lessons/_png/Pasted image 20240904093507.png",
     "Development/GIT/_lessons/_png/Pasted image 20240904092813.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240904092208.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240904092111.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240904090454.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240904090031.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240904090024.png",
-    "Development/GIT/_lessons/_png/Pasted image 20240903212852.png",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Продвинутая работа.md",
     "Development/GIT/_lessons/Удаление.md",
@@ -292,8 +295,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/Zustand.md",
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
-    "Development/NVim.md",
     "Development/NVim/_png",
     "Development/NVim",
     "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
