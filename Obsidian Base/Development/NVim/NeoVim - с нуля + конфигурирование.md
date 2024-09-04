@@ -139,16 +139,12 @@ brew install eza
 
 ### Установка NVim
 
-
-
 ```bash
 sudo [apt install | dnf install | pacman -S] neovim
 brew install neovim
 ```
 
-
 ### Создание первого файла
-
 
 
 
