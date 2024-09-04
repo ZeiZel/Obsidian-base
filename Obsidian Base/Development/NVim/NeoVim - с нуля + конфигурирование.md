@@ -141,6 +141,10 @@ brew install eza
 
 
 
+```bash
+sudo [apt install | dnf install | pacman -S] neovim
+brew install neovim
+```
 
 
 ### Создание первого файла
