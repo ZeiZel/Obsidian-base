@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+                "file": "Development/NVim/_lessons/Visual mode и макросы.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+                "file": "Development/NVim/_lessons/Visual mode и макросы.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+                "file": "Development/NVim/_lessons/Visual mode и макросы.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
+                "file": "Development/NVim/_lessons/Visual mode и макросы.md"
               }
             }
           },
@@ -270,20 +270,22 @@
   },
   "active": "a058dce016cc6ba9",
   "lastOpenFiles": [
-    "Development/NVim/_lessons/Настройка окружения.md",
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
-    "Development/NVim/_lessons/Конфигурация.md",
-    "Development/NVim/_lessons/Введение.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
-    "_png",
-    "Development/NVim/_lessons/_png",
-    "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Продвинутая работа.md",
+    "Development/NVim/_lessons/Преобразование текста.md",
     "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/Основы lua.md",
-    "Development/NVim/_lessons/Преобразование текста.md",
+    "Development/NVim/_lessons/Настройка окружения.md",
+    "Development/NVim/_lessons/Конфигурация.md",
+    "Development/NVim/_lessons/Введение.md",
     "Development/NVim/_lessons/Базовые motion.md",
+    "Development/NVim/_lessons/Visual mode и макросы.md",
+    "Development/NVim/_lessons/_png/Pasted image 20240918200710.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240918200418.png",
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "_png",
+    "Development/NVim/_lessons/_png",
     "Development/NVim/_lessons",
     "Development/NVim/_png/Pasted image 20240915182231.png",
     "Development/NVim/_png/Pasted image 20240915173427.png",
@@ -293,8 +295,6 @@
     "Development/NVim/_png/Pasted image 20240915165338.png",
     "Development/NVim/_png/Pasted image 20240915165327.png",
     "Development/NVim/_png/Pasted image 20240915162708.png",
-    "Development/NVim/_png/Pasted image 20240915162206.png",
-    "Development/NVim/_png/Pasted image 20240915161159.png",
     "Development/NVim.md",
     "Development/Agile.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",

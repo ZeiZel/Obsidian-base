@@ -1,4 +1,3 @@
-## Плагины UI
 
 ### Neotree
 ### Bufferline
