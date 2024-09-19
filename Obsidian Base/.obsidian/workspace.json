@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Visual mode и макросы.md",
+                "file": "Development/NVim/_lessons/Конфигурация.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Visual mode и макросы.md",
+                "file": "Development/NVim/_lessons/Конфигурация.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Visual mode и макросы.md",
+                "file": "Development/NVim/_lessons/Конфигурация.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Visual mode и макросы.md"
+                "file": "Development/NVim/_lessons/Конфигурация.md"
               }
             }
           },
@@ -270,6 +270,9 @@
   },
   "active": "a058dce016cc6ba9",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/_png/Pasted image 20240919210700.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240919210001.png",
+    "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/_png/Pasted image 20240919204630.png",
     "Development/NVim/_lessons/_png/Pasted image 20240919202544.png",
     "Development/NVim/_lessons/_png/Pasted image 20240919202150.png",
@@ -289,9 +292,6 @@
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/_lessons/Введение.md",
     "Development/NVim/_lessons/Базовые motion.md",
-    "Development/NVim/_lessons/Visual mode и макросы.md",
-    "Development/NVim/_lessons/_png/Pasted image 20240918200710.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240918200418.png",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "_png",
     "Development/NVim/_lessons/_png",
