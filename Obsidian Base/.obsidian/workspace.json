@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md"
+                "file": "Development/NVim/_lessons/Плагины для разработки.md"
               }
             }
           },
@@ -270,9 +270,9 @@
   },
   "active": "39fd618691246f4b",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240922094258.png",
     "Development/NVim/_lessons/Конфигурация.md",
-    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240922092833.png",
     "Development/NVim/_lessons/_png/Pasted image 20240922092242.png",
     "Development/Zustand.md",
@@ -285,7 +285,6 @@
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/_png/Pasted image 20240921160007.png",
     "Development/NVim/_lessons/_png/Pasted image 20240921155836.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240921154052.png",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
