@@ -225,7 +225,7 @@ return {
 brew install fzf
 ```
 
-Далее дефолтно устанавливаем телескоп и настраиваем ему локальные кейбиндинги
+Далее дефолтно устанавливаем телескоп и настраиваем ему локальные кейбиндинги, которые будут ссылаться не на определённую команду, а на функцию, которую провайдит пакет
 
 - `<leader>ff` - поиск по файлам в дереве проекта
 - `<leader>fw` - поиск по словам
@@ -247,26 +247,47 @@ return {
 }
 ```
 
+Для того, чтобы перемещаться по результатам поиска, можно через `jj` перейти в нормальный режим / через `Tab` выбирать результат поиска.
 
+Так же через `:Telescope`, мы можем выбирать, по какой группе будет вестись поиск
 
-
-
-
-
-### Доработка цветов
-
-
-
-
-
-
-
+![](_png/Pasted%20image%2020240922092242.png)
 
 ### Терминал
 
+Так же для полноценной работы с редактором нам понадобится терминал. Его мы добавим плагином [Toggleterm](https://github.com/akinsho/toggleterm.nvim)
 
+![](_png/Pasted%20image%2020240922094258.png)
 
+Нам нужно будет добавить небольшой и простенький конфиг для подгрузки плагина, где нам нужно будет задать сочетания для работы с терминалом:
 
+- `ctrl + \` - тугглит терминал
+- `jj` - так же переведёт в *normal mode*
 
+`lua / plugins / toggleterm.lua`
+```lua
+return {
+	{
+		'akinsho/toggleterm.nvim',
+		version = "*",
+		config = function()
+			require('toggleterm').setup({
+				open_mapping = [[<c-\>]],
+			})
+			function _G.set_terminal_keymaps()
+				local opts = { buffer = 0 }
+				vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+				vim.keymap.set('t', 'jj', [[<C-\><C-n>]], opts)
+				vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+				vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+				vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+				vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+				vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+			end
 
-
+			-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+			vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+		end
+	}
+}
+```
