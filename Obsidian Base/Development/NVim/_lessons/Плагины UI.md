@@ -215,10 +215,39 @@ return {
 
 ### Telescope
 
+Далее нам нужно организовать удобный поиск по проекту, чтобы мы смогли быстро найти интересующую нас строчку кода, буфер, тег, коммит и так далее. Для этого нам нужно будет установить [Telescope]()
+
+![](_png/Pasted%20image%2020240922091226.png)
+
+Для начала установим fuzzyfinder, который предоставляет поиск по словам в терминале
 
 ```bash
 brew install fzf
 ```
+
+Далее дефолтно устанавливаем телескоп и настраиваем ему локальные кейбиндинги
+
+- `<leader>ff` - поиск по файлам в дереве проекта
+- `<leader>fw` - поиск по словам
+- `<leader>fb` - поиск по открытым буферам
+
+`lua / plugins / lualine.lua`
+```lua
+return {
+    'nvim-telescope/telescope.nvim', 
+    tag = '0.1.8',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+	config = function()
+		require('telescope').setup({})
+		local builtin = require('telescope.builtin')
+		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+		vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
+		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+	end
+}
+```
+
+
 
 
 
