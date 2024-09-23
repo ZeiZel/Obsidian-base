@@ -56,18 +56,6 @@
             }
           },
           {
-            "id": "26c5262d82a2bdce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "3aa2932528edd426",
             "type": "leaf",
             "state": {
@@ -92,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -166,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -183,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md"
+                "file": "Development/NVim/_lessons/Плагины для разработки.md"
               }
             }
           },
@@ -280,13 +268,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "26c5262d82a2bdce",
+  "active": "39fd618691246f4b",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923203006.png",
     "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923202053.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923195701.png",
-    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923192513.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923192354.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923191822.png",
@@ -294,7 +282,6 @@
     "Development/NVim/_lessons/_png/Pasted image 20240923191127.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923191102.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923190929.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240923190749.png",
     "Development/NVim/_lessons/Базовые motion.md",
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/Zustand.md",
