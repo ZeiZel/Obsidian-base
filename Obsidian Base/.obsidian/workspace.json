@@ -56,6 +56,18 @@
             }
           },
           {
+            "id": "825791746435a37c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/NVim/_lessons/Базовые motion.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "3aa2932528edd426",
             "type": "leaf",
             "state": {
@@ -80,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -154,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/NVim/_lessons/Базовые motion.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/NVim/_lessons/Базовые motion.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md"
+                "file": "Development/NVim/_lessons/Базовые motion.md"
               }
             }
           },
@@ -268,11 +280,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "39fd618691246f4b",
+  "active": "825791746435a37c",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923183124.png",
     "Development/NVim/_lessons/Плагины UI.md",
-    "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923180624.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923180429.png",
@@ -284,7 +296,6 @@
     "Development/Zustand.md",
     "Development/NVim/_lessons/_png/Pasted image 20240922091226.png",
     "Development/NVim/_lessons/_png/Pasted image 20240922085916.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240922085853.png",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
