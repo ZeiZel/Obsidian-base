@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md"
+                "file": "Development/NVim/_lessons/Продвинутая работа.md"
               }
             }
           },
@@ -270,9 +270,13 @@
   },
   "active": "39fd618691246f4b",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/_png/Pasted image 20240924132302.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240924132227.png",
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "Development/NVim/_lessons/Продвинутая работа.md",
+    "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923203006.png",
-    "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923202053.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923195701.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923192513.png",
@@ -281,15 +285,12 @@
     "Development/NVim/_lessons/_png/Pasted image 20240923191711.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923191127.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923191102.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240923190929.png",
     "Development/NVim/_lessons/Базовые motion.md",
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/Zustand.md",
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
-    "Development/NVim/_lessons/Продвинутая работа.md",
     "Development/NVim/_lessons/Преобразование текста.md",
     "Development/NVim/_lessons/Настройка окружения.md",
     "Development/NVim/_lessons/Введение.md",
