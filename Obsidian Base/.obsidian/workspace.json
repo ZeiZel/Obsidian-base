@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Продвинутая работа.md",
+                "file": "Development/NVim/_lessons/Плагины UI.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Продвинутая работа.md",
+                "file": "Development/NVim/_lessons/Плагины UI.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Продвинутая работа.md",
+                "file": "Development/NVim/_lessons/Плагины UI.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Продвинутая работа.md"
+                "file": "Development/NVim/_lessons/Плагины UI.md"
               }
             }
           },
@@ -270,8 +270,10 @@
   },
   "active": "39fd618691246f4b",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
+    "Development/NVim/_lessons/_png/Pasted image 20240924184610.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240924184316.png",
     "Development/NVim/_lessons/Продвинутая работа.md",
+    "conflict-files-obsidian-git.md",
     "Development/NVim/_lessons/_png/Pasted image 20240924140133.png",
     "Development/NVim/_lessons/_png/Pasted image 20240924133752.png",
     "Development/NVim/_lessons/_png/Pasted image 20240924133644.png",
@@ -283,7 +285,6 @@
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240923203006.png",
     "Development/NVim/_lessons/_png/Pasted image 20240923202053.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240923195701.png",
     "Development/NVim/_lessons/Базовые motion.md",
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/Zustand.md",
@@ -308,7 +309,6 @@
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/018 Практика, ч2. Применяем условия и циклы.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/04 - JavaScript в работе.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/02 - Основы JavaScript.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "Development/NVim/_png",
     "Development/NVim",
     "Development/GIT/_lessons/_png",
