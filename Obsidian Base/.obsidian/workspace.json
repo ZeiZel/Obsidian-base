@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/Zustand.md",
                 "mode": "source",
                 "source": false
               }
@@ -126,7 +126,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 291.5
+    "width": 384.5
   },
   "right": {
     "id": "628c89310a05dc8a",
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/Zustand.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md",
+                "file": "Development/Zustand.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины UI.md"
+                "file": "Development/Zustand.md"
               }
             }
           },
@@ -258,11 +258,11 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
     "Development/Terminal.md",
     "Development/Zustand.md",
-    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240924184610.png",
     "Development/NVim/_lessons/_png/Pasted image 20240924184316.png",
     "Development/NVim/_lessons/Продвинутая работа.md",
