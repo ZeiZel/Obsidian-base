@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Удаление и копирование.md",
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
                 "mode": "source",
                 "source": false
               }
@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Terminal.md"
+                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
               }
             }
           },
@@ -256,9 +256,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "aa4fe56689b0fc48",
+  "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
     "Development/NVim/_lessons/Удаление и копирование.md",
+    "Development/Terminal.md",
     "Development/Zustand.md",
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/_png/Pasted image 20240924184610.png",
@@ -285,7 +286,6 @@
     "_png",
     "Development/NVim/_lessons/_png",
     "Development/NVim/_lessons",
-    "Development/Terminal.md",
     "Development/Agile.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/GIT/Git.md",
