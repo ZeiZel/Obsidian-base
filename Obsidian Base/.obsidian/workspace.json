@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+                "file": "Development/NVim/_lessons/Плагины UI.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+                "file": "Development/NVim/_lessons/Плагины UI.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+                "file": "Development/NVim/_lessons/Плагины UI.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
+                "file": "Development/NVim/_lessons/Плагины UI.md"
               }
             }
           },
@@ -258,6 +258,7 @@
   },
   "active": "bd3f8e6ff234b8c1",
   "lastOpenFiles": [
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
     "Development/Terminal.md",
     "Development/Zustand.md",
@@ -277,7 +278,6 @@
     "Development/NVim/_lessons/_png/Pasted image 20240923203006.png",
     "Development/NVim/_lessons/Базовые motion.md",
     "Development/NVim/_lessons/Конфигурация.md",
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Преобразование текста.md",
