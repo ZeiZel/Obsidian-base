@@ -1342,7 +1342,7 @@ export type CoffeeListActions = {
 };
 ```
 
-Далее нам нужно подключить наш хук `useCustomQuery` в инпуте поиска, который
+Далее нам нужно подключить наш хук `useCustomQuery` в инпуте поиска, который будет подтягивать данные через RQ
 
 `components / SearchInput.tsx`
 ```TSX
