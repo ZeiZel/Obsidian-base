@@ -1218,7 +1218,7 @@ export default App;
 
 TanStack Query - это мощная библиотека для контроля запросов на клиентской части приложения. Она принимает, инвалидирует и кэширует запросы.
 
-Добавляем клиент 
+Добавляем клиент ReactQuery и ReactQueryDevtools для диагностики отправляемых запросов в тулзе
 
 `main.tsx`
 ```TSX
@@ -1240,12 +1240,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <App />
       </QueryClientProvider>
     </BrowserRouter>
-    //{" "}
   </React.StrictMode>
 );
 ```
 
-
+Далее нам нужно реализовать хук, который обернёт в себя запрос из Zustand с помощью `useQuery` и вернёт нужные нам поля (сами данные + состояния запроса по типу `isLoading`, `isError`, `isSuccess`)
 
 `helpers / useCustomQuery.ts`
 ```TS
@@ -1264,7 +1263,86 @@ export const useCustomQuery = (params: CoffeeQueryParams) => {
 };
 ```
 
+Только для того, чтобы RQ смог вернуть и закэшировать наш запрос, нужно, чтобы функция возвращала данные, а не сохраняла их просто в стор. Тут мы переделали функцию `getCoffeeList`, чтобы она возвращала `data`
 
+`model / listSlice.ts`
+```TS
+import { StateCreator } from "zustand";
+import {
+  CoffeeCartActions,
+  CoffeeCartState,
+  CoffeeListActions,
+  CoffeeListState,
+} from "./storeTypes";
+import { CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
+import axios from "axios";
+import { BASE_URL } from "../api/CoreApi";
+
+export const listSlice: StateCreator<
+  CoffeeListActions & CoffeeListState & CoffeeCartActions & CoffeeCartState,
+  [["zustand/devtools", never], ["zustand/persist", unknown]],
+  [["zustand/devtools", never]],
+  CoffeeListActions & CoffeeListState
+> = (set, get) => ({
+  coffeeList: undefined,
+  controller: undefined,
+  params: { text: undefined, type: undefined },
+
+  setParams: (params) => {
+    set({ params: { ...get().params, ...params } });
+  },
+
+  getCoffeeList: async (params?: CoffeeQueryParams) => {
+    const { controller } = get();
+
+    if (controller) {
+      controller.abort();
+    }
+
+    const newController = new AbortController();
+    set({ controller: newController });
+    const { signal } = newController;
+    const { data } = await axios.get<CoffeeType[]>(BASE_URL, {
+      params,
+      signal,
+    });
+    set({ coffeeList: data });
+    return data;
+  },
+});
+```
+
+И поменяли тип возврата на `Promise` от типа кофе
+
+`model/storeTypes.ts`
+```TS
+import { CoffeItem, CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
+
+export type CoffeeCartState = {
+  cart?: CoffeItem[];
+  address?: string;
+};
+
+export type CoffeeCartActions = {
+  setAddress: (address: string) => void;
+  addToCart: (item: CoffeeType) => void;
+  orderCoffee: () => void;
+  clearCart: () => void;
+};
+
+export type CoffeeListState = {
+  coffeeList?: CoffeeType[];
+  controller?: AbortController;
+  params: CoffeeQueryParams;
+};
+
+export type CoffeeListActions = {
+  getCoffeeList: (params?: CoffeeQueryParams) => Promise<CoffeeType[]>;
+  setParams: (params?: CoffeeQueryParams) => void;
+};
+```
+
+Далее нам нужно подключить наш хук `useCustomQuery` в инпуте поиска, который
 
 `components / SearchInput.tsx`
 ```TSX
@@ -1335,82 +1413,7 @@ export const useUrlParamsStore = <T extends Record<string, string>>(
 
 
 
-`model / listSlice.ts`
-```TS
-import { StateCreator } from "zustand";
-import {
-  CoffeeCartActions,
-  CoffeeCartState,
-  CoffeeListActions,
-  CoffeeListState,
-} from "./storeTypes";
-import { CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
-import axios from "axios";
-import { BASE_URL } from "../api/CoreApi";
 
-export const listSlice: StateCreator<
-  CoffeeListActions & CoffeeListState & CoffeeCartActions & CoffeeCartState,
-  [["zustand/devtools", never], ["zustand/persist", unknown]],
-  [["zustand/devtools", never]],
-  CoffeeListActions & CoffeeListState
-> = (set, get) => ({
-  coffeeList: undefined,
-  controller: undefined,
-  params: { text: undefined, type: undefined },
-
-  setParams: (params) => {
-    set({ params: { ...get().params, ...params } });
-  },
-
-  getCoffeeList: async (params?: CoffeeQueryParams) => {
-    const { controller } = get();
-
-    if (controller) {
-      controller.abort();
-    }
-
-    const newController = new AbortController();
-    set({ controller: newController });
-    const { signal } = newController;
-    const { data } = await axios.get<CoffeeType[]>(BASE_URL, {
-      params,
-      signal,
-    });
-    set({ coffeeList: data });
-    return data;
-  },
-});
-```
-
-Теперь `getCoffeeList` возвращает `Promise` от типа кофе
-
-`model/storeTypes.ts`
-```TS
-import { CoffeItem, CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
-
-export type CoffeeCartState = {
-  cart?: CoffeItem[];
-  address?: string;
-};
-
-export type CoffeeCartActions = {
-  setAddress: (address: string) => void;
-  addToCart: (item: CoffeeType) => void;
-  orderCoffee: () => void;
-  clearCart: () => void;
-};
-
-export type CoffeeListState = {
-  coffeeList?: CoffeeType[];
-  controller?: AbortController;
-  params: CoffeeQueryParams;
-};
-
-export type CoffeeListActions = {
-  getCoffeeList: (params?: CoffeeQueryParams) => Promise<CoffeeType[]>;
-  setParams: (params?: CoffeeQueryParams) => void;
-};
-```
 
 ### Immer middleware
 
