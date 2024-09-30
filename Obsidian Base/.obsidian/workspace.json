@@ -68,6 +68,18 @@
             }
           },
           {
+            "id": "43e948ea600631a6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "283698d4ccddd7e5",
             "type": "leaf",
             "state": {
@@ -80,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -154,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -171,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Terminal.md"
+                "file": "Development/NVim/_lessons/Продвинутая работа.md"
               }
             }
           },
@@ -268,33 +280,35 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d554497896535628",
+  "active": "43e948ea600631a6",
   "lastOpenFiles": [
+    "Development/Terminal.md",
     "Development/NVim/_lessons/Продвинутая работа.md",
+    "Development/NVim/_lessons/_png/Pasted image 20240929155153.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929155030.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929154936.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929154811.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929154552.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929154502.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929154355.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929154049.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929153649.png",
+    "Development/NVim/_lessons/_png/Pasted image 20240929152701.png",
+    "Development/NVim/_lessons/Настройка окружения.md",
+    "Development/NVim/_lessons/Введение.md",
+    "Development/NVim/_lessons/Конфигурация.md",
+    "Development/Zustand.md",
+    "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/Zustand.md",
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
-    "Development/Terminal.md",
-    "Development/NVim/_lessons/_png/Pasted image 20240924184610.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240924184316.png",
     "conflict-files-obsidian-git.md",
-    "Development/NVim/_lessons/_png/Pasted image 20240924140133.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240924133752.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240924133644.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240924133219.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240924132302.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240924132227.png",
     "Development/NVim/_lessons/Плагины для разработки.md",
-    "Development/NVim/_lessons/_png/Pasted image 20240923203329.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240923203006.png",
     "Development/NVim/_lessons/Базовые motion.md",
-    "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Преобразование текста.md",
-    "Development/NVim/_lessons/Настройка окружения.md",
-    "Development/NVim/_lessons/Введение.md",
     "_png",
     "Development/NVim/_lessons/_png",
     "Development/NVim/_lessons",
@@ -313,7 +327,6 @@
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
     "Whats Learning/_png",
-    "Development/DevOps/Kybernetes + Helm/_lessons/_png",
     "Development/DevOps/Kybernetes + Helm/_lessons"
   ]
 }
