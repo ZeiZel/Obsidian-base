@@ -44,24 +44,24 @@
             }
           },
           {
-            "id": "3aa2932528edd426",
+            "id": "d554497896535628",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "43e948ea600631a6",
+            "id": "3aa2932528edd426",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Продвинутая работа.md",
+                "file": "Development/Terminal.md",
                 "mode": "source",
                 "source": false
               }
@@ -80,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -268,10 +268,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "43e948ea600631a6",
+  "active": "d554497896535628",
   "lastOpenFiles": [
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "Development/NVim/_lessons/Настройка окружения.md",
     "Development/Terminal.md",
-    "Development/NVim/_lessons/Продвинутая работа.md",
+    "conflict-files-obsidian-git.md",
     "Development/NVim/_lessons/_png/Pasted image 20240929155153.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929155030.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929154936.png",
@@ -282,19 +284,17 @@
     "Development/NVim/_lessons/_png/Pasted image 20240929154049.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929153649.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929152701.png",
-    "Development/NVim/_lessons/Настройка окружения.md",
-    "Development/NVim/_lessons/Введение.md",
-    "Development/NVim/_lessons/Конфигурация.md",
+    "Development/NVim/_lessons/Продвинутая работа.md",
     "Development/Zustand.md",
     "Development/NVim/_lessons/Плагины UI.md",
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
-    "conflict-files-obsidian-git.md",
     "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/Базовые motion.md",
+    "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Преобразование текста.md",
+    "Development/NVim/_lessons/Введение.md",
     "_png",
     "Development/NVim/_lessons/_png",
     "Development/NVim/_lessons",
