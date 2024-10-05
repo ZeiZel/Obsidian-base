@@ -31,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/RegExp.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -123,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/RegExp.md",
+                "file": "Development/NVim/_lessons/Плагины для разработки.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/RegExp.md"
+                "file": "Development/NVim/_lessons/Плагины для разработки.md"
               }
             }
           },
@@ -220,10 +219,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "230533acdb830f2e",
+  "active": "d554497896535628",
   "lastOpenFiles": [
-    "Development/NVim/_lessons/Продвинутая работа.md",
     "Development/RegExp.md",
+    "Development/NVim/_lessons/Продвинутая работа.md",
     "Development/Terminal.md",
     "conflict-files-obsidian-git.md",
     "Development/NVim/_lessons/Плагины для разработки.md",
