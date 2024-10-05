@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/RegExp.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/RegExp.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Terminal.md",
+                "file": "Development/RegExp.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Terminal.md"
+                "file": "Development/RegExp.md"
               }
             }
           },
@@ -222,11 +222,12 @@
   },
   "active": "230533acdb830f2e",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
+    "Development/NVim/_lessons/Продвинутая работа.md",
+    "Development/RegExp.md",
     "Development/Terminal.md",
+    "conflict-files-obsidian-git.md",
     "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
-    "Development/NVim/_lessons/Продвинутая работа.md",
     "Development/NVim/_lessons/Настройка окружения.md",
     "Development/NVim/_lessons/_png/Pasted image 20240929155153.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929155030.png",
