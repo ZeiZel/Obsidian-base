@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/NVim/_lessons/Конфигурация.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "mode": "source",
                 "source": false
               }
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Конфигурация.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Конфигурация.md",
+                "file": "Development/NVim/_lessons/Продвинутая работа.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Конфигурация.md"
+                "file": "Development/NVim/_lessons/Продвинутая работа.md"
               }
             }
           },
@@ -221,10 +221,11 @@
   },
   "active": "d554497896535628",
   "lastOpenFiles": [
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
-    "Development/NVim/_lessons/Преобразование текста.md",
     "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/Плагины UI.md",
+    "Development/NVim/_lessons/Конфигурация.md",
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "Development/NVim/_lessons/Преобразование текста.md",
     "Development/NVim/_lessons/Основы lua.md",
     "Development/NVim/_lessons/Настройка окружения.md",
     "Development/RegExp.md",
@@ -244,7 +245,6 @@
     "Development/Zustand.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
     "Development/NVim/_lessons/Базовые motion.md",
-    "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/_lessons/Visual mode и макросы.md",
     "Development/NVim/_lessons/Введение.md",
     "_png",
