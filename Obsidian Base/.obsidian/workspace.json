@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/MobileDev/React Native.md",
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md",
                 "mode": "source",
                 "source": false
               }
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/MobileDev/React Native.md",
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/MobileDev/React Native.md",
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/MobileDev/React Native.md"
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md"
               }
             }
           },
@@ -221,6 +221,12 @@
   },
   "active": "d554497896535628",
   "lastOpenFiles": [
+    "Development/MobileDev/React Native + Expo Router/_png/Pasted image 20241006150406.png",
+    "Development/MobileDev/React Native + Expo Router/_png/Pasted image 20241006150342.png",
+    "Development/MobileDev/React Native + Expo Router/_png",
+    "Development/MobileDev/React Native.md",
+    "Development/MobileDev/React Native + Expo Router/Index.md",
+    "Development/MobileDev/React Native + Expo Router",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Agile.md",
     "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/Практический JS.md",
@@ -245,7 +251,6 @@
     "Development/NVim/_lessons/_png/Pasted image 20240929154502.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929154355.png",
     "Development/NVim/_lessons/_png/Pasted image 20240929154049.png",
-    "Development/NVim/_lessons/_png/Pasted image 20240929153649.png",
     "Development/Zustand.md",
     "Development/NVim/_lessons/Удаление и копирование.md",
     "Development/NVim/_lessons/Базовые motion.md",
@@ -257,15 +262,10 @@
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Продвинутая работа.md",
-    "Development/GIT/_lessons/Удаление.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/035 Задачи с собеседований на понимание основ.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/018 Практика, ч2. Применяем условия и циклы.md",
     "Development/NVim/_png",
     "Development/NVim",
     "Development/GIT/_lessons/_png",
     "Development/GIT/_lessons",
-    "Whats Learning/_png",
-    "Development/DevOps/Kybernetes + Helm/_lessons/_png",
-    "Development/DevOps/Kybernetes + Helm/_lessons"
+    "Whats Learning/_png"
   ]
 }
