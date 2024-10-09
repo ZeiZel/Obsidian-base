@@ -1,5 +1,7 @@
 #Git #GitHub 
 
+>[!tip] [Гайд](https://githowto.com/ru/setup)
+
 [Введение](_lessons/Введение.md)
 [Базовые команды](_lessons/Базовые%20команды.md)
 [Начало работы с Git](_lessons/Начало%20работы%20с%20Git.md)
