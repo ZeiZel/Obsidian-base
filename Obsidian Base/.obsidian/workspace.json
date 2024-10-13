@@ -55,8 +55,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -130,7 +129,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +146,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md",
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +169,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/NVim/_lessons/Плагины для разработки.md"
+                "file": "Development/MobileDev/React Native + Expo Router/Index.md"
               }
             }
           },
@@ -244,15 +243,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8703f403ca428c79",
+  "active": "d554497896535628",
   "lastOpenFiles": [
+    "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/Преобразование текста.md",
     "Development/GIT/_lessons/Удаление.md",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/Введение.md",
     "Development/NVim/_lessons/_png/Pasted image 20241008195929.png",
-    "Development/NVim/_lessons/Плагины для разработки.md",
     "Development/MobileDev/React Native + Expo Router/Index.md",
     "Development/MobileDev/React Native + Expo Router/_png/Pasted image 20241006163555.png",
     "Development/MobileDev/React Native + Expo Router/_png/Pasted image 20241006163237.png",
