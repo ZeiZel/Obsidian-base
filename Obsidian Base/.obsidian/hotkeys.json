@@ -101,7 +101,8 @@
   "obsidian-git:pull": [
     {
       "modifiers": [
-        "Mod"
+        "Mod",
+        "Shift"
       ],
       "key": "-"
     }
