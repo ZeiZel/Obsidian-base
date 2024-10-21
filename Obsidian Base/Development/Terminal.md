@@ -271,7 +271,7 @@ pnpm setup
 Первым делом нужно установить сам плагин
 
 ```bash
-brew isntall tmux
+brew install tmux
 ```
 
 Далее нужно будет скопировать пакетный менеджер tmux
