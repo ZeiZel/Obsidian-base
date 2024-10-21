@@ -4,7 +4,10 @@ tags:
   - "#tmux"
   - lazygit
   - zsh
+description:
 ---
+
+>[!info] [Dotfiles](https://github.com/ZeiZel/dotfiles)
 
 #### Alacritty
 
@@ -37,10 +40,73 @@ save_to_clipboard = true
 
 #### Kitty
 
+Либо можно воспользоваться kitty, который будет даже немного лучше тем, что поддерживает в себе отображение медиа-контента и более широко настраивается
 
 `.config / kitty / kitty.conf`
 ```
+# :vim set filetype=conf:
+allow_remote_control yes
+scrollback_pager bash -c "exec nvim 63<&0 0</dev/null -u NONE -c 'map <silent> q :qa!<CR>' -c 'set shell=bash scrollback=100000 termguicolors laststatus=0 clipboard+=unnamedplus' -c 'autocmd TermEnter * stopinsert' -c 'autocmd TermClose * call cursor(max([0,INPUT_LINE_NUMBER-1])+CURSOR_LINE, CURSOR_COLUMN)' -c 'terminal sed </dev/fd/63 -e \"s/'$'\x1b'']8;;file:[^\]*[\]//g\" && sleep 0.01 && printf \"'$'\x1b'']2;\"'"
 
+font_family      JetBrainsMono Nerd Font
+font_size 13.0
+
+include ./kitty-themes/themes/Argonaut.conf
+
+# enable_audio_bell no
+bell_path pw-play /usr/share/sounds/freedesktop/stereo/bell.oga
+bell_on_tab yes
+
+single_window_margin_width -1
+window_margin_width 5
+
+remember_window_size  yes
+draw_minimal_borders no
+
+tab_bar_style slant
+
+cursor_shape block
+hide_window_decorations yes
+macos_quit_when_last_window_closed yes
+
+background_opacity         0.85
+dynamic_background_opacity no
+
+allow_remote_control yes
+cursor_blink_interval 0
+mouse_hide_wait 3
+
+map kitty_mod+y show_scrollback
+
+map kitty_mod+enter    launch --cwd=current
+map kitty_mod+alt+t  set_tab_title
+map kitty_mod+t        new_tab
+map kitty_mod+d detach_tab         # moves the tab into a new OS window
+map kitty_mod+f detach_window         # moves the window into a new OS window
+map kitty_mod+alt+w close_window
+map kitty_mod+w new_window
+
+
+map kitty_mod+s launch --location=hsplit
+map kitty_mod+x launch --location=vsplit
+map kitty_mod+r layout_action rotate
+
+map kitty_mod+h neighboring_window left
+map kitty_mod+l neighboring_window right
+map kitty_mod+k neighboring_window up
+map kitty_mod+j neighboring_window down
+
+map kitty_mod+alt+k move_window up
+map kitty_mod+alt+h move_window left
+map kitty_mod+alt+l move_window right
+map kitty_mod+alt+j move_window down
+
+# map kitty_mod+left resize_window narrower
+# map kitty_mod+right resize_window wider
+# map kitty_mod+up resize_window taller
+# map kitty_mod+down resize_window shorter
+
+enabled_layouts splits:split_axis=horizontal
 ```
 
 #### ZSH
@@ -61,6 +127,14 @@ sudo apt install zsh
 chsh -s $(which zsh)
 ```
 
+Устанавливаем OMZSH
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+Далее устанавливаем [NVM](https://github.com/nvm-sh/nvm) и тему [powerlevel10k](https://github.com/romkatv/powerlevel10k/tree/master)
+
 Далее нужно добавить данный конфиг для zsh
 
 `~/.zshrc`
@@ -68,26 +142,21 @@ chsh -s $(which zsh)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# Path to your oh-my-zsh installation.
+
 export ZSH="$HOME/.oh-my-zsh"
 export KUBECONFIG=/Users/alaricode/.kube/purple-cluster_kubeconfig.yaml
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh" 
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git z docker fzf thefuck zsh-autosuggestions history)
+plugins=(git z docker fzf zsh-autosuggestions history)
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -f '/Users/alaricode/vk-cloud-solutions/path.bash.inc' ]; then source '/Users/alaricode/vk-cloud-solutions/path.bash.inc'; fi
-
-# bun completions
-[ -s "/Users/alaricode/.bun/_bun" ] && source "/Users/alaricode/.bun/_bun"
 alias ls="eza --tree --level=1 --icons=always --no-time --no-user --no-permissions"
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export PATH="/Users/alaricode/.cargo/bin"
 export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:${PATH}
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
@@ -102,23 +171,47 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+# alias nvc="NVIM_APPNAME=nvchad nvim"
+alias nv="nvim"
+
+function nvims() {
+  items=("default" "nv") 
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
 function htt() {
   httpyac $1 --json -a | jq -r ".requests[0].response.body" | jq | bat --language=json
 }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+
+# pnpm
+export PNPM_HOME="/home/zeizel/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 ```
 
 И склонировать репозитории с плагинами `git z docker fzf thefuck zsh-autosuggestions history` (строчка `plugins = (...)`) в папку `~/.oh-my-zsh/custom/plugins`
 
 ```
-https://github.com/nvbn/thefuck?tab=readme-ov-file#installation
-https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#homebrew
+https://github.com/nvbn/thefuck
+https://github.com/zsh-users/zsh-autosuggestions
 https://github.com/agkozak/zsh-z
-https://github.com/unixorn/fzf-zsh-plugin?tab=readme-ov-file#oh-my-zsh
-
-https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
+https://github.com/unixorn/fzf-zsh-plugin
+https://github.com/romkatv/powerlevel10k
 ```
 
 `ctrl+r` - включает поиск по командам

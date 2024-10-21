@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -234,8 +234,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "323c03be85dd5f51",
+  "active": "67dd0bc83e186418",
   "lastOpenFiles": [
+    "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/GIT/Git.md",
     "Development/Terminal.md",
     "Development/NVim/_lessons/Настройка окружения.md",
