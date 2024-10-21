@@ -49,8 +49,7 @@
               "title": "Удалённый репозиторий"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -234,11 +233,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "67dd0bc83e186418",
+  "active": "88dc1963b5e46e82",
   "lastOpenFiles": [
     "Development/GIT/_lessons/Удалённый репозиторий.md",
-    "Development/GIT/Git.md",
     "Development/Terminal.md",
+    "Development/GIT/Git.md",
     "Development/NVim/_lessons/Настройка окружения.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md"
   ]
