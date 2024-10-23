@@ -19,7 +19,7 @@
 
 И третий вид запросов - Subscription (подписки) - клиент слушает изменения в БД в режиме реального времени
 
-```GQL
+```graphql
 subscription StoryLikeSubscription($input: StoryLikeSubscribeInput) {
   storyLikeSubscribe(input: $input) {
     story {
