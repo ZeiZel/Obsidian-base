@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/ESBuild.md",
+                "file": "Development/Architecture/Dev/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ESBuild"
+              "title": "index"
             }
           },
           {
@@ -250,10 +250,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/ESBuild.md"
+                "file": "Development/Architecture/Dev/index.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of ESBuild"
+              "title": "Outline of index"
             }
           },
           {
@@ -317,7 +317,7 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -335,13 +335,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "2feb2246643e19f8",
+  "active": "b86271c67a969cc7",
   "lastOpenFiles": [
-    "Development/Architecture/Architecture.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241026214651.png",
+    "Development/Architecture/index.md",
+    "Development/Architecture/Dev/index.md",
+    "Development/Architecture/Dev/Onion Architecture.md",
+    "Development/Architecture/Dev/_png",
+    "Development/Architecture/Dev",
     "Development/ESBuild.md",
-    "Development/Architecture/Onion Architecture.md",
     "Whats Learning/Прогресс изучения технологий.md",
-    "Development/Architecture/FSD.md",
+    "Development/Architecture/Dev/FSD.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
     "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
@@ -365,8 +369,6 @@
     "Development/NVim/_lessons/Настройка окружения.md",
     "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
     "Development/TypeScript/_lessons/09 Служебные типы.md",
-    "Development/TypeScript/TypeScript.md",
-    "Development/GIT/_lessons/Удалённый репозиторий.md",
-    "Development/Terminal.md"
+    "Development/TypeScript/TypeScript.md"
   ]
 }
