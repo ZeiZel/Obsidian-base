@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Architecture/Architecture.md",
+                "file": "Development/ESBuild.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Architecture"
+              "title": "ESBuild"
             }
           },
           {
@@ -250,10 +250,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Architecture/Architecture.md"
+                "file": "Development/ESBuild.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Architecture"
+              "title": "Outline of ESBuild"
             }
           },
           {
@@ -300,6 +300,16 @@
             "id": "22ca6228e5722604",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "8f294de79e25b9cc",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -307,7 +317,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 10
       }
     ],
     "direction": "horizontal",
@@ -327,8 +337,9 @@
   },
   "active": "2feb2246643e19f8",
   "lastOpenFiles": [
-    "Development/Architecture/Onion Architecture.md",
     "Development/Architecture/Architecture.md",
+    "Development/ESBuild.md",
+    "Development/Architecture/Onion Architecture.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Architecture/FSD.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
@@ -356,7 +367,6 @@
     "Development/TypeScript/_lessons/09 Служебные типы.md",
     "Development/TypeScript/TypeScript.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
-    "Development/Terminal.md",
-    "Development/GIT/Git.md"
+    "Development/Terminal.md"
   ]
 }
