@@ -256,11 +256,320 @@ app.listen(PORT,() => console.log('server started on PORT = ' + PORT))
 
 ### Пример клиентского приложения с MVC
 
+Корневой HTML, в который подключаются скрипты
+
+`index.html`
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="counter1"></div>
+    <div id="counter2"></div>
+    <div id="counter3"></div>
+    <div id="users"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+```
+
+Описываем интерфейсы для View, Model, Controller
+
+`types / controller.ts`
+```TS
+import {Model} from "./model";
+
+export interface Controller {
+    model: Model;
+}
+```
+
+`types / model.ts`
+```TS
+export interface Model {}
+```
+
+`types / view.ts`
+```TS
+import {Controller} from "./controller";
+
+export interface View {
+    mount: () => void;
+    controller: Controller;
+}
+```
+
+Далее опишем модель пользователя, внутри которой будет логика работы с пользователем и фильтрации списка пользователей
+
+`modules / user / UserModel.ts`
+```TS
+import {delay} from "../../helpers";
+
+export interface User {
+    id: string;
+    username: string;
+    age: number;
+    createdAt: string;
+}
+
+export type SortOrder = 'asc' | 'desc';
+export type SortField = 'age' | 'username';
+
+export class UsersModel {
+    users: User[];
+    searchValue: string;
+    sortOrder: SortOrder;
+    sortField: SortField;
+
+    constructor() {
+        this.users = [];
+        this.searchValue = '';
+        this.sortOrder = 'asc';
+        this.sortField = 'username';
+    }
+
+    async fetchUsers(): Promise<User[]> {
+        try {
+
+            return this.users;
+        } catch (e) {
+            this.users = [];
+            return [];
+        }
+    }
+
+    createUser(username: string, age: number) {
+        if(this.users.find(user => user.username === username)) {
+            throw Error('Пользователь уже существует')
+        }
+
+        const newUser: User = {
+            id: String(Math.random()),
+            username,
+            age,
+            createdAt: Date.now().toString(),
+        }
+
+        this.users.push(newUser)
+        return newUser;
+    }
+
+    sortUsers(field: SortField, order: SortOrder) {
+        const sortedUsers = [...this.users.sort((a, b) => {
+            if(order === "asc") {
+                return a[field] > b[field] ? 1 : -1;
+            }
+            return a[field] < b[field] ? 1 : -1;
+        })]
+
+        this.users = sortedUsers;
+
+        return sortedUsers;
+    }
+}
+```
 
 
 
+`modules / user / UserController.ts`
+```TS
+import {SortField, SortOrder, UsersModel} from "./UsersModel";
+
+export class UsersController {
+    model: UsersModel;
+
+    constructor(model: UsersModel) {
+        this.model = model
+    }
+
+    public handleCreate(username: string, age: number) {
+        console.log('handleCreate')
+        if(!username || !age) {
+            throw Error('Укажите username и age');
+        }
+        return this.model.createUser(username, age);
+    }
+
+    public handleSort(field: SortField, order: SortOrder) {
+        console.log('handleSort')
+        if(!field) {
+            throw Error('Укажите поле сортировки');
+        }
+        return this.model.sortUsers(field, order);
+    }
+}
+```
 
 
 
+`modules / user / UserModel.ts`
+```TS
+import {UsersController} from "./usersController";
+import {SortField, SortOrder, User} from "./UsersModel";
+import './user.css';
+
+export class UsersView {
+    controller: UsersController;
+    root: HTMLElement;
+
+    private form: HTMLDivElement;
+    private users: HTMLElement;
+    private usernameInput: HTMLInputElement;
+    private ageInput: HTMLInputElement;
+    private createButton: HTMLButtonElement;
+
+    private sortSelectors: HTMLDivElement;
+    private fieldSelect: HTMLSelectElement;
+    private orderSelect: HTMLSelectElement;
+    private sortButton: HTMLButtonElement;
+
+    constructor(root: HTMLElement, controller: UsersController) {
+        this.root = root;
+        this.controller = controller;
+
+
+        this.createUserForm()
+        this.createSortSelectors()
+        this.createUsersList();
+
+        this.bindListeners();
+
+    }
+
+    private onCreateClick = () => {
+        try {
+            const newUser = this.controller.handleCreate(this.usernameInput.value, Number(this.ageInput.value))
+            this.renderNewUser(newUser);
+        } catch (e) {
+            this.showError((e as Error).message)
+        }
+    }
+
+    private onSortClick = () => {
+        const newUsers = this.controller.handleSort(this.fieldSelect.value as SortField, this.orderSelect.value as SortOrder)
+        this.renderUsers(newUsers);
+    }
+
+    private bindListeners() {
+        this.createButton.addEventListener('click', this.onCreateClick)
+        this.sortButton.addEventListener('click', this.onSortClick)
+    }
+
+    private showError(message: string) {
+       alert(message);
+    }
+
+    private getUserElement(user: User) {
+        return `
+                 <div class="user">
+                    <h3>Username = ${user.username}</h3>
+                    <h5>Age = ${user.age}</h5>
+                </div>
+            `
+    }
+
+    private renderNewUser(user: User) {
+        const userNode = document.createElement('div');
+        userNode.innerHTML = this.getUserElement(user);
+
+        this.users.appendChild(userNode)
+    }
+
+    private renderUsers(users: User[]) {
+        const usersElements = users.map(user => {
+            return this.getUserElement(user);
+        })
+
+        this.users.innerHTML = usersElements.join('')
+    }
+
+    private createUsersList() {
+        this.users = document.createElement('div');
+    }
+
+    private createSortSelectors() {
+        this.sortSelectors = document.createElement('div');
+
+        this.fieldSelect = document.createElement('select');
+        const usernameOption = document.createElement('option');
+        usernameOption.value = 'username';
+        usernameOption.innerText = 'Имя пользователя';
+        const ageOption = document.createElement('option');
+        ageOption.value = 'age';
+        ageOption.innerText = 'Возраст';
+
+        this.fieldSelect.add(usernameOption);
+        this.fieldSelect.add(ageOption);
+
+        this.orderSelect = document.createElement('select');
+        const ascOption = document.createElement('option');
+        ascOption.value = 'asc';
+        ascOption.innerText = 'По возрастанию';
+        const descOption = document.createElement('option');
+        descOption.value = 'desc';
+        descOption.innerText = 'по убыванию';
+
+        this.orderSelect.add(ascOption);
+        this.orderSelect.add(descOption);
+
+        this.sortButton = document.createElement('button');
+        this.sortButton.innerText = 'сортировать';
+
+        this.sortSelectors.appendChild(this.fieldSelect)
+        this.sortSelectors.appendChild(this.orderSelect)
+        this.sortSelectors.appendChild(this.sortButton)
+    }
+
+    private createUserForm() {
+        this.form = document.createElement('div');
+        this.usernameInput = document.createElement('input');
+        this.usernameInput.placeholder = 'Введите имя пользователя'
+        this.ageInput = document.createElement('input');
+        this.ageInput.placeholder = 'Введите возраст'
+        this.createButton = document.createElement('button');
+        this.createButton.innerText = 'Создать'
+        this.form.appendChild(this.usernameInput)
+        this.form.appendChild(this.ageInput)
+        this.form.appendChild(this.createButton)
+    }
+
+    public mount() {
+        this.root.innerHTML = `
+            <h1>Пользователи</h1>
+        `
+        this.root.appendChild(this.sortSelectors)
+        this.root.appendChild(this.form)
+        this.root.appendChild(this.users)
+    }
+}
+```
+
+
+
+`mount.ts`
+```TS
+import {CounterTwoView} from "./modules/counterTwo/CounterTwoView";
+import {UsersView} from "./modules/users/UsersView";
+import {UsersController} from "./modules/users/usersController";
+import {UsersModel} from "./modules/users/UsersModel";
+
+const counterView = new CounterTwoView(document.getElementById('counter1')!)
+
+counterView.mount();
+
+const usersModel = new UsersModel();
+const usersController = new UsersController(usersModel)
+const usersView = new UsersView(
+    document.getElementById('users')!,
+    usersController
+)
+
+usersView.mount();
+```
 
 

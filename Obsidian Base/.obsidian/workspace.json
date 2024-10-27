@@ -188,66 +188,6 @@
             }
           },
           {
-            "id": "bd9fc40269bf13a5",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "d6e962b85a6e511d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "323c03be85dd5f51",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "f6b85dc83d40398f",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "22ca6228e5722604",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "8f294de79e25b9cc",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "cf5cb3a257aa7887",
             "type": "leaf",
             "state": {
@@ -256,13 +196,23 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "415bb995fabe15e8",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
         "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 432.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -278,8 +228,8 @@
   },
   "active": "e977d6a11e1bade2",
   "lastOpenFiles": [
-    "Development/Клиент-сервер/REST API.md",
     "Development/Architecture/Dev/MV-patterns.md",
+    "Development/Клиент-сервер/REST API.md",
     "Development/Agile.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Architecture/Dev/_png/Pasted image 20241027105158.png",
