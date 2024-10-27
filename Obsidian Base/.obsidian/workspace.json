@@ -28,13 +28,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Architecture/Dev/Onion Architecture.md",
+                "file": "Development/Architecture/Dev/index.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Onion Architecture"
+              "title": "index"
             }
           },
           {
@@ -184,10 +184,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Architecture/Dev/Onion Architecture.md"
+                "file": "Development/Architecture/Dev/index.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Onion Architecture"
+              "title": "Outline of index"
             }
           },
           {
@@ -241,8 +241,9 @@
   },
   "active": "e977d6a11e1bade2",
   "lastOpenFiles": [
-    "Development/Architecture/Dev/index.md",
+    "Development/Architecture/Dev/Atomic Design.md",
     "Development/Architecture/Dev/Onion Architecture.md",
+    "Development/Architecture/Dev/index.md",
     "Development/Architecture/Dev/_png/Pasted image 20241027140036.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027135743.png",
     "Development/Architecture/Dev/MV-patterns.md",
