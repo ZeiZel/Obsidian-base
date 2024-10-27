@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "88dc1963b5e46e82",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/NVim/_lessons/Настройка окружения.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Настройка окружения"
-            }
-          },
-          {
             "id": "b29046721df1b384",
             "type": "leaf",
             "state": {
@@ -36,31 +22,17 @@
             }
           },
           {
-            "id": "41a4df27c9e80500",
+            "id": "e977d6a11e1bade2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+                "file": "Development/Architecture/Dev/MV-patterns.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "05 Сети Docker"
-            }
-          },
-          {
-            "id": "2feb2246643e19f8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Architecture/Dev/index.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "index"
+              "title": "MV-patterns"
             }
           },
           {
@@ -76,51 +48,9 @@
               "icon": "lucide-file",
               "title": "Прогресс изучения технологий"
             }
-          },
-          {
-            "id": "67dd0bc83e186418",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Terminal.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Terminal"
-            }
-          },
-          {
-            "id": "299e69bfa02fa7f2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/GIT/_lessons/Удалённый репозиторий.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Удалённый репозиторий"
-            }
-          },
-          {
-            "id": "f9f32ae2388a66a4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "08 Манипуляция с типами"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -250,10 +180,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Architecture/Dev/index.md"
+                "file": "Development/Architecture/Dev/MV-patterns.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of MV-patterns"
             }
           },
           {
@@ -310,6 +240,16 @@
             "id": "8f294de79e25b9cc",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "cf5cb3a257aa7887",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -317,7 +257,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 11
       }
     ],
     "direction": "horizontal",
@@ -335,17 +275,32 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "2feb2246643e19f8",
+  "active": "e977d6a11e1bade2",
   "lastOpenFiles": [
+    "Development/Agile.md",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/Terminal.md",
+    "Development/GIT/_lessons/Удалённый репозиторий.md",
+    "Development/NVim/_lessons/Настройка окружения.md",
+    "Development/MobileDev/React Native.md",
+    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+    "_hobbies/Flameshot.md",
+    "_hobbies/_png/Pasted image 20241027103048.png",
+    "_hobbies/_png",
+    "Development/Architecture/Dev/MV-patterns.md",
+    "Envirompment/DataGrip.md",
+    "Envirompment/WebStorm.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241027100903.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027100711.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027100458.png",
+    "Development/Architecture/Dev/index.md",
     "Development/Architecture/Dev/_png/Pasted image 20241026215905.png",
     "Development/Architecture/Dev/_png/Pasted image 20241026214651.png",
     "Development/Architecture/index.md",
-    "Development/Architecture/Dev/index.md",
     "Development/Architecture/Dev/Onion Architecture.md",
     "Development/Architecture/Dev/_png",
     "Development/Architecture/Dev",
     "Development/ESBuild.md",
-    "Whats Learning/Прогресс изучения технологий.md",
     "Development/Architecture/Dev/FSD.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
@@ -359,17 +314,8 @@
     "Development/Клиент-сервер/WebSocket.md",
     "Development/Клиент-сервер/SOAP.md",
     "Development/Клиент-сервер/RPC (gRPC, tRPC).md",
-    "Development/Клиент-сервер/Apollo + GraphQL.md",
     "Development/WebSockets/_png",
     "Development/WebSockets",
-    "Development/Клиент-сервер/_png",
-    "Development/WebSockets/WebSockets.md",
-    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
-    "Development/DevOps/Docker + Ansible/Docker+Ansible.md",
-    "Development/Agile.md",
-    "Development/NVim/_lessons/Настройка окружения.md",
-    "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
-    "Development/TypeScript/_lessons/09 Служебные типы.md",
-    "Development/TypeScript/TypeScript.md"
+    "Development/Клиент-сервер/_png"
   ]
 }
