@@ -278,8 +278,9 @@
   },
   "active": "e977d6a11e1bade2",
   "lastOpenFiles": [
-    "Development/Agile.md",
+    "Development/Клиент-сервер/REST API.md",
     "Development/Architecture/Dev/MV-patterns.md",
+    "Development/Agile.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Architecture/Dev/_png/Pasted image 20241027105158.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027104602.png",
@@ -315,7 +316,6 @@
     "Development/Architecture",
     "Development/Bun.md",
     "Development/Zustand.md",
-    "Development/Клиент-сервер/REST API.md",
     "Development/Клиент-сервер/WebSocket.md",
     "Development/Клиент-сервер/SOAP.md",
     "Development/WebSockets/_png",

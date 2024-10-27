@@ -33,7 +33,7 @@ MVC подход используется у нас на любом этапе �
 Реализуем приложение на Express и шаблонизаторе HandleBars
 
 ```bash
-bun install express hbs
+bun install express hbs nodemon
 ```
 
 Первое, что мы сделаем - это во view напишем логику отображения в шаблонизаторе.
@@ -203,7 +203,18 @@ module.exports = {
 }
 ```
 
-Это контроллер для работы с соап-запросами
+Ну и так же мы можем реализовать множество различных способов взаимодействия с нашей моделью. Модель просто является источником истины, которую можно провайдить различными способами через наш контроллер: с помощью [REST API](../../Клиент-сервер/REST%20API.md), [SOAP](../../Клиент-сервер/SOAP.md) или того же [GraphQL](../../Клиент-сервер/Apollo%20+%20GraphQL.md)
+
+`domain / user / rest-controller.js`
+```JS
+const userModel = require('./model');
+
+module.exports = {
+    getAll: (req, res) => {
+        return res.json(userModel.getAll())
+    },
+}
+```
 
 `domain / user / soap-controller.js`
 ```JS
@@ -213,19 +224,6 @@ module.exports = {
     getAll: (req, res) => {
         const xmlUsers = XML.parse(userModel.getAll());
         return res.send(xmlUsers);
-    },
-}
-```
-
-Это контроллер для работы с рест-запросами
-
-`domain / user / rest-controller.js`
-```JS
-const userModel = require('./model');
-
-module.exports = {
-    getAll: (req, res) => {
-        return res.json(userModel.getAll())
     },
 }
 ```
@@ -242,14 +240,17 @@ const PORT = 5000;
 
 const app = express();
 
+// добавляем поддержку hbs
 app.set("view engine", "hbs");
 app.set('views', path.resolve(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
 
+// подцепляем контроллер под роуты
 app.get('/users', userController.getAll)
 app.post('/users/create', userController.create)
 app.delete('/users/remove', userController.removeById)
 
+// вызываем сервер
 app.listen(PORT,() => console.log('server started on PORT = ' + PORT))
 ```
 
