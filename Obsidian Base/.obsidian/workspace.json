@@ -122,6 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Development/Architecture/Dev/MV-patterns.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +132,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for MV-patterns"
             }
           },
           {
@@ -257,7 +258,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -278,7 +279,12 @@
   "active": "e977d6a11e1bade2",
   "lastOpenFiles": [
     "Development/Agile.md",
+    "Development/Architecture/Dev/MV-patterns.md",
     "Whats Learning/Прогресс изучения технологий.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241027105158.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027104602.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027103524.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027103521.png",
     "Development/Terminal.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/NVim/_lessons/Настройка окружения.md",
@@ -287,7 +293,6 @@
     "_hobbies/Flameshot.md",
     "_hobbies/_png/Pasted image 20241027103048.png",
     "_hobbies/_png",
-    "Development/Architecture/Dev/MV-patterns.md",
     "Envirompment/DataGrip.md",
     "Envirompment/WebStorm.md",
     "Development/Architecture/Dev/_png/Pasted image 20241027100903.png",
@@ -313,7 +318,6 @@
     "Development/Клиент-сервер/REST API.md",
     "Development/Клиент-сервер/WebSocket.md",
     "Development/Клиент-сервер/SOAP.md",
-    "Development/Клиент-сервер/RPC (gRPC, tRPC).md",
     "Development/WebSockets/_png",
     "Development/WebSockets",
     "Development/Клиент-сервер/_png"
