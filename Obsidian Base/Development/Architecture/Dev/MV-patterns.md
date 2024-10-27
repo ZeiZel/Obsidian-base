@@ -3,6 +3,7 @@ tags:
   - "#MVP"
   - "#MVC"
   - "#MVVM"
+description: MV-подобные паттерны
 ---
 
 Основная суть MV-образных паттернов заключается в разделении бизнес-логики от интерфейса.
@@ -309,6 +310,273 @@ export interface View {
 }
 ```
 
+#### Общение через контроллер
+
+Первый модуль у нас будет общаться по стандартной схеме, когда все потоки данных между View и Model контролирует Controller
+
+![](_png/Pasted%20image%2020241027124032.png)
+
+Вот сама модель счётчика
+
+`modules / counterTwo / CounterTwoModel.ts`
+```TS
+import {Model} from "../../types/model";
+
+export class CounterTwoModel implements Model {
+    value: number;
+
+    constructor() {
+        this.value = 0;
+    }
+
+    increment() {
+        this.value += 1;
+        return this.value;
+    }
+
+    decrement() {
+        this.value -= 1;
+        return this.value;
+    }
+
+    multipleAndDivide() {
+        this.value *= 5;
+        this.value /= 3;
+        this.value = Math.ceil(this.value);
+        return this.value;
+    }
+}
+```
+
+Тут уже находится контроллер, который дёргает запросы из модели
+
+`modules / counterTwo / CounterTwoController.ts`
+```TS
+import {CounterTwoModel} from "./CounterTwoModel";
+import {Controller} from "../../types/controller";
+
+export class CounterTwoController implements Controller {
+    model: CounterTwoModel;
+
+    constructor() {
+        this.model = new CounterTwoModel();
+    }
+
+    handleIncrement() {
+        console.log('increment', this.model)
+        return this.model.increment();
+    }
+
+    handleDecrement() {
+        console.log('handleDecrement')
+        return this.model.decrement();
+    }
+
+    handleMultiply() {
+        console.log('handleMultiply')
+        return this.model.multipleAndDivide();
+    }
+}
+```
+
+А тут уже во View мы вызываем только методы контроллера
+
+`modules / counterTwo / CounterTwoView.ts`
+```TS
+import {CounterTwoController} from "./CounterTwoController";
+import {View} from '../../types/view'
+
+export class CounterTwoView implements View {
+    controller: CounterTwoController;
+    root: HTMLElement;
+
+    private title: HTMLElement;
+    private incrementButton: HTMLElement;
+    private decrementButton: HTMLElement;
+    private multipleButton: HTMLElement;
+
+    constructor(root: HTMLElement) {
+        this.root = root;
+        this.controller = new CounterTwoController();
+
+        this.title = document.createElement('h1');
+        this.title.innerText = 'Value = 0';
+
+        this.incrementButton = document.createElement('button');
+        this.incrementButton.innerText = 'increment';
+        this.decrementButton = document.createElement('button');
+        this.decrementButton.innerText = 'decrement';
+        this.multipleButton = document.createElement('button');
+        this.multipleButton.innerText = 'multiply';
+
+        this.bindListeners();
+    }
+
+    private onIncrementClick = () => {
+        this.updateTitle(this.controller.handleIncrement())
+    }
+
+    private onDecrementClick = () => {
+        this.updateTitle(this.controller.handleDecrement())
+    }
+
+    private onMultiplyClick = () => {
+        this.updateTitle(this.controller.handleMultiply())
+    }
+
+    private bindListeners() {
+        this.incrementButton.addEventListener('click', this.onIncrementClick);
+        this.decrementButton.addEventListener('click', this.onDecrementClick);
+        this.multipleButton.addEventListener('click', this.onMultiplyClick);
+    }
+
+    public updateTitle(value: number) {
+        this.title.innerText = `Value = ${value}`;
+    }
+
+    public mount() {
+        this.root.appendChild(this.title);
+        this.root.appendChild(this.incrementButton);
+        this.root.appendChild(this.decrementButton);
+        this.root.appendChild(this.multipleButton);
+    }
+}
+```
+
+#### Общение по кругу
+
+В этом примере Controller отдаёт данные из Model во View, а View, в свою очередь, передаёт данные напрямую в Model
+
+![](_png/Pasted%20image%2020241027124303.png)
+
+Это модель счётчика. Она уже заранее знает про существование View и уже работает непосредственно с данными, которые находятся внутри View.
+
+Основной особенностью тут является то, что Model изменяет данные внутри себя и уведомляет View о том, что эти данные изменились. 
+
+`modules / counter / CounterModel.ts`
+```TS
+import {CounterView} from "./CounterView";
+
+export class CounterModel {
+    view: CounterView;
+    value: number;
+
+    constructor(view: CounterView) {
+        this.value = 0;
+        this.view = view;
+    }
+
+    increment() {
+        this.value += 1;
+        this.view.updateTitle()
+    }
+
+    decrement() {
+        this.value -= 1;
+        this.view.updateTitle()
+    }
+
+    multipleAndDivide() {
+        this.value *= 5;
+        this.value /= 3;
+        this.value = Math.ceil(this.value);
+        this.view.updateTitle()
+    }
+}
+```
+
+Это контроллер, который оборачивает в себе логику модели. Он принимает в себя модель и вызывает напрямую его методы
+
+`modules / counter / CounterController.ts`
+```TS
+import {CounterModel} from "./CounterModel";
+
+export class CounterController {
+    model: CounterModel;
+
+    constructor(model: CounterModel) {
+        this.model = model
+    }
+
+    handleIncrement() {
+        console.log('increment', this.model)
+        this.model.increment();
+    }
+
+    handleDecrement() {
+        console.log('handleDecrement')
+        this.model.decrement();
+    }
+
+    handleMultiply() {
+        console.log('handleMultiply')
+        this.model.multipleAndDivide();
+    }
+}
+```
+
+Это View, в котором мы передаём методы Model в Controller
+
+`modules / counter / CounterView.ts`
+```TS
+import {CounterController} from "./CounterController";
+import {CounterModel} from "./CounterModel";
+
+export class CounterView {
+    controller: CounterController;
+    model: CounterModel;
+    root: HTMLElement;
+
+    private title: HTMLElement;
+    private incrementButton: HTMLElement;
+    private decrementButton: HTMLElement;
+    private multipleButton: HTMLElement;
+
+    constructor(root: HTMLElement) {
+        this.root = root;
+        this.model = new CounterModel(this);
+        this.controller = new CounterController(this.model);
+
+        this.title = document.createElement('h1');
+        this.title.innerText = 'Value = 0';
+
+        this.incrementButton = document.createElement('button');
+        this.incrementButton.innerText = 'increment';
+        this.decrementButton = document.createElement('button');
+        this.decrementButton.innerText = 'decrement';
+        this.multipleButton = document.createElement('button');
+        this.multipleButton.innerText = 'multiply';
+
+        this.bindListeners();
+    }
+
+    private bindListeners() {
+        this.incrementButton.addEventListener('click', this.controller.handleIncrement.bind(this));
+        this.decrementButton.addEventListener('click', this.controller.handleDecrement.bind(this));
+        this.multipleButton.addEventListener('click', this.controller.handleMultiply.bind(this));
+    }
+
+    public updateTitle() {
+        this.title.innerText = `Value = ${this.model.value}`;
+    }
+
+    public render() {
+        this.root.appendChild(this.title);
+        this.root.appendChild(this.incrementButton);
+        this.root.appendChild(this.decrementButton);
+        this.root.appendChild(this.multipleButton);
+    }
+}
+```
+
+#### Общение View и Controller с Model
+
+Далее опишем модель, где и View, и Controller общаются с Model напрямую
+
+Тут мы уже делаем максимально валидный пример, когда в Controller мы передаём Model, а во View Controller. По такой регрессии мы реализуем полностью заменяемые модули, которые должны соответствовать просто по интерфейсам для взаимного переиспользования.
+
+![](_png/Pasted%20image%2020241027124312.png)
+
 Далее опишем модель пользователя, внутри которой будет логика работы с пользователем и фильтрации списка пользователей
 
 `modules / user / UserModel.ts`
@@ -415,7 +683,10 @@ export class UsersController {
 }
 ```
 
-А тут уже находится логика View, которая в себе использует контроллер. Она рисует нам представление, которое уже будет видеть пользователь.
+А тут уже находится логика View, которая в себе использует контроллер и методы из модели пользователя.
+
+- через контроллер мы получаем актуальные значения из модели
+- через методы модели мы заносим новые значения
 
 `modules / user / UserView.ts`
 ```TS
@@ -559,7 +830,7 @@ export class UsersView {
 }
 ```
 
-
+Тут мы уже собираем наше приложение со всеми моделями и контроллерами. Основной метод `mount()` в каждом из них монтирует View на странице
 
 `mount.ts`
 ```TS
@@ -582,4 +853,23 @@ const usersView = new UsersView(
 usersView.mount();
 ```
 
+### Итог
 
+MVC представляет из себя подход, в котором мы делим бизнес-логику и представление. Это деление позволяет нам легко заменять разные части приложения друг другом.
+
+- Модель - является единственным источником истины для приложения
+- Контроллер - является интерфейсом, которым пользуется представление, для обработки и передачи данных в модель
+- Представление - это непосредственно логика интерфейса пользователя, которая пользуется контроллером.
+## MVVM
+
+Этот паттерн применим только к графическим интерфейсам
+
+Тут у нас появляется сущность ViewModel вместо Controller
+
+То есть такой подход говорит нам связывать данные напрямую из view с model с помощью двустороннего связывания (как v-bind во Vue или банан в коробке `[()]` Angular)
+
+![](_png/Pasted%20image%2020241027133038.png)
+
+И последовательность в таком приложении достаточно короткая - связываем данные из View с ViewModel, где VM общается по обновлению и уведомлению с Model, чтобы связанные данные обновили интерфейс View
+
+![](_png/Pasted%20image%2020241027133237.png)

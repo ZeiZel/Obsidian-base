@@ -15,6 +15,7 @@
               "state": {
                 "file": "Development/Agile.md",
                 "mode": "source",
+                "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
@@ -44,6 +45,7 @@
               "state": {
                 "file": "Whats Learning/Прогресс изучения технологий.md",
                 "mode": "source",
+                "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
@@ -219,7 +221,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -239,10 +241,16 @@
   },
   "active": "e977d6a11e1bade2",
   "lastOpenFiles": [
-    "Development/Architecture/Dev/MV-patterns.md",
-    "Development/Клиент-сервер/REST API.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241027133237.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027133038.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027132918.png",
     "Development/Agile.md",
     "Whats Learning/Прогресс изучения технологий.md",
+    "Development/Architecture/Dev/MV-patterns.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241027124312.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027124303.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027124032.png",
+    "Development/Клиент-сервер/REST API.md",
     "Development/Architecture/Dev/_png/Pasted image 20241027105158.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027104602.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027103524.png",
@@ -257,12 +265,7 @@
     "_hobbies/_png",
     "Envirompment/DataGrip.md",
     "Envirompment/WebStorm.md",
-    "Development/Architecture/Dev/_png/Pasted image 20241027100903.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241027100711.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241027100458.png",
     "Development/Architecture/Dev/index.md",
-    "Development/Architecture/Dev/_png/Pasted image 20241026215905.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241026214651.png",
     "Development/Architecture/index.md",
     "Development/Architecture/Dev/Onion Architecture.md",
     "Development/Architecture/Dev/_png",
