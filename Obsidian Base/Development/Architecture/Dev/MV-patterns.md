@@ -1,4 +1,9 @@
-#MVP #MVC #MVVM
+---
+tags:
+  - "#MVP"
+  - "#MVC"
+  - "#MVVM"
+---
 
 Основная суть MV-образных паттернов заключается в разделении бизнес-логики от интерфейса.
 
@@ -6,7 +11,7 @@
 
 ### Что такое MVC
 
-Представим такую ситуацию, что у нас есть приложение, которому нужно будет заменить интерфейс и сохранить как прошлое, так и новое отображение интерфейса. Но до этого мы реализовывали приложение в полной связности с бизнес-логикой. То есть BL находится прямо внутри UI и неразрывно с ним связана. 
+Представим такую ситуацию, что у нас есть приложение, которому нужно будет заменить интерфейс и сохранить как прошлое, так и новое отображение интерфейса. Но до этого мы реализовывали приложение в полной связности с бизнес-логикой. То есть BL находится прямо внутри UI и неразрывно с ним связана.
 
 ![](_png/Pasted%20image%2020241027100458.png)
 
@@ -333,6 +338,7 @@ export class UsersModel {
         this.sortField = 'username';
     }
 
+	// запрос пользователей с aka сервера
     async fetchUsers(): Promise<User[]> {
         try {
 
@@ -343,6 +349,7 @@ export class UsersModel {
         }
     }
 
+	// создание пользователей
     createUser(username: string, age: number) {
         if(this.users.find(user => user.username === username)) {
             throw Error('Пользователь уже существует')
@@ -359,6 +366,7 @@ export class UsersModel {
         return newUser;
     }
 
+	// сортировка пользователей
     sortUsers(field: SortField, order: SortOrder) {
         const sortedUsers = [...this.users.sort((a, b) => {
             if(order === "asc") {
@@ -374,7 +382,7 @@ export class UsersModel {
 }
 ```
 
-
+Контроллер же оборачивает логику модели и предоставляет её нашей вюшке
 
 `modules / user / UserController.ts`
 ```TS
@@ -387,6 +395,7 @@ export class UsersController {
         this.model = model
     }
 
+	// создание пользователя
     public handleCreate(username: string, age: number) {
         console.log('handleCreate')
         if(!username || !age) {
@@ -395,6 +404,7 @@ export class UsersController {
         return this.model.createUser(username, age);
     }
 
+	// сортировка пользователя
     public handleSort(field: SortField, order: SortOrder) {
         console.log('handleSort')
         if(!field) {
@@ -405,9 +415,9 @@ export class UsersController {
 }
 ```
 
+А тут уже находится логика View, которая в себе использует контроллер. Она рисует нам представление, которое уже будет видеть пользователь.
 
-
-`modules / user / UserModel.ts`
+`modules / user / UserView.ts`
 ```TS
 import {UsersController} from "./usersController";
 import {SortField, SortOrder, User} from "./UsersModel";
