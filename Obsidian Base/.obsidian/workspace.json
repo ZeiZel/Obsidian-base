@@ -214,6 +214,16 @@
             "id": "dbe3d2e39ca8cfee",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "7468eb0f24006a20",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -221,7 +231,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 8
       }
     ],
     "direction": "horizontal",
@@ -239,7 +249,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "e977d6a11e1bade2",
+  "active": "7468eb0f24006a20",
   "lastOpenFiles": [
     "Development/Architecture/Dev/index.md",
     "Development/Architecture/Dev/Atomic Design.md",
