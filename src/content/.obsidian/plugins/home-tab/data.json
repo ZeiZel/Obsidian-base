@@ -24,16 +24,20 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Soft/Agile (Scrum, Kanban, Lean).md",
-      "timestamp": 1731850238772
+      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+      "timestamp": 1731862820012
     },
     {
-      "filepath": "Index.md",
-      "timestamp": 1731850237798
+      "filepath": "Soft/Agile/Old Agile.md",
+      "timestamp": 1731862810381
     },
     {
-      "filepath": "Books/Scrum. Революционный метод управления проектами.md",
-      "timestamp": 1731849479311
+      "filepath": "Soft/Agile/Agile.md",
+      "timestamp": 1731862765663
+    },
+    {
+      "filepath": "index.md",
+      "timestamp": 1731862732813
     }
   ],
   "bookmarkedFileStore": [],

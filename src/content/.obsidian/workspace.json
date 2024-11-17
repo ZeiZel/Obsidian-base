@@ -14,23 +14,23 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Index.md",
-                "mode": "source",
+                "file": "index.md",
+                "mode": "preview",
                 "backlinks": true,
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Index"
+              "title": "index"
             }
           },
           {
-            "id": "7f463bd1f47ac9b8",
+            "id": "ec55971d4c0af9a9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Soft/Agile (Scrum, Kanban, Lean).md",
+                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
@@ -108,8 +108,8 @@
             "state": {
               "type": "mk-path-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "layout-grid",
+              "title": "Spaces"
             }
           }
         ],
@@ -167,30 +167,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Agile (Scrum, Kanban, Lean).md"
+                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
               },
               "icon": "lucide-list",
               "title": "Outline of Agile (Scrum, Kanban, Lean)"
             }
           },
           {
-            "id": "f25102b14ba79a50",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "783047cd8dc7790c",
+            "id": "8aa35b675b3f4ad4",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           }
         ],
@@ -207,8 +197,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           },
           {
@@ -251,13 +241,25 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "omnisearch:Omnisearch": false,
+      "homepage:Open homepage": false,
+      "callout-manager:Insert Callout": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "7f463bd1f47ac9b8",
+  "active": "b86271c67a969cc7",
   "lastOpenFiles": [
+    "Soft/Agile/Old Agile.md",
+    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+    "Tags/#+#roadmap",
+    "Soft/Soft.md",
+    "Soft/Agile/Agile.md",
+    "index.md",
+    "Soft/Agile",
     "Index.md",
-    "Soft/Agile (Scrum, Kanban, Lean).md",
     "Books/Scrum. Революционный метод управления проектами.md",
     "Tags",
     "_assets/img/bg/windows-11-dark-mode-blue.jpg",
@@ -294,13 +296,7 @@
     "Development/Architecture/Dev/_png/Pasted image 20241027133737.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027133648.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027133237.png",
-    "Development/Клиент-сервер/REST API.md",
-    "Development/Terminal.md",
-    "Development/GIT/_lessons/Удалённый репозиторий.md",
-    "Development/NVim/_lessons/Настройка окружения.md",
     "_hobbies/_png",
-    "Development/Architecture/Dev/_png",
-    "Development/Architecture/Dev",
-    "Development/Architecture/_png"
+    "Development/Architecture/Dev/_png"
   ]
 }

@@ -47,7 +47,9 @@
   "expandedSpaces": [
     "/",
     "Development",
-    "Soft"
+    "Soft",
+    "//Soft",
+    "//Soft/Soft/Agile"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
