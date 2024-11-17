@@ -1,5 +1,5 @@
 ---
-banner: _assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg
+banner: "_assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg"
 ---
 
 ![](_png/df9dfc9e679d020c084e10b0fc7ecf63.png)

@@ -9,7 +9,6 @@
   "obsidian-outliner",
   "unique-attachments",
   "obsidian-style-settings",
-  "cmenu-plugin",
   "various-complements",
   "advanced-cursors",
   "obsidian-emoji-toolbar",
@@ -28,6 +27,6 @@
   "home-tab",
   "obsidian-banners",
   "obsidian-kanban",
-  "editing-toolbar",
-  "make-md"
+  "make-md",
+  "cmenu-plugin"
 ]
