@@ -15,7 +15,7 @@
               "type": "markdown",
               "state": {
                 "file": "Index.md",
-                "mode": "source",
+                "mode": "preview",
                 "backlinks": true,
                 "source": false
               },
@@ -156,6 +156,16 @@
             "id": "f25102b14ba79a50",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "783047cd8dc7790c",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -163,7 +173,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       },
       {
         "id": "5b34c4077a77a8e5",
@@ -225,13 +235,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "omnisearch:Omnisearch": false,
       "homepage:Open homepage": false,
-      "callout-manager:Insert Callout": false,
-      "breadcrumbs:Breadcrumbs Visualisation": false
+      "callout-manager:Insert Callout": false
     }
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
     "Index.md",
+    "_assets/img/bg/windows-11-dark-mode-blue.jpg",
+    "_assets/img/bg/macos-big-sur-apple.jpg",
+    "_assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg",
+    "_assets/img/bg",
+    "_assets/img/banners",
+    "_assets/img",
+    "_assets/technical-support.png",
     "_hobbies/Flameshot.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Whats Learning/О чём база~.md",
@@ -260,22 +276,14 @@
     "Development/Architecture/Dev/_png/Pasted image 20241027133737.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027133648.png",
     "Development/Architecture/Dev/_png/Pasted image 20241027133237.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241027133038.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241027132918.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241027124312.png",
-    "Development/Architecture/Dev/_png/Pasted image 20241027124303.png",
     "Development/Клиент-сервер/REST API.md",
     "Development/Terminal.md",
     "Development/GIT/_lessons/Удалённый репозиторий.md",
     "Development/NVim/_lessons/Настройка окружения.md",
-    "Development/MobileDev/React Native.md",
     "_hobbies/_png",
     "Development/Architecture/Dev/_png",
     "Development/Architecture/Dev",
     "Development/Architecture/_png",
-    "Development/Architecture",
-    "Development/WebSockets/_png",
-    "Development/WebSockets",
-    "Development/Клиент-сервер/_png"
+    "Development/Architecture"
   ]
 }
