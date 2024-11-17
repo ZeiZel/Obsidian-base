@@ -1,0 +1,277 @@
+{
+  "main": {
+    "id": "925db0cf0f350d19",
+    "type": "split",
+    "children": [
+      {
+        "id": "e5132d95ac1dc33a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "baa54bf684a65bda",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Architecture/index.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4cd8f71c815bb28d",
+    "type": "split",
+    "children": [
+      {
+        "id": "5ccfa79ead0b33dc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5935e4ff46ee1e3c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "16abcf779ebffa46",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "Паттерны",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "cddeae115023fbde",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "20cc73412f5ac259",
+    "type": "split",
+    "children": [
+      {
+        "id": "a8d88352d782b549",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d37a6a7c0a4ac866",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Development/Architecture/Dev/MV-patterns.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for MV-patterns"
+            }
+          },
+          {
+            "id": "3f88fd23278f96aa",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "7f4f3b5bfa988ac2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "78d2337a74d1186f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "b86271c67a969cc7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Development/Architecture/Dev/Atomic Design.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Atomic Design"
+            }
+          },
+          {
+            "id": "cf5cb3a257aa7887",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "415bb995fabe15e8",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          },
+          {
+            "id": "dbe3d2e39ca8cfee",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "7468eb0f24006a20",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "1f39358ee24ff4a9",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          }
+        ],
+        "currentTab": 9
+      }
+    ],
+    "direction": "horizontal",
+    "width": 265.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "baa54bf684a65bda",
+  "lastOpenFiles": [
+    "Development/Architecture/Dev/Atomic Design.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241102210235.png",
+    "Development/Agile.md",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+    "Development/FrontEnd/React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)/_lessons/03 TypeScript.md",
+    "Programming Principes/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
+    "Development/Architecture/Dev/Onion Architecture.md",
+    "Development/Architecture/Dev/index.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241027140036.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027135743.png",
+    "Development/Architecture/Dev/MV-patterns.md",
+    "Development/Architecture/Dev/_png/Pasted image 20241027133737.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027133648.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027133237.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027133038.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027132918.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027124312.png",
+    "Development/Architecture/Dev/_png/Pasted image 20241027124303.png",
+    "Development/Клиент-сервер/REST API.md",
+    "Development/Terminal.md",
+    "Development/GIT/_lessons/Удалённый репозиторий.md",
+    "Development/NVim/_lessons/Настройка окружения.md",
+    "Development/MobileDev/React Native.md",
+    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+    "_hobbies/Flameshot.md",
+    "_hobbies/_png",
+    "Envirompment/DataGrip.md",
+    "Envirompment/WebStorm.md",
+    "Development/Architecture/index.md",
+    "Development/Architecture/Dev/_png",
+    "Development/Architecture/Dev",
+    "Development/ESBuild.md",
+    "Development/Architecture/Dev/FSD.md",
+    "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/Architecture/_png",
+    "Development/Architecture",
+    "Development/WebSockets/_png",
+    "Development/WebSockets",
+    "Development/Клиент-сервер/_png"
+  ]
+}
