@@ -14,11 +14,7 @@
   "obsidian-prism-theme@@pt-icon-folder-accent": true,
   "obsidian-prism-theme@@pt-fixed-status-bar-align": "pt-fixed-status-bar-align-right",
   "obsidian-prism-theme@@pt-status-bar-style": "pt-status-bar-position-floating",
-  "obsidian-prism-theme@@file-explorer-left-margin": 17,
   "obsidian-prism-theme@@pt-custom-vault-banner": false,
-  "obsidian-prism-theme@@custom-vault-banner-horizontal-align": "pt-custom-vault-banner-justify-content-center",
-  "obsidian-prism-theme@@custom-vault-banner-order": "pt-custom-vault-banner-order-ltr",
-  "obsidian-prism-theme@@pt-custom-vault-banner-sticky": true,
   "obsidian-prism-theme@@highlight-text-accent-custom-lt": "#9E7BD9",
   "obsidian-prism-theme@@dark-mark-highlight-style": "pt-highlight-style-border-dt",
   "obsidian-prism-theme@@pt-disable-blur": true,
@@ -112,5 +108,9 @@
   "anuppuccin-theme-settings@@anuppuccin-accent-toggle": true,
   "anuppuccin-theme-settings@@anp-border-padding": 10,
   "anuppuccin-theme-settings@@anp-rainbow-folder-bg-opacity": 0.4,
-  "anuppuccin-theme-settings@@file-line-width": 900
+  "anuppuccin-theme-settings@@file-line-width": 900,
+  "anuppuccin-theme-settings@@anp-inline-title-vis": "block",
+  "anuppuccin-theme-settings@@anp-h1-divider": true,
+  "anuppuccin-theme-settings@@anp-h2-divider": false,
+  "anuppuccin-theme-settings@@anp-h3-divider": false
 }

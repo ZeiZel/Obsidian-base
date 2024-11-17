@@ -46,8 +46,8 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//Soft",
-    "//Books"
+    "Development",
+    "Soft"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
