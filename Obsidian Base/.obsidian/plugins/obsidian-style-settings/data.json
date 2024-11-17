@@ -111,5 +111,6 @@
   "anuppuccin-theme-settings@@anp-rainbow-file-toggle": false,
   "anuppuccin-theme-settings@@anuppuccin-accent-toggle": true,
   "anuppuccin-theme-settings@@anp-border-padding": 10,
-  "anuppuccin-theme-settings@@anp-rainbow-folder-bg-opacity": 0.4
+  "anuppuccin-theme-settings@@anp-rainbow-folder-bg-opacity": 0.4,
+  "anuppuccin-theme-settings@@file-line-width": 900
 }
