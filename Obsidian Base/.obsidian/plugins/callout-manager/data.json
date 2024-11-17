@@ -1,0 +1,22 @@
+{
+  "callouts": {
+    "custom": [
+      "greeting"
+    ],
+    "settings": {
+      "greeting": [
+        {
+          "changes": {
+            "icon": "lucide-crown",
+            "color": "244, 235, 138"
+          }
+        }
+      ]
+    }
+  },
+  "calloutDetection": {
+    "obsidian": true,
+    "theme": true,
+    "snippet": true
+  }
+}

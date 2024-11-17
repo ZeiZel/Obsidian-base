@@ -1,25 +1,27 @@
 {
   "main": {
-    "id": "925db0cf0f350d19",
+    "id": "5324373015726ba8",
     "type": "split",
     "children": [
       {
-        "id": "e5132d95ac1dc33a",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "baa54bf684a65bda",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Soft/Agile (Scrum, Kanban, Lean).md",
+                "file": "Index.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "Agile (Scrum, Kanban, Lean)"
+              "title": "Index"
             }
           }
         ]
@@ -72,6 +74,16 @@
               "state": {},
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "44a48e5ff48a46e6",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
             }
           }
         ]
@@ -153,10 +165,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Agile (Scrum, Kanban, Lean).md"
+                "file": "Index.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Agile (Scrum, Kanban, Lean)"
+              "title": "Outline of Index"
             }
           },
           {
@@ -235,11 +247,15 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "omnisearch:Omnisearch": false,
+      "homepage:Open homepage": false,
+      "callout-manager:Insert Callout": false
     }
   },
-  "active": "5935e4ff46ee1e3c",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Index.md",
     "Soft/Agile (Scrum, Kanban, Lean).md",
     "Soft/Собеседование.md",
     "Soft/Как учиться учиться.md",
@@ -280,7 +296,6 @@
     "Development/Architecture/Dev/_png",
     "Development/Architecture/Dev",
     "Development/ESBuild.md",
-    "Development/Architecture/Dev/FSD.md",
     "Development/Architecture/_png",
     "Development/Architecture",
     "Development/WebSockets/_png",

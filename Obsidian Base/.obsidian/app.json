@@ -8,6 +8,6 @@
   "alwaysUpdateLinks": true,
   "spellcheck": true,
   "showFrontmatter": true,
-  "vimMode": true,
+  "vimMode": false,
   "strictLineBreaks": true
 }

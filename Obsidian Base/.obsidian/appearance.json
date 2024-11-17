@@ -1,10 +1,10 @@
 {
   "baseFontSize": 21,
   "translucency": true,
-  "cssTheme": "Border",
-  "accentColor": "#6b7fd1",
+  "cssTheme": "AnuPpuccin",
+  "accentColor": "",
   "nativeMenus": false,
-  "theme": "obsidian",
+  "theme": "system",
   "interfaceFontFamily": "JetBrainsMono Nerd Font,JetBrains Mono,Montserrat,Consolas,Arial",
   "baseFontSizeAction": true,
   "textFontFamily": "Montserrat,JetBrainsMono Nerd Font,JetBrains Mono,Consolas,Arial",

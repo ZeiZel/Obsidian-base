@@ -6,6 +6,7 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "MiFolderTypescript",
       "MiTypescript",
       "MiRuby",
       "MiDatabase",
@@ -59,5 +60,5 @@
   "Development/BackEnd/Mongo DB.md": "MiDatabase",
   "Development/BackEnd/Prisma ORM.md": "MiDatabase",
   "Development/BackEnd/Ruby.md": "MiRuby",
-  "Development/TypeScript": "MiTypescript"
+  "Development/TypeScript": "MiFolderTypescript"
 }

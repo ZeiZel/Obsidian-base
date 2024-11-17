@@ -1,12 +1,4 @@
 {
-  "editor:set-heading": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "1"
-    }
-  ],
   "editor:focus-right": [],
   "editor:focus-left": [],
   "editor:focus-bottom": [],
@@ -23,6 +15,7 @@
   "cmenu-plugin:hide-show-menu": [
     {
       "modifiers": [
+        "Alt",
         "Mod"
       ],
       "key": " "
@@ -106,5 +99,24 @@
       ],
       "key": "-"
     }
-  ]
+  ],
+  "omnisearch:show-modal": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "S"
+    }
+  ],
+  "omnisearch:show-modal-infile": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "S"
+    }
+  ],
+  "editor:save-file": [],
+  "file-explorer:new-file-in-new-pane": []
 }
