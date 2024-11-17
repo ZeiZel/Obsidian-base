@@ -26,5 +26,8 @@
   "obsidian-linter",
   "highlightr-plugin",
   "home-tab",
-  "obsidian-banners"
+  "obsidian-banners",
+  "obsidian-kanban",
+  "editing-toolbar",
+  "make-md"
 ]

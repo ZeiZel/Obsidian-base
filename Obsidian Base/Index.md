@@ -1,12 +1,23 @@
 ---
-banner: "![[_assets/img/bg/macos-big-sur-apple.jpg]]"
+banner: _assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg
 banner_y: 0.396
+sticker: emoji//1f600
+---
+
+# Homepage
 ---
 
 > [!greeting]
-> Добрый день, Валерий :3
+> Добрый день, [User] :3
 
 
+
+---
+## Оглавление
+
+- Development
+- Soft
+- Design
 
 
 
