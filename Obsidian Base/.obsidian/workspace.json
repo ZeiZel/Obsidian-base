@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Architecture/index.md",
+                "file": "Soft/Собеседование.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Собеседование"
             }
           }
         ]
@@ -230,9 +230,14 @@
   },
   "active": "baa54bf684a65bda",
   "lastOpenFiles": [
+    "Soft/Agile.md",
+    "Soft/Собеседование.md",
+    "Soft/Как учиться учиться.md",
+    "SelfDevelopment/_png",
+    "SelfDevelopment",
+    "Development/Architecture/index.md",
     "Development/Architecture/Dev/Atomic Design.md",
     "Development/Architecture/Dev/_png/Pasted image 20241102210235.png",
-    "Development/Agile.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
     "Development/TypeScript/TypeScript.md",
@@ -262,12 +267,10 @@
     "_hobbies/_png",
     "Envirompment/DataGrip.md",
     "Envirompment/WebStorm.md",
-    "Development/Architecture/index.md",
     "Development/Architecture/Dev/_png",
     "Development/Architecture/Dev",
     "Development/ESBuild.md",
     "Development/Architecture/Dev/FSD.md",
-    "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/Architecture/_png",
     "Development/Architecture",
     "Development/WebSockets/_png",
