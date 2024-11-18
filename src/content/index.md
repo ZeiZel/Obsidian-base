@@ -1,6 +1,6 @@
 ---
 banner: "_assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg"
-banner_y: 0.396
+banner_y: 0.351
 sticker: emoji//1f600
 aliases:
   - index
