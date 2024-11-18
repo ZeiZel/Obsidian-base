@@ -50,7 +50,8 @@
     "Soft",
     "//Soft/Soft/Agile",
     "//Design",
-    "//Development"
+    "//Development",
+    "//Soft"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

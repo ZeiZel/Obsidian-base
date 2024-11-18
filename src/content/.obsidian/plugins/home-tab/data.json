@@ -24,8 +24,20 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+      "timestamp": 1731947458588
+    },
+    {
       "filepath": "index.md",
-      "timestamp": 1731943915666
+      "timestamp": 1731947454244
+    },
+    {
+      "filepath": "Soft/Agile/Old Agile.md",
+      "timestamp": 1731947453270
+    },
+    {
+      "filepath": "Soft/Soft.md",
+      "timestamp": 1731943962164
     }
   ],
   "bookmarkedFileStore": [],
