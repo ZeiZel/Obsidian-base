@@ -53,7 +53,12 @@
     "//Soft",
     "//Development",
     "//Development/Development/TypeScript",
-    "//Development/Development/Index"
+    "//Development/Development/Index",
+    "//Development/Development/Инструменты",
+    "//Development/Development/Tips&Tricks",
+    "//Development/Development/FrontEnd",
+    "//Development/Development/FrontEnd/Development/FrontEnd/Angular 9. Теория и Практика",
+    "//Development/Development/Клиент-сервер"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

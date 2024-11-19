@@ -1,5 +1,4 @@
 [
-  "obsidian-admonition",
   "advanced-cursors",
   "table-editor-obsidian",
   "obsidian-banners",
@@ -14,9 +13,12 @@
   "tag-wrangler",
   "obsidian-style-settings",
   "note-refactor-obsidian",
-  "obsidian-icon-folder",
   "obsidian-linter",
   "make-md",
   "obsidian-emoji-toolbar",
-  "highlightr-plugin"
+  "callout-manager",
+  "cm-editor-syntax-highlight-obsidian",
+  "settings-search",
+  "obsidian-outliner",
+  "omnisearch"
 ]

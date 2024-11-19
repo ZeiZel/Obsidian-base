@@ -1,6 +1,6 @@
 ---
-banner: "_assets/img/banners/early-evening-violet.jpg"
-banner_y: 1
+banner: _assets/img/banners/early-evening-violet.jpg
+banner_y: "71"
 sticker: emoji//1f600
 aliases:
   - index

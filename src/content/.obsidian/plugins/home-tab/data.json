@@ -24,24 +24,16 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Development/TypeScript/_lessons/10 Декораторы.md",
-      "timestamp": 1732035700653
+      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+      "timestamp": 1732036462766
     },
     {
-      "filepath": "Development/TypeScript/TypeScript.md",
-      "timestamp": 1732035691912
+      "filepath": "index.md",
+      "timestamp": 1732036419897
     },
     {
-      "filepath": "Development/Terminal.md",
-      "timestamp": 1732035673331
-    },
-    {
-      "filepath": "Development/TypeScript/_lessons/01 Введение.md",
-      "timestamp": 1732035664468
-    },
-    {
-      "filepath": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
-      "timestamp": 1732035622763
+      "filepath": "Development/Python.md",
+      "timestamp": 1732036418851
     }
   ],
   "bookmarkedFileStore": [],
@@ -49,6 +41,6 @@
   "replaceNewTabs": true,
   "newTabOnStart": false,
   "closePreviousSessionTabs": false,
-  "omnisearch": false,
+  "omnisearch": true,
   "showOmnisearchExcerpt": true
 }
