@@ -62,10 +62,10 @@
   "Development/BackEnd/Mongo DB.md": "MiDatabase",
   "Development/BackEnd/Prisma ORM.md": "MiDatabase",
   "Development/BackEnd/Ruby.md": "MiRuby",
-  "Development/TypeScript": "MiFolderTypescript",
   "Development/Клиент-сервер/Apollo + GraphQL.md": "MiApollo",
   "Development/Клиент-сервер/REST API.md": "MiApiblueprint",
   "Development/Клиент-сервер/RPC (gRPC, tRPC).md": "MiApiblueprint",
   "Development/Клиент-сервер/WebSocket.md": "MiApiblueprint",
-  "Development/Клиент-сервер": "MiApiblueprint"
+  "Development/Клиент-сервер": "MiApiblueprint",
+  "Development/TypeScript": "MiFolderTypescript"
 }

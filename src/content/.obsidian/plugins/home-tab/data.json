@@ -24,16 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-      "timestamp": 1732032700333
+      "filepath": "Development/TypeScript/_lessons/10 Декораторы.md",
+      "timestamp": 1732035700653
     },
     {
-      "filepath": "index.md",
-      "timestamp": 1732032616070
+      "filepath": "Development/TypeScript/TypeScript.md",
+      "timestamp": 1732035691912
     },
     {
-      "filepath": "Soft/Soft.md",
-      "timestamp": 1732032496026
+      "filepath": "Development/Terminal.md",
+      "timestamp": 1732035673331
+    },
+    {
+      "filepath": "Development/TypeScript/_lessons/01 Введение.md",
+      "timestamp": 1732035664468
+    },
+    {
+      "filepath": "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+      "timestamp": 1732035622763
     }
   ],
   "bookmarkedFileStore": [],

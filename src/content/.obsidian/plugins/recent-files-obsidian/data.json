@@ -5,6 +5,10 @@
       "path": "index.md"
     },
     {
+      "basename": "DataGrip",
+      "path": "Envirompment/DataGrip.md"
+    },
+    {
       "basename": "Прогресс изучения технологий",
       "path": "Whats Learning/Прогресс изучения технологий.md"
     },
@@ -19,22 +23,6 @@
     {
       "basename": "RoadMap",
       "path": "Whats Learning/RoadMap/RoadMap.md"
-    },
-    {
-      "basename": "Index",
-      "path": "Index.md"
-    },
-    {
-      "basename": "DataGrip",
-      "path": "Envirompment/DataGrip.md"
-    },
-    {
-      "basename": "ZeiZel",
-      "path": "ZeiZel.md"
-    },
-    {
-      "basename": "Agile (Scrum, Kanban, Lean)",
-      "path": "Soft/Agile (Scrum, Kanban, Lean).md"
     }
   ],
   "omittedPaths": [],

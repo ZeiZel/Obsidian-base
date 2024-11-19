@@ -2,7 +2,7 @@
 
 ## 03 TypeScript
 
-[TypeScript с нуля - язык + паттерны проектирования](../../../TypeScript/TypeScript.md)
+[TypeScript с нуля - язык + паттерны проектирования](../../../Index/TypeScript.md)
 
 ### JSX
 
