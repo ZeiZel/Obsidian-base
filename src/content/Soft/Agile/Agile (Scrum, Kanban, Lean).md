@@ -6,6 +6,9 @@ tags:
   - Lean
   - SberGile
   - Less
+banner: "_assets/img/banners/agile.png"
+banner_y: "48"
+sticker: emoji//1f30f
 ---
 ## Введение
 

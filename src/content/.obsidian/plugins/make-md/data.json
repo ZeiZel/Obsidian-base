@@ -48,7 +48,9 @@
     "/",
     "Development",
     "Soft",
-    "//Soft/Soft/Agile"
+    "//Soft/Soft/Agile",
+    "//_Obsidian",
+    "//Soft"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

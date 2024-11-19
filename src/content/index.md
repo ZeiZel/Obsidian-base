@@ -1,6 +1,6 @@
 ---
-banner: "_assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg"
-banner_y: 0.351
+banner: "_assets/img/banners/early-evening-violet.jpg"
+banner_y: "71"
 sticker: emoji//1f600
 aliases:
   - index
@@ -10,7 +10,8 @@ aliases:
 tags:
   - homepage
   - dashboard
-description: Base homepage
+description: Base homepage.
+cssclasses: 
 ---
 
 # Homepage
