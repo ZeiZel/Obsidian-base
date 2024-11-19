@@ -24,16 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-      "timestamp": 1732036462766
+      "filepath": "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+      "timestamp": 1732036865696
     },
     {
-      "filepath": "index.md",
-      "timestamp": 1732036419897
+      "filepath": "Development/TypeScript/TypeScriptCmp.md",
+      "timestamp": 1732036864578
     },
     {
-      "filepath": "Development/Python.md",
-      "timestamp": 1732036418851
+      "filepath": "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+      "timestamp": 1732036862872
+    },
+    {
+      "filepath": "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+      "timestamp": 1732036859667
+    },
+    {
+      "filepath": "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
+      "timestamp": 1732036856325
     }
   ],
   "bookmarkedFileStore": [],

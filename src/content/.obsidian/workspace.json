@@ -36,9 +36,24 @@
               "icon": "lucide-file",
               "title": "Agile (Scrum, Kanban, Lean)"
             }
+          },
+          {
+            "id": "77cde45bcd265efa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "12 Порождающие паттерны"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -132,10 +147,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Python.md"
+                "file": "Development/TypeScript/_lessons/12 Порождающие паттерны.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Python"
+              "title": "Outline of 12 Порождающие паттерны"
             }
           },
           {
@@ -255,8 +270,18 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "5f12c79e2351f519",
+  "active": "77cde45bcd265efa",
   "lastOpenFiles": [
+    "Development/TypeScript/TypeScriptCmp.md",
+    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
+    "Development/TypeScript/_lessons/05 Классы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/4. Директивы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/12. Unit тестирование.md",
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "index.md",
     "Development/Python.md",
@@ -266,7 +291,6 @@
     "Development/Real-time клиент-серверное взаимодействие.md",
     "Development/TypeScript/_lessons/10 Декораторы.md",
     "Development/NX.md",
-    "Development/TypeScript/TypeScriptCmp.md",
     "Development/TypeScript/_lessons/_png/ff160b641965688964c7d566bd0af549.png",
     "Development/TypeScript/_lessons/_png/ff068bf90e57bcc8fe088e5166c5846e.png",
     "Development/TypeScript/_lessons/_png/feb61e76d538e47ecdf13703c8a668bb.png",
@@ -289,19 +313,10 @@
     "_Obsidian/Obsidian.md",
     "Envirompment/DataGrip.md",
     "Whats Learning/Прогресс изучения технологий.md",
-    "Whats Learning/О чём база~.md",
-    "Development/Bun.md",
-    "Whats Learning/RoadMap/RoadMap.md",
-    "Soft/Soft.md",
-    "Untitled Kanban.md",
     "_assets/img/banners/Unconfirmed 428832.~",
-    "Soft/Agile/Agile.md",
     "Soft/Agile/_png",
-    "Soft/Собеседование.md",
     "Tags/#+#roadmap",
     "Soft/Agile",
-    "Index.md",
-    "Books/Scrum. Революционный метод управления проектами.md",
     "Tags"
   ]
 }
