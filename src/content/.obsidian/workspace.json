@@ -4,11 +4,28 @@
     "type": "split",
     "children": [
       {
-        "id": "0c348b0be9207710",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "3466c0b4dd527c70",
+            "id": "e7a7b303c61786dc",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "preview",
+                "backlinks": true,
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "865c3e92818372bf",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -22,7 +39,8 @@
               "title": "Agile (Scrum, Kanban, Lean)"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -159,6 +177,16 @@
             "id": "25c85db80e7ae754",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "f8ac716044d0129e",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -232,11 +260,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "3466c0b4dd527c70",
+  "active": "865c3e92818372bf",
   "lastOpenFiles": [
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+    "Soft/Agile/Agile.md",
     "index.md",
-    "Soft/Agile/Old Agile.md",
     "Soft/Agile/_png/Pasted image 20241118191317.png",
     "Soft/Agile/_png/Pasted image 20241118190217.png",
     "Soft/Agile/_png/Pasted image 20241118183953.png",
@@ -248,7 +277,6 @@
     "Soft/Soft.md",
     "Soft/Собеседование.md",
     "Tags/#+#roadmap",
-    "Soft/Agile/Agile.md",
     "Soft/Agile",
     "Index.md",
     "Books/Scrum. Революционный метод управления проектами.md",
