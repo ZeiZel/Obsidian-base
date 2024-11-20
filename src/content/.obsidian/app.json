@@ -1,0 +1,13 @@
+{
+  "promptDelete": false,
+  "readableLineLength": true,
+  "showLineNumber": true,
+  "attachmentFolderPath": "./_png",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "alwaysUpdateLinks": true,
+  "spellcheck": true,
+  "showFrontmatter": true,
+  "vimMode": false,
+  "strictLineBreaks": true
+}

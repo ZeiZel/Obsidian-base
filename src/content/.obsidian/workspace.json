@@ -1,0 +1,331 @@
+{
+  "main": {
+    "id": "5324373015726ba8",
+    "type": "split",
+    "children": [
+      {
+        "id": "4509724f8bf84da7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e7a7b303c61786dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "5f129794bd22ff8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Agile (Scrum, Kanban, Lean)"
+            }
+          },
+          {
+            "id": "77cde45bcd265efa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "12 Порождающие паттерны"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4cd8f71c815bb28d",
+    "type": "split",
+    "children": [
+      {
+        "id": "5ccfa79ead0b33dc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5935e4ff46ee1e3c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "16abcf779ebffa46",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "cddeae115023fbde",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "b188a48fa94b8f2b",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "b4a79c0593e28d70",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Spaces"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 374
+  },
+  "right": {
+    "id": "20cc73412f5ac259",
+    "type": "split",
+    "children": [
+      {
+        "id": "a8d88352d782b549",
+        "type": "tabs",
+        "dimension": 50.381679389312964,
+        "children": [
+          {
+            "id": "b86271c67a969cc7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Development/TypeScript/_lessons/12 Порождающие паттерны.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 12 Порождающие паттерны"
+            }
+          },
+          {
+            "id": "5f12c79e2351f519",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          },
+          {
+            "id": "e2572c6f02a8a515",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "e68a2bebfe8b6c81",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          }
+        ],
+        "currentTab": 3
+      },
+      {
+        "id": "5b34c4077a77a8e5",
+        "type": "tabs",
+        "dimension": 49.618320610687036,
+        "children": [
+          {
+            "id": "4a6c889a3d5e7439",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          },
+          {
+            "id": "7f4f3b5bfa988ac2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "78d2337a74d1186f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "3f88fd23278f96aa",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "d37a6a7c0a4ac866",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 447.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Open graph view": false,
+      "switcher:Open quick switcher": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false,
+      "homepage:Open homepage": false,
+      "callout-manager:Insert Callout": false,
+      "omnisearch:Omnisearch": false
+    }
+  },
+  "active": "4a6c889a3d5e7439",
+  "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "Tags/#+#screenshot",
+    "Tags/#+#ci",
+    "Tags/#+#loki",
+    "Tags/#+#storybook",
+    "Tags/#+#reacttestinglibrary",
+    "Tags/#+#bundleanalyzer",
+    "Tags/#+#errorboundary",
+    "Development/TypeScript/TypeScriptCmp.md",
+    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
+    "Development/TypeScript/_lessons/05 Классы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/4. Директивы.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
+    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/12. Unit тестирование.md",
+    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+    "index.md",
+    "Development/Python.md",
+    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Проверка типов с помощью PropTypes.md",
+    "Development/REST API.md",
+    "Development/PNPM.md",
+    "Development/Real-time клиент-серверное взаимодействие.md",
+    "Development/TypeScript/_lessons/10 Декораторы.md",
+    "Development/NX.md",
+    "Development/TypeScript/_lessons/_png/ff160b641965688964c7d566bd0af549.png",
+    "Development/TypeScript/_lessons/_png/ff068bf90e57bcc8fe088e5166c5846e.png",
+    "Development/TypeScript/_lessons/_png/feb61e76d538e47ecdf13703c8a668bb.png",
+    "Development/TypeScript/_lessons/_png/fdf13c218c37181b5bf8e9bdb2f928b7.png",
+    "Development/TypeScript/_lessons/_png/fd9b69ab06ec9043e715f36ad7c4cd11.png",
+    "Development/TypeScript/_lessons/_png/fc8c160bd86cca7bffc0a33c069500a1.png",
+    "Development/TypeScript/_lessons/_png/fa3107923b92efaeecbd2278487c5ed0.png",
+    "Development/TypeScript/_lessons/_png/f89f7aef94066ccf2efadc34973d2d86.png",
+    "Development/TypeScript/_lessons/_png/f82db476ba90ae04f64dd37335378752.png",
+    "Development/TypeScript/_lessons/_png/f5fcf94d758f215b35d15a8a08e0cc91.png",
+    "Development/TypeScript/TypeScript.md",
+    "Development/Index/_lessons/_png",
+    "Development/Index/_lessons",
+    "Development/Index",
+    "Development/Terminal.md",
+    "Development/TypeScript/_lessons/01 Введение.md",
+    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
+    "_Obsidian/Obsidian.md"
+  ]
+}

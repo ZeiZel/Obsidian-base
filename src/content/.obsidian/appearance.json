@@ -1,0 +1,13 @@
+{
+  "baseFontSize": 21,
+  "translucency": true,
+  "cssTheme": "AnuPpuccin",
+  "accentColor": "",
+  "nativeMenus": false,
+  "theme": "system",
+  "interfaceFontFamily": "JetBrainsMono Nerd Font,JetBrains Mono,Montserrat,Consolas,Arial",
+  "baseFontSizeAction": true,
+  "textFontFamily": "Montserrat,JetBrainsMono Nerd Font,JetBrains Mono,Consolas,Arial",
+  "monospaceFontFamily": "JetBrainsMono Nerd Font,JetBrains Mono,Consolas",
+  "enabledCssSnippets": []
+}
