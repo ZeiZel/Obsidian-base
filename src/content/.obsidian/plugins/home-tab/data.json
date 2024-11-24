@@ -24,8 +24,12 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
-      "timestamp": 1732440111740
+      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+      "timestamp": 1732440618431
+    },
+    {
+      "filepath": "index.md",
+      "timestamp": 1732440609067
     }
   ],
   "bookmarkedFileStore": [],

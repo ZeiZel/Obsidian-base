@@ -38,7 +38,7 @@
   "jotter@@colorful-tooltips": true,
   "jotter@@color-scheme": "ct-keeper",
   "mado-miniflow@@file-line-width": 950,
-  "mado-miniflow@@toggle-tab-height": false,
+  "mado-miniflow@@toggle-tab-height": true,
   "mado-miniflow@@toggle-tab-height-stacked": false,
   "mado-miniflow@@theme-color": "theme-deep-blue",
   "mado-miniflow@@toggle-wave-background": false,
@@ -129,5 +129,6 @@
   "anuppuccin-theme-settings@@anp-header-color-toggle": true,
   "anuppuccin-theme-settings@@anp-header-margin-toggle": false,
   "anuppuccin-theme-settings@@anp-header-divider-color-toggle": true,
-  "anuppuccin-theme-settings@@anp-decoration-toggle": true
+  "anuppuccin-theme-settings@@anp-decoration-toggle": true,
+  "anuppuccin-theme-settings@@anp-translucency-opacity": 0.9
 }
