@@ -21,38 +21,22 @@
               "icon": "lucide-file",
               "title": "index"
             }
-          },
-          {
-            "id": "e53aff7cd7f204d9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Agile (Scrum, Kanban, Lean)"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "4cd8f71c815bb28d",
+    "id": "7d5d9729e93c69a0",
     "type": "split",
     "children": [
       {
-        "id": "5ccfa79ead0b33dc",
+        "id": "3a9f6fcffec95690",
         "type": "tabs",
         "children": [
           {
-            "id": "5935e4ff46ee1e3c",
+            "id": "48c5943284c71db8",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -64,7 +48,7 @@
             }
           },
           {
-            "id": "16abcf779ebffa46",
+            "id": "c8a96e2fe293303a",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -81,7 +65,7 @@
             }
           },
           {
-            "id": "cddeae115023fbde",
+            "id": "8a26a51640c36244",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -91,17 +75,7 @@
             }
           },
           {
-            "id": "b188a48fa94b8f2b",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
-            }
-          },
-          {
-            "id": "b4a79c0593e28d70",
+            "id": "9f99dd9ecec9198f",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -111,123 +85,22 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 374
+    "width": 300
   },
   "right": {
-    "id": "20cc73412f5ac259",
+    "id": "5d906d621d61f331",
     "type": "split",
     "children": [
       {
-        "id": "a8d88352d782b549",
+        "id": "87f779e737b54d79",
         "type": "tabs",
-        "dimension": 50.381679389312964,
         "children": [
           {
-            "id": "b86271c67a969cc7",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
-              },
-              "icon": "lucide-list",
-              "title": "Outline of Agile (Scrum, Kanban, Lean)"
-            }
-          },
-          {
-            "id": "5f12c79e2351f519",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
-            "id": "e2572c6f02a8a515",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "362a15e815631763",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
-          }
-        ],
-        "currentTab": 3
-      },
-      {
-        "id": "5b34c4077a77a8e5",
-        "type": "tabs",
-        "dimension": 49.618320610687036,
-        "children": [
-          {
-            "id": "4a6c889a3d5e7439",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
-            }
-          },
-          {
-            "id": "7f4f3b5bfa988ac2",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": true
-              },
-              "icon": "lucide-tags",
-              "title": "Tags"
-            }
-          },
-          {
-            "id": "78d2337a74d1186f",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
-            }
-          },
-          {
-            "id": "3f88fd23278f96aa",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links"
-            }
-          },
-          {
-            "id": "d37a6a7c0a4ac866",
+            "id": "55e165ebdb0aba10",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -243,18 +116,67 @@
               "icon": "links-coming-in",
               "title": "Backlinks"
             }
+          },
+          {
+            "id": "f2a11511413c62c1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "912c743976f26aa3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "656d24955483df37",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "index.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of index"
+            }
+          },
+          {
+            "id": "5d9d7a9f517bab83",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 447.5
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
-      "omnisearch:Omnisearch": false,
-      "graph:Open graph view": false,
       "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
@@ -262,56 +184,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
       "homepage:Open homepage": false,
-      "callout-manager:Insert Callout": false
+      "callout-manager:Insert Callout": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "e53aff7cd7f204d9",
-  "lastOpenFiles": [
-    "index.md",
-    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
-    "Development/TypeScript/TypeScriptCmp.md",
-    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
-    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
-    "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
-    "Development/TypeScript/_lessons/05 Классы.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/2. Основы и синтаксис.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/Angular.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/4. Директивы.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/3. Компоненты в деталях.md",
-    "Development/FrontEnd/Angular 9. Теория и Практика/_lessons/12. Unit тестирование.md",
-    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-    "Development/Python.md",
-    "Development/FrontEnd/Полный курс по JavaScript + React - с нуля до результата (2022)/_lessons/009 Проверка типов с помощью PropTypes.md",
-    "Development/REST API.md",
-    "Development/PNPM.md",
-    "Development/Real-time клиент-серверное взаимодействие.md",
-    "Development/TypeScript/_lessons/10 Декораторы.md",
-    "Development/NX.md",
-    "Development/TypeScript/_lessons/_png/ff160b641965688964c7d566bd0af549.png",
-    "Development/TypeScript/_lessons/_png/ff068bf90e57bcc8fe088e5166c5846e.png",
-    "Development/TypeScript/_lessons/_png/feb61e76d538e47ecdf13703c8a668bb.png",
-    "Development/TypeScript/_lessons/_png/fdf13c218c37181b5bf8e9bdb2f928b7.png",
-    "Development/TypeScript/_lessons/_png/fd9b69ab06ec9043e715f36ad7c4cd11.png",
-    "Development/TypeScript/_lessons/_png/fc8c160bd86cca7bffc0a33c069500a1.png",
-    "Development/TypeScript/_lessons/_png/fa3107923b92efaeecbd2278487c5ed0.png",
-    "Development/TypeScript/_lessons/_png/f89f7aef94066ccf2efadc34973d2d86.png",
-    "Development/TypeScript/_lessons/_png/f82db476ba90ae04f64dd37335378752.png",
-    "Development/TypeScript/_lessons/_png/f5fcf94d758f215b35d15a8a08e0cc91.png",
-    "Development/TypeScript/TypeScript.md",
-    "Development/Index/_lessons/_png",
-    "Development/Index/_lessons",
-    "Development/Index",
-    "Development/Terminal.md",
-    "Tags/#javascript",
-    "Tags/#typescript",
-    "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
-    "_Obsidian/Obsidian.md",
-    "Envirompment/DataGrip.md",
-    "_assets/img/banners/Unconfirmed 428832.~",
-    "Soft/Agile/_png",
-    "Tags/#+#roadmap",
-    "Soft/Agile",
-    "Tags"
-  ]
+  "active": "e7a7b303c61786dc",
+  "lastOpenFiles": []
 }

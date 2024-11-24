@@ -1,12 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
+      "basename": "conflict-files-obsidian-git",
+      "path": "conflict-files-obsidian-git.md"
+    },
+    {
       "basename": "Agile (Scrum, Kanban, Lean)",
       "path": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
     },
     {
-      "basename": "index",
-      "path": "index.md"
+      "basename": "Git",
+      "path": "Development/GIT/Git.md"
+    },
+    {
+      "basename": "Github Actions",
+      "path": "Development/GIT/Github Actions.md"
     },
     {
       "basename": "DataGrip",
