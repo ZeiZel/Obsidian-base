@@ -21,39 +21,8 @@
               "icon": "lucide-file",
               "title": "index"
             }
-          },
-          {
-            "id": "5f129794bd22ff8e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Agile (Scrum, Kanban, Lean)"
-            }
-          },
-          {
-            "id": "77cde45bcd265efa",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "12 Порождающие паттерны"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -167,10 +136,10 @@
             "id": "e2572c6f02a8a515",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "New tab"
             }
           },
           {
@@ -182,9 +151,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "705382bac8a3786e",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "5b34c4077a77a8e5",
@@ -224,8 +203,8 @@
                 "showSearch": false,
                 "searchQuery": ""
               },
-              "icon": "lucide-archive",
-              "title": "All properties"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -280,8 +259,9 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "4a6c889a3d5e7439",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
     "conflict-files-obsidian-git.md",
     "Tags/#+#screenshot",
     "Tags/#+#ci",
