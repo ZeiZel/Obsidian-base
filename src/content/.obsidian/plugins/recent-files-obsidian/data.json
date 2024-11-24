@@ -9,6 +9,10 @@
       "path": "index.md"
     },
     {
+      "basename": "English",
+      "path": "English/English.md"
+    },
+    {
       "basename": "conflict-files-obsidian-git",
       "path": "conflict-files-obsidian-git.md"
     },

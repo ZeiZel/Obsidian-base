@@ -23,7 +23,7 @@
             }
           },
           {
-            "id": "680af6dfdc07068f",
+            "id": "346b0b83ad96e7cb",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -140,11 +140,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from Agile (Scrum, Kanban, Lean)"
             }
           },
           {
@@ -172,6 +173,16 @@
           },
           {
             "id": "5d9d7a9f517bab83",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "26d4dbd2fe177170",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -203,9 +214,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Agile (Scrum, Kanban, Lean)"
             }
           }
         ],
@@ -230,9 +243,11 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "656d24955483df37",
+  "active": "346b0b83ad96e7cb",
   "lastOpenFiles": [
+    "Soft/Agile/_png/Pasted image 20241124161543.png",
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-    "index.md"
+    "index.md",
+    "English/English.md"
   ]
 }
