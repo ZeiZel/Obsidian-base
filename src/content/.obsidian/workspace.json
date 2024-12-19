@@ -122,16 +122,6 @@
             }
           },
           {
-            "id": "16acae8d2daff7a5",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
             "id": "912c743976f26aa3",
             "type": "leaf",
             "state": {
@@ -165,7 +155,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -187,11 +177,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Agile (Scrum, Kanban, Lean)"
+              "title": "Outline"
             }
           }
         ],
@@ -213,8 +201,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "912c743976f26aa3",
   "lastOpenFiles": [
+    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/_png/Pasted image 20241219114631.png",
     "Soft/Agile/_png/Pasted image 20241219114521.png",
     "Soft/Agile/_png/Pasted image 20241219114202.png",
@@ -226,7 +215,6 @@
     "Soft/Agile/_png/Pasted image 20241216192737.png",
     "Soft/Agile/_png/Pasted image 20241216192257.png",
     "index.md",
-    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Tags/#+#screenshot",
     "Tags/#+#ci",
     "Tags/#+#loki",
@@ -237,7 +225,6 @@
     "Tags/#+#onionarchitecture",
     "Tags/#+#mvvm",
     "Tags/#+#mvc",
-    "Soft/Agile/_png/Pasted image 20241124172202.png",
     "English/English.md"
   ]
 }
