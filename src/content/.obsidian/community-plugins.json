@@ -10,7 +10,6 @@
   "obsidian-admonition",
   "advanced-cursors",
   "callout-manager",
-  "cm-editor-syntax-highlight-obsidian",
   "home-tab",
   "obsidian-linter",
   "make-md",
@@ -18,6 +17,5 @@
   "omnisearch",
   "recent-files-obsidian",
   "settings-search",
-  "obsidian-banners",
   "tag-wrangler"
 ]
