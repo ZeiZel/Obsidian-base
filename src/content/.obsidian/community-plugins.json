@@ -6,5 +6,18 @@
   "various-complements",
   "unique-attachments",
   "obsidian-style-settings",
-  "note-refactor-obsidian"
+  "note-refactor-obsidian",
+  "obsidian-admonition",
+  "advanced-cursors",
+  "callout-manager",
+  "cm-editor-syntax-highlight-obsidian",
+  "home-tab",
+  "obsidian-linter",
+  "make-md",
+  "obsidian-outliner",
+  "omnisearch",
+  "recent-files-obsidian",
+  "settings-search",
+  "obsidian-banners",
+  "tag-wrangler"
 ]

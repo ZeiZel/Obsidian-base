@@ -9,5 +9,7 @@
   "baseFontSizeAction": true,
   "textFontFamily": "Montserrat,JetBrainsMono Nerd Font,JetBrains Mono,Consolas,Arial",
   "monospaceFontFamily": "JetBrainsMono Nerd Font,JetBrains Mono,Consolas",
-  "enabledCssSnippets": []
+  "enabledCssSnippets": [
+    "custom-background"
+  ]
 }
