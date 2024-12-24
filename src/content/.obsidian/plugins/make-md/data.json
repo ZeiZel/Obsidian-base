@@ -59,7 +59,8 @@
     "//Development/Development/Клиент-сервер",
     "//Development/Development/GIT",
     "//Tags",
-    "//Development/Development/BackEnd"
+    "//Development/Development/BackEnd",
+    "//Soft"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

@@ -5,16 +5,20 @@
       "path": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
     },
     {
+      "basename": "Soft",
+      "path": "Soft/Soft.md"
+    },
+    {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
       "basename": "Основы HTML + CSS",
       "path": "Whats Learning/_lessons/Основы HTML + CSS.md"
     },
     {
       "basename": "Development",
       "path": "Development/Development.md"
-    },
-    {
-      "basename": "index",
-      "path": "index.md"
     },
     {
       "basename": "English",
