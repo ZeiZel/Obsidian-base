@@ -125,5 +125,6 @@
   "Editor@@line-hover-indicator": true,
   "Editor@@editor-grid-background-pattren": false,
   "Editor@@grid-background-pattern-size": "5px",
-  "Editor@@callout-style-select": "callout-style-4"
+  "Editor@@callout-style-select": "callout-style-4",
+  "Editor@@file-line-width": "850px"
 }
