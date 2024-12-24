@@ -211,6 +211,26 @@
             "id": "98667fe54686e798",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "6a5f36843367c1f1",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "52747e147e403176",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -218,7 +238,7 @@
             }
           },
           {
-            "id": "6a5f36843367c1f1",
+            "id": "1d60fba2b40fbe0d",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -228,7 +248,7 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 11
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -279,7 +299,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "6a5f36843367c1f1",
+  "active": "1d60fba2b40fbe0d",
   "lastOpenFiles": [
     "Soft/Soft.md",
     "index.md",
