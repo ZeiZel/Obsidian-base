@@ -1,8 +1,9 @@
 ---
 name: Deploy obsidian base
 on:
-  push:
-    branches: [main, master]
+  # trigger automaticly on PUSH
+  # push:
+  #   branches: [main, master]
   workflow_dispatch:
 jobs:
   build-and-test:
