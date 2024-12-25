@@ -178,7 +178,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -212,8 +212,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421,
-    "collapsed": true
+    "width": 421
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -229,8 +228,11 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "30b1559deb5fd356",
+  "active": "cce75f50fbaf6e19",
   "lastOpenFiles": [
+    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+    "Soft/Agile/_png/Pasted image 20241225105424.png",
+    "Soft/Agile/_png/Pasted image 20241225104937.png",
     "Soft/Agile/_png/Pasted image 20241224222252.png",
     "Soft/Agile/_png/Pasted image 20241224222221.png",
     "Soft/Agile/_png/Pasted image 20241224222136.png",
@@ -239,12 +241,8 @@
     "Soft/Agile/_png/Pasted image 20241224221942.png",
     "Soft/Agile/_png/Pasted image 20241224221305.png",
     "Soft/Agile/_png/Pasted image 20241224220819.png",
-    "Soft/Agile/_png/Pasted image 20241224220521.png",
-    "Soft/Agile/_png/Pasted image 20241224220449.png",
-    "Soft/Agile/_png/Pasted image 20241224220429.png",
     "Soft/Soft.md",
     "index.md",
-    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Whats Learning/_lessons/Основы HTML + CSS.md",
     "Development/Development.md",
     "Tags/#+#screenshot",
