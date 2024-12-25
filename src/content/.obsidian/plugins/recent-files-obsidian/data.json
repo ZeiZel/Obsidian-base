@@ -1,12 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "Development",
-      "path": "Development/Development.md"
+      "basename": "Масштабирование Agile",
+      "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
     },
     {
       "basename": "index",
       "path": "Soft/Agile/index.md"
+    },
+    {
+      "basename": "Kanban",
+      "path": "Soft/Agile/_lessons/Kanban.md"
+    },
+    {
+      "basename": "Development",
+      "path": "Development/Development.md"
     },
     {
       "basename": "Soft",
@@ -23,10 +31,6 @@
     {
       "basename": "Заключение",
       "path": "Soft/Agile/_lessons/Заключение.md"
-    },
-    {
-      "basename": "Kanban",
-      "path": "Soft/Agile/_lessons/Kanban.md"
     },
     {
       "basename": "index",

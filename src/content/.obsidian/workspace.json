@@ -11,12 +11,15 @@
             "id": "cce75f50fbaf6e19",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "Development"
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "Development"
+              "title": "Масштабирование Agile"
             }
           }
         ]
@@ -95,7 +98,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.5
+    "width": 343.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -196,10 +200,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Development.md"
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Development"
+              "title": "Outline of Масштабирование Agile"
             }
           }
         ],
@@ -224,19 +228,20 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "4a05a5e03df6dac2",
+  "active": "cce75f50fbaf6e19",
   "lastOpenFiles": [
     "Soft/Agile/index.md",
+    "Soft/Agile/_lessons/Масштабирование Agile.md",
+    "Soft/Agile/_lessons/Kanban.md",
+    "Development/Development.md",
     "Soft/Soft.md",
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Введение.md",
     "Soft/Agile/_lessons/Scrum.md",
     "Soft/Agile/_lessons/Заключение.md",
-    "Soft/Agile/_lessons/Kanban.md",
     "Soft/Agile/_lessons",
     "index.md",
-    "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Agile/_lessons/Управление задачам.md",
     "Soft/Agile/_lessons/Оптимизиации рабочего процесса.md",
     "Tags/#+#roadmap",
@@ -251,7 +256,6 @@
     "Soft/Agile/_png/Pasted image 20241224222252.png",
     "Soft/Agile/_png/Pasted image 20241224222221.png",
     "Whats Learning/_lessons/Основы HTML + CSS.md",
-    "Development/Development.md",
     "Tags/#+#screenshot",
     "Tags/#+#ci",
     "Tags/#+#loki",

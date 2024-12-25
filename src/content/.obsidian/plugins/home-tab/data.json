@@ -24,24 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Soft/Agile/_lessons/Масштабирование Agile.md",
+      "timestamp": 1735148084551
+    },
+    {
+      "filepath": "Soft/Agile/index.md",
+      "timestamp": 1735148083791
+    },
+    {
+      "filepath": "Soft/Agile/_lessons/Kanban.md",
+      "timestamp": 1735148074169
+    },
+    {
       "filepath": "Development/Development.md",
       "timestamp": 1735146955341
     },
     {
-      "filepath": "Soft/Agile/index.md",
-      "timestamp": 1735146870604
-    },
-    {
       "filepath": "Soft/Soft.md",
       "timestamp": 1735146863284
-    },
-    {
-      "filepath": "Soft/Agile/_lessons/Введение.md",
-      "timestamp": 1735145717910
-    },
-    {
-      "filepath": "Soft/Agile/_lessons/Scrum.md",
-      "timestamp": 1735145717141
     }
   ],
   "bookmarkedFileStore": [],
