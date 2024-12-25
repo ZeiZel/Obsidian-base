@@ -200,11 +200,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Agile (Scrum, Kanban, Lean)"
+              "title": "Outline"
             }
           }
         ],
@@ -228,7 +226,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "cce75f50fbaf6e19",
+  "active": "6b459289c2d4c520",
   "lastOpenFiles": [
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/_png/Pasted image 20241225105424.png",
