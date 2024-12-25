@@ -1,12 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "Agile (Scrum, Kanban, Lean)",
-      "path": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
+      "basename": "Development",
+      "path": "Development/Development.md"
+    },
+    {
+      "basename": "index",
+      "path": "Soft/Agile/index.md"
     },
     {
       "basename": "Soft",
       "path": "Soft/Soft.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Soft/Agile/_lessons/Введение.md"
+    },
+    {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
+    },
+    {
+      "basename": "Заключение",
+      "path": "Soft/Agile/_lessons/Заключение.md"
+    },
+    {
+      "basename": "Kanban",
+      "path": "Soft/Agile/_lessons/Kanban.md"
     },
     {
       "basename": "index",
@@ -15,10 +35,6 @@
     {
       "basename": "Основы HTML + CSS",
       "path": "Whats Learning/_lessons/Основы HTML + CSS.md"
-    },
-    {
-      "basename": "Development",
-      "path": "Development/Development.md"
     },
     {
       "basename": "English",

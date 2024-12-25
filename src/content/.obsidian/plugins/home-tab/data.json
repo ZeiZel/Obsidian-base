@@ -24,8 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-      "timestamp": 1735126194148
+      "filepath": "Development/Development.md",
+      "timestamp": 1735146955341
+    },
+    {
+      "filepath": "Soft/Agile/index.md",
+      "timestamp": 1735146870604
+    },
+    {
+      "filepath": "Soft/Soft.md",
+      "timestamp": 1735146863284
+    },
+    {
+      "filepath": "Soft/Agile/_lessons/Введение.md",
+      "timestamp": 1735145717910
+    },
+    {
+      "filepath": "Soft/Agile/_lessons/Scrum.md",
+      "timestamp": 1735145717141
     }
   ],
   "bookmarkedFileStore": [],

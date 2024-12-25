@@ -47,20 +47,8 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "Development",
-    "Soft",
-    "//Soft/Soft/Agile",
-    "//Development/Development/TypeScript",
-    "//Development/Development/Index",
-    "//Development/Development/Инструменты",
-    "//Development/Development/Tips&Tricks",
-    "//Development/Development/FrontEnd",
-    "//Development/Development/FrontEnd/Development/FrontEnd/Angular 9. Теория и Практика",
-    "//Development/Development/Клиент-сервер",
-    "//Development/Development/GIT",
-    "//Tags",
-    "//Development/Development/BackEnd",
-    "//Soft"
+    "//Soft",
+    "//Development"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

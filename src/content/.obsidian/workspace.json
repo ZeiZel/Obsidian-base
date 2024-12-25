@@ -11,15 +11,12 @@
             "id": "cce75f50fbaf6e19",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
+                "path": "Development"
               },
               "icon": "lucide-file",
-              "title": "Agile (Scrum, Kanban, Lean)"
+              "title": "Development"
             }
           }
         ]
@@ -35,6 +32,16 @@
         "id": "3a9f6fcffec95690",
         "type": "tabs",
         "children": [
+          {
+            "id": "ce67fca353c2f879",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Spaces"
+            }
+          },
           {
             "id": "48c5943284c71db8",
             "type": "leaf",
@@ -75,16 +82,6 @@
             }
           },
           {
-            "id": "ce67fca353c2f879",
-            "type": "leaf",
-            "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Spaces"
-            }
-          },
-          {
             "id": "d29b4086a66c80f5",
             "type": "leaf",
             "state": {
@@ -94,13 +91,11 @@
               "title": "Plugin no longer active"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 343.5,
-    "collapsed": true
+    "width": 343.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -201,10 +196,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
+                "file": "Development/Development.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Agile (Scrum, Kanban, Lean)"
+              "title": "Outline of Development"
             }
           }
         ],
@@ -229,22 +224,32 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "cce75f50fbaf6e19",
+  "active": "4a05a5e03df6dac2",
   "lastOpenFiles": [
+    "Soft/Agile/index.md",
+    "Soft/Soft.md",
+    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+    "Soft/Agile/Agile.md",
+    "Soft/Agile/_lessons/Введение.md",
+    "Soft/Agile/_lessons/Scrum.md",
+    "Soft/Agile/_lessons/Заключение.md",
+    "Soft/Agile/_lessons/Kanban.md",
+    "Soft/Agile/_lessons",
+    "index.md",
+    "Soft/Agile/_lessons/Масштабирование Agile.md",
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Soft/Agile/_lessons/Оптимизиации рабочего процесса.md",
+    "Tags/#+#roadmap",
     "Soft/Agile/_png/Pasted image 20241225174149.png",
     "Soft/Agile/_png/Pasted image 20241225172146.png",
     "Soft/Agile/_png/Pasted image 20241225171959.png",
     "Soft/Agile/_png/Pasted image 20241225145859.png",
     "Soft/Agile/_png/Pasted image 20241225145843.png",
     "Soft/Agile/_png/Pasted image 20241225145825.png",
-    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/_png/Pasted image 20241225105424.png",
     "Soft/Agile/_png/Pasted image 20241225104937.png",
     "Soft/Agile/_png/Pasted image 20241224222252.png",
     "Soft/Agile/_png/Pasted image 20241224222221.png",
-    "Soft/Agile/_png/Pasted image 20241224222136.png",
-    "Soft/Soft.md",
-    "index.md",
     "Whats Learning/_lessons/Основы HTML + CSS.md",
     "Development/Development.md",
     "Tags/#+#screenshot",
@@ -255,8 +260,6 @@
     "Tags/#+#bundleanalyzer",
     "Tags/#+#errorboundary",
     "Tags/#+#onionarchitecture",
-    "Tags/#+#mvvm",
-    "Tags/#+#mvc",
     "English/English.md"
   ]
 }
