@@ -178,7 +178,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -212,8 +212,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421,
-    "collapsed": true
+    "width": 421
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -229,7 +228,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "cce75f50fbaf6e19",
+  "active": "b0ebd1a06fdba383",
   "lastOpenFiles": [
     "Soft/Agile/_png/Pasted image 20241225145859.png",
     "Soft/Agile/_png/Pasted image 20241225145843.png",
