@@ -166,9 +166,19 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
+          },
+          {
+            "id": "30b1559deb5fd356",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -219,7 +229,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "cce75f50fbaf6e19",
+  "active": "30b1559deb5fd356",
   "lastOpenFiles": [
     "Soft/Agile/_png/Pasted image 20241224222252.png",
     "Soft/Agile/_png/Pasted image 20241224222221.png",
