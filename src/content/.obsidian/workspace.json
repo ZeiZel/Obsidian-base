@@ -212,8 +212,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421,
-    "collapsed": true
+    "width": 421
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -231,6 +230,8 @@
   },
   "active": "cce75f50fbaf6e19",
   "lastOpenFiles": [
+    "Soft/Agile/_png/Pasted image 20241225172146.png",
+    "Soft/Agile/_png/Pasted image 20241225171959.png",
     "Soft/Agile/_png/Pasted image 20241225145859.png",
     "Soft/Agile/_png/Pasted image 20241225145843.png",
     "Soft/Agile/_png/Pasted image 20241225145825.png",
@@ -241,8 +242,6 @@
     "Soft/Agile/_png/Pasted image 20241224222221.png",
     "Soft/Agile/_png/Pasted image 20241224222136.png",
     "Soft/Agile/_png/Pasted image 20241224222036.png",
-    "Soft/Agile/_png/Pasted image 20241224221956.png",
-    "Soft/Agile/_png/Pasted image 20241224221942.png",
     "Soft/Soft.md",
     "index.md",
     "Whats Learning/_lessons/Основы HTML + CSS.md",
