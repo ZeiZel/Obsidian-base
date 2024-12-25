@@ -178,7 +178,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -200,9 +200,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Agile (Scrum, Kanban, Lean)"
             }
           }
         ],
@@ -210,7 +212,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421
+    "width": 421,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -226,8 +229,11 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "6b459289c2d4c520",
+  "active": "cce75f50fbaf6e19",
   "lastOpenFiles": [
+    "Soft/Agile/_png/Pasted image 20241225145859.png",
+    "Soft/Agile/_png/Pasted image 20241225145843.png",
+    "Soft/Agile/_png/Pasted image 20241225145825.png",
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/_png/Pasted image 20241225105424.png",
     "Soft/Agile/_png/Pasted image 20241225104937.png",
@@ -237,8 +243,6 @@
     "Soft/Agile/_png/Pasted image 20241224222036.png",
     "Soft/Agile/_png/Pasted image 20241224221956.png",
     "Soft/Agile/_png/Pasted image 20241224221942.png",
-    "Soft/Agile/_png/Pasted image 20241224221305.png",
-    "Soft/Agile/_png/Pasted image 20241224220819.png",
     "Soft/Soft.md",
     "index.md",
     "Whats Learning/_lessons/Основы HTML + CSS.md",
