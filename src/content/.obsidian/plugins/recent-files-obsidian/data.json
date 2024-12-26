@@ -1,12 +1,28 @@
 {
   "recentFiles": [
     {
-      "basename": "Масштабирование Agile",
-      "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
+      "basename": "Как учиться учиться",
+      "path": "Soft/Как учиться учиться.md"
+    },
+    {
+      "basename": "Собеседование",
+      "path": "Soft/Собеседование.md"
+    },
+    {
+      "basename": "Storytelling",
+      "path": "Soft/Storytelling.md"
+    },
+    {
+      "basename": "Soft",
+      "path": "Soft/Soft.md"
     },
     {
       "basename": "index",
       "path": "Soft/Agile/index.md"
+    },
+    {
+      "basename": "Масштабирование Agile",
+      "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
     },
     {
       "basename": "Kanban",
@@ -15,10 +31,6 @@
     {
       "basename": "Development",
       "path": "Development/Development.md"
-    },
-    {
-      "basename": "Soft",
-      "path": "Soft/Soft.md"
     },
     {
       "basename": "Введение",
