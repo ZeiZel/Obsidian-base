@@ -24,24 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Soft/Agile/_lessons/Scrum.md",
+      "timestamp": 1735226185490
+    },
+    {
+      "filepath": "Soft/Agile/index.md",
+      "timestamp": 1735226182161
+    },
+    {
+      "filepath": "Soft/Agile/_lessons/Масштабирование Agile.md",
+      "timestamp": 1735225377331
+    },
+    {
       "filepath": "Soft/Как учиться учиться.md",
       "timestamp": 1735149136792
     },
     {
       "filepath": "Soft/Собеседование.md",
       "timestamp": 1735149134073
-    },
-    {
-      "filepath": "Soft/Storytelling.md",
-      "timestamp": 1735149128835
-    },
-    {
-      "filepath": "Soft/Soft.md",
-      "timestamp": 1735149126870
-    },
-    {
-      "filepath": "Soft/Agile/index.md",
-      "timestamp": 1735149117293
     }
   ],
   "bookmarkedFileStore": [],

@@ -4,17 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "ccabc68556ef2b94",
+        "id": "9e44f566909e98c0",
         "type": "tabs",
         "children": [
           {
-            "id": "e249b815cbe440f2",
+            "id": "2d0c475098481521",
             "type": "leaf",
             "state": {
-              "type": "home-tab-view",
-              "state": {},
-              "icon": "search",
-              "title": "Home tab"
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Agile/_lessons/Scrum.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Scrum"
             }
           }
         ]
@@ -203,9 +208,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Soft/Agile/_lessons/Scrum.md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Scrum"
             }
           }
         ],
@@ -229,20 +236,20 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e249b815cbe440f2",
+  "active": "2d0c475098481521",
   "lastOpenFiles": [
+    "Soft/Agile/index.md",
+    "Soft/Agile/_lessons/Scrum.md",
+    "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Как учиться учиться.md",
     "Soft/Собеседование.md",
     "Soft/Storytelling.md",
     "Soft/Soft.md",
-    "Soft/Agile/index.md",
-    "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Agile/_lessons/Kanban.md",
     "Development/Development.md",
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Введение.md",
-    "Soft/Agile/_lessons/Scrum.md",
     "Soft/Agile/_lessons/Заключение.md",
     "Soft/Agile/_lessons",
     "index.md",
