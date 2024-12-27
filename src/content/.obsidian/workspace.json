@@ -107,7 +107,7 @@
       {
         "id": "87f779e737b54d79",
         "type": "tabs",
-        "dimension": 43.60236220472441,
+        "dimension": 41.796875,
         "children": [
           {
             "id": "55e165ebdb0aba10",
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+                "file": "Soft/Agile/_lessons/Scrum.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -125,7 +125,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Agile (Scrum, Kanban, Lean)"
+              "title": "Backlinks for Scrum"
             }
           },
           {
@@ -134,12 +134,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
+                "file": "Soft/Agile/_lessons/Scrum.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Agile (Scrum, Kanban, Lean)"
+              "title": "Outgoing links from Scrum"
             }
           },
           {
@@ -186,12 +186,12 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
         "type": "tabs",
-        "dimension": 56.39763779527559,
+        "dimension": 58.203125,
         "children": [
           {
             "id": "4d30a7c31882a75b",
@@ -199,8 +199,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           },
           {
@@ -238,8 +238,8 @@
   },
   "active": "2d0c475098481521",
   "lastOpenFiles": [
-    "Soft/Agile/index.md",
     "Soft/Agile/_lessons/Scrum.md",
+    "Soft/Agile/index.md",
     "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Как учиться учиться.md",
     "Soft/Собеседование.md",
