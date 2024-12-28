@@ -58,6 +58,7 @@ jobs:
           node-version: 20
       - name: Build Quartz
         run: |
+          ls -a
           npm install
           npx quartz build
         working-directory: ./src
