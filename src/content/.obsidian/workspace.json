@@ -179,6 +179,16 @@
             "id": "bbcb94b47ed2ca9f",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "44b1f386da285acf",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -186,7 +196,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -236,7 +246,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "2d0c475098481521",
+  "active": "44b1f386da285acf",
   "lastOpenFiles": [
     "Soft/Agile/index.md",
     "Soft/Agile/_lessons/Заключение.md",
