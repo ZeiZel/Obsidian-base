@@ -61,7 +61,6 @@ jobs:
           ls -a
           npm install
           npx quartz build
-        working-directory: ./src
       - name: Copy raw HTML folder
         run: |
           cp -r raw_html/* public/
