@@ -56,11 +56,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Clone Quartz Repository
+        run: |
+          git clone https://github.com/jackyzha0/quartz.git src
+      - name: Copy obsidian content to quartz
+        run: cp -R ./base/* ./src/content/
       - name: Build Quartz
         run: |
-          ls -a
           npm install
           npx quartz build
+        working-directory: ./src
       - name: Copy raw HTML folder
         run: |
           cp -r raw_html/* public/
