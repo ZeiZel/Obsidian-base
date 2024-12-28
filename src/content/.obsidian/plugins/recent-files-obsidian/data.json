@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
+      "basename": "Масштабирование Agile",
+      "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
     },
     {
       "basename": "index",
       "path": "Soft/Agile/index.md"
     },
     {
-      "basename": "Масштабирование Agile",
-      "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
+      "basename": "Заключение",
+      "path": "Soft/Agile/_lessons/Заключение.md"
+    },
+    {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
       "basename": "Как учиться учиться",
@@ -39,10 +43,6 @@
     {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "Заключение",
-      "path": "Soft/Agile/_lessons/Заключение.md"
     },
     {
       "basename": "index",
