@@ -11,21 +11,18 @@ tags:
   - homepage
   - dashboard
 description: Base homepage.
-cssclasses: 
+cssclasses:
 ---
 
 # Homepage
-
 
 > [!greeting]
 > Добрый день, [User] :3
 
 ---
+
 ## Оглавление
 
 - Development
 - Soft
 - Design
-
-
-
