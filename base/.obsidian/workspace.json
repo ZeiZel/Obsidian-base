@@ -41,8 +41,8 @@
             "state": {
               "type": "mk-path-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "layout-grid",
+              "title": "Spaces"
             }
           },
           {
@@ -191,12 +191,22 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          },
+          {
+            "id": "831ecbdf091066c8",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -218,9 +228,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Масштабирование Agile"
             }
           }
         ],
@@ -237,11 +249,17 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false,
+      "callout-manager:Insert Callout": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "44b1f386da285acf",
+  "active": "2d0c475098481521",
   "lastOpenFiles": [
+    "Soft/Agile/_lessons/_png/Pasted image 20241230215410.png",
+    "Soft/Agile/_lessons/_png",
     "Soft/Agile/index.md",
     "Soft/Agile/_lessons/Заключение.md",
     "Soft/Agile/_lessons/Scrum.md",
@@ -278,7 +296,6 @@
     "Tags/#+#reacttestinglibrary",
     "Tags/#+#bundleanalyzer",
     "Tags/#+#errorboundary",
-    "Tags/#+#onionarchitecture",
     "English/English.md"
   ]
 }
