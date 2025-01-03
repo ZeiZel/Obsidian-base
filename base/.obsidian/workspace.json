@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Soft/Agile/_lessons/Введение.md",
+                "file": "Envirompment/DataGrip.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Введение"
+              "title": "DataGrip"
             }
           }
         ]
@@ -179,10 +179,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Agile/_lessons/Введение.md"
+                "file": "Envirompment/DataGrip.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Введение"
+              "title": "Outline of DataGrip"
             }
           }
         ],
@@ -208,6 +208,8 @@
   },
   "active": "2d0c475098481521",
   "lastOpenFiles": [
+    "Soft/Soft.md",
+    "Soft/Agile/_lessons/Введение.md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Agile/_lessons/_png/Pasted image 20250103123535.png",
@@ -228,12 +230,10 @@
     "Soft/Как учиться учиться.md",
     "Soft/Собеседование.md",
     "Soft/Storytelling.md",
-    "Soft/Soft.md",
     "Soft/Agile/_lessons/Kanban.md",
     "Development/Development.md",
     "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
     "Soft/Agile/Agile.md",
-    "Soft/Agile/_lessons/Введение.md",
     "Soft/Agile/_lessons",
     "index.md",
     "Soft/Agile/_lessons/Управление задачам.md",

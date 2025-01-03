@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "DataGrip",
+      "path": "Envirompment/DataGrip.md"
+    },
+    {
+      "basename": "Soft",
+      "path": "Soft/Soft.md"
+    },
+    {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
     },
@@ -33,10 +41,6 @@
       "path": "Soft/Storytelling.md"
     },
     {
-      "basename": "Soft",
-      "path": "Soft/Soft.md"
-    },
-    {
       "basename": "Kanban",
       "path": "Soft/Agile/_lessons/Kanban.md"
     },
@@ -67,10 +71,6 @@
     {
       "basename": "Github Actions",
       "path": "Development/GIT/Github Actions.md"
-    },
-    {
-      "basename": "DataGrip",
-      "path": "Envirompment/DataGrip.md"
     },
     {
       "basename": "Прогресс изучения технологий",
