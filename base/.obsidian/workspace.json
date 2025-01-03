@@ -154,59 +154,9 @@
               "icon": "lucide-tags",
               "title": "Tags"
             }
-          },
-          {
-            "id": "b0ebd1a06fdba383",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
-            }
-          },
-          {
-            "id": "30b1559deb5fd356",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "bbcb94b47ed2ca9f",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "44b1f386da285acf",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
-          },
-          {
-            "id": "831ecbdf091066c8",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 2
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -256,8 +206,12 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "2d0c475098481521",
+  "active": "912c743976f26aa3",
   "lastOpenFiles": [
+    "less.works/ru.md",
+    "Soft/Agile/_lessons/Масштабирование Agile.md",
+    "less.works",
+    "Soft/Agile/_lessons/_png/Pasted image 20250103101236.png",
     "Soft/Agile/_lessons/_png/Pasted image 20241230224306.png",
     "Soft/Agile/_lessons/_png/Pasted image 20241230220456.png",
     "Soft/Agile/_lessons/_png/Pasted image 20241230215410.png",
@@ -265,7 +219,6 @@
     "Soft/Agile/index.md",
     "Soft/Agile/_lessons/Заключение.md",
     "Soft/Agile/_lessons/Scrum.md",
-    "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Как учиться учиться.md",
     "Soft/Собеседование.md",
     "Soft/Storytelling.md",
@@ -286,8 +239,6 @@
     "Soft/Agile/_png/Pasted image 20241225145859.png",
     "Soft/Agile/_png/Pasted image 20241225145843.png",
     "Soft/Agile/_png/Pasted image 20241225145825.png",
-    "Soft/Agile/_png/Pasted image 20241225105424.png",
-    "Soft/Agile/_png/Pasted image 20241225104937.png",
     "Whats Learning/_lessons/Основы HTML + CSS.md",
     "Tags/#+#screenshot",
     "Tags/#+#ci",
@@ -295,7 +246,6 @@
     "Tags/#+#storybook",
     "Tags/#+#reacttestinglibrary",
     "Tags/#+#bundleanalyzer",
-    "Tags/#+#errorboundary",
     "English/English.md"
   ]
 }

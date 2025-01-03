@@ -5,6 +5,10 @@
       "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
     },
     {
+      "basename": "ru",
+      "path": "less.works/ru.md"
+    },
+    {
       "basename": "index",
       "path": "Soft/Agile/index.md"
     },
