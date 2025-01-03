@@ -5,4 +5,4 @@
 ![](_png/ed10608cb38c4fc6591bdbaa6d1b9611.png)
 
 Материалы:
-[React + Next.js - с нуля](../../Development/FrontEnd/React%20+%20Next.js%20-%20с%20нуля.%20TypeScript,%20Hooks,%20SSR%20и%20CSS%20Grid%20(2021)/React%20+%20Next.js%20-%20с%20нуля.md)
+[React + Next.js - с нуля](../../Development/FrontEnd/NextJS/React%20+%20Next.js%20-%20с%20нуля.md)

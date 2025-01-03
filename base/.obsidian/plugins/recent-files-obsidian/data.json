@@ -1,6 +1,74 @@
 {
   "recentFiles": [
     {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
+      "basename": "Git",
+      "path": "Development/GIT/Git.md"
+    },
+    {
+      "basename": "2. Базовые команды",
+      "path": "Development/GIT/_lessons/2. Базовые команды.md"
+    },
+    {
+      "basename": "7. Удалённый репозиторий",
+      "path": "Development/GIT/_lessons/7. Удалённый репозиторий.md"
+    },
+    {
+      "basename": "6. Продвинутая работа",
+      "path": "Development/GIT/_lessons/6. Продвинутая работа.md"
+    },
+    {
+      "basename": "5. Удаление",
+      "path": "Development/GIT/_lessons/5. Удаление.md"
+    },
+    {
+      "basename": "4. Ветки и изменения",
+      "path": "Development/GIT/_lessons/4. Ветки и изменения.md"
+    },
+    {
+      "basename": "3. Начало работы с Git",
+      "path": "Development/GIT/_lessons/3. Начало работы с Git.md"
+    },
+    {
+      "basename": "1. Введение",
+      "path": "Development/GIT/_lessons/1. Введение.md"
+    },
+    {
+      "basename": "Linux",
+      "path": "Development/Linux/Linux.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "Development/FrontEnd/Vue/Vue.md"
+    },
+    {
+      "basename": "Angular",
+      "path": "Development/FrontEnd/Angular/Angular.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "Development/FrontEnd/React/React Foundamentals.md"
+    },
+    {
+      "basename": "JavaScript",
+      "path": "Development/FrontEnd/JavaScript/JavaScript.md"
+    },
+    {
+      "basename": "11 Server side rendering",
+      "path": "Development/FrontEnd/NextJS/_lessons/11 Server side rendering.md"
+    },
+    {
+      "basename": "Продвинутый FrontEnd",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "Development",
+      "path": "Development/Development.md"
+    },
+    {
       "basename": "DataGrip",
       "path": "Envirompment/DataGrip.md"
     },
@@ -45,10 +113,6 @@
       "path": "Soft/Agile/_lessons/Kanban.md"
     },
     {
-      "basename": "Development",
-      "path": "Development/Development.md"
-    },
-    {
       "basename": "index",
       "path": "index.md"
     },
@@ -63,10 +127,6 @@
     {
       "basename": "conflict-files-obsidian-git",
       "path": "conflict-files-obsidian-git.md"
-    },
-    {
-      "basename": "Git",
-      "path": "Development/GIT/Git.md"
     },
     {
       "basename": "Github Actions",

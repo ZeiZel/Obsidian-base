@@ -4,22 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "9e44f566909e98c0",
+        "id": "827f698ff9c3ece6",
         "type": "tabs",
         "children": [
           {
-            "id": "2d0c475098481521",
+            "id": "a30664faf7f50307",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Envirompment/DataGrip.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
+                "path": "Development/MobileDev/React Native"
               },
               "icon": "lucide-file",
-              "title": "DataGrip"
+              "title": "React Native"
             }
           }
         ]
@@ -98,7 +95,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.5
+    "width": 650.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -154,9 +151,19 @@
               "icon": "lucide-tags",
               "title": "Tags"
             }
+          },
+          {
+            "id": "5712953f7f859114",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -178,11 +185,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Envirompment/DataGrip.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of DataGrip"
+              "title": "Outline"
             }
           }
         ],
@@ -206,8 +211,35 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "2d0c475098481521",
+  "active": "a30664faf7f50307",
   "lastOpenFiles": [
+    "Development/MobileDev/React Native/React Native.md",
+    "Development/GIT/Git.md",
+    "Development/MobileDev/React Native.md",
+    "Development/GIT/_lessons/2. Базовые команды.md",
+    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+    "Development/GIT/_lessons/6. Продвинутая работа.md",
+    "Development/GIT/_lessons/5. Удаление.md",
+    "Development/GIT/_lessons/4. Ветки и изменения.md",
+    "Development/GIT/_lessons/3. Начало работы с Git.md",
+    "Development/GIT/_lessons/1. Введение.md",
+    "Development/Linux/Linux.md",
+    "Development/Linux/Основы Linux.md",
+    "Development/FrontEnd/Vue/Vue.md",
+    "Development/FrontEnd/Vue/Vue.md",
+    "Development/FrontEnd/Vue/_png",
+    "Development/FrontEnd/Angular/Angular.md",
+    "Development/FrontEnd/Vue",
+    "Development/FrontEnd/React/React Foundamentals.md",
+    "Development/FrontEnd/Angular",
+    "Development/FrontEnd/State Managers/_png",
+    "Development/FrontEnd/State Managers",
+    "Development/FrontEnd/JavaScript/JavaScript.md",
+    "Development/FrontEnd/NextJS - основы.md",
+    "Development/FrontEnd/NextJS/_lessons/11 Server side rendering.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/Development.md",
+    "Envirompment/DataGrip.md",
     "Soft/Soft.md",
     "Soft/Agile/_lessons/Введение.md",
     "Soft/Agile/Agile.md",
@@ -220,32 +252,12 @@
     "Soft/Agile/_lessons/_png/Pasted image 20250103112842.png",
     "Soft/Agile/_lessons/_png/Pasted image 20250103112826.png",
     "Soft/Agile/_lessons/_png/Pasted image 20250103112354.png",
-    "less.works/ru.md",
     "less.works",
     "Soft/Agile/_lessons/_png/Pasted image 20250103101236.png",
     "Soft/Agile/_lessons/_png/Pasted image 20241230224306.png",
     "Soft/Agile/_lessons/_png",
-    "Soft/Agile/_lessons/Заключение.md",
-    "Soft/Agile/_lessons/Scrum.md",
-    "Soft/Как учиться учиться.md",
-    "Soft/Собеседование.md",
-    "Soft/Storytelling.md",
-    "Soft/Agile/_lessons/Kanban.md",
-    "Development/Development.md",
-    "Soft/Agile/Agile (Scrum, Kanban, Lean).md",
-    "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons",
-    "index.md",
-    "Soft/Agile/_lessons/Управление задачам.md",
-    "Soft/Agile/_lessons/Оптимизиации рабочего процесса.md",
     "Tags/#+#roadmap",
-    "Whats Learning/_lessons/Основы HTML + CSS.md",
-    "Tags/#+#screenshot",
-    "Tags/#+#ci",
-    "Tags/#+#loki",
-    "Tags/#+#storybook",
-    "Tags/#+#reacttestinglibrary",
-    "Tags/#+#bundleanalyzer",
-    "English/English.md"
+    "Tags/#+#screenshot"
   ]
 }

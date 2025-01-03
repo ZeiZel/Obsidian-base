@@ -48,7 +48,14 @@
   "expandedSpaces": [
     "/",
     "//Soft",
-    "//Envirompment"
+    "//Envirompment",
+    "//Development",
+    "//Development/Development/FrontEnd",
+    "//Development/Development/FrontEnd/Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
+    "//Development/Development/FrontEnd/Development/FrontEnd/Angular 9. Теория и Практика",
+    "//Development/Development/FrontEnd/Development/FrontEnd/HTML+CSS__Git+NPM",
+    "//Development/Development/MobileDev",
+    "//Development/Development/MobileDev/Development/MobileDev/React Native + Expo Router"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
