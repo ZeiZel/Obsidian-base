@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "file": "Soft/Agile/_lessons/Введение.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Масштабирование Agile"
+              "title": "Введение"
             }
           }
         ]
@@ -179,10 +179,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Agile/_lessons/Масштабирование Agile.md"
+                "file": "Soft/Agile/_lessons/Введение.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Масштабирование Agile"
+              "title": "Outline of Введение"
             }
           }
         ],
@@ -208,6 +208,8 @@
   },
   "active": "2d0c475098481521",
   "lastOpenFiles": [
+    "Soft/Agile/Agile.md",
+    "Soft/Agile/_lessons/Масштабирование Agile.md",
     "Soft/Agile/_lessons/_png/Pasted image 20250103123535.png",
     "Soft/Agile/_lessons/_png/Pasted image 20250103121015.png",
     "Soft/Agile/_lessons/_png/Pasted image 20250103120724.png",
@@ -217,13 +219,10 @@
     "Soft/Agile/_lessons/_png/Pasted image 20250103112826.png",
     "Soft/Agile/_lessons/_png/Pasted image 20250103112354.png",
     "less.works/ru.md",
-    "Soft/Agile/_lessons/Масштабирование Agile.md",
     "less.works",
     "Soft/Agile/_lessons/_png/Pasted image 20250103101236.png",
     "Soft/Agile/_lessons/_png/Pasted image 20241230224306.png",
-    "Soft/Agile/_lessons/_png/Pasted image 20241230220456.png",
     "Soft/Agile/_lessons/_png",
-    "Soft/Agile/index.md",
     "Soft/Agile/_lessons/Заключение.md",
     "Soft/Agile/_lessons/Scrum.md",
     "Soft/Как учиться учиться.md",

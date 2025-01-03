@@ -1,16 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "Введение",
+      "path": "Soft/Agile/_lessons/Введение.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
+    },
+    {
       "basename": "Масштабирование Agile",
       "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
-    },
-    {
-      "basename": "ru",
-      "path": "less.works/ru.md"
-    },
-    {
-      "basename": "index",
-      "path": "Soft/Agile/index.md"
     },
     {
       "basename": "Заключение",
@@ -43,10 +43,6 @@
     {
       "basename": "Development",
       "path": "Development/Development.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "Soft/Agile/_lessons/Введение.md"
     },
     {
       "basename": "index",
