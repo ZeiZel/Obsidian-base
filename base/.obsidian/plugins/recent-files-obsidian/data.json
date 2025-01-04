@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "09 Базовые понятия Ansible",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
     },
     {
       "basename": "Git",
@@ -79,10 +95,6 @@
     {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "Agile",
-      "path": "Soft/Agile/Agile.md"
     },
     {
       "basename": "Масштабирование Agile",

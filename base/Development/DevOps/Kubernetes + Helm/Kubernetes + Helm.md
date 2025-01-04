@@ -1,5 +1,7 @@
 
-[1. Введение](_lessons/Введение.md)
+#Kubernetes #Helm #DevOps
+
+[1. Введение](../../../Soft/Agile/_lessons/Введение.md)
 [2. Настройка окружения](_lessons/2.%20Настройка%20окружения.md)
 [3. Знакомство с Kubernetes](_lessons/3.%20Знакомство%20с%20Kubernetes.md)
 [4. Первый pod](_lessons/4.%20Первый%20pod.md)

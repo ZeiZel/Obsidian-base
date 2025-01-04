@@ -1,5 +1,5 @@
-# Docker + Ansible - с нуля, деплой и управление Swarm (2021)
-#Docker #Ansible #DevOps 
+
+#Docker #Ansible #DevOps
 
 [01 Введение](_lessons/01%20Введение.md)
 [02 Настройка VM на Linux](_lessons/02%20Настройка%20VM%20на%20Linux.md)

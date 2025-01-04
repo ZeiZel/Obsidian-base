@@ -54,8 +54,12 @@
     "//Development/Development/FrontEnd/Development/FrontEnd/Продвинутый FrontEnd - UlbiTV",
     "//Development/Development/FrontEnd/Development/FrontEnd/Angular 9. Теория и Практика",
     "//Development/Development/FrontEnd/Development/FrontEnd/HTML+CSS__Git+NPM",
-    "//Development/Development/MobileDev",
-    "//Development/Development/MobileDev/Development/MobileDev/React Native + Expo Router"
+    "//Development/Development/MobileDev/Development/MobileDev/React Native + Expo Router",
+    "//Soft/Soft/Agile",
+    "//Development/Development/DevOps",
+    "//Development/Development/DevOps/Development/DevOps/Docker + Ansible",
+    "//Development/Development/DevOps/Development/DevOps/Kybernetes + Helm",
+    "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

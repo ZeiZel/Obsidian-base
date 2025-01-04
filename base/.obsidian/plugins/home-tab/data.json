@@ -24,8 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
+      "timestamp": 1736023044269
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+      "timestamp": 1736023043497
+    },
+    {
+      "filepath": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+      "timestamp": 1736022584352
+    },
+    {
       "filepath": "Development/MobileDev/React Native/React Native.md",
-      "timestamp": 1735909354577
+      "timestamp": 1736022175374
+    },
+    {
+      "filepath": "Soft/Agile/Agile.md",
+      "timestamp": 1736022162251
     }
   ],
   "bookmarkedFileStore": [],
