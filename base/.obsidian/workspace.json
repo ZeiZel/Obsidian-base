@@ -224,9 +224,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "a8aeadcd3dd0f884",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -276,7 +286,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "9ac4ccda3b3d3c52",
+  "active": "e131ca8831584c8f",
   "lastOpenFiles": [
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250104234939.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
