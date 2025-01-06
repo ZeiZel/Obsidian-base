@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "09 Базовые понятия Ansible",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
+      "basename": "05 Сети Docker",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
     },
     {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "09 Базовые понятия Ansible",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
     },
     {
       "basename": "Kubernetes + Helm",

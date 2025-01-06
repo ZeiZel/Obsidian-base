@@ -208,5 +208,3 @@ ansible -i hosts -m user -a "name=zeizel state=absent" -e "ansible_become=true a
 ```bash
 ansible -i hosts -m user -a "name=zeizel state=absent" demo
 ```
-
-

@@ -24,6 +24,14 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
+      "timestamp": 1736199272680
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+      "timestamp": 1736199269648
+    },
+    {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
       "timestamp": 1736195677578
     }
