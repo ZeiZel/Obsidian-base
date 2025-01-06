@@ -91,7 +91,7 @@ sudo [apt|dnf|pacman] install ansible
 
 ![](_png/Pasted%20image%2020250105113153.png)
 
-3:
+3:00
 
 
 
