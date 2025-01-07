@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "О чём база~",
+      "path": "Whats Learning/О чём база~.md"
+    },
+    {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
       "basename": "06 Docker volumes",
       "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
     },
@@ -133,10 +145,6 @@
       "path": "Soft/Agile/_lessons/Kanban.md"
     },
     {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
       "basename": "Основы HTML + CSS",
       "path": "Whats Learning/_lessons/Основы HTML + CSS.md"
     },
@@ -151,14 +159,6 @@
     {
       "basename": "Github Actions",
       "path": "Development/GIT/Github Actions.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "О чём база~",
-      "path": "Whats Learning/О чём база~.md"
     },
     {
       "basename": "Bun",
