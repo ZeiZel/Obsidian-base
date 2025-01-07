@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "05 Сети Docker",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
+      "basename": "06 Docker volumes",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
     },
     {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "05 Сети Docker",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
     },
     {
       "basename": "09 Базовые понятия Ansible",
