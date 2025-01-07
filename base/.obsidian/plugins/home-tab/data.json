@@ -24,8 +24,12 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
+      "timestamp": 1736250729561
+    },
+    {
       "filepath": "Whats Learning/Прогресс изучения технологий.md",
-      "timestamp": 1736249276764
+      "timestamp": 1736250729030
     },
     {
       "filepath": "Whats Learning/О чём база~.md",
@@ -34,10 +38,6 @@
     {
       "filepath": "index.md",
       "timestamp": 1736249255502
-    },
-    {
-      "filepath": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
-      "timestamp": 1736242849217
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",

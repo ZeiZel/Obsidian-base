@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "06 Docker volumes",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
+    },
+    {
       "basename": "Прогресс изучения технологий",
       "path": "Whats Learning/Прогресс изучения технологий.md"
     },
@@ -11,10 +15,6 @@
     {
       "basename": "index",
       "path": "index.md"
-    },
-    {
-      "basename": "06 Docker volumes",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
     },
     {
       "basename": "Docker + Ansible",
