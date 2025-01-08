@@ -57,7 +57,7 @@
     "//Development/Development/DevOps/Development/DevOps/Docker + Ansible",
     "//Development/Development/DevOps/Development/DevOps/Kybernetes + Helm",
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm",
-    "//Whats Learning"
+    "//Development"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

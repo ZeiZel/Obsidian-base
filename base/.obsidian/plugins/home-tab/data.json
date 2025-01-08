@@ -24,6 +24,14 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Development/DevOps/NGINX.md",
+      "timestamp": 1736356700448
+    },
+    {
+      "filepath": "Whats Learning/Прогресс изучения технологий.md",
+      "timestamp": 1736356699150
+    },
+    {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
       "timestamp": 1736344384158
     },
@@ -34,14 +42,6 @@
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
       "timestamp": 1736341645518
-    },
-    {
-      "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
-      "timestamp": 1736341618148
-    },
-    {
-      "filepath": "Whats Learning/Прогресс изучения технологий.md",
-      "timestamp": 1736250729030
     }
   ],
   "bookmarkedFileStore": [],

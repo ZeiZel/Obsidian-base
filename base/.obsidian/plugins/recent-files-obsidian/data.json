@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "NGINX",
+      "path": "Development/DevOps/NGINX.md"
+    },
+    {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
       "basename": "07 Docker-compose",
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
     },
@@ -15,10 +23,6 @@
     {
       "basename": "09 Базовые понятия Ansible",
       "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
     },
     {
       "basename": "О чём база~",

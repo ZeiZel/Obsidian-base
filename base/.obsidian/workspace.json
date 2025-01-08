@@ -52,13 +52,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
+                "file": "Development/DevOps/NGINX.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "07 Docker-compose"
+              "title": "NGINX"
             }
           },
           {
@@ -294,10 +294,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
+                "file": "Development/DevOps/NGINX.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 07 Docker-compose"
+              "title": "Outline of NGINX"
             }
           }
         ],
@@ -323,6 +323,9 @@
   },
   "active": "e131ca8831584c8f",
   "lastOpenFiles": [
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/DevOps/NGINX.md",
+    "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250108180307.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
@@ -332,7 +335,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107150218.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107145331.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107145305.png",
-    "Whats Learning/Прогресс изучения технологий.md",
     "Whats Learning/О чём база~.md",
     "index.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
@@ -340,7 +342,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107122717.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107122130.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107115611.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107115453.png",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/MobileDev/React Native/React Native.md",
     "Soft/Agile/Agile.md",
@@ -360,7 +361,6 @@
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Angular/Angular.md",
     "Development/FrontEnd/Vue",
-    "Development/FrontEnd/React/React Foundamentals.md",
     "Development/FrontEnd/Angular",
     "Development/FrontEnd/State Managers/_png",
     "Development/FrontEnd/State Managers",
