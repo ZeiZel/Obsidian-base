@@ -25,7 +25,15 @@
   "recentFilesStore": [
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
-      "timestamp": 1736250729561
+      "timestamp": 1736341645518
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+      "timestamp": 1736341642604
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
+      "timestamp": 1736341618148
     },
     {
       "filepath": "Whats Learning/Прогресс изучения технологий.md",
@@ -34,14 +42,6 @@
     {
       "filepath": "Whats Learning/О чём база~.md",
       "timestamp": 1736249274858
-    },
-    {
-      "filepath": "index.md",
-      "timestamp": 1736249255502
-    },
-    {
-      "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-      "timestamp": 1736242844475
     }
   ],
   "bookmarkedFileStore": [],
