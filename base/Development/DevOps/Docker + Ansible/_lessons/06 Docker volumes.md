@@ -133,6 +133,19 @@ $ curl "127.0.0.1:3001/get"
 1234%
 ```
 
+Чтобы удалить volume, нужно будет сначала удалить все связанные с ним контейнеры
+
+```bash
+$ docker rm $(docker ps -a -q) -f
+8a6d2f71508f
+
+$ docker volume rm demo
+demo
+
+$ sudo ls /var/lib/docker/volumes
+backingFsBlockDev  metadata.db
+```
+
 ## VOLUME в Dockerfile
 
 
