@@ -224,7 +224,9 @@ Total reclaimed space: 4B
 
 Bind mounts - это биндинг файловой системы в произвольную область нашего хоста (а не внутри докера)
 
-
+```bash
+docker run --name volume-5 -d -v /home/zeizel/data:/opt/app/data -p 3000:3000 demo4
+```
 
 
 
