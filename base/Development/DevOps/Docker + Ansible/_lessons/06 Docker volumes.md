@@ -148,19 +148,77 @@ backingFsBlockDev  metadata.db
 
 ## VOLUME в Dockerfile
 
+Так же мы можем напрямую в файле контейнера указать volume, который нам нужно будет подключить
 
+```Dockerfile
+FROM node:14-alpine AS build
+WORKDIR /opt/app
+ADD *.json ./
+RUN npm install
+ADD . .
+VOLUME ["/opt/app/data"]
+CMD ["node", "./src/index.js"]
+```
 
+После сборки и инспекции контейнера, тут так же можно будет увидеть место пространства и файлы, которые к нему подцеплены
 
+```bash
+$ docker build -t demo4:latest .
 
+$ docker image inspect demo4:latest
+"Volumes": {
+	"/opt/app/data": {}
+},
+```
 
+И теперь при создании контейнера, мы получаем сгенерированный volume со своим сложным хешем
 
+```bash
+$ docker volume ls
+DRIVER    VOLUME NAME
 
+$ docker run --name volume-3 -d -p 3000:3000 demo4
 
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     cb72c2cba4e40437...
+```
 
+Он так же будет хранить данные, как и созданный ранее именованный volume
 
+```bash
+$ curl "127.0.0.1:3000/set?id=1234"
+done!%
 
+$ sudo cat /var/lib/docker/volumes/cb72c2cba4e404379e2af659fa65a3ca495e0cade6aaa0df51718d5e42e45f4d/_data/req
+1234%
+```
 
+Однако мы сталкиваемся с той проблемой, что при пересоздании контейнера, данные не будут биндиться и каждый раз будет создаваться новый volume, который будет занимать много места. Та же монга может просто два раза занять по 300 мб, вместо использования своего именованного участка.
 
+Поэтому мы можем так же прибиндить наш контейнер к именованному volume.
+
+```bash
+$ docker run --name volume-4 -d -v demo:/opt/app/data -p 3000:3000 demo4
+d7fdcdaa487eee48...
+
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     cb72c2cba4e40...
+local     demo
+```
+
+Чтобы очистить неиспользуемые неименованные volume, мы можем почистить их через `prune`
+
+```bash
+$ docker volume prune
+WARNING! This will remove anonymous local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Deleted Volumes:
+cb72c2cba4e404379e2af659fa65a3ca495e0cade6aaa0df51718d5e42e45f4d
+
+Total reclaimed space: 4B
+```
 
 ## Использование bind mounts
 
