@@ -168,11 +168,69 @@ my-name             demo4               latest              1fc568913222        
 
 docker compose - это удобный инструмент для оркестрирования сразу несколькими контейнерами. Он позволяет делать почти всё то же самое, что мы делали, когда собирали, запускали, останавливали и перезапускали образы самостоятельно.
 
-## Оркестрация сервисами
+## Оркестрация сервисов
 
+Docker compose позволяет нам удобно оркестрировать множеством сервисов, которые будут подняты одновременно и взаимодействовать друг с другом по описанным нами правилами.
 
+- Здесь нам нужны volumes, так как через них мы будем добавлять `.env` файл в билд приложения. В рамках композа на одной ноде - это хороший вариант. Если мы будем поднимать в swarm, то там уже энвы распространяются через механизм секретов.
+- Когда мы запускаем образ через `docker run`, мы можем передать через `-e ENV_NAME=value -e ENV_NAME_2=value_2` переменные окружения. Так же мы можем сделать и внутри compose ключом `environment`
+- Для каждого сервиса обязательно нужно **указать либо build, либо image** из которых будет собираться проект. Image мы берём из registry нашей кома
 
+`docker-compose.yml`
+```yml
+---
+# описываем все сервисы
+services:
+  # сервис апишки
+  api:
+    container_name: api
+	# указываем откуда будем собирать образ
+    build:
+      context: . # за контекст берём всю директорию проекта
+      dockerfile: apps/api/Dockerfile # укаызваем путь до проекта в монорепе
+    # перезапускаем всегда при падении
+    restart: always
+    # указываем путь до .env файла
+    volumes: [./.env:/opt/app/.env]
+    # укаызваем сеть, в которой будет находиться контейнер
+    networks: [my-network]
+    # образ зависим от RMQ и запустится уже после него
+    depends_on: [rmq]
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: apps/app/Dockerfile
+    restart: always
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+  converter:
+    container_name: converter
+    build:
+      context: .
+      dockerfile: apps/converter/Dockerfile
+    restart: always
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+    depends_on: [rmq]
+  # сервис брокера сообщений между сервисами
+  rmq:
+	# указываем image из registry docker hub
+    image: rabbitmq:3-management
+    networks: [my-network]
+    restart: always
+	# передаём переменные окружения для входа
+    environment: 
+	    - RABBITMQ_DEFAULT_USER=admin
+	    - RABBITMQ_DEFAULT_PASS=admin
 
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  data:
+```
 
 
 

@@ -52,13 +52,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/NGINX.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "NGINX"
+              "title": "07 Docker-compose"
             }
           },
           {
@@ -294,10 +294,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/NGINX.md"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of NGINX"
+              "title": "Outline of 07 Docker-compose"
             }
           }
         ],
@@ -305,7 +305,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421
+    "width": 596.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -323,8 +323,8 @@
   },
   "active": "e131ca8831584c8f",
   "lastOpenFiles": [
-    "Whats Learning/Прогресс изучения технологий.md",
     "Development/DevOps/NGINX.md",
+    "Whats Learning/Прогресс изучения технологий.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250108180307.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
