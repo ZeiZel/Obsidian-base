@@ -24,12 +24,16 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
-      "timestamp": 1736341645518
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
+      "timestamp": 1736344384158
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-      "timestamp": 1736341642604
+      "timestamp": 1736344382397
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
+      "timestamp": 1736341645518
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
@@ -38,10 +42,6 @@
     {
       "filepath": "Whats Learning/Прогресс изучения технологий.md",
       "timestamp": 1736250729030
-    },
-    {
-      "filepath": "Whats Learning/О чём база~.md",
-      "timestamp": 1736249274858
     }
   ],
   "bookmarkedFileStore": [],

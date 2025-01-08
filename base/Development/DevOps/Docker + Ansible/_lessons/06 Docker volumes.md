@@ -321,7 +321,3 @@ $ cat ~/data/req
 ```bash
 docker cp volume-9:/opt/app/data/. ~/data
 ```
-
-
-
-
