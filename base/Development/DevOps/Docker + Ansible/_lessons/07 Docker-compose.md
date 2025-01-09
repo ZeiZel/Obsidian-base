@@ -244,17 +244,80 @@ docker compose up
 
 ## Профили
 
+Профили - это список в конфиге, котрый позволяет нам группировать контейнеры
 
+```YML
+---
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: always
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+    depends_on: [rmq]
+    profiles: [backend]
+```
 
+Указание профилей позволит нам запускать только те сервисы, которые нам нужны из командной строки. То есть все backend сервисы поднимутся, когда мы укажем `--profile <профиль>`
 
+> Важно указать флаги до `up`
 
+```bash
+$ docker compose --profile backend --profile frontend up
 
+# либо можно вызывать нужные профили так
+COMPOSE_PROFILES=backend,frontend docker compose up
+```
+
+![](_png/Pasted%20image%2020250109180309.png)
+
+Так же мы можем поднять отдельно выбранный сервис. Поднимется только он и все остальные сервисы, которые мы указали в `depends_on`.
+
+`run` вызывает профили неявно просто благодаря его запуску.
+
+Такой подход может быть полезен, когда нам нужно запустить образы с какой-нибудь миграцией или отдельными скриптами с операциями.
+
+```bash
+docker compose run api
+```
+
+Однако, если у одного из контейнеров одного профиля есть зависимость из другого профиля, то мы столкнёмся с проблемой 
+
+![](_png/Pasted%20image%2020250109180444.png)
 
 ## Переменные окружения
 
+Ко всему пря
+
+```YML
+services:
+  api:
+    container_name: '{$API_CONTAINER_NAME}'
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: always
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+    depends_on: [rmq]
+    profiles: [backend]
+```
 
 
 
+`.env.compose`
+```env
+API_CONTAINER_NAME=api
+```
+
+
+
+```bash
+docker compose --env-file .env.compose --profile backend up
+```
 
 
 
