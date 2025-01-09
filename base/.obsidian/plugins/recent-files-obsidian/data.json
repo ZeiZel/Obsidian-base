@@ -5,16 +5,20 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
     },
     {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
       "basename": "NGINX",
       "path": "Development/DevOps/NGINX.md"
     },
     {
       "basename": "Прогресс изучения технологий",
       "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
       "basename": "06 Docker volumes",
@@ -35,10 +39,6 @@
     {
       "basename": "05 Сети Docker",
       "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "React Native",

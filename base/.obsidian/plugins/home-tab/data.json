@@ -25,7 +25,15 @@
   "recentFilesStore": [
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
-      "timestamp": 1736432433149
+      "timestamp": 1736437216729
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+      "timestamp": 1736437214805
+    },
+    {
+      "filepath": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+      "timestamp": 1736437203209
     }
   ],
   "bookmarkedFileStore": [],

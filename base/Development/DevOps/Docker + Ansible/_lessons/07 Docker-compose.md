@@ -290,7 +290,7 @@ docker compose run api
 
 ## Переменные окружения
 
-Ко всему пря
+Ко всему прямо внутри файла с конфигом композа, мы можем использовать переменные окружения. Вставлять их можно в строки через `'{$<переменная>}'` либо просто вставляя `$<переменная>`
 
 ```YML
 services:
@@ -306,20 +306,68 @@ services:
     profiles: [backend]
 ```
 
-
+Для этого дела создадим отдельный файл
 
 `.env.compose`
 ```env
 API_CONTAINER_NAME=api
 ```
 
+И через флаг `--env-file` можно указать путь до энва, который будет использоваться для конфига.
 
+Можно и не указывать флаг и тогда будет использоваться дефолтный файл `.env`.
 
 ```bash
 docker compose --env-file .env.compose --profile backend up
 ```
 
+Так же нужно указать возможность вызвать `docker compose config`, который позволяет нам взглянуть на итоговый конфиг, который попдаёт в композ и будет крутиться.
 
+К нему нужно добавить `--env`, чтобы взглянуть на переменные, которые он подставит и обязательно указать `--profile`, если мы задали его для наших контейнеров
+
+```bash
+$ docker compose --env-file .env.compose --profile queue config
+
+name: docker-demo
+services:
+  rmq:
+    profiles:
+      - queue
+    environment:
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_USER: admin
+    image: rabbitmq:3-management
+    networks:
+      my-network: null
+    restart: always
+networks:
+  my-network:
+    name: docker-demo_my-network
+    driver: bridge
+
+```
+
+Так же нужно отдельно упомянуть тот факт, что мы можем в сам контейнер передать переменные окружения не только через `environment`, но и через указания файла с энвами в ключе `env_file`
+
+```YML
+rmq:
+    image: rabbitmq:3-management
+    networks: [my-network]
+    restart: always
+    env_file: [.env.rmq]
+    environment: 
+	    - RABBITMQ_DEFAULT_USER=admin
+	    - RABBITMQ_DEFAULT_PASS=admin
+    profiles: [queue]
+```
+
+Так же мы можем передать переменную окружения `COMPOSE_PROJECT_NAME`, которая заменит название проекта в билде композа с названия папки, в которой находится `docker-compose.yml` на наш, который мы задали
+
+```bash
+COMPOSE_PROJECT_NAME=mycompose docker compose --env-file .env.compose --profile backend --profile queue up
+```
+
+![](_png/Pasted%20image%2020250109184352.png)
 
 ## Упражнение - Выкладываем полное приложение
 
