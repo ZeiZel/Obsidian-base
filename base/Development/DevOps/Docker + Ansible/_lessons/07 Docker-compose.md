@@ -164,6 +164,12 @@ CONTAINER           REPOSITORY          TAG                 IMAGE ID            
 my-name             demo4               latest              1fc568913222        122MB
 ```
 
+Если нам нужно следить за логами поднятого через `-d` контейнера, нам нужно воспользоваться `-f`
+
+```YML
+docker compose logs <контейнер> -f
+```
+
 #### Заключение
 
 docker compose - это удобный инструмент для оркестрирования сразу несколькими контейнерами. Он позволяет делать почти всё то же самое, что мы делали, когда собирали, запускали, останавливали и перезапускали образы самостоятельно.
@@ -382,11 +388,62 @@ COMPOSE_PROJECT_NAME=mycompose docker compose --env-file .env.compose --profile 
 
 ![](_png/Pasted%20image%2020250109184609.png)
 
+Образ -> Настройки -> Сеть -> Дополнительно -> Проброс портов -> указываем нужные порты
 
+![](_png/Pasted%20image%2020250110183238.png)
 
+Далее описываем вслед за схемой все нужные порты для наших контейнеров. Для конвертера нам порты не нужны, потому что он общается только с нашим api, который находится в локальной сети.
 
+`docker-compose.yml`
+```YML
+services:
 
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: apps/app/Dockerfile
+    restart: always
+    ports: [3001:80]
+    networks: [my-network]
 
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: always
+    ports: [3002:3000]
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+    depends_on: [rmq]
+  
+  converter:
+    container_name: converter
+    build:
+      context: .
+      dockerfile: apps/converter/Dockerfile
+    restart: always
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+    depends_on: [rmq]
+
+  rmq:
+    image: rabbitmq:3-management
+    networks: [my-network]
+    restart: always
+    env_file: [.env.rmq]
+    environment: 
+	    - RABBITMQ_DEFAULT_USER=admin
+	    - RABBITMQ_DEFAULT_PASS=admin
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  data:
+```
 
 ## Shared конфигурации
 
