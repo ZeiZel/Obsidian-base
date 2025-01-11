@@ -211,36 +211,6 @@
             }
           },
           {
-            "id": "5712953f7f859114",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "979c7cda313b5877",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "9ac4ccda3b3d3c52",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "a8aeadcd3dd0f884",
             "type": "leaf",
             "state": {
@@ -248,36 +218,6 @@
               "state": {},
               "icon": "spreadsheet",
               "title": "Advanced Tables"
-            }
-          },
-          {
-            "id": "9241abb9d6bbf80c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "ed3de0070d7dff53",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "108940e8b6ea65b1",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
             }
           },
           {
@@ -289,19 +229,9 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
-          },
-          {
-            "id": "59e75e32a2b6caca",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
           }
         ],
-        "currentTab": 11
+        "currentTab": 2
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -353,6 +283,8 @@
   },
   "active": "72b7f2ee9c70c3c7",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111124936.png",
+    "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111120306.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
@@ -370,7 +302,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250108180307.png",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107151452.png",
     "Whats Learning/О чём база~.md",
     "index.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
@@ -387,7 +318,6 @@
     "Development/GIT/_lessons/1. Введение.md",
     "Development/Linux/Linux.md",
     "Development/Linux/Основы Linux.md",
-    "Development/FrontEnd/Vue/Vue.md",
     "Development/FrontEnd/Vue/Vue.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
