@@ -25,11 +25,15 @@
   "recentFilesStore": [
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
-      "timestamp": 1736594377031
+      "timestamp": 1736596777494
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-      "timestamp": 1736594373838
+      "timestamp": 1736596775988
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
+      "timestamp": 1736596712764
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",

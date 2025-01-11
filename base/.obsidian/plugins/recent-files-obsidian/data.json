@@ -9,6 +9,10 @@
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
+      "basename": "09 Базовые понятия Ansible",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
+    },
+    {
       "basename": "08 Docker registry",
       "path": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md"
     },
@@ -35,10 +39,6 @@
     {
       "basename": "06 Docker volumes",
       "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
-    },
-    {
-      "basename": "09 Базовые понятия Ansible",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
     },
     {
       "basename": "О чём база~",
