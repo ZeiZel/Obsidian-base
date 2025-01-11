@@ -5,6 +5,10 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md"
     },
     {
+      "basename": "Flameshot",
+      "path": "_hobbies/Flameshot.md"
+    },
+    {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },

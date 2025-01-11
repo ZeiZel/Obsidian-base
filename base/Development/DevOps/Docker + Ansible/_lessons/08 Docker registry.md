@@ -55,7 +55,7 @@ nvim ~/TOKEN.txt
 cat ~/TOKEN.txt | docker login https://ghcr.io -u <github_username> --password-stdin
 ```
 
-И теперь мы можем позволить себе спуллить из gh любой публичный образ 
+И теперь мы можем позволить себе спуллить из gh любой публичный образ либо наш приватный
 
 ```bash
 $ docker pull ghcr.io/alaricode/top-api-demo/top-api-test:latest
@@ -70,6 +70,9 @@ f7a72abda4da: Waiting
 0ef759e161b4: Waiting
 0ea68650b52d: Waiting
 ```
+
+
+
 
 
 ## Поднимаем свой registry
