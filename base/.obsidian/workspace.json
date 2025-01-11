@@ -52,13 +52,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "07 Docker-compose"
+              "title": "08 Docker registry"
             }
           },
           {
@@ -324,10 +324,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 07 Docker-compose"
+              "title": "Outline of 08 Docker registry"
             }
           }
         ],
@@ -353,13 +353,14 @@
   },
   "active": "72b7f2ee9c70c3c7",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111120306.png",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250110183238.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250110183008.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250109184609.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250109184352.png",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250109180444.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250109180358.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250109180309.png",
@@ -370,7 +371,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107151452.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250107151410.png",
     "Whats Learning/О чём база~.md",
     "index.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
