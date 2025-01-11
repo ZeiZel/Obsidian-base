@@ -39,6 +39,8 @@ docker search --no-trunc <image>
 
 ## GitHub registry
 
+#### Логин и пуллинг
+
 Чтобы у docker была возможность работать с registry, нам нужно создать токен для GH с нужными привилегиями и сохранить его на компьютере
 
 ![](_png/Pasted%20image%2020250111124936.png)
@@ -71,19 +73,45 @@ f7a72abda4da: Waiting
 0ea68650b52d: Waiting
 ```
 
+#### Пуш
 
+Далее нам нужно затегать наш образ по данной структуре, чтобы gh смог его в себя принять и сохранить
 
+```bash
+docker tag <image> ghcr.io/<gh_username>/<repo>/<image_name>:<tag>
+```
 
+```bash
+docker tag docker-demo-api:latest ghcr.io/alaricode/top-api-demo/top-api-test:latest
+docker push ghcr.io/alaricode/top-api-demo/top-api-test:latest
+```
+
+![](_png/Pasted%20image%2020250111134443.png)
+
+>[!note] Работа с другими registry аналогична той, что есть на гитхабе
 
 ## Поднимаем свой registry
 
+[Дока](https://docker-docs.uclv.cu/registry/deploying/)
 
 
 
+`docker-compse.yml`
+```YML
+services:
+  registry:
+    image: registry:2
+    container_name: registry
+    restart: always
+    volumes: [data:/var/lib/registry]
+    ports: [5000:5000]
+volumes:
+  data:
+```
 
-
-
-
+```bash
+docker compose up
+```
 
 
 
