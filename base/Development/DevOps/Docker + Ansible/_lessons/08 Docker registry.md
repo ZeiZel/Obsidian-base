@@ -94,7 +94,7 @@ docker push ghcr.io/alaricode/top-api-demo/top-api-test:latest
 
 [Дока](https://docker-docs.uclv.cu/registry/deploying/)
 
-
+Преобразуем описанную команду из документации в docker-compse конфигурацию, чтобы быстрее и проще запускать registry
 
 `docker-compse.yml`
 ```YML
@@ -109,16 +109,26 @@ volumes:
   data:
 ```
 
+Далее нам нужно запустить registry, протегировать нужный нам образ и запушить его в тот же самый registry
+
+> Тегирование образа обязательно проходит с указанием домена в начале образа
+
 ```bash
-docker compose up
+docker compose up -d
+docker tag docker-demo-api:latest localhost:5000/api
+docker push localhost:5000/api
 ```
 
+![](_png/Pasted%20image%2020250111135823.png)
 
+И теперь мы можем спокойно удалить образ с нашей локалки и подтянуть с нашего локально-развёрнутого registry
 
+```bash
+docker image rm localhost:5000/api
+docker pull localhost:5000/api
+```
 
+![](_png/Pasted%20image%2020250111141355.png)
 
-
-
-
-
-
+>[!warning] Категорически не стоит использовать в качестве наименования домена ip-адрес
+> При переезде сервера, нужно будет так же прописывать старый ip-адрес, но если указать нормальный домен, то никаких подобных проблем не будет и все образы останутся на месте.
