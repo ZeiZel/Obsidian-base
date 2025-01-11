@@ -449,21 +449,61 @@ volumes:
 
 Так же, когда нам требуется сделать разные `docker-compose.yml` для локальной разработки и деплоя, мы можем поделить нашу конфигурацию на несколько файлов.
 
+#### Композиция из конфигов
+
 И вот пример дополнения прошлого конфига, когда мы открываем порт для менеджер-панели RMQ
 
 `docker-compose.dev.yml`
 ```YML
-
+---
+services:
+  rmq:
+    ports: [15672:15672]
 ```
 
-
+Чтобы скомбинировать эти конфиги и запустить их вместе, нам нужно будет передать через `-f` все доступные наши конфиги
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
+#### Extend
 
+Ну и так же мы можем напряму экстендиться от других файлов прямо в конфиге
 
+Опишем конфиг сервиса в одном файле
 
+`docker-compose.api.yml`
+```YML
+---
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: always
+    ports: [3002:3000]
+    volumes: [./.env:/opt/app/.env]
+    networks: [my-network]
+```
 
+И заэкстендим этот конфиг из другого файла
+
+`docker-compose.yml`
+```YML
+services:
+  api:
+    extends:
+      file: docker-compose.api.yml
+      service: api
+    depends_on: [rmq]
+```
+
+>[!note] Экстендить ключ `depends_on` из другого файла - не получится
+> Зависимости ищутся в оригинальном файле и, если они не разрезолвятся, мы обязательно получим ошибку отсутсвующей зависимости
+
+#### Заключение
+
+Такой подход с разбитием большого ко
 
