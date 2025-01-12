@@ -16,7 +16,7 @@
                 "path": "Soft/Agile"
               },
               "icon": "lucide-file",
-              "title": "Agile"
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -28,7 +28,7 @@
                 "path": "Development/MobileDev/React Native"
               },
               "icon": "lucide-file",
-              "title": "React Native"
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -96,8 +96,8 @@
             "state": {
               "type": "mk-path-view",
               "state": {},
-              "icon": "layout-grid",
-              "title": "Spaces"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -216,8 +216,8 @@
             "state": {
               "type": "advanced-tables-toolbar",
               "state": {},
-              "icon": "spreadsheet",
-              "title": "Advanced Tables"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -236,8 +236,8 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ],
@@ -286,9 +286,7 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-git:Open Git source control": false,
-      "callout-manager:Insert Callout": false,
-      "omnisearch:Omnisearch": false
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "72b7f2ee9c70c3c7",
