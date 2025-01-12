@@ -45,15 +45,23 @@ ansible-playbook -i hosts.ini user.yml -K
 
 ![](_png/Pasted%20image%2020250112131327.png)
 
-
-
-
-
-
 ## Переменные
 
 
+
+
+
+
+
+
+
+
 ## Отладка
+
+
+
+
+
 
 
 
@@ -61,11 +69,26 @@ ansible-playbook -i hosts.ini user.yml -K
 
 
 
+
+
+
+
+
 ## Асинхронные задачи
 
 
 
+
+
+
+
+
 ## Упражнение - Настройка сервера
+
+
+
+
+
 
 
 

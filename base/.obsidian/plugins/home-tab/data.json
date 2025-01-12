@@ -24,12 +24,16 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
-      "timestamp": 1736676751176
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+      "timestamp": 1736677068660
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-      "timestamp": 1736676749130
+      "timestamp": 1736677064075
+    },
+    {
+      "filepath": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+      "timestamp": 1736676751176
     },
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
@@ -38,10 +42,6 @@
     {
       "filepath": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
       "timestamp": 1736674615839
-    },
-    {
-      "filepath": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-      "timestamp": 1736674614668
     }
   ],
   "bookmarkedFileStore": [],
