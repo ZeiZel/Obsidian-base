@@ -1,7 +1,7 @@
 
 >[!info] Всю актуальную информацию по установке докера всегда можно найти в [официальной документации](https://docs.docker.com/engine/install/) а так же шагах [после установки](https://docs.docker.com/engine/install/linux-postinstall/)
 
-## Настройка Docker
+#### Установка Docker
 
 Устанавливаем сертификаты 
 
@@ -58,5 +58,27 @@ sudo groupadd docker
 ```bash
 sudo usermod -aG docker $USER
 ```
+
+#### Установка виртуалки
+
+Для примера удалённой машины, будет использоваться
+- Виртуализация - VirtualBox
+- ОС - Ubuntu Server
+
+Под Fedora перед запуском нужно было выполнить следующие команды:
+
+```bash
+sudo dnf install -y "kernel-devel-$(uname -r)"
+sudo /sbin/vboxconfig
+sudo rmmod kvm-intel
+```
+
+
+
+
+
+
+
+
 
 

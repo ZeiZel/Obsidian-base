@@ -52,13 +52,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10 Ansible playbooks"
+              "title": "02 Настройка VM на Linux"
             }
           },
           {
@@ -96,8 +96,8 @@
             "state": {
               "type": "mk-path-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "layout-grid",
+              "title": "Spaces"
             }
           },
           {
@@ -234,14 +234,44 @@
             "id": "ae3c92ca8de752c6",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "5d6fd6c2290f7fad",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "8b960ed227a6cc58",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          },
+          {
+            "id": "f58c9e3e740fbc4c",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -264,10 +294,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 10 Ansible playbooks"
+              "title": "Outline of 02 Настройка VM на Linux"
             }
           }
         ],
@@ -286,14 +316,16 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "callout-manager:Insert Callout": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "72b7f2ee9c70c3c7",
+  "active": "f58c9e3e740fbc4c",
   "lastOpenFiles": [
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+    "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111142409.png",
     "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111141355.png",
