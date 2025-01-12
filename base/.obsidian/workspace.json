@@ -16,7 +16,7 @@
                 "path": "Soft/Agile"
               },
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "Agile"
             }
           },
           {
@@ -28,7 +28,7 @@
                 "path": "Development/MobileDev/React Native"
               },
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "React Native"
             }
           },
           {
@@ -254,10 +254,10 @@
             "id": "8b960ed227a6cc58",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -269,9 +269,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "ba22cf78d89c9ecf",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 9
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -323,6 +333,15 @@
   },
   "active": "5efc20c4b70fd728",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112180959.png",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "_hobbies/Flameshot.md",
+    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+    "Soft/Agile/Agile.md",
+    "Development/MobileDev/React Native/React Native.md",
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175816.png",
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175650.png",
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112174851.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112131327.png",
@@ -337,18 +356,11 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111141355.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111135823.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111134443.png",
-    "_hobbies/Flameshot.md",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111124936.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111120306.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250110183238.png",
     "Development/DevOps/NGINX.md",
-    "Whats Learning/Прогресс изучения технологий.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Whats Learning/О чём база~.md",
     "index.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
-    "Development/MobileDev/React Native/React Native.md",
-    "Soft/Agile/Agile.md",
     "Development/GIT/Git.md",
     "Development/MobileDev/React Native.md",
     "Development/GIT/_lessons/2. Базовые команды.md",
@@ -357,7 +369,6 @@
     "Development/GIT/_lessons/5. Удаление.md",
     "Development/GIT/_lessons/4. Ветки и изменения.md",
     "Development/GIT/_lessons/3. Начало работы с Git.md",
-    "Development/GIT/_lessons/1. Введение.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",

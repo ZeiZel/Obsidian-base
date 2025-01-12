@@ -5,6 +5,22 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
     },
     {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "Flameshot",
+      "path": "_hobbies/Flameshot.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
+    },
+    {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
@@ -33,16 +49,8 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md"
     },
     {
-      "basename": "Flameshot",
-      "path": "_hobbies/Flameshot.md"
-    },
-    {
       "basename": "NGINX",
       "path": "Development/DevOps/NGINX.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
     },
     {
       "basename": "06 Docker volumes",
@@ -59,14 +67,6 @@
     {
       "basename": "05 Сети Docker",
       "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
-    },
-    {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
-    },
-    {
-      "basename": "Agile",
-      "path": "Soft/Agile/Agile.md"
     },
     {
       "basename": "Git",
