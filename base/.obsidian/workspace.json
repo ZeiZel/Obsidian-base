@@ -52,13 +52,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11 Развёртка машин с Vagrant"
+              "title": "10 Ansible playbooks"
             }
           },
           {
@@ -304,10 +304,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 11 Развёртка машин с Vagrant"
+              "title": "Outline of 10 Ansible playbooks"
             }
           }
         ],
@@ -333,16 +333,16 @@
   },
   "active": "5efc20c4b70fd728",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112180959.png",
     "Whats Learning/Прогресс изучения технологий.md",
     "_hobbies/Flameshot.md",
-    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Soft/Agile/Agile.md",
     "Development/MobileDev/React Native/React Native.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175816.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175650.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112174851.png",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112131327.png",
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
@@ -355,7 +355,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111142409.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111141355.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111135823.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111134443.png",
     "Development/DevOps/NGINX.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Whats Learning/О чём база~.md",
