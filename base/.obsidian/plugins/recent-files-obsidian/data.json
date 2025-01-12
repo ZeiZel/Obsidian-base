@@ -1,20 +1,28 @@
 {
   "recentFiles": [
     {
-      "basename": "02 Настройка VM на Linux",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md"
+      "basename": "10 Ansible playbooks",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
     {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
       "basename": "09 Базовые понятия Ansible",
       "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
+    },
+    {
+      "basename": "02 Настройка VM на Linux",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "07 Docker-compose",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
     },
     {
       "basename": "08 Docker registry",
@@ -23,14 +31,6 @@
     {
       "basename": "Flameshot",
       "path": "_hobbies/Flameshot.md"
-    },
-    {
-      "basename": "07 Docker-compose",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "NGINX",
