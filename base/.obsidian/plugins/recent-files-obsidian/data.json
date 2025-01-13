@@ -5,6 +5,10 @@
       "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
+    },
+    {
       "basename": "NX",
       "path": "Development/NX.md"
     },
@@ -15,10 +19,6 @@
     {
       "basename": "Прогресс изучения технологий",
       "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
       "basename": "Kanban",

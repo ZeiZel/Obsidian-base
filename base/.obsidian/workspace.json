@@ -62,18 +62,6 @@
             }
           },
           {
-            "id": "fa514eddde8b9b9c",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "Development/MobileDev/React Native"
-              },
-              "icon": "lucide-file",
-              "title": "React Native"
-            }
-          },
-          {
             "id": "59c1cef850079d7d",
             "type": "leaf",
             "state": {
@@ -89,7 +77,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -223,97 +211,7 @@
             }
           },
           {
-            "id": "a8aeadcd3dd0f884",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
-            }
-          },
-          {
-            "id": "144e7d655a355e87",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "ae3c92ca8de752c6",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "5d6fd6c2290f7fad",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "8b960ed227a6cc58",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "f58c9e3e740fbc4c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "ba22cf78d89c9ecf",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "d1f09db36160c616",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "3625f75179d3c7cb",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
-          },
-          {
-            "id": "b06b45c69619a348",
+            "id": "3664b6cf848a552d",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -323,7 +221,7 @@
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -371,13 +269,15 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "fa514eddde8b9b9c",
+  "active": "75f6a100c06b7790",
   "lastOpenFiles": [
     "Development/MobileDev/React Native/React Native.md",
+    "Soft/Agile/_lessons/Scrum.md",
+    "_png/Pasted image 20250113192743.png",
+    "_png",
     "Development/NX.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Whats Learning/Прогресс изучения технологий.md",
-    "Soft/Agile/_lessons/Scrum.md",
     "Soft/Agile/_lessons/Kanban.md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Введение.md",
@@ -400,7 +300,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112123327.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111142409.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111141355.png",
-    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111135823.png",
     "Development/DevOps/NGINX.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Whats Learning/О чём база~.md",
@@ -408,7 +307,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/MobileDev/React Native.md",
     "Development/GIT/_lessons/2. Базовые команды.md",
-    "Development/GIT/_lessons/6. Продвинутая работа.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
@@ -417,7 +315,6 @@
     "less.works",
     "Soft/Agile/_lessons/_png",
     "Soft/Agile/_lessons",
-    "Tags/#+#roadmap",
-    "Tags/#+#screenshot"
+    "Tags/#+#roadmap"
   ]
 }
