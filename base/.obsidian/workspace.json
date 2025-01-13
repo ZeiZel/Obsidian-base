@@ -52,13 +52,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10 Ansible playbooks"
+              "title": "11 Развёртка машин с Vagrant"
+            }
+          },
+          {
+            "id": "d02824fb33fad11b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "7. Удалённый репозиторий"
             }
           },
           {
@@ -77,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -264,10 +279,10 @@
             "id": "f58c9e3e740fbc4c",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -279,9 +294,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "d1f09db36160c616",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 9
+        "currentTab": 10
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -304,10 +329,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+                "file": "Development/GIT/_lessons/7. Удалённый репозиторий.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 10 Ansible playbooks"
+              "title": "Outline of 7. Удалённый репозиторий"
             }
           }
         ],
@@ -331,10 +356,12 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "5efc20c4b70fd728",
+  "active": "d02824fb33fad11b",
   "lastOpenFiles": [
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/GIT/Git.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112180959.png",
     "Whats Learning/Прогресс изучения технологий.md",
     "_hobbies/Flameshot.md",
@@ -343,7 +370,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175816.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175650.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112174851.png",
-    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112131327.png",
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
@@ -360,7 +386,6 @@
     "Whats Learning/О чём база~.md",
     "index.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
-    "Development/GIT/Git.md",
     "Development/MobileDev/React Native.md",
     "Development/GIT/_lessons/2. Базовые команды.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
