@@ -5,6 +5,14 @@
       "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
     },
@@ -15,10 +23,6 @@
     {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
     },
     {
       "basename": "Kanban",
@@ -59,10 +63,6 @@
     {
       "basename": "02 Настройка VM на Linux",
       "path": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "07 Docker-compose",
