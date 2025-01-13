@@ -11,12 +11,15 @@
             "id": "a30664faf7f50307",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "Soft/Agile"
+                "file": "Soft/Agile/_lessons/Scrum.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "Agile"
+              "title": "Scrum"
             }
           },
           {
@@ -50,30 +53,24 @@
             "id": "5efc20c4b70fd728",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
+                "path": "Development/DevOps/Docker + Ansible"
               },
               "icon": "lucide-file",
-              "title": "11 Развёртка машин с Vagrant"
+              "title": "Docker + Ansible"
             }
           },
           {
-            "id": "d02824fb33fad11b",
+            "id": "fa514eddde8b9b9c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Development/GIT/_lessons/7. Удалённый репозиторий.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
+                "path": "Development/MobileDev/React Native"
               },
               "icon": "lucide-file",
-              "title": "7. Удалённый репозиторий"
+              "title": "React Native"
             }
           },
           {
@@ -177,7 +174,7 @@
       {
         "id": "87f779e737b54d79",
         "type": "tabs",
-        "dimension": 41.796875,
+        "dimension": 19.841269841269842,
         "children": [
           {
             "id": "55e165ebdb0aba10",
@@ -289,6 +286,26 @@
             "id": "ba22cf78d89c9ecf",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "d1f09db36160c616",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "3625f75179d3c7cb",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -296,7 +313,7 @@
             }
           },
           {
-            "id": "d1f09db36160c616",
+            "id": "b06b45c69619a348",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -306,12 +323,12 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 12
       },
       {
         "id": "2df1decc2eef0b0b",
         "type": "tabs",
-        "dimension": 58.203125,
+        "dimension": 80.15873015873017,
         "children": [
           {
             "id": "4d30a7c31882a75b",
@@ -328,11 +345,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Development/GIT/_lessons/7. Удалённый репозиторий.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of 7. Удалённый репозиторий"
+              "title": "Outline"
             }
           }
         ],
@@ -340,7 +355,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 263.5
+    "width": 447.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -356,17 +371,22 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "d02824fb33fad11b",
+  "active": "fa514eddde8b9b9c",
   "lastOpenFiles": [
-    "Development/GIT/Git.md",
-    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+    "Development/MobileDev/React Native/React Native.md",
+    "Development/NX.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Soft/Agile/_lessons/Scrum.md",
+    "Soft/Agile/_lessons/Kanban.md",
+    "Soft/Agile/Agile.md",
+    "Soft/Agile/_lessons/Введение.md",
+    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+    "Development/GIT/Git.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112180959.png",
-    "Whats Learning/Прогресс изучения технологий.md",
     "_hobbies/Flameshot.md",
-    "Soft/Agile/Agile.md",
-    "Development/MobileDev/React Native/React Native.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175816.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112175650.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250112174851.png",
@@ -388,11 +408,7 @@
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/MobileDev/React Native.md",
     "Development/GIT/_lessons/2. Базовые команды.md",
-    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/GIT/_lessons/6. Продвинутая работа.md",
-    "Development/GIT/_lessons/5. Удаление.md",
-    "Development/GIT/_lessons/4. Ветки и изменения.md",
-    "Development/GIT/_lessons/3. Начало работы с Git.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
