@@ -73,13 +73,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
-                "mode": "preview",
+                "file": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
+                "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5. Монорепозитории"
+              "title": "6. Обмен сообщениями"
             }
           }
         ],
@@ -240,10 +240,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md"
+                "file": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 5. Монорепозитории"
+              "title": "Outline of 6. Обмен сообщениями"
             }
           }
         ],
@@ -268,6 +268,7 @@
   },
   "active": "f85d68430cea72fe",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250118180659.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
@@ -304,7 +305,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111142409.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111141355.png",
     "Development/DevOps/NGINX.md",
-    "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
