@@ -58,13 +58,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/MobileDev/React Native/React Native.md",
+                "file": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "React Native"
+              "title": "4 Работа с данными"
             }
           }
         ],
@@ -225,10 +225,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/MobileDev/React Native/React Native.md"
+                "file": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of React Native"
+              "title": "Outline of 4 Работа с данными"
             }
           }
         ],
@@ -253,8 +253,10 @@
   },
   "active": "af7c798aa4992616",
   "lastOpenFiles": [
-    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
     "Development/MobileDev/React Native/React Native.md",
+    "Whats Learning/Прогресс изучения технологий.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Soft/Agile/_lessons/Scrum.md",
     "_png/Pasted image 20250113192743.png",
@@ -288,7 +290,6 @@
     "index.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/MobileDev/React Native.md",
-    "Development/GIT/_lessons/2. Базовые команды.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",

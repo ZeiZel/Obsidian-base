@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "4 Работа с данными",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
+    },
+    {
+      "basename": "Продвинутый FrontEnd",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md"
+    },
+    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
@@ -141,10 +153,6 @@
       "path": "Development/FrontEnd/NextJS/_lessons/11 Server side rendering.md"
     },
     {
-      "basename": "Продвинутый FrontEnd",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
-    },
-    {
       "basename": "Development",
       "path": "Development/Development.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "Github Actions",
       "path": "Development/GIT/Github Actions.md"
-    },
-    {
-      "basename": "Bun",
-      "path": "Development/Bun.md"
-    },
-    {
-      "basename": "RoadMap",
-      "path": "Whats Learning/RoadMap/RoadMap.md"
     }
   ],
   "omittedPaths": [],
