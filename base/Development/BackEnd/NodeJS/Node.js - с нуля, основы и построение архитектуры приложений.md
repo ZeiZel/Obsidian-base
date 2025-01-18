@@ -1,9 +1,9 @@
 #NodeJS #Npm #Testing #V8 
 
-[01 Введение](_lessons/01%20Введение.md)
-[02 NVM](_lessons/02%20Настройка%20окружения.md)
+[01 Введение](../../TypeScript/_lessons/01%20Введение.md)
+[02 NVM](../../TypeScript/_lessons/02%20Настройка%20окружения.md)
 [03 Начало работы с Node.js](_lessons/03%20Начало%20работы%20с%20Node.js.md)
-[04 Как работает Node.js_](_lessons/04%20Как%20работает%20Node.js_.md)
+[04 Как работает Node.js\_](_lessons/04%20Как%20работает%20Node.js_.md)
 [05 Многопоточность](_lessons/05%20Многопоточность.md)
 [06 Движок V8](_lessons/06%20Движок%20V8.md)
 [07 Node Package Manager](_lessons/07%20Node%20Package%20Manager.md)

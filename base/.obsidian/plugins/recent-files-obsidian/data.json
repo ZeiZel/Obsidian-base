@@ -1,12 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "4 Работа с данными",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
+      "basename": "5. Монорепозитории",
+      "path": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "4. Переход к микросервисам",
+      "path": "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md"
     },
     {
       "basename": "Продвинутый FrontEnd",
       "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "4 Работа с данными",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
     },
     {
       "basename": "3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests",
@@ -187,18 +199,6 @@
     {
       "basename": "Основы HTML + CSS",
       "path": "Whats Learning/_lessons/Основы HTML + CSS.md"
-    },
-    {
-      "basename": "English",
-      "path": "English/English.md"
-    },
-    {
-      "basename": "conflict-files-obsidian-git",
-      "path": "conflict-files-obsidian-git.md"
-    },
-    {
-      "basename": "Github Actions",
-      "path": "Development/GIT/Github Actions.md"
     }
   ],
   "omittedPaths": [],
