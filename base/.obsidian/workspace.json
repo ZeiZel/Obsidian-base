@@ -74,7 +74,7 @@
               "type": "markdown",
               "state": {
                 "file": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
-                "mode": "source",
+                "mode": "preview",
                 "backlinks": true,
                 "source": false
               },
@@ -269,6 +269,7 @@
   "active": "f85d68430cea72fe",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
@@ -304,7 +305,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250111141355.png",
     "Development/DevOps/NGINX.md",
     "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md",
-    "Whats Learning/О чём база~.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
