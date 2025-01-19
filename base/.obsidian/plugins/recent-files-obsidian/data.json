@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "6. Обмен сообщениями",
-      "path": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md"
+      "basename": "7. RabbitMQ",
+      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "6. Обмен сообщениями",
+      "path": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md"
     },
     {
       "basename": "5. Монорепозитории",
@@ -195,10 +199,6 @@
     {
       "basename": "Собеседование",
       "path": "Soft/Собеседование.md"
-    },
-    {
-      "basename": "Storytelling",
-      "path": "Soft/Storytelling.md"
     }
   ],
   "omittedPaths": [],
