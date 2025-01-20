@@ -24,6 +24,18 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
+      "timestamp": 1737390285627
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+      "timestamp": 1737390283717
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
+      "timestamp": 1737390275334
+    },
+    {
       "filepath": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
       "timestamp": 1737384296510
     }

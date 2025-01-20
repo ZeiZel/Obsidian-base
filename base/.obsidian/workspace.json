@@ -73,13 +73,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+                "file": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. RabbitMQ"
+              "title": "5. Монорепозитории"
             }
           }
         ],
@@ -279,10 +279,11 @@
   },
   "active": "f85d68430cea72fe",
   "lastOpenFiles": [
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250120183234.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
     "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
+    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250120183234.png",
+    "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119164348.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119161016.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119160644.png",
@@ -292,7 +293,6 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119135713.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119134715.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119122018.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119121342.png",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",

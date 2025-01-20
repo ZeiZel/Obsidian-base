@@ -1,8 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "7. RabbitMQ",
-      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
+      "basename": "5. Монорепозитории",
+      "path": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
@@ -13,8 +13,8 @@
       "path": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md"
     },
     {
-      "basename": "5. Монорепозитории",
-      "path": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md"
+      "basename": "7. RabbitMQ",
+      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
     },
     {
       "basename": "4. Переход к микросервисам",
