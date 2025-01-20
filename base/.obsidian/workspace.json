@@ -277,8 +277,9 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "2e4f8cffc849facf",
+  "active": "f85d68430cea72fe",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250120183234.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
     "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
@@ -315,7 +316,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
-    "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
