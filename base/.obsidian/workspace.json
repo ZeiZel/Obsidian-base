@@ -141,11 +141,12 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "clock",
+              "title": "Recent Files"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -310,6 +311,14 @@
   },
   "active": "f85d68430cea72fe",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124190136.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185950.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185359.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185133.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185034.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124184956.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124184924.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124184402.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124181517.png",
     "_hobbies/Flameshot.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
@@ -319,14 +328,6 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250120183234.png",
     "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119164348.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119161016.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119160644.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119154714.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119153358.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119153134.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119135713.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119134715.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250119122018.png",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
