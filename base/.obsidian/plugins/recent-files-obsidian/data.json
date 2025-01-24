@@ -5,6 +5,10 @@
       "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
     },
     {
+      "basename": "Flameshot",
+      "path": "_hobbies/Flameshot.md"
+    },
+    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
@@ -83,10 +87,6 @@
     {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
-      "basename": "Flameshot",
-      "path": "_hobbies/Flameshot.md"
     },
     {
       "basename": "09 Базовые понятия Ansible",
