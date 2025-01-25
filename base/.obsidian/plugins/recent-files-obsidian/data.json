@@ -5,6 +5,22 @@
       "path": "Development/DB/DB.md"
     },
     {
+      "basename": "Тестирование JavaScript",
+      "path": "Development/Testing/Тестирование JavaScript.md"
+    },
+    {
+      "basename": "Python",
+      "path": "Development/Python.md"
+    },
+    {
+      "basename": "Real-time клиент-серверное взаимодействие",
+      "path": "Development/Клиент-сервер/Real-time клиент-серверное взаимодействие.md"
+    },
+    {
+      "basename": "SQLite",
+      "path": "Development/DB/SQLite.md"
+    },
+    {
       "basename": "PostgreSQL",
       "path": "Development/DB/PostgreSQL.md"
     },
@@ -183,22 +199,6 @@
     {
       "basename": "1. Введение",
       "path": "Development/GIT/_lessons/1. Введение.md"
-    },
-    {
-      "basename": "Linux",
-      "path": "Development/Linux/Linux.md"
-    },
-    {
-      "basename": "Vue",
-      "path": "Development/FrontEnd/Vue/Vue.md"
-    },
-    {
-      "basename": "Angular",
-      "path": "Development/FrontEnd/Angular/Angular.md"
-    },
-    {
-      "basename": "React Foundamentals",
-      "path": "Development/FrontEnd/React/React Foundamentals.md"
     }
   ],
   "omittedPaths": [],

@@ -25,19 +25,23 @@
   "recentFilesStore": [
     {
       "filepath": "Development/DB/DB.md",
-      "timestamp": 1737827025142
+      "timestamp": 1737828976395
     },
     {
-      "filepath": "Development/DB/PostgreSQL.md",
-      "timestamp": 1737827013519
+      "filepath": "Development/Testing/Тестирование JavaScript.md",
+      "timestamp": 1737828424754
     },
     {
-      "filepath": "Development/DB/Mongo DB.md",
-      "timestamp": 1737826995732
+      "filepath": "Development/Python.md",
+      "timestamp": 1737828404754
     },
     {
-      "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-      "timestamp": 1737826956198
+      "filepath": "Development/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+      "timestamp": 1737828375690
+    },
+    {
+      "filepath": "Development/DB/SQLite.md",
+      "timestamp": 1737827256090
     }
   ],
   "bookmarkedFileStore": [],

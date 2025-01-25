@@ -149,7 +149,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5
+    "width": 399.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -329,10 +329,15 @@
   },
   "active": "2690674d61ab63e9",
   "lastOpenFiles": [
+    "Development/Testing/Тестирование JavaScript.md",
+    "Development/Testing",
+    "Development/Python.md",
+    "Development/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+    "Development/DB/DB.md",
+    "Development/DB/SQLite.md",
     "Development/DB/_png",
     "Development/Architecture/_png",
     "Development/DB/PostgreSQL.md",
-    "Development/DB/DB.md",
     "Development/DB/Mongo DB.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/DB",
@@ -364,16 +369,11 @@
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
     "Development/MobileDev/React Native/React Native.md",
     "Whats Learning/Прогресс изучения технологий.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Soft/Agile/_lessons/Scrum.md",
     "_png",
-    "Development/NX.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
     "Development/FrontEnd/State Managers/_png",
-    "Development/FrontEnd/State Managers",
-    "less.works",
-    "Soft/Agile/_lessons/_png"
+    "Development/FrontEnd/State Managers"
   ]
 }
