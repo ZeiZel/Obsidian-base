@@ -1,16 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "DB",
-      "path": "Development/DB/DB.md"
-    },
-    {
       "basename": "C",
       "path": "Development/C.md"
     },
     {
       "basename": "Python",
       "path": "Development/Python.md"
+    },
+    {
+      "basename": "DB",
+      "path": "Development/DB/DB.md"
     },
     {
       "basename": "NX",

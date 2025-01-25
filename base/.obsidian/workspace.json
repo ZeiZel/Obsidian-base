@@ -111,9 +111,24 @@
               "icon": "lucide-file",
               "title": "C"
             }
+          },
+          {
+            "id": "e62054a37d15257f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Python.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Python"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -357,12 +372,12 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "2690674d61ab63e9",
+  "active": "08834d5f5ab0742c",
   "lastOpenFiles": [
-    "Development/C.md",
     "Development/Python.md",
-    "Development/NX.md",
+    "Development/C.md",
     "Development/DB/DB.md",
+    "Development/NX.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/Testing/_png",
