@@ -1,0 +1,381 @@
+{
+  "main": {
+    "id": "5324373015726ba8",
+    "type": "split",
+    "children": [
+      {
+        "id": "827f698ff9c3ece6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a30664faf7f50307",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Agile/_lessons/Scrum.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Scrum"
+            }
+          },
+          {
+            "id": "778aad268979a705",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes + Helm"
+            }
+          },
+          {
+            "id": "59c1cef850079d7d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Whats Learning/Прогресс изучения технологий.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Прогресс изучения технологий"
+            }
+          },
+          {
+            "id": "af7c798aa4992616",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Продвинутый FrontEnd"
+            }
+          },
+          {
+            "id": "2690674d61ab63e9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "7. RabbitMQ"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7d5d9729e93c69a0",
+    "type": "split",
+    "children": [
+      {
+        "id": "3a9f6fcffec95690",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48c5943284c71db8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c8a96e2fe293303a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8a26a51640c36244",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "d29b4086a66c80f5",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 314.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "5d906d621d61f331",
+    "type": "split",
+    "children": [
+      {
+        "id": "87f779e737b54d79",
+        "type": "tabs",
+        "dimension": 19.841269841269842,
+        "children": [
+          {
+            "id": "55e165ebdb0aba10",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Масштабирование Agile"
+            }
+          },
+          {
+            "id": "f2a11511413c62c1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Масштабирование Agile"
+            }
+          },
+          {
+            "id": "912c743976f26aa3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3664b6cf848a552d",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "2e4f8cffc849facf",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "6d3bfb130df0031a",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "49f169db733656b7",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "763d7c7e8c4f71e3",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "cffca7b942782d12",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          },
+          {
+            "id": "4509cf6575b4c41a",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          }
+        ],
+        "currentTab": 9
+      },
+      {
+        "id": "2df1decc2eef0b0b",
+        "type": "tabs",
+        "dimension": 80.15873015873017,
+        "children": [
+          {
+            "id": "4d30a7c31882a75b",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "656d24955483df37",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 7. RabbitMQ"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Open graph view": false,
+      "switcher:Open quick switcher": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false,
+      "callout-manager:Insert Callout": false
+    }
+  },
+  "active": "2690674d61ab63e9",
+  "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125153422.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125145351.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125121414.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125121137.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125120832.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125120538.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125120100.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125114843.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125113039.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125112715.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125112351.png",
+    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+    "_hobbies/Flameshot.md",
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
+    "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
+    "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
+    "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
+    "Development/MobileDev/React Native/React Native.md",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Soft/Agile/_lessons/Scrum.md",
+    "_png",
+    "Development/NX.md",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Soft/Agile/_lessons/Kanban.md",
+    "Soft/Agile/Agile.md",
+    "Soft/Agile/_lessons/Введение.md",
+    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+    "Development/GIT/Git.md",
+    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+    "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
+    "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md",
+    "Development/FrontEnd/Vue/_png",
+    "Development/FrontEnd/Vue",
+    "Development/FrontEnd/Angular",
+    "Development/FrontEnd/State Managers/_png",
+    "Development/FrontEnd/State Managers",
+    "less.works",
+    "Soft/Agile/_lessons/_png",
+    "Soft/Agile/_lessons",
+    "Tags/#+#roadmap"
+  ]
+}
