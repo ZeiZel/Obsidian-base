@@ -73,13 +73,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+                "file": "Development/DB/DB.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Паттерны и практика построения микросервисов"
+              "title": "DB"
             }
           }
         ],
@@ -329,8 +329,13 @@
   },
   "active": "2690674d61ab63e9",
   "lastOpenFiles": [
-    "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
+    "Development/DB/PostgreSQL.md",
+    "Development/DB/DB.md",
+    "Development/DB/Mongo DB.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/DB",
+    "Development/BackEnd/PostgreSQL/PostreSQL.md",
+    "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
     "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
@@ -362,10 +367,6 @@
     "_png",
     "Development/NX.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Soft/Agile/_lessons/Kanban.md",
-    "Soft/Agile/Agile.md",
-    "Soft/Agile/_lessons/Введение.md",
-    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
@@ -373,7 +374,6 @@
     "Development/FrontEnd/State Managers",
     "less.works",
     "Soft/Agile/_lessons/_png",
-    "Soft/Agile/_lessons",
-    "Tags/#+#roadmap"
+    "Soft/Agile/_lessons"
   ]
 }

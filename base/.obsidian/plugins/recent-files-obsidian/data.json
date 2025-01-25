@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "DB",
+      "path": "Development/DB/DB.md"
+    },
+    {
+      "basename": "PostgreSQL",
+      "path": "Development/DB/PostgreSQL.md"
+    },
+    {
+      "basename": "Mongo DB",
+      "path": "Development/DB/Mongo DB.md"
+    },
+    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
@@ -187,18 +199,6 @@
     {
       "basename": "React Foundamentals",
       "path": "Development/FrontEnd/React/React Foundamentals.md"
-    },
-    {
-      "basename": "JavaScript",
-      "path": "Development/FrontEnd/JavaScript/JavaScript.md"
-    },
-    {
-      "basename": "11 Server side rendering",
-      "path": "Development/FrontEnd/NextJS/_lessons/11 Server side rendering.md"
-    },
-    {
-      "basename": "Development",
-      "path": "Development/Development.md"
     }
   ],
   "omittedPaths": [],

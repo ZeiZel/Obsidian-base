@@ -1,1 +1,0 @@
-## **08 Логика с CASE, COALESCE и NULLIF**
