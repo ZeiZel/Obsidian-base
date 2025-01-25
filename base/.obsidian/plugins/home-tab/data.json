@@ -24,16 +24,24 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
-      "filepath": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
-      "timestamp": 1737821355231
-    },
-    {
       "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-      "timestamp": 1737821353173
+      "timestamp": 1737826909967
     },
     {
-      "filepath": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
-      "timestamp": 1737805624969
+      "filepath": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
+      "timestamp": 1737826827121
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
+      "timestamp": 1737826750246
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+      "timestamp": 1737826633435
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
+      "timestamp": 1737826516310
     }
   ],
   "bookmarkedFileStore": [],

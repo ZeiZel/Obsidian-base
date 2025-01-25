@@ -1,12 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "8. Реализация взаимодействия",
-      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
-    },
-    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "13. Выкладка и эксплуатация",
+      "path": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md"
+    },
+    {
+      "basename": "12. Тестирование микросервисов",
+      "path": "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md"
+    },
+    {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "10. Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
+    },
+    {
+      "basename": "9. Реализация API",
+      "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
+    },
+    {
+      "basename": "8. Реализация взаимодействия",
+      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
     },
     {
       "basename": "7. RabbitMQ",
@@ -179,26 +199,6 @@
     {
       "basename": "Development",
       "path": "Development/Development.md"
-    },
-    {
-      "basename": "DataGrip",
-      "path": "Envirompment/DataGrip.md"
-    },
-    {
-      "basename": "Soft",
-      "path": "Soft/Soft.md"
-    },
-    {
-      "basename": "Масштабирование Agile",
-      "path": "Soft/Agile/_lessons/Масштабирование Agile.md"
-    },
-    {
-      "basename": "Заключение",
-      "path": "Soft/Agile/_lessons/Заключение.md"
-    },
-    {
-      "basename": "Как учиться учиться",
-      "path": "Soft/Как учиться учиться.md"
     }
   ],
   "omittedPaths": [],
