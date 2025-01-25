@@ -24,6 +24,14 @@
   "unresolvedLinks": false,
   "recentFilesStore": [
     {
+      "filepath": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
+      "timestamp": 1737821355231
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+      "timestamp": 1737821353173
+    },
+    {
       "filepath": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
       "timestamp": 1737805624969
     }

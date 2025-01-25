@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "8. Реализация взаимодействия",
+      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
       "basename": "7. RabbitMQ",
       "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
     },
@@ -11,10 +19,6 @@
     {
       "basename": "Flameshot",
       "path": "_hobbies/Flameshot.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "5. Монорепозитории",
@@ -195,10 +199,6 @@
     {
       "basename": "Как учиться учиться",
       "path": "Soft/Как учиться учиться.md"
-    },
-    {
-      "basename": "Собеседование",
-      "path": "Soft/Собеседование.md"
     }
   ],
   "omittedPaths": [],

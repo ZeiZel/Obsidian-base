@@ -73,13 +73,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+                "file": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. RabbitMQ"
+              "title": "8. Реализация взаимодействия"
             }
           }
         ],
@@ -145,13 +145,11 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 314.5,
-    "collapsed": true
+    "width": 314.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -331,6 +329,8 @@
   },
   "active": "2690674d61ab63e9",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125175037.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125174958.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125174916.png",
@@ -341,11 +341,8 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125170051.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125164216.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125163723.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125153422.png",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
-    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
     "_hobbies/Flameshot.md",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
     "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
