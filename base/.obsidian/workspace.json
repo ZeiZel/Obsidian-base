@@ -68,7 +68,7 @@
             }
           },
           {
-            "id": "f85d68430cea72fe",
+            "id": "2690674d61ab63e9",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -319,8 +319,12 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "f85d68430cea72fe",
+  "active": "2690674d61ab63e9",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125112351.png",
+    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125111227.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125094249.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125093931.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125093458.png",
@@ -330,16 +334,12 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185950.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185359.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185133.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124185034.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250124184956.png",
     "_hobbies/Flameshot.md",
-    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
     "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
-    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md",
     "Development/MobileDev/React Native/React Native.md",

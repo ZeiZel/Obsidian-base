@@ -5,6 +5,10 @@
       "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
     },
     {
+      "basename": "Продвинутый FrontEnd",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
       "basename": "Flameshot",
       "path": "_hobbies/Flameshot.md"
     },
@@ -23,10 +27,6 @@
     {
       "basename": "4. Переход к микросервисам",
       "path": "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md"
-    },
-    {
-      "basename": "Продвинутый FrontEnd",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     },
     {
       "basename": "4 Работа с данными",
