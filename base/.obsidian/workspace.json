@@ -329,6 +329,8 @@
   },
   "active": "2690674d61ab63e9",
   "lastOpenFiles": [
+    "Development/DB/_png",
+    "Development/Architecture/_png",
     "Development/DB/PostgreSQL.md",
     "Development/DB/DB.md",
     "Development/DB/Mongo DB.md",
@@ -366,14 +368,12 @@
     "Soft/Agile/_lessons/Scrum.md",
     "_png",
     "Development/NX.md",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
     "Development/FrontEnd/Angular",
     "Development/FrontEnd/State Managers/_png",
     "Development/FrontEnd/State Managers",
     "less.works",
-    "Soft/Agile/_lessons/_png",
-    "Soft/Agile/_lessons"
+    "Soft/Agile/_lessons/_png"
   ]
 }

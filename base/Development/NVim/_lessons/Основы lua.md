@@ -22,7 +22,7 @@ print("Привет!")
 lua demo.lua
 ```
 
-![](../_png/Pasted%20image%2020240908124724.png)
+![](_png/Pasted%20image%2020240908124724.png)
 
 Из терминала можно выключить через стандартный `exit`
 
@@ -78,7 +78,7 @@ for key, value in ipairs(array) do
 end
 ```
 
-![](../_png/Pasted%20image%2020240908132100.png)
+![](_png/Pasted%20image%2020240908132100.png)
 
 ### Ветвления
 

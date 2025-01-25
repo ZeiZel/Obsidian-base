@@ -6,11 +6,11 @@
 
 Если слово `data` подчёркнуто и не показываются новые типы, то нужно с *ctrl* тыкнуть по функции `create()`, чтобы редактор подгрузил типы и увидел обновления модели
 
-![](../BackEnd/_png/675890cc4ddefaaa2d024e2f9e3438d8.png)
+![](_png/675890cc4ddefaaa2d024e2f9e3438d8.png)
 
 Так выглядит конечный файл
 
-![](../BackEnd/_png/efaabebf4a298762729b406b65a4a708.png)
+![](_png/efaabebf4a298762729b406b65a4a708.png)
 
 ##### 2) Подключение призмы к SQL Server
 
@@ -21,19 +21,19 @@
 
 Всё должно быть подключено
 
-![](../BackEnd/_png/dc7f92a5d9ca1bacca8daa0af59809bf.png)
+![](_png/dc7f92a5d9ca1bacca8daa0af59809bf.png)
 
 Должен быть включён TCP/IP
 
-![](../BackEnd/_png/6d96e1dba1602e3031f51bab76ea967b.png)
+![](_png/6d96e1dba1602e3031f51bab76ea967b.png)
 
 Выполняем все инструкции jetbrains по их ссылке. 
 
-![](../BackEnd/_png/836e1751ec2bdedbc51d86f92d17d857.png)
+![](_png/836e1751ec2bdedbc51d86f92d17d857.png)
 
 В `datagrip` составляем запрос на подключение внутри окна `ctrl+alt+shift+s`
 
-![](../BackEnd/_png/ece43f9ff8d7d851a4cfd18aeeb4a15f.png)
+![](_png/ece43f9ff8d7d851a4cfd18aeeb4a15f.png)
 
 ## Project Setup 
 
@@ -70,11 +70,11 @@ npx prisma init --datasource-provider postgresql
 
 После инициализации будут сгенерированы файлы схемы и `.env`
 
-![](../BackEnd/_png/0e8a06894dec20615f3b12b4a553902b.png)
+![](_png/0e8a06894dec20615f3b12b4a553902b.png)
 
 Так же нужно установить плагин в наш редактор, который будет подсвечивать синтаксис и форматировать код призмы
 
-![](../BackEnd/_png/488b062b09c1ac7d4201edc86db71164.png)
+![](_png/488b062b09c1ac7d4201edc86db71164.png)
 
 Так же в глобальных настройках VSCode можно добавить данную инструкцию, которая будет форматировать код призмы при сохранении
 
@@ -106,7 +106,7 @@ generator client {
 DATABASE_URL="postgresql://postgres:0000@localhost:5432/test"
 ```
 
-![](../BackEnd/_png/8b765f2d32420f51535ab9e986fb4ecd.png)
+![](_png/8b765f2d32420f51535ab9e986fb4ecd.png)
 
 ## Basic Prisma Model Setup 
 
@@ -140,7 +140,7 @@ npx prisma migrate dev --name init
 
 После миграции у нас генерируется лог с именем и кодом `sql`, который написан на языке той базы, к которой мы подключились
 
-![](../BackEnd/_png/57db14c99c866096e900756ccf6916d6.png)
+![](_png/57db14c99c866096e900756ccf6916d6.png)
 
 ## Prisma Client Basics 
 
@@ -161,7 +161,7 @@ const prisma = new PrismaClient();
 
 Конкретно сейчас мы сможем совершать действия над нашим сервером - например, подключиться к нему, отключиться, получить модель базы 
 
-![](../BackEnd/_png/030237d7f5a1f5940fce5dbe474f9f05.png)
+![](_png/030237d7f5a1f5940fce5dbe474f9f05.png)
 
 И уже тут представлен код, где мы инициализируем призму, создаём нового пользователя внутри нашей сгенерированной модели, выводим все записи из определённой таблицы, а так же дисконнектимся от базы 
 
@@ -195,7 +195,7 @@ main()
 
 Каждый раз, если мы будем менять имя пользователя внутри `name: "имя"` у нас будет создаваться новый пользователь с инкрементированным идентификатором
 
-![](../BackEnd/_png/71f4b1ac20fd29899cc8856543585f0b.png)
+![](_png/71f4b1ac20fd29899cc8856543585f0b.png)
 
 ## Datasources and Generators 
 
@@ -503,7 +503,7 @@ main()
 	.finally(async () => await prisma.$disconnect());
 ```
 
-![](../BackEnd/_png/48ee7cf35158e5e29db56df5d90110f4.png)
+![](_png/48ee7cf35158e5e29db56df5d90110f4.png)
 
 Так же мы имеем свойство `select`, которое позволяет вывести отдельные части данных моделей. 
 Можно пользоваться только `include` или `select` и только в функции `create()`
@@ -543,7 +543,7 @@ const main = async (): Promise<void> => {
 };
 ```
 
-![](../BackEnd/_png/258299b11ddca9b4ab5cd5de3e2dfcd3.png)
+![](_png/258299b11ddca9b4ab5cd5de3e2dfcd3.png)
 
 Так же мы можем выводить дополнительные данные по производимым запросам в нашу базу
 
@@ -553,7 +553,7 @@ import { PrismaClient, User } from '@prisma/client';
 const prisma = new PrismaClient({ log: ['query'] });
 ```
 
-![](../BackEnd/_png/3e5f98c17a7a5d73fb87bbdbe2d34222.png)
+![](_png/3e5f98c17a7a5d73fb87bbdbe2d34222.png)
 
 Функция `createMany()` позволяет создать сразу несколько пользователей
 
@@ -584,7 +584,7 @@ const main = async () => {
 
 И тут нам выходит число созданных записей
 
-![](../BackEnd/_png/5c6bd573113e05cea6580a2bf7c107ac.png)
+![](_png/5c6bd573113e05cea6580a2bf7c107ac.png)
 
 ## Client Read Operations
 
@@ -638,7 +638,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/d7da382122d3af3dfc6d1b9cefe1ef93.png)
+![](_png/d7da382122d3af3dfc6d1b9cefe1ef93.png)
 
 Функция `findMany()` найдёт все записи, которые соответствуют условию (возвращает массив)
 
@@ -649,7 +649,7 @@ const user = await prisma.user.findMany({
 	},
 });
 ```
-![](../BackEnd/_png/7981c4903bbf2810381a4825a6efbffe.png)
+![](_png/7981c4903bbf2810381a4825a6efbffe.png)
 
 Свойство `distinct` позволяет нам выводить только уникальные значения по определённым полям
 
@@ -661,7 +661,7 @@ const user = await prisma.user.findMany({
 	distinct: ['name'],
 });
 ```
-![](../BackEnd/_png/bb6a4deae0f2f0a80344f1a1e553f46f.png)
+![](_png/bb6a4deae0f2f0a80344f1a1e553f46f.png)
 
 Так же мы имеем дополнительно три свойства для сортировки наших полученных результатов:
 - `orderBy` - сортирует полученные записи по определённому полю в выбранном порядке
@@ -956,7 +956,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/c7b134d98f7a3d6dcc6805767f0f7804.png)
+![](_png/c7b134d98f7a3d6dcc6805767f0f7804.png)
 
 
 
@@ -1025,7 +1025,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/a2054a807cca0a65ff194e52f87b8fef.png)
+![](_png/a2054a807cca0a65ff194e52f87b8fef.png)
 
 Так же нужно упомянуть, что у нас есть операции `increment`, `decrement`, `multiply` и `divide`
 
@@ -1037,7 +1037,7 @@ data: {
 },
 ```
 
-![](../BackEnd/_png/7412e15d219dac14a8930e59f4ef4c7e.png)
+![](_png/7412e15d219dac14a8930e59f4ef4c7e.png)
 
 ## Connect Existing Relationships 
 
@@ -1078,7 +1078,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/c8f6c8bddca0d6490283899d9b26c37f.png)
+![](_png/c8f6c8bddca0d6490283899d9b26c37f.png)
 
 Так же мы можем подключить уже существующие настройки через `connect`
 
@@ -1101,7 +1101,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/1f3ec6af057c1a391a1ec19201f20324.png)
+![](_png/1f3ec6af057c1a391a1ec19201f20324.png)
 
 Выводим настройки
 
@@ -1118,7 +1118,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/6b9de247536ff4d4573c331a4f97abbf.png)
+![](_png/6b9de247536ff4d4573c331a4f97abbf.png)
 
 Так же мы можем отключиться от внешних полученных данных с использованием свойства `disconnect`
 
@@ -1139,7 +1139,7 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/077f7a80249aa9a72e0871d519701114.png)
+![](_png/077f7a80249aa9a72e0871d519701114.png)
 
 Так же мы можем произвести `connect` сразу при создании нового пользователя
 
@@ -1175,11 +1175,11 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/c51e7da0b9fe1831eed52ea99dc9f4fe.png)
+![](_png/c51e7da0b9fe1831eed52ea99dc9f4fe.png)
 
-![](../BackEnd/_png/3fa0dc29a8150f1a9498ab84465442a0.png)
+![](_png/3fa0dc29a8150f1a9498ab84465442a0.png)
 
-![](../BackEnd/_png/e49a2971a67206f361a2fd5db0257011.png)
+![](_png/e49a2971a67206f361a2fd5db0257011.png)
 
 Ну и так же мы можем удалить множество пользователей с использованием `deleteMany` по заданному условию
 
@@ -1195,4 +1195,4 @@ const main = async () => {
 };
 ```
 
-![](../BackEnd/_png/d133563bde60b82a91a6c81d28741788.png)
+![](_png/d133563bde60b82a91a6c81d28741788.png)
