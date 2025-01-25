@@ -5,12 +5,28 @@
       "path": "Development/DB/DB.md"
     },
     {
-      "basename": "Тестирование JavaScript",
-      "path": "Development/Testing/Тестирование JavaScript.md"
+      "basename": "C",
+      "path": "Development/C.md"
     },
     {
       "basename": "Python",
       "path": "Development/Python.md"
+    },
+    {
+      "basename": "NX",
+      "path": "Development/NX.md"
+    },
+    {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "Тестирование JavaScript",
+      "path": "Development/Testing/Тестирование JavaScript.md"
     },
     {
       "basename": "Real-time клиент-серверное взаимодействие",
@@ -27,10 +43,6 @@
     {
       "basename": "Mongo DB",
       "path": "Development/DB/Mongo DB.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "13. Выкладка и эксплуатация",
@@ -93,20 +105,12 @@
       "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "NX",
-      "path": "Development/NX.md"
     },
     {
       "basename": "Docker + Ansible",
@@ -195,10 +199,6 @@
     {
       "basename": "3. Начало работы с Git",
       "path": "Development/GIT/_lessons/3. Начало работы с Git.md"
-    },
-    {
-      "basename": "1. Введение",
-      "path": "Development/GIT/_lessons/1. Введение.md"
     }
   ],
   "omittedPaths": [],

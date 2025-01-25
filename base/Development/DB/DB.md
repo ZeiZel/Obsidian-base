@@ -1,4 +1,11 @@
-#PostgreSQL #SQLite #MongoDB #Prisma #ORM #Database
+---
+tags:
+  - PostgreSQL
+  - SQLite
+  - MongoDB
+  - Prisma
+  - DataBase
+---
 
 # Базы данных
 
