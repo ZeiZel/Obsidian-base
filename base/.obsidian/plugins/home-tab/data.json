@@ -25,7 +25,15 @@
   "recentFilesStore": [
     {
       "filepath": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
-      "timestamp": 1737871311365
+      "timestamp": 1737875138685
+    },
+    {
+      "filepath": "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+      "timestamp": 1737874901213
+    },
+    {
+      "filepath": "Development/GIT/Git.md",
+      "timestamp": 1737874876073
     },
     {
       "filepath": "Whats Learning/Прогресс изучения технологий.md",
@@ -34,14 +42,6 @@
     {
       "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
       "timestamp": 1737871077080
-    },
-    {
-      "filepath": "Development/DB/DB.md",
-      "timestamp": 1737871073907
-    },
-    {
-      "filepath": "Development/C.md",
-      "timestamp": 1737871056440
     }
   ],
   "bookmarkedFileStore": [],

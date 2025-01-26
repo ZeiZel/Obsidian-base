@@ -164,8 +164,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 399.5,
-    "collapsed": true
+    "width": 399.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -355,8 +354,10 @@
   },
   "active": "345fde07595e7e45",
   "lastOpenFiles": [
-    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+    "Development/GIT/Git.md",
     "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
+    "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/DB/DB.md",
     "Development/C.md",
@@ -394,8 +395,6 @@
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md",
     "Development/BackEnd/Microservices/_lessons/14. Заключение.md",
-    "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
-    "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "_png",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
