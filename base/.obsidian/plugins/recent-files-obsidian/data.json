@@ -1,20 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "C",
-      "path": "Development/C.md"
-    },
-    {
-      "basename": "Python",
-      "path": "Development/Python.md"
-    },
-    {
-      "basename": "DB",
-      "path": "Development/DB/DB.md"
-    },
-    {
-      "basename": "NX",
-      "path": "Development/NX.md"
+      "basename": "8. Реализация взаимодействия",
+      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
     },
     {
       "basename": "Прогресс изучения технологий",
@@ -23,6 +11,22 @@
     {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "DB",
+      "path": "Development/DB/DB.md"
+    },
+    {
+      "basename": "C",
+      "path": "Development/C.md"
+    },
+    {
+      "basename": "Python",
+      "path": "Development/Python.md"
+    },
+    {
+      "basename": "NX",
+      "path": "Development/NX.md"
     },
     {
       "basename": "Тестирование JavaScript",
@@ -63,10 +67,6 @@
     {
       "basename": "9. Реализация API",
       "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
-    },
-    {
-      "basename": "8. Реализация взаимодействия",
-      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
     },
     {
       "basename": "7. RabbitMQ",

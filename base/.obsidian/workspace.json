@@ -73,62 +73,32 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+                "file": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Паттерны и практика построения микросервисов"
+              "title": "8. Реализация взаимодействия"
             }
           },
           {
-            "id": "2690674d61ab63e9",
+            "id": "67632d96050b7ec2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DB/DB.md",
+                "file": "Whats Learning/Прогресс изучения технологий.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DB"
-            }
-          },
-          {
-            "id": "08834d5f5ab0742c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/C.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "C"
-            }
-          },
-          {
-            "id": "e62054a37d15257f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Python.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Python"
+              "title": "Прогресс изучения технологий"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -194,7 +164,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 399.5
+    "width": 399.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -382,14 +353,15 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "6f648ccd8d1ed8ad",
+  "active": "345fde07595e7e45",
   "lastOpenFiles": [
-    "Development/Python.md",
-    "Development/C.md",
-    "Development/DB/DB.md",
-    "Development/NX.md",
     "Whats Learning/Прогресс изучения технологий.md",
+    "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/DB/DB.md",
+    "Development/C.md",
+    "Development/Python.md",
+    "Development/NX.md",
     "Development/Testing/_png",
     "Development/Testing/Тестирование JavaScript.md",
     "Development/Testing",
@@ -406,7 +378,6 @@
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
     "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
-    "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125175037.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250125174958.png",
