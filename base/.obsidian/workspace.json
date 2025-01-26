@@ -305,10 +305,10 @@
             "id": "cffca7b942782d12",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -320,9 +320,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "6f648ccd8d1ed8ad",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 9
+        "currentTab": 10
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -372,7 +382,7 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "08834d5f5ab0742c",
+  "active": "6f648ccd8d1ed8ad",
   "lastOpenFiles": [
     "Development/Python.md",
     "Development/C.md",
