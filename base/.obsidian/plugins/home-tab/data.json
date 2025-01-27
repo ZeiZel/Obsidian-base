@@ -25,7 +25,23 @@
   "recentFilesStore": [
     {
       "filepath": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
-      "timestamp": 1737992218824
+      "timestamp": 1737995427094
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+      "timestamp": 1737995424237
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
+      "timestamp": 1737994559814
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+      "timestamp": 1737994343116
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
+      "timestamp": 1737993729946
     }
   ],
   "bookmarkedFileStore": [],

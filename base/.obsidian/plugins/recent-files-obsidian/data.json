@@ -5,6 +5,22 @@
       "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
     },
     {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "5. Монорепозитории",
+      "path": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md"
+    },
+    {
+      "basename": "7. RabbitMQ",
+      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
+    },
+    {
+      "basename": "4. Переход к микросервисам",
+      "path": "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md"
+    },
+    {
       "basename": "7. Удалённый репозиторий",
       "path": "Development/GIT/_lessons/7. Удалённый репозиторий.md"
     },
@@ -15,10 +31,6 @@
     {
       "basename": "Прогресс изучения технологий",
       "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "DB",
@@ -77,10 +89,6 @@
       "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
     },
     {
-      "basename": "7. RabbitMQ",
-      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
-    },
-    {
       "basename": "Продвинутый FrontEnd",
       "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     },
@@ -89,16 +97,8 @@
       "path": "_hobbies/Flameshot.md"
     },
     {
-      "basename": "5. Монорепозитории",
-      "path": "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md"
-    },
-    {
       "basename": "6. Обмен сообщениями",
       "path": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md"
-    },
-    {
-      "basename": "4. Переход к микросервисам",
-      "path": "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md"
     },
     {
       "basename": "4 Работа с данными",
