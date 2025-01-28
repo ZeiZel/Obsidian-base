@@ -1,0 +1,16 @@
+{
+  "hotkeys": [
+    {
+      "command": "obsidian-git:commit",
+      "chords": [
+        "C-KeyS"
+      ]
+    },
+    {
+      "command": "obsidian-git:push2",
+      "chords": [
+        "C-KeyS"
+      ]
+    }
+  ]
+}
