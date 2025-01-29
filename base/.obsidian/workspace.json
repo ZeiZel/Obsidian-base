@@ -73,13 +73,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
+                "file": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "9. Реализация API"
+              "title": "10. Реализация бизнес логики"
             }
           },
           {
@@ -164,8 +164,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 399.5,
-    "collapsed": true
+    "width": 399.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -395,6 +394,8 @@
   },
   "active": "345fde07595e7e45",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129203738.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129203608.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129203541.png",
@@ -405,10 +406,7 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129183818.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250128184513.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250128184338.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250128183851.png",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
-    "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",

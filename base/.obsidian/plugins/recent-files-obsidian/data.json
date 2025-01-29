@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "9. Реализация API",
-      "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
+      "basename": "10. Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "9. Реализация API",
+      "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
     },
     {
       "basename": "8. Реализация взаимодействия",
@@ -83,10 +87,6 @@
     {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
-    },
-    {
-      "basename": "10. Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
     },
     {
       "basename": "Продвинутый FrontEnd",
