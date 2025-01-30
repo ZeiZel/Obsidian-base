@@ -325,10 +325,10 @@
             "id": "899529b407bf7eeb",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -340,9 +340,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "23b188efa853fd01",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 14
+        "currentTab": 15
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -392,7 +402,7 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "345fde07595e7e45",
+  "active": "23b188efa853fd01",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129204434.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
