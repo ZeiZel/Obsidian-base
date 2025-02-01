@@ -25,7 +25,15 @@
   "recentFilesStore": [
     {
       "filepath": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
-      "timestamp": 1738333339405
+      "timestamp": 1738419132342
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+      "timestamp": 1738419130847
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
+      "timestamp": 1738419049163
     }
   ],
   "bookmarkedFileStore": [],
