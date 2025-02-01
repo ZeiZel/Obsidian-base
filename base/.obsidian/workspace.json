@@ -164,7 +164,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 399.5
+    "width": 399.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -432,8 +433,9 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "a5b939b5b97e1a69",
+  "active": "345fde07595e7e45",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201144728.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250130185153.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129204434.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
@@ -446,7 +448,6 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129184737.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129184252.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129183818.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250128184513.png",
     "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
