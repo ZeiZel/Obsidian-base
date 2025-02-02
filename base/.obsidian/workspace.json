@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -88,7 +88,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "10. Реализация бизнес логики"
+              "title": "11. Консистентность данных"
             }
           },
           {
@@ -126,7 +126,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -452,11 +453,13 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "3520d41d5f2e5c4e",
+  "active": "345fde07595e7e45",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250202201256.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250202200121.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
     "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201165851.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201163546.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201144728.png",
@@ -466,7 +469,6 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129203608.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129203541.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129202934.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250129190419.png",
     "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
