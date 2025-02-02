@@ -92,18 +92,6 @@
             }
           },
           {
-            "id": "d9403ec723f448df",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.4"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.4"
-            }
-          },
-          {
             "id": "67632d96050b7ec2",
             "type": "leaf",
             "state": {
@@ -119,7 +107,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
