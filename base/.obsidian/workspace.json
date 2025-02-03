@@ -166,8 +166,8 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ]
@@ -398,12 +398,22 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
             "id": "d4c928b60a4b9830",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "809498bb13b00a6d",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -413,7 +423,7 @@
             }
           }
         ],
-        "currentTab": 20
+        "currentTab": 21
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -426,8 +436,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           },
           {
@@ -436,19 +446,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 7. RabbitMQ"
+              "title": "Outline of 11. Консистентность данных"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300.5,
-    "collapsed": true
+    "width": 471.5
   },
   "left-ribbon": {
     "hiddenItems": {
