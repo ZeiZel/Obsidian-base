@@ -45,7 +45,8 @@
     "iconsInLinksEnabled": true,
     "iconIdentifier": ":",
     "lucideIconPackType": "custom",
-    "debugMode": false
+    "debugMode": false,
+    "useInternalPlugins": false
   },
   "Programming Principes": "LiFolder",
   "Development": "Mi3d",

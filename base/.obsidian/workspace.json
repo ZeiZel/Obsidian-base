@@ -139,7 +139,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#TypeScript",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -169,13 +169,22 @@
               "icon": "lucide-file",
               "title": "Plugin no longer active"
             }
+          },
+          {
+            "id": "6be5f04771f08940",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 399.5,
-    "collapsed": true
+    "width": 399.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -184,7 +193,7 @@
       {
         "id": "87f779e737b54d79",
         "type": "tabs",
-        "dimension": 19.841269841269842,
+        "dimension": 37.61792452830189,
         "children": [
           {
             "id": "55e165ebdb0aba10",
@@ -226,194 +235,16 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": false
+                "useHierarchy": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "Tags"
             }
           },
           {
-            "id": "3664b6cf848a552d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "2e4f8cffc849facf",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "6d3bfb130df0031a",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "49f169db733656b7",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "763d7c7e8c4f71e3",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "cffca7b942782d12",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "4509cf6575b4c41a",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "6f648ccd8d1ed8ad",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "d7d269cebbe2d3e8",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "58250769513aae65",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "899529b407bf7eeb",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "7115ccbb9a0c4665",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "23b188efa853fd01",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "98953367c60b7335",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "d173cfb6da6435c5",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "a5b939b5b97e1a69",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "3520d41d5f2e5c4e",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
-            }
-          },
-          {
             "id": "d4c928b60a4b9830",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
-            }
-          },
-          {
-            "id": "809498bb13b00a6d",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -423,12 +254,12 @@
             }
           }
         ],
-        "currentTab": 21
+        "currentTab": 2
       },
       {
         "id": "2df1decc2eef0b0b",
         "type": "tabs",
-        "dimension": 80.15873015873017,
+        "dimension": 62.382075471698116,
         "children": [
           {
             "id": "4d30a7c31882a75b",
@@ -471,11 +302,14 @@
       "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "callout-manager:Insert Callout": false
+      "callout-manager:Insert Callout": false,
+      "homepage:Open homepage": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "345fde07595e7e45",
+  "active": "48c5943284c71db8",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203184306.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203182939.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203182252.png",
@@ -489,7 +323,6 @@
     "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201165851.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201163546.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201144728.png",
     "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
@@ -514,7 +347,6 @@
     "Development/BackEnd/PostgreSQL/PostreSQL.md",
     "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
     "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "_hobbies/Flameshot.md",
     "_png",
