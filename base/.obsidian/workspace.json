@@ -386,10 +386,10 @@
             "id": "a5b939b5b97e1a69",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -401,9 +401,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "d4c928b60a4b9830",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 19
+        "currentTab": 20
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -453,7 +463,7 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "345fde07595e7e45",
+  "active": "d4c928b60a4b9830",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250202201256.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250202200121.png",
