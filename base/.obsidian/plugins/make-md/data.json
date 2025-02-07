@@ -48,7 +48,9 @@
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm",
     "//Development",
     "//Development/Development/MobileDev",
-    "//Development/Development/MobileDev/Development/MobileDev/React Native"
+    "//Development/Development/MobileDev/Development/MobileDev/React Native",
+    "//Development/Development/BackEnd",
+    "//Development/Development/BackEnd/Development/BackEnd/Microservices"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

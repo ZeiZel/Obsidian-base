@@ -1,0 +1,317 @@
+{
+  "main": {
+    "id": "5324373015726ba8",
+    "type": "split",
+    "children": [
+      {
+        "id": "1e4a90ab872bec74",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c172c1c9babf7ea9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "11. Консистентность данных"
+            }
+          },
+          {
+            "id": "91fd12500da9f5d6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Agile/_lessons/Управление задачам.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Управление задачам"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7d5d9729e93c69a0",
+    "type": "split",
+    "children": [
+      {
+        "id": "3a9f6fcffec95690",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48c5943284c71db8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c8a96e2fe293303a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8a26a51640c36244",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "d29b4086a66c80f5",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "f315ba0e504eae9f",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 399.5
+  },
+  "right": {
+    "id": "5d906d621d61f331",
+    "type": "split",
+    "children": [
+      {
+        "id": "87f779e737b54d79",
+        "type": "tabs",
+        "dimension": 37.61792452830189,
+        "children": [
+          {
+            "id": "55e165ebdb0aba10",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Масштабирование Agile"
+            }
+          },
+          {
+            "id": "f2a11511413c62c1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Масштабирование Agile"
+            }
+          },
+          {
+            "id": "912c743976f26aa3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "d4c928b60a4b9830",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "c83a0840d1d743cd",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          }
+        ],
+        "currentTab": 4
+      },
+      {
+        "id": "2df1decc2eef0b0b",
+        "type": "tabs",
+        "dimension": 62.382075471698116,
+        "children": [
+          {
+            "id": "4d30a7c31882a75b",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          },
+          {
+            "id": "656d24955483df37",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 11. Консистентность данных"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 471.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Open graph view": false,
+      "switcher:Open quick switcher": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false,
+      "callout-manager:Insert Callout": false,
+      "homepage:Open homepage": false,
+      "omnisearch:Omnisearch": false
+    }
+  },
+  "active": "c172c1c9babf7ea9",
+  "lastOpenFiles": [
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Soft/Agile/Agile.md",
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "index.md",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203184306.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203182939.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203182252.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203180104.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203180020.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203175506.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250202201256.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250202200121.png",
+    "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201165851.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250201163546.png",
+    "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
+    "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
+    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+    "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
+    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+    "Development/GIT/Git.md",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Development/DB/DB.md",
+    "Development/C.md",
+    "Development/Python.md",
+    "Development/NX.md",
+    "Development/Testing/_png",
+    "Development/Testing/Тестирование JavaScript.md",
+    "Development/Testing",
+    "Development/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+    "Development/DB/SQLite.md",
+    "Development/DB/_png",
+    "Development/Architecture/_png",
+    "Development/DB/PostgreSQL.md",
+    "Development/DB/Mongo DB.md",
+    "Development/DB",
+    "Development/BackEnd/PostgreSQL/PostreSQL.md",
+    "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
+    "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
+    "_png",
+    "Development/FrontEnd/Vue/_png",
+    "Development/FrontEnd/Vue",
+    "Development/FrontEnd/Angular",
+    "Development/FrontEnd/State Managers/_png"
+  ]
+}

@@ -5,8 +5,20 @@
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
+    },
+    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "index",
+      "path": "index.md"
     },
     {
       "basename": "10. Реализация бизнес логики",
@@ -129,10 +141,6 @@
       "path": "Soft/Agile/_lessons/Kanban.md"
     },
     {
-      "basename": "Agile",
-      "path": "Soft/Agile/Agile.md"
-    },
-    {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
     },
@@ -173,10 +181,6 @@
       "path": "Whats Learning/О чём база~.md"
     },
     {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
       "basename": "05 Сети Docker",
       "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "4. Ветки и изменения",
       "path": "Development/GIT/_lessons/4. Ветки и изменения.md"
-    },
-    {
-      "basename": "3. Начало работы с Git",
-      "path": "Development/GIT/_lessons/3. Начало работы с Git.md"
     }
   ],
   "omittedPaths": [],
