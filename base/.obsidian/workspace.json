@@ -11,13 +11,76 @@
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "home-tab-view",
-              "state": {},
-              "icon": "search",
-              "title": "Home tab"
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "11. Консистентность данных"
+            }
+          },
+          {
+            "id": "6fce7210b1f25591",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Docker + Ansible"
+            }
+          },
+          {
+            "id": "6522b6ff43fc1a5c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/MobileDev/React Native/React Native.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "React Native"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -76,22 +139,11 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
-            }
-          },
-          {
-            "id": "c1a7dce2d654bf32",
-            "type": "leaf",
-            "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Navigator"
+              "icon": "clock",
+              "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -165,7 +217,7 @@
             }
           },
           {
-            "id": "c83a0840d1d743cd",
+            "id": "2fae9562f1226b8c",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -198,20 +250,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "file": "Development/MobileDev/React Native/React Native.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 11. Консистентность данных"
+              "title": "Outline of React Native"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 471.5
+    "width": 445.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -224,17 +277,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
       "callout-manager:Insert Callout": false,
-      "homepage:Open homepage": false,
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "6522b6ff43fc1a5c",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/MobileDev/React Native/React Native.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
-    "Soft/Agile/_lessons/Управление задачам.md",
-    "Soft/Agile/Agile.md",
+    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "index.md",
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Soft/Agile/Agile.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203184306.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203182939.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250203182252.png",
@@ -268,9 +323,6 @@
     "Development/DB/PostgreSQL.md",
     "Development/DB/Mongo DB.md",
     "Development/DB",
-    "Development/BackEnd/PostgreSQL/PostreSQL.md",
-    "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
-    "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
     "_png",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",

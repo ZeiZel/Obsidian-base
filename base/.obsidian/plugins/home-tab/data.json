@@ -25,7 +25,15 @@
   "recentFilesStore": [
     {
       "filepath": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
-      "timestamp": 1738994529756
+      "timestamp": 1738995313979
+    },
+    {
+      "filepath": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+      "timestamp": 1738995309756
+    },
+    {
+      "filepath": "index.md",
+      "timestamp": 1738994534429
     }
   ],
   "bookmarkedFileStore": [],

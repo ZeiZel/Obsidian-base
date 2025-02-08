@@ -18,7 +18,7 @@ brew install hashicorp/tap/vagrant
 ENV['VAGRANT_SERVER_URL'] = 'https://vagrant.elab.pro'
 ```
 
-Скачать последнюю версию Vagrant мы можем из репозиториев [Yandex](https://hashicorp-releases.yandexcloud.net/vagrant/)
+Скачать последнюю версию Vagrant мы можем из репозиториев [Yandex](https://hashicorp-releases.yandexcloud.net/vagrant/) или [Mail.ru](https://hashicorp-releases.mcs.mail.ru/vagrant/)
 
 >[!warning] Vagrant поддерживает только определённые версии VB, поэтому лучше всего скачивать их последние версии, чтобы не было проблем с совместимостью!
 

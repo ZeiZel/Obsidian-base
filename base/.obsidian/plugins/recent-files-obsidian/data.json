@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
-      "basename": "Agile",
-      "path": "Soft/Agile/Agile.md"
+      "basename": "11 Развёртка машин с Vagrant",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
@@ -19,6 +23,14 @@
     {
       "basename": "index",
       "path": "index.md"
+    },
+    {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
     },
     {
       "basename": "10. Реализация бизнес логики",
@@ -121,10 +133,6 @@
       "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md"
     },
     {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
@@ -133,20 +141,12 @@
       "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
       "basename": "Kanban",
       "path": "Soft/Agile/_lessons/Kanban.md"
     },
     {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "11 Развёртка машин с Vagrant",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
     },
     {
       "basename": "10 Ansible playbooks",
