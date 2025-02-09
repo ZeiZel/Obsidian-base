@@ -213,22 +213,91 @@ export default function SamplePage() {
 
 ![](_png/Pasted%20image%2020250209181245.png)
 
-### Основы Flex
+#### Flex
 
 Изначально все элементы внутри `View` располагаются через `flex` и `column`. 
 В `display` у нас есть только `flex` и `none` отображение.
-
-Дефолтно, `flexDirection` у нас равен `column`, поэтому основная ось, относительно которой работают align и justify - это вертикальная. Вспомогательной же будет горизонтальная. Если мы поменяем направление на `row`, то горизонтальная станет основной, а вертикальная вспомогательной.
-
-- `alignItems` - отвечает за выравнивание элементов по горизонтали
-- `justifyContent` - отвечает за выравнивание элементов по горизонтали
-
-![](_png/Pasted%20image%2020250209185305.png)
 
 Контейнером, в нашем случае, будет являться любой элемент, на который накинут `display: flex`, а айтемом - все вложенные. 
 
 ![](_png/Pasted%20image%2020250209185336.png)
 
+#### align/justify
+
+Дефолтно, `flexDirection` у нас равен `column`, поэтому основная ось, относительно которой работают align и justify - это вертикальная. Вспомогательной же будет горизонтальная. Если мы поменяем направление на `row`, то горизонтальная станет основной, а вертикальная вспомогательной.
+
+- `alignItems` - отвечает за выравнивание элементов по вспомогательной оси
+- `justifyContent` - отвечает за выравнивание элементов по основной оси
+
+>[!info] Все базовые свойства работают точно так же, как и в вебе.
+
+![](_png/Pasted%20image%2020250209185305.png)
+
+То есть дефолтно мы опишем такой конфиг, когда элементы выравниваются по основной оси по центру и на вспомогательной с равными отступами
+
+```TSX
+<View
+	style={{
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		height: 500,
+		backgroundColor: 'yellow',
+	}}
+>
+	<View style={{ width: 100, height: 100, backgroundColor: 'tomato' }} />
+	<View style={{ width: 100, height: 100, backgroundColor: 'blue' }} />
+	<View style={{ width: 100, height: 100, backgroundColor: 'violet' }} />
+</View>
+```
+
+![](_png/Pasted%20image%2020250209203047.png)
+
+Но если поменяем основную ось, то у нас так же останется, что `jc` раскидал элементы по основной оси, а `ai` распределил по вспомогательной (тут - по-центру)
+
+```TSX
+flexDirection: 'row',
+```
+
+![](_png/Pasted%20image%2020250209203108.png)
+
+#### self
+
+Так же ничто нам не мешает воспользоваться `alignSelf` для центровки отдельного элемента
+
+```TSX
+<View
+	style={{
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		height: 500,
+		backgroundColor: 'yellow',
+	}}
+>
+	<View style={{ width: 100, height: 100, backgroundColor: 'tomato' }} />
+	<View
+		style={{
+			alignSelf: 'flex-start',
+			width: 100,
+			height: 100,
+			backgroundColor: 'blue',
+		}}
+	/>
+	<View style={{ width: 100, height: 100, backgroundColor: 'violet' }} />
+</View>
+```
+
+![](_png/Pasted%20image%2020250209203706.png)
+
+#### wrap
+
+
+
+
+
+
+#### basis/grow/shrink
 
 
 
@@ -236,10 +305,24 @@ export default function SamplePage() {
 
 
 
+#### gap
 
 
 
-### Использование компонентов
+
+
+
+
+#### dimensions
+
+
+
+
+
+
+
+### Вёрстка логина
+
 
 
 
