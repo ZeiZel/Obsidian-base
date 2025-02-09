@@ -129,7 +129,37 @@ bun start
 
 ### Использование компонентов
 
+Заместо использования базовых компонентов из веба, мы должны использовать те, что представляет `react-native` (либо другая библиотека нативных компонентов) по типу: `View`, `Text` или других. 
 
+- `View` - это аналог `div`, в который мы всегда должны оборачивать контент.
+- `Text` - это компонент, в который мы должны складывать текст. Помещать в другое место вне него уже нельзя, так как это выдаст ошибку.
+
+```TSX
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: 'green',
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+});
+
+export default function SamplePage() {
+	return (
+		<View style={styles.container}>
+			<Text>Привет!</Text>
+			<Button title='Я дефолтный заголовок' />
+			<TextInput value='Я значение, которое можно тыкать' />
+		</View>
+	);
+}
+```
+
+И примерно так будет выглядеть наш стек компонентов
+
+![](_png/Pasted%20image%2020250209172249.png)
 
 ### Стилизация
 
@@ -137,8 +167,58 @@ bun start
 
 ![](_png/Pasted%20image%2020250209100407.png)
 
+Стили мы можем писать любыми способами, как и в нативном JS, но стоит для их описания использовать `StyleSheet.create`, который предоставит нам удобные типы и автокомплит по стилям
+
+```TS
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+
+const outInline = {
+	color: 'blue',
+};
+
+const stylesPalette = {
+	text: {
+		color: 'blue',
+	},
+};
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: 'green',
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	text: {
+		color: 'blue',
+		borderColor: 'blue',
+		borderWidth: 1,
+	},
+});
+
+export default function SamplePage() {
+	return (
+		<View style={styles.container}>
+			<Text>Привет!</Text>
+			<Text style={{ color: 'blue' }}>Инлайн</Text>
+			<Text style={outInline}>Вынесенный инлайн</Text>
+			<Text style={stylesPalette.text}>Объект со стилями</Text>
+			<Text style={styles.text}>Stylesheet</Text>
+			<Button title='Я дефолтный заголовок' />
+			<TextInput value='Я значение, которое можно тыкать' />
+		</View>
+	);
+}
+```
+
+![](_png/Pasted%20image%2020250209181245.png)
 
 ### Основы Flex
+
+
+
+
+
 ### Использование компонентов
 
 
