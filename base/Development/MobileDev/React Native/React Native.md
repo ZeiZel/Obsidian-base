@@ -458,17 +458,66 @@ export default function SamplePage() {
 
 ![](_png/Pasted%20image%2020250210190903.png)
 
-Объект `Dimensions` имеет размеры
+Объект `Dimensions` позволяет нам получить размеры нашего экрана или окна из RN. Мы можем из него получить обычный скейл, скейл шрифта, высоту и ширину
 
 ### Вёрстка логина
 
+Сделали базовую вёрстку
 
+```TSX
+import { View, Text, Button, TextInput, StyleSheet, Dimensions } from 'react-native';
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		backgroundColor: '#5456',
+		padding: 55,
+	},
+	content: {
+		alignItems: 'center',
+		gap: 50,
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: 16,
+	},
+	input: {
+		backgroundColor: '#2E2D3D',
+	},
+});
 
+export default function SamplePage() {
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Text>VioletSchool</Text>
+				<View style={styles.form}>
+					<TextInput style={styles.input} />
+					<TextInput style={styles.input} />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View>
+	);
+}
+```
 
+![](_png/Pasted%20image%2020250210193444.png)
+
+То, к чему нужно будет прийти
+
+![](_png/Pasted%20image%2020250210193504.png)
 
 ## События и создание компонента
 
+### Image
+### Input
+### Дизайн система
+### SVG
+### Обработка событий
+### Кнопка
 
 
 
@@ -476,6 +525,13 @@ export default function SamplePage() {
 
 ## Анимация
 
+### Основы анимации
+### Как работает анимация
+### Ограничения анимации
+### Интерполяция
+### Анимация кнопки
+### Alert и Toast
+### Анимация окна уведомлений
 
 
 
@@ -483,6 +539,11 @@ export default function SamplePage() {
 
 ## Отладка и lint
 
+### Eslint
+### Обработка ошибок
+### Отладчик Chrome
+### React Dev Tools
+### Отладка и lint
 
 
 
@@ -490,6 +551,20 @@ export default function SamplePage() {
 
 ## Expo router
 
+### Выбор роутинга
+### Добавление роута
+### Страницы и навигации
+### Layout
+### Stack
+### SafeArea и StatusBar
+### Подключение шрифта
+### SplashScreen
+### Unmatched
+### Страница ошибки
+### Route параметры
+### Структура проекта
+### Вложенные Layout
+### Expo router
 
 
 
@@ -532,6 +607,18 @@ export default function SamplePage() {
 
 ## Нотификации
 
+### Типы уведомлений
+### Установка expo-notofocations
+### Отправка уведомлений
+### Обработка уведомлений
+### Реакция на уведомления
+### Нажатие на уведомление
+### Уведомление с URL
+### Работа с push-уведомлениями
+### Использование 
+
+
+
 
 
 
@@ -539,13 +626,12 @@ export default function SamplePage() {
 
 ## Сборка и публикация
 
-
-
-
-
-
-
-
+### Процесс публикации
+### Конфигурация иконки
+### Сборка через EAS
+### Сборка через XCode
+### Сборка через Android Studio
+### Сборка через Expo
 
 
 
