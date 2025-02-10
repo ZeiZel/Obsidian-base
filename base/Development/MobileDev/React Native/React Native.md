@@ -292,34 +292,173 @@ flexDirection: 'row',
 
 #### wrap
 
+`flexWrap` со значением `wrap` так же переносит элементы, если они не влезают в контейнер
 
+![](_png/Pasted%20image%2020250210182254.png)
 
+```TSX
+<View
+	style={{
+		flexDirection: 'row',
+		height: 500,
+		backgroundColor: 'yellow',
+		flexWrap: 'wrap',
+	}}
+>
+	<View style={{ width: 300, height: 100, backgroundColor: 'tomato' }} />
+	<View
+		style={{
+			width: 100,
+			height: 100,
+			backgroundColor: 'blue',
+		}}
+	/>
+	<View style={{ width: 100, height: 100, backgroundColor: 'violet' }} />
+</View>
+```
 
+Однако если мы добавим `alignContent`, то мы так же поменяем поведение контента и перенесём его по дополнительной оси по-центру
 
+```TSX
+alignContent: 'center',
+alignItems: 'center',
+```
+
+![](_png/Pasted%20image%2020250210182601.png)
 
 #### basis/grow/shrink
 
+`flexBasis` говорит нам, что данный элемент в идеале должен быть не меньше определённой ширины
 
+```TSX
+<View
+	style={{
+		flexDirection: 'row',
+		height: 500,
+		backgroundColor: 'yellow',
+	}}
+>
+	<View style={{ flexBasis: 100, height: 100, backgroundColor: 'tomato' }}>
+		<Text>1</Text>
+	</View>
+	<View style={{ flexBasis: 100, height: 100, backgroundColor: 'blue' }}>
+		<Text>2</Text>
+	</View>
+	<View style={{ flexBasis: 100, height: 100, backgroundColor: 'violet' }}>
+		<Text>3</Text>
+	</View>
+</View>
+```
 
+![](_png/Pasted%20image%2020250210185049.png)
 
+`flexGrow` говорит о том, какой процент пространства этот элемент должен занимать. Если один элемент имеет значение 1, то он будет стараться занимать всё оставшееся пространство. Если два, то они поделят оставшееся поровну.
 
+```TSX
+<View
+		style={{
+			flexDirection: 'row',
+			height: 500,
+			backgroundColor: 'yellow',
+		}}
+>
+		<View style={{ flexBasis: 100, flexGrow: 1, height: 100, backgroundColor: 'tomato' }}>
+			<Text>1</Text>
+		</View>
+		<View style={{ flexBasis: 100, flexGrow: 1, height: 100, backgroundColor: 'blue' }}>
+			<Text>2</Text>
+		</View>
+		<View style={{ flexBasis: 100, height: 100, backgroundColor: 'violet' }}>
+			<Text>3</Text>
+		</View>
+	</View>
+</View>
+```
 
+![](_png/Pasted%20image%2020250210185127.png)
+
+`flexShrink` отвечает за преполненное пространство. Если `grow` отвечает за распределение заполненного пространства относительно базиса, то `shrink` начинает работать только тогда, когда у нас контент начинает заполняться. 
+
+>[!info] Все эти параметры используются для мощной гибкости вместе
+> `basis` определит наш идеальный размер, `grow` незаполненное пространство, а `shrink` уже отработает заполненные места
 
 #### gap
 
+`gap` / `rowGap` / `columnGap` - определяют отступы между элементами
 
+```TSX
+<View
+	style={{
+		flexDirection: 'row',
+		height: 500,
+		backgroundColor: 'yellow',
+		columnGap: 20,
+		rowGap: 30,
+		flexWrap: 'wrap',
+	}}
+>
+	<View style={{ flexBasis: 100, flexGrow: 1, height: 100, backgroundColor: 'tomato' }}>
+		<Text>1</Text>
+	</View>
+	<View style={{ flexBasis: 100, flexGrow: 1, height: 100, backgroundColor: 'blue' }}>
+		<Text>2</Text>
+	</View>
+	<View style={{ flexBasis: 100, height: 100, backgroundColor: 'violet' }}>
+		<Text>3</Text>
+	</View>
+	<View style={{ flexBasis: 100, height: 100, backgroundColor: 'cyan' }}>
+		<Text>3</Text>
+	</View>
+	<View style={{ flexBasis: 100, height: 100, backgroundColor: 'brown' }}>
+		<Text>3</Text>
+	</View>
+</View>
+```
 
-
-
-
+![](_png/Pasted%20image%2020250210185852.png)
 
 #### dimensions
 
+Но представим такую ситуацию, когда нам нужно правильно посчитать отступ. То есть элементы должны занимать половину ширины экрана и учитывать отступ между ними. 
 
+Чтобы посчитать такую ширину, флексов не хватит. Нам нужно будет воспользоваться объектом ширины экрана, который мы можем получить из RN.
 
+```TSX
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
 
+	return (
+		<View style={styles.container}>
+			<View
+				style={{
+					paddingTop: 200,
+					flexDirection: 'row',
+					height: 500,
+					backgroundColor: 'yellow',
+					gap: 10,
+					flexWrap: 'wrap',
+				}}
+			>
+				<View style={{ width: width / 2 - 5, height: 100, backgroundColor: 'tomato' }}>
+					<Text>1</Text>
+				</View>
+				<View style={{ width: width / 2 - 5, height: 100, backgroundColor: 'blue' }}>
+					<Text>2</Text>
+				</View>
+				<View style={{ width: width / 2 - 5, height: 100, backgroundColor: 'violet' }}>
+					<Text>3</Text>
+				</View>
+			</View>
+		</View>
+	);
+}
+```
 
+![](_png/Pasted%20image%2020250210190903.png)
+
+Объект `Dimensions` имеет размеры
 
 ### Вёрстка логина
 
