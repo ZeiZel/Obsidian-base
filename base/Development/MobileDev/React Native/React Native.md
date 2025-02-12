@@ -469,6 +469,7 @@ import { View, Text, Button, TextInput, StyleSheet, Dimensions } from 'react-nat
 
 const styles = StyleSheet.create({
 	container: {
+		/** заполняет всё пространство по направлению флекса */
 		flex: 1,
 		justifyContent: 'center',
 		backgroundColor: '#5456',
@@ -513,13 +514,495 @@ export default function SamplePage() {
 ## События и создание компонента
 
 ### Image
+
+Чтобы добавить изображение в приложение, нам нужно воспользоваться нативным компонентом `Image`, в который мы можем сразу передать `require` с путём до любого изображения
+
+`app / (tabs) / sample.tsx`
+```TSX
+import { StatusBar } from 'expo-status-bar';
+import { Button, Dimensions, StyleSheet, Text, View, Image } from 'react-native';
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: '#16171D'
+	},
+	content: {
+		alignItems: 'center',
+		gap: 50
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: 16
+	},
+	input: {
+		backgroundColor: '#2E2D3D'
+	},
+	logo: {
+		width: 220
+	}
+});
+
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<TextInput style={styles.input} />
+					<TextInput style={styles.input} />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+```
+
+
+
+
+
 ### Input
+
+
+
+`shared / ui / Input / Input.tsx`
+```TSX
+import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+
+const styles = StyleSheet.create({
+	input: {
+		height: 58,
+		backgroundColor: '#2E2D3D',
+		paddingHorizontal: 24,
+		borderRadius: 10,
+		fontSize: 16,
+	}
+});
+
+export function Input(props: TextInputProps) {
+	return (
+		<TextInput
+			style={styles.input}
+			placeholderTextColor={'#AFB2BF'}
+			{...props} />
+	)
+}
+```
+
+
+
+`app / (tabs) / sample.tsx`
+```TSX
+import { StatusBar } from 'expo-status-bar';
+import { Button, Dimensions, StyleSheet, Text, View, Image } from 'react-native';
+import { Input } from '@/shared/ui';
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: '#16171D'
+	},
+	content: {
+		alignItems: 'center',
+		gap: 50
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: 16
+	},
+	input: {
+		backgroundColor: '#2E2D3D'
+	},
+	logo: {
+		width: 220
+	}
+});
+
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input placeholder='Пароль' />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+```
+
+
+
 ### Дизайн система
+
+
+
+`shared / const / tokens.const.ts`
+```TS
+export const Colors = {
+	black: '#16171D',
+	gray: '#AFB2BF',
+	violetDark: '#2E2D3D',
+	primary: '#6C38CC',
+	primaryHover: '#452481',
+	link: '#A97BFF'
+}
+
+export const Gaps = {
+	g16: 16,
+	g50: 50
+}
+
+export const Radius = {
+	r10: 10
+}
+```
+
+
+
+`shared / ui / Input`
+```TSX
+import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+import { Colors, Radius } from '../../const';
+
+const styles = StyleSheet.create({
+	input: {
+		height: 58,
+		backgroundColor: Colors.violetDark,
+		paddingHorizontal: 24,
+		borderRadius: Radius.r10,
+		fontSize: 16,
+	}
+});
+
+export function Input(props: TextInputProps) {
+	return (
+		<TextInput
+			style={styles.input}
+			placeholderTextColor={Colors.gray}
+			{...props} />
+	)
+}
+```
+
+
+
+`app / (tabs) / sample.tsx`
+```TSX
+import { StatusBar } from 'expo-status-bar';
+import { Button, Dimensions, StyleSheet, Text, View, Image } from 'react-native';
+import { Input } from '@/shared/ui';
+import { Colors, Gaps } from '@/shared/const';
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: Colors.black
+	},
+	content: {
+		alignItems: 'center',
+		gap: Gaps.g50
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: Gaps.g16
+	},
+	logo: {
+		width: 220
+	}
+});
+
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+	
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input placeholder='Пароль' />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+```
+
+
+
 ### SVG
+
+
+
+```bash
+npm i react-native-svg
+```
+
+
+
+`shared / assets / icons / eye-closed.tsx`
+```TSX
+import * as React from "react"
+import Svg, { Path } from "react-native-svg"
+
+const EyeClosedIcon = () => (
+	<Svg
+		width={24}
+		height={24}
+		fill="none"
+	>
+		<Path
+			fill="#AFB2BF"
+			d="M2.69 6.705a.75.75 0 0 0-1.38..."
+		/>
+	</Svg>
+)
+
+export default EyeClosedIcon
+```
+
+
+
+`app / (tabs) / sample.tsx`
+```TSX
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input placeholder='Пароль' />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+				<EyeClosedIcon />
+				<EyeOpenedIcon />
+			</View>
+		</View >
+	);
+}
+```
+
+
+
+
 ### Обработка событий
+
+
+
+`shared / ui / Input.tsx`
+```TSX
+import { Pressable, StyleSheet, TextInput, TextInputProps, View } from 'react-native';
+import { Colors, Radius } from '../../const';
+import { useState } from 'react';
+import { EyeOpenedIcon, EyeClosedIcon } from '../../assets/icons';
+
+const styles = StyleSheet.create({
+	input: {
+		height: 58,
+		backgroundColor: Colors.violetDark,
+		paddingHorizontal: 24,
+		borderRadius: Radius.r10,
+		fontSize: 16,
+		color: Colors.gray
+	},
+	eyeIcon: {
+		position: 'absolute',
+		right: 0,
+		paddingHorizontal: 20,
+		paddingVertical: 18
+	}
+});
+
+export const Input = (
+	{ isPassword, ...props }: TextInputProps & { isPassword?: boolean }
+) => {
+	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+	return (
+		<View>
+			<TextInput
+				style={styles.input}
+				secureTextEntry={
+					isPassword && !isPasswordVisible
+				}
+				placeholderTextColor={Colors.gray}
+				{...props} 
+			/>
+			{isPassword && 
+				<Pressable 
+					onPress={
+						() => 
+							setIsPasswordVisible(state => !state)
+					} 
+					style={styles.eyeIcon}
+				>
+					{isPasswordVisible 
+						? <EyeOpenedIcon /> 
+						: <EyeClosedIcon />
+					}
+				</Pressable>
+			}
+		</View>
+	)
+}
+```
+
+
+
+`app / (tabs) / sample.tsx`
+```TSX
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input isPassword placeholder='Пароль' />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+```
+
+
+
+
+
+
 ### Кнопка
 
+Немного обновляем наши токены и добавляем туда различные размеры шрифтов
 
+`shared / const / tokens.const.ts`
+```TSX
+export const Colors = {
+	black: '#16171D',
+	gray: '#AFB2BF',
+	violetDark: '#2E2D3D',
+	primary: '#6C38CC',
+	primaryHover: '#452481',
+	link: '#A97BFF',
+	white: '#FAFAFA'
+}
+
+export const Gaps = {
+	g16: 16,
+	g50: 50
+}
+
+export const Radius = {
+	r10: 10
+}
+
+export const Fonts = { // <--
+	f16: 16,
+	f18: 18
+}
+```
+
+Теперь нужно описать кнопку. Реализовываем для гибкости не нативную кнопку так же через компонент `Pressable`, как когда мы делали кнопку для инпута
+
+`shared / ui / Button / Button.tsx`
+```TSX
+import { Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Radius } from '../../const';
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		backgroundColor: Colors.primary,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18
+	}
+})
+
+export function Button({ text, ...props }: PressableProps & { text: string }) {
+	return (
+		<Pressable {...props}>
+			<View style={styles.button}>
+				<Text style={styles.text}>{text}</Text>
+			</View>
+		</Pressable>
+	)
+}
+```
+
+И добавляем нашу новую кнопку на страницу
+
+`app / (tabs) / sample.tsx`
+```TSX
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input isPassword placeholder='Пароль' />
+					<Button text='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+```
 
 
 

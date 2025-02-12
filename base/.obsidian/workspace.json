@@ -259,7 +259,8 @@
               "title": "Outline of React Native"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -279,8 +280,10 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "656d24955483df37",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+    "Development/MobileDev/React Native/React Native.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193504.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193444.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210190903.png",
@@ -291,10 +294,7 @@
     "Development/MobileDev/React Native/_png/Pasted image 20250210182254.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250209203706.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250209203108.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250209203047.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Development/MobileDev/React Native/React Native.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "index.md",
