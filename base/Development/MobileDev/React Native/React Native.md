@@ -1009,11 +1009,367 @@ export default function SamplePage() {
 ## Анимация
 
 ### Основы анимации
+
+
+
+`shared / ui / Button / Button.tsx`
+```TSX
+import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+
+export function Button({ text, ...props }: PressableProps & { text: string }) {
+	const animatedValue = new Animated.ValueXY({
+		x: 0,
+		y: 0
+	});
+	Animated.spring(animatedValue, {
+		toValue: {
+			x: 100,
+			y: 100
+		},
+		useNativeDriver: true
+	}).start();
+	return (
+		<Pressable {...props}>
+			<Animated.View style={{
+				...styles.button, transform: [
+					{ translateX: animatedValue.x },
+					{ translateY: animatedValue.y }
+				]
+			}}>
+				<Text style={styles.text}>{text}</Text>
+			</Animated.View>
+		</Pressable>
+	)
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		backgroundColor: Colors.primary,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18
+	}
+})
+```
+
+
+
 ### Как работает анимация
+
+
+
+`shared / ui / Button / Button.tsx`
+```TSX
+import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+import { useEffect } from 'react';
+
+export function Button({ text, ...props }: PressableProps & { text: string }) {
+	const animatedValue = new Animated.ValueXY({
+		x: 0,
+		y: 0
+	});
+
+	Animated.timing(animatedValue, {
+		toValue: {
+			x: 100,
+			y: 100
+		},
+		duration: 2000,
+		useNativeDriver: true
+	}).start();
+
+	return (
+		<Pressable {...props}>
+			<Animated.View style={{
+				...styles.button, transform: [
+					{ translateX: animatedValue.x },
+					{ translateY: animatedValue.y }
+				]
+			}}>
+				<Text style={styles.text}>{text}</Text>
+			</Animated.View>
+		</Pressable>
+	)
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		backgroundColor: Colors.primary,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18
+	}
+})
+```
+
+
+
 ### Ограничения анимации
+
+
+
+`shared / ui / Button / Button.tsx`
+```TSX
+import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+
+export function Button({ text, ...props }: PressableProps & { text: string }) {
+	const animatedValue = new Animated.ValueXY({
+		x: 0,
+		y: 0
+	});
+
+	Animated.timing(animatedValue, {
+		toValue: {
+			x: 100,
+			y: 100
+		},
+		duration: 2000,
+		useNativeDriver: false
+	}).start();
+
+	return (
+		<Pressable {...props}>
+			<Animated.View style={{
+				...styles.button, width: animatedValue.x, height: animatedValue.y
+			}}>
+				<Text style={styles.text}>{text}</Text>
+			</Animated.View>
+		</Pressable>
+	)
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		backgroundColor: Colors.primary,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18
+	}
+})
+```
+
+
 ### Интерполяция
+
+
+
+
+```TSX
+import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+
+export function Button({ text, ...props }: PressableProps & { text: string }) {
+	const animatedValue = new Animated.Value(100);
+	const color = animatedValue.interpolate({
+		inputRange: [0, 100],
+		outputRange: [Colors.primaryHover, Colors.primary]
+	});
+
+	Animated.timing(animatedValue, {
+		toValue: 0,
+		duration: 3000,
+		useNativeDriver: true
+	}).start();
+
+	return (
+		<Pressable {...props}>
+			<Animated.View style={{
+				...styles.button, backgroundColor: color
+			}}>
+				<Text style={styles.text}>{text}</Text>
+			</Animated.View>
+		</Pressable>
+	)
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18
+	}
+})
+```
+
+
 ### Анимация кнопки
+
+
+
+
+```TSX
+import { Animated, GestureResponderEvent, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+
+export function Button({ text, ...props }: PressableProps & { text: string }) {
+	const animatedValue = new Animated.Value(100);
+	const color = animatedValue.interpolate({
+		inputRange: [0, 100],
+		outputRange: [Colors.primaryHover, Colors.primary]
+	});
+
+	const fadeIn = (e: GestureResponderEvent) => {
+		Animated.timing(animatedValue, {
+			toValue: 0,
+			duration: 100,
+			useNativeDriver: true
+		}).start();
+		props.onPressIn && props.onPressIn(e);
+	}
+
+	const fadeOut = (e: GestureResponderEvent) => {
+		Animated.timing(animatedValue, {
+			toValue: 100,
+			duration: 100,
+			useNativeDriver: true
+		}).start();
+		props.onPressOut && props.onPressOut(e);
+	}
+
+	return (
+		<Pressable {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
+			<Animated.View style={{
+				...styles.button, backgroundColor: color
+			}}>
+				<Text style={styles.text}>{text}</Text>
+			</Animated.View>
+		</Pressable>
+	)
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18
+	}
+})
+```
+
+
 ### Alert и Toast
+
+Отключаем нативные драйверы в анимациях кнопки
+
+`shared / ui / Button / Button.tsx`
+```TSX
+const fadeIn = (e: GestureResponderEvent) => {
+	Animated.timing(animatedValue, {
+		toValue: 0,
+		duration: 100,
+		useNativeDriver: false
+	}).start();
+	props.onPressIn && props.onPressIn(e);
+}
+
+const fadeOut = (e: GestureResponderEvent) => {
+	Animated.timing(animatedValue, {
+		toValue: 100,
+		duration: 100,
+		useNativeDriver: false
+	}).start();
+	props.onPressOut && props.onPressOut(e);
+}
+```
+
+
+
+`app / (tabs) / sample.tsx`
+```TSX
+import { Dimensions, StyleSheet, Text, View, Image, Alert, ToastAndroid, Platform } from 'react-native';
+import { Input } from './shared/Input/Input';
+import { Colors, Gaps } from './shared/tokens';
+import { Button } from './shared/Button/Button';
+
+export default function SamplePage() {
+	const width = Dimensions.get('window').width;
+
+	const alert = () => {
+		// Alert
+		// Alert.alert('Ошибка', 'Неверный логин или пароль', [{
+		// 	text: 'Хорошо',
+		// 	onPress: () => {},
+		// 	style: 'cancel'
+		// }]);
+		if (Platform.OS === 'android') {
+			ToastAndroid.showWithGravity(
+				'Неверный логин или пароль',
+				ToastAndroid.LONG,
+				ToastAndroid.CENTER,
+			);
+		}
+	}
+
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input isPassword placeholder='Пароль' />
+					<Button text='Войти' onPress={alert} />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: Colors.black
+	},
+	content: {
+		alignItems: 'center',
+		gap: Gaps.g50
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: Gaps.g16
+	},
+	logo: {
+		width: 220
+	}
+});
+```
+
+
+
 ### Анимация окна уведомлений
 
 
