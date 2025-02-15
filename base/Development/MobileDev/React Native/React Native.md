@@ -1369,14 +1369,237 @@ const styles = StyleSheet.create({
 ```
 
 
+### Уведомление
+
+
+
+`shared / const / tokens.const.ts`
+```TS
+export const Colors = {
+	black: '#16171D',
+	gray: '#AFB2BF',
+	violetDark: '#2E2D3D',
+	primary: '#6C38CC',
+	primaryHover: '#452481',
+	link: '#A97BFF',
+	white: '#FAFAFA',
+	red: '#CC384E'
+}
+
+export const Gaps = {
+	g16: 16,
+	g50: 50
+}
+
+export const Radius = {
+	r10: 10
+}
+
+export const Fonts = {
+	f16: 16,
+	f18: 18
+}
+```
+
+
+
+`shared / ui / ErrorNotification / ErrorNotification.props.ts`
+```TSX
+export interface ErrorNotificationProps {
+	error?: string;
+}
+```
+
+
+
+`shared / ui / ErrorNotification / ErrorNotification.tsx`
+```TSX
+import { useEffect, useState } from 'react';
+import { ErrorNotificationProps } from './ErrorNotification.props';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Colors, Fonts } from '../tokens';
+
+export function ErrorNotification({ error }: ErrorNotificationProps) {
+	const [isShown, setIsShown] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (!error) {
+			return;
+		}
+		setIsShown(true);
+		const timerId = setTimeout(() => {
+			setIsShown(false);
+		}, 3000);
+		return () => {
+			clearTimeout(timerId);
+		}
+	}, [error]);
+
+	if (!isShown) {
+		return <></>;
+	}
+
+	return (
+		<View style={styles.error}>
+			<Text style={styles.errorText}>{error}</Text>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	error: {
+		position: 'absolute',
+		width: Dimensions.get('screen').width,
+		backgroundColor: Colors.red,
+		padding: 15,
+		top: 50
+	},
+	errorText: {
+		fontSize: Fonts.f16,
+		color: Colors.white,
+		textAlign: 'center'
+	}
+})
+```
+
+
+
+`app / (tabs) / sample.tsx`
+```TSX
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Input } from './shared/Input/Input';
+import { Colors, Gaps } from './shared/tokens';
+import { Button } from './shared/Button/Button';
+import { ErrorNotification } from './shared/ErrorNotification/ErrorNotification';
+import { useState } from 'react';
+
+export default function SamplePage() {
+	const [error, setError] = useState<string | undefined>();
+
+	const alert = () => {
+		setError('Неверный логин и пароль')
+	}
+
+	return (
+		<View style={styles.container}>
+			<ErrorNotification error={error} />
+			<View style={styles.content}>
+				<Image
+					style={styles.logo}
+					source={require('./assets/logo.png')}
+					resizeMode='contain'
+				/>
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input isPassword placeholder='Пароль' />
+					<Button text='Войти' onPress={alert} />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View >
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: Colors.black
+	},
+	content: {
+		alignItems: 'center',
+		gap: Gaps.g50
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: Gaps.g16
+	},
+	logo: {
+		width: 220
+	}
+});
+```
+
 
 ### Анимация окна уведомлений
 
+Добавляем очистку ошибки через таймаут
+
+`app / (tabs) / sample.tsx`
+```TSX
+const alert = () => {
+	setError('Неверный логин и пароль');
+	setTimeout(() => {
+		setError(undefined);
+	}, 4000)
+}
+```
 
 
 
+`shared / ui / ErrorNotification / ErrorNotification.tsx`
+```TSX
+import { useEffect, useState } from 'react';
+import { ErrorNotificationProps } from './ErrorNotification.props';
+import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native';
+import { Colors, Fonts } from '../tokens';
 
+export function ErrorNotification({ error }: ErrorNotificationProps) {
+	const [isShown, setIsShown] = useState<boolean>(false);
+	const animatedValue = new Animated.Value(-100);
 
+	const onEnter = () => {
+		Animated.timing(animatedValue, {
+			toValue: 0,
+			duration: 300,
+			useNativeDriver: true
+		}).start();
+	}
+
+	useEffect(() => {
+		if (!error) {
+			return;
+		}
+		setIsShown(true);
+		const timerId = setTimeout(() => {
+			setIsShown(false);
+		}, 3000);
+		return () => {
+			clearTimeout(timerId);
+		}
+	}, [error]);
+
+	if (!isShown) {
+		return <></>;
+	}
+
+	return (
+		<Animated.View style={{
+			...styles.error, transform: [
+				{ translateY: animatedValue }
+			]
+		}} onLayout={onEnter}>
+			<Text style={styles.errorText}>{error}</Text>
+		</Animated.View>
+	);
+}
+
+const styles = StyleSheet.create({
+	error: {
+		position: 'absolute',
+		width: Dimensions.get('screen').width,
+		backgroundColor: Colors.red,
+		padding: 15,
+		top: 50
+	},
+	errorText: {
+		fontSize: Fonts.f16,
+		color: Colors.white,
+		textAlign: 'center'
+	}
+})
+```
 
 
 ## Отладка и lint
