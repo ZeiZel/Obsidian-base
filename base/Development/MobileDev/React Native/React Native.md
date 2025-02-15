@@ -1605,10 +1605,91 @@ const styles = StyleSheet.create({
 ## Отладка и lint
 
 ### Eslint
+
+
+
+`.eslintrc.json`
+```JSON
+{
+	"plugins": [
+		"prettier",
+		"react",
+		"react-native"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"rules": {
+		"react-native/no-unused-styles": 2,
+		"react-native/split-platform-components": 2,
+		"react-native/no-inline-styles": 2,
+		"react-native/no-color-literals": 2,
+		"react-native/no-raw-text": 2,
+		"react-native/no-single-element-style-arrays": 2,
+		"react-hooks/exhaustive-deps": "off",
+		"prettier/prettier": [
+			"error",
+			{
+				"singleQuote": true,
+				"useTabs": true,
+				"semi": true,
+				"trailingComma": "all",
+				"bracketSpacing": true,
+				"printWidth": 100,
+				"endOfLine": "auto"
+			}
+		],
+		"@typescript-eslint/no-empty-function": [
+			"off"
+		],
+		"@typescript-eslint/interface-name-prefix": "off",
+		"@typescript-eslint/ban-types": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/explicit-module-boundary-types": "off"
+	}
+}
+```
+
 ### Обработка ошибок
+
+
+
+
+
+
+
+
+
 ### Отладчик Chrome
+
+
+
+
+
+
+
+
+
 ### React Dev Tools
+
+
+
+
+
+
+
+
+
 ### Отладка и lint
+
+
+
+
+
+
+
+
 
 
 
@@ -1617,19 +1698,130 @@ const styles = StyleSheet.create({
 ## Expo router
 
 ### Выбор роутинга
+
+
+
+
+
+
+
+
 ### Добавление роута
+
+
+
+
+
+
+
+
 ### Страницы и навигации
+
+
+
+
+
+
+
+
 ### Layout
+
+
+
+
+
+
+
+
 ### Stack
+
+
+
+
+
+
+
+
 ### SafeArea и StatusBar
+
+
+
+
+
+
+
+
 ### Подключение шрифта
+
+
+
+
+
+
+
+
 ### SplashScreen
+
+
+
+
+
+
+
+
 ### Unmatched
+
+
+
+
+
+
+
+
 ### Страница ошибки
+
+
+
+
+
+
+
+
 ### Route параметры
+
+
+
+
+
+
+
+
 ### Структура проекта
+
+
+
+
+
+
+
+
 ### Вложенные Layout
+
+
+
+
+
+
+
+
 ### Expo router
+
+
+
+
+
+
+
 
 
 
