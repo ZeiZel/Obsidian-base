@@ -1376,6 +1376,9 @@ const styles = StyleSheet.create({
 
 
 
+
+
+
 ## Отладка и lint
 
 ### Eslint
