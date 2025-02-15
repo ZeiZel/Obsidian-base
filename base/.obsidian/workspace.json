@@ -78,9 +78,33 @@
               "icon": "lucide-file",
               "title": "React Native"
             }
+          },
+          {
+            "id": "10e688c1f963f2cd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -250,13 +274,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/MobileDev/React Native/React Native.md",
+                "file": "index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of React Native"
+              "title": "Outline of index"
             }
           }
         ],
@@ -280,10 +304,10 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "656d24955483df37",
+  "active": "10e688c1f963f2cd",
   "lastOpenFiles": [
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/React Native.md",
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193504.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193444.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210190903.png",

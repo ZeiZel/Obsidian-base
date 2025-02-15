@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
-    },
-    {
-      "basename": "index",
-      "path": "index.md"
     },
     {
       "basename": "Управление задачам",
