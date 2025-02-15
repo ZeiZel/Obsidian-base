@@ -1699,10 +1699,135 @@ const styles = StyleSheet.create({
 
 ### Выбор роутинга
 
+> В приложение нужно завести app-роутер, который аналогичен тому, что сейчас есть в nextjs
 
+Описание метода роутинга находится в корневом конфиге приложения в `plugins`. Тут нам нужно указать модуль, который отвечает за роутинг
 
+`app.json`
+```JSON
+{
+  "expo": {
+    "name": "expo-example",
+    "slug": "expo-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
+```
 
+Далее, если у нас стоял дефолтный роутинг, то нам нужно поменять входную точку в `main` на то, что описано в документации роутера и добавить сам пакет роутера
 
+`package.json`
+```JSON
+_ "main": "node_modules/expo/AppEntry.js",
++ "main": "expo-router/entry",
+
+"expo-router": "^2.0.0",
+```
+
+Далее нужно описать babel (либо не нужно, если роутер изначально был выбран при инициализации проекта)
+
+`babel.config.js`
+```JSX
+module.exports = function (api) {
+	api.cache(true);
+	return {
+		presets: ['babel-preset-expo'],
+		plugins: ['expo-router/babel'],
+	};
+};
+```
+
+И в итоге мы получаем роутер, который основан на папке `app`, где каждый `index` или `name.tsx` будет являться страницей
+
+`app / (tabs) / sample.tsx`
+```TSX
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Input } from '../shared/Input/Input';
+import { Colors, Gaps } from '../shared/tokens';
+import { Button } from '../shared/Button/Button';
+import { ErrorNotification } from '../shared/ErrorNotification/ErrorNotification';
+import { useState } from 'react';
+
+export default function SamplePage() {
+	const [error, setError] = useState<string | undefined>();
+
+	const alert = () => {
+		setError('Неверный логин и пароль');
+		setTimeout(() => {
+			setError(undefined);
+		}, 4000);
+	};
+
+	return (
+		<View style={styles.container}>
+			<ErrorNotification error={error} />
+			<View style={styles.content}>
+				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
+				<View style={styles.form}>
+					<Input placeholder="Email" />
+					<Input isPassword placeholder="Пароль" />
+					<Button text="Войти" onPress={alert} />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: Colors.black,
+	},
+	content: {
+		alignItems: 'center',
+		gap: Gaps.g50,
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: Gaps.g16,
+	},
+	logo: {
+		width: 220,
+	},
+});
+```
 
 
 
@@ -1719,7 +1844,54 @@ const styles = StyleSheet.create({
 
 
 
+`app / login.tsx`
+```TSX
+export default function Login() {
+	const [error, setError] = useState<string | undefined>();
 
+	const alert = () => {
+		setError('Неверный логин и пароль');
+		setTimeout(() => {
+			setError(undefined);
+		}, 4000);
+	};
+
+	return (
+		<View style={styles.container}>
+			<ErrorNotification error={error} />
+			<View style={styles.content}>
+				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
+				<View style={styles.form}>
+					<Input placeholder="Email" />
+					<Input isPassword placeholder="Пароль" />
+					<Button text="Войти" onPress={alert} />
+				</View>
+				<Link href={'/restore'}>
+					<Text>Восстановить пароль</Text>
+				</Link>
+			</View>
+		</View>
+	);
+}
+```
+
+
+
+`app / restore.tsx`
+```TSX
+import { Link } from 'expo-router';
+import { View, Text } from 'react-native';
+
+export default function Restore() {
+	return (
+		<View>
+			<Link href={'/'}>
+				<Text>Restore</Text>
+			</Link>
+		</View>
+	);
+}
+```
 
 
 
@@ -1728,8 +1900,14 @@ const styles = StyleSheet.create({
 
 
 
+`app / _layout.tsx`
+```TSX
+import { Stack } from 'expo-router';
 
-
+export default function RootRayout() {
+	return <Stack />;
+}
+```
 
 
 
@@ -1737,8 +1915,33 @@ const styles = StyleSheet.create({
 
 
 
+`app / _layout.tsx`
+```TSX
+import { Stack } from 'expo-router';
+import { Colors } from '../shared/tokens';
 
-
+export default function RootRayout() {
+	return (
+		<Stack
+			screenOptions={{
+				statusBarColor: Colors.black,
+				contentStyle: {
+					backgroundColor: Colors.black,
+				},
+			}}
+		>
+			<Stack.Screen name="index" />
+			<Stack.Screen
+				name="restore"
+				options={{
+					presentation: 'modal',
+					headerShown: false,
+				}}
+			/>
+		</Stack>
+	);
+}
+```
 
 
 
@@ -1773,7 +1976,18 @@ const styles = StyleSheet.create({
 
 
 
+`app / [...unmathed].tsx`
+```TSX
+import { View, Text } from 'react-native';
 
+export default function UnmatchedCustom() {
+	return (
+		<View>
+			<Text>Не нашли</Text>
+		</View>
+	);
+}
+```
 
 
 
