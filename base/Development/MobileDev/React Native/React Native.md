@@ -2479,10 +2479,70 @@ export default function MyCourses() {
 
 
 
+`package.json`
+```JSON
+"expo-constants": "~14.4.2",
+"expo-linking": "~5.0.2",
+"expo-router": "^2.0.0",
+"jotai": "^2.6.2",
+"react-native-gesture-handler": "~2.12.0",
+"react-native-svg": "13.9.0"
+```
 
 
 
+`entities/user/model/user.model.ts`
+```TS
+export interface User {
+	id: number;
+	name: string;
+	surname?: string;
+	photo?: string;
+}
+```
 
+
+
+`entities/user/model/user.state.ts`
+```TS
+import { atom } from 'jotai';
+import { User } from './user.model';
+
+export const profileAtom = atom<UserState>({
+	profile: {
+		id: 1,
+		name: 'Антон',
+	},
+	isLoading: false,
+	error: null,
+});
+
+export interface UserState {
+	profile: User | null;
+	isLoading: boolean;
+	error: string | null;
+}
+```
+
+
+
+`app/(app)/index.tsx`
+```TSX
+import { useAtom } from 'jotai';
+import { View, Text } from 'react-native';
+import { Colors } from '../../shared/tokens';
+import { profileAtom } from '../../entities/user/model/user.state';
+
+export default function MyCourses() {
+	const [profile] = useAtom(profileAtom);
+	return (
+		<View>
+			<Text style={{ color: Colors.white }}>MyCourses</Text>
+			<Text>{profile.profile?.name}</Text>
+		</View>
+	);
+}
+```
 
 
 
@@ -2493,7 +2553,32 @@ export default function MyCourses() {
 
 
 
+`package.json`
+```JSON
+"@react-native-async-storage/async-storage": "1.18.2"
+```
 
+
+
+`app / (app) / index.tsx`
+```TSX
+import { useAtom } from 'jotai';
+import { View, Text } from 'react-native';
+import { profileAtom } from '../../entities/user/model/user.state';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
+
+export default function MyCourses() {
+	const [profile] = useAtom(profileAtom);
+	useEffect(() => {
+		AsyncStorage.setItem('demo', 'test').then(async () => {
+			console.log(await AsyncStorage.getAllKeys());
+			console.log(await AsyncStorage.getItem('demo'));
+			console.log(await AsyncStorage.removeItem('demo'));
+			console.log(await AsyncStorage.getItem('demo'));
+		});
+	}, []);
+```
 
 
 
@@ -2506,8 +2591,29 @@ export default function MyCourses() {
 ### atomWithStorage
 
 
+`entities/auth/model/auth.state.ts`
+```TS
+import { createJSONStorage, atomWithStorage } from 'jotai/utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const storage = createJSONStorage<AuthState>(() => AsyncStorage);
 
+export const authAtom = atomWithStorage<AuthState>(
+	'auth',
+	{
+		access_token: null,
+		isLoading: false,
+		error: null,
+	},
+	storage,
+);
+
+export interface AuthState {
+	access_token: string | null;
+	isLoading: boolean;
+	error: string | null;
+}
+```
 
 
 
@@ -2521,13 +2627,57 @@ export default function MyCourses() {
 
 
 
+```bash
+npm i axios
+```
 
 
 
+`entities/auth/model/auth.intefaces.ts`
+```TS
+export interface IAuthResponse {
+	access_token: string;
+}
+```
 
 
 
+`entities/auth/api/api.ts`
+```TS
+export const PREFIX = 'https://purpleschool.ru/api-v2';
+export const API = {
+	login: `${PREFIX}/auth/login`,
+};
+```
 
+
+
+`app / (app) / index.tsx`
+```TSX
+import { useAtom } from 'jotai';
+import { View, Text } from 'react-native';
+import { profileAtom } from '../../entities/user/model/user.state';
+import axios from 'axios';
+import { API } from '../../entities/auth/api/api';
+import { useEffect } from 'react';
+import { IAuthResponse } from '../../entities/auth/model/auth.intefaces';
+
+export default function MyCourses() {
+	const [profile] = useAtom(profileAtom);
+	const login = async () => {
+		const { data } = await axios.post<IAuthResponse>(API.login, {
+			email: 'vasia@pupkin.ru',
+			password: '123456789',
+		});
+		console.log(data);
+	};
+	useEffect(() => {
+		login();
+	}, []);
+	return (
+		<View>
+			<Text>{profile.profile?.name}</Text>
+```
 
 
 
@@ -2535,9 +2685,101 @@ export default function MyCourses() {
 
 
 
+`entities / auth / model / auth.intefaces.ts`
+```TS
+export interface AuthResponse {
+	access_token: string;
+}
+
+export interface LoginRequest {
+	email: string;
+	password: string;
+}
+```
 
 
 
+`entities / auth / model / auth.state.ts`
+```TSX
+import { createJSONStorage, atomWithStorage } from 'jotai/utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { atom } from 'jotai';
+import { AuthResponse, LoginRequest } from './auth.intefaces';
+import axios, { AxiosError } from 'axios';
+import { API } from '../api/api';
+
+const storage = createJSONStorage<AuthState>(() => AsyncStorage);
+
+export const authAtom = atomWithStorage<AuthState>(
+	'auth',
+	{
+		access_token: null,
+		isLoading: false,
+		error: null,
+	},
+	storage,
+);
+
+export const loginAtom = atom(
+	(get) => get(authAtom),
+	async (_get, set, { email, password }: LoginRequest) => {
+		set(authAtom, {
+			isLoading: true,
+			access_token: null,
+			error: null,
+		});
+		try {
+			const { data } = await axios.post<AuthResponse>(API.login, {
+				email,
+				password,
+			});
+			set(authAtom, {
+				isLoading: false,
+				access_token: data.access_token,
+				error: null,
+			});
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				set(authAtom, {
+					isLoading: false,
+					access_token: null,
+					error: error.response?.data.message,
+				});
+			}
+		}
+	},
+);
+
+export interface AuthState {
+	access_token: string | null;
+	isLoading: boolean;
+	error: string | null;
+}
+```
+
+
+
+`app / (app) / index.tsx`
+```TSX
+import { useAtom } from 'jotai';
+import { View, Text } from 'react-native';
+import { loginAtom } from '../../entities/auth/model/auth.state';
+import { useEffect } from 'react';
+
+export default function MyCourses() {
+	const [auth, login] = useAtom(loginAtom);
+
+	useEffect(() => {
+		login({ email: 'vasia@pupkin.ru', password: '12345678' });
+	}, []);
+
+	return (
+		<View>
+			<Text>{auth?.access_token}</Text>
+		</View>
+	);
+}
+```
 
 
 
@@ -2549,12 +2791,90 @@ export default function MyCourses() {
 
 
 
+`entities / auth / model / auth.state.ts`
+```TSX
+import { createJSONStorage, atomWithStorage } from 'jotai/utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { atom } from 'jotai';
+import { AuthResponse, LoginRequest } from './auth.intefaces';
+import axios, { AxiosError } from 'axios';
+import { API } from '../api/api';
+
+const storage = createJSONStorage<AuthState>(() => AsyncStorage);
+
+const INITIAL_STATE = {
+	access_token: null,
+	isLoading: false,
+	error: null,
+};
+
+export const authAtom = atomWithStorage<AuthState>('auth', INITIAL_STATE, storage);
+
+export const logoutAtom = atom(null, (_get, set) => {
+	set(authAtom, INITIAL_STATE);
+});
+
+export const loginAtom = atom(
+	(get) => get(authAtom),
+	async (_get, set, { email, password }: LoginRequest) => {
+		set(authAtom, {
+			isLoading: true,
+			access_token: null,
+			error: null,
+		});
+		try {
+			const { data } = await axios.post<AuthResponse>(API.login, {
+				email,
+				password,
+			});
+			set(authAtom, {
+				isLoading: false,
+				access_token: data.access_token,
+				error: null,
+			});
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				set(authAtom, {
+					isLoading: false,
+					access_token: null,
+					error: error.response?.data.message,
+				});
+			}
+		}
+	},
+);
+
+export interface AuthState {
+	access_token: string | null;
+	isLoading: boolean;
+	error: string | null;
+}
+```
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { useSetAtom } from 'jotai';
+import { View, Text } from 'react-native';
+import { logoutAtom } from '../../entities/auth/model/auth.state';
+import { useEffect } from 'react';
 
+export default function MyCourses() {
+	// const [auth, login] = useAtom(loginAtom);
+	const logout = useSetAtom(logoutAtom);
 
+	useEffect(() => {
+		logout();
+	}, []);
 
+	return (
+		<View>
+			<Text>index</Text>
+		</View>
+	);
+}
+```
 
 
 
@@ -2563,7 +2883,32 @@ export default function MyCourses() {
 
 
 
+`app / (app) / index.tsx`
+```TSX
+import { useAtomValue } from 'jotai';
+import { View, Text } from 'react-native';
+import { authAtom } from '../../entities/auth/model/auth.state';
+import { useEffect } from 'react';
+import { router, useRootNavigationState } from 'expo-router';
 
+export default function MyCourses() {
+	const { access_token } = useAtomValue(authAtom);
+	const state = useRootNavigationState();
+
+	useEffect(() => {
+		if (!state?.key) return;
+		if (!access_token) {
+			router.replace('/login');
+		}
+	}, [access_token, state]);
+
+	return (
+		<View>
+			<Text>index</Text>
+		</View>
+	);
+}
+```
 
 
 
@@ -2575,16 +2920,43 @@ export default function MyCourses() {
 
 ### Redirect компонент
 
+Чистим компонент с курсом
 
+`app / (app) / index.tsx`
+```TSX
+import { View, Text } from 'react-native';
 
+export default function MyCourses() {
+	return (
+		<View>
+			<Text>index</Text>
+		</View>
+	);
+}
+```
 
+И переносим логику редиректа в лейаут
 
+`app / (app) / _layout.tsx`
+```TSX
+import { Redirect, Stack } from 'expo-router';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '../../entities/auth/model/auth.state';
 
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
 
-
-
-
-
+	return (
+		<Stack>
+			<Stack.Screen name="index" />
+		</Stack>
+	);
+}
+```
 
 
 ### Реализация логина
@@ -2602,6 +2974,10 @@ export default function MyCourses() {
 
 
 ### ActivityIndicator
+
+
+
+
 
 
 
@@ -3186,6 +3562,34 @@ export default function MyCourses() {
 
 ## Сборка и публикация
 
+### Переменные окружения
+
+Первым делом, сразу добавим энвы в игнор
+
+`.gitignore`
+```
+.env
+```
+
+Далее добавим переменную, чтобы была возможность разрабатывать локально
+
+Все переменные должны иметь префикс `EXPO_PUBLIC_` как тот же `NEXT_PUBLIC_`
+
+`.env`
+```
+EXPO_PUBLIC_DOMAIN=https://purpleschool.ru/api-v2
+```
+
+И теперь можно использовать переменную сразу из процесса
+
+`shared / api / api.ts`
+```TS
+export const PREFIX = `${process.env.EXPO_PUBLIC_DOMAIN}/api-v2`;
+```
+
+
+
+
 ### Процесс публикации
 
 
@@ -3202,11 +3606,83 @@ export default function MyCourses() {
 
 ### Конфигурация иконки
 
+Меняем адаптивную и обычную иконку приложения
 
+![](_png/Pasted%20image%2020250216103237.png)
 
+Теперь нам нужно сменить конфигурацию
 
-
-
+`app.json`
+```JSON
+{
+  "expo": {
+-    "name": "native-app",
+-    "slug": "native-app",
++    "name": "PupleSchool Demo App",
++    "slug": "purple-school-demo-app",
++	"description": "Приложение школы PurpleSchool для прохождения курсов",
+    "version": "1.0.0",
++	"platforms": ["ios", "android"],
+    "icon": "./assets/icon.png",
++	"orientation": "portrait",
+    "userInterfaceStyle": "light",
+	"backgroundColor": "#16171D",
++	"primaryColor": "#6C38CC",
+	"extra": { 
+	"eas": { 
+		"projectId": "9e8de316-bef0-4e46-9476-cabcea343056" 
+		} 
+	},
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#16171D"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+-     "supportsTablet": true
++     "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+	  [
+		"expo-font",
+		{
+			"fonts": [
+				"./assets/fonts/FiraSans-Regular.ttf",
+				"./assets/fonts/FiraSans-SemiBold.ttf"
+			]
+		}
+	  ],
+	  [
+        "expo-notifications",
+			{
+				"icon": "./assets/notification-icon.png",
+				"color": "#16171D"
+			}
+      ],
++	  [
+        "expo-image-picker",
+        {
+			"photosPermission": "Необходимо разрешение для выбора фото профиля"
+        }
+      ]
+    ],
+	"scheme": "purpleschool"
+  }
+}
+```
 
 
 
@@ -3216,13 +3692,118 @@ export default function MyCourses() {
 
 ### Сборка через EAS
 
+Первым делом, подготовим конфиг приложения к сборке
 
+`app.json`
+```JSON
+{
+  "expo": {
+    "name": "PupleSchool Demo App",
+	/** слаг должен быть без "-" */
+    "slug": "purpleschooldemoapp",
+    "description": "Приложение школы PurpleSchool для прохождения курсов",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "icon": "./assets/icon.png",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#16171D",
+    "primaryColor": "#6C38CC",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#16171D"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+	  /** указываем разрешения, которые понадобятся для андроида */
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "ru.purpleschool.purpleappdemo"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/FiraSans-Regular.ttf",
+            "./assets/fonts/FiraSans-SemiBold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#16171D"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Необходимо разрешение для выбора фото профиля"
+        }
+      ]
+    ],
 
+	/** дополняем схему и добавялем параметры сборки */
+    "scheme": "purpleschool",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ae16f11a-60ff-4bc6-a52c-ce1a2f7b011d"
+      }
+    },
+    "owner": "alaricode"
+  }
+}
+```
 
+Далее нужно сгенерирть конфиг для билда в `eas`
 
-
-
-
+`eas.json`
+```JSON
+{
+  "cli": {
+    "version": ">= 7.2.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+	  "android": {
+        "buildType": "apk"
+      },
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
+  }
+}
+```
 
 
 
@@ -3235,6 +3816,16 @@ export default function MyCourses() {
 `.gitignore`
 ```
 ios/
+```
+
+В настройках приложения нужно добавить имя бандла `bundleIdentifier`, в котором указать имя приложения
+
+`app.json`
+```JSON
+"ios": {
+  "supportsTablet": false,
+  "bundleIdentifier": "ru.purpleschool.purpleappdemo"
+},
 ```
 
 Меняем методы сборки в пакадже на expo сборку
