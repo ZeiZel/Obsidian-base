@@ -1947,17 +1947,136 @@ export default function RootRayout() {
 
 ### SafeArea и StatusBar
 
+Меняем дефолтный бэкграунд приложения в его настройках
 
+`app.json`
+```JSON
+"backgroundColor": "#16171D",
+```
 
+Далее добавим `StatusBar` из `expo-status-bar`, который предложит нам кастомизированный статусбар с возможностью его контролировать.
 
+Добавляем `SafeAreaProvider` и `useSafeAreaInsets` из `react-native-safe-area-context`. Они помогут провайдить безопасные границы для тапов внутри приложения. 
+
+`app / _layout.tsx`
+```TSX
+import { Stack } from 'expo-router';
+import { Colors } from '../shared/tokens';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+export default function RootRayout() {
+	const insets = useSafeAreaInsets();
+	return (
+		<SafeAreaProvider>
+			<StatusBar style="light" />
+			<Stack
+				screenOptions={{
+					statusBarColor: Colors.black,
+					contentStyle: {
+						backgroundColor: Colors.black,
+						paddingTop: insets.top,
+					},
+					headerShown: false,
+				}}
+			>
+				<Stack.Screen name="index" />
+				<Stack.Screen
+					name="restore"
+					options={{
+						presentation: 'modal',
+					}}
+				/>
+			</Stack>
+		</SafeAreaProvider>
+	);
+}
+```
+
+И осталось теперь только скорректировать цвет текста восстановления токеном из `Colors`
+
+`app / restore.tsx`
+```TSX
+import { Link } from 'expo-router';
+import { View, Text } from 'react-native';
+import { Colors } from '../shared/tokens';
+
+export default function Restore() {
+	return (
+		<View>
+			<Link href={'/'}>
+				<Text style={{ color: Colors.white }}>Restore</Text>
+			</Link>
+		</View>
+	);
+}
+```
 
 
 
 
 ### Подключение шрифта
 
+Первым делом, нужно добавить `ttf` шрифты в нашу папку ассетов `shared / assets / fonts / FiraSans / FiraSans-SemiBold.ttf`
 
+Далее добавляем шрифт через хук из expo
 
+`app/_layout.tsx`
+```TSX
+import { useFonts } from 'expo-font';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+export default function RootRayout() {
+	const insets = useSafeAreaInsets();
+	const [loaded, error] = useFonts({
+		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
+		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+	});
+```
+
+Далее добавляем имена наших шрифтов в токены, чтобы ими вдальнейшем воспользоваться
+
+`shared / const / tokens.const.ts`
+```TSX
+export const Fonts = {
+	f16: 16,
+	f18: 18,
+	regular: 'FiraSans',
+	semibold: 'FiraSansSemiBold',
+};
+```
+
+Далее добавляем шрифты из токенов в нашу кнопку, инпут и уведомление
+
+```TSX
+import { Colors, Fonts, Radius } from '../tokens';
+
+// Button / ErrorNotification
+text: {
+	color: Colors.white,
+	fontSize: Fonts.f18,
+	fontFamily: Fonts.regular,
+},
+
+// Input
+const styles = StyleSheet.create({
+	input: {
+		height: 58,
+		backgroundColor: Colors.violetDark,
+		paddingHorizontal: 24,
+		borderRadius: Radius.r10,
+		fontSize: 16,
+		color: Colors.gray,
+		fontFamily: Fonts.regular,
+	},
+	eyeIcon: {
+		position: 'absolute',
+		right: 0,
+		paddingHorizontal: 20,
+		paddingVertical: 18,
+	},
+});
+```
 
 
 
@@ -1965,16 +2084,94 @@ export default function RootRayout() {
 
 ### SplashScreen
 
+- Первым делом, укажем путь до изображения сплешскрина в `image`. 
+- Затем нам нужно указать метод ресайзинга на `contain`, чтобы не сжимать изображение, а центрировать его. 
+- И поменяем задник в `backgroundColor` под цвет задника сплеша `#16171D`
 
+`app.json`
+```JSON
+"splash": {
+  "image": "./assets/splash.png",
+  "resizeMode": "contain",
+  "backgroundColor": "#16171D"
+},
+```
 
+Первым делом меняем изображение сплеша в наших ассетов с дефолтного на наш
 
+![](_png/Pasted%20image%2020250216095742.png)
 
+И теперь нам нужно законтролить отображение сплеша в приложении через объект `SplashScreen`, чтобы у нас не было леаут-шифтинга при подгрузке шрифтов.
+
+1. Отключаем автовыключение сплешэкрана через `preventAutoHideAsync`
+2. Триггерим `hideAsync`, чтобы скрыть сплеш после загрузки шрифтов
+3. Если произойдёт ошибка подгрузки шрифта, то выкинем ошибку на экран
+
+`app / _layout.tsx`
+```TSX
+import { Stack, SplashScreen } from 'expo-router';
+import { Colors } from '../shared/tokens';
+import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useEffect } from 'react';
+
+SplashScreen.preventAutoHideAsync();
+
+export default function RootRayout() {
+	const insets = useSafeAreaInsets();
+	const [loaded, error] = useFonts({
+		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
+		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+	});
+
+	useEffect(() => {
+		if (error) {
+			throw error;
+		}
+	}, [error]);
+
+	useEffect(() => {
+		if (loaded) {
+			SplashScreen.hideAsync();
+		}
+	}, [loaded]);
+
+	if (!loaded) {
+		return null;
+	}
+
+	return (
+		<SafeAreaProvider>
+			<StatusBar style="light" />
+			<Stack
+				screenOptions={{
+					statusBarColor: Colors.black,
+					contentStyle: {
+						backgroundColor: Colors.black,
+						paddingTop: insets.top,
+					},
+					headerShown: false,
+				}}
+			>
+				<Stack.Screen name="index" />
+				<Stack.Screen
+					name="restore"
+					options={{
+						presentation: 'modal',
+					}}
+				/>
+			</Stack>
+		</SafeAreaProvider>
+	);
+}
+```
 
 
 
 ### Unmatched
 
-
+Реализуем страницу, которая будет выходить пользователю, если он перешёл на несуществующий экран
 
 `app / [...unmathed].tsx`
 ```TSX
@@ -1996,34 +2193,246 @@ export default function UnmatchedCustom() {
 
 
 
+`shared / ui / CustomLink / CustomLink.tsx`
+```TSX
+import { Link } from 'expo-router';
+import { StyleSheet, Text } from 'react-native';
+import { Colors, Fonts } from '../tokens';
+import { LinkProps } from 'expo-router/build/link/Link';
 
+export function CustomLink({ text, ...props }: LinkProps & { text: string }) {
+	return (
+		<Link style={styles.link} {...props}>
+			<Text>{text}</Text>
+		</Link>
+	);
+}
+
+const styles = StyleSheet.create({
+	link: {
+		fontSize: Fonts.f18,
+		color: Colors.link,
+		fontFamily: Fonts.regular,
+	},
+});
+```
+
+Далее добавим нашу кастомную ссылку на страницу логина
+
+`app / index.tsx`
+```TSX
+<CustomLink href={'/restore'} text="Восстановить пароль" />
+```
+
+Далее тут мы можем отказаться от использования хука и перейти на провайдер `SafeAreaProvider` из `react-native-safe-area-context`
+
+`app / _layout.tsx`
+```TSX
+import { Stack, SplashScreen } from 'expo-router';
+import { Colors } from '../shared/tokens';
+import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useEffect } from 'react';
+
+SplashScreen.preventAutoHideAsync();
+
+export default function RootRayout() {
+	const [loaded, error] = useFonts({
+		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
+		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+	});
+
+	useEffect(() => {
+		if (error) {
+			throw error;
+		}
+	}, [error]);
+
+	useEffect(() => {
+		if (loaded) {
+			SplashScreen.hideAsync();
+		}
+	}, [loaded]);
+
+	if (!loaded) {
+		return null;
+	}
+
+	return (
+		<SafeAreaProvider>
+			<StatusBar style="light" />
+			<Stack
+				screenOptions={{
+					statusBarColor: Colors.black,
+					contentStyle: {
+						backgroundColor: Colors.black,
+					},
+					headerShown: false,
+				}}
+			>
+				<Stack.Screen name="index" />
+				<Stack.Screen
+					name="restore"
+					options={{
+						presentation: 'modal',
+					}}
+				/>
+			</Stack>
+		</SafeAreaProvider>
+	);
+}
+```
+
+Добавляем вёрстку страницы непопада а так же добавляем сюда вьюшку безопасной зоны для клика
+
+`app / [...unmathed].tsx`
+```TSX
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { CustomLink } from '../shared/CustomLink/CustomLink';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Colors, Fonts, Gaps } from '../shared/tokens';
+
+export default function UnmatchedCustom() {
+	return (
+		<SafeAreaView style={styles.container}>
+			<View style={styles.content}>
+				<Image
+					style={styles.image}
+					source={require('../assets/images/unmatched.png')}
+					resizeMode="contain"
+				/>
+				<Text style={styles.text}>
+					Ооо... что-то пошло не так. Попробуйте вернуться на главный экран приложения
+				</Text>
+				<CustomLink href={'/'} text="На главный экран" />
+			</View>
+		</SafeAreaView>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+	},
+	content: {
+		alignItems: 'center',
+		gap: Gaps.g50,
+	},
+	image: {
+		width: 204,
+		height: 282,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18,
+		textAlign: 'center',
+		fontFamily: Fonts.regular,
+	},
+});
+```
 
 
 
 
 ### Route параметры
 
+Роуты с параметрами пишутся ровно так же, как и в NextJS. Параметры передаются в квадратных скобках `[]`
 
+Получить доступ к параметру мы можем через хук `useLocalSearchParams` из `expo-router`
 
+`app / course / [alias].tsx`
+```TSX
+import { View, Text } from 'react-native';
+import { Colors } from '../../shared/tokens';
+import { useLocalSearchParams } from 'expo-router';
 
+export default function CoursePage() {
+	const { alias } = useLocalSearchParams();
+	return (
+		<View>
+			<Text style={{ color: Colors.white }}>{alias}</Text>
+		</View>
+	);
+}
+```
 
+Для примера заменим ссылку на странице входа и перейдём по ней
+
+`app / login.tsx`
+```TSX
+<CustomLink href={'/course/typescript'} text="Восстановить пароль" />
+```
 
 
 
 ### Структура проекта
 
+Объединим наши роуты через синтаксис группировки `(alias)`. Это позволит нам поместить в одно место роуты без изменения путей к скринам.
 
 
+`app / (app) / _layout.tsx`
+```TSX
+import { Stack } from 'expo-router';
 
+export default function AppRayout() {
+	return (
+		<Stack>
+			<Stack.Screen name="index" />
+		</Stack>
+	);
+}
+```
 
+Доавбялем страницу моих курсов как основную страницу в приложении
 
+`app / (app) / index.tsx`
+```TSX
+import { View, Text } from 'react-native';
+import { Colors } from '../../shared/tokens';
 
+export default function MyCourses() {
+	return (
+		<View>
+			<Text style={{ color: Colors.white }}>MyCourses</Text>
+		</View>
+	);
+}
+```
+
+Меняем имя страницы авторизации с `index` на `login`
+
+`app / _layout.tsx`
+```TSX
+<SafeAreaProvider>
+		<StatusBar style="light" />
+		<Stack
+			screenOptions={{
+				statusBarColor: Colors.black,
+				contentStyle: {
+					backgroundColor: Colors.black,
+				},
+				headerShown: false,
+			}}
+>
+			<Stack.Screen name="login" />
+			<Stack.Screen
+				name="restore"
+				options={{
+					presentation: 'modal',
+				}}
+			/>
+		</Stack>
+	</SafeAreaProvider>
+```
+
+И меняем роут нашей страницы с курсом
+
+`[‎app/course/[alias].tsx -> ‎app/(app)/course/[alias].tsx]`
 
 ### Вложенные Layout
-
-
-
-
 
 
 
@@ -2036,24 +2445,162 @@ export default function UnmatchedCustom() {
 
 
 
-
-
-
-
-
 ## Запросы и состояния
 
 ### Выбор State Manager
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Архитектура проекта
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Первый атом
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### AsyncStorage
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### atomWithStorage
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Запросы на сервер
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Запросы в State
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Выход
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Программный редирект
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Redirect компонент
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Реализация логина
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### ActivityIndicator
 
 
@@ -2063,14 +2610,131 @@ export default function UnmatchedCustom() {
 ## Боковая панель
 
 ### Drawer Layout
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Стилизация панели
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Кнопка открытия
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Кастомный Drawer
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Стилизация Drawer
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Получение данных профиля
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Компонент пользователя
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Компонент меню
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Навигация
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2081,15 +2745,145 @@ export default function UnmatchedCustom() {
 ## Нативные возможности
 
 ### Обновление Expo
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Рефакторинг приложения
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### ImagePicker
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Permissions
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Отображение изображения
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Permissions
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Компонент загрузки
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Загрузка на сервер
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Улучшаем код
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Сохранение профиля
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Sharing API
 
 
@@ -2101,9 +2895,61 @@ export default function UnmatchedCustom() {
 ## Разрешения и layout
 
 ### ScreenOrientation
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Поддержка планшетов
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### KeyboardAvoidingView
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Platform
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2112,12 +2958,103 @@ export default function UnmatchedCustom() {
 ## Списки
 
 ### Данные курсов
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Вёрстка карточки
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### ScrollView
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### FlatList
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### RefreshControl
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Linking
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Градиентный текст
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Progress Bar
 
 
@@ -2127,13 +3064,117 @@ export default function UnmatchedCustom() {
 ## Нотификации
 
 ### Типы уведомлений
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Установка expo-notofocations
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Отправка уведомлений
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Обработка уведомлений
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Реакция на уведомления
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Нажатие на уведомление
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Уведомление с URL
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Работа с push-уведомлениями
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Использование push-токена
 
 
@@ -2146,10 +3187,86 @@ export default function UnmatchedCustom() {
 ## Сборка и публикация
 
 ### Процесс публикации
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Конфигурация иконки
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Сборка через EAS
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Сборка через XCode
+
+Убираем папку сборки из гита
+
+`.gitignore`
+```
+ios/
+```
+
+Меняем методы сборки в пакадже на expo сборку
+
+`package.json`
+```JSON
+"scripts": {
+	"start": "expo start",
+-	"android": "expo start --android",
+-   "ios": "expo start --ios",
++   "android": "expo run:android",
++   "ios": "expo run:ios",
+	"web": "expo start --web"
+},
+```
+
+
+
+
+
+
 ### Сборка через Android Studio
+
+Единственное, что нам нужно сделать в коде - это убрать папку вывода приложения из отслеживания гитом
+
+`.gitignore`
+```
+android/
+```
+
+
+
 ### Сборка через Expo
 
 
