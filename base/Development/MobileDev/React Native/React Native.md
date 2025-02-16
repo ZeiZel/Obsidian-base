@@ -2963,10 +2963,105 @@ export default function AppRayout() {
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { View, Text } from 'react-native';
+import { Button } from '../../shared/Button/Button';
+import { useSetAtom } from 'jotai';
+import { logoutAtom } from '../../entities/auth/model/auth.state';
+
+export default function MyCourses() {
+	const logout = useSetAtom(logoutAtom);
+	return (
+		<View>
+			<Text>index</Text>
+			<Button text="Выход" onPress={logout} />
+		</View>
+	);
+}
+```
 
 
 
+`app/login.tsx`
+```TSX
+import { StyleSheet, View, Image } from 'react-native';
+import { Input } from '../shared/Input/Input';
+import { Colors, Gaps } from '../shared/tokens';
+import { Button } from '../shared/Button/Button';
+import { ErrorNotification } from '../shared/ErrorNotification/ErrorNotification';
+import { useEffect, useState } from 'react';
+import { CustomLink } from '../shared/CustomLink/CustomLink';
+import { useAtom } from 'jotai';
+import { loginAtom } from '../entities/auth/model/auth.state';
+import { router } from 'expo-router';
 
+export default function Login() {
+	const [localError, setLocalError] = useState<string | undefined>();
+	const [email, setEmail] = useState<string>();
+	const [password, setPassword] = useState<string>();
+	const [{ access_token, isLoading, error }, login] = useAtom(loginAtom);
+
+	const submit = () => {
+		if (!email) {
+			setLocalError('Не введён email');
+			return;
+		}
+		if (!password) {
+			setLocalError('Не введён пароль');
+			return;
+		}
+		login({ email, password });
+	};
+
+	useEffect(() => {
+		if (error) {
+			setLocalError(error);
+		}
+	}, [error]);
+
+	useEffect(() => {
+		if (access_token) {
+			router.replace('/(app)');
+		}
+	}, [access_token]);
+
+	return (
+		<View style={styles.container}>
+			<ErrorNotification error={localError} />
+			<View style={styles.content}>
+				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
+				<View style={styles.form}>
+					<Input placeholder="Email" onChangeText={setEmail} />
+					<Input isPassword placeholder="Пароль" onChangeText={setPassword} />
+					<Button text="Войти" onPress={submit} />
+				</View>
+				<CustomLink href={'/course/typescript'} text="Восстановить пароль" />
+			</View>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: Colors.black,
+	},
+	content: {
+		alignItems: 'center',
+		gap: Gaps.g50,
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: Gaps.g16,
+	},
+	logo: {
+		width: 220,
+	},
+});
+```
 
 
 
@@ -2975,9 +3070,143 @@ export default function AppRayout() {
 
 ### ActivityIndicator
 
+Добавим фейковую задержку в авторизацию, чтобы увидеть спиннер индикатора
 
+`entities/auth/model/auth.state.ts`
+```TS
+export const loginAtom = atom(
+	(get) => get(authAtom),
+	async (_get, set, { email, password }: LoginRequest) => {
+		set(authAtom, {
+			isLoading: true,
+			access_token: null,
+			error: null,
+		});
+		try {
+			/** фейковая задержка, чтобы увидеть загрузку */
+			await new Promise<void>((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 2000),
+			);
+			
+			const { data } = await axios.post<AuthResponse>(API.login, {
+				email,
+				password,
+			});
+			set(authAtom, {
+				isLoading: false,
+				access_token: data.access_token,
+				error: null,
+			});
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				set(authAtom, {
+					isLoading: false,
+					access_token: null,
+					error: error.response?.data.message,
+				});
+			}
+		}
+	},
+);
+```
 
+Далее нам нужно добавить в кнопку обработку пропса `isLoading` через который мы будем показывать нативный компонент реакта `ActivityIndicator`, что отобразит нам загрузку
 
+`shared / ui / Button / Button.tsx`
+```TSX
+import {
+	ActivityIndicator,
+	Animated,
+	GestureResponderEvent,
+	Pressable,
+	PressableProps,
+	StyleSheet,
+	Text,
+} from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+
+export function Button({
+	text,
+	isLoading,
+	...props
+}: PressableProps & { text: string; isLoading?: boolean }) {
+	const animatedValue = new Animated.Value(100);
+	const color = animatedValue.interpolate({
+		inputRange: [0, 100],
+		outputRange: [Colors.primaryHover, Colors.primary],
+	});
+
+	const fadeIn = (e: GestureResponderEvent) => {
+		Animated.timing(animatedValue, {
+			toValue: 0,
+			duration: 100,
+			useNativeDriver: false,
+		}).start();
+		props.onPressIn && props.onPressIn(e);
+	};
+
+	const fadeOut = (e: GestureResponderEvent) => {
+		Animated.timing(animatedValue, {
+			toValue: 100,
+			duration: 100,
+			useNativeDriver: false,
+		}).start();
+		props.onPressOut && props.onPressOut(e);
+	};
+
+	return (
+		<Pressable {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
+			<Animated.View
+				style={{
+					...styles.button,
+					backgroundColor: color,
+				}}
+			>
+				{!isLoading && <Text style={styles.text}>{text}</Text>}
+				{isLoading && <ActivityIndicator size="large" color={Colors.white} />}
+			</Animated.View>
+		</Pressable>
+	);
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		borderRadius: Radius.r10,
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f18,
+		fontFamily: Fonts.regular,
+	},
+});
+```
+
+И теперь добавляем лоадер в саму кнопку на странице авторизации
+
+`app / login.tsx`
+```TSX
+return (
+		<View style={styles.container}>
+			<ErrorNotification error={localError} />
+			<View style={styles.content}>
+				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
+				<View style={styles.form}>
+					<Input placeholder="Email" onChangeText={setEmail} />
+					<Input isPassword placeholder="Пароль" onChangeText={setPassword} />
+					<Button text="Войти" onPress={submit} />
+					<Button text="Войти" onPress={submit} isLoading={isLoading} />
+				</View>
+				<CustomLink href={'/course/typescript'} text="Восстановить пароль" />
+				<CustomLink href={'/restore'} text="Восстановить пароль" />
+			</View>
+		</View>
+	);
+```
 
 
 
