@@ -4111,29 +4111,159 @@ module.exports = function (api) {
 
 ### Рефакторинг приложения
 
+Переместим `CustomDrawer` в виджеты
 
+Далее добавим плагин шрифтов в конфиг приложения
 
+`app.json`
+```JSON
+"plugins": [
+  "expo-router",
+  [
+	"expo-font",
+	{
+		"fonts": [
+			"./assets/fonts/FiraSans-Regular.ttf",
+			"./assets/fonts/FiraSans-SemiBold.ttf"
+		]
+	}
+  ]
+  
+],
+```
 
+Тут нужно поменять названия шрифтов на оригинальные из файлов
 
+`shared/tokens.ts`
+```TS
+export const Fonts = {
+	f16: 16,
+	f18: 18,
+	f20: 20,
+	// regular: 'FiraSans',
+	// semibold: 'FiraSansSemiBold',
+	regular: 'FiraSans-Regular',
+	semibold: 'FiraSans-SemiBold',
+};
+```
 
+Добавляем имена шрифтов в ключи `useFonts`
 
+`app/_layout.tsx`
+```TSX
+const [loaded, error] = useFonts({
+		//FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
+		//FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+		'FiraSans-Regular': require('../assets/fonts/FiraSans-Regular.ttf'),
+		'FiraSans-SemiBold': require('../assets/fonts/FiraSans-SemiBold.ttf'),
+	});
+```
 
+И оборачиваем дровер в хэндлер жестов `GestureHandlerRootView`
 
+`app/(app)/_layout.tsx`
+```TSX
+import { Redirect } from 'expo-router';
+import { Drawer } from 'expo-router/drawer';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '../../entities/auth/model/auth.state';
+import { Colors, Fonts } from '../../shared/tokens';
+import { MenuButton } from '../../features/layout/ui/MenuButton/MenuButton';
+import { CustomDrawer } from '../../widget/layout/ui/CustomDrawer/CustomDrawer';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
 
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
 
+	return (
+		<GestureHandlerRootView style={styles.wrapper}>
+			<Drawer
+				drawerContent={(props) => <CustomDrawer {...props} />}
+				screenOptions={({ navigation }) => ({
+					headerStyle: {
+						backgroundColor: Colors.blackLight,
+						shadowColor: Colors.blackLight,
+						shadowOpacity: 0,
+					},
+					headerLeft: () => {
+						return <MenuButton navigation={navigation} />;
+					},
+					headerTitleStyle: {
+						color: Colors.white,
+						fontFamily: Fonts.regular,
+						fontSize: Fonts.f20,
+					},
+					headerTitleAlign: 'center',
+					sceneContainerStyle: {
+						backgroundColor: Colors.black,
+					},
+				})}
+			>
+				<Drawer.Screen
+					name="index"
+					options={{
+						title: 'Мои курсы',
+					}}
+				/>
+				<Drawer.Screen
+					name="profile"
+					options={{
+						title: 'Профиль',
+					}}
+				/>
+			</Drawer>
+		</GestureHandlerRootView>
+	);
+}
+
+const styles = StyleSheet.create({
+	wrapper: {
+		flex: 1,
+	},
+});
+```
 
 
 ### ImagePicker
 
 
 
+```bash
+npm i expo-image-picker
+```
 
 
 
+`app/(app)/profile.tsx`
+```TSX
+import { useState } from 'react';
+import { View, Text } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { Button } from '../../shared/Button/Button';
 
-
-
-
+export default function Profile() {
+	const [image, setImage] = useState(null);
+	const pickAvatar = async () => {
+		const result = await ImagePicker.launchCameraAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		console.log(result);
+	};
+	return (
+		<View>
+			<Text>Profile</Text>
+			<Button text="Выбрать изображение" onPress={pickAvatar} />
+		</View>
+	);
+}
+```
 
 
 
@@ -4141,69 +4271,424 @@ module.exports = function (api) {
 
 
 
+`app/(app)/profile.tsx`
+```TSX
+import { useState } from 'react';
+import { View, Text, Alert } from 'react-native';
+import {
+	launchCameraAsync,
+	MediaTypeOptions,
+	useCameraPermissions,
+	PermissionStatus,
+} from 'expo-image-picker';
+import { Button } from '../../shared/Button/Button';
 
+export default function Profile() {
+	const [image, setImage] = useState(null);
+	const [cameraPermissions, requestCameraPermission] = useCameraPermissions();
 
+	const varifyCameraPermissions = async () => {
+		if (cameraPermissions?.status === PermissionStatus.UNDETERMINED) {
+			const res = await requestCameraPermission();
+			return res.granted;
+		}
+		if (cameraPermissions?.status === PermissionStatus.DENIED) {
+			Alert.alert('Недостаточно прав для доступа к камере');
+			return false;
+		}
+		return true;
+	};
 
+	const pickAvatar = async () => {
+		const isPermissionGranted = await varifyCameraPermissions();
+		if (!isPermissionGranted) {
+			return;
+		}
+		const result = await launchCameraAsync({
+			mediaTypes: MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		console.log(result);
+	};
 
-
-
-
+	return (
+		<View>
+			<Text>Profile</Text>
+			<Button text="Выбрать изображение" onPress={pickAvatar} />
+		</View>
+	);
+}
+```
 
 
 
 ### Отображение изображения
 
 
+`app/(app)/profile.tsx`
+```TSX
+import { useState } from 'react';
+import { View, Text, Alert, Image } from 'react-native';
+import {
+	launchCameraAsync,
+	MediaTypeOptions,
+	useCameraPermissions,
+	launchImageLibraryAsync,
+	useMediaLibraryPermissions,
+	PermissionStatus,
+} from 'expo-image-picker';
+import { Button } from '../../shared/Button/Button';
 
+export default function Profile() {
+	const [image, setImage] = useState<string | null>(null);
+	const [cameraPermissions, requestCameraPermission] = useCameraPermissions();
+	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
 
+	const varifyCameraPermissions = async () => {
+		if (cameraPermissions?.status === PermissionStatus.UNDETERMINED) {
+			const res = await requestCameraPermission();
+			return res.granted;
+		}
+		if (cameraPermissions?.status === PermissionStatus.DENIED) {
+			Alert.alert('Недостаточно прав для доступа к камере');
+			return false;
+		}
+		return true;
+	};
 
+	const varifyMediaPermissions = async () => {
+		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
+			const res = await requestLibraryPermission();
+			return res.granted;
+		}
+		if (libraryPermissions?.status === PermissionStatus.DENIED) {
+			Alert.alert('Недостаточно прав для доступа к фото');
+			return false;
+		}
+		return true;
+	};
 
+	const captureAvatar = async () => {
+		const isPermissionGranted = await varifyCameraPermissions();
+		if (!isPermissionGranted) {
+			return;
+		}
+		const result = await launchCameraAsync({
+			mediaTypes: MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		if (!result.assets) {
+			return;
+		}
+		setImage(result.assets[0].uri);
+	};
 
+	const pickAvatar = async () => {
+		const isPermissionGranted = await varifyMediaPermissions();
+		if (!isPermissionGranted) {
+			return;
+		}
+		const result = await launchImageLibraryAsync({
+			mediaTypes: MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		if (!result.assets) {
+			return;
+		}
+		console.log(result);
+		setImage(result.assets[0].uri);
+	};
 
-
-
-
-
-
-### Permissions
-
-
-
-
-
-
-
-
-
-
+	return (
+		<View>
+			<Text>Profile</Text>
+			<Button text="Снять изображение" onPress={captureAvatar} />
+			<Button text="Выбрать из галери" onPress={pickAvatar} />
+			{image && (
+				<Image
+					source={{
+						uri: image,
+						width: 100,
+						height: 100,
+					}}
+				/>
+			)}
+		</View>
+	);
+}
+```
 
 
 
 ### Компонент загрузки
 
 
+`assets/icons/upload.tsx`
+```TSX
+import * as React from 'react';
+import Svg, { SvgProps, Path } from 'react-native-svg';
+const UploadIcon = (props: SvgProps) => (
+	<Svg width={24} height={24} fill="none" {...props}>
+		<Path
+			stroke="#fff"
+			strokeLinecap="round"
+			strokeWidth={1.5}
+			d="M6.286 19C3.919 19 2 17.104 2 14.765c0-2.34 1.919-4.236 4.286-4.236.284 0 .562.028.83.08m7.265-2.582a5.765 5.765 0 0 1 1.905-.321c.654 0 1.283.109 1.87.309m-11.04 2.594a5.577 5.577 0 0 1-.354-1.962C6.762 5.528 9.32 3 12.476 3c2.94 0 5.361 2.194 5.68 5.015m-11.04 2.594a4.29 4.29 0 0 1 1.55.634m9.49-3.228C20.392 8.78 22 10.881 22 13.353c0 2.707-1.927 4.97-4.5 5.52"
+		/>
+		<Path
+			stroke="#fff"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={1.5}
+			d="M12 16v6m0-6 2 2m-2-2-2 2"
+		/>
+	</Svg>
+);
+export default UploadIcon;
+```
 
 
 
+`shared/tokens.ts`
+```TS
+export const Fonts = {
+	f14: 14,
+	f16: 16,
+	f18: 18,
+	f20: 20,
+	regular: 'FiraSans-Regular',
+	semibold: 'FiraSans-SemiBold',
+};
+```
 
 
 
+`shared/ImageUploader/ImageUploader.tsx`
+```TSX
+import {
+	MediaTypeOptions,
+	launchImageLibraryAsync,
+	useMediaLibraryPermissions,
+	PermissionStatus,
+} from 'expo-image-picker';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import UploadIcon from '../../assets/icons/upload';
+import { Colors, Fonts, Gaps, Radius } from '../tokens';
+interface ImageUploaderProps {
+	onUpload: (uri: string) => void;
+}
+export function ImageUploader({ onUpload }: ImageUploaderProps) {
+	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
+	const varifyMediaPermissions = async () => {
+		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
+			const res = await requestLibraryPermission();
+			return res.granted;
+		}
+		if (libraryPermissions?.status === PermissionStatus.DENIED) {
+			Alert.alert('Недостаточно прав для доступа к фото');
+			return false;
+		}
+		return true;
+	};
+	const pickImage = async () => {
+		const isPermissionGranted = await varifyMediaPermissions();
+		if (!isPermissionGranted) {
+			return;
+		}
+		const result = await launchImageLibraryAsync({
+			mediaTypes: MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		if (!result.assets) {
+			return;
+		}
+		onUpload(result.assets[0].uri);
+	};
+	return (
+		<Pressable onPress={pickImage}>
+			<View style={styles.container}>
+				<UploadIcon />
+				<Text style={styles.text}>Загрузить изображение</Text>
+			</View>
+		</Pressable>
+	);
+}
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: 'row',
+		gap: Gaps.g8,
+		backgroundColor: Colors.violetDark,
+		borderRadius: Radius.r10,
+		paddingHorizontal: 20,
+		paddingVertical: 17,
+		alignItems: 'center',
+	},
+	text: {
+		fontSize: Fonts.f14,
+		fontFamily: Fonts.regular,
+		color: Colors.white,
+	},
+});
+```
 
 
+
+`app/(app)/profile.tsx`
+```TSX
+import { useState } from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+import { ImageUploader } from '../../shared/ImageUploader/ImageUploader';
+import { Gaps } from '../../shared/tokens';
+
+export default function Profile() {
+	const [image, setImage] = useState<string | null>(null);
+
+	return (
+		<View style={styles.container}>
+			{image ? (
+				<Image
+					style={styles.image}
+					source={{
+						uri: image,
+					}}
+				/>
+			) : (
+				<Image source={require('../../assets/images/avatar.png')} />
+			)}
+			<ImageUploader onUpload={setImage} />
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	image: {
+		width: 70,
+		height: 70,
+		borderRadius: 35,
+	},
+	container: {
+		flexDirection: 'row',
+		gap: Gaps.g20,
+		alignItems: 'center',
+		paddingHorizontal: 30,
+		paddingVertical: 20,
+	},
+});
+```
 
 
 
 ### Загрузка на сервер
 
 
+```bash
+npm i form-data
+```
 
 
 
+`shared/ImageUploader/ImageUploader.interface.ts`
+```TSX
+export interface UploadResponse {
+	urls: {
+		original: string;
+		webP: string;
+	};
+}
+```
 
 
 
+`shared/api.ts`
+```TSX
+export const FILE_API = {
+	uploadImage: `${PREFIX}/files/upload-image?folder=demo`,
+};
+```
 
+Добавляем метод `uploadToServer`, которым мы будем загружать на сервер новую аватарку
 
+`shared/ImageUploader/ImageUploader.tsx`
+```TSX
+import {
+	MediaTypeOptions,
+	launchImageLibraryAsync,
+	useMediaLibraryPermissions,
+	PermissionStatus,
+} from 'expo-image-picker';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import UploadIcon from '../../assets/icons/upload';
+import { Colors, Fonts, Gaps, Radius } from '../tokens';
+import FormData from 'form-data';
+import axios, { AxiosError } from 'axios';
+import { FILE_API } from '../api';
+import { UploadResponse } from './ImageUploader.interface';
+
+interface ImageUploaderProps {
+	onUpload: (uri: string) => void;
+}
+
+export function ImageUploader({ onUpload }: ImageUploaderProps) {
+	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
+
+	const varifyMediaPermissions = async () => {
+		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
+			const res = await requestLibraryPermission();
+			return res.granted;
+		}
+		if (libraryPermissions?.status === PermissionStatus.DENIED) {
+			Alert.alert('Недостаточно прав для доступа к фото');
+			return false;
+		}
+		return true;
+	};
+
+	const pickImage = async () => {
+		const isPermissionGranted = await varifyMediaPermissions();
+		if (!isPermissionGranted) {
+			return;
+		}
+		const result = await launchImageLibraryAsync({
+			mediaTypes: MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		if (!result.assets) {
+			return;
+		}
+		await uploadToServer(result.assets[0].uri, result.assets[0].fileName ?? '');
+	};
+
+	const uploadToServer = async (uri: string, name: string) => {
+		const formData = new FormData();
+		formData.append('files', {
+			uri,
+			name,
+			type: 'image/jpeg',
+		});
+		try {
+			const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+			onUpload(data.urls.original);
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				console.error(error);
+			}
+		}
+	};
+```
 
 
 
