@@ -5440,12 +5440,138 @@ const styles = StyleSheet.create({
 
 
 
+`entities/course/api/api.ts`
+```TS
+import { PREFIX } from '../../../shared/api';
+export const API = {
+	my: `${PREFIX}/course/my`,
+};
+```
 
 
 
+`entities/course/model/course.model.ts`
+```TS
+export interface Progress {
+	progressPercent: number;
+	tariffLessonsCount: number;
+	userViewedLessonsCount: number;
+}
+export type StudentCourseDescription = {
+	id: number;
+	shortTitle: string;
+	image: string;
+	title: string;
+	alias: string;
+	length: number;
+	avgRating: number;
+	price: number;
+	courseOnDirection: { direction: Record<'name', string> }[];
+	tariffs: Tariff[];
+	progress: Progress;
+};
+export type Tariff = {
+	id: number;
+	name: string;
+	price: number;
+	type: TariffType;
+	oldPrice?: number;
+	creditPrice?: number;
+	lengthInMonth: number;
+	courseId: number;
+	createdAt: string;
+	videoUuid: string;
+};
+export enum TariffType {
+	free = 'free',
+	basic = 'basic',
+	mentor = 'mentor',
+	project = 'project',
+}
+```
 
 
 
+`entities/course/model/course.state.ts`
+```TS
+import { atom } from 'jotai';
+import { authAtom } from '../../auth/model/auth.state';
+import axios, { AxiosError } from 'axios';
+import { API } from '../api/api';
+import { StudentCourseDescription } from './course.model';
+export const courseAtom = atom<CourseState>({
+	courses: [],
+	isLoading: false,
+	error: null,
+});
+export const loadCourseAtom = atom(
+	async (get) => {
+		return get(courseAtom);
+	},
+	async (get, set) => {
+		try {
+			const { access_token } = await get(authAtom);
+			set(courseAtom, {
+				isLoading: true,
+				courses: [],
+				error: null,
+			});
+			const { data } = await axios.get<StudentCourseDescription[]>(API.my, {
+				params: {
+					studentCourse: 'dontMy',
+				},
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			});
+			set(courseAtom, {
+				isLoading: false,
+				courses: data,
+				error: null,
+			});
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				set(courseAtom, {
+					isLoading: false,
+					courses: [],
+					error: error.response?.data.message,
+				});
+			}
+		}
+	},
+);
+export interface CourseState {
+	courses: StudentCourseDescription[];
+	isLoading: boolean;
+	error: string | null;
+}
+```
+
+
+
+`app/(app)/index.tsx`
+```TSX
+import { View, Text } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+
+export default function MyCourses() {
+	const { isLoading, error, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
+
+	useEffect(() => {
+		loadCourse();
+	}, []);
+
+	return (
+		<View>
+			<Text>index</Text>
+			{courses.length > 0 && courses.map((c) => <Text key={c.id}>{c.title}</Text>)}
+		</View>
+	);
+}
+```
 
 
 
@@ -5454,13 +5580,136 @@ const styles = StyleSheet.create({
 
 
 
+`shared/tokens.ts`
+```TS
+export const Colors = {
+	black: '#16171D',
+	blackLight: '#1E1F29',
+	gray: '#AFB2BF',
+	violetDark: '#2E2D3D',
+	primary: '#6C38CC',
+	primaryHover: '#452481',
+	link: '#A97BFF',
+	white: '#FAFAFA',
+	red: '#CC384E',
+	border: '#4D5064',
+};
+
+export const Radius = {
+	r10: 10,
+	r17: 17,
+};
+```
 
 
 
+`shared/Chip/Chip.tsx`
+```TSX
+import { View, Text, StyleSheet } from 'react-native';
+import { Colors, Fonts, Radius } from '../tokens';
+export function Chip({ text }: { text: string }) {
+	return (
+		<View style={styles.container}>
+			<Text style={styles.text}>{text}</Text>
+		</View>
+	);
+}
+const styles = StyleSheet.create({
+	container: {
+		paddingVertical: 5,
+		paddingHorizontal: 10,
+		borderColor: Colors.border,
+		borderRadius: Radius.r17,
+		borderWidth: 1,
+	},
+	text: {
+		fontFamily: Fonts.regular,
+		fontSize: Fonts.f14,
+		color: Colors.white,
+	},
+});
+```
 
 
 
+`entities/course/ui/CourseCard/CourseCard.tsx`
+```TSX
+import { StyleSheet, View, Image, Text } from 'react-native';
+import { StudentCourseDescription } from '../../model/course.model';
+import { Chip } from '../../../../shared/Chip/Chip';
+import { Button } from '../../../../shared/Button/Button';
+import { Colors, Radius } from '../../../../shared/tokens';
+export function CourseCard({ image, title, courseOnDirection }: StudentCourseDescription) {
+	return (
+		<View style={styles.card}>
+			<Image
+				source={{
+					uri: image,
+				}}
+				style={styles.image}
+				height={200}
+			/>
+			<View style={styles.header}>
+				<Text style={styles.title}>{title}</Text>
+				<View style={styles.chips}>
+					{courseOnDirection.length > 0 &&
+						courseOnDirection.map((c) => <Chip text={c.direction.name} />)}
+				</View>
+			</View>
+			<View style={styles.footer}>
+				<Button text="Купить" />
+			</View>
+		</View>
+	);
+}
+const styles = StyleSheet.create({
+	card: {
+		flexDirection: 'column',
+		borderRadius: Radius.r10,
+		backgroundColor: Colors.blackLight,
+	},
+	image: {},
+	title: {},
+	chips: {},
+	header: {},
+	footer: {},
+});
+```
 
+
+
+`app/(app)/index.tsx`
+```TSX
+import { View, Text, StyleSheet } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+import { CourseCard } from '../../entities/course/ui/CourseCard/CourseCard';
+import { Gaps } from '../../shared/tokens';
+
+export default function MyCourses() {
+	const { isLoading, error, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
+
+	useEffect(() => {
+		loadCourse();
+	}, []);
+
+	return (
+		<View style={styles.wrapper}>
+			{courses.length > 0 && courses.map((c) => <CourseCard {...c} key={c.id} />)}
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	wrapper: {
+		flexDirection: 'column',
+		gap: Gaps.g20,
+		padding: 20,
+	},
+});
+```
 
 
 
@@ -5468,13 +5717,132 @@ const styles = StyleSheet.create({
 
 
 
+`shared/tokens.ts`
+```TS
+export const Gaps = {
+	g8: 8,
+	g10: 10,
+	g16: 16,
+	g20: 20,
+	g50: 50,
+};
+
+export const Fonts = {
+	f14: 14,
+	f16: 16,
+	f18: 18,
+	f20: 20,
+	f21: 21,
+	regular: 'FiraSans-Regular',
+	semibold: 'FiraSans-SemiBold',
+};
+```
 
 
 
+`entities/course/ui/CourseCard/CourseCard.tsx`
+```TSX
+import { StyleSheet, View, Image, Text } from 'react-native';
+import { StudentCourseDescription } from '../../model/course.model';
+import { Chip } from '../../../../shared/Chip/Chip';
+import { Button } from '../../../../shared/Button/Button';
+import { Colors, Fonts, Gaps, Radius } from '../../../../shared/tokens';
+
+export function CourseCard({ image, shortTitle, courseOnDirection }: StudentCourseDescription) {
+	return (
+		<View style={styles.card}>
+			<Image
+				source={{
+					uri: image,
+				}}
+				style={styles.image}
+				height={200}
+			/>
+			<View style={styles.header}>
+				<Text style={styles.title}>{shortTitle}</Text>
+				<View style={styles.chips}>
+					{courseOnDirection.length > 0 &&
+						courseOnDirection.map((c) => <Chip text={c.direction.name} />)}
+				</View>
+			</View>
+			<View style={styles.footer}>
+				<Button text="Купить" />
+			</View>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	card: {
+		flexDirection: 'column',
+		borderRadius: Radius.r10,
+		backgroundColor: Colors.blackLight,
+	},
+	image: {
+		borderRadius: 10,
+		borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 0,
+	},
+	title: {
+		fontSize: Fonts.f21,
+		color: Colors.white,
+		fontFamily: Fonts.semibold,
+		marginBottom: 12,
+	},
+	chips: {
+		flexDirection: 'row',
+		gap: Gaps.g10,
+	},
+	header: {
+		paddingHorizontal: 24,
+		paddingVertical: 18,
+	},
+	footer: {
+		backgroundColor: Colors.violetDark,
+		paddingHorizontal: 24,
+		paddingVertical: 20,
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+	},
+});
+```
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+import { CourseCard } from '../../entities/course/ui/CourseCard/CourseCard';
+import { Gaps } from '../../shared/tokens';
 
+export default function MyCourses() {
+	const { isLoading, error, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
+
+	useEffect(() => {
+		loadCourse();
+	}, []);
+
+	return (
+		<ScrollView>
+			<View style={styles.wrapper}>
+				{courses.length > 0 && courses.map((c) => <CourseCard {...c} key={c.id} />)}
+			</View>
+		</ScrollView>
+	);
+}
+
+const styles = StyleSheet.create({
+	wrapper: {
+		flexDirection: 'column',
+		gap: Gaps.g20,
+		padding: 20,
+	},
+});
+```
 
 
 
@@ -5482,13 +5850,50 @@ const styles = StyleSheet.create({
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { View, StyleSheet, FlatList } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+import { CourseCard } from '../../entities/course/ui/CourseCard/CourseCard';
+import { StudentCourseDescription } from '../../entities/course/model/course.model';
 
+export default function MyCourses() {
+	const { isLoading, error, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
 
+	useEffect(() => {
+		loadCourse();
+	}, []);
 
+	const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
+		return (
+			<View style={styles.item}>
+				<CourseCard {...item} />
+			</View>
+		);
+	};
 
+	return (
+		<>
+			{courses.length > 0 && (
+				<FlatList
+					data={courses}
+					keyExtractor={(item) => item.id.toString()}
+					renderItem={renderCourse}
+				/>
+			)}
+		</>
+	);
+}
 
-
-
+const styles = StyleSheet.create({
+	item: {
+		padding: 20,
+	},
+});
+```
 
 
 
@@ -5496,13 +5901,65 @@ const styles = StyleSheet.create({
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { View, StyleSheet, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+import { CourseCard } from '../../entities/course/ui/CourseCard/CourseCard';
+import { StudentCourseDescription } from '../../entities/course/model/course.model';
+import { Colors } from '../../shared/tokens';
 
+export default function MyCourses() {
+	const { isLoading, error, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
 
+	useEffect(() => {
+		loadCourse();
+	}, []);
 
+	const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
+		return (
+			<View style={styles.item}>
+				<CourseCard {...item} />
+			</View>
+		);
+	};
 
+	return (
+		<>
+			{isLoading && (
+				<ActivityIndicator style={styles.activity} size="large" color={Colors.primary} />
+			)}
+			{courses.length > 0 && (
+				<FlatList
+					refreshControl={
+						<RefreshControl
+							tintColor={Colors.primary}
+							titleColor={Colors.primary}
+							refreshing={isLoading}
+							onRefresh={loadCourse}
+						/>
+					}
+					data={courses}
+					keyExtractor={(item) => item.id.toString()}
+					renderItem={renderCourse}
+				/>
+			)}
+		</>
+	);
+}
 
-
-
+const styles = StyleSheet.create({
+	item: {
+		padding: 20,
+	},
+	activity: {
+		marginTop: 30,
+	},
+});
+```
 
 
 
@@ -5510,27 +5967,191 @@ const styles = StyleSheet.create({
 
 
 
+`entities/course/ui/CourseCard/CourseCard.tsx`
+```TSX
+import { StyleSheet, View, Image, Text, Linking } from 'react-native';
+import { StudentCourseDescription } from '../../model/course.model';
+import { Chip } from '../../../../shared/Chip/Chip';
+import { Button } from '../../../../shared/Button/Button';
+import { Colors, Fonts, Gaps, Radius } from '../../../../shared/tokens';
+
+export function CourseCard({
+	image,
+	shortTitle,
+	courseOnDirection,
+	alias,
+}: StudentCourseDescription) {
+	return (
+		<View style={styles.card}>
+			<Image
+				source={{
+					uri: image,
+				}}
+				style={styles.image}
+				height={200}
+			/>
+			<View style={styles.header}>
+				<Text style={styles.title}>{shortTitle}</Text>
+				<View style={styles.chips}>
+					{courseOnDirection.length > 0 &&
+						courseOnDirection.map((c) => <Chip text={c.direction.name} />)}
+				</View>
+			</View>
+			<View style={styles.footer}>
+				<Button
+					text="Купить"
+					onPress={() => Linking.openURL(`https://purpleschool.ru/course/${alias}`)}
+				/>
+			</View>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	card: {
+		flexDirection: 'column',
+		borderRadius: Radius.r10,
+		backgroundColor: Colors.blackLight,
+	},
+	image: {
+		borderRadius: 10,
+		borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 0,
+	},
+	title: {
+		fontSize: Fonts.f21,
+		color: Colors.white,
+		fontFamily: Fonts.semibold,
+		marginBottom: 12,
+	},
+	chips: {
+		flexDirection: 'row',
+		gap: Gaps.g10,
+	},
+	header: {
+		paddingHorizontal: 24,
+		paddingVertical: 18,
+	},
+	footer: {
+		backgroundColor: Colors.violetDark,
+		paddingHorizontal: 24,
+		paddingVertical: 20,
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+	},
+});
+```
 
 
 
+### Градиентный текст / LinearGradient
 
 
 
+```bash
+npm i expo-linear-gradient @react-native-masked-view/masked-view
+```
 
 
 
+`entities/course/ui/CourseCard/CourseCard.tsx`
+```TSX
+import { StyleSheet, View, Image, Text, Linking } from 'react-native';
+import { StudentCourseDescription } from '../../model/course.model';
+import { Chip } from '../../../../shared/Chip/Chip';
+import { Button } from '../../../../shared/Button/Button';
+import { Colors, Fonts, Gaps, Radius } from '../../../../shared/tokens';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
-### Градиентный текст
+export function CourseCard({
+	image,
+	shortTitle,
+	courseOnDirection,
+	alias,
+	tariffs,
+}: StudentCourseDescription) {
+	return (
+		<View style={styles.card}>
+			<Image
+				source={{
+					uri: image,
+				}}
+				style={styles.image}
+				height={200}
+			/>
+			<View style={styles.header}>
+				<Text style={styles.title}>{shortTitle}</Text>
+				<View style={styles.chips}>
+					{courseOnDirection.length > 0 &&
+						courseOnDirection.map((c) => <Chip text={c.direction.name} />)}
+				</View>
+				<MaskedView
+					maskElement={<Text style={styles.tariff}>Тариф &laquo;{tariffs[0].name}&raquo;</Text>}
+				>
+					<LinearGradient
+						colors={['#D77BE5', '#6C38CC']}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 0 }}
+					>
+						<Text style={{ ...styles.tariff, ...styles.tariffWithOpacity }}>
+							Тариф &laquo;{tariffs[0].name}&raquo;
+						</Text>
+					</LinearGradient>
+				</MaskedView>
+			</View>
+			<View style={styles.footer}>
+				<Button
+					text="Купить"
+					onPress={() => Linking.openURL(`https://purpleschool.ru/course/${alias}`)}
+				/>
+			</View>
+		</View>
+	);
+}
 
-
-
-
-
-
-
-
-
-
+const styles = StyleSheet.create({
+	card: {
+		flexDirection: 'column',
+		borderRadius: Radius.r10,
+		backgroundColor: Colors.blackLight,
+	},
+	tariff: {
+		marginTop: 10,
+		fontSize: Fonts.f16,
+		fontFamily: Fonts.regular,
+	},
+	tariffWithOpacity: {
+		opacity: 0,
+	},
+	image: {
+		borderRadius: 10,
+		borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 0,
+	},
+	title: {
+		fontSize: Fonts.f21,
+		color: Colors.white,
+		fontFamily: Fonts.semibold,
+		marginBottom: 12,
+	},
+	chips: {
+		flexDirection: 'row',
+		gap: Gaps.g10,
+	},
+	header: {
+		paddingHorizontal: 24,
+		paddingVertical: 18,
+	},
+	footer: {
+		backgroundColor: Colors.violetDark,
+		paddingHorizontal: 24,
+		paddingVertical: 20,
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+	},
+});
+```
 
 
 
@@ -5538,23 +6159,108 @@ const styles = StyleSheet.create({
 
 
 
+`entities/course/ui/CourseProgress/CourseProgress.tsx`
+```TSX
+import { StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts } from '../../../../shared/tokens';
+export function CourseProgress({
+	totalLessons,
+	passedLessons,
+}: {
+	totalLessons: number;
+	passedLessons: number;
+}) {
+	const percent = Math.round((passedLessons / totalLessons) * 100);
+	return (
+		<View style={styles.wrapper}>
+			<View style={styles.head}>
+				<Text style={styles.textPercent}>{percent}%</Text>
+				<Text style={styles.textCount}>
+					{passedLessons}/{totalLessons}
+				</Text>
+			</View>
+			<View style={styles.bar}>
+				<View
+					style={{
+						...styles.progress,
+						width: `${percent}%`,
+					}}
+				/>
+			</View>
+		</View>
+	);
+}
+const styles = StyleSheet.create({
+	wrapper: {
+		marginBottom: 18,
+	},
+	textPercent: {
+		fontSize: Fonts.f16,
+		fontFamily: Fonts.regular,
+		color: Colors.secondary,
+	},
+	textCount: {
+		fontSize: Fonts.f12,
+		fontFamily: Fonts.regular,
+		color: Colors.grayLight,
+	},
+	head: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginBottom: 6,
+	},
+	bar: {
+		height: 5,
+		borderRadius: 20,
+		backgroundColor: Colors.border,
+	},
+	progress: {
+		height: 5,
+		borderRadius: 20,
+		backgroundColor: Colors.secondary,
+	},
+});
+```
+
+
+
+`widget/course/ui/CourseCard/CourseCard.tsx`
+```TSX
+export function CourseCard({
+	image,
+	shortTitle,
+	courseOnDirection,
+	alias,
+	tariffs,
+}: StudentCourseDescription) {
+	return (
+		<View style={styles.card}>
+			<Image
+				source={{
+					uri: image,
+				}}
+				style={styles.image}
+				height={200}
+			/>
+			<View style={styles.header}>
+				<CourseProgress totalLessons={120} passedLessons={40} />
+				<Text style={styles.title}>{shortTitle}</Text>
+```
+
 
 
 ## Нотификации
 
 ### Типы уведомлений
 
+У нас есть два типа уведомлений: локальные и пуши
 
+Локальные уведомления вызываются самим приложением, а пуши триггерятся нашим бэкэндом.
 
+![](_png/Pasted%20image%2020250217202345.png)
 
-
-
-
-
-
-
-
-
+Управляют мобильными пушами для каждой из систем - Google и Apple. Мы можем отправлять пуши через хабы (тот же Expo), которые подключатся к сервисам пушей распространителей. 
 
 ### Установка expo-notifications
 
