@@ -3218,25 +3218,140 @@ return (
 
 
 
+```bash
+npm i @react-navigation/drawer react-native-reanimated
+```
+
+
+`babel.config.js`
+```JS
+module.exports = function (api) {
+	api.cache(true);
+	return {
+		presets: ['babel-preset-expo'],
+		plugins: ['expo-router/babel', 'react-native-reanimated/plugin'],
+	};
+};
+```
 
 
 
+`app / (app) / _layout.tsx`
+```TSX
+import { Redirect, Stack } from 'expo-router';
+import { Drawer } from 'expo-router/drawer';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '../../entities/auth/model/auth.state';
 
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
 
-
+	return (
+		<Drawer>
+			<Drawer.Screen name="index" />
+		</Drawer>
+	);
+}
+```
 
 
 
 
 ### Стилизация панели
 
+Добавляем новую иконку
 
+`assets/icons/menu.tsx`
+```TSX
+import * as React from 'react';
+import Svg, { Rect } from 'react-native-svg';
+const MenuIcon = () => (
+	<Svg width={26} height={24} fill="none">
+		<Rect width={10} height={1.65} x={4.96} y={4} fill="#AFB2BF" rx={0.825} />
+		<Rect width={16} height={1.65} x={4.96} y={8.65} fill="#AFB2BF" rx={0.825} />
+		<Rect width={12} height={1.65} x={4.96} y={13.3} fill="#AFB2BF" rx={0.825} />
+		<Rect width={16} height={1.65} x={4.96} y={17.95} fill="#AFB2BF" rx={0.825} />
+	</Svg>
+);
+export default MenuIcon;
+```
 
+Добавляем в токен новый цвет и размер шрифта
 
+```TS
+export const Colors = {
+	black: '#16171D',
+	blackLight: '#1E1F29',
+	gray: '#AFB2BF',
+	violetDark: '#2E2D3D',
+	primary: '#6C38CC',
+	primaryHover: '#452481',
+	link: '#A97BFF',
+	white: '#FAFAFA',
+	red: '#CC384E',
+};
 
+export const Fonts = {
+	f16: 16,
+	f18: 18,
+	f20: 20,
+	regular: 'FiraSans',
+	semibold: 'FiraSansSemiBold',
+};
+```
 
+Стилизуем сам Drawer
 
+`app/(app)/_layout.tsx`
+```TSX
+import { Redirect } from 'expo-router';
+import { Drawer } from 'expo-router/drawer';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '../../entities/auth/model/auth.state';
+import { Colors, Fonts } from '../../shared/tokens';
+import { Text } from 'react-native';
 
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
+
+	return (
+		<Drawer
+			screenOptions={({ navigation }) => ({
+				headerStyle: {
+					backgroundColor: Colors.blackLight,
+					shadowColor: Colors.blackLight,
+					shadowOpacity: 0,
+				},
+				headerLeft: () => {
+					return <Text>!</Text>;
+				},
+				headerTitleStyle: {
+					color: Colors.white,
+					fontFamily: 'FiraSans',
+					fontSize: Fonts.f20,
+				},
+				headerTitleAlign: 'center',
+				sceneContainerStyle: {
+					backgroundColor: Colors.black,
+				},
+			})}
+		>
+			<Drawer.Screen
+				name="index"
+				options={{
+					title: 'Мои курсы',
+				}}
+			/>
+		</Drawer>
+	);
+}
+```
 
 
 
@@ -3244,12 +3359,77 @@ return (
 
 ### Кнопка открытия
 
+Добавляем фичу, которая будет выполнять действие закрытия бокового дровера
 
+`features/layout/ui/MenuButton/MenuButton.tsx`
+```TSX
+import { View, Pressable, PressableProps, StyleSheet } from 'react-native';
+import MenuIcon from '../../../../assets/icons/menu';
+import { useState } from 'react';
+import { Colors } from '../../../../shared/tokens';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function MenuButton({ navigation, ...props }: PressableProps & { navigation: any }) {
+	const [clicked, setClicked] = useState<boolean>(false);
 
+	return (
+		<Pressable
+			{...props}
+			onPressIn={() => setClicked(true)}
+			onPressOut={() => setClicked(false)}
+			onPress={() => navigation.toggleDrawer()}
+		>
+			<View
+				style={{
+					...styles.button,
+					backgroundColor: clicked ? Colors.violetDark : Colors.blackLight,
+				}}
+			>
+				<MenuIcon />
+			</View>
+		</Pressable>
+	);
+}
 
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingHorizontal: 20,
+		flex: 1,
+	},
+});
+```
 
+Добавляем в лейаут саму кастомную кнопку открытия
 
+`app/(app)/_layout.tsx`
+```TSX
+import { Redirect } from 'expo-router';
+import { Drawer } from 'expo-router/drawer';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '../../entities/auth/model/auth.state';
+import { Colors, Fonts } from '../../shared/tokens';
+import { MenuButton } from '../../features/layout/ui/MenuButton/MenuButton';
+
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
+
+	return (
+		<Drawer
+			screenOptions={({ navigation }) => ({
+				headerStyle: {
+					backgroundColor: Colors.blackLight,
+					shadowColor: Colors.blackLight,
+					shadowOpacity: 0,
+				},
+				headerLeft: () => {
+					return <MenuButton navigation={navigation} />;
+				},
+```
 
 
 
@@ -3260,26 +3440,153 @@ return (
 
 
 
+`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+```TSX
+import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { Colors } from '../../../../shared/tokens';
+import { CustomLink } from '../../../../shared/CustomLink/CustomLink';
+export function CustomDrawer(props: DrawerContentComponentProps) {
+	return (
+		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
+			<View>
+				<Text>Текст</Text>
+			</View>
+			<View>
+				<CustomLink text="Выход" href={'/login'} />
+				<Image source={require('../../../../assets/logo.png')} resizeMode="contain" />
+			</View>
+		</DrawerContentScrollView>
+	);
+}
+const styles = StyleSheet.create({
+	scrollView: {
+		flex: 1,
+		backgroundColor: Colors.black,
+	},
+});
+```
 
+Добавляем в лейаут наш кастомный контент дровера
 
+`app/(app)/_layout.tsx`
+```TSX
+import { CustomDrawer } from '../../entities/layout/ui/CustomDrawer/CustomDrawer';
 
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
 
-
-
+	return (
+		<Drawer
+			drawerContent={(props) => <CustomDrawer {...props} />}
+			screenOptions={({ navigation }) => ({
+```
 
 
 
 
 ### Стилизация Drawer
 
+Добавляем иконку закрытия
 
+`assets/icons/close.tsx`
+```TSX
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
+const CloseIcon = () => (
+	<Svg width={24} height={24} fill="none">
+		<Path stroke="#AFB2BF" strokeLinecap="round" strokeWidth={1.5} d="M19 5 5 19M5 5l14 14" />
+	</Svg>
+);
+export default CloseIcon;
+```
 
+И фичу закрытия дровера
 
+`features/layout/ui/CloseDrawer/CloseDrawer.tsx`
+```TSX
+import { View, Pressable, StyleSheet } from 'react-native';
+import CloseIcon from '../../../../assets/icons/close';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
+export function CloseDrawer(navigation: DrawerNavigationHelpers) {
+	return (
+		<Pressable onPress={() => navigation.closeDrawer()}>
+			<View style={styles.button}>
+				<CloseIcon />
+			</View>
+		</Pressable>
+	);
+}
 
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'absolute',
+		top: 20,
+		right: 20,
+	},
+});
+```
 
+И завершаем кастомный дровер, добавив в него возможность выйти из приложения и из дровера
 
+`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+```TSX
+import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { Colors } from '../../../../shared/tokens';
+import { CustomLink } from '../../../../shared/CustomLink/CustomLink';
+import { CloseDrawer } from '../../../../features/layout/ui/CloseDrawer/CloseDrawer';
+import { useSetAtom } from 'jotai';
+import { logoutAtom } from '../../../auth/model/auth.state';
 
+export function CustomDrawer(props: DrawerContentComponentProps) {
+	const logout = useSetAtom(logoutAtom);
+	return (
+		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
+			<View>
+			<View style={styles.content}>
+				<CloseDrawer {...props.navigation} />
+				<Text>Текст</Text>
+			</View>
+			<View>
+				<CustomLink text="Выход" href={'/login'} />
+				<Image source={require('../../../../assets/logo.png')} resizeMode="contain" />
+			<View style={styles.footer}>
+				<CustomLink text="Выход" onPress={() => logout()} href={'/login'} />
+				<Image
+					style={styles.logo}
+					source={require('../../../../assets/logo.png')}
+					resizeMode="contain"
+				/>
+			</View>
+		</DrawerContentScrollView>
+	);
+}
+
+const styles = StyleSheet.create({
+	scrollView: {
+		flex: 1,
+		backgroundColor: Colors.black,
+	},
+	content: {
+		flex: 1,
+	},
+	footer: {
+		gap: 50,
+		alignItems: 'center',
+		marginBottom: 40,
+	},
+	logo: {
+		width: 160,
+	},
+});
+```
 
 
 
@@ -3288,39 +3595,333 @@ return (
 
 
 
+`shared/api.ts`
+```TS
+export const PREFIX = 'https://purpleschool.ru/api-v2';
+```
+
+
+`entities/user/api/api.ts`
+```TS
+import { PREFIX } from '../../../shared/api';
+
+export const API = {
+	profile: `${PREFIX}/user/profile`,
+};
+```
 
 
 
+`entities/auth/api/api.ts`
+```TSX
+import { PREFIX } from '../../../shared/api';
 
+export const API = {
+	login: `${PREFIX}/auth/login`,
+};
+```
 
+Добавляем атом загрузки профиля пользователя `loadProfileAtom`
 
+`entities/user/model/user.state.ts`
+```TSX
+import { atom } from 'jotai';
+import { User } from './user.model';
+import { authAtom } from '../../auth/model/auth.state';
+import axios, { AxiosError } from 'axios';
+import { API } from '../api/api';
 
+export const profileAtom = atom<UserState>({
+	profile: null,
+	isLoading: false,
+	error: null,
+});
 
+export const loadProfileAtom = atom(
+	async (get) => {
+		return get(profileAtom);
+	},
+	async (get, set) => {
+		const { access_token } = await get(authAtom);
+		set(profileAtom, {
+			isLoading: true,
+			profile: null,
+			error: null,
+		});
+		try {
+			const { data } = await axios.get<User>(API.profile, {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			});
+			set(profileAtom, {
+				isLoading: false,
+				profile: data,
+				error: null,
+			});
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				set(profileAtom, {
+					isLoading: false,
+					profile: null,
+					error: error.response?.data.message,
+				});
+			}
+		}
+	},
+);
+
+export interface UserState {
+	profile: User | null;
+	isLoading: boolean;
+	error: string | null;
+}
+```
+
+Добавляем загрузку профиля `loadProfileAtom` и выводим имя пользователя
+
+`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+```TSX
+import { CloseDrawer } from '../../../../features/layout/ui/CloseDrawer/CloseDrawer';
+import { useAtom, useSetAtom } from 'jotai';
+import { logoutAtom } from '../../../auth/model/auth.state';
+import { loadProfileAtom } from '../../../user/model/user.state';
+import { useEffect } from 'react';
+
+export function CustomDrawer(props: DrawerContentComponentProps) {
+	const logout = useSetAtom(logoutAtom);
+	const [profile, loadProfile] = useAtom(loadProfileAtom);
+	useEffect(() => {
+		loadProfile();
+	}, []);
+
+	return (
+		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
+			<View style={styles.content}>
+				<CloseDrawer {...props.navigation} />
+				<Text>{profile.profile?.name}</Text>
+			</View>
+```
 
 
 ### Компонент пользователя
 
+Добавляем иконку аватара `assets/images/avatar.png`
+
+![](_png/Pasted%20image%2020250217182526.png)
+
+
+
+`shared/tokens.ts`
+```TSX
+export const Gaps = {
+	g8: 8,
+	g16: 16,
+	g50: 50,
+};
+```
 
 
 
 
+`entities/user/ui/UserMenu/UserMenu.tsx`
+```TSX
+import { View, Image, StyleSheet, Text } from 'react-native';
+import { User } from '../../model/user.model';
+import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
+export function UserMenu({ user }: { user: User | null }) {
+	if (!user) {
+		return;
+	}
+	return (
+		<View style={styles.container}>
+			{user.photo ? (
+				<Image
+					style={styles.image}
+					source={{
+						uri: user.photo,
+					}}
+				/>
+			) : (
+				<Image source={require('../../../../assets/images/avatar.png')} />
+			)}
+			<Text style={styles.name}>
+				{user.name} {user.surname}
+			</Text>
+		</View>
+	);
+}
+const styles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+		gap: Gaps.g8,
+		marginTop: 30,
+	},
+	image: {
+		width: 70,
+		height: 70,
+		borderRadius: 35,
+	},
+	name: {
+		fontSize: Fonts.f16,
+		fontFamily: Fonts.regular,
+		color: Colors.white,
+	},
+});
+```
 
+Прокидываем пользователя в наш компонент `UserMenu`
 
+`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+```TSX
+import { UserMenu } from '../../../user/ui/UserMenu/UserMenu';
 
+export function CustomDrawer(props: DrawerContentComponentProps) {
+	const logout = useSetAtom(logoutAtom);
+	const [profile, loadProfile] = useAtom(loadProfileAtom);
 
+	useEffect(() => {
+		loadProfile();
+	}, []);
 
+	return (
+		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
+			<View style={styles.content}>
+				<CloseDrawer {...props.navigation} />
+				<UserMenu user={profile.profile} />
+			</View>
+```
 
 
 
 ### Компонент меню
 
 
+`assets/menu/profile.tsx`
+```TSX
+import * as React from 'react';
+import Svg, { Circle, Path } from 'react-native-svg';
+const ProfileIcon = () => (
+	<Svg width={24} height={24} fill="none">
+		<Circle cx={12} cy={7} r={4.25} stroke="#AFB2BF" strokeWidth={1.5} />
+		<Path
+			stroke="#AFB2BF"
+			strokeWidth={1.5}
+			d="m7.118 15.288.638-.299a10 10 0 0 1 8.488 0l.638.3A5.418 5.418 0 0 1 20 20.193c0 .997-.809 1.806-1.806 1.806H5.806A1.806 1.806 0 0 1 4 20.194a5.418 5.418 0 0 1 3.118-4.906Z"
+		/>
+	</Svg>
+);
+export default ProfileIcon;
+```
 
 
 
+`assets/menu/courses.tsx`
+```TSX
+import * as React from 'react';
+import Svg, { G, Path, Defs, ClipPath } from 'react-native-svg';
+const CoursesIcon = () => (
+	<Svg width={24} height={24} fill="none">
+		<G clipPath="url(#a)">
+			<Path
+				stroke="#AFB2BF"
+				strokeWidth={1.5}
+				d="m4.65 11.294 5.374 2.874a4 4 0 0 0 3.773 0l5.373-2.874m-14.52 0L1.948 9.478C.653 8.61.805 6.661 2.219 6.004l7.599-3.531a5 5 0 0 1 4.19-.011l7.69 3.525c1.433.656 1.579 2.634.258 3.494l-2.785 1.813m-14.52 0v5.713c0 .523.203 1.026.607 1.36C6.358 19.272 8.852 21 11.91 21c3.058 0 5.553-1.727 6.653-2.634.403-.333.607-.835.607-1.359v-5.713"
+			/>
+			<Path stroke="#AFB2BF" d="M22 10v5" />
+			<Path
+				fill="#AFB2BF"
+				d="m22.861 17.023-.368-2.148c-.095-.554-.89-.554-.986 0l-.368 2.148a4 4 0 0 0 .053 1.61l.322 1.341c.123.511.85.511.972 0l.322-1.341a4 4 0 0 0 .053-1.61Z"
+			/>
+		</G>
+		<Defs>
+			<ClipPath id="a">
+				<Path fill="#fff" d="M0 0h24v24H0z" />
+			</ClipPath>
+		</Defs>
+	</Svg>
+);
+export default CoursesIcon;
+```
 
 
 
+`entities/layout/ui/MenuItem/MenuItem.tsx`
+```TSX
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
+import { ReactNode, useState } from 'react';
+import { Pressable, PressableProps, Text, View } from 'react-native';
+interface MenuItemProps {
+	navigation: DrawerNavigationHelpers;
+	icon: ReactNode;
+	text: string;
+	path: string;
+}
+export function MenuItem({
+	navigation,
+	icon,
+	text,
+	path,
+	...props
+}: MenuItemProps & PressableProps) {
+	const [clicked, setClicked] = useState<boolean>(false);
+	return (
+		<Pressable
+			{...props}
+			onPress={() => navigation.navigate(path)}
+			onPressIn={() => setClicked(true)}
+			onPressOut={() => setClicked(false)}
+		>
+			<View>
+				{icon}
+				<Text>{text}</Text>
+			</View>
+		</Pressable>
+	);
+}
+```
+
+
+
+`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+```TSX
+import CoursesIcon from '../../../../assets/menu/courses';
+import ProfileIcon from '../../../../assets/menu/profile';
+import { MenuItem } from '../MenuItem/MenuItem';
+const MENU = [
+	{ text: 'Курсы', icon: <CoursesIcon />, path: '/(app)' },
+	{ text: 'Профиль', icon: <ProfileIcon />, path: '/profile' },
+];
+
+export function CustomDrawer(props: DrawerContentComponentProps) {
+	const logout = useSetAtom(logoutAtom);
+	const [profile, loadProfile] = useAtom(loadProfileAtom);
+
+	useEffect(() => {
+		loadProfile();
+	}, []);
+
+	return (
+		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
+			<View style={styles.content}>
+				<CloseDrawer {...props.navigation} />
+				<UserMenu user={profile.profile} />
+				{MENU.map((menu) => (
+					<MenuItem key={menu.path} {...menu} navigation={props.navigation} />
+				))}
+			</View>
+			<View style={styles.footer}>
+				<CustomLink text="Выход" onPress={() => logout()} href={'/login'} />
+				<Image
+					style={styles.logo}
+					source={require('../../../../assets/logo.png')}
+					resizeMode="contain"
+				/>
+			</View>
+		</DrawerContentScrollView>
+	);
+}
+```
 
 
 
@@ -3332,16 +3933,147 @@ return (
 
 
 
+`shared/tokens.ts`
+```TSX
+export const Gaps = {
+	g8: 8,
+	g16: 16,
+	g20: 20,
+	g50: 50,
+};
+```
+
+
+`entities/user/ui/UserMenu/UserMenu.tsx`
+```TSX
+const styles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+		gap: Gaps.g8,
+		marginTop: 30,
+		marginBottom: 40,
+	},
+```
+
+
+`app/(app)/profile.tsx`
+```TSX
+import { View, Text } from 'react-native';
+export default function Profile() {
+	return (
+		<View>
+			<Text>Profile</Text>
+		</View>
+	);
+}
+```
 
 
 
+`app/(app)/_layout.tsx`
+```TSX
+>
+	<Drawer.Screen
+		name="index"
+		options={{
+			title: 'Мои курсы',
+		}}
+	/>
+	<Drawer.Screen
+		name="profile"
+		options={{
+			title: 'Профиль',
+		}}
+	/>
+</Drawer>
+```
 
 
 
+`entities/layout/ui/MenuItem/MenuItem.tsx`
+```TSX
+import { DrawerContentComponentProps } from '@react-navigation/drawer/lib/typescript/src/types';
+import { ReactNode, useState } from 'react';
+import { Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
 
+interface MenuItemProps {
+	drawer: DrawerContentComponentProps;
+	icon: ReactNode;
+	text: string;
+	path: string;
+}
 
+export function MenuItem({ drawer, icon, text, path, ...props }: MenuItemProps & PressableProps) {
+	const [clicked, setClicked] = useState<boolean>(false);
+	const isActive = drawer.state.routes[drawer.state.index].name === path;
 
+	return (
+		<Pressable
+			{...props}
+			onPress={() => drawer.navigation.navigate(path)}
+			onPressIn={() => setClicked(true)}
+			onPressOut={() => setClicked(false)}
+		>
+			<View
+				style={{
+					...styles.menu,
+					borderColor: isActive ? Colors.primary : Colors.black,
+					backgroundColor: clicked || isActive ? Colors.violetDark : Colors.black,
+				}}
+			>
+				{icon}
+				<Text style={styles.text}>{text}</Text>
+			</View>
+		</Pressable>
+	);
+}
 
+const styles = StyleSheet.create({
+	menu: {
+		flexDirection: 'row',
+		gap: Gaps.g20,
+		paddingHorizontal: 24,
+		paddingVertical: 16,
+		borderRightWidth: 5,
+		alignItems: 'center',
+	},
+	text: {
+		color: Colors.white,
+		fontSize: Fonts.f16,
+		fontFamily: Fonts.regular,
+	},
+});
+```
+
+И сейчас добавляем пути в нашем приложени через мапу
+
+`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+```TSX
+const MENU = [
+	{ text: 'Курсы', icon: <CoursesIcon />, path: 'index' },
+	{ text: 'Профиль', icon: <ProfileIcon />, path: 'profile' },
+];
+
+export function CustomDrawer(props: DrawerContentComponentProps) {
+	const logout = useSetAtom(logoutAtom);
+	const [profile, loadProfile] = useAtom(loadProfileAtom);
+
+	useEffect(() => {
+		loadProfile();
+	}, []);
+
+	return (
+		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
+			<View style={styles.content}>
+				<CloseDrawer {...props.navigation} />
+				<UserMenu user={profile.profile} />
+				{MENU.map((menu) => (
+					<MenuItem key={menu.path} {...menu} navigation={props.navigation} />
+					<MenuItem key={menu.path} {...menu} drawer={props} />
+				))}
+			</View>
+```
 
 
 
@@ -3353,15 +4085,29 @@ return (
 
 
 
+```bash
+npm i expo@latest
+```
 
+И вырезаем `expo-router/babel`, так как теперь для роутера он не нужен
 
+`babel.config.js`
+```TS
+module.exports = function (api) {
+	api.cache(true);
+	return {
+		presets: ['babel-preset-expo'],
+-		plugins: ['expo-router/babel', 'react-native-reanimated/plugin'],
++		plugins: ['react-native-reanimated/plugin'],
+	};
+};
+```
 
+Все ошибки обновлений будут выходить на экран устройства и то, что придётся нам обновить - поменяем. 
 
+Менять версию сразу всех пакетов не стоит, так как не всё может быть совместимо
 
-
-
-
-
+![](_png/Pasted%20image%2020250217185307.png)
 
 ### Рефакторинг приложения
 
@@ -3726,10 +4472,83 @@ return (
 
 ### Реакция на уведомления
 
+Добавляем хэндлер уведомлений внутри лейаута авторизованной зоны приложения
+
+`app/(app)/_layout.tsx`
+```TSX
+import * as Notificaitons from 'expo-notifications';
+
+Notificaitons.setNotificationHandler({
+	handleNotification: async () => ({
+		shouldPlaySound: true,
+		shouldSetBadge: true,
+		shouldShowAlert: true,
+	}),
+});
+```
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { View, StyleSheet, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+import { CourseCard } from '../../widget/course/ui/CourseCard/CourseCard';
+import { StudentCourseDescription } from '../../entities/course/model/course.model';
+import { Colors } from '../../shared/tokens';
+import { Button } from '../../shared/Button/Button';
+import * as Notificaitons from 'expo-notifications';
 
+export default function MyCourses() {
+	const { isLoading, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
+
+	useEffect(() => {
+		loadCourse();
+	}, []);
+
+	const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
+		return (
+			<View style={styles.item}>
+				<CourseCard {...item} />
+			</View>
+		);
+	};
+
+	const allowsNotification = async () => {
+		const settings = await Notificaitons.getPermissionsAsync();
+		return (
+			settings.granted || settings.ios?.status == Notificaitons.IosAuthorizationStatus.PROVISIONAL
+		);
+	};
+	const requestPermissions = async () => {
+		return Notificaitons.requestPermissionsAsync({
+			ios: {
+				allowAlert: true,
+				allowBadge: true,
+				allowSound: true,
+			},
+		});
+	};
+	const scheduleNotification = async () => {
+		const granted = await allowsNotification();
+		if (!granted) {
+			await requestPermissions();
+		}
+		Notificaitons.scheduleNotificationAsync({
+			content: {
+				title: 'Не забудь пройти курс',
+				body: 'Не забывай учиться каждый день!',
+				data: { success: true },
+			},
+			trigger: {
+				seconds: 5,
+			},
+		});
+	};
+```
 
 
 
@@ -3742,21 +4561,114 @@ return (
 
 
 
+`shared/Notification/Notification.tsx`
+```TSX
+import * as Notificaitons from 'expo-notifications';
+import { useEffect } from 'react';
 
+export function Notificaiton() {
+	Notificaitons.setNotificationHandler({
+		handleNotification: async () => ({
+			shouldPlaySound: true,
+			shouldSetBadge: true,
+			shouldShowAlert: true,
+		}),
+	});
+	
+	useEffect(() => {
+		const subRecieved = Notificaitons.addNotificationReceivedListener((notification) => {
+			console.log(notification.request.content.data);
+		});
+		const subResponseReceived = Notificaitons.addNotificationResponseReceivedListener(
+			(notification) => {
+				console.log('Clicked');
+				console.log(notification.notification.request.content.data);
+			},
+		);
+		return () => {
+			subRecieved.remove();
+			subResponseReceived.remove();
+		};
+	}, []);
+	
+	return <></>;
+}
+```
 
+Добавляем компонент `Notificaiton` в корневой лейаут приложения
 
-
-
-
+`app/_layout.tsx`
+```TSX
+<SafeAreaProvider>
+	<Notificaiton />
+	<StatusBar style="light" />
+	<Stack
+```
 
 
 
 
 ### Уведомление с URL
 
+Обновляем нотификатор
 
+`app/(app)/index.tsx`
+```TSX
+const scheduleNotification = async () => {
+	const granted = await allowsNotification();
+	if (!granted) {
+		await requestPermissions();
+	}
+	Notificaitons.scheduleNotificationAsync({
+		content: {
+			title: 'Новый курс TypeScript',
+			body: 'Начни учиться уже сейчас!',
+			data: { alias: 'typescript' },
+		},
+		trigger: {
+			seconds: 5,
+		},
+	});
+};
+```
 
+Тут мы будем открывать ссылку с алиасом, который мы задали в уведомлениях через `router`. Сам алиас мы получим из объекта уведомления, который получается из `addNotificationResponseReceivedListener` листенера уведомлений
 
+`shared/Notification/Notification.tsx`
+```TSX
+import * as Notificaitons from 'expo-notifications';
+import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
+
+export function Notificaiton() {
+	const router = useRouter();
+	Notificaitons.setNotificationHandler({
+		handleNotification: async () => ({
+			shouldPlaySound: true,
+			shouldSetBadge: true,
+			shouldShowAlert: true,
+		}),
+	});
+
+	useEffect(() => {
+		const subRecieved = Notificaitons.addNotificationReceivedListener((notification) => {
+			console.log(notification.request.content.data);
+		});
+		const subResponseReceived = Notificaitons.addNotificationResponseReceivedListener(
+			(notification) => {
+				const alias = notification.notification.request.content.data.alias;
+				router.push(`/(app)/course/${alias}`);
+			},
+		);
+		return () => {
+			subRecieved.remove();
+			subResponseReceived.remove();
+		};
+	}, []);
+
+	return <></>;
+}
+```
 
 
 
@@ -3770,22 +4682,75 @@ return (
 
 
 
+```bash
+npm i expo-device
+```
 
+Достаём из `Device` параметр `isDevice` и проверяем, что у нас мобильное устройство
 
+Убираем `Notificaitons.scheduleNotificationAsync` и заменяем на `getExpoPushTokenAsync`, через который мы получим токен для пушей
 
+```TSX
+import * as Device from 'expo-device';
+import Constants from 'expo-constants';
 
+export default function MyCourses() {
+	const { isLoading, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
 
+	useEffect(() => {
+		loadCourse();
+	}, []);
 
+	const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
+		return (
+			<View style={styles.item}>
+				<CourseCard {...item} />
+			</View>
+		);
+	};
 
+	const allowsNotification = async () => {
+		const settings = await Notificaitons.getPermissionsAsync();
+		return (
+			settings.granted || settings.ios?.status == Notificaitons.IosAuthorizationStatus.PROVISIONAL
+		);
+	};
+
+	const requestPermissions = async () => {
+		return Notificaitons.requestPermissionsAsync({
+			ios: {
+				allowAlert: true,
+				allowBadge: true,
+				allowSound: true,
+			},
+		});
+	};
+
+	const scheduleNotification = async () => {
+		const granted = await allowsNotification();
+		if (!granted) {
+			await requestPermissions();
+		}
+		if (Device.isDevice) {
+			const token = await Notificaitons.getExpoPushTokenAsync({
+				projectId: Constants.expoConfig?.extra?.eas.projectId,
+			});
+			console.log(token);
+		}
+	};
+```
 
 
 
 ### Использование push-токена
 
+Добавляем токен пушей в приложение
 
-
-
-
+`app.json`
+```JSON
+"extra": { "eas": { "projectId": "9e8de316-bef0-4e46-9476-cabcea343056" } },
+```
 
 
 
