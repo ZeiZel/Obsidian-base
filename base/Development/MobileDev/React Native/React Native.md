@@ -4696,13 +4696,220 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
 
 
 
+`entities/user/ui/Avatar/Avatar.tsx`
+```TSX
+import { Image, StyleSheet } from 'react-native';
+export function Avatar({ image }: { image: string | null }) {
+	return (
+		<>
+			{image ? (
+				<Image
+					style={styles.image}
+					source={{
+						uri: image,
+					}}
+				/>
+			) : (
+				<Image source={require('../../../../assets/images/avatar.png')} />
+			)}
+		</>
+	);
+}
+const styles = StyleSheet.create({
+	image: {
+		width: 70,
+		height: 70,
+		borderRadius: 35,
+	},
+});
+```
+
+
+`app/(app)/profile.tsx`
+```TSX
+import { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { ImageUploader } from '../../shared/ImageUploader/ImageUploader';
+import { Gaps } from '../../shared/tokens';
+import { Avatar } from '../../entities/user/ui/Avatar/Avatar';
+
+export default function Profile() {
+	const [image, setImage] = useState<string | null>(null);
+
+	return (
+		<View style={styles.container}>
+			<Avatar image={image} />
+			<ImageUploader onUpload={setImage} onError={(e) => console.log(e)} />
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: 'row',
+		gap: Gaps.g20,
+		alignItems: 'center',
+		paddingHorizontal: 30,
+		paddingVertical: 20,
+	},
+});
+```
+
+`shared/ImageUploader/ImageUploader.tsx`
+```TSX
+import {
+	MediaTypeOptions,
+	launchImageLibraryAsync,
+	useMediaLibraryPermissions,
+	PermissionStatus,
+} from 'expo-image-picker';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import UploadIcon from '../../assets/icons/upload';
+import { Colors, Fonts, Gaps, Radius } from '../tokens';
+import FormData from 'form-data';
+import axios, { AxiosError } from 'axios';
+import { FILE_API } from '../api';
+import { UploadResponse } from './ImageUploader.interface';
+
+interface ImageUploaderProps {
+	onUpload: (uri: string) => void;
+	onError: (error: string) => void;
+}
+
+export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
+	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
+
+	const upload = async () => {
+		const isPermissionGranted = await varifyMediaPermissions();
+		if (!isPermissionGranted) {
+			onError('Недостаточно прав');
+			return;
+		}
+		const asset = await pickImage();
+		if (!asset) {
+			onError('Не выбрано изображение');
+			return;
+		}
+		const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? '');
+		if (!uploadedUrl) {
+			onError('Не удалось загрузить изображение');
+			return;
+		}
+		onUpload(uploadedUrl);
+	};
+
+	const varifyMediaPermissions = async () => {
+		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
+			const res = await requestLibraryPermission();
+			return res.granted;
+		}
+		if (libraryPermissions?.status === PermissionStatus.DENIED) {
+			Alert.alert('Недостаточно прав для доступа к фото');
+			return false;
+		}
+		return true;
+	};
+
+	const pickImage = async () => {
+		const result = await launchImageLibraryAsync({
+			mediaTypes: MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.5,
+		});
+		if (!result.assets) {
+			return null;
+		}
+		return result.assets[0];
+	};
+
+	const uploadToServer = async (uri: string, name: string) => {
+		const formData = new FormData();
+		formData.append('files', {
+			uri,
+			name,
+			type: 'image/jpeg',
+		});
+		try {
+			const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+			return data.urls.original;
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				console.error(error);
+			}
+			return null;
+		}
+	};
+
+	return (
+		<Pressable onPress={upload}>
+			<View style={styles.container}>
+				<UploadIcon />
+				<Text style={styles.text}>Загрузить изображение</Text>
+			</View>
+		</Pressable>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: 'row',
+		gap: Gaps.g8,
+		backgroundColor: Colors.violetDark,
+		borderRadius: Radius.r10,
+		paddingHorizontal: 20,
+		paddingVertical: 17,
+		alignItems: 'center',
+	},
+	text: {
+		fontSize: Fonts.f14,
+		fontFamily: Fonts.regular,
+		color: Colors.white,
+	},
+});
+```
 
 
 
+`widget/user/ui/UserMenu/UserMenu.tsx`
+```TSX
+import { View, StyleSheet, Text } from 'react-native';
+import { User } from '../../../../entities/user/model/user.model';
+import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
+import { Avatar } from '../../../../entities/user/ui/Avatar/Avatar';
 
+export function UserMenu({ user }: { user: User | null }) {
+	if (!user) {
+		return;
+	}
+	return (
+		<View style={styles.container}>
+			<Avatar image={user.photo ?? null} />
+			<Text style={styles.name}>
+				{user.name} {user.surname}
+			</Text>
+		</View>
+	);
+}
 
-
-
+const styles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+		gap: Gaps.g8,
+		marginTop: 30,
+		marginBottom: 40,
+	},
+	name: {
+		fontSize: Fonts.f16,
+		fontFamily: Fonts.regular,
+		color: Colors.white,
+	},
+});
+```
 
 
 
@@ -4710,13 +4917,95 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
 
 
 
+`entities/user/model/user.state.ts`
+```TSX
+export const updateProfileAtom = atom(
+	async (get) => {
+		return get(profileAtom);
+	},
+	async (get, set, { photo }: { photo: string }) => {
+		try {
+			const { access_token } = await get(authAtom);
+			const { data } = await axios.patch<User>(
+				API.profile,
+				{
+					photo,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+					},
+				},
+			);
+			set(profileAtom, {
+				isLoading: false,
+				profile: data,
+				error: null,
+			});
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				set(profileAtom, {
+					isLoading: false,
+					profile: null,
+					error: error.response?.data.message,
+				});
+			}
+		}
+	},
+);
+```
 
 
 
+`app/(app)/profile.tsx`
+```TSX
+import { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { ImageUploader } from '../../shared/ImageUploader/ImageUploader';
+import { Gaps } from '../../shared/tokens';
+import { Avatar } from '../../entities/user/ui/Avatar/Avatar';
+import { useAtom } from 'jotai';
+import { updateProfileAtom } from '../../entities/user/model/user.state';
+import { Button } from '../../shared/Button/Button';
 
+export default function Profile() {
+	const [image, setImage] = useState<string | null>(null);
+	const [profile, updateProfile] = useAtom(updateProfileAtom);
 
+	const submitProfile = () => {
+		if (!image) {
+			return;
+		}
+		updateProfile({ photo: image });
+	};
 
+	useEffect(() => {
+		if (profile && profile.profile?.photo) {
+			setImage(profile.profile?.photo);
+		}
+	}, [profile]);
 
+	return (
+		<View>
+			<View style={styles.container}>
+				<Avatar image={image} />
+				<ImageUploader onUpload={setImage} onError={(e) => console.log(e)} />
+			</View>
+			<Button text="Сохранить" onPress={submitProfile} />
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: 'row',
+		gap: Gaps.g20,
+		alignItems: 'center',
+		paddingHorizontal: 30,
+		paddingVertical: 20,
+	},
+});
+```
 
 
 
@@ -4724,7 +5013,73 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
 
 
 
+```bash
+npm i expo-sharing
+```
 
+Добавляем метод `shareProfile`
+
+`app/(app)/profile.tsx`
+```TSX
+import { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { ImageUploader } from '../../shared/ImageUploader/ImageUploader';
+import { Gaps } from '../../shared/tokens';
+import { Avatar } from '../../entities/user/ui/Avatar/Avatar';
+import { useAtom } from 'jotai';
+import { updateProfileAtom } from '../../entities/user/model/user.state';
+import { Button } from '../../shared/Button/Button';
+import * as Sharing from 'expo-sharing';
+
+export default function Profile() {
+	const [image, setImage] = useState<string | null>(null);
+	const [profile, updateProfile] = useAtom(updateProfileAtom);
+
+	const shareProfile = async () => {
+		const isShaingAvailable = await Sharing.isAvailableAsync();
+		if (!isShaingAvailable) {
+			return;
+		}
+		await Sharing.shareAsync('https://purpleschool.ru', {
+			dialogTitle: 'Поделиться профилем',
+		});
+	};
+
+	const submitProfile = () => {
+		if (!image) {
+			return;
+		}
+		updateProfile({ photo: image });
+	};
+
+	useEffect(() => {
+		if (profile && profile.profile?.photo) {
+			setImage(profile.profile?.photo);
+		}
+	}, [profile]);
+
+	return (
+		<View>
+			<View style={styles.container}>
+				<Avatar image={image} />
+				<ImageUploader onUpload={setImage} onError={(e) => console.log(e)} />
+			</View>
+			<Button text="Сохранить" onPress={submitProfile} />
+			<Button text="Поделиться" onPress={shareProfile} />
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: 'row',
+		gap: Gaps.g20,
+		alignItems: 'center',
+		paddingHorizontal: 30,
+		paddingVertical: 20,
+	},
+});
+```
 
 
 
