@@ -5085,15 +5085,16 @@ const styles = StyleSheet.create({
 
 ## Разрешения и layout
 
+### Ориентация экрана
+
+
+
+`app.json`
+```JSON
+"orientation": "portrait",
+```
+
 ### ScreenOrientation
-
-
-
-
-
-
-
-
 
 
 
@@ -5268,17 +5269,31 @@ const styles = StyleSheet.create({
 
 
 
-### Установка expo-notofocations
+### Установка expo-notifications
 
+Устанавливаем плагин `expo-notifications` 
 
+```bash
+npm i expo-notifications
+```
 
+Добавляем иконку для уведомлений `assets/notification-icon.png`
 
+И добавляем плагин нотификаций из экспо
 
-
-
-
-
-
+`app.json`
+```JSON
+"plugins": [
+  ...
+  [
+	"expo-notifications",
+	{
+	  "icon": "./assets/notification-icon.png",
+	  "color": "#16171D"
+	}
+  ]
+],
+```
 
 
 
@@ -5286,31 +5301,85 @@ const styles = StyleSheet.create({
 
 
 
+`app/(app)/index.tsx`
+```TSX
+import { View, StyleSheet, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { courseAtom, loadCourseAtom } from '../../entities/course/model/course.state';
+import { useEffect } from 'react';
+import { CourseCard } from '../../widget/course/ui/CourseCard/CourseCard';
+import { StudentCourseDescription } from '../../entities/course/model/course.model';
+import { Colors } from '../../shared/tokens';
+import { Button } from '../../shared/Button/Button';
+import * as Notioficaitons from 'expo-notifications';
 
+export default function MyCourses() {
+	const { isLoading, error, courses } = useAtomValue(courseAtom);
+	const loadCourse = useSetAtom(loadCourseAtom);
 
+	useEffect(() => {
+		loadCourse();
+	}, []);
 
+	const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
+		return (
+			<View style={styles.item}>
+				<CourseCard {...item} />
+			</View>
+		);
+	};
 
+	const scheduleNotification = () => {
+		Notioficaitons.scheduleNotificationAsync({
+			content: {
+				title: 'Не забудь пройти курс',
+				body: 'Не забывай учиться каждый день!',
+				data: { success: true },
+			},
+			trigger: {
+				seconds: 5,
+			},
+		});
+	};
 
+	return (
+		<>
+			{isLoading && (
+				<ActivityIndicator style={styles.activity} size="large" color={Colors.primary} />
+			)}
+			<Button text="Напомнить" onPress={scheduleNotification} />
+			{courses.length > 0 && (
+				<FlatList
+					refreshControl={
+						<RefreshControl
+							tintColor={Colors.primary}
+							titleColor={Colors.primary}
+							refreshing={isLoading}
+							onRefresh={loadCourse}
+						/>
+					}
+					data={courses}
+					keyExtractor={(item) => item.id.toString()}
+					renderItem={renderCourse}
+				/>
+			)}
+		</>
+	);
+}
 
-
+const styles = StyleSheet.create({
+	item: {
+		padding: 20,
+	},
+	activity: {
+		marginTop: 30,
+	},
+});
+```
 
 
 
 ### Обработка уведомлений
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Реакция на уведомления
 
 Добавляем хэндлер уведомлений внутри лейаута авторизованной зоны приложения
 
@@ -5389,12 +5458,6 @@ export default function MyCourses() {
 		});
 	};
 ```
-
-
-
-
-
-
 
 
 ### Нажатие на уведомление
