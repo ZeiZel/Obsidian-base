@@ -1,16 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
       "basename": "index",
       "path": "index.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "Docker + Ansible",

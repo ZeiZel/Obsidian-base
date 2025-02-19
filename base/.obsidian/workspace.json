@@ -78,21 +78,8 @@
               "icon": "lucide-file",
               "title": "React Native"
             }
-          },
-          {
-            "id": "e35fc1e14a15113f",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.7"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.7"
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -262,13 +249,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/MobileDev/React Native/React Native.md",
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of React Native"
+              "title": "Outline of 11. Консистентность данных"
             }
           }
         ],
@@ -292,22 +279,21 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e35fc1e14a15113f",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Development/MobileDev/React Native/React Native.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250217202345.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217185307.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217182526.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250216103237.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250216095742.png",
     "index.md",
-    "Development/MobileDev/React Native/React Native.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193504.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193444.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210190903.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210185852.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210185127.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250210185049.png",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
