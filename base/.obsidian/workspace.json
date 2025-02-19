@@ -78,9 +78,21 @@
               "icon": "lucide-file",
               "title": "React Native"
             }
+          },
+          {
+            "id": "e35fc1e14a15113f",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.7"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -280,7 +292,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "6522b6ff43fc1a5c",
+  "active": "e35fc1e14a15113f",
   "lastOpenFiles": [
     "Development/MobileDev/React Native/_png/Pasted image 20250217202345.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217185307.png",
