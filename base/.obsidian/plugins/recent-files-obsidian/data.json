@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "04 Модули, контроллеры и провайдеры",
+      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
+    },
+    {
+      "basename": "NestJS - с нуля",
+      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
+    },
+    {
+      "basename": "02 Настройка окружения",
+      "path": "Development/TypeScript/_lessons/02 Настройка окружения.md"
+    },
+    {
+      "basename": "01 Введение",
+      "path": "Development/TypeScript/_lessons/01 Введение.md"
+    },
+    {
+      "basename": "07 Валидация данных",
+      "path": "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md"
+    },
+    {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
@@ -179,26 +199,6 @@
     {
       "basename": "О чём база~",
       "path": "Whats Learning/О чём база~.md"
-    },
-    {
-      "basename": "05 Сети Docker",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
-    },
-    {
-      "basename": "2. Базовые команды",
-      "path": "Development/GIT/_lessons/2. Базовые команды.md"
-    },
-    {
-      "basename": "6. Продвинутая работа",
-      "path": "Development/GIT/_lessons/6. Продвинутая работа.md"
-    },
-    {
-      "basename": "5. Удаление",
-      "path": "Development/GIT/_lessons/5. Удаление.md"
-    },
-    {
-      "basename": "4. Ветки и изменения",
-      "path": "Development/GIT/_lessons/4. Ветки и изменения.md"
     }
   ],
   "omittedPaths": [],

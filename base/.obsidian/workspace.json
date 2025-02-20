@@ -78,8 +78,33 @@
               "icon": "lucide-file",
               "title": "React Native"
             }
+          },
+          {
+            "id": "7aa8661bd6975ef3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "04 Модули, контроллеры и провайдеры"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -111,7 +136,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "class-tra",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -249,13 +274,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 11. Консистентность данных"
+              "title": "Outline of 04 Модули, контроллеры и провайдеры"
             }
           }
         ],
@@ -279,8 +304,14 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "7aa8661bd6975ef3",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS/NestJS - с нуля.md",
+    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+    "Development/TypeScript/_lessons/02 Настройка окружения.md",
+    "Development/TypeScript/_lessons/01 Введение.md",
+    "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/React Native.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250217202345.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217185307.png",
@@ -288,7 +319,6 @@
     "Development/MobileDev/React Native/_png/Pasted image 20250216103237.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250216095742.png",
     "index.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193504.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210193444.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210190903.png",
@@ -313,13 +343,9 @@
     "Development/Python.md",
     "Development/NX.md",
     "Development/Testing/_png",
-    "Development/Testing/Тестирование JavaScript.md",
     "Development/Testing",
-    "Development/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
-    "Development/DB/SQLite.md",
     "Development/DB/_png",
     "Development/Architecture/_png",
-    "Development/DB/PostgreSQL.md",
     "Development/DB",
     "_png",
     "Development/FrontEnd/Vue/_png",
