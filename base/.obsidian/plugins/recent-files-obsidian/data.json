@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "14 Поведенческие паттерны",
+      "path": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
+    },
+    {
       "basename": "04 Модули, контроллеры и провайдеры",
       "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "06 Docker volumes",
       "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
-    },
-    {
-      "basename": "О чём база~",
-      "path": "Whats Learning/О чём база~.md"
     }
   ],
   "omittedPaths": [],
