@@ -1,8 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "04 Модули, контроллеры и провайдеры",
+      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
+    },
+    {
+      "basename": "NestJS - с нуля",
+      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
+    },
+    {
       "basename": "12 Dependency Injection",
       "path": "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md"
+    },
+    {
+      "basename": "SOLID принципы",
+      "path": "Programming Principes/SOLID принципы.md"
     },
     {
       "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
@@ -25,10 +37,6 @@
       "path": "Development/TypeScript/_lessons/01 Введение.md"
     },
     {
-      "basename": "NestJS - с нуля",
-      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
-    },
-    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
@@ -47,10 +55,6 @@
     {
       "basename": "14 Поведенческие паттерны",
       "path": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
-    },
-    {
-      "basename": "04 Модули, контроллеры и провайдеры",
-      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
     },
     {
       "basename": "07 Валидация данных",
@@ -195,10 +199,6 @@
     {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
-      "basename": "09 Базовые понятия Ansible",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
     }
   ],
   "omittedPaths": [],

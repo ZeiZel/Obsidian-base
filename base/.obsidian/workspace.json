@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NestJS/NestJS - с нуля.md",
+                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -100,7 +100,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "NestJS - с нуля"
+              "title": "04 Модули, контроллеры и провайдеры"
             }
           },
           {
@@ -128,6 +128,30 @@
             }
           },
           {
+            "id": "7ee3752a320c3b93",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Programming Principes/SOLID принципы.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "SOLID принципы"
+            }
+          },
+          {
             "id": "509d2208406c05e1",
             "type": "leaf",
             "state": {
@@ -152,7 +176,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -184,7 +208,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "SOLID",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -332,13 +356,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md",
+                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 12 Dependency Injection"
+              "title": "Outline of 04 Модули, контроллеры и провайдеры"
             }
           }
         ],
@@ -362,14 +386,16 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "baf0a5bfbeabf736",
+  "active": "7aa8661bd6975ef3",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS/NestJS - с нуля.md",
+    "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md",
+    "Programming Principes/SOLID принципы.md",
     "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/BackEnd/NodeJS/_lessons/04 Как работает Node.js_.md",
     "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/MobileDev/React Native/React Native.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
@@ -398,8 +424,6 @@
     "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
-    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
-    "Development/GIT/Git.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",
