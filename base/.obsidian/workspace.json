@@ -160,7 +160,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Abstract",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -191,8 +191,7 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -330,7 +329,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "509d2208406c05e1",
+  "active": "48c5943284c71db8",
   "lastOpenFiles": [
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
