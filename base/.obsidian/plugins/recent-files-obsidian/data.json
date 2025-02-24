@@ -1,16 +1,12 @@
 {
   "recentFiles": [
     {
-      "basename": "14 Поведенческие паттерны",
-      "path": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
+      "basename": "03 Начало работы с Node.js",
+      "path": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md"
     },
     {
-      "basename": "04 Модули, контроллеры и провайдеры",
-      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
-    },
-    {
-      "basename": "NestJS - с нуля",
-      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
+      "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
+      "path": "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md"
     },
     {
       "basename": "02 Настройка окружения",
@@ -21,24 +17,40 @@
       "path": "Development/TypeScript/_lessons/01 Введение.md"
     },
     {
-      "basename": "07 Валидация данных",
-      "path": "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+      "basename": "NestJS - с нуля",
+      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
     },
     {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "TypeScriptCmp",
+      "path": "Development/TypeScript/TypeScriptCmp.md"
+    },
+    {
+      "basename": "14 Поведенческие паттерны",
+      "path": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
+    },
+    {
+      "basename": "04 Модули, контроллеры и провайдеры",
+      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
+    },
+    {
+      "basename": "07 Валидация данных",
+      "path": "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md"
+    },
+    {
+      "basename": "index",
+      "path": "index.md"
     },
     {
       "basename": "11 Развёртка машин с Vagrant",
@@ -187,18 +199,6 @@
     {
       "basename": "07 Docker-compose",
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
-    },
-    {
-      "basename": "08 Docker registry",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/08 Docker registry.md"
-    },
-    {
-      "basename": "NGINX",
-      "path": "Development/DevOps/NGINX.md"
-    },
-    {
-      "basename": "06 Docker volumes",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/06 Docker volumes.md"
     }
   ],
   "omittedPaths": [],

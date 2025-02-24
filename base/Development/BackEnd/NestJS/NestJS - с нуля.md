@@ -1,4 +1,4 @@
-# NestJS - с нуля, современный backend на TypeScript и Node JS (2021)
+
 #NodeJS #BackEnd #NestJS #TypeScript #MongoDB 
 
 [01 Введение](../../TypeScript/_lessons/01%20Введение.md)

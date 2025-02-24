@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "file": "Development/BackEnd/NestJS/NestJS - с нуля.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -100,7 +100,31 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "04 Модули, контроллеры и провайдеры"
+              "title": "NestJS - с нуля"
+            }
+          },
+          {
+            "id": "baf0a5bfbeabf736",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "03 Начало работы с Node.js"
             }
           },
           {
@@ -109,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+                "file": "Development/TypeScript/TypeScriptCmp.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -124,7 +148,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "14 Поведенческие паттерны"
+              "title": "TypeScriptCmp"
             }
           }
         ],
@@ -195,7 +219,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 478.5
+    "width": 413.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -268,6 +292,16 @@
             "id": "2fae9562f1226b8c",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "7dafae2a3f935010",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -275,7 +309,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -298,13 +332,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+                "file": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 14 Поведенческие паттерны"
+              "title": "Outline of 03 Начало работы с Node.js"
             }
           }
         ],
@@ -312,8 +346,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 254.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -329,15 +362,19 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "48c5943284c71db8",
+  "active": "baf0a5bfbeabf736",
   "lastOpenFiles": [
-    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
-    "Development/BackEnd/NestJS/NestJS - с нуля.md",
+    "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+    "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/MobileDev/React Native/React Native.md",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+    "Development/TypeScript/TypeScriptCmp.md",
+    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+    "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250217202345.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217185307.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217182526.png",
@@ -349,7 +386,6 @@
     "Development/MobileDev/React Native/_png/Pasted image 20250210190903.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210185852.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250210185127.png",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Soft/Agile/_lessons/Управление задачам.md",
@@ -364,9 +400,6 @@
     "Development/GIT/Git.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/DB/DB.md",
-    "Development/C.md",
-    "Development/Python.md",
-    "Development/NX.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",
