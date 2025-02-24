@@ -1,12 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "03 Начало работы с Node.js",
-      "path": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md"
+      "basename": "12 Dependency Injection",
+      "path": "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md"
     },
     {
       "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
       "path": "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md"
+    },
+    {
+      "basename": "04 Как работает Node.js_",
+      "path": "Development/BackEnd/NodeJS/_lessons/04 Как работает Node.js_.md"
+    },
+    {
+      "basename": "03 Начало работы с Node.js",
+      "path": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md"
     },
     {
       "basename": "02 Настройка окружения",
@@ -191,14 +199,6 @@
     {
       "basename": "09 Базовые понятия Ansible",
       "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
-    },
-    {
-      "basename": "02 Настройка VM на Linux",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/02 Настройка VM на Linux.md"
-    },
-    {
-      "basename": "07 Docker-compose",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
     }
   ],
   "omittedPaths": [],

@@ -109,7 +109,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
+                "file": "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -124,7 +124,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "03 Начало работы с Node.js"
+              "title": "12 Dependency Injection"
             }
           },
           {
@@ -332,13 +332,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
+                "file": "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 03 Начало работы с Node.js"
+              "title": "Outline of 12 Dependency Injection"
             }
           }
         ],
@@ -346,7 +346,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 529.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -365,6 +365,8 @@
   "active": "baf0a5bfbeabf736",
   "lastOpenFiles": [
     "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
+    "Development/BackEnd/NodeJS/_lessons/04 Как работает Node.js_.md",
+    "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
@@ -398,8 +400,6 @@
     "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/GIT/Git.md",
-    "Whats Learning/Прогресс изучения технологий.md",
-    "Development/DB/DB.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",
