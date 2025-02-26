@@ -1,6 +1,30 @@
 {
   "recentFiles": [
     {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
+      "basename": "TypeScriptCmp",
+      "path": "Development/TypeScript/TypeScriptCmp.md"
+    },
+    {
+      "basename": "13 Структурные паттерны",
+      "path": "Development/TypeScript/_lessons/13 Структурные паттерны.md"
+    },
+    {
+      "basename": "12 Порождающие паттерны",
+      "path": "Development/TypeScript/_lessons/12 Порождающие паттерны.md"
+    },
+    {
+      "basename": "14 Поведенческие паттерны",
+      "path": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
+    },
+    {
+      "basename": "Паттерны",
+      "path": "Whats Learning/_lessons/Паттерны.md"
+    },
+    {
       "basename": "04 Модули, контроллеры и провайдеры",
       "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
     },
@@ -37,24 +61,12 @@
       "path": "Development/TypeScript/_lessons/01 Введение.md"
     },
     {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
-    },
-    {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
-    },
-    {
-      "basename": "TypeScriptCmp",
-      "path": "Development/TypeScript/TypeScriptCmp.md"
-    },
-    {
-      "basename": "14 Поведенческие паттерны",
-      "path": "Development/TypeScript/_lessons/14 Поведенческие паттерны.md"
     },
     {
       "basename": "07 Валидация данных",
@@ -187,18 +199,6 @@
     {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "Kanban",
-      "path": "Soft/Agile/_lessons/Kanban.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     }
   ],
   "omittedPaths": [],

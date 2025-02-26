@@ -515,46 +515,19 @@ export default function SamplePage() {
 
 ### Image
 
-Чтобы добавить изображение в приложение, нам нужно воспользоваться нативным компонентом `Image`, в который мы можем сразу передать `require` с путём до любого изображения
+Чтобы добавить изображение в приложение, нам нужно воспользоваться нативным компонентом `Image`. Чтобы указать путь до локального изображения, нам нужно передать `require` либо мы можем указать сразу url на изображение из сети
 
 `app / (tabs) / sample.tsx`
 ```TSX
-import { StatusBar } from 'expo-status-bar';
-import { Button, Dimensions, StyleSheet, Text, View, Image } from 'react-native';
+import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 
-const styles = StyleSheet.create({
-	container: {
-		justifyContent: 'center',
-		flex: 1,
-		padding: 55,
-		backgroundColor: '#16171D'
-	},
-	content: {
-		alignItems: 'center',
-		gap: 50
-	},
-	form: {
-		alignSelf: 'stretch',
-		gap: 16
-	},
-	input: {
-		backgroundColor: '#2E2D3D'
-	},
-	logo: {
-		width: 220
-	}
-});
+const LOGO = require('@/shared/assets/logo.png');
 
 export default function SamplePage() {
-	const width = Dimensions.get('window').width;
 	return (
 		<View style={styles.container}>
 			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
 				<View style={styles.form}>
 					<TextInput style={styles.input} />
 					<TextInput style={styles.input} />
@@ -562,14 +535,35 @@ export default function SamplePage() {
 				</View>
 				<Text>Восстановить пароль</Text>
 			</View>
-		</View >
+		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: '#16171D',
+	},
+	content: {
+		alignItems: 'center',
+		gap: 50,
+	},
+	form: {
+		alignSelf: 'stretch',
+		gap: 16,
+	},
+	input: {
+		backgroundColor: '#2E2D3D',
+	},
+	logo: {
+		width: 220,
+	},
+});
 ```
 
-
-
-
+![](_png/Pasted%20image%2020250226183901.png)
 
 ### Input
 
@@ -578,6 +572,15 @@ export default function SamplePage() {
 `shared / ui / Input / Input.tsx`
 ```TSX
 import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+
+export function Input(props: TextInputProps) {
+	return (
+		<TextInput
+			style={styles.input}
+			placeholderTextColor={'#AFB2BF'}
+			{...props} />
+	)
+}
 
 const styles = StyleSheet.create({
 	input: {
@@ -588,15 +591,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	}
 });
-
-export function Input(props: TextInputProps) {
-	return (
-		<TextInput
-			style={styles.input}
-			placeholderTextColor={'#AFB2BF'}
-			{...props} />
-	)
-}
 ```
 
 

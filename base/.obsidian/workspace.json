@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "file": "Development/TypeScript/TypeScriptCmp.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -100,7 +100,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "04 Модули, контроллеры и провайдеры"
+              "title": "TypeScriptCmp"
             }
           },
           {
@@ -176,7 +176,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -208,7 +208,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "SOLID",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -356,13 +356,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "file": "Development/MobileDev/React Native/React Native.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 04 Модули, контроллеры и провайдеры"
+              "title": "Outline of React Native"
             }
           }
         ],
@@ -386,8 +386,15 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "7aa8661bd6975ef3",
+  "active": "6522b6ff43fc1a5c",
   "lastOpenFiles": [
+    "Development/MobileDev/React Native/_png/Pasted image 20250226183901.png",
+    "Development/TypeScript/TypeScriptCmp.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
+    "Whats Learning/_lessons/Паттерны.md",
+    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md",
     "Programming Principes/SOLID принципы.md",
@@ -399,9 +406,6 @@
     "Development/MobileDev/React Native/React Native.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
-    "Development/TypeScript/TypeScriptCmp.md",
-    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
-    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250217202345.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250217185307.png",
@@ -420,10 +424,6 @@
     "Soft/Agile/Agile.md",
     "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
     "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
-    "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
-    "Development/BackEnd/Microservices/_lessons/5. Монорепозитории.md",
-    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
-    "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",
