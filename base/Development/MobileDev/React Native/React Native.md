@@ -710,6 +710,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24,
 		borderRadius: RADIUS.r10,
 		fontSize: FONTS.f16,
+		color: COLORS.gray,
 	},
 });
 ```
@@ -769,6 +770,10 @@ export const EyeClosedIcon = () => (
 
 ```
 
+Но чтобы ускорить ход дела, можно воспользоваться сайтом [react-svgr](https://react-svgr.com/playground/?native=true), который за нас сделает рутинный перевод svg в рякт
+
+![](_png/Pasted%20image%2020250226195311.png)
+
 И теперь мы просто можем вставить иконки, как React-компоненты в наше приложение
 
 `app / index.tsx`
@@ -794,162 +799,135 @@ export default function LoginPage() {
 }
 ```
 
-![](_png/Pasted%20image%2020250226194931.png)
+![](_png/Pasted%20image%2020250226202801.png)
 
 ### Обработка событий
 
+Обработка событий в RN достаточно похожа на веб, но отличается тем, что мы перехватываем специфичные для мобилки события через компоненты RN
 
+Добавляем отдельно инпут нашего пароля, который будет обёрткой над нашим базовым инпутом. 
 
-`shared / ui / Input.tsx`
+Воспользуемся компонентом `Pressable`, который перехватывает ивенты нажатия на экран и при событии `onPress` (нажатие), мы будем вызывать изменение состояния отображения текста. Чтобы скрыть текст под пароль, нужно передать параметр `secureTextEntry` в сам инпут
+
+`shared / ui / PasswordInput / PasswordInput.tsx`
 ```TSX
-import { Pressable, StyleSheet, TextInput, TextInputProps, View } from 'react-native';
-import { Colors, Radius } from '../../const';
+import { EyeClosedIcon, EyeOpenedIcon } from '@/shared/assets/icons';
 import { useState } from 'react';
-import { EyeOpenedIcon, EyeClosedIcon } from '../../assets/icons';
+import { Pressable, StyleSheet, View, type TextInputProps } from 'react-native';
+import { Input } from '../..';
+
+export const PasswordInput = (props: TextInputProps) => {
+	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+	const handleToggleShowState = () => setIsPasswordVisible((state) => !state);
+
+	return (
+		<View>
+			<Input secureTextEntry={!isPasswordVisible} {...props} />
+			<Pressable onPress={handleToggleShowState} style={styles.eyeIcon}>
+				{isPasswordVisible ? <EyeOpenedIcon /> : <EyeClosedIcon />}
+			</Pressable>
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
-	input: {
-		height: 58,
-		backgroundColor: Colors.violetDark,
-		paddingHorizontal: 24,
-		borderRadius: Radius.r10,
-		fontSize: 16,
-		color: Colors.gray
-	},
 	eyeIcon: {
 		position: 'absolute',
 		right: 0,
 		paddingHorizontal: 20,
-		paddingVertical: 18
-	}
+		paddingVertical: 18,
+	},
 });
-
-export const Input = (
-	{ isPassword, ...props }: TextInputProps & { isPassword?: boolean }
-) => {
-	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-
-	return (
-		<View>
-			<TextInput
-				style={styles.input}
-				secureTextEntry={
-					isPassword && !isPasswordVisible
-				}
-				placeholderTextColor={Colors.gray}
-				{...props} 
-			/>
-			{isPassword && 
-				<Pressable 
-					onPress={
-						() => 
-							setIsPasswordVisible(state => !state)
-					} 
-					style={styles.eyeIcon}
-				>
-					{isPasswordVisible 
-						? <EyeOpenedIcon /> 
-						: <EyeClosedIcon />
-					}
-				</Pressable>
-			}
-		</View>
-	)
-}
 ```
 
+И вставялем инпут нашего пароля на главную
 
-
-`app / (tabs) / sample.tsx`
+`app / index.tsx`
 ```TSX
-export default function SamplePage() {
-	const width = Dimensions.get('window').width;
+export default function LoginPage() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
 				<View style={styles.form}>
 					<Input placeholder='Email' />
-					<Input isPassword placeholder='Пароль' />
+					<PasswordInput placeholder='Password' />
 					<Button title='Войти' />
 				</View>
 				<Text>Восстановить пароль</Text>
 			</View>
-		</View >
+		</View>
 	);
 }
 ```
 
-
-
-
-
+![](_png/Pasted%20image%2020250226202716.png)
 
 ### Кнопка
 
-Теперь нужно описать кнопку. Реализовываем для гибкости не нативную кнопку так же через компонент `Pressable`, как когда мы делали кнопку для инпута
+Теперь нужно описать кнопку. Реализовываем для гибкости не нативную кнопку так же через компонент `Pressable`, как когда мы делали кнопку для инпута, но заворачиваем внутрь уже не кнопку, а вьюшку с текстом. 
+
+Тут гоняться за нативностью не актуально для мобилного устройства, так как под каждую ОС кнопка выглядит совершеннно по-разному и проще будет сделать таким образом с самостоятельной отрисовкой. Так же у нас тут нет таких же острых проблем с доступностью
 
 `shared / ui / Button / Button.tsx`
 ```TSX
-import { Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
-import { Colors, Fonts, Radius } from '../../const';
+import { COLORS, FONTS, RADIUS } from '@/shared/const';
+import { Pressable, PressableProps, ButtonProps, View, Text, StyleSheet } from 'react-native';
+
+export interface IButtonProps extends PressableProps, Pick<ButtonProps, 'title'> {
+	text?: string;
+}
+
+export const Button = ({ title, text, ...props }: IButtonProps) => {
+	return (
+		<Pressable {...props}>
+			<View style={styles.button}>
+				<Text style={styles.text}>{title ?? text}</Text>
+			</View>
+		</Pressable>
+	);
+};
 
 const styles = StyleSheet.create({
 	button: {
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 58,
-		backgroundColor: Colors.primary,
-		borderRadius: Radius.r10,
+		backgroundColor: COLORS.primary,
+		borderRadius: RADIUS.r10,
 	},
 	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18
-	}
-})
-
-export function Button({ text, ...props }: PressableProps & { text: string }) {
-	return (
-		<Pressable {...props}>
-			<View style={styles.button}>
-				<Text style={styles.text}>{text}</Text>
-			</View>
-		</Pressable>
-	)
-}
+		color: COLORS.white,
+		fontSize: FONTS.f18,
+	},
+});
 ```
 
 И добавляем нашу новую кнопку на страницу
 
-`app / (tabs) / sample.tsx`
+`app / index.tsx`
 ```TSX
-export default function SamplePage() {
-	const width = Dimensions.get('window').width;
+import { Input, PasswordInput, Button } from '@/shared/ui';
+
+export default function LoginPage() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
 				<View style={styles.form}>
 					<Input placeholder='Email' />
-					<Input isPassword placeholder='Пароль' />
-					<Button text='Войти' />
+					<PasswordInput placeholder='Password' />
+					<Button title={'Войти'} />
 				</View>
 				<Text>Восстановить пароль</Text>
 			</View>
-		</View >
+		</View>
 	);
 }
 ```
 
-
+![](_png/Pasted%20image%2020250226204018.png)
 
 ## Анимация
 
