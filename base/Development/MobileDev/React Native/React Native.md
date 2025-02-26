@@ -567,140 +567,154 @@ const styles = StyleSheet.create({
 
 ### Input
 
+Создадим отдельный компонент инпута нашего приложения на основе нативного инпута из RN
 
+Сам инпут имеет схожее поведение с браузерным, но стилизацию псевдоселекторами тут заменили на пропсы. Если нам нужно покрасить плейсходер, то нужно будет воспользоваться `placeholderTextColor`
 
 `shared / ui / Input / Input.tsx`
 ```TSX
-import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
 
-export function Input(props: TextInputProps) {
-	return (
-		<TextInput
-			style={styles.input}
-			placeholderTextColor={'#AFB2BF'}
-			{...props} />
-	)
-}
+export const Input = (props: TextInputProps) => {
+	return <TextInput style={styles.input} placeholderTextColor={'#AFB2BF'} {...props} />;
+};
 
 const styles = StyleSheet.create({
 	input: {
 		height: 58,
-		backgroundColor: '#2E2D3D',
+		backgroundColor: '#2e2d3d',
 		paddingHorizontal: 24,
 		borderRadius: 10,
 		fontSize: 16,
-	}
+	},
 });
 ```
 
-
+И теперь можем наш инпут спокойно применять везде в приложении
 
 `app / (tabs) / sample.tsx`
 ```TSX
-import { StatusBar } from 'expo-status-bar';
-import { Button, Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 import { Input } from '@/shared/ui';
+import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+
+const LOGO = require('@/shared/assets/logo.png');
+
+export default function SamplePage() {
+	return (
+		<View style={styles.container}>
+			<View style={styles.content}>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
+				<View style={styles.form}>
+					<Input placeholder='Email' />
+					<Input placeholder='Password' />
+					<Button title='Войти' />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View>
+	);
+}
 
 const styles = StyleSheet.create({
 	container: {
 		justifyContent: 'center',
 		flex: 1,
 		padding: 55,
-		backgroundColor: '#16171D'
+		backgroundColor: '#16171D',
 	},
 	content: {
 		alignItems: 'center',
-		gap: 50
+		gap: 50,
 	},
 	form: {
 		alignSelf: 'stretch',
-		gap: 16
+		gap: 16,
 	},
 	input: {
-		backgroundColor: '#2E2D3D'
+		backgroundColor: '#2E2D3D',
 	},
 	logo: {
-		width: 220
-	}
+		width: 220,
+	},
 });
-
-export default function SamplePage() {
-	const width = Dimensions.get('window').width;
-	return (
-		<View style={styles.container}>
-			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
-				<View style={styles.form}>
-					<Input placeholder='Email' />
-					<Input placeholder='Пароль' />
-					<Button title='Войти' />
-				</View>
-				<Text>Восстановить пароль</Text>
-			</View>
-		</View >
-	);
-}
 ```
 
-
+![](_png/Pasted%20image%2020250226190344.png)
 
 ### Дизайн система
 
+Дизайн система в мобильном приложении будет полностью находиться в JS и триггериться из него. 
 
+Сейчас нам нужно указать:
+- `COLORS` - все возможные цвета
+- `GAPS` - все возможные отступы между элементами
+- `FONTS` - все возможные размеры шрифтов и их типы начертания
+- `RADIUS` - возможные радиусы скругления
+
+Тут используется максимально прямолинейная система, когда мы указываем цвет/размер прямо в наименовании константы, но стоит использовать имена по типу отображения (error / success / warning / info / day / night)
 
 `shared / const / tokens.const.ts`
 ```TS
-export const Colors = {
-	black: '#16171D',
-	gray: '#AFB2BF',
-	violetDark: '#2E2D3D',
-	primary: '#6C38CC',
-	primaryHover: '#452481',
-	link: '#A97BFF'
-}
+export const COLORS = {
+    black: '#16171D',
+    blackLight: '#1E1F29',
+    gray: '#AFB2BF',
+    violetDark: '#2E2D3D',
+    primary: '#6C38CC',
+    primaryHover: '#452481',
+    link: '#A97BFF',
+    white: '#FAFAFA',
+    red: '#CC384E',
+    border: '#4D5064',
+};
 
-export const Gaps = {
-	g16: 16,
-	g50: 50
-}
+export const GAPS = {
+    g8: 8,
+    g10: 10,
+    g16: 16,
+    g20: 20,
+    g50: 50,
+};
 
-export const Radius = {
-	r10: 10
-}
+export const FONTS = {
+    f14: 14,
+    f16: 16,
+    f18: 18,
+    f20: 20,
+    f21: 21,
+    regular: 'FiraSans-Regular',
+    semibold: 'FiraSans-SemiBold',
+};
+
+export const RADIUS = {
+    r10: 10,
+    r17: 17,
+};
 ```
 
-
+Теперь применяем константы к нашим компонентам
 
 `shared / ui / Input`
 ```TSX
-import { StyleSheet, TextInput, TextInputProps } from 'react-native';
-import { Colors, Radius } from '../../const';
+import { COLORS, FONTS, RADIUS } from '@/shared/const';
+import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
+
+export const Input = (props: TextInputProps) => {
+	return <TextInput style={styles.input} placeholderTextColor={'#AFB2BF'} {...props} />;
+};
 
 const styles = StyleSheet.create({
 	input: {
 		height: 58,
-		backgroundColor: Colors.violetDark,
+		backgroundColor: COLORS.violetDark,
 		paddingHorizontal: 24,
-		borderRadius: Radius.r10,
-		fontSize: 16,
-	}
+		borderRadius: RADIUS.r10,
+		fontSize: FONTS.f16,
+	},
 });
-
-export function Input(props: TextInputProps) {
-	return (
-		<TextInput
-			style={styles.input}
-			placeholderTextColor={Colors.gray}
-			{...props} />
-	)
-}
 ```
 
-
+Вставляем наши переменные ДС в стили страницы
 
 `app / (tabs) / sample.tsx`
 ```TSX
@@ -728,93 +742,59 @@ const styles = StyleSheet.create({
 		width: 220
 	}
 });
-
-export default function SamplePage() {
-	const width = Dimensions.get('window').width;
-	
-	return (
-		<View style={styles.container}>
-			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
-				<View style={styles.form}>
-					<Input placeholder='Email' />
-					<Input placeholder='Пароль' />
-					<Button title='Войти' />
-				</View>
-				<Text>Восстановить пароль</Text>
-			</View>
-		</View >
-	);
-}
 ```
-
-
 
 ### SVG
 
-
+Поддержки svg из коробки у нас нет, поэтому нужно будет установить отдельный пакет, который позволит имплементировать их в приложение
 
 ```bash
 npm i react-native-svg
 ```
 
-
+При вставке SVG в приложение, нам нужно будет заменить браузерные теги на теги из библиотеки. Она сама преобразует изображение нужным образом и соберёт картинку, которую нужно будет отобразить на мобильном устройстве
 
 `shared / assets / icons / eye-closed.tsx`
 ```TSX
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import Svg, { Path } from 'react-native-svg';
 
-const EyeClosedIcon = () => (
-	<Svg
-		width={24}
-		height={24}
-		fill="none"
-	>
+export const EyeClosedIcon = () => (
+	<Svg width={24} height={24} fill='none'>
 		<Path
-			fill="#AFB2BF"
-			d="M2.69 6.705a.75.75 0 0 0-1.38..."
+			fill='#AFB2BF'
+			d='M2.69 6...'
 		/>
 	</Svg>
-)
+);
 
-export default EyeClosedIcon
 ```
 
+И теперь мы просто можем вставить иконки, как React-компоненты в наше приложение
 
-
-`app / (tabs) / sample.tsx`
+`app / index.tsx`
 ```TSX
-export default function SamplePage() {
-	const width = Dimensions.get('window').width;
+import { EyeClosedIcon, EyeOpenedIcon } from '@/shared/assets/icons';
+
+export default function LoginPage() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
 				<View style={styles.form}>
 					<Input placeholder='Email' />
-					<Input placeholder='Пароль' />
+					<Input placeholder='Password' />
 					<Button title='Войти' />
 				</View>
-				<Text>Восстановить пароль</Text>
 				<EyeClosedIcon />
 				<EyeOpenedIcon />
+				<Text>Восстановить пароль</Text>
 			</View>
-		</View >
+		</View>
 	);
 }
 ```
 
-
-
+![](_png/Pasted%20image%2020250226194931.png)
 
 ### Обработка событий
 
@@ -910,35 +890,6 @@ export default function SamplePage() {
 
 
 ### Кнопка
-
-Немного обновляем наши токены и добавляем туда различные размеры шрифтов
-
-`shared / const / tokens.const.ts`
-```TSX
-export const Colors = {
-	black: '#16171D',
-	gray: '#AFB2BF',
-	violetDark: '#2E2D3D',
-	primary: '#6C38CC',
-	primaryHover: '#452481',
-	link: '#A97BFF',
-	white: '#FAFAFA'
-}
-
-export const Gaps = {
-	g16: 16,
-	g50: 50
-}
-
-export const Radius = {
-	r10: 10
-}
-
-export const Fonts = { // <--
-	f16: 16,
-	f18: 18
-}
-```
 
 Теперь нужно описать кнопку. Реализовываем для гибкости не нативную кнопку так же через компонент `Pressable`, как когда мы делали кнопку для инпута
 
@@ -1364,36 +1315,6 @@ const styles = StyleSheet.create({
 
 
 ### Уведомление
-
-
-
-`shared / const / tokens.const.ts`
-```TS
-export const Colors = {
-	black: '#16171D',
-	gray: '#AFB2BF',
-	violetDark: '#2E2D3D',
-	primary: '#6C38CC',
-	primaryHover: '#452481',
-	link: '#A97BFF',
-	white: '#FAFAFA',
-	red: '#CC384E'
-}
-
-export const Gaps = {
-	g16: 16,
-	g50: 50
-}
-
-export const Radius = {
-	r10: 10
-}
-
-export const Fonts = {
-	f16: 16,
-	f18: 18
-}
-```
 
 
 
@@ -3706,18 +3627,6 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
 
 
 
-`shared/tokens.ts`
-```TSX
-export const Gaps = {
-	g8: 8,
-	g16: 16,
-	g50: 50,
-};
-```
-
-
-
-
 `entities/user/ui/UserMenu/UserMenu.tsx`
 ```TSX
 import { View, Image, StyleSheet, Text } from 'react-native';
@@ -3923,19 +3832,6 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
 
 ### Навигация
 
-
-
-
-
-`shared/tokens.ts`
-```TSX
-export const Gaps = {
-	g8: 8,
-	g16: 16,
-	g20: 20,
-	g50: 50,
-};
-```
 
 
 `entities/user/ui/UserMenu/UserMenu.tsx`
@@ -4445,20 +4341,6 @@ const UploadIcon = (props: SvgProps) => (
 	</Svg>
 );
 export default UploadIcon;
-```
-
-
-
-`shared/tokens.ts`
-```TS
-export const Fonts = {
-	f14: 14,
-	f16: 16,
-	f18: 18,
-	f20: 20,
-	regular: 'FiraSans-Regular',
-	semibold: 'FiraSans-SemiBold',
-};
 ```
 
 
@@ -5574,29 +5456,6 @@ export default function MyCourses() {
 
 
 
-`shared/tokens.ts`
-```TS
-export const Colors = {
-	black: '#16171D',
-	blackLight: '#1E1F29',
-	gray: '#AFB2BF',
-	violetDark: '#2E2D3D',
-	primary: '#6C38CC',
-	primaryHover: '#452481',
-	link: '#A97BFF',
-	white: '#FAFAFA',
-	red: '#CC384E',
-	border: '#4D5064',
-};
-
-export const Radius = {
-	r10: 10,
-	r17: 17,
-};
-```
-
-
-
 `shared/Chip/Chip.tsx`
 ```TSX
 import { View, Text, StyleSheet } from 'react-native';
@@ -5708,29 +5567,6 @@ const styles = StyleSheet.create({
 
 
 ### ScrollView
-
-
-
-`shared/tokens.ts`
-```TS
-export const Gaps = {
-	g8: 8,
-	g10: 10,
-	g16: 16,
-	g20: 20,
-	g50: 50,
-};
-
-export const Fonts = {
-	f14: 14,
-	f16: 16,
-	f18: 18,
-	f20: 20,
-	f21: 21,
-	regular: 'FiraSans-Regular',
-	semibold: 'FiraSans-SemiBold',
-};
-```
 
 
 
