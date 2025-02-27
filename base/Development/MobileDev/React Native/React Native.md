@@ -1093,7 +1093,15 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 
 ### Интерполяция
 
-Интерполяция позволяет нам изменять входной диапазон значений в выходной
+Интерполяция позволяет нам изменять входной диапазон значений в другой выходной
+
+> Сейчас мы будем добавлять анимацию изменения цвета кнопки
+
+Для этого мы создадим анимационное значение `new Animated.Value(100)`, из него соберём интерполяцию перехода из `inputRange` (входное числовое значение) в `outputRange` (выходной массив значений). Меняя число, мы будем менять цвет от одного к другому во времени
+
+`timing` будет линейно изменять цвет в течение трёх секунд
+
+Так же из стилей можно вырезать будет `backgroundColor`, так как мы вставляем свой
 
 `shared / ui / Button / Button.tsx`
 ```TSX
@@ -1101,12 +1109,17 @@ import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'rea
 import { Colors, Fonts, Radius } from '../tokens';
 
 export function Button({ text, ...props }: PressableProps & { text: string }) {
+	// анимационное значение
 	const animatedValue = new Animated.Value(100);
+	// интерполяция между числом и цветом с выводом цвета
 	const color = animatedValue.interpolate({
+		// входной массив значений
 		inputRange: [0, 100],
+		// и промеждуток между этими цветами мы будем получать от изменения value, который находится между значениями из inputRange
 		outputRange: [Colors.primaryHover, Colors.primary]
 	});
 
+	// анимация цвета во времени
 	Animated.timing(animatedValue, {
 		toValue: 0,
 		duration: 3000,
@@ -1116,6 +1129,7 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 	return (
 		<Pressable {...props}>
 			<Animated.View style={{
+				// добавляем цвет в бэкграунд
 				...styles.button, backgroundColor: color
 			}}>
 				<Text style={styles.text}>{text}</Text>
@@ -1123,14 +1137,29 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 		</Pressable>
 	)
 }
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 58,
+		// вырезали backgroundColor
+		borderRadius: RADIUS.r10,
+	},
+	text: {
+		color: COLORS.white,
+		fontSize: FONTS.f18,
+	},
+});
 ```
 
+Теперь у нас есть автоматическая интерполяция цвета от одного к другому
 
 ### Анимация кнопки
 
 
 
-
+`shared / ui / Button / Button.tsx`
 ```TSX
 import { Animated, GestureResponderEvent, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
 import { Colors, Fonts, Radius } from '../tokens';
