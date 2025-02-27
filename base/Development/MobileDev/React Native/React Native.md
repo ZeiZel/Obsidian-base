@@ -933,7 +933,11 @@ export default function LoginPage() {
 
 ### Основы анимации
 
+Анимация в RN строится на нативном компоненте `Animated`, который предоставляет нам множество интерфейсов для реализации анимации
 
+При создании `Animated` мы можем выбрать `Value` либо `ValueXY`, которые будут представлять из себя анимационные величины
+
+Для изменения величин во времени мы можем использовать `Animated.timing` (линейное изменение) и `Animated.spring` (анимация по Безье). Для него мы передаём конченые значения и триггерим `start` анимации.
 
 `shared / ui / Button / Button.tsx`
 ```TSX
@@ -945,13 +949,25 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 		x: 0,
 		y: 0
 	});
-	Animated.spring(animatedValue, {
+
+	/* Animated.timing(animatedValue, {
+		toValue: {
+			x: 100,
+			y: 100
+		},
+		// длительность
+		duration: 2000,
+		useNativeDriver: true
+	}).start(); */
+	
+	Animated.timing(animatedValue, {
 		toValue: {
 			x: 100,
 			y: 100
 		},
 		useNativeDriver: true
 	}).start();
+	
 	return (
 		<Pressable {...props}>
 			<Animated.View style={{
@@ -965,27 +981,29 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 		</Pressable>
 	)
 }
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		backgroundColor: Colors.primary,
-		borderRadius: Radius.r10,
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18
-	}
-})
 ```
 
-
+![](_png/Pasted%20image%2020250227205514.png)
 
 ### Как работает анимация
 
+Изначально, вызов и обработка анимации происходят на стороне JS и триггерят на каждый кадр огромное количество порядков, которые потом уходят в Bridge и он рендерит изменение положения элемента
 
+Это может приводить к тому, что мы можем заблокировать основной поток своими неоптимальными действиями
+
+![](_png/Pasted%20image%2020250227205843.png)
+
+Когда мы используем нативный драйвер всю ответственность за калькуляцию операции мы перекладываем на нативные методы и уже они будут вызывать нужный нам рендер, так как Bridge просто отдал факт того, что нужно провести следующую калькуляцию в такой последовательности
+
+![](_png/Pasted%20image%2020250227205923.png)
+
+И у нас будет разное поведение анимации при разных значениях `useNativeDriver`: 
+- если мы поставим `false`, то в купе с тяжёлой анимацией, у нас будет просто скачок из одного в другое место, потому что поток не смог обработать анимацию и кинуть сигнал на рендер через Bridge
+- если мы поставим `true`, то анимация отработает полностью даже при заблокированном потоке, потому что сигнал мы отправили на устройство сразу
+
+>[!hint] Дефолтно стоит ставить `useNativeDriver` на `true`
+
+>[!warning] Однако иногда анимация может сбоить с нативным драйвером и рисоваться с багами, поэтому может понадобиться использовать `false` 
 
 `shared / ui / Button / Button.tsx`
 ```TSX
@@ -1005,8 +1023,14 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 			y: 100
 		},
 		duration: 2000,
-		useNativeDriver: true
+		useNativeDriver: true / false
 	}).start();
+
+	useEffect(() => {
+		for (let i = 1; i < 10000; i++) {
+			console.log('2');
+		}
+	}, [])
 
 	return (
 		<Pressable {...props}>
@@ -1021,27 +1045,11 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 		</Pressable>
 	)
 }
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		backgroundColor: Colors.primary,
-		borderRadius: Radius.r10,
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18
-	}
-})
 ```
-
-
 
 ### Ограничения анимации
 
-
+Самым большим ограничением нативного драйвера анимации является отсутствие возможности менять layout элементов. Если нам нужно проанимировать любые другие значения, кроме `transform`, то мы обязаны использовать `useNativeDriver: false`
 
 `shared / ui / Button / Button.tsx`
 ```TSX
@@ -1073,28 +1081,21 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 		</Pressable>
 	)
 }
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		backgroundColor: Colors.primary,
-		borderRadius: Radius.r10,
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18
-	}
-})
 ```
 
+![](_png/Pasted%20image%2020250227211208.png)
+
+Чтобы удобно и хорошо работать со сложной анимацией в мобильном приложении, нам нужно будет воспользоваться [React Reanimated](https://docs.expo.dev/versions/latest/sdk/reanimated/)
+
+Он работает эффективнее, так как использует возможности новой архитектуры и пользуется `sharedValue` между JS и нативной средой
+
+![](_png/Pasted%20image%2020250227211628.png)
 
 ### Интерполяция
 
+Интерполяция позволяет нам изменять входной диапазон значений в выходной
 
-
-
+`shared / ui / Button / Button.tsx`
 ```TSX
 import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
 import { Colors, Fonts, Radius } from '../tokens';
@@ -1122,19 +1123,6 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 		</Pressable>
 	)
 }
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		borderRadius: Radius.r10,
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18
-	}
-})
 ```
 
 
