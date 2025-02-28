@@ -1212,101 +1212,69 @@ export const Button = ({ title, text, onPressIn, onPressOut, ...props }: IButton
 };
 ```
 
-
+Теперь при нажатии на кнопку, у нас будет срабатывать анимация изменения цвета кнопки
 
 ### Alert и Toast
 
-Отключаем нативные драйверы в анимациях кнопки
+Для реализации уведомлений у нас есть несколько сущностей:
+- `ToastAndroid` - специфичное для андроида уведомление
+- `Alert` - кроссплатформенный класс, который вызывает стандартное уведомление для каждый платформы
 
-`shared / ui / Button / Button.tsx`
+Чтобы воспользоваться `ToastAndroid` стоит проверить, на какой платформе мы находимся. Информацию о платформе в себе хранит объект `Platform`.
+
+`app / index.tsx`
 ```TSX
-const fadeIn = (e: GestureResponderEvent) => {
-	Animated.timing(animatedValue, {
-		toValue: 0,
-		duration: 100,
-		useNativeDriver: false
-	}).start();
-	props.onPressIn && props.onPressIn(e);
-}
+import { Alert, Image, Platform, StyleSheet, Text, ToastAndroid, View } from 'react-native';
 
-const fadeOut = (e: GestureResponderEvent) => {
-	Animated.timing(animatedValue, {
-		toValue: 100,
-		duration: 100,
-		useNativeDriver: false
-	}).start();
-	props.onPressOut && props.onPressOut(e);
-}
-```
-
-
-
-`app / (tabs) / sample.tsx`
-```TSX
-import { Dimensions, StyleSheet, Text, View, Image, Alert, ToastAndroid, Platform } from 'react-native';
-import { Input } from './shared/Input/Input';
-import { Colors, Gaps } from './shared/tokens';
-import { Button } from './shared/Button/Button';
-
-export default function SamplePage() {
-	const width = Dimensions.get('window').width;
-
-	const alert = () => {
-		// Alert
-		// Alert.alert('Ошибка', 'Неверный логин или пароль', [{
-		// 	text: 'Хорошо',
-		// 	onPress: () => {},
-		// 	style: 'cancel'
-		// }]);
+export default function LoginPage() {
+	const alertIn = () => {
 		if (Platform.OS === 'android') {
-			ToastAndroid.showWithGravity(
-				'Неверный логин или пароль',
-				ToastAndroid.LONG,
-				ToastAndroid.CENTER,
-			);
+			ToastAndroid.showWithGravity('Неверный логин или пароль', ToastAndroid.LONG, ToastAndroid.CENTER);
 		}
 	}
+
+	const alertOut = () => {
+		Alert.alert('Произошла ошибка', 'Неверный логин или пароль', [
+			{
+				text: 'Хорошо',
+				isPreferred: true,
+				onPress: () => {
+				},
+				style: 'cancel',
+			},
+			{
+				text: 'Отмена',
+				isPreferred: true,
+				onPress: () => {
+				},
+				style: 'default',
+			},
+		]);
+	};
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
 				<View style={styles.form}>
-					<Input placeholder='Email' />
-					<Input isPassword placeholder='Пароль' />
-					<Button text='Войти' onPress={alert} />
+					<Input placeholder="Email" />
+					<PasswordInput placeholder="Password" />
+					<Button title={'Войти'} onPress={alertIn} onPressOut={alertOut} />
 				</View>
 				<Text>Восстановить пароль</Text>
 			</View>
-		</View >
+		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		justifyContent: 'center',
-		flex: 1,
-		padding: 55,
-		backgroundColor: Colors.black
-	},
-	content: {
-		alignItems: 'center',
-		gap: Gaps.g50
-	},
-	form: {
-		alignSelf: 'stretch',
-		gap: Gaps.g16
-	},
-	logo: {
-		width: 220
-	}
-});
 ```
 
+Вот так выглядит `Alert`
+
+![](_png/Pasted%20image%2020250228185052.png)
+
+И вот так выглядит `ToastAndroid.showWithGravity`
+
+![](_png/Pasted%20image%2020250228184735.png)
 
 ### Уведомление
 
