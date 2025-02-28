@@ -1157,62 +1157,61 @@ const styles = StyleSheet.create({
 
 ### Анимация кнопки
 
-
+У нас есть несколько разных событий, которые мы можем повесить на `Pressable` компонент:
+- `onPress` - стандартная отработка нажатия с возможностью не отрабатывать при миссклике (нажал и потянул или совершил другое действие)
+- `onPressIn` - сразу при нажатии на кнопку
+- `onPressOut` - при снятии пальца с кнопки
+- `onLongPress` - нажали и удерживаем
 
 `shared / ui / Button / Button.tsx`
 ```TSX
 import { Animated, GestureResponderEvent, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
 import { Colors, Fonts, Radius } from '../tokens';
 
-export function Button({ text, ...props }: PressableProps & { text: string }) {
+export interface IButtonProps extends PressableProps, Pick<ButtonProps, 'title'> {
+	text?: string;
+}
+
+export const Button = ({ title, text, onPressIn, onPressOut, ...props }: IButtonProps) => {
 	const animatedValue = new Animated.Value(100);
 	const color = animatedValue.interpolate({
 		inputRange: [0, 100],
-		outputRange: [Colors.primaryHover, Colors.primary]
+		outputRange: [COLORS.primaryHover, COLORS.primary],
 	});
 
-	const fadeIn = (e: GestureResponderEvent) => {
+	const handleAnimate = (value: number) => {
 		Animated.timing(animatedValue, {
-			toValue: 0,
+			useNativeDriver: true,
 			duration: 100,
-			useNativeDriver: true
+			toValue: value,
 		}).start();
-		props.onPressIn && props.onPressIn(e);
 	}
 
-	const fadeOut = (e: GestureResponderEvent) => {
-		Animated.timing(animatedValue, {
-			toValue: 100,
-			duration: 100,
-			useNativeDriver: true
-		}).start();
-		props.onPressOut && props.onPressOut(e);
-	}
+	const handleOnPressIn = (e: GestureResponderEvent) => {
+		handleAnimate(0)
+		onPressIn?.(e);
+	};
+
+	const handleOnPressOut = (e: GestureResponderEvent) => {
+		handleAnimate(100)
+		onPressOut?.(e);
+	};
 
 	return (
-		<Pressable {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
-			<Animated.View style={{
-				...styles.button, backgroundColor: color
-			}}>
-				<Text style={styles.text}>{text}</Text>
+		<Pressable {...props} onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
+			<Animated.View
+				style={{
+					...styles.button,
+					backgroundColor: color,
+				}}
+			>
+				<Text style={styles.text}>{title ?? text}</Text>
 			</Animated.View>
 		</Pressable>
-	)
-}
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		borderRadius: Radius.r10,
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18
-	}
-})
+	);
+};
 ```
+
 
 
 ### Alert и Toast
