@@ -937,7 +937,7 @@ export default function LoginPage() {
 
 При создании `Animated` мы можем выбрать `Value` либо `ValueXY`, которые будут представлять из себя анимационные величины
 
-Для изменения величин во времени мы можем использовать `Animated.timing` (линейное изменение) и `Animated.spring` (анимация по Безье). Для него мы передаём конченые значения и триггерим `start` анимации.
+Для изменения величин во времени мы можем использовать `Animated.timing` (линейное изменение) и `Animated.spring` (анимация по Безье). Для него мы передаём конченые значения и триггерим `start` анимации. В `start` можно передать коллбэк, который отработает на старте.
 
 Чтобы была возможность применить анимацию на компоненте, нужно `View` так же брать из объекта `Animated`
 
@@ -968,7 +968,8 @@ export function Button({ text, ...props }: PressableProps & { text: string }) {
 			y: 100
 		},
 		useNativeDriver: true
-	}).start();
+		// триггерим любое событие на старте анимации
+	}).start(() => console.log('asdadsd'));
 	
 	return (
 		<Pressable {...props}>
@@ -1294,6 +1295,10 @@ export interface ErrorNotificationProps {
 
 Далее реализуем компонент этого уведомления. Тут мы должны будем использовать состояние с занесением ошибки и скрытием её от пользователя через таймаут.
 
+Чтобы триггернуть анимацию при появлении вёрстки, нам нужно воспользоваться событием `onLayout`, которое триггерится, когда у нас меняется лейаут. То есть так мы сможем триггернуть старт анимации при появлении этого компонента `Animated.View`
+
+В качестве ширины уведомления воспользуемся `Dimensions.get('screen').width` откуда получим полную ширину экрана вместо использования `100%`, который не растянется на всю ширину из-за абсолютного позиционирования
+
 `shared / ui / ErrorNotification / ErrorNotification.tsx`
 ```TSX
 import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
@@ -1345,7 +1350,7 @@ const styles = StyleSheet.create({
 	error: {
 		position: 'absolute',
 		top: 0,
-		width: Dimensions.get('window').width,
+		width: Dimensions.get('screen').width,
 		padding: 15,
 		backgroundColor: COLORS.red,
 	},
@@ -1395,48 +1400,57 @@ export default function LoginPage() {
 
 ### Eslint
 
+Устанавливаем форматтировщик и линтер
 
+```bash
+bun i prettier eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-native
+```
 
-`.eslintrc.json`
+Конфиг для eslint, в котором так же находится и конфиг для prettier
+
+`.eslintrc`
 ```JSON
 {
-	"plugins": [
-		"prettier",
-		"react",
-		"react-native"
-	],
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended"
-	],
-	"rules": {
-		"react-native/no-unused-styles": 2,
-		"react-native/split-platform-components": 2,
-		"react-native/no-inline-styles": 2,
-		"react-native/no-color-literals": 2,
-		"react-native/no-raw-text": 2,
-		"react-native/no-single-element-style-arrays": 2,
-		"react-hooks/exhaustive-deps": "off",
-		"prettier/prettier": [
-			"error",
-			{
-				"singleQuote": true,
-				"useTabs": true,
-				"semi": true,
-				"trailingComma": "all",
-				"bracketSpacing": true,
-				"printWidth": 100,
-				"endOfLine": "auto"
-			}
-		],
-		"@typescript-eslint/no-empty-function": [
-			"off"
-		],
-		"@typescript-eslint/interface-name-prefix": "off",
-		"@typescript-eslint/ban-types": "off",
-		"@typescript-eslint/explicit-function-return-type": "off",
-		"@typescript-eslint/explicit-module-boundary-types": "off"
-	}
+  "plugins": [
+    "prettier",
+    "react",
+    "react-native"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
+    "react-native/no-raw-text": 2,
+    "react-native/no-single-element-style-arrays": 2,
+    "react-hooks/exhaustive-deps": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "useTabs": true,
+        "semi": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "printWidth": 100,
+        "endOfLine": "auto",
+        "jsxSingleQuote": true,
+        "tabWidth": 4,
+        "arrowParens": "always"
+      }
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "off"
+    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  }
 }
 ```
 
