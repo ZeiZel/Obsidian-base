@@ -939,6 +939,8 @@ export default function LoginPage() {
 
 Для изменения величин во времени мы можем использовать `Animated.timing` (линейное изменение) и `Animated.spring` (анимация по Безье). Для него мы передаём конченые значения и триггерим `start` анимации.
 
+Чтобы была возможность применить анимацию на компоненте, нужно `View` так же брать из объекта `Animated`
+
 `shared / ui / Button / Button.tsx`
 ```TSX
 import { Animated, Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
@@ -1218,7 +1220,7 @@ export const Button = ({ title, text, onPressIn, onPressOut, ...props }: IButton
 
 Для реализации уведомлений у нас есть несколько сущностей:
 - `ToastAndroid` - специфичное для андроида уведомление
-- `Alert` - кроссплатформенный класс, который вызывает стандартное уведомление для каждый платформы
+- `Alert` - кроссплатформенный класс, который вызывает стандартное уведомление для каждый платформы. Содержит в себе `alert` и `prompt`
 
 Чтобы воспользоваться `ToastAndroid` стоит проверить, на какой платформе мы находимся. Информацию о платформе в себе хранит объект `Platform`.
 
@@ -1228,12 +1230,15 @@ import { Alert, Image, Platform, StyleSheet, Text, ToastAndroid, View } from 're
 
 export default function LoginPage() {
 	const alertIn = () => {
+		// проверяем платформу
 		if (Platform.OS === 'android') {
+			// вызываем уведомление для андроида
 			ToastAndroid.showWithGravity('Неверный логин или пароль', ToastAndroid.LONG, ToastAndroid.CENTER);
 		}
 	}
 
 	const alertOut = () => {
+		// вызываем окошко алёрта
 		Alert.alert('Произошла ошибка', 'Неверный логин или пароль', [
 			{
 				text: 'Хорошо',
@@ -1278,7 +1283,7 @@ export default function LoginPage() {
 
 ### Уведомление
 
-
+Опишем интерфейс уведомления. Оно будет получать только строку с ошибкой
 
 `shared / ui / ErrorNotification / ErrorNotification.props.ts`
 ```TSX
@@ -1287,197 +1292,104 @@ export interface ErrorNotificationProps {
 }
 ```
 
-
-
-`shared / ui / ErrorNotification / ErrorNotification.tsx`
-```TSX
-import { useEffect, useState } from 'react';
-import { ErrorNotificationProps } from './ErrorNotification.props';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { Colors, Fonts } from '../tokens';
-
-export function ErrorNotification({ error }: ErrorNotificationProps) {
-	const [isShown, setIsShown] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (!error) {
-			return;
-		}
-		setIsShown(true);
-		const timerId = setTimeout(() => {
-			setIsShown(false);
-		}, 3000);
-		return () => {
-			clearTimeout(timerId);
-		}
-	}, [error]);
-
-	if (!isShown) {
-		return <></>;
-	}
-
-	return (
-		<View style={styles.error}>
-			<Text style={styles.errorText}>{error}</Text>
-		</View>
-	);
-}
-
-const styles = StyleSheet.create({
-	error: {
-		position: 'absolute',
-		width: Dimensions.get('screen').width,
-		backgroundColor: Colors.red,
-		padding: 15,
-		top: 50
-	},
-	errorText: {
-		fontSize: Fonts.f16,
-		color: Colors.white,
-		textAlign: 'center'
-	}
-})
-```
-
-
-
-`app / (tabs) / sample.tsx`
-```TSX
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Input } from './shared/Input/Input';
-import { Colors, Gaps } from './shared/tokens';
-import { Button } from './shared/Button/Button';
-import { ErrorNotification } from './shared/ErrorNotification/ErrorNotification';
-import { useState } from 'react';
-
-export default function SamplePage() {
-	const [error, setError] = useState<string | undefined>();
-
-	const alert = () => {
-		setError('Неверный логин и пароль')
-	}
-
-	return (
-		<View style={styles.container}>
-			<ErrorNotification error={error} />
-			<View style={styles.content}>
-				<Image
-					style={styles.logo}
-					source={require('./assets/logo.png')}
-					resizeMode='contain'
-				/>
-				<View style={styles.form}>
-					<Input placeholder='Email' />
-					<Input isPassword placeholder='Пароль' />
-					<Button text='Войти' onPress={alert} />
-				</View>
-				<Text>Восстановить пароль</Text>
-			</View>
-		</View >
-	);
-}
-
-const styles = StyleSheet.create({
-	container: {
-		justifyContent: 'center',
-		flex: 1,
-		padding: 55,
-		backgroundColor: Colors.black
-	},
-	content: {
-		alignItems: 'center',
-		gap: Gaps.g50
-	},
-	form: {
-		alignSelf: 'stretch',
-		gap: Gaps.g16
-	},
-	logo: {
-		width: 220
-	}
-});
-```
-
-
-### Анимация окна уведомлений
-
-Добавляем очистку ошибки через таймаут
-
-`app / (tabs) / sample.tsx`
-```TSX
-const alert = () => {
-	setError('Неверный логин и пароль');
-	setTimeout(() => {
-		setError(undefined);
-	}, 4000)
-}
-```
-
-
+Далее реализуем компонент этого уведомления. Тут мы должны будем использовать состояние с занесением ошибки и скрытием её от пользователя через таймаут.
 
 `shared / ui / ErrorNotification / ErrorNotification.tsx`
 ```TSX
+import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
-import { ErrorNotificationProps } from './ErrorNotification.props';
-import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native';
-import { Colors, Fonts } from '../tokens';
+import { IErrorNotificationProps } from './ErrorNotification.props';
+import { COLORS, FONTS } from '@/shared/const';
 
-export function ErrorNotification({ error }: ErrorNotificationProps) {
-	const [isShown, setIsShown] = useState<boolean>(false);
+export const ErrorNotification = ({ error }: IErrorNotificationProps) => {
+	const [isShown, setIsShown] = useState(false);
 	const animatedValue = new Animated.Value(-100);
 
 	const onEnter = () => {
 		Animated.timing(animatedValue, {
 			toValue: 0,
 			duration: 300,
-			useNativeDriver: true
+			useNativeDriver: true,
 		}).start();
-	}
+	};
 
 	useEffect(() => {
-		if (!error) {
-			return;
-		}
+		if (!error) return;
 		setIsShown(true);
 		const timerId = setTimeout(() => {
 			setIsShown(false);
-		}, 3000);
+		}, 5000);
 		return () => {
 			clearTimeout(timerId);
-		}
+		};
 	}, [error]);
 
-	if (!isShown) {
-		return <></>;
-	}
-
-	return (
-		<Animated.View style={{
-			...styles.error, transform: [
-				{ translateY: animatedValue }
-			]
-		}} onLayout={onEnter}>
-			<Text style={styles.errorText}>{error}</Text>
+	return isShown && (
+		<Animated.View
+			onLayout={onEnter}
+			style={{
+				...styles.error,
+				transform: [
+					{ translateY: animatedValue },
+				]
+			}}
+		>
+			<Text style={styles.error__text}>
+				{error}
+			</Text>
 		</Animated.View>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	error: {
 		position: 'absolute',
-		width: Dimensions.get('screen').width,
-		backgroundColor: Colors.red,
+		top: 0,
+		width: Dimensions.get('window').width,
 		padding: 15,
-		top: 50
+		backgroundColor: COLORS.red,
 	},
-	errorText: {
-		fontSize: Fonts.f16,
-		color: Colors.white,
-		textAlign: 'center'
-	}
-})
+	error__text: {
+		fontSize: FONTS.f16,
+		color: COLORS.white,
+		textAlign: 'center',
+		fontFamily: FONTS.regular,
+	},
+});
 ```
 
+И вставляем уведомление на главную страницу
+
+`app / index.tsx`
+```TSX
+export default function LoginPage() {
+	const [error, setError] = useState('');
+
+	const alertIn = () => {
+		setError('Неверный логин или пароль!');
+		setTimeout(() => {
+			setError(undefined);
+		}, 4000)
+	};
+
+	return (
+		<View style={styles.container}>
+			<ErrorNotification error={error} />
+			<View style={styles.content}>
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
+				<View style={styles.form}>
+					<Input placeholder="Email" />
+					<PasswordInput placeholder="Password" />
+					<Button title={'Войти'} onPress={alertIn} />
+				</View>
+				<Text>Восстановить пароль</Text>
+			</View>
+		</View>
+	);
+}
+```
+
+![](_png/Pasted%20image%2020250301105040.png)
 
 ## Отладка и lint
 
