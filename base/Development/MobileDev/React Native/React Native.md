@@ -1671,7 +1671,27 @@ export default function LoginPage() {
 
 ### Layout
 
+Для того, чтобы описать layout наших скринов, мы должны воспользоваться прямо в папке роутера зарезервированным словом `_layout`
 
+Expo предоставляет нам компонент `Slot`, который скажет роутингу, куда нужно вставлять скрин страницы (то есть в него вставится компонент, который мы дефолтно экспортировали из страницы)
+
+`app / _layout.tsx`
+```TSX
+import { Slot } from 'expo-router';
+import { Text } from 'react-native';
+
+export default function RootRayout() {
+	return (
+		<>
+			<Text>Header</Text>
+			<Slot />
+			<Text>Footer</Text>
+		</>
+	)
+}
+```
+
+Но чаще всего в лейауте определяют поведение роутинга и для этого используют компонент `Stack`. Он уже позволяет нам положить в стек страницу и вернуться к предыдущей из стрелки вверху экрана
 
 `app / _layout.tsx`
 ```TSX
@@ -1682,7 +1702,22 @@ export default function RootRayout() {
 }
 ```
 
+Теперь у нас появилась такая стек-менюшка
 
+![](_png/Pasted%20image%2020250303201537.png)
+
+Так же мы имеем `Tabs`
+
+`app / _layout.tsx`
+```TSX
+import { Tabs } from 'expo-router';
+
+export default function RootRayout() {
+	return <Tabs />;
+}
+```
+
+![](_png/Pasted%20image%2020250303201731.png)
 
 ### Stack
 
