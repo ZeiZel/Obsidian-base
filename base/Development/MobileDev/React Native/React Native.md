@@ -1523,11 +1523,21 @@ Element Inspector позволяет нам глянуть:
 
 ### Выбор роутинга
 
-
+React Navigation следует принципу структуризации роутов как кода, когда Expo Router предлагает нам удобный роутинг по типу того, что предоставляет NextJS
 
 ![](_png/Pasted%20image%2020250303190308.png)
 
+### Добавление роута
+
+Если мы используем дефолтный проект без роутинга, то наша стартовая точка - это `App.jsx` в корне проекта. Внутрь неё мы должны были бы навешивать React Navigation. 
+
 > В приложение нужно завести app-роутер, который аналогичен тому, что сейчас есть в nextjs
+
+Полная последовательность подключения всегда [указана в документации](https://docs.expo.dev/router/installation/)
+
+```bash
+npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
+```
 
 Описание метода роутинга находится в корневом конфиге приложения в `plugins`. Тут нам нужно указать модуль, который отвечает за роутинг
 
@@ -1558,7 +1568,7 @@ Element Inspector позволяет нам глянуть:
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      "expo-router", // <--
       [
         "expo-splash-screen",
         {
@@ -1599,123 +1609,58 @@ module.exports = function (api) {
 };
 ```
 
-И в итоге мы получаем роутер, который основан на папке `app`, где каждый `index` или `name.tsx` будет являться страницей
-
-`app / (tabs) / sample.tsx`
-```TSX
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Input } from '../shared/Input/Input';
-import { Colors, Gaps } from '../shared/tokens';
-import { Button } from '../shared/Button/Button';
-import { ErrorNotification } from '../shared/ErrorNotification/ErrorNotification';
-import { useState } from 'react';
-
-export default function SamplePage() {
-	const [error, setError] = useState<string | undefined>();
-
-	const alert = () => {
-		setError('Неверный логин и пароль');
-		setTimeout(() => {
-			setError(undefined);
-		}, 4000);
-	};
-
-	return (
-		<View style={styles.container}>
-			<ErrorNotification error={error} />
-			<View style={styles.content}>
-				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
-				<View style={styles.form}>
-					<Input placeholder="Email" />
-					<Input isPassword placeholder="Пароль" />
-					<Button text="Войти" onPress={alert} />
-				</View>
-				<Text>Восстановить пароль</Text>
-			</View>
-		</View>
-	);
-}
-
-const styles = StyleSheet.create({
-	container: {
-		justifyContent: 'center',
-		flex: 1,
-		padding: 55,
-		backgroundColor: Colors.black,
-	},
-	content: {
-		alignItems: 'center',
-		gap: Gaps.g50,
-	},
-	form: {
-		alignSelf: 'stretch',
-		gap: Gaps.g16,
-	},
-	logo: {
-		width: 220,
-	},
-});
-```
-
-
-
-### Добавление роута
-
-
-
-
-
-
-
+И в итоге мы получаем роутер, который основан на папке `app`, где каждый `index` или `name.tsx` будет являться страницей: `app / (tabs) / sample.tsx`
 
 ### Страницы и навигации
 
+Создадим страницу восстановления `restore`, которая теперь будет доступна нам по роуту `/restore`. В качестве отображения для роута используется дефолтно экспортируемая функция
 
+Чтобы создать линк на другой роут, нам нужно воспользоваться компонентом `Link` из `expo-router`, который предоставит нам возможность перейти на этот роут
 
-`app / login.tsx`
+`app / restore.tsx`
 ```TSX
-export default function Login() {
-	const [error, setError] = useState<string | undefined>();
+import { View, Text } from 'react-native';
+import { Link } from 'expo-router';
 
-	const alert = () => {
-		setError('Неверный логин и пароль');
-		setTimeout(() => {
-			setError(undefined);
-		}, 4000);
+export default function Restore() {
+	return (
+		<View>
+			<Text>This is restore page</Text>
+			<Link href={'/'}>
+				<Text>Login</Text>
+			</Link>
+		</View>
+	);
+}
+```
+
+И на странице логина, которую мы обозначили как `index` (основная страница группы, которая будет грузиться первой на `/`), мы так же создадим ссылку на восстановление пароля
+
+`app / index.tsx`
+```TSX
+export default function LoginPage() {
+	const [error, setError] = useState('');
+
+	console.log('LoginPage', error);
+
+	const alertIn = () => {
+		setError('Неверный логин или пароль!');
 	};
 
 	return (
 		<View style={styles.container}>
 			<ErrorNotification error={error} />
 			<View style={styles.content}>
-				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
+				<Image source={LOGO} resizeMode={'contain'} style={styles.logo} />
 				<View style={styles.form}>
-					<Input placeholder="Email" />
-					<Input isPassword placeholder="Пароль" />
-					<Button text="Войти" onPress={alert} />
+					<Input placeholder='Email' />
+					<PasswordInput placeholder='Password' />
+					<Button title={'Войти'} onPress={alertIn} />
 				</View>
 				<Link href={'/restore'}>
 					<Text>Восстановить пароль</Text>
 				</Link>
 			</View>
-		</View>
-	);
-}
-```
-
-
-
-`app / restore.tsx`
-```TSX
-import { Link } from 'expo-router';
-import { View, Text } from 'react-native';
-
-export default function Restore() {
-	return (
-		<View>
-			<Link href={'/'}>
-				<Text>Restore</Text>
-			</Link>
 		</View>
 	);
 }
