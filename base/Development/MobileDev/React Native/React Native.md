@@ -1805,7 +1805,216 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function RootRayout() {
+	// хук, из которого получим безопасные отступы
 	const insets = useSafeAreaInsets();
+	return (
+		<SafeAreaProvider>
+			<StatusBar barStyle={'dark-content'} />
+			<Stack
+				screenOptions={{
+					statusBarBackgroundColor: COLORS.black,
+					headerShown: false,
+					contentStyle: {
+						// применяем отступ сверху
+						paddingTop: insets.top,
+						backgroundColor: COLORS.black,
+					},
+				}}
+			>
+				<Stack.Screen name={'index'} />
+				<Stack.Screen
+					name={'restore'}
+					options={{
+						presentation: 'modal',
+					}}
+				/>
+			</Stack>
+		</SafeAreaProvider>
+	);
+}
+```
+
+Благодаря настройке `StatusBar`, мы получили возможность скорректировать наш статусбар на мобильном устройстве. Если андроид автоматически определяет цвет от контента, то iOS не всегда такое умеет.
+
+![](_png/Pasted%20image%2020250304194249.png)
+
+Так же у нас появился безопасный отступ сверху, который оттолкнёт контент от краёв
+
+![](_png/Pasted%20image%2020250304195847.png)
+
+### Подключение шрифта
+
+Самые универсальные шрифты - это otf и ttf - они поддерживаются на любой платформе и могут использоваться везде.
+
+Способа подключения шрифтов у нас тоже два - подключение в конфиге и из хука
+
+Первым делом, нужно добавить `ttf` шрифты в нашу папку ассетов `shared / assets / fonts / FiraSans / FiraSans-SemiBold.ttf`
+
+#### подключение в конфиге
+
+Тут нам нужно просто добавить наш плагин `expo-font` и в его параметрах указать пути до шрифтов
+
+`app.config.ts`
+```TS
+plugins: [
+	'expo-router',
+	[
+		'expo-font',
+		{
+			fonts: [
+				'./shared/assets/fonts/FiraSans-Regular.ttf',
+				'./shared/assets/fonts/FiraSans-SemiBold.ttf',
+			],
+		},
+	],
+],
+```
+
+#### Подключение через хук
+
+Далее добавляем шрифт через хук `useFonts` из expo, который принимает в себя объект вида `имя:импорт шрифта`
+
+`app/_layout.tsx`
+```TSX
+import { useFonts } from 'expo-font';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+export default function RootRayout() {
+	const insets = useSafeAreaInsets();
+	const [loaded, error] = useFonts({
+		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
+		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+	});
+
+	if (!loaded) {
+		return null;
+	}
+```
+
+>[!hint] Но теперь у нас есть проблема при использовании такого подхода. Она заключается в том, что мы будем видеть пустой экран при подгрузке шрифта, пока он не подгрузится 
+
+#### Использование
+
+Далее добавляем имена наших шрифтов в токены, чтобы ими вдальнейшем воспользоваться
+
+>[!warning] Имена должны совпадать с тем, что мы указали при импорте наших шрифтов 
+
+`shared / const / tokens.const.ts`
+```TSX
+export const FONTS = {
+	f16: 16,
+	f18: 18,
+	regular: 'FiraSans',
+	semibold: 'FiraSansSemiBold',
+};
+```
+
+Далее добавляем шрифты из токенов в нашу кнопку, инпут и уведомление
+
+```TSX
+import { Fonts ... } from '../tokens';
+
+// Button / ErrorNotification
+text: {
+	color: COLORS.white,
+	fontSize: FONTS.f18,
+	fontFamily: FONTS.regular,
+},
+
+// Input
+const styles = StyleSheet.create({
+	input: {
+		...
+		fontFamily: Fonts.regular,
+	},
+});
+```
+
+Теперь у нас подтянулись шрифты в приложении
+
+![](_png/Pasted%20image%2020250304195813.png)
+
+### SplashScreen
+
+SplashScreen - это наш начальный загрузочный экран при входе в приложение
+
+Первым делом меняем изображение сплеша в наших ассетов с дефолтного на наш
+
+Отдельно только стоит сказать, что можно экспортировать только лого, так как сплэш будет того же цвета, который мы указали в конфиге и это легче настроить будет там под разные ситуации 
+
+![](_png/Pasted%20image%2020250216095742.png)
+
+За его конфигурацию отвечает пакет `expo-splash-screen`, который мы можем применить в плагинах
+
+- Первым делом, укажем путь до изображения сплешскрина в `image`. 
+- Затем нам нужно указать метод ресайзинга `resizeMode` на `contain`, чтобы не сжимать изображение, а центрировать его. 
+- И поменяем задник в `backgroundColor` под цвет задника сплеша `#16171D`
+- Укажем размер изображения `imageWidth`
+
+`app.config.ts`
+```TS
+plugins: [
+	'expo-router',
+	[
+		'expo-font',
+		{
+			fonts: [
+				'./shared/assets/fonts/FiraSans-Regular.ttf',
+				'./shared/assets/fonts/FiraSans-SemiBold.ttf',
+			],
+		},
+	],
+	[
+		'expo-splash-screen',
+		{
+			image: './shared/assets/splash.png',
+			imageWidth: 200,
+			resizeMode: 'contain',
+			backgroundColor: '#ffffff',
+			dark: {
+				image: './assets/splash.png',
+				backgroundColor: '#16171D',
+			},
+		},
+	],
+],
+```
+
+И теперь нам нужно законтролить отображение сплеша в приложении через объект `expo-splash-screen`, чтобы у нас не было леаут-шифтинга при подгрузке шрифтов.
+
+1. Отключаем автовыключение сплешэкрана через `preventAutoHideAsync`
+2. Триггерим `hideAsync`, чтобы скрыть сплеш после загрузки шрифтов `loaded`
+3. Если произойдёт ошибка подгрузки шрифта, то выкинем ошибку на экран
+
+`app / _layout.tsx`
+```TSX
+import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen';
+
+preventAutoHideAsync();
+
+export default function RootLayout() {
+	const insets = useSafeAreaInsets();
+
+	const [loaded, error] = useFonts({
+		FiraSans: FiraSansFont,
+	});
+
+	useEffect(() => {
+		if (loaded) {
+			hideAsync();
+		}
+	}, [loaded]);
+
+	useEffect(() => {  
+	    if (error) {  
+	       throw error;  
+	    }  
+	}, [error]);
+
+	if (!loaded) {
+		return null;
+	}
+
 	return (
 		<SafeAreaProvider>
 			<StatusBar barStyle={'dark-content'} />
@@ -1832,183 +2041,31 @@ export default function RootRayout() {
 }
 ```
 
-Благодаря настройке `StatusBar`, мы получили возможность скорректировать наш статусбар на мобильном устройстве. Если андроид автоматически определяет цвет от контента, то iOS не всегда такое умеет.
+Теперь у нас настроен SplashScreen на всём промежутке начальной загрузки приложения
 
-![](_png/Pasted%20image%2020250304194249.png)
-
-### Подключение шрифта
-
-Первым делом, нужно добавить `ttf` шрифты в нашу папку ассетов `shared / assets / fonts / FiraSans / FiraSans-SemiBold.ttf`
-
-Далее добавляем шрифт через хук из expo
-
-`app/_layout.tsx`
-```TSX
-import { useFonts } from 'expo-font';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-
-export default function RootRayout() {
-	const insets = useSafeAreaInsets();
-	const [loaded, error] = useFonts({
-		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
-		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
-	});
-```
-
-Далее добавляем имена наших шрифтов в токены, чтобы ими вдальнейшем воспользоваться
-
-`shared / const / tokens.const.ts`
-```TSX
-export const FONTS = {
-	f16: 16,
-	f18: 18,
-	regular: 'FiraSans',
-	semibold: 'FiraSansSemiBold',
-};
-```
-
-Далее добавляем шрифты из токенов в нашу кнопку, инпут и уведомление
-
-```TSX
-import { Fonts } from '../tokens';
-
-// Button / ErrorNotification
-text: {
-	color: Colors.white,
-	fontSize: Fonts.f18,
-	fontFamily: Fonts.regular,
-},
-
-// Input
-const styles = StyleSheet.create({
-	input: {
-		height: 58,
-		backgroundColor: Colors.violetDark,
-		paddingHorizontal: 24,
-		borderRadius: Radius.r10,
-		fontSize: 16,
-		color: Colors.gray,
-		fontFamily: Fonts.regular,
-	},
-	eyeIcon: {
-		position: 'absolute',
-		right: 0,
-		paddingHorizontal: 20,
-		paddingVertical: 18,
-	},
-});
-```
-
-
-
-
-
-### SplashScreen
-
-- Первым делом, укажем путь до изображения сплешскрина в `image`. 
-- Затем нам нужно указать метод ресайзинга на `contain`, чтобы не сжимать изображение, а центрировать его. 
-- И поменяем задник в `backgroundColor` под цвет задника сплеша `#16171D`
-
-`app.json`
-```JSON
-"splash": {
-  "image": "./assets/splash.png",
-  "resizeMode": "contain",
-  "backgroundColor": "#16171D"
-},
-```
-
-Первым делом меняем изображение сплеша в наших ассетов с дефолтного на наш
-
-![](_png/Pasted%20image%2020250216095742.png)
-
-И теперь нам нужно законтролить отображение сплеша в приложении через объект `SplashScreen`, чтобы у нас не было леаут-шифтинга при подгрузке шрифтов.
-
-1. Отключаем автовыключение сплешэкрана через `preventAutoHideAsync`
-2. Триггерим `hideAsync`, чтобы скрыть сплеш после загрузки шрифтов
-3. Если произойдёт ошибка подгрузки шрифта, то выкинем ошибку на экран
-
-`app / _layout.tsx`
-```TSX
-import { Stack, SplashScreen } from 'expo-router';
-import { Colors } from '../shared/tokens';
-import { StatusBar } from 'expo-status-bar';
-import { useFonts } from 'expo-font';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useEffect } from 'react';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function RootRayout() {
-	const insets = useSafeAreaInsets();
-	const [loaded, error] = useFonts({
-		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
-		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
-	});
-
-	useEffect(() => {
-		if (error) {
-			throw error;
-		}
-	}, [error]);
-
-	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [loaded]);
-
-	if (!loaded) {
-		return null;
-	}
-
-	return (
-		<SafeAreaProvider>
-			<StatusBar style="light" />
-			<Stack
-				screenOptions={{
-					statusBarColor: Colors.black,
-					contentStyle: {
-						backgroundColor: Colors.black,
-						paddingTop: insets.top,
-					},
-					headerShown: false,
-				}}
-			>
-				<Stack.Screen name="index" />
-				<Stack.Screen
-					name="restore"
-					options={{
-						presentation: 'modal',
-					}}
-				/>
-			</Stack>
-		</SafeAreaProvider>
-	);
-}
-```
-
-
+![](_png/Pasted%20image%2020250304203258.png)
 
 ### Unmatched
 
 Реализуем страницу, которая будет выходить пользователю, если он перешёл на несуществующий экран
 
-`app / [...unmathed].tsx`
-```TSX
-import { View, Text } from 'react-native';
+За такую страницу отвечает зарезервированное слово `+not-found`
 
-export default function UnmatchedCustom() {
+`app / +not-found.tsx`
+```TSX
+import { Stack, Unmatched } from 'expo-router';
+
+export default function NotFoundScreen() {
 	return (
-		<View>
-			<Text>Не нашли</Text>
-		</View>
+		<>
+			<Stack.Screen options={{ title: 'Oops!' }} />
+			<Unmatched />
+		</>
 	);
 }
 ```
 
-
-
+![](_png/Pasted%20image%2020250304203958.png)
 
 ### Страница ошибки
 
@@ -2155,8 +2212,9 @@ const styles = StyleSheet.create({
 });
 ```
 
+Теперь у нас имеется полноценная своя страница ненайденных вещей
 
-
+![](_png/Pasted%20image%2020250304205216.png)
 
 ### Route параметры
 
