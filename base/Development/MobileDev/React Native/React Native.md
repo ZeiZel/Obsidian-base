@@ -2069,28 +2069,28 @@ export default function NotFoundScreen() {
 
 ### Страница ошибки
 
-
+Создадим компонент кастомной ссылки, который мы смэтчим с дизайном
 
 `shared / ui / CustomLink / CustomLink.tsx`
 ```TSX
 import { Link } from 'expo-router';
 import { StyleSheet, Text } from 'react-native';
-import { Colors, Fonts } from '../tokens';
 import { LinkProps } from 'expo-router/build/link/Link';
+import { COLORS, FONTS } from '@/shared/const';
 
-export function CustomLink({ text, ...props }: LinkProps & { text: string }) {
+export const CustomLink = ({ text, ...props }: LinkProps & { text: string }) => {
 	return (
 		<Link style={styles.link} {...props}>
 			<Text>{text}</Text>
 		</Link>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	link: {
-		fontSize: Fonts.f18,
-		color: Colors.link,
-		fontFamily: Fonts.regular,
+		fontSize: FONTS.f18,
+		color: COLORS.link,
+		fontFamily: FONTS.regular,
 	},
 });
 ```
@@ -2102,88 +2102,27 @@ const styles = StyleSheet.create({
 <CustomLink href={'/restore'} text="Восстановить пароль" />
 ```
 
-Далее тут мы можем отказаться от использования хука и перейти на провайдер `SafeAreaProvider` из `react-native-safe-area-context`
+Добавляем вёрстку страницы `nnot-found` а так же добавляем сюда вьюшку безопасной зоны для клика
 
-`app / _layout.tsx`
-```TSX
-import { Stack, SplashScreen } from 'expo-router';
-import { Colors } from '../shared/tokens';
-import { StatusBar } from 'expo-status-bar';
-import { useFonts } from 'expo-font';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useEffect } from 'react';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function RootRayout() {
-	const [loaded, error] = useFonts({
-		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
-		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
-	});
-
-	useEffect(() => {
-		if (error) {
-			throw error;
-		}
-	}, [error]);
-
-	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [loaded]);
-
-	if (!loaded) {
-		return null;
-	}
-
-	return (
-		<SafeAreaProvider>
-			<StatusBar style="light" />
-			<Stack
-				screenOptions={{
-					statusBarColor: Colors.black,
-					contentStyle: {
-						backgroundColor: Colors.black,
-					},
-					headerShown: false,
-				}}
-			>
-				<Stack.Screen name="index" />
-				<Stack.Screen
-					name="restore"
-					options={{
-						presentation: 'modal',
-					}}
-				/>
-			</Stack>
-		</SafeAreaProvider>
-	);
-}
-```
-
-Добавляем вёрстку страницы непопада а так же добавляем сюда вьюшку безопасной зоны для клика
+Тут мы используем `SafeAreaView` вместо обычного `View`, чтобы не пользоваться хуком `useSafeAreaInsets`, который иногда может сбоить. То есть мы можем одно заменить другим, но в компоненте вьюшки нужно будет указать свои пэддинги. Он так же работает с контекстом, который мы обозначили в лейауте. 
 
 `app / [...unmathed].tsx`
 ```TSX
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { CustomLink } from '../shared/CustomLink/CustomLink';
+import { CustomLink } from '@/shared/ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Colors, Fonts, Gaps } from '../shared/tokens';
+import { COLORS, FONTS, GAPS } from '@/shared/const';
+import UnmatchedIcon from '@/shared/assets/images/unmatched.png';
 
 export default function UnmatchedCustom() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.content}>
-				<Image
-					style={styles.image}
-					source={require('../assets/images/unmatched.png')}
-					resizeMode="contain"
-				/>
+				<Image style={styles.image} source={UnmatchedIcon} resizeMode='contain' />
 				<Text style={styles.text}>
 					Ооо... что-то пошло не так. Попробуйте вернуться на главный экран приложения
 				</Text>
-				<CustomLink href={'/'} text="На главный экран" />
+				<CustomLink href={'/'} text='На главный экран' />
 			</View>
 		</SafeAreaView>
 	);
@@ -2197,17 +2136,17 @@ const styles = StyleSheet.create({
 	},
 	content: {
 		alignItems: 'center',
-		gap: Gaps.g50,
+		gap: GAPS.g50,
 	},
 	image: {
 		width: 204,
 		height: 282,
 	},
 	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18,
+		color: COLORS.white,
+		fontSize: FONTS.f18,
 		textAlign: 'center',
-		fontFamily: Fonts.regular,
+		fontFamily: FONTS.regular,
 	},
 });
 ```
