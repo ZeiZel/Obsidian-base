@@ -1718,7 +1718,31 @@ export default function RootRayout() {
 
 ### Stack
 
+Компонент `Stack` позволяет нам указать метаданные, которые повлияют на отображение страницы
 
+Первый вариант - это когда мы через `Stack.Screen` указываем на конкретной странице, какие парметры мы хотим ей указать
+
+> Параметр `presentation` лучше не указывать в этом месте, так как он более общий и с ним лучше работать из лейаута
+
+`app / restore.tsx`
+```TSX
+import { View, Text } from 'react-native';
+import { Link, Stack } from 'expo-router';
+
+export default function Restore() {
+	return (
+		<View>
+			<Stack.Screen options={{ title: 'Восстановить пароль' }} />
+			<Text>This is restore page</Text>
+			<Link href={'/'}>
+				<Text>Login</Text>
+			</Link>
+		</View>
+	);
+}
+```
+
+Второй вариант и самый правильный - это использовать `Stack` в лейауте. Тут мы можем сразу указать внутри общего `Stack` с параметрами сразу для всех странц отдельные `Stack` для каждой страницы через `Stack.Screen` с указанием пропса `name`, в котором передадим роут этого экрана
 
 `app / _layout.tsx`
 ```TSX
@@ -1729,15 +1753,15 @@ export default function RootRayout() {
 	return (
 		<Stack
 			screenOptions={{
-				statusBarColor: Colors.black,
+				statusBarBackgroundColor: COLORS.black,
 				contentStyle: {
-					backgroundColor: Colors.black,
+					backgroundColor: COLORS.black,
 				},
 			}}
 		>
-			<Stack.Screen name="index" />
+			<Stack.Screen name={'index'} />
 			<Stack.Screen
-				name="restore"
+				name={'restore'}
 				options={{
 					presentation: 'modal',
 					headerShown: false,
@@ -1748,18 +1772,28 @@ export default function RootRayout() {
 }
 ```
 
+Основная страница у нас остаётся с хедером
 
+![](_png/Pasted%20image%2020250304192203.png)
+
+А страница восстановления откроется без хедера и в режиме модалки (на айфоне модалка реализована интереснее)
+
+![](_png/Pasted%20image%2020250304192228.png)
+
+После задания `contentStyle` задник поменяется везде
+
+![](_png/Pasted%20image%2020250304192432.png)
 
 ### SafeArea и StatusBar
 
-Меняем дефолтный бэкграунд приложения в его настройках
+Меняем дефолтный бэкграунд приложения в его настройках. Это позволит избавиться от мерцания при переходе между страницами
 
 `app.json`
 ```JSON
 "backgroundColor": "#16171D",
 ```
 
-Далее добавим `StatusBar` из `expo-status-bar`, который предложит нам кастомизированный статусбар с возможностью его контролировать.
+Далее добавим `StatusBar` из `expo-status-bar`, который позволит нам кастоизировать статус-бар нашего телефона
 
 Добавляем `SafeAreaProvider` и `useSafeAreaInsets` из `react-native-safe-area-context`. Они помогут провайдить безопасные границы для тапов внутри приложения. 
 
@@ -1774,20 +1808,20 @@ export default function RootRayout() {
 	const insets = useSafeAreaInsets();
 	return (
 		<SafeAreaProvider>
-			<StatusBar style="light" />
+			<StatusBar barStyle={'dark-content'} />
 			<Stack
 				screenOptions={{
-					statusBarColor: Colors.black,
-					contentStyle: {
-						backgroundColor: Colors.black,
-						paddingTop: insets.top,
-					},
+					statusBarBackgroundColor: COLORS.black,
 					headerShown: false,
+					contentStyle: {
+						paddingTop: insets.top,
+						backgroundColor: COLORS.black,
+					},
 				}}
 			>
-				<Stack.Screen name="index" />
+				<Stack.Screen name={'index'} />
 				<Stack.Screen
-					name="restore"
+					name={'restore'}
 					options={{
 						presentation: 'modal',
 					}}
@@ -1798,27 +1832,9 @@ export default function RootRayout() {
 }
 ```
 
-И осталось теперь только скорректировать цвет текста восстановления токеном из `Colors`
+Благодаря настройке `StatusBar`, мы получили возможность скорректировать наш статусбар на мобильном устройстве. Если андроид автоматически определяет цвет от контента, то iOS не всегда такое умеет.
 
-`app / restore.tsx`
-```TSX
-import { Link } from 'expo-router';
-import { View, Text } from 'react-native';
-import { Colors } from '../shared/tokens';
-
-export default function Restore() {
-	return (
-		<View>
-			<Link href={'/'}>
-				<Text style={{ color: Colors.white }}>Restore</Text>
-			</Link>
-		</View>
-	);
-}
-```
-
-
-
+![](_png/Pasted%20image%2020250304194249.png)
 
 ### Подключение шрифта
 
@@ -1843,7 +1859,7 @@ export default function RootRayout() {
 
 `shared / const / tokens.const.ts`
 ```TSX
-export const Fonts = {
+export const FONTS = {
 	f16: 16,
 	f18: 18,
 	regular: 'FiraSans',
@@ -1854,7 +1870,7 @@ export const Fonts = {
 Далее добавляем шрифты из токенов в нашу кнопку, инпут и уведомление
 
 ```TSX
-import { Colors, Fonts, Radius } from '../tokens';
+import { Fonts } from '../tokens';
 
 // Button / ErrorNotification
 text: {
