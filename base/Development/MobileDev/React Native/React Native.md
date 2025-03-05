@@ -2104,7 +2104,7 @@ const styles = StyleSheet.create({
 
 Добавляем вёрстку страницы `nnot-found` а так же добавляем сюда вьюшку безопасной зоны для клика
 
-Тут мы используем `SafeAreaView` вместо обычного `View`, чтобы не пользоваться хуком `useSafeAreaInsets`, который иногда может сбоить. То есть мы можем одно заменить другим, но в компоненте вьюшки нужно будет указать свои пэддинги. Он так же работает с контекстом, который мы обозначили в лейауте. 
+Тут мы используем `SafeAreaView` вместо обычного `View`, чтобы не пользоваться хуком `useSafeAreaInsets`, который иногда может сбоить. `SafeAreaView` позволяет персонально в каждом компоненте воспользоваться встроенными отступами с безопасной зоной
 
 `app / [...unmathed].tsx`
 ```TSX
@@ -2159,20 +2159,29 @@ const styles = StyleSheet.create({
 
 Роуты с параметрами пишутся ровно так же, как и в NextJS. Параметры передаются в квадратных скобках `[]`
 
-Получить доступ к параметру мы можем через хук `useLocalSearchParams` из `expo-router`
+Получить доступ к параметру мы можем через хук `useLocalSearchParams` из `expo-router`. Он берёт локальные параметры, которые доступны для компонента и обновляется только тогда, когда они поменялись для этого компонента.
+
+Так же существует ещё и `useGlobalSearchParams`, который применяется при изменении глобальных параметров. Он уже может вызывать множество ререндеров, так как обновляется постоянно при изменении любого параметра.
 
 `app / course / [alias].tsx`
 ```TSX
-import { View, Text } from 'react-native';
-import { Colors } from '../../shared/tokens';
-import { useLocalSearchParams } from 'expo-router';
+import { Text } from 'react-native';
+import { useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
+import { COLORS, FONTS } from '@/shared/const';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function CoursePage() {
-	const { alias } = useLocalSearchParams();
+export default function Courses() {
+	const { alias } = useLocalSearchParams<{ alias: string }>();
+
 	return (
-		<View>
-			<Text style={{ color: Colors.white }}>{alias}</Text>
-		</View>
+		<SafeAreaView>
+			<Text style={{ 
+				fontSize: FONTS.f21, 
+				color: COLORS.white 
+			}}>
+				{alias}
+			</Text>
+		</SafeAreaView>
 	);
 }
 ```
@@ -2181,10 +2190,17 @@ export default function CoursePage() {
 
 `app / login.tsx`
 ```TSX
-<CustomLink href={'/course/typescript'} text="Восстановить пароль" />
+<CustomLink
+	href={{
+		pathname: '/courses/[alias]',
+		params: { alias: 'typescript' },
+	}}
+	text={'typescript'}
+/>
+<CustomLink href={'/courses/javascript'} text={'javascript'} />
 ```
 
-
+![](_png/Pasted%20image%2020250305192812.png)
 
 ### Структура проекта
 
