@@ -80,6 +80,18 @@
             }
           },
           {
+            "id": "8ee579e571396e8c",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.9"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.9"
+            }
+          },
+          {
             "id": "7aa8661bd6975ef3",
             "type": "leaf",
             "state": {
@@ -152,7 +164,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -362,7 +374,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "6522b6ff43fc1a5c",
+  "active": "8ee579e571396e8c",
   "lastOpenFiles": [
     "Development/MobileDev/React Native/_png/Pasted image 20250305192812.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250304205216.png",
