@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+                "file": "Development/TypeScript/TypeScriptCmp.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -100,7 +100,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "13 Структурные паттерны"
+              "title": "TypeScriptCmp"
             }
           },
           {
@@ -151,8 +151,7 @@
               "title": "SOLID принципы"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -332,13 +331,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 13 Структурные паттерны"
+              "title": "Outline of 11. Консистентность данных"
             }
           }
         ],
@@ -362,15 +361,16 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "7aa8661bd6975ef3",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
     "Development/TypeScript/TypeScriptCmp.md",
-    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/MobileDev/React Native/React Native.md",
     "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
+    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
+    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
     "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Programming Principes/SOLID принципы.md",
-    "Development/MobileDev/React Native/React Native.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250305192812.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250304205216.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250304203958.png",
@@ -381,7 +381,6 @@
     "Development/MobileDev/React Native/_png/Pasted image 20250304192432.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250304192228.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250304192203.png",
-    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
     "Whats Learning/_lessons/Паттерны.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
