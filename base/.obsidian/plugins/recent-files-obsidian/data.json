@@ -1,20 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
+      "basename": "13 Структурные паттерны",
+      "path": "Development/TypeScript/_lessons/13 Структурные паттерны.md"
     },
     {
       "basename": "TypeScriptCmp",
       "path": "Development/TypeScript/TypeScriptCmp.md"
     },
     {
-      "basename": "13 Структурные паттерны",
-      "path": "Development/TypeScript/_lessons/13 Структурные паттерны.md"
-    },
-    {
       "basename": "12 Порождающие паттерны",
       "path": "Development/TypeScript/_lessons/12 Порождающие паттерны.md"
+    },
+    {
+      "basename": "11 Модульность и библиотеки",
+      "path": "Development/TypeScript/_lessons/11 Модульность и библиотеки.md"
+    },
+    {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "SOLID принципы",
+      "path": "Programming Principes/SOLID принципы.md"
+    },
+    {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
       "basename": "14 Поведенческие паттерны",
@@ -35,10 +47,6 @@
     {
       "basename": "12 Dependency Injection",
       "path": "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md"
-    },
-    {
-      "basename": "SOLID принципы",
-      "path": "Programming Principes/SOLID принципы.md"
     },
     {
       "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
@@ -63,10 +71,6 @@
     {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "07 Валидация данных",
@@ -195,10 +199,6 @@
     {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
     }
   ],
   "omittedPaths": [],
