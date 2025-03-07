@@ -151,7 +151,8 @@
               "title": "SOLID принципы"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -331,13 +332,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "file": "Development/MobileDev/React Native/React Native.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 11. Консистентность данных"
+              "title": "Outline of React Native"
             }
           }
         ],
@@ -361,15 +362,15 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "6522b6ff43fc1a5c",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/TypeScript/TypeScriptCmp.md",
     "Development/MobileDev/React Native/React Native.md",
     "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
     "Development/TypeScript/_lessons/13 Структурные паттерны.md",
     "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
     "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Programming Principes/SOLID принципы.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250305192812.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250304205216.png",

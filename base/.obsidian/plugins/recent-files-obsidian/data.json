@@ -1,16 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "TypeScriptCmp",
       "path": "Development/TypeScript/TypeScriptCmp.md"
-    },
-    {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
       "basename": "12 Порождающие паттерны",
