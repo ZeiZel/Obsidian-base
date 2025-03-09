@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Vue",
+      "path": "Development/FrontEnd/Vue/Vue.md"
+    },
+    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests",
       "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     }
   ],
   "omittedPaths": [],
