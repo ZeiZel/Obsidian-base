@@ -2367,7 +2367,7 @@ export default function MyCourses() {
 bun i @react-native-async-storage/async-storage
 ```
 
-Асинхронное хранилище позволяет нам пользоваться некоторым подобием `localStorage` в мобильном приложении, но в рамках мобильного приложени
+Асинхронное хранилище позволяет нам пользоваться некоторым подобием `localStorage` в мобильном приложении, но в рамках мобильного приложения
 
 `app / (app) / index.tsx`
 ```TSX
@@ -2389,21 +2389,20 @@ export default function MyCourses() {
 	}, []);
 ```
 
-
-
-
-
-
-
-
-
 ### atomWithStorage
 
+Теперь нужно реализовать атом, который будет подкреплён к стейту через персистентное хранилище. Это нам нужно будет для того, чтобы сохранять состояние авторизации пользователя
 
-`entities/auth/model/auth.state.ts`
+`entities / auth / model / auth.state.ts`
 ```TS
 import { createJSONStorage, atomWithStorage } from 'jotai/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export interface AuthState {
+	access_token: string | null;
+	isLoading: boolean;
+	error: string | null;
+}
 
 const storage = createJSONStorage<AuthState>(() => AsyncStorage);
 
@@ -2416,12 +2415,6 @@ export const authAtom = atomWithStorage<AuthState>(
 	},
 	storage,
 );
-
-export interface AuthState {
-	access_token: string | null;
-	isLoading: boolean;
-	error: string | null;
-}
 ```
 
 
