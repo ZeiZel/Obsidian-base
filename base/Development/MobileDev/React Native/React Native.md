@@ -2281,51 +2281,29 @@ export default function MyCourses() {
 
 ## Запросы и состояния
 
+#jotai #FSD
+
 ### Выбор State Manager
 
-
+[Jotai](https://jotai.org/) - хорошее и очень простое решение для хранения и управления состоянием. Имеет понятную и короткую документацию с небольшим количеством функционала.
 
 ![](_png/Pasted%20image%2020250303190332.png)
 
-
-
-
-
-
-
-
-
 ### Архитектура проекта
 
-
-
-
-
-
-
-
-
-
-
-
+В проекте будет использоваться [FSD](../../Architecture/Dev/FSD.md)
 
 ### Первый атом
 
+Устанавливаем `jotai`
 
-
-`package.json`
-```JSON
-"expo-constants": "~14.4.2",
-"expo-linking": "~5.0.2",
-"expo-router": "^2.0.0",
-"jotai": "^2.6.2",
-"react-native-gesture-handler": "~2.12.0",
-"react-native-svg": "13.9.0"
+```bash
+bun i jotai
 ```
 
+Добавляем интерфейс пользователя
 
-
-`entities/user/model/user.model.ts`
+`entities / user / model / user.model.ts`
 ```TS
 export interface User {
 	id: number;
@@ -2335,12 +2313,18 @@ export interface User {
 }
 ```
 
+Добавляем стейт пользователя в атоме. Создать отдельную атомарную единицу стейта можно через `atom`. Для неё опишем состояние `UserState`
 
-
-`entities/user/model/user.state.ts`
+`entities / user / model / user.state.ts`
 ```TS
 import { atom } from 'jotai';
 import { User } from './user.model';
+
+export interface UserState {
+	profile: User | null;
+	isLoading: boolean;
+	error: string | null;
+}
 
 export const profileAtom = atom<UserState>({
 	profile: {
@@ -2350,49 +2334,40 @@ export const profileAtom = atom<UserState>({
 	isLoading: false,
 	error: null,
 });
-
-export interface UserState {
-	profile: User | null;
-	isLoading: boolean;
-	error: string | null;
-}
 ```
 
+Получаем профиль пользователя из атома
 
-
-`app/(app)/index.tsx`
+`app / (app) / index.tsx`
 ```TSX
 import { useAtom } from 'jotai';
 import { View, Text } from 'react-native';
-import { Colors } from '../../shared/tokens';
-import { profileAtom } from '../../entities/user/model/user.state';
+import { COLORS } from '@/shared/tokens';
+import { profileAtom } from '@/entities/user';
 
 export default function MyCourses() {
 	const [profile] = useAtom(profileAtom);
+	
 	return (
 		<View>
-			<Text style={{ color: Colors.white }}>MyCourses</Text>
+			<Text style={{ color: COLORS.white }}>MyCourses</Text>
 			<Text>{profile.profile?.name}</Text>
 		</View>
 	);
 }
 ```
 
-
-
-
-
+![](_png/Pasted%20image%2020250311193403.png)
 
 ### AsyncStorage
 
+Установим асинхронное хранилище
 
-
-`package.json`
-```JSON
-"@react-native-async-storage/async-storage": "1.18.2"
+```bash
+bun i @react-native-async-storage/async-storage
 ```
 
-
+Асинхронное хранилище позволяет нам пользоваться некоторым подобием `localStorage` в мобильном приложении, но в рамках мобильного приложени
 
 `app / (app) / index.tsx`
 ```TSX
