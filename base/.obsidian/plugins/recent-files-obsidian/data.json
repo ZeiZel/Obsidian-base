@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "React Native",
+      "path": "Development/MobileDev/React Native/React Native.md"
+    },
+    {
       "basename": "Vue",
       "path": "Development/FrontEnd/Vue/Vue.md"
     },
@@ -11,10 +15,6 @@
     {
       "basename": "Git",
       "path": "Development/GIT/Git.md"
-    },
-    {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
     },
     {
       "basename": "11. Консистентность данных",

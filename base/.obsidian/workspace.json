@@ -104,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -284,13 +284,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Vue/Vue.md",
+                "file": "Development/MobileDev/React Native/React Native.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Vue"
+              "title": "Outline of React Native"
             }
           }
         ],
@@ -314,11 +314,11 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "e2014b4cda6a9b75",
+  "active": "6522b6ff43fc1a5c",
   "lastOpenFiles": [
+    "Development/FrontEnd/Vue/Vue.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/GIT/Git.md",
-    "Development/FrontEnd/Vue/Vue.md",
     "Development/MobileDev/React Native/React Native.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/TypeScript/TypeScriptCmp.md",
