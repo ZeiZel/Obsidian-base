@@ -2369,6 +2369,13 @@ bun i @react-native-async-storage/async-storage
 
 Асинхронное хранилище позволяет нам пользоваться некоторым подобием `localStorage` в мобильном приложении, но в рамках мобильного приложения
 
+`AsyncStorage` - это объект, который хранит локально в приложении глобальные значения. Сам он работает подобно синтаксису `localStorage`, но асинхронно:
+
+- `setItem` - установить значение
+- `getAllKeys` - получить все ключи
+- `getItem` - получить значение по ключу
+- `removeItem` - удалить значение из стора
+
 `app / (app) / index.tsx`
 ```TSX
 import { useAtom } from 'jotai';
@@ -2389,9 +2396,24 @@ export default function MyCourses() {
 	}, []);
 ```
 
+И вот такой вывод получим:
+
+```bash
+# получили ключ
+["demo"]
+# получаем значение по ключу
+test
+# удаляем значение
+undefined
+# получаем значение по ключу, которое было удалено
+null
+```
+
 ### atomWithStorage
 
 Теперь нужно реализовать атом, который будет подкреплён к стейту через персистентное хранилище. Это нам нужно будет для того, чтобы сохранять состояние авторизации пользователя
+
+Из `jotai` берём `createJSONStorage`, который позволит создать нам кастомное хранилище данных. Далее берём не просто `atom`, а `atomWithStorage`, который позволит нам для атома задать своё собственное хранилище
 
 `entities / auth / model / auth.state.ts`
 ```TS
@@ -2419,21 +2441,15 @@ export const authAtom = atomWithStorage<AuthState>(
 
 
 
-
-
-
-
-
-
 ### Запросы на сервер
 
-
+Установим библиотеку для работы с запросами
 
 ```bash
 npm i axios
 ```
 
-
+Опишем интерфейс ответа на запрос
 
 `entities/auth/model/auth.intefaces.ts`
 ```TS
@@ -2442,7 +2458,7 @@ export interface IAuthResponse {
 }
 ```
 
-
+Укажем пути до рестов `api` в сущности авторизации
 
 `entities/auth/api/api.ts`
 ```TS
@@ -2452,20 +2468,21 @@ export const API = {
 };
 ```
 
-
+Вставим запрос на авторизацию, откуда получим токен
 
 `app / (app) / index.tsx`
 ```TSX
-import { useAtom } from 'jotai';
-import { View, Text } from 'react-native';
-import { profileAtom } from '../../entities/user/model/user.state';
-import axios from 'axios';
-import { API } from '../../entities/auth/api/api';
 import { useEffect } from 'react';
-import { IAuthResponse } from '../../entities/auth/model/auth.intefaces';
+import { View, Text } from 'react-native';
+import axios from 'axios';
+import { useAtom } from 'jotai';
+
+import { profileAtom } from '@/entities/user';
+import { API, IAuthResponse } from '@/entities/auth';
 
 export default function MyCourses() {
 	const [profile] = useAtom(profileAtom);
+	
 	const login = async () => {
 		const { data } = await axios.post<IAuthResponse>(API.login, {
 			email: 'vasia@pupkin.ru',
@@ -2473,9 +2490,11 @@ export default function MyCourses() {
 		});
 		console.log(data);
 	};
+	
 	useEffect(() => {
 		login();
 	}, []);
+	
 	return (
 		<View>
 			<Text>{profile.profile?.name}</Text>
@@ -2485,7 +2504,7 @@ export default function MyCourses() {
 
 ### Запросы в State
 
-
+Опишем интерфейсы модули авторизации. На запрос мы должны отправлять почту и пароль, а в ответе получать токен доступа
 
 `entities / auth / model / auth.intefaces.ts`
 ```TS
@@ -2499,67 +2518,71 @@ export interface LoginRequest {
 }
 ```
 
-
+В состояние авторизации добавим
 
 `entities / auth / model / auth.state.ts`
 ```TSX
-import { createJSONStorage, atomWithStorage } from 'jotai/utils';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { atom } from 'jotai';
-import { AuthResponse, LoginRequest } from './auth.intefaces';
-import axios, { AxiosError } from 'axios';
-import { API } from '../api/api';
-
-const storage = createJSONStorage<AuthState>(() => AsyncStorage);
-
-export const authAtom = atomWithStorage<AuthState>(
-	'auth',
-	{
-		access_token: null,
-		isLoading: false,
-		error: null,
-	},
-	storage,
+import { createJSONStorage, atomWithStorage } from 'jotai/utils';  
+import AsyncStorage from '@react-native-async-storage/async-storage';  
+import { atom } from 'jotai';  
+import { AuthResponse, LoginRequest } from './auth.intefaces';  
+import axios, { AxiosError } from 'axios';  
+import { API } from '../api/api';  
+  
+export interface AuthState {  
+    access_token: string | null;  
+    isLoading: boolean;  
+    error: string | null;  
+}  
+  
+const storage = createJSONStorage<AuthState>(() => AsyncStorage);  
+  
+const INITIAL_STATE: AuthState = {  
+    access_token: null,  
+    isLoading: false,  
+    error: null,  
+};  
+  
+export const authAtom = atomWithStorage<AuthState>('auth', INITIAL_STATE, storage);  
+  
+export const logoutAtom = atom(null, (_get, set) => {  
+    set(authAtom, INITIAL_STATE);  
+});  
+  
+export const loginAtom = atom(  
+    (get) => get(authAtom),  
+    async (_get, set, { email, password }: LoginRequest) => {  
+       set(authAtom, {  
+          isLoading: true,  
+          access_token: null,  
+          error: null,  
+       });
+       
+       try {  
+          const { data } = await axios.post<AuthResponse>(API.login, {  
+             email,  
+             password,  
+          });  
+          
+          set(authAtom, {  
+             isLoading: false,  
+             access_token: data.access_token,  
+             error: null,  
+          });  
+       } catch (error) {  
+          if (error instanceof AxiosError) {  
+             set(authAtom, {
+                isLoading: false,  
+                access_token: null,  
+                error: error.response?.data.message,  
+             });
+          }  
+       }  
+    },  
 );
-
-export const loginAtom = atom(
-	(get) => get(authAtom),
-	async (_get, set, { email, password }: LoginRequest) => {
-		set(authAtom, {
-			isLoading: true,
-			access_token: null,
-			error: null,
-		});
-		try {
-			const { data } = await axios.post<AuthResponse>(API.login, {
-				email,
-				password,
-			});
-			set(authAtom, {
-				isLoading: false,
-				access_token: data.access_token,
-				error: null,
-			});
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				set(authAtom, {
-					isLoading: false,
-					access_token: null,
-					error: error.response?.data.message,
-				});
-			}
-		}
-	},
-);
-
-export interface AuthState {
-	access_token: string | null;
-	isLoading: boolean;
-	error: string | null;
-}
 ```
 
-
+И добавим вызов метода `loginAtom` через `useAtom` (где вторым аргументом будет функция для запроса данных, подвязанная под стейт), чтобы получить `access_token` из `auth`
 
 `app / (app) / index.tsx`
 ```TSX
