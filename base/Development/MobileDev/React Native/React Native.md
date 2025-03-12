@@ -2361,6 +2361,10 @@ export default function MyCourses() {
 
 ### AsyncStorage
 
+Для поиска подходящей библиотеки под RN можно воспользоваться любым решением из [react-native.directory](https://reactnative.directory/)
+
+Давным давно `AsyncStorage` стал deprecated в RN и вместо него рекоммендуют использовать любое другое коммьюнити хранилище
+
 Установим асинхронное хранилище
 
 ```bash
