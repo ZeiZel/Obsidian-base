@@ -2465,7 +2465,7 @@ npm i axios
 `entities / auth / model / auth.intefaces.ts`
 ```TS
 export interface IAuthResponse {
-	access_token: string;
+	accessToken: string;
 }
 ```
 
@@ -2818,6 +2818,10 @@ const styles = StyleSheet.create({
 
 ![](_png/Pasted%20image%2020250313201927.png)
 
+Теперь у нас есть рабочий редирект после получения токена доступа
+
+![](_png/Pasted%20image%2020250313205529.png)
+
 ### ActivityIndicator
 
 Добавим фейковую задержку в авторизацию, чтобы увидеть спиннер индикатора
@@ -2840,14 +2844,13 @@ export const loginAtom = atom(
 				}, 2000),
 			);
 			
-			const { data } = await axios.post<AuthResponse>(API.login, {
-				email,
-				password,
-			});
-			set(authAtom, {
-				isLoading: false,
-				access_token: data.access_token,
-				error: null,
+			const { data } = await axios.post<AuthResponse>(API.login, {  
+			    email,  
+			    password,  
+			});  
+			set(authAtom, {  
+			    ...INITIAL_STATE,  
+			    access_token: data.accessToken,  
 			});
 		} catch (error) {
 			if (error instanceof AxiosError) {
