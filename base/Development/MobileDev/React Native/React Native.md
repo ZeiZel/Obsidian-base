@@ -2666,9 +2666,13 @@ export default function MyCourses() {
 }
 ```
 
+Это программный редирект, который мы можем выполнять для перемещения пользователя по приложению. Проверку токена лучше выполнять лейауте, чтобы каждый раз проверять наличие токена или проверять факт того, что сессия не протухла. 
+
 ### Redirect компонент
 
-Чистим компонент с курсом
+Сделаем более валидный редирект не из компонента, а из `_layout`, который будет постоянно отслеживать наличие токена. Таким образом мы обезопасим сильнее наше приложение и не нужно будет костыльно проверять наличие токена роутера.
+
+Чистим компонент, куда мы добавили старый редирект
 
 `app / (app) / index.tsx`
 ```TSX
@@ -2683,7 +2687,7 @@ export default function MyCourses() {
 }
 ```
 
-И переносим логику редиректа в лейаут
+И переносим логику редиректа в лейаут. Тут мы так же получаем значение токена из атома, но выполняем редирект лейаут-компонентом `Redirect`, который выполнит редирект органичнее в рамках нашего приложения
 
 `app / (app) / _layout.tsx`
 ```TSX
@@ -2706,17 +2710,18 @@ export default function AppRayout() {
 }
 ```
 
+Такой способ имеет лучший отклик в рамках приложения, так как у нас не будет мерцаний и предзагрузки основной страницы. Тут мы сразу отследим наличие токена авторизации и сразу полетим до загрузки страницы на другой экран.
 
 ### Реализация логина
 
-
+Добавляем кнопку выхода на главный экран
 
 `app/(app)/index.tsx`
 ```TSX
 import { View, Text } from 'react-native';
-import { Button } from '../../shared/Button/Button';
+import { Button } from '@/shared/ui';
 import { useSetAtom } from 'jotai';
-import { logoutAtom } from '../../entities/auth/model/auth.state';
+import { logoutAtom } from '@/entities/auth';
 
 export default function MyCourses() {
 	const logout = useSetAtom(logoutAtom);
@@ -2729,9 +2734,11 @@ export default function MyCourses() {
 }
 ```
 
+И на страницу логина добавляем наш хук авторизации. Тут мы должны будем собирать сами данные с нашей формы и переводить инпуты в контролируемые. 
 
+Сохранять данные из инпутов в RN проще, так как нам не нужно отслеживать ивенты и нам всего лишь достаточно передать в пропс `onChangeText` функцию-сеттер из `useState`
 
-`app/login.tsx`
+`app / login.tsx`
 ```TSX
 import { StyleSheet, View, Image } from 'react-native';
 import { Input } from '../shared/Input/Input';
@@ -2751,23 +2758,19 @@ export default function Login() {
 	const [{ access_token, isLoading, error }, login] = useAtom(loginAtom);
 
 	const submit = () => {
-		if (!email) {
-			setLocalError('Не введён email');
-			return;
-		}
-		if (!password) {
-			setLocalError('Не введён пароль');
-			return;
-		}
+		if (!email) return setLocalError('Не введён email');
+		if (!password) return setLocalError('Не введён пароль');
 		login({ email, password });
 	};
 
+	// выводим ошибку из запроса
 	useEffect(() => {
 		if (error) {
 			setLocalError(error);
 		}
 	}, [error]);
 
+	// редирект при успешном входе
 	useEffect(() => {
 		if (access_token) {
 			router.replace('/(app)');
@@ -2811,16 +2814,15 @@ const styles = StyleSheet.create({
 });
 ```
 
+И теперь бэк полностью отрабатывает наши запросы на авторизацию
 
-
-
-
+![](_png/Pasted%20image%2020250313201927.png)
 
 ### ActivityIndicator
 
 Добавим фейковую задержку в авторизацию, чтобы увидеть спиннер индикатора
 
-`entities/auth/model/auth.state.ts`
+`entities / auth / model / auth.state.ts`
 ```TS
 export const loginAtom = atom(
 	(get) => get(authAtom),
@@ -2864,80 +2866,70 @@ export const loginAtom = atom(
 
 `shared / ui / Button / Button.tsx`
 ```TSX
-import {
-	ActivityIndicator,
-	Animated,
-	GestureResponderEvent,
-	Pressable,
-	PressableProps,
-	StyleSheet,
-	Text,
-} from 'react-native';
-import { Colors, Fonts, Radius } from '../tokens';
-
-export function Button({
-	text,
-	isLoading,
-	...props
-}: PressableProps & { text: string; isLoading?: boolean }) {
-	const animatedValue = new Animated.Value(100);
-	const color = animatedValue.interpolate({
-		inputRange: [0, 100],
-		outputRange: [Colors.primaryHover, Colors.primary],
-	});
-
-	const fadeIn = (e: GestureResponderEvent) => {
-		Animated.timing(animatedValue, {
-			toValue: 0,
-			duration: 100,
-			useNativeDriver: false,
-		}).start();
-		props.onPressIn && props.onPressIn(e);
-	};
-
-	const fadeOut = (e: GestureResponderEvent) => {
-		Animated.timing(animatedValue, {
-			toValue: 100,
-			duration: 100,
-			useNativeDriver: false,
-		}).start();
-		props.onPressOut && props.onPressOut(e);
-	};
-
-	return (
-		<Pressable {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
-			<Animated.View
-				style={{
-					...styles.button,
-					backgroundColor: color,
-				}}
-			>
-				{!isLoading && <Text style={styles.text}>{text}</Text>}
-				{isLoading && <ActivityIndicator size="large" color={Colors.white} />}
-			</Animated.View>
-		</Pressable>
-	);
+import {  
+    ActivityIndicator,  
+    Animated,  
+    ButtonProps,  
+    GestureResponderEvent,  
+    Pressable,  
+    PressableProps,  
+    StyleSheet,  
+    Text,  
+} from 'react-native';  
+import { COLORS, FONTS, RADIUS } from '../../../const';  
+  
+export interface IButtonProps extends PressableProps, Pick<ButtonProps, 'title'> {  
+    text?: string;  
+    isLoading?: boolean;  
+}  
+  
+export function Button({ title, text, onPressIn, onPressOut, isLoading = false, ...props }: IButtonProps) {  
+    const animatedValue = new Animated.Value(100);  
+    const color = animatedValue.interpolate({  
+       inputRange: [0, 100],  
+       outputRange: [COLORS.primaryHover, COLORS.primary],  
+    });  
+  
+    const handleAnimate = (value: number) => {  
+       Animated.timing(animatedValue, {  
+          useNativeDriver: true,  
+          duration: 100,  
+          toValue: value,  
+       }).start();  
+    };  
+  
+    const handleOnPressIn = (e: GestureResponderEvent) => {  
+       handleAnimate(0);  
+       onPressIn?.(e);  
+    };  
+  
+    const handleOnPressOut = (e: GestureResponderEvent) => {  
+       handleAnimate(100);  
+       onPressOut?.(e);  
+    };  
+  
+    return (  
+       <Pressable {...props} onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>  
+          <Animated.View  
+             style={{  
+                ...styles.button,  
+                backgroundColor: color,  
+             }}  
+          >  
+             {!isLoading && <Text style={styles.text}>{title ?? text}</Text>}  
+             {isLoading && <ActivityIndicator size={'large'} color={COLORS.white} />}  
+          </Animated.View>  
+       </Pressable>  
+    );  
 }
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 58,
-		borderRadius: Radius.r10,
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f18,
-		fontFamily: Fonts.regular,
-	},
-});
 ```
 
-И теперь добавляем лоадер в саму кнопку на странице авторизации
+И теперь добавляем состояние загрузки запроса в саму кнопку на странице авторизации
 
 `app / login.tsx`
 ```TSX
+const [{ access_token, isLoading, error }, login] = useAtom(loginAtom);
+
 return (
 		<View style={styles.container}>
 			<ErrorNotification error={localError} />
@@ -2956,40 +2948,41 @@ return (
 	);
 ```
 
+Теперь в кнопке появился лоадер
 
-
-
+![](_png/Pasted%20image%2020250313202350.png)
 
 ## Боковая панель
 
 ### Drawer Layout
 
-
+Полная установка [Drawer](https://docs.expo.dev/router/advanced/drawer/) уже описана в документации expo. Это нужно просто повторить, чтобы выполнить операцию.
 
 ```bash
-npm i @react-navigation/drawer react-native-reanimated
+npx expo install @react-navigation/drawer react-native-gesture-handler react-native-reanimated
 ```
 
+`'expo-router/babel` не нужен в expo SDK выше 50 версии, а плагин `'react-native-reanimated/plugin'` установить нам будет нужно
 
 `babel.config.js`
 ```JS
-module.exports = function (api) {
-	api.cache(true);
-	return {
-		presets: ['babel-preset-expo'],
-		plugins: ['expo-router/babel', 'react-native-reanimated/plugin'],
-	};
+module.exports = function (api) {  
+    api.cache(true);  
+    return {  
+       presets: ['babel-preset-expo'],  
+       plugins: ['react-native-reanimated/plugin'],  
+    };  
 };
 ```
 
-
+И далее добавляем в лейауте авторизованного приложения дефолтный `Drawer`
 
 `app / (app) / _layout.tsx`
 ```TSX
 import { Redirect, Stack } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { useAtomValue } from 'jotai';
-import { authAtom } from '../../entities/auth/model/auth.state';
+import { authAtom } from '@/entities/auth';
 
 export default function AppRayout() {
 	const { access_token } = useAtomValue(authAtom);
