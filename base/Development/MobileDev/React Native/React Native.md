@@ -2437,17 +2437,20 @@ export interface AuthState {
 const storage = createJSONStorage<AuthState>(() => AsyncStorage);
 
 export const authAtom = atomWithStorage<AuthState>(
+	// ключ, по которому будет сохраняться состояние
 	'auth',
+	// начальные данные
 	{
 		access_token: null,
 		isLoading: false,
 		error: null,
 	},
+	// сам стор
 	storage,
 );
 ```
 
-
+Далее нужно будет сделать запрос на сервер, чтобы получать данные по клиенту
 
 ### Запросы на сервер
 
@@ -2459,7 +2462,7 @@ npm i axios
 
 Опишем интерфейс ответа на запрос
 
-`entities/auth/model/auth.intefaces.ts`
+`entities / auth / model / auth.intefaces.ts`
 ```TS
 export interface IAuthResponse {
 	access_token: string;
@@ -2468,7 +2471,7 @@ export interface IAuthResponse {
 
 Укажем пути до рестов `api` в сущности авторизации
 
-`entities/auth/api/api.ts`
+`entities / auth / api / api.ts`
 ```TS
 export const PREFIX = 'https://purpleschool.ru/api-v2';
 export const API = {
@@ -2476,7 +2479,7 @@ export const API = {
 };
 ```
 
-Вставим запрос на авторизацию, откуда получим токен
+Вставим запрос на авторизацию, откуда получим токен. Вставить сюда можно свои реальные данные для входа в [app.purpleschool.ru](https://app.purpleschool.ru)
 
 `app / (app) / index.tsx`
 ```TSX
@@ -2508,9 +2511,9 @@ export default function MyCourses() {
 			<Text>{profile.profile?.name}</Text>
 ```
 
+Дальше нам стоит добавить запрос с сам стейт
 
-
-### Запросы в State
+### Запросы в State - Вход и Выход
 
 Опишем интерфейсы модули авторизации. На запрос мы должны отправлять почту и пароль, а в ответе получать токен доступа
 
@@ -2552,38 +2555,40 @@ const INITIAL_STATE: AuthState = {
 };  
   
 export const authAtom = atomWithStorage<AuthState>('auth', INITIAL_STATE, storage);  
-  
+
+// этот атом будет стирать токен из приложения и разлогинивать нас
+// тут уже хук вернёт первым параметром ничего, а вторым функцию разлогина 
 export const logoutAtom = atom(null, (_get, set) => {  
     set(authAtom, INITIAL_STATE);  
 });  
-  
-export const loginAtom = atom(  
+
+// атом авторизации
+export const loginAtom = atom(
+	// первым параметром мы передаём функцию-геттер наших данных по состояния
+	// первым параметром из хука этот атом будет возвращать данные по авторизации
     (get) => get(authAtom),  
+    // вторым параметром мы передадим функцию-сеттер данных в наш стейт
+    // этот метод вернёт хук для совершения авторизации
     async (_get, set, { email, password }: LoginRequest) => {  
        set(authAtom, {  
+          ...INITIAL_STATE,  
           isLoading: true,  
-          access_token: null,  
-          error: null,  
-       });
-       
+       });  
        try {  
           const { data } = await axios.post<AuthResponse>(API.login, {  
              email,  
              password,  
           });  
-          
           set(authAtom, {  
-             isLoading: false,  
+             ...INITIAL_STATE,  
              access_token: data.access_token,  
-             error: null,  
           });  
        } catch (error) {  
           if (error instanceof AxiosError) {  
-             set(authAtom, {
-                isLoading: false,  
-                access_token: null,  
+             set(authAtom, {  
+                ...INITIAL_STATE,  
                 error: error.response?.data.message,  
-             });
+             });  
           }  
        }  
     },  
@@ -2592,18 +2597,25 @@ export const loginAtom = atom(
 
 И добавим вызов метода `loginAtom` через `useAtom` (где вторым аргументом будет функция для запроса данных, подвязанная под стейт), чтобы получить `access_token` из `auth`
 
+Логаут мы можем организовать через `useSetAtom`, который не будет возвращать `get` (то есть текущий стейт), а отдаст только функцию-сеттер
+
 `app / (app) / index.tsx`
 ```TSX
 import { useAtom } from 'jotai';
 import { View, Text } from 'react-native';
-import { loginAtom } from '../../entities/auth/model/auth.state';
+import { logoutAtom, loginAtom } from '@/entities/auth';
 import { useEffect } from 'react';
 
 export default function MyCourses() {
 	const [auth, login] = useAtom(loginAtom);
+	const logout = useSetAtom(logoutAtom);
 
 	useEffect(() => {
-		login({ email: 'vasia@pupkin.ru', password: '12345678' });
+		login({ 
+			email: 'vasia@pupkin.ru', 
+			password: '12345678' 
+		})
+			.then(logout);
 	}, []);
 
 	return (
@@ -2614,107 +2626,14 @@ export default function MyCourses() {
 }
 ```
 
-
-
-
-
-
-
-### Выход
-
-
-
-`entities / auth / model / auth.state.ts`
-```TSX
-import { createJSONStorage, atomWithStorage } from 'jotai/utils';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { atom } from 'jotai';
-import { AuthResponse, LoginRequest } from './auth.intefaces';
-import axios, { AxiosError } from 'axios';
-import { API } from '../api/api';
-
-const storage = createJSONStorage<AuthState>(() => AsyncStorage);
-
-const INITIAL_STATE = {
-	access_token: null,
-	isLoading: false,
-	error: null,
-};
-
-export const authAtom = atomWithStorage<AuthState>('auth', INITIAL_STATE, storage);
-
-export const logoutAtom = atom(null, (_get, set) => {
-	set(authAtom, INITIAL_STATE);
-});
-
-export const loginAtom = atom(
-	(get) => get(authAtom),
-	async (_get, set, { email, password }: LoginRequest) => {
-		set(authAtom, {
-			isLoading: true,
-			access_token: null,
-			error: null,
-		});
-		try {
-			const { data } = await axios.post<AuthResponse>(API.login, {
-				email,
-				password,
-			});
-			set(authAtom, {
-				isLoading: false,
-				access_token: data.access_token,
-				error: null,
-			});
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				set(authAtom, {
-					isLoading: false,
-					access_token: null,
-					error: error.response?.data.message,
-				});
-			}
-		}
-	},
-);
-
-export interface AuthState {
-	access_token: string | null;
-	isLoading: boolean;
-	error: string | null;
-}
-```
-
-
-
-`app/(app)/index.tsx`
-```TSX
-import { useSetAtom } from 'jotai';
-import { View, Text } from 'react-native';
-import { logoutAtom } from '../../entities/auth/model/auth.state';
-import { useEffect } from 'react';
-
-export default function MyCourses() {
-	// const [auth, login] = useAtom(loginAtom);
-	const logout = useSetAtom(logoutAtom);
-
-	useEffect(() => {
-		logout();
-	}, []);
-
-	return (
-		<View>
-			<Text>index</Text>
-		</View>
-	);
-}
-```
-
-
-
-
 ### Программный редирект
 
+Если пользователь перешёл на любую другую страницу кроме логина и у него нет `access_token`, то нам нужно его переадресовать обратно на логин
 
+Для реализации этой задачи нам помогут: 
+- `useRootNavigationState`, который вернёт состояние навигации пользователя 
+- `useAtomValue`, который вернёт только стейт (данные из функции-геттера)
+- объект `router`, который работает как обычный браузерный роутер
 
 `app / (app) / index.tsx`
 ```TSX
@@ -2725,11 +2644,15 @@ import { useEffect } from 'react';
 import { router, useRootNavigationState } from 'expo-router';
 
 export default function MyCourses() {
+	// получили только данные из стейта
 	const { access_token } = useAtomValue(authAtom);
+	// получили состояние текущего роутинга
 	const state = useRootNavigationState();
 
 	useEffect(() => {
+		// если роутер не проинициализирован
 		if (!state?.key) return;
+		// если токена нет, то возвращаемся на логин
 		if (!access_token) {
 			router.replace('/login');
 		}
@@ -2742,14 +2665,6 @@ export default function MyCourses() {
 	);
 }
 ```
-
-
-
-
-
-
-
-
 
 ### Redirect компонент
 
