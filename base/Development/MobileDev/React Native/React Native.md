@@ -3009,11 +3009,11 @@ export default function AppRayout() {
 
 Добавляем новую иконку
 
-`assets/icons/menu.tsx`
+`assets / icons / menu.tsx`
 ```TSX
-import * as React from 'react';
 import Svg, { Rect } from 'react-native-svg';
-const MenuIcon = () => (
+
+export const MenuIcon = () => (
 	<Svg width={26} height={24} fill="none">
 		<Rect width={10} height={1.65} x={4.96} y={4} fill="#AFB2BF" rx={0.825} />
 		<Rect width={16} height={1.65} x={4.96} y={8.65} fill="#AFB2BF" rx={0.825} />
@@ -3021,46 +3021,24 @@ const MenuIcon = () => (
 		<Rect width={16} height={1.65} x={4.96} y={17.95} fill="#AFB2BF" rx={0.825} />
 	</Svg>
 );
-export default MenuIcon;
 ```
 
-Добавляем в токен новый цвет и размер шрифта
+Чтобы стилизовать `Drawer`, нужно воспользоваться пропсом `screenOptions`, который представляет из себя функцию, в которую попадает объект с методом `navigation`, который пригодится нам для навигации по приложению внутри дровера
 
-```TS
-export const Colors = {
-	black: '#16171D',
-	blackLight: '#1E1F29',
-	gray: '#AFB2BF',
-	violetDark: '#2E2D3D',
-	primary: '#6C38CC',
-	primaryHover: '#452481',
-	link: '#A97BFF',
-	white: '#FAFAFA',
-	red: '#CC384E',
-};
+Сама функция должна вернуть объект с описанными стилями
 
-export const Fonts = {
-	f16: 16,
-	f18: 18,
-	f20: 20,
-	regular: 'FiraSans',
-	semibold: 'FiraSansSemiBold',
-};
-```
-
-Стилизуем сам Drawer
-
-`app/(app)/_layout.tsx`
+`app / (app) / _layout.tsx`
 ```TSX
-import { Redirect } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
-import { useAtomValue } from 'jotai';
-import { authAtom } from '../../entities/auth/model/auth.state';
-import { Colors, Fonts } from '../../shared/tokens';
 import { Text } from 'react-native';
+import { Redirect } from 'expo-router';  
+import { Drawer } from 'expo-router/drawer';  
+import { useAtomValue } from 'jotai';  
+import { authAtom } from '@/entities/auth';  
+import { COLORS, FONTS } from '@/shared/const';
 
 export default function AppRayout() {
 	const { access_token } = useAtomValue(authAtom);
+	
 	if (!access_token) {
 		return <Redirect href="/login" />;
 	}
@@ -3068,22 +3046,27 @@ export default function AppRayout() {
 	return (
 		<Drawer
 			screenOptions={({ navigation }) => ({
+				// стили шпаки
 				headerStyle: {
-					backgroundColor: Colors.blackLight,
-					shadowColor: Colors.blackLight,
+					backgroundColor: COLORS.blackLight,
+					shadowColor: COLORS.blackLight,
 					shadowOpacity: 0,
 				},
+				// сюда передаётся левый контент дровера, которым и будет иконка
 				headerLeft: () => {
 					return <Text>!</Text>;
 				},
+				// стили заголовка шапки
 				headerTitleStyle: {
-					color: Colors.white,
+					color: COLORS.white,
 					fontFamily: 'FiraSans',
-					fontSize: Fonts.f20,
+					fontSize: FONTS.f20,
 				},
+				// выравнивание заголовка
 				headerTitleAlign: 'center',
+				// цвет контейнера
 				sceneContainerStyle: {
-					backgroundColor: Colors.black,
+					backgroundColor: COLORS.black,
 				},
 			})}
 		>
