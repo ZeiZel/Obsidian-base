@@ -3566,7 +3566,9 @@ export default function AppRayout() {
 
 ### Обновление Expo
 
+Полный гайд по обновлению экспо есть в документации [expo](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/)
 
+Обновляем стабильную версию экспо
 
 ```bash
 npm i expo@latest
