@@ -3461,7 +3461,7 @@ export default function Profile() {
 
 И теперь нам просто остаётся все прошлые элементы добавить в единый компонент кастомного дровера
 
-`entities / layout / ui / CustomDrawer / CustomDrawer.tsx`
+`widgets / layout / ui / CustomDrawer / CustomDrawer.tsx`
 ```TSX
 import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
 import { Image, StyleSheet, View } from 'react-native';
@@ -3571,7 +3571,7 @@ export default function AppRayout() {
 Обновляем стабильную версию экспо
 
 ```bash
-npm i expo@latest
+npm i expo@latest <rest expo plugins...>
 ```
 
 И вырезаем `expo-router/babel`, так как теперь для роутера он не нужен
@@ -3596,8 +3596,6 @@ module.exports = function (api) {
 
 ### Рефакторинг приложения
 
-Переместим `CustomDrawer` в виджеты
-
 Далее добавим плагин шрифтов в конфиг приложения
 
 `app.json`
@@ -3617,9 +3615,11 @@ module.exports = function (api) {
 ],
 ```
 
-Тут нужно поменять названия шрифтов на оригинальные из файлов
+Тут нужно поменять названия шрифтов на оригинальные из файлов. Оригинальное имя можно посмотреть в редакторе текста и взять наименование шрифта оттуда (а не просто наименование файла со шрифтом)
 
-`shared/tokens.ts`
+![](_png/Pasted%20image%2020250315140500.png)
+
+`shared / tokens.ts`
 ```TS
 export const Fonts = {
 	f16: 16,
@@ -3632,7 +3632,9 @@ export const Fonts = {
 };
 ```
 
-Добавляем имена шрифтов в ключи `useFonts`
+И теперь у нас есть два варианта с `useFonts`: 
+- мы можем удалить загрузку шрифтов из хука, так как у нас шрифт подтянется прямо во время билда
+- мы можем оставить этот хук и через него подгружать другие шрифты, если в приложении есть возможность менять шрифт либо если может понадобиться другой шрифт в другой ситуации, но не во время билда
 
 `app/_layout.tsx`
 ```TSX
@@ -3648,74 +3650,30 @@ const [loaded, error] = useFonts({
 
 `app/(app)/_layout.tsx`
 ```TSX
-import { Redirect } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
-import { useAtomValue } from 'jotai';
-import { authAtom } from '../../entities/auth/model/auth.state';
-import { Colors, Fonts } from '../../shared/tokens';
-import { MenuButton } from '../../features/layout/ui/MenuButton/MenuButton';
-import { CustomDrawer } from '../../widget/layout/ui/CustomDrawer/CustomDrawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
 
 export default function AppRayout() {
 	const { access_token } = useAtomValue(authAtom);
+
 	if (!access_token) {
-		return <Redirect href="/login" />;
+		return <Redirect href='/login' />;
 	}
 
 	return (
 		<GestureHandlerRootView style={styles.wrapper}>
-			<Drawer
-				drawerContent={(props) => <CustomDrawer {...props} />}
-				screenOptions={({ navigation }) => ({
-					headerStyle: {
-						backgroundColor: Colors.blackLight,
-						shadowColor: Colors.blackLight,
-						shadowOpacity: 0,
-					},
-					headerLeft: () => {
-						return <MenuButton navigation={navigation} />;
-					},
-					headerTitleStyle: {
-						color: Colors.white,
-						fontFamily: Fonts.regular,
-						fontSize: Fonts.f20,
-					},
-					headerTitleAlign: 'center',
-					sceneContainerStyle: {
-						backgroundColor: Colors.black,
-					},
-				})}
-			>
-				<Drawer.Screen
-					name="index"
-					options={{
-						title: 'Мои курсы',
-					}}
-				/>
-				<Drawer.Screen
-					name="profile"
-					options={{
-						title: 'Профиль',
-					}}
-				/>
-			</Drawer>
+			...
 		</GestureHandlerRootView>
 	);
 }
-
-const styles = StyleSheet.create({
-	wrapper: {
-		flex: 1,
-	},
-});
 ```
-
 
 ### ImagePicker
 
+Чтобы найти нужный нативный компонент, достаточно зайти в документацию экспо и оттуда подтянуть нужный элемент. Там есть гироскоп, сенсоры, пикеры, работа с клипбордом и так далее.
 
+![](_png/Pasted%20image%2020250315141120.png)
+
+Установим пикер изображений, который провайдит экспо из коробки
 
 ```bash
 npm i expo-image-picker
