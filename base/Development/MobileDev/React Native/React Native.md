@@ -3681,7 +3681,7 @@ npm i expo-image-picker
 
 
 
-`app/(app)/profile.tsx`
+`app / (app) / profile.tsx`
 ```TSX
 import { useState } from 'react';
 import { View, Text } from 'react-native';
@@ -3690,6 +3690,7 @@ import { Button } from '../../shared/Button/Button';
 
 export default function Profile() {
 	const [image, setImage] = useState(null);
+	
 	const pickAvatar = async () => {
 		const result = await ImagePicker.launchCameraAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -4304,49 +4305,11 @@ const styles = StyleSheet.create({
 
 
 
-`widget/user/ui/UserMenu/UserMenu.tsx`
-```TSX
-import { View, StyleSheet, Text } from 'react-native';
-import { User } from '../../../../entities/user/model/user.model';
-import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
-import { Avatar } from '../../../../entities/user/ui/Avatar/Avatar';
-
-export function UserMenu({ user }: { user: User | null }) {
-	if (!user) {
-		return;
-	}
-	return (
-		<View style={styles.container}>
-			<Avatar image={user.photo ?? null} />
-			<Text style={styles.name}>
-				{user.name} {user.surname}
-			</Text>
-		</View>
-	);
-}
-
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		gap: Gaps.g8,
-		marginTop: 30,
-		marginBottom: 40,
-	},
-	name: {
-		fontSize: Fonts.f16,
-		fontFamily: Fonts.regular,
-		color: Colors.white,
-	},
-});
-```
-
-
-
 ### Сохранение профиля
 
 
 
-`entities/user/model/user.state.ts`
+`entities / user / model / user.state.ts`
 ```TSX
 export const updateProfileAtom = atom(
 	async (get) => {
@@ -4386,7 +4349,7 @@ export const updateProfileAtom = atom(
 
 
 
-`app/(app)/profile.tsx`
+`app / (app) / profile.tsx`
 ```TSX
 import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
@@ -4436,7 +4399,9 @@ const styles = StyleSheet.create({
 });
 ```
 
+После выбора и обрезки фотограции, можно будет загрузить её на сервер
 
+![](_png/Pasted%20image%2020250315141624.png)
 
 ### Sharing API
 
