@@ -3064,7 +3064,7 @@ export default function AppRayout() {
 				},
 				// выравнивание заголовка
 				headerTitleAlign: 'center',
-				// цвет контейнера
+				// цвет бэкграунда
 				sceneContainerStyle: {
 					backgroundColor: COLORS.black,
 				},
@@ -3081,42 +3081,39 @@ export default function AppRayout() {
 }
 ```
 
-
-
-
-
 ### Кнопка открытия
 
 Добавляем фичу, которая будет выполнять действие закрытия бокового дровера
 
-`features/layout/ui/MenuButton/MenuButton.tsx`
+`features / layout / ui / MenuButton / MenuButton.tsx`
 ```TSX
 import { View, Pressable, PressableProps, StyleSheet } from 'react-native';
-import MenuIcon from '../../../../assets/icons/menu';
 import { useState } from 'react';
-import { Colors } from '../../../../shared/tokens';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function MenuButton({ navigation, ...props }: PressableProps & { navigation: any }) {
-	const [clicked, setClicked] = useState<boolean>(false);
-
-	return (
-		<Pressable
-			{...props}
-			onPressIn={() => setClicked(true)}
-			onPressOut={() => setClicked(false)}
-			onPress={() => navigation.toggleDrawer()}
-		>
-			<View
-				style={{
-					...styles.button,
-					backgroundColor: clicked ? Colors.violetDark : Colors.blackLight,
-				}}
-			>
-				<MenuIcon />
-			</View>
-		</Pressable>
-	);
+import { MenuIcon } from '@/shared/assets/icons';
+import { COLORS } from '@/shared/const';
+import { DrawerNavigationProp } from '@react-navigation/drawer';  
+  
+export function MenuButton<T extends DrawerNavigationProp<unknown>>({  
+    navigation,  
+    ...props  
+}: PressableProps & { navigation: T }) {  
+    const [clicked, setClicked] = useState<boolean>(false);  
+  
+    return (  
+       <Pressable          {...props}  
+          onPressIn={() => setClicked(true)}  
+          onPressOut={() => setClicked(false)}  
+          onPress={() => navigation.toggleDrawer()}  
+       >          <View  
+             style={{  
+                ...styles.button,  
+                backgroundColor: clicked ? COLORS.violetDark : COLORS.blackLight,  
+             }}  
+          >  
+             <MenuIcon />  
+          </View>  
+       </Pressable>  
+    );  
 }
 
 const styles = StyleSheet.create({
@@ -3133,15 +3130,9 @@ const styles = StyleSheet.create({
 
 `app/(app)/_layout.tsx`
 ```TSX
-import { Redirect } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
-import { useAtomValue } from 'jotai';
-import { authAtom } from '../../entities/auth/model/auth.state';
-import { Colors, Fonts } from '../../shared/tokens';
-import { MenuButton } from '../../features/layout/ui/MenuButton/MenuButton';
-
 export default function AppRayout() {
 	const { access_token } = useAtomValue(authAtom);
+	
 	if (!access_token) {
 		return <Redirect href="/login" />;
 	}
@@ -3149,209 +3140,30 @@ export default function AppRayout() {
 	return (
 		<Drawer
 			screenOptions={({ navigation }) => ({
-				headerStyle: {
-					backgroundColor: Colors.blackLight,
-					shadowColor: Colors.blackLight,
-					shadowOpacity: 0,
-				},
+				...
 				headerLeft: () => {
 					return <MenuButton navigation={navigation} />;
 				},
 ```
 
-
-
-
-
-
-### Кастомный Drawer
-
-
-
-`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
-```TSX
-import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { Colors } from '../../../../shared/tokens';
-import { CustomLink } from '../../../../shared/CustomLink/CustomLink';
-export function CustomDrawer(props: DrawerContentComponentProps) {
-	return (
-		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
-			<View>
-				<Text>Текст</Text>
-			</View>
-			<View>
-				<CustomLink text="Выход" href={'/login'} />
-				<Image source={require('../../../../assets/logo.png')} resizeMode="contain" />
-			</View>
-		</DrawerContentScrollView>
-	);
-}
-const styles = StyleSheet.create({
-	scrollView: {
-		flex: 1,
-		backgroundColor: Colors.black,
-	},
-});
-```
-
-Добавляем в лейаут наш кастомный контент дровера
-
-`app/(app)/_layout.tsx`
-```TSX
-import { CustomDrawer } from '../../entities/layout/ui/CustomDrawer/CustomDrawer';
-
-export default function AppRayout() {
-	const { access_token } = useAtomValue(authAtom);
-	if (!access_token) {
-		return <Redirect href="/login" />;
-	}
-
-	return (
-		<Drawer
-			drawerContent={(props) => <CustomDrawer {...props} />}
-			screenOptions={({ navigation }) => ({
-```
-
-
-
-
-### Стилизация Drawer
-
-Добавляем иконку закрытия
-
-`assets/icons/close.tsx`
-```TSX
-import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
-const CloseIcon = () => (
-	<Svg width={24} height={24} fill="none">
-		<Path stroke="#AFB2BF" strokeLinecap="round" strokeWidth={1.5} d="M19 5 5 19M5 5l14 14" />
-	</Svg>
-);
-export default CloseIcon;
-```
-
-И фичу закрытия дровера
-
-`features/layout/ui/CloseDrawer/CloseDrawer.tsx`
-```TSX
-import { View, Pressable, StyleSheet } from 'react-native';
-import CloseIcon from '../../../../assets/icons/close';
-import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
-
-export function CloseDrawer(navigation: DrawerNavigationHelpers) {
-	return (
-		<Pressable onPress={() => navigation.closeDrawer()}>
-			<View style={styles.button}>
-				<CloseIcon />
-			</View>
-		</Pressable>
-	);
-}
-
-const styles = StyleSheet.create({
-	button: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		position: 'absolute',
-		top: 20,
-		right: 20,
-	},
-});
-```
-
-И завершаем кастомный дровер, добавив в него возможность выйти из приложения и из дровера
-
-`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
-```TSX
-import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { Colors } from '../../../../shared/tokens';
-import { CustomLink } from '../../../../shared/CustomLink/CustomLink';
-import { CloseDrawer } from '../../../../features/layout/ui/CloseDrawer/CloseDrawer';
-import { useSetAtom } from 'jotai';
-import { logoutAtom } from '../../../auth/model/auth.state';
-
-export function CustomDrawer(props: DrawerContentComponentProps) {
-	const logout = useSetAtom(logoutAtom);
-	return (
-		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
-			<View>
-			<View style={styles.content}>
-				<CloseDrawer {...props.navigation} />
-				<Text>Текст</Text>
-			</View>
-			<View>
-				<CustomLink text="Выход" href={'/login'} />
-				<Image source={require('../../../../assets/logo.png')} resizeMode="contain" />
-			<View style={styles.footer}>
-				<CustomLink text="Выход" onPress={() => logout()} href={'/login'} />
-				<Image
-					style={styles.logo}
-					source={require('../../../../assets/logo.png')}
-					resizeMode="contain"
-				/>
-			</View>
-		</DrawerContentScrollView>
-	);
-}
-
-const styles = StyleSheet.create({
-	scrollView: {
-		flex: 1,
-		backgroundColor: Colors.black,
-	},
-	content: {
-		flex: 1,
-	},
-	footer: {
-		gap: 50,
-		alignItems: 'center',
-		marginBottom: 40,
-	},
-	logo: {
-		width: 160,
-	},
-});
-```
-
-
-
+![](_png/Pasted%20image%2020250315124337.png)
 
 ### Получение данных профиля
 
-
-
-`shared/api.ts`
-```TS
-export const PREFIX = 'https://purpleschool.ru/api-v2';
-```
-
+Добавляем путь апишки на получение данных профиля
 
 `entities/user/api/api.ts`
 ```TS
-import { PREFIX } from '../../../shared/api';
+import { PREFIX } from '@/shared/api';
 
 export const API = {
 	profile: `${PREFIX}/user/profile`,
 };
 ```
 
-
-
-`entities/auth/api/api.ts`
-```TSX
-import { PREFIX } from '../../../shared/api';
-
-export const API = {
-	login: `${PREFIX}/auth/login`,
-};
-```
-
 Добавляем атом загрузки профиля пользователя `loadProfileAtom`
 
-`entities/user/model/user.state.ts`
+`entities / user / model / user.state.ts`
 ```TSX
 import { atom } from 'jotai';
 import { User } from './user.model';
@@ -3406,31 +3218,49 @@ export interface UserState {
 }
 ```
 
-Добавляем загрузку профиля `loadProfileAtom` и выводим имя пользователя
+### Кнопка закрытия
 
-`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
+Добавляем иконку закрытия
+
+`shared / assets / icons / close.tsx`
 ```TSX
-import { CloseDrawer } from '../../../../features/layout/ui/CloseDrawer/CloseDrawer';
-import { useAtom, useSetAtom } from 'jotai';
-import { logoutAtom } from '../../../auth/model/auth.state';
-import { loadProfileAtom } from '../../../user/model/user.state';
-import { useEffect } from 'react';
+import Svg, { Path } from 'react-native-svg';
 
-export function CustomDrawer(props: DrawerContentComponentProps) {
-	const logout = useSetAtom(logoutAtom);
-	const [profile, loadProfile] = useAtom(loadProfileAtom);
-	useEffect(() => {
-		loadProfile();
-	}, []);
-
-	return (
-		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
-			<View style={styles.content}>
-				<CloseDrawer {...props.navigation} />
-				<Text>{profile.profile?.name}</Text>
-			</View>
+export const CloseIcon = () => (
+	<Svg width={24} height={24} fill="none">
+		<Path stroke="#AFB2BF" strokeLinecap="round" strokeWidth={1.5} d="M19 5 5 19M5 5l14 14" />
+	</Svg>
+);
 ```
 
+И фичу закрытия дровера. Закрываться будет дровер опять же через вызов `closeDrawer` объекта `navigation`
+
+`features / layout / ui / CloseDrawer / CloseDrawer.tsx`
+```TSX
+import { View, Pressable, StyleSheet } from 'react-native';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
+import { CloseIcon } from '@/shared/assets/icons';
+
+export function CloseDrawer(navigation: DrawerNavigationHelpers) {
+	return (
+		<Pressable onPress={() => navigation.closeDrawer()}>
+			<View style={styles.button}>
+				<CloseIcon />
+			</View>
+		</Pressable>
+	);
+}
+
+const styles = StyleSheet.create({
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'absolute',
+		top: 20,
+		right: 20,
+	},
+});
+```
 
 ### Компонент пользователя
 
@@ -3438,86 +3268,53 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
 
 ![](_png/Pasted%20image%2020250217182526.png)
 
+И добавляем компонент, который будет отображать меню пользователя
 
-
-`entities/user/ui/UserMenu/UserMenu.tsx`
+`entities / user / ui / UserMenu / UserMenu.tsx`
 ```TSX
-import { View, Image, StyleSheet, Text } from 'react-native';
-import { User } from '../../model/user.model';
-import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
-export function UserMenu({ user }: { user: User | null }) {
-	if (!user) {
-		return;
-	}
-	return (
-		<View style={styles.container}>
-			{user.photo ? (
-				<Image
-					style={styles.image}
-					source={{
-						uri: user.photo,
-					}}
-				/>
-			) : (
-				<Image source={require('../../../../assets/images/avatar.png')} />
-			)}
-			<Text style={styles.name}>
-				{user.name} {user.surname}
-			</Text>
-		</View>
-	);
-}
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		gap: Gaps.g8,
-		marginTop: 30,
-	},
-	image: {
-		width: 70,
-		height: 70,
-		borderRadius: 35,
-	},
-	name: {
-		fontSize: Fonts.f16,
-		fontFamily: Fonts.regular,
-		color: Colors.white,
-	},
+import { View, StyleSheet, Text } from 'react-native';  
+import { User } from '@/entities/user';  
+import { COLORS, FONTS, GAPS } from '@/shared/const';  
+import { Avatar } from '@/entities/user';  
+  
+export function UserMenu({ user }: { user: User | null }) {  
+    return (       
+	    user && (  
+          <View style={styles.container}>  
+             <Avatar image={user.photo ?? null} />  
+             <Text style={styles.name}>  
+                {user.name} {user.surname}  
+             </Text>  
+          </View>  
+       )  
+    );  
+}  
+  
+const styles = StyleSheet.create({  
+    container: {  
+       alignItems: 'center',  
+       gap: GAPS.g8,  
+       marginTop: 30,  
+       marginBottom: 40,  
+    },  
+    name: {  
+       fontSize: FONTS.f16,  
+       fontFamily: FONTS.regular,  
+       color: COLORS.white,  
+    },  
 });
 ```
-
-Прокидываем пользователя в наш компонент `UserMenu`
-
-`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
-```TSX
-import { UserMenu } from '../../../user/ui/UserMenu/UserMenu';
-
-export function CustomDrawer(props: DrawerContentComponentProps) {
-	const logout = useSetAtom(logoutAtom);
-	const [profile, loadProfile] = useAtom(loadProfileAtom);
-
-	useEffect(() => {
-		loadProfile();
-	}, []);
-
-	return (
-		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
-			<View style={styles.content}>
-				<CloseDrawer {...props.navigation} />
-				<UserMenu user={profile.profile} />
-			</View>
-```
-
 
 
 ### Компонент меню
 
+Добавляем иконки профиля и курсов
 
 `assets/menu/profile.tsx`
 ```TSX
-import * as React from 'react';
 import Svg, { Circle, Path } from 'react-native-svg';
-const ProfileIcon = () => (
+
+export const ProfileIcon = () => (
 	<Svg width={24} height={24} fill="none">
 		<Circle cx={12} cy={7} r={4.25} stroke="#AFB2BF" strokeWidth={1.5} />
 		<Path
@@ -3527,16 +3324,13 @@ const ProfileIcon = () => (
 		/>
 	</Svg>
 );
-export default ProfileIcon;
 ```
-
-
 
 `assets/menu/courses.tsx`
 ```TSX
-import * as React from 'react';
 import Svg, { G, Path, Defs, ClipPath } from 'react-native-svg';
-const CoursesIcon = () => (
+
+export const CoursesIcon = () => (
 	<Svg width={24} height={24} fill="none">
 		<G clipPath="url(#a)">
 			<Path
@@ -3557,111 +3351,81 @@ const CoursesIcon = () => (
 		</Defs>
 	</Svg>
 );
-export default CoursesIcon;
 ```
 
+`MenuItem` будет представлять из себя элемент списка пагинации внутри дровера. Сюда мы будем передавать полностью все пропсы из дровера, чтобы контролировать пагинацию и реагировать на неё.
 
-
-`entities/layout/ui/MenuItem/MenuItem.tsx`
+`entities / layout / ui / MenuItem / MenuItem.tsx`
 ```TSX
-import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
-import { ReactNode, useState } from 'react';
-import { Pressable, PressableProps, Text, View } from 'react-native';
-interface MenuItemProps {
-	navigation: DrawerNavigationHelpers;
-	icon: ReactNode;
-	text: string;
-	path: string;
-}
-export function MenuItem({
-	navigation,
-	icon,
-	text,
-	path,
-	...props
-}: MenuItemProps & PressableProps) {
-	const [clicked, setClicked] = useState<boolean>(false);
-	return (
-		<Pressable
-			{...props}
-			onPress={() => navigation.navigate(path)}
-			onPressIn={() => setClicked(true)}
-			onPressOut={() => setClicked(false)}
-		>
-			<View>
-				{icon}
-				<Text>{text}</Text>
-			</View>
-		</Pressable>
-	);
-}
+import { DrawerContentComponentProps } from '@react-navigation/drawer/lib/typescript/src/types';  
+import { ReactNode, useState } from 'react';  
+import { Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';  
+import { COLORS, FONTS, GAPS } from '@/shared/const';
+  
+interface MenuItemProps {  
+    drawer: DrawerContentComponentProps;  
+    icon: ReactNode;  
+    text: string;  
+    path: string;  
+}  
+  
+export function MenuItem({ drawer, icon, text, path, ...props }: MenuItemProps & PressableProps) {
+	// проверяем состояние клика пользователя по элементу
+    const [clicked, setClicked] = useState<boolean>(false);
+    // сверяемся с пагинацией из дровера, чтобы отобразить элемент активным
+    const isActive = drawer.state.routes[drawer.state.index].name === path;  
+  
+    return (  
+       <Pressable          
+	      {...props}  
+          onPress={() => drawer.navigation.navigate(path)}  
+          onPressIn={() => setClicked(true)}  
+          onPressOut={() => setClicked(false)}  
+       >    
+		<View  
+             style={{  
+                ...styles.menu,  
+                // красим бордер, когда находимся на нужной странице
+                borderColor: isActive ? COLORS.primary : COLORS.black, 
+            // меняем цвет бэкграунда при плике и смене активной страницы 
+                backgroundColor: clicked || isActive ? COLORS.violetDark : COLORS.black,  
+             }}  
+          >  
+             {icon}  
+             <Text style={styles.text}>{text}</Text>  
+          </View>  
+       </Pressable>  
+    );  
+}  
+  
+const styles = StyleSheet.create({  
+    menu: {  
+       flexDirection: 'row',  
+       gap: GAPS.g20,  
+       paddingHorizontal: 24,  
+       paddingVertical: 16,  
+	   // задали ширину дефолтно, чтобы просто потом покрасить этот отсутп для элемента
+       borderRightWidth: 5,  
+       alignItems: 'center',  
+    },  
+    text: {  
+       color: COLORS.white,  
+       fontSize: FONTS.f16,  
+       fontFamily: FONTS.regular,  
+    },  
+});
 ```
 
-
-
-`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
-```TSX
-import CoursesIcon from '../../../../assets/menu/courses';
-import ProfileIcon from '../../../../assets/menu/profile';
-import { MenuItem } from '../MenuItem/MenuItem';
-const MENU = [
-	{ text: 'Курсы', icon: <CoursesIcon />, path: '/(app)' },
-	{ text: 'Профиль', icon: <ProfileIcon />, path: '/profile' },
-];
-
-export function CustomDrawer(props: DrawerContentComponentProps) {
-	const logout = useSetAtom(logoutAtom);
-	const [profile, loadProfile] = useAtom(loadProfileAtom);
-
-	useEffect(() => {
-		loadProfile();
-	}, []);
-
-	return (
-		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
-			<View style={styles.content}>
-				<CloseDrawer {...props.navigation} />
-				<UserMenu user={profile.profile} />
-				{MENU.map((menu) => (
-					<MenuItem key={menu.path} {...menu} navigation={props.navigation} />
-				))}
-			</View>
-			<View style={styles.footer}>
-				<CustomLink text="Выход" onPress={() => logout()} href={'/login'} />
-				<Image
-					style={styles.logo}
-					source={require('../../../../assets/logo.png')}
-					resizeMode="contain"
-				/>
-			</View>
-		</DrawerContentScrollView>
-	);
-}
-```
-
-
-
-
+![](_png/Pasted%20image%2020250315130431.png)
 
 ### Навигация
 
+Добавляем страницу профиля
 
-
-`entities/user/ui/UserMenu/UserMenu.tsx`
-```TSX
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		gap: Gaps.g8,
-		marginTop: 30,
-		marginBottom: 40,
-	},
-```
-
-
-`app/(app)/profile.tsx`
+`app / (app) / profile.tsx`
 ```TSX
 import { View, Text } from 'react-native';
+
 export default function Profile() {
 	return (
 		<View>
@@ -3671,9 +3435,9 @@ export default function Profile() {
 }
 ```
 
+И добавляем эту страницу в лейаут для отображения
 
-
-`app/(app)/_layout.tsx`
+`app / (app) / _layout.tsx`
 ```TSX
 >
 	<Drawer.Screen
@@ -3691,77 +3455,46 @@ export default function Profile() {
 </Drawer>
 ```
 
+Дальше останется только в меню добавить ссылку на этот роут
 
+### Кастомный Drawer
 
-`entities/layout/ui/MenuItem/MenuItem.tsx`
+И теперь нам просто остаётся все прошлые элементы добавить в единый компонент кастомного дровера
+
+`entities / layout / ui / CustomDrawer / CustomDrawer.tsx`
 ```TSX
-import { DrawerContentComponentProps } from '@react-navigation/drawer/lib/typescript/src/types';
-import { ReactNode, useState } from 'react';
-import { Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
-import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
+import { DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
+import { Image, StyleSheet, View } from 'react-native';
+import { COLORS } from '@/shared/const';
+import { CustomLink } from '@/shared/ui';
+import { CloseDrawer } from '@/features/layout';
+import { useAtom, useSetAtom } from 'jotai';
+import { logoutAtom } from '@/entities/auth';
+import { loadProfileAtom } from '@/entities/user';
+import { useEffect } from 'react';
+import { UserMenu } from '@/widget/user';
+import { ProfileIcon, CoursesIcon } from '@/shared/assets/icons';
+import LogoIcon from '@/shared/assets/logo.png';
+import { MenuItem } from '@/entities/layout';
 
-interface MenuItemProps {
-	drawer: DrawerContentComponentProps;
-	icon: ReactNode;
-	text: string;
-	path: string;
-}
-
-export function MenuItem({ drawer, icon, text, path, ...props }: MenuItemProps & PressableProps) {
-	const [clicked, setClicked] = useState<boolean>(false);
-	const isActive = drawer.state.routes[drawer.state.index].name === path;
-
-	return (
-		<Pressable
-			{...props}
-			onPress={() => drawer.navigation.navigate(path)}
-			onPressIn={() => setClicked(true)}
-			onPressOut={() => setClicked(false)}
-		>
-			<View
-				style={{
-					...styles.menu,
-					borderColor: isActive ? Colors.primary : Colors.black,
-					backgroundColor: clicked || isActive ? Colors.violetDark : Colors.black,
-				}}
-			>
-				{icon}
-				<Text style={styles.text}>{text}</Text>
-			</View>
-		</Pressable>
-	);
-}
-
-const styles = StyleSheet.create({
-	menu: {
-		flexDirection: 'row',
-		gap: Gaps.g20,
-		paddingHorizontal: 24,
-		paddingVertical: 16,
-		borderRightWidth: 5,
-		alignItems: 'center',
-	},
-	text: {
-		color: Colors.white,
-		fontSize: Fonts.f16,
-		fontFamily: Fonts.regular,
-	},
-});
-```
-
-И сейчас добавляем пути в нашем приложени через мапу
-
-`entities/layout/ui/CustomDrawer/CustomDrawer.tsx`
-```TSX
+// список элементов меню
 const MENU = [
 	{ text: 'Курсы', icon: <CoursesIcon />, path: 'index' },
 	{ text: 'Профиль', icon: <ProfileIcon />, path: 'profile' },
 ];
 
+/**
+ *
+ * Элемент кастомного дровера
+ *
+ */
 export function CustomDrawer(props: DrawerContentComponentProps) {
+	// тут добавляем выход из приложения
 	const logout = useSetAtom(logoutAtom);
+	// тут получаем профиль пользователя
 	const [profile, loadProfile] = useAtom(loadProfileAtom);
 
+	// загружаем профиль
 	useEffect(() => {
 		loadProfile();
 	}, []);
@@ -3769,18 +3502,65 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
 	return (
 		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView}>
 			<View style={styles.content}>
+				{/** передаём сюда полностью объект навигации */}
 				<CloseDrawer {...props.navigation} />
+				{/** передаём профиль пользователя */}
 				<UserMenu user={profile.profile} />
+				{/** рисуем элементы меню и передаём туда пропсы дровера */}
 				{MENU.map((menu) => (
-					<MenuItem key={menu.path} {...menu} navigation={props.navigation} />
 					<MenuItem key={menu.path} {...menu} drawer={props} />
 				))}
 			</View>
+			<View style={styles.footer}>
+				{/** логаут */}
+				<CustomLink text='Выход' onPress={() => logout()} href={'/login'} />
+				<Image style={styles.logo} source={LogoIcon} resizeMode='contain' />
+			</View>
+		</DrawerContentScrollView>
+	);
+}
+
+const styles = StyleSheet.create({
+	scrollView: {
+		flex: 1,
+		backgroundColor: COLORS.black,
+	},
+	content: {
+		flex: 1,
+	},
+	footer: {
+		gap: 50,
+		alignItems: 'center',
+		marginBottom: 40,
+	},
+	logo: {
+		width: 160,
+	},
+});
 ```
 
+Добавляем в лейаут наш кастомный контент дровера через пропс `drawerContent`
 
+`app/(app)/_layout.tsx`
+```TSX
+import { CustomDrawer } from '@/widget/layout';
 
+export default function AppRayout() {
+	const { access_token } = useAtomValue(authAtom);
+	
+	if (!access_token) {
+		return <Redirect href="/login" />;
+	}
 
+	return (
+		<Drawer
+			drawerContent={(props) => <CustomDrawer {...props} />}
+			screenOptions={({ navigation }) => ({
+```
+
+И теперь мы имеем красивый кастомный дровер с пагинацией по страницам, кастомной кнопкой закрытия, логаутом и подгрузкой профиля
+
+![](_png/Pasted%20image%2020250315125751.png)
 
 ## Нативные возможности
 
