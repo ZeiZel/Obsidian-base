@@ -3919,7 +3919,7 @@ export const UploadIcon = (props: SvgProps) => (
 );
 ```
 
-Выделяем пикер изображений в отдельный шейред компонент
+Выделяем пикер изображений в отдельный шейред компонент, который будет принимать функцию-сеттер ссылки на изображение и функцию-триггер при ошибке
 
 `shared / ImageUploader / ImageUploader.tsx`
 ```TSX
@@ -3957,25 +3957,6 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
 		return true;
 	};
 
-	const upload = async () => {
-		const isPermissionGranted = await verifyMediaPermissions();
-		if (!isPermissionGranted) {
-			onError('Недостаточно прав');
-			return;
-		}
-		const asset = await pickImage();
-		if (!asset) {
-			onError('Не выбрано изображение');
-			return;
-		}
-		const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? '');
-		if (!uploadedUrl) {
-			onError('Не удалось загрузить изображение');
-			return;
-		}
-		onUpload(uploadedUrl);
-	};
-
 	const pickImage = async () => {
 		const result = await launchImageLibraryAsync({
 			mediaTypes: MediaTypeOptions.Images,
@@ -3989,26 +3970,18 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
 		return result.assets[0];
 	};
 
-	const uploadToServer = async (uri: string, name: string) => {
-		const formData = new FormData();
-		formData.append('files', {
-			uri,
-			name,
-			type: 'image/jpeg',
-		});
-		try {
-			const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
-			return data.urls.original;
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				console.error(error);
-			}
-			return null;
+	const upload = async () => {
+		const isPermissionGranted = await verifyMediaPermissions();
+		if (!isPermissionGranted) {
+			onError('Недостаточно прав');
+			return;
 		}
+		const asset = await pickImage();
+		if (!asset) {
+			onError('Не выбрано изображение');
+			return;
+		}
+		onUpload(asset.uri);
 	};
 
 	return (
@@ -4045,8 +4018,9 @@ const styles = StyleSheet.create({
 ```TSX
 import { useState } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { ImageUploader } from '../../shared/ImageUploader/ImageUploader';
-import { Gaps } from '../../shared/tokens';
+import { Button, ImageUploader } from '@/shared/ui';  
+import { GAPS } from '@/shared/const';
+import AvatarIcon from '@/shared/assets/images/avatar.png';
 
 export default function Profile() {
 	const [image, setImage] = useState<string | null>(null);
@@ -4061,7 +4035,7 @@ export default function Profile() {
 					}}
 				/>
 			) : (
-				<Image source={require('../../assets/images/avatar.png')} />
+				<Image source={AvatarIcon} />
 			)}
 			<ImageUploader onUpload={setImage} />
 		</View>
@@ -4084,18 +4058,29 @@ const styles = StyleSheet.create({
 });
 ```
 
+Теперь при клике на "загрузить изображение", мы вызываем пикер изображений из нашей галереи
 
+![](_png/Pasted%20image%2020250316175324.png)
 
 ### Загрузка на сервер
 
+Сейчас будет реализована загрузка изображения на сервер. Сделано это будет прямо в шейред-компоненте чего делать не нужно, но в ==рамках курса и так пойдёт :)==
+
+И у нас есть два пути загрузки изображений:
+1. нативный асинхронный загрузчик из expo: `import { uploadAsync } from 'expo-file-system'`
+2. загрузка изображений через `axios`
+
+Пойдём мы по второму пути и реализуем загрузку файла через `form-data`.
+
+Изначально RN не умеет работать с `multipart/form-data`, который зачастую нужен для отправки изображений на сервер, поэтому нужно скачать отдельный пакет
 
 ```bash
 npm i form-data
 ```
 
+Добавим интерфейс загрузки прямо в наш шейред компонент
 
-
-`shared/ImageUploader/ImageUploader.interface.ts`
+`shared / ImageUploader / ImageUploader.interface.ts`
 ```TSX
 export interface UploadResponse {
 	urls: {
@@ -4105,9 +4090,9 @@ export interface UploadResponse {
 }
 ```
 
+Апишка загрузки изображения
 
-
-`shared/api.ts`
+`shared / api.ts`
 ```TSX
 export const FILE_API = {
 	uploadImage: `${PREFIX}/files/upload-image?folder=demo`,
@@ -4116,89 +4101,142 @@ export const FILE_API = {
 
 Добавляем метод `uploadToServer`, которым мы будем загружать на сервер новую аватарку
 
-`shared/ImageUploader/ImageUploader.tsx`
+`shared / ImageUploader / ImageUploader.tsx`
 ```TSX
-import {
-	MediaTypeOptions,
-	launchImageLibraryAsync,
-	useMediaLibraryPermissions,
-	PermissionStatus,
-} from 'expo-image-picker';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
-import UploadIcon from '../../assets/icons/upload';
-import { Colors, Fonts, Gaps, Radius } from '../tokens';
-import FormData from 'form-data';
-import axios, { AxiosError } from 'axios';
-import { FILE_API } from '../api';
-import { UploadResponse } from './ImageUploader.interface';
+import {  
+    MediaTypeOptions,  
+    launchImageLibraryAsync,  
+    useMediaLibraryPermissions,  
+    PermissionStatus,  
+} from 'expo-image-picker';  
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';  
+import { COLORS, FONTS, GAPS, RADIUS } from '../../const';  
+import FormData from 'form-data';  
+import axios, { AxiosError } from 'axios';  
+import { FILE_API } from '../../api';  
+import { UploadResponse } from './ImageUploader.interface';  
+import { UploadIcon } from '@/shared/assets/icons';  
+  
+interface ImageUploaderProps {  
+    onUpload: (uri: string) => void;  
+    onError: (error: string) => void;  
+}  
+  
+export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {  
+    const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();  
+  
+    const verifyMediaPermissions = async () => {  
+       if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {  
+          const res = await requestLibraryPermission();  
+          return res.granted;  
+       }  
+       if (libraryPermissions?.status === PermissionStatus.DENIED) {  
+          Alert.alert('Недостаточно прав для доступа к фото');  
+          return false;  
+       }  
+       return true;  
+    };  
 
-interface ImageUploaderProps {
-	onUpload: (uri: string) => void;
-}
+	const pickImage = async () => {  
+       const result = await launchImageLibraryAsync({  
+          mediaTypes: MediaTypeOptions.Images,  
+          allowsEditing: true,  
+          aspect: [1, 1],  
+          quality: 0.5,  
+       });  
+       if (!result.assets) {  
+          return null;  
+       }  
+       return result.assets[0];  
+    }; 
+  
+    const uploadToServer = async (uri: string, name: string) => {  
+	   // создаём новую форм-дату, которая будет похожа на браузерную
+       const formData = new FormData();  
+       // и аппендим сюда изображение
+       formData.append('files', {  
+          uri,  
+          name,  
+          type: 'image/jpeg',  
+       });  
+       
+       try {
+	       // совершаем запрос и передаём сюда
+          const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {  
+             headers: {  
+                'Content-Type': 'multipart/form-data',  
+             },  
+          });  
+          return data.urls.original;  
+       } catch (error) {  
+          if (error instanceof AxiosError) {  
+             console.error(error);  
+          }  
+          return null;  
+       }  
+    };  
 
-export function ImageUploader({ onUpload }: ImageUploaderProps) {
-	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
-
-	const varifyMediaPermissions = async () => {
-		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
-			const res = await requestLibraryPermission();
-			return res.granted;
-		}
-		if (libraryPermissions?.status === PermissionStatus.DENIED) {
-			Alert.alert('Недостаточно прав для доступа к фото');
-			return false;
-		}
-		return true;
-	};
-
-	const pickImage = async () => {
-		const isPermissionGranted = await varifyMediaPermissions();
-		if (!isPermissionGranted) {
-			return;
-		}
-		const result = await launchImageLibraryAsync({
-			mediaTypes: MediaTypeOptions.Images,
-			allowsEditing: true,
-			aspect: [1, 1],
-			quality: 0.5,
-		});
-		if (!result.assets) {
-			return;
-		}
-		await uploadToServer(result.assets[0].uri, result.assets[0].fileName ?? '');
-	};
-
-	const uploadToServer = async (uri: string, name: string) => {
-		const formData = new FormData();
-		formData.append('files', {
-			uri,
-			name,
-			type: 'image/jpeg',
-		});
-		try {
-			const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
-			onUpload(data.urls.original);
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				console.error(error);
-			}
-		}
-	};
+	const upload = async () => {  
+       const isPermissionGranted = await verifyMediaPermissions();  
+       if (!isPermissionGranted) {  
+          onError('Недостаточно прав');  
+          return;  
+       }  
+       const asset = await pickImage();  
+       if (!asset) {  
+          onError('Не выбрано изображение');  
+          return;  
+       }  
+       const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? '');  
+       if (!uploadedUrl) {  
+          onError('Не удалось загрузить изображение');  
+          return;  
+       }  
+       onUpload(uploadedUrl);  
+    };
+  
+    return (  
+       <Pressable onPress={upload}>  
+          <View style={styles.container}>  
+             <UploadIcon />  
+             <Text style={styles.text}>Загрузить изображение</Text>  
+          </View>  
+       </Pressable>  
+    );  
+}  
+  
+const styles = StyleSheet.create({  
+    container: {  
+       flexDirection: 'row',  
+       gap: GAPS.g8,  
+       backgroundColor: COLORS.violetDark,  
+       borderRadius: RADIUS.r10,  
+       paddingHorizontal: 20,  
+       paddingVertical: 17,  
+       alignItems: 'center',  
+    },  
+    text: {  
+       fontSize: FONTS.f14,  
+       fontFamily: FONTS.regular,  
+       color: COLORS.white,  
+    },  
+});
 ```
 
+Теперь изображение загружается на cdn с изображениями
 
+![](_png/Pasted%20image%2020250316180609.png)
 
 ### Улучшаем код
 
+Выделим отображение аватарки в отдельный компонент
 
-
-`entities/user/ui/Avatar/Avatar.tsx`
+`entities / user / ui / Avatar / Avatar.tsx`
 ```TSX
 import { Image, StyleSheet } from 'react-native';
+
+import AvatarIcon from '@/shared/assets/images/avatar.png';
+
 export function Avatar({ image }: { image: string | null }) {
 	return (
 		<>
@@ -4210,11 +4248,12 @@ export function Avatar({ image }: { image: string | null }) {
 					}}
 				/>
 			) : (
-				<Image source={require('../../../../assets/images/avatar.png')} />
+				<Image source={AvatarIcon} />
 			)}
 		</>
 	);
 }
+
 const styles = StyleSheet.create({
 	image: {
 		width: 70,
@@ -4224,8 +4263,9 @@ const styles = StyleSheet.create({
 });
 ```
 
+Далее добавляем сюда наш новый компонент аватарки
 
-`app/(app)/profile.tsx`
+`app / (app) / profile.tsx`
 ```TSX
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';

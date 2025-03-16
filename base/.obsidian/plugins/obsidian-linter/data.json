@@ -286,7 +286,7 @@
     "aliasArrayStyle": "single-line",
     "tagArrayStyle": "single-line",
     "minimumNumberOfDollarSignsToBeAMathBlock": 2,
-    "escapeCharacter": "\"",
+    "escapeCharacter": "'",
     "removeUnnecessaryEscapeCharsForMultiLineArrays": false
   }
 }
