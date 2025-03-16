@@ -3268,6 +3268,40 @@ const styles = StyleSheet.create({
 
 ![](_png/Pasted%20image%2020250217182526.png)
 
+Выделим отображение аватарки в отдельный компонент. Здесь мы должны заранее поддержать переданное извне изображение
+
+`entities / user / ui / Avatar / Avatar.tsx`
+```TSX
+import { Image, StyleSheet } from 'react-native';
+
+import AvatarIcon from '@/shared/assets/images/avatar.png';
+
+export function Avatar({ image }: { image: string | null }) {
+	return (
+		<>
+			{image ? (
+				<Image
+					style={styles.image}
+					source={{
+						uri: image,
+					}}
+				/>
+			) : (
+				<Image source={AvatarIcon} />
+			)}
+		</>
+	);
+}
+
+const styles = StyleSheet.create({
+	image: {
+		width: 70,
+		height: 70,
+		borderRadius: 35,
+	},
+});
+```
+
 И добавляем компонент, который будет отображать меню пользователя
 
 `entities / user / ui / UserMenu / UserMenu.tsx`
@@ -4158,15 +4192,24 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
           uri,  
           name,  
           type: 'image/jpeg',  
-       });  
+       });
        
        try {
 	       // совершаем запрос и передаём сюда
-          const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {  
-             headers: {  
-                'Content-Type': 'multipart/form-data',  
-             },  
-          });  
+          const { data } = await axios.post<UploadResponse(
+	          // url
+	          FILE_API.uploadImage, 
+	          // данные
+	          formData,
+	          // укажем нужные нам заголовки 
+	          {  
+	             headers: {  
+	                'Content-Type': 'multipart/form-data',  
+	             },  
+	          }
+	      );  
+
+		  // возьмём с сервера полученную ссылку
           return data.urls.original;  
        } catch (error) {  
           if (error instanceof AxiosError) {  
@@ -4187,11 +4230,19 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
           onError('Не выбрано изображение');  
           return;  
        }  
-       const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? '');  
+
+	   // отправили на сервер наше изображение
+       const uploadedUrl = await uploadToServer(
+	       asset.uri, 
+	       asset.fileName ?? ''
+	    );
+	      
        if (!uploadedUrl) {  
           onError('Не удалось загрузить изображение');  
           return;  
-       }  
+       }
+
+	   // если загрузка прошла успешно, то триггерим функцию при загрузке (сюда попадёт ссылка на изображение с нужного ресурса)
        onUpload(uploadedUrl);  
     };
   
@@ -4227,43 +4278,7 @@ const styles = StyleSheet.create({
 
 ![](_png/Pasted%20image%2020250316180609.png)
 
-### Улучшаем код
-
-Выделим отображение аватарки в отдельный компонент
-
-`entities / user / ui / Avatar / Avatar.tsx`
-```TSX
-import { Image, StyleSheet } from 'react-native';
-
-import AvatarIcon from '@/shared/assets/images/avatar.png';
-
-export function Avatar({ image }: { image: string | null }) {
-	return (
-		<>
-			{image ? (
-				<Image
-					style={styles.image}
-					source={{
-						uri: image,
-					}}
-				/>
-			) : (
-				<Image source={AvatarIcon} />
-			)}
-		</>
-	);
-}
-
-const styles = StyleSheet.create({
-	image: {
-		width: 70,
-		height: 70,
-		borderRadius: 35,
-	},
-});
-```
-
-Далее добавляем сюда наш новый компонент аватарки
+Далее добавляем сюда наш новый компонент аватарки, чтобы отобразить его в профиле
 
 `app / (app) / profile.tsx`
 ```TSX
@@ -4295,129 +4310,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-`shared/ImageUploader/ImageUploader.tsx`
-```TSX
-import {
-	MediaTypeOptions,
-	launchImageLibraryAsync,
-	useMediaLibraryPermissions,
-	PermissionStatus,
-} from 'expo-image-picker';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
-import UploadIcon from '../../assets/icons/upload';
-import { Colors, Fonts, Gaps, Radius } from '../tokens';
-import FormData from 'form-data';
-import axios, { AxiosError } from 'axios';
-import { FILE_API } from '../api';
-import { UploadResponse } from './ImageUploader.interface';
-
-interface ImageUploaderProps {
-	onUpload: (uri: string) => void;
-	onError: (error: string) => void;
-}
-
-export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
-	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
-
-	const upload = async () => {
-		const isPermissionGranted = await varifyMediaPermissions();
-		if (!isPermissionGranted) {
-			onError('Недостаточно прав');
-			return;
-		}
-		const asset = await pickImage();
-		if (!asset) {
-			onError('Не выбрано изображение');
-			return;
-		}
-		const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? '');
-		if (!uploadedUrl) {
-			onError('Не удалось загрузить изображение');
-			return;
-		}
-		onUpload(uploadedUrl);
-	};
-
-	const varifyMediaPermissions = async () => {
-		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
-			const res = await requestLibraryPermission();
-			return res.granted;
-		}
-		if (libraryPermissions?.status === PermissionStatus.DENIED) {
-			Alert.alert('Недостаточно прав для доступа к фото');
-			return false;
-		}
-		return true;
-	};
-
-	const pickImage = async () => {
-		const result = await launchImageLibraryAsync({
-			mediaTypes: MediaTypeOptions.Images,
-			allowsEditing: true,
-			aspect: [1, 1],
-			quality: 0.5,
-		});
-		if (!result.assets) {
-			return null;
-		}
-		return result.assets[0];
-	};
-
-	const uploadToServer = async (uri: string, name: string) => {
-		const formData = new FormData();
-		formData.append('files', {
-			uri,
-			name,
-			type: 'image/jpeg',
-		});
-		try {
-			const { data } = await axios.post<UploadResponse>(FILE_API.uploadImage, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
-			return data.urls.original;
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				console.error(error);
-			}
-			return null;
-		}
-	};
-
-	return (
-		<Pressable onPress={upload}>
-			<View style={styles.container}>
-				<UploadIcon />
-				<Text style={styles.text}>Загрузить изображение</Text>
-			</View>
-		</Pressable>
-	);
-}
-
-const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
-		gap: Gaps.g8,
-		backgroundColor: Colors.violetDark,
-		borderRadius: Radius.r10,
-		paddingHorizontal: 20,
-		paddingVertical: 17,
-		alignItems: 'center',
-	},
-	text: {
-		fontSize: Fonts.f14,
-		fontFamily: Fonts.regular,
-		color: Colors.white,
-	},
-});
-```
-
-
-
 ### Сохранение профиля
 
-
+Напишем атом обновления профиля, который будет принимать наше загруженное изображение и обновлять состояние данных на сервере
 
 `entities / user / model / user.state.ts`
 ```TSX
@@ -4457,32 +4352,31 @@ export const updateProfileAtom = atom(
 );
 ```
 
-
+Далее в компоненте страницы профиля используем наш новый атом по работе с профилем, создаём сабмит `submitProfile` с функцией обновления профиля
 
 `app / (app) / profile.tsx`
 ```TSX
 import { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ImageUploader } from '../../shared/ImageUploader/ImageUploader';
-import { Gaps } from '../../shared/tokens';
-import { Avatar } from '../../entities/user/ui/Avatar/Avatar';
+import { StyleSheet, View } from 'react-native';
+import { Button, ImageUploader } from '@/shared/ui';
+import { GAPS } from '@/shared/const';
 import { useAtom } from 'jotai';
-import { updateProfileAtom } from '../../entities/user/model/user.state';
-import { Button } from '../../shared/Button/Button';
+import { Avatar, updateProfileAtom } from '@/entities/user';
+import * as Sharing from 'expo-sharing';
 
 export default function Profile() {
 	const [image, setImage] = useState<string | null>(null);
 	const [profile, updateProfile] = useAtom(updateProfileAtom);
 
 	const submitProfile = () => {
-		if (!image) {
-			return;
-		}
+		if (!image) return;
 		updateProfile({ photo: image });
 	};
 
 	useEffect(() => {
+		// если есть профиль и фото профиля в состоянии профиля
 		if (profile && profile.profile?.photo) {
+			// то устанавливаем текущее изображение
 			setImage(profile.profile?.photo);
 		}
 	}, [profile]);
@@ -4493,7 +4387,7 @@ export default function Profile() {
 				<Avatar image={image} />
 				<ImageUploader onUpload={setImage} onError={(e) => console.log(e)} />
 			</View>
-			<Button text="Сохранить" onPress={submitProfile} />
+			<Button text='Сохранить' onPress={submitProfile} />
 		</View>
 	);
 }
@@ -4501,21 +4395,22 @@ export default function Profile() {
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		gap: Gaps.g20,
+		gap: GAPS.g20,
 		alignItems: 'center',
 		paddingHorizontal: 30,
 		paddingVertical: 20,
 	},
 });
+
 ```
 
-После выбора и обрезки фотограции, можно будет загрузить её на сервер
+После выбора и обрезки фотограции, можно будет загрузить её на сервер, нажав на кнопку "сохранить"
 
 ![](_png/Pasted%20image%2020250315141624.png)
 
 ### Sharing API
 
-
+Устанавливаем expo модуль по работе с нативной sharing апишкой
 
 ```bash
 npm i expo-sharing

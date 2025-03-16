@@ -117,7 +117,14 @@
       "key": "S"
     }
   ],
-  "editor:save-file": [],
+  "editor:save-file": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "S"
+    }
+  ],
   "file-explorer:new-file-in-new-pane": [],
   "obsidian-linter:lint-file": [
     {
