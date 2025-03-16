@@ -3679,27 +3679,33 @@ export default function AppRayout() {
 npm i expo-image-picker
 ```
 
-
+И далее на страницу профиля добавляем кнопку, которая будет отрабатывать клик и вызывать срабатывание метода `launchCameraAsync` из `expo-image-picker`
 
 `app / (app) / profile.tsx`
 ```TSX
 import { useState } from 'react';
 import { View, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { Button } from '../../shared/Button/Button';
+import { Button } from '@/shared/ui';
 
 export default function Profile() {
 	const [image, setImage] = useState(null);
 	
 	const pickAvatar = async () => {
+		// триггерим функцию асинхронной загрузки камеры
 		const result = await ImagePicker.launchCameraAsync({
+			// принимаем только изображения
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
+			// поддерживаем изменение фотографии встроенными средствами
 			allowsEditing: true,
+			// вспект должен быть 1 к 1
 			aspect: [1, 1],
+			// половина от оригинального качества
 			quality: 0.5,
 		});
 		console.log(result);
 	};
+	
 	return (
 		<View>
 			<Text>Profile</Text>
@@ -3709,13 +3715,17 @@ export default function Profile() {
 }
 ```
 
-
+![](_png/Pasted%20image%2020250316170426.png)
 
 ### Permissions
 
+Далее нам нужно научить отрабатывать разрешения на использование камеры приложением
 
+Для этого нам понадобятся:
+- `PermissionStatus`, который хранит константы проверенного статуса
+- хук `useCameraPermissions`, который триггерит вызов разрешений и контролирует их состояние
 
-`app/(app)/profile.tsx`
+`app / (app) / profile.tsx`
 ```TSX
 import { useState } from 'react';
 import { View, Text, Alert } from 'react-native';
@@ -3725,35 +3735,41 @@ import {
 	useCameraPermissions,
 	PermissionStatus,
 } from 'expo-image-picker';
-import { Button } from '../../shared/Button/Button';
+import { Button } from '@/shared/ui';
 
 export default function Profile() {
 	const [image, setImage] = useState(null);
+	// возвращает статус разрешений и хук вызова разрешений
 	const [cameraPermissions, requestCameraPermission] = useCameraPermissions();
 
-	const varifyCameraPermissions = async () => {
+	const verifyCameraPermissions = async () => {
+		// Если права не предоставлены, то вызываем запрос на получение этих прав
 		if (cameraPermissions?.status === PermissionStatus.UNDETERMINED) {
 			const res = await requestCameraPermission();
 			return res.granted;
 		}
+
+		// если права отклонены, то выведем пользователю уведомление об этом
 		if (cameraPermissions?.status === PermissionStatus.DENIED) {
 			Alert.alert('Недостаточно прав для доступа к камере');
 			return false;
 		}
+		
 		return true;
 	};
 
 	const pickAvatar = async () => {
-		const isPermissionGranted = await varifyCameraPermissions();
-		if (!isPermissionGranted) {
-			return;
-		}
+		const isPermissionGranted = await verifyCameraPermissions();
+		
+		if (!isPermissionGranted) return;
+		
 		const result = await launchCameraAsync({
 			mediaTypes: MediaTypeOptions.Images,
 			allowsEditing: true,
 			aspect: [1, 1],
 			quality: 0.5,
 		});
+		
 		console.log(result);
 	};
 
