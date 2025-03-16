@@ -3745,6 +3745,7 @@ export default function Profile() {
 	const verifyCameraPermissions = async () => {
 		// Если права не предоставлены, то вызываем запрос на получение этих прав
 		if (cameraPermissions?.status === PermissionStatus.UNDETERMINED) {
+			// получаем обновлённые разрешения
 			const res = await requestCameraPermission();
 			return res.granted;
 		}
@@ -3782,12 +3783,15 @@ export default function Profile() {
 }
 ```
 
-
-
 ### Отображение изображения
 
+Для того, чтобы отобразить библиотеку изображений, нам нужно будет воспользоваться:
+- функцией `launchImageLibraryAsync`, которая вызывает библиотеку фотографий устройства
+- и хуком `useMediaLibraryPermissions`, который возвращает разрешения и функцию запроса получения библиотеки фотографий устройства
 
-`app/(app)/profile.tsx`
+В итоге функции получения изображения нам вернут массив, из которого можно выбрать изображение для получения / отображения `result.assets[0].uri`
+
+`app / (app) / profile.tsx`
 ```TSX
 import { useState } from 'react';
 import { View, Text, Alert, Image } from 'react-native';
@@ -3803,10 +3807,11 @@ import { Button } from '../../shared/Button/Button';
 
 export default function Profile() {
 	const [image, setImage] = useState<string | null>(null);
+	
 	const [cameraPermissions, requestCameraPermission] = useCameraPermissions();
 	const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
 
-	const varifyCameraPermissions = async () => {
+	const verifyCameraPermissions = async () => {
 		if (cameraPermissions?.status === PermissionStatus.UNDETERMINED) {
 			const res = await requestCameraPermission();
 			return res.granted;
@@ -3818,7 +3823,7 @@ export default function Profile() {
 		return true;
 	};
 
-	const varifyMediaPermissions = async () => {
+	const verifyMediaPermissions = async () => {
 		if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
 			const res = await requestLibraryPermission();
 			return res.granted;
@@ -3831,7 +3836,7 @@ export default function Profile() {
 	};
 
 	const captureAvatar = async () => {
-		const isPermissionGranted = await varifyCameraPermissions();
+		const isPermissionGranted = await verifyCameraPermissions();
 		if (!isPermissionGranted) {
 			return;
 		}
@@ -3848,7 +3853,7 @@ export default function Profile() {
 	};
 
 	const pickAvatar = async () => {
-		const isPermissionGranted = await varifyMediaPermissions();
+		const isPermissionGranted = await verifyMediaPermissions();
 		if (!isPermissionGranted) {
 			return;
 		}
@@ -3862,6 +3867,7 @@ export default function Profile() {
 			return;
 		}
 		console.log(result);
+		// устанавливаем url изображения из массива элементов и сохраняем его в качестве строки
 		setImage(result.assets[0].uri);
 	};
 
@@ -3884,7 +3890,7 @@ export default function Profile() {
 }
 ```
 
-
+![](_png/Pasted%20image%2020250316173209.png)
 
 ### Компонент загрузки
 
