@@ -310,8 +310,7 @@
       "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "callout-manager:Insert Callout": false,
-      "omnisearch:Omnisearch": false
+      "callout-manager:Insert Callout": false
     }
   },
   "active": "6522b6ff43fc1a5c",
