@@ -4488,12 +4488,16 @@ const styles = StyleSheet.create({
 
 ### Ориентация экрана
 
-
+За ориентацию экрана отвечает параметр `orientation` в параметрах приложения
 
 `app.json`
 ```JSON
 "orientation": "portrait",
 ```
+
+Если поставить `landscape` или `auto`, то мы будем иметь возможность работать с повёрнутой версией приложения
+
+![](_png/Pasted%20image%2020250318180407.png)
 
 ### ScreenOrientation
 
