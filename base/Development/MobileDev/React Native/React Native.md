@@ -4509,7 +4509,7 @@ npm i expo-screen-orientatio
 
 
 
-`shared/hooks.ts`
+`shared / hooks.ts`
 ```TSX
 import { useEffect, useState } from 'react';
 import * as ScreenOrientation from 'expo-screen-orientation';
@@ -4529,20 +4529,9 @@ export function useScreenOrientation() {
 }
 ```
 
-Добавляем `style` в инпут
-
-`shared/Input/Input.tsx`
-```TSX
-export function Input({ isPassword, style, ...props }: TextInputProps & { isPassword?: boolean }) {
-	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-
-	return (
-		<View style={style}>
-```
 
 
-
-`app/login.tsx`
+`app / login.tsx`
 ```TSX
 /* eslint-disable react-native/no-inline-styles */
 import { StyleSheet, View, Image, Dimensions } from 'react-native';
