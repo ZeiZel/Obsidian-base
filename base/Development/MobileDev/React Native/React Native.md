@@ -4501,51 +4501,67 @@ const styles = StyleSheet.create({
 
 ### ScreenOrientation
 
+Что нам нужно сделать, чтобы получить текущую ориентацию приложения в пространстве? 
 
+1. Мы можем воспользоваться `Dimensions` и всегда проверять ширину и высоту
+2. Воспользоваться внутренним решением `expo-screen-orientation`
 
 ```bash
-npm i expo-screen-orientatio
+npm i expo-screen-orientation
 ```
 
+Далее добавим хук, который будет отслеживать ориентацию
 
+1. Он возвращает доступные ориентации `Orientation`
+2. Получаем начальную ориентацию экрана через метод `getOrientationAsync`
+3. Вешаем листенер смены ориентации `addOrientationChangeListener`
+4. `removeOrientationChangeListeners` удаляем листенер при смене ориентации
 
 `shared / hooks.ts`
 ```TSX
 import { useEffect, useState } from 'react';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import {
+	Orientation,
+	getOrientationAsync,
+	addOrientationChangeListener,
+	removeOrientationChangeListeners,
+} from 'expo-screen-orientation';
 
 export function useScreenOrientation() {
-	const [orientation, setOrientation] = useState<ScreenOrientation.Orientation>();
+	const [orientation, setOrientation] = useState<Orientation>();
+
 	useEffect(() => {
-		ScreenOrientation.getOrientationAsync().then((o) => setOrientation(o));
-		ScreenOrientation.addOrientationChangeListener((e) => {
+		getOrientationAsync().then((o) => setOrientation(o));
+		
+		addOrientationChangeListener((e) => {
 			setOrientation(e.orientationInfo.orientation);
 		});
+		
 		return () => {
-			ScreenOrientation.removeOrientationChangeListeners();
+			removeOrientationChangeListeners();
 		};
 	}, []);
+
 	return orientation;
 }
 ```
 
-
+Далее, в зависимости от текущей ориентации приложения, меняем стили для наших вьюшек через проверку `orientation === Orientation.PORTRAIT_UP`
 
 `app / login.tsx`
 ```TSX
-/* eslint-disable react-native/no-inline-styles */
-import { StyleSheet, View, Image, Dimensions } from 'react-native';
-import { Input } from '../shared/Input/Input';
-import { Colors, Gaps } from '../shared/tokens';
-import { Button } from '../shared/Button/Button';
-import { ErrorNotification } from '../shared/ErrorNotification/ErrorNotification';
-import { useEffect, useState } from 'react';
-import { CustomLink } from '../shared/CustomLink/CustomLink';
-import { useAtom } from 'jotai';
-import { loginAtom } from '../entities/auth/model/auth.state';
 import { router } from 'expo-router';
-import { useScreenOrientation } from '../shared/hooks';
+import { useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
 import { Orientation } from 'expo-screen-orientation';
+import { Dimensions, Image, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
+
+import { loginAtom } from '@/entities/auth';
+import { useScreenOrientation } from '@/shared/lib/hooks';
+import { COLORS, GAPS } from '@/shared/const';
+import { Button, CustomLink, ErrorNotification, Input, PasswordInput } from '@/shared/ui';
+
+import LogoIcon from '@/shared/assets/logo.png';
 
 export default function Login() {
 	const [localError, setLocalError] = useState<string | undefined>();
@@ -4582,7 +4598,7 @@ export default function Login() {
 		<View style={styles.container}>
 			<ErrorNotification error={localError} />
 			<View style={styles.content}>
-				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
+				<Image style={styles.logo} source={LogoIcon} resizeMode='contain' />
 				<View style={styles.form}>
 					<View
 						style={{
@@ -4597,22 +4613,21 @@ export default function Login() {
 										? 'auto'
 										: Dimensions.get('window').width / 2 - 16 - 48,
 							}}
-							placeholder="Email"
+							placeholder='Email'
 							onChangeText={setEmail}
 						/>
-						<Input
+						<PasswordInput
 							style={{
 								width:
 									orientation === Orientation.PORTRAIT_UP
 										? 'auto'
 										: Dimensions.get('window').width / 2 - 16 - 48,
 							}}
-							isPassword
-							placeholder="Пароль"
+							placeholder='Пароль'
 							onChangeText={setPassword}
 						/>
 					</View>
-					<Button text="Войти" onPress={submit} isLoading={isLoading} />
+					<Button text='Войти' onPress={submit} isLoading={isLoading} />
 				</View>
 				<CustomLink href={'/restore'} text="Восстановить пароль" />
 			</View>
@@ -4625,21 +4640,21 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		flex: 1,
 		padding: 55,
-		backgroundColor: Colors.black,
+		backgroundColor: COLORS.black,
 	},
 	content: {
 		alignItems: 'center',
-		gap: Gaps.g50,
+		gap: GAPS.g50,
 	},
 	form: {
 		alignSelf: 'stretch',
-		gap: Gaps.g16,
+		gap: GAPS.g16,
 	},
 	logo: {
 		width: 220,
 	},
 	inputs: {
-		gap: Gaps.g16,
+		gap: GAPS.g16,
 	},
 });
 ```
