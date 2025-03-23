@@ -6035,7 +6035,7 @@ export default function MyCourses() {
 EXPO_PUBLIC_DOMAIN=https://purpleschool.ru/api-v2
 ```
 
-И теперь можно использовать переменную сразу из процесса
+И теперь можно использовать переменную сразу из энвов и менять в зависимости от окружения, в котором мы запускаемся
 
 `shared / api / api.ts`
 ```TS
@@ -6052,11 +6052,11 @@ export const PREFIX = `${process.env.EXPO_PUBLIC_DOMAIN}/api-v2`;
 
 ### Конфигурация иконки
 
-Меняем адаптивную и обычную иконку приложения
+Меняем адаптивную и обычную иконку приложения. У нас есть две сетки иконок и обе из них должны вписываться в сетку, которая находится дефолтно в приложении.
 
 ![](_png/Pasted%20image%2020250216103237.png)
 
-Конфигурация приложения может быть описана, как в `json`, так и в `js` / `ts` формате. Некоторые настройки применимы только для `eas` сборки, поэтому нужно работать по доке
+Конфигурация приложения может быть описана, как в `json`, так и в `js` / `ts` формате. Некоторые настройки применимы только для `eas` сборки, поэтому [нужно работать по доке](https://docs.expo.dev/versions/latest/config/app/)
 
 Дефолтная конфигурация выглядит следующим образом:
 
@@ -6066,24 +6066,29 @@ import { ConfigContext, ExpoConfig } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
 	...config,
+	// имя приложения
 	name: 'expo-example',
-	slug: 'expo-example',
+	// имя приложения, которое должно быть валидно для URL (уникально на один аккаунт) и не должно содержать "-"
+	slug: 'expoexample',
+	// короткое описание приложения
 	description: 'Дефолтное example приложение',
-	jsEngine: 'hermes',
-	newArchEnabled: true,
-	version: '1.0.0',
-	platforms: ['ios', 'android'],
-	icon: './shared/assets/icon.png',
-	orientation: 'portrait',
+	jsEngine: 'hermes', // движок
+	newArchEnabled: true, // включение новой архитектуры
+	version: '1.0.0', // версия приложения
+	platforms: ['ios', 'android'], // доступные платформы
+	icon: './shared/assets/icon.png', // иконка приложения
+	orientation: 'portrait', // ориентация (лочим только на портрет)
 	userInterfaceStyle: 'light',
 	backgroundColor: '#16171D',
 	primaryColor: '#6C38CC',
+	// путь до сплеш-скрина
 	splash: {
 		image: './shared/assets/splash.png',
 		resizeMode: 'contain',
 		backgroundColor: '#16171D',
 	},
 	assetBundlePatterns: ['**/*'],
+	// настройки специфичные только для iOS, Android и Web
 	ios: {
 		supportsTablet: false,
 		bundleIdentifier: 'ru.example.demo',
@@ -6093,6 +6098,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 			foregroundImage: './shared/assets/adaptive-icon.png',
 			backgroundColor: '#16171D',
 		},
+		// тут мы можем заранее указать разрешения, которые нужно будет предоставить приложению
 		permissions: ['android.permission.RECORD_AUDIO'],
 		package: 'ru.example.demo',
 	},
@@ -6101,6 +6107,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		bundler: 'metro',
 		output: 'static',
 	},
+	// список плагинов expo с их настройками
 	plugins: [
 		'expo-router',
 		[
@@ -6119,115 +6126,51 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		[
 			'expo-image-picker',
 			{
+				// задаём текст для запроса разрешений к иконкам
 				photosPermission: 'Необходимо разрешение для выбора фото профиля',
 			},
 		],
 	],
+	// схема для URL во время перехода на `demo://` на мобильном устройстве
 	scheme: 'example',
+	// дополнительные настройки EAS
 	extra: {
+		// настройки роутера
 		router: {
 			origin: false,
 		},
+		// настройки EAS
 		eas: {
-			projectId: 'ae16f11a-60ff-4bc6-a52c-ce1a2f7b011d',
+			// идентификатор проекта (получаем из личного кабинета eas)
+			projectId: 'f9ef318a-8740-4ea2-948e-388eb98f8738',
 		},
 	},
+	// владелец
 	owner: 'zeizel',
 });
 ```
 
-
-
-
-
-
-
 ### Сборка через EAS
 
-Первым делом, подготовим конфиг приложения к сборке
+При создании нового проекта с Expo, нам нужно триггернуть следующие команды
 
-`app.json`
-```JSON
-{
-  "expo": {
-    "name": "PupleSchool Demo App",
-	/** слаг должен быть без "-" */
-    "slug": "purpleschooldemoapp",
-    "description": "Приложение школы PurpleSchool для прохождения курсов",
-    "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "icon": "./assets/icon.png",
-    "orientation": "portrait",
-    "userInterfaceStyle": "light",
-    "backgroundColor": "#16171D",
-    "primaryColor": "#6C38CC",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#16171D"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": false
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-	  /** указываем разрешения, которые понадобятся для андроида */
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ],
-      "package": "ru.purpleschool.purpleappdemo"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/FiraSans-Regular.ttf",
-            "./assets/fonts/FiraSans-SemiBold.ttf"
-          ]
-        }
-      ],
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/notification-icon.png",
-          "color": "#16171D"
-        }
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "Необходимо разрешение для выбора фото профиля"
-        }
-      ]
-    ],
+```bash
+npm install --global eas-cli
+eas init --id f9ef318a-8740-4ea2-948e-388eb98f8738
+```
 
-	/** дополняем схему и добавялем параметры сборки */
-    "scheme": "purpleschool",
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "ae16f11a-60ff-4bc6-a52c-ce1a2f7b011d"
-      }
-    },
-    "owner": "alaricode"
-  }
-}
+![](_png/Pasted%20image%2020250323163741.png)
+
+Далее нужно авторизоваться в утилите
+
+```bash
+eas login
+```
+
+Далее нам нужно создать конфиг, который будет говорить eas, как производить сборку
+
+```bash
+eas build:configure
 ```
 
 Далее нужно сгенерирть конфиг для билда в `eas`
@@ -6257,6 +6200,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 }
 ```
 
+Далее выполняем сборку приложения
+
+```bash
+eas build --platform android
+```
 
 
 
