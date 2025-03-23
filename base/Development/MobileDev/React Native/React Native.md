@@ -4548,6 +4548,8 @@ export function useScreenOrientation() {
 
 Далее, в зависимости от текущей ориентации приложения, меняем стили для наших вьюшек через проверку `orientation === Orientation.PORTRAIT_UP`
 
+`Orientation` представляет из себя enum с пятью значениями, где мы получаем каждую ось либо неизвестное значение, если нет доступа к получению информации об ориентации (не мобильное устройство)
+
 `app / login.tsx`
 ```TSX
 import { router } from 'expo-router';
@@ -6026,7 +6028,7 @@ export default function MyCourses() {
 
 Далее добавим переменную, чтобы была возможность разрабатывать локально
 
-Все переменные должны иметь префикс `EXPO_PUBLIC_` как тот же `NEXT_PUBLIC_`
+Все переменные должны иметь префикс `EXPO_PUBLIC_` как тот же `NEXT_PUBLIC_`, чтобы они попадали в билдовую сборку
 
 `.env`
 ```
@@ -6040,21 +6042,13 @@ EXPO_PUBLIC_DOMAIN=https://purpleschool.ru/api-v2
 export const PREFIX = `${process.env.EXPO_PUBLIC_DOMAIN}/api-v2`;
 ```
 
-
-
-
 ### Процесс публикации
 
-
+Дефолтно есть два пути для реализации публикации приложения:
+1. Expo. Самый удобный путь. Тут у нас есть возможность собирать приложение через облако сразу для всех платформ, под которые мы должны собираться. Это удобно, так как дыже без наличия мака можно подготовить сборку.
+2. Самостоятельная сборка. К ней стоит прибегать только тогда, когда мы сделаем eject проекта из expo с переходом на чистый RN либо если сразу писали на RN
 
 ![](_png/Pasted%20image%2020250303190436.png)
-
-
-
-
-
-
-
 
 ### Конфигурация иконки
 
@@ -6062,78 +6056,84 @@ export const PREFIX = `${process.env.EXPO_PUBLIC_DOMAIN}/api-v2`;
 
 ![](_png/Pasted%20image%2020250216103237.png)
 
-Теперь нам нужно сменить конфигурацию
+Конфигурация приложения может быть описана, как в `json`, так и в `js` / `ts` формате. Некоторые настройки применимы только для `eas` сборки, поэтому нужно работать по доке
 
-`app.json`
+Дефолтная конфигурация выглядит следующим образом:
+
+`app.config.ts`
 ```JSON
-{
-  "expo": {
--    "name": "native-app",
--    "slug": "native-app",
-+    "name": "PupleSchool Demo App",
-+    "slug": "purple-school-demo-app",
-+	"description": "Приложение школы PurpleSchool для прохождения курсов",
-    "version": "1.0.0",
-+	"platforms": ["ios", "android"],
-    "icon": "./assets/icon.png",
-+	"orientation": "portrait",
-    "userInterfaceStyle": "light",
-	"backgroundColor": "#16171D",
-+	"primaryColor": "#6C38CC",
-	"extra": { 
-	"eas": { 
-		"projectId": "9e8de316-bef0-4e46-9476-cabcea343056" 
-		} 
+import { ConfigContext, ExpoConfig } from 'expo/config';
+
+export default ({ config }: ConfigContext): ExpoConfig => ({
+	...config,
+	name: 'expo-example',
+	slug: 'expo-example',
+	description: 'Дефолтное example приложение',
+	jsEngine: 'hermes',
+	newArchEnabled: true,
+	version: '1.0.0',
+	platforms: ['ios', 'android'],
+	icon: './shared/assets/icon.png',
+	orientation: 'portrait',
+	userInterfaceStyle: 'light',
+	backgroundColor: '#16171D',
+	primaryColor: '#6C38CC',
+	splash: {
+		image: './shared/assets/splash.png',
+		resizeMode: 'contain',
+		backgroundColor: '#16171D',
 	},
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#16171D"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
--     "supportsTablet": true
-+     "supportsTablet": false
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-	  [
-		"expo-font",
-		{
-			"fonts": [
-				"./assets/fonts/FiraSans-Regular.ttf",
-				"./assets/fonts/FiraSans-SemiBold.ttf"
-			]
-		}
-	  ],
-	  [
-        "expo-notifications",
+	assetBundlePatterns: ['**/*'],
+	ios: {
+		supportsTablet: false,
+		bundleIdentifier: 'ru.example.demo',
+	},
+	android: {
+		adaptiveIcon: {
+			foregroundImage: './shared/assets/adaptive-icon.png',
+			backgroundColor: '#16171D',
+		},
+		permissions: ['android.permission.RECORD_AUDIO'],
+		package: 'ru.example.demo',
+	},
+	web: {
+		favicon: './shared/assets/favicon.png',
+		bundler: 'metro',
+		output: 'static',
+	},
+	plugins: [
+		'expo-router',
+		[
+			'expo-font',
 			{
-				"icon": "./assets/notification-icon.png",
-				"color": "#16171D"
-			}
-      ],
-+	  [
-        "expo-image-picker",
-        {
-			"photosPermission": "Необходимо разрешение для выбора фото профиля"
-        }
-      ]
-    ],
-	"scheme": "purpleschool"
-  }
-}
+				fonts: ['./shared/assets/fonts/FiraSans-Regular.ttf', './shared/assets/fonts/FiraSans-SemiBold.ttf'],
+			},
+		],
+		[
+			'expo-notifications',
+			{
+				icon: './shared/assets/notification-icon.png',
+				color: '#16171D',
+			},
+		],
+		[
+			'expo-image-picker',
+			{
+				photosPermission: 'Необходимо разрешение для выбора фото профиля',
+			},
+		],
+	],
+	scheme: 'example',
+	extra: {
+		router: {
+			origin: false,
+		},
+		eas: {
+			projectId: 'ae16f11a-60ff-4bc6-a52c-ce1a2f7b011d',
+		},
+	},
+	owner: 'zeizel',
+});
 ```
 
 
