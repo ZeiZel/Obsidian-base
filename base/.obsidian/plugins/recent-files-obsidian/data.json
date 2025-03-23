@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "2. Настройка окружения",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Soft/Agile/_lessons/Введение.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
       "basename": "React Native",
       "path": "Development/MobileDev/React Native/React Native.md"
     },
@@ -15,10 +35,6 @@
     {
       "basename": "Git",
       "path": "Development/GIT/Git.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "TypeScriptCmp",
@@ -79,10 +95,6 @@
     {
       "basename": "01 Введение",
       "path": "Development/TypeScript/_lessons/01 Введение.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
       "basename": "07 Валидация данных",
@@ -187,18 +199,6 @@
     {
       "basename": "Flameshot",
       "path": "_hobbies/Flameshot.md"
-    },
-    {
-      "basename": "6. Обмен сообщениями",
-      "path": "Development/BackEnd/Microservices/_lessons/6. Обмен сообщениями.md"
-    },
-    {
-      "basename": "4 Работа с данными",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
-    },
-    {
-      "basename": "3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/3 Storybook, RTL, Bundle analyzer, Error boundary, UI tests.md"
     }
   ],
   "omittedPaths": [],
