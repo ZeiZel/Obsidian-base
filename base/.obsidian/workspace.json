@@ -80,6 +80,30 @@
             }
           },
           {
+            "id": "566cee4fa80cc691",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Whats Learning/Прогресс изучения технологий.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Прогресс изучения технологий"
+            }
+          },
+          {
             "id": "6522b6ff43fc1a5c",
             "type": "leaf",
             "state": {
@@ -128,7 +152,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -308,13 +332,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+                "file": "Whats Learning/Прогресс изучения технологий.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3. Знакомство с Kubernetes"
+              "title": "Outline of Прогресс изучения технологий"
             }
           }
         ],
@@ -337,8 +361,11 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "40f87e26203f4b0c",
+  "active": "566cee4fa80cc691",
   "lastOpenFiles": [
+    "Whats Learning/О чём база~.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191301.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191105.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191101.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324190621.png",
@@ -348,9 +375,7 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183648.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183553.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183542.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324182704.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250323192647.png",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Soft/Agile/_lessons/Введение.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
@@ -374,7 +399,6 @@
     "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",

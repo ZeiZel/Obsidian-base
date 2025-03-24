@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "О чём база~",
+      "path": "Whats Learning/О чём база~.md"
+    },
+    {
       "basename": "3. Знакомство с Kubernetes",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
     },
@@ -149,10 +157,6 @@
       "path": "Development/BackEnd/Microservices/_lessons/4. Переход к микросервисам.md"
     },
     {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
       "basename": "DB",
       "path": "Development/DB/DB.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "12. Тестирование микросервисов",
       "path": "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md"
-    },
-    {
-      "basename": "Продвинутый FrontEnd",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     }
   ],
   "omittedPaths": [],
