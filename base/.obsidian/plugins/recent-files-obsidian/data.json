@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "3. Знакомство с Kubernetes",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
+    },
+    {
       "basename": "2. Настройка окружения",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "Продвинутый FrontEnd",
       "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
-    },
-    {
-      "basename": "Flameshot",
-      "path": "_hobbies/Flameshot.md"
     }
   ],
   "omittedPaths": [],

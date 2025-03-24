@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "2. Настройка окружения"
+              "title": "3. Знакомство с Kubernetes"
             }
           },
           {
@@ -308,13 +308,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2. Настройка окружения"
+              "title": "Outline of 3. Знакомство с Kubernetes"
             }
           }
         ],
@@ -339,22 +339,23 @@
   },
   "active": "40f87e26203f4b0c",
   "lastOpenFiles": [
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191105.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191101.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324190621.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184838.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184417.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184043.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183648.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183553.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183542.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324182704.png",
+    "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250323192647.png",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Soft/Agile/_lessons/Введение.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/React Native.md",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323185824.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323185432.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323184241.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183913.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183851.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183829.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183748.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183646.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183629.png",
-    "Development/MobileDev/React Native/_png/Pasted image 20250323183256.png",
     "Development/FrontEnd/Vue/Vue.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/GIT/Git.md",
@@ -374,7 +375,6 @@
     "Development/TypeScript/_lessons/02 Настройка окружения.md",
     "Development/TypeScript/_lessons/01 Введение.md",
     "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
-    "index.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",
