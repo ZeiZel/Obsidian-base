@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "09 Базовые понятия Ansible",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
@@ -31,10 +39,6 @@
     {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
       "basename": "11. Консистентность данных",
@@ -195,10 +199,6 @@
     {
       "basename": "PostgreSQL",
       "path": "Development/DB/PostgreSQL.md"
-    },
-    {
-      "basename": "Mongo DB",
-      "path": "Development/DB/Mongo DB.md"
     }
   ],
   "omittedPaths": [],

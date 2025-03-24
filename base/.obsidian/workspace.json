@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Docker + Ansible"
+              "title": "09 Базовые понятия Ansible"
             }
           },
           {
@@ -152,7 +152,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -332,13 +332,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Kubernetes + Helm"
+              "title": "Outline of 09 Базовые понятия Ansible"
             }
           }
         ],
@@ -361,8 +361,10 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "40f87e26203f4b0c",
+  "active": "6fce7210b1f25591",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
@@ -379,9 +381,7 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184417.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184043.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Soft/Agile/_lessons/Введение.md",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/MobileDev/React Native/React Native.md",
     "Development/FrontEnd/Vue/Vue.md",
