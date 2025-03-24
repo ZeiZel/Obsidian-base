@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "3. Знакомство с Kubernetes"
+              "title": "Kubernetes + Helm"
             }
           },
           {
@@ -332,13 +332,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3. Знакомство с Kubernetes"
+              "title": "Outline of Kubernetes + Helm"
             }
           }
         ],
@@ -363,12 +363,14 @@
   },
   "active": "40f87e26203f4b0c",
   "lastOpenFiles": [
+    "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324193927.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324193256.png",
     "Whats Learning/Прогресс изучения технологий.md",
     "Whats Learning/О чём база~.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191301.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191105.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191101.png",
@@ -376,7 +378,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184838.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184417.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184043.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324183648.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Soft/Agile/_lessons/Введение.md",
@@ -398,7 +399,6 @@
     "Development/BackEnd/NodeJS/_lessons/12 Dependency Injection.md",
     "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "Development/BackEnd/NodeJS/_lessons/04 Как работает Node.js_.md",
-    "Development/BackEnd/NodeJS/_lessons/03 Начало работы с Node.js.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",

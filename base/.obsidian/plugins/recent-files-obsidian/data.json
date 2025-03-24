@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "4. Первый pod",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md"
+    },
+    {
       "basename": "3. Знакомство с Kubernetes",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
     },
@@ -15,10 +27,6 @@
     {
       "basename": "2. Настройка окружения",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "Введение",
@@ -191,14 +199,6 @@
     {
       "basename": "Mongo DB",
       "path": "Development/DB/Mongo DB.md"
-    },
-    {
-      "basename": "13. Выкладка и эксплуатация",
-      "path": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md"
-    },
-    {
-      "basename": "12. Тестирование микросервисов",
-      "path": "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md"
     }
   ],
   "omittedPaths": [],
