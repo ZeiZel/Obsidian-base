@@ -4661,21 +4661,54 @@ const styles = StyleSheet.create({
 });
 ```
 
-
-
 ### Поддержка планшетов
 
+В Android Studio нужно будет выбрать в качестве устройства планшет и запустить Expo Go на нём. 
 
+Чтобы прилжоение поддерживалось на планшетах, эту настройку нужно будет задать в конфиге приложения
 
+`app.config.ts`
+```JSON
+ios: {  
+    supportsTablet: true,
+},
+```
 
+Добавляем на экран логина минимальную и максимальную ширину экрана, а так же центрируем форму
 
+Обязательно нужно упомянуть, что с добавлением планшетов, нужно будет поддерживать оба положения экрана на телефоне и планшете
 
+`login.tsx`
+```TSX
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		flex: 1,
+		padding: 55,
+		backgroundColor: COLORS.black,
+	},
+	content: {
+		alignItems: 'center',
+		gap: GAPS.g50,
+	},
+	form: {
+		maxWidth: 400,
+		minWidth: '60%',
+		alignSelf: 'stretch',
+		gap: GAPS.g16,
+	},
+	logo: {
+		width: 220,
+	},
+	inputs: {
+		gap: GAPS.g16,
+	},
+});
 
+```
 
-
-
-
-
+![](_png/Pasted%20image%2020250328175122.png)
 
 ### KeyboardAvoidingView
 
