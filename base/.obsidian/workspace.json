@@ -211,8 +211,8 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ]
@@ -304,8 +304,8 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ],
@@ -322,8 +322,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
