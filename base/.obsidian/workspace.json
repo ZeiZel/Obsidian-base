@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "09 Базовые понятия Ansible"
+              "title": "07 Docker-compose"
             }
           },
           {
@@ -152,7 +152,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -302,14 +302,34 @@
             "id": "7dafae2a3f935010",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "6451f895ac2455db",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          },
+          {
+            "id": "a062e1f23e3dc903",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -332,13 +352,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/MobileDev/React Native/React Native.md",
+                "file": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of React Native"
+              "title": "Outline of 07 Docker-compose"
             }
           }
         ],
@@ -361,12 +381,13 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "6522b6ff43fc1a5c",
+  "active": "a062e1f23e3dc903",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
+    "Development/MobileDev/React Native/React Native.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250328175122.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328174800.png",
-    "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md",
@@ -381,11 +402,9 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191101.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324190621.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184838.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184417.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
     "Soft/Agile/_lessons/Введение.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
-    "Development/MobileDev/React Native/React Native.md",
     "Development/FrontEnd/Vue/Vue.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/GIT/Git.md",
