@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "2. Настройка окружения",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
+    },
+    {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "Terminal",
+      "path": "Development/Terminal.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
       "basename": "07 Docker-compose",
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
     },
@@ -11,10 +27,6 @@
     {
       "basename": "05 Сети Docker",
       "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
-    },
-    {
-      "basename": "Terminal",
-      "path": "Development/Terminal.md"
     },
     {
       "basename": "09 Базовые понятия Ansible",
