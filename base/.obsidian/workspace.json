@@ -318,10 +318,10 @@
             "id": "ae1531b05edbce3b",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -333,9 +333,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "5d99d4a0518ab014",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 10
+        "currentTab": 11
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -387,7 +397,7 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "40f87e26203f4b0c",
+  "active": "5d99d4a0518ab014",
   "lastOpenFiles": [
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Terminal.md",
