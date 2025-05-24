@@ -1,8 +1,32 @@
 {
   "recentFiles": [
     {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "07 Docker-compose",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
+    },
+    {
       "basename": "2. Настройка окружения",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "Прогресс изучения технологий",
@@ -11,18 +35,6 @@
     {
       "basename": "Terminal",
       "path": "Development/Terminal.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "07 Docker-compose",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
       "basename": "05 Сети Docker",
