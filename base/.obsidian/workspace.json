@@ -4,17 +4,31 @@
     "type": "split",
     "children": [
       {
-        "id": "97d0007737368a64",
+        "id": "3bf7e5d90321df48",
         "type": "tabs",
         "children": [
           {
-            "id": "86b23abca9fcc300",
+            "id": "4523ce68f5765302",
             "type": "leaf",
             "state": {
-              "type": "home-tab-view",
-              "state": {},
-              "icon": "search",
-              "title": "Home tab"
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Прохождение собеседования.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Прохождение собеседования"
             }
           }
         ]
@@ -81,16 +95,13 @@
             }
           },
           {
-            "id": "e5ad9ea4ce6e5adc",
+            "id": "3d9671d1620552ee",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
             }
           }
         ],
@@ -183,8 +194,8 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -196,9 +207,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "8452d4cb3c2dd82c",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -221,12 +242,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Soft/Прохождение собеседования.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Прохождение собеседования"
             }
           }
         ],
@@ -251,8 +273,12 @@
       "homepage:Open homepage": false
     }
   },
-  "active": "c523274aeb2b0907",
+  "active": "4523ce68f5765302",
   "lastOpenFiles": [
+    "Soft/_png/Pasted image 20250531201947.png",
+    "Soft/_png/Pasted image 20250531201921.png",
+    "Soft/Прохождение собеседования.md",
+    "Soft/Soft.md",
     "index.md",
     "Soft/Agile/Agile.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
@@ -278,7 +304,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191105.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191101.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324190621.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324184838.png",
     "Soft/Agile/_lessons/Введение.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/FrontEnd/Vue/Vue.md",
@@ -286,9 +311,6 @@
     "Development/GIT/Git.md",
     "Development/TypeScript/TypeScriptCmp.md",
     "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
-    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
-    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
-    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",

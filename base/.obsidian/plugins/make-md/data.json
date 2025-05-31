@@ -54,7 +54,8 @@
     "//Development/Development/MobileDev/Development/MobileDev/React Native",
     "//Development/Development/BackEnd",
     "//Development/Development/BackEnd/Development/BackEnd/Microservices",
-    "//Development/Development/GIT"
+    "//Development/Development/GIT",
+    "//Soft"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
