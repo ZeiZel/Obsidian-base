@@ -4,31 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "3bf7e5d90321df48",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "4523ce68f5765302",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Soft/Прохождение собеседования.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Прохождение собеседования"
+              "type": "home-tab-view",
+              "state": {},
+              "icon": "search",
+              "title": "Home tab"
             }
           }
         ]
@@ -95,7 +81,7 @@
             }
           },
           {
-            "id": "3d9671d1620552ee",
+            "id": "efcd971aef7c1b05",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -192,10 +178,10 @@
             "id": "5285abe723f01399",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "New tab"
             }
           },
           {
@@ -217,9 +203,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "979fe8dcc4e381ad",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -242,13 +238,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Прохождение собеседования.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Прохождение собеседования"
+              "title": "Outline"
             }
           }
         ],
@@ -273,11 +268,11 @@
       "homepage:Open homepage": false
     }
   },
-  "active": "4523ce68f5765302",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Soft/Прохождение собеседования.md",
     "Soft/_png/Pasted image 20250531201947.png",
     "Soft/_png/Pasted image 20250531201921.png",
-    "Soft/Прохождение собеседования.md",
     "Soft/Soft.md",
     "index.md",
     "Soft/Agile/Agile.md",
@@ -303,7 +298,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191301.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191105.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324191101.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324190621.png",
     "Soft/Agile/_lessons/Введение.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/FrontEnd/Vue/Vue.md",
