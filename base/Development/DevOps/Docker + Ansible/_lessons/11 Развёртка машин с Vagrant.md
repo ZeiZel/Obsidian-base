@@ -88,6 +88,9 @@ vagrant up
 > 1. Хранить папку проекта на диске c Windows (не в директории linux `~/`)  
 > 2. Разрешить Vagrant обращаться к Windows из под WSL через: `export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"`
 
+>[!attention] Если выходит эта ошибка, то нужно удалить папку `.vagrant`
+> The VirtualBox VM was created with a user that doesn't match the current user running Vagrant. VirtualBox requires that the same user be used to manage the VM that was created. Please re-run Vagrant with that user. This is not a Vagrant issue. The UID used to create the VM was: 1000 Your UID is: 0
+
 Теперь мы можем подключиться к любому нашему серверу
 
 ```bash
