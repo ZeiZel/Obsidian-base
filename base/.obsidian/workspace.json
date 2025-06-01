@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "Soft/Прохождение собеседования.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Прохождение собеседования"
             }
           }
         ]
@@ -202,13 +202,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "index.md",
+                "file": "Soft/Прохождение собеседования.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of Прохождение собеседования"
             }
           }
         ],
@@ -235,11 +235,12 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Soft/Собеседование.md",
+    "index.md",
     "Soft/Прохождение собеседования.md",
     "Soft/_png/Pasted image 20250531201947.png",
     "Soft/_png/Pasted image 20250531201921.png",
     "Soft/Soft.md",
-    "index.md",
     "Soft/Agile/Agile.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
