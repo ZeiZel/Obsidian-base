@@ -204,7 +204,7 @@
               "state": {
                 "file": "Soft/Прохождение собеседования.md",
                 "followCursor": false,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
@@ -235,9 +235,9 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Soft/Прохождение собеседования.md",
     "Soft/Собеседование.md",
     "index.md",
-    "Soft/Прохождение собеседования.md",
     "Soft/_png/Pasted image 20250531201947.png",
     "Soft/_png/Pasted image 20250531201921.png",
     "Soft/Soft.md",
