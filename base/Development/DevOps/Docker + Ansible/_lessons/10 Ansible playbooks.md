@@ -264,13 +264,6 @@ ansible-playbook -i demo-server user.yml -K --extra-vars "user=zeizel"
 
 ![](_png/Pasted%20image%2020250601193209.png)
 
-
-
-
-
-
-
-
 ## Отладка
 
 
