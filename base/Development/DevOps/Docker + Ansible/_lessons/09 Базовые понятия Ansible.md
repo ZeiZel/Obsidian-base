@@ -174,9 +174,44 @@ Ad-hoc команда выглядит следующим образом:
 2. Changed - Жёлтый - операция что-то изменила
 3. Failed - Красный - операция не выполнена
 
-![](_png/Pasted%20image%2020250107001643.png)
+```bash
+➜ ansible -i hosts -m user -a "name=zeizel state=present" localhost
 
-Чтобы операция выполнилась от sudo, добаляем `become` as `-b` и запрашиваем интерактивно пароль через `-K`. Это первый способ использования sudo.
+localhost | SUCCESS => {
+    "append": false,
+    "changed": false,
+    "comment": ",,,",
+    "group": 1000,
+    "home": "/home/zeizel",
+    "move_home": false,
+    "name": "zeizel",
+    "shell": "/usr/bin/zsh",
+    "state": "present",
+    "uid": 1000
+}
+
+```
+
+Чтобы операция выполнилась от sudo, добаляем `become` через `-b` и запрашиваем интерактивно пароль через `-K`. Это первый способ использования sudo.
+
+```bash
+➜ ansible -m user -a "name=zeizel state=present" -b -K localhost
+
+BECOME password:
+localhost | SUCCESS => {
+    "append": false,
+    "changed": false,
+    "comment": ",,,",
+    "group": 1000,
+    "home": "/home/zeizel",
+    "move_home": false,
+    "name": "zeizel",
+    "shell": "/usr/bin/zsh",
+    "state": "present",
+    "uid": 1000
+}
+
+```
 
 ![](_png/Pasted%20image%2020250107001928.png)
 
