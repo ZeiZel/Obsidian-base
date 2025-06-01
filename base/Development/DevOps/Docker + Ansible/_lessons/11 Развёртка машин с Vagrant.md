@@ -24,6 +24,12 @@ ENV['VAGRANT_SERVER_URL'] = 'https://vagrant.elab.pro'
 
 ## Развёртка машин
 
+Генерируем RSA ключ на нашей машине
+
+```bash
+ssh-keygen -t rsa
+```
+
 Конфиг vagrant написан на [Ruby](../../../BackEnd/Ruby.md) 
 
 `Vagrantfile`
@@ -70,11 +76,17 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+И поднимаем всё окружение виртуальных машин следующей командой
+
 ```bash
 vagrant up
 ```
 
 ![](_png/Pasted%20image%2020250112174851.png)
+
+>[!seealso] Если мы поднимаем вагрант из под WSL, то нам нужно:
+> 1. Хранить папку проекта на диске c Windows (не в директории linux `~/`)  
+> 2. Разрешить Vagrant обращаться к Windows из под WSL через: `export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"`
 
 Теперь мы можем подключиться к любому нашему серверу
 
