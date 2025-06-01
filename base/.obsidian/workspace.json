@@ -132,7 +132,7 @@
             }
           },
           {
-            "id": "f4b612be078d8ac7",
+            "id": "d7bdfec0fc09f89c",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -281,6 +281,7 @@
   },
   "active": "8d85d6587cc9de68",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601194115.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601193209.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601192608.png",
@@ -311,7 +312,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324193927.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324193256.png",
     "Whats Learning/О чём база~.md",
     "Soft/Agile/_lessons/Введение.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",

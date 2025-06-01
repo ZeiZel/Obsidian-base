@@ -123,7 +123,7 @@ ansible-playbook -i hosts.ini user.yml -K
         state: present
 ```
 
-![](_png/Pasted%20image%2020250601194115.png)
+![](_png/Pasted%20image%2020250601195352.png)
 
 #### Из отдельного файла
 
