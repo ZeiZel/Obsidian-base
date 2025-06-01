@@ -61,7 +61,210 @@ ansible-playbook -i hosts.ini user.yml -K
 - `my-var` - дефисы
 - `5my_var` - начинать с числа
 
+### Использование
+
 Перменные можно задавать в: playbook, block, tasks, group_vars, host_vars, inventory, extra_vars
+
+Мы можем задать переменные через ключ `vars` и использовать их через синтаксис `'{{ environment }}'`
+
+#### Модуль
+
+Запись переменной для модуля
+
+```YML
+---
+- name: user
+  hosts: demo
+  tasks:
+    - name: create user
+      vars:
+        user: zeizel
+      become: true
+      user:
+        name: '{{ user }}'
+        state: present
+
+```
+
+#### Весь плейбук
+
+И запись переменной для всего плейбука
+
+```YML
+---
+- name: user
+  hosts: demo
+  vars:
+		user: zeizel
+  tasks:
+    - name: create user
+      become: true
+      user:
+        name: '{{ user }}'
+        state: present
+```
+
+#### Задание переменной из промпта
+
+Через `vars_prompt` мы можем указать, какие переменные нас должен попросить ввести playbook в процессе выполнения тасок
+
+```yml
+- name: user
+  hosts: demo
+  vars_prompt:
+    - name: user                 # имя переменной
+      prompt: "Input user name"  # выводимый лейбл для ввода переменной
+      private: no                # скрывать ли вводимое значение
+  tasks:
+    - name: create user
+      become: true
+      user:
+        name: '{{ user }}'
+        state: present
+```
+
+![](_png/Pasted%20image%2020250601194115.png)
+
+#### Из отдельного файла
+
+Создаём отдельный файл чисто под переменные окружения
+
+`user_vars.yml`
+```yml
+---
+user: zeizel
+```
+
+Тут уже мы импортируем через поле `vars_files` список назначений с переменными окружения
+
+```YML
+---
+- name: user
+  hosts: demo
+  vars_files: [./user_vars.yml]
+  tasks:
+    - name: create user
+      become: true
+      user:
+        name: '{{ user }}'
+        state: present
+
+```
+
+#### Неявно указание
+
+Так же в ansible присутствует плагин, который неявно берёт переменные по различным группам данных
+
+Вот базовый инвентарь
+
+```ini
+[demo]
+127.0.0.1 ansible_user=zeizel ansible_connection=local
+```
+
+##### По названию группы из описанного инвентаря
+
+1. Из инвентаря берём наименование группы `demo`
+2. Создаём папку `group_vars`, в которую помещаем папку с группой и фиксированным именем `vars.yml`
+
+`group_vars / demo / vars.yml`
+```yml
+---
+user: zeizel
+```
+
+3. В файле playbook ничего указывать не нужно - просто используем переменную
+
+```yml
+---
+- name: user
+  hosts: demo
+  tasks:
+    - name: create user
+      become: true
+      user:
+        name: '{{ user }}'
+        state: present
+```
+
+##### По хостам
+
+1. Из инвентаря берём наименование хоста (можно алиас, если есть) `127.0.0.1`
+2. Создаём папку `host_vars`, в которой мы создаём ямл с именем хоста `127.0.0.1.yml`
+
+`host_vars / 127.0.0.1.yml`
+```yml
+---
+user: zeizel
+```
+
+3. И переменные так же работают без прямого импорта
+
+#### Задавать переменные прямо в инвентаре
+
+Так же переменная напрямую попадёт в playbook, если мы укажем её прямо в инвентаре
+
+```ini
+[demo]
+127.0.0.1 ansible_user=zeizel ansible_connection=local user=zeizel
+```
+
+### Объединение инвентарей
+
+Так же ничто нам не мешает вместо одного инвентаря использовать сразу несколько, чтобы складывать большое количество хостов и данных по ним
+
+Создадим папку `demo-server`, в которую поместим просто файл `demo`
+
+`demo-server / demo`
+```
+[demo]
+127.0.0.1 ansible_user=zeizel ansible_connection=local user=zeizel
+```
+
+И в качестве инвентаря указываем не отдельный файл, а всю папку целиком, где все инвентари из неё сконкатенируются в один
+
+```bash
+ansible-playbook -i demo-server user.yml -K
+```
+
+#### Установка переменных в группе инвентарей
+
+При таком подходе, мы можем положить переменные прямо в ту же папку с инвентарём и не пихать их прямо в сам файл с хостами
+
+`group_vars / all.yml`
+```yml
+---
+user: zeizel
+```
+
+Получается примерно такая структура папок
+
+```bash
+.
+├── demo-server
+│   ├── group_vars
+│   │   └── all.yml
+│   └── hosts
+└── user.yml
+```
+
+#### Установка переменных через extra-vars
+
+Ну и передача переменных прямо в команде через флаг `--extra-vars`
+
+```bash
+ansible-playbook -i demo-server user.yml -K --extra-vars "user=zeizel"
+```
+
+### Порядок переменных по приоритету
+
+Переменные автоматически мёрджатся из разных источников. Применяются самые конкретно заданные переменные (группа < хост < роль < блок < таска) 
+
+`--extra-vars` - это самые приоритетные переменные из всех.
+
+![](_png/Pasted%20image%2020250601193209.png)
+
+
 
 
 
