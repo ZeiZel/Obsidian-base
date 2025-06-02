@@ -67,8 +67,7 @@
               "title": "10 Ansible playbooks"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -132,16 +131,13 @@
             }
           },
           {
-            "id": "d7bdfec0fc09f89c",
+            "id": "7afeba60fa03cda0",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
             }
           }
         ],
@@ -252,13 +248,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+                "file": "Soft/Прохождение собеседования.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 10 Ansible playbooks"
+              "title": "Outline of Прохождение собеседования"
             }
           }
         ],
@@ -282,8 +278,9 @@
       "callout-manager:Insert Callout": false
     }
   },
-  "active": "8d85d6587cc9de68",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601194115.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601193209.png",
@@ -292,7 +289,6 @@
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
-    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Soft/Прохождение собеседования.md",
     "Soft/Собеседование.md",
@@ -314,7 +310,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324193927.png",
     "Whats Learning/О чём база~.md",
     "Soft/Agile/_lessons/Введение.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",

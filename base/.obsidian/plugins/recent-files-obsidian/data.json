@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Прохождение собеседования",
+      "path": "Soft/Прохождение собеседования.md"
+    },
+    {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Прохождение собеседования",
-      "path": "Soft/Прохождение собеседования.md"
     },
     {
       "basename": "index",
