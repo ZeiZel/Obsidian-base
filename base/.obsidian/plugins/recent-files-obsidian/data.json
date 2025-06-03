@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Soft/Agile/_lessons/Введение.md"
+    },
+    {
       "basename": "Прохождение собеседования",
       "path": "Soft/Прохождение собеседования.md"
+    },
+    {
+      "basename": "Golang",
+      "path": "Development/BackEnd/Golang.md"
     },
     {
       "basename": "10 Ansible playbooks",
@@ -31,10 +47,6 @@
     {
       "basename": "Soft",
       "path": "Soft/Soft.md"
-    },
-    {
-      "basename": "Agile",
-      "path": "Soft/Agile/Agile.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",

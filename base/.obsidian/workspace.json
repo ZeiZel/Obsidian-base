@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Soft/Прохождение собеседования.md",
+                "file": "Soft/Agile/_lessons/Scrum.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Прохождение собеседования"
+              "title": "Scrum"
             }
           },
           {
@@ -131,16 +131,13 @@
             }
           },
           {
-            "id": "7afeba60fa03cda0",
+            "id": "034cf0ce98f17d09",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
             }
           }
         ],
@@ -251,13 +248,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Soft/Прохождение собеседования.md",
+                "file": "Soft/Agile/_lessons/Scrum.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Прохождение собеседования"
+              "title": "Outline of Scrum"
             }
           }
         ],
@@ -283,6 +280,10 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Soft/Agile/Agile.md",
+    "Soft/Agile/_lessons/Введение.md",
+    "Soft/Прохождение собеседования.md",
+    "Development/BackEnd/Golang.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601194115.png",
@@ -293,13 +294,11 @@
     "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Soft/Прохождение собеседования.md",
     "Soft/Собеседование.md",
     "index.md",
     "Soft/_png/Pasted image 20250531201947.png",
     "Soft/_png/Pasted image 20250531201921.png",
     "Soft/Soft.md",
-    "Soft/Agile/Agile.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
@@ -314,7 +313,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
     "Whats Learning/О чём база~.md",
-    "Soft/Agile/_lessons/Введение.md",
     "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/FrontEnd/Vue/Vue.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
