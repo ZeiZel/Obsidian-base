@@ -54,7 +54,10 @@
     "//Development/Development/BackEnd",
     "//Development/Development/BackEnd/Development/BackEnd/Microservices",
     "//Development/Development/GIT",
-    "//Soft"
+    "//Soft",
+    "//Development/Development/Architecture",
+    "//Whats Learning",
+    "//Whats Learning/Whats Learning/RoadMap"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

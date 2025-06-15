@@ -1,6 +1,38 @@
 {
   "recentFiles": [
     {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "index",
+      "path": "Development/Architecture/index.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "Development/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "О чём база~",
+      "path": "Whats Learning/О чём база~.md"
+    },
+    {
+      "basename": "3. Знакомство с Kubernetes",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "Настройка окружения",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md"
+    },
+    {
+      "basename": "10 Ansible playbooks",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+    },
+    {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
     },
@@ -21,10 +53,6 @@
       "path": "Development/BackEnd/Golang.md"
     },
     {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
@@ -35,10 +63,6 @@
     {
       "basename": "11 Развёртка машин с Vagrant",
       "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "index",
@@ -55,14 +79,6 @@
     {
       "basename": "07 Docker-compose",
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
-    },
-    {
-      "basename": "2. Настройка окружения",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
     },
     {
       "basename": "Terminal",

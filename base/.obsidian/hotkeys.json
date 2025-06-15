@@ -109,14 +109,6 @@
       "key": "S"
     }
   ],
-  "omnisearch:show-modal-infile": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "S"
-    }
-  ],
   "editor:save-file": [
     {
       "modifiers": [
@@ -143,5 +135,14 @@
       ],
       "key": "O"
     }
-  ]
+  ],
+  "omnisearch:show-modal-infile": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
+  "editor:open-search": []
 }
