@@ -175,11 +175,11 @@
               "type": "webviewer",
               "state": {
                 "url": "https://code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf",
-                "title": "syllabus.pdf",
+                "title": "code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf",
                 "mode": "webview"
               },
               "icon": "globe-2",
-              "title": "syllabus.pdf"
+              "title": "code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf"
             }
           }
         ]
@@ -246,7 +246,7 @@
             }
           },
           {
-            "id": "338d8ec553c299b5",
+            "id": "79d8142e724c3709",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -335,12 +335,22 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "65a1814e8bb26264",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -390,11 +400,10 @@
       "workspaces:Manage workspace layouts": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "callout-manager:Insert Callout": false,
-      "omnisearch:Omnisearch": false
+      "callout-manager:Insert Callout": false
     }
   },
-  "active": "d7b7345674ab9349",
+  "active": "65a1814e8bb26264",
   "lastOpenFiles": [
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Architecture/index.md",
