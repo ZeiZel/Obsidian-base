@@ -57,7 +57,8 @@
     "//Soft",
     "//Development/Development/Architecture",
     "//Whats Learning",
-    "//Whats Learning/Whats Learning/RoadMap"
+    "//Whats Learning/Whats Learning/RoadMap",
+    "//Development/Development/BackEnd/Development/BackEnd/NestJS"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

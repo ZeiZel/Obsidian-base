@@ -6,7 +6,6 @@
       {
         "id": "4509724f8bf84da7",
         "type": "tabs",
-        "dimension": 57.757805108798486,
         "children": [
           {
             "id": "ad15acb6e9919011",
@@ -159,30 +158,33 @@
               "icon": "lucide-file",
               "title": "Прогресс изучения технологий"
             }
-          }
-        ],
-        "currentTab": 5
-      },
-      {
-        "id": "efe2d0608571c25a",
-        "type": "tabs",
-        "dimension": 42.242194891201514,
-        "children": [
+          },
           {
-            "id": "d7b7345674ab9349",
+            "id": "5c3ac71ee028b825",
             "type": "leaf",
             "state": {
-              "type": "webviewer",
+              "type": "markdown",
               "state": {
-                "url": "https://code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf",
-                "title": "code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf",
-                "mode": "webview"
+                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
-              "icon": "globe-2",
-              "title": "code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf"
+              "icon": "lucide-file",
+              "title": "04 Модули, контроллеры и провайдеры"
             }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -246,7 +248,7 @@
             }
           },
           {
-            "id": "79d8142e724c3709",
+            "id": "d483fde2e4c8714e",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -256,11 +258,12 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 386.5
+    "width": 386.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -333,10 +336,10 @@
             "id": "0786a4c57901480b",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "New tab"
             }
           },
           {
@@ -348,9 +351,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "345d6b1b0e4532fe",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -400,11 +413,14 @@
       "workspaces:Manage workspace layouts": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "callout-manager:Insert Callout": false
+      "callout-manager:Insert Callout": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "65a1814e8bb26264",
+  "active": "345d6b1b0e4532fe",
   "lastOpenFiles": [
+    "Development/BackEnd/NestJS/NestJS - с нуля.md",
+    "Development/TypeScript/_lessons/01 Введение.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/Architecture/index.md",
     "Development/Алгоритмы и Структуры даных.md",
@@ -436,10 +452,8 @@
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/Terminal.md",
     "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
-    "Development/MobileDev/React Native/React Native.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250328175122.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328174800.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
     "Development/Testing/_png",
     "Development/Testing",
