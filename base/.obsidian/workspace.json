@@ -182,9 +182,33 @@
               "icon": "lucide-file",
               "title": "04 Модули, контроллеры и провайдеры"
             }
+          },
+          {
+            "id": "1498c8912c17ffec",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Agile/_lessons/Управление задачам.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Управление задачам"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -216,7 +240,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "DoR",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -258,12 +282,11 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 386.5,
-    "collapsed": true
+    "width": 386.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -417,8 +440,10 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "345d6b1b0e4532fe",
+  "active": "1498c8912c17ffec",
   "lastOpenFiles": [
+    "Soft/Agile/_lessons/Scrum.md",
+    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/TypeScript/_lessons/01 Введение.md",
     "Whats Learning/Прогресс изучения технологий.md",
@@ -430,7 +455,6 @@
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
-    "Soft/Agile/_lessons/Scrum.md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Введение.md",
     "Soft/Прохождение собеседования.md",
@@ -451,7 +475,6 @@
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/Terminal.md",
-    "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250328175122.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328174800.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",

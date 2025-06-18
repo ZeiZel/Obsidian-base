@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
+    },
+    {
       "basename": "04 Модули, контроллеры и провайдеры",
       "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
     },
@@ -43,10 +51,6 @@
     {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
       "basename": "Agile",
