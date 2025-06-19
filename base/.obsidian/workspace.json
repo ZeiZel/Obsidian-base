@@ -272,7 +272,7 @@
             }
           },
           {
-            "id": "d483fde2e4c8714e",
+            "id": "5adaee2b72f9ff8d",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -282,7 +282,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -369,6 +369,26 @@
             "id": "65a1814e8bb26264",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "345d6b1b0e4532fe",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "c04a15e9bec6617e",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -376,7 +396,7 @@
             }
           },
           {
-            "id": "345d6b1b0e4532fe",
+            "id": "8d89e7cd848dbd0b",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -386,7 +406,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -440,7 +460,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "1498c8912c17ffec",
+  "active": "8d89e7cd848dbd0b",
   "lastOpenFiles": [
     "Soft/Agile/_lessons/Scrum.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
