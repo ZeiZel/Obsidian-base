@@ -272,7 +272,7 @@
             }
           },
           {
-            "id": "5adaee2b72f9ff8d",
+            "id": "4a386251d753974f",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -389,10 +389,10 @@
             "id": "c04a15e9bec6617e",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -404,9 +404,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "110d34cdbb36dd9d",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 9
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -460,7 +470,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "8d89e7cd848dbd0b",
+  "active": "110d34cdbb36dd9d",
   "lastOpenFiles": [
     "Soft/Agile/_lessons/Scrum.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
