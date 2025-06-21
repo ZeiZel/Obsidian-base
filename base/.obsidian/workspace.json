@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Environment/Terminal.md",
+                "file": "Environment/Aerospace.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Terminal"
+              "title": "Aerospace"
             }
           },
           {
@@ -193,7 +193,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 386.5
+    "width": 386.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -389,8 +390,8 @@
   },
   "active": "cba7dffc9c5cdb3c",
   "lastOpenFiles": [
-    "Environment/Yazi.md",
     "Environment/Terminal.md",
+    "Environment/Yazi.md",
     "Environment/ZSH.md",
     "Environment/TMUX.md",
     "Environment/Aerospace.md",

@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Aerospace",
+      "path": "Environment/Aerospace.md"
+    },
+    {
       "basename": "Terminal",
       "path": "Environment/Terminal.md"
     },
@@ -15,10 +19,6 @@
     {
       "basename": "TMUX",
       "path": "Environment/TMUX.md"
-    },
-    {
-      "basename": "Aerospace",
-      "path": "Environment/Aerospace.md"
     },
     {
       "basename": "DataGrip",
