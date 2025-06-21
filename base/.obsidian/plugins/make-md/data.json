@@ -57,7 +57,10 @@
     "//Development/Development/Architecture",
     "//Whats Learning",
     "//Whats Learning/Whats Learning/RoadMap",
-    "//Development/Development/BackEnd/Development/BackEnd/NestJS"
+    "//Development/Development/BackEnd/Development/BackEnd/NestJS",
+    "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm",
+    "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm/Development/DevOps/Kubernetes + Helm/_lessons",
+    "//Development/Development/FrontEnd/Development/FrontEnd/State Managers"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

@@ -10,7 +10,6 @@
           {
             "id": "ad15acb6e9919011",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -28,15 +27,37 @@
                   "unlinkedCollapsed": true
                 }
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Алгоритмы и Структуры даных"
             }
           },
           {
+            "id": "cba7dffc9c5cdb3c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Environment/Terminal.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Terminal"
+            }
+          },
+          {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -54,7 +75,6 @@
                   "unlinkedCollapsed": true
                 }
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Scrum"
             }
@@ -62,13 +82,11 @@
           {
             "id": "7c9701acc7feed5d",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "mk-space",
               "state": {
                 "path": "Development/DevOps/Kubernetes + Helm"
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Kubernetes + Helm"
             }
@@ -76,7 +94,6 @@
           {
             "id": "8d85d6587cc9de68",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -94,133 +111,12 @@
                   "unlinkedCollapsed": true
                 }
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "10 Ansible playbooks"
             }
-          },
-          {
-            "id": "9cfac3d7ffa5cad7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Architecture/index.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
-            "id": "d5d91b37bc1b1b2c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Whats Learning/Прогресс изучения технологий.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Прогресс изучения технологий"
-            }
-          },
-          {
-            "id": "5c3ac71ee028b825",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "04 Модули, контроллеры и провайдеры"
-            }
-          },
-          {
-            "id": "1498c8912c17ffec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Soft/Agile/_lessons/Управление задачам.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Управление задачам"
-            }
-          },
-          {
-            "id": "61675a4ba3bf26fa",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Настройка окружения"
-            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -252,7 +148,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "DoR",
+                "query": "CTRL",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -293,8 +189,7 @@
               "title": "Navigator"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -492,41 +387,42 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "61675a4ba3bf26fa",
+  "active": "cba7dffc9c5cdb3c",
   "lastOpenFiles": [
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
-    "Soft/Agile/_lessons/Управление задачам.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+    "Environment/Yazi.md",
+    "Environment/Terminal.md",
+    "Environment/ZSH.md",
+    "Environment/TMUX.md",
+    "Environment/Aerospace.md",
+    "Environment/DataGrip.md",
+    "Environment/WebStorm.md",
+    "Development/Алгоритмы и Структуры даных.md",
+    "Environment",
+    "Development/FrontEnd/State Managers/Zustand.md",
     "Soft/Agile/_lessons/Scrum.md",
+    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md",
+    "Development/Architecture/index.md",
+    "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/TypeScript/_lessons/01 Введение.md",
-    "Whats Learning/Прогресс изучения технологий.md",
-    "Development/Architecture/index.md",
-    "Development/Алгоритмы и Структуры даных.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/RoadMap/RoadMap.md",
-    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Введение.md",
     "Soft/Прохождение собеседования.md",
-    "Development/BackEnd/Golang.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601194115.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601193209.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601192608.png",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601192606.png",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md",
-    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
-    "Soft/Собеседование.md",
-    "index.md",
     "Soft/_png/Pasted image 20250531201947.png",
     "Soft/_png/Pasted image 20250531201921.png",
-    "Soft/Soft.md",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250328175122.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328174800.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
@@ -538,7 +434,6 @@
     "_png",
     "Development/FrontEnd/Vue/_png",
     "Development/FrontEnd/Vue",
-    "Development/FrontEnd/Angular",
-    "Development/FrontEnd/State Managers/_png"
+    "Development/FrontEnd/Angular"
   ]
 }

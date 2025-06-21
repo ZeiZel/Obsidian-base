@@ -1,6 +1,66 @@
 {
   "recentFiles": [
     {
+      "basename": "Terminal",
+      "path": "Environment/Terminal.md"
+    },
+    {
+      "basename": "Yazi",
+      "path": "Environment/Yazi.md"
+    },
+    {
+      "basename": "ZSH",
+      "path": "Environment/ZSH.md"
+    },
+    {
+      "basename": "TMUX",
+      "path": "Environment/TMUX.md"
+    },
+    {
+      "basename": "Aerospace",
+      "path": "Environment/Aerospace.md"
+    },
+    {
+      "basename": "DataGrip",
+      "path": "Environment/DataGrip.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "Development/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "Zustand",
+      "path": "Development/FrontEnd/State Managers/Zustand.md"
+    },
+    {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
+    },
+    {
+      "basename": "10 Ansible playbooks",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md"
+    },
+    {
+      "basename": "index",
+      "path": "Development/Architecture/index.md"
+    },
+    {
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
+    },
+    {
+      "basename": "04 Модули, контроллеры и провайдеры",
+      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
+    },
+    {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
       "basename": "Настройка окружения",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md"
     },
@@ -9,20 +69,8 @@
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
       "basename": "3. Знакомство с Kubernetes",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "04 Модули, контроллеры и провайдеры",
-      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
     },
     {
       "basename": "NestJS - с нуля",
@@ -33,24 +81,8 @@
       "path": "Development/TypeScript/_lessons/01 Введение.md"
     },
     {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "index",
-      "path": "Development/Architecture/index.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
       "basename": "О чём база~",
       "path": "Whats Learning/О чём база~.md"
-    },
-    {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
     {
       "basename": "Agile",
@@ -95,10 +127,6 @@
     {
       "basename": "07 Docker-compose",
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
-    },
-    {
-      "basename": "Terminal",
-      "path": "Development/Terminal.md"
     },
     {
       "basename": "05 Сети Docker",
