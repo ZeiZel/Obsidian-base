@@ -64,25 +64,13 @@
             "type": "leaf",
             "pinned": true,
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "Development/DevOps/Kubernetes + Helm"
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "3. Знакомство с Kubernetes"
+              "title": "Kubernetes + Helm"
             }
           },
           {
@@ -206,9 +194,33 @@
               "icon": "lucide-file",
               "title": "Управление задачам"
             }
+          },
+          {
+            "id": "61675a4ba3bf26fa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Настройка окружения"
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -480,8 +492,12 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "77a1a2217f3a479b",
+  "active": "61675a4ba3bf26fa",
   "lastOpenFiles": [
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Soft/Agile/_lessons/Scrum.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
@@ -491,9 +507,6 @@
     "Development/Алгоритмы и Структуры даных.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/RoadMap/RoadMap.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Soft/Agile/Agile.md",
     "Soft/Agile/_lessons/Введение.md",
@@ -514,7 +527,6 @@
     "Soft/Soft.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
-    "Development/Terminal.md",
     "Development/MobileDev/React Native/_png/Pasted image 20250328175122.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328174800.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
