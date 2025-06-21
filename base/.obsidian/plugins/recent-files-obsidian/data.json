@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Настройка окружения",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
       "basename": "Aerospace",
       "path": "Environment/Aerospace.md"
     },
@@ -59,14 +67,6 @@
     {
       "basename": "Управление задачам",
       "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
-      "basename": "Настройка окружения",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
       "basename": "3. Знакомство с Kubernetes",

@@ -83,12 +83,24 @@
             "id": "7c9701acc7feed5d",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "Development/DevOps/Kubernetes + Helm"
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
+              "title": "Настройка окружения"
             }
           },
           {
@@ -116,7 +128,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -193,8 +205,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 386.5,
-    "collapsed": true
+    "width": 386.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -408,14 +419,15 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "19de3f55fe905645",
+  "active": "7c9701acc7feed5d",
   "lastOpenFiles": [
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Environment/Aerospace.md",
     "Environment/_png/Screenshot 2025-06-21 at 14.37.22.png",
     "Environment/Terminal.md",
     "Environment/Yazi.md",
     "Environment/ZSH.md",
     "Environment/TMUX.md",
-    "Environment/Aerospace.md",
     "Environment/DataGrip.md",
     "Environment/WebStorm.md",
     "Development/Алгоритмы и Структуры даных.md",
@@ -429,7 +441,6 @@
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Soft/Agile/_lessons/Управление задачам.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/TypeScript/_lessons/01 Введение.md",
@@ -446,7 +457,6 @@
     "Soft/_png/Pasted image 20250531201921.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328175122.png",
     "Development/MobileDev/React Native/_png/Pasted image 20250328174800.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250324194047.png",
     "Development/Testing/_png",
     "Development/Testing",
     "Development/DB/_png",
