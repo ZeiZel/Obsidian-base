@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "4. Первый pod",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
+      "basename": "5. Работа с объектами",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
     },
     {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "4. Первый pod",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
     },
     {
       "basename": "Настройка окружения",
