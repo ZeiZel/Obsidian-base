@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "10 Ansible playbooks",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+    },
+    {
       "basename": "5. Работа с объектами",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
     },
@@ -59,10 +63,6 @@
     {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
     {
       "basename": "index",

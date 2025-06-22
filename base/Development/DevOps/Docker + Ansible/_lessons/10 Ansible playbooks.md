@@ -271,8 +271,6 @@ ansible-playbook -i demo-server user.yml -K --extra-vars "user=zeizel"
 
 
 
-
-
 ## Блоки и отработка ошибок
 
 

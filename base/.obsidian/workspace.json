@@ -104,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -274,15 +274,17 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of 10 Ansible playbooks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -304,13 +306,13 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "7c9701acc7feed5d",
+  "active": "8d85d6587cc9de68",
   "lastOpenFiles": [
+    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",
