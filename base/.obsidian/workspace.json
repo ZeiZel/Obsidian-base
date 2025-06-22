@@ -168,7 +168,7 @@
             }
           },
           {
-            "id": "658395eb184b9370",
+            "id": "e4af333e2c6806c4",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -177,7 +177,8 @@
               "title": "Navigator"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -249,9 +250,19 @@
               "icon": "lucide-git-fork",
               "title": "Graph view"
             }
+          },
+          {
+            "id": "de42332dd051acc2",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -283,8 +294,7 @@
               "title": "Outline of 10 Ansible playbooks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -302,11 +312,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
       "callout-manager:Insert Callout": false,
-      "omnisearch:Omnisearch": false,
-      "copilot:Open Copilot Chat": false
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "8d85d6587cc9de68",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
     "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
