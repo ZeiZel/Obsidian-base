@@ -9,12 +9,16 @@
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
-      "basename": "4. Первый pod",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
+      "basename": "2. Настройка окружения",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
     },
     {
-      "basename": "Настройка окружения",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md"
+      "basename": "1. Введение",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md"
+    },
+    {
+      "basename": "4. Первый pod",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
     },
     {
       "basename": "3. Знакомство с Kubernetes",
@@ -59,10 +63,6 @@
     {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md"
     },
     {
       "basename": "index",

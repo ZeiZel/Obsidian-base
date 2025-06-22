@@ -177,13 +177,11 @@
               "title": "Navigator"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 386.5,
-    "collapsed": true
+    "width": 436.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -251,109 +249,9 @@
               "icon": "lucide-git-fork",
               "title": "Graph view"
             }
-          },
-          {
-            "id": "0786a4c57901480b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "65a1814e8bb26264",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "345d6b1b0e4532fe",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "c04a15e9bec6617e",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "8d89e7cd848dbd0b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "110d34cdbb36dd9d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "77a1a2217f3a479b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "8195b86676bc751b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "19de3f55fe905645",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
-          },
-          {
-            "id": "8c4aa28cbf26e34d",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
           }
         ],
-        "currentTab": 13
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -388,7 +286,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 413.5
+    "width": 533.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -409,12 +307,14 @@
   "active": "7c9701acc7feed5d",
   "lastOpenFiles": [
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164853.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622155305.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622154540.png",
@@ -433,7 +333,6 @@
     "Development/FrontEnd/State Managers/Zustand.md",
     "Soft/Agile/_lessons/Scrum.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/Введение.md",
     "Development/Architecture/index.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
