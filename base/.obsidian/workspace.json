@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "3. Знакомство с Kubernetes"
+              "title": "4. Первый pod"
             }
           },
           {
@@ -404,14 +404,16 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
       "callout-manager:Insert Callout": false,
-      "omnisearch:Omnisearch": false
+      "omnisearch:Omnisearch": false,
+      "copilot:Open Copilot Chat": false
     }
   },
   "active": "7c9701acc7feed5d",
   "lastOpenFiles": [
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622095427.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622092936.png",
     "Environment/Aerospace.md",
@@ -432,7 +434,6 @@
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Soft/Agile/_lessons/Управление задачам.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
     "Development/TypeScript/_lessons/01 Введение.md",
     "Whats Learning/О чём база~.md",
