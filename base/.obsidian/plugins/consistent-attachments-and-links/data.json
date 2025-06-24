@@ -6,6 +6,7 @@
     ".git/",
     ".obsidian/"
   ],
+  "excludePathsFromAttachmentCollecting": [],
   "includePaths": [],
   "shouldChangeNoteBacklinksDisplayText": false,
   "shouldCollectAttachmentsAutomatically": false,

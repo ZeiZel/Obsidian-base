@@ -168,7 +168,7 @@
             }
           },
           {
-            "id": "481c32366ae2b7af",
+            "id": "e8c9485236f6f432",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -177,8 +177,7 @@
               "title": "Navigator"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -321,10 +320,11 @@
       "workspaces:Manage workspace layouts": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
-      "callout-manager:Insert Callout": false
+      "callout-manager:Insert Callout": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "e34b07cb9f3f78d0",
+  "active": "48c5943284c71db8",
   "lastOpenFiles": [
     "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
