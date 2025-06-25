@@ -1,6 +1,34 @@
 {
   "recentFiles": [
     {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "10. Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
+    },
+    {
+      "basename": "9. Реализация API",
+      "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
+    },
+    {
+      "basename": "8. Реализация взаимодействия",
+      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
+    },
+    {
+      "basename": "7. RabbitMQ",
+      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
+    },
+    {
+      "basename": "5. Работа с объектами",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
+    },
+    {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
@@ -11,10 +39,6 @@
     {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "5. Работа с объектами",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
     },
     {
       "basename": "Kubernetes + Helm",
@@ -127,10 +151,6 @@
     {
       "basename": "Soft",
       "path": "Soft/Soft.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "07 Docker-compose",

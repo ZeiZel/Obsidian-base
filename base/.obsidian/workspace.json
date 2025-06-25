@@ -80,6 +80,30 @@
             }
           },
           {
+            "id": "a4a0a906fc76b769",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "11. Консистентность данных"
+            }
+          },
+          {
             "id": "8d85d6587cc9de68",
             "type": "leaf",
             "state": {
@@ -294,20 +318,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 10 Ansible playbooks"
+              "title": "Outline of 11. Консистентность данных"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 533.5
+    "width": 536.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -321,15 +346,22 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
       "callout-manager:Insert Callout": false,
-      "omnisearch:Omnisearch": false
+      "omnisearch:Omnisearch": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "8d85d6587cc9de68",
+  "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
+    "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
+    "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/Алгоритмы и Структуры даных.md",
     "Soft/Agile/_lessons/Scrum.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
@@ -357,11 +389,6 @@
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
     "Soft/Agile/_lessons/Управление задачам.md",
-    "Development/BackEnd/NestJS/NestJS - с нуля.md",
-    "Development/TypeScript/_lessons/01 Введение.md",
-    "Whats Learning/О чём база~.md",
-    "Whats Learning/RoadMap/RoadMap.md",
-    "Soft/Agile/Agile.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/Testing/_png",
     "Development/Testing",
