@@ -324,8 +324,11 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "48c5943284c71db8",
+  "active": "8d85d6587cc9de68",
   "lastOpenFiles": [
+    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+    "Development/Алгоритмы и Структуры даных.md",
+    "Soft/Agile/_lessons/Scrum.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
@@ -348,11 +351,8 @@
     "Environment/TMUX.md",
     "Environment/DataGrip.md",
     "Environment/WebStorm.md",
-    "Development/Алгоритмы и Структуры даных.md",
     "Environment",
     "Development/FrontEnd/State Managers/Zustand.md",
-    "Soft/Agile/_lessons/Scrum.md",
-    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/Architecture/index.md",
     "Whats Learning/Прогресс изучения технологий.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",

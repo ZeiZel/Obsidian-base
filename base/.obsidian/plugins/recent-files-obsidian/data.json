@@ -5,6 +5,14 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
     {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "Development/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
+    },
+    {
       "basename": "5. Работа с объектами",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
     },
@@ -53,16 +61,8 @@
       "path": "Environment/DataGrip.md"
     },
     {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
       "basename": "Zustand",
       "path": "Development/FrontEnd/State Managers/Zustand.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
       "basename": "index",
