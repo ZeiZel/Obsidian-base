@@ -1,8 +1,44 @@
 {
   "recentFiles": [
     {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
+      "basename": "3. Знакомство с Kubernetes",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "2. Настройка окружения",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
+    },
+    {
+      "basename": "1. Введение",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "Development/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "10 Ansible playbooks",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+    },
+    {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "5. Работа с объектами",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
+    },
+    {
+      "basename": "Scrum",
+      "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
@@ -25,40 +61,8 @@
       "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
     },
     {
-      "basename": "5. Работа с объектами",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
-    },
-    {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "2. Настройка окружения",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
-    },
-    {
-      "basename": "1. Введение",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md"
-    },
-    {
       "basename": "4. Первый pod",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
-    },
-    {
-      "basename": "3. Знакомство с Kubernetes",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
     },
     {
       "basename": "Aerospace",
@@ -99,10 +103,6 @@
     {
       "basename": "04 Модули, контроллеры и провайдеры",
       "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
-    },
-    {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
     },
     {
       "basename": "NestJS - с нуля",

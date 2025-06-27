@@ -32,12 +32,12 @@
             }
           },
           {
-            "id": "e7a7b303c61786dc",
+            "id": "ac014f84be876b5c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Soft/Agile/_lessons/Scrum.md",
+                "file": "Soft/Agile/_lessons/Управление задачам.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Scrum"
+              "title": "Управление задачам"
             }
           },
           {
@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "5. Работа с объектами"
+              "title": "3. Знакомство с Kubernetes"
             }
           },
           {
@@ -128,7 +128,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -160,7 +160,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "CTRL",
+                "query": "DoR",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -192,7 +192,7 @@
             }
           },
           {
-            "id": "e8c9485236f6f432",
+            "id": "52c2f1bcdab6cb5b",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -201,11 +201,12 @@
               "title": "Navigator"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 436.5
+    "width": 305.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -278,10 +279,10 @@
             "id": "de42332dd051acc2",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -293,9 +294,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "35609d7989f63c37",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -318,13 +329,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "file": "Soft/Agile/_lessons/Управление задачам.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 11. Консистентность данных"
+              "title": "Outline of Управление задачам"
             }
           }
         ],
@@ -332,7 +343,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 536.5
+    "width": 257.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -351,26 +363,28 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "a4a0a906fc76b769",
+  "active": "ac014f84be876b5c",
   "lastOpenFiles": [
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Development/Алгоритмы и Структуры даных.md",
+    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
+    "Soft/Agile/_lessons/Scrum.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
     "Development/BackEnd/Microservices/_lessons/9. Реализация API.md",
     "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
-    "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
-    "Development/Алгоритмы и Структуры даных.md",
-    "Soft/Agile/_lessons/Scrum.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164853.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622155305.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622154540.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622095427.png",
@@ -387,8 +401,6 @@
     "Development/FrontEnd/State Managers/Zustand.md",
     "Development/Architecture/index.md",
     "Whats Learning/Прогресс изучения технологий.md",
-    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
-    "Soft/Agile/_lessons/Управление задачам.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/Testing/_png",
     "Development/Testing",
