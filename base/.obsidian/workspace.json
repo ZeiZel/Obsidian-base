@@ -192,7 +192,7 @@
             }
           },
           {
-            "id": "52c2f1bcdab6cb5b",
+            "id": "161c1394e2f60ce8",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -289,10 +289,10 @@
             "id": "e34b07cb9f3f78d0",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -304,9 +304,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "db0b903b48f707c9",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -363,7 +373,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "ac014f84be876b5c",
+  "active": "db0b903b48f707c9",
   "lastOpenFiles": [
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
