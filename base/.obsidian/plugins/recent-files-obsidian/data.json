@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
+      "basename": "Прохождение собеседования",
+      "path": "Soft/Прохождение собеседования.md"
     },
     {
       "basename": "3. Знакомство с Kubernetes",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
+    },
+    {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
     },
     {
       "basename": "Kubernetes + Helm",
@@ -123,10 +127,6 @@
     {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "Прохождение собеседования",
-      "path": "Soft/Прохождение собеседования.md"
     },
     {
       "basename": "Golang",
