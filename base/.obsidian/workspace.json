@@ -216,7 +216,7 @@
             }
           },
           {
-            "id": "94bf3764a3ccc7b0",
+            "id": "3dcf8b0b7e2f5708",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -343,6 +343,26 @@
             "id": "cce4c68288d292f0",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "12aac2bbdfa6dbac",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "bff38938509cd505",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -350,7 +370,7 @@
             }
           },
           {
-            "id": "12aac2bbdfa6dbac",
+            "id": "0736c08e4327940e",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -360,7 +380,7 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 11
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -417,7 +437,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "12aac2bbdfa6dbac",
+  "active": "0736c08e4327940e",
   "lastOpenFiles": [
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Soft/Agile/_lessons/Управление задачам.md",
