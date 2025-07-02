@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "Конфигурация",
+      "path": "Development/NVim/_lessons/Конфигурация.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
+      "basename": "NVim",
+      "path": "Development/NVim/NVim.md"
+    },
+    {
+      "basename": "Плагины UI",
+      "path": "Development/NVim/_lessons/Плагины UI.md"
+    },
+    {
+      "basename": "Продвинутая работа",
+      "path": "Development/NVim/_lessons/Продвинутая работа.md"
+    },
+    {
       "basename": "Прохождение собеседования",
       "path": "Soft/Прохождение собеседования.md"
     },

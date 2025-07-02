@@ -150,9 +150,33 @@
               "icon": "lucide-file",
               "title": "10 Ansible playbooks"
             }
+          },
+          {
+            "id": "70354030f8526dbe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/NVim/_lessons/Конфигурация.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Конфигурация"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -184,7 +208,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "DoR",
+                "query": "NVIM",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -225,12 +249,12 @@
               "title": "Navigator"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 305.5,
-    "collapsed": true
+    "width": 305.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -447,8 +471,13 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "15291149d6333cd6",
+  "active": "70354030f8526dbe",
   "lastOpenFiles": [
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
+    "Development/NVim/NVim.md",
+    "Development/NVim/_lessons/Плагины UI.md",
+    "Development/NVim/_lessons/Продвинутая работа.md",
+    "Soft/Прохождение собеседования.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Soft/Agile/_lessons/Управление задачам.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
@@ -479,12 +508,7 @@
     "Environment/Yazi.md",
     "Environment/ZSH.md",
     "Environment/TMUX.md",
-    "Environment/DataGrip.md",
-    "Environment/WebStorm.md",
     "Environment",
-    "Development/FrontEnd/State Managers/Zustand.md",
-    "Development/Architecture/index.md",
-    "Whats Learning/Прогресс изучения технологий.md",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/Testing/_png",
     "Development/Testing",
