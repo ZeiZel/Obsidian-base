@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "10 Ansible playbooks",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
+    },
+    {
       "basename": "Конфигурация",
       "path": "Development/NVim/_lessons/Конфигурация.md"
     },
@@ -47,10 +51,6 @@
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
     {
       "basename": "11. Консистентность данных",
