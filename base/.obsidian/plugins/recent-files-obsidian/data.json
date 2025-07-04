@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Visual mode и макросы",
+      "path": "Development/NVim/_lessons/Visual mode и макросы.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
       "basename": "10 Ansible playbooks",
       "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
     },
     {
       "basename": "Конфигурация",
       "path": "Development/NVim/_lessons/Конфигурация.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
     },
     {
       "basename": "NVim",
@@ -151,10 +159,6 @@
     {
       "basename": "Golang",
       "path": "Development/BackEnd/Golang.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
       "basename": "09 Базовые понятия Ansible",

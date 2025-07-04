@@ -60,7 +60,8 @@
     "//Development/Development/BackEnd/Development/BackEnd/NestJS",
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm",
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm/Development/DevOps/Kubernetes + Helm/_lessons",
-    "//Development/Development/FrontEnd/Development/FrontEnd/State Managers"
+    "//Development/Development/FrontEnd/Development/FrontEnd/State Managers",
+    "//Development/Development/NVim"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
