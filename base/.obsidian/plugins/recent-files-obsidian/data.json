@@ -1,6 +1,38 @@
 {
   "recentFiles": [
     {
+      "basename": "Продвинутый FrontEnd",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "4 Работа с данными",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
+    },
+    {
+      "basename": "1. Введение",
+      "path": "Development/BackEnd/Microservices/_lessons/1. Введение.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "1. Введение",
+      "path": "Development/GIT/_lessons/1. Введение.md"
+    },
+    {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "3. Знакомство с Kubernetes",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
+    },
+    {
+      "basename": "Visual mode и макросы",
+      "path": "Development/NVim/_lessons/Visual mode и макросы.md"
+    },
+    {
       "basename": "Troubleshooting",
       "path": "Development/DevOps/Docker + Ansible/_lessons/Troubleshooting.md"
     },
@@ -13,10 +45,6 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
     },
     {
-      "basename": "Visual mode и макросы",
-      "path": "Development/NVim/_lessons/Visual mode и макросы.md"
-    },
-    {
       "basename": "Алгоритмы и Структуры даных",
       "path": "Development/Алгоритмы и Структуры даных.md"
     },
@@ -27,14 +55,6 @@
     {
       "basename": "Прохождение собеседования",
       "path": "Soft/Прохождение собеседования.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
-    },
-    {
-      "basename": "3. Знакомство с Kubernetes",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
@@ -79,10 +99,6 @@
     {
       "basename": "Scrum",
       "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "10. Реализация бизнес логики",
@@ -183,14 +199,6 @@
     {
       "basename": "07 Docker-compose",
       "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
-    },
-    {
-      "basename": "05 Сети Docker",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/05 Сети Docker.md"
-    },
-    {
-      "basename": "React Native",
-      "path": "Development/MobileDev/React Native/React Native.md"
     }
   ],
   "omittedPaths": [],
