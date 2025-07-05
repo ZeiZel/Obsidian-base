@@ -1,4 +1,6 @@
 
+[Setup VM's Ubuntu](https://gist.github.com/anupkrbid/e894af7df2d43a4e253fc252251dd7fe)
+
 ### Установка Docker на виртуальную машину на MacOS
 
 ```bash
