@@ -61,7 +61,8 @@
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm",
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm/Development/DevOps/Kubernetes + Helm/_lessons",
     "//Development/Development/FrontEnd/Development/FrontEnd/State Managers",
-    "//Development/Development/NVim"
+    "//Development/Development/NVim",
+    "//Development/Development/DevOps/Development/DevOps/Docker + Ansible/Development/DevOps/Docker + Ansible/_lessons"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

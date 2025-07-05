@@ -1,6 +1,7 @@
 
 #Docker #Ansible #DevOps
 
+- [Troubleshooting](_lessons/Troubleshooting.md)
 - [01 Введение](_lessons/01%20Введение.md)
 - [02 Настройка VM на Linux](_lessons/02%20Настройка%20VM%20на%20Linux.md)
 - [03 Базовые понятия Docker](_lessons/03%20Базовые%20понятия%20Docker.md)

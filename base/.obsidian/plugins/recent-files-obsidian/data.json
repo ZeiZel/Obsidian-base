@@ -1,20 +1,40 @@
 {
   "recentFiles": [
     {
-      "basename": "3. Знакомство с Kubernetes",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
-    },
-    {
-      "basename": "11 Развёртка машин с Vagrant",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
+      "basename": "Troubleshooting",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/Troubleshooting.md"
     },
     {
       "basename": "Docker + Ansible",
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
+      "basename": "11 Развёртка машин с Vagrant",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
+    },
+    {
       "basename": "Visual mode и макросы",
       "path": "Development/NVim/_lessons/Visual mode и макросы.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "Development/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
+      "basename": "Прохождение собеседования",
+      "path": "Soft/Прохождение собеседования.md"
+    },
+    {
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "3. Знакомство с Kubernetes",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
@@ -41,14 +61,6 @@
       "path": "Development/NVim/_lessons/Продвинутая работа.md"
     },
     {
-      "basename": "Прохождение собеседования",
-      "path": "Soft/Прохождение собеседования.md"
-    },
-    {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
@@ -59,14 +71,6 @@
     {
       "basename": "1. Введение",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "5. Работа с объектами",
