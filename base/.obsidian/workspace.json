@@ -56,30 +56,6 @@
             }
           },
           {
-            "id": "7c9701acc7feed5d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "3. Знакомство с Kubernetes"
-            }
-          },
-          {
             "id": "156286721ed69f74",
             "type": "leaf",
             "state": {
@@ -128,15 +104,51 @@
             }
           },
           {
+            "id": "7c9701acc7feed5d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "3. Знакомство с Kubernetes"
+            }
+          },
+          {
             "id": "8d85d6587cc9de68",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "Development/DevOps/Docker + Ansible"
+                "file": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "Docker + Ansible"
+              "title": "11 Развёртка машин с Vagrant"
             }
           },
           {
@@ -164,7 +176,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -228,7 +240,7 @@
             }
           },
           {
-            "id": "5980340855b20269",
+            "id": "8c3179980982b6fd",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -385,6 +397,26 @@
             "id": "0736c08e4327940e",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "15291149d6333cd6",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "db6f51b2024569a6",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -392,7 +424,7 @@
             }
           },
           {
-            "id": "15291149d6333cd6",
+            "id": "cc1786538405c59d",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -402,7 +434,7 @@
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 14
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -459,10 +491,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "fd262a70758aee92",
+  "active": "cc1786538405c59d",
   "lastOpenFiles": [
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/NVim/_lessons/Visual mode и макросы.md",
+    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/NVim.md",
@@ -495,7 +528,6 @@
     "Environment/Aerospace.md",
     "Environment/_png/Screenshot 2025-06-21 at 14.37.22.png",
     "Environment/Terminal.md",
-    "Environment/Yazi.md",
     "Environment",
     "Development/DevOps/Docker + Ansible/_lessons/_png/Pasted image 20250601195352.png",
     "Development/Testing/_png",
