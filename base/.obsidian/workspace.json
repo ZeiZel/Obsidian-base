@@ -216,7 +216,7 @@
             }
           },
           {
-            "id": "8c3179980982b6fd",
+            "id": "588824f12d6af4e9",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -225,7 +225,8 @@
               "title": "Navigator"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -392,10 +393,10 @@
             "id": "db6f51b2024569a6",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -407,9 +408,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "49e9d74d59ad7a47",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 14
+        "currentTab": 15
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -466,7 +477,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "26248ac1eda32c23",
+  "active": "49e9d74d59ad7a47",
   "lastOpenFiles": [
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
