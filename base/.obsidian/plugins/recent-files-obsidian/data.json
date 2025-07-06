@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Terminal",
+      "path": "Environment/Terminal.md"
+    },
+    {
       "basename": "Продвинутый FrontEnd",
       "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     },
@@ -123,10 +127,6 @@
     {
       "basename": "Aerospace",
       "path": "Environment/Aerospace.md"
-    },
-    {
-      "basename": "Terminal",
-      "path": "Environment/Terminal.md"
     },
     {
       "basename": "Yazi",

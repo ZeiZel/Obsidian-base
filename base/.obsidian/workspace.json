@@ -150,9 +150,33 @@
               "icon": "lucide-file",
               "title": "Продвинутый FrontEnd"
             }
+          },
+          {
+            "id": "7b5e124c782c1107",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Environment/Terminal.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Terminal"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -184,7 +208,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "npm-check",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -226,7 +250,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -477,10 +501,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "49e9d74d59ad7a47",
+  "active": "7b5e124c782c1107",
   "lastOpenFiles": [
-    "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "Development/BackEnd/Microservices/_lessons/1. Введение.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/GIT/_lessons/1. Введение.md",
