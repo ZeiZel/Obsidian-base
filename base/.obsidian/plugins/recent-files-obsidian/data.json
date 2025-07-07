@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "07 Docker-compose",
+      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "1. Введение",
+      "path": "Development/BackEnd/Microservices/_lessons/1. Введение.md"
+    },
+    {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
+      "basename": "3. Знакомство с Kubernetes",
+      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
+    },
+    {
       "basename": "Прохождение собеседования",
       "path": "Soft/Прохождение собеседования.md"
     },
@@ -33,10 +53,6 @@
       "path": "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md"
     },
     {
-      "basename": "1. Введение",
-      "path": "Development/BackEnd/Microservices/_lessons/1. Введение.md"
-    },
-    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
@@ -49,10 +65,6 @@
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
-      "basename": "3. Знакомство с Kubernetes",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
-    },
-    {
       "basename": "Visual mode и макросы",
       "path": "Development/NVim/_lessons/Visual mode и макросы.md"
     },
@@ -61,20 +73,12 @@
       "path": "Development/DevOps/Docker + Ansible/_lessons/Troubleshooting.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
       "basename": "11 Развёртка машин с Vagrant",
       "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
@@ -195,10 +199,6 @@
     {
       "basename": "Введение",
       "path": "Soft/Agile/_lessons/Введение.md"
-    },
-    {
-      "basename": "Golang",
-      "path": "Development/BackEnd/Golang.md"
     }
   ],
   "omittedPaths": [],
