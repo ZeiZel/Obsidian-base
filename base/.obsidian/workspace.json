@@ -240,7 +240,7 @@
             }
           },
           {
-            "id": "588824f12d6af4e9",
+            "id": "b61b67488a2d92a0",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -250,7 +250,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -427,6 +427,26 @@
             "id": "cc1786538405c59d",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "49e9d74d59ad7a47",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "ce1a1b15df046671",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -434,7 +454,7 @@
             }
           },
           {
-            "id": "49e9d74d59ad7a47",
+            "id": "d743033197eec7ce",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -444,7 +464,7 @@
             }
           }
         ],
-        "currentTab": 15
+        "currentTab": 17
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -501,8 +521,9 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "7b5e124c782c1107",
+  "active": "d743033197eec7ce",
   "lastOpenFiles": [
+    "Environment/Terminal.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "Development/BackEnd/Microservices/_lessons/1. Введение.md",
@@ -528,7 +549,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
-    "Soft/Agile/_lessons/Scrum.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",

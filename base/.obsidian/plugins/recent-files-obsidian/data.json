@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Прохождение собеседования",
+      "path": "Soft/Прохождение собеседования.md"
+    },
+    {
       "basename": "Terminal",
       "path": "Environment/Terminal.md"
     },
@@ -55,10 +59,6 @@
     {
       "basename": "Управление задачам",
       "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
-      "basename": "Прохождение собеседования",
-      "path": "Soft/Прохождение собеседования.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
