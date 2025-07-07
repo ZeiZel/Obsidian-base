@@ -100,15 +100,6 @@
       "key": "-"
     }
   ],
-  "omnisearch:show-modal": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "S"
-    }
-  ],
   "editor:save-file": [
     {
       "modifiers": [
@@ -144,5 +135,15 @@
       "key": "F"
     }
   ],
-  "editor:open-search": []
+  "editor:open-search": [],
+  "omnisearch:show-modal": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "F"
+    }
+  ],
+  "global-search:open": []
 }

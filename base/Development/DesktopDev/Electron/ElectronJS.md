@@ -1,5 +1,5 @@
-# Electron
-#JavaScript #Desctop #Electron
+
+#JavaScript #Desktop #Electron
 
 [Почему именно электрон?](_lessons/1%20Почему%20именно%20электрон.md)
 [Создание первого приложения](_lessons/Создание%20первого%20приложения.md)

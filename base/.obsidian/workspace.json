@@ -56,30 +56,6 @@
             }
           },
           {
-            "id": "156286721ed69f74",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Soft/Прохождение собеседования.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Прохождение собеседования"
-            }
-          },
-          {
             "id": "a4a0a906fc76b769",
             "type": "leaf",
             "state": {
@@ -152,6 +128,30 @@
             }
           },
           {
+            "id": "156286721ed69f74",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Soft/Прохождение собеседования.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Прохождение собеседования"
+            }
+          },
+          {
             "id": "7b5e124c782c1107",
             "type": "leaf",
             "state": {
@@ -174,9 +174,33 @@
               "icon": "lucide-file",
               "title": "Terminal"
             }
+          },
+          {
+            "id": "4bf787bed9047129",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DesktopDev/Electron/ElectronJS.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "ElectronJS"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -254,7 +278,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 358.5
+    "width": 358.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -521,9 +546,14 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "d743033197eec7ce",
+  "active": "156286721ed69f74",
   "lastOpenFiles": [
     "Environment/Terminal.md",
+    "Development/DesktopDev/Electron/ElectronJS.md",
+    "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
+    "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
+    "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
+    "Soft/Прохождение собеседования.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
     "Development/BackEnd/Microservices/_lessons/1. Введение.md",
@@ -538,17 +568,12 @@
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/Алгоритмы и Структуры даных.md",
     "Soft/Agile/_lessons/Управление задачам.md",
-    "Soft/Прохождение собеседования.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
     "Development/NVim/_lessons/Конфигурация.md",
     "Development/NVim/NVim.md",
     "Development/NVim/_lessons/Плагины UI.md",
     "Development/NVim/_lessons/Продвинутая работа.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",

@@ -9,6 +9,22 @@
       "path": "Environment/Terminal.md"
     },
     {
+      "basename": "ElectronJS",
+      "path": "Development/DesktopDev/Electron/ElectronJS.md"
+    },
+    {
+      "basename": "Создание Electron приложения с другими технологиями",
+      "path": "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md"
+    },
+    {
+      "basename": "Создание первого приложения",
+      "path": "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md"
+    },
+    {
+      "basename": "1 Почему именно электрон",
+      "path": "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md"
+    },
+    {
       "basename": "Продвинутый FrontEnd",
       "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     },
@@ -183,22 +199,6 @@
     {
       "basename": "Golang",
       "path": "Development/BackEnd/Golang.md"
-    },
-    {
-      "basename": "09 Базовые понятия Ansible",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/09 Базовые понятия Ansible.md"
-    },
-    {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
-      "basename": "Soft",
-      "path": "Soft/Soft.md"
-    },
-    {
-      "basename": "07 Docker-compose",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md"
     }
   ],
   "omittedPaths": [],
