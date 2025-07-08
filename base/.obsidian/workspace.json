@@ -424,12 +424,11 @@
               "title": "Outline of 11. Консистентность данных"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 257.5
+    "width": 513.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -448,7 +447,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "a4a0a906fc76b769",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203655.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
