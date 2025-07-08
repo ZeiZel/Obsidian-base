@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "3. Нотация описания архитектуры",
-      "path": "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md"
+      "basename": "11. Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "3. Нотация описания архитектуры",
+      "path": "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md"
     },
     {
       "basename": "2.Настройка окружения",
@@ -71,10 +75,6 @@
     {
       "basename": "1. Введение",
       "path": "Development/GIT/_lessons/1. Введение.md"
-    },
-    {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
       "basename": "Visual mode и макросы",

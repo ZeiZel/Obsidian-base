@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md",
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "3. Нотация описания архитектуры"
+              "title": "11. Консистентность данных"
             }
           },
           {
@@ -372,136 +372,6 @@
             }
           },
           {
-            "id": "de42332dd051acc2",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "e34b07cb9f3f78d0",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "35609d7989f63c37",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "db0b903b48f707c9",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "cce4c68288d292f0",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "12aac2bbdfa6dbac",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "bff38938509cd505",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "0736c08e4327940e",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "15291149d6333cd6",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "db6f51b2024569a6",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "cc1786538405c59d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "49e9d74d59ad7a47",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "ce1a1b15df046671",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "d743033197eec7ce",
             "type": "leaf",
             "state": {
@@ -522,7 +392,7 @@
             }
           }
         ],
-        "currentTab": 18
+        "currentTab": 5
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -545,13 +415,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md",
+                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3. Нотация описания архитектуры"
+              "title": "Outline of 11. Консистентность данных"
             }
           }
         ],
@@ -559,8 +429,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 257.5,
-    "collapsed": true
+    "width": 257.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -582,6 +451,7 @@
   "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md",
     "Development/BackEnd/Microservices/_lessons/2.Настройка окружения.md",
     "Development/BackEnd/Microservices/_lessons/1. Введение.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
@@ -606,7 +476,6 @@
     "Development/Алгоритмы и Структуры даных.md",
     "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md",
-    "Development/NVim/_lessons/Конфигурация.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",
