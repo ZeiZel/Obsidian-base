@@ -428,7 +428,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 273.5
+    "width": 432.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -449,6 +449,7 @@
   },
   "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250709212541.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203655.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708202114.png",
@@ -484,7 +485,6 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164853.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622155305.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622154540.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622095427.png",
     "Environment",
     "Development/Testing/_png",
     "Development/Testing",
