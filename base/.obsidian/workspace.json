@@ -428,7 +428,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 513.5
+    "width": 273.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -447,7 +447,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203655.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
