@@ -5,6 +5,18 @@
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
     },
     {
+      "basename": "Продвинутый FrontEnd",
+      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "ElectronJS",
+      "path": "Development/DesktopDev/Electron/ElectronJS.md"
+    },
+    {
+      "basename": "05 Классы",
+      "path": "Development/TypeScript/_lessons/05 Классы.md"
+    },
+    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
@@ -49,10 +61,6 @@
       "path": "Environment/Terminal.md"
     },
     {
-      "basename": "ElectronJS",
-      "path": "Development/DesktopDev/Electron/ElectronJS.md"
-    },
-    {
       "basename": "Создание Electron приложения с другими технологиями",
       "path": "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md"
     },
@@ -63,10 +71,6 @@
     {
       "basename": "1 Почему именно электрон",
       "path": "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md"
-    },
-    {
-      "basename": "Продвинутый FrontEnd",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     },
     {
       "basename": "4 Работа с данными",
@@ -195,10 +199,6 @@
     {
       "basename": "NestJS - с нуля",
       "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
-    },
-    {
-      "basename": "01 Введение",
-      "path": "Development/TypeScript/_lessons/01 Введение.md"
     }
   ],
   "omittedPaths": [],
