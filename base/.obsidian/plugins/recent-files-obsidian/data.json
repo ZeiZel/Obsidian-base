@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "13. Выкладка и эксплуатация",
+      "path": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "12. Тестирование микросервисов",
+      "path": "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md"
+    },
+    {
       "basename": "11. Консистентность данных",
       "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+    },
+    {
+      "basename": "10. Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
     },
     {
       "basename": "Продвинутый FrontEnd",
@@ -15,10 +31,6 @@
     {
       "basename": "05 Классы",
       "path": "Development/TypeScript/_lessons/05 Классы.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "3. Нотация описания архитектуры",
@@ -141,10 +153,6 @@
       "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
-      "basename": "10. Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
-    },
-    {
       "basename": "9. Реализация API",
       "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "Прогресс изучения технологий",
       "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "04 Модули, контроллеры и провайдеры",
-      "path": "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md"
-    },
-    {
-      "basename": "NestJS - с нуля",
-      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
     }
   ],
   "omittedPaths": [],

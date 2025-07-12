@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "file": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "11. Консистентность данных"
+              "title": "13. Выкладка и эксплуатация"
             }
           },
           {
@@ -415,20 +415,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+                "file": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 11. Консистентность данных"
+              "title": "Outline of 13. Выкладка и эксплуатация"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 432.5
+    "width": 432.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -447,18 +448,20 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
+    "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
     "Development/TypeScript/_lessons/05 Классы.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250709212541.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203655.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708202114.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708201746.png",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md",
     "Development/BackEnd/Microservices/_lessons/2.Настройка окружения.md",
     "Development/BackEnd/Microservices/_lessons/1. Введение.md",
@@ -478,8 +481,6 @@
     "Development/DevOps/Docker + Ansible/_lessons/Troubleshooting.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_lessons.md",
     "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
-    "Development/Алгоритмы и Структуры даных.md",
-    "Development/NVim/NeoVim - с нуля + конфигурирование.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",
