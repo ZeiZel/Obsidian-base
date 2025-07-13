@@ -1,24 +1,64 @@
 {
   "recentFiles": [
     {
-      "basename": "13. Выкладка и эксплуатация",
-      "path": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md"
+      "basename": "Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
-      "basename": "12. Тестирование микросервисов",
-      "path": "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md"
+      "basename": "Выкладка и эксплуатация",
+      "path": "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md"
     },
     {
-      "basename": "11. Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md"
+      "basename": "Введение",
+      "path": "Development/BackEnd/Microservices/_lessons/Введение.md"
     },
     {
-      "basename": "10. Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md"
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
+      "basename": "Настройка окружения",
+      "path": "Development/BackEnd/Microservices/_lessons/Настройка окружения.md"
+    },
+    {
+      "basename": "Нотация описания архитектуры",
+      "path": "Development/BackEnd/Microservices/_lessons/Нотация описания архитектуры.md"
+    },
+    {
+      "basename": "Переход к микросервисам",
+      "path": "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md"
+    },
+    {
+      "basename": "Монорепозитории",
+      "path": "Development/BackEnd/Microservices/_lessons/Монорепозитории.md"
+    },
+    {
+      "basename": "Обмен сообщениями",
+      "path": "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md"
+    },
+    {
+      "basename": "RabbitMQ",
+      "path": "Development/BackEnd/Microservices/_lessons/RabbitMQ.md"
+    },
+    {
+      "basename": "Реализация взаимодействия",
+      "path": "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md"
+    },
+    {
+      "basename": "Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
+    },
+    {
+      "basename": "Реализация API",
+      "path": "Development/BackEnd/Microservices/_lessons/Реализация API.md"
+    },
+    {
+      "basename": "Тестирование микросервисов",
+      "path": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md"
     },
     {
       "basename": "Продвинутый FrontEnd",
@@ -31,18 +71,6 @@
     {
       "basename": "05 Классы",
       "path": "Development/TypeScript/_lessons/05 Классы.md"
-    },
-    {
-      "basename": "3. Нотация описания архитектуры",
-      "path": "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md"
-    },
-    {
-      "basename": "2.Настройка окружения",
-      "path": "Development/BackEnd/Microservices/_lessons/2.Настройка окружения.md"
-    },
-    {
-      "basename": "1. Введение",
-      "path": "Development/BackEnd/Microservices/_lessons/1. Введение.md"
     },
     {
       "basename": "7. Удалённый репозиторий",
@@ -153,18 +181,6 @@
       "path": "Soft/Agile/_lessons/Scrum.md"
     },
     {
-      "basename": "9. Реализация API",
-      "path": "Development/BackEnd/Microservices/_lessons/9. Реализация API.md"
-    },
-    {
-      "basename": "8. Реализация взаимодействия",
-      "path": "Development/BackEnd/Microservices/_lessons/8. Реализация взаимодействия.md"
-    },
-    {
-      "basename": "7. RabbitMQ",
-      "path": "Development/BackEnd/Microservices/_lessons/7. RabbitMQ.md"
-    },
-    {
       "basename": "4. Первый pod",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
     },
@@ -183,22 +199,6 @@
     {
       "basename": "TMUX",
       "path": "Environment/TMUX.md"
-    },
-    {
-      "basename": "DataGrip",
-      "path": "Environment/DataGrip.md"
-    },
-    {
-      "basename": "Zustand",
-      "path": "Development/FrontEnd/State Managers/Zustand.md"
-    },
-    {
-      "basename": "index",
-      "path": "Development/Architecture/index.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
     }
   ],
   "omittedPaths": [],

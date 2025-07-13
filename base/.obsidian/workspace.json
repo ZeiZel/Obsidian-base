@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
+                "file": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "13. Выкладка и эксплуатация"
+              "title": "Консистентность данных"
             }
           },
           {
@@ -415,13 +415,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/13. Выкладка и эксплуатация.md",
+                "file": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 13. Выкладка и эксплуатация"
+              "title": "Outline of Консистентность данных"
             }
           }
         ]
@@ -451,9 +451,20 @@
   "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/12. Тестирование микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/11. Консистентность данных.md",
-    "Development/BackEnd/Microservices/_lessons/10. Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
+    "Development/BackEnd/Microservices/_lessons/Введение.md",
+    "index.md",
+    "Development/BackEnd/Microservices/_lessons/Настройка окружения.md",
+    "Development/BackEnd/Microservices/_lessons/Нотация описания архитектуры.md",
+    "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md",
+    "Development/BackEnd/Microservices/_lessons/Монорепозитории.md",
+    "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md",
+    "Development/BackEnd/Microservices/_lessons/RabbitMQ.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация API.md",
+    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
+    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/TypeScript/_lessons/05 Классы.md",
@@ -462,9 +473,6 @@
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708202114.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708201746.png",
-    "Development/BackEnd/Microservices/_lessons/3. Нотация описания архитектуры.md",
-    "Development/BackEnd/Microservices/_lessons/2.Настройка окружения.md",
-    "Development/BackEnd/Microservices/_lessons/1. Введение.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
     "Development/DevOps/Docker + Ansible/_lessons/07 Docker-compose.md",
     "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
@@ -473,14 +481,6 @@
     "Soft/Прохождение собеседования.md",
     "Environment/Terminal.md",
     "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
-    "Development/DesktopDev/Electron/_lessons/Создание первого приложения.md",
-    "Development/DesktopDev/Electron/_lessons/1 Почему именно электрон.md",
-    "Development/FrontEnd/Продвинутый FrontEnd/lessons/4 Работа с данными.md",
-    "Development/GIT/_lessons/1. Введение.md",
-    "Development/NVim/_lessons/Visual mode и макросы.md",
-    "Development/DevOps/Docker + Ansible/_lessons/Troubleshooting.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_lessons.md",
-    "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",

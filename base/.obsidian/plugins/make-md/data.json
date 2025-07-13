@@ -62,7 +62,9 @@
     "//Development/Development/DevOps/Development/DevOps/Kubernetes + Helm/Development/DevOps/Kubernetes + Helm/_lessons",
     "//Development/Development/FrontEnd/Development/FrontEnd/State Managers",
     "//Development/Development/NVim",
-    "//Development/Development/DevOps/Development/DevOps/Docker + Ansible/Development/DevOps/Docker + Ansible/_lessons"
+    "//Development/Development/DevOps/Development/DevOps/Docker + Ansible/Development/DevOps/Docker + Ansible/_lessons",
+    "//Design",
+    "//Design/Design/DaVinci Resolve"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
