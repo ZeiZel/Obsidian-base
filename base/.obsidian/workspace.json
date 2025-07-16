@@ -288,7 +288,7 @@
             }
           },
           {
-            "id": "319b70017bb69f8d",
+            "id": "aa5be0206e9e6a0b",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -375,10 +375,10 @@
             "id": "d743033197eec7ce",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -390,9 +390,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "149b4d96e9d31fe0",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -448,7 +458,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "a4a0a906fc76b769",
+  "active": "149b4d96e9d31fe0",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
