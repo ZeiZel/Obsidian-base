@@ -302,7 +302,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 283.5
+    "width": 283.5,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -458,7 +459,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "149b4d96e9d31fe0",
+  "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
