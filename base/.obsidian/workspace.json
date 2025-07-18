@@ -479,8 +479,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "aed8274880d4d9fc",
+  "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
     "Development/BackEnd/Microservices/_lessons/Введение.md",
@@ -492,9 +494,7 @@
     "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md",
     "Development/BackEnd/Microservices/_lessons/RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md",
-    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
     "Development/BackEnd/Microservices/_lessons/Реализация API.md",
-    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
     "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/DesktopDev/Electron/ElectronJS.md",

@@ -5,6 +5,10 @@
       "path": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md"
     },
     {
+      "basename": "Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
+    },
+    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
     },
@@ -47,10 +51,6 @@
     {
       "basename": "Реализация взаимодействия",
       "path": "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md"
-    },
-    {
-      "basename": "Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
     },
     {
       "basename": "Реализация API",
