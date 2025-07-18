@@ -288,7 +288,7 @@
             }
           },
           {
-            "id": "aa5be0206e9e6a0b",
+            "id": "8ca902b3a2ad770c",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -298,7 +298,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -386,6 +386,26 @@
             "id": "d596f371a355b127",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "149b4d96e9d31fe0",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "c8a875d71dc77720",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -393,7 +413,7 @@
             }
           },
           {
-            "id": "149b4d96e9d31fe0",
+            "id": "aed8274880d4d9fc",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -403,7 +423,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -459,7 +479,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "a4a0a906fc76b769",
+  "active": "aed8274880d4d9fc",
   "lastOpenFiles": [
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
