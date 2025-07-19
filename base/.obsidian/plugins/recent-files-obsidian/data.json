@@ -1,12 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md"
-    },
-    {
-      "basename": "Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
+      "basename": "Тестирование микросервисов",
+      "path": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
@@ -15,6 +11,14 @@
     {
       "basename": "Выкладка и эксплуатация",
       "path": "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md"
+    },
+    {
+      "basename": "Консистентность данных",
+      "path": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md"
+    },
+    {
+      "basename": "Реализация бизнес логики",
+      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
     },
     {
       "basename": "Введение",
@@ -55,10 +59,6 @@
     {
       "basename": "Реализация API",
       "path": "Development/BackEnd/Microservices/_lessons/Реализация API.md"
-    },
-    {
-      "basename": "Тестирование микросервисов",
-      "path": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md"
     },
     {
       "basename": "Продвинутый FrontEnd",

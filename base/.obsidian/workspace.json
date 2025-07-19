@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
+                "file": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Консистентность данных"
+              "title": "Тестирование микросервисов"
             }
           },
           {
@@ -298,7 +298,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -481,10 +481,13 @@
   },
   "active": "a4a0a906fc76b769",
   "lastOpenFiles": [
-    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
-    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250719193144.png",
+    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250719191357.png",
     "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
     "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
+    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
     "Development/BackEnd/Microservices/_lessons/Введение.md",
     "index.md",
     "Development/BackEnd/Microservices/_lessons/Настройка окружения.md",
@@ -495,7 +498,6 @@
     "Development/BackEnd/Microservices/_lessons/RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md",
     "Development/BackEnd/Microservices/_lessons/Реализация API.md",
-    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
     "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "Development/DesktopDev/Electron/ElectronJS.md",
     "Development/TypeScript/_lessons/05 Классы.md",
@@ -511,12 +513,10 @@
     "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
     "Soft/Прохождение собеседования.md",
     "Environment/Terminal.md",
-    "Development/DesktopDev/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170338.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622170107.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164927.png",
     "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622164853.png",
-    "Development/DevOps/Kubernetes + Helm/_lessons/_png/Pasted image 20250622155305.png",
     "Environment",
     "Development/Testing/_png",
     "Development/Testing",
