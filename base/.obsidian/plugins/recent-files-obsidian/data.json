@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "BFF",
+      "path": "Development/BackEnd/REST/BFF.md"
+    },
+    {
+      "basename": "REST",
+      "path": "Development/BackEnd/REST/REST.md"
+    },
+    {
       "basename": "Работа с SHELL",
       "path": "Development/Linux/_lessons/Работа с SHELL.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "Плагины UI",
       "path": "Development/NVim/_lessons/Плагины UI.md"
-    },
-    {
-      "basename": "Продвинутая работа",
-      "path": "Development/NVim/_lessons/Продвинутая работа.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     }
   ],
   "omittedPaths": [],

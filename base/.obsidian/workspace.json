@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/_lessons/Работа с SHELL.md",
+                "file": "Development/BackEnd/REST/BFF.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Работа с SHELL"
+              "title": "BFF"
             }
           },
           {
@@ -480,13 +480,17 @@
   },
   "active": "ac014f84be876b5c",
   "lastOpenFiles": [
+    "Development/BackEnd/REST/BFF.md",
+    "Development/BackEnd/REST/REST.md",
+    "Development/BackEnd/REST",
+    "Development/Linux/_lessons/Работа с SHELL.md",
+    "Development/BackEnd/Untitled.md",
     "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481337-y.jpg",
     "Development/Linux/Linux.md",
     "Development/Linux/_lessons/Особенности BASH.md",
     "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481338-y.jpg",
     "Development/Linux/_lessons/Структура Linux.md",
     "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481339-y.jpg",
-    "Development/Linux/_lessons/Работа с SHELL.md",
     "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5334936663031411954-y.jpg",
     "Development/Linux/_lessons/Введение.md",
     "Development/Linux/_lessons/Доступ и права.md",
@@ -511,12 +515,9 @@
     "Development/BackEnd/Microservices/_lessons/Нотация описания архитектуры.md",
     "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md",
     "Development/BackEnd/Microservices/_lessons/Монорепозитории.md",
-    "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md",
-    "Development/BackEnd/Microservices/_lessons/RabbitMQ.md",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250709212541.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203655.png",
     "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708202114.png",
     "Environment",
     "Development/Testing/_png",
     "Development/Testing",
@@ -524,7 +525,6 @@
     "Development/Architecture/_png",
     "Development/DB",
     "_png",
-    "Development/FrontEnd/Vue/_png",
-    "Development/FrontEnd/Vue"
+    "Development/FrontEnd/Vue/_png"
   ]
 }
