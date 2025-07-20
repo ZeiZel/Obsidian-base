@@ -1,6 +1,30 @@
 {
   "recentFiles": [
     {
+      "basename": "Работа с SHELL",
+      "path": "Development/Linux/_lessons/Работа с SHELL.md"
+    },
+    {
+      "basename": "Linux",
+      "path": "Development/Linux/Linux.md"
+    },
+    {
+      "basename": "Особенности BASH",
+      "path": "Development/Linux/_lessons/Особенности BASH.md"
+    },
+    {
+      "basename": "Структура Linux",
+      "path": "Development/Linux/_lessons/Структура Linux.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Development/Linux/_lessons/Введение.md"
+    },
+    {
+      "basename": "Доступ и права",
+      "path": "Development/Linux/_lessons/Доступ и права.md"
+    },
+    {
       "basename": "SMM",
       "path": "Soft/SMM/SMM.md"
     },
@@ -175,26 +199,6 @@
     {
       "basename": "Kubernetes + Helm",
       "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "2. Настройка окружения",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md"
-    },
-    {
-      "basename": "1. Введение",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md"
-    },
-    {
-      "basename": "5. Работа с объектами",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md"
-    },
-    {
-      "basename": "Scrum",
-      "path": "Soft/Agile/_lessons/Scrum.md"
-    },
-    {
-      "basename": "4. Первый pod",
-      "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
     }
   ],
   "omittedPaths": [],
