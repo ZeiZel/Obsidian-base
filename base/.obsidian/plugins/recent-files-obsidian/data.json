@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "SMM",
+      "path": "Soft/SMM/SMM.md"
+    },
+    {
+      "basename": "NVim",
+      "path": "Development/NVim/NVim.md"
+    },
+    {
+      "basename": "Заключение",
+      "path": "Soft/Agile/_lessons/Заключение.md"
+    },
+    {
+      "basename": "Agile",
+      "path": "Soft/Agile/Agile.md"
+    },
+    {
+      "basename": "Управление задачам",
+      "path": "Soft/Agile/_lessons/Управление задачам.md"
+    },
+    {
       "basename": "Тестирование микросервисов",
       "path": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md"
     },
@@ -85,10 +105,6 @@
       "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
     },
     {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
       "basename": "3. Знакомство с Kubernetes",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md"
     },
@@ -149,10 +165,6 @@
       "path": "Development/NVim/_lessons/Конфигурация.md"
     },
     {
-      "basename": "NVim",
-      "path": "Development/NVim/NVim.md"
-    },
-    {
       "basename": "Плагины UI",
       "path": "Development/NVim/_lessons/Плагины UI.md"
     },
@@ -183,22 +195,6 @@
     {
       "basename": "4. Первый pod",
       "path": "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md"
-    },
-    {
-      "basename": "Aerospace",
-      "path": "Environment/Aerospace.md"
-    },
-    {
-      "basename": "Yazi",
-      "path": "Environment/Yazi.md"
-    },
-    {
-      "basename": "ZSH",
-      "path": "Environment/ZSH.md"
-    },
-    {
-      "basename": "TMUX",
-      "path": "Environment/TMUX.md"
     }
   ],
   "omittedPaths": [],
