@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
+                "file": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,155 +76,77 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Тестирование микросервисов"
+              "title": "Паттерны и практика построения микросервисов"
             }
           },
           {
             "id": "7c9701acc7feed5d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "Development/DevOps/Kubernetes + Helm"
               },
               "icon": "lucide-file",
-              "title": "3. Знакомство с Kubernetes"
+              "title": "Kubernetes + Helm"
             }
           },
           {
-            "id": "26248ac1eda32c23",
+            "id": "0749e8da4e97de87",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "Development/FrontEnd/Vue/Nuxt"
               },
               "icon": "lucide-file",
-              "title": "Продвинутый FrontEnd"
+              "title": "Nuxt"
             }
           },
           {
-            "id": "156286721ed69f74",
+            "id": "5c7da5706a33cf6c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Soft/Прохождение собеседования.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "Development/Architecture/FSD"
               },
               "icon": "lucide-file",
-              "title": "Прохождение собеседования"
-            }
-          },
-          {
-            "id": "7b5e124c782c1107",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Environment/Terminal.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Terminal"
-            }
-          },
-          {
-            "id": "4bf787bed9047129",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DesktopDev/Electron/ElectronJS.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "ElectronJS"
-            }
-          },
-          {
-            "id": "1db3039e158d4852",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/GIT/_lessons/7. Удалённый репозиторий.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "7. Удалённый репозиторий"
+              "title": "FSD"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
+      },
+      {
+        "id": "2535062c8a18d379",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dc84958ff6b277de",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Architecture/FSD.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "FSD"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -318,7 +240,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "file": "Development/Architecture/FSD.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -328,7 +250,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Масштабирование Agile"
+              "title": "Backlinks for FSD"
             }
           },
           {
@@ -337,12 +259,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Soft/Agile/_lessons/Масштабирование Agile.md",
+                "file": "Development/Architecture/FSD.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Масштабирование Agile"
+              "title": "Outgoing links from FSD"
             }
           },
           {
@@ -369,59 +291,9 @@
               "icon": "lucide-git-fork",
               "title": "Graph view"
             }
-          },
-          {
-            "id": "d743033197eec7ce",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "d596f371a355b127",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "149b4d96e9d31fe0",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "c8a875d71dc77720",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
-          },
-          {
-            "id": "aed8274880d4d9fc",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 2
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -444,13 +316,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Linux/Bash/Bash.md",
+                "file": "Development/Architecture/FSD.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Bash"
+              "title": "Outline of FSD"
             }
           }
         ],
@@ -458,7 +330,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 432.5
+    "width": 407.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -477,53 +350,52 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "ac014f84be876b5c",
+  "active": "dc84958ff6b277de",
   "lastOpenFiles": [
-    "Development/Linux/Bash/_png/Pasted image 20250723184341.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723183659.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723183632.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723183604.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723182736.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723182650.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723182625.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723182609.png",
-    "Development/Linux/Bash/_png",
-    "Development/Linux/OS/OS.md",
-    "Development/Linux/Bash/Bash.md",
-    "Development/Linux/Bash",
-    "Development/Linux/OS/_lessons/Введение.md",
-    "Development/Linux/OS",
+    "Development/Architecture/FSD/FSD.md",
+    "Development/Architecture/FSD.md",
+    "Tags/#architecture+#fsd",
+    "Development/Architecture/MV-patterns.md",
+    "Development/Architecture/Architecture.md",
+    "Design/Design.md",
+    "Development/Architecture/Atomic Design.md",
+    "Development/Architecture/FSD",
+    "_hobbies/Shortcuts/Шорткаты Windows.md",
+    "Development/FrontEnd/Untitled",
+    "_hobbies/Flameshot.md",
+    "Development/FrontEnd/Web Vitals.md",
+    "Development/Architecture/Dev.md",
     "Development/FrontEnd/Vue/Vue/Vue.md",
     "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
-    "Development/FrontEnd/Vue/Vue.md",
-    "Development/FrontEnd/Vue/Vue/Untitled.md",
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/Linux/Bash/Bash.md",
+    "Development/Алгоритмы и Структуры даных.md",
+    "Development/GIT/Git.md",
+    "Development/GIT/_lessons/7. Удалённый репозиторий.md",
+    "Development/DesktopDev/Electron/ElectronJS.md",
+    "Environment/Terminal.md",
+    "Soft/Прохождение собеседования.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
+    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
+    "Development/Linux/Bash/_png/Pasted image 20250723190934.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190924.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190855.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190751.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190741.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190731.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190722.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190705.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190423.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723190412.png",
+    "Development/Linux/Bash/_png",
+    "Development/Linux/OS/OS.md",
+    "Development/Linux/Bash",
+    "Development/Linux/OS",
     "Development/FrontEnd/Vue/Nuxt",
-    "Development/FrontEnd/Vue/Untitled.md",
     "Development/FrontEnd/Vue/Vue",
-    "Development/FrontEnd/JavaScript/JavaScript.md",
-    "Development/FrontEnd/React/Практический JS.md",
-    "Development/FrontEnd/React/React Foundamentals.md",
-    "Development/FrontEnd/Angular/Angular.md",
-    "Development/FrontEnd/Angular/Untitled.md",
-    "Development/BackEnd/REST/REST.md",
-    "Development/BackEnd/REST/BFF.md",
     "Development/BackEnd/REST",
-    "Development/Linux/OS/_lessons/Работа с SHELL.md",
-    "Development/BackEnd/Untitled.md",
-    "Development/Linux/OS/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481337-y.jpg",
-    "Development/Linux/OS/_lessons/Особенности BASH.md",
-    "Development/Linux/OS/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481338-y.jpg",
-    "Development/Linux/OS/_lessons/Структура Linux.md",
-    "Development/Linux/OS/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481339-y.jpg",
-    "Development/Linux/OS/_lessons/Доступ и права.md",
-    "Soft/SMM/SMM.md",
-    "Soft/SMM/Untitled.md",
-    "Soft/SMM",
-    "Development/NVim/NVim.md",
-    "Soft/Agile/_lessons/Заключение.md",
-    "Soft/Agile/Agile.md",
-    "Environment",
-    "Development/Testing/_png",
-    "Development/Testing"
+    "Soft/SMM"
   ]
 }

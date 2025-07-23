@@ -2291,7 +2291,7 @@ export default function MyCourses() {
 
 ### Архитектура проекта
 
-В проекте будет использоваться [FSD](../../Architecture/Dev/FSD.md)
+В проекте будет использоваться [FSD](../../Architecture/FSD.md)
 
 ### Первый атом
 
