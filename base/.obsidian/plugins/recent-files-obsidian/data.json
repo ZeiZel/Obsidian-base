@@ -1,36 +1,68 @@
 {
   "recentFiles": [
     {
-      "basename": "BFF",
-      "path": "Development/BackEnd/REST/BFF.md"
+      "basename": "Bash",
+      "path": "Development/Linux/Bash/Bash.md"
+    },
+    {
+      "basename": "OS",
+      "path": "Development/Linux/OS/OS.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "Development/Linux/OS/_lessons/Введение.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "Development/FrontEnd/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "Nuxt",
+      "path": "Development/FrontEnd/Vue/Nuxt/Nuxt.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "Development/FrontEnd/Vue/Vue.md"
+    },
+    {
+      "basename": "JavaScript",
+      "path": "Development/FrontEnd/JavaScript/JavaScript.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "Development/FrontEnd/React/Практический JS.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "Development/FrontEnd/React/React Foundamentals.md"
+    },
+    {
+      "basename": "Angular",
+      "path": "Development/FrontEnd/Angular/Angular.md"
     },
     {
       "basename": "REST",
       "path": "Development/BackEnd/REST/REST.md"
     },
     {
-      "basename": "Работа с SHELL",
-      "path": "Development/Linux/_lessons/Работа с SHELL.md"
+      "basename": "BFF",
+      "path": "Development/BackEnd/REST/BFF.md"
     },
     {
-      "basename": "Linux",
-      "path": "Development/Linux/Linux.md"
+      "basename": "Работа с SHELL",
+      "path": "Development/Linux/OS/_lessons/Работа с SHELL.md"
     },
     {
       "basename": "Особенности BASH",
-      "path": "Development/Linux/_lessons/Особенности BASH.md"
+      "path": "Development/Linux/OS/_lessons/Особенности BASH.md"
     },
     {
       "basename": "Структура Linux",
-      "path": "Development/Linux/_lessons/Структура Linux.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "Development/Linux/_lessons/Введение.md"
+      "path": "Development/Linux/OS/_lessons/Структура Linux.md"
     },
     {
       "basename": "Доступ и права",
-      "path": "Development/Linux/_lessons/Доступ и права.md"
+      "path": "Development/Linux/OS/_lessons/Доступ и права.md"
     },
     {
       "basename": "SMM",
@@ -167,38 +199,6 @@
     {
       "basename": "1. Введение",
       "path": "Development/GIT/_lessons/1. Введение.md"
-    },
-    {
-      "basename": "Visual mode и макросы",
-      "path": "Development/NVim/_lessons/Visual mode и макросы.md"
-    },
-    {
-      "basename": "Troubleshooting",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/Troubleshooting.md"
-    },
-    {
-      "basename": "11 Развёртка машин с Vagrant",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/11 Развёртка машин с Vagrant.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "Development/NVim/NeoVim - с нуля + конфигурирование.md"
-    },
-    {
-      "basename": "10 Ansible playbooks",
-      "path": "Development/DevOps/Docker + Ansible/_lessons/10 Ansible playbooks.md"
-    },
-    {
-      "basename": "Конфигурация",
-      "path": "Development/NVim/_lessons/Конфигурация.md"
-    },
-    {
-      "basename": "Плагины UI",
-      "path": "Development/NVim/_lessons/Плагины UI.md"
     }
   ],
   "omittedPaths": [],

@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/REST/BFF.md",
+                "file": "Development/Linux/Bash/Bash.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "BFF"
+              "title": "Bash"
             }
           },
           {
@@ -297,8 +297,7 @@
               "title": "Navigator"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -445,21 +444,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
+                "file": "Development/Linux/Bash/Bash.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Консистентность данных"
+              "title": "Outline of Bash"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 432.5,
-    "collapsed": true
+    "width": 432.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -480,51 +479,51 @@
   },
   "active": "ac014f84be876b5c",
   "lastOpenFiles": [
-    "Development/BackEnd/REST/BFF.md",
+    "Development/Linux/Bash/_png/Pasted image 20250723184341.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723183659.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723183632.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723183604.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723182736.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723182650.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723182625.png",
+    "Development/Linux/Bash/_png/Pasted image 20250723182609.png",
+    "Development/Linux/Bash/_png",
+    "Development/Linux/OS/OS.md",
+    "Development/Linux/Bash/Bash.md",
+    "Development/Linux/Bash",
+    "Development/Linux/OS/_lessons/Введение.md",
+    "Development/Linux/OS",
+    "Development/FrontEnd/Vue/Vue/Vue.md",
+    "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
+    "Development/FrontEnd/Vue/Vue.md",
+    "Development/FrontEnd/Vue/Vue/Untitled.md",
+    "Development/FrontEnd/Vue/Nuxt",
+    "Development/FrontEnd/Vue/Untitled.md",
+    "Development/FrontEnd/Vue/Vue",
+    "Development/FrontEnd/JavaScript/JavaScript.md",
+    "Development/FrontEnd/React/Практический JS.md",
+    "Development/FrontEnd/React/React Foundamentals.md",
+    "Development/FrontEnd/Angular/Angular.md",
+    "Development/FrontEnd/Angular/Untitled.md",
     "Development/BackEnd/REST/REST.md",
+    "Development/BackEnd/REST/BFF.md",
     "Development/BackEnd/REST",
-    "Development/Linux/_lessons/Работа с SHELL.md",
+    "Development/Linux/OS/_lessons/Работа с SHELL.md",
     "Development/BackEnd/Untitled.md",
-    "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481337-y.jpg",
-    "Development/Linux/Linux.md",
-    "Development/Linux/_lessons/Особенности BASH.md",
-    "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481338-y.jpg",
-    "Development/Linux/_lessons/Структура Linux.md",
-    "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481339-y.jpg",
-    "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5334936663031411954-y.jpg",
-    "Development/Linux/_lessons/Введение.md",
-    "Development/Linux/_lessons/Доступ и права.md",
-    "Development/Linux/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481336-y.jpg",
+    "Development/Linux/OS/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481337-y.jpg",
+    "Development/Linux/OS/_lessons/Особенности BASH.md",
+    "Development/Linux/OS/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481338-y.jpg",
+    "Development/Linux/OS/_lessons/Структура Linux.md",
+    "Development/Linux/OS/_lessons/_png/telegram-cloud-photo-size-2-5260352571661481339-y.jpg",
+    "Development/Linux/OS/_lessons/Доступ и права.md",
     "Soft/SMM/SMM.md",
     "Soft/SMM/Untitled.md",
     "Soft/SMM",
     "Development/NVim/NVim.md",
     "Soft/Agile/_lessons/Заключение.md",
     "Soft/Agile/Agile.md",
-    "Soft/Agile/_lessons/Управление задачам.md",
-    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250719193144.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250719191357.png",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
-    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
-    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
-    "Development/BackEnd/Microservices/_lessons/Введение.md",
-    "index.md",
-    "Development/BackEnd/Microservices/_lessons/Настройка окружения.md",
-    "Development/BackEnd/Microservices/_lessons/Нотация описания архитектуры.md",
-    "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md",
-    "Development/BackEnd/Microservices/_lessons/Монорепозитории.md",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250709212541.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203655.png",
-    "Development/BackEnd/Microservices/_lessons/_png/Pasted image 20250708203251.png",
     "Environment",
     "Development/Testing/_png",
-    "Development/Testing",
-    "Development/DB/_png",
-    "Development/Architecture/_png",
-    "Development/DB",
-    "_png",
-    "Development/FrontEnd/Vue/_png"
+    "Development/Testing"
   ]
 }
