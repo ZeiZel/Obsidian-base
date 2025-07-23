@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "4509724f8bf84da7",
+        "id": "eed6b67c74b3b00e",
         "type": "tabs",
         "children": [
           {
-            "id": "ad15acb6e9919011",
+            "id": "c21aa5980478b5be",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Алгоритмы и Структуры даных.md",
+                "file": "Development/Architecture/FSD/FSD.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,16 +28,16 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Алгоритмы и Структуры даных"
+              "title": "FSD"
             }
           },
           {
-            "id": "ac014f84be876b5c",
+            "id": "856c925ebbfd2181",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Linux/Bash/Bash.md",
+                "file": "Development/FrontEnd/Vue/Vue/Vue.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -52,11 +52,35 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Bash"
+              "title": "Vue"
             }
           },
           {
-            "id": "a4a0a906fc76b769",
+            "id": "404d5afde002caa8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Nuxt"
+            }
+          },
+          {
+            "id": "b3398f24df70f895",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -80,55 +104,12 @@
             }
           },
           {
-            "id": "7c9701acc7feed5d",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "Development/DevOps/Kubernetes + Helm"
-              },
-              "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
-            }
-          },
-          {
-            "id": "0749e8da4e97de87",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "Development/FrontEnd/Vue/Nuxt"
-              },
-              "icon": "lucide-file",
-              "title": "Nuxt"
-            }
-          },
-          {
-            "id": "5c7da5706a33cf6c",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "Development/Architecture/FSD"
-              },
-              "icon": "lucide-file",
-              "title": "FSD"
-            }
-          }
-        ],
-        "currentTab": 5
-      },
-      {
-        "id": "2535062c8a18d379",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "dc84958ff6b277de",
+            "id": "2c489657bd590278",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/Architecture/FSD.md",
+                "file": "Development/BackEnd/NestJS/NestJS - с нуля.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -143,10 +124,59 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "FSD"
+              "title": "NestJS - с нуля"
+            }
+          },
+          {
+            "id": "d7b1e45352b347d8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Docker + Ansible"
+            }
+          },
+          {
+            "id": "bebc5c8e4f926326",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/TypeScript/TypeScript.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "TypeScript"
             }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -208,16 +238,6 @@
               "icon": "clock",
               "title": "Recent Files"
             }
-          },
-          {
-            "id": "8ca902b3a2ad770c",
-            "type": "leaf",
-            "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Navigator"
-            }
           }
         ]
       }
@@ -240,7 +260,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Development/Architecture/FSD.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -250,7 +270,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for FSD"
+              "title": "Backlinks for TypeScript"
             }
           },
           {
@@ -259,12 +279,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Development/Architecture/FSD.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from FSD"
+              "title": "Outgoing links from TypeScript"
             }
           },
           {
@@ -316,13 +336,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/Architecture/FSD.md",
+                "file": "Development/TypeScript/TypeScript.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FSD"
+              "title": "Outline of TypeScript"
             }
           }
         ],
@@ -350,10 +370,33 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "dc84958ff6b277de",
+  "active": "bebc5c8e4f926326",
   "lastOpenFiles": [
+    "Development/TypeScript/_lessons/01 Введение.md",
+    "Development/TypeScript/_lessons/02 Настройка окружения.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/BackEnd/NestJS/NestJS - с нуля.md",
+    "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
+    "Development/FrontEnd/Vue/Vue/Vue.md",
+    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "Development/FrontEnd/Vue/Vue.md",
     "Development/Architecture/FSD/FSD.md",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200453.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200325.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200255.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200245.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200233.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200214.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200039.png",
+    "Development/Architecture/FSD/_png/Pasted image 20250723200022.png",
+    "Development/Architecture/FSD/_png",
     "Development/Architecture/FSD.md",
+    "Development/Алгоритмы и Структуры даных.md",
+    "Development/Linux/Bash/Bash.md",
     "Tags/#architecture+#fsd",
     "Development/Architecture/MV-patterns.md",
     "Development/Architecture/Architecture.md",
@@ -365,37 +408,15 @@
     "_hobbies/Flameshot.md",
     "Development/FrontEnd/Web Vitals.md",
     "Development/Architecture/Dev.md",
-    "Development/FrontEnd/Vue/Vue/Vue.md",
-    "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/Linux/Bash/Bash.md",
-    "Development/Алгоритмы и Структуры даных.md",
     "Development/GIT/Git.md",
     "Development/GIT/_lessons/7. Удалённый репозиторий.md",
-    "Development/DesktopDev/Electron/ElectronJS.md",
-    "Environment/Terminal.md",
-    "Soft/Прохождение собеседования.md",
-    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
-    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
     "Development/Linux/Bash/_png/Pasted image 20250723190934.png",
     "Development/Linux/Bash/_png/Pasted image 20250723190924.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190855.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190751.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190741.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190731.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190722.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190705.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190423.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190412.png",
     "Development/Linux/Bash/_png",
-    "Development/Linux/OS/OS.md",
     "Development/Linux/Bash",
     "Development/Linux/OS",
     "Development/FrontEnd/Vue/Nuxt",
     "Development/FrontEnd/Vue/Vue",
-    "Development/BackEnd/REST",
-    "Soft/SMM"
+    "Development/BackEnd/REST"
   ]
 }
