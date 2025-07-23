@@ -143,54 +143,6 @@
     {
       "basename": "Работа с SHELL",
       "path": "Development/Linux/OS/_lessons/Работа с SHELL.md"
-    },
-    {
-      "basename": "Особенности BASH",
-      "path": "Development/Linux/OS/_lessons/Особенности BASH.md"
-    },
-    {
-      "basename": "Структура Linux",
-      "path": "Development/Linux/OS/_lessons/Структура Linux.md"
-    },
-    {
-      "basename": "Доступ и права",
-      "path": "Development/Linux/OS/_lessons/Доступ и права.md"
-    },
-    {
-      "basename": "SMM",
-      "path": "Soft/SMM/SMM.md"
-    },
-    {
-      "basename": "NVim",
-      "path": "Development/NVim/NVim.md"
-    },
-    {
-      "basename": "Заключение",
-      "path": "Soft/Agile/_lessons/Заключение.md"
-    },
-    {
-      "basename": "Agile",
-      "path": "Soft/Agile/Agile.md"
-    },
-    {
-      "basename": "Управление задачам",
-      "path": "Soft/Agile/_lessons/Управление задачам.md"
-    },
-    {
-      "basename": "Выкладка и эксплуатация",
-      "path": "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md"
-    },
-    {
-      "basename": "Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md"
-    },
-    {
-      "basename": "Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "Development/BackEnd/Microservices/_lessons/Введение.md"
     }
   ],
   "omittedPaths": [],
