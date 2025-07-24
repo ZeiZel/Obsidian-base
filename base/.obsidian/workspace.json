@@ -80,6 +80,30 @@
             }
           },
           {
+            "id": "8c3cde7b9fa4303b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/React/React + Redux.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "React + Redux"
+            }
+          },
+          {
             "id": "c91e1298e5f04273",
             "type": "leaf",
             "state": {
@@ -149,30 +173,6 @@
               },
               "icon": "lucide-file",
               "title": "NestJS - с нуля"
-            }
-          },
-          {
-            "id": "8c3cde7b9fa4303b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/React/React + Redux.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "React + Redux"
             }
           },
           {
@@ -248,7 +248,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -418,13 +418,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
+                "file": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Nuxt"
+              "title": "Outline of Паттерны и практика построения микросервисов"
             }
           }
         ],
@@ -451,53 +451,53 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "404d5afde002caa8",
+  "active": "b3398f24df70f895",
   "lastOpenFiles": [
+    "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md",
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/Монорепозитории.md",
+    "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md",
+    "Development/BackEnd/Microservices/_lessons/RabbitMQ.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация API.md",
+    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
+    "Development/BackEnd/Microservices/_lessons/Консистентность данных.md",
+    "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md",
+    "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md",
+    "Development/BackEnd/Microservices/_lessons/Нотация описания архитектуры.md",
+    "Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png",
+    "Development/BackEnd/Microservices/_png",
+    "Development/BackEnd/Microservices/_lessons/Введение.md",
+    "Development/BackEnd/Microservices/_lessons/Настройка окружения.md",
+    "Development/FrontEnd/React/React + Redux.md",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
     "Development/FrontEnd/Vue/Vue/Vue.md",
-    "Development/Architecture/FSD/FSD.md",
+    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213829.png",
+    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213818.png",
+    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213648.png",
+    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213304.png",
+    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213251.png",
+    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213242.png",
+    "Development/FrontEnd/Vue/Vue/_png",
     "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
+    "Development/FrontEnd/Vue/Nuxt/_png/Pasted image 20250724212534.png",
+    "Development/FrontEnd/Vue/Nuxt/_png/Pasted image 20250724212259.png",
+    "Development/FrontEnd/Vue/Nuxt/_png/Pasted image 20250724212227.png",
+    "Development/FrontEnd/Vue/Nuxt/_png",
+    "Development/Architecture/FSD/FSD.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/BackEnd/NestJS/NestJS - с нуля.md",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/FrontEnd/React/React + Redux.md",
     "Development/Linux/Bash/Bash.md",
-    "Development/BackEnd/Microservices/_lessons/Введение.md",
     "Development/TypeScript/TypeScript.md",
     "Development/BackEnd/NestJS/_lessons/02 Настройка окружения.md",
     "Development/BackEnd/NestJS/_lessons/01 Введение.md",
     "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
-    "Development/BackEnd/NestJS/_lessons/05 Работа с базой данных.md",
-    "Development/BackEnd/NestJS/_lessons/06 Тесты.md",
-    "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
-    "Development/BackEnd/NestJS/_lessons/08 Отладка приложений.md",
-    "Development/BackEnd/NestJS/_lessons/09 Авторизация.md",
-    "Development/BackEnd/NestJS/_lessons/10 Продвинутые темы.md",
-    "Development/BackEnd/NestJS/_lessons/11 Выкладка на production (Бонус!).md",
-    "Development/BackEnd/NestJS/_lessons/12 Работа с файлами.md",
-    "Development/BackEnd/NestJS/_lessons/13 Telegram bot уведомлений.md",
-    "Development/BackEnd/NestJS/_lessons/14 Интеграция с внешним API.md",
-    "Development/BackEnd/NestJS/_lessons/15 Остальное.md",
-    "Development/Linux/OS/OS.md",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200453.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200325.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200255.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200245.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200233.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200214.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200039.png",
-    "Development/Architecture/FSD/_png/Pasted image 20250723200022.png",
     "Development/Architecture/FSD/_png",
     "Tags/#architecture+#fsd",
     "Development/Architecture/FSD",
     "Development/FrontEnd/Untitled",
-    "Development/Linux/Bash/_png/Pasted image 20250723190934.png",
-    "Development/Linux/Bash/_png/Pasted image 20250723190924.png",
     "Development/Linux/Bash/_png",
     "Development/Linux/Bash",
-    "Development/Linux/OS",
-    "Development/FrontEnd/Vue/Nuxt",
-    "Development/FrontEnd/Vue/Vue",
-    "Development/BackEnd/REST"
+    "Development/Linux/OS"
   ]
 }
