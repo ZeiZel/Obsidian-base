@@ -311,9 +311,19 @@
               "icon": "lucide-git-fork",
               "title": "Graph view"
             }
+          },
+          {
+            "id": "973952e7766a6198",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -369,7 +379,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "48c5943284c71db8",
+  "active": "973952e7766a6198",
   "lastOpenFiles": [
     "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
     "Development/TypeScript/TypeScript.md",
