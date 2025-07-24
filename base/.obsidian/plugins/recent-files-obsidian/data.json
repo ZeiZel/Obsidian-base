@@ -1,64 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+      "basename": "Kubernetes + Helm",
+      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
-      "basename": "Переход к микросервисам",
-      "path": "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md"
+      "basename": "NestJS - с нуля",
+      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
     },
     {
-      "basename": "Монорепозитории",
-      "path": "Development/BackEnd/Microservices/_lessons/Монорепозитории.md"
-    },
-    {
-      "basename": "Обмен сообщениями",
-      "path": "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md"
-    },
-    {
-      "basename": "RabbitMQ",
-      "path": "Development/BackEnd/Microservices/_lessons/RabbitMQ.md"
-    },
-    {
-      "basename": "Реализация взаимодействия",
-      "path": "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md"
-    },
-    {
-      "basename": "Реализация API",
-      "path": "Development/BackEnd/Microservices/_lessons/Реализация API.md"
-    },
-    {
-      "basename": "Реализация бизнес логики",
-      "path": "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md"
-    },
-    {
-      "basename": "Консистентность данных",
-      "path": "Development/BackEnd/Microservices/_lessons/Консистентность данных.md"
-    },
-    {
-      "basename": "Тестирование микросервисов",
-      "path": "Development/BackEnd/Microservices/_lessons/Тестирование микросервисов.md"
-    },
-    {
-      "basename": "Выкладка и эксплуатация",
-      "path": "Development/BackEnd/Microservices/_lessons/Выкладка и эксплуатация.md"
-    },
-    {
-      "basename": "Нотация описания архитектуры",
-      "path": "Development/BackEnd/Microservices/_lessons/Нотация описания архитектуры.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "Development/BackEnd/Microservices/_lessons/Введение.md"
-    },
-    {
-      "basename": "React + Redux",
-      "path": "Development/FrontEnd/React/React + Redux.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+      "basename": "FSD",
+      "path": "Development/Architecture/FSD/FSD.md"
     },
     {
       "basename": "Vue",
@@ -69,24 +21,28 @@
       "path": "Development/FrontEnd/Vue/Nuxt/Nuxt.md"
     },
     {
-      "basename": "FSD",
-      "path": "Development/Architecture/FSD/FSD.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "NestJS - с нуля",
-      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
+      "basename": "React + Redux",
+      "path": "Development/FrontEnd/React/React + Redux.md"
     },
     {
       "basename": "Bash",
       "path": "Development/Linux/Bash/Bash.md"
     },
     {
+      "basename": "Docker + Ansible",
+      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
       "basename": "TypeScript",
       "path": "Development/TypeScript/TypeScript.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "Pasted image 20250724215135",
+      "path": "Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png"
     },
     {
       "basename": "OS",
