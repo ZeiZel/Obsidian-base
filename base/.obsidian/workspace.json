@@ -80,6 +80,102 @@
             }
           },
           {
+            "id": "c91e1298e5f04273",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/Linux/Bash/Bash.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Bash"
+            }
+          },
+          {
+            "id": "20b8e1afdf753c74",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes + Helm"
+            }
+          },
+          {
+            "id": "2c489657bd590278",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/BackEnd/NestJS/NestJS - с нуля.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "NestJS - с нуля"
+            }
+          },
+          {
+            "id": "8c3cde7b9fa4303b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/FrontEnd/React/React + Redux.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "React + Redux"
+            }
+          },
+          {
             "id": "b3398f24df70f895",
             "type": "leaf",
             "state": {
@@ -104,61 +200,13 @@
             }
           },
           {
-            "id": "2c489657bd590278",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/NestJS/NestJS - с нуля.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "NestJS - с нуля"
-            }
-          },
-          {
-            "id": "d7b1e45352b347d8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Docker + Ansible"
-            }
-          },
-          {
             "id": "bebc5c8e4f926326",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Development/TypeScript/TypeScript.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -174,9 +222,33 @@
               "icon": "lucide-file",
               "title": "TypeScript"
             }
+          },
+          {
+            "id": "d7b1e45352b347d8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Docker + Ansible"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -208,7 +280,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "npm-check",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -346,13 +418,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/TypeScript/TypeScript.md",
+                "file": "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TypeScript"
+              "title": "Outline of Nuxt"
             }
           }
         ],
@@ -360,7 +432,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 407.5
+    "width": 387.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -379,34 +451,34 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "973952e7766a6198",
+  "active": "404d5afde002caa8",
   "lastOpenFiles": [
-    "Development/TypeScript/_lessons/Типизация TypeScript в React, Redux Toolkit.md",
-    "Development/TypeScript/TypeScript.md",
-    "Development/TypeScript/_lessons/15 Проект - Утилита выполнения команд.md",
-    "Development/TypeScript/_lessons/14 Поведенческие паттерны.md",
-    "Development/TypeScript/_lessons/12 Порождающие паттерны.md",
-    "Development/TypeScript/_lessons/13 Структурные паттерны.md",
-    "Development/TypeScript/_lessons/11 Модульность и библиотеки.md",
-    "Development/TypeScript/_lessons/10 Декораторы.md",
-    "Development/TypeScript/_lessons/09 Служебные типы.md",
-    "Development/TypeScript/_lessons/08 Манипуляция с типами.md",
-    "Development/TypeScript/_lessons/07 Generics.md",
-    "Development/TypeScript/_lessons/06 Компилятор TypeScript.md",
-    "Development/TypeScript/_lessons/05 Классы.md",
-    "Development/TypeScript/_lessons/04 Продвинутые типы.md",
-    "Development/TypeScript/_lessons/03 Основные типы.md",
-    "Development/TypeScript/_lessons/01 Введение.md",
-    "Development/TypeScript/_lessons/02 Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Development/BackEnd/NestJS/NestJS - с нуля.md",
-    "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
     "Development/FrontEnd/Vue/Vue/Vue.md",
-    "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
-    "Development/FrontEnd/Vue/Vue.md",
+    "Development/Architecture/FSD/FSD.md",
+    "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
+    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/BackEnd/NestJS/NestJS - с нуля.md",
+    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
+    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
+    "Development/FrontEnd/React/React + Redux.md",
+    "Development/Linux/Bash/Bash.md",
+    "Development/BackEnd/Microservices/_lessons/Введение.md",
+    "Development/TypeScript/TypeScript.md",
+    "Development/BackEnd/NestJS/_lessons/02 Настройка окружения.md",
+    "Development/BackEnd/NestJS/_lessons/01 Введение.md",
+    "Development/BackEnd/NestJS/_lessons/04 Модули, контроллеры и провайдеры.md",
+    "Development/BackEnd/NestJS/_lessons/05 Работа с базой данных.md",
+    "Development/BackEnd/NestJS/_lessons/06 Тесты.md",
+    "Development/BackEnd/NestJS/_lessons/07 Валидация данных.md",
+    "Development/BackEnd/NestJS/_lessons/08 Отладка приложений.md",
+    "Development/BackEnd/NestJS/_lessons/09 Авторизация.md",
+    "Development/BackEnd/NestJS/_lessons/10 Продвинутые темы.md",
+    "Development/BackEnd/NestJS/_lessons/11 Выкладка на production (Бонус!).md",
+    "Development/BackEnd/NestJS/_lessons/12 Работа с файлами.md",
+    "Development/BackEnd/NestJS/_lessons/13 Telegram bot уведомлений.md",
+    "Development/BackEnd/NestJS/_lessons/14 Интеграция с внешним API.md",
+    "Development/BackEnd/NestJS/_lessons/15 Остальное.md",
+    "Development/Linux/OS/OS.md",
     "Development/Architecture/FSD/_png/Pasted image 20250723200453.png",
     "Development/Architecture/FSD/_png/Pasted image 20250723200325.png",
     "Development/Architecture/FSD/_png/Pasted image 20250723200255.png",

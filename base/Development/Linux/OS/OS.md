@@ -1,7 +1,9 @@
 ---
 sticker: emoji//1f3f3-fe0f-200d-1f308
+tags:
+  - linux
+  - devops
 ---
-#Linux #DevOps 
 
 [Введение](_lessons/Введение.md)
 [Работа с SHELL](_lessons/Работа%20с%20SHELL.md)

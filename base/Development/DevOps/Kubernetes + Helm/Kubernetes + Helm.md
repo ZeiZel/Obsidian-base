@@ -1,5 +1,9 @@
-
-#Kubernetes #Helm #DevOps
+---
+tags:
+  - kubernetes
+  - helm
+  - devops
+---
 
 [1. Введение](_lessons/1.%20Введение.md)
 [2. Настройка окружения](_lessons/2.%20Настройка%20окружения.md)
