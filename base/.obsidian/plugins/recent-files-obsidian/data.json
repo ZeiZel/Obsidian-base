@@ -1,6 +1,86 @@
 {
   "recentFiles": [
     {
+      "basename": "RxJS",
+      "path": "frontend/RxJS.md"
+    },
+    {
+      "basename": "Zustand",
+      "path": "frontend/State Managers/Zustand.md"
+    },
+    {
+      "basename": "MobX",
+      "path": "frontend/State Managers/MobX.md"
+    },
+    {
+      "basename": "JavaScript",
+      "path": "frontend/JavaScript/JavaScript.md"
+    },
+    {
+      "basename": "10 - Оператор разделения на свойства",
+      "path": "frontend/JavaScript/_lessons/10 - Оператор разделения на свойства.md"
+    },
+    {
+      "basename": "Angular",
+      "path": "frontend/Angular/Angular.md"
+    },
+    {
+      "basename": "React + Next.js - с нуля",
+      "path": "frontend/NextJS/React + Next.js - с нуля.md"
+    },
+    {
+      "basename": "12 Контекст",
+      "path": "frontend/NextJS/_lessons/12 Контекст.md"
+    },
+    {
+      "basename": "TMUX",
+      "path": "tools/TMUX.md"
+    },
+    {
+      "basename": "Тестирование JavaScript",
+      "path": "testing/Тестирование JavaScript.md"
+    },
+    {
+      "basename": "REST API",
+      "path": "edge/REST API.md"
+    },
+    {
+      "basename": "WebSocket",
+      "path": "edge/Клиент-сервер/WebSocket.md"
+    },
+    {
+      "basename": "REST API",
+      "path": "edge/Клиент-сервер/REST API.md"
+    },
+    {
+      "basename": "RPC (gRPC, tRPC)",
+      "path": "edge/Клиент-сервер/RPC (gRPC, tRPC).md"
+    },
+    {
+      "basename": "Apollo + GraphQL",
+      "path": "edge/Клиент-сервер/Apollo + GraphQL.md"
+    },
+    {
+      "basename": "Real-time клиент-серверное взаимодействие",
+      "path": "edge/Клиент-сервер/Real-time клиент-серверное взаимодействие.md"
+    },
+    {
+      "basename": "CI-CD",
+      "path": "devops/CI-CD.md"
+    },
+    {
+      "basename": "NGINX",
+      "path": "devops/NGINX.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
       "basename": "Prettier",
       "path": "edge/Инструменты/Prettier.md"
     },
@@ -37,16 +117,8 @@
       "path": "tools/tools.md"
     },
     {
-      "basename": "TMUX",
-      "path": "tools/TMUX.md"
-    },
-    {
       "basename": "Terminal",
       "path": "tools/Terminal.md"
-    },
-    {
-      "basename": "Тестирование JavaScript",
-      "path": "testing/Тестирование JavaScript.md"
     },
     {
       "basename": "React Native",
@@ -125,80 +197,8 @@
       "path": "cs/RegExp.md"
     },
     {
-      "basename": "CI-CD",
-      "path": "devops/CI-CD.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
       "basename": "Bash",
       "path": "devops/Linux/Bash/Bash.md"
-    },
-    {
-      "basename": "Задачи с Leetcode",
-      "path": "cs/Задачи с Leetcode.md"
-    },
-    {
-      "basename": "SOLID принципы",
-      "path": "cs/SOLID принципы.md"
-    },
-    {
-      "basename": "Python",
-      "path": "cs/Python.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Web Vitals",
-      "path": "frontend/Web Vitals.md"
-    },
-    {
-      "basename": "05 - Продвинутый JavaScript",
-      "path": "frontend/React/_lessons/05 - Продвинутый JavaScript.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
-    },
-    {
-      "basename": "React Foundamentals",
-      "path": "frontend/React/React Foundamentals.md"
-    },
-    {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
-    },
-    {
-      "basename": "Storybook",
-      "path": "frontend/Storybook.md"
-    },
-    {
-      "basename": "Tailwind CSS",
-      "path": "frontend/Tailwind CSS.md"
-    },
-    {
-      "basename": "Поиск динамического класса",
-      "path": "frontend/Tips&Tricks/Поиск динамического класса.md"
-    },
-    {
-      "basename": "Контент в миксинах",
-      "path": "frontend/Tips&Tricks/Контент в миксинах.md"
-    },
-    {
-      "basename": "Visually Hidden",
-      "path": "frontend/Tips&Tricks/Visually Hidden.md"
-    },
-    {
-      "basename": "Reset&Reboot",
-      "path": "frontend/Tips&Tricks/Reset&Reboot.md"
     }
   ],
   "omittedPaths": [],

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "edge/Инструменты/Prettier.md",
+                "file": "frontend/RxJS.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Prettier"
+              "title": "RxJS"
             }
           }
         ]
@@ -211,13 +211,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "edge/Инструменты/Prettier.md",
+                "file": "frontend/RxJS.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Prettier"
+              "title": "Outline of RxJS"
             }
           }
         ],
@@ -246,6 +246,26 @@
   },
   "active": "70b94462b957ed5a",
   "lastOpenFiles": [
+    "frontend/State Managers/Zustand.md",
+    "frontend/State Managers/MobX.md",
+    "frontend/JavaScript/JavaScript.md",
+    "frontend/JavaScript/_lessons/10 - Оператор разделения на свойства.md",
+    "frontend/Angular/Angular.md",
+    "frontend/NextJS/React + Next.js - с нуля.md",
+    "frontend/NextJS/_lessons/12 Контекст.md",
+    "tools/TMUX.md",
+    "testing/Тестирование JavaScript.md",
+    "edge/REST API.md",
+    "edge/Клиент-сервер/WebSocket.md",
+    "edge/Клиент-сервер/REST API.md",
+    "edge/Клиент-сервер/RPC (gRPC, tRPC).md",
+    "edge/Клиент-сервер/Apollo + GraphQL.md",
+    "edge/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+    "devops/CI-CD.md",
+    "devops/NGINX.md",
+    "devops/Docker + Ansible/Docker + Ansible.md",
+    "devops/Kubernetes + Helm/Kubernetes + Helm.md",
+    "edge/Инструменты/Prettier.md",
     "edge/Инструменты/VSCode.md",
     "edge/Инструменты/NX.md",
     "edge/Инструменты/Bun.md",
@@ -253,12 +273,6 @@
     "Whats Learning/Прогресс изучения технологий.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_png/Pasted image 20240828103634.png",
-    "tools/Yazi.md",
-    "tools/tools.md",
-    "tools/TMUX.md",
-    "tools/Terminal.md",
-    "testing/Тестирование JavaScript.md",
-    "mobile/React Native/React Native.md",
     "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png",
     "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png",
     "inbox/Development/_png/Pasted image 20221030141236.png",
@@ -268,21 +282,7 @@
     "inbox/Development/_png/Pasted image 20240724203233.png",
     "inbox/Development/_png/Pasted image 20230605120613.png",
     "inbox/Development/_png/Pasted image 20230530140014.png",
-    "desktop/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
-    "desktop/Electron/ElectronJS.md",
-    "edge/Инструменты/PNPM.md",
-    "edge/Инструменты/ESBuild.md",
-    "cs/RegExp.md",
-    "devops/CI-CD.md",
-    "devops/Docker + Ansible/Docker + Ansible.md",
-    "devops/Kubernetes + Helm/Kubernetes + Helm.md",
-    "devops/Linux/Bash/Bash.md",
-    "cs/Задачи с Leetcode.md",
-    "cs/SOLID принципы.md",
-    "cs/Python.md",
-    "cs/Алгоритмы и Структуры даных.md",
     "edge/_png",
-    "frontend/Web Vitals.md",
     "devops/_png",
     "cs",
     "edge",
