@@ -315,7 +315,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 283.5
+    "width": 409.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -388,6 +388,16 @@
             "id": "973952e7766a6198",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "3c740cf1bd4ebcc0",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -395,7 +405,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -418,13 +428,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Kubernetes + Helm"
+              "title": "Outline"
             }
           }
         ],
@@ -432,7 +441,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 387.5
+    "width": 559.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -451,10 +460,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "48c5943284c71db8",
+  "active": "3c740cf1bd4ebcc0",
   "lastOpenFiles": [
-    "Development/DevOps/Kubernetes + Helm/_lessons/11. Шаблоны.md",
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "Development/DevOps/Kubernetes + Helm/_lessons/11. Шаблоны.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/7. Volumes.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/6. Работа с сетью.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
