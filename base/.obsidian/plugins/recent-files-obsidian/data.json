@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "design",
+      "path": "design/design.md"
+    },
+    {
       "basename": "index",
       "path": "index.md"
     },
@@ -47,10 +51,6 @@
     {
       "basename": "Obsidian UI",
       "path": "inbox/obsidian/_lessons/Obsidian UI.md"
-    },
-    {
-      "basename": "Design",
-      "path": "design/Design.md"
     },
     {
       "basename": "ZSH",

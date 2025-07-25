@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "design/design.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "design"
             }
           }
         ]
@@ -245,6 +245,7 @@
   },
   "active": "20b8e1afdf753c74",
   "lastOpenFiles": [
+    "index.md",
     "agile/agile.md",
     "inbox/Development/Linux/Bash/Bash.md",
     "devops/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
@@ -284,7 +285,6 @@
     "inbox/Whats Learning/_lessons",
     "inbox/Whats Learning",
     "inbox/Terminal.md",
-    "inbox/TMUX.md",
     "inbox/Soft/_png",
     "inbox/Soft/SMM",
     "inbox/Soft",
