@@ -1,148 +1,204 @@
 {
   "recentFiles": [
     {
-      "basename": "design",
-      "path": "design/design.md"
+      "basename": "Prettier",
+      "path": "edge/Инструменты/Prettier.md"
     },
     {
-      "basename": "index",
-      "path": "index.md"
+      "basename": "VSCode",
+      "path": "edge/Инструменты/VSCode.md"
     },
     {
-      "basename": "agile",
-      "path": "agile/agile.md"
+      "basename": "NX",
+      "path": "edge/Инструменты/NX.md"
     },
     {
-      "basename": "Bash",
-      "path": "inbox/Development/Linux/Bash/Bash.md"
+      "basename": "Bun",
+      "path": "edge/Инструменты/Bun.md"
     },
     {
-      "basename": "Books",
-      "path": "books/Books.md"
+      "basename": "Прогресс изучения технологий",
+      "path": "Whats Learning/Прогресс изучения технологий.md"
     },
     {
-      "basename": "inbox",
-      "path": "inbox/inbox.md"
+      "basename": "О чём база~",
+      "path": "Whats Learning/О чём база~.md"
     },
     {
-      "basename": "Как учиться учиться",
-      "path": "inbox/Soft/Как учиться учиться.md"
+      "basename": "Pasted image 20240828103634",
+      "path": "Whats Learning/_png/Pasted image 20240828103634.png"
     },
     {
-      "basename": "Storytelling",
-      "path": "inbox/Soft/Storytelling.md"
+      "basename": "Yazi",
+      "path": "tools/Yazi.md"
     },
     {
-      "basename": "Flameshot",
-      "path": "inbox/Flameshot.md"
+      "basename": "tools",
+      "path": "tools/tools.md"
     },
     {
-      "basename": "Obsidian",
-      "path": "inbox/obsidian/Obsidian.md"
+      "basename": "TMUX",
+      "path": "tools/TMUX.md"
     },
     {
-      "basename": "Как написать свой плагин",
-      "path": "inbox/obsidian/_lessons/Как написать свой плагин.md"
+      "basename": "Terminal",
+      "path": "tools/Terminal.md"
     },
     {
-      "basename": "Плагины",
-      "path": "inbox/obsidian/_lessons/Плагины.md"
+      "basename": "Тестирование JavaScript",
+      "path": "testing/Тестирование JavaScript.md"
     },
     {
-      "basename": "Obsidian UI",
-      "path": "inbox/obsidian/_lessons/Obsidian UI.md"
+      "basename": "React Native",
+      "path": "mobile/React Native/React Native.md"
     },
     {
-      "basename": "ZSH",
-      "path": "inbox/ZSH.md"
+      "basename": "7d620c9751f2694cf8ed3af5fcc7c08f",
+      "path": "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png"
     },
     {
-      "basename": "SMM",
-      "path": "inbox/Soft/SMM/SMM.md"
+      "basename": "b736ed279084211d1063b469caa31d5b",
+      "path": "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png"
     },
     {
-      "basename": "Pasted image 20241124162534",
-      "path": "agile/_png/Pasted image 20241124162534.png"
+      "basename": "Pasted image 20221030141236",
+      "path": "inbox/Development/_png/Pasted image 20221030141236.png"
     },
     {
-      "basename": "Kubernetes + Helm",
-      "path": "inbox/Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+      "basename": "Pasted image 20221105125402",
+      "path": "inbox/Development/_png/Pasted image 20221105125402.png"
     },
     {
-      "basename": "Немного про ООП (by ExtremeCode)",
-      "path": "inbox/Programming Principes/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md"
+      "basename": "Pasted image 20221223185309",
+      "path": "inbox/Development/_png/Pasted image 20221223185309.png"
     },
     {
-      "basename": "NestJS - с нуля",
-      "path": "inbox/Development/BackEnd/NestJS/NestJS - с нуля.md"
+      "basename": "Pasted image 20240724204850",
+      "path": "inbox/Development/_png/Pasted image 20240724204850.png"
     },
     {
-      "basename": "FSD",
-      "path": "inbox/Development/Architecture/FSD/FSD.md"
+      "basename": "Pasted image 20240724203233",
+      "path": "inbox/Development/_png/Pasted image 20240724203233.png"
     },
     {
-      "basename": "Vue",
-      "path": "inbox/Development/FrontEnd/Vue/Vue/Vue.md"
+      "basename": "Pasted image 20230605120613",
+      "path": "inbox/Development/_png/Pasted image 20230605120613.png"
     },
     {
-      "basename": "Nuxt",
-      "path": "inbox/Development/FrontEnd/Vue/Nuxt/Nuxt.md"
+      "basename": "Pasted image 20230530140014",
+      "path": "inbox/Development/_png/Pasted image 20230530140014.png"
     },
     {
-      "basename": "React + Redux",
-      "path": "inbox/Development/FrontEnd/React/React + Redux.md"
+      "basename": "Pasted image 20230221093147",
+      "path": "inbox/Development/_png/Pasted image 20230221093147.png"
+    },
+    {
+      "basename": "Pasted image 20221105104741",
+      "path": "inbox/Development/_png/Pasted image 20221105104741.png"
+    },
+    {
+      "basename": "Создание Electron приложения с другими технологиями",
+      "path": "desktop/Electron/_lessons/Создание Electron приложения с другими технологиями.md"
+    },
+    {
+      "basename": "ElectronJS",
+      "path": "desktop/Electron/ElectronJS.md"
+    },
+    {
+      "basename": "Pasted image 20221030140411",
+      "path": "inbox/Development/_png/Pasted image 20221030140411.png"
+    },
+    {
+      "basename": "Pasted image 20221030173908",
+      "path": "inbox/Development/_png/Pasted image 20221030173908.png"
+    },
+    {
+      "basename": "PNPM",
+      "path": "edge/Инструменты/PNPM.md"
+    },
+    {
+      "basename": "ESBuild",
+      "path": "edge/Инструменты/ESBuild.md"
+    },
+    {
+      "basename": "RegExp",
+      "path": "cs/RegExp.md"
+    },
+    {
+      "basename": "CI-CD",
+      "path": "devops/CI-CD.md"
     },
     {
       "basename": "Docker + Ansible",
-      "path": "inbox/Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+      "path": "devops/Docker + Ansible/Docker + Ansible.md"
     },
     {
-      "basename": "TypeScript",
-      "path": "inbox/Development/TypeScript/TypeScript.md"
+      "basename": "Kubernetes + Helm",
+      "path": "devops/Kubernetes + Helm/Kubernetes + Helm.md"
     },
     {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "inbox/Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+      "basename": "Bash",
+      "path": "devops/Linux/Bash/Bash.md"
     },
     {
-      "basename": "Pasted image 20250724215135",
-      "path": "inbox/Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png"
+      "basename": "Задачи с Leetcode",
+      "path": "cs/Задачи с Leetcode.md"
     },
     {
-      "basename": "OS",
-      "path": "inbox/Development/Linux/OS/OS.md"
+      "basename": "SOLID принципы",
+      "path": "cs/SOLID принципы.md"
     },
     {
-      "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
-      "path": "inbox/Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md"
-    },
-    {
-      "basename": "Продвинутый FrontEnd",
-      "path": "inbox/Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+      "basename": "Python",
+      "path": "cs/Python.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
-      "path": "inbox/Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "MV-patterns",
-      "path": "inbox/Development/Architecture/MV-patterns.md"
-    },
-    {
-      "basename": "Architecture",
-      "path": "inbox/Development/Architecture/Architecture.md"
-    },
-    {
-      "basename": "Atomic Design",
-      "path": "inbox/Development/Architecture/Atomic Design.md"
+      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "Web Vitals",
-      "path": "inbox/Development/FrontEnd/Web Vitals.md"
+      "path": "frontend/Web Vitals.md"
     },
     {
-      "basename": "Dev",
-      "path": "inbox/Development/Architecture/Dev.md"
+      "basename": "05 - Продвинутый JavaScript",
+      "path": "frontend/React/_lessons/05 - Продвинутый JavaScript.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "frontend/React/React Foundamentals.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "Storybook",
+      "path": "frontend/Storybook.md"
+    },
+    {
+      "basename": "Tailwind CSS",
+      "path": "frontend/Tailwind CSS.md"
+    },
+    {
+      "basename": "Поиск динамического класса",
+      "path": "frontend/Tips&Tricks/Поиск динамического класса.md"
+    },
+    {
+      "basename": "Контент в миксинах",
+      "path": "frontend/Tips&Tricks/Контент в миксинах.md"
+    },
+    {
+      "basename": "Visually Hidden",
+      "path": "frontend/Tips&Tricks/Visually Hidden.md"
+    },
+    {
+      "basename": "Reset&Reboot",
+      "path": "frontend/Tips&Tricks/Reset&Reboot.md"
     }
   ],
   "omittedPaths": [],

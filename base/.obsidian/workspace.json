@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "eed6b67c74b3b00e",
+        "id": "aa85dbbd7c3e67a0",
         "type": "tabs",
         "children": [
           {
-            "id": "20b8e1afdf753c74",
+            "id": "70b94462b957ed5a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "design/design.md",
+                "file": "edge/Инструменты/Prettier.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "design"
+              "title": "Prettier"
             }
           }
         ]
@@ -211,16 +211,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/agile.md",
+                "file": "edge/Инструменты/Prettier.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of agile"
+              "title": "Outline of Prettier"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -243,53 +244,53 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "20b8e1afdf753c74",
+  "active": "70b94462b957ed5a",
   "lastOpenFiles": [
-    "index.md",
-    "agile/agile.md",
-    "inbox/Development/Linux/Bash/Bash.md",
-    "devops/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "inbox/ZSH.md",
-    "inbox/Yazi.md",
-    "inbox/Whats Learning/_lessons/_png/6c002d1c935278b379ea1b74fbb330c2.png",
-    "inbox/Whats Learning/_lessons/_png/ee7a155b3569e54e25026818df742fd0.png",
-    "inbox/Whats Learning/_lessons/_png/ed10608cb38c4fc6591bdbaa6d1b9611.png",
-    "inbox/Whats Learning/_lessons/_png/70e2f598deb3ca472d54f5f7e452e86b.png",
-    "inbox/Whats Learning/_lessons/_png/e5c9a4807fbc554141383572047d9ffd.png",
-    "inbox/Whats Learning/_lessons/_png/6e44be3b51db319506ba1653ddba6b95.png",
-    "inbox/Whats Learning/_lessons/_png/c5a6b9a5a7f24afbe810523e7d82afea.png",
-    "inbox/Whats Learning/_lessons/_png/adcd91c5775906b4f4f4b2266801dc7b.png",
-    "inbox/Whats Learning/_lessons/_png/9e0c9647da37efe54b0d2c7296b8f6d0.jpg",
-    "inbox/Whats Learning/_lessons/_png/94c64ace59234aa8c00526f7c53abfa8.png",
-    "inbox/Whats Learning/_lessons/Тестирование.md",
-    "inbox/Whats Learning/_lessons/Паттерны.md",
-    "inbox/Whats Learning/_lessons/Основы HTML + CSS.md",
-    "inbox/Whats Learning/_lessons/Основные принципы в программировании.md",
-    "inbox/Whats Learning/_lessons/Микросервисная архитектура.md",
-    "inbox/Whats Learning/_lessons/Концепты.md",
-    "inbox/Whats Learning/_lessons/Инструменты.md",
-    "inbox/Whats Learning/_lessons/Базы Данных.md",
-    "inbox/Whats Learning/_lessons/_png",
-    "inbox/Whats Learning/_lessons/TypeScritpt.md",
-    "inbox/Whats Learning/_lessons/Serverless.md",
-    "inbox/Whats Learning/_lessons/SSR.md",
-    "inbox/Whats Learning/_lessons/PWA.md",
-    "inbox/Whats Learning/_lessons/ORM-системы.md",
-    "inbox/Whats Learning/_lessons/JavaScript.md",
-    "inbox/Whats Learning/_lessons/FrontEnd.md",
-    "inbox/Whats Learning/_lessons/Computer Science.md",
-    "inbox/Whats Learning/_lessons/Backend.md",
-    "inbox/Whats Learning/_png",
-    "inbox/Whats Learning/Прогресс изучения технологий.md",
-    "inbox/Whats Learning/О чём база~.md",
-    "inbox/Whats Learning/_lessons",
-    "inbox/Whats Learning",
-    "inbox/Terminal.md",
-    "inbox/Soft/_png",
-    "inbox/Soft/SMM",
-    "inbox/Soft",
-    "inbox/obsidian/_lessons/_png/атмосферный звук моря и крики чаек.mp3",
-    "inbox/obsidian/_lessons/_png",
-    "inbox/obsidian/_lessons"
+    "edge/Инструменты/VSCode.md",
+    "edge/Инструменты/NX.md",
+    "edge/Инструменты/Bun.md",
+    "edge/Инструменты/Gulp.md",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Whats Learning/О чём база~.md",
+    "Whats Learning/_png/Pasted image 20240828103634.png",
+    "tools/Yazi.md",
+    "tools/tools.md",
+    "tools/TMUX.md",
+    "tools/Terminal.md",
+    "testing/Тестирование JavaScript.md",
+    "mobile/React Native/React Native.md",
+    "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png",
+    "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png",
+    "inbox/Development/_png/Pasted image 20221030141236.png",
+    "inbox/Development/_png/Pasted image 20221105125402.png",
+    "inbox/Development/_png/Pasted image 20221223185309.png",
+    "inbox/Development/_png/Pasted image 20240724204850.png",
+    "inbox/Development/_png/Pasted image 20240724203233.png",
+    "inbox/Development/_png/Pasted image 20230605120613.png",
+    "inbox/Development/_png/Pasted image 20230530140014.png",
+    "desktop/Electron/_lessons/Создание Electron приложения с другими технологиями.md",
+    "desktop/Electron/ElectronJS.md",
+    "edge/Инструменты/PNPM.md",
+    "edge/Инструменты/ESBuild.md",
+    "cs/RegExp.md",
+    "devops/CI-CD.md",
+    "devops/Docker + Ansible/Docker + Ansible.md",
+    "devops/Kubernetes + Helm/Kubernetes + Helm.md",
+    "devops/Linux/Bash/Bash.md",
+    "cs/Задачи с Leetcode.md",
+    "cs/SOLID принципы.md",
+    "cs/Python.md",
+    "cs/Алгоритмы и Структуры даных.md",
+    "edge/_png",
+    "frontend/Web Vitals.md",
+    "devops/_png",
+    "cs",
+    "edge",
+    "frontend",
+    "devops",
+    "backend",
+    "tools/_png",
+    "database/_png",
+    "database"
   ]
 }

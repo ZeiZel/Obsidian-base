@@ -22,4 +22,4 @@ description: Base homepage.
 - 
 - 
 - 
-- [inbox](inbox/inbox.md) - неструктурированные данные и шальные мысли =)
+- [inbox](tools/inbox.md) - неструктурированные данные и шальные мысли =)
