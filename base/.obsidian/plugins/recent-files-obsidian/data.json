@@ -1,96 +1,148 @@
 {
   "recentFiles": [
     {
-      "basename": "Kubernetes + Helm",
-      "path": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+      "basename": "Books",
+      "path": "books/Books.md"
     },
     {
-      "basename": "NestJS - с нуля",
-      "path": "Development/BackEnd/NestJS/NestJS - с нуля.md"
+      "basename": "index",
+      "path": "index.md"
     },
     {
-      "basename": "FSD",
-      "path": "Development/Architecture/FSD/FSD.md"
+      "basename": "inbox",
+      "path": "inbox/inbox.md"
     },
     {
-      "basename": "Vue",
-      "path": "Development/FrontEnd/Vue/Vue/Vue.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
-      "basename": "Nuxt",
-      "path": "Development/FrontEnd/Vue/Nuxt/Nuxt.md"
+      "basename": "Как учиться учиться",
+      "path": "inbox/Soft/Как учиться учиться.md"
     },
     {
-      "basename": "React + Redux",
-      "path": "Development/FrontEnd/React/React + Redux.md"
-    },
-    {
-      "basename": "Bash",
-      "path": "Development/Linux/Bash/Bash.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "Development/DevOps/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
-      "basename": "TypeScript",
-      "path": "Development/TypeScript/TypeScript.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
-    },
-    {
-      "basename": "Pasted image 20250724215135",
-      "path": "Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png"
-    },
-    {
-      "basename": "OS",
-      "path": "Development/Linux/OS/OS.md"
-    },
-    {
-      "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
-      "path": "Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md"
-    },
-    {
-      "basename": "Продвинутый FrontEnd",
-      "path": "Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "Development/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "MV-patterns",
-      "path": "Development/Architecture/MV-patterns.md"
-    },
-    {
-      "basename": "Architecture",
-      "path": "Development/Architecture/Architecture.md"
-    },
-    {
-      "basename": "Design",
-      "path": "Design/Design.md"
-    },
-    {
-      "basename": "Atomic Design",
-      "path": "Development/Architecture/Atomic Design.md"
-    },
-    {
-      "basename": "Шорткаты Windows",
-      "path": "_hobbies/Shortcuts/Шорткаты Windows.md"
+      "basename": "Storytelling",
+      "path": "inbox/Soft/Storytelling.md"
     },
     {
       "basename": "Flameshot",
-      "path": "_hobbies/Flameshot.md"
+      "path": "inbox/Flameshot.md"
+    },
+    {
+      "basename": "Obsidian",
+      "path": "inbox/obsidian/Obsidian.md"
+    },
+    {
+      "basename": "Как написать свой плагин",
+      "path": "inbox/obsidian/_lessons/Как написать свой плагин.md"
+    },
+    {
+      "basename": "Плагины",
+      "path": "inbox/obsidian/_lessons/Плагины.md"
+    },
+    {
+      "basename": "Obsidian UI",
+      "path": "inbox/obsidian/_lessons/Obsidian UI.md"
+    },
+    {
+      "basename": "Design",
+      "path": "design/Design.md"
+    },
+    {
+      "basename": "ZSH",
+      "path": "inbox/ZSH.md"
+    },
+    {
+      "basename": "SMM",
+      "path": "inbox/Soft/SMM/SMM.md"
+    },
+    {
+      "basename": "Pasted image 20241124162534",
+      "path": "agile/_png/Pasted image 20241124162534.png"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "inbox/Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "Немного про ООП (by ExtremeCode)",
+      "path": "inbox/Programming Principes/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md"
+    },
+    {
+      "basename": "NestJS - с нуля",
+      "path": "inbox/Development/BackEnd/NestJS/NestJS - с нуля.md"
+    },
+    {
+      "basename": "FSD",
+      "path": "inbox/Development/Architecture/FSD/FSD.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "inbox/Development/FrontEnd/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "Nuxt",
+      "path": "inbox/Development/FrontEnd/Vue/Nuxt/Nuxt.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "inbox/Development/FrontEnd/React/React + Redux.md"
+    },
+    {
+      "basename": "Bash",
+      "path": "inbox/Development/Linux/Bash/Bash.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "inbox/Development/DevOps/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
+      "basename": "TypeScript",
+      "path": "inbox/Development/TypeScript/TypeScript.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "inbox/Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "Pasted image 20250724215135",
+      "path": "inbox/Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png"
+    },
+    {
+      "basename": "OS",
+      "path": "inbox/Development/Linux/OS/OS.md"
+    },
+    {
+      "basename": "Node.js - с нуля, основы и построение архитектуры приложений",
+      "path": "inbox/Development/BackEnd/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md"
+    },
+    {
+      "basename": "Продвинутый FrontEnd",
+      "path": "inbox/Development/FrontEnd/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "inbox/Development/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "MV-patterns",
+      "path": "inbox/Development/Architecture/MV-patterns.md"
+    },
+    {
+      "basename": "Architecture",
+      "path": "inbox/Development/Architecture/Architecture.md"
+    },
+    {
+      "basename": "Atomic Design",
+      "path": "inbox/Development/Architecture/Atomic Design.md"
     },
     {
       "basename": "Web Vitals",
-      "path": "Development/FrontEnd/Web Vitals.md"
+      "path": "inbox/Development/FrontEnd/Web Vitals.md"
     },
     {
       "basename": "Dev",
-      "path": "Development/Architecture/Dev.md"
+      "path": "inbox/Development/Architecture/Dev.md"
     }
   ],
   "omittedPaths": [],

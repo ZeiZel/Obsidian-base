@@ -1,7 +1,4 @@
 ---
-banner: "_assets/img/banners/early-evening-violet.jpg"
-banner_y: "71"
-sticker: emoji//1f600
 aliases:
   - index
   - home
@@ -11,20 +8,18 @@ tags:
   - homepage
   - dashboard
 description: Base homepage.
-cssclasses:
 ---
 
-# Homepage
+# Obsidian Base
 
-> [!greeting]
-> Добрый день, [User] :3
+Привет, дорогой читатель (или я). Это база junior-frontend разработчика из маленького регионального банка. Её я собираю, чтобы всегда держать под руками актуальную и важную информацию из пройденных курсов. 
 
----
-
-## Оглавление
-
-- Development
-- Soft
-- Design
-
-
+- [agile](agile/agile.md)
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- [inbox](inbox/inbox.md) - неструктурированные данные и шальные мысли =)

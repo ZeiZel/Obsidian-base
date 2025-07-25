@@ -133,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+                "file": "inbox/Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -181,8 +181,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-                "mode": "preview",
+                "file": "index.md",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -196,59 +196,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Паттерны и практика построения микросервисов"
-            }
-          },
-          {
-            "id": "bebc5c8e4f926326",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/TypeScript/TypeScript.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "TypeScript"
-            }
-          },
-          {
-            "id": "d7b1e45352b347d8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Docker + Ansible"
+              "title": "index"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -315,7 +267,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 508.51103591918945
+    "width": 445.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -428,12 +380,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of index"
             }
           }
         ],
@@ -460,53 +413,53 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "48c5943284c71db8",
+  "active": "b3398f24df70f895",
   "lastOpenFiles": [
-    "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/11. Шаблоны.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/7. Volumes.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/6. Работа с сетью.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/5. Работа с объектами.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/4. Первый pod.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/3. Знакомство с Kubernetes.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/2. Настройка окружения.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/15. Заключение.md",
-    "Development/DevOps/Kubernetes + Helm/_lessons/1. Введение.md",
-    "Development/BackEnd/NestJS/NestJS - с нуля.md",
-    "Development/Architecture/FSD/FSD.md",
-    "Development/FrontEnd/Vue/Vue/Vue.md",
-    "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
-    "Development/FrontEnd/React/React + Redux.md",
-    "Development/Linux/Bash/Bash.md",
-    "Development/DevOps/Docker + Ansible/Docker + Ansible.md",
-    "Development/TypeScript/TypeScript.md",
-    "Development/BackEnd/Microservices/Паттерны и практика построения микросервисов.md",
-    "Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png",
-    "Development/BackEnd/Microservices/_lessons/Переход к микросервисам.md",
-    "Development/BackEnd/Microservices/_lessons/Монорепозитории.md",
-    "Development/BackEnd/Microservices/_lessons/Обмен сообщениями.md",
-    "Development/BackEnd/Microservices/_lessons/RabbitMQ.md",
-    "Development/BackEnd/Microservices/_lessons/Реализация взаимодействия.md",
-    "Development/BackEnd/Microservices/_lessons/Реализация API.md",
-    "Development/BackEnd/Microservices/_lessons/Реализация бизнес логики.md",
-    "Development/BackEnd/Microservices/_png",
-    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213829.png",
-    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213818.png",
-    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213648.png",
-    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213304.png",
-    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213251.png",
-    "Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213242.png",
-    "Development/FrontEnd/Vue/Vue/_png",
-    "Development/FrontEnd/Vue/Nuxt/_png/Pasted image 20250724212534.png",
-    "Development/FrontEnd/Vue/Nuxt/_png/Pasted image 20250724212259.png",
-    "Development/FrontEnd/Vue/Nuxt/_png/Pasted image 20250724212227.png",
-    "Development/FrontEnd/Vue/Nuxt/_png",
-    "Development/Architecture/FSD/_png",
-    "Tags/#architecture+#fsd",
-    "Development/Architecture/FSD",
-    "Development/FrontEnd/Untitled",
-    "Development/Linux/Bash/_png",
-    "Development/Linux/Bash",
-    "Development/Linux/OS"
+    "inbox/inbox.md",
+    "index.md",
+    "agile/agile.md",
+    "_assets/img/banners/agile.png",
+    "_assets/img/banners/early-evening-violet.jpg",
+    "_assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg",
+    "_assets/img/banners/violet-mountains.jpg",
+    "_assets/img/bg/windows-11-dark-mode-blue.jpg",
+    "_assets/img/bg/macos-big-sur-apple.jpg",
+    "_assets/technical-support.png",
+    "inbox/Soft/Как учиться учиться.md",
+    "inbox/Soft/Storytelling.md",
+    "inbox/Flameshot.md",
+    "_Obsidian/_Obsidian.md",
+    "inbox/obsidian/Obsidian.md",
+    "inbox/obsidian/_lessons/Как написать свой плагин.md",
+    "inbox/obsidian/_lessons/Плагины.md",
+    "inbox/obsidian/_lessons/Obsidian UI.md",
+    "design/Design.md",
+    "inbox/ZSH.md",
+    "inbox",
+    "English/English.md",
+    "English/_lessons/Интенсив от Intermediate до Advanced (2019).md",
+    "English/_lessons/От Elementary до Intermediate за 30 дней. Тариф Мастер (2020).md",
+    "English/_lessons/Английский - те самые основы (2019).md",
+    "inbox/Soft/SMM/SMM.md",
+    "Soft/Agile/_lessons/Управление задачам.md",
+    "Soft/Agile/_lessons/Оптимизиации рабочего процесса.md",
+    "Soft/Agile/_lessons/Масштабирование Agile.md",
+    "Soft/Agile/_lessons/Заключение.md",
+    "Soft/Agile/_lessons/Введение.md",
+    "Soft/Agile/_lessons/Scrum.md",
+    "Soft/Agile/_lessons/Kanban.md",
+    "agile/_png/Pasted image 20241124162534.png",
+    "english",
+    "common",
+    "inbox/Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
+    "new_organization/areas",
+    "design",
+    "agile",
+    "new_organization/areas/development",
+    "devops",
+    "backend",
+    "frontend",
+    "inbox/Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png",
+    "inbox/Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213829.png"
   ]
 }
