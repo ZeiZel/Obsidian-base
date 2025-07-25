@@ -315,7 +315,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 409.51103591918945
+    "width": 508.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -441,7 +441,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 559.5
+    "width": 381.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -460,7 +460,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "3c740cf1bd4ebcc0",
+  "active": "48c5943284c71db8",
   "lastOpenFiles": [
     "Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "Development/DevOps/Kubernetes + Helm/_lessons/11. Шаблоны.md",
