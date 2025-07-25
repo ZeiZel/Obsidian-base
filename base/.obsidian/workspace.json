@@ -8,175 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "c21aa5980478b5be",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Architecture/FSD/FSD.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "FSD"
-            }
-          },
-          {
-            "id": "856c925ebbfd2181",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Vue/Vue/Vue.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Vue"
-            }
-          },
-          {
-            "id": "404d5afde002caa8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/Vue/Nuxt/Nuxt.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Nuxt"
-            }
-          },
-          {
-            "id": "8c3cde7b9fa4303b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/FrontEnd/React/React + Redux.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "React + Redux"
-            }
-          },
-          {
-            "id": "c91e1298e5f04273",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/Linux/Bash/Bash.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Bash"
-            }
-          },
-          {
             "id": "20b8e1afdf753c74",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "inbox/Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
-            }
-          },
-          {
-            "id": "2c489657bd590278",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Development/BackEnd/NestJS/NestJS - с нуля.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "NestJS - с нуля"
-            }
-          },
-          {
-            "id": "b3398f24df70f895",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -199,8 +31,7 @@
               "title": "index"
             }
           }
-        ],
-        "currentTab": 7
+        ]
       }
     ],
     "direction": "vertical"
@@ -380,21 +211,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "index.md",
+                "file": "agile/agile.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of agile"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 381.5
+    "width": 588.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -413,53 +243,53 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "b3398f24df70f895",
+  "active": "20b8e1afdf753c74",
   "lastOpenFiles": [
-    "inbox/inbox.md",
-    "index.md",
     "agile/agile.md",
-    "_assets/img/banners/agile.png",
-    "_assets/img/banners/early-evening-violet.jpg",
-    "_assets/img/banners/macos-big-sur-colorful-waves-smooth.jpg",
-    "_assets/img/banners/violet-mountains.jpg",
-    "_assets/img/bg/windows-11-dark-mode-blue.jpg",
-    "_assets/img/bg/macos-big-sur-apple.jpg",
-    "_assets/technical-support.png",
-    "inbox/Soft/Как учиться учиться.md",
-    "inbox/Soft/Storytelling.md",
-    "inbox/Flameshot.md",
-    "_Obsidian/_Obsidian.md",
-    "inbox/obsidian/Obsidian.md",
-    "inbox/obsidian/_lessons/Как написать свой плагин.md",
-    "inbox/obsidian/_lessons/Плагины.md",
-    "inbox/obsidian/_lessons/Obsidian UI.md",
-    "design/Design.md",
+    "inbox/Development/Linux/Bash/Bash.md",
+    "devops/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
     "inbox/ZSH.md",
-    "inbox",
-    "English/English.md",
-    "English/_lessons/Интенсив от Intermediate до Advanced (2019).md",
-    "English/_lessons/От Elementary до Intermediate за 30 дней. Тариф Мастер (2020).md",
-    "English/_lessons/Английский - те самые основы (2019).md",
-    "inbox/Soft/SMM/SMM.md",
-    "Soft/Agile/_lessons/Управление задачам.md",
-    "Soft/Agile/_lessons/Оптимизиации рабочего процесса.md",
-    "Soft/Agile/_lessons/Масштабирование Agile.md",
-    "Soft/Agile/_lessons/Заключение.md",
-    "Soft/Agile/_lessons/Введение.md",
-    "Soft/Agile/_lessons/Scrum.md",
-    "Soft/Agile/_lessons/Kanban.md",
-    "agile/_png/Pasted image 20241124162534.png",
-    "english",
-    "common",
-    "inbox/Development/DevOps/Kubernetes + Helm/Kubernetes + Helm.md",
-    "new_organization/areas",
-    "design",
-    "agile",
-    "new_organization/areas/development",
-    "devops",
-    "backend",
-    "frontend",
-    "inbox/Development/BackEnd/Microservices/_png/Pasted image 20250724215135.png",
-    "inbox/Development/FrontEnd/Vue/Vue/_png/Pasted image 20250724213829.png"
+    "inbox/Yazi.md",
+    "inbox/Whats Learning/_lessons/_png/6c002d1c935278b379ea1b74fbb330c2.png",
+    "inbox/Whats Learning/_lessons/_png/ee7a155b3569e54e25026818df742fd0.png",
+    "inbox/Whats Learning/_lessons/_png/ed10608cb38c4fc6591bdbaa6d1b9611.png",
+    "inbox/Whats Learning/_lessons/_png/70e2f598deb3ca472d54f5f7e452e86b.png",
+    "inbox/Whats Learning/_lessons/_png/e5c9a4807fbc554141383572047d9ffd.png",
+    "inbox/Whats Learning/_lessons/_png/6e44be3b51db319506ba1653ddba6b95.png",
+    "inbox/Whats Learning/_lessons/_png/c5a6b9a5a7f24afbe810523e7d82afea.png",
+    "inbox/Whats Learning/_lessons/_png/adcd91c5775906b4f4f4b2266801dc7b.png",
+    "inbox/Whats Learning/_lessons/_png/9e0c9647da37efe54b0d2c7296b8f6d0.jpg",
+    "inbox/Whats Learning/_lessons/_png/94c64ace59234aa8c00526f7c53abfa8.png",
+    "inbox/Whats Learning/_lessons/Тестирование.md",
+    "inbox/Whats Learning/_lessons/Паттерны.md",
+    "inbox/Whats Learning/_lessons/Основы HTML + CSS.md",
+    "inbox/Whats Learning/_lessons/Основные принципы в программировании.md",
+    "inbox/Whats Learning/_lessons/Микросервисная архитектура.md",
+    "inbox/Whats Learning/_lessons/Концепты.md",
+    "inbox/Whats Learning/_lessons/Инструменты.md",
+    "inbox/Whats Learning/_lessons/Базы Данных.md",
+    "inbox/Whats Learning/_lessons/_png",
+    "inbox/Whats Learning/_lessons/TypeScritpt.md",
+    "inbox/Whats Learning/_lessons/Serverless.md",
+    "inbox/Whats Learning/_lessons/SSR.md",
+    "inbox/Whats Learning/_lessons/PWA.md",
+    "inbox/Whats Learning/_lessons/ORM-системы.md",
+    "inbox/Whats Learning/_lessons/JavaScript.md",
+    "inbox/Whats Learning/_lessons/FrontEnd.md",
+    "inbox/Whats Learning/_lessons/Computer Science.md",
+    "inbox/Whats Learning/_lessons/Backend.md",
+    "inbox/Whats Learning/_png",
+    "inbox/Whats Learning/Прогресс изучения технологий.md",
+    "inbox/Whats Learning/О чём база~.md",
+    "inbox/Whats Learning/_lessons",
+    "inbox/Whats Learning",
+    "inbox/Terminal.md",
+    "inbox/TMUX.md",
+    "inbox/Soft/_png",
+    "inbox/Soft/SMM",
+    "inbox/Soft",
+    "inbox/obsidian/_lessons/_png/атмосферный звук моря и крики чаек.mp3",
+    "inbox/obsidian/_lessons/_png",
+    "inbox/obsidian/_lessons"
   ]
 }

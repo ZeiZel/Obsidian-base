@@ -1,20 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "Books",
-      "path": "books/Books.md"
-    },
-    {
       "basename": "index",
       "path": "index.md"
     },
     {
-      "basename": "inbox",
-      "path": "inbox/inbox.md"
-    },
-    {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "Bash",
+      "path": "inbox/Development/Linux/Bash/Bash.md"
+    },
+    {
+      "basename": "Books",
+      "path": "books/Books.md"
+    },
+    {
+      "basename": "inbox",
+      "path": "inbox/inbox.md"
     },
     {
       "basename": "Как учиться учиться",
@@ -87,10 +91,6 @@
     {
       "basename": "React + Redux",
       "path": "inbox/Development/FrontEnd/React/React + Redux.md"
-    },
-    {
-      "basename": "Bash",
-      "path": "inbox/Development/Linux/Bash/Bash.md"
     },
     {
       "basename": "Docker + Ansible",
