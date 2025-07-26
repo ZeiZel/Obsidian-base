@@ -5,6 +5,54 @@
       "path": "agile/agile.md"
     },
     {
+      "basename": "Davinci resolve",
+      "path": "design/DaVinci Resolve/Davinci resolve.md"
+    },
+    {
+      "basename": "10 Вкладка Deliver. Экспорт материала",
+      "path": "design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md"
+    },
+    {
+      "basename": "design",
+      "path": "design/design.md"
+    },
+    {
+      "basename": "3 Вкладка edit монтаж",
+      "path": "design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
+    },
+    {
+      "basename": "Службы",
+      "path": "devops/Linux/OS/_lessons/Службы.md"
+    },
+    {
+      "basename": "Структура Linux",
+      "path": "devops/Linux/OS/_lessons/Структура Linux.md"
+    },
+    {
+      "basename": "Особенности BASH",
+      "path": "devops/Linux/OS/_lessons/Особенности BASH.md"
+    },
+    {
+      "basename": "Доступ и права",
+      "path": "devops/Linux/OS/_lessons/Доступ и права.md"
+    },
+    {
+      "basename": "Введение",
+      "path": "devops/Linux/OS/_lessons/Введение.md"
+    },
+    {
+      "basename": "Pasted image 20250723185324",
+      "path": "devops/Linux/Bash/_png/Pasted image 20250723185324.png"
+    },
+    {
+      "basename": "OS",
+      "path": "devops/Linux/OS/OS.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/Docker + Ansible/Docker + Ansible.md"
+    },
+    {
       "basename": "Pasted image 20240902093107",
       "path": "inbox/Development/_png/Pasted image 20240902093107.png"
     },
@@ -151,54 +199,6 @@
     {
       "basename": "Zustand",
       "path": "frontend/State Managers/Zustand.md"
-    },
-    {
-      "basename": "22 – Промисы",
-      "path": "frontend/JavaScript/_lessons/22 – Промисы.md"
-    },
-    {
-      "basename": "JavaScript",
-      "path": "frontend/JavaScript/JavaScript.md"
-    },
-    {
-      "basename": "02 - Самое важное в JavaScript и console.log",
-      "path": "frontend/JavaScript/_lessons/02 - Самое важное в JavaScript и console.log.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
-    },
-    {
-      "basename": "React Query",
-      "path": "frontend/React/React Query.md"
-    },
-    {
-      "basename": "RxJS",
-      "path": "frontend/RxJS.md"
-    },
-    {
-      "basename": "10 - Оператор разделения на свойства",
-      "path": "frontend/JavaScript/_lessons/10 - Оператор разделения на свойства.md"
-    },
-    {
-      "basename": "Angular",
-      "path": "frontend/Angular/Angular.md"
-    },
-    {
-      "basename": "React + Next.js - с нуля",
-      "path": "frontend/NextJS/React + Next.js - с нуля.md"
-    },
-    {
-      "basename": "12 Контекст",
-      "path": "frontend/NextJS/_lessons/12 Контекст.md"
-    },
-    {
-      "basename": "TMUX",
-      "path": "tools/TMUX.md"
-    },
-    {
-      "basename": "Тестирование JavaScript",
-      "path": "testing/Тестирование JavaScript.md"
     }
   ],
   "omittedPaths": [],

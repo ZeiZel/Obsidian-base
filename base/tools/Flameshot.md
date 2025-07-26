@@ -7,6 +7,6 @@
 script --command "QT_QPA_PLATFORM=wayland flameshot gui" /dev/null
 ```
 
-![](_png/Pasted%20image%2020241027103048.png)
+![](_png/4d2135adc697525b152e3381e93fbc44.png)
 
 
