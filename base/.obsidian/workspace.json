@@ -220,12 +220,11 @@
               "title": "Outline of agile"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 588.5
+    "width": 670.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -244,7 +243,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "70b94462b957ed5a",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
     "inbox/Development/_png/Pasted image 20240902093107.png",
     "inbox/Development/_png/Pasted image 20240724205149.png",
