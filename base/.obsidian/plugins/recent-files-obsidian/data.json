@@ -1,6 +1,70 @@
 {
   "recentFiles": [
     {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "tools",
+      "path": "tools/tools.md"
+    },
+    {
+      "basename": "inbox",
+      "path": "inbox/inbox.md"
+    },
+    {
+      "basename": "testing",
+      "path": "testing/testing.md"
+    },
+    {
+      "basename": "obsidian",
+      "path": "obsidian/obsidian.md"
+    },
+    {
+      "basename": "mobile",
+      "path": "mobile/mobile.md"
+    },
+    {
+      "basename": "frontend",
+      "path": "frontend/frontend.md"
+    },
+    {
+      "basename": "edge",
+      "path": "edge/edge.md"
+    },
+    {
+      "basename": "backend",
+      "path": "backend/backend.md"
+    },
+    {
+      "basename": "computer science",
+      "path": "cs/computer science.md"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
+      "basename": "Pasted image 20250601192606",
+      "path": "devops/docker/_png/Pasted image 20250601192606.png"
+    },
+    {
+      "basename": "desktop",
+      "path": "desktop/desktop.md"
+    },
+    {
+      "basename": "devops",
+      "path": "devops/devops.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
     },
@@ -22,35 +86,31 @@
     },
     {
       "basename": "Службы",
-      "path": "devops/Linux/OS/_lessons/Службы.md"
+      "path": "devops/linux/OS/_lessons/Службы.md"
     },
     {
       "basename": "Структура Linux",
-      "path": "devops/Linux/OS/_lessons/Структура Linux.md"
+      "path": "devops/linux/OS/_lessons/Структура Linux.md"
     },
     {
       "basename": "Особенности BASH",
-      "path": "devops/Linux/OS/_lessons/Особенности BASH.md"
+      "path": "devops/linux/OS/_lessons/Особенности BASH.md"
     },
     {
       "basename": "Доступ и права",
-      "path": "devops/Linux/OS/_lessons/Доступ и права.md"
+      "path": "devops/linux/OS/_lessons/Доступ и права.md"
     },
     {
       "basename": "Введение",
-      "path": "devops/Linux/OS/_lessons/Введение.md"
+      "path": "devops/linux/OS/_lessons/Введение.md"
     },
     {
       "basename": "Pasted image 20250723185324",
-      "path": "devops/Linux/Bash/_png/Pasted image 20250723185324.png"
+      "path": "devops/linux/Bash/_png/Pasted image 20250723185324.png"
     },
     {
       "basename": "OS",
-      "path": "devops/Linux/OS/OS.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/Docker + Ansible/Docker + Ansible.md"
+      "path": "devops/linux/OS/OS.md"
     },
     {
       "basename": "Pasted image 20240902093107",
@@ -139,66 +199,6 @@
     {
       "basename": "9800284ad13b11c18bfc3c1866c175f2",
       "path": "inbox/Development/_png/9800284ad13b11c18bfc3c1866c175f2.png"
-    },
-    {
-      "basename": "53233c6f85c1386db27cae12c808eb15",
-      "path": "inbox/Development/_png/53233c6f85c1386db27cae12c808eb15.png"
-    },
-    {
-      "basename": "5464a484976f5df07f5e3f56c225f327",
-      "path": "inbox/Development/_png/5464a484976f5df07f5e3f56c225f327.png"
-    },
-    {
-      "basename": "2070ba0e3694221a75607e9cce03f47b",
-      "path": "inbox/Development/_png/2070ba0e3694221a75607e9cce03f47b.png"
-    },
-    {
-      "basename": "91f9d7e1da33da27780edcc06017aee1",
-      "path": "inbox/Development/_png/91f9d7e1da33da27780edcc06017aee1.png"
-    },
-    {
-      "basename": "79c54156ad56b2334e5ce1095e4b89a2",
-      "path": "inbox/Development/_png/79c54156ad56b2334e5ce1095e4b89a2.png"
-    },
-    {
-      "basename": "078da972bb18d070a02aaaf5cfd97138",
-      "path": "inbox/Development/_png/078da972bb18d070a02aaaf5cfd97138.png"
-    },
-    {
-      "basename": "44c9fbfe01dd24de1df73c1d8753bc88",
-      "path": "inbox/Development/_png/44c9fbfe01dd24de1df73c1d8753bc88.png"
-    },
-    {
-      "basename": "40ec4a2b1d47c5b420a0add8526ced84",
-      "path": "inbox/Development/_png/40ec4a2b1d47c5b420a0add8526ced84.png"
-    },
-    {
-      "basename": "8ceb92db064802f2d157a74281d665f0",
-      "path": "inbox/Development/_png/8ceb92db064802f2d157a74281d665f0.png"
-    },
-    {
-      "basename": "7d620c9751f2694cf8ed3af5fcc7c08f",
-      "path": "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png"
-    },
-    {
-      "basename": "5ccce3ac5447c49f786726c4f62fc552",
-      "path": "inbox/Development/_png/5ccce3ac5447c49f786726c4f62fc552.png"
-    },
-    {
-      "basename": "4b10cbb17dcec923071a5a0cf01ec7c7",
-      "path": "inbox/Development/_png/4b10cbb17dcec923071a5a0cf01ec7c7.png"
-    },
-    {
-      "basename": "3bd0087e86fd290b77ff3816f5a77a30",
-      "path": "inbox/Development/_png/3bd0087e86fd290b77ff3816f5a77a30.png"
-    },
-    {
-      "basename": "MobX",
-      "path": "frontend/State Managers/MobX.md"
-    },
-    {
-      "basename": "Zustand",
-      "path": "frontend/State Managers/Zustand.md"
     }
   ],
   "omittedPaths": [],

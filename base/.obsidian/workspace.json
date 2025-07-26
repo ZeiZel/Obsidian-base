@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "agile/agile.md",
-                "mode": "source",
+                "file": "index.md",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "agile"
+              "title": "index"
             }
           }
         ]
@@ -211,13 +211,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/agile.md",
+                "file": "index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of agile"
+              "title": "Outline of index"
             }
           }
         ]
@@ -245,19 +245,34 @@
   },
   "active": "70b94462b957ed5a",
   "lastOpenFiles": [
+    "devops/docker/Docker + Ansible.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "index.md",
+    "tools/tools.md",
+    "inbox/inbox.md",
+    "tools/Untitled.md",
+    "testing/testing.md",
+    "obsidian/obsidian.md",
+    "mobile/mobile.md",
+    "frontend/frontend.md",
+    "edge/edge.md",
+    "backend/backend.md",
+    "cs/computer science.md",
+    "database/database.md",
+    "devops/docker/_png/Pasted image 20250601192606.png",
+    "desktop/desktop.md",
+    "design/Untitled.md",
+    "devops/devops.md",
+    "agile/agile.md",
     "design/DaVinci Resolve/Davinci resolve.md",
     "design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
     "design/design.md",
     "design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
-    "devops/Linux/OS/_lessons/Службы.md",
-    "devops/Linux/OS/_lessons/Структура Linux.md",
-    "devops/Linux/OS/_lessons/Особенности BASH.md",
-    "devops/Linux/OS/_lessons/Доступ и права.md",
-    "devops/Linux/OS/_lessons/Введение.md",
-    "devops/Linux/Bash/_png/Pasted image 20250723185324.png",
-    "devops/Linux/OS/OS.md",
-    "devops/Docker + Ansible/Docker + Ansible.md",
-    "agile/agile.md",
+    "devops/linux/OS/_lessons/Службы.md",
+    "devops/linux/OS/_lessons/Структура Linux.md",
+    "devops/linux/OS/_lessons/Особенности BASH.md",
+    "devops/linux/OS/_lessons/Доступ и права.md",
+    "devops/linux/Bash/_png/Pasted image 20250723185324.png",
     "inbox/Development/_png/Pasted image 20240902093107.png",
     "inbox/Development/_png/Pasted image 20240724205149.png",
     "inbox/Development/_png/Pasted image 20240724203233.png",
@@ -266,21 +281,6 @@
     "inbox/Development/_png/Pasted image 20221105125402.png",
     "inbox/Development/_png/Pasted image 20221030173908.png",
     "inbox/Development/_png/Pasted image 20221030140917.png",
-    "inbox/Development/_png/Pasted image 20221030135625.png",
-    "frontend/State Managers/MobX.md",
-    "frontend/State Managers/Zustand.md",
-    "frontend/JavaScript/_lessons/22 – Промисы.md",
-    "frontend/JavaScript/JavaScript.md",
-    "frontend/JavaScript/_lessons/02 - Самое важное в JavaScript и console.log.md",
-    "frontend/React/Практический JS.md",
-    "frontend/React/React Query.md",
-    "frontend/RxJS.md",
-    "frontend/JavaScript/_lessons/10 - Оператор разделения на свойства.md",
-    "frontend/Angular/Angular.md",
-    "frontend/NextJS/React + Next.js - с нуля.md",
-    "frontend/NextJS/_lessons/12 Контекст.md",
-    "tools/TMUX.md",
-    "testing/Тестирование JavaScript.md",
     "edge/_png",
     "devops/_png",
     "cs",
