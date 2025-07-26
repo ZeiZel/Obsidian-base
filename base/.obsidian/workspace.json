@@ -13,8 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "frontend/PWA.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "PWA"
+            }
+          }
+        ]
+      },
+      {
+        "id": "96e83e40aab6ecfb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3c69fba2e9afe0d6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "index.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -98,7 +128,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 445.51103591918945
+    "width": 303.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -220,11 +250,12 @@
               "title": "Outline of index"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 670.5
+    "width": 298.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -243,35 +274,38 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "70b94462b957ed5a",
+  "active": "3c69fba2e9afe0d6",
   "lastOpenFiles": [
+    "frontend/PWA.md",
+    "index.md",
+    "backend/Microservices/Паттерны и практика построения микросервисов.md",
+    "Whats Learning/О чём база~.md",
+    "Whats Learning/_lessons/Микросервисная архитектура.md",
+    "Whats Learning/_lessons/PWA.md",
+    "Whats Learning/_lessons/Тестирование.md",
+    "Whats Learning/_lessons/Serverless.md",
+    "Whats Learning/_lessons/Концепты.md",
+    "Whats Learning/_lessons/ORM-системы.md",
+    "Whats Learning/_lessons/Базы Данных.md",
+    "Whats Learning/_lessons/Backend.md",
+    "Whats Learning/_lessons/Паттерны.md",
+    "Whats Learning/_lessons/Основные принципы в программировании.md",
+    "Whats Learning/_lessons/TypeScritpt.md",
+    "Whats Learning/_lessons/SSR.md",
+    "Whats Learning/_lessons/FrontEnd.md",
+    "Whats Learning/_lessons/Инструменты.md",
+    "Whats Learning/_lessons/JavaScript.md",
+    "_png",
+    "_png/7aa96c5de3ede9b2f06afffc82a22803.png",
+    "Whats Learning/Прогресс изучения технологий.md",
+    "Whats Learning/_lessons/Основы HTML + CSS.md",
+    "RoadMap/RoadMap.md",
+    "RoadMap",
     "devops/docker/Docker + Ansible.md",
     "devops/kubernetes/Kubernetes + Helm.md",
-    "index.md",
     "tools/tools.md",
     "inbox/inbox.md",
-    "tools/Untitled.md",
-    "testing/testing.md",
-    "obsidian/obsidian.md",
-    "mobile/mobile.md",
-    "frontend/frontend.md",
-    "edge/edge.md",
-    "backend/backend.md",
-    "cs/computer science.md",
-    "database/database.md",
     "devops/docker/_png/Pasted image 20250601192606.png",
-    "desktop/desktop.md",
-    "design/Untitled.md",
-    "devops/devops.md",
-    "agile/agile.md",
-    "design/DaVinci Resolve/Davinci resolve.md",
-    "design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md",
-    "design/design.md",
-    "design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md",
-    "devops/linux/OS/_lessons/Службы.md",
-    "devops/linux/OS/_lessons/Структура Linux.md",
-    "devops/linux/OS/_lessons/Особенности BASH.md",
-    "devops/linux/OS/_lessons/Доступ и права.md",
     "devops/linux/Bash/_png/Pasted image 20250723185324.png",
     "inbox/Development/_png/Pasted image 20240902093107.png",
     "inbox/Development/_png/Pasted image 20240724205149.png",
@@ -280,7 +314,6 @@
     "inbox/Development/_png/Pasted image 20221220162447.png",
     "inbox/Development/_png/Pasted image 20221105125402.png",
     "inbox/Development/_png/Pasted image 20221030173908.png",
-    "inbox/Development/_png/Pasted image 20221030140917.png",
     "edge/_png",
     "devops/_png",
     "cs",
@@ -288,8 +321,6 @@
     "frontend",
     "devops",
     "backend",
-    "tools/_png",
-    "database/_png",
-    "database"
+    "tools/_png"
   ]
 }

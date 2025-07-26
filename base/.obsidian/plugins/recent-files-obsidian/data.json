@@ -5,6 +5,22 @@
       "path": "index.md"
     },
     {
+      "basename": "PWA",
+      "path": "frontend/PWA.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "backend/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "7aa96c5de3ede9b2f06afffc82a22803",
+      "path": "_png/7aa96c5de3ede9b2f06afffc82a22803.png"
+    },
+    {
+      "basename": "RoadMap",
+      "path": "RoadMap/RoadMap.md"
+    },
+    {
       "basename": "Docker + Ansible",
       "path": "devops/docker/Docker + Ansible.md"
     },
@@ -123,82 +139,6 @@
     {
       "basename": "Pasted image 20240724203233",
       "path": "inbox/Development/_png/Pasted image 20240724203233.png"
-    },
-    {
-      "basename": "Pasted image 20230329102800",
-      "path": "inbox/Development/_png/Pasted image 20230329102800.png"
-    },
-    {
-      "basename": "Pasted image 20221220162447",
-      "path": "inbox/Development/_png/Pasted image 20221220162447.png"
-    },
-    {
-      "basename": "Pasted image 20221105125402",
-      "path": "inbox/Development/_png/Pasted image 20221105125402.png"
-    },
-    {
-      "basename": "Pasted image 20221030173908",
-      "path": "inbox/Development/_png/Pasted image 20221030173908.png"
-    },
-    {
-      "basename": "Pasted image 20221030140917",
-      "path": "inbox/Development/_png/Pasted image 20221030140917.png"
-    },
-    {
-      "basename": "Pasted image 20221030135625",
-      "path": "inbox/Development/_png/Pasted image 20221030135625.png"
-    },
-    {
-      "basename": "Pasted image 20221030135401",
-      "path": "inbox/Development/_png/Pasted image 20221030135401.png"
-    },
-    {
-      "basename": "Pasted image 20221030134841",
-      "path": "inbox/Development/_png/Pasted image 20221030134841.png"
-    },
-    {
-      "basename": "f0aca7c4a0cadeb48cd75618b45444a3",
-      "path": "inbox/Development/_png/f0aca7c4a0cadeb48cd75618b45444a3.png"
-    },
-    {
-      "basename": "ee50cc71bd2566bdf9123147b99507ec",
-      "path": "inbox/Development/_png/ee50cc71bd2566bdf9123147b99507ec.png"
-    },
-    {
-      "basename": "ece4dc3828b7b8ac951d741061545b8a",
-      "path": "inbox/Development/_png/ece4dc3828b7b8ac951d741061545b8a.png"
-    },
-    {
-      "basename": "dd9d0122c4a8822baa276e17be142eea",
-      "path": "inbox/Development/_png/dd9d0122c4a8822baa276e17be142eea.png"
-    },
-    {
-      "basename": "d56eaf83f75b9d7aafda8949cad10ddf",
-      "path": "inbox/Development/_png/d56eaf83f75b9d7aafda8949cad10ddf.png"
-    },
-    {
-      "basename": "d4c0544655755686e05a75591a4bc4c8",
-      "path": "inbox/Development/_png/d4c0544655755686e05a75591a4bc4c8.png"
-    },
-    {
-      "basename": "b736ed279084211d1063b469caa31d5b",
-      "path": "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png"
-    },
-    {
-      "basename": "b22db5b693ec05eb4371f961f914bff5",
-      "path": "inbox/Development/_png/b22db5b693ec05eb4371f961f914bff5.png"
-    },
-    {
-      "basename": "aed807ee2fcd10ec07b3c1971c6b7d4f",
-      "path": "inbox/Development/_png/aed807ee2fcd10ec07b3c1971c6b7d4f.png"
-    },
-    {
-      "basename": "a596f136434d3dfbf62cb640b8f444ed",
-      "path": "inbox/Development/_png/a596f136434d3dfbf62cb640b8f444ed.png"
-    },
-    {
-      "basename": "9800284ad13b11c18bfc3c1866c175f2",
-      "path": "inbox/Development/_png/9800284ad13b11c18bfc3c1866c175f2.png"
     }
   ],
   "omittedPaths": [],
