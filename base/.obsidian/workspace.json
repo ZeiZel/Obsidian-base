@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "frontend/RxJS.md",
+                "file": "agile/agile.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "RxJS"
+              "title": "agile"
             }
           }
         ]
@@ -211,13 +211,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "frontend/RxJS.md",
+                "file": "agile/agile.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of RxJS"
+              "title": "Outline of agile"
             }
           }
         ],
@@ -246,9 +246,25 @@
   },
   "active": "70b94462b957ed5a",
   "lastOpenFiles": [
-    "frontend/State Managers/Zustand.md",
+    "inbox/Development/_png/Pasted image 20240902093107.png",
+    "inbox/Development/_png/Pasted image 20240724205149.png",
+    "inbox/Development/_png/Pasted image 20240724203233.png",
+    "inbox/Development/_png/Pasted image 20230329102800.png",
+    "inbox/Development/_png/Pasted image 20221220162447.png",
+    "inbox/Development/_png/Pasted image 20221105125402.png",
+    "inbox/Development/_png/Pasted image 20221030173908.png",
+    "inbox/Development/_png/Pasted image 20221030140917.png",
+    "inbox/Development/_png/Pasted image 20221030135625.png",
+    "inbox/Development/_png/Pasted image 20221030135401.png",
+    "inbox/Development/_png/Pasted image 20221030134841.png",
     "frontend/State Managers/MobX.md",
+    "frontend/State Managers/Zustand.md",
+    "frontend/JavaScript/_lessons/22 – Промисы.md",
     "frontend/JavaScript/JavaScript.md",
+    "frontend/JavaScript/_lessons/02 - Самое важное в JavaScript и console.log.md",
+    "frontend/React/Практический JS.md",
+    "frontend/React/React Query.md",
+    "frontend/RxJS.md",
     "frontend/JavaScript/_lessons/10 - Оператор разделения на свойства.md",
     "frontend/Angular/Angular.md",
     "frontend/NextJS/React + Next.js - с нуля.md",
@@ -266,22 +282,6 @@
     "devops/Docker + Ansible/Docker + Ansible.md",
     "devops/Kubernetes + Helm/Kubernetes + Helm.md",
     "edge/Инструменты/Prettier.md",
-    "edge/Инструменты/VSCode.md",
-    "edge/Инструменты/NX.md",
-    "edge/Инструменты/Bun.md",
-    "edge/Инструменты/Gulp.md",
-    "Whats Learning/Прогресс изучения технологий.md",
-    "Whats Learning/О чём база~.md",
-    "Whats Learning/_png/Pasted image 20240828103634.png",
-    "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png",
-    "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png",
-    "inbox/Development/_png/Pasted image 20221030141236.png",
-    "inbox/Development/_png/Pasted image 20221105125402.png",
-    "inbox/Development/_png/Pasted image 20221223185309.png",
-    "inbox/Development/_png/Pasted image 20240724204850.png",
-    "inbox/Development/_png/Pasted image 20240724203233.png",
-    "inbox/Development/_png/Pasted image 20230605120613.png",
-    "inbox/Development/_png/Pasted image 20230530140014.png",
     "edge/_png",
     "devops/_png",
     "cs",

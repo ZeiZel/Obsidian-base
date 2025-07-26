@@ -1,20 +1,180 @@
 {
   "recentFiles": [
     {
-      "basename": "RxJS",
-      "path": "frontend/RxJS.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
-      "basename": "Zustand",
-      "path": "frontend/State Managers/Zustand.md"
+      "basename": "Pasted image 20240902093107",
+      "path": "inbox/Development/_png/Pasted image 20240902093107.png"
+    },
+    {
+      "basename": "Pasted image 20240724205149",
+      "path": "inbox/Development/_png/Pasted image 20240724205149.png"
+    },
+    {
+      "basename": "Pasted image 20240724203233",
+      "path": "inbox/Development/_png/Pasted image 20240724203233.png"
+    },
+    {
+      "basename": "Pasted image 20230329102800",
+      "path": "inbox/Development/_png/Pasted image 20230329102800.png"
+    },
+    {
+      "basename": "Pasted image 20221220162447",
+      "path": "inbox/Development/_png/Pasted image 20221220162447.png"
+    },
+    {
+      "basename": "Pasted image 20221105125402",
+      "path": "inbox/Development/_png/Pasted image 20221105125402.png"
+    },
+    {
+      "basename": "Pasted image 20221030173908",
+      "path": "inbox/Development/_png/Pasted image 20221030173908.png"
+    },
+    {
+      "basename": "Pasted image 20221030140917",
+      "path": "inbox/Development/_png/Pasted image 20221030140917.png"
+    },
+    {
+      "basename": "Pasted image 20221030135625",
+      "path": "inbox/Development/_png/Pasted image 20221030135625.png"
+    },
+    {
+      "basename": "Pasted image 20221030135401",
+      "path": "inbox/Development/_png/Pasted image 20221030135401.png"
+    },
+    {
+      "basename": "Pasted image 20221030134841",
+      "path": "inbox/Development/_png/Pasted image 20221030134841.png"
+    },
+    {
+      "basename": "f0aca7c4a0cadeb48cd75618b45444a3",
+      "path": "inbox/Development/_png/f0aca7c4a0cadeb48cd75618b45444a3.png"
+    },
+    {
+      "basename": "ee50cc71bd2566bdf9123147b99507ec",
+      "path": "inbox/Development/_png/ee50cc71bd2566bdf9123147b99507ec.png"
+    },
+    {
+      "basename": "ece4dc3828b7b8ac951d741061545b8a",
+      "path": "inbox/Development/_png/ece4dc3828b7b8ac951d741061545b8a.png"
+    },
+    {
+      "basename": "dd9d0122c4a8822baa276e17be142eea",
+      "path": "inbox/Development/_png/dd9d0122c4a8822baa276e17be142eea.png"
+    },
+    {
+      "basename": "d56eaf83f75b9d7aafda8949cad10ddf",
+      "path": "inbox/Development/_png/d56eaf83f75b9d7aafda8949cad10ddf.png"
+    },
+    {
+      "basename": "d4c0544655755686e05a75591a4bc4c8",
+      "path": "inbox/Development/_png/d4c0544655755686e05a75591a4bc4c8.png"
+    },
+    {
+      "basename": "b736ed279084211d1063b469caa31d5b",
+      "path": "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png"
+    },
+    {
+      "basename": "b22db5b693ec05eb4371f961f914bff5",
+      "path": "inbox/Development/_png/b22db5b693ec05eb4371f961f914bff5.png"
+    },
+    {
+      "basename": "aed807ee2fcd10ec07b3c1971c6b7d4f",
+      "path": "inbox/Development/_png/aed807ee2fcd10ec07b3c1971c6b7d4f.png"
+    },
+    {
+      "basename": "a596f136434d3dfbf62cb640b8f444ed",
+      "path": "inbox/Development/_png/a596f136434d3dfbf62cb640b8f444ed.png"
+    },
+    {
+      "basename": "9800284ad13b11c18bfc3c1866c175f2",
+      "path": "inbox/Development/_png/9800284ad13b11c18bfc3c1866c175f2.png"
+    },
+    {
+      "basename": "53233c6f85c1386db27cae12c808eb15",
+      "path": "inbox/Development/_png/53233c6f85c1386db27cae12c808eb15.png"
+    },
+    {
+      "basename": "5464a484976f5df07f5e3f56c225f327",
+      "path": "inbox/Development/_png/5464a484976f5df07f5e3f56c225f327.png"
+    },
+    {
+      "basename": "2070ba0e3694221a75607e9cce03f47b",
+      "path": "inbox/Development/_png/2070ba0e3694221a75607e9cce03f47b.png"
+    },
+    {
+      "basename": "91f9d7e1da33da27780edcc06017aee1",
+      "path": "inbox/Development/_png/91f9d7e1da33da27780edcc06017aee1.png"
+    },
+    {
+      "basename": "79c54156ad56b2334e5ce1095e4b89a2",
+      "path": "inbox/Development/_png/79c54156ad56b2334e5ce1095e4b89a2.png"
+    },
+    {
+      "basename": "078da972bb18d070a02aaaf5cfd97138",
+      "path": "inbox/Development/_png/078da972bb18d070a02aaaf5cfd97138.png"
+    },
+    {
+      "basename": "44c9fbfe01dd24de1df73c1d8753bc88",
+      "path": "inbox/Development/_png/44c9fbfe01dd24de1df73c1d8753bc88.png"
+    },
+    {
+      "basename": "40ec4a2b1d47c5b420a0add8526ced84",
+      "path": "inbox/Development/_png/40ec4a2b1d47c5b420a0add8526ced84.png"
+    },
+    {
+      "basename": "8ceb92db064802f2d157a74281d665f0",
+      "path": "inbox/Development/_png/8ceb92db064802f2d157a74281d665f0.png"
+    },
+    {
+      "basename": "7d620c9751f2694cf8ed3af5fcc7c08f",
+      "path": "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png"
+    },
+    {
+      "basename": "5ccce3ac5447c49f786726c4f62fc552",
+      "path": "inbox/Development/_png/5ccce3ac5447c49f786726c4f62fc552.png"
+    },
+    {
+      "basename": "4b10cbb17dcec923071a5a0cf01ec7c7",
+      "path": "inbox/Development/_png/4b10cbb17dcec923071a5a0cf01ec7c7.png"
+    },
+    {
+      "basename": "3bd0087e86fd290b77ff3816f5a77a30",
+      "path": "inbox/Development/_png/3bd0087e86fd290b77ff3816f5a77a30.png"
     },
     {
       "basename": "MobX",
       "path": "frontend/State Managers/MobX.md"
     },
     {
+      "basename": "Zustand",
+      "path": "frontend/State Managers/Zustand.md"
+    },
+    {
+      "basename": "22 – Промисы",
+      "path": "frontend/JavaScript/_lessons/22 – Промисы.md"
+    },
+    {
       "basename": "JavaScript",
       "path": "frontend/JavaScript/JavaScript.md"
+    },
+    {
+      "basename": "02 - Самое важное в JavaScript и console.log",
+      "path": "frontend/JavaScript/_lessons/02 - Самое важное в JavaScript и console.log.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "React Query",
+      "path": "frontend/React/React Query.md"
+    },
+    {
+      "basename": "RxJS",
+      "path": "frontend/RxJS.md"
     },
     {
       "basename": "10 - Оператор разделения на свойства",
@@ -39,166 +199,6 @@
     {
       "basename": "Тестирование JavaScript",
       "path": "testing/Тестирование JavaScript.md"
-    },
-    {
-      "basename": "REST API",
-      "path": "edge/REST API.md"
-    },
-    {
-      "basename": "WebSocket",
-      "path": "edge/Клиент-сервер/WebSocket.md"
-    },
-    {
-      "basename": "REST API",
-      "path": "edge/Клиент-сервер/REST API.md"
-    },
-    {
-      "basename": "RPC (gRPC, tRPC)",
-      "path": "edge/Клиент-сервер/RPC (gRPC, tRPC).md"
-    },
-    {
-      "basename": "Apollo + GraphQL",
-      "path": "edge/Клиент-сервер/Apollo + GraphQL.md"
-    },
-    {
-      "basename": "Real-time клиент-серверное взаимодействие",
-      "path": "edge/Клиент-сервер/Real-time клиент-серверное взаимодействие.md"
-    },
-    {
-      "basename": "CI-CD",
-      "path": "devops/CI-CD.md"
-    },
-    {
-      "basename": "NGINX",
-      "path": "devops/NGINX.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/Docker + Ansible/Docker + Ansible.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/Kubernetes + Helm/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Prettier",
-      "path": "edge/Инструменты/Prettier.md"
-    },
-    {
-      "basename": "VSCode",
-      "path": "edge/Инструменты/VSCode.md"
-    },
-    {
-      "basename": "NX",
-      "path": "edge/Инструменты/NX.md"
-    },
-    {
-      "basename": "Bun",
-      "path": "edge/Инструменты/Bun.md"
-    },
-    {
-      "basename": "Прогресс изучения технологий",
-      "path": "Whats Learning/Прогресс изучения технологий.md"
-    },
-    {
-      "basename": "О чём база~",
-      "path": "Whats Learning/О чём база~.md"
-    },
-    {
-      "basename": "Pasted image 20240828103634",
-      "path": "Whats Learning/_png/Pasted image 20240828103634.png"
-    },
-    {
-      "basename": "Yazi",
-      "path": "tools/Yazi.md"
-    },
-    {
-      "basename": "tools",
-      "path": "tools/tools.md"
-    },
-    {
-      "basename": "Terminal",
-      "path": "tools/Terminal.md"
-    },
-    {
-      "basename": "React Native",
-      "path": "mobile/React Native/React Native.md"
-    },
-    {
-      "basename": "7d620c9751f2694cf8ed3af5fcc7c08f",
-      "path": "inbox/Development/_png/7d620c9751f2694cf8ed3af5fcc7c08f.png"
-    },
-    {
-      "basename": "b736ed279084211d1063b469caa31d5b",
-      "path": "inbox/Development/_png/b736ed279084211d1063b469caa31d5b.png"
-    },
-    {
-      "basename": "Pasted image 20221030141236",
-      "path": "inbox/Development/_png/Pasted image 20221030141236.png"
-    },
-    {
-      "basename": "Pasted image 20221105125402",
-      "path": "inbox/Development/_png/Pasted image 20221105125402.png"
-    },
-    {
-      "basename": "Pasted image 20221223185309",
-      "path": "inbox/Development/_png/Pasted image 20221223185309.png"
-    },
-    {
-      "basename": "Pasted image 20240724204850",
-      "path": "inbox/Development/_png/Pasted image 20240724204850.png"
-    },
-    {
-      "basename": "Pasted image 20240724203233",
-      "path": "inbox/Development/_png/Pasted image 20240724203233.png"
-    },
-    {
-      "basename": "Pasted image 20230605120613",
-      "path": "inbox/Development/_png/Pasted image 20230605120613.png"
-    },
-    {
-      "basename": "Pasted image 20230530140014",
-      "path": "inbox/Development/_png/Pasted image 20230530140014.png"
-    },
-    {
-      "basename": "Pasted image 20230221093147",
-      "path": "inbox/Development/_png/Pasted image 20230221093147.png"
-    },
-    {
-      "basename": "Pasted image 20221105104741",
-      "path": "inbox/Development/_png/Pasted image 20221105104741.png"
-    },
-    {
-      "basename": "Создание Electron приложения с другими технологиями",
-      "path": "desktop/Electron/_lessons/Создание Electron приложения с другими технологиями.md"
-    },
-    {
-      "basename": "ElectronJS",
-      "path": "desktop/Electron/ElectronJS.md"
-    },
-    {
-      "basename": "Pasted image 20221030140411",
-      "path": "inbox/Development/_png/Pasted image 20221030140411.png"
-    },
-    {
-      "basename": "Pasted image 20221030173908",
-      "path": "inbox/Development/_png/Pasted image 20221030173908.png"
-    },
-    {
-      "basename": "PNPM",
-      "path": "edge/Инструменты/PNPM.md"
-    },
-    {
-      "basename": "ESBuild",
-      "path": "edge/Инструменты/ESBuild.md"
-    },
-    {
-      "basename": "RegExp",
-      "path": "cs/RegExp.md"
-    },
-    {
-      "basename": "Bash",
-      "path": "devops/Linux/Bash/Bash.md"
     }
   ],
   "omittedPaths": [],
