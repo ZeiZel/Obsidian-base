@@ -60,191 +60,77 @@ description: Base homepage.
 
 Пройтись по паку занний [отсюда](https://code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf) и нафильтровать нужного
 
-- Основы HTML + CSS
-- Javascript / Typescript
-- Инструменты
-- Frontend
-- SSR
-- Backend
-- Базы данных
-- ORM
-- Архитектура
+- [Основы HTML + CSS](frontend/Базовая%20вёрстка/Вёрстка%20Basic.md)
+	- HTML
+	- CSS / SASS / LESS / STYLYS
+		- FlexBox
+		- Grid
+		- container queries
+		- mediaqueries
+		- animations
+		- position
+	- Bootstrap
+	- Materialize CSS
+	- BEM
+	- Pug
+	- [Tailwind CSS](frontend/Tailwind%20CSS.md)
+- [JavaScript](frontend/JavaScript/JavaScript.md)
+	- Language Basics
+	- Dom
+	- Замыкания
+	- Типы функций
+		- arrow functions
+		- 
+	- Promises / async-await
+	- Event loop
+	- Prototype
+	- Array
+	- Classes
+	- Fetch
+	- Proxy
+	- Observables
+	- Events
+- [TypeScript](edge/TypeScript/TypeScript.md)
+- [Инструменты](edge/edge.md)
+	- Webpack
+	- RSPack
+	- ESBuild
+	- Parcel
+	- Snowpack
+	- Git, Npm, Yarn
+	- Github, Gitlab, Bitbucket
+- [Frontend](frontend/frontend.md)
+	- React / NextJS
+		- Redux
+		- [MobX](frontend/State%20Managers/MobX.md)
+	- Vue / Nuxt
+		- Pinia
+	- Angular
+		- NgRx
+		- RxJS
+	- Svelte / SvelteKit
+	- [SSR](frontend/SSR.md)
+	- [PWA](frontend/PWA.md)
+	- [Микрофронтенды](frontend/microfrontends.md)
+- [Backend](backend/backend.md)
+	- [Безбэкендный подход](backend/serverless.md)
+	- [Микросервисы](backend/Microservices/Паттерны%20и%20практика%20построения%20микросервисов.md)
+- [Базы данных](database/database.md)
+	- SQL
+		- [SQLite](database/SQLite.md)
+		- [PostgreSQL](database/PostgreSQL.md)
+	- NoSQL
+		- [Mongo DB](database/Mongo%20DB.md)
+	- Caching
+		- [Redis](database/Redis.md)
+		- [Valkey](database/Valkey.md)
+	- ORM
+		- [Prisma ORM](database/Prisma%20ORM.md)
+- [Архитектура](architecture/architecture.md)
+	- ООП
 	- Паттерны
 	- SOLID
 	- DRY
 	- KISS
-- Концепты
-- Serverless
-- Тестирование
-- 
-- Микросервисы
-- Микрофронтенды
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Основы HTML + CSS
-
-#HTML #CSS #Pug #SASS #SCSS #Bootstrap #Tailwind #Materialize #BEM #Adaptive #FlexBox #CSSGrid #Float
-
-**HTML**: структура страницы, семантика, формы, эммет
-
-**CSS**: селекторы, box model, flexbox, grid, позиционирование, псевдоэлементы, медиазапросы, анимации
-
-**Дополнительно к разметке**: препроцессоры (SASS), Bootstrap (это фреймворк для CSS, который был разработан в фейсбук), Materialize CSS (разработан в гугл для материал-дизайна), Tailwind CSS (огромная библиотека заранее подготовленных классов), BEM (яндекс-стайл наименования классов)
-
-Материал:
-[Вёрстка Basic](frontend/Базовая%20вёрстка/Вёрстка%20Basic.md)
-[Вёрстка PRO](../../Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка%20PRO/Вёрстка%20PRO.md)
-[Pug](../../Development/FrontEnd/HTML+CSS__Git+NPM/PUG/Pug.md)
-[Tailwind CSS](frontend/Tailwind%20CSS.md)
-
-## **JavaScript**
-#JavaScript 
-
-![](_png/e5c9a4807fbc554141383572047d9ffd.png)
-
-Материал:
-[JS - Basics](frontend/JavaScript/JavaScript.md)
-[Практический JS](frontend/React/Практический%20JS.md)
-[Senior JS](../../Development/FrontEnd/Владилен%20Минин%20-%20JavaScript.%20Стань%20Senior%20Frontend%20Разработчиком%20(2020)/Senior%20JS.md)
-
-## **Инструменты**
-#Tools #Git #GitHub #Gitbucket #Gitlab #Webpack #Parcel #Snowpack #Npm #yarn
-
-Если говорить про сборщики проектов, то лучше использовать вебпак. Сноупак является достаточно перспективным сборщиком
-![](_png/29c20746c808d1131e5b35d8854bf886.png)
-
-Материал:
-[Git и GitHub - основные команды](../../Development/FrontEnd/HTML+CSS__Git+NPM/Вёрстка%20PRO/Глава%202.%20Git%20и%20GitHub/Git%20и%20GitHub.md)
-[Webpack - Полный курс](edge/Инструменты/Webpack.md)
-[Docker - Полный курс Docker](../../Development/DevOps/Полный%20курс%20Docker/Docker%20-%20Полный%20курс%20Docker.md)
-
-## **FrontEnd**
-#React #Angular #Vue #Svelte #Redux #Mobx #Vuex #NgRx #ContextAPI #FrontEnd #Framework
-
-Учить какой-либо из фреймворков - обязательно. Так же к ним в придачу учим технологию для определения состояний
-![](_png/482236cf39a3649276563bebc277261f.png)
-
-Материал:
-[Практический JS - часть по React (+Redux)](frontend/React/Практический%20JS.md)
-[Типизация TypeScript в React, Redux Toolkit](../../Development/TypeScript/_lessons/Типизация%20TypeScript%20в%20React,%20Redux%20Toolkit.md)
-
-## **SSR**
-#NextJS #NuxtJS #AngularUniversal #Sapper
-
-**Server-***side** **rendering** – эта технология позволяет изначально генерировать определённую структуру страницы на сервере. Дело в том, что SPA сайты не парсятся роботом поисковиков, поэтому отпадает СЕО-оптимизация. Для исправления этой ситуации используют ССР технологии, чтобы генерировался HTML-код на сервере и выдавался пользователю
-![](_png/ed10608cb38c4fc6591bdbaa6d1b9611.png)
-
-Материалы:
-[React + Next.js - с нуля](frontend/NextJS/React%20+%20Next.js%20-%20с%20нуля.md)
-
-## **TypeScritpt**
-#TypeScript 
-
-TypeScript используют в основе своей для поддержания больших проектов в строго-типизируемом русле. Ангуляр был сразу написан на тайпскрипте
-![](_png/4e60c342f96ec2f11635064a52a24144.png)
-
-Материал:
-[TypeScript](edge/TypeScript/TypeScript.md)
-
-# ООП
-#OOP
-
-Самая используемая и продвинутая в мире методология написания легкорасширяемого и безопасного кода, которая состоит из нескольких парадигм
-![](_png/24c739265fe4b1a2b48ae64d6078d1ac.jpg)
-
-Материал:
-[Немного про ООП (by ExtremeCode)](cs/ООП/Великое%20ООП/Немного%20про%20ООП%20(by%20ExtremeCode).md)
-[ООП на простых примерах. Объектно-ориентированное программирование](cs/ООП/ООП%20в%20TypeScript/ООП%20на%20простых%20примерах.%20Объектно-ориентированное%20программирование.md)
-
-# Паттерны
-#Patterns #Singleton #Observer #SOLID #Builder #Factory #Strategy
-
-Шаблон **проектирования** или **паттерн** (англ. design **pattern**) в разработке программного обеспечения — повторяемая архитектурная конструкция, представляющая собой решение проблемы **проектирования** в рамках некоторого часто возникающего контекста. Обычно шаблон не является законченным образцом, который может быть прямо преобразован в код; это лишь пример решения задачи, который можно использовать в различных ситуациях.
-![](_png/9e0c9647da37efe54b0d2c7296b8f6d0.jpg)
-
-
-Материал:
-[SOLID принципы](cs/SOLID%20принципы.md)
-
-## **Backend**
-#NodeJS #Express #Deno #NestJS 
-
-**Deno.JS** – это язык от разработчиков ноды. Его основной целю при создании было исправить ошибки, которые были допущены при проектировании ноды
-![](_png/94c64ace59234aa8c00526f7c53abfa8.png)
-
-
-Материал:
-[Node.js - с нуля, основы и построение архитектуры приложений](backend/NodeJS/Node.js%20-%20с%20нуля,%20основы%20и%20построение%20архитектуры%20приложений.md)
-[Node JS. Практический курс.](../../Development/BackEnd%20-%20Node.JS%20+%20Express__Mongo,%20Graph,%20SQL/Владилен%20Минин%20-%20%20Node%20JS.%20Практический%20курс.%20(Mongo,%20GraphQL,%20MySQL,%20Express)%20(2020)/Node%20JS.%20Практический%20курс..md)
-
-## **Базы Данных**
-#PostgreSQL #SQL #MySQL #MongoDB #FireBase
-
-**PostreSQL** и **MySQL** выступают в качестве БД, которые построены на языке SQL. MongoDB же построен на файловом взаимодействии (JSON)
-![](_png/ee7a155b3569e54e25026818df742fd0.png)
-
-Материал:
-- [Mongo DB](database/Mongo%20DB.md)
-- [PostreSQL](../../Development/BackEnd/PostgreSQL/PostreSQL.md)
-
-## ORM
-
-#ORM #Prisma 
-
-ORM предоставляют разработчику интерфейс общения с базой данных на основе ввода запросов из языка с автоматической компиляцией этих запросов в SQL или в другой язык определённой базы 
-
-Материал:
-[Prisma ORM](database/Prisma%20ORM.md)
-
-## **Концепты**
-#GraphQL #RestAPI #HTTP #HTTPS
-
-**GraphQL** позволяет настроить вызов только тех данных с фронтэнда, которые нам нужны в данный момент. **Rest** **API** позволяет настроить клиент-серверное взаимодействие. **HTTP/***S** – это протокол, с который желательно понимать для работы с интернет-приложениями
-![](_png/70e2f598deb3ca472d54f5f7e452e86b.png)
-
-Материал: 
-[REST API](edge/REST%20API.md)
-
-## **Serverless**
-#FireBase #AWS #JAMstack #YandexCloud #Netlify
-
-Серверлеесс технология позволяет не покупать сервера для своего веб-приложения и не гадать, куда и сколько про запас понадобится оборудования. Данные технологии позволяют сократить количество затрат на крупные приложения (было 1000 запросов на сервер – заказчик заплатил только за них). Так же данные приложения забирают на себя часть сервиса и забот по бэкэнду и БД
-![](_png/adcd91c5775906b4f4f4b2266801dc7b.png)
-
-## **Тестирование**
-#Testing #Unit #Integrational #End2End #Jest #ReactTestingLibrary #Screenshot 
-
-Юнит-тестирование – тестирует отдельный функционал/класс
-
-Интеграциональное тестирование – тестирует целый модуль приложения
-
-End 2 end – тестирует использование приложения полностью
-![](_png/6e44be3b51db319506ba1653ddba6b95.png)
-
-Материал:
-[Тестирование JavaScript](testing/Тестирование%20JavaScript.md)
-
-## **PWA**
-#ServiceWorkers #Cashing
-
-Progressive Web Application. Эта технология позволяет эмулировать работу нативного приложения в браузере
-
-![](_png/6c002d1c935278b379ea1b74fbb330c2.png)
-
-
-
-
+- [Концепты](concepts/concepts.md)
+- [Тестирование](testing/Тестирование%20JavaScript.md)

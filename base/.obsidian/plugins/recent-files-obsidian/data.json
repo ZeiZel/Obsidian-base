@@ -5,8 +5,52 @@
       "path": "index.md"
     },
     {
+      "basename": "TypeScript",
+      "path": "edge/TypeScript/TypeScript.md"
+    },
+    {
+      "basename": "SSR",
+      "path": "frontend/SSR.md"
+    },
+    {
+      "basename": "backend",
+      "path": "backend/backend.md"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
+      "basename": "concepts",
+      "path": "concepts/concepts.md"
+    },
+    {
+      "basename": "SQLite",
+      "path": "database/SQLite.md"
+    },
+    {
+      "basename": "Valkey",
+      "path": "database/Valkey.md"
+    },
+    {
+      "basename": "architecture",
+      "path": "architecture/architecture.md"
+    },
+    {
+      "basename": "serverless",
+      "path": "backend/serverless.md"
+    },
+    {
+      "basename": "Тестирование JavaScript",
+      "path": "testing/Тестирование JavaScript.md"
+    },
+    {
       "basename": "PWA",
       "path": "frontend/PWA.md"
+    },
+    {
+      "basename": "microfrontends",
+      "path": "frontend/microfrontends.md"
     },
     {
       "basename": "Паттерны и практика построения микросервисов",
@@ -57,16 +101,8 @@
       "path": "edge/edge.md"
     },
     {
-      "basename": "backend",
-      "path": "backend/backend.md"
-    },
-    {
       "basename": "computer science",
       "path": "cs/computer science.md"
-    },
-    {
-      "basename": "database",
-      "path": "database/database.md"
     },
     {
       "basename": "Pasted image 20250601192606",

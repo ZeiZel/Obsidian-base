@@ -60,9 +60,9 @@
   "backend/Golang.md": "MiGo",
   "edge/TypeScript": "MiFolderTypescript",
   "frontend": "MiJs",
-  "edge/Клиент-сервер": "MiApiblueprint",
-  "edge/Клиент-сервер/Apollo + GraphQL.md": "MiApollo",
-  "edge/Клиент-сервер/REST API.md": "MiApiblueprint",
-  "edge/Клиент-сервер/RPC (gRPC, tRPC).md": "MiApiblueprint",
-  "edge/Клиент-сервер/WebSocket.md": "MiApiblueprint"
+  "concepts/Клиент-сервер": "MiApiblueprint",
+  "concepts/Клиент-сервер/Apollo + GraphQL.md": "MiApollo",
+  "concepts/Клиент-сервер/REST API.md": "MiApiblueprint",
+  "concepts/Клиент-сервер/RPC (gRPC, tRPC).md": "MiApiblueprint",
+  "concepts/Клиент-сервер/WebSocket.md": "MiApiblueprint"
 }

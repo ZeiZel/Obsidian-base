@@ -13,36 +13,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "frontend/PWA.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "PWA"
-            }
-          }
-        ]
-      },
-      {
-        "id": "96e83e40aab6ecfb",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "3c69fba2e9afe0d6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "index.md",
                 "mode": "source",
                 "source": false,
@@ -274,10 +244,23 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "3c69fba2e9afe0d6",
+  "active": "70b94462b957ed5a",
   "lastOpenFiles": [
-    "frontend/PWA.md",
+    "edge/TypeScript/TypeScript.md",
     "index.md",
+    "frontend/SSR.md",
+    "backend/backend.md",
+    "database/database.md",
+    "concepts/concepts.md",
+    "database/SQLite.md",
+    "database/Valkey.md",
+    "architecture/architecture.md",
+    "architecture",
+    "concepts",
+    "backend/serverless.md",
+    "testing/Тестирование JavaScript.md",
+    "frontend/PWA.md",
+    "frontend/microfrontends.md",
     "backend/Microservices/Паттерны и практика построения микросервисов.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_lessons/Микросервисная архитектура.md",
@@ -291,20 +274,9 @@
     "Whats Learning/_lessons/Паттерны.md",
     "Whats Learning/_lessons/Основные принципы в программировании.md",
     "Whats Learning/_lessons/TypeScritpt.md",
-    "Whats Learning/_lessons/SSR.md",
-    "Whats Learning/_lessons/FrontEnd.md",
-    "Whats Learning/_lessons/Инструменты.md",
-    "Whats Learning/_lessons/JavaScript.md",
     "_png",
     "_png/7aa96c5de3ede9b2f06afffc82a22803.png",
-    "Whats Learning/Прогресс изучения технологий.md",
-    "Whats Learning/_lessons/Основы HTML + CSS.md",
-    "RoadMap/RoadMap.md",
     "RoadMap",
-    "devops/docker/Docker + Ansible.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
-    "tools/tools.md",
-    "inbox/inbox.md",
     "devops/docker/_png/Pasted image 20250601192606.png",
     "devops/linux/Bash/_png/Pasted image 20250723185324.png",
     "inbox/Development/_png/Pasted image 20240902093107.png",
@@ -319,8 +291,6 @@
     "cs",
     "edge",
     "frontend",
-    "devops",
-    "backend",
-    "tools/_png"
+    "devops"
   ]
 }
