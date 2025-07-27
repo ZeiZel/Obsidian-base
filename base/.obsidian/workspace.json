@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "cs/Алгоритмы и Структуры даных.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Алгоритмы и Структуры даных"
             }
           }
         ]
@@ -186,9 +186,19 @@
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "abaf06a24855039e",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -211,13 +221,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "index.md",
+                "file": "cs/Алгоритмы и Структуры даных.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of Алгоритмы и Структуры даных"
             }
           }
         ],
@@ -225,7 +235,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 298.5
+    "width": 367.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -244,8 +254,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "70b94462b957ed5a",
+  "active": "abaf06a24855039e",
   "lastOpenFiles": [
+    "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
+    "cs/Алгоритмы и Структуры даных.md",
     "index.md",
     "edge/TypeScript/TypeScript.md",
     "frontend/SSR.md",
@@ -272,8 +284,6 @@
     "Whats Learning/_lessons/Базы Данных.md",
     "Whats Learning/_lessons/Backend.md",
     "Whats Learning/_lessons/Паттерны.md",
-    "Whats Learning/_lessons/Основные принципы в программировании.md",
-    "Whats Learning/_lessons/TypeScritpt.md",
     "_png",
     "_png/7aa96c5de3ede9b2f06afffc82a22803.png",
     "RoadMap",

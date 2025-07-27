@@ -73,14 +73,10 @@ description: Base homepage.
 	- Pug
 	- [Tailwind CSS](frontend/Tailwind%20CSS.md)
 - Computer Science
-	- Алгоритмы
-		- Сортировки
-		- Стек и очередь
-		- Хеш-таблицы
-		- Деревья, операции
-		- Сжатие данных
+	- [Алгоритмы и Структуры даных](cs/Алгоритмы%20и%20Структуры%20даных.md)
 	- Безопасность
-	- 
+	- [C](cs/C.md)
+	- [Python](cs/Python.md)
 - [JavaScript](frontend/JavaScript/JavaScript.md)
 	- Language Basics
 	- Dom
@@ -150,12 +146,6 @@ description: Base homepage.
 		- [Valkey](database/Valkey.md)
 	- ORM
 		- [Prisma ORM](database/Prisma%20ORM.md)
-- [Архитектура](architecture/architecture.md)
-	- ООП
-	- Паттерны
-	- SOLID
-	- DRY
-	- KISS
 - [Концепты](concepts/concepts.md)
 	- [REST API](concepts/REST%20API.md)
 	- GraphQL
@@ -172,3 +162,12 @@ description: Base homepage.
 	- Screenshot
 		- Storybook
 		- Loki
+- [Архитектура](architecture/architecture.md)
+	- Парадигмы
+		- Объектно-ориентированное программирование
+		- Структурное программирование
+		- Функциональное программирование
+	- Паттерны
+	- SOLID
+	- DRY
+	- KISS
