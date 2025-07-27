@@ -58,8 +58,6 @@ description: Base homepage.
 
 ## Прогресс изучения
 
-Пройтись по паку занний [отсюда](https://code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf) и нафильтровать нужного
-
 - [Основы HTML + CSS](frontend/Базовая%20вёрстка/Вёрстка%20Basic.md)
 	- HTML
 	- CSS / SASS / LESS / STYLYS
@@ -74,6 +72,15 @@ description: Base homepage.
 	- BEM
 	- Pug
 	- [Tailwind CSS](frontend/Tailwind%20CSS.md)
+- Computer Science
+	- Алгоритмы
+		- Сортировки
+		- Стек и очередь
+		- Хеш-таблицы
+		- Деревья, операции
+		- Сжатие данных
+	- Безопасность
+	- 
 - [JavaScript](frontend/JavaScript/JavaScript.md)
 	- Language Basics
 	- Dom
@@ -100,6 +107,8 @@ description: Base homepage.
 	- Git, Npm, Yarn
 	- Github, Gitlab, Bitbucket
 - [Frontend](frontend/frontend.md)
+	- Подходы
+		- Webhooks
 	- React / NextJS
 		- Redux
 		- [MobX](frontend/State%20Managers/MobX.md)
@@ -111,6 +120,21 @@ description: Base homepage.
 	- Svelte / SvelteKit
 	- [SSR](frontend/SSR.md)
 	- [PWA](frontend/PWA.md)
+		- Canvas
+		- WebGL + WebVR
+		- WebAuthn
+		- Service Workers
+		- Web Workers
+		- Fullscreen
+		- Perfomance
+		- Notification
+		- Geolocation
+		- Broadcast API
+		- Media
+		- Filesystem
+		- Gamepad
+		- Pointer Lock
+		- Ambient Light Events
 	- [Микрофронтенды](frontend/microfrontends.md)
 - [Backend](backend/backend.md)
 	- [Безбэкендный подход](backend/serverless.md)
@@ -133,4 +157,18 @@ description: Base homepage.
 	- DRY
 	- KISS
 - [Концепты](concepts/concepts.md)
+	- [REST API](concepts/REST%20API.md)
+	- GraphQL
+	- gRPC
+	- Brokers
 - [Тестирование](testing/Тестирование%20JavaScript.md)
+	- E2E
+		- Playwright
+		- Cypress
+	- Integration
+	- Unit
+		- Jest
+		- React-testing-library
+	- Screenshot
+		- Storybook
+		- Loki

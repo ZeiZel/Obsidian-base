@@ -32,26 +32,6 @@
             }
           }
         ]
-      },
-      {
-        "id": "a7c45141ddfebfb4",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "7f18f0b2543f4a73",
-            "type": "leaf",
-            "state": {
-              "type": "webviewer",
-              "state": {
-                "url": "https://code.s3.yandex.net/MiddleFrontend/syllabus/syllabus.pdf",
-                "title": "syllabus.pdf",
-                "mode": "webview"
-              },
-              "icon": "globe-2",
-              "title": "syllabus.pdf"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -231,12 +211,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of index"
             }
           }
         ],
@@ -263,7 +244,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "7f18f0b2543f4a73",
+  "active": "70b94462b957ed5a",
   "lastOpenFiles": [
     "index.md",
     "edge/TypeScript/TypeScript.md",
