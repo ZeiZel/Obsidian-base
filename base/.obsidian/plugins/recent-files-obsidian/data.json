@@ -1,6 +1,34 @@
 {
   "recentFiles": [
     {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "frontend",
+      "path": "frontend/frontend.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "frontend/React/React Foundamentals.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "DataGrip",
+      "path": "database/DataGrip.md"
+    },
+    {
+      "basename": "RegExp",
+      "path": "cs/RegExp.md"
+    },
+    {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
     },
@@ -73,14 +101,6 @@
       "path": "RoadMap/RoadMap.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
       "basename": "tools",
       "path": "tools/tools.md"
     },
@@ -99,10 +119,6 @@
     {
       "basename": "mobile",
       "path": "mobile/mobile.md"
-    },
-    {
-      "basename": "frontend",
-      "path": "frontend/frontend.md"
     },
     {
       "basename": "edge",

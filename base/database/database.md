@@ -28,7 +28,7 @@ ORM:
 #PostgreSQL #SQL #MySQL #MongoDB #FireBase
 
 **PostreSQL** и **MySQL** выступают в качестве БД, которые построены на языке SQL. MongoDB же построен на файловом взаимодействии (JSON)
-![](_png/ee7a155b3569e54e25026818df742fd0.png)
+![](../_png/ee7a155b3569e54e25026818df742fd0.png)
 ## ORM
 
 #ORM #Prisma 

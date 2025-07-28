@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Алгоритмы и Структуры даных"
+              "title": "Kubernetes + Helm"
             }
           }
         ]
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 303.51103591918945
+    "width": 571.5110359191895
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -231,21 +231,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Алгоритмы и Структуры даных"
+              "title": "Outline of Kubernetes + Helm"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 367.5
+    "width": 516.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -264,10 +263,16 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "90744df994a85d0b",
+  "active": "70b94462b957ed5a",
   "lastOpenFiles": [
-    "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
+    "devops/docker/Docker + Ansible.md",
+    "frontend/frontend.md",
+    "frontend/React/React Foundamentals.md",
+    "frontend/React/React + Redux.md",
+    "database/DataGrip.md",
+    "cs/RegExp.md",
     "cs/Алгоритмы и Структуры даных.md",
+    "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
     "index.md",
     "edge/TypeScript/TypeScript.md",
     "frontend/SSR.md",
@@ -288,12 +293,6 @@
     "Whats Learning/_lessons/Микросервисная архитектура.md",
     "Whats Learning/_lessons/PWA.md",
     "Whats Learning/_lessons/Тестирование.md",
-    "Whats Learning/_lessons/Serverless.md",
-    "Whats Learning/_lessons/Концепты.md",
-    "Whats Learning/_lessons/ORM-системы.md",
-    "Whats Learning/_lessons/Базы Данных.md",
-    "Whats Learning/_lessons/Backend.md",
-    "Whats Learning/_lessons/Паттерны.md",
     "_png",
     "_png/7aa96c5de3ede9b2f06afffc82a22803.png",
     "RoadMap",
