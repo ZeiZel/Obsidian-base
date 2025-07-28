@@ -1,12 +1,13 @@
+
 ---
 name: Deploy obsidian base
 on:
   # trigger automaticly on PUSH
-  # push:
-  #   branches: [main, master]
+  push:
+    branches: [main, master]
   workflow_dispatch:
 jobs:
-  build-and-test:
+  build-test-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,7 +23,7 @@ jobs:
         run: |
           git clone https://github.com/jackyzha0/quartz.git src
       - name: Copy obsidian content to quartz
-        run: cp -R ./base/* ./src/content/
+        run: cp -r ./base/* ./src/content/
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -35,32 +36,6 @@ jobs:
       - name: chmod
         run: chmod +x ./quartz/bootstrap-cli.mjs
         working-directory: ./src
-      - name: Ensure Quartz builds, check bundle info
-        run: npx quartz build --bundleInfo
-        working-directory: ./src
-  deploy:
-    needs: build-and-test
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Clone Quartz Repository
-        run: |
-          git clone https://github.com/jackyzha0/quartz.git src
-      - name: Copy obsidian content to quartz
-        run: cp -R ./base/* ./src/content/
       - name: Build Quartz
         run: |
           npm install
@@ -68,7 +43,7 @@ jobs:
         working-directory: ./src
       - name: Copy raw HTML folder
         run: |
-          cp -r raw_html/* public/
+          cp -r raw_html/* public/ || true
         working-directory: ./src
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v3
