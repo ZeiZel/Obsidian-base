@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/kubernetes/Kubernetes + Helm.md",
+                "file": "backend/NestJS/NestJS - с нуля.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
+              "title": "NestJS - с нуля"
             }
           }
         ]
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 571.5110359191895
+    "width": 275.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -231,20 +231,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/kubernetes/Kubernetes + Helm.md",
+                "file": "backend/NestJS/NestJS - с нуля.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Kubernetes + Helm"
+              "title": "Outline of NestJS - с нуля"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 516.5
+    "width": 313.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -265,6 +266,12 @@
   },
   "active": "70b94462b957ed5a",
   "lastOpenFiles": [
+    "_png/Pasted image 20250801210344.png",
+    "_png/Pasted image 20250801190250.png",
+    "_png/Pasted image 20250801190139.png",
+    "_png/Pasted image 20250801185812.png",
+    "_png/атмосферный звук моря и крики чаек.mp3",
+    "devops/kubernetes/Kubernetes + Helm.md",
     "devops/docker/Docker + Ansible.md",
     "frontend/frontend.md",
     "frontend/React/React Foundamentals.md",
@@ -291,8 +298,6 @@
     "backend/Microservices/Паттерны и практика построения микросервисов.md",
     "Whats Learning/О чём база~.md",
     "Whats Learning/_lessons/Микросервисная архитектура.md",
-    "Whats Learning/_lessons/PWA.md",
-    "Whats Learning/_lessons/Тестирование.md",
     "_png",
     "_png/7aa96c5de3ede9b2f06afffc82a22803.png",
     "RoadMap",
@@ -302,14 +307,10 @@
     "inbox/Development/_png/Pasted image 20240724205149.png",
     "inbox/Development/_png/Pasted image 20240724203233.png",
     "inbox/Development/_png/Pasted image 20230329102800.png",
-    "inbox/Development/_png/Pasted image 20221220162447.png",
-    "inbox/Development/_png/Pasted image 20221105125402.png",
-    "inbox/Development/_png/Pasted image 20221030173908.png",
     "edge/_png",
     "devops/_png",
     "cs",
     "edge",
-    "frontend",
-    "devops"
+    "frontend"
   ]
 }

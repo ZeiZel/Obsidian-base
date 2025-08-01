@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "NestJS - с нуля",
+      "path": "backend/NestJS/NestJS - с нуля.md"
+    },
+    {
+      "basename": "атмосферный звук моря и крики чаек",
+      "path": "_png/атмосферный звук моря и крики чаек.mp3"
+    },
+    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "Pasted image 20240902093107",
       "path": "inbox/Development/_png/Pasted image 20240902093107.png"
-    },
-    {
-      "basename": "Pasted image 20240724205149",
-      "path": "inbox/Development/_png/Pasted image 20240724205149.png"
-    },
-    {
-      "basename": "Pasted image 20240724203233",
-      "path": "inbox/Development/_png/Pasted image 20240724203233.png"
     }
   ],
   "omittedPaths": [],

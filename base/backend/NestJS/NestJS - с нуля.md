@@ -151,7 +151,7 @@ nest start
 }
 ```
 
-Тут используется TSLint вместо ESLint. Конфиг для тслинта:
+Пример старого конфига TSLint
 
 `tslint.json`
 ```JSON
@@ -201,6 +201,58 @@ nest start
 }
 ```
 
+Пример нового конфига ESLint
+
+`eslint.js`
+```JS
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: 'tsconfig.json',
+    tsconfigRootDir : __dirname, 
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint/eslint-plugin'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  root: true,
+  env: {
+    node: true,
+    jest: true,
+  },
+  ignorePatterns: ['.eslintrc.js'],
+  rules: {
+    "no-empty-function": "off",
+    "no-empty-pattern": "off",
+    "prettier/prettier": ["error",
+        {
+            "singleQuote": true,
+            "useTabs": true,
+            "semi": true,
+            "trailingComma": "all",
+            "bracketSpacing": true,
+            "printWidth": 100,
+            "endOfLine": "auto"
+        }
+    ],
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-empty-function": [
+        "off"
+    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-types": "off"
+  },
+};
+```
+
 Данная команда запустит сервер в режиме просмотра (перекомпиляции при изменениях)
 
 ```bash
@@ -224,12 +276,14 @@ npm run start:dev
 Модуль объединяет в себе различные зависимости одной области практического применения. 
 
 Декоратор модуля (`@Module`) принимает в себя данные значения:
-- `imports: []` - что импортируется в данный модуль
-- `controllers: []` - контроллеры данного модуля (позволяют с ним связаться извне / http-контроллеры запросов / принимают запрос от клиента и выполняют методы из сервиса, а так же выкидывают ошибки)
+- `imports: []` - импортируемые модули в данный сервис
+- `controllers: []` - контроллеры данного модуля для взаимодействия с приложением
 - `providers: []` - сервисы, репозитории (базы данных)
-- `exports: []` - что экспортируется из данного модуля
+- `exports: []` - экспортируемые модули
 
-Все данные передаются в декораторы, так как по декораторам строится дерево зависимостей в NestJS. Идя от корневого модуля до конечных вложенностей, фреймворк собирает все импорты, контроллеры, провайдеры и строит данное дерево.
+Идя от корневого модуля до конечных вложенностей, фреймворк собирает все импорты, контроллеры, провайдеры, которые мы описали в модулях, и строит дерево зависимостей. 
+
+Если модуль нигде не используется или не импортирован в дерево зависимостей, то он не будет задействован в приложении. 
 
 ![](_png/37b1d9474389940020f4c25f1bef3665.png)
 
@@ -278,7 +332,7 @@ npm run start:dev
 
 ![](_png/5bc7e344f78b651149168ea72594550b.png)
 
-Для генерации модулей можно воспользоваться встроенным ==CLI== неста
+Для генерации модулей воспользуемся встроенным ==CLI== неста
 
 ```bash
 nest g module auth
@@ -287,7 +341,7 @@ nest g module review
 nest g module top-page
 ```
 
-По итогу нест нам сам сгенерирует нужные модули, сделает для них папки и сам обновит импорты в корневом модуле `AppModule`, добавив в него сгенерированные модули
+По итогу нест нам сам сгенерирует нужные модули, создаст для них директории и сам обновит импорты в корневом модуле `AppModule`, добавив в него сгенерированные модули
 
 ![](_png/814f8018398ecff151bcc18daa685021.png)
 
@@ -300,7 +354,7 @@ nest g module top-page
 - использовать сразу в БД
 - так же можно добавлять полезные методы для самой сущности с данными
 
-(`--no-spec` позволяет не создавать спеки)
+(`--no-spec` позволяет не создавать тесты)
 
 ```bash
 nest g class product/product.model --no-spec
@@ -1728,9 +1782,6 @@ npm run test
 
 
 
-
-
-
 ---
 ## Валидация данных
 
@@ -2667,8 +2718,23 @@ describe('AppController (e2e)', () => {
 ---
 ## Продвинутые темы
 
+### Работа с Mongo через GUI
 
-### 001 Агрегации в Mongo
+Studio 3T -специализированный GUI для работы с монгой. Крайне функциональный и специально под него заточенный. Тут можно совершать агрегации в синтаксисе монги, править живые данные и совершать SQL запросы. 
+
+![](../../_png/Pasted%20image%2020250801185812.png)
+
+[DataGrip](../../database/DataGrip.md) - более универсальный и мощный вариант. Он в меньшей степени подходит для Mongo, но имеет интеграции с огромным количеством других баз данных.
+
+Подключаемся к базе и скачиваем коннектор
+
+![](../../_png/Pasted%20image%2020250801190139.png)
+
+Ну и тут так же можно перейти в консоль, которая позволяет отправлять запросы в синтаксисе Mongo напрямую в базу
+
+![](../../_png/Pasted%20image%2020250801190250.png)
+
+### Агрегации в Mongo
 
 Добавим в модуль продуткта сервис, который будет модифицировать данные в базе
 
@@ -3027,7 +3093,7 @@ export const PRODUCT_NOT_FOUND_ERROR = 'Такого товара нет';
 
 ![](_png/dcfe58bd547e068385cf78bcfeb6a9ac.png)
 
-### 002 Пишем свой Pipe
+### Пишем свой Pipe
 
 Изначально, при отправке запроса на изменение данных (`PATCH`), мы получаем ошибку сервера, так как он пытается кастануть фейковую строку под реальный тип данных id монги 
 
@@ -3086,7 +3152,7 @@ export const ID_VALIDATION_ERROR = 'Неверный формат id';
 
 ![](_png/c5620cfe9fcfc56be9d5268bee0336bf.png)
 
-### 003 Функции в Mongo 4.4
+### Функции в Mongo 4.4
 
 Далее нужно реализовать функцию, которая будет сортировать обзоры внутри продукта
 
@@ -3146,7 +3212,7 @@ async findWithReviews(dto: FindProductDto) {
 
 ![](_png/d35f1962ccaff2af2823ee1abea83e9b.png)
 
-### 005 Сервис страниц
+### Сервис страниц
 
 Типизируем модель, по которой мы будем создавать нашу новую страницу с курсом
 
@@ -3414,6 +3480,81 @@ export const NOT_FOUND_TOP_PAGE_ERROR = 'Страница с таким id не 
 А с токеном в запросе доступны
 
 ![](_png/762015d48b107ea02964c4840c1942bb.png)
+
+### Текстовый индекс Mongo
+
+Представим, что нам понадобится реализовать поиск по страницам в нашем приложении. А именно, нам нужно реализовать поиск по всем данным в приложении (заголовки, разделы, преимущества). 
+
+Реализовать мы это можем и на фронте, но куда эффективнее будет такой подход реализовать на бэке. 
+
+Искать через `find` будет неудобно и достаточно медленно. Чтобы решить проблемы с поиском, в MongoDB есть механизм текстового индекса.  
+
+![](../../_png/Pasted%20image%2020250801210344.png)
+
+Текстовый индекс - это механизм MongoDB, после добавления которого у нас появляется возможность искать с помощью команды `$text`. 
+Это команда превращает наши строки в токены, по которым потом происходит поиск.
+
+Сначала в модель нам нужно добавить декоратор `@index`, который будет разбивать все данные в модели на токены. 
+
+`src / top-page / top-page.model.ts`
+```TS
+import { prop, index } from '@typegoose/typegoose';
+
+@index({ '$**': 'text' })
+export class TopPageModel extends TimeStamps {
+	@prop({ enum: TopLevelCategory })
+	firstCategory: TopLevelCategory;
+```
+
+Либо мы можем отдельный пропс перевести в текстовый индекс, но это нужно будет только в случае потребности поиска по одному полю
+
+```TS
+@prop({ text: true })
+alias: string;
+```
+
+Дальше в сервисе главной страницы реализуем метод `findByText`, который будет осуществлять `find`, но с командой `$text`
+
+`src / top-page / top-page.service.ts`
+```TS
+async findByText(text: string) {
+	return this.topPageModel.find({ 
+		$text: { 
+			$search: text, 
+			$caseSensitive: false 
+		} 
+	}).exec();
+}
+```
+
+И описываем контроллер, который в параметре будет принимать в себя запрос строки
+
+`src / top-page / top-page.controller.ts`
+```TS
+@Get('textSearch/:text')
+async textSearch(@Param('text') text: string) {
+	return this.topPageService.findByText(text);
+}
+```
+
+### Group and push
+
+
+
+`src / top-page / top-page.service.ts`
+```TS
+async findByCategory(firstCategory: TopLevelCategory) {
+	return this.topPageModel
+		.aggregate()
+		.match({
+			firstCategory
+		})
+		.group({
+			_id: { secondCategory: '$secondCategory' },
+			pages: { $push: { alias: '$alias', title: '$title' } }
+		}).exec();
+}
+```
 
 
 
