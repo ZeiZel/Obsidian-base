@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/NestJS/NestJS - с нуля.md",
+                "file": "edge/TypeScript/TypeScript.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "NestJS - с нуля"
+              "title": "TypeScript"
             }
           }
         ]
@@ -231,13 +231,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/NestJS/NestJS - с нуля.md",
+                "file": "edge/TypeScript/TypeScript.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of NestJS - с нуля"
+              "title": "Outline of TypeScript"
             }
           }
         ],
@@ -266,15 +266,18 @@
   },
   "active": "70b94462b957ed5a",
   "lastOpenFiles": [
+    "_png/Pasted image 20250802123715.png",
+    "_png/Pasted image 20250802123511.png",
+    "backend/NestJS/NestJS - с нуля.md",
+    "_png/Pasted image 20250802112615.png",
+    "_png/Pasted image 20250802103819.png",
+    "_png/Pasted image 20250801222903.png",
     "_png/Pasted image 20250801221025.png",
     "_png/Pasted image 20250801220834.png",
     "_png/Pasted image 20250801212911.png",
     "_png/Pasted image 20250801212834.png",
     "_png/Pasted image 20250801212408.png",
     "_png/Pasted image 20250801210344.png",
-    "_png/Pasted image 20250801190250.png",
-    "_png/Pasted image 20250801190139.png",
-    "_png/Pasted image 20250801185812.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/docker/Docker + Ansible.md",
@@ -302,11 +305,8 @@
     "frontend/microfrontends.md",
     "backend/Microservices/Паттерны и практика построения микросервисов.md",
     "Whats Learning/О чём база~.md",
-    "Whats Learning/_lessons/Микросервисная архитектура.md",
     "_png",
-    "_png/7aa96c5de3ede9b2f06afffc82a22803.png",
     "RoadMap",
-    "devops/docker/_png/Pasted image 20250601192606.png",
     "edge/_png",
     "devops/_png",
     "cs",

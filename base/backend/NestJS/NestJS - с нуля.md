@@ -3735,8 +3735,26 @@ services:
 ---
 ## Работа с файлами
 
+### Принципы загрузки файлов
 
-### 001 Загрузка файлов
+Есть несколько способов передачи изображения на фронт:
+1. С клиента мы можем передть изображение внутри FormData вместе с стальными данными (изображение, заголовок, описание), но тогда ValidationType не сможет обработать такой запрос, так как все поля будут являться строками, и производительность будет плохой при большом количестве файлов
+2.  Мы можем загружать отдельно изображение под отдельный id продукта
+
+Самый базовый принцип:
+1. Мы имеем фронт, который отправляет отдельное изображение на сервер
+2. После загрузки на сервер, мы обработаем там изображение и сгенерируем ссылку на изображение
+3. На фронт мы вернём путь к изображению в виде ссылки
+4. Далее мы на фронте передаём вместе с остальными данными по продукту ссылку на логотип, которую получили на прошлом этапе
+
+![](../../_png/Pasted%20image%2020250801222903.png)
+
+>[!success] Преимущества такого подхода: 
+> - Загружаем любое число файлов поочерёдно
+> - Меньше риск сбоя при отправке данных по продукту
+> - Легко восстановить данные после сбоя, если передать дополнительную метадату для чего это изображение
+
+### Загрузка файлов
 
 Очень хорошей практикой будет реализовать сервер, который примет изображения и будет сам на фронт отправлять их в формат webp
 
@@ -3881,7 +3899,7 @@ export class FilesService {
 
 ![](_png/43d6e1dac0c0ce5028ed9293f07d1450.png)
 
-### 002 Конвертация изображений
+### Конвертация изображений
 
 Данная библиотечка очень оптимальная для использования в оверлоаде, так как она крайне быстро может оптимизировать и выдать нужное нам сконвертированное изображение
 
@@ -4000,7 +4018,7 @@ export class FilesController {
 
 ![](_png/11a97d7647c2c5eac48153895000c7dc.png)
 
-### 003 Serve файлов
+### Serve файлов
 
 Для сёрва наших файлов на клиент нам потребуется один модуль из неста:
 
@@ -4055,6 +4073,158 @@ export class FilesModule {}
 
 ![](_png/b98223ba84e83e6371cea82eca1c1b54.png)
 
+### Sitemap.xml
+
+Sitemap - это обязательная карта для старта индексации поисковиками, которая содержит информацию о: требуемой частоте обхода и ссылкам, по которым стоит пройти.
+
+Из себя документ представляет `xml` с метатегами, `urlset` с группой `url` тегов, в которых описано, когда нужно посещать сайт.
+
+- `loc` - расположение на сайте
+- `lastmod` - последнее редактирование
+- `changefreq` - частота изменения
+- `priority` - приоритет отсмотра. У каждого робота есть квота по индексации страниц, поэтому ему нужно предоставить приоритет, чтобы он в первую очередь отсматривал именно эти страницы.
+
+Занимается генерацией этого документа NGINX. Эту задачу лучше переложить на него. 
+
+![](../../_png/Pasted%20image%2020250802103819.png)
+
+Установим пакеты для трансформации JS в XML
+
+```bash
+npm i xml2js
+npm i -D @types/xml2js
+```
+
+```bash
+nest g module sitemap
+nest g controller sitemap --no-spec
+```
+
+Создаём мапу тех продуктов, которые мы используем
+
+`src/sitemap/sitemap.constants.ts`
+```TS
+import { TopLevelCategory } from 'src/top-page/top-page.model';
+
+type routeMapType = Record<TopLevelCategory, string>;
+
+export const CATEGORY_URL: routeMapType = {
+	0: '/courses',
+	1: '/services',
+	2: '/books',
+	3: '/products'
+}
+```
+
+Далее в сервисе главной страницы, нам нужно реализовать получение всех продуктов
+
+`src/top-page/top-page.service.ts`
+```TS
+async findAll() {
+	return this.topPageModel.find({}).exec();
+}
+```
+
+Нужно экспортировать сервис `TopPageService`, чтобы была возможность его импортировать в `SitemapModule`
+
+`src/top-page/top-page.module.ts`
+```TS
+	exports: [TopPageService]
+})
+export class TopPageModule { }
+```
+
+Далее нам нужно реализовать контроллер, который будет возвращать Sitemap по пути `GET /api/sitemap/xml`
+
+`src/sitemap/sitemap.controller.ts`
+```TS
+import { Controller, Get, Header } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { TopPageService } from 'src/top-page/top-page.service';
+import { subDays, format } from 'date-fns';
+import { Builder } from 'xml2js';
+import { CATEGORY_URL } from './sitemap.constants';
+
+@Controller('sitemap')
+export class SitemapController {
+	// домен, относительно которого будут строиться ссылки
+	domain: string;
+
+	constructor(
+		private readonly topPageService: TopPageService,
+		private readonly configService: ConfigService
+	) {
+		// устанавливаем домен, получая его из конфиг сервиса
+		this.domain = this.configService.get('DOMAIN') ?? '';
+	}
+
+	@Get('xml')
+	@Header('content-type', 'text/xml') // переопределяем заголовки
+	async sitemap() {
+		const formatString = 'yyyy-MM-dd\'T\'HH:mm:00.000xxx';
+		
+		let res = [
+			{
+				loc: this.domain,
+				lastmod: format(subDays(new Date(), 1), formatString),
+				changefreq: 'daily',
+				priority: '1.0'
+			}, 
+			{
+				loc: `${this.domain}/courses`,
+				lastmod: format(subDays(new Date(), 1), formatString),
+				changefreq: 'daily',
+				priority: '1.0'
+			}
+		];
+		
+		const pages = await this.topPageService.findAll();
+		
+		res = res.concat(pages.map(page => ({
+				loc: `${this.domain}${CATEGORY_URL[page.firstCategory]}/${page.alias}`,
+				lastmod: format(new Date(page.updatedAt ?? new Date()), formatString),
+				changefreq: 'weekly',
+				priority: '0.7'
+			})
+		));
+
+		// Инстанциируем билдер XML
+		const builder = new Builder({
+			xmldec: { version: '1.0', encoding: 'UTF-8' }
+		})
+
+		// Собираем XML документ из urlset
+		return builder.buildObject({
+			urlset: {
+				$: {
+					xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9'
+				},
+				url: res
+			}
+		})
+	}
+}
+```
+
+Импортируем сервисы `TopPageModule` и `ConfigModule` в контроллер, чтобы инжекты работали
+
+`src/sitemap/sitemap.module.ts`
+```TS
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TopPageModule } from 'src/top-page/top-page.module';
+import { SitemapController } from './sitemap.controller';
+
+@Module({
+	controllers: [SitemapController],
+	imports: [TopPageModule, ConfigModule]
+})
+export class SitemapModule { }
+```
+
+В результате мы получили динамический sitemap со страницами курсов
+
+![](../../_png/Pasted%20image%2020250802112615.png)
 
 
 ---

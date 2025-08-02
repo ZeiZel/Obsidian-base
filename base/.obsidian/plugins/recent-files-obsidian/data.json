@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "TypeScript",
+      "path": "edge/TypeScript/TypeScript.md"
+    },
+    {
       "basename": "NestJS - с нуля",
       "path": "backend/NestJS/NestJS - с нуля.md"
     },
@@ -47,10 +51,6 @@
     {
       "basename": "index",
       "path": "index.md"
-    },
-    {
-      "basename": "TypeScript",
-      "path": "edge/TypeScript/TypeScript.md"
     },
     {
       "basename": "SSR",
