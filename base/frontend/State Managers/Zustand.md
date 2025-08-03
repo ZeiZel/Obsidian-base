@@ -849,117 +849,428 @@ function App() {
 export default App;
 ```
 
+### Сохранение состояния
 
+Добавляем типизацию к нашим товарам. Размер кофе, отдельный айтем и заказ.
 
----
-## Продвинутые техники
+`src/types/coffeTypes.ts`
+```TS
+export enum CoffeeTypeEnum {
+  cappuccino = "cappuccino",
+  latte = "latte",
+  macchiato = "macchiato",
+  americano = "americano",
+}
 
-### Подписки на store
+export type CoffeeQueryParams = {
+  text?: string;
+  type?: CoffeeTypeEnum;
+};
 
-#### Цели:
+export enum CoffeSizeEnum {
+  S = "S",
+  M = "M",
+  L = "L",
+}
 
-- Улучшить читаемость и производительность кода
-- Осуществить сохранение пользовательского ввода в URL-параметрах
+export type CoffeItem = {
+  id: number;
+  name: string;
+  size: CoffeSizeEnum;
+  quantity: number;
+};
+export type OrderCoffeeReq = {
+  address: string;
+  orderItems: CoffeItem[];
+};
 
-#### Шаги:
+export type OrderCoffeeRes = {
+  message: string;
+  success: boolean;
+};
 
-1. **Введение в проблему сохранения состояния**
-    - Текущая реализация поиска теряет данные при перезагрузке страницы
-    - Целесообразно сохранять такие данные в параметрах URL
-2. **Создание отдельного стора для поиска**
-    - Удаление ненужных сторов и хелперов (CounterStore, TodoStore)
-    - Создание нового стора `SearchStore` с состоянием для поиска
-3. **Структура SearchStore**
-    - `SearchState`: хранит текст поиска как необязательный параметр типа `string`
-    - `SearchActions`: включает действие `setText` для обновления текста поиска
-4. **Работа с подписками в Zustand**
-    - Введение в использование `subscribe` для отслеживания изменений стейта
-    - Пример подписки на изменения в `searchStore` и связывание его с другими сторами
-5. **Стратегия работы с подписками**
-    - Использование подписок для реагирования на изменения состояний
-    - Пример: автоматическое обновление списка напитков при изменении состояния поиска
+export type CoffeeType = {
+  id: number;
+  name: string;
+  subTitle: string;
+  type: CoffeeTypeEnum;
+  price: number;
+  image: string;
+  description: string;
+  rating: number;
+};
+```
 
+Модифицируем стор и добавляем в него заказ кофе `orderCoffee`, добавление в корзину `addToCart`, задание адреса `setAddress`, очистку корзины `clearCart` и добавляем `persist` в наш стор
 
+`src/model/coffeeStore.ts`
+```TS
+import { create, StateCreator } from "zustand";
+import {
+  CoffeeQueryParams,
+  CoffeeType,
+  CoffeItem,
+  CoffeSizeEnum,
+  OrderCoffeeReq,
+  OrderCoffeeRes,
+} from "../types/coffeTypes";
+import axios, { AxiosError } from "axios";
+import { devtools, persist } from "zustand/middleware";
 
+const BASE_URL = "https://purpleschool.ru/coffee-api/";
 
+type CoffeeState = {
+  coffeeList?: CoffeeType[];
+  controller?: AbortController;
+  cart?: CoffeItem[];
+  address?: string;
+};
 
+type CoffeeActions = {
+  setAddress: (address: string) => void;
+  getCoffeeList: (params?: CoffeeQueryParams) => void;
+  addToCart: (item: CoffeeType) => void;
+  orderCoffee: () => void;
+  clearCart: () => void;
+};
 
+const coffeeSlice: StateCreator<
+  CoffeeActions & CoffeeState,
+  [["zustand/devtools", never], ["zustand/persist", unknown]]
+> = (set, get) => ({
+  coffeeList: undefined,
+  controller: undefined,
+  cart: undefined,
+  address: undefined,
 
+  clearCart: () => set({ cart: undefined }),
 
+  setAddress: (address) => set({ address }),
 
-### Кастомные хранилища
+  addToCart: (item) => {
+    const { cart } = get();
+    const preparedItem: CoffeItem = {
+      id: item.id,
+      name: `${item.name} ${item.subTitle}`,
+      quantity: 1,
+      size: CoffeSizeEnum.M,
+    };
+    set({ cart: cart ? [...cart, preparedItem] : [preparedItem] });
+  },
 
-#### Цель:
+  orderCoffee: async () => {
+    const { cart, address } = get();
+    const order: OrderCoffeeReq = {
+      address: address!,
+      orderItems: cart!,
+    };
+    try {
+      const { data } = await axios.post<OrderCoffeeRes>(
+        BASE_URL + "order",
+        order
+      );
+      if (data.success) {
+        alert(data.message);
+        get().clearCart();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  },
 
-Разработать систему, позволяющую сохранять и восстанавливать состояние приложения через параметры URL.
+  getCoffeeList: async (params?: CoffeeQueryParams) => {
+    const { controller } = get();
 
-#### Шаги реализации:
+    if (controller) {
+      controller.abort();
+    }
 
-1. **Создание hashStorage**:
-    - Создать хранилище (`hashStorage`) в директории `helpers`, используя пример из документации.
-    - Объявить тип хранилища как `StateStorage`.
-2. **Настройка Middleware Persist**:
-    - Подключить `Middleware Persist` в `SearchStore` и `CoffeeStore`.
-    - Для `SearchStore`, настроить использование `hashStorage` вместо стандартного `localStorage`.
-3. **Кастомизация хранилища**:
-    - Для использования других типов хранилищ, например, `SessionStorage`, написать функции `getItem`, `setItem`, и `removeItem`.
-    - Показать, как данные сохраняются и восстанавливаются при перезагрузке страницы и при открытии в новой вкладке.
-4. **Сохранение состояния в URL**:
-    - Иллюстрация того, как параметры сохраняются в URL, позволяя перезагрузить страницу без потери информации.
-5. **Улучшение UX**:
-    - Внедрение механизма, позволяющего сохранить текст запроса при перезагрузке страницы для последующего использования при инициализации.
+    const newController = new AbortController();
+    set({ controller: newController });
+    const { signal } = newController;
 
+    try {
+      const { data } = await axios.get<CoffeeType[]>(BASE_URL, {
+        params,
+        signal,
+      });
+      set({ coffeeList: data }, false, "setCoffeeListWithSearch");
+    } catch (error) {
+      if (axios.isCancel(error)) return;
 
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  },
+});
 
+export const useCoffeeStore = create<CoffeeActions & CoffeeState>()(
+  devtools(
+    persist(coffeeSlice, {
+      name: "coffeeStore",
+      partialize: (state) => ({ cart: state.cart, address: state.address }),
+    }),
+    {
+      name: "coffeeStore",
+    }
+  )
+);
+```
 
+И довёрстываем раздел с нашей корзиной
 
-
-`App.tsx`
+`src/App.tsx`
 ```TSX
-import { Route, Routes } from "react-router-dom";
-import { OrderPage } from "./pages/OrderPage";
-import { AboutPage } from "./pages/AboutPage";
+import "./App.css";
+import { Button, Card, Input, Rate, Tag } from "antd";
+import { useCoffeeStore } from "./model/coffeeStore";
+import { useEffect, useState } from "react";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 function App() {
+  const {
+    getCoffeeList,
+    coffeeList,
+    cart,
+    addToCart,
+    orderCoffee,
+    setAddress,
+    address,
+    clearCart,
+  } = useCoffeeStore();
+  const [text, setText] = useState<string>("");
+  const handleSearch = (text: string) => {
+    setText(text);
+    getCoffeeList({ text });
+  };
+  useEffect(() => {
+    getCoffeeList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <Routes>
-      <Route path="/" element={<OrderPage />} />
-      <Route path="about" element={<AboutPage />} />
-    </Routes>
+    <div className="wrapper">
+      <Input
+        placeholder="Search"
+        value={text}
+        onChange={(e) => handleSearch(e.target.value)}
+      />
+      <div className="container">
+        {coffeeList ? (
+          <div className="cardsContainer">
+            {coffeeList.map((coffee) => (
+              <Card
+                hoverable
+                key={coffee.id}
+                cover={<img src={coffee.image} />}
+                actions={[
+                  <Button
+                    icon={<ShoppingCartOutlined />}
+                    key={coffee.name}
+                    onClick={() => addToCart(coffee)}
+                  >
+                    {coffee.price}
+                  </Button>,
+                ]}
+              >
+                <Card.Meta title={coffee.name} description={coffee.subTitle} />
+                <Tag style={{ marginTop: "24px" }} color="purple">
+                  {coffee.type}
+                </Tag>
+                <Rate
+                  defaultValue={coffee.rating}
+                  disabled
+                  allowHalf
+                  style={{ marginTop: "24px" }}
+                />
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <span>По запросу не нашлось ни одного напитка</span>
+        )}
+
+        <aside className="sider">
+          <h1>Cart</h1>
+          {cart ? (
+            <>
+              {cart.map((item) => (
+                <span key={item.id}>{item.name}</span>
+              ))}
+              <Input
+                placeholder="Adress"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <Button onClick={orderCoffee} disabled={!address} type="primary">
+                Order coffee
+              </Button>
+              <Button onClick={clearCart}>Clear cart</Button>
+            </>
+          ) : (
+            <span>Your cart is empty</span>
+          )}
+        </aside>
+      </div>
+    </div>
   );
 }
 
 export default App;
 ```
 
-
-### Улучшенный стор в URL
-
-**Проблема изначального решения:**
-
-- Хранение стейта поиска в hash URL, плохо масштабируется при усложнении (например, добавлении пагинации, фильтров).
-- Сильная связанность компонентов и сторов, усложняющая поддержку и развитие.
-- Неудобство работы с несколькими сторами из-за ограничений `persist` функции.
-
-**Подход к улучшению:**
-
-1. **Создание кастомного хука для работы с URL Storage (**`useURLStorage.ts`**):**
-    - Использовать ReactRouterDOM для взаимодействия с URL.
-    - Использование типизации для удобства работы c параметрами.
-    - Перенос логики из компонентов для повторного использования и упрощения компонентной структуры.
-2. **Логика работы хука:**
-    - Извлекаем параметры из URL и синхронизируем с внутренним стором приложения.
-    - Обновление URL параметров при изменении стейта приложения для отражения текущего состояния.
-    - Упрощение строки запроса в URL для удобства пользователей.
-3. **Преимущества подхода:**
-    - Улучшенная масштабируемость и поддерживаемость кода.
-    - Уменьшение связанности компонентов и сторов.
-    - Упрощение работы с URL и облегчение навигации для пользователя.
-4. **Практическое применение:**
-    - Обернуть приложение в браузер роутер из ReactRouterDOM для корректной работы.
-    - Использование созданного хука в главном компоненте `app.tsx` для обработки параметров поиска и пагинации.
+![](../../_png/Pasted%20image%2020250803174940.png)
 
 
+
+---
+## Продвинутые техники
+
+### Подписки на стор + Улучшенный стор в URL
+
+Мы столкнулись с проблемой, когда при вводе данных пользователя они теряются при перезагрузке. Чтобы решить эту проблему, мы можем вынести параметр запроса в url
+
+Первое, что нам нужно сделать - это добавить `react-router-dom` в приложение, чтобы иметь доступ к `window` из хуков
+
+`src/main.tsx`
+```TSX
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+```
+
+Далее подписаться на изменение url-параметров с помощью `useSearchParams`. С помощью него мы сможем получать актуальные url-параметры.
+
+`src/helpers/useUrlStorage.tsx`
+```TSX
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
+export const useUrlParamsStore = <T extends Record<string, string>>(
+  params: T,
+  setParams: (params: T) => void
+) => {
+  const [queryParams, setQueryParams] = useSearchParams();
+
+  const setParamsFromUrl = () => {
+    const paramsFromUrl: Partial<T> = Object.keys(params).reduce((acc, key) => {
+      const value = queryParams.get(key);
+      if (typeof value === "string") {
+        acc[key as keyof T] = value as T[keyof T];
+      }
+      return acc;
+    }, {} as Partial<T>);
+    if (paramsFromUrl) {
+      setParams(paramsFromUrl as T);
+    }
+  };
+
+  useEffect(setParamsFromUrl, [queryParams]);
+
+  useEffect(() => {
+    const newQueryParams = new URLSearchParams();
+    params.text && newQueryParams.set("text", params.text);
+    setQueryParams(newQueryParams);
+  }, [params]);
+};
+```
+
+Далее нам нужно будет создать здесь кастомный Slice с экшенами, которые будут использоваться в `persist`. Это нам нужно, чтобы хранить значения не в `localStorage`, а в url-параметрах
+
+`src/helpers/hashStorage.tsx`
+```TS
+import { StateStorage } from "zustand/middleware";
+
+export const hashStorage: StateStorage = {
+  getItem: (key): string => {
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    const storedValue = searchParams.get(key) ?? "";
+    return JSON.parse(storedValue);
+  },
+  setItem: (key, newValue): void => {
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    searchParams.set(key, JSON.stringify(newValue));
+    location.hash = searchParams.toString();
+  },
+  removeItem: (key): void => {
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    searchParams.delete(key);
+    location.hash = searchParams.toString();
+  },
+};
+```
+
+Далее реализуем отдельный стор для поиска. Тут мы будем использовать метод подписки. К действиям в сторе можно подписаться через метод `subscribe`, который предоставляет инстанс стора.
+
+Так же при создании нового persist стора мы передаём туда `createJSONStorage` наш кастомный стор, через который он будет работать с URL-параметрами
+
+`src/model/searchStore.ts`
+```TS
+import { StateCreator, create } from "zustand";
+import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { getCoffeeList } from "./coffeeStore";
+import { hashStorage } from "./helpers/hashStorage";
+
+type SearchState = {
+  text: string;
+};
+
+type SearchActions = {
+  setText: (text: string) => void;
+};
+
+const initialState = {
+  text: "",
+};
+
+// сохраняем состояние текста и провайдим метод для изменения текста
+const searchSlice: StateCreator<
+  SearchState & SearchActions,
+  [["zustand/devtools", never], ["zustand/persist", unknown]]
+> = (set) => ({
+  text: initialState.text,
+  setText: (text: string) => set({ text }, false, "setText"),
+});
+
+export const useSearchStore = create<SearchState & SearchActions>()(
+  devtools(
+    persist(searchSlice, {
+      name: "searchStore",
+      // передаём сюда кастомный стор с URL-параметрами
+      storage: createJSONStorage(() => hashStorage),
+      version: undefined,
+    }),
+    { name: "searchStore" }
+  )
+);
+
+// совершаем подписку на стор
+useSearchStore.subscribe((state, prev) => {
+  console.log(state.text);
+
+  // если прошлое состояние текста не равно текущему, то совершаем запрос заново
+  if (state.text !== prev.text) {
+    getCoffeeList({ text: state.text });
+  }
+});
+```
+
+И теперь модифицируем наш корневой компонент, чтобы для поиска он использовал URL-параметры
+
+`src / App.tsx`
 ```TSX
 import "../App.css";
 import { Button, Card, Input, Rate, Tag } from "antd";
@@ -967,8 +1278,6 @@ import { useCoffeeStore } from "./model/coffeeStore";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useUrlParamsStore } from "./helpers/useUrlStorage";
-
-// import { useSearchStore } from "../model/searchStore";
 
 function App() {
   const {
@@ -982,31 +1291,13 @@ function App() {
     address,
     clearCart,
   } = useCoffeeStore();
+
+  // заносим новое состояние поиска
   const handleSearch = (text: string) => {
     setParams({ text });
   };
 
-  //   useEffect(() => {
-  //     setParams(params);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     setParams({ text: queryParams.get("text") || undefined });
-  //   }, [queryParams]);
-
-  //   useCoffeeStore.subscribe((state, prev) => {
-  //     if (state.params?.text) {
-  //       console.log(state.params.text);
-  //       queryParams.set("text", state.params.text);
-  //       setQueryParams(queryParams);
-  //     }
-
-  //     if (state.params?.text !== prev.params?.text && !state.params?.text) {
-  //       queryParams.delete("text");
-  //       setQueryParams(queryParams);
-  //     }
-  //   });
-
+  // инициализируем стор
   useUrlParamsStore(params, setParams);
 
   return (
@@ -1081,82 +1372,550 @@ function App() {
 export default App;
 ```
 
-### Slice паттерн
+### Slice паттерн + кастомные хранилища
 
-**I. Введение в компонентный подход**
+Slice паттерн предполагает, что мы будем делить нашу логику на slice и относить к отдельным компонентам
 
-1. Проблема: Приложение разрослось, все в одном файле.
-2. Решение: Переход к компонентному подходу - разбиение на несколько файлов.
+`src/model/storeTypes.ts`
+```TS
+import { CoffeItem, CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
 
-**II. Декомпозиция компонентов**
+export type CoffeeCartState = {
+  cart?: CoffeItem[];
+  address?: string;
+};
 
-1. Создание папки `components`.
-2. Вынос карточки напитка
-3. Экспорт необходимых компонентов и функций из AntDesign и Store.
+export type CoffeeCartActions = {
+  setAddress: (address: string) => void;
+  addToCart: (item: CoffeeType) => void;
+  orderCoffee: () => void;
+  clearCart: () => void;
+};
 
-**III. Декомпозиция State Management**
+export type CoffeeListState = {
+  coffeeList?: CoffeeType[];
+  controller?: AbortController;
+  params: CoffeeQueryParams;
+};
 
-1. Проблема: `CoffeeStore` становится слишком большим.
-2. Решение: Разделение на несколько файлов или слайсов для упрощения управления и поддержки.
+export type CoffeeListActions = {
+  getCoffeeList: (params?: CoffeeQueryParams) => void;
+  setParams: (params?: CoffeeQueryParams) => void;
+};
+```
 
-**IV. Создание отдельных слайсов**
+Отдельно выносим слайс по работе с корзиной
 
-1. Удаление ненужных Store и создание новых слайсов, например, `CartSlice` и `ListSlice`.
-2. Использование `StateCreator` для определения типов и состояний.
-3. Декомпозиция типов и экшенов для точечного использования в слайсах.
+`src/model/cartSlice.ts`
+```TS
+import { StateCreator } from "zustand";
+import {
+  CoffeeCartActions,
+  CoffeeCartState,
+  CoffeeListActions,
+  CoffeeListState,
+} from "./storeTypes";
+import {
+  CoffeItem,
+  CoffeSizeEnum,
+  OrderCoffeeReq,
+  OrderCoffeeRes,
+} from "../types/coffeTypes";
+import axios, { AxiosError } from "axios";
+import { BASE_URL } from "../api/baseUrl";
 
-**V. Консолидация и оптимизация типов**
+export const cartSlice: StateCreator<
+  CoffeeListActions & CoffeeListState & CoffeeCartActions & CoffeeCartState,
+  [["zustand/devtools", never], ["zustand/persist", unknown]],
+  [["zustand/devtools", never], ["zustand/persist", unknown]],
+  CoffeeCartState & CoffeeCartActions
+> = (set, get) => ({
+  cart: undefined,
+  address: undefined,
 
-1. Создание файла `StoreTypes` для удобного экспорта и импорта типов.
-2. Внесение необходимых изменений в слайсы для корректной работы и типизации.
+  clearCart: () => set({ cart: undefined }),
 
-**VI. Финальная интеграция и рефакторинг**
+  setAddress: (address) => set({ address }),
 
-1. Упрощение `CoffeeStore` путем удаления дубликатов и лишних типов.
-2. Создание общего Store, объединяющего `CartSlice` и `ListSlice`.
-3. Описание только необходимой логики в файле `store`, что облегчает поддержку приложения.
+  addToCart: (item) => {
+    const { cart } = get();
+    const preparedItem: CoffeItem = {
+      id: item.id,
+      name: `${item.name} ${item.subTitle}`,
+      quantity: 1,
+      size: CoffeSizeEnum.M,
+    };
+    set({ cart: cart ? [...cart, preparedItem] : [preparedItem] });
+  },
 
-**VII. Заключение: Преимущества подхода**
+  orderCoffee: async () => {
+    const { cart, address } = get();
+    const order: OrderCoffeeReq = {
+      address: address!,
+      orderItems: cart!,
+    };
+    try {
+      const { data } = await axios.post<OrderCoffeeRes>(
+        BASE_URL + "order",
+        order
+      );
+      if (data.success) {
+        alert(data.message);
+        get().clearCart();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  },
+});
+```
 
-1. Улучшение читаемости кода и облегчение его поддержки.
-2. Более эффективная работа в команде за счет четкого разделения логики и компонентов.
-3. Повышение продуктивности разработки за счет декомпозиции и оптимизации структуры приложения.
+Выносим отдельно слайс со списком объектов
 
+`src/model/listSlice.ts`
+```TS
+import { StateCreator } from "zustand";
+import {
+  CoffeeCartActions,
+  CoffeeCartState,
+  CoffeeListActions,
+  CoffeeListState,
+} from "./storeTypes";
+import { CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
+import axios, { AxiosError } from "axios";
+import { BASE_URL } from "../api/baseUrl";
 
+export const listSlice: StateCreator<
+  CoffeeListActions & CoffeeListState & CoffeeCartActions & CoffeeCartState,
+  [["zustand/devtools", never], ["zustand/persist", unknown]],
+  [["zustand/devtools", never]],
+  CoffeeListActions & CoffeeListState
+> = (set, get) => ({
+  coffeeList: undefined,
+  controller: undefined,
+  params: { text: undefined, type: undefined },
 
+  setParams: (params) => {
+    const { getCoffeeList } = get();
+    set({ params: { ...get().params, ...params } }), getCoffeeList(params);
+  },
+
+  getCoffeeList: async (params?: CoffeeQueryParams) => {
+    const { controller } = get();
+
+    if (controller) {
+      controller.abort();
+    }
+
+    const newController = new AbortController();
+    set({ controller: newController });
+    const { signal } = newController;
+
+    try {
+      const { data } = await axios.get<CoffeeType[]>(BASE_URL, {
+        params,
+        signal,
+      });
+      set({ coffeeList: data }, false, "setCoffeeListWithSearch");
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  },
+});
+```
+
+Теперь в основное хранилище мы можем импортировать два других слайса и объединить их внутри `persist`
+
+`src/model/coffeeStore.ts`
+```TS
+import { create } from "zustand";
+import { CoffeeQueryParams } from "../types/coffeTypes";
+
+import { devtools, persist } from "zustand/middleware";
+
+import {
+  CoffeeCartActions,
+  CoffeeCartState,
+  CoffeeListActions,
+  CoffeeListState,
+} from "./storeTypes";
+import { listSlice } from "./listSlice";
+import { cartSlice } from "./cartSlice";
+
+export const useCoffeeStore = create<
+  CoffeeListActions & CoffeeListState & CoffeeCartActions & CoffeeCartState
+>()(
+  devtools(
+    persist((...args) => ({ ...listSlice(...args), ...cartSlice(...args) }), {
+      name: "coffeeStore",
+      partialize: (state) => ({ cart: state.cart, address: state.address }),
+    }),
+    {
+      name: "coffeeStore",
+    }
+  )
+);
+
+// получение списка кофе по параметрам
+export const getCoffeeList = (params?: CoffeeQueryParams) =>
+  useCoffeeStore.getState().getCoffeeList(params);
+```
+
+Делим приложение на страницы
+
+`src/App.tsx`
+```TSX
+import { Route, Routes } from "react-router-dom";
+import { OrderPage } from "./pages/OrderPage";
+import { AboutPage } from "./pages/AboutPage";
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<OrderPage />} />
+      <Route path="about" element={<AboutPage />} />
+    </Routes>
+  );
+}
+
+export default App;
+```
 
 ### Предотвращение рендеров
 
-#### Цель:
+Предотвращение ререндеров в приложении будет происходить за счёт разделения компонентов и за счёт сравнения стейта и изменений в нём с помощью `useShallow`
 
-Уменьшить количество ненужных ререндеров в приложении для улучшения производительности.
+Этот хук позволяет писать мемоизированные селекторы. В нём стоит возвращать только нужные даннные из стора, которые могут изменяться внешними компонентами. Это помогает избежать большого количества перерисовок. Так же этот хук требует возвращения из него данных в массиве, но можно вернуть и один элемент вне массива.
 
-#### Инструменты:
+Создадим селекторы для получения данных из стора. Это удобно, чтобы не писать свои команды каждый раз и использовать их вместе с параметрами.
 
-- React DevTools для визуализации ререндеров.
-- Хук `useShallow` для оптимизации доступа к данным.
+`src/model/coffeeStore.ts`
+```TS
+export const addToCart = (item: CoffeeType) =>
+  useCoffeeStore.getState().addToCart(item);
 
-#### Шаги оптимизации:
+export const orderCoffee = () => useCoffeeStore.getState().orderCoffee();
 
-1. **Визуализация Ререндеров:**
-    - Установите расширение React DevTools.
-    - Во вкладке разработчика, активируйте опцию "Highlight Updates when component re-render" для визуальной отметки ререндеров.
-2. **Проблема:**
-    - Вся страница перерендеривается при любом изменении данных, так как стор связан с каждым компонентом.
-3. **Решение Проблемы Через** `useShallow`**:**
-    - Избавьтесь от глобального вызова стора (`useCoffeeStore`) в верхнем уровне приложения.
-    - Разделите компоненты, использующие данные из стора, на отдельные модули.
-    - Для каждого компонента, вызывайте стор только там, где это необходимо.
-4. **Примеры Имплементации:**
-    - **Поиск:** В `searchInput.tsx`, получите доступ к методам и параметрам стора, используя `useShallow`.
-    - **Список Кофе:** Аналогично, изолируйте компоненты, работающие со списком кофе и данными корзины.
-    - **Методы и Параметры:** Перенесите логику `useEffect` и другие взаимодействия со стором в соответствующие компоненты.
-5. **Результаты:**
-    - Изменение параметров поиска изменяет только список кофе, не вызывая ререндер всей страницы.
-    - Добавление кофе в корзину не приводит к ререндеру других компонентов страницы, за исключением самой корзины.
+export const setAddress = (address: string) =>
+  useCoffeeStore.getState().setAddress(address);
 
+export const clearCart = () => useCoffeeStore.getState().clearCart();
 
+export const setParams = (params: CoffeeQueryParams) =>
+  useCoffeeStore.getState().setParams(params);
+```
 
+Вынесем отдельно поиск
+
+`src/components/SearchInput.tsx`
+```TSX
+import { Input } from "antd";
+import { setParams, useCoffeeStore } from "../model/coffeeStore";
+import { useUrlParamsStore } from "../helpers/useUrlStorage";
+
+export const SearchInput = () => {
+  const [params] = useCoffeeStore((state) => [state.params]);
+  useUrlParamsStore();
+
+  return (
+    <Input
+      placeholder="Search"
+      value={params?.text}
+      onChange={(e) => setParams({ text: e.target.value })}
+    />
+  );
+};
+```
+
+Так же вынесем отдельно список. Тут уже его можно запихнуть внутрь `useShallow`, потому что данные постоянно обновляются и меняются извне другими компонентами приложения.
+
+`src/components/CoffeeList.tsx`
+```TSX
+import { useShallow } from "zustand/react/shallow";
+import { useCoffeeStore } from "../model/coffeeStore";
+import { CoffeeCard } from "./CoffeeCard";
+import "../App.css";
+
+export const CoffeList = () => {
+  const [coffeeList] = useCoffeeStore(
+    useShallow((state) => [state.coffeeList])
+  );
+  
+  return (
+    <>
+      {coffeeList ? (
+        <div className="cardsContainer">
+          {coffeeList.map((coffee) => (
+            <CoffeeCard key={coffee.id} coffee={coffee} />
+          ))}
+        </div>
+      ) : (
+        <span>По запросу не нашлось ни одного напитка</span>
+      )}
+    </>
+  );
+};
+```
+
+Карточка кофе будет извне принимать этот объект
+
+`src/components/CoffeeCard.tsx`
+```TSX
+import { Button, Card, Rate, Tag } from "antd";
+import { CoffeeType } from "../types/coffeTypes";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { addToCart } from "../model/coffeeStore";
+import "../App.css";
+
+export const CoffeeCard = ({ coffee }: { coffee: CoffeeType }) => {
+
+  return (
+    <Card
+      className="card"
+      hoverable
+      key={coffee.id}
+      cover={<img src={coffee.image} />}
+      actions={[
+        <Button
+          icon={<ShoppingCartOutlined />}
+          key={coffee.name}
+          onClick={() => addToCart(coffee)}
+        >
+          {coffee.price}
+        </Button>,
+      ]}
+    >
+      <Card.Meta title={coffee.name} description={coffee.subTitle} />
+      <Tag style={{ marginTop: "24px" }} color="purple">
+        {coffee.type}
+      </Tag>
+      <Rate
+        defaultValue={coffee.rating}
+        disabled
+        allowHalf
+        style={{ marginTop: "24px" }}
+      />
+    </Card>
+  );
+};
+```
+
+Корзина так же меняется извне, поэтому используем `useShallow`
+
+`src/components/Cart.tsx`
+```TSX
+import { useCoffeeStore } from "../model/coffeeStore";
+import { useShallow } from "zustand/react/shallow";
+
+export const Cart = () => {
+  const [cart] = useCoffeeStore(useShallow((state) => [state.cart]));
+
+  return (
+    <>
+      {cart ? (
+        <>
+          {cart.map((item) => (
+            <span key={item.id}>{item.name}</span>
+          ))}
+        </>
+      ) : (
+        <span>Your cart is empty</span>
+      )}
+    </>
+  );
+};
+```
+
+Так же выносим действия по корзине
+
+`src/components/CartActions.tsx`
+```TSX
+import { Button, Input } from "antd";
+import {
+  clearCart,
+  orderCoffee,
+  setAddress,
+  useCoffeeStore,
+} from "../model/coffeeStore";
+import { useShallow } from "zustand/react/shallow";
+
+export const CartActions = () => {
+  const [address] = useCoffeeStore(useShallow((state) => [state.address]));
+  
+  return (
+    <>
+      <Input
+        placeholder="Adress"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <Button onClick={orderCoffee} disabled={!address} type="primary">
+        Order coffee
+      </Button>
+      <Button onClick={clearCart}>Clear cart</Button>
+    </>
+  );
+};
+```
+
+И саму корзину
+
+`src/components/Cart.tsx`
+```TSX
+import { useCoffeeStore } from "../model/coffeeStore";
+import { useShallow } from "zustand/react/shallow";
+
+export const Cart = () => {
+  const [cart] = useCoffeeStore(useShallow((state) => [state.cart]));
+
+  return cart 
+	  ? (
+		<>
+			{cart.map((item) => (
+				<span key={item.id}>{item.name}</span>
+			))}
+		</>
+	  ) : (
+		<span>Your cart is empty</span>
+	  )
+};
+```
+
+И объединяем всё в одном месте
+
+`src/App.tsx`
+```TSX
+import "../App.css";
+import { SearchInput } from "./components/SearchInput";
+import { CoffeList } from "./components/CoffeeList";
+import { Cart } from "./components/Cart";
+import { CartActions } from "./components/CartActions";
+
+function App() {
+  return (
+    <div className="wrapper">
+      <a href="/about">About</a>
+      <SearchInput />
+      <div className="container">
+        <CoffeList />
+        <aside className="sider">
+          <h1>Cart</h1>
+          <Cart />
+          <CartActions />
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Финал проекта
+
+В сторе нам нужно в методе `setParams` добавить инвалидацию запрошенного списка по изменению состояния в параметрах. То есть мы туда всегда будем передавать актуальные параметры и делать новый запрос списка.
+
+`src/model/listSlice.ts`
+```TS
+import { StateCreator } from "zustand";
+import {
+  CoffeeCartActions,
+  CoffeeCartState,
+  CoffeeListActions,
+  CoffeeListState,
+} from "./storeTypes";
+import { CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
+import axios, { AxiosError } from "axios";
+import { BASE_URL } from "../api/baseUrl";
+
+export const listSlice: StateCreator<
+  CoffeeListActions & CoffeeListState & CoffeeCartActions & CoffeeCartState,
+  [["zustand/devtools", never], ["zustand/persist", unknown]],
+  [["zustand/devtools", never]],
+  CoffeeListActions & CoffeeListState
+> = (set, get) => ({
+  coffeeList: undefined,
+  controller: undefined,
+  params: { text: undefined, type: undefined },
+
+  setParams: (params) => {
+    const { getCoffeeList } = get();
+    set({ params: { ...get().params, ...params } });
+    getCoffeeList(get().params); // <-- Актуализируем параметры запроса
+  },
+
+  getCoffeeList: async (params?: CoffeeQueryParams) => {
+    const { controller } = get();
+
+    if (controller) {
+      controller.abort();
+    }
+
+    const newController = new AbortController();
+    set({ controller: newController });
+    const { signal } = newController;
+
+    try {
+      const { data } = await axios.get<CoffeeType[]>(BASE_URL, {
+        params,
+        signal,
+      });
+      set({ coffeeList: data }, false, "setCoffeeListWithSearch");
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  },
+});
+```
+
+Далее нам нужно реализовать список кофе и актуализировать список параметров
+
+`src/components/CategoryPicker.tsx`
+```TSX
+import { Button } from "antd";
+import { CoffeeTypeEnum } from "../types/coffeTypes";
+import { setParams, useCoffeeStore } from "../model/coffeeStore";
+import { useShallow } from "zustand/react/shallow";
+
+export const CategoryPicker = () => {
+  const [params] = useCoffeeStore(useShallow((state) => [state.params]));
+  
+  return (
+    <div>
+      {Object.keys(CoffeeTypeEnum).map((key) => (
+        <Button
+          key={key}
+          danger={params.type === key}
+          onClick={() =>
+            setParams({
+              type: CoffeeTypeEnum[key as keyof typeof CoffeeTypeEnum],
+            })
+          }
+        >
+          {key}
+        </Button>
+      ))}
+    </div>
+  );
+};
+```
+
+А в конце просто останется добавить компонент в корень
+
+`src/App.tsx`
+```TSX
+ <CategoryPicker />
+```
 
 ### Работа с TanStack Query
 
