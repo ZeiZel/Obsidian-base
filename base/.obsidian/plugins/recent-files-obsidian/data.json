@@ -1,6 +1,38 @@
 {
   "recentFiles": [
     {
+      "basename": "Zustand",
+      "path": "frontend/State Managers/Zustand.md"
+    },
+    {
+      "basename": "Паттерны и практика построения микросервисов",
+      "path": "backend/Microservices/Паттерны и практика построения микросервисов.md"
+    },
+    {
+      "basename": "Nuxt",
+      "path": "frontend/Vue/Nuxt/Nuxt.md"
+    },
+    {
+      "basename": "microfrontends",
+      "path": "frontend/microfrontends.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "frontend/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "FSD",
+      "path": "architecture/Architecture/FSD/FSD.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
       "basename": "TypeScript",
       "path": "edge/TypeScript/TypeScript.md"
     },
@@ -11,14 +43,6 @@
     {
       "basename": "атмосферный звук моря и крики чаек",
       "path": "_png/атмосферный звук моря и крики чаек.mp3"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
     },
     {
       "basename": "frontend",
@@ -91,14 +115,6 @@
     {
       "basename": "PWA",
       "path": "frontend/PWA.md"
-    },
-    {
-      "basename": "microfrontends",
-      "path": "frontend/microfrontends.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "backend/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "7aa96c5de3ede9b2f06afffc82a22803",
@@ -183,22 +199,6 @@
     {
       "basename": "Доступ и права",
       "path": "devops/linux/OS/_lessons/Доступ и права.md"
-    },
-    {
-      "basename": "Введение",
-      "path": "devops/linux/OS/_lessons/Введение.md"
-    },
-    {
-      "basename": "Pasted image 20250723185324",
-      "path": "devops/linux/Bash/_png/Pasted image 20250723185324.png"
-    },
-    {
-      "basename": "OS",
-      "path": "devops/linux/OS/OS.md"
-    },
-    {
-      "basename": "Pasted image 20240902093107",
-      "path": "inbox/Development/_png/Pasted image 20240902093107.png"
     }
   ],
   "omittedPaths": [],

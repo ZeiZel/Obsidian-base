@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "edge/TypeScript/TypeScript.md",
+                "file": "frontend/State Managers/Zustand.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,151 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "TypeScript"
+              "title": "Zustand"
+            }
+          },
+          {
+            "id": "bc089856e0886f65",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes + Helm"
+            }
+          },
+          {
+            "id": "55ceacdad2b4f6e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/docker/Docker + Ansible.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Docker + Ansible"
+            }
+          },
+          {
+            "id": "584f640f8a2f07cb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architecture/Architecture/FSD/FSD.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "FSD"
+            }
+          },
+          {
+            "id": "41e66bb90725c03f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/Vue/Vue/Vue.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Vue"
+            }
+          },
+          {
+            "id": "6d640e3ccae0af81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/Vue/Nuxt/Nuxt.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Nuxt"
+            }
+          },
+          {
+            "id": "8ede4e25a09157f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Microservices/Паттерны и практика построения микросервисов.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Паттерны и практика построения микросервисов"
             }
           }
         ]
@@ -208,7 +352,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -231,13 +375,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "edge/TypeScript/TypeScript.md",
+                "file": "frontend/State Managers/Zustand.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TypeScript"
+              "title": "Outline of Zustand"
             }
           }
         ],
@@ -245,7 +389,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 478.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -266,6 +410,17 @@
   },
   "active": "70b94462b957ed5a",
   "lastOpenFiles": [
+    "_png/Pasted image 20250803151806.png",
+    "frontend/State Managers/Zustand.md",
+    "_png/Pasted image 20250803142502.png",
+    "backend/Microservices/Паттерны и практика построения микросервисов.md",
+    "frontend/Vue/Nuxt/Nuxt.md",
+    "frontend/microfrontends.md",
+    "frontend/Vue/Vue/Vue.md",
+    "architecture/Architecture/FSD/FSD.md",
+    "devops/docker/Docker + Ansible.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "edge/TypeScript/TypeScript.md",
     "_png/Pasted image 20250803110738.png",
     "_png/Pasted image 20250803105819.png",
     "_png/Pasted image 20250803104342.png",
@@ -276,11 +431,7 @@
     "_png/Pasted image 20250802103819.png",
     "_png/Pasted image 20250801222903.png",
     "_png/Pasted image 20250801221025.png",
-    "_png/Pasted image 20250801220834.png",
-    "_png/Pasted image 20250801212911.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
-    "devops/kubernetes/Kubernetes + Helm.md",
-    "devops/docker/Docker + Ansible.md",
     "frontend/frontend.md",
     "frontend/React/React Foundamentals.md",
     "frontend/React/React + Redux.md",
@@ -289,7 +440,6 @@
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
     "index.md",
-    "edge/TypeScript/TypeScript.md",
     "frontend/SSR.md",
     "backend/backend.md",
     "database/database.md",
@@ -299,12 +449,6 @@
     "architecture/architecture.md",
     "architecture",
     "concepts",
-    "backend/serverless.md",
-    "testing/Тестирование JavaScript.md",
-    "frontend/PWA.md",
-    "frontend/microfrontends.md",
-    "backend/Microservices/Паттерны и практика построения микросервисов.md",
-    "Whats Learning/О чём база~.md",
     "_png",
     "RoadMap",
     "edge/_png",
