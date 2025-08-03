@@ -2,6 +2,8 @@
 tags:
   - react
   - "#redux"
+  - frontend
+  - react-router-dom
 ---
 
 

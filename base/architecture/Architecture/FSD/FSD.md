@@ -1,5 +1,12 @@
 ---
-tags: architecture, fsd
+tags:
+  - architecture
+  - fsd
+  - react
+  - vue
+  - angular
+  - svelte
+  - frontend
 ---
 
 ## Введение

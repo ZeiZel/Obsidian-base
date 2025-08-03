@@ -8,30 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "70b94462b957ed5a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "frontend/State Managers/Zustand.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Zustand"
-            }
-          },
-          {
             "id": "bc089856e0886f65",
             "type": "leaf",
             "state": {
@@ -174,8 +150,57 @@
               "icon": "lucide-file",
               "title": "Паттерны и практика построения микросервисов"
             }
+          },
+          {
+            "id": "c85f4071aa1eb90a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/Linux/Bash/Bash.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Bash"
+            }
+          },
+          {
+            "id": "63fa70a86f80a985",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/React/React + Redux.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "React + Redux"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -375,13 +400,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "frontend/State Managers/Zustand.md",
+                "file": "backend/Microservices/Паттерны и практика построения микросервисов.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Zustand"
+              "title": "Outline of Паттерны и практика построения микросервисов"
             }
           }
         ],
@@ -408,19 +433,23 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "70b94462b957ed5a",
+  "active": "8ede4e25a09157f2",
   "lastOpenFiles": [
+    "frontend/React/React + Redux.md",
+    "backend/Microservices/Паттерны и практика построения микросервисов.md",
+    "devops/Linux/Bash/Bash.md",
+    "frontend/React/_lessons/09 - React + Redux.md",
+    "devops/docker/Docker + Ansible.md",
+    "index.md",
+    "architecture/Architecture/FSD/FSD.md",
+    "frontend/Vue/Vue/Vue.md",
+    "frontend/Vue/Nuxt/Nuxt.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "frontend/State Managers/Zustand.md",
     "_png/Pasted image 20250803174940.png",
     "_png/Pasted image 20250803151806.png",
-    "frontend/State Managers/Zustand.md",
     "_png/Pasted image 20250803142502.png",
-    "backend/Microservices/Паттерны и практика построения микросервисов.md",
-    "frontend/Vue/Nuxt/Nuxt.md",
     "frontend/microfrontends.md",
-    "frontend/Vue/Vue/Vue.md",
-    "architecture/Architecture/FSD/FSD.md",
-    "devops/docker/Docker + Ansible.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "edge/TypeScript/TypeScript.md",
     "_png/Pasted image 20250803110738.png",
     "_png/Pasted image 20250803105819.png",
@@ -430,23 +459,19 @@
     "backend/NestJS/NestJS - с нуля.md",
     "_png/Pasted image 20250802112615.png",
     "_png/Pasted image 20250802103819.png",
-    "_png/Pasted image 20250801222903.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "frontend/frontend.md",
     "frontend/React/React Foundamentals.md",
-    "frontend/React/React + Redux.md",
     "database/DataGrip.md",
     "cs/RegExp.md",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
-    "index.md",
     "frontend/SSR.md",
     "backend/backend.md",
     "database/database.md",
     "concepts/concepts.md",
     "database/SQLite.md",
     "database/Valkey.md",
-    "architecture/architecture.md",
     "architecture",
     "concepts",
     "_png",

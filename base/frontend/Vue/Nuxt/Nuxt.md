@@ -1,5 +1,11 @@
-
-
+---
+tags:
+  - vue
+  - nuxt
+  - ssr
+  - seo
+  - frontend
+---
 
 ## Введение
 
