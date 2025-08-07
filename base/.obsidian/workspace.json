@@ -200,7 +200,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -421,13 +421,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "frontend/Vue/Vue/Vue.md",
+                "file": "architecture/Architecture/FSD/FSD.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Vue"
+              "title": "Outline of FSD"
             }
           }
         ],
@@ -454,18 +454,19 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "41e66bb90725c03f",
+  "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
+    "frontend/Vue/Vue/Vue.md",
+    "frontend/React/React + Redux.md",
+    "frontend/Angular/Angular.md",
+    "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250807193826.png",
     "devops/docker/Docker + Ansible.md",
     "devops/kubernetes/Kubernetes + Helm.md",
     "backend/Microservices/Паттерны и практика построения микросервисов.md",
-    "frontend/React/React + Redux.md",
     "devops/Linux/Bash/Bash.md",
     "frontend/React/_lessons/09 - React + Redux.md",
     "index.md",
-    "architecture/Architecture/FSD/FSD.md",
-    "frontend/Vue/Vue/Vue.md",
     "frontend/Vue/Nuxt/Nuxt.md",
     "frontend/State Managers/Zustand.md",
     "_png/Pasted image 20250803174940.png",
@@ -480,7 +481,6 @@
     "_png/Pasted image 20250802123511.png",
     "backend/NestJS/NestJS - с нуля.md",
     "_png/Pasted image 20250802112615.png",
-    "_png/Pasted image 20250802103819.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "frontend/frontend.md",
     "frontend/React/React Foundamentals.md",

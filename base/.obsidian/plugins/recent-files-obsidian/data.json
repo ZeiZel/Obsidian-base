@@ -1,8 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "FSD",
+      "path": "architecture/Architecture/FSD/FSD.md"
+    },
+    {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "Angular",
+      "path": "frontend/Angular/Angular.md"
     },
     {
       "basename": "Docker + Ansible",
@@ -17,10 +29,6 @@
       "path": "backend/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
-    },
-    {
       "basename": "Bash",
       "path": "devops/Linux/Bash/Bash.md"
     },
@@ -31,10 +39,6 @@
     {
       "basename": "index",
       "path": "index.md"
-    },
-    {
-      "basename": "FSD",
-      "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
       "basename": "Nuxt",
@@ -195,10 +199,6 @@
     {
       "basename": "Службы",
       "path": "devops/linux/OS/_lessons/Службы.md"
-    },
-    {
-      "basename": "Структура Linux",
-      "path": "devops/linux/OS/_lessons/Структура Linux.md"
     }
   ],
   "omittedPaths": [],
