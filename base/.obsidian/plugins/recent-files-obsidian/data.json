@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "Vue",
+      "path": "frontend/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
       "basename": "Паттерны и практика построения микросервисов",
       "path": "backend/Microservices/Паттерны и практика построения микросервисов.md"
     },
@@ -17,10 +29,6 @@
       "path": "frontend/React/_lessons/09 - React + Redux.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
-    },
-    {
       "basename": "index",
       "path": "index.md"
     },
@@ -29,16 +37,8 @@
       "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
-      "basename": "Vue",
-      "path": "frontend/Vue/Vue/Vue.md"
-    },
-    {
       "basename": "Nuxt",
       "path": "frontend/Vue/Nuxt/Nuxt.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
       "basename": "Zustand",

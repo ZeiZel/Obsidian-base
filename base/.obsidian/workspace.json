@@ -200,7 +200,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -267,7 +267,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275.51103591918945
+    "width": 275.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -370,6 +371,26 @@
             "id": "90744df994a85d0b",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "592f1e99d5457817",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "0d52777bf8d345f3",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -377,7 +398,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 9
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -400,13 +421,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/Microservices/Паттерны и практика построения микросервисов.md",
+                "file": "frontend/Vue/Vue/Vue.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Паттерны и практика построения микросервисов"
+              "title": "Outline of Vue"
             }
           }
         ],
@@ -414,7 +435,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 478.5
+    "width": 276.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -433,18 +454,19 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "8ede4e25a09157f2",
+  "active": "41e66bb90725c03f",
   "lastOpenFiles": [
-    "frontend/React/React + Redux.md",
+    "_png/Pasted image 20250807193826.png",
+    "devops/docker/Docker + Ansible.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
     "backend/Microservices/Паттерны и практика построения микросервисов.md",
+    "frontend/React/React + Redux.md",
     "devops/Linux/Bash/Bash.md",
     "frontend/React/_lessons/09 - React + Redux.md",
-    "devops/docker/Docker + Ansible.md",
     "index.md",
     "architecture/Architecture/FSD/FSD.md",
     "frontend/Vue/Vue/Vue.md",
     "frontend/Vue/Nuxt/Nuxt.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "frontend/State Managers/Zustand.md",
     "_png/Pasted image 20250803174940.png",
     "_png/Pasted image 20250803151806.png",
@@ -471,7 +493,6 @@
     "database/database.md",
     "concepts/concepts.md",
     "database/SQLite.md",
-    "database/Valkey.md",
     "architecture",
     "concepts",
     "_png",
