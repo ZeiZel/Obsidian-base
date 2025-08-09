@@ -456,6 +456,8 @@
   },
   "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
+    "_png/Pasted image 20250809211618.png",
+    "_png/Pasted image 20250809210954.png",
     "_png/Pasted image 20250809132409.png",
     "_png/Pasted image 20250809121338.png",
     "_png/Pasted image 20250809121325.png",
@@ -477,8 +479,6 @@
     "index.md",
     "frontend/Vue/Nuxt/Nuxt.md",
     "frontend/State Managers/Zustand.md",
-    "_png/Pasted image 20250803174940.png",
-    "_png/Pasted image 20250803151806.png",
     "frontend/microfrontends.md",
     "edge/TypeScript/TypeScript.md",
     "backend/NestJS/NestJS - с нуля.md",
