@@ -217,15 +217,94 @@ Shared вмещает в себя весь переиспользуемый ко
 
 ### Vue
 
+Реконфигурируем положение элементов в проекте:
+- В качестве `entrypoint` у нас будет выходить `App.vue` и `main.ts`
+- Выделяем туда же в `app` роутинг
+- Выносим вьюшки страниц в `pages`. Оттуда нужно переэкспортировать дефолтные экспорты из Vue
 
+![](../../../_png/Pasted%20image%2020250810112750.png)
 
+ Определяем входную точку в приложение через корневой HTML, в котором указываем путь до скрипта
 
+`index.html`
+```HTML
+<!DOCTYPE html>  
+<html lang="">  
+  <head>  
+    <meta charset="UTF-8">  
+    <link rel="icon" href="/favicon.ico">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Vite App</title>  
+  </head>  
+  <body>  
+    <div id="app"></div>  
+    <script type="module" src="/src/app/entrypoint/main.ts"></script>  
+  </body>  
+</html>
+```
+
+И проект теперь на FSD
+
+![](../../../_png/Pasted%20image%2020250810113152.png)
 
 ### Nuxt
 
+Немного меняем конфигурацию и добавляем `alias` с переопределением в `dir` директорий для расположения роутов и лейаутов
 
+`nuxt.config.ts`
+```TS
+// https://nuxt.com/docs/api/configuration/nuxt-config  
+export default defineNuxtConfig({  
+  compatibilityDate: '2025-07-15',  
+  devtools: { enabled: true },  
+  
+    alias: {  
+        '@': '../src'  
+    },  
+    dir: {  
+        pages: './src/app/routes',  
+        layouts: './src/app/layouts',  
+    },  
+  
+  modules: [  
+    '@nuxt/eslint',  
+    '@nuxt/image',  
+    '@nuxt/scripts',  
+    '@nuxt/test-utils',  
+    '@nuxt/ui',  
+    '@nuxt/content'  
+  ]  
+})
+```
 
+В роутер передаём страницу, описанную в `pages`
 
+`src / app / routes / index.vue`
+```HTML
+<script setup lang="ts">  
+import {HomePage} from "../../pages/home";  
+</script>  
+  
+<template>  
+  <HomePage/>  
+</template>
+```
+
+Оставляем в корне проекта корневой vue-файл
+
+`app.vue`
+```HTML
+<template>  
+  <div>  
+    <NuxtRouteAnnouncer />  
+    <NuxtPage/>  
+  </div>  
+</template>
+```
+
+И примерно так выглядит структура нашего проекта после переопределения проекта под FSD
+
+![](../../../_png/Pasted%20image%2020250810125130.png)
 
 ### Angular
 
