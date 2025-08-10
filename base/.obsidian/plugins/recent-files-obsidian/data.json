@@ -5,6 +5,14 @@
       "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
+      "basename": "Плагины для разработки",
+      "path": "tools/nvim/_lessons/Плагины для разработки.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "design",
       "path": "design/design.md"
-    },
-    {
-      "basename": "3 Вкладка edit монтаж",
-      "path": "design/DaVinci Resolve/Модули/3 Вкладка edit монтаж.md"
-    },
-    {
-      "basename": "Службы",
-      "path": "devops/linux/OS/_lessons/Службы.md"
     }
   ],
   "omittedPaths": [],

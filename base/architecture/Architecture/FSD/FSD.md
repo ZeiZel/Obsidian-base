@@ -216,9 +216,81 @@ Shared вмещает в себя весь переиспользуемый ко
 - лейауты так же можем помещать в `src/app/layouts/*`
 
 ### Vue
+
+
+
+
+
 ### Nuxt
+
+
+
+
+
 ### Angular
+
+Так же легко реализуется поддержание FSD и в Angular: 
+- Перемещаем корневой app компонент в entrypoint
+- выделяем configs и router в отдельные папки
+- оставляем `main.ts`, глобальные стили `styles.scss` и входной `index.html` в корне проекта
+
+![](../../../_png/Pasted%20image%2020250810103352.png)
+
 ### Sveltekit
+
+Производим начальную конфигурацию кита: 
+- Перемещаем расположение папок роутинга в `app/routes`
+- Переопределяем корневой шаблон на другое местоположение `src/app/index.html`
+
+`svelte.config.js`
+```JS
+import adapter from '@sveltejs/adapter-auto';  
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';  
+  
+/** @type {import('@sveltejs/kit').Config} */  
+const config = {  
+  preprocess: vitePreprocess(),  
+  
+  kit: {  
+   adapter: adapter(),  
+   alias: { '@/*': 'src/*' },  
+   files: {  
+    routes: 'src/app/routes',  
+    lib: 'src',  
+    appTemplate: 'src/app/index.html',  
+    assets: 'public'  
+   }  
+  },  
+};  
+  
+export default config;
+```
+
+Примечание: страницы дефолтно экспортируются из файлов Svelte
+
+`pages / home / ui / index.ts`
+```TS
+export { default as HomePage } from './Home.svelte'
+```
+
+Далее просто импортируем нашу страницу в роутер
+
+`app / routes / +page.svelte`
+```JS
+<script lang="ts">  
+  import { HomePage } from '@/pages/home';  
+</script>  
+  
+<HomePage />
+```
+
+### Миграция проектов
+
+Миграция большого проекта в FSD - это достаточно долгий процесс. Чтобы снизить градус боли, можно следовать такой последовательности:
+- создать отдельную папку под FSD (`src`, `fsd`)
+- выделить сначала `pages` и `app`
+- затем можно перетащить переиспользуемый функционал в `shared` (легко туда переедут `hook`, `interfaces` и `helpers`)
+- потом постепенно перетаскивать во время рефакторинга или проивзодства новый фичи в `features` / `entities` / `widgets`
 
 ## Примечания
 
