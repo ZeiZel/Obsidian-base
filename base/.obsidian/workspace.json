@@ -459,8 +459,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 276.5,
-    "collapsed": true
+    "width": 276.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -481,6 +480,11 @@
   },
   "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
+    "_png/Pasted image 20250810194827.png",
+    "_png/Pasted image 20250810194713.png",
+    "_png/Pasted image 20250810194601.png",
+    "_png/Pasted image 20250810191651.png",
+    "_png/Pasted image 20250810125449.png",
     "_png/Pasted image 20250810125130.png",
     "_png/Pasted image 20250810113152.png",
     "_png/Pasted image 20250810112750.png",
@@ -491,11 +495,6 @@
     "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250809211618.png",
     "_png/Pasted image 20250809210954.png",
-    "_png/Pasted image 20250809132409.png",
-    "_png/Pasted image 20250809121338.png",
-    "_png/Pasted image 20250809121325.png",
-    "_png/Pasted image 20250809121121.png",
-    "_png/Pasted image 20250809120525.png",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/React + Redux.md",
     "frontend/Angular/Angular.md",
