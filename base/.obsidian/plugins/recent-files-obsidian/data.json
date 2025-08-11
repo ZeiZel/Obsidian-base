@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
     },
@@ -43,10 +47,6 @@
     {
       "basename": "09 - React + Redux",
       "path": "frontend/React/_lessons/09 - React + Redux.md"
-    },
-    {
-      "basename": "index",
-      "path": "index.md"
     },
     {
       "basename": "Nuxt",

@@ -222,9 +222,33 @@
               "icon": "lucide-file",
               "title": "Плагины для разработки"
             }
+          },
+          {
+            "id": "75381ab3c0dfab7a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 9
       }
     ],
     "direction": "vertical"
@@ -445,13 +469,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/Architecture/FSD/FSD.md",
+                "file": "index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FSD"
+              "title": "Outline of index"
             }
           }
         ],
@@ -459,7 +483,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 276.5
+    "width": 276.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -478,8 +503,9 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "584f640f8a2f07cb",
+  "active": "75381ab3c0dfab7a",
   "lastOpenFiles": [
+    "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250810194827.png",
     "_png/Pasted image 20250810194713.png",
     "_png/Pasted image 20250810194601.png",
@@ -492,9 +518,7 @@
     "tools/nvim/_lessons/Плагины для разработки.md",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "tools/nvim/NVim.md",
-    "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250809211618.png",
-    "_png/Pasted image 20250809210954.png",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/React + Redux.md",
     "frontend/Angular/Angular.md",

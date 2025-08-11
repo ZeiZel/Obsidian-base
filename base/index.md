@@ -60,18 +60,27 @@ description: Base homepage.
 
 - [Основы HTML + CSS](frontend/Базовая%20вёрстка/Вёрстка%20Basic.md)
 	- HTML
-	- CSS / SASS / LESS / STYLYS
+	- CSS
 		- FlexBox
 		- Grid
 		- container queries
 		- mediaqueries
 		- animations
 		- position
-	- Bootstrap
-	- Materialize CSS
-	- BEM
-	- Pug
-	- [Tailwind CSS](frontend/Tailwind%20CSS.md)
+	- Preprocessors
+		- SASS
+		- LESS
+		- STYLYS
+	- Frameworks
+		- Bootstrap
+		- Materialize CSS
+		- [Tailwind CSS](frontend/Tailwind%20CSS.md)
+		- Panda CSS
+		- CSS Modules
+	- Methology
+		- BEM
+	- Tooling
+		- Pug
 - Computer Science
 	- [Алгоритмы и Структуры даных](cs/Алгоритмы%20и%20Структуры%20даных.md)
 	- Безопасность
@@ -95,25 +104,68 @@ description: Base homepage.
 	- Events
 - [TypeScript](edge/TypeScript/TypeScript.md)
 - [Инструменты](edge/edge.md)
-	- Webpack
-	- RSPack
-	- ESBuild
-	- Parcel
-	- Snowpack
+	- Bundlers
+		- Vite
+		- SWC
+		- Webpack
+		- RSPack
+		- ESBuild
+		- Parcel
+		- Snowpack
 	- Git, Npm, Yarn
 	- Github, Gitlab, Bitbucket
 - [Frontend](frontend/frontend.md)
+	- UI Libs
+		- Material UI (React)
+		- Chakra UI (React)
+		- Shadcn UI (React)
+		- Ant-design (React)
+		- Radix UI (React)
+		- React Aria (React)
+		- Ark UI (React)
+		- Taiga UI (Angular)
 	- Подходы
 		- Webhooks
-	- React / NextJS
+	- Frameworks
+		- React / NextJS / React Router Dom
+		- Vue / Nuxt
+			- Pinia
+		- Angular
+			- NgRx
+			- RxJS
+		- Svelte / SvelteKit
+		- Astro
+	- State management
 		- Redux
 		- [MobX](frontend/State%20Managers/MobX.md)
-	- Vue / Nuxt
-		- Pinia
-	- Angular
-		- NgRx
-		- RxJS
-	- Svelte / SvelteKit
+		- Jotai
+		- Effector
+		- Context
+		- Zustand
+	- Forms
+		- React-hook-form
+		- Formik
+	- Validation
+		- Zod
+		- Yup
+		- Valibot
+	- API Calls
+		- REST
+			- RTK Query
+			- axios
+			- swr
+			- react query
+		- GQL
+			- Relay
+			- urql
+			- Apollo
+		- gRPC
+			- 
+	- Animation
+		- Framer Motion
+		- React Spring
+		- GSock
+		- GASP
 	- [SSR](frontend/SSR.md)
 	- [PWA](frontend/PWA.md)
 		- Canvas
@@ -132,6 +184,8 @@ description: Base homepage.
 		- Pointer Lock
 		- Ambient Light Events
 	- [Микрофронтенды](frontend/microfrontends.md)
+- Mobile
+	- [React Native](mobile/React%20Native/React%20Native.md)
 - [Backend](backend/backend.md)
 	- [Безбэкендный подход](backend/serverless.md)
 	- [Микросервисы](backend/Microservices/Паттерны%20и%20практика%20построения%20микросервисов.md)
@@ -157,6 +211,7 @@ description: Base homepage.
 		- Cypress
 	- Integration
 	- Unit
+		- Vitest
 		- Jest
 		- React-testing-library
 	- Screenshot
