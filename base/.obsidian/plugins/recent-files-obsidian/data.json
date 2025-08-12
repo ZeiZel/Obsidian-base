@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
       "basename": "Плагины для разработки",
       "path": "tools/nvim/_lessons/Плагины для разработки.md"
+    },
+    {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
+      "basename": "Службы",
+      "path": "devops/Linux/OS/_lessons/Службы.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
@@ -19,10 +27,6 @@
     {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
-    },
-    {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
     },
     {
       "basename": "Angular",
@@ -195,10 +199,6 @@
     {
       "basename": "10 Вкладка Deliver. Экспорт материала",
       "path": "design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md"
-    },
-    {
-      "basename": "design",
-      "path": "design/design.md"
     }
   ],
   "omittedPaths": [],
