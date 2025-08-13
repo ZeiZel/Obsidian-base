@@ -177,14 +177,125 @@ FSD решает проблемы декомпозиции функционал�
 
 ### Старт проекта
 
+Создаём проект
 
+```bash
+npm create vite@latest
+npm i react-router
+```
 
+Добавляем роутер
 
+`src / main.tsx`
+```TSX
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import { createBrowserRouter, RouterProvider } from 'react-router'
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <div>Привет из FSD</div>
+	}
+])
+
+createRoot(document.getElementById('root')!).render(
+	<StrictMode>
+		<RouterProvider router={router} />
+	</StrictMode>,
+)
+```
 
 ### Подготовка слоя App
 
+Создадим базовый лейаут, который будет оборачивать наши приложения. Его поместим в App в отдельный сегмент `layout`
 
+`src / app / layout / Layout.tsx`
+```TSX
+import { Outlet } from "react-router";  
+import { Footer } from "@/shared/ui";  
+import { Icon } from "@/assets";  
+import { useUserStore } from "@/entities";  
+  
+export function Layout() {  
+  const { profile } = useUserStore();  
+  
+  return (  
+    <div>  
+      <div>Шапка</div>  
+      {profile?.name}  
+      <Icon.Check />  
+      <Outlet />  
+      <Footer />  
+    </div>  
+  );  
+}
+```
 
+Далее выделим сегмент `routes`, в который поместим роуты со всеми страницами
+
+`src / app / routes / routes.tsx`
+```TSX
+import { createBrowserRouter } from "react-router";  
+import { CategoryPage, MainPage } from "../../pages";  
+import { Layout } from "../layout/Layout";  
+  
+export const router = createBrowserRouter([  
+    {  
+       path: "/",  
+       Component: Layout,  
+       children: [  
+          { index: true, Component: MainPage },  
+          { path: "community", element: <a>Comm</a> },  
+          { path: ":category", Component: CategoryPage },  
+          {  
+             path: "article",  
+             children: [{ path: ":alias", element: <a>Article</a> }],  
+          },  
+          {  
+             path: "profile",  
+             children: [  
+                { index: true, element: <a>Profile</a> },  
+                { path: "edit", element: <a>EditProfile</a> },  
+             ],  
+          },  
+       ],  
+    },  
+]);
+```
+
+И в конце определим `entrypoint` точку, в которой будет происходить инициализация приложения
+
+`src / app / entrypoint / main.tsx`
+```TSX
+import { StrictMode } from 'react'  
+import { createRoot } from 'react-dom/client'  
+import '../styles/variables.css'  
+import '../styles/base.css'  
+import { RouterProvider } from 'react-router'  
+import { router } from '../routes'  
+  
+createRoot(document.getElementById('root')!).render(  
+    <StrictMode>  
+       <RouterProvider router={router} />  
+    </StrictMode>,  
+)
+```
+
+И примерно так будет выглядеть наша структура
+
+![](../../../_png/Pasted%20image%2020250813211831.png)
+
+В базовом `index.html `нужно изменить путь до скрипта инициализации приложения прямо к энтрипоинту
+
+`index.html`
+```HTML
+<body>  
+  <div id="root"></div>  
+  <script type="module" src="/src/app/entrypoint/main.tsx"></script>  
+</body>
+```
 
 ### Обзор проекта
 
@@ -673,6 +784,8 @@ Widgets - это большие самодостаточные блоки инт
 
 - экспортируемые метаданные и настройки для страницы можно хранить в `src/pages/<page>/meta/meta.ts`
 - лейауты так же можем помещать в `src/app/layouts/*`
+
+>[!warning] Если с next не работает папка `src/`, то её можно переименовать в любое другое наименование (например, `fsd/`), чтобы не было конфликтов с внешними `app` и `pages`
 
 ### Vue
 
