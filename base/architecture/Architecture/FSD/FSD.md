@@ -238,7 +238,7 @@ export function Layout() {
 `src / app / routes / routes.tsx`
 ```TSX
 import { createBrowserRouter } from "react-router";  
-import { CategoryPage, MainPage } from "../../pages";  
+import { MainPage } from "../../pages";  
 import { Layout } from "../layout/Layout";  
   
 export const router = createBrowserRouter([  
@@ -246,20 +246,7 @@ export const router = createBrowserRouter([
        path: "/",  
        Component: Layout,  
        children: [  
-          { index: true, Component: MainPage },  
-          { path: "community", element: <a>Comm</a> },  
-          { path: ":category", Component: CategoryPage },  
-          {  
-             path: "article",  
-             children: [{ path: ":alias", element: <a>Article</a> }],  
-          },  
-          {  
-             path: "profile",  
-             children: [  
-                { index: true, element: <a>Profile</a> },  
-                { path: "edit", element: <a>EditProfile</a> },  
-             ],  
-          },  
+          { index: true, Component: MainPage }, 
        ],  
     },  
 ]);
@@ -308,17 +295,65 @@ createRoot(document.getElementById('root')!).render(
 
 ### Обзор проекта
 
+Сайт с рейтингами по разным категориям
 
+![](../../../_png/Pasted%20image%2020250813214707.png)
 
 ### О слое Pages
 
+Pages - страницы нашего приложения
 
+Содержит внутри slices
 
+Сегменты:
+- ui - интерфейс страницы / состояние загрузки / ошибки
+- api - данные, которые не относятся к сущностям
+- store - допустим стор, если он используется только для страницы и никуда больше не уходит
+
+![](../../../_png/Pasted%20image%2020250813215319.png)
 
 ### Структура роутинга
 
+Разобьём страницы по макету: 
+1. главная
+2. сообщество
+3. отдельная страница категорий (с новостями)
+4. страница отдельной новости
+5. профиль
+	1. Главная
+	2. Редактировать профиль
 
+![](../../../_png/Pasted%20image%2020250813220102.png)
 
+`src / app / routes / routes.tsx`
+```TSX
+import { createBrowserRouter } from "react-router";  
+import { CategoryPage, MainPage } from "../../pages";  
+import { Layout } from "../layout/Layout";  
+  
+export const router = createBrowserRouter([  
+    {  
+       path: "/",  
+       Component: Layout,  
+       children: [  
+          { index: true, Component: MainPage },  
+          { path: "community", element: <a>Comm</a> },  
+          { path: ":category", Component: CategoryPage },  
+          {  
+             path: "article",  
+             children: [{ path: ":alias", element: <a>Article</a> }],  
+          },  
+          {  
+             path: "profile",  
+             children: [  
+                { index: true, element: <a>Profile</a> },  
+                { path: "edit", element: <a>EditProfile</a> },  
+             ],  
+          },  
+       ],  
+    },  
+]);
+```
 
 ### Выделение slice
 
