@@ -435,7 +435,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 276.5
+    "width": 276.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -456,22 +457,22 @@
   },
   "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
+    "_png/Pasted image 20250815223655.png",
+    "_png/Pasted image 20250815222459.png",
+    "_png/Pasted image 20250815214050.png",
+    "_png/Pasted image 20250814220536.png",
+    "_png/Pasted image 20250814220456.png",
+    "_png/Pasted image 20250814220258.png",
+    "_png/Pasted image 20250814220230.png",
+    "_png/Pasted image 20250814220124.png",
+    "_png/Pasted image 20250814220055.png",
     "_png/Pasted image 20250813220102.png",
     "_png/Pasted image 20250813215319.png",
-    "_png/Pasted image 20250813214707.png",
-    "_png/Pasted image 20250813211831.png",
     "frontend/React/React + Redux.md",
     "architecture/Architecture/FSD/FSD.md",
-    "_png/Pasted image 20250812220347.png",
-    "_png/Pasted image 20250812220327.png",
-    "_png/Pasted image 20250812215034.png",
-    "_png/Pasted image 20250812214759.png",
-    "_png/Pasted image 20250812214749.png",
-    "_png/Pasted image 20250812213949.png",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "index.md",
     "devops/Linux/OS/_lessons/Службы.md",
-    "_png/Pasted image 20250810194827.png",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "tools/nvim/NVim.md",
     "frontend/Vue/Vue/Vue.md",

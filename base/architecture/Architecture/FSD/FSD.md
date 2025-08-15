@@ -325,6 +325,8 @@ Pages - страницы нашего приложения
 
 ![](../../../_png/Pasted%20image%2020250813220102.png)
 
+И примерно так можем начально определить роутинг нашего приложения
+
 `src / app / routes / routes.tsx`
 ```TSX
 import { createBrowserRouter } from "react-router";  
@@ -336,13 +338,18 @@ export const router = createBrowserRouter([
        path: "/",  
        Component: Layout,  
        children: [  
+		  // главная
           { index: true, Component: MainPage },  
+		  // сообщество
           { path: "community", element: <a>Comm</a> },  
+		  // категории
           { path: ":category", Component: CategoryPage },  
+		  // статьи
           {  
              path: "article",  
              children: [{ path: ":alias", element: <a>Article</a> }],  
           },  
+		  // профиль
           {  
              path: "profile",  
              children: [  
@@ -357,23 +364,211 @@ export const router = createBrowserRouter([
 
 ### Выделение slice
 
+Users
 
+![](../../../_png/Pasted%20image%2020250814220055.png)
+
+Category
+
+![](../../../_png/Pasted%20image%2020250814220124.png)
+
+Rating
+
+![](../../../_png/Pasted%20image%2020250814220230.png)
+
+Company
+
+![](../../../_png/Pasted%20image%2020250814220258.png)
+
+Review
+
+![](../../../_png/Pasted%20image%2020250814220456.png)
+
+Correction
+
+![](../../../_png/Pasted%20image%2020250814220536.png)
 
 ### Создание первой страницы
 
+Создаём базовую страницу с категориями
 
+`src / pages / category / ui / CategoryPage / CategoryPage.tsx`
+```TSX
+export const CategoryPage = () => {
+	return <div>Category</div>
+}
+```
 
+Теперь создаём экспорт из `ui`
+
+`src/pages/category/ui/index.ts`
+```TSX
+export { CategoryPage } from './CategoryPage/CategoryPage'
+```
+
+Для каждого слайса обязательно выделяем своё публичное АПИ, через которое предоставляем доступ к текущим элементам
+
+`src / pages / category / index.ts`
+```TSX
+export { CategoryPage } from './ui'
+```
+
+И финальный экспорт - из самого слоя
+
+`src/pages/index.ts`
+```TSX
+export { CategoryPage } from './category'
+```
+
+В итоге структура наших директорий выглядит подобным образом: 
+
+![](../../../_png/Pasted%20image%2020250815214050.png)
+
+Хорошей практикой является создание ридмих с описанием модуля. Тут мы можем выделить слайсы с определёнными доменными сущностями приложения. 
+
+Преимущественно, у нас есть два способа выделения страниц: 
+- по назначению - ui-prefered - когда мы выделяем страницы по назначению, а не отталкиваясь от бизнес-сущностей
+- по slices - entity-prefered - когда мы выделяем страницы вне бизнес-сущностей
+
+`README.md`
+```MD
+# Slices
+
+- User
+- Category
+- Rating
+- Company
+- Review
+- Correction
+
+## Строго по slices
+
+1. /pages/user/ui/Profile
+2. /pages/user/ui/ProfileEdit
+3. /pages/user/ui/Community
+4. /pages/main/ui/Index
+
+## По назначению
+
+1. /pages/profile/ui/Index
+2. /pages/profile/ui/Edit
+3. /pages/community/ui/Index
+```
 
 ### Добавление стилей
 
+Создаём базовые стили
 
+`src / app / styles / base.css`
+```CSS
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--fontFamilyButton);
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+```
+
+Глобальные переменные. В этом файле нам нужно описать глобальные значения цветов, которые мы используем в приложении.
+
+![](../../../_png/Pasted%20image%2020250815222459.png)
+
+`src / app / styles / variables.css`
+```CSS
+:root {
+	--dominant-main: #ffffff;
+	--dominant-dop: #f6f8fc;
+
+	--content-dark: #373737;
+	--content-medium: #787a7c;
+	--content-light: #dddfe1;
+
+	--blue-dark: #0f52c2;
+	--blue-medium: #1f74e7;
+	--blue-light: #6399f6;
+
+	--orange: #f16600;
+
+	--red-light: #f0776c;
+	--red: #ea4335;
+
+	--green-light: #53cc93;
+	--green: #21ba72;
+
+	--padding: 50px;
+
+	--fontFamilyButton: "Inter", sans-serif;
+}
+```
+
+Передаём стили во входную точку приложения
+
+`src / app / entrypoint / main.tsx`
+```TSX
+import '../styles/variables.css'
+import '../styles/base.css'
+```
+
+И добавляем шрифты для приложения в базовый 
+
+`index.html`
+```HTML
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+```
 
 ### Layout
 
+После того, как мы задали стили, нам нужно определить, где будут идти шапка и футер
 
+Тут проблема встаёт в том, что не понятно, куда мы можем деть Layout. Если бы шапка содержала только кнопки и навигацию, то лейаут можно было бы положить в shared (хоть это и не идеальный вариант, так как нам бы пришлось импортировать shared в shared). 
 
+На нашем макете, у нас в шапке располагаются элементы из entities, что усложняет задачу
 
+Если мы решим положить Layout в widgets, то так получится, что мы положили просто UI в отдельную сущность, которая не является бизнесовым доменом. Условные `layout` и `user` слайсы не мэтчатся по логике, так как одно интерфейс, а другое уже бизнес-сущность
 
+![](../../../_png/Pasted%20image%2020250815223655.png)
+
+Чтобы решить проблему, мы можем пойти по третьему пути и, в нашем варианте, можно положить layout в `app`
+
+`src / app / layout / Layout.tsx`
+```TSX
+import { Outlet } from 'react-router'
+
+export function Layout() {
+	return <div>
+		<div>Шапка</div>
+		{/** контент страницы из react-router */}
+		<Outlet />
+		<div>Футер</div>
+	</div>
+}
+```
+
+И добавить в нашу обёртку
+
+`src/app/routes/routes.tsx`
+```TSX
+import { Layout } from '../layout/Layout'
+
+export const router = createBrowserRouter([
+	{
+		path: '/',
+		Component: Layout,
+```
 
 
 
@@ -392,12 +587,12 @@ Shared - это слой для общих частей приложения: б
 Не содержит slice
 
 Частые сегменты: 
-- api - клиент запросов, префикс для запросов
-- ui - кнопки, инпуты, карты, чекбоксы
-- lib - хуки, хелперы, форматтеры
-- config - переменные окружения, конфигурации и feature flags
-- routes - роуты в приложении
-- i18n - интернационализации
+- `api` - клиент запросов, префикс для запросов
+- `ui` - кнопки, инпуты, карты, чекбоксы
+- `lib` - хуки, хелперы, форматтеры
+- `config` - переменные окружения, конфигурации и feature flags
+- `routes` - роуты в приложении
+- `i18n` - интернационализации
 
 И многие другие. У нас нет ограничений на наименование сегментов.
 
