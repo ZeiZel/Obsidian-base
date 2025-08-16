@@ -596,45 +596,169 @@ Shared - это слой для общих частей приложения: б
 
 И многие другие. У нас нет ограничений на наименование сегментов.
 
+>[!warning] Из-за проблем, связанных со сборщиками и их работой с реэкспортами файлов, класть в корень слоя `index.ts` может быть чревато раздутым бандлом и более медленной сборкой
+
 ![](../../../_png/Pasted%20image%2020250812213949.png)
 
 ### Константы маршрутов
 
+В `shared` нам уже стоит расположить константы наших роутов, которые мы будем использовать во время навигации по приложению. Эти константы не являются частью бизнес-логики самого приложения и использоваться могут сразу во всех слоях, поэтому `shared` - это самый правильный вариант их расположения. 
 
+`src / shared / routes / routes.ts`
+```TS
+export const ROUTES = {  
+    main: '/',  
+    community: '/community',  
+    category: (alias: string) => `/${alias}`,  
+    article: (alias: string) => `/article/${alias}`,  
+    profile: {  
+       index: '/profile',  
+       edit: '/profile/edit'  
+    }  
+}
+```
 
+И провайдим их через публичное АПИ
 
-
-
-
-
+`src / shared / routes / index.ts`
+```TS
+export { ROUTES } from './routes'
+```
 
 ### Конфигурации
 
+Создаём пример энвов, который будет сохранён в нашем репозитории
 
+`.env.example`
+```env
+API_URL=https://ratingus.ru/api
+```
 
+Создаём сами энвы
 
+`.env`
+```env
+API_URL=https://ratingus.ru/api
+```
 
+Игнорим энвы, чтобы не закидывать их в репозиторий в публичный доступ
 
+`.gitignore`
+```
+.env
+```
 
+И описываем конфигурацию сбора переменных окружения
 
+`src / shared / config / env.ts`
+```TS
+export type EnvConfig = {  
+    API_URL: string;  
+}  
+  
+export const CONFIG: EnvConfig = {  
+    API_URL: import.meta.env.API_URL  
+}
+```
+
+Ну и тут же рядом мы можем расположить feature-флаги нашего приложения
+
+`src / shared / config / flags.ts`
+```TS
+
+```
+
+Теперь остаётся только создать для них публичное АПИ
+
+`src / shared / config / index.ts`
+```TS
+export { CONFIG } from './env';  
+export type { EnvConfig } from './env';
+```
 
 ### API клиент
 
 
 
+`src / shared / api / client.ts`
+```TS
+import axios from 'axios';  
+import { CONFIG } from '../config';  
+  
+export const http = axios.create({  
+    baseURL: CONFIG.API_URL,  
+    headers: {  
+       'Content-Type': 'application/json'  
+    }  
+});
+```
 
 
 
+`src / shared / api / access-token.intecepter.ts`
+```TS
+import { http } from './client';  
+  
+http.interceptors.request.use(request => {  
+    const accessToken = localStorage.getItem('accessToken');  
+    if (accessToken) {  
+       request.headers['Authorization'] = `Bearer ${accessToken}`  
+    }  
+    return request  
+}, error => {  
+    return Promise.reject(error)  
+});
+```
 
+
+
+`src / shared / api / index.ts`
+```TS
+export { http } from './client'
+```
 
 
 ### Библиотека
 
 
 
+`src / shared / lib / hooks / useDebounce.ts`
+```TS
+import { useState, useEffect } from 'react';  
+  
+export function useDebounce<T>(value: T, delay: number) {  
+    const [debouncedValue, setDebouncedValue] = useState(value);  
+  
+    useEffect(  
+       () => {  
+          const handler = setTimeout(() => {  
+             setDebouncedValue(value);  
+          }, delay);  
+  
+          return () => {  
+             clearTimeout(handler);  
+          };  
+       },  
+       [delay, value]  
+    );  
+  
+    return debouncedValue;  
+}
+```
 
 
 
+`src / shared / lib / hooks / index.ts`
+```TS
+export { useDebounce } from './useDebounce'
+```
+
+
+
+`src / shared / lib / index.ts`
+```TS
+export { useDebounce } from './hooks'
+```
 
 
 
@@ -642,11 +766,125 @@ Shared - это слой для общих частей приложения: б
 
 
 
+`src / shared / ui / Tag / Tag.module.css`
+```CSS
+.tag {  
+  display: flex;  
+  align-items: center;  
+}  
+  
+.tag svg {  
+  color: var(--dominant-main);  
+}  
+  
+.tag span {  
+  color: var(--dominant-main);  
+}  
+  
+.s {  
+  gap: 6px;  
+  padding: 4px 8px;  
+  border-radius: 49px;  
+}  
+  
+.m {  
+  gap: 4px;  
+  padding: 6px 8px;  
+  border-radius: 28px;  
+}  
+  
+.s svg {  
+  width: 16px;  
+  height: 16px;  
+}  
+  
+.m svg {  
+  width: 24px;  
+  height: 24px;  
+}  
+  
+.s span {  
+  font-weight: 500;  
+  font-size: 14px;  
+  line-height: 1.42857;  
+}  
+  
+.tagM span {  
+  font-weight: 400;  
+  font-size: 18px;  
+  line-height: 1.66667;  
+}  
+  
+.orange {  
+  background-color: var(--orange);  
+}  
+  
+.red {  
+  background-color: var(--red);  
+}  
+  
+.green {  
+  background-color: var(--green);  
+}  
+  
+.greenLight {  
+  background-color: var(--green-light);  
+}
+```
 
 
 
+`src / shared / ui / Tag / Tag.props.ts`
+```TS
+import type { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";  
+import type { IconType } from '../../../assets/Icon/Icon';  
+  
+  
+export interface TagProps  
+    extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
+    size: "s" | "m";  
+    color: "orange" | "red" | "green" | "greenLight";  
+    icon: IconType;  
+    children: ReactNode;  
+}
+```
 
 
+
+`src / shared / ui / Tag / Tag.tsx`
+```TS
+import cn from "classnames";  
+  
+import styles from "./Tag.module.css";  
+import type { TagProps } from "./Tag.props";  
+import { Icon } from "../../../assets/Icon/Icon";  
+  
+export const Tag = ({ icon, size, color, children, className }: TagProps) => {  
+    const IconComponent = Icon[icon];  
+  
+    const renderChildren = () => {  
+       if (typeof children === "string") {  
+          return <span>{children}</span>;  
+       }  
+       return children;  
+    };  
+  
+    return (  
+       <div className={cn(styles.tag, styles[color], styles[size], className)}>  
+          <IconComponent />  
+          {renderChildren()}  
+       </div>  
+    );  
+};
+```
+
+Далее просто экспортируем все элементы из данного слайса
+
+`src / shared / ui / index.ts`
+```TS
+export { Footer } from './Footer/Footer'  
+export { Tag } from './Tag/Tag'
+```
 
 ### Импорты в shared
 
