@@ -1,12 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "FSD",
-      "path": "architecture/Architecture/FSD/FSD.md"
+      "basename": "React Query",
+      "path": "frontend/React/React Query.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "frontend/React/React Foundamentals.md"
     },
     {
       "basename": "React + Redux",
       "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "Продвинутый FrontEnd",
+      "path": "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
+    },
+    {
+      "basename": "JavaScript",
+      "path": "frontend/JavaScript/JavaScript.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "FSD",
+      "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
       "basename": "Плагины для разработки",
@@ -81,20 +101,12 @@
       "path": "frontend/frontend.md"
     },
     {
-      "basename": "React Foundamentals",
-      "path": "frontend/React/React Foundamentals.md"
-    },
-    {
       "basename": "DataGrip",
       "path": "database/DataGrip.md"
     },
     {
       "basename": "RegExp",
       "path": "cs/RegExp.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "03 - Дополнительные основы JavaScript",
@@ -187,18 +199,6 @@
     {
       "basename": "devops",
       "path": "devops/devops.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
-    },
-    {
-      "basename": "Davinci resolve",
-      "path": "design/DaVinci Resolve/Davinci resolve.md"
-    },
-    {
-      "basename": "10 Вкладка Deliver. Экспорт материала",
-      "path": "design/DaVinci Resolve/Модули/10 Вкладка Deliver. Экспорт материала.md"
     }
   ],
   "omittedPaths": [],

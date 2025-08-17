@@ -198,9 +198,67 @@
               "icon": "lucide-file",
               "title": "React + Redux"
             }
+          },
+          {
+            "id": "ee2d840f35516602",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "f134da2ce9adb7b5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/Алгоритмы и Структуры даных.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Алгоритмы и Структуры даных"
+            }
+          },
+          {
+            "id": "7a677a46d18a1b6f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/React/React Query.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "React Query"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -267,8 +325,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275.51103591918945,
-    "collapsed": true
+    "width": 275.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -421,13 +478,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/Architecture/FSD/FSD.md",
+                "file": "frontend/React/React Query.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FSD"
+              "title": "Outline of React Query"
             }
           }
         ],
@@ -455,8 +512,14 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "584f640f8a2f07cb",
+  "active": "7a677a46d18a1b6f",
   "lastOpenFiles": [
+    "frontend/React/React Foundamentals.md",
+    "frontend/React/React + Redux.md",
+    "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
+    "frontend/JavaScript/JavaScript.md",
+    "cs/Алгоритмы и Структуры даных.md",
+    "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250815223655.png",
     "_png/Pasted image 20250815222459.png",
     "_png/Pasted image 20250815214050.png",
@@ -467,9 +530,6 @@
     "_png/Pasted image 20250814220124.png",
     "_png/Pasted image 20250814220055.png",
     "_png/Pasted image 20250813220102.png",
-    "_png/Pasted image 20250813215319.png",
-    "frontend/React/React + Redux.md",
-    "architecture/Architecture/FSD/FSD.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "index.md",
     "devops/Linux/OS/_lessons/Службы.md",
@@ -489,11 +549,8 @@
     "backend/NestJS/NestJS - с нуля.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "frontend/frontend.md",
-    "frontend/React/React Foundamentals.md",
     "database/DataGrip.md",
     "cs/RegExp.md",
-    "cs/Алгоритмы и Структуры даных.md",
-    "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
     "architecture",
     "concepts",
     "_png",
