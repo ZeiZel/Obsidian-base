@@ -1,6 +1,34 @@
 {
   "recentFiles": [
     {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "JS",
+      "path": "frontend/JavaScript/JS.md"
+    },
+    {
+      "basename": "JavaScript",
+      "path": "frontend/JavaScript/JavaScript.md"
+    },
+    {
+      "basename": "Профилирование React",
+      "path": "frontend/React/Профилирование React.md"
+    },
+    {
+      "basename": "02 - Основы JavaScript",
+      "path": "frontend/React/_lessons/02 - Основы JavaScript.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
       "basename": "React Query",
       "path": "frontend/React/React Query.md"
     },
@@ -9,20 +37,8 @@
       "path": "frontend/React/React Foundamentals.md"
     },
     {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
-    },
-    {
       "basename": "Продвинутый FrontEnd",
       "path": "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
-    },
-    {
-      "basename": "JavaScript",
-      "path": "frontend/JavaScript/JavaScript.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "FSD",
@@ -183,22 +199,6 @@
     {
       "basename": "edge",
       "path": "edge/edge.md"
-    },
-    {
-      "basename": "computer science",
-      "path": "cs/computer science.md"
-    },
-    {
-      "basename": "Pasted image 20250601192606",
-      "path": "devops/docker/_png/Pasted image 20250601192606.png"
-    },
-    {
-      "basename": "desktop",
-      "path": "desktop/desktop.md"
-    },
-    {
-      "basename": "devops",
-      "path": "devops/devops.md"
     }
   ],
   "omittedPaths": [],
