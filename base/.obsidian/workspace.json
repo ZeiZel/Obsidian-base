@@ -403,8 +403,7 @@
               "title": "Outline of Алгоритмы и Структуры даных"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -429,7 +428,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "bf31226b3be7dffb",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
     "frontend/React/React + Redux.md",
     "cs/Алгоритмы и Структуры даных.md",

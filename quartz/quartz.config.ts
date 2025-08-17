@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
     configuration: {
-        pageTitle: "Quartz 4",
+        pageTitle: "ZeiZel",
         pageTitleSuffix: "",
         enableSPA: true,
         enablePopovers: true,
@@ -16,7 +16,7 @@ const config: QuartzConfig = {
             provider: "plausible",
         },
         locale: "ru-RU",
-        baseUrl: "quartz.jzhao.xyz",
+        baseUrl: "https://zeizel.github.io/Obsidian-base/",
         ignorePatterns: ["private", "templates", ".obsidian"],
         defaultDateType: "modified",
         theme: {
@@ -60,16 +60,16 @@ const config: QuartzConfig = {
                 priority: ["frontmatter", "git", "filesystem"],
             }),
             Plugin.SyntaxHighlighting({
+                keepBackground: false,
                 theme: {
                     light: "light-plus",
                     dark: "dark-plus",
                 },
-                keepBackground: false,
             }),
             Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
             Plugin.GitHubFlavoredMarkdown(),
             Plugin.TableOfContents(),
-            Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
+            Plugin.CrawlLinks({ markdownLinkResolution: "shortest", lazyLoad: true }),
             Plugin.Description(),
             Plugin.Latex({ renderEngine: "katex" }),
         ],
