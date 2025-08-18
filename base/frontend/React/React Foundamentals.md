@@ -1,9 +1,9 @@
-
 ## 03:15 ➝ Теория
 
-Реакт - это библиотека для создания пользовательских интерфейсов. То есть это означает, что мы можем писать интерфейсы на нём не только для браузера, но и для мобилок, так как он использует свой виртуальный DOM. 
+Реакт - это библиотека для создания пользовательских интерфейсов. То есть это означает, что мы можем писать интерфейсы на нём не только для браузера, но и для мобилок, так как он использует свой виртуальный DOM.
 
 Мы имеем две основные концепции сайтов:
+
 - MPA (Multi Page Application) - сайт состоит из нескольких страниц, при переходе на которые мы подгружаем их данные целиком
 - SPA (Single Page Application) - весь сайт располагается на одной странице и при переходе на другую страницу в нём меняются только конкретные данные
 
@@ -14,6 +14,7 @@
 ![](_png/29cbb4f770a6269be5856df2b083bf28.png)
 
 Во время своей работы реакт строит два своих дерева и переносят изменения на конечное третье:
+
 - Первое - дерево элементов реакта - когда в нём происходят изменения, они попадают на второе дерево, между которыми происходит сравнение
 - Второе - виртуальное дерево для сравнения
 - Третье - это конечный DOM браузера, в которое и вносятся изменения после сравнения (фаза рендеринга, за которую отвечает React DOM или React Native)
@@ -40,6 +41,7 @@ npm start
 Начальной страницей, которая запускает весь рендер приложения является `index.js`, который рендерится в root диве `index.html` документа
 
 `public > index.html`
+
 ```HTML
 <body>
   <noscript>
@@ -50,6 +52,7 @@ npm start
 ```
 
 `src > index.js`
+
 ```TSX
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -69,7 +72,7 @@ ReactDOM.render(
 
 ## 18:11 ➝ Компонент App. Работа с состоянием. UseState
 
-Задача: нам нужно сделать счётчик, который при нажатии на кнопку будет увеличивать значение. 
+Задача: нам нужно сделать счётчик, который при нажатии на кнопку будет увеличивать значение.
 
 В примере ниже Реакт не понимает, что нужно обновлять значение в определённом компоненте, так как мы подобной функцией отправляем изменение значения в JS (`clg` покажет, что значение меняется внутри JS), а не в дерево Реакта.
 
@@ -161,26 +164,26 @@ export const ControlledInput = (): JSX.Element => {
 
 ```TSX
 import { Button } from '@/components';  // импортируем кнопку
-  
-function Home() {  
-   return (  
-      <div className={styles.wrapper}>  
-         <h1>React фундаментальный</h1>  
-         <div className={styles.links}>  
-            <Link href={'fundamentals/state'}>  
-               <Button buttonType={'purple'}>Состояния React</Button>  
-            </Link>  
-            <Link href={'fundamentals/controlledInput'}>  
+
+function Home() {
+   return (
+      <div className={styles.wrapper}>
+         <h1>React фундаментальный</h1>
+         <div className={styles.links}>
+            <Link href={'fundamentals/state'}>
+               <Button buttonType={'purple'}>Состояния React</Button>
+            </Link>
+            <Link href={'fundamentals/controlledInput'}>
 	            {/* добавляем кнопку на страницу */}
-	            <Button buttonType={'purple'}>Управляемый инпут</Button>  
-				<Button buttonType={'purple'}>Управляемый инпут</Button>  
-				<Button buttonType={'purple'}>Управляемый инпут</Button>  
-				<Button buttonType={'purple'}>Управляемый инпут</Button>  
+	            <Button buttonType={'purple'}>Управляемый инпут</Button>
 				<Button buttonType={'purple'}>Управляемый инпут</Button>
-            </Link>  
-         </div>  
-      </div>  
-   );  
+				<Button buttonType={'purple'}>Управляемый инпут</Button>
+				<Button buttonType={'purple'}>Управляемый инпут</Button>
+				<Button buttonType={'purple'}>Управляемый инпут</Button>
+            </Link>
+         </div>
+      </div>
+   );
 }
 ```
 
@@ -241,26 +244,26 @@ export class ClassCounter extends Component<any, any> {
 
 ![](_png/98ac183cb0f9192b8df07d268d9b7c1e.png)
 
-
 ## Сокращение путей импортов до компонентов
 
 Так же ну нужно забывать, что при создании компонента в папке `components`, мы можем экспортировать удобно эти компоненты из папки, чтобы использовать в других папках (`pages` или `page-components`)
 
 `components / index.ts`
+
 ```TS
-export * from './Button/Button';  
-export * from './Divider/Divider';  
-export * from './Input/Input';  
-export * from './Select/Select';  
-export * from './Paragraph/Paragraph';  
-export * from './ClassCounter/ClassCounter';  
-export * from './PostItem/PostItem';  
-export * from './PostForm/PostForm';  
-export * from './PostFilter/PostFilter';  
+export * from './Button/Button';
+export * from './Divider/Divider';
+export * from './Input/Input';
+export * from './Select/Select';
+export * from './Paragraph/Paragraph';
+export * from './ClassCounter/ClassCounter';
+export * from './PostItem/PostItem';
+export * from './PostForm/PostForm';
+export * from './PostFilter/PostFilter';
 export * from './PostList/PostList';
 ```
 
-После подобного экспорта, мы сможем получать доступ к данным компонентам, просто обратившись через: `import { нужный_компонент } from './components'` 
+После подобного экспорта, мы сможем получать доступ к данным компонентам, просто обратившись через: `import { нужный_компонент } from './components'`
 
 ## 30:25 ➝ Что такое хуки? useState, useEffect
 
@@ -277,6 +280,7 @@ export * from './PostList/PostList';
 ![](_png/3a972f5907462687bbdedf442b2a758f.png)
 
 А можем использовать модули для описания стилей. В этом случае нужно:
+
 - В названии файла стилей указать `.module`
 - В `className` указать класс через точку от импортированных стилей
 
@@ -286,26 +290,27 @@ export * from './PostList/PostList';
 
 ![](_png/4a4c19f86bde3c08c6b0a0e13d2567ff.png)
 
-## 34:30 ➝ Props. Аргументы компонента. 
+## 34:30 ➝ Props. Аргументы компонента.
 
 Свойства, которые мы передаём в компонент, называются `props`
 
-В рамках ==React== при использовании его вместе с TS мы обязаны использовать интерфейсы для наших получаемых пропсов (чтобы всегда понимать, что компонент получает). 
+В рамках ==React== при использовании его вместе с TS мы обязаны использовать интерфейсы для наших получаемых пропсов (чтобы всегда понимать, что компонент получает).
 
-Интерфейсы для компонентов мы обычно расширяем с помощью `DetailedHTMLProps` и уточняем, какие атрибуты он должен принимать через `HTMLAttributes`. 
+Интерфейсы для компонентов мы обычно расширяем с помощью `DetailedHTMLProps` и уточняем, какие атрибуты он должен принимать через `HTMLAttributes`.
 
-В данном случае, мы расширяем компонент от дива, чтобы была возможность в него передать `className`. 
+В данном случае, мы расширяем компонент от дива, чтобы была возможность в него передать `className`.
 
 Так же мы указываем `children` с типом `ReactNode` - это те данные, которые мы вкладываем между открывающим и закрывающим тегом
 
 `PostItem.props.ts`
+
 ```TSX
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
-  
-export interface PostItemProps  
-   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
-   children: ReactNode;  
-   title: string;  
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export interface PostItemProps
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+   children: ReactNode;
+   title: string;
 }
 ```
 
@@ -314,44 +319,46 @@ export interface PostItemProps
 Так же, чтобы передать сразу все остальные пропсы, которые мы вложим в компонент, можно использовать `...props` при получении `props` и в самом JSX указать, что мы выкладываем все пропсы в этот элемент: `<div {...props}>`. Такой подход более актуален, когда мы создаём свои компоненты кнопок, инпутов и остальных простых элементов.
 
 `PostItem.tsx`
+
 ```TSX
-export const PostItem = ({ title, children, className, ...props }: PostItemProps) => {  
-   return (  
-      <div className={cn(styles.wrapper, className)} {...props}>  
-         <div className={styles.post}>  
-            <div className={styles.post__content}>  
-               <h2>{title}</h2>  
-               <Paragraph size={'l'}>{children}</Paragraph>  
-            </div>  
-            <Button buttonType={'purple'} className={styles.post__button}>  
-               Удалить пост  
-            </Button>  
-         </div>  
-      </div>  
-   );  
+export const PostItem = ({ title, children, className, ...props }: PostItemProps) => {
+   return (
+      <div className={cn(styles.wrapper, className)} {...props}>
+         <div className={styles.post}>
+            <div className={styles.post__content}>
+               <h2>{title}</h2>
+               <Paragraph size={'l'}>{children}</Paragraph>
+            </div>
+            <Button buttonType={'purple'} className={styles.post__button}>
+               Удалить пост
+            </Button>
+         </div>
+      </div>
+   );
 };
 ```
 
 Передаются пропсы ровно таким же образом, как и атрибуты. В случае с ==TS== компилятор нам подскажет, какие значения мы можем вставить в данный элемент компонент
 
 `PostList.tsx`
+
 ```TSX
-export const Posts = () => {  
+export const Posts = () => {
    const [postsData, setPostsData] = useState([
 		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
 		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
 		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
-	]); 
-  
-   return (  
-      <div>  
-         {postsData.map(p => (  
-            <PostItem key={p.id} title={p.title}>  
-               {p.body}  
-            </PostItem>  
-         ))}  
-      </div>  
-   );  
+	]);
+
+   return (
+      <div>
+         {postsData.map(p => (
+            <PostItem key={p.id} title={p.title}>
+               {p.body}
+            </PostItem>
+         ))}
+      </div>
+   );
 };
 ```
 
@@ -361,13 +368,14 @@ export const Posts = () => {
 
 ## 36:55 ➝ Работы со списками. Преобразование массива объектов в массив React элементов
 
-Когда нам нужно вывести массив элементов с определённой структурой, мы можем воспользоваться функциями JS внутри JSX. Для этого функции нужно вписать внутрь `{ }` скобок. 
+Когда нам нужно вывести массив элементов с определённой структурой, мы можем воспользоваться функциями JS внутри JSX. Для этого функции нужно вписать внутрь `{ }` скобок.
 
 Для перебора массива можно воспользоваться функцией `map()`.
 
 Когда мы создаём списки, обязательно для всех элементов нужно указать уникальный ключ и передать его через атрибут `key`. Для ключа обычно не стоит использовать индекс элемента в массиве - это плохая практика, так как он может поменяться после изменения размера массива. Рекомендуется использовать какой-либо статичный индекс. Это поможет реакту запомнить элемент массива и не перерисовывать все выведенные элементы.
 
 `PostList.tsx`
+
 ```TSX
 export const Posts = () => {
 	const [postsData, setPostsData] = useState([
@@ -399,6 +407,7 @@ export const Posts = () => {
 Компонент кнопки:
 
 `Button.tsx`
+
 ```TSX
 import React from 'react';
 import styles from './Button.module.scss';
@@ -419,7 +428,7 @@ export const Button = ({
 				[styles.ghost]: buttonType == 'ghost',
 				[styles.purple]: buttonType == 'purple',
 			})}
-			
+
 		{/* сюда будут передаваться все остальные пропсы, которые мы припишем к кнопке */}
 			{...props}
 		>
@@ -433,6 +442,7 @@ export const Button = ({
 Тут мы опишем те параметры, которые должна принимать в себя кнопка. Чтобы описать получаемые атрибуты, мы должны расширить интерфейс от `DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>`, где мы расширяемся от `Button`.
 
 `Button.props.ts`
+
 ```TS
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 
@@ -446,6 +456,7 @@ export interface ButtonProps
 Стили кнопки:
 
 `Button.module.css`
+
 ```CSS
 .button {
 	display: flex;
@@ -531,8 +542,8 @@ export interface ButtonProps
 Чтобы предотвратить срабатывание дефолтной перезагрузки страницы, нужно использовать на ивенте данного элемента отключение поведения браузера `preventDefault()`
 
 ```TS
-const addNewPost = (event): void => {  
-   event.preventDefault();  
+const addNewPost = (event): void => {
+   event.preventDefault();
 };
 ```
 
@@ -540,18 +551,21 @@ const addNewPost = (event): void => {
 
 Ниже приведены примеры управляемого и неуправляемого компонента:
 
-1) Управляемый:
+1. Управляемый:
+
 - Управляемый компонент имеет подконтрольное значение
 - Это состояние связано с компонентом через значение
 
-2) Неуправляемый компонент:
+2. Неуправляемый компонент:
+
 - Не имеет подконтрольного значения
 - Для получения доступа к нему используется отдельный хук `useRef`
 
 Порядок использования рефа:
+
 - Инициализируем `useRef`
 - Передаём в атриьбут `ref` проинициализированный `useRef`
-- Оборачиваем сам компонент в своей внутренней реализации в  `forwardRef`
+- Оборачиваем сам компонент в своей внутренней реализации в `forwardRef`
 - Прокидываем `ref` внутрь реализации компонента
 
 ```TSX
@@ -623,9 +637,10 @@ export const PostList = () => {
 };
 ```
 
-Далее сам компонент `<Input>` нужно обернуть в `forwardRef` полностью (всю функцию обернуть внутрь `( )` скобок) и передать внутрь компонента дополнительное свойство `ref`. Само свойство `ref` нужно вложить в качестве атрибута внутрь нашего компонента 
+Далее сам компонент `<Input>` нужно обернуть в `forwardRef` полностью (всю функцию обернуть внутрь `( )` скобок) и передать внутрь компонента дополнительное свойство `ref`. Само свойство `ref` нужно вложить в качестве атрибута внутрь нашего компонента
 
 `Input.tsx`
+
 ```TSX
 // оборачиваем функцию полностью в forwardRef и вкладываем дополнительный параметр ref
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -792,62 +807,65 @@ export const PostList = () => {
 
 ## 57:35 ➝ React Devtools. Инструменты разработчика React
 
-React DevTools - необходимый плагин в работе, который позволит просмотреть дерево элементов страницы, влияние изменения стейта компонентов 
+React DevTools - необходимый плагин в работе, который позволит просмотреть дерево элементов страницы, влияние изменения стейта компонентов
 
 ![](_png/36feb1b975b5f56aea7f075c98c17273.png)
 
 ## 59:15 ➝ Обмен данными между компонентами. От родителя к ребенку. От ребенка к родителю.
 
 Мы можем передавать функции четырьмя разными способами:
+
 - Самый простой стандартный - это от родителя к ребёнку
 - От ребёнка к родителю выполняется через callback-фукнцию
 - Между дочерними компонентами (через родительский)
-- И глобально в различные компоненты проекта (зачастую через контекст) 
+- И глобально в различные компоненты проекта (зачастую через контекст)
 
 ![](_png/5fe6ac8f3bcb39b34d29b102b260767f.png)
 
-Первым делом, нужно выделить форму добавления нового поста в отдельный компонент. И тут нам понадобится реализовать передачу пропсов от дочернего элемента к родительскому. 
+Первым делом, нужно выделить форму добавления нового поста в отдельный компонент. И тут нам понадобится реализовать передачу пропсов от дочернего элемента к родительскому.
 
 Передаём через `create={createPost}` функцию от родительского элемента к дочерней форме на добавление поста.
 
 И передаём функцию `remove={removePost}` для удаления поста, но уже непосредственно в айтем поста
 
 `PostList.tsx`
+
 ```TSX
-export const PostList = () => {  
+export const PostList = () => {
    const [postsData, setPostsData] = useState<IPost[]>([
 		{ id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
 		{ id: 'adsgsa2', title: 'C#', body: 'Лучший язык на Земле' },
 		{ id: 'fsdagha3', title: 'Python', body: 'Лучший язык на Земле' },
-	]); 
-  
-   // коллбэк функция для создания поста, которую передаём в дочерний элемент  
-   const createPost = (newPost: IPost): void => {  
-      setPostsData([...postsData, newPost]);  
-   };  
-  
-   // коллбэк функция для удаления поста, которую передаём в дочерний элемент  
-   const removePost = (post: IPost): void => {  
-      // в стейт вернём новый массив, который будет отфильтрован через filter  
-      setPostsData(postsData.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <PostForm create={createPost} />  
-         <div className={styles.list}>  
-            {postsData.map(p => (  
-               <PostItem remove={removePost} key={p.id} post={p} />  
-            ))}  
-         </div>  
-      </div>  
-   );  
+	]);
+
+   // коллбэк функция для создания поста, которую передаём в дочерний элемент
+   const createPost = (newPost: IPost): void => {
+      setPostsData([...postsData, newPost]);
+   };
+
+   // коллбэк функция для удаления поста, которую передаём в дочерний элемент
+   const removePost = (post: IPost): void => {
+      // в стейт вернём новый массив, который будет отфильтрован через filter
+      setPostsData(postsData.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <PostForm create={createPost} />
+         <div className={styles.list}>
+            {postsData.map(p => (
+               <PostItem remove={removePost} key={p.id} post={p} />
+            ))}
+         </div>
+      </div>
+   );
 };
 ```
 
 Тут представлен интерфейс поста в отдельном файле
 
 `PostList.interface.ts`
+
 ```TS
 export interface IPost {
 	id: string;
@@ -859,6 +877,7 @@ export interface IPost {
 Сейчас нужно разбить логику так, чтобы можно было передать внутрь дочернего компонента функцию от родительского компонента
 
 `PostForm.props.ts`
+
 ```TS
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import { IPost } from '@/page-components/PostList/PostList.interface';
@@ -872,6 +891,7 @@ export interface PostFormProps
 Уже сам отдельный элемент будет в себя принимать функцию удаления поста по полученному посту и сам пост
 
 `PostItem.props.ts`
+
 ```TS
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import { IPost } from '@/page-components/PostList/PostList.interface';
@@ -886,6 +906,7 @@ export interface PostItemProps
 Далее тут вызваем функцию из родительского компонента `create()` в дочернем элементе
 
 `PostForm.tsx`
+
 ```TSX
 import React, { useState } from 'react';
 import styles from './PostForm.module.scss';
@@ -945,6 +966,7 @@ export const PostForm = ({ create }: PostFormProps) => {
 Далее переходим в элемент отдельного поста. Тут кнопкой вызываем функцию удаления поста, передавая в неё полный пост: `() => remove(post)`
 
 `PostItem.tsx`
+
 ```TSX
 export const PostItem = ({ remove, post, className, ...props }: PostItemProps) => {
 	return (
@@ -975,12 +997,12 @@ export const PostItem = ({ remove, post, className, ...props }: PostItemProps) =
 
 ![](_png/16616b4f3d8c5a04dae3e6bcfdb6a305.png)
 
-
 ## 01:04:20 ➝ Отрисовка по условию
 
 Отрисовка по условию выполняется крайне просто - через тернарный оператор:
 
 `PostList.tsx`
+
 ```TSX
 return (
 	<div className={styles.wrapper}>
@@ -1002,113 +1024,116 @@ return (
 
 ## 01:05:30 ➝ Сортировка. Выпадающий список
 
-Первым делом, нужно реализовать компонент сортировки. Он будет в себя принимать массив опций, дефолтную опцию и определённое выбранное значение пользователем 
+Первым делом, нужно реализовать компонент сортировки. Он будет в себя принимать массив опций, дефолтную опцию и определённое выбранное значение пользователем
 
 `Select.props.ts`
+
 ```TS
-import { DetailedHTMLProps, HTMLAttributes } from 'react';  
-  
-export interface SelectProps  
-   extends DetailedHTMLProps<HTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {  
-   options: { value: string; name: string }[];  
-   defaultValue: string;  
-   value: string;  
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+
+export interface SelectProps
+   extends DetailedHTMLProps<HTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
+   options: { value: string; name: string }[];
+   defaultValue: string;
+   value: string;
 }
 ```
 
 Компонент селекта выводит массив переданных в него опций и триггерит переданную в него функцию `onChange` при выборе определённого селекта
 
 `Select.tsx`
+
 ```TSX
-import React from 'react';  
-import cn from 'classnames';  
-import styles from './Select.module.scss';  
-import { SelectProps } from '@/components/Select/Select.props';  
-  
-export const Select = ({  
-   defaultValue,  
-   options,  
-   className,  
-   value,  
-   onChange,  
-   ...props  
-}: SelectProps): JSX.Element => {  
-   return (  
-      <select  
-         value={value}  
-         onChange={event => onChange(event.target.value)}  
-         className={styles.select}  
-      >         
-	    <option disabled value=''>  
-            {defaultValue}  
-		</option>  
-         {options.map(option => (  
-            <option key={option.value} value={option.value}>  
-               {option.name}  
-            </option>  
-         ))}  
-      </select>  
-   );  
+import React from 'react';
+import cn from 'classnames';
+import styles from './Select.module.scss';
+import { SelectProps } from '@/components/Select/Select.props';
+
+export const Select = ({
+   defaultValue,
+   options,
+   className,
+   value,
+   onChange,
+   ...props
+}: SelectProps): JSX.Element => {
+   return (
+      <select
+         value={value}
+         onChange={event => onChange(event.target.value)}
+         className={styles.select}
+      >
+	    <option disabled value=''>
+            {defaultValue}
+		</option>
+         {options.map(option => (
+            <option key={option.value} value={option.value}>
+               {option.name}
+            </option>
+         ))}
+      </select>
+   );
 };
 ```
 
-В главном компоненте мы создали функцию `sortPosts`, которую и передаём в дочерний компонент селекта. Внутри функции мы устанавливаем тип селекшена  `setSelectedSort` и производим сравнение списков через `localeCompare`.
+В главном компоненте мы создали функцию `sortPosts`, которую и передаём в дочерний компонент селекта. Внутри функции мы устанавливаем тип селекшена `setSelectedSort` и производим сравнение списков через `localeCompare`.
 
 `PostList.tsx`
+
 ```TSX
-export const PostList = () => {  
-   const [postsData, setPostsData] = useState<IPost[]>([  
-      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
-      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
-      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
-   ]);  
-  
-   // состояние для элемента сортировки select  
-   const [selectedSort, setSelectedSort] = useState<'title' | 'body' | ''>('');  
-  
-   // коллбэк функция для создания поста, которую передаём в дочерний элемент  
-   const createPost = (newPost: IPost): void => {  
-      setPostsData([...postsData, newPost]);  
-   };  
-  
-   // коллбэк функция для удаления поста, которую передаём в дочерний элемент  
-   const removePost = (post: IPost): void => {  
-      // в стейт вернём новый массив, который будет отфильтрован через filter  
-      setPostsData(postsData.filter(p => p.id !== post.id));  
-   };  
-  
-   // функция для сортировки постов  
-   const sortPosts = (sort: 'title' | 'body'): void => {  
-      setSelectedSort(sort);  
-  
-      // тут мы сортируем массив, не мутируя его состояние напрямую  
-      setPostsData([...postsData].sort((a, b) => a[sort].localeCompare(b[sort])));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <PostForm create={createPost} />  
-  
-         <Divider />  
-         <Select  
-            value={selectedSort}  
-            onChange={sortPosts}  
-            defaultValue={'Сортировка'}  
-            options={[  
-               { value: 'title', name: 'По заголовку' },  
-               { value: 'body', name: 'По описанию' },  
-            ]}  
-         />  
-  
-         <div className={styles.list}>  
-            {postsData.length ? (  
-               postsData.map(p => <PostItem remove={removePost} key={p.id} post={p} />)  
-            ) : (  
-               <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>  
-            )}  
-         </div>  
-      </div>  
-   );  
+export const PostList = () => {
+   const [postsData, setPostsData] = useState<IPost[]>([
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },
+   ]);
+
+   // состояние для элемента сортировки select
+   const [selectedSort, setSelectedSort] = useState<'title' | 'body' | ''>('');
+
+   // коллбэк функция для создания поста, которую передаём в дочерний элемент
+   const createPost = (newPost: IPost): void => {
+      setPostsData([...postsData, newPost]);
+   };
+
+   // коллбэк функция для удаления поста, которую передаём в дочерний элемент
+   const removePost = (post: IPost): void => {
+      // в стейт вернём новый массив, который будет отфильтрован через filter
+      setPostsData(postsData.filter(p => p.id !== post.id));
+   };
+
+   // функция для сортировки постов
+   const sortPosts = (sort: 'title' | 'body'): void => {
+      setSelectedSort(sort);
+
+      // тут мы сортируем массив, не мутируя его состояние напрямую
+      setPostsData([...postsData].sort((a, b) => a[sort].localeCompare(b[sort])));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <PostForm create={createPost} />
+
+         <Divider />
+         <Select
+            value={selectedSort}
+            onChange={sortPosts}
+            defaultValue={'Сортировка'}
+            options={[
+               { value: 'title', name: 'По заголовку' },
+               { value: 'body', name: 'По описанию' },
+            ]}
+         />
+
+         <div className={styles.list}>
+            {postsData.length ? (
+               postsData.map(p => <PostItem remove={removePost} key={p.id} post={p} />)
+            ) : (
+               <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>
+            )}
+         </div>
+      </div>
+   );
 };
 ```
 
@@ -1117,7 +1142,6 @@ export const PostList = () => {
 ![](_png/3bfa96bbd5e99bdf1aa83f3d3b9bfe11.png)
 
 ![](_png/dd8af079db3adf040bd33670522e2e6f.png)
-
 
 ## 01:15:10 ➝ useMemo. Мемоизация. Кеширование. Поиск. Фильтрация.
 
@@ -1132,11 +1156,12 @@ export const PostList = () => {
 Нужно помнить, что функция, переданная `useMemo`, запускается во время рендеринга. Не нужно делать там ничего, что обычно не делается во время рендеринга. Например, все побочные эффекты должен выполнять `useEffect`, а не `useMemo`.
 
 `example:`
+
 ```TSX
 const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```
 
->[!warning] Далее структура проекта была немного реорганизована и теперь главным компонентом будет компонен страницы  `Posts.tsx`
+> [!warning] Далее структура проекта была немного реорганизована и теперь главным компонентом будет компонен страницы `Posts.tsx`
 
 В самом компоненте `Posts.tsx` мы создадим общее состояние под поиск, где `filter` будет отвечать за строку запроса `query` и компонент селекта `sort`.
 
@@ -1145,84 +1170,87 @@ const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 Далее мы вызваем три компонента: форму, фильтр и генерацию списка постов.
 
 `page-components / Posts.tsx`
+
 ```TSX
-import React, { useMemo, useRef, useState } from 'react';  
-import styles from './Posts.module.scss';  
-import { PostFilter } from '@/components';  
-import { PostForm } from '@/components';  
-import { PostList } from '@/components';  
-import { IPost } from '@/page-components/Posts/Posts.interface';  
-import { IFilter } from '@/components/PostFilter/PostFilter.props';  
-  
-export const Posts = () => {  
-   const [posts, setPosts] = useState<IPost[]>([  
-      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
-      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
-      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
-   ]);  
-  
-   // состояние селекта и строки поиска  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-  
-   // получаем отсортированный массив  
-   const sortedPosts = useMemo<IPost[]>(() => {  
-      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));  
-   }, [filter.sort, posts]);  
-  
-   // сортируем массив по строке поиска  
-   const sortedAndSearchedPosts = useMemo<IPost[]>(() => {  
-      return sortedPosts.filter(post =>  
-         post.title.toLowerCase().includes(filter.query.toLowerCase()),  
-      );  
-   }, [filter.query, sortedPosts]);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <PostForm create={createPost} />  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
-      </div>  
-   );  
+import React, { useMemo, useRef, useState } from 'react';
+import styles from './Posts.module.scss';
+import { PostFilter } from '@/components';
+import { PostForm } from '@/components';
+import { PostList } from '@/components';
+import { IPost } from '@/page-components/Posts/Posts.interface';
+import { IFilter } from '@/components/PostFilter/PostFilter.props';
+
+export const Posts = () => {
+   const [posts, setPosts] = useState<IPost[]>([
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },
+   ]);
+
+   // состояние селекта и строки поиска
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+
+   // получаем отсортированный массив
+   const sortedPosts = useMemo<IPost[]>(() => {
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));
+   }, [filter.sort, posts]);
+
+   // сортируем массив по строке поиска
+   const sortedAndSearchedPosts = useMemo<IPost[]>(() => {
+      return sortedPosts.filter(post =>
+         post.title.toLowerCase().includes(filter.query.toLowerCase()),
+      );
+   }, [filter.query, sortedPosts]);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <PostForm create={createPost} />
+         <PostFilter filter={filter} setFilter={setFilter} />
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />
+      </div>
+   );
 };
 ```
 
 Далее идёт компонент `PostList`, который принимает в себя функцию для удаления поста и массив постов.
 
 `components / PostList / PostList.props.ts`
+
 ```TS
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
-import { IPost } from '@/page-components/Posts/Posts.interface';  
-  
-export interface PostListProps  
-   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
-   remove: (post: IPost) => void;  
-   posts: IPost[];  
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { IPost } from '@/page-components/Posts/Posts.interface';
+
+export interface PostListProps
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+   remove: (post: IPost) => void;
+   posts: IPost[];
 }
 ```
 
 Тут выводится список постов, в каждый из которых передаётся своя функция для их удаления
 
 `components / PostList / PostList.tsx`
+
 ```TSX
-export const PostList = ({ remove, posts, className, ...props }: PostListProps) => {  
-   return (  
-      <div className={cn(styles.wrapper, className)} {...props}>  
-         {/* выводим полностью отфильтрованный конечный массив */}  
-         {posts.length ? (  
-            posts.map(p => <PostItem remove={remove} key={p.id} post={p} />)  
-         ) : (  
-            <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>  
-         )}  
-      </div>  
-   );  
+export const PostList = ({ remove, posts, className, ...props }: PostListProps) => {
+   return (
+      <div className={cn(styles.wrapper, className)} {...props}>
+         {/* выводим полностью отфильтрованный конечный массив */}
+         {posts.length ? (
+            posts.map(p => <PostItem remove={remove} key={p.id} post={p} />)
+         ) : (
+            <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>
+         )}
+      </div>
+   );
 };
 ```
 
@@ -1231,67 +1259,69 @@ export const PostList = ({ remove, posts, className, ...props }: PostListProps) 
 Сам интерфейс `IFilter` представляет из себя интерфейс стейта фильтра из главного компонента
 
 `components / PostFilter / PostFilter.props.ts`
+
 ```TS
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
-import { IPost } from '@/page-components/Posts/Posts.interface';  
-  
-export interface IPostFilterProps  
-   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
-   filter: IFilter;  
-   setFilter: (filter: IFilter) => void;  
-}  
-  
-export interface IFilter {  
-   sort: 'title' | 'body';  
-   query: string;  
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { IPost } from '@/page-components/Posts/Posts.interface';
+
+export interface IPostFilterProps
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+   filter: IFilter;
+   setFilter: (filter: IFilter) => void;
+}
+
+export interface IFilter {
+   sort: 'title' | 'body';
+   query: string;
 }
 ```
 
 Данный компонент выполняет фильтрацию по инпуту и по селекту
 
 `components / PostFilter / PostFilter.tsx`
+
 ```TSX
-export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {  
-   return (  
-      <div className={styles.wrapper}>  
-         <Input  
-            className={styles.search}  
-            placeholder={'Поиск...'}  
-            value={filter.query}  
-            onChange={e => setFilter({ ...filter, query: e.target.value })}  
-         />  
-  
-         <Divider />  
-  
-         <Select  
-            value={filter.sort}  
-            onChange={(selectedSort: 'title' | 'body') =>  
-               setFilter({ ...filter, sort: selectedSort })  
-            }  
-            defaultValue={'Сортировка'}  
-            options={[  
-               { value: 'title', name: 'По заголовку' },  
-               { value: 'body', name: 'По описанию' },  
-            ]}  
-         />  
-      </div>  
-   );  
+export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {
+   return (
+      <div className={styles.wrapper}>
+         <Input
+            className={styles.search}
+            placeholder={'Поиск...'}
+            value={filter.query}
+            onChange={e => setFilter({ ...filter, query: e.target.value })}
+         />
+
+         <Divider />
+
+         <Select
+            value={filter.sort}
+            onChange={(selectedSort: 'title' | 'body') =>
+               setFilter({ ...filter, sort: selectedSort })
+            }
+            defaultValue={'Сортировка'}
+            options={[
+               { value: 'title', name: 'По заголовку' },
+               { value: 'body', name: 'По описанию' },
+            ]}
+         />
+      </div>
+   );
 };
 ```
 
 Сделаем поиск по ширине экрана
 
 `components / PostFilter / PostFilter.module.css`
+
 ```CSS
-.search {  
-   width: 100%;  
+.search {
+   width: 100%;
 }
 ```
 
-Итог: теперь работает поиск по строке запроса 
+Итог: теперь работает поиск по строке запроса
 
 ![](_png/7130d7a046740e25898b3560d25f4985.png)
-
 
 ## 01:23:50 ➝ Модальное окно. Переиспользуемый UI компонент
 
@@ -1303,17 +1333,18 @@ export const PostFilter = ({ filter, setFilter }: IPostFilterProps) => {
 
 ![](_png/f0e8fd560aabb7334d8b133f208b64c1.png)
 
-Компонент модального окна принимает в себя дочерние элементы, состояние видимости и функцию установки этой видимости 
+Компонент модального окна принимает в себя дочерние элементы, состояние видимости и функцию установки этой видимости
 
 `components / Modal / Modal.props.ts`
+
 ```TS
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
-  
-export interface IModalProps  
-   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
-   children: ReactNode;  
-   visible: boolean;  
-   setVisible: (visible: boolean) => void;  
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export interface IModalProps
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+   children: ReactNode;
+   visible: boolean;
+   setVisible: (visible: boolean) => void;
 }
 ```
 
@@ -1324,98 +1355,99 @@ export interface IModalProps
 Тут нужно сказать, что функция `e.stopPropagation()` (которая вложена в дочерний элемент обёртки) предотвращает выполнение остальных функций, срабатывание которых повешено на данный элемент или его родителей. Конкретно в данном случае, он не даёт закрыться модальному окну при клике на него (функция закрытия работает не только на родителе изначально, но и на ребёнке)
 
 `components / Modal / Modal.tsx`
+
 ```TSX
-import React from 'react';  
-import styles from './Modal.module.scss';  
-import cn from 'classnames';  
-import { IModalProps } from '@/components/Modal/Modal.props';  
-  
-export const Modal = ({ children, className, visible, setVisible, ...props }: IModalProps): JSX.Element => {  
-   return (  
-      <div  
-         className={cn(styles.modal, className, {  
-            [styles.active]: visible,  
-            [styles.disabled]: !visible,  
-         })}  
-         onClick={() => setVisible(false)}  
-      >         
-         <div 
-	         className={styles.modal__content} 
+import React from 'react';
+import styles from './Modal.module.scss';
+import cn from 'classnames';
+import { IModalProps } from '@/components/Modal/Modal.props';
+
+export const Modal = ({ children, className, visible, setVisible, ...props }: IModalProps): JSX.Element => {
+   return (
+      <div
+         className={cn(styles.modal, className, {
+            [styles.active]: visible,
+            [styles.disabled]: !visible,
+         })}
+         onClick={() => setVisible(false)}
+      >
+         <div
+	         className={styles.modal__content}
 	         onClick={e => e.stopPropagation()}
-	    > 		 
-            {children}  
-         </div>  
-      </div>  
-   );  
+	    >
+            {children}
+         </div>
+      </div>
+   );
 };
 ```
 
 - В родительский компонент нужно добавить состояние, которое будет контролировать видимость модального окна.
 - Далее в функцию `createPost()` добавим закрытие модального окна при добавлении нового поста
--  В рендере передаём дополнительную кнопку, которая будет проявлять модальное окно
+- В рендере передаём дополнительную кнопку, которая будет проявлять модальное окно
 - Внутрь модалки переложим форму для создания нового поста
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState<IPost[]>([  
-      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
-      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
-      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
-   ]);  
-  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-  
-   // состояние модального окна  
-   const [modal, setModal] = useState(false);  
-  
-   const sortedPosts = useMemo<IPost[]>(() => {  
-      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));  
-   }, [filter.sort, posts]);  
-  
-   const sortedAndSearchedPosts = useMemo<IPost[]>(() => {  
-      return sortedPosts.filter(post =>  
-         post.title.toLowerCase().includes(filter.query.toLowerCase()),  
-      );  
-   }, [filter.query, sortedPosts]);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-  
-      // после создания модалки, оно закроется  
-      setModal(false);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button 
-	         className={styles.button} 
-	         buttonType={'purple'} 
+export const Posts = () => {
+   const [posts, setPosts] = useState<IPost[]>([
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },
+   ]);
+
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+
+   // состояние модального окна
+   const [modal, setModal] = useState(false);
+
+   const sortedPosts = useMemo<IPost[]>(() => {
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));
+   }, [filter.sort, posts]);
+
+   const sortedAndSearchedPosts = useMemo<IPost[]>(() => {
+      return sortedPosts.filter(post =>
+         post.title.toLowerCase().includes(filter.query.toLowerCase()),
+      );
+   }, [filter.query, sortedPosts]);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+
+      // после создания модалки, оно закроется
+      setModal(false);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <Button
+	         className={styles.button}
+	         buttonType={'purple'}
 	         onClick={() => setModal(true)}
-	     >  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
-      </div>  
-   );  
+	     >
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />
+      </div>
+   );
 };
 ```
 
 Итог:
 
 ![](_png/997361d35579ece72bb248ed475d0001.png)
-
 
 ## 01:30:23 ➝ Анимации. React transition group
 
@@ -1429,49 +1461,49 @@ npm install --save @types/react-transition-group
 Тут нужно обернуть группу элементов в `TransitionGroup` а каждый отдельный элемент в `CSSTransition` (в этот же элемент нужно передать свойство ключа, так как он располагается выше, чем `PostItem`)
 
 `components / PostList / PostList.tsx`
+
 ```TSX
-import { TransitionGroup, CSSTransition } from 'react-transition-group';  
-  
-export const PostList = ({ remove, posts, className, ...props }: PostListProps) => {  
-   return (  
-      <div className={cn(styles.wrapper, className)} {...props}>  
-         {posts.length ? (  
-            <TransitionGroup className='post-list'>  
-               {posts.map(p => (  
-                  <CSSTransition key={p.id} timeout={500} classNames='post'>  
-                     <PostItem remove={remove} post={p} />  
-                  </CSSTransition>  
-               ))}  
-            </TransitionGroup>  
-         ) : (  
-            <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>  
-         )}  
-      </div>  
-   );  
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+export const PostList = ({ remove, posts, className, ...props }: PostListProps) => {
+   return (
+      <div className={cn(styles.wrapper, className)} {...props}>
+         {posts.length ? (
+            <TransitionGroup className='post-list'>
+               {posts.map(p => (
+                  <CSSTransition key={p.id} timeout={500} classNames='post'>
+                     <PostItem remove={remove} post={p} />
+                  </CSSTransition>
+               ))}
+            </TransitionGroup>
+         ) : (
+            <h2 style={{ textAlign: 'center' }}>Посты не добавлены</h2>
+         )}
+      </div>
+   );
 };
 ```
 
-Стили компонента: 
+Стили компонента:
 `CSSTransition` мы наименовали как `post` и поэтому в определённых состояниях нужно наименовать начальный элемент как `post`
 
 ```CSS
-.post-enter {  
-   opacity: 0;  
-}  
-.post-enter-active {  
-   opacity: 1;  
-   transition: all 0.2s ease-in;  
-}  
-.post-exit {  
-   opacity: 1;  
-}  
-.post-exit-active {  
-   opacity: 0;  
-   transform: rotateY(-350deg);  
-   transition: all 0.2s ease-in;  
+.post-enter {
+   opacity: 0;
+}
+.post-enter-active {
+   opacity: 1;
+   transition: all 0.2s ease-in;
+}
+.post-exit {
+   opacity: 1;
+}
+.post-exit-active {
+   opacity: 0;
+   transform: rotateY(-350deg);
+   transition: all 0.2s ease-in;
 }
 ```
-
 
 ## 01:33:40 ➝ Декомпозиция. Кастомные хуки
 
@@ -1480,84 +1512,85 @@ export const PostList = ({ remove, posts, className, ...props }: PostListProps) 
 Тут будут храниться отдельные хуки, которые мы выцепили из основного компонента создания постов.
 
 `hooks / usePosts.ts`
+
 ```TS
-import { useMemo } from 'react';  
-import { IPost } from '@/page-components/Posts/Posts.interface';  
-  
-const useSortedPosts = (posts: IPost[], sort: 'title' | 'body') => {  
-   return useMemo<IPost[]>(() => {  
-      return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]));  
-   }, [sort, posts]);  
-};  
-  
-export const usePosts = (posts: IPost[], sort: 'title' | 'body', query: string) => {  
-   const sortedPosts = useSortedPosts(posts, sort);  
-  
-   return useMemo<IPost[]>(() => {  
-      return sortedPosts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()));  
-   }, [query, sortedPosts]);  
+import { useMemo } from 'react';
+import { IPost } from '@/page-components/Posts/Posts.interface';
+
+const useSortedPosts = (posts: IPost[], sort: 'title' | 'body') => {
+   return useMemo<IPost[]>(() => {
+      return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]));
+   }, [sort, posts]);
+};
+
+export const usePosts = (posts: IPost[], sort: 'title' | 'body', query: string) => {
+   const sortedPosts = useSortedPosts(posts, sort);
+
+   return useMemo<IPost[]>(() => {
+      return sortedPosts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()));
+   }, [query, sortedPosts]);
 };
 ```
 
 В самом компоненте мы просто вызваем сортировку постов
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState<IPost[]>([  
-      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },  
-      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },  
-      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },  
-   ]);  
-  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-  
-   const [modal, setModal] = useState(false);  
-  
-   // сортировка массива постов  
-   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-  
-      setModal(false);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
-      </div>  
-   );  
+export const Posts = () => {
+   const [posts, setPosts] = useState<IPost[]>([
+      { id: 'asd1', title: 'Javascript', body: 'Лучший язык на Земле' },
+      { id: 'adsgsa2', title: 'C#', body: 'Хроший язык' },
+      { id: 'fsdagha3', title: 'Python', body: 'Почему бы и нет?' },
+   ]);
+
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+
+   const [modal, setModal] = useState(false);
+
+   // сортировка массива постов
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+
+      setModal(false);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />
+      </div>
+   );
 };
 ```
-
 
 ## 01:36:20 ➝ Работа с сервером. Axios
 
 Первым делом, установим модуль по работе с сервером `axios`, который позволит просто отправлять запросы на получение данных на сервер
 
 ```bash
-npm i axios 
+npm i axios
 ```
-
 
 ## 01:38:40 ➝ Жизненный цикл компонента. useEffect
 
 Жизненный цикл компонента React делится на 4 части:
+
 - Инициализация (компонент получает пропсы и состояния)
 - Монтирование (вешаем слушатели события, генерим компонент)
 - Обновление (производим какие-либо действия над компонентом)
@@ -1572,50 +1605,51 @@ npm i axios
 В главном компоненте получим массив постов с сервера через `fetchPosts` и сохраним его в стейт наших постов. Вызвана эта функция будет через `useEffect`, который в представленном сетапе будет выполнять действие ровно один раз - при загрузке компонента
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState('');  
-  
-   const fetchPosts = async () => {  
-      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');  
-      setPosts(posts.data);  
-   };  
-  
-   useEffect(() => {  
-      fetchPosts();  
-   }, []);  
-  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-  
-   const [modal, setModal] = useState(false);  
-  
-   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-  
-      setModal(false);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
-      </div>  
-   );  
+export const Posts = () => {
+   const [posts, setPosts] = useState('');
+
+   const fetchPosts = async () => {
+      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      setPosts(posts.data);
+   };
+
+   useEffect(() => {
+      fetchPosts();
+   }, []);
+
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+
+   const [modal, setModal] = useState(false);
+
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+
+      setModal(false);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />
+      </div>
+   );
 };
 ```
 
@@ -1632,20 +1666,22 @@ export const Posts = () => {
 Заранее стоит сказать, что обрабатывать ошибку тут - плохой подход, поэтому переловим ошибку в другом месте кода ->
 
 `API / post.service.ts`
+
 ```TS
-import axios from 'axios';  
-  
-export default class PostService {  
-   static async getAll() {  
-      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');  
-      return posts.data;  
-   }  
+import axios from 'axios';
+
+export default class PostService {
+   static async getAll() {
+      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      return posts.data;
+   }
 }
 ```
 
 И теперь мы можем получить посты более лаконичным и понятным способом
 
 `page-components / Posts.tsx`
+
 ```TSX
 const fetchPosts = async () => {
 	const posts = await PostService.getAll();
@@ -1658,51 +1694,52 @@ const fetchPosts = async () => {
 Мы создали состояние `isPostLoading`, которое будет отвечать за состояние загрузки постов. В функции `fetchPosts` добавим изменение этого состояния (так как через него идёт получение данных с сервера). И далее в `render` укажем, что отображать сообщение о загрузке нужно пока его состояние не перейдёт в `false`
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState('');  
-   // состояние для загрузки постов  
-   const [isPostLoading, setIsPostLoading] = useState(false);  
-  
-   const fetchPosts = async () => {  
-      // сейчас посты только начнут загрузку, поэтому нужно показать загрузку  
-      setIsPostLoading(true);  
-      const posts = await PostService.getAll();  
-      setPosts(posts);  
-  
-      // здесь уже посты загружены  
-      setIsPostLoading(false);  
-   };  
-  
-   useEffect(() => {  
-      fetchPosts();  
-   }, []);  
-    
+export const Posts = () => {
+   const [posts, setPosts] = useState('');
+   // состояние для загрузки постов
+   const [isPostLoading, setIsPostLoading] = useState(false);
+
+   const fetchPosts = async () => {
+      // сейчас посты только начнут загрузку, поэтому нужно показать загрузку
+      setIsPostLoading(true);
+      const posts = await PostService.getAll();
+      setPosts(posts);
+
+      // здесь уже посты загружены
+      setIsPostLoading(false);
+   };
+
+   useEffect(() => {
+      fetchPosts();
+   }, []);
+
    /// CODE ...
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         {isPostLoading ? (  
-            <h1>Идёт загрузка...</h1>  
-         ) : (  
-            <PostList  
-               className={styles.list}  
-               posts={sortedAndSearchedPosts}  
-               remove={removePost}  
-            />         
-	    )}  
-      </div>  
-   );  
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         {isPostLoading ? (
+            <h1>Идёт загрузка...</h1>
+         ) : (
+            <PostList
+               className={styles.list}
+               posts={sortedAndSearchedPosts}
+               remove={removePost}
+            />
+	    )}
+      </div>
+   );
 };
 ```
 
@@ -1710,12 +1747,12 @@ export const Posts = () => {
 
 ![](_png/91f7f327e1c061443782aac10e149fa2.png)
 
-
 ## 01:46:20 ➝ Компонент Loader. Анимации
 
 Компонент лоадера будет представлять из себя обычный `<div>`
 
 `components / Loader / Loader.tsx`
+
 ```TSX
 export const Loader = ({ children, className }: ILoaderProps) => {
 	return <div className={cn(styles.loader, className)}>{children}</div>;
@@ -1725,37 +1762,39 @@ export const Loader = ({ children, className }: ILoaderProps) => {
 А анимация будет бесконечной и реализованной через обычный ==CSS==
 
 `components / Loader / Loader.module.SCSS`
+
 ```SCSS
-.loader {  
-   display: flex;  
-   align-items: center;  
-   justify-items: center;  
-  
-   text-align: center;  
-  
-   width: 100px;  
-   height: 100px;  
-  
-   border-radius: 50%;  
-   border: 3px dashed var(--primary);  
-  
-   animation: rotate 1s linear infinite;  
-   transition: all 0.2s;  
-}  
-  
-@keyframes rotate {  
-   from {  
-      transform: rotate(0deg) scale(1);  
-   }  
-  
-   to {      transform: rotate(360deg) scale(1.2);  
-   }  
+.loader {
+   display: flex;
+   align-items: center;
+   justify-items: center;
+
+   text-align: center;
+
+   width: 100px;
+   height: 100px;
+
+   border-radius: 50%;
+   border: 3px dashed var(--primary);
+
+   animation: rotate 1s linear infinite;
+   transition: all 0.2s;
+}
+
+@keyframes rotate {
+   from {
+      transform: rotate(0deg) scale(1);
+   }
+
+   to {      transform: rotate(360deg) scale(1.2);
+   }
 }
 ```
 
 Теперь останется только вставить крутилку на страницу
 
 `page-components / Posts.tsx`
+
 ```TSX
 {isPostLoading ? (
 	<div className={styles.loadPosition}>
@@ -1779,25 +1818,26 @@ export const Loader = ({ children, className }: ILoaderProps) => {
 Далее нам нужно сделать хук, который будет получать функцию и выполнять её, а так же будет контролировать состояние спиннера загрузки и перехватывать ошибку, если таковая придёт на страницу
 
 `hooks / useFetching.ts`
+
 ```TS
-import { useState } from 'react';  
-  
-export const useFetching = (callback: Function): [Function, boolean, string] => {  
-   const [isLoading, setIsLoading] = useState<boolean>(false);  
-   const [error, setError] = useState<string>('');  
-  
-   const fetching = async (): Promise<void> => {  
-      try {  
-         setIsLoading(true);  
-         await callback();  
-      } catch (e: unknown) {  
-         setError(e.message as string);  
-      } finally {  
-         setIsLoading(false);  
-      }  
-   };  
-  
-   return [fetching, isLoading, error];  
+import { useState } from 'react';
+
+export const useFetching = (callback: Function): [Function, boolean, string] => {
+   const [isLoading, setIsLoading] = useState<boolean>(false);
+   const [error, setError] = useState<string>('');
+
+   const fetching = async (): Promise<void> => {
+      try {
+         setIsLoading(true);
+         await callback();
+      } catch (e: unknown) {
+         setError(e.message as string);
+      } finally {
+         setIsLoading(false);
+      }
+   };
+
+   return [fetching, isLoading, error];
 };
 ```
 
@@ -1806,62 +1846,63 @@ export const useFetching = (callback: Function): [Function, boolean, string] => 
 Так же сделаем вывод ошибки, если таковая будет иметься через `postsError`
 
 `page-components / Posts.tsx`
-```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState('');  
 
-	// Используем хук для 
-   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
-      const posts = await PostService.getAll();  
-      setPosts(posts);  
-   });  
-  
-   useEffect(() => {  
-      fetchPosts();  
-   }, []);  
-  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-  
-   const [modal, setModal] = useState(false);  
-  
-   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-  
-      setModal(false);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
+```TSX
+export const Posts = () => {
+   const [posts, setPosts] = useState('');
+
+	// Используем хук для
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {
+      const posts = await PostService.getAll();
+      setPosts(posts);
+   });
+
+   useEffect(() => {
+      fetchPosts();
+   }, []);
+
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+
+   const [modal, setModal] = useState(false);
+
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+
+      setModal(false);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
 
 		{postsError && <h1>Произошла ошибка {postsError}</h1>}
 
-         {isPostLoading ? (  
-            <div className={styles.loadPosition}>  
-               <Loader>Идёт загрузка...</Loader>  
-            </div>  
-         ) : (  
-            <PostList  
-               className={styles.list}  
-               posts={sortedAndSearchedPosts}  
-               remove={removePost}  
-            />         )}  
-      </div>  
-   );  
+         {isPostLoading ? (
+            <div className={styles.loadPosition}>
+               <Loader>Идёт загрузка...</Loader>
+            </div>
+         ) : (
+            <PostList
+               className={styles.list}
+               posts={sortedAndSearchedPosts}
+               remove={removePost}
+            />         )}
+      </div>
+   );
 };
 ```
 
@@ -1869,50 +1910,49 @@ export const Posts = () => {
 
 ![](_png/a6042458062262708205435c4085c678.png)
 
-
 ## 01:54:15➝ Постраничный вывод. Пагинация (pagination)
 
-Выводить сразу на одной странице 100 постов - это не самая лучшая идея. Если данные посты будут иметь ещё и фотографии, то загрузка страницы будет долгой и устройство пользователя так же будет сильно нагружено. 
+Выводить сразу на одной странице 100 постов - это не самая лучшая идея. Если данные посты будут иметь ещё и фотографии, то загрузка страницы будет долгой и устройство пользователя так же будет сильно нагружено.
 
-Сейчас стоит воспользоваться пагинацией - постраничной загрузкой страниц. 
+Сейчас стоит воспользоваться пагинацией - постраничной загрузкой страниц.
 
 Домен `jsonplaceholder` позволяет по определённым параметрам выводить лимитированное количество постов и менять страницу. В хедере (`x-total-count`) так же указывается максимальное количество постов, которое может выдать запрос
 
 ![](_png/90fc90640054f05d12fb5aff9db1b2a2.png)
 
-
 `API / post.service.ts`
+
 ```TS
-import axios from 'axios';  
-  
-export default class PostService {  
-   static async getAll(limit: number = 10, page: number = 1) {  
-      return await axios.get('https://jsonplaceholder.typicode.com/posts', {  
-         params: {  
-            _limit: limit,  
-            _page: page,  
-         },  
-      });  
-   }  
+import axios from 'axios';
+
+export default class PostService {
+   static async getAll(limit: number = 10, page: number = 1) {
+      return await axios.get('https://jsonplaceholder.typicode.com/posts', {
+         params: {
+            _limit: limit,
+            _page: page,
+         },
+      });
+   }
 }
 ```
 
-
 `utilities / pages.utilities.ts`
+
 ```TS
-// тут мы получаем количество страниц в зависимости от общего количества постов и их максимального количества на странице  
-export const getPageCount = (totalCount: number, limit: number): number => {  
-   // вернём число страниц, округлённое в большую сторону  
-   return Math.ceil(totalCount / limit);  
-};  
-  
-// тут мы создадим массив страниц, которые будут выводить посты  
-export const getPagesArray = (totalPages: number) => {  
-   let result: number[] = [];  
-   for (let i = 0; i < totalPages; i++) {  
-      result.push(i + 1);  
-   }  
-   return result;  
+// тут мы получаем количество страниц в зависимости от общего количества постов и их максимального количества на странице
+export const getPageCount = (totalCount: number, limit: number): number => {
+   // вернём число страниц, округлённое в большую сторону
+   return Math.ceil(totalCount / limit);
+};
+
+// тут мы создадим массив страниц, которые будут выводить посты
+export const getPagesArray = (totalPages: number) => {
+   let result: number[] = [];
+   for (let i = 0; i < totalPages; i++) {
+      result.push(i + 1);
+   }
+   return result;
 };
 ```
 
@@ -1922,100 +1962,100 @@ export const getPagesArray = (totalPages: number) => {
 
 Потом в `pagesArray` мы получаем массив страниц (1, 2, 3...).
 
-И уже в функции `changePage` мы осуществляем фетчинг новых постов на странице. Эту функцию вызывает компонент `Button`. 
+И уже в функции `changePage` мы осуществляем фетчинг новых постов на странице. Эту функцию вызывает компонент `Button`.
 Кнопки рендерятся в зависимости от количества элементов в массиве `pagesArray`.
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState('');  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-   const [modal, setModal] = useState(false);  
-  
-   // состояние, которое хранит общее колчиество постов  
-   const [totalPages, setTotalPages] = useState<number>(0);  
-   // состояние лимита постов  
-   const [limit, setLimit] = useState<number>(10);  
-   // состояние страницы постов  
-   const [page, setPage] = useState<number>(1);  
-  
-   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
-      const response = await PostService.getAll(limit, page);  
-      setPosts(response.data);  
-  
-      // общее количество постов получаем из хедера запроса  
-      const totalCount = response.headers['x-total-count'];  
-  
-      // получаем общее количество страниц  
-      setTotalPages(getPageCount(totalCount, limit));  
-   });  
-  
-   // получаем массив номеров страниц  
-   let pagesArray: number[] = getPagesArray(totalPages);  
-  
-   // тут мы будем устанавливать в состояние выбранную страницу пользователя  
-   const changePage = (page: number) => {  
-      setPage(page);  
-      fetchPosts();  
-   };  
-  
-   useEffect(() => {  
-      fetchPosts();  
-   }, []);  
-  
-   /// CODE ... 
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         {postsError && <h1>Произошла ошибка {postsError}</h1>}  
-  
-         {isPostLoading ? (  
-            <div className={styles.loadPosition}>  
-               <Loader>Идёт загрузка...</Loader>  
-            </div>  
-         ) : (  
-            <PostList  
-               className={styles.list}  
-               posts={sortedAndSearchedPosts}  
-               remove={removePost}  
-            />         
-        )}  
+export const Posts = () => {
+   const [posts, setPosts] = useState('');
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+   const [modal, setModal] = useState(false);
+
+   // состояние, которое хранит общее колчиество постов
+   const [totalPages, setTotalPages] = useState<number>(0);
+   // состояние лимита постов
+   const [limit, setLimit] = useState<number>(10);
+   // состояние страницы постов
+   const [page, setPage] = useState<number>(1);
+
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {
+      const response = await PostService.getAll(limit, page);
+      setPosts(response.data);
+
+      // общее количество постов получаем из хедера запроса
+      const totalCount = response.headers['x-total-count'];
+
+      // получаем общее количество страниц
+      setTotalPages(getPageCount(totalCount, limit));
+   });
+
+   // получаем массив номеров страниц
+   let pagesArray: number[] = getPagesArray(totalPages);
+
+   // тут мы будем устанавливать в состояние выбранную страницу пользователя
+   const changePage = (page: number) => {
+      setPage(page);
+      fetchPosts();
+   };
+
+   useEffect(() => {
+      fetchPosts();
+   }, []);
+
+   /// CODE ...
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         {postsError && <h1>Произошла ошибка {postsError}</h1>}
+
+         {isPostLoading ? (
+            <div className={styles.loadPosition}>
+               <Loader>Идёт загрузка...</Loader>
+            </div>
+         ) : (
+            <PostList
+               className={styles.list}
+               posts={sortedAndSearchedPosts}
+               remove={removePost}
+            />
+        )}
 
 
 		{/* тут уже мы выводим кнопки со страницами */}
-         <div className={styles.buttonBlock}>  
-            {pagesArray.map(p => (  
-               <Button  
-                  onClick={() => changePage(p)}  
-                  key={p}  
-                  className={cn(styles.buttonPage, {  
-                     [styles.buttonPage__current]: page === p,  
-                  })}  
-                  buttonType={'gray'}  
-               >  
-                  {p}  
-               </Button>  
-            ))}  
-         </div>  
-      </div>  
-   );  
+         <div className={styles.buttonBlock}>
+            {pagesArray.map(p => (
+               <Button
+                  onClick={() => changePage(p)}
+                  key={p}
+                  className={cn(styles.buttonPage, {
+                     [styles.buttonPage__current]: page === p,
+                  })}
+                  buttonType={'gray'}
+               >
+                  {p}
+               </Button>
+            ))}
+         </div>
+      </div>
+   );
 };
 ```
 
 Мы реализовали подгрузку новых постов на странице, но тут мы столкнулись с проблемой, что при переходе на разные страницы, у нас загружается прошлая выбранная страница
 
 ![](_png/8da325f149f2e8d270422f42b2ebb5a2.png)
-
 
 ## 02:06:20 ➝ Обьяснение механизма изменения состояния
 
@@ -2027,13 +2067,14 @@ export const Posts = () => {
 И теперь можно из функции `changePage` убрать функцию фетчинга постов, так как это делает `useEffect`.
 
 `page-components / Posts.tsx`
+
 ```TSX
-const changePage = (page: number) => {  
-   setPage(page);  
-};  
-  
-useEffect(() => {  
-   fetchPosts();  
+const changePage = (page: number) => {
+   setPage(page);
+};
+
+useEffect(() => {
+   fetchPosts();
 }, [page]);
 ```
 
@@ -2041,125 +2082,127 @@ useEffect(() => {
 
 И так же можно декомпозировать постраничный вывод в отдельный компонент.
 
-Компонент пагинации будет в себя принимать общее количество страниц, страницу, на которой мы сейчас находимся и функцию изменения страницы 
+Компонент пагинации будет в себя принимать общее количество страниц, страницу, на которой мы сейчас находимся и функцию изменения страницы
 
 `components / Pagination / Pagination.props.ts`
+
 ```TS
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';  
-  
-export interface IPaginationProps  
-   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {  
-   totalPages: number;  
-   page: number;  
-   changePage: (page: number) => void;  
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export interface IPaginationProps
+   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+   totalPages: number;
+   page: number;
+   changePage: (page: number) => void;
 }
 ```
 
 В сам компонент так же перенесём вызов функции получения массива страниц
 
 `components / Pagination / Pagination.tsx`
+
 ```TSX
-export const Pagination = ({ totalPages, page, changePage }: IPaginationProps) => {  
-   let pagesArray: number[] = getPagesArray(totalPages);  
-  
-   return (  
-      <div className={styles.buttonBlock}>  
-         {pagesArray.map(p => (  
-            <Button  
-               onClick={() => changePage(p)}  
-               key={p}  
-               className={cn(styles.buttonPage, {  
-                  [styles.buttonPage__current]: page === p,  
-               })}  
-               buttonType={'gray'}  
-            >               
-			{p}  
-            </Button>  
-         ))}  
-      </div>  
-   );  
+export const Pagination = ({ totalPages, page, changePage }: IPaginationProps) => {
+   let pagesArray: number[] = getPagesArray(totalPages);
+
+   return (
+      <div className={styles.buttonBlock}>
+         {pagesArray.map(p => (
+            <Button
+               onClick={() => changePage(p)}
+               key={p}
+               className={cn(styles.buttonPage, {
+                  [styles.buttonPage__current]: page === p,
+               })}
+               buttonType={'gray'}
+            >
+			{p}
+            </Button>
+         ))}
+      </div>
+   );
 };
 ```
 
 Родительский компонент на данный момент выглядит подобным образом:
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState('');  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-   const [modal, setModal] = useState(false);  
-  
-   // состояние, которое хранит общее колчиество постов  
-   const [totalPages, setTotalPages] = useState<number>(0);  
-   // состояние лимита постов  
-   const [limit, setLimit] = useState<number>(10);  
-   // состояние страницы постов  
-   const [page, setPage] = useState<number>(1);  
-  
-   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
-      const response = await PostService.getAll(limit, page);  
-      setPosts(response.data);  
-  
-      // общее количество постов получаем из хедера запроса  
-      const totalCount = response.headers['x-total-count'];  
-  
-      // получаем общее количество страниц  
-      setTotalPages(getPageCount(totalCount, limit));  
-   });  
-  
-   // тут мы будем устанавливать в состояние выбранную страницу пользователя  
-   const changePage = (page: number) => {  
-      setPage(page);  
-   };  
-  
-   useEffect(() => {  
-      fetchPosts();  
-   }, [page]);  
-  
-   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-  
-      setModal(false);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         {postsError && <h1>Произошла ошибка {postsError}</h1>}  
-  
-         {isPostLoading ? (  
-            <div className={styles.loadPosition}>  
-               <Loader>Идёт загрузка...</Loader>  
-            </div>  
-         ) : (  
-            <PostList  
-               className={styles.list}  
-               posts={sortedAndSearchedPosts}  
-               remove={removePost}  
-            />         )}  
-  
-         <Pagination totalPages={totalPages} page={page} changePage={changePage} />  
-      </div>  
-   );  
+export const Posts = () => {
+   const [posts, setPosts] = useState('');
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+   const [modal, setModal] = useState(false);
+
+   // состояние, которое хранит общее колчиество постов
+   const [totalPages, setTotalPages] = useState<number>(0);
+   // состояние лимита постов
+   const [limit, setLimit] = useState<number>(10);
+   // состояние страницы постов
+   const [page, setPage] = useState<number>(1);
+
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {
+      const response = await PostService.getAll(limit, page);
+      setPosts(response.data);
+
+      // общее количество постов получаем из хедера запроса
+      const totalCount = response.headers['x-total-count'];
+
+      // получаем общее количество страниц
+      setTotalPages(getPageCount(totalCount, limit));
+   });
+
+   // тут мы будем устанавливать в состояние выбранную страницу пользователя
+   const changePage = (page: number) => {
+      setPage(page);
+   };
+
+   useEffect(() => {
+      fetchPosts();
+   }, [page]);
+
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+
+      setModal(false);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         {postsError && <h1>Произошла ошибка {postsError}</h1>}
+
+         {isPostLoading ? (
+            <div className={styles.loadPosition}>
+               <Loader>Идёт загрузка...</Loader>
+            </div>
+         ) : (
+            <PostList
+               className={styles.list}
+               posts={sortedAndSearchedPosts}
+               remove={removePost}
+            />         )}
+
+         <Pagination totalPages={totalPages} page={page} changePage={changePage} />
+      </div>
+   );
 };
 ```
-
 
 ## 02:12:00 ➝ React router. Постраничная навигация. BrowserRouter, Route, Switch, Redirect
 
@@ -2170,6 +2213,7 @@ npm i react-router-dom
 ```
 
 Теперь мы немного переструктурируем приложение:
+
 - Создадим папку `pages`, которая будет хранить не отдельные компоненты, а целые страницы, которые будут располагаться в приложении
 - Компонент `App`, который является стартовой точкой приложения, будет хранить в себе `BrowserRouter`, который будет отслеживать все роуты в приложении
 - Чтобы определить страницу в качестве отдельного роута, нужно поместить компонент страницы в компонент отдельного роута `Route`. Сам `Route` внутрь себя принимает компонент для роутинга и путь, по которому страница должна отрисовываться
@@ -2191,6 +2235,7 @@ npm i react-router-dom
 И так выглядит страница ошибки при переходе не несуществующую страницу
 
 `pages > Error.jsx`
+
 ```JSX
 import React from 'react';
 
@@ -2217,9 +2262,10 @@ export default Error;
 
 И далее нам нужно реализовать роуты под каждый отдельный пост, чтобы можно было просмотреть по нему детальную информацию
 
-Тут нужно уже воспользоваться хуком `useHistory`, который предоставляет реакт-роутер-дом. Этот хук позволяет нам реализовать переход по страницам без компонента `Link`. Конкретно мы можем воспользоваться методом `push` для генерации роутов по нашим постам. Переход будет осуществляться без помощи ссылок - мы нажали на кнопку и перешли на нужную страницу 
+Тут нужно уже воспользоваться хуком `useHistory`, который предоставляет реакт-роутер-дом. Этот хук позволяет нам реализовать переход по страницам без компонента `Link`. Конкретно мы можем воспользоваться методом `push` для генерации роутов по нашим постам. Переход будет осуществляться без помощи ссылок - мы нажали на кнопку и перешли на нужную страницу
 
 `components / PostItem.jsx`
+
 ```JSX
 const PostItem = (props) => {
     const router = useHistory()
@@ -2253,7 +2299,7 @@ const PostItem = (props) => {
 
 ![](_png/72ce7088571cc1a864e6d2146e153611.png)
 
-И далее в компоненте с роутами нужно реализовать переход на динамическую страницу. Чтобы указать, что параметр страницы динамический, нужно в ссылке указать `:id` двоеточие. 
+И далее в компоненте с роутами нужно реализовать переход на динамическую страницу. Чтобы указать, что параметр страницы динамический, нужно в ссылке указать `:id` двоеточие.
 
 Так же у нас используется два роута, которые начинаются на `/posts`. Чтобы избежать конфликтов, нужно передать атрибут `exact`
 
@@ -2264,6 +2310,7 @@ const PostItem = (props) => {
 Первым делом, нужно добавить в API метод, который будет получать один определённый пост с сервера `getById` и его комментарии `getCommentsByPostId`, которые будут получать `id` поста
 
 `src > API > PostService.js`
+
 ```JSX
 import axios from "axios";
 
@@ -2385,6 +2432,7 @@ export default PostIdPage;
 Сейчас нужно описать все приватные и публичные маршруты на странице
 
 `src > router > index.js`
+
 ```JSX
 import About from "../pages/About";
 import Posts from "../pages/Posts";
@@ -2403,7 +2451,7 @@ export const publicRoutes = [
 ]
 ```
 
-И чтобы выводить только публичные или только приватные маршруты, мы можем по тернарному оператору выводить разные конструкции с разными роутами 
+И чтобы выводить только публичные или только приватные маршруты, мы можем по тернарному оператору выводить разные конструкции с разными роутами
 
 Если `isAuth = false`, то будет рендериться только один маршрут - `Login`
 
@@ -2411,7 +2459,7 @@ export const publicRoutes = [
 
 ## 02:38:00 ➝ useContext. Глобальные данные. Авторизация пользователя
 
-Далее у нас идёт хук `useContext`, который позволяет из любой точки приложения получить определённые данные. 
+Далее у нас идёт хук `useContext`, который позволяет из любой точки приложения получить определённые данные.
 
 Потребность в нём появилась, когда появились сложности с передачей пропсов между большой вложенностью компонентов в приложении
 
@@ -2420,6 +2468,7 @@ export const publicRoutes = [
 Чтобы начать использовать контекст, нам нужно для начала создать сам контекст, к которому мы буем обращаться:
 
 `src > context > index.js`
+
 ```JS
 import {createContext} from 'react'
 
@@ -2429,6 +2478,7 @@ export const AuthContext = createContext(null);
 Далее в главном компоненте приложения нужно обернуть всё последующее приложение в контекст `AuthContext`, который и будет распространять определённые данные на все компоненты. Самим распространением занимается `Provider` этого контекста. В атрибут `value` мы передаём значения, которые хотим распространять.
 
 И теперь при обновлении страницы с отдельным постом мы можем встретить проблему, что мы выбрасываемся на страницу с постами. Это происходит по следующей причине:
+
 - изначально аутентификация стоит как `false`
 - у нас грузится страница логина
 - потом мы получаем данные с локального хранилища, что мы авторизованы
@@ -2437,6 +2487,7 @@ export const AuthContext = createContext(null);
 Чтобы поправить проблему, нужно создать состояние `isLoading`, которое не даст нам выбрасываться обратно, а просто будет отображать компонент загрузки
 
 `src > App.jsx`
+
 ```JSX
 function App() {
     // состояние зарегистрированности пользователя
@@ -2478,6 +2529,7 @@ export default App;
 Далее по состоянию аутентификации будут подгружаться определённые роуты
 
 `src > components > AppRouter.jsx`
+
 ```JSX
 const AppRouter = () => {
     // получаем из глобального контекста состояние входа пользователя и состояние загрузки
@@ -2515,6 +2567,7 @@ export default AppRouter;
 На странице логина, мы будем устанавливать айтем `auth` в локальное хранилище, который и будет отвечать за аутентификацию пользователя в системе
 
 `src > page > Login.jsx`
+
 ```JSX
 import React, {useContext} from 'react';
 import MyInput from "../components/UI/input/MyInput";
@@ -2556,6 +2609,7 @@ export default Login;
 Далее в навигационном баре можно сделать функцию выхода из приложения, которая удалить айтем аутентификации из локального хранилища
 
 `src > components > Navbar.jsx`
+
 ```JSX
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
@@ -2602,134 +2656,135 @@ export default Navbar;
 Свойство `isIntersecting` у `observer` отвечает за то, в зоне видимости ли наш элемент
 
 `hooks / useObserver.ts`
+
 ```TS
-import { useEffect, useRef } from 'react';  
-  
-export const useObserver = (ref, canLoad: boolean, isLoading: boolean, callback: Function) => {  
-   // тут будет храниться сам обзёрвер  
-   const observer = useRef();  
-  
-   // второй эффект будет отвечать за отслеживание элемента, который будет триггерить загрузку постов  
-   useEffect(() => {  
-      // если мы загружаемся, то новый обзёрвер создавать сейчас не нужно  
-      if (isLoading) return;  
-  
-      // если обзёрвер за чем-то уже следит, то нужно убрать с него все слежки на данный момент времени  
-      if (observer.current) observer.current?.disconnect();  
-  
-      const callbackObserver = (entries, observer) => {  
-         // если объект в зоне видимости и если номер текущей страницы меньше общего количества страниц  
-         if (entries[0].isIntersecting && canLoad) {  
-            // то изменяем номер страницы  
-            callback();  
-         }  
-      };  
-  
-      // инициализируем новый обзёрвер  
-      observer.current = new IntersectionObserver(callbackObserver);  
-      // выбираем отслеживаемый элемент  
-      observer.current.observe(ref.current);  
-  
-      // срабатывать эффект должен только тогда, когда изменилось состояние загрузки страницы  
-   }, [isLoading]);  
+import { useEffect, useRef } from 'react';
+
+export const useObserver = (ref, canLoad: boolean, isLoading: boolean, callback: Function) => {
+   // тут будет храниться сам обзёрвер
+   const observer = useRef();
+
+   // второй эффект будет отвечать за отслеживание элемента, который будет триггерить загрузку постов
+   useEffect(() => {
+      // если мы загружаемся, то новый обзёрвер создавать сейчас не нужно
+      if (isLoading) return;
+
+      // если обзёрвер за чем-то уже следит, то нужно убрать с него все слежки на данный момент времени
+      if (observer.current) observer.current?.disconnect();
+
+      const callbackObserver = (entries, observer) => {
+         // если объект в зоне видимости и если номер текущей страницы меньше общего количества страниц
+         if (entries[0].isIntersecting && canLoad) {
+            // то изменяем номер страницы
+            callback();
+         }
+      };
+
+      // инициализируем новый обзёрвер
+      observer.current = new IntersectionObserver(callbackObserver);
+      // выбираем отслеживаемый элемент
+      observer.current.observe(ref.current);
+
+      // срабатывать эффект должен только тогда, когда изменилось состояние загрузки страницы
+   }, [isLoading]);
 };
 ```
 
 В `return` добавляем див-пустышку, который будет просто иметь в себе референс `lastElement`, за которым и будет следить обзёрвер. Далее нам просто нужно вызвать самописный хук `useObserver` и передать в него нужные параметры
 
 `page-components / Posts.tsx`
+
 ```TSX
-export const Posts = () => {  
-   const [posts, setPosts] = useState('');  
-   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });  
-   const [modal, setModal] = useState(false);  
-  
-   const [totalPages, setTotalPages] = useState<number>(0);  
-   const [limit, setLimit] = useState<number>(10);  
-   const [page, setPage] = useState<number>(1);  
-  
-   // тут мы будем хранить ссылку на последний элемент страницы, чтобы при достижении его, у нас подгружались новые посты  
-   const lastElement = useRef<HTMLDivElement>();  
-  
-   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {  
-      const response = await PostService.getAll(limit, page);  
-  
-      // подгружает не просто новые посты, а добавляет подгруженные в общий массив постов  
-      setPosts([...posts, ...response.data]);  
-  
-      const totalCount = response.headers['x-total-count'];  
-  
-      setTotalPages(getPageCount(totalCount, limit));  
-   });  
-  
-   const changePage = (page: number) => {  
-      setPage(page);  
-   };  
-  
-   // тут воспользуемся кастомным хуком для отслеживания конца страницы  
-   useObserver(lastElement, page < totalPages, isPostLoading, () => {  
-      setPage(page + 1);  
-   });  
-  
-   useEffect(() => {  
-      fetchPosts();  
-   }, [page, limit]);  
-  
-   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);  
-  
-   const createPost = (newPost: IPost): void => {  
-      setPosts([...posts, newPost]);  
-  
-      setModal(false);  
-   };  
-  
-   const removePost = (post: IPost): void => {  
-      setPosts(posts.filter(p => p.id !== post.id));  
-   };  
-  
-   return (  
-      <div className={styles.wrapper}>  
-         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>  
-            Создать пост  
-         </Button>  
-  
-         <Modal visible={modal} setVisible={setModal}>  
-            <PostForm create={createPost} />  
-         </Modal>  
-  
-         <PostFilter filter={filter} setFilter={setFilter} />  
-  
-         <Select  
-            defaultValue={'Количество элементов на странице'}  
-            options={[  
-               { value: 5, name: '5' },  
-               { value: 10, name: '10' },  
-               { value: 25, name: '25' },  
-               { value: -1, name: 'Все' },  
-            ]}  
-            value={limit}  
-            onChange={value => setLimit(value)}  
-         />  
-  
-         {postsError && <h1>Произошла ошибка {postsError}</h1>}  
-  
-         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />  
-  
-         {/* это наблюдаемый div */}  
-         <div ref={lastElement} style={{ height: 1 }} />  
-  
-         {isPostLoading && (  
-            <div className={styles.loadPosition}>  
-               <Loader>Идёт загрузка...</Loader>  
-            </div>  
-         )}  
-  
-         <Pagination totalPages={totalPages} page={page} changePage={changePage} />  
-      </div>  
-   );  
+export const Posts = () => {
+   const [posts, setPosts] = useState('');
+   const [filter, setFilter] = useState<IFilter>({ query: '', sort: 'title' });
+   const [modal, setModal] = useState(false);
+
+   const [totalPages, setTotalPages] = useState<number>(0);
+   const [limit, setLimit] = useState<number>(10);
+   const [page, setPage] = useState<number>(1);
+
+   // тут мы будем хранить ссылку на последний элемент страницы, чтобы при достижении его, у нас подгружались новые посты
+   const lastElement = useRef<HTMLDivElement>();
+
+   const [fetchPosts, isPostLoading, postsError] = useFetching(async () => {
+      const response = await PostService.getAll(limit, page);
+
+      // подгружает не просто новые посты, а добавляет подгруженные в общий массив постов
+      setPosts([...posts, ...response.data]);
+
+      const totalCount = response.headers['x-total-count'];
+
+      setTotalPages(getPageCount(totalCount, limit));
+   });
+
+   const changePage = (page: number) => {
+      setPage(page);
+   };
+
+   // тут воспользуемся кастомным хуком для отслеживания конца страницы
+   useObserver(lastElement, page < totalPages, isPostLoading, () => {
+      setPage(page + 1);
+   });
+
+   useEffect(() => {
+      fetchPosts();
+   }, [page, limit]);
+
+   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+   const createPost = (newPost: IPost): void => {
+      setPosts([...posts, newPost]);
+
+      setModal(false);
+   };
+
+   const removePost = (post: IPost): void => {
+      setPosts(posts.filter(p => p.id !== post.id));
+   };
+
+   return (
+      <div className={styles.wrapper}>
+         <Button className={styles.button} buttonType={'purple'} onClick={() => setModal(true)}>
+            Создать пост
+         </Button>
+
+         <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+         </Modal>
+
+         <PostFilter filter={filter} setFilter={setFilter} />
+
+         <Select
+            defaultValue={'Количество элементов на странице'}
+            options={[
+               { value: 5, name: '5' },
+               { value: 10, name: '10' },
+               { value: 25, name: '25' },
+               { value: -1, name: 'Все' },
+            ]}
+            value={limit}
+            onChange={value => setLimit(value)}
+         />
+
+         {postsError && <h1>Произошла ошибка {postsError}</h1>}
+
+         <PostList className={styles.list} posts={sortedAndSearchedPosts} remove={removePost} />
+
+         {/* это наблюдаемый div */}
+         <div ref={lastElement} style={{ height: 1 }} />
+
+         {isPostLoading && (
+            <div className={styles.loadPosition}>
+               <Loader>Идёт загрузка...</Loader>
+            </div>
+         )}
+
+         <Pagination totalPages={totalPages} page={page} changePage={changePage} />
+      </div>
+   );
 };
 ```
-
 
 При достижении невидимого `div`, у нас срабатывает функция закинутая в `observer`
 

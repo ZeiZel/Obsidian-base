@@ -1,4 +1,3 @@
-
 [Obsidian UI](_lessons/Obsidian%20UI.md)
 [Как написать свой плагин](_lessons/Как%20написать%20свой%20плагин.md)
 [Плагины](_lessons/Плагины.md)

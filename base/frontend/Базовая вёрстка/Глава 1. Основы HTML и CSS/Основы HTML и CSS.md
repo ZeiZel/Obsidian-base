@@ -1,4 +1,4 @@
-#HTML #CSS 
+#HTML #CSS
 
 ### 2.3 Как работают теги HTML и стили CSS
 

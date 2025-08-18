@@ -27,6 +27,7 @@ bun run start
 Так выглядит простейший сервер на Bun
 
 `index.ts`
+
 ```TS
 import Bun, { file, serve } from "bun";
 
@@ -78,5 +79,3 @@ describe("arithmetic", () => {
   });
 });
 ```
-
-

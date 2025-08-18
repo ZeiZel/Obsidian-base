@@ -1,4 +1,3 @@
-
 ## 001 Локальные сервера
 
 Сервер
@@ -20,7 +19,6 @@ JSON – более современный формат обмена данны�
 Так же такой подход позволяет сделать глубокое копирование объектов (когда копируются объекты полностью любой вложенности), как тут показано на примере, когда мы меняем значения вложенных объектов
 
 ![](_png/5f4bc06913a0c186f859343183e11537.png)
-
 
 ## 003 AJAX и общение с сервером
 
@@ -44,7 +42,7 @@ JSON – более современный формат обмена данны�
 
 `Open`(`метод`(пост- или гет-запрос), `ссылка на файл запроса`, `асинхронность` (`true`/`false` – изначально стоит в `true`, так как выполняется запрос к серверу и работа страницы асинхронно и это нормально), `логин`, `пароль`)
 
-`get`-запросы можно реализовать даже на простом сервере (тот же *Live Server*)
+`get`-запросы можно реализовать даже на простом сервере (тот же _Live Server_)
 
 `setRequestHeader` – отправляет сам json-файл. В него мы вставляем заголовок типа и сам тип
 
@@ -85,9 +83,7 @@ JSON – более современный формат обмена данны�
 
 ![](_png/e3c15fc3c0e952cf121f22c171b03419.png)
 
-
 ## 004 Реализация скрипта отправки данных на сервер
-
 
 Сейчас нужно будет реализовать ПОСТ-запрос отправку данных на сервер и ответ пользователю
 
@@ -135,7 +131,7 @@ PHP файл будет возвращать данные, которые мы �
 ![](_png/119bb0e89b07a1372279ab33843be00d.png)
 ![](_png/5c7296f010f92f090adaf6e5c90024b2.png)
 
-И тут уже кроется очень важная особенность работы с ПОСТ-запросами. Если мы используем `XMLHttpRequest`, *ПОСТ-запрос* и передаём данные через `FormData`, то *указывать хедер нам нелья*, так как вылезет ошибка
+И тут уже кроется очень важная особенность работы с ПОСТ-запросами. Если мы используем `XMLHttpRequest`, _ПОСТ-запрос_ и передаём данные через `FormData`, то _указывать хедер нам нелья_, так как вылезет ошибка
 
 ![](_png/23799214df8ba30497ccd4ac193440d7.png)
 ![](_png/960888e90941f60a81f5d05c0c08b3da.png)
@@ -157,8 +153,9 @@ PHP файл будет возвращать данные, которые мы �
 Вот php-код, который обработает JSON-данные с сервера
 
 ![](_png/d05726bc02cf9f227399049acad2ecd9.png)
+
 - И код работает нормально и ровно так же, как и раньше
-![](_png/13ac8b4f48e7dd0d5adb917033c1b733.png)
+  ![](_png/13ac8b4f48e7dd0d5adb917033c1b733.png)
 
 Полный код:
 
@@ -166,9 +163,7 @@ PHP файл будет возвращать данные, которые мы �
 ![](_png/353d118d1bd4b10f42a5b42d12778777.png)
 ![](_png/438eed0fd20d2d415b471ed57d9f8a89.png)
 
-
 ## 005 Красивое оповещение пользователя
-
 
 На сегодня нам нужно сделать красивое оповещение пользователя о загрузке (если она будет долгой).
 
@@ -199,9 +194,7 @@ PHP файл будет возвращать данные, которые мы �
 
 ![](_png/e1f6998488093770aa43f9baaf5e8e5b.png)
 
-
 ## 006 Promise (ES6)
-
 
 `Promise` (обещание) – это блок кода, который будет выполняться асинхронно относительно другого кода. Промис позволяет избежать **collback-hell** ситуации, когда у нас огромное количество таймаутов и вложенных функций
 
@@ -249,9 +242,7 @@ PHP файл будет возвращать данные, которые мы �
 
 ![](_png/191458a426d45fbe9200628acfdd3e05.png)
 
-
 ## 007 Fetch API
-
 
 `fetch` – это конструкция с GET-запросом, которая внутри представляет из себя промис (то есть чейны работают так же как и в промисах)
 
@@ -295,9 +286,7 @@ PHP файл будет возвращать данные, которые мы �
 ![](_png/9a417c30d0df5f0bf70170343497fbe7.png)
 ![](_png/658f5000de6c879fd45cc23e691b3327.png)
 
-
 ## 008 Методы перебора массивов
-
 
 И у нас есть основные методы массивов, которые мы можем использовать на постоянной основе
 
@@ -333,7 +322,6 @@ PHP файл будет возвращать данные, которые мы �
 И уже в конце трансформируем массив так, чтобы в нём остались только люди (под нулевым индексом)
 
 ![](_png/d468d3c7f8c8e088b34cb7c2a3583f67.png)
-
 
 ## 009 Подробно про npm и проект. JSON-server
 
@@ -430,10 +418,11 @@ npm i
 ![](_png/166b0563cac011f5b68633503e83057e.png)
 
 И поэтому мы сейчас выполним такую комбинацию:
-1) Сначала `formData` переведём в массив массивов (можно записать и `Object.entires(formData)`)
-2) Потом переведём через `Object.fromEntires()` этот массив массивов в обычный объект
-3) Потом через `stringify` переведём объект в json-формат данных
-4) Передадим переменную с джсоном в `postData`
+
+1. Сначала `formData` переведём в массив массивов (можно записать и `Object.entires(formData)`)
+2. Потом переведём через `Object.fromEntires()` этот массив массивов в обычный объект
+3. Потом через `stringify` переведём объект в json-формат данных
+4. Передадим переменную с джсоном в `postData`
 
 ![](_png/f41440014aca7cbff768f2de57bc0a6d.png)
 
@@ -458,9 +447,7 @@ npm i
 
 ![](_png/3effda72aa631c5d63f2cddbb22d02df.png)
 
-
 ## 011 Дополнительно Что такое библиотеки. Библиотека axios
-
 
 Часть про библиотеки: вставляем все библиотеки над нашим скриптом, чтобы при выполнении логики основного файла, он смог ссылаться на эту библиотеку
 
@@ -484,388 +471,381 @@ npm i
 ![](_png/7efbd59f1cf4d8639a0d2e1b2bac8618.png)
 ![](_png/2d25dcfc78017a5ef2c1608567f54a01.png)
 
-
 ## 012 Создаем слайдер на сайте. Вариант 1 - простой
-
 
 Простой вариант создания слайдера:
 
 ```JS
 // Получаем массив слайдеров и стрелочки
-const slides = document.querySelectorAll(".offer__slide"),  
-      prev = document.querySelector(".offer__slider-prev"),  
-      next = document.querySelector(".offer__slider-next");  
+const slides = document.querySelectorAll(".offer__slide"),
+      prev = document.querySelector(".offer__slider-prev"),
+      next = document.querySelector(".offer__slider-next");
 // Получаем доступ к номерам слайдеров
-const currentSlide = document.querySelector("#current"),  
-      totalSlides = document.querySelector("#total");  
+const currentSlide = document.querySelector("#current"),
+      totalSlides = document.querySelector("#total");
 // Будем менять индекс выводимых слайдеров
-let slideIndex = 1;  
+let slideIndex = 1;
 
 // Выводим первый слайд
-showSlides(slideIndex);  
+showSlides(slideIndex);
 
 // Будем менять номер слайдера по идентификатору
-function showSlideIndex(slideIdentifier, slideDependency) {  
-    if (slides.length < 10) {  
-        slideIdentifier.textContent = `0${slideDependency}`;  
-    } else {  
-        slideIdentifier.textContent = slideDependency;  
+function showSlideIndex(slideIdentifier, slideDependency) {
+    if (slides.length < 10) {
+        slideIdentifier.textContent = `0${slideDependency}`;
+    } else {
+        slideIdentifier.textContent = slideDependency;
     }
-}  
+}
 
 // Выводим общее количество слайдеров
-showSlideIndex(totalSlides, slides.length);  
+showSlideIndex(totalSlides, slides.length);
 
 // Тут уже реализовано отображение слайдов
-function showSlides(n) {  
-    // Проверяем границы значений слайдов  
+function showSlides(n) {
+    // Проверяем границы значений слайдов
     if (n > slides.length) {  // После последнего слайда выводим первый
-        slideIndex = 1;  
-    }  
+        slideIndex = 1;
+    }
     if (n < 1) {  // Если тыкнем меньше первого слайда, то выведем последний слайд
-        slideIndex = slides.length;  
-    }  
-    
-    // Скрываем все слайды  
-    slides.forEach(item => item.style.display = 'none');  
+        slideIndex = slides.length;
+    }
+
+    // Скрываем все слайды
+    slides.forEach(item => item.style.display = 'none');
 
 	// Отображаем слайдер по индексу
-    slides[slideIndex - 1].style.display = 'block'; // так же можем поставить ""  
+    slides[slideIndex - 1].style.display = 'block'; // так же можем поставить ""
 
-	// Отображаем номер текущего слайда 
-    showSlideIndex(currentSlide, slideIndex);  
-}  
+	// Отображаем номер текущего слайда
+    showSlideIndex(currentSlide, slideIndex);
+}
 
 // Тут мы будем менять отображаемый слайдер через вызов показа слайдов и изменение самого индекса
-function changeSlides(n) {  
-    showSlides(slideIndex += n);  
-}  
+function changeSlides(n) {
+    showSlides(slideIndex += n);
+}
 
 // Триггер для показа предыдущего слайда
-prev.addEventListener("click", () => {  
-    changeSlides(-1)  
-});  
+prev.addEventListener("click", () => {
+    changeSlides(-1)
+});
 
 // Триггер для следующего слайда
-next.addEventListener("click", () => {  
-    changeSlides(1);  
+next.addEventListener("click", () => {
+    changeSlides(1);
 })
 ```
 
 ![](_png/e62938364cbcfcf3b3355454059f92de.png)
 
-
 ## 013 Создаем слайдер на сайте. Вариант 2 - более сложный
-
 
 Опишем немного логику нашего слайдера. Самый внешний слайдер теперь будет не просто оболочной для наших слайдов - он будет просто окошком для просмотра слайдов. Ему мы зададим `overflow:hidden`. Дальше у нас идёт inner оболочка, которая будет в ширину равняться сразу всем слайдерам и будет занимать 400% от слайда на странице (400%, так как слайдов 4 штуки)
 
 ```HTML
 <div class="offer__slider-wrapper">  // Окошко
     <div class="offer__slider-inner">  // Добавили обёртку
-        <div class="offer__slide">  
-            <img src="img/slider/pepper.jpg" alt="pepper">  
-        </div>  
-        <div class="offer__slide">  
-            <img src="img/slider/food-12.jpg" alt="food">  
-        </div>  
-        <div class="offer__slide">  
-            <img src="img/slider/olive-oil.jpg" alt="oil">  
-        </div>  
-        <div class="offer__slide">  
-            <img src="img/slider/paprika.jpg" alt="paprika">  
-        </div>  
-    </div>  
+        <div class="offer__slide">
+            <img src="img/slider/pepper.jpg" alt="pepper">
+        </div>
+        <div class="offer__slide">
+            <img src="img/slider/food-12.jpg" alt="food">
+        </div>
+        <div class="offer__slide">
+            <img src="img/slider/olive-oil.jpg" alt="oil">
+        </div>
+        <div class="offer__slide">
+            <img src="img/slider/paprika.jpg" alt="paprika">
+        </div>
+    </div>
 </div>
 ```
 
 ```JS
-const slides = document.querySelectorAll(".offer__slide"),  
-      prev = document.querySelector(".offer__slider-prev"),  
-      next = document.querySelector(".offer__slider-next"),  
-      total = document.querySelector("#total"),  
-      current = document.querySelector("#current"),  
-      slidesWrapper = document.querySelector(".offer__slider-wrapper"),  
+const slides = document.querySelectorAll(".offer__slide"),
+      prev = document.querySelector(".offer__slider-prev"),
+      next = document.querySelector(".offer__slider-next"),
+      total = document.querySelector("#total"),
+      current = document.querySelector("#current"),
+      slidesWrapper = document.querySelector(".offer__slider-wrapper"),
       slidesField = document.queryав
-// Через регулярные выражения получаем ширину слайда  
-const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {  
-    return acc += val; // собираем все значения массива в один  
-});  
-  
-let slideIndex = 1;  
-let offset = 0; // Определяет длину прокрутки внутри slidesField  
-  
+// Через регулярные выражения получаем ширину слайда
+const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {
+    return acc += val; // собираем все значения массива в один
+});
+
+let slideIndex = 1;
+let offset = 0; // Определяет длину прокрутки внутри slidesField
+
 // Выводим общее количество слайдов
-if (slides.length < 10) {  
-    total.textContent = `0${slides.length}`;  
-    current.textContent = `0${slideIndex}`;  
-} else {  
-    total.textContent = slides.length;  
-    current.textContent = slideIndex;  
-}  
-  
-slidesField.style.width = 100 * slides.length + "%";// Зададим карусельному блоку ширину во все слайды  
+if (slides.length < 10) {
+    total.textContent = `0${slides.length}`;
+    current.textContent = `0${slideIndex}`;
+} else {
+    total.textContent = slides.length;
+    current.textContent = slideIndex;
+}
+
+slidesField.style.width = 100 * slides.length + "%";// Зададим карусельному блоку ширину во все слайды
 slidesField.style.display = "flex"; // Расположим слайды вдоль
-slidesField.style.transition = "all .5s"; // Настроим анимацию для всех трансформаций внутри блока (тут - перемещение слайда)  
-  
+slidesField.style.transition = "all .5s"; // Настроим анимацию для всех трансформаций внутри блока (тут - перемещение слайда)
+
 slidesWrapper.style.overflow = "hidden"; // Скрывает все слайды за границами окошка
-  
-// Задаём всем слайдам одну ширину  
-slides.forEach(slide => {  
-    slide.style.width = width;  
-})  
-  
-next.addEventListener("click", () => {  
+
+// Задаём всем слайдам одну ширину
+slides.forEach(slide => {
+    slide.style.width = width;
+})
+
+next.addEventListener("click", () => {
     // Перемещение слайда вперёд
-    if (offset === width * (slides.length - 1)) {  
-        offset = 0;  
-    } else {  
-        offset += width;  
-    }  
-    slidesField.style.transform = `translateX(-${offset}px)`;  
-
-	// Выводим номер слайда
-    if (slideIndex === slides.length) {  
-        slideIndex = 1;  
-    } else {  
-       slideIndex++;  
-    }  
-    if (slides.length < 10) {  
-        current.textContent = `0${slideIndex}`;  
-    } else {  
-        current.textContent = slideIndex;  
+    if (offset === width * (slides.length - 1)) {
+        offset = 0;
+    } else {
+        offset += width;
     }
-});  
-  
-prev.addEventListener("click", () => {  
-    // Перемещение слайда назад
-    if (offset === 0) {  
-        offset = width * (slides.length - 1);  
-    } else {  
-        offset -= width;  
-    }  
-    slidesField.style.transform = `translateX(-${offset}px)`;  
+    slidesField.style.transform = `translateX(-${offset}px)`;
 
 	// Выводим номер слайда
-    if (slideIndex === 1) {  
-        slideIndex = slides.length;  
-    } else {  
-        slideIndex--;  
-    }  
-    if (slides.length < 10) {  
-        current.textContent = `0${slideIndex}`;  
-    } else {  
-        current.textContent = slideIndex;  
+    if (slideIndex === slides.length) {
+        slideIndex = 1;
+    } else {
+       slideIndex++;
+    }
+    if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+    } else {
+        current.textContent = slideIndex;
+    }
+});
+
+prev.addEventListener("click", () => {
+    // Перемещение слайда назад
+    if (offset === 0) {
+        offset = width * (slides.length - 1);
+    } else {
+        offset -= width;
+    }
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+	// Выводим номер слайда
+    if (slideIndex === 1) {
+        slideIndex = slides.length;
+    } else {
+        slideIndex--;
+    }
+    if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+    } else {
+        current.textContent = slideIndex;
     }
 });
 ```
 
-
 ## 014 Создаем навигацию для слайдов
 
-
-Индикаторы слайдов сделаем через CSS и JS. Без дополнительных иконок. 
+Индикаторы слайдов сделаем через CSS и JS. Без дополнительных иконок.
 
 ```CSS
-.carousel-indicators {  
-   position: absolute;  
-   right: 0;  
-   bottom: 0;  
-   left: 0;  
-   z-index: 15;  
-   display: flex;  
-   justify-content: center;  
-   margin-right: 15%;  
-   margin-left: 15%;  
-   list-style: none;  
-}  
-  
-.dot {  
-   box-sizing: content-box;  
-   flex: 0 1 auto;  
-   width: 30px;  
-   height: 6px;  
-   margin-right: 3px;  
-   margin-left: 3px;  
-   cursor: pointer;  
-   background-color: #fff;  
-   background-clip: padding-box;  
-   border-top: 10px solid transparent;  
-   border-bottom: 10px solid transparent;  
-   opacity: .5;  
-   transition: opacity .6s ease;  
+.carousel-indicators {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 15;
+   display: flex;
+   justify-content: center;
+   margin-right: 15%;
+   margin-left: 15%;
+   list-style: none;
+}
+
+.dot {
+   box-sizing: content-box;
+   flex: 0 1 auto;
+   width: 30px;
+   height: 6px;
+   margin-right: 3px;
+   margin-left: 3px;
+   cursor: pointer;
+   background-color: #fff;
+   background-clip: padding-box;
+   border-top: 10px solid transparent;
+   border-bottom: 10px solid transparent;
+   opacity: .5;
+   transition: opacity .6s ease;
 }
 ```
 
 И вот сам код слайдера:
 
 ```JS
-const slides = document.querySelectorAll(".offer__slide"),  
-      slider = document.querySelector(".offer__slider"), // Добавляем сам слайдер, чтобы относительно него спозиционировать точки  
-      prev = document.querySelector(".offer__slider-prev"),  
-      next = document.querySelector(".offer__slider-next"),  
-      total = document.querySelector("#total"),  
-      current = document.querySelector("#current"),  
-      slidesWrapper = document.querySelector(".offer__slider-wrapper"),  
-      slidesField = document.querySelector(".offer__slider-inner");  
-  
-const sourceWidth = window.getComputedStyle(slidesWrapper).width;// Получаем ширину окошка прямо из посчитанных стилей  
-// Через регулярные выражения получаем ширину слайда  
-const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {  
-    return acc += val; // собираем все значения массива в один  
-});  
-  
-let slideIndex = 1;  
-let offset = 0; // Определяет длину прокрутки внутри slidesField  
-  
-  
-if (slides.length < 10) {  
-    total.textContent = `0${slides.length}`;  
-    current.textContent = `0${slideIndex}`;  
-} else {  
-    total.textContent = slides.length;  
-    current.textContent = slideIndex;  
-}  
-  
-slidesField.style.width = 100 * slides.length + "%";// Зададим карусельному блоку ширину во все слайды  
-slidesField.style.display = "flex";  
-slidesField.style.transition = "all .5s";  
-  
-slidesWrapper.style.overflow = "hidden";  
-  
-// Задаём всем слайдам одну ширину  
-slides.forEach(slide => {  
-    slide.style.width = width;  
-})  
-  
-// Делать точки будем полностью через JS  
-slider.style.position = "relative"; // Родитель должен иметь relative  
-const indicators = document.createElement("ol"),  
-      dots = []; // создаём истинный массив элементов  
-indicators.classList.add("carousel-indicators");  
-indicators.style.cssText = `  
-    position: absolute;    
-    right: 0;    
-    bottom: 0;    
-    left: 0;    
-    z-index: 15;    
-    display: flex;    
-    justify-content: center;    
-    margin-right: 15%;    
-    margin-left: 15%;    
+const slides = document.querySelectorAll(".offer__slide"),
+      slider = document.querySelector(".offer__slider"), // Добавляем сам слайдер, чтобы относительно него спозиционировать точки
+      prev = document.querySelector(".offer__slider-prev"),
+      next = document.querySelector(".offer__slider-next"),
+      total = document.querySelector("#total"),
+      current = document.querySelector("#current"),
+      slidesWrapper = document.querySelector(".offer__slider-wrapper"),
+      slidesField = document.querySelector(".offer__slider-inner");
+
+const sourceWidth = window.getComputedStyle(slidesWrapper).width;// Получаем ширину окошка прямо из посчитанных стилей
+// Через регулярные выражения получаем ширину слайда
+const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {
+    return acc += val; // собираем все значения массива в один
+});
+
+let slideIndex = 1;
+let offset = 0; // Определяет длину прокрутки внутри slidesField
+
+
+if (slides.length < 10) {
+    total.textContent = `0${slides.length}`;
+    current.textContent = `0${slideIndex}`;
+} else {
+    total.textContent = slides.length;
+    current.textContent = slideIndex;
+}
+
+slidesField.style.width = 100 * slides.length + "%";// Зададим карусельному блоку ширину во все слайды
+slidesField.style.display = "flex";
+slidesField.style.transition = "all .5s";
+
+slidesWrapper.style.overflow = "hidden";
+
+// Задаём всем слайдам одну ширину
+slides.forEach(slide => {
+    slide.style.width = width;
+})
+
+// Делать точки будем полностью через JS
+slider.style.position = "relative"; // Родитель должен иметь relative
+const indicators = document.createElement("ol"),
+      dots = []; // создаём истинный массив элементов
+indicators.classList.add("carousel-indicators");
+indicators.style.cssText = `
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    margin-right: 15%;
+    margin-left: 15%;
     list-style: none;
-`;  
-slider.append(indicators);  
-  
-for (let i = 0; i < slides.length; i++) {  
-    const dot = document.createElement("li");  
-    dot.setAttribute("data-slide-to", i + 1); // устанавливаем (атрибут, значение атрибута)  
-    dot.style.cssText = `  
-        box-sizing: content-box;        
-        flex: 0 1 auto;        
-        width: 30px;        
-        height: 6px;        
-        margin-right: 3px;        
-        margin-left: 3px;        
-        cursor: pointer;        
-        background-color: #fff;        
-        background-clip: padding-box;        
-        border-top: 10px solid transparent;        
-        border-bottom: 10px solid transparent;        
-        opacity: .5;        
-        transition: opacity .6s ease;    
-    `;  
-    if (i === 0) {  
-        dot.style.opacity = 1;  
-    }    
-    indicators.append(dot); // добавляем на каждой итерации точку  
-    dots.push(dot); // и сразу пушим точки в массив  
-}  
-  
-// Активируем точку определённого слайда  
-function activateDot() {  
-    dots.forEach(dot => dot.style.opacity = ".5");  
-    dots[slideIndex - 1].style.opacity = 1;  
-}  
-  
-// Вынесем корректировку числа слайдеров вовне  
-function checkToZero() {  
-    if (slides.length < 10) {  
-        current.textContent = `0${slideIndex}`;  
-    } else {  
-        current.textContent = slideIndex;  
+`;
+slider.append(indicators);
+
+for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement("li");
+    dot.setAttribute("data-slide-to", i + 1); // устанавливаем (атрибут, значение атрибута)
+    dot.style.cssText = `
+        box-sizing: content-box;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 6px;
+        margin-right: 3px;
+        margin-left: 3px;
+        cursor: pointer;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        opacity: .5;
+        transition: opacity .6s ease;
+    `;
+    if (i === 0) {
+        dot.style.opacity = 1;
     }
-}  
-  
-// Так же вынесем создание оффсета  
-function createOffset(offset) {  
-    slidesField.style.transform = `translateX(-${offset}px)`;  
-}  
-  
-next.addEventListener("click", () => {  
-    if (offset === width * (slides.length - 1)) {  
-        offset = 0;  
-    } else {  
-        offset += width;  
-    }  
-    createOffset(offset);  
-  
-    if (slideIndex === slides.length) {  
-        slideIndex = 1;  
-    } else {  
-       slideIndex++;  
-    }  
-    checkToZero();  
-    activateDot();  
-});  
-  
-prev.addEventListener("click", () => {  
-    if (offset === 0) {  
-        offset = width * (slides.length - 1);  
-    } else {  
-        offset -= width;  
-    }  
-    createOffset(offset);  
-  
-    if (slideIndex === 1) {  
-        slideIndex = slides.length;  
-    } else {  
-        slideIndex--;  
-    }  
-    checkToZero();  
-    activateDot();  
-});  
-  
-// Функциональность точек  
-dots.forEach(dot => {  
-    dot.addEventListener("click", (e) => {  
-        // Получаем атрибут слайдера, на который мы тыкнули  
-        const slideTo = e.target.getAttribute("data-slide-to");  
-        slideIndex = slideTo; // Индекс = текущему слайдеру с таргета  
-        offset = width * (slideTo - 1); // считаем оффсет относительно тыкнутого слайдера  
-        createOffset(offset);  
-  
-        if (slides.length < 10) {  
-            current.textContent = `0${slideIndex}`;  
-        } else {  
-            current.textContent = slideIndex;  
-        }  
-  
-        activateDot();  
+    indicators.append(dot); // добавляем на каждой итерации точку
+    dots.push(dot); // и сразу пушим точки в массив
+}
+
+// Активируем точку определённого слайда
+function activateDot() {
+    dots.forEach(dot => dot.style.opacity = ".5");
+    dots[slideIndex - 1].style.opacity = 1;
+}
+
+// Вынесем корректировку числа слайдеров вовне
+function checkToZero() {
+    if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+    } else {
+        current.textContent = slideIndex;
+    }
+}
+
+// Так же вынесем создание оффсета
+function createOffset(offset) {
+    slidesField.style.transform = `translateX(-${offset}px)`;
+}
+
+next.addEventListener("click", () => {
+    if (offset === width * (slides.length - 1)) {
+        offset = 0;
+    } else {
+        offset += width;
+    }
+    createOffset(offset);
+
+    if (slideIndex === slides.length) {
+        slideIndex = 1;
+    } else {
+       slideIndex++;
+    }
+    checkToZero();
+    activateDot();
+});
+
+prev.addEventListener("click", () => {
+    if (offset === 0) {
+        offset = width * (slides.length - 1);
+    } else {
+        offset -= width;
+    }
+    createOffset(offset);
+
+    if (slideIndex === 1) {
+        slideIndex = slides.length;
+    } else {
+        slideIndex--;
+    }
+    checkToZero();
+    activateDot();
+});
+
+// Функциональность точек
+dots.forEach(dot => {
+    dot.addEventListener("click", (e) => {
+        // Получаем атрибут слайдера, на который мы тыкнули
+        const slideTo = e.target.getAttribute("data-slide-to");
+        slideIndex = slideTo; // Индекс = текущему слайдеру с таргета
+        offset = width * (slideTo - 1); // считаем оффсет относительно тыкнутого слайдера
+        createOffset(offset);
+
+        if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+        } else {
+            current.textContent = slideIndex;
+        }
+
+        activateDot();
     })
 });
 ```
 
-
 ## 015 Как сохранить данные без БД. Работа с localStorage
-
 
 > [!Info] `localStorage`- это свойство объекта `Window`, которое хранит в себе данные и сохранено в браузере пользователя. Оно позволяет сохранить данные даже после перезагрузки страницы
 
->[!Note] Пример использования: 
-> 1) Запомнить время, на котором пользователь остановился
-> 2) Запомнить введённые данные в поля
-> 3) Запомнить настройки сайта (тёмная/светлая тема)
+> [!Note] Пример использования:
+>
+> 1. Запомнить время, на котором пользователь остановился
+> 2. Запомнить введённые данные в поля
+> 3. Запомнить настройки сайта (тёмная/светлая тема)
 
 > Однако нужно отметить, что нам доступно только 5 мб информации
 
@@ -874,6 +854,7 @@ dots.forEach(dot => {
 ```JS
 localStorage.setItem('number', 5);
 ```
+
 ![](_png/c3ca5a917913d54e01bc70301f8635f1.png)
 
 И так же через `getItem()` мы можем получить нужную нам строку
@@ -882,6 +863,7 @@ localStorage.setItem('number', 5);
 localStorage.setItem('string', 'some long string in this life');
 console.log(localStorage.getItem('string'));
 ```
+
 ![](_png/889f62bf4497784d753ccd575b7ed7f1.png)
 
 А уже таким образом мы можем удалить ненужное нам значение
@@ -904,7 +886,7 @@ localStorage.clear();
 const checkbox = document.querySelector('#checkbox'),
       form = document.querySelector('form'),
       change = document.querySelector('#color');
-      
+     
 // Проверим, есть ли наша запись при пезагрузке страницы
 if (localStorage.getItem('isChecked')) { // если будет отсутствовать, то = null, а null === false
     checkbox.checked = true;
@@ -915,6 +897,7 @@ checkbox.addEventListener('change', () => {
     localStorage.setItem('isChecked', true);
 });
 ```
+
 ![](_png/cb9869be6679e54b394207480f3f6141.png)
 
 А тут уже показана реализация изменения цвета формы по листенеру и сохранение этих настроек даже после перезагрузки. Цвет можно убрать только нажав ещё раз по кнопке
@@ -936,6 +919,7 @@ change.addEventListener('click', () => {
     }
 });
 ```
+
 ![](_png/7b4645045517bf4a572e06b83af8a0ee.png)
 
 Ну и так же в localStorage мы можем закинуть объект (но только уже стрингифайнутый в JSON)
@@ -950,17 +934,16 @@ const serializedPerson = JSON.stringify(person);
 
 localStorage.setItem('alex', serializedPerson);
 ```
+
 ![](_png/0af0e4a8147d5e3d2eef0dd7bd336988.png)
 
 Ну и так же спокойно мы можем получить это значение с сайта
 
 ![](_png/33df848ac414bf985f9cbd2e8dec9765.png)
 
-
 ## 016 Регулярные выражения
 
-
-Где используются? Для работы со строками: удаление, замена части слов, ограничить ввод *определённых* знаков,  для поиска определённой буквы или сочетания букв в строке и так далее.
+Где используются? Для работы со строками: удаление, замена части слов, ограничить ввод _определённых_ знаков, для поиска определённой буквы или сочетания букв в строке и так далее.
 
 Регулярные выражения состоят из паттерна и флага. Записываются паттерны так: /паттерн/флаги.
 
@@ -971,7 +954,7 @@ new RegExp("pattern", "flags"); // редко используется
 /pattern/flags; // используется часто
 ```
 
-И тут мы в переменной *answer* через метод `search()` ищем *pattern* внутри ответа. Метод поиска вернёт нам индекс, где в слове находится паттерн. 
+И тут мы в переменной _answer_ через метод `search()` ищем _pattern_ внутри ответа. Метод поиска вернёт нам индекс, где в слове находится паттерн.
 Тут 0 - A, 1 - n, ищем мы - n
 
 ![](_png/cd55f1c19030c807880695cb2f4c6f16.png)
@@ -981,7 +964,8 @@ new RegExp("pattern", "flags"); // редко используется
 
 ![](_png/0630d68668410cd9e0432bd3db037670.png)
 
-Флаги: 
+Флаги:
+
 - `i` – пытаемся найти что-то вне зависимости от регистра
 - `g` – пытаемся найти сразу несколько вхождений
 - `m` – многострочный режим
@@ -1018,11 +1002,11 @@ console.log(pass.replace(/\./g, "*"));
 
 Кроме точки у нас есть ещё много разных зарезервированных спецсимволов: `|`, `\`, `/`, `^`, `&`
 
-И вот пример прямого использования строкового метода. Тут мы можем непосредственно и быстро изменять нужный нам текст. 
+И вот пример прямого использования строкового метода. Тут мы можем непосредственно и быстро изменять нужный нам текст.
 
 ![| 600](_png/d9b204820ecd177674af3cb202713a0f.png)
 
-Дальше пойдут методы, которые непосредственно относятся к паттернам. Все прошлые относились к строкам. 
+Дальше пойдут методы, которые непосредственно относятся к паттернам. Все прошлые относились к строкам.
 Метод `test()` вернёт `boolean` значение. Отвечает за поиск паттерна в слове
 
 ![| 600](_png/0940d186ea454916a7d654f490b0044b.png)
@@ -1040,7 +1024,7 @@ console.log(pass.replace(/\./g, "*"));
 ![](_png/167a831ca91972cd9da12086bf4dcfdf.png)
 ![](_png/176b8b6580d53e2fbfc2b90ecee57f38.png)
 
-Так же мы можем вписать заборчик из того паттерна, который нам нужно найти. 
+Так же мы можем вписать заборчик из того паттерна, который нам нужно найти.
 Тут мы уже ищем слово, которое совпадает под наш паттерн
 
 ![](_png/18e9aee45ec61a40ab4ae3442d3fcf7e.png)
@@ -1068,7 +1052,7 @@ const sourceWidth = window.getComputedStyle(slidesWrapper).width;
 Это первый вариант получения чисел из полученного массива. Тут мы складываем все полученные числа через `reduce`
 
 ```JS
-const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {  
+const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {
     return acc += val;
 });
 ```
@@ -1079,110 +1063,107 @@ const width = +sourceWidth.match(/\d/g).reduce((acc, val) => {
 const width = +sourceWidth.replace(/\D/g, '');
 ```
 
-
 ## 017 Создаем калькулятор на сайте, часть 1
-
 
 Берём наш HTML-код:
 
 ```HTML
 // Кнопки женщины и мужчины
-<div class="calculating__choose" id="gender">  
-    <div id="female" class="calculating__choose-item calculating__choose-item_active">Женщина</div>  
-    <div id="male" class="calculating__choose-item">Мужчина</div>  
+<div class="calculating__choose" id="gender">
+    <div id="female" class="calculating__choose-item calculating__choose-item_active">Женщина</div>
+    <div id="male" class="calculating__choose-item">Мужчина</div>
 </div>
 
 // Кнопки активности жизнедеятельности
 // Через data-ratio мы задаём коэффициент для формулы в JS
-<div class="calculating__subtitle">  
-    Выберите вашу физическая активность  
-</div>  
-<div class="calculating__choose calculating__choose_big">  
-    <div data-ratio="1.2" id="low" class="calculating__choose-item">Низкая активность </div>  
-    <div data-ratio="1.375" id="small"  class="calculating__choose-item calculating__choose-item_active">Невысокая активность</div>  
-    <div data-ratio="1.55" id="medium" class="calculating__choose-item">Умеренная активность</div>  
-    <div data-ratio="1.725" id="high" class="calculating__choose-item">Высокая активность</div>  
+<div class="calculating__subtitle">
+    Выберите вашу физическая активность
+</div>
+<div class="calculating__choose calculating__choose_big">
+    <div data-ratio="1.2" id="low" class="calculating__choose-item">Низкая активность </div>
+    <div data-ratio="1.375" id="small"  class="calculating__choose-item calculating__choose-item_active">Невысокая активность</div>
+    <div data-ratio="1.55" id="medium" class="calculating__choose-item">Умеренная активность</div>
+    <div data-ratio="1.725" id="high" class="calculating__choose-item">Высокая активность</div>
 </div>
 ```
 
 И сама реализация нашего калькулятора:
 
 ```JS
-const result = document.querySelector(".calculating__result span");  
-// Задали значения по умолчанию, чтобы всё работало без клика по кнопкам  
-let sex = "female",  
-    weight, height, age,  
-    ratio = 1.375;  
-  
-// Калькулятор результата ккал в день  
-function calcTotal() {  
-    if (!sex || !height || !weight || !age || !ratio) {  
-        result.textContent = "----";  
-        return; // досрочно прервёт функцию  
-    }  
-  
-    if (sex === "female") {  
-        result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);  
-    } else {  
-        result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);  
-    }}  
-  
-// Активирует эффект нажатой кнопки  
-function getStaticInformation(parentSelector, activeClass) {  
-    const elements = document.querySelectorAll(`${parentSelector} div`);  
-  
-    elements.forEach(elem => {  
-        elem.addEventListener("click", (e) => {  
-            if (e.target.getAttribute("data-ratio")) {  
-                ratio = +e.target.getAttribute("data-ratio"); // вытаскиваем значение активности из атрибута  
-            } else {  
-                sex = e.target.getAttribute("id");  
-            }  
-  
-            elements.forEach(elem => {  
-                elem.classList.remove(activeClass);  
-            });  
-  
-            e.target.classList.add(activeClass);  
-  
-            calcTotal();  
-        });  
-    });  
-}  
-  
-// Каждый раз при вводе данные будут записываться в нужный идентификатор  
-function getDynamicInformation(selector) {  
-    const input = document.querySelector(selector);  
-  
-    input.addEventListener("input", () => {  
-        switch(input.getAttribute("id")) {  
-            case "height":   
-height = +input.value;  
-                break;  
-            case "weight":  
-                weight = +input.value;  
-                break;  
-            case "age":  
-                age = +input.value;  
-                break;  
-        }  
-  
-        calcTotal();  
-    });  
-}  
-  
-calcTotal();  
-getStaticInformation("#gender", "calculating__choose-item_active");  
-getStaticInformation(".calculating__choose_big", "calculating__choose-item_active");  
-getDynamicInformation("#height");  
-getDynamicInformation("#weight");  
+const result = document.querySelector(".calculating__result span");
+// Задали значения по умолчанию, чтобы всё работало без клика по кнопкам
+let sex = "female",
+    weight, height, age,
+    ratio = 1.375;
+
+// Калькулятор результата ккал в день
+function calcTotal() {
+    if (!sex || !height || !weight || !age || !ratio) {
+        result.textContent = "----";
+        return; // досрочно прервёт функцию
+    }
+
+    if (sex === "female") {
+        result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+    } else {
+        result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+    }}
+
+// Активирует эффект нажатой кнопки
+function getStaticInformation(parentSelector, activeClass) {
+    const elements = document.querySelectorAll(`${parentSelector} div`);
+
+    elements.forEach(elem => {
+        elem.addEventListener("click", (e) => {
+            if (e.target.getAttribute("data-ratio")) {
+                ratio = +e.target.getAttribute("data-ratio"); // вытаскиваем значение активности из атрибута
+            } else {
+                sex = e.target.getAttribute("id");
+            }
+
+            elements.forEach(elem => {
+                elem.classList.remove(activeClass);
+            });
+
+            e.target.classList.add(activeClass);
+
+            calcTotal();
+        });
+    });
+}
+
+// Каждый раз при вводе данные будут записываться в нужный идентификатор
+function getDynamicInformation(selector) {
+    const input = document.querySelector(selector);
+
+    input.addEventListener("input", () => {
+        switch(input.getAttribute("id")) {
+            case "height":
+height = +input.value;
+                break;
+            case "weight":
+                weight = +input.value;
+                break;
+            case "age":
+                age = +input.value;
+                break;
+        }
+
+        calcTotal();
+    });
+}
+
+calcTotal();
+getStaticInformation("#gender", "calculating__choose-item_active");
+getStaticInformation(".calculating__choose_big", "calculating__choose-item_active");
+getDynamicInformation("#height");
+getDynamicInformation("#weight");
 getDynamicInformation("#age");
 ```
+
 ![](_png/4c5b4db5009e1bd6fc11375caf0cda5a.png)
 
-
 ## 018 Создаем калькулятор на сайте, часть 2
-
 
 Сначала сделаем проверку на вводимые значения в наши поля
 
@@ -1204,9 +1185,7 @@ getDynamicInformation("#age");
 ![](_png/044e09830b5065329a971842b7263c91.png)
 ![](_png/92bc8bbabf804eab0ca9123885969c73.png)
 
-
 ## 019 Геттеры и сеттеры (свойства объектов)
-
 
 Свойства объектов делятся на две группы: свойства данные и свойства акцессоры. Свойства акцессоры так называются именно потому, что при вызове не ставятся круглые скобки – подразумевается, что мы обращаемся к свойству-методу
 
@@ -1217,7 +1196,6 @@ getDynamicInformation("#age");
 ![](_png/9558c37560d5b919890deedc090740f0.png)
 
 ## 020 Инкапсуляция
-
 
 Вот пример функции-конструктора, который создаёт нам персонажа. Тут мы легко можем поменять переменные внутри пользователя
 
@@ -1259,9 +1237,7 @@ getDynamicInformation("#age");
 
 ![](_png/a9f0571f65cd919de6a7a08c6adc037c.png)
 
-
 ## 021 Прием модуль, как и зачем его использовать
-
 
 **Проблема**: иногда, при использовании сторонних библиотек, мы можем сталкиваться с проблемой, что мы создаём переменную, которая уже присутствует в библиотеке. Такие конфликты происходят в основе своей из-за того, что мы почти постоянно находимся в глобальной области видимости
 
@@ -1271,6 +1247,7 @@ getDynamicInformation("#age");
 <script defer src="lib.js"></script>
 <script defer src="script.js"></script>
 ```
+
 ![](_png/334eaa50add4e709eb1cafef73a598f8.png)
 ![](_png/4619d9467007035018d3e73881e1f62c.png)
 
@@ -1293,7 +1270,7 @@ const user = (function() {  
     const private = function () {
         console.log('I\'m a private');
     }
-    
+   
     return {
         sayHello: private
     };
@@ -1302,12 +1279,10 @@ const user = (function() {  
 user.sayHello(); // I'm a private
 ```
 
-
 ## 022 Webpack. Собираем наш проект
 
-
-Все большие проекты на JS разбиваются на различные блоки кода и эти блоки кода убирают в отдельные файлы. Дробление проекта на отдельные модули позволяет нам нормально поддерживать проект и делить логику на составные части. 
-Однако мы встречаемся с той проблемой, что браузеры не понимают деление проекта на модули и поэтому за помощью нам нужно обращаться к сборщикам модулей, которые создадут один файл из множества маленьких. И уже этот единственный файл браузер сможет обработать и смочь с нам работать 
+Все большие проекты на JS разбиваются на различные блоки кода и эти блоки кода убирают в отдельные файлы. Дробление проекта на отдельные модули позволяет нам нормально поддерживать проект и делить логику на составные части.
+Однако мы встречаемся с той проблемой, что браузеры не понимают деление проекта на модули и поэтому за помощью нам нужно обращаться к сборщикам модулей, которые создадут один файл из множества маленьких. И уже этот единственный файл браузер сможет обработать и смочь с нам работать
 
 ==Webpack== - это сборщик модулей. Он позволяет нам собрать проект, состоящий из большого количества отдельных файлов с экспортами и импортами.
 
@@ -1332,6 +1307,7 @@ function myModule() {
 
 module.exports = myModule; // exports
 ```
+
 ```JS
 // script.js - import
 
@@ -1360,6 +1336,7 @@ npx webpack
 ```
 
 Дальше нужно перейти к настройке конфигурации вебпака:
+
 - `mode` - девелопментом пользуемся, когда нужно просто работать над сайтом, а ставим продакшн, когда выпускаем сайт на продакшен (там будут модули для оптимизации кода)
 - `entry` - указываем точку входа в программу
 - `output` - настраивает выходной файл
@@ -1368,6 +1345,7 @@ npx webpack
 - `module` - устанавливает дополнительные модули (например, ==babel==)
 
 ![](_png/c2477c23871cf538393a4fac2088db70.png)
+
 ```JSON
 'use strict';
 
@@ -1391,16 +1369,17 @@ module.exports = {
 ![](_png/77fea1729835c30d97af4d7b5d27b7fb.png)
 
 ###### И как с этим всем работать?
+
 Нужно весь код, который мы переносим в другой модуль, обернуть в функцию и эту функцию экспортнуть.
 В принимаемом файле нужно через require получить и вызывать эту функцию.
 Далее просто запускаем `npx webpack` с настройками выше и получаем готовый результат
 
 ```JS
-function calculator() {  
+function calculator() {
     const result = document.querySelector(".calculating__result span");
     // ...
-}  
-  
+}
+
 module.exports = calculator;
 ```
 
@@ -1409,6 +1388,7 @@ module.exports = calculator;
 ```HTML
 <script src="js/bundle.js"></script>
 ```
+
 ![](_png/c4d3522359d8306e3aab4537a96eaf31.png)
 
 При запуске ==Webpack==, он начинает следить за проектом и работает на постоянной основе, поэтому для работы с терминалом, нам нужно запустить второй
@@ -1419,14 +1399,12 @@ module.exports = calculator;
 
 ![](_png/0fe12219991d9b7d097ff75a68178716.png)
 
-
 ## 023 ES6 Modules
 
-
-==Импорт ES6== - это уже более современный способ импорта данных в файлы. Он обеспечивает более понятный синтаксис импорта, который представляет из себя конструкцию: `export` для экспорта элемента и `import from` для принятия экспорта из другого файла. 
+==Импорт ES6== - это уже более современный способ импорта данных в файлы. Он обеспечивает более понятный синтаксис импорта, который представляет из себя конструкцию: `export` для экспорта элемента и `import from` для принятия экспорта из другого файла.
 Через `as` мы можем задать другое имя для импортируемого объекта (например, если имена очень длинные)
 Если мы используем `export default`, то конкретно этот объект нам не нужно будет заключать в `{ }` при импорте
-Ещё одна важная вещь - *модули **ES6** так же как и **CommonJS** нужно собирать сборщиком модулей **Webpack***
+Ещё одна важная вещь - \*модули **ES6** так же как и **CommonJS** нужно собирать сборщиком модулей **Webpack\***
 
 ```JS
 // lib.js - export
@@ -1449,10 +1427,11 @@ export default class User {
     constructor(name) { console.log(name); }
 }
 ```
+
 ```JS
 // script.js - import
 
-import User, { a as first, b, c, ex } from './lib'; // импорт 
+import User, { a as first, b, c, ex } from './lib'; // импорт
 
 new User('Andrew'); // Использование
 
@@ -1467,7 +1446,7 @@ import * as all from './lib';
 console.log(all.a); // 1
 ```
 
-Интересная особенность дефолтного экспорта заключается в том, что под капотом он выглядит при импорте так: 
+Интересная особенность дефолтного экспорта заключается в том, что под капотом он выглядит при импорте так:
 
 ```JS
 import {default as User} from './lib'; // ок - реализован так
@@ -1476,21 +1455,21 @@ import User from './lib'; // ок - выглядит так
 
 И теперь мы можем подключить эти модули к браузеру. Можно воспользоваться вебпаком и сделать всё удобно, но так же мы можем обойтись и подключением, которое может сделать браузер.
 Для нормальной работы нам нужно:
+
 - `'./lib.js'` указать импорты с правильным наименованием браузера
 - В HTML самым последним скриптом указать тот, который собирает все импорты
-- Указать атрибут `type="module"` 
+- Указать атрибут `type="module"`
 
 ```JS
 import User, { a as first, b, c, d} from './lib.js';
 ```
+
 ```HTML
 <script type="module" src="js/lib.js"></script>
 <script type="module" src="js/script.js"></script>
 ```
 
-
 ## 024 Собираем наш проект и фиксим баги
-
 
 В первую очередь, нам нужно дефолтно экспортировать наши обёртки и правильно их импортировать (в глобальной области видимости)
 
@@ -1503,26 +1482,26 @@ import User, { a as first, b, c, d} from './lib.js';
 Дальше для всех функций создадим вызываемость с аргументами
 
 ```JS
-export function closeModal(modalSelector) {  
-    const modal = document.querySelector(modalSelector);  
-    modal.classList.toggle("hide");  
+export function closeModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
+    modal.classList.toggle("hide");
     document.documentElement.style.overflow = "";
-}  
-  
-export function openModal(modalSelector) {  
-    const modal = document.querySelector(modalSelector);  
-    modal.classList.toggle("hide");  
-    document.documentElement.style.overflow = "hidden";  
-    clearTimeout(modalTimer);  
-}  
-  
-function modal(triggerSelector, modalSelector) {  
-    const modal = document.querySelector(modalSelector),  
+}
+
+export function openModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
+    modal.classList.toggle("hide");
+    document.documentElement.style.overflow = "hidden";
+    clearTimeout(modalTimer);
+}
+
+function modal(triggerSelector, modalSelector) {
+    const modal = document.querySelector(modalSelector),
     modalBtns = document.querySelectorAll(triggerSelector);
     //...
 }
 
-export default modal;  
+export default modal;
 export {openModal, closeModal};
 ```
 
@@ -1550,65 +1529,68 @@ modalBtns.forEach(btn => {btn.addEventListener("click", () => openModal(modalSel
 ```JS
 if (target && target.classList.contains('tabheader__item')) {
 ```
+
 `tabsSelector = ".tabheader__item"`
+
 ```JS
 tabs(".tabheader__item", ".tabcontent", ".tabheader__items", "tabheader__item_active");
 ```
+
 Слайсим переменную и пользуемся ей
+
 ```JS
 if (target && target.classList.contains(tabsSelector.slice(1))) {
 ```
 
-Сделаем подобие деструктурированной передачи информации для слайдеров как в ==slickslider== 
+Сделаем подобие деструктурированной передачи информации для слайдеров как в ==slickslider==
 
 ![](_png/a27c5722c9cd452301b46406ae90f6e5.png)
 
-И тут мы реализовали передачу аргументов в функцию через деструктуризацию, которая происходит через `{}`. Это даёт нам возможность не передавать какие-либо аргументы (если они не нужны) или передавать их в хаотичном порядке 
+И тут мы реализовали передачу аргументов в функцию через деструктуризацию, которая происходит через `{}`. Это даёт нам возможность не передавать какие-либо аргументы (если они не нужны) или передавать их в хаотичном порядке
 
 ```JS
 // Реализация в slider.js
-function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {  
-  
-    const slides = document.querySelectorAll(slide),  
-        slider = document.querySelector(container), // Добавляем сам слайдер, чтобы относительно него спозиционировать точки  
-        prev = document.querySelector(prevArrow),  
-        next = document.querySelector(nextArrow),  
-        total = document.querySelector(totalCounter),  
-        current = document.querySelector(currentCounter),  
-        slidesWrapper = document.querySelector(wrapper),  
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
+
+    const slides = document.querySelectorAll(slide),
+        slider = document.querySelector(container), // Добавляем сам слайдер, чтобы относительно него спозиционировать точки
+        prev = document.querySelector(prevArrow),
+        next = document.querySelector(nextArrow),
+        total = document.querySelector(totalCounter),
+        current = document.querySelector(currentCounter),
+        slidesWrapper = document.querySelector(wrapper),
         slidesField = document.querySelector(field);
 ```
+
 ```JS
 // Вызов из script.js
-slider({  
-    container: ".offer__slider",  
-    totalCounter: "#total",  
-    currentCounter: "#current",  
-    prevArrow: ".offer__slider-prev",  
-    nextArrow: ".offer__slider-next",  
-    wrapper: ".offer__slider-wrapper",  
-    field: ".offer__slider-inner",  
-    slide: ".offer__slide"  
+slider({
+    container: ".offer__slider",
+    totalCounter: "#total",
+    currentCounter: "#current",
+    prevArrow: ".offer__slider-prev",
+    nextArrow: ".offer__slider-next",
+    wrapper: ".offer__slider-wrapper",
+    field: ".offer__slider-inner",
+    slide: ".offer__slide"
 });
 ```
 
->[!Info] Модульный подход к разработке сайта предоставляет нам возможность 
+> [!Info] Модульный подход к разработке сайта предоставляет нам возможность
+>
 > - переиспользовать код
 > - более эффективно его модифицировать за счёт того, что теперь это не простыня, а отдельные блоки кода
 
-
 ## 025 Формируем портфолио на GitHub
 
-Гитхаб - это не только площадка для постинга репозиториев, но и отличная площадка для отображения своих скилов программиста. Тут мы можем в открытый доступ выкладывать наши приложения для того, чтобы работодатель мог увидеть наши скилы. 
+Гитхаб - это не только площадка для постинга репозиториев, но и отличная площадка для отображения своих скилов программиста. Тут мы можем в открытый доступ выкладывать наши приложения для того, чтобы работодатель мог увидеть наши скилы.
 В первую очередь внимание нужно обратить на оформление нашего гита. Нужно фото - желательно с улыбкой, имя и достаточное количество проектов (даже самых малых) + желательно много новых коммитов, которые покажут, что мы активно работаем
 
 ![](_png/a939d6bafc967e830aa31d8e3cf2570d.png)
 
-
 ## 026 Ошибки. Как избежать “поломки” своего кода
 
-
-Для обработки ошибок у нас существует стандартная конструкция `try-catch`. Внутрь него вкладываем код, который подозреваем на ошибку и в блоке `catch` пишем обработку нашей ошибки. Так же этот блок принимает в себя параметр ошибки. Из самой ошибки мы можем получить имя, сообщение и стек ошибки. 
+Для обработки ошибок у нас существует стандартная конструкция `try-catch`. Внутрь него вкладываем код, который подозреваем на ошибку и в блоке `catch` пишем обработку нашей ошибки. Так же этот блок принимает в себя параметр ошибки. Из самой ошибки мы можем получить имя, сообщение и стек ошибки.
 Ну и блок `finally`, который необязателен, но позволяет выполнить логику, которая должна обязательно произойти
 
 ```JS
@@ -1625,10 +1607,11 @@ try { // проверяемый блок кода
 
 console.log('that\'s works!');
 ```
+
 ![](_png/14301cdf6422498eb4588ef9933ede54.png)
 
 Для чего, например, может использоваться такой подход в повседневной работе?
-У нас есть функция, которая подключена сразу к двум документам. Эта функция из одного из них берёт информацию и обрабатывает её. Если на первой странице всё будет нормально, то на второй выйдет ошибка и код дальше работать не будет. 
+У нас есть функция, которая подключена сразу к двум документам. Эта функция из одного из них берёт информацию и обрабатывает её. Если на первой странице всё будет нормально, то на второй выйдет ошибка и код дальше работать не будет.
 
 ![](_png/ed9c57d452d163361c04cae75c4b0823.png)
 
@@ -1636,9 +1619,7 @@ console.log('that\'s works!');
 
 ![](_png/d04cd9c96b243b657f8f3e0015ba39b7.png)
 
-
 ## 027 (д) Создание своих ошибок
-
 
 Представим, что нам нужно добавить на страницу несколько блоков с определёнными элементами по тегу и атрибуту
 В результате выполнения этого кода у нас будет один элемент без `id`
@@ -1754,9 +1735,7 @@ try {
 
 ![](_png/bcd3d9febfff59658a2dc5d31bea4e86.png)
 
-
 ## 028 Как превратить код ES6+ в старый формат ES5. Babel, Core.js и полифиллы
-
 
 ==Трансплиттер== - это инструмент, который переводит код нового формата в более старый формат, который, например, понятен старым браузерам
 ==Полифилл== - это участки старого кода, которые эмулируют поведение современных стандартов кода
@@ -1768,10 +1747,10 @@ try {
 npm install --save-dev @babel/core @babel/cli @babel/preset-env
 
 // для установки всех полифилов в проект (даже неиспользуемых)
-npm install --save @babel/polyfill 
+npm install --save @babel/polyfill
 
 // для работы конфига
-npm install --save-dev babel-loader 
+npm install --save-dev babel-loader
 
 // Библиотека, которая оставляет только нужные полифиллы в проекте
 npm install --save-dev corejs
@@ -1797,7 +1776,7 @@ module.exports = {
     path: __dirname + '/js'
   },
   watch: true,
-  
+
   devtool: "source-map",
 
   // Настройка модулей в webpack
@@ -1810,7 +1789,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         // работаем с этими модулями
         use: {
-	      // Модуль установили чуть выше 
+	      // Модуль установили чуть выше
           loader: 'babel-loader',
           // Настройки для этого лоадера
           options: {
@@ -1833,7 +1812,7 @@ module.exports = {
 
 Дальше для активации ==Babel== нам нужно запустить вебпак через `npx webpack`. После компиляции файл может весить до двух раз больше :(
 
-Так же нужно упомянуть, что иногда некоторые полифиллы могут не сработать и из-за этого может полететь функционал на странице. Для исправления ситуации, нужно зайти в гугл и ввести: *<функция> polyfill js*
+Так же нужно упомянуть, что иногда некоторые полифиллы могут не сработать и из-за этого может полететь функционал на странице. Для исправления ситуации, нужно зайти в гугл и ввести: _<функция> polyfill js_
 Например, на том же npm можно найти полифилл для промиса
 
 ![](_png/b3b3292389f338a2db283deaa8433e09.png)
@@ -1850,24 +1829,25 @@ require('es6-promise').polyfill();
 
 ![](_png/9d58b297c2b1749b12a175014d346612.png)
 
-Так же есть и другой вариант импорта полифиллов. Так же если мы пропишем просто `import 'имя_пакета'`, то он импортнётся из папки модулей 
+Так же есть и другой вариант импорта полифиллов. Так же если мы пропишем просто `import 'имя_пакета'`, то он импортнётся из папки модулей
 
 ```shell
 npm i nodelist-foreach-polyfill
 ```
+
 ![](_png/2ed7a70ec4360536fc05c33af6dc4a9f.png)
 
 Так же такой вариант импорта работает и для других отдельных полноценных плагинов, которые мы можем просто установить через npm и так импортнуть в проект
+
 > И лучше плагины подключать именно так, так как это всё скомпилируется в один JS файл без кучи других отдельных с разными зависимостями
 
 ```JS
 import 'slick-slider';
 ```
 
-
 ## 029 Современные библиотеки и фрэймворки
 
-###### Фреймворки и библиотеки: #Angular #React #Vue 
+###### Фреймворки и библиотеки: #Angular #React #Vue
 
 ==Библиотека== - это просто готовые участки кода, которые можно как использовать для быстрого написания какой-то логики, так и не использовать
 Библиотека зачастую направлена на решение одной задачи
@@ -1875,30 +1855,30 @@ import 'slick-slider';
 ==Фреймворк== - это уже определённая структура, которая диктует правила, как нужно писать код программисту и заставляет его их придерживаться
 Фреймворки позволяют нам создать полноценное приложение прямо из того функционала, который в нём присутствует
 
-Фреймворки позволяют нам создавать #SPA (Single Page Applications), которые, в свою очередь, представляют из себя приложения в браузере. Эти приложения позволяют работать с сайтом как с программой, которая располагается на удалённом компьютере. При этом при переходе в другие вкладки внутри приложения - *страница не перезагружается*.
+Фреймворки позволяют нам создавать #SPA (Single Page Applications), которые, в свою очередь, представляют из себя приложения в браузере. Эти приложения позволяют работать с сайтом как с программой, которая располагается на удалённом компьютере. При этом при переходе в другие вкладки внутри приложения - _страница не перезагружается_.
 
 Что нужно знать, прежде чем изучать фреймворки:
+
 - #Angular
-	- #TypeScript 
-	- node.js
-	- #Webpack
-	- MVC pattern
-	- Сам фреймворк (документация)
+    - #TypeScript
+    - node.js
+    - #Webpack
+    - MVC pattern
+    - Сам фреймворк (документация)
 - #React
-	- node.js
-	- JSX (препроцессор)
-	- Babel (компилятор JSX)
-	- #Webpack
-	- Сам фреймворк (документация)
+    - node.js
+    - JSX (препроцессор)
+    - Babel (компилятор JSX)
+    - #Webpack
+    - Сам фреймворк (документация)
 - #Vue
-	- node.js
-	- #Webpack
-	- Сам фреймворк (документация)
+    - node.js
+    - #Webpack
+    - Сам фреймворк (документация)
 
 Так же стоит упомянуть о ==jQuery==. Это библиотека, которая используется в большом количестве старых сайтов для создания интерактива. Её просто стоит знать, чтобы понимать, с чем может прийтись работать.
 
 ## 030 Библиотека Jquery
-
 
 Самая простая установка:
 
@@ -1917,12 +1897,12 @@ import 'jquery';
 Использование в компилируемом файле:
 
 ```JS
-import 'jquery';  
-import $ from 'jquery'; // Просто чтобы не видеть ошибку в консоли в браузере  
-  
-// $() - это функция получения элемента со страницы  
-const btn = $('#btn');  
-  
+import 'jquery';
+import $ from 'jquery'; // Просто чтобы не видеть ошибку в консоли в браузере
+
+// $() - это функция получения элемента со страницы
+const btn = $('#btn');
+
 console.log(btn);
 ```
 
@@ -1933,34 +1913,34 @@ console.log(btn);
 ![](_png/fafc90fbc5faf8928de3c73b49b4869b.png)
 
 - `JQuery UI` - это пользовательские модификации
-- `Ajax` - это технология запросов, которая была прототипом функции `fetch`, которую добавили уже после 
+- `Ajax` - это технология запросов, которая была прототипом функции `fetch`, которую добавили уже после
 
 И вот пример быстрой реализации некоторых анимаций на JQuery:
 
 ```JS
-import 'jquery';  
-import $ from 'jquery';  
-  
-// ready() - проверяет, что все нужные компоненты со страницы загружены  
-$(document).ready(function() {  
-    // Выбираем первый элемент из списка list-item'ов  
-    // hover() - срабатывание при наведении    $('.list-item:first').hover(function() {  
-        // $(this) - обращение к ЭТОМУ элементу  
-        $(this).toggleClass('active');  
-    });  
-    // Обращаемся к третьей кнопке и назначем ей eventListener  
-    $('.list-item:eq(2)').on('click', function() {  
-        // Обращаемся ко всем чётным элементам (0-1-2-3 - 1, 3)  
-        // fadeToggle() - производит скрытие и показ элементов        
-        $('.image:even').fadeToggle('slow');  
-    })  
-    // Обращаемся к пятой кнопке и назначем ей eventListener  
-    $('.list-item:eq(4)').on('click', function() {  
-        // Обращаемся ко всем нечётным элементам (0-1-2-3 - 0, 2)  
-        $('.image:odd').animate({  
-            opacity: 'toggle',  
-            height: 'toggle'  
-        }, 2000);  
+import 'jquery';
+import $ from 'jquery';
+
+// ready() - проверяет, что все нужные компоненты со страницы загружены
+$(document).ready(function() {
+    // Выбираем первый элемент из списка list-item'ов
+    // hover() - срабатывание при наведении    $('.list-item:first').hover(function() {
+        // $(this) - обращение к ЭТОМУ элементу
+        $(this).toggleClass('active');
+    });
+    // Обращаемся к третьей кнопке и назначем ей eventListener
+    $('.list-item:eq(2)').on('click', function() {
+        // Обращаемся ко всем чётным элементам (0-1-2-3 - 1, 3)
+        // fadeToggle() - производит скрытие и показ элементов
+        $('.image:even').fadeToggle('slow');
+    })
+    // Обращаемся к пятой кнопке и назначем ей eventListener
+    $('.list-item:eq(4)').on('click', function() {
+        // Обращаемся ко всем нечётным элементам (0-1-2-3 - 0, 2)
+        $('.image:odd').animate({
+            opacity: 'toggle',
+            height: 'toggle'
+        }, 2000);
     })
 });
 ```
@@ -1971,13 +1951,12 @@ $(document).ready(function() {
 
 ![](_png/361d813fcfa895df6d5b3bae1d13c5fe.png)
 
->[!warning] Стоит сказать, что JQuery не стоит использовать в современных проектах. 
+> [!warning] Стоит сказать, что JQuery не стоит использовать в современных проектах.
+>
 > - Лет 10-12 назад он добавлял функционал на сайт, который делать через JS было очень тяжело и долго. Либо добавлял такие функции, которые сделать было просто невозможно из нативного JS.
 > - Используем JQuery только для поддержки старых проектов - но не для написания новых!
 
-
 ## 031 Функции-генераторы
-
 
 Функция-генератор в разные моменты времени выдаёт разные результаты. Первым делом нам нужно присвоить функцию в новую переменную и через эту переменную вызвать методы, которые контролируют поведение функции-генератора. Одним из методов, который вызывают следующее значение является `next()`. Так как этот метод возвращает объект, то мы сразу можем обратиться к нужному нам свойству.
 
@@ -1997,6 +1976,7 @@ console.log(str.next());
 console.log(str.next());
 console.log(str.next());
 ```
+
 ```shell
 { value: 'S', done: false }
 b
@@ -2035,11 +2015,9 @@ for (const k of count(7)) {
 }
 ```
 
-
 ## 032 JS анимации, requestAnimationFrame
 
-
-Главная проблема CSS-анимаций заключается в том, что построить сложную анимацию крайне сложно. Так же для настройки плавности анимации используются сугубо кривые Безье 
+Главная проблема CSS-анимаций заключается в том, что построить сложную анимацию крайне сложно. Так же для настройки плавности анимации используются сугубо кривые Безье
 
 ```CSS
 p {
@@ -2064,50 +2042,52 @@ p {
 
 ![](_png/572b95d32abd056f6074178d5906cac6.png)
 
-Поэтому был создан API: `requestAnimationFrame`. Он подстраивается под количество кадров на компьютере пользователя и позволяет реализовать адекватную анимацию. Так же он оптимизирует нашу анимацию (запускает анимацию и производит отрисовку в браузере одновременно, а не последовательно, как в обычных функциях). 
+Поэтому был создан API: `requestAnimationFrame`. Он подстраивается под количество кадров на компьютере пользователя и позволяет реализовать адекватную анимацию. Так же он оптимизирует нашу анимацию (запускает анимацию и производит отрисовку в браузере одновременно, а не последовательно, как в обычных функциях).
 
 ###### Стандартный вариант
+
 Вот так выглядит стоковая анимация через `setInterval`
 
 ```JS
-const btn = document.querySelector(".animation-button"),  
+const btn = document.querySelector(".animation-button"),
     box = document.querySelector(".box-rider");
 
-function myAnimation() {  
-    const box = document.querySelector(".box-rider");  
-    let pos = 0;  
-  
-    const id = setInterval(frame, 5);  
-    function frame() {  
-        if (pos === 480) {  
-            clearInterval(id);  
-        } else {  
-            pos++;  
-            box.style.top = `${pos}px`;  
-            box.style.left = `${pos}px`;  
-        }    }  
-}  
+function myAnimation() {
+    const box = document.querySelector(".box-rider");
+    let pos = 0;
+
+    const id = setInterval(frame, 5);
+    function frame() {
+        if (pos === 480) {
+            clearInterval(id);
+        } else {
+            pos++;
+            box.style.top = `${pos}px`;
+            box.style.left = `${pos}px`;
+        }    }
+}
 btn.addEventListener('click', myAnimation)
 ```
 
 ###### Предпочтительный вариант
+
 И вот так выглядит код с использованием `requestAnimationFrame`. Тут мы рекурсивно вызываем функцию по заданному условию, что позволяет нам сократить код и не использовать таймауты. Так же эта анимация и более оптимизирована под браузеры.
 
 ```JS
-const btn = document.querySelector(".animation-button"),  
+const btn = document.querySelector(".animation-button"),
     box = document.querySelector(".box-rider");
 
-let pos = 0;  
-function myAnimationFrame() {  
-    pos++;  
-    box.style.top = `${pos}px`;  
-    box.style.left = `${pos}px`;  
+let pos = 0;
+function myAnimationFrame() {
+    pos++;
+    box.style.top = `${pos}px`;
+    box.style.left = `${pos}px`;
 
 	// Тут идёт перевызов функции до тех пор, пока не будет выполнено условие
-    if (pos < 480) {  
-        requestAnimationFrame(myAnimationFrame);  
-    }  
-}  
+    if (pos < 480) {
+        requestAnimationFrame(myAnimationFrame);
+    }
+}
 
 // Вызов функции с аргументами в листенерах нужно осуществлять через стрелочные функции
 btn.addEventListener('click', () => requestAnimationFrame(myAnimationFrame));
@@ -2116,13 +2096,11 @@ btn.addEventListener('click', () => requestAnimationFrame(myAnimationFrame));
 Этот код позволит остановить анимацию по нашему усмотрению
 
 ```JS
-let id = requestAnimationFrame(myAnimationFrame);  
+let id = requestAnimationFrame(myAnimationFrame);
 cancelAnimationFrame(id);
 ```
 
-
 ## 033 Web Animations API
-
 
 ==Web Animations API== - это API, который связывает анимации JS и CSS. То есть в него мы передаём сначала ключевые кадры как в CSS, а уже потом передаём опции, которые влияют на эту анимацию
 
@@ -2145,26 +2123,27 @@ document.getElementById("tunnel").animate([
 Этим кодом мы заанимировали бесконечное движение телефона по ограниченным координатам
 
 ```JS
-const btnPhone = document.querySelector('#iphone'),  
-      btnMacbook = document.querySelector('#macbook'),  
-      images = document.querySelectorAll('img');  
-  
-const phoneAnimation = images[0].animate([  
-    // keyframes  
-    { transform: 'translateY(0)' },  
-    { transform: 'translateY(-100px)' },  
-    { transform: 'translateY(100px)' },  
-    { transform: 'translateY(0)' }  
-], {  
-    // timing options  
-    duration: 3000,  
-    iterations: Infinity  
+const btnPhone = document.querySelector('#iphone'),
+      btnMacbook = document.querySelector('#macbook'),
+      images = document.querySelectorAll('img');
+
+const phoneAnimation = images[0].animate([
+    // keyframes
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-100px)' },
+    { transform: 'translateY(100px)' },
+    { transform: 'translateY(0)' }
+], {
+    // timing options
+    duration: 3000,
+    iterations: Infinity
 });
 ```
 
 ![](_png/afe78c3f244acaade0fbc84b97ad3331.png)
 
 Анимация имеет 4 состояния (`PlayState`):
+
 - `idle`
 - `running`
 - `paused`
@@ -2173,61 +2152,59 @@ const phoneAnimation = images[0].animate([
 Тут уже представлена полноценная реализация этой анимации со стейтами паузы, а так же с несколькими изменяемыми свойствами. Это более удобный вариант нежели чем создание такой же анимации через CSS
 
 ```JS
-const btnPhone = document.querySelector('#iphone'),  
-      btnMacbook = document.querySelector('#macbook'),  
-      images = document.querySelectorAll('img');  
-  
-// переменная, которая будет хранить анимацию  
-let phoneAnimation;  
-// Регулируем анимацию по кнопке  
-btnPhone.addEventListener('click', () => {  
-    // Запускаем анимацию при нажатии на кнопку  
-    if (!phoneAnimation) {  
-        phoneAnimation = images[0].animate([  
-            // keyframes  
-            { transform: 'translateY(0) rotate(0)',  
-                filter: 'opacity(100%)'},  
-            { transform: 'translateY(-100px) rotate(180deg)',  
-                filter: 'opacity(50%)'},  
-            { transform: 'translateY(100px) rotate(270deg)',  
-                filter: 'opacity(90%)'},  
-            { transform: 'translateY(0) rotate(360deg)',  
-                filter: 'opacity(100%)'}  
-        ], {  
-            // timing options  
-            duration: 3000,  
-            iterations: Infinity  
-        });  
-        // Если анимация находится в состоянии паузы, то  
-    } else if (phoneAnimation.playState === 'paused') {  
-        // ... нужно опять запустить анимацию  
-        phoneAnimation.play();  
-        // Если анимация есть и она не стоит на паузе, то мы её должны поставить на паузу  
-    } else {  
-        phoneAnimation.pause();  
-    }  
+const btnPhone = document.querySelector('#iphone'),
+      btnMacbook = document.querySelector('#macbook'),
+      images = document.querySelectorAll('img');
+
+// переменная, которая будет хранить анимацию
+let phoneAnimation;
+// Регулируем анимацию по кнопке
+btnPhone.addEventListener('click', () => {
+    // Запускаем анимацию при нажатии на кнопку
+    if (!phoneAnimation) {
+        phoneAnimation = images[0].animate([
+            // keyframes
+            { transform: 'translateY(0) rotate(0)',
+                filter: 'opacity(100%)'},
+            { transform: 'translateY(-100px) rotate(180deg)',
+                filter: 'opacity(50%)'},
+            { transform: 'translateY(100px) rotate(270deg)',
+                filter: 'opacity(90%)'},
+            { transform: 'translateY(0) rotate(360deg)',
+                filter: 'opacity(100%)'}
+        ], {
+            // timing options
+            duration: 3000,
+            iterations: Infinity
+        });
+        // Если анимация находится в состоянии паузы, то
+    } else if (phoneAnimation.playState === 'paused') {
+        // ... нужно опять запустить анимацию
+        phoneAnimation.play();
+        // Если анимация есть и она не стоит на паузе, то мы её должны поставить на паузу
+    } else {
+        phoneAnimation.pause();
+    }
 })
 ```
 
 ![](_png/64115dc08b8e7997632fb3b66761b310.png)
 
-
 ## 034 Event loop, подробная работа асинхронных и синхронных операций
-
 
 Ниже представлено сочетание синхронных и асинхронных функций:
 
 ```JS
-console.log(1);  
-  
-setTimeout(() => {  
-    console.log('timeout_1');  
-}, 2000)  
-  
-setTimeout(() => {  
-    console.log('timeout_2');  
-}, 4000)  
-  
+console.log(1);
+
+setTimeout(() => {
+    console.log('timeout_1');
+}, 2000)
+
+setTimeout(() => {
+    console.log('timeout_2');
+}, 4000)
+
 console.log(2);
 
 // 1
@@ -2236,19 +2213,19 @@ console.log(2);
 // timeout_2
 ```
 
-Во втором случае команды оставим всё те же, но сеттаймауты сделаем по одинаковому времени. Вывод будет идентичен первому варианту, так как первый сеттаймаут в коде запустился чуть раньше второго 
+Во втором случае команды оставим всё те же, но сеттаймауты сделаем по одинаковому времени. Вывод будет идентичен первому варианту, так как первый сеттаймаут в коде запустился чуть раньше второго
 
 ```JS
-console.log(1);  
-  
-setTimeout(() => {  
-    console.log('timeout_1');  
-}, 4000)  
-  
-setTimeout(() => {  
-    console.log('timeout_2');  
-}, 4000)  
-  
+console.log(1);
+
+setTimeout(() => {
+    console.log('timeout_1');
+}, 4000)
+
+setTimeout(() => {
+    console.log('timeout_2');
+}, 4000)
+
 console.log(2);
 
 // 1
@@ -2261,89 +2238,89 @@ console.log(2);
 ==Web Apis== - это хранилище в браузере для хранения промежуточных данных
 ==Callback Queue== - это очередь задач. Все операции не могут выполняться параллельно, они встают в очередь друг за другом, чтобы нормально выполниться.
 
-> **Что тут происходит?** Все наши таймауты, ивенты на кнопках попадают в ==Web Apis== и ждут своего выполнения (таймауты - конца таймера, кнопки - срабатывания). Дальше абсолютно все задачи попадают в порядке очереди в ==Callback Queue== (очередь из синхронных задач по порядку и попадающие в них асинхронные функции). После того, как задача подошла к выходу из очереди, она попадает в ==Call Stack==, где и выполняется. После выполнения новая задача попадает в стек из очереди. 
+> **Что тут происходит?** Все наши таймауты, ивенты на кнопках попадают в ==Web Apis== и ждут своего выполнения (таймауты - конца таймера, кнопки - срабатывания). Дальше абсолютно все задачи попадают в порядке очереди в ==Callback Queue== (очередь из синхронных задач по порядку и попадающие в них асинхронные функции). После того, как задача подошла к выходу из очереди, она попадает в ==Call Stack==, где и выполняется. После выполнения новая задача попадает в стек из очереди.
 
 ![](_png/561e53972da89354d94289e121a56a8f.png)
 
 Все события (клики, коллбэки, таймауты, промисы), которые мы вызовем, становятся в очередь и не могут выполниться одновременно, так как ==JS== - ==это однопоточный язык==.
 
 Но если мы запустим функцию и внутри неё уже будут производиться итерации по циклу, то они будут выполняться сразу в ==Call Stack==. Самый важный из этого вывод: **если внутри цикла выполняется какая-то тяжёлая задача, то она будет тормозить всю очередь на странице - то есть кроме этого цикла ничего выполняться на странице не будет**
-*Например, бесконечный цикл может полностью убить сайт от чего придётся перезапускать вкладку с этим сайтом*
+_Например, бесконечный цикл может полностью убить сайт от чего придётся перезапускать вкладку с этим сайтом_
 
 ![](_png/dc93812b89b1eea3835514ca8c7ab2d3.png)
 
 ###### Пример
-Такой цикл с перебором и записью стопорит сайт полностью на 10+ секунд и не даёт тыкать кнопки или выполнять какую-либо анимацию 
+
+Такой цикл с перебором и записью стопорит сайт полностью на 10+ секунд и не даёт тыкать кнопки или выполнять какую-либо анимацию
 
 ```JS
-let k;  
-  
-function count() {  
-    for (let i = 0; i < 1e9; i++) { // 1 000 000 000  
-        k++;  
-    }  
-    alert('Браузер выполнил обработку');  
-}  
-  
+let k;
+
+function count() {
+    for (let i = 0; i < 1e9; i++) { // 1 000 000 000
+        k++;
+    }
+    alert('Браузер выполнил обработку');
+}
+
 count();
 ```
 
 ![](_png/77c277023b60ba131f7fd7276027ca34.png)
 
-1) `setTimeout` проходит всегда полный цикл асинхронных операций, поэтому он обязательно попадает сначала в ==Web Apis==, что замедлит его выполнение. В таком примере всегда сначала выполняется синхронная операция, если таковая имеется сразу после асинхронной операцией.
-2) Минимальная длительность задержки *= 4 мс* (даже если мы напишем *0*). Сделано это для совместимости с разными браузерами.
+1. `setTimeout` проходит всегда полный цикл асинхронных операций, поэтому он обязательно попадает сначала в ==Web Apis==, что замедлит его выполнение. В таком примере всегда сначала выполняется синхронная операция, если таковая имеется сразу после асинхронной операцией.
+2. Минимальная длительность задержки _= 4 мс_ (даже если мы напишем _0_). Сделано это для совместимости с разными браузерами.
 
 ```JS
-setTimeout(() => {  
-    console.log(1);  
-}, 0) // 4мс  
-  
+setTimeout(() => {
+    console.log(1);
+}, 0) // 4мс
+
 console.log(2);
 
 // 2
 // 1
 ```
 
->[!info] Очень важно понимать работу Event Loop для правильной работы с промисами, сервером и правильного построения архитектуры приложения, так как из-за непонимания этого подхода у нас может очень легко крашнуться сайт.
-
+> [!info] Очень важно понимать работу Event Loop для правильной работы с промисами, сервером и правильного построения архитектуры приложения, так как из-за непонимания этого подхода у нас может очень легко крашнуться сайт.
 
 ## 035 Макро и микрозадачи
 
-
->[!info] Микро и макрозадачи:
+> [!info] Микро и макрозадачи:
+>
 > - Все задачи, которые попадают в ==Callback Queue==, являются макрозадачами
 > - Уже `then`, `catch`, `finally` и `await` относятся к ==микрозадачам==
 
-Конкретно в примере ниже у нас выполняется сначала макрозадача `console.log('code')`, после которой выполняются микрозадачи у промисов, которые сначала попали в ==Web Apis==, а уже только потом выполняется макроздача `setTimeout` 
+Конкретно в примере ниже у нас выполняется сначала макрозадача `console.log('code')`, после которой выполняются микрозадачи у промисов, которые сначала попали в ==Web Apis==, а уже только потом выполняется макроздача `setTimeout`
 После выполнения какой-то макрозадачи, у нас обязательно выполняются сразу все микрозадачи, которые скопились в очереди (queue). `Promise` имеет свои микрозадачи, поэтому он имеет приоритет выполнения выше, чем `setTimeout`, который представляет из себя просто макрозадачу
 Выполняются сначала все микрозадачи ровно потому, что им важно то окружение на странице, с которым они поступили в очередь
 
 ```JS
-setTimeout(() => console.log('timeout'))  
-  
-Promise.resolve().then(() => console.log('promise'))  
-Promise.resolve().then(() => console.log('promise_2'))  
-  
+setTimeout(() => console.log('timeout'))
+
+Promise.resolve().then(() => console.log('promise'))
+Promise.resolve().then(() => console.log('promise_2'))
+
 console.log('code');
 
 // code
 // promise
 // promise_2
-// timeout 
+// timeout
 ```
 
-Так же с помощью функции `queueMicrotask()` мы можем создать собственную микрозадачу, которая выполнится между макрозадачами 
+Так же с помощью функции `queueMicrotask()` мы можем создать собственную микрозадачу, которая выполнится между макрозадачами
 
 ```JS
-setTimeout(() => console.log('timeout'));  
-  
-Promise.resolve().then(() => console.log('promise'));  
+setTimeout(() => console.log('timeout'));
+
+Promise.resolve().then(() => console.log('promise'));
 
 // Сгенерированная нами микрозадача
-queueMicrotask(() => console.log('microtask'));  
-  
-Promise.resolve().then(() => console.log('promise_2'));  
-  
+queueMicrotask(() => console.log('microtask'));
+
+Promise.resolve().then(() => console.log('promise_2'));
+
 console.log('code');
 
 // code
@@ -2352,12 +2329,10 @@ console.log('code');
 // microtask
 
 // promise_2
-// timeout 
+// timeout
 ```
 
-
 ## 036 Работаем с готовым кодом
-
 
 На всех проектах мы используем JS, чтобы решать задачи. Иногда нам нужно решать абсолютно типовые задачи, которые писать самостоятельно нет никакого смысла.
 
@@ -2365,9 +2340,10 @@ console.log('code');
 
 Слайдеры:
 С использованием JQuery (займёт много места и замедлит сайт):
+
 - [Slick-slider](https://kenwheeler.github.io/slick/)
 - [Owl Carouel 2](https://owlcarousel2.github.io/OwlCarousel2/)
-Лёгкий слайдер на чистом JS:
+  Лёгкий слайдер на чистом JS:
 - [Tiny Slider](https://github.com/ganlanyuan/tiny-slider)
 - [Glide JS](https://glidejs.com)
 - [Galleria JS](https://galleriajs.github.io)
@@ -2380,7 +2356,7 @@ console.log('code');
 npm install tiny-slider
 ```
 
-По возможности, подключаем плагин во внутрь скрипта, так как подключать всё в HTML и городить кашу - это некрасиво 
+По возможности, подключаем плагин во внутрь скрипта, так как подключать всё в HTML и городить кашу - это некрасиво
 
 ```JS
 import { tns } from "./node_modules/tiny-slider/src/tiny-slider"

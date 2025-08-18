@@ -1,6 +1,4 @@
-
 ZSH - Z Shell - оболочка командной строки, которая предоставляет более широкий выбор инструментария, чем Bash
-
 
 - Более полное контекстное завершение файловых имен и команд
 - Предоставление возможных команд по tab юзеру возможные значения
@@ -26,6 +24,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 Далее нужно добавить данный конфиг для zsh
 
 `~/.zshrc`
+
 ```bash
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -64,7 +63,7 @@ function yy() {
 alias nv="nvim"
 
 function nvims() {
-  items=("default" "nv") 
+  items=("default" "nv")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -82,7 +81,7 @@ function htt() {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # pnpm
 export PNPM_HOME="/home/zeizel/.local/share/pnpm"

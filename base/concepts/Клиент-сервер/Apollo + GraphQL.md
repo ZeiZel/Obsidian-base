@@ -11,6 +11,7 @@ Apollo - это платформа, которая позволяет удобн
 ## Виды запросов
 
 Для осуществления запросов на сервер, нам потребуется написать:
+
 - **Schema** - схема данных, которые находятся на сервере (грубо говоря - интерфейсы)
 - **Query** - запрос на сервер, который вернёт определённые данные
 
@@ -28,12 +29,16 @@ Apollo - это платформа, которая позволяет удобн
 
 ```graphql
 subscription StoryLikeSubscription($input: StoryLikeSubscribeInput) {
-  storyLikeSubscribe(input: $input) {
-    story {
-      likers { count }
-      likeSentence { text }
-    }
-  }
+	storyLikeSubscribe(input: $input) {
+		story {
+			likers {
+				count
+			}
+			likeSentence {
+				text
+			}
+		}
+	}
 }
 ```
 
@@ -50,16 +55,18 @@ npm i express-graphql graphql
 Далее нам нужно будет описать схему наших сущностей на сервере
 
 Как выглядит описание сущностей:
+
 - Мы описываем объекты User и Post (через `[Post]` указываем вложенность от другой сущности)
 - Описываем возможные инпуты, которые придут к нам на сервер (через `!` указываем обязательность поля)
 - Определяем мутации и запросы в схеме
 
 `schema.js`
+
 ```JS
 const {buildSchema} = require('graphql')
 
 const schema = buildSchema(`
-    
+
     type User {
         id: ID
         username: String
@@ -71,7 +78,7 @@ const schema = buildSchema(`
         title: String
         content: String
     }
-    
+
     input UserInput {
         id: ID
         username: String!
@@ -83,7 +90,7 @@ const schema = buildSchema(`
         title: String!
         content: String!
     }
-    
+
     type Query {
         getAllUsers: [User]
         getUser(id: ID): User
@@ -102,6 +109,7 @@ module.exports = schema
 В него нам нужно будет передать rootValue (методы, которые будут работать с описанными запросами GraphQL) и нашу схему
 
 `index.js`
+
 ```JS
 const express = require('express')
 const {graphqlHTTP} = require('express-graphql')
@@ -154,6 +162,7 @@ npm i graphql @apollo/client
 Тут мы уже должны использовать Apollo клиент, который будет общаться с graphql сервером, кэшировать и провайдить данные
 
 `index.js`
+
 ```JS
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -176,6 +185,7 @@ ReactDOM.render(
 Опишем схемы для запросов данных
 
 `query / user.js`
+
 ```JS
 import {gql} from '@apollo/client'
 
@@ -184,7 +194,7 @@ export const GET_ALL_USERS = gql`
         getAllUsers {
             id, username, age
         }
-    }    
+    }
 
 `
 
@@ -193,7 +203,7 @@ export const GET_ONE_USER = gql`
         getUser(id: $id) {
             id, username
         }
-    }    
+    }
 
 `
 ```
@@ -201,6 +211,7 @@ export const GET_ONE_USER = gql`
 Опишем схемы для изменения данных
 
 `mutations / user.js`
+
 ```JS
 import {gql} from '@apollo/client'
 
@@ -216,10 +227,12 @@ export const CREATE_USER = gql`
 И далее используем клиент на нашем вебе
 
 Для отправки запросов мы должны воспользоваться хуками:
+
 - useQuery, в который мы первым аргументом передаём схему запроса, а вторым пропсы
 - useMutation, в который мы передаём наши мутации и на выходе получаем функцию-триггер запроса
 
 `App.js`
+
 ```JSX
 import React, {useEffect, useState} from 'react';
 import './App.css'

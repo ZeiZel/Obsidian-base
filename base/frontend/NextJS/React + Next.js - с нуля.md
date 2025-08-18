@@ -1,5 +1,6 @@
 # React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)
-#React #NextJS #TypeScript #SSR #CSSGrid #ReactHooks #JavaScript #FrontEnd 
+
+#React #NextJS #TypeScript #SSR #CSSGrid #ReactHooks #JavaScript #FrontEnd
 
 [01 Введение](../../TypeScript/_lessons/01%20Введение.md)
 [02 Настройка окружения](../../TypeScript/_lessons/02%20Настройка%20окружения.md)

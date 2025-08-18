@@ -1,8 +1,7 @@
-
-
 Для начала развернём проект реакта и добавим в него кнопку с описанием принимаемых ею пропсов
 
 `components > Button > Button.tsx`
+
 ```TSX
 import React from 'react'
 import { ButtonProps } from './Button.props'
@@ -25,6 +24,7 @@ export const Button = ({ appearance = 'primary', children, className, ...props }
 ```
 
 `components > Button > Button.props.ts`
+
 ```TS
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 
@@ -44,6 +44,7 @@ npx sb init
 После установки, у нас появится скрипт для запуска сторибука
 
 `package.json`
+
 ```JSON
 "scripts": {
 	"start": "react-scripts start",
@@ -58,6 +59,7 @@ npx sb init
 Так же сформируются два файла конфигурации, которые будут отвечать за то, какие файлы будут и по каким параметрам определяться как источники историй для сторибука
 
 `.storybook > main.ts`
+
 ```TS
 import type { StorybookConfig } from "@storybook/react-webpack5";
 
@@ -85,6 +87,7 @@ export default config;
 Сохраняет настройки лейаута
 
 `.storybook > preview.ts`
+
 ```TS
 import type { Preview } from "@storybook/react";
 
@@ -106,6 +109,7 @@ export default preview;
 И уже только сейчас в папке, где у нас располагается элемент, мы можем реализовать страницу сторибука с элементом
 
 `Button.stories.js`
+
 ```TSX
 import { Button } from "./Button";
 
@@ -125,6 +129,7 @@ export const DefaultButton = () => <Button>Кнопка</Button>
 Но более правильным добавлением элемента в сторисы будет считаться добавление его через темплейт, что позволит нам динамически менять значение параметров компонентов прямо в сторибуке
 
 `Button.stories.js`
+
 ```JS
 import { Button } from './Button';
 
@@ -153,6 +158,7 @@ Default.args = {
 Так же мы можем создать несколько вариантов наших компонентов, чтобы не менять пропсы вручную
 
 `Button.stories.js
+
 ```JS
 import { Button } from './Button';
 
@@ -193,7 +199,7 @@ export default {
 		// аргумент оформления
 		appearance: {
 			type: 'string', // тип аргумента
-			description: 'Вариант внешнего вида кнопки', // описание 
+			description: 'Вариант внешнего вида кнопки', // описание
 			defaultValue: 'primary', // дефолтное значение
 			options: ['primary', 'ghost'], // возможные опции
 			control: { // способ переключения опций
@@ -227,6 +233,6 @@ Ghost.args = {
 
 ![](_png/788a98b3abfd5ab0415e88055ecce44b.png)
 
->[!info] Но так же мы можем сделать проверку типов с помощью #PropTypes внутри самого компонента, что так же позволит заменить функционал интерфейса для отображения пропсов в сторибуке
->![](_png/e243eb34ac97df0cbb8187e6347965bf.png)
->![](_png/5165a4486ae121e919b8215c0070c1d6.png)
+> [!info] Но так же мы можем сделать проверку типов с помощью #PropTypes внутри самого компонента, что так же позволит заменить функционал интерфейса для отображения пропсов в сторибуке
+> ![](_png/e243eb34ac97df0cbb8187e6347965bf.png)
+> ![](_png/5165a4486ae121e919b8215c0070c1d6.png)

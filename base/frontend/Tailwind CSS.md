@@ -1,8 +1,8 @@
 ##### [Документация](https://tailwindcss.com/docs/installation)
 
-## Установка Tailwind 
+## Установка Tailwind
 
-Первым делом нам нужно установить пакет фронт-энд приложения 
+Первым делом нам нужно установить пакет фронт-энд приложения
 
 ```bash
 npx create-react-app my-project
@@ -19,6 +19,7 @@ npx tailwindcss init -p
 Начальный конфиг выглядит примерно таким образом
 
 `tailwind.config.js`
+
 ```JS
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -33,13 +34,14 @@ module.exports = {
 И эти строки нужно будет вставить в основной файл стилей
 
 `index.css`
+
 ```SCSS
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
-## Расширение Tailwind VS code 
+## Расширение Tailwind VS code
 
 Это расширение, которое добавит автокомплит под ==Tailwind==
 
@@ -55,12 +57,12 @@ module.exports = {
 
 ![](_png/45f917b06e22b1cc7666d6d5029198f9.png)
 
-## Отступы (margin, padding, borders) 
+## Отступы (margin, padding, borders)
 
 `m-10` - `margin:10rem`
 `mx-10` - сделает марджин по оси `x`
 `my-10` - сделает марджин по оси `y`
-`m-auto`/ `mx-auto` /`my-auto`  - сделает автоматический марджин по всем осям, либо справа слева по центру, либо отцентрирует сверху снизу по середине
+`m-auto`/ `mx-auto` /`my-auto` - сделает автоматический марджин по всем осям, либо справа слева по центру, либо отцентрирует сверху снизу по середине
 
 `-m-10` - отрицательный марджин
 `-mx-10` - по оси `x`
@@ -69,7 +71,7 @@ module.exports = {
 `p-10` - делает паддинг со всех сторон
 `px-10` - сделает паддинг по оси `x`
 `py-10` сделает паддинг по оси `y`
-`p-auto`/ `px-auto` /`py-auto` 
+`p-auto`/ `px-auto` /`py-auto`
 
 `-p-10` - делает отрицательный паддинг
 `-px-10` - по оси `x`
@@ -92,8 +94,7 @@ function App() {
 
 ![](_png/607c251b5e0442b71e440e515386db34.png)
 
-## Шрифт (размер, цвет, жирность) 
-
+## Шрифт (размер, цвет, жирность)
 
 `text-xl` - этим классом можно определять жирность текста (от `xl` до `4xl`)
 `font-bold` - жирный текст
@@ -102,7 +103,7 @@ function App() {
 
 ![](_png/9568843bde740709dff97954ba73339f.png)
 
-## Ширина, высота 
+## Ширина, высота
 
 `w-число` - определяет ширину объекта относительно окна
 `w-screen` - `width: 100vw`
@@ -114,13 +115,13 @@ function App() {
 
 ![](_png/be96d2012ac0127aa89e236b713851cb.png)
 
-## hover, focus, before, after... 
+## hover, focus, before, after...
 
 `bg-purple-500` - так же мы можем укзывать цвета для `bg`
 `bg-opacity-60` - и непрозрачность тоже
 
 - `hover:конечный-итог` - действие, которое должно происходить при наведении
-`hover:bg-opacity-100` - непрозрачность фона при наведении = `100%`
+  `hover:bg-opacity-100` - непрозрачность фона при наведении = `100%`
 - `hover/focus/before/after:конечный-итог` - так же со всеми остальными элементами
 
 ![](_png/a5827261bc2a966e372f190028f17412.png)
@@ -133,9 +134,9 @@ function App() {
 			<h1 className='text-4xl font-bold text-center text-gray-600'>
 				Hello Tailwind CSS
 			</h1>
-			<button 
-				className='block mt-10 mx-auto px-4 py-2 
-				bg-purple-500 bg-opacity-60 rounded-lg 
+			<button
+				className='block mt-10 mx-auto px-4 py-2
+				bg-purple-500 bg-opacity-60 rounded-lg
 				hover:bg-opacity-100'
 			>
 				Login
@@ -145,8 +146,7 @@ function App() {
 }
 ```
 
-
-## Transition 
+## Transition
 
 `transition` - определяет переход анимации
 `transition-[colors/opacity/shadow/transform]` - анимации отдельно для цветов, непрозрачности, теней и трансформации
@@ -158,7 +158,7 @@ function App() {
 
 ![](_png/5301a859be66e678fc5dda13987908c6.png)
 
-## Анимации 
+## Анимации
 
 `animate-[анимация]` - позволяет задать заранее определённую (заготовленню) анимацию
 `animate-spin` - анимация кручения объекта
@@ -182,19 +182,19 @@ function App() {
 
 ![](_png/2fbc57a40c8c485f84e95797be31295d.png)
 
-## Темный режим 
+## Темный режим
 
 `dark:[какое-то свойство]` - применит определённые настройки, если на ПК установлена тёмная тема
 
 ![](_png/26195efec567ffea805f70f90f4be5ce.png)
 
-
-## @apply и module.scss 
+## @apply и module.scss
 
 Сначала подключим стили к скрипту в `.module` режиме (чтобы можно было из JSX обращаться в стили в виде компонентов)
 `styles.parent` - обращается к стилям `styles` и берёт оттуда стили класса `parent`
 
 `App.js`
+
 ```JSX
 import styles from './App.module.scss';
 
@@ -213,6 +213,7 @@ export default App;
 Дирректива `@apply` работает в `PostCSS`, которая позволяет применить стили тэилвинда прямо внутри документа `CSS`
 
 `App.module.scss`
+
 ```SCSS
 .parent {
 	@apply border border-emerald-600 rounded-md m-10 p-4;
@@ -231,10 +232,10 @@ export default App;
 }
 ```
 
-
-## Пример на верстке формы авторизации 
+## Пример на верстке формы авторизации
 
 `App.js`
+
 ```JSX
 import { useState } from 'react';
 import styles from './App.module.scss';
@@ -268,8 +269,8 @@ function App() {
 export default App;
 ```
 
-
 `App.module.scss`
+
 ```SCSS
 .parent {
 	@apply mx-auto mt-0 w-80;
@@ -300,11 +301,9 @@ export default App;
 }
 ```
 
-
 ![](_png/8d1513c31b22ed8f4fed6222adcabb41.png)
 
-
-## Tailwind Config 
+## Tailwind Config
 
 Первым делом, мы можем указать значения в `theme`, которые должны присутствовать в нашем проекте. Если мы начнём их указывать прямо в теме, то других значений этой группы присутствовать больше не будет
 
@@ -370,6 +369,7 @@ module.exports = {
 	plugins: [],
 };
 ```
+
 ![](_png/314348d4a876c1d4299dd087f1c5ad86.png)
 
 А уже таким образом мы можем добавлять шаблоны для наших значений
@@ -408,6 +408,7 @@ module.exports = {
 	plugins: [],
 };
 ```
+
 ![](_png/ae1d1caf2c1e1069ac16045e2a120f07.png)
 
 Так же тут мы можем указать свои маленькие значения `z-index`, если нам понадобятся (так как в тэилвинде они идут, начиная с 10)
@@ -428,8 +429,7 @@ module.exports = {
 };
 ```
 
-
-## Плагины 
+## Плагины
 
 Так же мы можем установить дополнительные плагины либо пользовательские с ==npm==, либо от самих разработчиков
 
@@ -466,7 +466,7 @@ module.exports = {
 </article>
 ```
 
-## Компонент кнопки 
+## Компонент кнопки
 
 Так же внутри плагинов через функцию `plugin()` можно определить компонент функцией `addComponents()`, которая принимает в себя объект с именованием и стили для него
 

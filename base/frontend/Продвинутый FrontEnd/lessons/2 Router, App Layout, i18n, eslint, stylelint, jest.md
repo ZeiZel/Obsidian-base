@@ -1,4 +1,3 @@
-
 ### 11 AppRouter. Конфиг для роутера
 
 Сейчас нужно реализовать конфиг для нашего будущего роутера
@@ -6,19 +5,21 @@
 Первым делом нужно определить пути, которые будут доступны в нашем приложении
 
 `src / app / providers / router / model / const / appRoutes.const.ts`
+
 ```TSX
-export enum AppRoutes {  
-    MAIN = 'main',  
-    ABOUT = 'about',  
-    LOGIN = 'login',  
-    FORBIDDEN = 'forbidden',  
-    NOT_FOUND = 'not_found',  
+export enum AppRoutes {
+    MAIN = 'main',
+    ABOUT = 'about',
+    LOGIN = 'login',
+    FORBIDDEN = 'forbidden',
+    NOT_FOUND = 'not_found',
 }
 ```
 
 Далее нужно написать пути, которые будут использоваться в самом роутере
 
 `src / shared / const / paths.const.ts`
+
 ```TS
 export const getRouteMain = () => '/';
 export const getRouteLogin = () => '/login';
@@ -30,91 +31,94 @@ export const getRouteNotFound = () => '*';
 Далее нужно расширить пропсы, которые будут описывать роутер. Конкретно мы добавим свойство, которое будет отвечать за доступность роута неавторизованному пользователю (сама авторизация будет реализована за счёт перехватчика состояния авторизации в будущей заметке (для этого будет использоваться `RequireAuth`))
 
 `src/app/providers/router/model/types/routes.type.ts`
+
 ```TS
-import { RouteProps } from 'react-router-dom';  
-  
+import { RouteProps } from 'react-router-dom';
+
 export type AppRouteProps = RouteProps & { authOnly: boolean };
 ```
 
 Далее нужно написать сам конфиг, который будет содержать все нужные пропсы для роута приложения
 
 `src > shared > config > routeConfig > routeConfig.tsx`
+
 ```TSX
-import React from 'react';  
-import { AppRouteProps } from '../model/types';  
-import { AppRoutes } from '../model/const';  
-/* pages */  
-import { MainPageAsync } from '@/pages/MainPage';  
-import { AboutPageAsync } from '@/pages/AboutPage';  
-import { LoginPageAsync } from '@/pages/LoginPage';  
-import { ForbiddenPageAsync } from '@/pages/ForbiddenPage';  
-import { NotFoundPageAsync } from '@/pages/NotFoundPage';  
-/* route const */  
-import {  
-    /* data */  
-    getRouteMain,  
-    getRouteAbout,  
-    /* auth */  
-    getRouteLogin,  
-    /* service */  
-    getRouteForbidden,  
-    getRouteNotFound,  
-} from '@/shared/const';  
-  
-/* тут мы храним все роуты приложения */  
-export const routeConfig: Record<AppRoutes, AppRouteProps> = {  
-    [AppRoutes.MAIN]: {  
-       path: getRouteMain(),  
-       element: <MainPageAsync />,  
-       authOnly: true,  
-    },  
-    [AppRoutes.ABOUT]: {  
-       path: getRouteAbout(),  
-       element: <AboutPageAsync />,  
-       authOnly: true,  
-    },  
-    [AppRoutes.LOGIN]: {  
-       path: getRouteLogin(),  
-       element: <LoginPageAsync />,  
-       authOnly: true,  
-    },  
-    [AppRoutes.FORBIDDEN]: {  
-       path: getRouteForbidden(),  
-       element: <ForbiddenPageAsync />,  
-       authOnly: true,  
-    },  
-    [AppRoutes.NOT_FOUND]: {  
-       path: getRouteNotFound(),  
-       element: <NotFoundPageAsync />,  
-       authOnly: true,  
-    },  
+import React from 'react';
+import { AppRouteProps } from '../model/types';
+import { AppRoutes } from '../model/const';
+/* pages */
+import { MainPageAsync } from '@/pages/MainPage';
+import { AboutPageAsync } from '@/pages/AboutPage';
+import { LoginPageAsync } from '@/pages/LoginPage';
+import { ForbiddenPageAsync } from '@/pages/ForbiddenPage';
+import { NotFoundPageAsync } from '@/pages/NotFoundPage';
+/* route const */
+import {
+    /* data */
+    getRouteMain,
+    getRouteAbout,
+    /* auth */
+    getRouteLogin,
+    /* service */
+    getRouteForbidden,
+    getRouteNotFound,
+} from '@/shared/const';
+
+/* тут мы храним все роуты приложения */
+export const routeConfig: Record<AppRoutes, AppRouteProps> = {
+    [AppRoutes.MAIN]: {
+       path: getRouteMain(),
+       element: <MainPageAsync />,
+       authOnly: true,
+    },
+    [AppRoutes.ABOUT]: {
+       path: getRouteAbout(),
+       element: <AboutPageAsync />,
+       authOnly: true,
+    },
+    [AppRoutes.LOGIN]: {
+       path: getRouteLogin(),
+       element: <LoginPageAsync />,
+       authOnly: true,
+    },
+    [AppRoutes.FORBIDDEN]: {
+       path: getRouteForbidden(),
+       element: <ForbiddenPageAsync />,
+       authOnly: true,
+    },
+    [AppRoutes.NOT_FOUND]: {
+       path: getRouteNotFound(),
+       element: <NotFoundPageAsync />,
+       authOnly: true,
+    },
 };
 ```
 
 Далее нужно реализовать отдельный провайдер с роутером, который будет генерировать массив роутов приложения
 
 `src > app > providers > router > ui > AppRouter.tsx`
+
 ```TSX
-import React, { Suspense } from 'react';  
-import { Route, Routes } from 'react-router-dom';  
-import { routeConfig } from '@/app/providers/router/config/routeConfig';  
-import { Loader } from '@/shared/ui';  
-  
-export const AppRouter = () => {  
-	return (  
-	  <Routes>  
-		 {Object.values(routeConfig).map(({ element, path }) => (  
-			<Route                   key={path}  
-			   path={path}  
-			   element={  
-				  <Suspense fallback={<Loader />}>  
-					 <div className='page-wrapper'>{element}</div>  
-				  </Suspense>  
-			   }  
-			/>  
-		 ))}  
-	  </Routes>  
-    );  
+import React, { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { routeConfig } from '@/app/providers/router/config/routeConfig';
+import { Loader } from '@/shared/ui';
+
+export const AppRouter = () => {
+	return (
+	  <Routes>
+		 {Object.values(routeConfig).map(({ element, path }) => (
+			<Route                   key={path}
+			   path={path}
+			   element={
+				  <Suspense fallback={<Loader />}>
+					 <div className='page-wrapper'>{element}</div>
+				  </Suspense>
+			   }
+			/>
+		 ))}
+	  </Routes>
+    );
 };
 ```
 
@@ -127,6 +131,7 @@ export const AppRouter = () => {
 Экспортируем роутер
 
 `src > app > providers > router > index.ts`
+
 ```TS
 export { AppRouter } from './ui/AppRouter';
 ```
@@ -134,6 +139,7 @@ export { AppRouter } from './ui/AppRouter';
 И просто используем роуты в корневом файле
 
 `src > app > App.tsx`
+
 ```TSX
 export const App = () => {
 	const { toggleTheme, theme } = useTheme();
@@ -155,18 +161,20 @@ React-Router определяет роут `*` как любое другое з
 
 ![](_png/310f87da81a3b63ad6e7f30daf267ce9.png)
 
->[!info] Итоги
+> [!info] Итоги
+>
 > - Был реализован конфиг для роутов
 > - Были обработаны несуществующие маршруты (`NotFoundPage` - `*`)
 > - В будущем будет реализован `RequireAuth.tsx`, который будет отлавливать неавторизованного пользователя и бросать его на страницу логина
 
 ### 12 Navbar. Шаблоны для разработки. Первый UI Kit компонент
 
-В перечислении будут храниться названия стилей, которые будут применяться на ссылку. 
+В перечислении будут храниться названия стилей, которые будут применяться на ссылку.
 
-Сами пропсы будут расширяться от пропсов ссылки 
+Сами пропсы будут расширяться от пропсов ссылки
 
 `src > shared > ui > AppLink > AppLink.props.ts`
+
 ```TS
 import { LinkProps } from 'react-router-dom';
 import { ReactNode } from 'react';
@@ -185,6 +193,7 @@ export interface IAppLinkProps extends LinkProps {
 Компонент ссылки выглядит следующим образом и располагается в папке `shared`, так как он не имеет никакой бизнес-логики
 
 `src > shared > ui > AppLink > AppLink.tsx`
+
 ```TSX
 import React, { ReactNode } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -214,6 +223,7 @@ export const AppLink = ({
 Стили, которые позволяют менять цвета ссылок
 
 `src > shared > ui > AppLink > AppLink.module.scss`
+
 ```SCSS
 .applink {
 	color: var(--primary-color);
@@ -231,6 +241,7 @@ export const AppLink = ({
 Пропсы навбара
 
 `src > widgets > Navbar > ui > Navbar.props.ts`
+
 ```TS
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
@@ -241,6 +252,7 @@ export interface INavbarProps
 `Navbar` использует ссылки `AppLink`
 
 `src > widgets > Navbar > ui > Navbar.tsx`
+
 ```TSX
 import React from 'react';
 import { INavbarProps } from 'widgets/Navbar/ui/Navbar.props';
@@ -268,6 +280,7 @@ export const Navbar = ({ className }: INavbarProps) => {
 Стили навигационного меню
 
 `src > widgets > Navbar > ui > Navbar.module.scss`
+
 ```SCSS
 .navbar {
 	display: flex;
@@ -283,7 +296,7 @@ export const Navbar = ({ className }: INavbarProps) => {
 	&__links {
 		display: flex;
 		gap: 15px;
-		
+
 		margin-left: auto;
 	}
 }
@@ -292,6 +305,7 @@ export const Navbar = ({ className }: INavbarProps) => {
 Подключаем навигационное меню к приложению
 
 `src > app > App.tsx`
+
 ```TSX
 export const App = () => {
 	const { toggleTheme, theme } = useTheme();
@@ -333,6 +347,7 @@ npm install file-loader --save-dev
 В лоадеры нужно добавить правила для svg и файлов остальных изображений
 
 `config > build > buildLoaders.ts`
+
 ```TS
 export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
 	// так как порядок некоторых лоадеров важен, то важные лоадеры можно выносить в отдельные переменные
@@ -385,9 +400,10 @@ export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
 }
 ```
 
-Так же нужно добавить типы для подключаемых файлов 
+Так же нужно добавить типы для подключаемых файлов
 
 `src > app > types > global.d.ts`
+
 ```TS
 declare module '*.svg' {
 	const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
@@ -402,6 +418,7 @@ declare module '*.jpeg';
 Кастомный компонент кнопки
 
 `src > shared > ui > Button > Button.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -416,7 +433,9 @@ export const Button: FC<IButtonProps> = ({ theme, className, children, ...props 
 	);
 };
 ```
+
 `src > shared > ui > Button > Button.props.ts`
+
 ```TS
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 
@@ -430,7 +449,9 @@ export interface IButtonProps
 	theme?: ThemeButton;
 }
 ```
+
 `src > shared > ui > Button > Button.module.scss`
+
 ```SCSS
 .button {
 	cursor: pointer;
@@ -447,6 +468,7 @@ export interface IButtonProps
 Кастомный компонент переключателя темы
 
 `src > widgets > ThemeSwitcher > ui > ThemeSwitcher.tsx`
+
 ```TSX
 export const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ className }) => {
 	const { toggleTheme, theme } = useTheme();
@@ -462,14 +484,18 @@ export const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ className }) => {
 	);
 };
 ```
+
 `src > widgets > ThemeSwitcher > ui > ThemeSwitcher.props.ts`
+
 ```TS
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 export interface IThemeSwitcherProps
 	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {}
 ```
+
 `src > widgets > ThemeSwitcher > index.ts`
+
 ```TS
 export { ThemeSwitcher } from './ui/ThemeSwitcher';
 ```
@@ -477,6 +503,7 @@ export { ThemeSwitcher } from './ui/ThemeSwitcher';
 Добавляем компонент переключения тем в навигационное меню
 
 `src > widgets > Navbar > ui > Navbar.tsx`
+
 ```TSX
 export const Navbar = ({ className }: INavbarProps) => {
 	return (
@@ -498,6 +525,7 @@ export const Navbar = ({ className }: INavbarProps) => {
 И теперь так чисто выглядит корневой компонент приложения
 
 `src > app > App.tsx`
+
 ```TSX
 export const App = () => {
 	const { theme } = useTheme();
@@ -518,6 +546,7 @@ export const App = () => {
 Добавляем компонент сайдбара и перемещаем в него кнопку смены темы. Так же анимируем скрытие сайдбара через накладываемый стиль коллапса
 
 `src > widgets > Sidebar > ui > Sidebar > Sidebar.tsx`
+
 ```TSX
 import React, { useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -541,14 +570,18 @@ export const Sidebar = ({ className }: ISidebarProps) => {
 	);
 };
 ```
+
 `src > widgets > Sidebar > ui > Sidebar > Sidebar.props.ts`
+
 ```TS
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface ISidebarProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 ```
+
 `src > widgets > Sidebar > ui > Sidebar > Sidebar.module.scss`
+
 ```SCSS
 .sidebar {
 	position: relative;
@@ -575,7 +608,9 @@ export interface ISidebarProps
 	width: 100%;
 }
 ```
+
 `src > widgets > Sidebar > index.ts`
+
 ```TS
 export { Sidebar } from './ui/Sidebar/Sidebar';
 ```
@@ -583,6 +618,7 @@ export { Sidebar } from './ui/Sidebar/Sidebar';
 В роутере приложения элемент нужно обернуть во враппер страницы, который имеет свойство `flex-grow`, чтобы он занимал полностью размер своей флекс-колонки
 
 `src > app > providers > router > ui > AppRouter.tsx
+
 ```TSX
 export const AppRouter = () => {
 	return (
@@ -608,6 +644,7 @@ export const AppRouter = () => {
 Добавляем переменные размеров сайдбара
 
 `src > app > variables > global.scss`
+
 ```SCSS
 :root {
 	--font-family-main: Montserrat, Roboto, sans-serif;
@@ -629,6 +666,7 @@ export const AppRouter = () => {
 Добавляем стили для отображения сайдбара и деления страницы на 2 части
 
 `src > app > index.scss`
+
 ```SCSS
 .content-page {
 	display: flex;
@@ -658,6 +696,7 @@ npm install react-i18next i18next --save
 Конкретно нам понадобится переменная `__IS_DEV__`, которая будет отвечать за наличие режим разработки, который определяется из вебпака
 
 `build > config > buildPlugins.ts`
+
 ```TS
 export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInstance[] => {
 	return [
@@ -685,6 +724,7 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInsta
 Далее нужно объявить эти переменные глобально для ТС
 
 `app > types > global.d.ts`
+
 ```TS
 declare const __IS_DEV__: boolean;
 declare const __API__: string;
@@ -693,6 +733,7 @@ declare const __API__: string;
 Далее нужно написать конфиг для интернационализатора. Сам конфиг представляет из себя декодер языка, поддержку реакта и подгрузку языков с сервера по запросу пользователя на смену языка
 
 `shared > config > i18n > i18n.ts`
+
 ```TS
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
@@ -718,6 +759,7 @@ export default i18n;
 Далее нужно глобально поместить `i18n` в корень приложения (помещаем сам файл полностью) и обернуть всю динамику в `Suspense`, так как переводы будут подгружаться чанками
 
 `index.tsx`
+
 ```TSX
 import '@/shared/config/i18n/i18n';
 
@@ -743,13 +785,16 @@ root.render(
 Далее нам нужно создать переводы для приложения и указать ключ, по которому можно добраться до текста и значение
 
 `public > locales > ru > translation.json`
+
 ```JSON
 {
 	"translate": "Перевод",
 	"Sample": "Пример русского текста"
 }
 ```
+
 `public > locales > en > translation.json`
+
 ```JSON
 {
 	"translate": "Translate",
@@ -790,15 +835,18 @@ const App = () => {
 
 ![](_png/0ce633011b4e6611e9f08592810244e4.png)
 
-Но при каждой смене языка, пользователь будет грузить абсолютно весь перевод, который у нас находится в файле `translation.json`. Чтобы избежать этой проблемы, нам нужно создать отдельный файл с переводами 
+Но при каждой смене языка, пользователь будет грузить абсолютно весь перевод, который у нас находится в файле `translation.json`. Чтобы избежать этой проблемы, нам нужно создать отдельный файл с переводами
 
 `public > locales > ru > about.json`
+
 ```JSON
 {
 	"About": "О приложении"
 }
 ```
+
 `public > locales > en > about.json`
+
 ```JSON
 {
     "About": "About Page"
@@ -836,71 +884,73 @@ npm install -D @pmmmwh/react-refresh-webpack-plugin react-refresh
 Далее нужно включить хот-релоад в дев-сервере
 
 `config > build > buildDevServer.ts`
+
 ```TS
-import { BuildOptions } from './types/config';  
-import { Configuration as DevServerConfiguration } from 'webpack-dev-server';  
-  
-export function buildDevServer(options: BuildOptions): DevServerConfiguration {  
-    return {  
-        port: options.port, // порт  
-        // open: true, // автоматически будет открывать страницу в браузере        // данная команда позволяет проксиовать запросы через index страницу, чтобы при обновлении страницы не выпадала ошибка        historyApiFallback: true,  
-        // данный параметр используется для горяей замены модулей  
-        hot: true  
-    };  
+import { BuildOptions } from './types/config';
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+
+export function buildDevServer(options: BuildOptions): DevServerConfiguration {
+    return {
+        port: options.port, // порт
+        // open: true, // автоматически будет открывать страницу в браузере        // данная команда позволяет проксиовать запросы через index страницу, чтобы при обновлении страницы не выпадала ошибка        historyApiFallback: true,
+        // данный параметр используется для горяей замены модулей
+        hot: true
+    };
 }
 ```
 
-И так же нужно добавить два плагина `HotModuleReplacementPlugin`, который идёт в пакете с webpack и `ReactRefreshWebpackPlugin`, который установили отдельно. 
+И так же нужно добавить два плагина `HotModuleReplacementPlugin`, который идёт в пакете с webpack и `ReactRefreshWebpackPlugin`, который установили отдельно.
 
 Теперь замещение пакетов происходит в реальном времени
 
 `config > build > buildPlugins.ts`
+
 ```TS
-import { WebpackPluginInstance, ProgressPlugin, DefinePlugin, HotModuleReplacementPlugin } from 'webpack';  
-import HTMLWebpackPlugin from 'html-webpack-plugin';  
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';  
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';  
-import { BuildOptions } from './types/config';  
-  
-export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInstance[] => {  
-    const plugins = [  
-       // то плагин, который будет показывать прогресс сборки  
-       new ProgressPlugin(),  
-       // это плагин, который будет добавлять самостоятельно скрипт в наш index.html  
-       new HTMLWebpackPlugin({  
-          // указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте  
-          template: paths.html,  
-       }),  
-       // этот плагин будет отвечать за отделение чанков с css от файлов JS  
-       new MiniCssExtractPlugin({  
-          filename: 'css/[name].[contenthash:8].css',  
-          chunkFilename: 'css/[name].[contenthash:8].css',  
-       }),  
-       // этот плагин позволяет прокидывать глобальные переменные в приложение  
-       new DefinePlugin({  
-          __IS_DEV__: JSON.stringify(isDev),  
-          __API__: JSON.stringify('https://' /* api_path */),  
-       }),  
-    ];  
-  
-    if (isDev) {  
-       plugins.push(  
-          // данный плагин уже нужен для рефреша реакт-компонентов  
-          new ReactRefreshWebpackPlugin(),  
-       );  
-       plugins.push(  
-          // данный плагин отвечает за горячую замену модулей без перезагрузки приложения  
-          new HotModuleReplacementPlugin(),  
-       );  
-    }  
-  
-    return plugins;  
+import { WebpackPluginInstance, ProgressPlugin, DefinePlugin, HotModuleReplacementPlugin } from 'webpack';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import { BuildOptions } from './types/config';
+
+export const buildPlugins = ({ paths, isDev }: BuildOptions): WebpackPluginInstance[] => {
+    const plugins = [
+       // то плагин, который будет показывать прогресс сборки
+       new ProgressPlugin(),
+       // это плагин, который будет добавлять самостоятельно скрипт в наш index.html
+       new HTMLWebpackPlugin({
+          // указываем путь до базового шаблона той вёрстки, которая нужна в нашем проекте
+          template: paths.html,
+       }),
+       // этот плагин будет отвечать за отделение чанков с css от файлов JS
+       new MiniCssExtractPlugin({
+          filename: 'css/[name].[contenthash:8].css',
+          chunkFilename: 'css/[name].[contenthash:8].css',
+       }),
+       // этот плагин позволяет прокидывать глобальные переменные в приложение
+       new DefinePlugin({
+          __IS_DEV__: JSON.stringify(isDev),
+          __API__: JSON.stringify('https://' /* api_path */),
+       }),
+    ];
+
+    if (isDev) {
+       plugins.push(
+          // данный плагин уже нужен для рефреша реакт-компонентов
+          new ReactRefreshWebpackPlugin(),
+       );
+       plugins.push(
+          // данный плагин отвечает за горячую замену модулей без перезагрузки приложения
+          new HotModuleReplacementPlugin(),
+       );
+    }
+
+    return plugins;
 };
 ```
 
 ### 17 Babel. Extract plugin [optional]
 
-Сейчас нам нужно установить `babel-plugin-i18next-extract`, чтобы экстрактить переводы в отдельные файлы по языкам 
+Сейчас нам нужно установить `babel-plugin-i18next-extract`, чтобы экстрактить переводы в отдельные файлы по языкам
 
 Так же мы установили `@babel/preset-env` нужно установить пакет который включает преобразование js для новых стандартов ES
 
@@ -911,46 +961,48 @@ npm install --save-dev babel-loader @babel/core @babel/preset-env babel-plugin-i
 Далее добавляем такой конфиг, который уже включает в себя все установленные плагины
 
 `buildLoaders.ts`
+
 ```TS
-/* лоадер, который позволит использовать бейбел */  
-const babelLoader = {  
-    test: /\.(js|jsx|tsx)$/,  
-    exclude: /node_modules/,  
-    use: {  
-       loader: 'babel-loader',  
-       options: {  
-          presets: ['@babel/preset-env'],  
-          plugins: [  
-             [  
-                'i18next-extract',  
-                {  
-                   locales: ['ru', 'en'],  
-                   keyAsDefaultValue: true,  
-                },  
-             ],  
-          ],  
-       },  
-    },  
-};  
-  
-/*  
-* typescriptLoader должен идти после babelLoader  
-* */  
+/* лоадер, который позволит использовать бейбел */
+const babelLoader = {
+    test: /\.(js|jsx|tsx)$/,
+    exclude: /node_modules/,
+    use: {
+       loader: 'babel-loader',
+       options: {
+          presets: ['@babel/preset-env'],
+          plugins: [
+             [
+                'i18next-extract',
+                {
+                   locales: ['ru', 'en'],
+                   keyAsDefaultValue: true,
+                },
+             ],
+          ],
+       },
+    },
+};
+
+/*
+* typescriptLoader должен идти после babelLoader
+* */
 return [fileLoader, svgLoader, babelLoader, typescriptLoader, stylesLoader];
 ```
 
->[!note] По поводу лоадера для React
+> [!note] По поводу лоадера для React
 > Если бы мы не использовали typescriptLoader и писали проект на JS, то нам бы пришлось устанавливать `babel/preset-react`, чтобы поднимать наш проект
 
 Далее нам нужно настроить плагины
 
 `babel.config.json`
+
 ```JSON
-{  
-    "presets": ["@babel/preset-env"],  
-    "plugins": [  
-       "i18next-extract"  
-    ]  
+{
+    "presets": ["@babel/preset-env"],
+    "plugins": [
+       "i18next-extract"
+    ]
 }
 ```
 
@@ -973,92 +1025,94 @@ npm install --save-dev eslint eslint-plugin-unicorn eslint-plugin-i18next
 И так уже выглядит начальный конфиг
 
 `.eslint.cjs`
+
 ```JS
-module.exports = {  
-    root: true,  
-    parser: '@typescript-eslint/parser',  
-    env: {  
-       'browser': true,  
-       'es2021': true,  
-    },  
-    settings: {  
-       react: {  
-          version: 'detect',  
-       },  
-    },  
-    /* расширения конфига */  
-    extends: [  
-       'eslint:recommended',  
-       'plugin:@typescript-eslint/recommended',  
-       'plugin:react/recommended',  
-       'prettier',  
-       "plugin:i18next/recommended"  
-    ],  
-    overrides: [  
-       {  
-          'env': {  
-             'node': true,  
-          },  
-          'files': [  
-             '.eslintrc.{js,cjs}',  
-          ],  
-          'parserOptions': {  
-             'sourceType': 'script',  
-          },  
-       },  
-    ],  
-    /* опции для парсера */  
-    'parserOptions': {  
-       'ecmaVersion': 'latest',  
-       'sourceType': 'module',  
-    },  
-    /* объявление глобальных переменных, которые доступны во всём приложении */  
-    globals: {  
-       __API__: true,  
-       __IS_DEV__: true,  
-    },  
-    /* подключение внешних плагинов */  
-    'plugins': [  
-       "unicorn",  
-       'import',  
-       'react',  
-       'i18next',  
-       'react-hooks',  
-       'jsx-a11y',  
-       '@typescript-eslint',  
-    ],  
-    /* настройка правил  */  
-    'rules': {  
-	    /*  
-		* проверяет максимальную длину строки    
-		* если комментарий, то игнорирует    
-		*  */    
+module.exports = {
+    root: true,
+    parser: '@typescript-eslint/parser',
+    env: {
+       'browser': true,
+       'es2021': true,
+    },
+    settings: {
+       react: {
+          version: 'detect',
+       },
+    },
+    /* расширения конфига */
+    extends: [
+       'eslint:recommended',
+       'plugin:@typescript-eslint/recommended',
+       'plugin:react/recommended',
+       'prettier',
+       "plugin:i18next/recommended"
+    ],
+    overrides: [
+       {
+          'env': {
+             'node': true,
+          },
+          'files': [
+             '.eslintrc.{js,cjs}',
+          ],
+          'parserOptions': {
+             'sourceType': 'script',
+          },
+       },
+    ],
+    /* опции для парсера */
+    'parserOptions': {
+       'ecmaVersion': 'latest',
+       'sourceType': 'module',
+    },
+    /* объявление глобальных переменных, которые доступны во всём приложении */
+    globals: {
+       __API__: true,
+       __IS_DEV__: true,
+    },
+    /* подключение внешних плагинов */
+    'plugins': [
+       "unicorn",
+       'import',
+       'react',
+       'i18next',
+       'react-hooks',
+       'jsx-a11y',
+       '@typescript-eslint',
+    ],
+    /* настройка правил  */
+    'rules': {
+	    /*
+		* проверяет максимальную длину строки
+		* если комментарий, то игнорирует
+		*  */
 		'max-len': ['error', { code: 100, ignoreComments: true }],
-		'no-undef': 'warn',  
-		/* 
-		* нельзя использовать объявленные ранее имена 
+		'no-undef': 'warn',
+		/*
+		* нельзя использовать объявленные ранее имена
 		* (даже внутри другого скоупа)
-		* */  
-		'no-shadow': 'warn',  
-		/* неиспользуемые переменные запрещены */  
-		'no-unused-vars': 'warn',  
-		'no-underscore-dangle': 'off',  
-		'react/prop-types': 0,  
-		'react/jsx-props-no-spreading': 'warn',  
-		'react/function-component-definition': 'off',  
-		'import/no-unresolved': 'off',  
-		'react-hooks/rules-of-hooks': 'error',  
-		/* запрещает просто вводить текст в JSX - можно только через перевод */  
-		"i18next/no-literal-string": ['error', { markupOnly: true }],  
-		/* неиспользуемые переменные запрещены (TS) */  
-		'@typescript-eslint/no-unused-vars': 'warn'  
-    },  
+		* */
+		'no-shadow': 'warn',
+		/* неиспользуемые переменные запрещены */
+		'no-unused-vars': 'warn',
+		'no-underscore-dangle': 'off',
+		'react/prop-types': 0,
+		'react/jsx-props-no-spreading': 'warn',
+		'react/function-component-definition': 'off',
+		'import/no-unresolved': 'off',
+		'react-hooks/rules-of-hooks': 'error',
+		/* запрещает просто вводить текст в JSX - можно только через перевод */
+		"i18next/no-literal-string": ['error', { markupOnly: true }],
+		/* неиспользуемые переменные запрещены (TS) */
+		'@typescript-eslint/no-unused-vars': 'warn'
+    },
 };
 ```
 
-И так же можно добавить скрипт,  который будет прогоняться при каждом запуске
+И так же можно добавить скрипт, который будет прогоняться при каждом запуске
 
 `package.json`
+
 ```JSON
 "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" --quiet"
 ```
@@ -1074,32 +1128,35 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-config-stan
 Конфигурация:
 
 `.stylelintrc`
+
 ```JSON
-{  
-    "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],  
-    "plugins": ["stylelint-scss"],  
-    "rules": {  
-       "selector-class-pattern": null,  
-       "property-no-unknown": null,  
-       "no-invalid-double-slash-comments": null,  
-       "no-descending-specificity": null,  
-       "font-family-no-duplicate-names": null,  
-       "function-no-unknown": null,  
-       "block-no-empty": null  
-    }  
+{
+    "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
+    "plugins": ["stylelint-scss"],
+    "rules": {
+       "selector-class-pattern": null,
+       "property-no-unknown": null,
+       "no-invalid-double-slash-comments": null,
+       "no-descending-specificity": null,
+       "font-family-no-duplicate-names": null,
+       "function-no-unknown": null,
+       "block-no-empty": null
+    }
 }
 ```
 
 Скрипт линтера
 
 `package.json`
+
 ```JSON
 "stylelint": "stylelint \"**/*.scss\" --fix",
 ```
 
 ### 20 Тестовая среда. Настраиваем Jest. Пишем первый тест Метка
 
-Устанавливаем 
+Устанавливаем
+
 - jest
 - типы к нему
 - поддержка тайпскрипта
@@ -1112,9 +1169,10 @@ jest --init
 
 ![](_png/7236c64652c010824bbbfe286a8d23e2.png)
 
-Тут мы добавляем jest в eslint, чтобы линтер не ругался на не импортированные файлы  
+Тут мы добавляем jest в eslint, чтобы линтер не ругался на не импортированные файлы
 
 `.eslintrc.js`
+
 ```JS
 env: {
 	browser: true,
@@ -1126,6 +1184,7 @@ env: {
 Далее нужно добавить обработку тайпскрипта, чтобы джест мог читать абсолютные импорты и работал с типами
 
 `.babel.config.js`
+
 ```JS
 module.exports = {
 	presets: ['@babel/preset-env', '@babel/preset-typescript'],

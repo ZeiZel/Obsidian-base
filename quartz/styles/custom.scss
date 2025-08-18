@@ -1,0 +1,8 @@
+@use './base.scss';
+
+// put your custom CSS here!
+
+[saved-theme=dark] code[data-theme*=\ ] {
+  color: var(--shiki-dark);
+  background-color: #3B4252;
+}

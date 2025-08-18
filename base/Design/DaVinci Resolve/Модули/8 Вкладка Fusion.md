@@ -1,9 +1,11 @@
 # 8 Вкладка Fusion
+
 #Fusion
 
 ## 1 Задачи вкладки Fusion. Что такое композитинг
 
 Во фьюжене можно:
+
 - кеить
 - ротоскопить
 - композить
@@ -50,72 +52,32 @@
 
 ![](_png/7f0b5c2cadafdaa800d2f63093772dd0.png)
 
-
-
-
-
-
-
-
-
-
 ## 4 Логика работы во Fusion media in out, pipes, merge, viewers
-
-
 
 ## 5 Основные ноды вкладки Fusion. Toolbar
 
-
-
 ## 6 Работа с текстом. Окна keyframes и curves
-
-
 
 ## 7 Работа с текстом. Окна keyframes и curves часть вторая
 
-
-
 ## 8 Modifiers - автоматическая анимация параметров
-
-
 
 ## 9 Motion Blur. Где он нужен и как его включить
 
-
-
 ## 10 Chroma Keying вырезаем фон. Delta Keyer
-
-
 
 ## 11 Tracker трекинг объектов
 
-
-
 ## 12 Planar Tracker
-
-
 
 ## 13 Luma Keying
 
-
-
 ## 14 Rotoscoping - выделяем сложные области. Magic Mask
-
-
 
 ## 15 Clean-up убираем ненужное из кадра с помощью ноды Paint
 
-
-
 ## 16 Clean-up дублирование паттерна
-
-
 
 ## 17 Как снизить нагрузку на ПК. Ноды Saver & Loader
 
-
-
 ## 18 Композитинг
-
-
-

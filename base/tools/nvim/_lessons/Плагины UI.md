@@ -1,15 +1,16 @@
-
 ### Neotree
 
 Neotree - это плагин для отображения боковой менюшки с файлами проекта
 
 Так же мы имеем дополнительные поля в нашей конфигурации lazy:
+
 - `branch` - ветка, с которой нужно стянуть актуальный плагин
 - `dependencies` - представляет собой отображение дополнительных зависимостей пакета
 
 Отдельно мы тут включаем диагностику `diagnostic` и назначаем каждому типу предупреждения свою иконку
 
 `lua / plugins / neo-tree.lua`
+
 ```lua
 return {
 	"nvim-neo-tree/neo-tree.nvim",
@@ -20,10 +21,10 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		-- эти параметры сделают плавающее окошко редактирования прозрачным 
+		-- эти параметры сделают плавающее окошко редактирования прозрачным
 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none"})
 		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "none"})
-		
+
 		vim.diagnostic.config({
 			signs = {
 				text = {
@@ -73,8 +74,9 @@ return {
 Добавим в маппинги строчку, по которой мы будем быстро открывать и закрывать отображение дерева `<leader>e`
 
 `lua / core / mappings.lua`
+
 ```lua
--- Устанавливаем дефолтный кейбиндинг для Neotree плагина 
+-- Устанавливаем дефолтный кейбиндинг для Neotree плагина
 vim.keymap.set("n", "<leader>e", ":Neotree left toggle reveal<CR>")
 ```
 
@@ -94,6 +96,7 @@ vim.keymap.set("n", "<leader>e", ":Neotree left toggle reveal<CR>")
 - Вызываем `setup`, в который передаём опции с иконками и цветами для подсветки
 
 `lua / plugins / bufferline.lua`
+
 ```lua
 return {
 	{
@@ -151,12 +154,14 @@ return {
 ```
 
 Биндинги на быструю работу:
+
 - `tab` - перейти на следующую вкладку
 - `shift + tab` - перейти на предыдущую вкладку
 - `lead + x` - закрыть текущую вкладку
 - `ctrl + x` - закрыть остальные вкладки
 
 `lua / core / mappings.lua`
+
 ```lua
 -- Настройка табуляции
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>")
@@ -174,6 +179,7 @@ vim.keymap.set("n", "<c-x>", ":BufferLineCloseOthers<CR>")
 Для этого можно воспользоваться следующим конфигом, где мы определяем свои цвета, тему и сепараторы (включая закругления по краям)
 
 `lua / plugins / lualine.lua`
+
 ```lua
 return {
 	{
@@ -261,9 +267,10 @@ brew install fzf
 - `<leader>fb` - поиск по открытым буферам
 
 `lua / plugins / lualine.lua`
+
 ```lua
 return {
-    'nvim-telescope/telescope.nvim', 
+    'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
 	config = function()
@@ -291,9 +298,10 @@ return {
 Нам нужно будет добавить небольшой и простенький конфиг для подгрузки плагина, где нам нужно будет задать сочетания для работы с терминалом:
 
 - `ctrl + \` - тугглит терминал
-- `jj` - так же переведёт в *normal mode*
+- `jj` - так же переведёт в _normal mode_
 
 `lua / plugins / toggleterm.lua`
+
 ```lua
 return {
 	{

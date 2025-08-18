@@ -1,7 +1,7 @@
 ---
 description: Слоистая архитектура
 tags:
-  - "#OnionArchitecture"
+    - '#OnionArchitecture'
 ---
 
 Что есть часть ПО?
@@ -20,6 +20,7 @@ tags:
 ![](_png/d3462135c522f861a0161c5d37d6a8c9.png)
 
 ## Части архитектуры
+
 ### Domain Model
 
 Доменная модель - это описание бизнес-моделей, с которыми мы работаем.
@@ -38,10 +39,4 @@ tags:
 
 ### Services
 
-
-
 ### API / Tests / UI / Infrastructure
-
-
-
-

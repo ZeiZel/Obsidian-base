@@ -7,18 +7,19 @@
 Первым делом настроим тайтл и дескрипшн. Будем выводить в компоненте некста `Head` информацию по странице. Эта информация генерируется на сервере, поэтому всё будет подставляться динамически
 
 `pages / [type] / [alias].tsx`
+
 ```TSX
-function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {  
-   return (  
-      <>  
-    {/* данный компонент позволит перезаписать мета-информацию страницы */}  
-         <Head>  
-            <title>{page.metaTitle}</title>  
-            <meta name={'description'} content={page.metaDescription} />  
-         </Head>  
-         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;  
-      </>  
-   );  
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+   return (
+      <>
+    {/* данный компонент позволит перезаписать мета-информацию страницы */}
+         <Head>
+            <title>{page.metaTitle}</title>
+            <meta name={'description'} content={page.metaDescription} />
+         </Head>
+         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;
+      </>
+   );
 }
 ```
 
@@ -27,6 +28,7 @@ function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
 При передаче ссылки другому человеку в интернете некоторые ресурсы позволяют из ссылки вытащить определённые элементы, которые дополнят эту ссылку полезной информацией для пользователя.
 
 Теги для передачи:
+
 - `og:image` - изображение, которое будет браться для другого сайта
 - `og:title` - заголовок
 - `og:description` - описание
@@ -38,57 +40,61 @@ function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
 ![](_png/998309be481df72d2ac25d7d08fb7447.png)
 
 Далее для каждой отдельной страницы алиаса будут добавлены несколько тегов, которые позволят отобразить содержание страницы:
+
 - `og:title`
 - `og:description`
 - `og:type` - позволит описать назначение страницы
 
 `pages / [type] / [alias].tsx`
+
 ```TSX
-function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {  
-   return (  
-      <>  
-    {/* данный компонент позволит перезаписать мета-информацию страницы */}  
-         <Head>  
-            <title>{page.metaTitle}</title>  
-            <meta name={'description'} content={page.metaDescription} />  
-            <meta property={'og:title'} content={page.metaTitle} />  
-            <meta property={'og:description'} content={page.metaDescription} />  
-            <meta property={'og:type'} content={'article'} />  
-         </Head>  
-         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;  
-      </>  
-   );  
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+   return (
+      <>
+    {/* данный компонент позволит перезаписать мета-информацию страницы */}
+         <Head>
+            <title>{page.metaTitle}</title>
+            <meta name={'description'} content={page.metaDescription} />
+            <meta property={'og:title'} content={page.metaTitle} />
+            <meta property={'og:description'} content={page.metaDescription} />
+            <meta property={'og:type'} content={'article'} />
+         </Head>
+         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;
+      </>
+   );
 }
 ```
 
 Так же в компоненте страниц нужно указать мета-теги, которые будут распространятся на все страницы в приложении:
-- `og:url` - будет генерировать в нашем случае ссылку до страницы, которая будет использоваться для перехода на наш ресурс 
+
+- `og:url` - будет генерировать в нашем случае ссылку до страницы, которая будет использоваться для перехода на наш ресурс
 - `og:locale` - скажет, что сайт построен на русском языке
 
 `pages / _app.tsx`
+
 ```TSX
-function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {  
-   return (  
-      <>  
-         <Head>  
-            <title>MyTop - наш лучший топ</title>  
-            <link rel='icon' href='/favicon.ico' />  
-            <link rel='preconnect' href='https://fonts.gstatic.com' />  
-            <link  
-               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'  
-               rel='stylesheet'  
-            />  
-            {/* сюда уже помещаем ссылку на страницу и через роутер получаем путь до открытой страницы */}  
-            <meta  
-               property={'og:url'}  
-               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}  
-            />  
-            {/* тут уже просто указываем язык страницы */}  
-            <meta property={'og:locale'} content={'ru_RU'} />  
-         </Head>  
-         <Component {...pageProps} />  
-      </>  
-   );  
+function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
+   return (
+      <>
+         <Head>
+            <title>MyTop - наш лучший топ</title>
+            <link rel='icon' href='/favicon.ico' />
+            <link rel='preconnect' href='https://fonts.gstatic.com' />
+            <link
+               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'
+               rel='stylesheet'
+            />
+            {/* сюда уже помещаем ссылку на страницу и через роутер получаем путь до открытой страницы */}
+            <meta
+               property={'og:url'}
+               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}
+            />
+            {/* тут уже просто указываем язык страницы */}
+            <meta property={'og:locale'} content={'ru_RU'} />
+         </Head>
+         <Component {...pageProps} />
+      </>
+   );
 }
 ```
 
@@ -111,50 +117,51 @@ npm i react-yandex-metrika
 Далее идёт компонент `YMInitializer` который в целом инициализирует работу с метрикой.
 
 `pages / _app.tsx`
+
 ```TSX
-import ym from 'react-yandex-metrika'; // каунтер  
+import ym from 'react-yandex-metrika'; // каунтер
 import { YMInitializer } from 'react-yandex-metrika'; // инициализирует работу с метрикой
 
-function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {  
-   // далее при удачном событии изменении пути роута  
-   router.events.on('routeChangeComplete', (url: string) => {  
-      // проверяем, что мы не на сервере  
-      if (typeof window !== 'undefined') {  
-         // и тут выполняем событие hit перехода на определённый url  
-         ym('hit', url);  
-      }  
-   });  
-  
-   return (  
-      <>  
-         <Head>  
-            <title>MyTop - наш лучший топ</title>  
-            <link rel='icon' href='/favicon.ico' />  
-            <link rel='preconnect' href='https://fonts.gstatic.com' />  
-            <link rel='preconnect' href='https://mc.yandex.ru' />  
-            <link  
-               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'  
-               rel='stylesheet'  
-            />  
-            <meta  
-               property={'og:url'}  
-               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}  
-            />  
-            <meta property={'og:locale'} content={'ru_RU'} />  
-         </Head>  
-         {/* сама инициализация яндекс-метрики */}  
-         <YMInitializer  
-            // массив id счётчиков метрики  
-            accounts={[]}  
-            // далее передаём опции  
-            // первый параметр позволит просматривать статистику посещений, а второй откладывает метрику до загрузки приложения            
-            options={{ webvisor: true, defer: true }}  
-            // так же можно указать версию счётчика  
-            version={'2'}  
-         />  
-         <Component {...pageProps} />  
-      </>  
-   );  
+function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
+   // далее при удачном событии изменении пути роута
+   router.events.on('routeChangeComplete', (url: string) => {
+      // проверяем, что мы не на сервере
+      if (typeof window !== 'undefined') {
+         // и тут выполняем событие hit перехода на определённый url
+         ym('hit', url);
+      }
+   });
+
+   return (
+      <>
+         <Head>
+            <title>MyTop - наш лучший топ</title>
+            <link rel='icon' href='/favicon.ico' />
+            <link rel='preconnect' href='https://fonts.gstatic.com' />
+            <link rel='preconnect' href='https://mc.yandex.ru' />
+            <link
+               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'
+               rel='stylesheet'
+            />
+            <meta
+               property={'og:url'}
+               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}
+            />
+            <meta property={'og:locale'} content={'ru_RU'} />
+         </Head>
+         {/* сама инициализация яндекс-метрики */}
+         <YMInitializer
+            // массив id счётчиков метрики
+            accounts={[]}
+            // далее передаём опции
+            // первый параметр позволит просматривать статистику посещений, а второй откладывает метрику до загрузки приложения
+            options={{ webvisor: true, defer: true }}
+            // так же можно указать версию счётчика
+            version={'2'}
+         />
+         <Component {...pageProps} />
+      </>
+   );
 }
 ```
 
@@ -171,12 +178,12 @@ npm i -D husky
 Далее нужно установить скрипт `prepare`, который установит нам хаски в проект:
 
 ```JSON
-"scripts": {  
-   "prepare": "husky install",  
-   "dev": "next dev",  
-   "debug": "NODE_OPTIONS='--inspect' next dev",  
-   "build": "next build",  
-   "start": "next start",  
+"scripts": {
+   "prepare": "husky install",
+   "dev": "next dev",
+   "debug": "NODE_OPTIONS='--inspect' next dev",
+   "build": "next build",
+   "start": "next start",
    "stylelint": "stylelint \"**/*.css\" --fix"
 },
 ```
@@ -188,7 +195,7 @@ npm run prepare
 ```
 
 Далее мы можем добавить файл, который будет содержать команды, выполняемые в определённый промежуток через выполнение хаски.
-Конкретно тут мы добавляем процедуру, которая будет выполняться перед коммитом 
+Конкретно тут мы добавляем процедуру, которая будет выполняться перед коммитом
 
 ```bash
 npx husky add .husky/pre-commit "npm test"
@@ -199,9 +206,9 @@ npx husky add .husky/pre-commit "npm test"
 Поменяем тест на выполнение команды стайллинта. И теперь перед каждым коммитом будет прогоняться стайллинт.
 
 ```
-#!/usr/bin/env sh  
-. "$(dirname -- "$0")/_/husky.sh"  
-  
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 npm run stylelint
 ```
 
@@ -212,84 +219,87 @@ npm run stylelint
 Нужно использовать роутер не полученный из приложения, а импортированный из некста
 
 `pages / _app.tsx`
+
 ```TSX
 import Router from 'next/router';
 
-Router.events.on('routeChangeComplete', (url: string) => {  
-   if (typeof window !== 'undefined') {  
-      ym('hit', url);  
-   }  
-});  
-  
-function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {  
-   return (  
-      <>  
-         <Head>  
-            <title>MyTop - наш лучший топ</title>  
-            <link rel='icon' href='/favicon.ico' />  
-            <link rel='preconnect' href='https://fonts.gstatic.com' />  
-            <link rel='preconnect' href='https://mc.yandex.ru' />  
-            <link  
-               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'  
-               rel='stylesheet'  
-            />  
-            <meta  
-               property={'og:url'}  
-               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}  
-            />  
-            <meta property={'og:locale'} content={'ru_RU'} />  
-         </Head>  
-         <YMInitializer accounts={[]} options={{ webvisor: true, defer: true }} version={'2'} />  
-         <Component {...pageProps} />  
-      </>  
-   );  
+Router.events.on('routeChangeComplete', (url: string) => {
+   if (typeof window !== 'undefined') {
+      ym('hit', url);
+   }
+});
+
+function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
+   return (
+      <>
+         <Head>
+            <title>MyTop - наш лучший топ</title>
+            <link rel='icon' href='/favicon.ico' />
+            <link rel='preconnect' href='https://fonts.gstatic.com' />
+            <link rel='preconnect' href='https://mc.yandex.ru' />
+            <link
+               href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'
+               rel='stylesheet'
+            />
+            <meta
+               property={'og:url'}
+               content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath}
+            />
+            <meta property={'og:locale'} content={'ru_RU'} />
+         </Head>
+         <YMInitializer accounts={[]} options={{ webvisor: true, defer: true }} version={'2'} />
+         <Component {...pageProps} />
+      </>
+   );
 }
 ```
 
 Далее тут нужно производить подмену мета-данных страницы только если мы получили с сервера страницы и продукты
 
 `pages / [type] / [alias].tsx`
+
 ```TSX
-function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {  
-   return (  
-      <>  
-         {page && products && (  
-            <>  
-               <Head>  
-                  <title>{page.metaTitle}</title>  
-                  <meta name={'description'} content={page.metaDescription} />  
-                  <meta property={'og:title'} content={page.metaTitle} />  
-                  <meta property={'og:description'} content={page.metaDescription} />  
-                  <meta property={'og:type'} content={'article'} />  
-               </Head>  
-               <TopPageComponent  
-                  firstCategory={firstCategory}  
-                  page={page}  
-                  products={products}  
-               />  
-               ;  
-            </>  
-         )}  
-      </>  
-   );  
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+   return (
+      <>
+         {page && products && (
+            <>
+               <Head>
+                  <title>{page.metaTitle}</title>
+                  <meta name={'description'} content={page.metaDescription} />
+                  <meta property={'og:title'} content={page.metaTitle} />
+                  <meta property={'og:description'} content={page.metaDescription} />
+                  <meta property={'og:type'} content={'article'} />
+               </Head>
+               <TopPageComponent
+                  firstCategory={firstCategory}
+                  page={page}
+                  products={products}
+               />
+               ;
+            </>
+         )}
+      </>
+   );
 }
 ```
 
 Далее нужно добавить скрипт для `export` из некста
 
 ```JSON
-"scripts": {  
-   "prepare": "husky install",  
-   "dev": "next dev",  
-   "export": "next export",  
-   "debug": "NODE_OPTIONS='--inspect' next dev",  
-   "build": "next build",  
-   "start": "next start",  
+"scripts": {
+   "prepare": "husky install",
+   "dev": "next dev",
+   "export": "next export",
+   "debug": "NODE_OPTIONS='--inspect' next dev",
+   "build": "next build",
+   "start": "next start",
    "stylelint": "stylelint \"**/*.css\" --fix"
 },
 ```
 
 Последовательность выполнения операций:
+
 - `build` - билдит приложение некста в папку `.next`
 - `export` - берёт сбилженное приложение и экспортирует в папку `out`, где лежит статический полностью рабочий сайт, который можно закинуть на сервер и пользоваться им
 
@@ -299,6 +309,7 @@ npm run export
 ```
 
 Однако при выполнении команды `export` мы получим ошибку, так как мы не можем пользоваться серверными возможностями некста:
+
 - нужно убрать компонент `Image`
 
 ![](_png/ceb0cf280ba8b78358b1b94bdcff92c0.png)
@@ -318,6 +329,7 @@ npm run export
 ![](_png/864bd228ace9fe8ad271be08946ca1ad.png)
 
 У нас нет преимуществ NextJS:
+
 - Нет оптимизированных изображений
 - Нет фонового обновления данных
 - Нет добавления новых страниц, если добавляются роуты
@@ -326,7 +338,8 @@ npm run export
 
 Итог:
 
->[!note] Использовать такой подход можно в нескольких случаях:
+> [!note] Использовать такой подход можно в нескольких случаях:
+>
 > - Если нам нужен просто статический сайт
 > - Если страницы обновляются не часто и можно делать билд под обновления
 
@@ -337,36 +350,38 @@ npm run export
 Чтобы заменить страницы 404 и 500, нам нужно воспользоваться стандартными именами `404.tsx` внутри папки страниц (мы заменяем стандартный элемент ошибки)
 
 `pages / 404.tsx`
+
 ```TSX
-import React from 'react';  
-import { withLayout } from '../layout/Layout';  
-import { Htag } from '../components';  
-  
-export const Error404 = (): JSX.Element => {  
-   return (  
-      <>  
-         <Htag tag={'h1'}>Ошибка 404</Htag>  
-      </>  
-   );  
-};  
-  
+import React from 'react';
+import { withLayout } from '../layout/Layout';
+import { Htag } from '../components';
+
+export const Error404 = (): JSX.Element => {
+   return (
+      <>
+         <Htag tag={'h1'}>Ошибка 404</Htag>
+      </>
+   );
+};
+
 export default withLayout(Error404);
 ```
 
 `pages / 500.tsx`
+
 ```TSX
-import React from 'react';  
-import { withLayout } from '../layout/Layout';  
-import { Htag } from '../components';  
-  
-export const Error500 = (): JSX.Element => {  
-   return (  
-      <>  
-         <Htag tag={'h1'}>Ошибка 500</Htag>  
-      </>  
-   );  
-};  
-  
+import React from 'react';
+import { withLayout } from '../layout/Layout';
+import { Htag } from '../components';
+
+export const Error500 = (): JSX.Element => {
+   return (
+      <>
+         <Htag tag={'h1'}>Ошибка 500</Htag>
+      </>
+   );
+};
+
 export default withLayout(Error500);
 ```
 
@@ -377,24 +392,25 @@ export default withLayout(Error500);
 Далее тут будем выводить страницу с ошибкой, если у нас не будет пропсов продуктов и страниц
 
 `pages / [type] / [alias].tsx`
+
 ```TSX
-function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {  
-   if (!page || !products) {  
-      return <Error404 />;  
-   }  
-  
-   return (  
-      <>  
-         <Head>  
-            <title>{page.metaTitle}</title>  
-            <meta name={'description'} content={page.metaDescription} />  
-            <meta property={'og:title'} content={page.metaTitle} />  
-            <meta property={'og:description'} content={page.metaDescription} />  
-            <meta property={'og:type'} content={'article'} />  
-         </Head>  
-         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />  
-      </>  
-   );  
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+   if (!page || !products) {
+      return <Error404 />;
+   }
+
+   return (
+      <>
+         <Head>
+            <title>{page.metaTitle}</title>
+            <meta name={'description'} content={page.metaDescription} />
+            <meta property={'og:title'} content={page.metaTitle} />
+            <meta property={'og:description'} content={page.metaDescription} />
+            <meta property={'og:type'} content={'article'} />
+         </Head>
+         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />
+      </>
+   );
 }
 ```
 
@@ -413,6 +429,7 @@ function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
 ![](_png/3a6a64fa82d9cc1be0d1692439ab5d7a.png)
 
 Далее нам нужно запустить две данные команды:
+
 - собирает приложение
 - стартует его
 
@@ -444,27 +461,28 @@ npm run start
 - и в конце нужно показать один отдельный порт наружу через `Expose` - 3000
 
 `Dockerfile`
+
 ```Dockerfile
-FROM node:14-alpine  
-WORKDIR /opt/app  
-ADD package.json package.json  
-RUN npm install  
+FROM node:14-alpine
+WORKDIR /opt/app
+ADD package.json package.json
+RUN npm install
 ADD . .
-ENV NODE_ENV production  
-RUN npm run build  
-RUN npm prune --production  
-CMD ["npm", "start"]  
+ENV NODE_ENV production
+RUN npm run build
+RUN npm prune --production
+CMD ["npm", "start"]
 EXPOSE 3000
 ```
 
 Далее нам нужно решить определённые ошибки по проекту, чтобы запуск приложения в контейнере не падал:
 
 - Нужно запретить неописанное `any`
-![](_png/2ab7e9a5f7dee0348a6e91a690c9e200.png)
+  ![](_png/2ab7e9a5f7dee0348a6e91a690c9e200.png)
 - Все пути названия файлов должны быть правильными
-![](_png/af7030781bfdb5f79f8b43386b70aaea.png)
+  ![](_png/af7030781bfdb5f79f8b43386b70aaea.png)
 - Импорт парсера должен происходить из `querystring`, а не из `node:querystring`
-![](_png/4630c197e74a5731f101091ec5199063.png)
+  ![](_png/4630c197e74a5731f101091ec5199063.png)
 
 Далее запускаем сборку контейнера:
 
@@ -497,14 +515,15 @@ docker images
 - `ports` - так как контейнер закрыт от внешнего мира, ему нужно будет указать, по какому порту мы сможем попасть внутрь контейнера. Внешний порт `3000` будет мапиться на внутренний порт `3000`.
 
 `docker-compose.yml`
+
 ```YML
-version: "3"  
-services:  
-  app:  
-    image: top-app-demo  
-    container_name: top-app-demo  
-    restart: always  
-    ports:  
+version: "3"
+services:
+  app:
+    image: top-app-demo
+    container_name: top-app-demo
+    restart: always
+    ports:
     - 3000:3000
 ```
 
@@ -539,42 +558,44 @@ docker ps
 ![|600](_png/80c17e271af71d24a101ffdb2c35ea89.png)
 
 Далее описываем то окружение, которое нам нужно:
+
 - name - имя нашего окружения
 - on - описываем на каком действии триггерится окружение
-	- push - при пуше на гитхаб
-		- branches - выбираем ветку или ветки
+    - push - при пуше на гитхаб
+        - branches - выбираем ветку или ветки
 - jobs - действия, которые будут осуществляться
-	- build - сборка проекта
-		- runs-on - запуск на какой ОС
-		- steps - шаги, которые нужно выполнить для действия
-			- uses - какую ветку используем
-			- name - название того экшена, который мы используем
-			- uses - указываем гитхаб экшена, который мы используем (можно использовать чужие экшены, а можно свои)
-			- with - указывает параметры выполнения экшена (у каждого экшена свои параметры)
-				- name - состоит из самого имени на гитхабе, имени профиля, имени репозитория и конечного названия пакета, который будет опубликован на гитхабе
+    - build - сборка проекта
+        - runs-on - запуск на какой ОС
+        - steps - шаги, которые нужно выполнить для действия
+            - uses - какую ветку используем
+            - name - название того экшена, который мы используем
+            - uses - указываем гитхаб экшена, который мы используем (можно использовать чужие экшены, а можно свои)
+            - with - указывает параметры выполнения экшена (у каждого экшена свои параметры)
+                - name - состоит из самого имени на гитхабе, имени профиля, имени репозитория и конечного названия пакета, который будет опубликован на гитхабе
 
 `.github / workflows / main.yml`
+
 ```YML
-name: Publish Docker  
-  
-# Controls when the action will run. Triggers the workflow on push or pull request  
-# events but only for the master branch  
-on:  
-  push:  
-    branches: [ main ]  
-  
-jobs:  
-  build:  
-    runs-on: ubuntu-latest  
-    steps:  
-      - uses: actions/checkout@master  
-      - name: Publish to Registry  
-        uses: elgohr/Publish-Docker-Github-Action@master  
-        with:  
-          registry: docker.pkg.github.com  
-          name: docker.pkg.github.com/alaricode/top-app-demo/top-app-demo  
-          username: ${{ secrets.DOCKER_USERNAME }}  
-          password: ${{ secrets.DOCKER_PASSWORD }}  
+name: Publish Docker
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          registry: docker.pkg.github.com
+          name: docker.pkg.github.com/alaricode/top-app-demo/top-app-demo
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "develop"
 ```
 

@@ -1,27 +1,6 @@
 ---
 tags:
-  - angular
-  - rxjs
-  - ngrx
+    - angular
+    - rxjs
+    - ngrx
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

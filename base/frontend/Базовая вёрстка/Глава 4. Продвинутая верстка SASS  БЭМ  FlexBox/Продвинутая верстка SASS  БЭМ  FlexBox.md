@@ -1,5 +1,6 @@
 ### 5.2 Препроцессор SASS ч.1
-#SASS 
+
+#SASS
 
 Чтобы у нас была возможность компилировать sass-файлы, нам нужно установить сасс-компилятор. После его установки снизу нажимаем на кнопку Watching
 
@@ -78,8 +79,8 @@ Sass/SCSS позволяет работать с переменными. В CSS 
 ```css
 $number: 1;
 $color: #ff0000;
-$text: "tproger forever.";
-$text: "IT forever." !default;
+$text: 'tproger forever.';
+$text: 'IT forever.' !default;
 $nothing: null;
 ```
 
@@ -87,7 +88,7 @@ $nothing: null;
 
 ```css
 #container {
-  content: $text;
+	content: $text;
 }
 ```
 
@@ -100,13 +101,13 @@ $nothing: null;
 ```css
 /* Вложенные правила */
 #A {
-  color: red;
+	color: red;
 }
 #A #B {
-  color: green;
+	color: green;
 }
 #A #B #C p {
-  color: blue;
+	color: blue;
 }
 ```
 
@@ -115,13 +116,13 @@ $nothing: null;
 ```scss
 /* Вложенные правила */
 #A {
-  color: red;
-  #B {
-    color: green;
-    #C p {
-      color: blue;
-    }
-  }
+	color: red;
+	#B {
+		color: green;
+		#C p {
+			color: blue;
+		}
+	}
 }
 ```
 
@@ -137,13 +138,13 @@ $nothing: null;
 
 ```scss
 #p {
-  color: black;
-  a {
-    font-weight: bold;
-    &:hover {
-      color: red;
-    }
-  }
+	color: black;
+	a {
+		font-weight: bold;
+		&:hover {
+			color: red;
+		}
+	}
 }
 ```
 
@@ -152,9 +153,15 @@ $nothing: null;
 Результат компиляции Sass (из предыдущего примера) в CSS ниже.
 
 ```css
-#p {color: black;}
-#p a {font-weight: bold;}
-#p a:hover {color: red;}
+#p {
+	color: black;
+}
+#p a {
+	font-weight: bold;
+}
+#p a:hover {
+	color: red;
+}
 ```
 
 В итоге амперсанд был компилирован в название родительского элемента `a` (`a:hover`).
@@ -164,16 +171,16 @@ $nothing: null;
 Миксины объявляются [директивой](https://sass-scss.ru/documentation/miksini/) `@mixin`. После неё должно стоять имя миксина и, опционально, его параметры, а также блок, содержащий тело миксина. Например, можно определить миксин `flexible()`, который далее будет включён, например, в класс `.centered-elements` следующим образом:
 
 ```scss
-@mixin flexible () {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+@mixin flexible() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 .centered-elements {
-    @include flexible ();
-    border: 1px solid gray;
-  }
+	@include flexible();
+	border: 1px solid gray;
+}
 ```
 
 Теперь каждый раз после применения класса `.centered-elements` к HTML-элементу, последний будет преобразован во [Flexbox](https://tproger.ru/translations/how-css-flexbox-works/).
@@ -218,8 +225,8 @@ p {
 
 ```css
 div {
-    height: 12% - 2%;
-    margin: 4rem - 1;
+	height: 12% - 2%;
+	margin: 4rem - 1;
 }
 ```
 
@@ -245,12 +252,14 @@ p {
 
 ```css
 /* краткая форма записи свойств */
-font: italic bold .8em/1.2 Arial, sans-serif;
+font:
+	italic bold 0.8em/1.2 Arial,
+	sans-serif;
 
 /* стандартная форма записи свойств */
 font-style: italic;
 font-weight: bold;
-font-size: .8em;
+font-size: 0.8em;
 line-height: 1.2;
 font-family: Arial, sans-serif;
 ```
@@ -268,12 +277,12 @@ $var1: 20;
 $var2: 4;
 
 p {
-    top: 16px / 24px;          // Отображается без изменений в стандартном CSS
-    top: (20px / 5px);         // Производится деление (но только при использовании скобок)
-    top: #{$var1} / #{$var2};  // Выводится как обычный CSS-код, деление не выполняется
-    top: $var1 / $var2;        // Деление выполняется
-    top: random(4) / 5;        // Деление выполняется (если использовать в паре с функцией)
-    top: 2px / 4px + 3px;      // Деление выполняется, если добавлена ещё одно арифметическое действие
+	top: 16px / 24px; // Отображается без изменений в стандартном CSS
+	top: (20px / 5px); // Производится деление (но только при использовании скобок)
+	top: #{$var1} / #{$var2}; // Выводится как обычный CSS-код, деление не выполняется
+	top: $var1 / $var2; // Деление выполняется
+	top: random(4) / 5; // Деление выполняется (если использовать в паре с функцией)
+	top: 2px / 4px + 3px; // Деление выполняется, если добавлена ещё одно арифметическое действие
 }
 ```
 
@@ -281,12 +290,12 @@ p {
 
 ```css
 p {
-  top: 16px / 24px;
-  top: 4;
-  top: 20 / 4;
-  top: 5;
-  top: 0.6;
-  top: 3.5px;
+	top: 16px / 24px;
+	top: 4;
+	top: 20 / 4;
+	top: 5;
+	top: 0.6;
+	top: 3.5px;
 }
 ```
 
@@ -296,18 +305,18 @@ p {
 
 ```scss
 @mixin zebra() {
-    @for $i from 1 through 7 {
-        @if ($i % 2 == 1) {
-            .stripe-#{$i} {
-                background-color: black;
-                color: white;
-            }
-        }
-    }
+	@for $i from 1 through 7 {
+		@if ($i % 2 == 1) {
+			.stripe-#{$i} {
+				background-color: black;
+				color: white;
+			}
+		}
+	}
 }
 * {
-  @include zebra();
-  text-align: center;
+	@include zebra();
+	text-align: center;
 }
 ```
 
@@ -341,15 +350,15 @@ p {
 
 ```scss
 @mixin spacing($padding, $margin) {
-    @if ($padding > $margin) {
-        padding: $padding;
-    } @else {
-        padding: $margin;
-    }
+	@if ($padding > $margin) {
+		padding: $padding;
+	} @else {
+		padding: $margin;
+	}
 }
 
 .container {
-    @include spacing(10px, 20px);
+	@include spacing(10px, 20px);
 }
 ```
 
@@ -358,7 +367,9 @@ p {
 После компиляции в CSS:
 
 ```css
-.container { padding: 20px; }
+.container {
+	padding: 20px;
+}
 ```
 
 #### Логические операторы
@@ -391,7 +402,7 @@ p {
 
 ```scss
 p {
-    font: 50px Ari + "al"; // Компилируется в 50px Arial
+	font: 50px Ari + 'al'; // Компилируется в 50px Arial
 }
 ```
 
@@ -399,7 +410,7 @@ p {
 
 ```scss
 p {
-    font: "50px" + Arial; // ОШИБКА!
+	font: '50px' + Arial; // ОШИБКА!
 }
 ```
 
@@ -539,11 +550,21 @@ p {
 Результат компиляции в CSS:
 
 ```css
-.definition-1 { width: 10px; }
-.definition-2 { width: 20px; }
-.definition-3 { width: 30px; }
-.definition-4 { width: 40px; }
-.definition-5 { width: 50px; }
+.definition-1 {
+	width: 10px;
+}
+.definition-2 {
+	width: 20px;
+}
+.definition-3 {
+	width: 30px;
+}
+.definition-4 {
+	width: 40px;
+}
+.definition-5 {
+	width: 50px;
+}
 ```
 
 #### Директива @each
@@ -562,16 +583,16 @@ p {
 
 ```css
 .platypus-icon {
-    background-image: url("/images/platypus.png");
+	background-image: url('/images/platypus.png');
 }
 .lion-icon {
-    background-image: url("/images/lion.png");
+	background-image: url('/images/lion.png');
 }
 .sheep-icon {
-    background-image: url("/images/sheep.png");
+	background-image: url('/images/sheep.png');
 }
 .dove-icon {
-    background-image: url("/images/dove.png");
+	background-image: url('/images/dove.png');
 }
 ```
 
@@ -590,11 +611,21 @@ $index: 5;
 Результат компиляции:
 
 ```css
-.element-5 { width: 50px; }
-.element-4 { width: 40px; }
-.element-3 { width: 30px; }
-.element-2 { width: 20px; }
-.element-1 { width: 10px; }
+.element-5 {
+	width: 50px;
+}
+.element-4 {
+	width: 40px;
+}
+.element-3 {
+	width: 30px;
+}
+.element-2 {
+	width: 20px;
+}
+.element-1 {
+	width: 10px;
+}
 ```
 
 #### Функции в Sass/SCSS
@@ -619,7 +650,7 @@ $index: 5;
 После применения класса `.name` ширина элемента будет равна 300 пикселям.
 
 ```html
-<div class = "name">Hello.</div>
+<div class="name">Hello.</div>
 ```
 
 Результат в браузере:
@@ -699,11 +730,11 @@ $index: 5;
 }
 ```
 
-
 [https://tproger.ru/translations/complete-sass-guide/#sass-preprocessor](https://tproger.ru/translations/complete-sass-guide/#sass-preprocessor)
 
 ### 5.4 FlexBox. Новый способ позиционирования элементов
-#FlexBox 
+
+#FlexBox
 
 И сейчас наконец-то будет описана технология, которая позволяет нормально выравнивать объекты на странице. Дело в том, что прошлые попытки выровнять через марджин или текст-алайн имели достаточно костыльную реализацию расположения контента на странице. Однако придумали и добавили в CSS такую технологию как FlexBox.
 
@@ -713,7 +744,7 @@ $index: 5;
 
 Используя свойство `justify-content`, мы выравниваем элементы горизонтально, а также оно принимает следующие значения:
 
-- `flex-start` -  Элементы выравниваются по левой стороне контейнера.
+- `flex-start` - Элементы выравниваются по левой стороне контейнера.
 - `flex-end` - Элементы выравниваются по правой стороне контейнера.
 - `center` - Элементы выравниваются по центру контейнера.
 - `space-between` - Элементы отображаются с одинаковыми отступами между ними.
@@ -794,7 +825,8 @@ $index: 5;
 ![](_png/609222bdb962754d27a7d7d224dc3957.png)
 
 ### 5 Что такое Grid и как его использовать
-#CSSGrid 
+
+#CSSGrid
 
 Кратка шпаргалка по всем свойствам гридов
 
@@ -867,10 +899,10 @@ $index: 5;
 
 Данные инструкции уже конкретно показывают, какое положение будет занимать определённый блок грида в таблице.
 
-1) Указывает, с какой колонки начинается элемент
-2) Указывает окончание колонки (последняя видимая колонка в таблице + 1)
-3) Указываем номер строки, с которой начинается объект
-4) И на которой заканчивается
+1. Указывает, с какой колонки начинается элемент
+2. Указывает окончание колонки (последняя видимая колонка в таблице + 1)
+3. Указываем номер строки, с которой начинается объект
+4. И на которой заканчивается
 
 ![](_png/0b1cfe76450aa34768e5cc56c2ca7d14.png)
 
@@ -891,7 +923,8 @@ $index: 5;
 ![](_png/1ae7451b80390c10cfa0bacdb3fe2d80.png)
 
 ### 5.5 Методология БЭМ и как ее использовать
-#BEM 
+
+#BEM
 
 - БЭМ (Блок, Элемент, Модификатор) — компонентный подход к веб-разработке. В его основе лежит принцип разделения интерфейса на независимые блоки. Он позволяет легко и быстро разрабатывать интерфейсы любой сложности и повторно использовать существующий код, избегая «Copy-Paste».
 
@@ -915,7 +948,7 @@ $index: 5;
 
 Элемент показывает нам, что перед нами находится. Данный класс позволяет стилизировать и работать с определённым элементом блока отдельно. Ему позволяется задавать отступы и размеры. Стилизовать же желательно через миксы (например, создать класс `text`, которым мы будем модифицировать только текст)
 
-Элементами блока называем все вложенные элементы, которые принадлежат родителю. Например, блок навигационного меню `nav` и его дочерние элементы `nav__item`, внутри дочерних элементов ссылки `nav__link` (вкладывать родительские элменты – нельзя `nav__item__link` - неправильно**)
+Элементами блока называем все вложенные элементы, которые принадлежат родителю. Например, блок навигационного меню `nav` и его дочерние элементы `nav__item`, внутри дочерних элементов ссылки `nav__link` (вкладывать родительские элменты – нельзя `nav__item__link` - неправильно\*\*)
 
 ![](_png/47d9c9c01b1e56b90cc432841d230031.png)
 
@@ -1041,7 +1074,7 @@ $index: 5;
 
 В первую очередь под нашими социальными сетями прописываем новый заголовок и прямо внутри заголовка можно прописать тег `hr`. Далее основная наша проблема: позиционирование элементов, а именно – текстовый блок над фотографией. Делается это через накидывание релэйтива на нашего родителя и через абсолют на наш райт-враппер (так же допишем ширину блока и положение от абсолюта)
 
-![](_png/eeb0b358412374d419f2c89b649f39f2.png)![](_png/88fab6b6a2499aec1fdf456df1508af3.png)![](_png/bd2b18e10cf2dc01c4e44bb2cc0eb38d.png) 
+![](_png/eeb0b358412374d419f2c89b649f39f2.png)![](_png/88fab6b6a2499aec1fdf456df1508af3.png)![](_png/bd2b18e10cf2dc01c4e44bb2cc0eb38d.png)
 
 Чтобы оттолкнуть иконки от блока райт-враппер, можно сделать внутренний паддинг. Так же нам нужно оттолкнуть текст от иконок, но уже через марджин-боттом
 

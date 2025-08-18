@@ -1,4 +1,3 @@
-
 #esbuild #bundler
 
 ## Что это такое?
@@ -6,6 +5,7 @@
 ESBuild - это сборщик пакетов
 
 Преимущества:
+
 - Он простой
 - Он быстрый
 - Минималистичный
@@ -16,6 +16,7 @@ ESBuild - это сборщик пакетов
 ## Как стартовать?
 
 Стандартно, команда для сборки приложения выглядит следующим образом:
+
 - что собираем
 - какой тип сборки
 - папка с результатом сборки
@@ -29,6 +30,7 @@ esbuild ./src/index.js --bundle --outdir="dist"
 ESBuild смотрит так же на нашу конфигурацию TS
 
 `tsconfig.json`
+
 ```JSON
 {
   "compilerOptions": {
@@ -63,6 +65,7 @@ ESBuild смотрит так же на нашу конфигурацию TS
 Тут мы реализовали очистку dist перед рекомпиляцией приложения в эту папку.
 
 `config / build / plugins / CleanPlugin.ts`
+
 ```TS
 import {Plugin} from 'esbuild';
 import {rm} from 'fs/promises';
@@ -85,9 +88,10 @@ export const CleanPlugin: Plugin = {
 }
 ```
 
-Далее нам нужно будет дефолтно вставить HTML-страницу для сборки приложения. Если в Webpack у нас есть плагин, который вставит наш код в нужный `index.html`, то в ESBuild нужно будет поработать и самому из JS сгенерировать нужный шаблон 
+Далее нам нужно будет дефолтно вставить HTML-страницу для сборки приложения. Если в Webpack у нас есть плагин, который вставит наш код в нужный `index.html`, то в ESBuild нужно будет поработать и самому из JS сгенерировать нужный шаблон
 
 `config / build / plugins / HTMLPlugin.ts`
+
 ```TS
 import {Plugin} from 'esbuild';
 import {rm, writeFile} from 'fs/promises';
@@ -119,11 +123,11 @@ const renderHtml = (options: HTMLPluginOptions): string => {
               const evtSource = new EventSource('http://localhost:3000/subscribe')
              evtSource.onopen = function () { console.log('open') }
              evtSource.onerror = function () { console.log('error') }
-             evtSource.onmessage = function () { 
+             evtSource.onmessage = function () {
                   console.log('message')
                   window.location.reload();
               }
-             
+
              </script>
           </body>
       </html>
@@ -179,6 +183,7 @@ export const HTMLPlugin = (options: HTMLPluginOptions): Plugin => {
 Так у нас будет выглядеть конфигурация ESBuild, в которой нам нужно будет указать основные поля для сборки
 
 `config / build / esbuild-config.ts`
+
 ```TS
 import ESBuild, {BuildOptions} from 'esbuild'
 import path from 'path'
@@ -227,6 +232,7 @@ export default config;
 Дев сборка. Она в себя будет включать сервер ноды с Express, которая будет контролировать работу сборщика.
 
 `config / build / esbuild-dev.ts`
+
 ```TS
 import ESBuild from 'esbuild';
 import path from 'path';
@@ -283,6 +289,7 @@ ESBuild.build({
 Тут мы вызовем конфигурацию для production сборки, которая просто вернёт собранное приложение
 
 `config / build / esbuild-prod.ts`
+
 ```TS
 import ESBuild from 'esbuild';
 import path from 'path';
@@ -295,6 +302,7 @@ ESBuild.build(config)
 Вызывается каждая сборка достаточно просто. Нам нужно просто вызывать команду сборки конфига esbuild, который мы описали в файле
 
 `package.json`
+
 ```JSON
 "scripts": {
 	"build": "cross-env MODE=production ts-node config/build/esbuild-prod.ts",

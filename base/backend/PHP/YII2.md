@@ -1,5 +1,3 @@
-
-
 ## Установка
 
 Установка Composer
@@ -18,6 +16,7 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic папка
 И далее нужно будет для композера указать сгенерированный токен
 
 ![](_png/91565aa5f670d5c3ef5b951ad1674121.png)
+
 ## Структура
 
 В качестве входного скрипта выступает фронт-контроллер, который находится в `web/index.php`, в котором подгружается конфигурация, фреймворк Yii и собирается объект приложения
@@ -89,6 +88,7 @@ class SiteController extends Controller
 В папке с контроллерами нам нужно создавать одноимённые контроллеры, которые будут обозначать определённый маршрут. В них мы вкладываем функции, которые начинаются с `action` и уже дальше будет идти имя роута, который мы вызываем в url-строке
 
 `controllers / PostCommentController.php`
+
 ```PHP
 <?php
 
@@ -109,6 +109,7 @@ class PostCommentController extends Controller
 Так же мы можем отделять контроллеры в отдельные модули. Тут нам нужно будет указать папку дополнительно в неймспейсе `\admin`
 
 `controllers / admin / MyController.php`
+
 ```PHP
 <?php
 
@@ -128,9 +129,10 @@ class MyController extends Controller
 
 ![](_png/5d3872a84cc6fa199697b4ab2758fbf1.png)
 
-Так же мы можем не указывать имя метода контроллера, если он `Index` или если мы запишем в качестве дефолтного контроллера другой через `$defaultAction` 
+Так же мы можем не указывать имя метода контроллера, если он `Index` или если мы запишем в качестве дефолтного контроллера другой через `$defaultAction`
 
 `controllers / TestController.php`
+
 ```PHP
 <?php
 
@@ -158,6 +160,7 @@ class TestController extends Controller {
 Таким образом мы можем просто передавать параметры в контроллер через Get-запрос
 
 `controllers / TestController.php`
+
 ```PHP
 <?php
 
@@ -187,6 +190,7 @@ class TestController extends Controller {
 Так же внутри контролерров в методе `actions()` мы можем присваивать определённым роутам контроллеров выполнение определённых функций. Тут в контроллере `test` по роуту `test` будет выводиться текст `'Action runner'`
 
 `components / HelloAction.php`
+
 ```PHP
 <?php
 
@@ -203,6 +207,7 @@ class HelloAction extends Action
 ```
 
 `controllers / TestController.php`
+
 ```PHP
 <?php
 
@@ -281,6 +286,7 @@ $this->registerJsFile('/js/script.js');
 Yii предоставляет нам возможность рендерить страницы пользователю на основе определённых видов.
 
 Конкретно у нас есть 4 методя для реализации данной задумки:
+
 - render - отрисовывает заранее заданный вид
 - renderAjax - отрисовывает страницу по AJAX запросу и подключает JS/CSS к файлу
 - renderPartial
@@ -294,9 +300,10 @@ Yii предоставляет нам возможность рендерить 
 
 ![](_png/f84ff222e67d89bd25ad7b22b44f9936.png)
 
-И таким образом мы в тестовом контроллере сделали `actionIndex()`, который будет по роуту `\test` вызывать 
+И таким образом мы в тестовом контроллере сделали `actionIndex()`, который будет по роуту `\test` вызывать
 
 `controllers / TestController.php`
+
 ```PHP
 <?php
 
@@ -324,6 +331,7 @@ class TestController extends Controller {
 ```
 
 `views / test / index.php`
+
 ```PHP
 <h1>Hello, man</h1>
 ```
@@ -335,6 +343,7 @@ class TestController extends Controller {
 Так же мы можем рендерить одни вью в других вью
 
 `views / test / inc.php`
+
 ```PHP
 <p>
     <code>
@@ -344,6 +353,7 @@ class TestController extends Controller {
 ```
 
 `views / test / index.php`
+
 ```PHP
 <h1>Hello, man</h1>
 <?= this->render('inc') ?>
@@ -357,6 +367,7 @@ class TestController extends Controller {
 
 первый вариант:
 `controllers / TestController.php`
+
 ```PHP
 <?php
 
@@ -379,7 +390,9 @@ class TestController extends Controller {
 
 }
 ```
+
 Второй вариант:
+
 ```PHP
 public function actionIndex($name = 'Guest', $age = 30) {
 	return $this->render('index', compact('name', 'age'));
@@ -387,6 +400,7 @@ public function actionIndex($name = 'Guest', $age = 30) {
 ```
 
 `views / test / index.php`
+
 ```PHP
 <h1>Hello, man</h1>
 <?= $name ?>
@@ -400,25 +414,28 @@ public function actionIndex($name = 'Guest', $age = 30) {
 И по вышеописанному алгоритму мы можем подключить любой другой файл с использованием наших заветных `//`
 
 `views / test / index.php`
+
 ```PHP
-<h1>Hello, man</h1>  
-<?= $this->render('inc') ?>  
-<?= $this->render('//data/about.html') ?>  
-<?= $name ?>  
+<h1>Hello, man</h1>
+<?= $this->render('inc') ?>
+<?= $this->render('//data/about.html') ?>
+<?= $name ?>
 <?= $age ?>
 ```
 
 `views / data / about.html`
+
 ```PHP
-<h2>No words about me</h2>  
+<h2>No words about me</h2>
 <p>So close...</p>
 ```
 
 ![](_png/f698966e4192d130e073a1964ed9aeb2.png)
 
-Так же у нас есть возможность передавать данные из контроллера во вью в обход прямой передачи 
+Так же у нас есть возможность передавать данные из контроллера во вью в обход прямой передачи
 
 `controllers / TestController.php`
+
 ```PHP
 <?php
 
@@ -447,6 +464,7 @@ class TestController extends Controller {
 ```
 
 `views / test / index.php`
+
 ```PHP
 <h1>Hello, man</h1>
 <p><?= $this->context->score ?></p>
@@ -556,9 +574,9 @@ use yii\widgets\ActiveForm;
 $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name') ?>
-    
+
     <?= $form->field($model, 'email') ?>
-    
+
     <?= $form->field($model, 'message')->textarea() ?>
 
     <div class="form-group">
@@ -611,69 +629,14 @@ class SiteController extends Controller
 
 ## Валидация
 
-
-
-
-
-
-
-
-
-
 ## AJAX
-
-
-
-
-
-
 
 ## Модели (Model)
 
-
-
-
-
-
-
 ## Active Record
-
-
-
-
-
-
 
 ## Связи моделей
 
-
-
-
-
-
-
 ## Виджеты
 
-
-
-
-
-
-
 ## ЧПУ
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

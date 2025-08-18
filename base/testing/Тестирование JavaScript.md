@@ -1,23 +1,23 @@
-
 # Тестирование JavaScript от А до Я (Jest, React Testing Library, e2e, screenshot)
 
-#Testing #End2End #Jest #ReactTestingLibrary #Screenshot 
+#Testing #End2End #Jest #ReactTestingLibrary #Screenshot
 
 ## Введение. Теория. Пирамида тестирования. Квадрат допустимых значений
 
-Тесты позволяют явно увидеть нам изменения в поведении приложения при изменении его логики (тест выдаст ошибку, если наши изменения в приложении ломают логику другой функции). 
+Тесты позволяют явно увидеть нам изменения в поведении приложения при изменении его логики (тест выдаст ошибку, если наши изменения в приложении ломают логику другой функции).
 
 > Цель тестирования - проверка соответствия ПО предъявляемым требованиям
 
 Виды тестирования:
+
 - Функциональное
-	- ==Модульное (unit)== (70%)
-	- ==Интеграционное== (20%)
-	- ==end-to-end== (10%)
+    - ==Модульное (unit)== (70%)
+    - ==Интеграционное== (20%)
+    - ==end-to-end== (10%)
 - Нефункциональное
-	- нагрузочное тестирование
-	- регрессионное (тестирование старого функционала)
-	- тестирование безопасности
+    - нагрузочное тестирование
+    - регрессионное (тестирование старого функционала)
+    - тестирование безопасности
 
 ![](_png/51d2f08ae92cf59cb178040ac826a05f.png)
 
@@ -25,7 +25,7 @@
 
 ![](_png/68e86956558fcd2b6441404306ac27b9.png)
 
-==Screenshot-тесты==. Они уже позволяют нам проверять интерфейс приложения. 
+==Screenshot-тесты==. Они уже позволяют нам проверять интерфейс приложения.
 
 Если мы поменяем шрифт в одном месте и он поменятся в другом, то такой тест нам сообщит, что изменения произошли в разных местах и выдаст результат.
 
@@ -36,6 +36,7 @@
 ![](_png/8f13defa0d3727528ce7cdddc7f7c57f.png)
 
 ==E2E-тестирование==. Оно уже предназначено для проверки важных модулей системы:
+
 - авторизация
 - оплата
 - создание сущностей
@@ -44,6 +45,7 @@
 ![](_png/14a828ac2527e28763e4581fbcf8a7e4.png)
 
 Квадрат тестирования - это квадрат, который описывает валидные значения, которые может вернуть функция:
+
 - Валидные значения
 - Пограничные значения
 - Невалидные значения
@@ -55,6 +57,7 @@
 ![](_png/b064f532a8807bea9997c1b8b95c5a96.png)
 
 Технологии тестирования:
+
 - `Jest` - самая популярная библиотека для написания любых тестов
 - `React-testing-library` - библиотека для тестрования React-приложений
 - `WebdriverIO` - E2E-тесты
@@ -71,29 +74,32 @@ npm i -D jest
 Далее напишем функцию, которую нужно проверить
 
 `validateValue.js`
+
 ```JS
-const validateValue = (value) => {  
-    if (value < 0 || value > 100) {  
-        return false;  
-    }  
-  
-    return true;  
-}  
-  
+const validateValue = (value) => {
+    if (value < 0 || value > 100) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = validateValue;
 ```
 
 И далее нам нужно написать сами тесты для функции:
+
 - `test()` (мы так же можем писать `it()` который является алиасом для `test()`) принимает в себя имя и функцию, которая будет исполнять тестирование
 - `expect()` - основная функция, которая используется в тестах - в ней мы описываем, что мы ожидаем от выполнения операции. Внутрь неё передаём операцию и дальше по чейну нужно выбрать одну из функций-проверки
 - `toBe()` принимает в себя то значение, которое должно оказаться в expect для успешного прохождения проверки
 
 `validateValue.spec.js`
+
 ```JS
-const validateValue = require('./validateValue');  
-  
-test('Валидация значения', () => {  
-    expect(validateValue(50)).toBe(true);  
+const validateValue = require('./validateValue');
+
+test('Валидация значения', () => {
+    expect(validateValue(50)).toBe(true);
 });
 ```
 
@@ -102,6 +108,7 @@ test('Валидация значения', () => {
 Так же мы можем описать сразу несколько тестов для нужного нам функционала:
 
 `validateValue.spec.js`
+
 ```JS
 const validateValue = require('./validateValue');
 
@@ -129,6 +136,7 @@ describe('validateValue', () => {
 Так же дальше мы можем попробовать сравнить массивы:
 
 `mapArrToString.js`
+
 ```JS
 const mapArrToString = (arr) => {
 	return arr.filter((item) => Number.isInteger(item)).map(String);
@@ -138,10 +146,12 @@ module.exports = mapArrToString;
 ```
 
 Тут мы уже используем другие функции jest:
+
 - `toEqual` проводит глубокое сравнение объектов и позволяет сравнить массивы и объекты (если попробовать через `toBe`, то он выдаст феил, так как он будет сравнивать ссылки, а не значения)
 - чейн `not` инвертирует результат следующей операции (если у нас значения не эквивалентны, то `not` выдаст, что они эквивалентны)
 
 `mapArrToString.spec.js`
+
 ```JS
 const mapArrToString = require('./mapArrToString');
 
@@ -167,6 +177,7 @@ describe('mapArrToString', () => {
 Далее реализуем функционал возведения в степень
 
 `square.js`
+
 ```JS
 const square = (value) => {
 	return value * value;
@@ -178,12 +189,14 @@ module.exports = square;
 Так же условий сравнения в методе `expect` крайне большое количество и все из них можно посмотреть в [документации](https://jestjs.io/ru/docs/expect)
 
 Так же jest предоставляет нам 4 функции, которые выполняют побочные действия между тестами:
-- `beforeAll` 
-- `beforeEach` 
-- `afterAll`  
+
+- `beforeAll`
+- `beforeEach`
+- `afterAll`
 - `afterEach`
 
 `square.spec.js`
+
 ```JS
 const square = require('./square');
 
@@ -232,9 +245,10 @@ describe('validateValue', () => {
 
 ###### Моковые данные
 
-Модифицируем нашу функцию таким образом, чтобы она возводила числов в степень через метод и могла не вызвать эту функцию, если число = 1 
+Модифицируем нашу функцию таким образом, чтобы она возводила числов в степень через метод и могла не вызвать эту функцию, если число = 1
 
 `square.js`
+
 ```JS
 const square = (value) => {
 	if (value === 1) return 1;
@@ -245,70 +259,74 @@ module.exports = square;
 ```
 
 Для того, чтобы посмотреть сколько раз вызовется определённая функция, мы можем:
+
 - воспользоваться `jest.spyOn`, куда мы передадим библиотеку, за которой следим и её метод
 - далее нам нужно вызвать целевую функцию
 - и далее в `expect` передать наше моковое значение, где чейном проверяем количество вызовов
 
 `square.spec.js`
+
 ```JS
-const square = require('./square');  
-  
-describe('validateValue', () => {  
-   it('Успешное значение - success', () => {  
-      const spyMathPow = jest.spyOn(Math, 'pow');  
-      square(2);  
-      expect(spyMathPow).toBeCalledTimes(1);  
-   });  
+const square = require('./square');
+
+describe('validateValue', () => {
+   it('Успешное значение - success', () => {
+      const spyMathPow = jest.spyOn(Math, 'pow');
+      square(2);
+      expect(spyMathPow).toBeCalledTimes(1);
+   });
 });
 ```
 
 ![](_png/5916d0a42d40b14549a5e4089347e8b6.png)
 
-Однако тут нужно сказать, что моковые значения в Jest копятся и не делятся на тесты, поэтому второй шан тест уже выдал ошибку 
+Однако тут нужно сказать, что моковые значения в Jest копятся и не делятся на тесты, поэтому второй шан тест уже выдал ошибку
 
 `square.spec.js`
+
 ```JS
-const square = require('./square');  
-  
-describe('validateValue', () => {  
-   it('Успешное значение - success', () => {  
-      const spyMathPow = jest.spyOn(Math, 'pow');  
-      square(2);  
-      expect(spyMathPow).toBeCalledTimes(1);  
-   });  
-  
-   it('Успешное значение - success', () => {  
-      const spyMathPow = jest.spyOn(Math, 'pow');  
-      square(1);  
-      expect(spyMathPow).toBeCalledTimes(0);  
-   });  
+const square = require('./square');
+
+describe('validateValue', () => {
+   it('Успешное значение - success', () => {
+      const spyMathPow = jest.spyOn(Math, 'pow');
+      square(2);
+      expect(spyMathPow).toBeCalledTimes(1);
+   });
+
+   it('Успешное значение - success', () => {
+      const spyMathPow = jest.spyOn(Math, 'pow');
+      square(1);
+      expect(spyMathPow).toBeCalledTimes(0);
+   });
 });
 ```
 
 ![](_png/6544e46f7812596ba215399f6ec2dc28.png)
 
-Чтобы определить нормальное поведение, нужно будет после каждого теста чистить моковые данные с помощью `jest.clearAllMocks()` 
+Чтобы определить нормальное поведение, нужно будет после каждого теста чистить моковые данные с помощью `jest.clearAllMocks()`
 
 `square.spec.js`
+
 ```JS
-const square = require('./square');  
-  
-describe('validateValue', () => {  
-   it('Успешное значение - success', () => {  
-      const spyMathPow = jest.spyOn(Math, 'pow');  
-      square(2);  
-      expect(spyMathPow).toBeCalledTimes(1);  
-   });  
-  
-   it('Успешное значение - success', () => {  
-      const spyMathPow = jest.spyOn(Math, 'pow');  
-      square(1);  
-      expect(spyMathPow).toBeCalledTimes(0);  
-   });  
-  
-   afterEach(() => {  
-      jest.clearAllMocks();  
-   });  
+const square = require('./square');
+
+describe('validateValue', () => {
+   it('Успешное значение - success', () => {
+      const spyMathPow = jest.spyOn(Math, 'pow');
+      square(2);
+      expect(spyMathPow).toBeCalledTimes(1);
+   });
+
+   it('Успешное значение - success', () => {
+      const spyMathPow = jest.spyOn(Math, 'pow');
+      square(1);
+      expect(spyMathPow).toBeCalledTimes(0);
+   });
+
+   afterEach(() => {
+      jest.clearAllMocks();
+   });
 });
 ```
 
@@ -319,6 +337,7 @@ describe('validateValue', () => {
 Реализуем функцию, которая принимает в себя колбэк и время ожидания
 
 `delay.js`
+
 ```JS
 const delay = (callback, ms) => {
 	return new Promise((resolve) => {
@@ -334,6 +353,7 @@ module.exports = delay;
 И чтобы протестировать её достаточно просто воспользоваться async/await операторами
 
 `delay.spec.js`
+
 ```JS
 const delay = require('./delay');
 
@@ -350,6 +370,7 @@ describe('mapArrToString', () => {
 Дальше уже пойдёт функция получения данных с сервера, выделения из них id и перевода их в строки
 
 `getData.js`
+
 ```JS
 const axios = require('axios');
 const mapArrToString = require('../mapArrToString/mapArrToString');
@@ -368,16 +389,19 @@ module.exports = getData;
 ```
 
 Тут нам потребуется уже замокать результат выполнения функции:
+
 - `jest.mock()` - мокает модуль, котрый мы используем
 - `mockReturnValue()` - передаёт те данные, которые должна вернуть вызываемая нами функция
 
 Конкретно в данном примере
-- сначала мокаем модуль `axios`, 
+
+- сначала мокаем модуль `axios`,
 - затем вызываем его до выполнения нашей функции, которую мы проверяем с передачей замоканных данных
 - вызываем функцию, которую мы проверяем (выполнение `axios` внутри функции `getData` заменяется на то, что мы замокали через `jest.mock()`)
 - экспектим данные
 
 `getData.spec.js`
+
 ```JS
 const axios = require('axios');
 const getData = require('./getData');
@@ -476,6 +500,7 @@ describe('Тесты', () => {
 Создадим простой компонент:
 
 `App.js`
+
 ```JSX
 function App() {
 	return (
@@ -491,14 +516,16 @@ export default App;
 ```
 
 И далее познакомимся с некоторыми особенностями тестирования в реакте:
+
 - `render()` - функция, которая рендерит нужный нам элемент на странице
 - `screen` - объект, который хранит в себе вёрстку, которая должна пойти на страницу
-	- `getByText` - получение элемента по тексту внутри него
-	- `getByRole` - получение элемента по его роли на странице (инпут, кнопка, артикль)
-	- `getByPlaceholderText` - получение элемента по тексту плейсхолдера
+    - `getByText` - получение элемента по тексту внутри него
+    - `getByRole` - получение элемента по его роли на странице (инпут, кнопка, артикль)
+    - `getByPlaceholderText` - получение элемента по тексту плейсхолдера
 - `toBeInTheDocument` - проверяет, что элемент должен находиться на странице
 
 `App.test.js`
+
 ```JS
 import { render, screen } from '@testing-library/react';
 import App from './App';
@@ -537,51 +564,53 @@ test('renders react', () => {
 ## findBy, getBy, queryBy. Пример с useEffect. Асинхронный код
 
 Функции выборки делятся на следующие группы:
+
 - `getBy...` - находит и возвращает элемент, но если не находит, то прокидывает ошибку и тест завершается с фейлом (`getAll...` возвращает массив элементов)
 - `queryBy...` - находит и возвращает элемент, но если элемент не найден, то он нам даёт в этом просто убедиться присвоив в переменную `null` (`queryAll...` возвращает массив элементов)
 - `findBy...` - работает как `queryBy...`, но возвращает промис от поиска, то есть работает асинхронно (`findAll...` возвращает массив элементов)
 
 `App.test.js`
+
 ```JS
-test('renders react', () => {  
-   render(<App />);  
-   const helloWorldElement = screen.queryByText(/helloswrld/i);  
-   expect(helloWorldElement).toBeNull();  
+test('renders react', () => {
+   render(<App />);
+   const helloWorldElement = screen.queryByText(/helloswrld/i);
+   expect(helloWorldElement).toBeNull();
 });
 ```
 
 ![](_png/1b4450d336d06019eff3e9f53a2a98eb.png)
 
-Уже в данном примере мы проводим поиск через `findByText`, который позволяет проверить наш асинхронный код появления текста `text` на странице 
+Уже в данном примере мы проводим поиск через `findByText`, который позволяет проверить наш асинхронный код появления текста `text` на странице
 
 ```JSX
-function App() {  
-   const [data, setData] = useState(null);  
-  
-   useEffect(() => {  
-      setTimeout(() => {  
-         setData({});  
-      }, 100);  
-   }, []);  
-  
-   return (  
-      <div className='App'>  
-         {data && <div>text</div>}  
-         <h1>Hello</h1>  
-         <button>Button</button>  
-         <input type='text' placeholder={'input value'} />  
-      </div>  
-   );  
+function App() {
+   const [data, setData] = useState(null);
+
+   useEffect(() => {
+      setTimeout(() => {
+         setData({});
+      }, 100);
+   }, []);
+
+   return (
+      <div className='App'>
+         {data && <div>text</div>}
+         <h1>Hello</h1>
+         <button>Button</button>
+         <input type='text' placeholder={'input value'} />
+      </div>
+   );
 }
 ```
 
 ```JSX
-describe('Test App', () => {  
-   test('renders react', async () => {  
-      render(<App />);  
-      const text = await screen.findByText(/text/i);  
-      expect(text).toBeInTheDocument();  
-   });  
+describe('Test App', () => {
+   test('renders react', async () => {
+      render(<App />);
+      const text = await screen.findByText(/text/i);
+      expect(text).toBeInTheDocument();
+   });
 });
 ```
 
@@ -638,6 +667,7 @@ export default App;
 ```
 
 Далее тут мы будем проверять работу тугглера кнопки:
+
 - `getByTestId` позволяет получать элементы по ранее описанному атрибуту `data-testid`
 - `fireEvent` позволяет триггерить определённые ивенты на выбранных нами элементах
 - тут мы используем `queryByTestId` потому что элемент пропадает со страницы и значение будет закономерно `null`. Вынести один раз в переменную наш элемент, который исчезает нельзя и нам нужно будет его каждый раз получать через вызов `screen.queryByTestId('toggle-element')`
@@ -682,25 +712,25 @@ describe('Test App', () => {
 ```
 
 ```JSX
-describe('Test App', () => {  
-   test('Input Event', async () => {  
-      render(<App />);  
-  
-      // получаем инпут  
-      const input = await screen.getByPlaceholderText(/input value/i);  
-  
-      // ожидаем, что в заголовке нет текста  
-      expect(screen.queryByTestId('value-elem')).toContainHTML('');  
-  
-      // передаём событие  
-      fireEvent.input(input, {  
-         // сюда прилетает инпут  
-         target: { value: '1234' },  
-      });  
-  
-      // ожидаем текст  
-      expect(screen.queryByTestId('value-elem')).toContainHTML('1234');  
-   });  
+describe('Test App', () => {
+   test('Input Event', async () => {
+      render(<App />);
+
+      // получаем инпут
+      const input = await screen.getByPlaceholderText(/input value/i);
+
+      // ожидаем, что в заголовке нет текста
+      expect(screen.queryByTestId('value-elem')).toContainHTML('');
+
+      // передаём событие
+      fireEvent.input(input, {
+         // сюда прилетает инпут
+         target: { value: '1234' },
+      });
+
+      // ожидаем текст
+      expect(screen.queryByTestId('value-elem')).toContainHTML('1234');
+   });
 });
 ```
 
@@ -731,9 +761,6 @@ describe('Test App', () => {
 ```
 
 ## Тестирование компонента с асинхронной загрузкой данных с сервера
-
-
-
 
 ```JSX
 import React, { useEffect, useState } from 'react';
@@ -806,6 +833,7 @@ describe('Users tests', () => {
 ###### Тестируем переход по ссылкам
 
 Начальная сборка для тестирования роутинга:
+
 - две страницы
 - роутинг в `App`
 - `BrowserRouter` в `index`
@@ -859,35 +887,36 @@ export default App;
 ```
 
 И таким способом мы можем проверить наш роутинг:
+
 - в компонент `MemoryRouter` помещаем рендеримый компонент
 - далее через `userEvent.click` переходим по страницам
 
 ```JSX
-import { render, screen } from '@testing-library/react';  
-import App from './App';  
-import userEvent from '@testing-library/user-event';  
-import { MemoryRouter } from 'react-router-dom';  
-  
-describe('Router Tests', () => {  
-   it('should run on links', () => {  
-      render(  
-         <MemoryRouter>  
-            <App />  
-         </MemoryRouter>,  
-      );  
-      const mainLink = screen.getByTestId('main-link');  
-      const aboutLink = screen.getByTestId('about-link');  
-  
-      userEvent.click(aboutLink); // переходим по первой ссылке  
-  
-      // ожидаем элемент страницы      
-      expect(screen.getByTestId('about-page')).toBeInTheDocument();  
-  
-      userEvent.click(mainLink); // переходим по второй ссылке  
-  
-      // ожидаем элемент главной страницы      
-      expect(screen.getByTestId('main-page')).toBeInTheDocument();  
-   });  
+import { render, screen } from '@testing-library/react';
+import App from './App';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+
+describe('Router Tests', () => {
+   it('should run on links', () => {
+      render(
+         <MemoryRouter>
+            <App />
+         </MemoryRouter>,
+      );
+      const mainLink = screen.getByTestId('main-link');
+      const aboutLink = screen.getByTestId('about-link');
+
+      userEvent.click(aboutLink); // переходим по первой ссылке
+
+      // ожидаем элемент страницы
+      expect(screen.getByTestId('about-page')).toBeInTheDocument();
+
+      userEvent.click(mainLink); // переходим по второй ссылке
+
+      // ожидаем элемент главной страницы
+      expect(screen.getByTestId('main-page')).toBeInTheDocument();
+   });
 });
 ```
 
@@ -896,20 +925,20 @@ describe('Router Tests', () => {
 Страница ошибки:
 
 ```JSX
-const ErrorPage = () => {  
-   return <div data-testid={'not-found-page'}>Error</div>;  
-};  
-  
+const ErrorPage = () => {
+   return <div data-testid={'not-found-page'}>Error</div>;
+};
+
 export default ErrorPage;
 ```
 
 Добавляем роут на переход по неизвестной ссылке `/*`, по которому будет выпадать страница 404
 
 ```JSX
-<Routes>  
-   <Route path={'/'} element={<MainPage />} />  
-   <Route path={'/about'} element={<AboutPage />} />  
-   <Route path={'/*'} element={<ErrorPage />} />  
+<Routes>
+   <Route path={'/'} element={<MainPage />} />
+   <Route path={'/about'} element={<AboutPage />} />
+   <Route path={'/*'} element={<ErrorPage />} />
 </Routes>
 ```
 
@@ -918,14 +947,14 @@ export default ErrorPage;
 Конкретно тут написан любой роут, которого нет в приложении, чтобы отрендерился роут ошибки
 
 ```JS
-it('error page', () => {  
-   render(  
-      <MemoryRouter initialEntries={['/asfd']}>  
-         <App />  
-      </MemoryRouter>,  
-   );  
-  
-   expect(screen.getByTestId('not-found-page')).toBeInTheDocument();  
+it('error page', () => {
+   render(
+      <MemoryRouter initialEntries={['/asfd']}>
+         <App />
+      </MemoryRouter>,
+   );
+
+   expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
 });
 ```
 
@@ -934,13 +963,14 @@ it('error page', () => {
 Первым делом, создадим страницу отдельного пользователя (данные для всех будут одинаковыми и статичными)
 
 `pages > UserDetailsPage.jsx`
+
 ```JSX
-import React from 'react';  
-  
-const UserDetailsPage = () => {  
-return <div data-testid={'user-page'}>User Details Page</div>;  
-};  
-  
+import React from 'react';
+
+const UserDetailsPage = () => {
+return <div data-testid={'user-page'}>User Details Page</div>;
+};
+
 export default UserDetailsPage;
 ```
 
@@ -954,9 +984,10 @@ export default UserDetailsPage;
 `App.js`
 ![](_png/7b462ee1fe75e1fd2c8a8c135895e6e1.png)
 
-И для того, чтобы протестировать пользователя придётся уже вынести  внутрь `MemoryRouter` оба роута, по которым мы хотим переходить, так как наш компонент `App` не рендерится и мы из него не можем перейти на нужную страницу `user`. Так же нужно будет указать `/user` в путях `MemoryRouter`, чтобы сразу попасть на нужную нам страницу
+И для того, чтобы протестировать пользователя придётся уже вынести внутрь `MemoryRouter` оба роута, по которым мы хотим переходить, так как наш компонент `App` не рендерится и мы из него не можем перейти на нужную страницу `user`. Так же нужно будет указать `/user` в путях `MemoryRouter`, чтобы сразу попасть на нужную нам страницу
 
 `Users.tests.js`
+
 ```JS
 import { getByTestId, render, screen } from '@testing-library/react';
 import Users from './Users';
@@ -1027,6 +1058,7 @@ describe('Users tests', () => {
 Первым делом, вынесем всё наше дерево роутинга в отдельный компонент
 
 `src > router > AppRouter.jsx`
+
 ```JSX
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -1054,6 +1086,7 @@ export default AppRouter;
 Далее создадим хелпер, который будет в себя принимать ту конструкцию, которая требуется для тестирования нужных роутов приложения
 
 `src > test > helpers > renderWithRouter.jsx
+
 ```JSX
 import { MemoryRouter } from 'react-router-dom';
 import AppRouter from '../../router/AppRouter';
@@ -1068,9 +1101,10 @@ export const renderWithRouter = (component, initialRoute = '/') => {
 };
 ```
 
- Так выглядит целевой компонент для тестирования:
+Так выглядит целевой компонент для тестирования:
 
 `Users.jsx`
+
 ```JSX
 const Users = () => {
 	const [users, setUsers] = useState([]);
@@ -1099,6 +1133,7 @@ const Users = () => {
 Тут оставляем компонент с роутами
 
 `App.jsx`
+
 ```JSX
 const App = () => {
 	return (
@@ -1121,6 +1156,7 @@ const App = () => {
 Теперь в тестах для запуска тестирования нужного роута, достаточно обернуть нужный компонент в `renderWithRouter()` хелпер
 
 `Users.test.js`
+
 ```JS
 import { render, screen } from '@testing-library/react';
 import Users from './Users';
@@ -1181,6 +1217,7 @@ describe('USERS TEST', () => {
 Навбар будет хранить просто ссылки по страницам в нашем приложении реакта
 
 `Navbar.jsx`
+
 ```JSX
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -1207,6 +1244,7 @@ export default Navbar;
 В основном компоненте приложения добавляем наш навбар
 
 `App.js`
+
 ```JSX
 const App = () => {
 	return (
@@ -1218,9 +1256,10 @@ const App = () => {
 };
 ```
 
-И тут пишем отдельные тейки тестирования под срабатывание разных роутов 
+И тут пишем отдельные тейки тестирования под срабатывание разных роутов
 
 `Navbar.test.js`
+
 ```JSX
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -1262,6 +1301,7 @@ describe('navbar test', () => {
 Первым делом, нам нужно создать стор
 
 `store > store.js`
+
 ```JS
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import counterReducer from './reducers/counterReducer';
@@ -1281,6 +1321,7 @@ export const createReduxStore = (initialState = {}) => {
 Далее нужно будет создать срез, который вернёт нам редьюсер и два экшена
 
 `store > selectors > counterReducer.js
+
 ```JS
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -1307,6 +1348,7 @@ export default counterSlice.reducer;
 Тут мы реализуем селектор, по которому мы будем получать значение
 
 `store > selectors > getCounterValue > getCounterValue.js
+
 ```JS
 // стоит подстраховаться и в селектор доставить проверку через nullish и подставлять 0
 export const getCounterValue = (state) => state?.counter?.value || 0;
@@ -1315,6 +1357,7 @@ export const getCounterValue = (state) => state?.counter?.value || 0;
 Тут мы должны вложить всё приложение в провайдер, который уже и будет распространять состояние по проекту
 
 `index.js`
+
 ```JS
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -1331,6 +1374,7 @@ root.render(
 Это компонент счётчика
 
 `components > Counter > Counter.jsx`
+
 ```JS
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -1368,6 +1412,7 @@ export default Counter;
 Это компонент, в котором располагается счётчик
 
 `pages > MainPage.jsx`
+
 ```JSX
 const MainPage = () => {
 	return (
@@ -1379,7 +1424,6 @@ const MainPage = () => {
 };
 ```
 
-
 ## Тестируем селектор
 
 Чтобы протестировать селектор, можно просто складывать в него различные значения и на выходе он просо должен вернуть нам то же значение
@@ -1388,6 +1432,7 @@ const MainPage = () => {
 - если вложим значение, то оно и будет находиться в селекторе
 
 `store > selectors > getCounterValue > getCounterValue.test.js
+
 ```JS
 import { getCounterValue } from './getCounterValue';
 
@@ -1408,12 +1453,13 @@ describe('getCounterValue', () => {
 });
 ```
 
-Далее мы тестируем функции из среза. 
+Далее мы тестируем функции из среза.
 
 - если мы ничего не передали в стейт, то значение будет идти от 0 при каждом действии
 - если мы что-то передали в стейт, то на него будет действовать экшен (`increment`, `decrement`)
 
 `store > selectors > counterReducer.test.js
+
 ```JS
 import counterReducer, { decrement, increment } from './counterReducer';
 
@@ -1441,6 +1487,7 @@ describe('counterReducer', () => {
 - функция сравнения `toHaveTextContent` позволяет нам найти содержание текста в определённом элементе
 
 `components > Counter > Counter.test.jsx``
+
 ```JS
 import Counter from './Counter';
 import { render } from '@testing-library/react';
@@ -1478,6 +1525,7 @@ describe('Counter component', () => {
 Однако, мы можем в хелперах заранее возвращать сгенерированный ответ от `render`, а не делать рендер в тесте
 
 `test > helpers > renderWithRedux.js`
+
 ```JSX
 import { createReduxStore } from '../../store/store';
 import { render } from '@testing-library/react';
@@ -1493,6 +1541,7 @@ export const renderWithRedux = (component, initialState = {}) => {
 И использовть его для тестирования
 
 `Counter.test.js`
+
 ```JSX
 describe('Counter component', () => {
 	it('increment', () => {
@@ -1509,9 +1558,10 @@ describe('Counter component', () => {
 });
 ```
 
-И так уже будет выглядеть хелпер для тестирования роутинга и редакса одновременно 
+И так уже будет выглядеть хелпер для тестирования роутинга и редакса одновременно
 
 `test > helpers > renderTestApp.js`
+
 ```JSX
 import { render } from '@testing-library/react';
 import { createReduxStore } from '../../store/store';
@@ -1532,6 +1582,7 @@ export const renderTestApp = (component, options) => {
 А так выглядит его применение в приложениях:
 
 `Counter.test.js`
+
 ```JSX
 describe('Counter component', () => {
 	it('increment', () => {
@@ -1557,7 +1608,7 @@ describe('Counter component', () => {
 
 ## e2e тесты с WebdriverIO
 
-E2E-тесты, в свою очередь, уже будут запускаться на реальных данных в реальном браузере 
+E2E-тесты, в свою очередь, уже будут запускаться на реальных данных в реальном браузере
 
 Для тестирования приложения будет использоваться WebdriverIO, который представляет из себя движок для тестирования веб-приложений
 
@@ -1565,7 +1616,7 @@ E2E-тесты, в свою очередь, уже будут запускать
 npm init wdio .
 ```
 
-Так выглядит спек установки вебдрайвера: 
+Так выглядит спек установки вебдрайвера:
 
 ![](_png/9c412e981fb0ebedf9be60001e203782.png)
 
@@ -1577,13 +1628,14 @@ npm init wdio .
 
 ![](_png/6f2d9cf2e7733007a81e736c83b6d2c0.png)
 
-Тут появится команда запуска тестов 
+Тут появится команда запуска тестов
 
 ![](_png/2f922cc557ab0eadac0298d7044e8001.png)
 
 Создадим страницу, которая будет выполнять функционал тугглера текста
 
 `pages > HelloWorld.jsx`
+
 ```JSX
 import React, { useState } from 'react';
 
@@ -1617,6 +1669,7 @@ export default HelloWorld;
 В данном файле находится главный класс, который будет предоставлять метод открытия компонента в браузере
 
 `tests > pages > page.js`
+
 ```JS
 module.exports = class Page {
 	open(path) {
@@ -1628,9 +1681,10 @@ module.exports = class Page {
 
 Далее пишем текст для страницы приветствия, где мы сначала получаем нужные элементы для взаимодействия, а затем пишем сами тесовые методы, которые должны будут выполниться
 
-Получение элементов происходит через конструкцию `$()`, в которую мы, используя селекторы `$, #, .`, получаем нужные нам элементы 
+Получение элементов происходит через конструкцию `$()`, в которую мы, используя селекторы `$, #, .`, получаем нужные нам элементы
 
 `tests > pages > hello.e2e.js`
+
 ```JS
 const Page = require('./page');
 
@@ -1669,12 +1723,13 @@ module.exports = new HelloPage();
 В данном файле уже описываем сам тест, используя методы класса
 
 `tests > e2e > hello.e2e.js`
+
 ```JS
 const HelloPage = require('../pages/hello.page');
 
 describe('hello page', () => {
 	it('test', async () => {
-		// открываем страницу для теста 
+		// открываем страницу для теста
 		await HelloPage.open();
 		// выполняем метод
 		await HelloPage.toggleTitleWithInput('hello');
@@ -1700,6 +1755,7 @@ npm run wdio -- --spec tests/e2e/hello.e2e.js
 Пишем компонент получения списка пользователей
 
 `components > UsersForTest > UsersForTest.js`
+
 ```JSX
 import React, { useEffect, useState } from 'react';
 import User from './Users';
@@ -1744,6 +1800,7 @@ export default UsersForTest;
 Далее создаём отдельный компонент пользователя
 
 `components > UsersForTest > User.js
+
 ```JSX
 import React from 'react';
 
@@ -1766,9 +1823,10 @@ export default User;
 `router > AppRouter.jsx`
 ![](_png/dcf194b3e633770faa7635309b70e63b.png)
 
-Далее тут создаём метод страницы пользователей 
+Далее тут создаём метод страницы пользователей
 
 `tests > pages > users.page.js`
+
 ```JS
 const Page = require('./page');
 
@@ -1835,9 +1893,10 @@ class UsersPage extends Page {
 module.exports = new UsersPage();
 ```
 
-А тут пишем сам тест, который будет проверять выполнение методов страницы 
+А тут пишем сам тест, который будет проверять выполнение методов страницы
 
 `tests > e2e > users.e2e.js
+
 ```JS
 const UsersPage = require('../pages/users.page');
 

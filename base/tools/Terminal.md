@@ -1,21 +1,21 @@
 ---
 tags:
-  - "#terminal"
-  - "#tmux"
-  - lazygit
-  - zsh
+    - '#terminal'
+    - '#tmux'
+    - lazygit
+    - zsh
 description:
 ---
 
->[!info] [Dotfiles](https://github.com/ZeiZel/dotfiles)
+> [!info] [Dotfiles](https://github.com/ZeiZel/dotfiles)
 
 #### Brew
 
 Далее устанавливаем [brew](https://brew.sh/)
 
-````
+```
 brew install eza
-````
+```
 
 #### NODE
 

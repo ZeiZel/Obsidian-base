@@ -1,9 +1,8 @@
-
 ## Имплементация монорепы
 
 Сейчас будет пример создания трёх приложений и двух библиотек
-  
-- Два приложения React: клиентское и административное.  
+
+- Два приложения React: клиентское и административное.
 - Библиотека React с именем common-components, которая будет содержать компоненты, совместно используемые проектами React
 - А Node.js сервер с именем backend
 - Библиотека TypeScript с именами функций, которые будут использоваться серверной частью
@@ -26,9 +25,9 @@ npx create-nx-workspace@latest <project>
 # Установит nextjs приложение
 nx add @nx/next
 # Другие популярные сетапы
-nx add @nx/react 
-nx add @nx/express 
-nx add @nx/nest 
+nx add @nx/react
+nx add @nx/express
+nx add @nx/nest
 nx add @nx/node
 ```
 
@@ -39,13 +38,13 @@ npx nx g @nx/react:app admin
 npx nx g @nx/node:app backend
 ```
 
-Чтобы создать библиотеку для React-проектов, нам нужно задать через пакет `@nx/react` с флагом `:lib` папку с распространяемыми компонентами. Флаг `:lib` создаёт проект с шейребл компонентами приложения под выбранный стек пакета. Конкретно тут можно расположить общие компоненты для нескольких проектов и они будут собираться из конфига, который находится внутри папки `lib/common-components`  
+Чтобы создать библиотеку для React-проектов, нам нужно задать через пакет `@nx/react` с флагом `:lib` папку с распространяемыми компонентами. Флаг `:lib` создаёт проект с шейребл компонентами приложения под выбранный стек пакета. Конкретно тут можно расположить общие компоненты для нескольких проектов и они будут собираться из конфига, который находится внутри папки `lib/common-components`
 
 ```
 npx nx g @nx/react:lib common-components
 ```
 
-Данная команда создаст общие для всех проектов компоненты 
+Данная команда создаст общие для всех проектов компоненты
 
 ```
 npx nx g @nx/js:lib functions
@@ -71,9 +70,10 @@ npx nx g @nx/js:lib functions
 ```
 npx nx graph
 ```
+
 ![](_png/7eb8b7aea7403ffb21f8956ef6d9ef2b.png)
 
-Далее мы можем воспользоваться встроенным генератором из nx и сделать react-компонент, который будет доступен сразу в обоих наших react-проектах 
+Далее мы можем воспользоваться встроенным генератором из nx и сделать react-компонент, который будет доступен сразу в обоих наших react-проектах
 
 ```bash
 npx nx g @nx/react:component header \
@@ -81,6 +81,7 @@ npx nx g @nx/react:component header \
 ```
 
 `libs/common-components/src/lib/header/header.tsx`
+
 ```TSX
 import styles from './header.module.css';
 
@@ -107,6 +108,7 @@ npm install axios cors date-fns
 Далее нам нужно немного сделать тестовое приложение, которое будет иметь взаимосвязи внутри монорепозитория
 
 `apps/admin/src/app/app.tsx`
+
 ```TSX
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
@@ -135,7 +137,9 @@ export function App() {
 
 export default App;
 ```
+
 `apps/customer/src/app/app.tsx`
+
 ```TSX
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
@@ -166,6 +170,7 @@ export default App;
 ```
 
 `libs/functions/src/lib/functions.ts`
+
 ```TS
 import { format } from 'date-fns';
 
@@ -175,6 +180,7 @@ export function currentDate(): string {
 ```
 
 `apps/backend/src/main.ts`
+
 ```TS
 import express from 'express';
 import { currentDate } from '@myorg/functions';
@@ -237,4 +243,3 @@ npx nx affected -t test
 ```
 
 Самое ключевое слово `affected:` выполняет любую операцию чисто только на изменённых проектах, а не на всём окружении
-

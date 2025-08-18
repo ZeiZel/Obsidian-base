@@ -1,7 +1,7 @@
 ---
 tags:
-  - zustand
-  - react
+    - zustand
+    - react
 ---
 
 ## Введение
@@ -10,9 +10,8 @@ Zustand - это стейт-менеджер, в котором под кажд�
 
 ![](_png/797df33693e41187cd3b5c23e8929120.png)
 
-
-
 ---
+
 ## Старт проекта
 
 ```bash
@@ -20,9 +19,8 @@ npm create vite@latest .
 npm i antd zustand react-router-dom
 ```
 
-
-
 ---
+
 ## Основы работы
 
 ### Slice
@@ -30,17 +28,18 @@ npm i antd zustand react-router-dom
 Создание слайса выглядит следующим образом:
 
 `model / counterSlice.ts`
+
 ```ts
-import { create, StateCreator } from "zustand";
+import { create, StateCreator } from 'zustand';
 
 // тип
 type counterState = {
-  counter: number;
+	counter: number;
 };
 
 // функция-инициализатор / слайс
 const counterSlice: StateCreator<counterState> = () => ({
-  counter: 0,
+	counter: 0,
 });
 
 // хук для использования стора
@@ -52,13 +51,14 @@ export const useCounterStore = create<counterState>(counterSlice);
 Чтобы использовать данные из стейта, мы импортируем наш хук и вставляем из него данные в компонент
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { useCounterStore } from "./model/counterStore";
 
-function App() {  
+function App() {
   const { counter } = useCounterStore();
-  
+
   return (
     <div className="wrapper">
       <span>{counter}</span>
@@ -71,15 +71,16 @@ export default App;
 
 ### Использование actions
 
-Экшены - это функции для изменения состояний в Store. 
+Экшены - это функции для изменения состояний в Store.
 
 Всю логику работы с данными (получение из API, отправка запросов) рекомендуется выносить в Store.
 
-Описываются экшены достаточно просто - это функции, которые кладутся в одно место со значениями стора. 
+Описываются экшены достаточно просто - это функции, которые кладутся в одно место со значениями стора.
 
 Чтобы модифицировать состояние в Store, Zustand провайдит методы `get` и `set`, которые позволяют получить актуальные значения из стора и заменить нужные значения
 
 `model / counterSlice.ts`
+
 ```TS
 import { create, StateCreator } from "zustand";
 
@@ -120,16 +121,17 @@ export const useCounterStore = create<counterState & counterActions>(
 );
 ```
 
-И теперь тут мы просто получаем наши экшены вместе со значением в сторе. Применяются они без посредников - в виде функций-прослоек. 
+И теперь тут мы просто получаем наши экшены вместе со значением в сторе. Применяются они без посредников - в виде функций-прослоек.
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { useCounterStore } from "./model/counterStore";
 
 function App() {
   const { counter, decrement, increment } = useCounterStore();
-  
+
   return (
     <div className="wrapper">
       <button onClick={increment}>+</button>
@@ -146,9 +148,10 @@ export default App;
 
 Иногда перед нами может появиться такая ситуация, когда нам нужно использовать стор-значения вне компонента и менять его данные так же извне. Для этого мы можем сделать отдельный хелпер, который внутри себя будет выполнять операции над стором
 
-Извне мы можем получить доступ к изменению состояния с помощью получения стейта выделенного стора `useCounterStore.getState()` 
+Извне мы можем получить доступ к изменению состояния с помощью получения стейта выделенного стора `useCounterStore.getState()`
 
 `model / counterSlice.ts
+
 ```TSX
 import { create, StateCreator } from "zustand";
 
@@ -205,14 +208,15 @@ export const getCounter = () => useCounterStore.getState().counter;
 Далее в отдельной функции получаем наше значение и выполняем любые логические операции, которые нам понадобятся
 
 `helpers / addTen.ts`
+
 ```TS
 import { getCounter, incrementByAmount } from "../model/counterStore";
 
 export const addTen = () => {
   const counter = getCounter();
-  
+
   console.log(counter);
-  
+
   if (counter >= 0) {
     incrementByAmount(10);
   } else {
@@ -224,6 +228,7 @@ export const addTen = () => {
 И теперь можем в любой части приложения выполнить этот код, который мы вынесли в отдельный участок приложения
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { addTen } from "./helpers/addTen";
@@ -253,10 +258,11 @@ export default App;
 
 Сейчас у нас представлен код маленького todo-листа
 
-- В изменение состояния `set` мы должны будем добавить небольшой бойлерплейт с кастомными логами на изменение состояния, которые полетят в devtools. 
+- В изменение состояния `set` мы должны будем добавить небольшой бойлерплейт с кастомными логами на изменение состояния, которые полетят в devtools.
 - в функции создания слайса, нам нужно будет его инстанциировать с кастомным `set` и `get`, полученным из `devtools`
 
 `model / todoStore.ts
+
 ```TS
 import { create, StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -334,14 +340,15 @@ export const markAsCompleted = (index: number) => {
 };
 ```
 
->[!note] Replace Flag 
+> [!note] Replace Flag
 > В Zustand позволяет **полностью заменить старое состояние новым объектом**, отбросив любые поля, которые были в предыдущем состоянии, но не являются частью нового.
-> 
+>
 > По умолчанию при обновлении состояния в Zustand (как и в React на компонентах) происходит слияние нового состояния с существующим. Изменяются только обновлённые поля, остальное состояние остаётся неизменным.
 
 Небольшой интерфейс для тудушек
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { Card, Checkbox, Input } from "antd";
@@ -351,7 +358,7 @@ import { useState } from "react";
 function App() {
   const { todos, addTodo } = useToDoStore();
   const [value, setValue] = useState<string>("");
-  
+
   return (
     <div className="wrapper">
       <Input
@@ -385,9 +392,8 @@ export default App;
 
 ![](../../_png/Pasted%20image%2020250803142502.png)
 
-
-
 ---
+
 ## Асинхронные операции
 
 ### Асинхронные операции + Запрос на сервер
@@ -402,7 +408,6 @@ export default App;
 3. **Преимущества Zustand как State Manager:**
     - Несмотря на простоту и легкость, Zustand предоставляет мощные возможности для управления состоянием.
     - Помогает в оптимизации и предотвращении ненужных ререндеров.
-
 
 #### Подготовка:
 
@@ -438,12 +443,10 @@ export default App;
     - Удаление заглушек, использование хука для доступа к состоянию.
     - Запрос данных при первой загрузке с помощью `useEffect`.
 
-
-
-
 Опишем типы, с которыми мы можем отправить запрос на наш сервер
 
 `types / coffeTypes.ts`
+
 ```TS
 export enum CoffeeTypeEnum {
   cappuccino = "cappuccino",
@@ -476,6 +479,7 @@ export type CoffeeType = {
 > Запросили (1) -> Запрашиваем заново (2) -> Отменяем первый запрос (1) -> Отправляем новый запрос (2)
 
 `model / coffeeStore.ts`
+
 ```TS
 import { create, StateCreator } from "zustand";
 import { CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
@@ -542,6 +546,7 @@ export const useCoffeeStore = create<CoffeeActions & CoffeeState>()(
 И в самом компоненте нам останется сделать не так уж и много - добавить функцию для запроса и вызывать её во время поиска по сайту и во время инициализации компонента. Весь список данных мы храним в самом слайсе, который ререндерит компонент только во время обновления данных.
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { Button, Card, Input, Rate, Tag } from "antd";
@@ -552,17 +557,17 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 function App() {
   const { getCoffeeList, coffeeList } = useCoffeeStore();
   const [text, setText] = useState<string>("");
-  
+
   const handleSearch = (text: string) => {
     setText(text);
     getCoffeeList({ text });
   };
-  
+
   useEffect(() => {
     getCoffeeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   return (
     <div className="wrapper">
       <Input
@@ -606,11 +611,12 @@ export default App;
 
 ### Persist
 
-Некоторые данные можно сохранять персонально в `localStorage`, чтобы не терять их во время перезагрузки страницы. 
+Некоторые данные можно сохранять персонально в `localStorage`, чтобы не терять их во время перезагрузки страницы.
 
 Для решения этой проблемы в Zustand есть middleware `persist`, который позволяет сохранить значения в различные сторы браузера. В себя он принимает первым параметром наш слайс, а вторым объект с именем `name` и функцией `partialize`, в которой мы определим какую часть стора мы хотим персистить
 
 `model / counterStore.ts`
+
 ```TS
 import { create, StateCreator } from "zustand";
 import { persist } from "zustand/middleware";
@@ -637,17 +643,17 @@ const counterSlice: StateCreator<
 > = (set, get) => ({
   counter: initialState.counter,
   persistedCounter: initialState.persistedCounter,
-  
+
   decrement: () => {
     const { counter, persistedCounter } = get();
     set({ counter: counter - 1, persistedCounter: persistedCounter - 1 });
   },
-  
+
   increment: () => {
     const { counter, persistedCounter } = get();
     set({ counter: counter + 1, persistedCounter: persistedCounter + 1 });
   },
-  
+
   incrementByAmount: (value: number) => {
     const { counter } = get();
     set({ counter: counter + value });
@@ -673,6 +679,7 @@ export const getCounter = () => useCounterStore.getState().counter;
 Создаём простой counter
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { Button, Card, Input, Rate, Tag } from "antd";
@@ -684,7 +691,7 @@ import { addTen } from "./helpers/addTen";
 
 function App() {
   const { counter, decrement, increment, persistedCounter } = useCounterStore();
-  
+
   return (
     <div className="wrapper">
       <button onClick={decrement}>-</button>
@@ -707,6 +714,7 @@ export default App;
 Для сброса состояния стейта, потребуется кастомизировать дефолтный `create` таким образом, чтобы он каждый раз создавал функцию для сброса и записывал её в глобальную мапу со всеми функциями сброса состояния
 
 `src/helpers/create.ts`
+
 ```TS
 import { create as _create } from "zustand";
 import type { StateCreator } from "zustand";
@@ -742,6 +750,7 @@ export const create = (<T>() => {
 И теперь тут используем наш кастомный `create`, в который добавим так же состояние action `reset`, в которое передадим `initialState` с начальным состоянием
 
 `src/model/counterStore.ts`
+
 ```TS
 import { StateCreator } from "zustand";
 import { persist } from "zustand/middleware";
@@ -804,6 +813,7 @@ export const getCounter = () => useCounterStore.getState().counter;
 И добавляем кнопку сброса состояния
 
 `App.tsx`
+
 ```TSX
 import "./App.css";
 import { Button, Card, Input, Rate, Tag } from "antd";
@@ -818,12 +828,12 @@ import { useToDoStore } from "./model/todoStore";
 function App() {
   const { getCoffeeList, coffeeList } = useCoffeeStore();
   const [text, setText] = useState<string>("");
-  
+
   const handleSearch = (text: string) => {
     setText(text);
     getCoffeeList({ text });
   };
-  
+
   useEffect(() => {
     getCoffeeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -831,7 +841,7 @@ function App() {
 
   const { counter, decrement, increment, persistedCounter } = useCounterStore();
   const { addTodo, todos } = useToDoStore();
-  
+
   return (
     <div className="wrapper">
       <button onClick={decrement}>-</button>
@@ -854,6 +864,7 @@ export default App;
 Добавляем типизацию к нашим товарам. Размер кофе, отдельный айтем и заказ.
 
 `src/types/coffeTypes.ts`
+
 ```TS
 export enum CoffeeTypeEnum {
   cappuccino = "cappuccino",
@@ -904,6 +915,7 @@ export type CoffeeType = {
 Модифицируем стор и добавляем в него заказ кофе `orderCoffee`, добавление в корзину `addToCart`, задание адреса `setAddress`, очистку корзины `clearCart` и добавляем `persist` в наш стор
 
 `src/model/coffeeStore.ts`
+
 ```TS
 import { create, StateCreator } from "zustand";
 import {
@@ -1023,6 +1035,7 @@ export const useCoffeeStore = create<CoffeeActions & CoffeeState>()(
 И довёрстываем раздел с нашей корзиной
 
 `src/App.tsx`
+
 ```TSX
 import "./App.css";
 import { Button, Card, Input, Rate, Tag } from "antd";
@@ -1124,9 +1137,8 @@ export default App;
 
 ![](../../_png/Pasted%20image%2020250803174940.png)
 
-
-
 ---
+
 ## Продвинутые техники
 
 ### Подписки на стор + Улучшенный стор в URL
@@ -1136,6 +1148,7 @@ export default App;
 Первое, что нам нужно сделать - это добавить `react-router-dom` в приложение, чтобы иметь доступ к `window` из хуков
 
 `src/main.tsx`
+
 ```TSX
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -1155,6 +1168,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 Далее подписаться на изменение url-параметров с помощью `useSearchParams`. С помощью него мы сможем получать актуальные url-параметры.
 
 `src/helpers/useUrlStorage.tsx`
+
 ```TSX
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -1191,6 +1205,7 @@ export const useUrlParamsStore = <T extends Record<string, string>>(
 Далее нам нужно будет создать здесь кастомный Slice с экшенами, которые будут использоваться в `persist`. Это нам нужно, чтобы хранить значения не в `localStorage`, а в url-параметрах
 
 `src/helpers/hashStorage.tsx`
+
 ```TS
 import { StateStorage } from "zustand/middleware";
 
@@ -1218,6 +1233,7 @@ export const hashStorage: StateStorage = {
 Так же при создании нового persist стора мы передаём туда `createJSONStorage` наш кастомный стор, через который он будет работать с URL-параметрами
 
 `src/model/searchStore.ts`
+
 ```TS
 import { StateCreator, create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
@@ -1271,6 +1287,7 @@ useSearchStore.subscribe((state, prev) => {
 И теперь модифицируем наш корневой компонент, чтобы для поиска он использовал URL-параметры
 
 `src / App.tsx`
+
 ```TSX
 import "../App.css";
 import { Button, Card, Input, Rate, Tag } from "antd";
@@ -1377,6 +1394,7 @@ export default App;
 Slice паттерн предполагает, что мы будем делить нашу логику на slice и относить к отдельным компонентам
 
 `src/model/storeTypes.ts`
+
 ```TS
 import { CoffeItem, CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
 
@@ -1407,6 +1425,7 @@ export type CoffeeListActions = {
 Отдельно выносим слайс по работе с корзиной
 
 `src/model/cartSlice.ts`
+
 ```TS
 import { StateCreator } from "zustand";
 import {
@@ -1475,6 +1494,7 @@ export const cartSlice: StateCreator<
 Выносим отдельно слайс со списком объектов
 
 `src/model/listSlice.ts`
+
 ```TS
 import { StateCreator } from "zustand";
 import {
@@ -1533,6 +1553,7 @@ export const listSlice: StateCreator<
 Теперь в основное хранилище мы можем импортировать два других слайса и объединить их внутри `persist`
 
 `src/model/coffeeStore.ts`
+
 ```TS
 import { create } from "zustand";
 import { CoffeeQueryParams } from "../types/coffeTypes";
@@ -1570,6 +1591,7 @@ export const getCoffeeList = (params?: CoffeeQueryParams) =>
 Делим приложение на страницы
 
 `src/App.tsx`
+
 ```TSX
 import { Route, Routes } from "react-router-dom";
 import { OrderPage } from "./pages/OrderPage";
@@ -1596,6 +1618,7 @@ export default App;
 Создадим селекторы для получения данных из стора. Это удобно, чтобы не писать свои команды каждый раз и использовать их вместе с параметрами.
 
 `src/model/coffeeStore.ts`
+
 ```TS
 export const addToCart = (item: CoffeeType) =>
   useCoffeeStore.getState().addToCart(item);
@@ -1614,6 +1637,7 @@ export const setParams = (params: CoffeeQueryParams) =>
 Вынесем отдельно поиск
 
 `src/components/SearchInput.tsx`
+
 ```TSX
 import { Input } from "antd";
 import { setParams, useCoffeeStore } from "../model/coffeeStore";
@@ -1636,6 +1660,7 @@ export const SearchInput = () => {
 Так же вынесем отдельно список. Тут уже его можно запихнуть внутрь `useShallow`, потому что данные постоянно обновляются и меняются извне другими компонентами приложения.
 
 `src/components/CoffeeList.tsx`
+
 ```TSX
 import { useShallow } from "zustand/react/shallow";
 import { useCoffeeStore } from "../model/coffeeStore";
@@ -1646,7 +1671,7 @@ export const CoffeList = () => {
   const [coffeeList] = useCoffeeStore(
     useShallow((state) => [state.coffeeList])
   );
-  
+
   return (
     <>
       {coffeeList ? (
@@ -1666,6 +1691,7 @@ export const CoffeList = () => {
 Карточка кофе будет извне принимать этот объект
 
 `src/components/CoffeeCard.tsx`
+
 ```TSX
 import { Button, Card, Rate, Tag } from "antd";
 import { CoffeeType } from "../types/coffeTypes";
@@ -1709,6 +1735,7 @@ export const CoffeeCard = ({ coffee }: { coffee: CoffeeType }) => {
 Корзина так же меняется извне, поэтому используем `useShallow`
 
 `src/components/Cart.tsx`
+
 ```TSX
 import { useCoffeeStore } from "../model/coffeeStore";
 import { useShallow } from "zustand/react/shallow";
@@ -1735,6 +1762,7 @@ export const Cart = () => {
 Так же выносим действия по корзине
 
 `src/components/CartActions.tsx`
+
 ```TSX
 import { Button, Input } from "antd";
 import {
@@ -1747,7 +1775,7 @@ import { useShallow } from "zustand/react/shallow";
 
 export const CartActions = () => {
   const [address] = useCoffeeStore(useShallow((state) => [state.address]));
-  
+
   return (
     <>
       <Input
@@ -1767,6 +1795,7 @@ export const CartActions = () => {
 И саму корзину
 
 `src/components/Cart.tsx`
+
 ```TSX
 import { useCoffeeStore } from "../model/coffeeStore";
 import { useShallow } from "zustand/react/shallow";
@@ -1774,7 +1803,7 @@ import { useShallow } from "zustand/react/shallow";
 export const Cart = () => {
   const [cart] = useCoffeeStore(useShallow((state) => [state.cart]));
 
-  return cart 
+  return cart
 	  ? (
 		<>
 			{cart.map((item) => (
@@ -1790,6 +1819,7 @@ export const Cart = () => {
 И объединяем всё в одном месте
 
 `src/App.tsx`
+
 ```TSX
 import "../App.css";
 import { SearchInput } from "./components/SearchInput";
@@ -1822,6 +1852,7 @@ export default App;
 В сторе нам нужно в методе `setParams` добавить инвалидацию запрошенного списка по изменению состояния в параметрах. То есть мы туда всегда будем передавать актуальные параметры и делать новый запрос списка.
 
 `src/model/listSlice.ts`
+
 ```TS
 import { StateCreator } from "zustand";
 import {
@@ -1881,6 +1912,7 @@ export const listSlice: StateCreator<
 Далее нам нужно реализовать список кофе и актуализировать список параметров
 
 `src/components/CategoryPicker.tsx`
+
 ```TSX
 import { Button } from "antd";
 import { CoffeeTypeEnum } from "../types/coffeTypes";
@@ -1889,7 +1921,7 @@ import { useShallow } from "zustand/react/shallow";
 
 export const CategoryPicker = () => {
   const [params] = useCoffeeStore(useShallow((state) => [state.params]));
-  
+
   return (
     <div>
       {Object.keys(CoffeeTypeEnum).map((key) => (
@@ -1913,6 +1945,7 @@ export const CategoryPicker = () => {
 А в конце просто останется добавить компонент в корень
 
 `src/App.tsx`
+
 ```TSX
  <CategoryPicker />
 ```
@@ -1924,6 +1957,7 @@ TanStack Query - это мощная библиотека для контрол�
 Добавляем клиент ReactQuery и ReactQueryDevtools для диагностики отправляемых запросов в тулзе
 
 `main.tsx`
+
 ```TSX
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -1950,6 +1984,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 Далее нам нужно реализовать хук, который обернёт в себя запрос из Zustand с помощью `useQuery` и вернёт нужные нам поля (сами данные + состояния запроса по типу `isLoading`, `isError`, `isSuccess`)
 
 `helpers / useCustomQuery.ts`
+
 ```TS
 import { useQuery } from "@tanstack/react-query";
 import { getCoffeeList } from "../model/coffeeStore";
@@ -1969,6 +2004,7 @@ export const useCustomQuery = (params: CoffeeQueryParams) => {
 Только для того, чтобы RQ смог вернуть и закэшировать наш запрос, нужно, чтобы функция возвращала данные, а не сохраняла их просто в стор. Тут мы переделали функцию `getCoffeeList`, чтобы она возвращала `data`
 
 `model / listSlice.ts`
+
 ```TS
 import { StateCreator } from "zustand";
 import {
@@ -2018,6 +2054,7 @@ export const listSlice: StateCreator<
 И поменяли тип возврата на `Promise` от типа кофе
 
 `model/storeTypes.ts`
+
 ```TS
 import { CoffeItem, CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
 
@@ -2048,6 +2085,7 @@ export type CoffeeListActions = {
 Далее нам нужно подключить наш хук `useCustomQuery` в инпуте поиска, который будет подтягивать данные через RQ
 
 `components / SearchInput.tsx`
+
 ```TSX
 import { Input } from "antd";
 import { setParams, useCoffeeStore } from "../model/coffeeStore";
@@ -2073,9 +2111,8 @@ export const SearchInput = () => {
 };
 ```
 
-
-
 `src/helpers/useUrlStorage.tsx`
+
 ```TSX
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -2085,7 +2122,7 @@ export const useUrlParamsStore = <T extends Record<string, string>>(
   setParams: (params: T) => void
 ) => {
   const [queryParams, setQueryParams] = useSearchParams();
-  
+
   const setParamsFromUrl = () => {
     const paramsFromUrl: Partial<T> = Object.keys(params).reduce((acc, key) => {
       const value = queryParams.get(key);
@@ -2118,9 +2155,9 @@ export const useUrlParamsStore = <T extends Record<string, string>>(
 
 Что мы хотим сделать? Нам нужно выводить один и тот же напиток не друг за другом, а считать их количество и выводить его сбоку, чтобы не раздувать слишком сильно список.
 
-В этом деле, чтобы не мутировать объекты в нашем сторе, мы можем воспользоваться прослойкой в виде *immer*, который позволяет не мутировать объекты, но задавать им новые значения просто указывая целевое поле для изменения.
+В этом деле, чтобы не мутировать объекты в нашем сторе, мы можем воспользоваться прослойкой в виде _immer_, который позволяет не мутировать объекты, но задавать им новые значения просто указывая целевое поле для изменения.
 
-Устанавливаем *immer*
+Устанавливаем _immer_
 
 ```bash
 npm i immer
@@ -2129,6 +2166,7 @@ npm i immer
 Дополняем наш `persist` небольшой конфигурацией `immer`
 
 `model/coffeeStore.ts`
+
 ```TS
 import { create } from "zustand";
 import { CoffeeQueryParams, CoffeeType } from "../types/coffeTypes";
@@ -2180,13 +2218,14 @@ export const setParams = (params: CoffeeQueryParams) =>
   useCoffeeStore.getState().setParams(params);
 ```
 
-И теперь нам нужно будет заменить код в функции `set`, вставив туда `produce` из *immer*. Теперь мы можем себе позволить не деструктуризировать проект, а сразу мутировать то, что нам прилетает.
+И теперь нам нужно будет заменить код в функции `set`, вставив туда `produce` из _immer_. Теперь мы можем себе позволить не деструктуризировать проект, а сразу мутировать то, что нам прилетает.
 
 В общем работа выглядит следующим образом: мы получаем в `produce` определённый `draft` нашего состояния, который мы изменяем. Потом `immer` подставит этот draft в наш стейт. Вторым аргументом мы получаем немутированные данные в state для изменения нашего черновика, который пойдёт в стор.
 
 Так же в `StateCreator` нужно передать дополнительное обозначение типа `["zustand/immer", unknown]`
 
 `src/model/cartSlice.ts`
+
 ```TS
 import { StateCreator } from "zustand";
 import {
@@ -2242,12 +2281,12 @@ export const cartSlice: StateCreator<
         const itemIndex = draft.cart.findIndex(
           (cartItem) => cartItem.id === preparedItem.id
         );
-        
+
         if (itemIndex !== -1) {
           draft.cart[itemIndex].quantity += 1;
           return;
         }
-        
+
         draft.cart.push(preparedItem);
       })
     );
@@ -2280,6 +2319,7 @@ export const cartSlice: StateCreator<
 Выведем количество кофе в корзине
 
 `src/components/Cart.tsx`
+
 ```TSX
 import { useCoffeeStore } from "../model/coffeeStore";
 import { useShallow } from "zustand/react/shallow";
@@ -2304,7 +2344,3 @@ export const Cart = () => {
   );
 };
 ```
-
-
-
-

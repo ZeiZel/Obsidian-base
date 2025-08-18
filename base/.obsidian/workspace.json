@@ -369,9 +369,19 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
+          },
+          {
+            "id": "5590d3a98c9b49cc",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -424,11 +434,10 @@
       "omnisearch:Omnisearch": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-kanban:Create new board": false,
-      "remotely-save:Remotely Save": false,
       "templater-obsidian:Templater": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "5590d3a98c9b49cc",
   "lastOpenFiles": [
     "frontend/React/React + Redux.md",
     "cs/Алгоритмы и Структуры даных.md",

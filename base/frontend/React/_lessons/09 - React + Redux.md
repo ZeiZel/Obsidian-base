@@ -1,11 +1,11 @@
-#Redux #React 
+#Redux #React
 
 ## 001 Основные принципы Redux. Теория
-
 
 Работа с динамическими данными и со стейтом - это одна из основных задач разработчика. Если логика изменения данных написана правильно, то и их отображение будет несложной задачей.
 
 Первое приложение у нас выглядит следующим образом:
+
 - Все данные хранились в одном компоненте
 - Все данные передавались по иерархии вниз, а изменения состояния передавались вверх через коллбэки
 - Так же все состояния централизованы (они все находились в одном месте - в компоненте `App`)
@@ -13,6 +13,7 @@
 Такой подход называется ==Property Drill==, когда мы просверливаем пути для передачи состояний по уровням через несколько компонентов. Такой подход не является достаточно логичным, так как некоторые компоненты могут хранить в себе ненужные для них состояния, которые мы просто перебрасываем дальше.
 
 Второе приложение выглядит уже следующим образом:
+
 - Каждый компонент хранит своё состояние у себя (один компонент содержит список персонажей, а другой список комиксов, третий содержит информацию об одном конкретном персонаже и так далее)
 
 Такой подход сложно масштабировать, особенно, если появятся зависимости между компонентами
@@ -28,10 +29,11 @@
 ![](_png/87f733b02e665518085856aa2af1fb9e.png)
 
 И чтобы решить уже вышеописанную проблему, был придуман следующий подход:
+
 - Мы имеем наши компоненты **View**, которые при выполнении какого-либо действия создают **Actions** (который уже знает, что нужно обновить в стейте)
 - Определённые события **Actions** (которые хранят информацию о требуемых изменениях) вызывают срабатывание определённых действий в компоненте **Reducer** (который уже знает, как именно обновить этот стейт). Операция передачи объекта **Actions** в **Reducer** называется ==dispatch==
 - Компонент **Reducer** - это компонент, который находится в общем хранилище стейтов и он знает, что делать при любом запросе от компонентов сайта. То есть он регулирует обновление стейтов внутри **S**, чтобы компоненты могли перерисоваться на базе обновлённых данных
-- Компонент **S** так же находится внутри хранилища и сам по себе просто хранит все состояния приложения. 
+- Компонент **S** так же находится внутри хранилища и сам по себе просто хранит все состояния приложения.
 
 Так же в ==Redux== имеются ==селекторы== - это функции, которые получают часть данных из хранилища для дальнейшего использования (из **S** во **View**)
 
@@ -55,7 +57,6 @@
 
 ![](_png/d25df2e601565b20620b5bb5c6cfd73b.png)
 
-
 ## 002 Основные принципы Redux. Практика
 
 Первым делом нужно установить библиотеки редакса в приложение
@@ -65,6 +66,7 @@ npm i redux react-redux
 ```
 
 Дальше распишем базовую схему, которая будет соответствовать архитектуре работы редакса:
+
 - начальное состояние
 - функция-редьюсер
 - стейт
@@ -110,7 +112,7 @@ const reducer = (state = 0, action) => {
 
 ![](_png/dde820134b8651b1028b5159d0f4b6a1.png)
 
-Ну и далее создадим единый стор, который уже принимает в себя функцию-редьюсер. Обычно в приложении располагается только один стор 
+Ну и далее создадим единый стор, который уже принимает в себя функцию-редьюсер. Обычно в приложении располагается только один стор
 
 ```JS
 import { createStore } from 'redux';
@@ -178,7 +180,8 @@ store.dispatch({ type: 'INC' });
 
 ![](_png/74b1417834efbe320877ead56dc58ec0.png)
 
->[!info] Важные правила работы с Reducer:
+> [!info] Важные правила работы с Reducer:
+>
 > - Эта функция должна быть чистой и зависеть только от приходящего в неё стейта и экшена
 > - Она должна возвращать один и тот же результат при одинаковых аргументах и не иметь никаких побочных эффектов (никаких логов, запросов на сервер, генераций случайных чисел и никакой работы с ДОМ-деревом)
 
@@ -281,9 +284,10 @@ document.getElementById('rnd').addEventListener('click', () => {
 ```
 
 Но так же мы будем часто работать с данными в виде объекта, поэтому и писать придётся код соблюдая иммутабельность:
+
 - переводим начальный стейт в объект
 - меняем редьюсер на работу со стейтом по принципу иммутабельности (разворачиваем старый объект и добавляем новые данные)
-- далее из стора нужно будет получить не целый объект, а одно значение `store.getState().value` 
+- далее из стора нужно будет получить не целый объект, а одно значение `store.getState().value`
 
 ```JS
 // начальное состояние
@@ -334,18 +338,16 @@ document.getElementById('rnd').addEventListener('click', () => {
 });
 ```
 
-Итог: мы имеем каунтер построенный на базе отслеживания состояния через редакс даже без использования **React** на чистом **JS** 
+Итог: мы имеем каунтер построенный на базе отслеживания состояния через редакс даже без использования **React** на чистом **JS**
 
 ![](_png/7b7c0276df02f1babc736f34b6b03bc6.png)
 
-
-
 ## 003 Чистые функции
-
 
 Понятие чистой функции исходит из обычного программирования и там это имеется ввиду, когда говорят про прозрачность работы функции
 
->[!info] Особенности чистых функций:
+> [!info] Особенности чистых функций:
+>
 > - При одинаковых данных они всегда возвращают одинаковый результат
 > - Она не вызывает внутри себя побочных эффектов
 
@@ -357,26 +359,26 @@ document.getElementById('rnd').addEventListener('click', () => {
 
 ![](_png/14ae831ab98a1e6de8a173bef3aa6dbe.png)
 
-Так же тут нужно понимать, что все зависимости должны находиться внутри данной функции - значений извне она принимать не может 
+Так же тут нужно понимать, что все зависимости должны находиться внутри данной функции - значений извне она принимать не может
 
 ![](_png/888fccf052ba4da10e7a3bb244ea9c17.png)
 
->[!danger] Побочные действия, которые нельзя использовать в чистых функциях:
+> [!danger] Побочные действия, которые нельзя использовать в чистых функциях:
+>
 > - Все асинхронные операции (запросы на сервер, изменение файлов)
 > - Получение рандомного значения
 > - Вывод логов
 > - Работа с ДОМ-деревом
 > - Видоизменение входных данных (это нарушение иммутабельности)
 
-
 ## 004 Оптимизация через actionCreators и bindActionCreator
-
 
 Далее попробуем разбить приложение на отдельные файлы
 
 Экшены вынесем в отдельный файл
 
 `actions.js`
+
 ```JS
 export const inc = () => ({ type: 'INC' });
 export const dec = () => ({ type: 'DEC' });
@@ -386,6 +388,7 @@ export const rnd = (value) => ({ type: 'RND', payload: value });
 Сам редьюсер уберём в другой файл
 
 `reducer.js`
+
 ```JS
 const initialState = { value: 0 };
 
@@ -408,10 +411,12 @@ export default reducer;
 ```
 
 И далее основную логику приложения оптимизируем:
+
 - деструктуризируем и достанем из стора повторяющиеся функции `dispatch`, `subscribe` и `getState`
-- Ивентлистенеры повторяют одну и ту же вложенную функцию - вызывают экшен-функцию внутри `dispatch`. Это поведение можно оптимизировать и вынести в отдельную функцию-диспэтчер (`incDispatch` и так далее) 
+- Ивентлистенеры повторяют одну и ту же вложенную функцию - вызывают экшен-функцию внутри `dispatch`. Это поведение можно оптимизировать и вынести в отдельную функцию-диспэтчер (`incDispatch` и так далее)
 
 `index.js`
+
 ```JS
 import { createStore } from 'redux';
 import reducer from './reducer';
@@ -441,6 +446,7 @@ document.getElementById('rnd').addEventListener('click', () => {
 Однако очень часто разработчики для простоты использования кода создавали функцию `bindActionCreator`, которая возвращала уже сбинженную функцию диспэтча для вызова в других местах
 
 `index.js`
+
 ```JS
 const store = createStore(reducer);
 const { dispatch, subscribe, getState } = store;
@@ -471,6 +477,7 @@ document.getElementById('rnd').addEventListener('click', () => {
 Однако в редаксе уже есть подобная функция `bindActionCreators`, которая за нас создаёт подобный связыватель
 
 `index.js`
+
 ```JS
 import { createStore, bindActionCreators } from 'redux';
 
@@ -482,6 +489,7 @@ const rndDispatch = bindActionCreators(rnd, dispatch);
 Так же мы можем сделать привязку нескольких функций через одну функцию `bindActionCreators`, но уже через объект
 
 `index.js`
+
 ```JS
 const { incDispatch, decDispatch, rndDispatch } = bindActionCreators(
 	{
@@ -503,6 +511,7 @@ document.getElementById('rnd').addEventListener('click', () => {
 Можно ещё сильнее сократить запись, если импортировать не все именованные импорты по отдельности, а импортировать целый объект и его вложить первым аргументом
 
 `index.js`
+
 ```JS
 // import { dec, inc, rnd } from './actions';
 import * as actions from './actions';
@@ -512,13 +521,12 @@ const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
 
 ![](_png/b9acfef5b2151f52493c0eb34a8d5b05.png)
 
-
 ## 005 Добавим React в проект
-
 
 Сначала выделим компонент счётчика в отдельный реакт-компонент
 
 `Counter.js`
+
 ```JS
 import React from 'react';
 import './counter.css';
@@ -553,9 +561,10 @@ export default Counter;
 
 Далее передадим все функции, которые нужны для работы компонента и обернём рендер реакт-компонента в функцию `update`, которая будет вызваться через `subscribe`, когда у нас обновится значение в редаксе
 
-*Тут нужно отметить, что такой подход не используется в реальных проектах*
+_Тут нужно отметить, что такой подход не используется в реальных проектах_
 
 `index.js`
+
 ```JS
 const store = createStore(reducer);
 const { dispatch, subscribe, getState } = store;
@@ -595,6 +604,7 @@ subscribe(update);
 Тут нужно упомянуть, что провайдер сам отслеживает изменения и сам сигнализирует компонентам, что данные были изменены
 
 `index.js`
+
 ```JS
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -622,6 +632,7 @@ root.render(
 И далее нужно просто вызвать компонент счётчика внутри `App`
 
 `components > App.js`
+
 ```JS
 import React from 'react';
 import Counter from './Counter';
@@ -635,15 +646,15 @@ export default App;
 
 > Далее, чтобы приложение заработало, нужно будет с помощью `connect` распространить данные по всем компонентам приложения. Это позволит прокинуть в `Counter` нужные функции и данные для работы со счётчиком. Пока же компонент не работает без данных манипуляций.
 
-
 ## 006 Соединяем React и Redux при помощи connect
 
-
 Подключить Redux к React можно двумя способами:
-- функция `connect`, которая используется в классовых компонентах и в старых проектах 
+
+- функция `connect`, которая используется в классовых компонентах и в старых проектах
 - хук `useSelector`
 
 [Преимущества и недостатки](https://www.samdawson.dev/article/react-redux-use-selector-vs-connect) использования хука:
+
 - меньше бойлерплейта
 - сложнее тестировать, чем обычный коннект
 - проще в понимании
@@ -652,9 +663,10 @@ export default App;
 
 Далее нужно реализовать контроль состояния в нашем каунтере
 
-Для начала, можно перенести логику по генерации рандомного значения прямо в `actionCreator`-функцию 
+Для начала, можно перенести логику по генерации рандомного значения прямо в `actionCreator`-функцию
 
 `actions.js`
+
 ```JS
 export const inc = () => ({ type: 'INC' });
 export const dec = () => ({ type: 'DEC' });
@@ -664,18 +676,21 @@ export const rnd = () => ({ type: 'RND', payload: Math.floor(Math.random() * 10)
 Первым делом, нужно обернуть вывод компонента в функцию `connect`, получаемую из реакт-редакса. Передаётся функция во вторые скобочки (аргументы вложенного ретёрна). В первые скобки уже будут приниматься аргументы самого коннекта
 
 Работает `connect` по следующей цепочке:
+
 - внутри приложения какой-либо компонент задиспетчил (изменил стейт) какое-либо действие
--  глобальное состояние изменилось
+- глобальное состояние изменилось
 - провайдер отлавливает изменение и даёт сигнал всем компонентам, которые находятся внутри
 - дальше запускается `connect` от провайдера
 - запускается функция `mapStateToProps`
 - и если пропсы компонента поменялись, то весь компонент будет перерисован
 
 И далее создадим две функции `mapStateToProps` и `mapDispatchToProps`, чтобы получить:
+
 - из первой функции значение из стора
 - с помощью второй функции сгенерировать три функции-диспэтча
 
 `Counter.js`
+
 ```JS
 import React from 'react';
 import './counter.css';
@@ -716,6 +731,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 ```
 
 Функция коннекта принимает в себя 4 необязательных значения:
+
 - `mapStateToProps` в виде функции, которая запросит данные из стейта
 - `mapDispatchToProps` в виде функции, которая сгенерирует объект с диспетчами или в виде объекта (коннект сам распарсит объект и сделает из него нужные функции)
 - `mergeProps` и `options` используются для оптимизации работы функции `connect`
@@ -792,6 +808,7 @@ const mapDispatchToProps = (dispatch) => {
 Однако такой подход работает только тогда, когда нам не нужно проводить дополнительные манипуляции над `actionCreator`ами
 
 `Counter.js`
+
 ```JS
 import * as actions from '../actions';
 
@@ -806,15 +823,15 @@ export default connect(mapStateToProps, actions)(Counter);
 
 ![](_png/a49dd5e847f7e232cf59e1b30cf9b0ed.png)
 
-
 ## 007 Соединяем React и Redux при помощи хуков
 
-
 Так же куда более простым способом в реализации подключения редакса к реакту будет использование хуков:
-- `useSelector` - позволяет получить из глобального хранилища (стора) нужное нам состояние 
+
+- `useSelector` - позволяет получить из глобального хранилища (стора) нужное нам состояние
 - `useDispatch` - предоставляет доступ к функции `dispatch`
 
 `Counter.js`
+
 ```JS
 import { useDispatch, useSelector } from 'react-redux';
 import { inc, dec, rnd } from '../actions';
@@ -848,6 +865,7 @@ export default Counter;
 ![](_png/9f466fd78259bd9344abe48b067f1da6.png)
 
 Отличия `useSelector` от `mapStateToProps`:
+
 - хук возвращает всё, что угодно, а не только то, что идёт на пропсы
 - коллюэк функция позволяет сделать всё, что угодно с данными, но она должна оставаться чистой и синхронной
 - в само значение, которое вызывает функцию, может помещаться что угодно (строка, массив, функция и так далее)
@@ -856,8 +874,10 @@ export default Counter;
 - Так же хук при изменении стейта в сторе будет вызывать перерендер компонента
 
 Так же, когда мы возвращаем из функции новый объект, то у нас каждый раз будет создаваться новый объект, что будет вызывать перерендеры компонента. Чтобы избавиться от данной ошибки, можно:
+
 - просто дублировать использование хука `useSelector` при запросе отдельных свойств из стора
 - использовать функцию [Reselect](https://react-redux.js.org/api/hooks) из сторонней библиотеки
+
 ```JS
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -882,7 +902,9 @@ export const App = () => {
   )
 }
 ```
+
 - либо можно использовать функцию `shallowEqual`:
+
 ```JS
 import { shallowEqual, useSelector } from 'react-redux'
 
@@ -914,12 +936,12 @@ export const CounterComponent = ({ value }) => {
 }
 ```
 
->[!info] В конце стоит отметить, что показанный в начале пример использования компонента с хуками - стоит использовать как конечный вариант. Не стоит использовать оборачивать хуки редакса в дополнительные хуки.
+> [!info] В конце стоит отметить, что показанный в начале пример использования компонента с хуками - стоит использовать как конечный вариант. Не стоит использовать оборачивать хуки редакса в дополнительные хуки.
 
 ## Zombie Childrens
 
--   **zombie children**: дочерние компоненты, о которых родитель ничего не знает
--   **stale props**: протухшие свойства - свойства, которые не являются актуальными в данный конкретный момент времени
+- **zombie children**: дочерние компоненты, о которых родитель ничего не знает
+- **stale props**: протухшие свойства - свойства, которые не являются актуальными в данный конкретный момент времени
 
 Большинство разработчиков даже не представляют себе что это такое и когда это может возникнуть.
 
@@ -930,30 +952,30 @@ export const CounterComponent = ({ value }) => {
 Для начала давайте рассмотрим типичный PubSub объект
 
 ```JS
-function createStore(reducer) {  
-    var state;  
-    var listeners = [];  
-  
-    function getState() {  
-        return state;  
-    }  
-      
-    function subscribe(listener) {  
-        listeners.push(listener)  
-        return function unsubscribe() {  
-            var index = listeners.indexOf(listener);  
-            listeners.splice(index, 1);  
-        }  
-    }  
-      
-    function dispatch(action) {  
-        state = reducer(state, action);  
-        listeners.forEach(listener => listener(state));  
-    }  
-  
-    dispatch({});  
-  
-    return { dispatch, subscribe, getState };  
+function createStore(reducer) {
+    var state;
+    var listeners = [];
+
+    function getState() {
+        return state;
+    }
+
+    function subscribe(listener) {
+        listeners.push(listener)
+        return function unsubscribe() {
+            var index = listeners.indexOf(listener);
+            listeners.splice(index, 1);
+        }
+    }
+
+    function dispatch(action) {
+        state = reducer(state, action);
+        listeners.forEach(listener => listener(state));
+    }
+
+    dispatch({});
+
+    return { dispatch, subscribe, getState };
 }
 ```
 
@@ -962,9 +984,9 @@ function createStore(reducer) {
 Теперь давайте посмотрим в каком порядке происходит монтирование компонент в иерархии компонент родитель-дети:
 
 ```JSX
-<A>  
-    <B />  
-    <C />  
+<A>
+    <B />
+    <C />
 </A>
 ```
 
@@ -979,18 +1001,18 @@ mounting component A
 Рассмотрим использования redux контейнеров:
 
 ```JS
-state = {  
-  list: [  
-    1: { id: 1, title: 'Component1', text: '...' },  
-    2: { id: 2, title: 'Component2', text: '...' }  
-  }  
-};  
-  
-const List = ({ list }) => {  
-  return list.map(item =>   
-      <ListItemContainer id={item.id} title={item.title} />);  
-}  
-  
+state = {
+  list: [
+    1: { id: 1, title: 'Component1', text: '...' },
+    2: { id: 2, title: 'Component2', text: '...' }
+  }
+};
+
+const List = ({ list }) => {
+  return list.map(item =>
+      <ListItemContainer id={item.id} title={item.title} />);
+}
+
 const ListContainer = connect()(List);
 ```
 
@@ -1005,7 +1027,7 @@ const ListContainer = connect()(List);
 
 `const { someProp } = store.list[1];`
 
-приведет к краху приложения с ошибкой типа _“Uncaught TypeError: Cannot read property ‘1’ of undefined.”_ или подобной (ошибки может и не быть если сначала проверить на существование элемент в сторе, но компонент в дереве присутствует и он — зомби);
+приведет к краху приложения с ошибкой типа *“Uncaught TypeError: Cannot read property ‘1’ of undefined.”* или подобной (ошибки может и не быть если сначала проверить на существование элемент в сторе, но компонент в дереве присутствует и он — зомби);
 
 Оказывается, что компонент с `id=1` в данный момент не является дочерним для компонента-контейнера `ListContainer`, хотя на момент возникновения изменений в источнике данных он находится в дереве DOM— **зомби-ребенок**
 
@@ -1028,17 +1050,15 @@ const ListContainer = connect()(List);
 
 Во избежание этих проблем советуют:
 
--   Не полагаться на свойства компонента в селекторе при получении данных из источника
--   В случае если без использования свойств компонента не возможно выбрать данные из источника — пытайтесь выбирать данные безопасно: вместо `state.todos[props.id].name` используйте `todo = state.todos[props.id` для начала и затем после проверки на существование `todo` используйте `todo.name`
--   чтобы избежать появления `stale props `— передавайте в дочерние контейнеры только ключевые свойства, по которым осуществляется выборка всех остальных свойств компонента из источника — все свойства всегда будут свежими
+- Не полагаться на свойства компонента в селекторе при получении данных из источника
+- В случае если без использования свойств компонента не возможно выбрать данные из источника — пытайтесь выбирать данные безопасно: вместо `state.todos[props.id].name` используйте `todo = state.todos[props.id` для начала и затем после проверки на существование `todo` используйте `todo.name`
+- чтобы избежать появления `stale props `— передавайте в дочерние контейнеры только ключевые свойства, по которым осуществляется выборка всех остальных свойств компонента из источника — все свойства всегда будут свежими
 
 При разработке своих библиотек и компонент **React**, разработчику всегда нужно помнить об обратном порядке генерации события жизненного цикла `ComponentDidMount` родителя и детей в случае использования подписок на события одного источника данных, когда данные хранятся вне контекста **React**, чтобы не возникали ошибки данного рода.
 
 Но лучший совет — хранить данные внутри контекста исполнения **React** в хуке `useState` или в `Context /useContext`— вы никогда не столкнетесь с вышеописанными проблемами т.к. в функциональных компонентах вызов этих хуков происходит в естественном порядке — сначала у родителя, а затем — у детей.
 
-
 ## 008 Redux devtools
-
 
 Когда мы работаем со старым АПИ редакса, нужно использовать вторым аргументом данную строку, чтобы подключить тулзы разработчика (если пишем на современном, то обойтись можно и без этого)
 
@@ -1067,7 +1087,6 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 
 ![](_png/347146178c93902506e46137a4e919b2.png)
 
-
 ## 009 Правило названия action и домашнее задание (мини-экзамен)
 
 Структура проекта выглядит примерно следующим образом:
@@ -1077,6 +1096,7 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 Это тот файл приложения, который будет шэриться через `json-server` и от которого будут выводиться новые посты
 
 `heroses.json`
+
 ```JSON
 {
     "heroes": [
@@ -1112,6 +1132,7 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 Стор редакса
 
 `src > store > index.js`
+
 ```JS
 import { createStore } from 'redux';
 import reducer from '../reducers';
@@ -1128,6 +1149,7 @@ export default store;
 Второй кейс редьюсера так же в качестве `payload` принимает в себя список героев, который будет отображаться на странице
 
 `src > reducer > index.js`
+
 ```JS
 const initialState = {
     heroes: [], // герои
@@ -1165,6 +1187,7 @@ export default reducer;
 Экшен `heroesFetched` принимает в себя так же список героев, который пришёл от сервера и сохраняет его в состояние.
 
 `src > actions > index.js`
+
 ```JS
 export const heroesFetching = () => {
     return {
@@ -1189,6 +1212,7 @@ export const heroesFetchingError = () => {
 Хук отправки запроса на сервер будет возвращать один ответ от сервера
 
 `src > hooks > http.hook.js`
+
 ```JS
 import { useCallback } from "react";
 
@@ -1220,9 +1244,9 @@ export const useHttp = () => {
     // }, []);
 
     return {
-	    request, 
-		// clearError, 
-		// process, 
+	    request,
+		// clearError,
+		// process,
 		// setProcess
     }
 }
@@ -1231,6 +1255,7 @@ export const useHttp = () => {
 Тут уже располагается вся основная часть приложения
 
 `src > index.js`
+
 ```JS
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -1254,6 +1279,7 @@ ReactDOM.render(
 Это основной компонент `App`
 
 `src > components > app > App.js`
+
 ```JS
 import HeroesList from '../heroesList/HeroesList';
 import HeroesAddForm from '../heroesAddForm/HeroesAddForm';
@@ -1262,7 +1288,7 @@ import HeroesFilters from '../heroesFilters/HeroesFilters';
 import './app.scss';
 
 const App = () => {
-    
+
     return (
         <main className="app">
             <div className="content">
@@ -1279,7 +1305,7 @@ const App = () => {
 export default App;
 ```
 
-Чтобы запустить два сервера вместе (react и json-server), нужно будет установить дополнительную библиотеку, которая позволяет запустить две команды одновременно: 
+Чтобы запустить два сервера вместе (react и json-server), нужно будет установить дополнительную библиотеку, которая позволяет запустить две команды одновременно:
 
 ```bash
 npm i concurrently
@@ -1288,6 +1314,7 @@ npm i concurrently
 И так теперь выглядит сдвоенный запрос:
 
 `package.json`
+
 ```JSON
 "start": "concurrently \"react-scripts start\" \"npx json-server heroes.json --port 3001\"",
 ```
@@ -1295,6 +1322,7 @@ npm i concurrently
 Это компонент, который выводит список элементов карточек героев
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { useHttp } from '../../hooks/http.hook';
 import { useEffect } from 'react';
@@ -1325,9 +1353,9 @@ const HeroesList = () => {
     // если герои загружаются
 	if (heroesLoadingStatus === 'loading') {
 		// то возвращаем загрузку
-        return <Spinner />; 
-        
-        // если ошибка 
+        return <Spinner />;
+
+        // если ошибка
 	} else if (heroesLoadingStatus === 'error') {
         // то возвращаем ошибку
 		return <h5 className='text-center mt-5'>Ошибка загрузки</h5>;
@@ -1346,7 +1374,7 @@ const HeroesList = () => {
 
     // элементы списка героев
 	const elements = renderHeroesList(heroes);
-	
+
     // возвращаем список героев
     return <ul>{elements}</ul>;
 };
@@ -1357,6 +1385,7 @@ export default HeroesList;
 А это компонент самой карточки
 
 `components > heroesListItem > HeroesListItem.js`
+
 ```JS
 const HeroesListItem = ({name, description, element}) => {
     // тут будет храниться класс, который попадёт в айтем
@@ -1381,14 +1410,14 @@ const HeroesListItem = ({name, description, element}) => {
     }
 
     return (
-        <li 
+        <li
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}``}>
-            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg" 
-                 className="img-fluid w-25 d-inline" 
-                 alt="unknown hero" 
+            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg"
+                 className="img-fluid w-25 d-inline"
+                 alt="unknown hero"
                  style={{'objectFit': 'cover'}}/>
             <div className="card-body">
-                
+
                 <h3 className="card-title">{name}</h3>
                 <p className="card-text">{description}</p>
             </div>
@@ -1402,9 +1431,10 @@ const HeroesListItem = ({name, description, element}) => {
 export default HeroesListItem;
 ```
 
-Тут уже находится вёрстка компонента смена активностей классов: 
+Тут уже находится вёрстка компонента смена активностей классов:
 
 `components > heroesFilters > HeroesFilters.js`
+
 ```JS
 const HeroesFilters = () => {
     return (
@@ -1429,18 +1459,19 @@ export default HeroesFilters;
 Тут представлена вёрстка формы для добавления персонажей без логики
 
 `components > heroesAddForm > HeroesAddForm.js`
+
 ```JS
 const HeroesAddForm = () => {
     return (
         <form className="border p-4 shadow-lg rounded">
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
-                <input 
+                <input
                     required
-                    type="text" 
-                    name="name" 
-                    className="form-control" 
-                    id="name" 
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    id="name"
                     placeholder="Как меня зовут?"/>
             </div>
 
@@ -1448,19 +1479,19 @@ const HeroesAddForm = () => {
                 <label htmlFor="text" className="form-label fs-4">Описание</label>
                 <textarea
                     required
-                    name="text" 
-                    className="form-control" 
-                    id="text" 
+                    name="text"
+                    className="form-control"
+                    id="text"
                     placeholder="Что я умею?"
                     style={{"height": '130px'}}/>
             </div>
 
             <div className="mb-3">
                 <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
-                <select 
+                <select
                     required
-                    className="form-select" 
-                    id="element" 
+                    className="form-select"
+                    id="element"
                     name="element">
                     <option >Я владею элементом...</option>
                     <option value="fire">Огонь</option>
@@ -1482,13 +1513,12 @@ export default HeroesAddForm;
 
 ![](_png/b180999d720fead4852a1e0905d8306c.png)
 
-
 ## 010 Разбор самых сложных моментов
-
 
 Фильтры были расширены и внутрь них были помещены дополнительные данные по лейблу и классам, которые нужно будет вставить в кнопки
 
 `heroes.json`
+
 ```JSON
 {
   "heroes": [
@@ -1544,6 +1574,7 @@ export default HeroesAddForm;
 В экшены были добавлены креэйторы, которые отвечают за состояние фильтров и состояние добавления персонажей
 
 `actions > index.js`
+
 ```JS
 // отправка запроса на получение героев
 export const heroesFetching = () => {
@@ -1599,7 +1630,7 @@ export const activeFilterChanged = (filter) => {
     }
 }
 
-// герой создан 
+// герой создан
 // сюда передаются данные по герою с формы
 export const heroCreated = (hero) => {
     return {
@@ -1621,6 +1652,7 @@ export const heroDeleted = (id) => {
 В редьюсер были добавлены кейсы для добавления персонажа, удаления и реагирование на изменение фильтра. Так же было добавлены дополнительные состояния в хранилище
 
 `reducers > index.js`
+
 ```JS
 const initialState = {
     heroes: [], // герои
@@ -1645,8 +1677,8 @@ const reducer = (state = initialState, action) => {
                 // ЭТО МОЖНО СДЕЛАТЬ И ПО ДРУГОМУ
                 // Я специально показываю вариант с действиями тут, но более правильный вариант
                 // будет показан в следующем уроке
-                filteredHeroes: state.activeFilter === 'all' ? 
-                                action.payload : 
+                filteredHeroes: state.activeFilter === 'all' ?
+                                action.payload :
                                 action.payload.filter(item => item.element === state.activeFilter),
                 heroesLoadingStatus: 'idle'
             }
@@ -1675,32 +1707,32 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 activeFilter: action.payload,
-                filteredHeroes: action.payload === 'all' ? 
+                filteredHeroes: action.payload === 'all' ?
                                 state.heroes :
                                 state.heroes.filter(item => item.element === action.payload)
             }
         // Самая сложная часть - это показывать новые элементы по фильтрам
         // при создании или удалении
         case 'HERO_CREATED':
-            // Формируем новый массив    
+            // Формируем новый массив
             let newCreatedHeroList = [...state.heroes, action.payload];
             return {
                 ...state,
                 heroes: newCreatedHeroList,
                 // Фильтруем новые данные по фильтру, который сейчас применяется
-                filteredHeroes: state.activeFilter === 'all' ? 
-                                newCreatedHeroList : 
+                filteredHeroes: state.activeFilter === 'all' ?
+                                newCreatedHeroList :
                                 newCreatedHeroList.filter(item => item.element === state.activeFilter)
             }
-        case 'HERO_DELETED': 
+        case 'HERO_DELETED':
             // Формируем новый массив, в котором не будет удалённого персонажа
             const newHeroList = state.heroes.filter(item => item.id !== action.payload);
             return {
                 ...state,
                 heroes: newHeroList,
                 // Фильтруем новые данные по фильтру, который сейчас применяется
-                filteredHeroes: state.activeFilter === 'all' ? 
-                                newHeroList : 
+                filteredHeroes: state.activeFilter === 'all' ?
+                                newHeroList :
                                 newHeroList.filter(item => item.element === state.activeFilter)
             }
         default: return state
@@ -1713,6 +1745,7 @@ export default reducer;
 В компонент списка героев добавилась функция, которая позволяет удалить персонажа и она передаётся в компонент с одним персонажем. Так же была добавлена анимация для удаления и появления элементов в списке
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import {useHttp} from '../../hooks/http.hook';
 import { useEffect, useCallback } from 'react';
@@ -1770,7 +1803,7 @@ const HeroesList = () => {
 
         return arr.map(({id, ...props}) => {
             return (
-                <CSSTransition 
+                <CSSTransition
                     key={id}
                     timeout={500}
                     classNames="hero">
@@ -1791,9 +1824,10 @@ const HeroesList = () => {
 export default HeroesList;
 ```
 
-В компонент одного героя была добавлена только функция для удаления персонажа, которая приходит из списка 
+В компонент одного героя была добавлена только функция для удаления персонажа, которая приходит из списка
 
 `components > heroesListItem > HeroesListItem.js`
+
 ```JS
 const HeroesListItem = ({name, description, element, onDelete}) => {
 
@@ -1817,18 +1851,18 @@ const HeroesListItem = ({name, description, element, onDelete}) => {
     }
 
     return (
-        <li 
+        <li
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}``}>
-            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg" 
-                 className="img-fluid w-25 d-inline" 
-                 alt="unknown hero" 
+            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg"
+                 className="img-fluid w-25 d-inline"
+                 alt="unknown hero"
                  style={{'objectFit': 'cover'}}/>
             <div className="card-body">
-                
+
                 <h3 className="card-title">{name}</h3>
                 <p className="card-text">{description}</p>
             </div>
-            <span onClick={onDelete} 
+            <span onClick={onDelete}
                 className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
                 <button type="button" className="btn-close btn-close" aria-label="Close"></button>
             </span>
@@ -1844,6 +1878,7 @@ export default HeroesListItem;
 Была добавлена функция `onSubmitHandler`, которая контролирует действие при отправке формы
 
 `components > heroesAddForm > HeroesAddForm.js`
+
 ```JS
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -1903,7 +1938,7 @@ const HeroesAddForm = () => {
         } else if (status === "error") {
             return <option>Ошибка загрузки</option>
         }
-        
+
         // Если фильтры есть, то рендерим их
         if (filters && filters.length > 0 ) {
             return filters.map(({name, label}) => {
@@ -1919,12 +1954,12 @@ const HeroesAddForm = () => {
         <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
-                <input 
+                <input
                     required
-                    type="text" 
-                    name="name" 
-                    className="form-control" 
-                    id="name" 
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    id="name"
                     placeholder="Как меня зовут?"
                     value={heroName}
                     onChange={(e) => setHeroName(e.target.value)}/>
@@ -1934,9 +1969,9 @@ const HeroesAddForm = () => {
                 <label htmlFor="text" className="form-label fs-4">Описание</label>
                 <textarea
                     required
-                    name="text" 
-                    className="form-control" 
-                    id="text" 
+                    name="text"
+                    className="form-control"
+                    id="text"
                     placeholder="Что я умею?"
                     style={{"height": '130px'}}
                     value={heroDescr}
@@ -1945,10 +1980,10 @@ const HeroesAddForm = () => {
 
             <div className="mb-3">
                 <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
-                <select 
+                <select
                     required
-                    className="form-select" 
-                    id="element" 
+                    className="form-select"
+                    id="element"
                     name="element"
                     value={heroElement}
                     onChange={(e) => setHeroElement(e.target.value)}>
@@ -1968,6 +2003,7 @@ export default HeroesAddForm;
 Тут были добавлены фильтры, которые мы получаем с сервера
 
 `components > heroesFilters > HeroesFilters.js`
+
 ```JS
 import {useHttp} from '../../hooks/http.hook';
 import {useEffect} from 'react';
@@ -2047,9 +2083,7 @@ export default HeroesFilters;
 
 ![](_png/f73b65d8851223cf2b61023d552c47a4.png)
 
-
 ## 011 Комбинирование reducers и красивые селекторы. CreateSelector()
-
 
 При разрастании приложения увеличивается и количество действий, которые должен контролировать реакт. Если экшены можно спокойно разделить по папкам и обращаться конкретно к нужным, то данное разрастание не позволит спокойно поделить функцию-редьюсер
 
@@ -2058,12 +2092,14 @@ export default HeroesFilters;
 ![](_png/68f0062f0d1040d2a1a1be1318ac1a58.png)
 
 Чтобы сократить код и разбить логику, можно:
+
 - разделить логику редьюсера через функцию `combineReducers`
 - вынести фильтрацию внутрь компонента, чтобы разбить логику стейтов
 
 Тут мы выносим фильтрацию полученных данных из стейта и теперь её не нужно проводить внутри редьюсера
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 const HeroesList = () => {
 	const filteredHeroes = useSelector((state) => {
@@ -2091,6 +2127,7 @@ const HeroesList = () => {
 Вынесем из главного `reducer` логику по работе с персонажами и его стейты в отдельный файл
 
 `reducers > heroes.js`
+
 ```JS
 const initialState = {
 	heroes: [],
@@ -2136,6 +2173,7 @@ export const heroes = (state = initialState, action) => {
 Тут уже будем хранить логику фильтрации
 
 `reducers > filters.js`
+
 ```JS
 const initialState = {
 	filters: [],
@@ -2175,6 +2213,7 @@ export const filters = (state = initialState, action) => {
 И тут через функцию `combineReducers` объединяем две функции редьюсера в один внутри объекта. Теперь обычный `reducer` не нужен и его можно будет удалить
 
 `store > index.js`
+
 ```JS
 import { createStore, combineReducers } from 'redux';
 import { heroes } from '../reducers/heroes';
@@ -2194,12 +2233,12 @@ export default store;
 
 И вот уже с таким синтаксисом мы можем импортировать поля из нескольких объектов
 Однако такой подход приводит к тому, что компонент будет перерисовываться при каждом изменении стейта
-*Такой вариант не стоит использовать в проекте, так как он не оптимизирован*
+_Такой вариант не стоит использовать в проекте, так как он не оптимизирован_
 
 ```JS
-const someState = useSelector((state) => ({  
-   activeFilter: state.filters.activeFilter,  
-   heroes: state.heroes.heroes,  
+const someState = useSelector((state) => ({
+   activeFilter: state.filters.activeFilter,
+   heroes: state.heroes.heroes,
 }));
 ```
 
@@ -2207,17 +2246,18 @@ const someState = useSelector((state) => ({
 Но тут мы встретимся с такой проблемой, что каждый раз при нажатии кнопки фильтрации, у нас будет воспроизводиться перерендер компонента. Это происходит из-за того, что каждый раз у нас вызывается `useSelector()` при изменении глобального стейта.
 
 `components > heroesList > HeroesList.js`
+
 ```JS
-const HeroesList = () => {  
-   const filteredHeroes = useSelector((state) => {  
-      if (state.filters.activeFilter === 'all') {  
+const HeroesList = () => {
+   const filteredHeroes = useSelector((state) => {
+      if (state.filters.activeFilter === 'all') {
 	      console.log('render');
-         return state.heroes.heroes;  
-      } else {  
-         return state.heroes.heroes.filter(  
-            (item) => item.element === state.filters.activeFilter,  
-         );  
-      }  
+         return state.heroes.heroes;
+      } else {
+         return state.heroes.heroes.filter(
+            (item) => item.element === state.filters.activeFilter,
+         );
+      }
    });
 
 	/// CODE ...
@@ -2231,30 +2271,31 @@ const HeroesList = () => {
 npm i reselect
 ```
 
-Данный модуль позволяет нам вызвать по определённым правилам функцию `useSelector`. То есть мы создаём массив запросов в селектор первым аргументом, а вторым аргументом берём полученные значения и используем их в функции, которую хотели использовать в селекторе. 
-После вышеописанных манипуляций просто помещаем функцию реселекта внутрь `useSelector` 
+Данный модуль позволяет нам вызвать по определённым правилам функцию `useSelector`. То есть мы создаём массив запросов в селектор первым аргументом, а вторым аргументом берём полученные значения и используем их в функции, которую хотели использовать в селекторе.
+После вышеописанных манипуляций просто помещаем функцию реселекта внутрь `useSelector`
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { createSelector } from 'reselect';
 
 /// CODE ...
 
-// эта функция будет вызвать useSelector по заданным правилам и будет мемоизировать значение  
-const filteredHeroesSelector = createSelector(  
-   // вызываем срабатывание двух селекторов  
-   // получаем сам активный фильтр и массив героев   [(state) => state.filters.activeFilter, (state) => state.heroes.heroes],  
-   // производим операции над результатами двух вызванных селекторов  
-   (filter, heroes) => {  
-      if (filter === 'all') {  
-         console.log('render');  
-         return heroes;  
-      } else {  
-         return heroes.filter((item) => item.element === filter);  
-      }  
-   },  
-);  
-  
+// эта функция будет вызвать useSelector по заданным правилам и будет мемоизировать значение
+const filteredHeroesSelector = createSelector(
+   // вызываем срабатывание двух селекторов
+   // получаем сам активный фильтр и массив героев   [(state) => state.filters.activeFilter, (state) => state.heroes.heroes],
+   // производим операции над результатами двух вызванных селекторов
+   (filter, heroes) => {
+      if (filter === 'all') {
+         console.log('render');
+         return heroes;
+      } else {
+         return heroes.filter((item) => item.element === filter);
+      }
+   },
+);
+
 const filteredHeroes = useSelector(filteredHeroesSelector);
 
 /// CODE ...
@@ -2264,7 +2305,6 @@ const filteredHeroes = useSelector(filteredHeroesSelector);
 
 ![](_png/5e09e8e34adefe980e8d2bb292c5b57d.png)
 
-
 ## 012 Про сложность реальной разработки
 
 Реальные приложения требуют от разработчика большое количество знаний - это сложно, но нужна практика
@@ -2273,11 +2313,9 @@ const filteredHeroes = useSelector(filteredHeroesSelector);
 
 > **Спасибо за внимание**
 
-
 ## 013 Store enhancers
 
-
-==Store enhancers== - это дополнительный функционал, который упрощает взаимодействие с хранилищем. Зачастую просто используют сторонние *npm-пакеты*, но так же можно написать и свой функционал улучшителя.
+==Store enhancers== - это дополнительный функционал, который упрощает взаимодействие с хранилищем. Зачастую просто используют сторонние _npm-пакеты_, но так же можно написать и свой функционал улучшителя.
 
 Так же частным случаем энхэнсеров является `middleware` функции, которые так же передаются в стор.
 
@@ -2316,7 +2354,7 @@ const enhancer =
 const store = createStore(
 	combineReducers({ heroes, filters }),
 	compose(
-		enhancer, 
+		enhancer,
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	),
 );
@@ -2328,15 +2366,14 @@ export default store;
 
 ![](_png/dd400bb592bce412f86ea5d95b35788c.png)
 
-
 ## 014 Middleware
-
 
 ==Middleware== - это `enhancer`, который занимается улучшением только `dispatch`. Так же зачастую пользуются уже готовыми ==middleware==, которые предоставляет комьюнити npm
 
-Конкретно тут сделаем посредника, который позволит `dispatch` принимать не только объекты, но и строки 
+Конкретно тут сделаем посредника, который позволит `dispatch` принимать не только объекты, но и строки
 
 `store > index.js`
+
 ```JS
 // функция-посредник, которая работает только на dispatch
 // сюда автоматически будет попадать две сущности из store - dispatch, getState
@@ -2358,6 +2395,7 @@ const stringMiddleware =
 - обычно, функцию `dispatch` называют `next`, так как будет вызываться следующая функция из `middleware`
 
 `store > index.js`
+
 ```JS
 const stringMiddleware =
 	() =>
@@ -2371,11 +2409,12 @@ const stringMiddleware =
 	};
 ```
 
-Чтобы применять `middleware` в `createStore`, нужно будет воспользоваться функцией `applyMiddleware`, которая будет применять посредника. 
+Чтобы применять `middleware` в `createStore`, нужно будет воспользоваться функцией `applyMiddleware`, которая будет применять посредника.
 
 Чтобы вернуть подключение к редакс-девтулзу, можно опять же обернуть весь второй аргумент `createStore` в функцию `compose()`
 
 `store > index.js`
+
 ```JS
 const store = createStore(
 	combineReducers({ heroes, filters }),
@@ -2386,13 +2425,11 @@ const store = createStore(
 );
 ```
 
-
 ## 015 Redux-thunk
-
 
 Основная задача модуля `redux-thunk` передавать функцию, которая потом будет производить асинхронную операцию
 
-Устанавливаем пакет в проект. 
+Устанавливаем пакет в проект.
 
 ```bash
 npm i redux-thunk
@@ -2401,37 +2438,40 @@ npm i redux-thunk
 И далее, чтобы убедиться, что он работает, можно просто попробовать передать `actionCreater` функцию в `dispatch` без вызова:
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 // функция получения персонажей с сервера
-useEffect(() => {  
+useEffect(() => {
    dispatch(heroesFetching); // передаём функцию экшена без вызова
-   request('http://localhost:3001/heroes')  
-      .then((data) => dispatch(heroesFetched(data)))  
-      .catch(() => dispatch(heroesFetchingError()));  
+   request('http://localhost:3001/heroes')
+      .then((data) => dispatch(heroesFetched(data)))
+      .catch(() => dispatch(heroesFetchingError()));
 }, []);
 ```
 
-Так же мы можем расширять наши экшены, так как в их вложенную функцию может автоматически поступать `dispatch`, над которым мы можем проводить различные манипуляции. 
+Так же мы можем расширять наши экшены, так как в их вложенную функцию может автоматически поступать `dispatch`, над которым мы можем проводить различные манипуляции.
 Конкретно тут будет срабатывать передача данных в стейт через определённый промежуток времени.
 
 `actions > index.js`
+
 ```JS
-// когда мы вызываем функцию, она возвращает функцию, принимающую в себя dispatch  
-// dispatch приходит в функцию автоматически, так как мы используем thunk middleware  
-export const activeFilterChanged = (filter) => (dispatch) => {  
-   setTimeout(() => {  
-      dispatch({  
-         type: 'ACTIVE_FILTER_CHANGED',  
-         payload: filter,  
-      });  
-   }, 1000);  
+// когда мы вызываем функцию, она возвращает функцию, принимающую в себя dispatch
+// dispatch приходит в функцию автоматически, так как мы используем thunk middleware
+export const activeFilterChanged = (filter) => (dispatch) => {
+   setTimeout(() => {
+      dispatch({
+         type: 'ACTIVE_FILTER_CHANGED',
+         payload: filter,
+      });
+   }, 1000);
 };
 ```
 
-Но так же мы можем и упростить себе жизнь тем, что мы можем вызвать логику диспетча прямо внутри самой папки экшенов. 
+Но так же мы можем и упростить себе жизнь тем, что мы можем вызвать логику диспетча прямо внутри самой папки экшенов.
 Конкретно, мы можем вынести запрос на получение персонажей и занесение их в стейт прямо из экшенов. Там нам не нужно будет импортировать и экспортировать отдельные экшены - можно будет ими просто воспользоваться.
 
 `actions > index.js`
+
 ```JS
 export const fetchHeroes = (request) => (dispatch) => {
 	dispatch(heroesFetching());
@@ -2446,12 +2486,13 @@ export const fetchHeroes = (request) => (dispatch) => {
 И тут далее в самом компоненте уже можем воспользоваться одним экшеном, который сам занесёт данные по персонажам в стейт, передав в него функцию совершения реквеста
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { fetchHeroes, heroDeleted } from '../../actions';
 
 const HeroesList = () => {
 	/// CODE ...
-	
+
 	const { request } = useHttp();
 
 	useEffect(() => {
@@ -2459,32 +2500,33 @@ const HeroesList = () => {
 	}, []);
 ```
 
-
 ## Redux Toolkit
 
 #RTK #Redux #ReduxToolkit
 
-
 Проблемы больших проектов на обычном редакса:
-- очень много *boilerplates* при создании `actionCreators` и `reducers`
-- при большом количестве `enhancers` и `middlewares` функция по созданию `store` сильно разрастается 
 
-**Redux Toolkit** включает в себя набор инструментов для более простой и быстрой работы с `states` и `store`. 
+- очень много _boilerplates_ при создании `actionCreators` и `reducers`
+- при большом количестве `enhancers` и `middlewares` функция по созданию `store` сильно разрастается
 
-Та же функция `createSelector` была переэкспортирована из модуля **Reselect** в **RTK** 
+**Redux Toolkit** включает в себя набор инструментов для более простой и быстрой работы с `states` и `store`.
+
+Та же функция `createSelector` была переэкспортирована из модуля **Reselect** в **RTK**
 
 ### Redux Toolkit `configureStore()`
 
-Функция `configureStore` предназначена для того, чтобы удобно автоматически регулировать `reducers`, подключать `middlewares` или `enhancers` и автоматически подключать **redux devtools** без дополнительных строк кода  
+Функция `configureStore` предназначена для того, чтобы удобно автоматически регулировать `reducers`, подключать `middlewares` или `enhancers` и автоматически подключать **redux devtools** без дополнительных строк кода
 
 В тулкит так же включены изначально самые популярные `middlewares`:
-- *Serializability Middlweware* - проверяет, чтобы в стейте были только те значения, которые должны быть в сторе
-- *Immutability Middlweware* - предназначен для обнаружения мутаций, которые могут быть в сторе
-- *Thunk Middlweware* - позволяет в экшены автоматически получать `dispatch`
 
-И уже так будет выглядеть создание нового `store` с использованием **RTK** 
+- _Serializability Middlweware_ - проверяет, чтобы в стейте были только те значения, которые должны быть в сторе
+- _Immutability Middlweware_ - предназначен для обнаружения мутаций, которые могут быть в сторе
+- _Thunk Middlweware_ - позволяет в экшены автоматически получать `dispatch`
+
+И уже так будет выглядеть создание нового `store` с использованием **RTK**
 
 `store > index.js`
+
 ```JS
 import { heroes } from '../reducers/heroes';
 import { filters } from '../reducers/filters';
@@ -2515,7 +2557,8 @@ export default store;
 Функция `createAction()` позволяет автоматически выполнять операцию по созданию экшена
 
 Функция принимает в себя:
-- тип действия 
+
+- тип действия
 - вспомогательную функцию
 
 И далее тут нужно сказать, что данная функция автоматически обрабатывает поступающие в неё данные. Т.е. если вызвать `heroesFetched` и передать в него аргумент, то он автоматически отправится в поле `payload`
@@ -2567,10 +2610,12 @@ const addTodo = createAction('todos/add', function prepare(text) {
 Функция `reducer` зачастую представляет из себя очень много блоков `switch-case` и много вложенных конструкций, которые нужно редактировать в глубине, что усложняет разработку
 
 Для упрощения создания `reducer` была добавлена функция `createReducer`, которая принимает в себя:
+
 - начальное состояние
 - `builder`, который позволяет строить `reducer` за счёт встроенных в него трёх функций
 
 `builder` использует три функции:
+
 - `addCase` - добавляет кейс в свитчер редьюсера
 - `addDefaultCase` - устанавливает дефолтный кейс выполнения
 - `addMatcher` - позволяет фильтровать входящие экшены
@@ -2578,6 +2623,7 @@ const addTodo = createAction('todos/add', function prepare(text) {
 И так выглядит реализация нашего редьюсера героев через `createReducer`:
 
 `reducers > heroes.js`
+
 ```JS
 import { createReducer } from '@reduxjs/toolkit';
 
@@ -2630,6 +2676,7 @@ export const heroes = createReducer(initialState, (builder) => {
 Однако функция `createReducer` требует для работы, чтобы все экшены были написаны с помощью `createAction`
 
 `actions > index.js`
+
 ```JS
 import { createAction } from '@reduxjs/toolkit';
 
@@ -2650,6 +2697,7 @@ export const heroDeleted = createAction('HERO_DELETED');
 Так же у нас есть вариант использовать более короткий способ создания редьюсеров через объект. Такой способ уже не работает с TS.
 
 `reducers > heroes.js`
+
 ```JS
 export const heroes = createReducer(
 	// начальное состояние
@@ -2684,17 +2732,19 @@ export const heroes = createReducer(
 
 - Данная функция объединяет функции `createAction` и `createReducer` в одно
 - Обычно она располагается рядом с файлом, к которому она и относится
-- В конец названия файла обычно добавляется суффикс `Slice` 
+- В конец названия файла обычно добавляется суффикс `Slice`
 
 Функция `createSlice` принимает в себя 4 аргумента:
-- `name` - пространство имён создаваемых действий (имя среза). Это имя *будет являться префиксом для всех имён экшенов*, которые мы будем передавать в качестве ключа внутри объекта `reducers`
+
+- `name` - пространство имён создаваемых действий (имя среза). Это имя _будет являться префиксом для всех имён экшенов_, которые мы будем передавать в качестве ключа внутри объекта `reducers`
 - `initialState` - начальное состояние
 - `reducers` - объект с обработчиками
 - `extraReducers` - объект с редьюсерами другого среза (обычно используется для обновления объекта, относящегося к другому слайсу)
 
-Конкретно тут был создан срез `actionCreators` и `reducer` для героев в одном файле рядом с самим компонентом 
+Конкретно тут был создан срез `actionCreators` и `reducer` для героев в одном файле рядом с самим компонентом
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -2740,6 +2790,7 @@ export default reducer;
 И далее импортируем наш `reducer` в `store`
 
 `store > index.js`
+
 ```JS
 import heroes from '../components/heroesList/heroesSlice';
 
@@ -2753,6 +2804,7 @@ const store = configureStore({
 Теперь всё то, что относится к `actionCreators` героев можно удалить из файла экшенов и импортировать нужные зависимости для работы функции `fetchHeroes`
 
 `actions > index.js`
+
 ```JS
 import {
 	heroCreated,
@@ -2776,11 +2828,12 @@ export const fetchHeroes = (request) => (dispatch) => {
 
 И теперь мы имеем работающее приложение, которое мы переписали на более коротком синтаксисе.
 
-Однако тут стоит сказать, что теперь наши действия были переименованы под образ `createSlice`, где обозначается пространство выполняемых действий экшеном (`heroes`) и сам `actionCreator` (`heroesFetching`) 
+Однако тут стоит сказать, что теперь наши действия были переименованы под образ `createSlice`, где обозначается пространство выполняемых действий экшеном (`heroes`) и сам `actionCreator` (`heroesFetching`)
 
 ![](_png/928c9f86e25941eb218bc5527a83b9d6.png)
 
 Если нам нужно будет не только получить, но и обогатить `payload`, то можно будет добавить передать в экшен два объекта:
+
 - `reducer` - это сам обработчик
 - `prepare` - обработчик, который обогащает `payload`
 
@@ -2837,12 +2890,13 @@ createSlice({
 
 ### Redux Toolkit `createAsyncThunk()`
 
-Функция `createAsyncThunk()` позволяет сделать асинхронный `actionCreator`, который будет вести себя ровно так же, как и при использовании обычного `redux-thunk`. 
+Функция `createAsyncThunk()` позволяет сделать асинхронный `actionCreator`, который будет вести себя ровно так же, как и при использовании обычного `redux-thunk`.
 Использование данной функции является приоритетным, так как при таком запросе `heroes/fetchHeroes` функция возвращает нам три экшена, которые поделены на:
--   `pending`: `'heroes/fetchHeroes/pending'`
--   `fulfilled`: `'heroes/fetchHeroes/fulfilled'`
--   `rejected`: `'heroes/fetchHeroes/rejected'`
-Такой подход позволит нам не обрабатывать три разных состояния функции самостоятельно, а перекладывать это на функционал тулкита.
+
+- `pending`: `'heroes/fetchHeroes/pending'`
+- `fulfilled`: `'heroes/fetchHeroes/fulfilled'`
+- `rejected`: `'heroes/fetchHeroes/rejected'`
+  Такой подход позволит нам не обрабатывать три разных состояния функции самостоятельно, а перекладывать это на функционал тулкита.
 
 > Тут нужно отметить, что из данной функции мы должны возвращать `Promise`, который функция сама и обработает по трём состояниям
 
@@ -2851,6 +2905,7 @@ createSlice({
 Тут мы создали функцию `fetchHeroes`, которая заменит `fetchHeroes` находящийся в `actions`. Далее нужно будет обработать три состояния `fetchHeroes` уже внутри самого `heroesSlice`, передав внутрь `extraReducers`
 
 `components > heroesList > heroesSlice.js`
+
 ```JS
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useHttp } from '../../hooks/http.hook';
@@ -2912,6 +2967,7 @@ export default reducer;
 Теперь тут меняем импорты
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { heroDeleted, fetchHeroes } from './heroesSlice';
 ```
@@ -2963,6 +3019,7 @@ export const useHttp = () => {
 Так же мы можем внутрь адаптера вложить свойства, которые мы не хотим обрабатывать через него (`heroesLoadingStatus`), а хотим обработать самостоятельно
 
 `components > heroesList > heroesSlice.js`
+
 ```JS
 // создаём адаптер
 const heroesAdapter = createEntityAdapter();
@@ -2977,7 +3034,7 @@ const initialState = heroesAdapter.getInitialState({
 
 ![](_png/a75f75aecfb62a2c77cf2737ba445232.png)
 
-Так же нужно сказать, что функция `createEntityAdapter` принимает в себя объект с переопределением начальных функций 
+Так же нужно сказать, что функция `createEntityAdapter` принимает в себя объект с переопределением начальных функций
 
 ```JS
 const booksAdapter = createEntityAdapter({
@@ -2990,24 +3047,25 @@ const booksAdapter = createEntityAdapter({
 
 CRUD-операции, которые предоставляет `createEntityAdapter`:
 
--   `addOne`: принимает один объект и добавляет его, если он еще не присутствует.
--   `addMany`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и добавляет их, если они еще не присутствуют.
--   `setOne`: принимает отдельный объект и добавляет или заменяет его
--   `setMany`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и добавляет или заменяет их.
--   `setAll`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и заменяет все существующие сущности значениями в массиве.
--   `removeOne`: принимает единственное значение идентификатора объекта и удаляет объект с этим идентификатором, если он существует.
--   `removeMany`: принимает массив значений идентификатора объекта и удаляет каждый объект с этими идентификаторами, если они существуют.
--   `removeAll`: удаляет все объекты из объекта состояния сущности.
--   `updateOne`: принимает "объект обновления", содержащий идентификатор объекта, и объект, содержащий одно или несколько новых значений поля для обновления внутри `changes` поля, и выполняет поверхностное обновление соответствующего объекта.
--   `updateMany`: принимает массив объектов обновления и выполняет мелкие обновления для всех соответствующих объектов.
--   `upsertOne`: принимает единую сущность. Если объект с таким идентификатором существует, он выполнит поверхностное обновление, и указанные поля будут объединены в существующий объект, а любые совпадающие поля будут перезаписывать существующие значения. Если объект не существует, он будет добавлен.
--   `upsertMany`: принимает массив объектов или объект в форме`Record<EntityId, T>`, который будет слегка изменен.
+- `addOne`: принимает один объект и добавляет его, если он еще не присутствует.
+- `addMany`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и добавляет их, если они еще не присутствуют.
+- `setOne`: принимает отдельный объект и добавляет или заменяет его
+- `setMany`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и добавляет или заменяет их.
+- `setAll`: принимает массив сущностей или объект в форме `Record<EntityId, T>` и заменяет все существующие сущности значениями в массиве.
+- `removeOne`: принимает единственное значение идентификатора объекта и удаляет объект с этим идентификатором, если он существует.
+- `removeMany`: принимает массив значений идентификатора объекта и удаляет каждый объект с этими идентификаторами, если они существуют.
+- `removeAll`: удаляет все объекты из объекта состояния сущности.
+- `updateOne`: принимает "объект обновления", содержащий идентификатор объекта, и объект, содержащий одно или несколько новых значений поля для обновления внутри `changes` поля, и выполняет поверхностное обновление соответствующего объекта.
+- `updateMany`: принимает массив объектов обновления и выполняет мелкие обновления для всех соответствующих объектов.
+- `upsertOne`: принимает единую сущность. Если объект с таким идентификатором существует, он выполнит поверхностное обновление, и указанные поля будут объединены в существующий объект, а любые совпадающие поля будут перезаписывать существующие значения. Если объект не существует, он будет добавлен.
+- `upsertMany`: принимает массив объектов или объект в форме`Record<EntityId, T>`, который будет слегка изменен.
 
 > Все вышеописанные методы следуют принципу **нормализации данных**. Они производят действия над данными по определённым условиям, если они существуют/не существуют
 
 Реализуем добавление персонажей в массив через адаптер. Для этого нам может подойти функция `setAll`, в которая будет являться местом, куда помещаем все данные, а вторым аргументом данные для помещения.
 
 `components > heroesList > heroesSlice.js`
+
 ```JS
 const heroesSlice = createSlice({
 	name: 'heroes',
@@ -3045,11 +3103,11 @@ const heroesSlice = createSlice({
 
 Чтобы работать с данным объектом и получать из него нужные сущности, нужно воспользоваться функциями выбора. Адаптер выбранной сущности содержит метод `getSelectors()`, которая предоставляет функционал селекторов уже знающих как считывать содержимое этой сущности:
 
--   `selectIds`: возвращает массив с идентификаторами `state.ids`.
--   `selectEntities`: возвращает объект `state.entities`.
--   `selectAll`: возвращает массив объектов с идентификаторами `state.ids`.
--   `selectTotal`: возвращает общее количество объектов, сохраняемых в этом состоянии.
--   `selectById`: учитывая состояние и идентификатор объекта, возвращает объект с этим идентификатором или `undefined`.
+- `selectIds`: возвращает массив с идентификаторами `state.ids`.
+- `selectEntities`: возвращает объект `state.entities`.
+- `selectAll`: возвращает массив объектов с идентификаторами `state.ids`.
+- `selectTotal`: возвращает общее количество объектов, сохраняемых в этом состоянии.
+- `selectById`: учитывая состояние и идентификатор объекта, возвращает объект с этим идентификатором или `undefined`.
 
 Если мы использем селекторы в глобальной областивидимости, то нам нужно будет самостоятельно указывать, с чем именно должна работать данная команда
 
@@ -3073,12 +3131,13 @@ const allBooks = globalizedSelectors.selectAll(store.getState())
 И теперь нам нужно добавить функционал по вытаскиванию всех элементов из стейта. Сделать это легко - мы просто из файла со слайсом будем экспортировать функцию `selectAll`, которую привяжем к `state.heroes`
 
 `components > heroesList > heroesSlice.js`
+
 ```JS
 // и теперь все функции для получения значений из стейта, которые мы используем, будут обращаться к героям
 export const { selectAll } = heroesAdapter.getSelectors((state) => state.heroes);
 ```
 
-Вторым аргументом в листе мы возвращали с помощью отдельной функции список всех персонажей. Теперь же можно вернуть всё с помощью функции-селектора 
+Вторым аргументом в листе мы возвращали с помощью отдельной функции список всех персонажей. Теперь же можно вернуть всё с помощью функции-селектора
 
 ![](_png/3b1dcbbe9d3115bc569138e3d10f890a.png)
 
@@ -3090,7 +3149,7 @@ export const { selectAll } = heroesAdapter.getSelectors((state) => state.heroes)
 
 ![](_png/b5f6eee8d55d775765e6641d7ce884cb.png)
 
-И теперь можно переписать все операции модификации стейта на круд-операции из самого адаптера. 
+И теперь можно переписать все операции модификации стейта на круд-операции из самого адаптера.
 
 Тут нужно сказать, что данные по `reducer`, действия над которыми происходят в пространстве имён `heroes`, будут помещаться в `state.entities.heroes`. Однако напрямую с ними взаимодействовать не придётся, так как мы их можем автоматически достать через селекторы
 
@@ -3102,16 +3161,14 @@ export const { selectAll } = heroesAdapter.getSelectors((state) => state.heroes)
 
 ![](_png/9665f64d38892294cbf40dd93bf30f3b.png)
 
-
->[!success] Вышеописанный подход с использованием ==Redux== позволяет нам скрывать логическую часть работы с данными от самого компонента, который эти данные отображает. Теперь ==View== работает отдельно и занимается только отображением данных без какого-либо их преобразования.
-
+> [!success] Вышеописанный подход с использованием ==Redux== позволяет нам скрывать логическую часть работы с данными от самого компонента, который эти данные отображает. Теперь ==View== работает отдельно и занимается только отображением данных без какого-либо их преобразования.
 
 ## 024 Redux Toolkit RTK Query
-
 
 RTK Qeury и React Query концептуально меняют подход к использованию данных в приложении. Они предлагают не изменять глобальные состояния, а оперировать загруженными данными
 
 Сейчас наше взаимодействие выглядит так:
+
 - мы отправляем запрос на сервер
 - мы получаем данные с сервера
 - отправляем изменение состояния в стейт
@@ -3119,19 +3176,22 @@ RTK Qeury и React Query концептуально меняют подход к
 ![](_png/706e2ba2e0a4288f02cb4f0c3f2112ea.png)
 
 Далее потребуются две основные функции для работы с Query:
+
 - `createApi` - полностью описывает поведение RTK Query
 - `fetchBaseQuery` - модифицированная функция `fetch()`
 
 Чтобы начать работать с данной библиотекой, нужно будет написать будущее АПИ общения с RTK Query:
+
 - Пишем функцию `createApi`, которая описывает взаимодействие с библиотекой и передаём в неё объект
-	- `reducerPath` будет указывать то пространство имён, в котором происходят все запросы
-	- `baseQuery` описывает полностью базовые параметры запроса на сервер
-		- функция `fetchBaseQuery` выполняет функцию фетча, но хранит дополнительные параметры для ртк
-		- `baseUrl` принимает строку для обращения к серверу
-	- `endpoints` хранит функцию, которая возвращает объект с теми запросами и изменениями, что мы можем вызвать
-		- свойство объекта будет входить в имя хука, который будет сгенерирован. Если мы имеем имя `getHeroes`, то библиотека сформирует хук `useGetHeroes[Query/Mutation]` (суффикс уже будет зависеть от типа того, что делает хук - просто запрос или мутация данных)
+    - `reducerPath` будет указывать то пространство имён, в котором происходят все запросы
+    - `baseQuery` описывает полностью базовые параметры запроса на сервер
+        - функция `fetchBaseQuery` выполняет функцию фетча, но хранит дополнительные параметры для ртк
+        - `baseUrl` принимает строку для обращения к серверу
+    - `endpoints` хранит функцию, которая возвращает объект с теми запросами и изменениями, что мы можем вызвать
+        - свойство объекта будет входить в имя хука, который будет сгенерирован. Если мы имеем имя `getHeroes`, то библиотека сформирует хук `useGetHeroes[Query/Mutation]` (суффикс уже будет зависеть от типа того, что делает хук - просто запрос или мутация данных)
 
 `api > apiSlice.js`
+
 ```JS
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -3160,24 +3220,26 @@ export const { useGetHeroesQuery } = apiSlice;
 ```
 
 Далее нужно сконфигурировать хранилище:
+
 - чтобы добавить новый reduce, нужно в качестве свойства указать динамическую строку `apiSlice.reducerPath` и указать значение переменной самого редьюсера `apiSlice.reducer`
 - далее добавляем `middleware` для обработки специфических запросов RTK Query
 
 `store > index.js`
+
 ```JS
 import { apiSlice } from '../api/apiSlice';
 
 const store = configureStore({
-	reducer: { 
-		heroes, 
-		filters, 
+	reducer: {
+		heroes,
+		filters,
 		// добавляем reducer, сформированный через RTK Query
-		[apiSlice.reducerPath]: apiSlice.reducer 
+		[apiSlice.reducerPath]: apiSlice.reducer
 	},
 	devTools: process.env.NODE_ENV === 'development',
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(
-			stringMiddleware, 
+			stringMiddleware,
 			// передаём сюда middleware для обработки запросов RTK Query
 			apiSlice.middleware
 		),
@@ -3189,6 +3251,7 @@ const store = configureStore({
 > Так же нужно упомянуть, что все те данные, что мы получили с сервера будут кешироваться в браузере на определённое время
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { heroDeleted, fetchHeroes, filteredHeroesSelector } from './heroesSlice';
 import { useGetHeroesQuery } from '../../api/apiSlice';
@@ -3229,7 +3292,7 @@ const HeroesList = () => {
 
 	/// CODE ...
 
-	// и сюда подставляем отсортированных персонажей  
+	// и сюда подставляем отсортированных персонажей
 	const elements = renderHeroesList(filteredHeroes);
 	return <TransitionGroup component='ul'>{elements}</TransitionGroup>;
 };
@@ -3244,6 +3307,7 @@ export default HeroesList;
 Далее добавим запрос на мутацию стейта, который будет отправлять на сервер запрос на добавление персонажа в список
 
 `api > apiSlice.js`
+
 ```JS
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -3270,9 +3334,10 @@ export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
 ```
 
 И далее можно будет применить данный хук мутации в коде:
+
 - хук возвращает массив из двух объектов:
-	- функция отправки мутации данных
-	- объект со статусом обработки запроса (тот же объект, что и у `query`)
+    - функция отправки мутации данных
+    - объект со статусом обработки запроса (тот же объект, что и у `query`)
 - далее можно будет применить функцию отправки героя на сервер и передать в него нового героя
 - и для нормальной работы всех обработчиков (объект из второго аргумента) используется функция `unwrap()`
 
@@ -3287,11 +3352,13 @@ export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
 ![](_png/418ea3c74724db6334644b6a86743e01.png)
 
 И теперь тут правим ситуацию:
+
 - объявляем глобально в АПИ поле `tagTypes`, которое принимает в себя массив тегов, которые будут использоваться для общения между методами
 - добавляем в первый запрос `providesTags` и тег, по которому будет оповещаться данный метод, чтобы он сработал при изменении данных
 - добавляем в запрос мутации `invalidatesTags`, который будет отправлять в хранилище тегов запрос, откуда на все подписанные методы с подходящими тегами будет приходить уведомление о переиспользовании
 
 `api > apiSlice.js`
+
 ```JS
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -3327,10 +3394,8 @@ export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
 
 ![](_png/8a45a2d40886061b454479142418d1d5.png)
 
-
-
-
 `api > apiSlice.js`
+
 ```JS
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -3363,10 +3428,10 @@ export const apiSlice = createApi({
 	}),
 });
 
-export const { 
-	useGetHeroesQuery, 
-	useCreateHeroMutation, 
-	useDeleteHeroMutation 
+export const {
+	useGetHeroesQuery,
+	useCreateHeroMutation,
+	useDeleteHeroMutation
 } = apiSlice;
 ```
 
@@ -3374,11 +3439,12 @@ export const {
 
 ![](_png/4955ea8761d104fcf028b311ae19172e.png)
 
-И по итогу мы теперь можем удалить весь `heroesSlice.js`, который использовался для реализации управления состояниями 
+И по итогу мы теперь можем удалить весь `heroesSlice.js`, который использовался для реализации управления состояниями
 
 И теперь список персонажей выглядит таком образом:
 
 `components > heroesList > HeroesList.js`
+
 ```JS
 import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -3450,6 +3516,7 @@ const HeroesList = () => {
 export default HeroesList;
 ```
 
->[!success] И сейчас можно сделать следующие выводы:
-> - RTK Query предлагает нам не пользоваться каким-либо единственным хранилищем состояния, а пользоваться активным взаимодействием с сервером для актуализации данных 
+> [!success] И сейчас можно сделать следующие выводы:
+>
+> - RTK Query предлагает нам не пользоваться каким-либо единственным хранилищем состояния, а пользоваться активным взаимодействием с сервером для актуализации данных
 > - В браузере же данные хранятся только в кешированном формате (то есть тех данных, что хранится просто в нашем стейте просто нет - они в памяти браузера)

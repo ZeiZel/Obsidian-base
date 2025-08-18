@@ -1,4 +1,4 @@
-#NodeJS #Npm #Testing #V8 
+#NodeJS #Npm #Testing #V8
 
 - [01 Введение](../../TypeScript/_lessons/01%20Введение.md)
 - [02 NVM](../../TypeScript/_lessons/02%20Настройка%20окружения.md)

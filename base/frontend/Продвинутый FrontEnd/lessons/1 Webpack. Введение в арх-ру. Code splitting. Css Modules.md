@@ -1,7 +1,6 @@
-
 ### 1 Начало разработки Основы Webpack. Добавляем TypeScript Метка
 
-Первым делом нужно инициализировать проект 
+Первым делом нужно инициализировать проект
 
 ```bash
  npm init -y
@@ -16,11 +15,13 @@ npm i -D html-webpack-plugin
 
 Далее идёт настройка конфига вебпака
 
-В `output` свойство `filename` отвечает за название того файла, который будет генерироваться. Конкретно тут используются шаблоны, конфигурирующие стандартное имя для файла и хеш: 
+В `output` свойство `filename` отвечает за название того файла, который будет генерироваться. Конкретно тут используются шаблоны, конфигурирующие стандартное имя для файла и хеш:
+
 - `[name]` - выберет дефолтное имя по пути
 - `[contenthash]` - будет добавлять хеш в название, чтобы браузер не сохранял закешированный файл
 
 `webpack.config.js`
+
 ```JS
 const path = require('path');
 const webpack = require('webpack');
@@ -74,6 +75,7 @@ npm install --save-dev typescript ts-node @types/node @types/webpack
 Далее меняем расширение конфига и меняем входной файл на `.ts`. Добавляем `resolve` и `module`, в который поместим лоадер для обработки ts файлов
 
 `webpack.config.ts`
+
 ```TS
 import path from 'path';
 import webpack from 'webpack';
@@ -130,40 +132,41 @@ export default webpackConfig;
 Для работы нодовских пакетов, нормальных импортов и модулей в целом, нужно добавить такой конфиг в проект:
 
 `tsconfig.json`
+
 ```JSON
-{  
-    "compilerOptions": {  
-       // постановка всех путей от начала папки проекта  
-       "baseUrl": ".",  
-       "paths": {  
-          "@/*": ["./src/*"]  
-       },  
-       "outDir": "./dist/",  
-       "noImplicitAny": true,  
-       // современные модули  
-       "module": "ESNext",  
-       "target": "es5",  
-       // устанавливаем данное значение, чтобы не было необходимости импортировать React  
-       "jsx": "react-jsx",  
-       "allowJs": true,  
-       "strict": true,  
-       "moduleResolution": "node",  
-       "esModuleInterop": true,  
-       // позволяет использовать обычные импорты вместо CommonJS  
-       "isolatedModules": true,  
-       // убирает потребность писать * as для импорта нодовских пакетов  
-       "allowSyntheticDefaultImports": true  
-    },  
-    "include": [  
-       "./src/**/*.ts",  
-       "./src/**/*.tsx"  
-    ],  
-    // настройки импортов нодовских плагинов  
-    "ts-node": {  
-       "compilerOptions": {  
-          "module": "CommonJS"  
-       }  
-    }  
+{
+    "compilerOptions": {
+       // постановка всех путей от начала папки проекта
+       "baseUrl": ".",
+       "paths": {
+          "@/*": ["./src/*"]
+       },
+       "outDir": "./dist/",
+       "noImplicitAny": true,
+       // современные модули
+       "module": "ESNext",
+       "target": "es5",
+       // устанавливаем данное значение, чтобы не было необходимости импортировать React
+       "jsx": "react-jsx",
+       "allowJs": true,
+       "strict": true,
+       "moduleResolution": "node",
+       "esModuleInterop": true,
+       // позволяет использовать обычные импорты вместо CommonJS
+       "isolatedModules": true,
+       // убирает потребность писать * as для импорта нодовских пакетов
+       "allowSyntheticDefaultImports": true
+    },
+    "include": [
+       "./src/**/*.ts",
+       "./src/**/*.tsx"
+    ],
+    // настройки импортов нодовских плагинов
+    "ts-node": {
+       "compilerOptions": {
+          "module": "CommonJS"
+       }
+    }
 }
 ```
 
@@ -176,10 +179,12 @@ export default webpackConfig;
 Далее перед нами встанет задача разбить конфигурацию вебпака на несколько разных файлов, чтобы было проще поддерживать разрастающийся конфиг
 
 Первым делом нужно будет описать типы тех данных, что будет принимать в себя конфиг:
+
 - типы режима (разработка | продакшн)
 - пути
 
 `config > build > types > config.ts`
+
 ```TS
 // режим, в котором мы находимся
 export type BuildMode = 'production' | 'development';
@@ -202,6 +207,7 @@ export interface BuildOptions {
 Далее нам нужно будет вынести плагины в отдельную функцию, которая будет принимать в себя объект конфига и брать из него пути, чтобы сослаться на html
 
 `config > build > buildPlugins.ts`
+
 ```TS
 import { WebpackPluginInstance, ProgressPlugin } from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
@@ -221,16 +227,17 @@ export function buildPlugins({ paths }: BuildOptions): WebpackPluginInstance[] {
 }
 ```
 
-Далее нужно будет вынести лоадеры в отдельный файл, так как их будет много. 
+Далее нужно будет вынести лоадеры в отдельный файл, так как их будет много.
 
 Некоторые лоадеры нужно будет вынести в константы, чтобы было проще отслеживать последовательность их выполнения (потому что это может играть роль в работе приложения)
 
 `config > build > buildLoaders.ts`
+
 ```TS
 import { RuleSetRule } from 'webpack';
 
 export function buildLoaders(): RuleSetRule[] {
-	
+
 	const typescriptLoader = {
 		test: /\.tsx?$/,
 		use: 'ts-loader',
@@ -244,6 +251,7 @@ export function buildLoaders(): RuleSetRule[] {
 Далее выносим резолверы в отдельную функцию
 
 `config > build > buildResolvers.ts`
+
 ```TS
 import { ResolveOptions } from 'webpack';
 
@@ -258,6 +266,7 @@ export function buildResolvers(): ResolveOptions {
 Выносим остальную часть конфига в отдельную функцию, которая будет принимать в себя опции конфига. Тут же и вызываем все функции для сборки остальных частей конфига вебпака
 
 `config > build > buildWebpackConfig.ts`
+
 ```TS
 import { Configuration } from 'webpack';
 import { BuildOptions } from './types/config';
@@ -301,6 +310,7 @@ export function buildWebpackConfig(options: BuildOptions): Configuration {
 В основном файле конфига добавляем переменные путей и разработки, чтобы можно было их контролировать из одного места и вызываем `buildWebpackConfig()`, чтобы собрать вебпак конфиг
 
 `webpack.config.ts`
+
 ```TS
 import path from 'path';
 import { Configuration } from 'webpack';
@@ -340,6 +350,7 @@ npm i -D webpack-dev-server @types/webpack-dev-server
 Далее нужно будет создать отдельную функцию конфига под сервер
 
 `config > build > buildDevServer.ts`
+
 ```TS
 import { BuildOptions } from './types/config';
 import { Configuration } from 'webpack-dev-server'; // импортируем конфигурацию отсюда
@@ -353,10 +364,12 @@ export function buildDevServer(options: BuildOptions): Configuration {
 ```
 
 Добавляем в основной конфиг два свойства:
-- devtool - будет формировать мэпы внутри файлов 
+
+- devtool - будет формировать мэпы внутри файлов
 - devServer - хранит конфиг для девсервера. Если мы находимся в продакшене, то нам не нужен конфиг
 
 `config > build > buildWebpackConfig.ts`
+
 ```TS
 import { Configuration } from 'webpack';
 import { BuildOptions } from './types/config';
@@ -392,6 +405,7 @@ export function buildWebpackConfig(options: BuildOptions): Configuration {
 Добавим в конфиг `BuildEnv`, который будет отвечать за попадаемые переменные окружения и добавим порт в `BuildOptions`, на котором будет запускаться приложение
 
 `config > build > types > config.ts`
+
 ```TS
 // режим, в котором мы находимся
 export type BuildMode = 'production' | 'development';
@@ -421,6 +435,7 @@ export interface BuildOptions {
 Чтобы переменные окружения попадали в конфиг, его нужно обернуть в функцию, которая будет принимать в себя `env`. После уже можно будет воспользоваться данными переменными и задать порт для приложения
 
 `webpack.config.ts`
+
 ```TS
 import path from 'path';
 import { Configuration } from 'webpack';
@@ -452,6 +467,7 @@ export default (env: BuildEnv) => {
 Теперь можно добавить три команды, которые будут выполнять разную сборку проекта
 
 `package.json`
+
 ```JSON
 "scripts": {
 	"start": "webpack serve --env port=3000",
@@ -478,6 +494,7 @@ npm install sass-loader sass webpack style-loader css-loader --save-dev
 Далее нужно добавить правила для лоадеров в конфиг `buildLoaders()`
 
 `config > build > buildLoaders.ts`
+
 ```TS
 import { RuleSetRule } from 'webpack';
 
@@ -508,6 +525,7 @@ export function buildLoaders(): RuleSetRule[] {
 Корневой компонент, которому мы поменяли расширение на TSX
 
 `src > index.tsx`
+
 ```TSX
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -528,6 +546,7 @@ root.render(
 Сам компонент с подключенными стилями
 
 `src > components > app > App.tsx`
+
 ```TSX
 import React from 'react';
 import './App.scss';
@@ -544,6 +563,7 @@ export const App = () => {
 Стили
 
 `src > components > app > App.scss`
+
 ```SCSS
 h1 {
 	font-size: 74px;
@@ -571,7 +591,7 @@ export const App = () => {
 
 ![](_png/1904bb4dc5d213fdb322965780eb4e13.png)
 
-Первым делом нужно установить экстрактор, который будет отделять чанки 
+Первым делом нужно установить экстрактор, который будет отделять чанки
 
 ```bash
 npm install --save-dev mini-css-extract-plugin
@@ -580,6 +600,7 @@ npm install --save-dev mini-css-extract-plugin
 Далее в конфигурацию плагинов нужно добавить `MiniCssExtractPlugin`, внутри которого нужно будет определить наименования собранных css-файлов
 
 `config > build > buildPlugins.ts`
+
 ```TS
 import { WebpackPluginInstance, ProgressPlugin } from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
@@ -608,6 +629,7 @@ export function buildPlugins({ paths }: BuildOptions): WebpackPluginInstance[] {
 В лоадерах нужно настроить `style-loader` и экстрактор, чтобы они работали в разное время (прод/дев) и нужно настроить `css-loader`, чтобы он поддерживал модули в названиях файлов и транспилировал их в объекты, которые поддерживаются JS
 
 `config > build > buildLoaders.ts`
+
 ```TS
 import { RuleSetRule } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -651,6 +673,7 @@ export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
 Так же нужно добавить глобальные типы, которые определят то, что находится внутри импортируемых модулей стилей - без этого TS не поймёт, что импортируется из модульных стилей
 
 `src > global.d.ts`
+
 ```TS
 declare module '*.scss' {
 	interface IClassNames {
@@ -667,24 +690,25 @@ declare module '*.scss' {
 
 ### 6 Роутинг Code splitting Lazy Suspence метка
 
-Первым делом нужно установить роутер и его 
+Первым делом нужно установить роутер и его
 
 ```bash
 npm i react-router-dom
 npm i -D @types/react-router-dom
 ```
 
-Code Splitting, Lazy Loading, Async Chunks - это всё механизмы подгрузки данных на страницу по необходимости. 
+Code Splitting, Lazy Loading, Async Chunks - это всё механизмы подгрузки данных на страницу по необходимости.
 
-Конкретно мы имеем SPA и несколько страниц в рамках него и их всех стоило бы подгружать ровно тогда, когда он на них перейдёт. 
+Конкретно мы имеем SPA и несколько страниц в рамках него и их всех стоило бы подгружать ровно тогда, когда он на них перейдёт.
 
-В обычном случае у нас генерируется один бандл со всеми страницами, а нужно, чтобы генерировалось несколько 
+В обычном случае у нас генерируется один бандл со всеми страницами, а нужно, чтобы генерировалось несколько
 
 ![](_png/8f36c962d16b40aa00f7f204db8d33ed.png)
 
-Оборачиваем всё приложение в `BrowserRouter`, чтобы работали роуты 
+Оборачиваем всё приложение в `BrowserRouter`, чтобы работали роуты
 
 `src > index.tsx`
+
 ```TSX
 import { BrowserRouter } from 'react-router-dom';
 
@@ -701,6 +725,7 @@ root.render(
 Далее нужно добавить опцию `historyApiFallback`, чтобы проксировать все запросы через index. Это нужно, чтобы страница не выдавала ошибку при перезагрузке, если это не стартовая страница
 
 `config > build > buildDevServer.ts
+
 ```TS
 import { BuildOptions } from './types/config';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
@@ -718,6 +743,7 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
 Далее нужно реализовать две страницы в приложении
 
 `src > pages > AboutPage.tsx`
+
 ```TSX
 import React from 'react';
 
@@ -729,6 +755,7 @@ export default AboutPage;
 ```
 
 `src > pages > MainPage.tsx`
+
 ```TSX
 import React from 'react';
 
@@ -744,6 +771,7 @@ export default MainPage;
 Такой подход будет говорить webpack, что мы хотим выделить эти страницы в отдельные бандлы, чтобы они подгружались только при необходимости
 
 `src > pages > AboutPage.async.tsx`
+
 ```TSX
 import { lazy } from 'react';
 
@@ -751,19 +779,21 @@ export const AboutPageAsync = lazy(() => import('./AboutPage'));
 ```
 
 `src > pages > MainPage.async.tsx`
+
 ```TSX
 import { lazy } from 'react';
 
 export const MainPageAsync = lazy(() => import('./MainPage'));
 ```
 
-И в корневом компоненте `App` нужно реализовать сам роутинг. 
+И в корневом компоненте `App` нужно реализовать сам роутинг.
 
 Вместо обычных страниц, нужно использовать их асинхронные версии, чтобы они уходили в отдельный бандл.
 
-Реакт обязует нас использовать компонент `Suspense` вместе с асинхронными компонентами, чтобы пользователь знал, что идёт подзагрузка страницы. 
+Реакт обязует нас использовать компонент `Suspense` вместе с асинхронными компонентами, чтобы пользователь знал, что идёт подзагрузка страницы.
 
 `src > components > app > App.tsx`
+
 ```TSX
 import React, { Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -800,6 +830,7 @@ export const App = () => {
 Стили будут распределены подобным образом (reset.scss находится [тут](../../Tips&Tricks/Reset&Reboot.md)):
 
 `src > styles > index.scss`
+
 ```SCSS
 @import "./variables/global";
 
@@ -826,6 +857,7 @@ export const App = () => {
 ```
 
 `src > styles > variables > global.scss`
+
 ```SCSS
 :root {
 	--font-family-main: Montserrat, Roboto, sans-serif;
@@ -841,6 +873,7 @@ export const App = () => {
 ```
 
 `src > styles > themes > light.scss`
+
 ```SCSS
 .app.light {
 	--bg-color: #fff;
@@ -852,6 +885,7 @@ export const App = () => {
 ```
 
 `src > styles > themes > dark.scss`
+
 ```SCSS
 .app.dark {
 	--bg-color: #242b33;
@@ -862,9 +896,10 @@ export const App = () => {
 }
 ```
 
-И первым делом, что нужно сделать для глобального сохранения состояния темы - это создать контекст, который будет в себе хранить функцию смены темы и само значение темы 
+И первым делом, что нужно сделать для глобального сохранения состояния темы - это создать контекст, который будет в себе хранить функцию смены темы и само значение темы
 
 `src > theme > ThemeContext.ts`
+
 ```TS
 import { createContext } from 'react';
 
@@ -889,6 +924,7 @@ export const LOCAL_STORAGE_THEME_KEY = 'theme';
 Далее нужно будет реализовать провайдер контекста, в который мы обернём всё приложение
 
 `src > theme > ThemeProvider.ts`
+
 ```TSX
 import React, { DetailedHTMLProps, FC, HTMLAttributes, ReactNode, useMemo, useState } from 'react';
 import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from './ThemeContext';
@@ -925,6 +961,7 @@ export default ThemeProvider;
 И уже потом оборачиваем всё приложение в провайдер
 
 `src > index.tsx`
+
 ```TSX
 const root = createRoot(document.getElementById('root'));
 root.render(
@@ -941,6 +978,7 @@ root.render(
 Тут реализован хук получения функции изменения темы и самой темы
 
 `src > theme > useTheme.tsx
+
 ```TSX
 import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from './ThemeContext';
 import { useContext } from 'react';
@@ -963,9 +1001,10 @@ export function useTheme(): IUseTheme {
 }
 ```
 
-И далее просто получаем функцию смены темы и саму тему в корневом компоненте приложения 
+И далее просто получаем функцию смены темы и саму тему в корневом компоненте приложения
 
 `src > components > app > App.tsx`
+
 ```TSX
 import React, { Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -1014,42 +1053,44 @@ export const App = () => {
 Ниже представлена реализация замены библиотеке `classnames` (или `clsx`), которая будет принимать в себя классы по условию и массив различных классов
 
 `src > helpers > classNames > classNames.ts`
+
 ```TS
-/** тип объекта с классами */  
-type ClassObject = {  
-    [key: string]: boolean;  
-};  
-  
-/** аргументы функции cn */  
-type TClassValue = string | number | boolean | null | undefined | ClassObject;  
-  
-/**  
- * функция для сборки классов * @param {Array} args - аргументы для билда классов  
- * @returns {String} string - результирующая строка  
- * */export const cn = (...args: TClassValue[]): string => {  
-    const classes: string[] = [];  
-  
-    args.forEach((arg: TClassValue) => {  
-       if (Array.isArray(arg)) {  
-          classes.push(...arg.filter(Boolean).map(String));  
-       } else if (typeof arg === 'string') {  
-          classes.push(arg);  
-       } else if (typeof arg === 'object' && arg !== null) {  
-          Object.keys(arg).forEach((key) => {  
-             if (arg[key]) {  
-                classes.push(key);  
-             }  
-          });  
-       }  
-    });  
-  
-    return classes.join(' ');  
+/** тип объекта с классами */
+type ClassObject = {
+    [key: string]: boolean;
+};
+
+/** аргументы функции cn */
+type TClassValue = string | number | boolean | null | undefined | ClassObject;
+
+/**
+ * функция для сборки классов * @param {Array} args - аргументы для билда классов
+ * @returns {String} string - результирующая строка
+ * */export const cn = (...args: TClassValue[]): string => {
+    const classes: string[] = [];
+
+    args.forEach((arg: TClassValue) => {
+       if (Array.isArray(arg)) {
+          classes.push(...arg.filter(Boolean).map(String));
+       } else if (typeof arg === 'string') {
+          classes.push(arg);
+       } else if (typeof arg === 'object' && arg !== null) {
+          Object.keys(arg).forEach((key) => {
+             if (arg[key]) {
+                classes.push(key);
+             }
+          });
+       }
+    });
+
+    return classes.join(' ');
 };
 ```
 
 Тут представлено использование функции
 
 `src > components > app > App.tsx
+
 ```TSX
 export const App = () => {
 	const { toggleTheme, theme } = useTheme();
@@ -1077,6 +1118,7 @@ export const App = () => {
 В данном проекте будет использоваться архитектура [FSD](https://feature-sliced.design/ru/docs/get-started/overview), которая предоставляет оптимальную организацию проекта фронтенд приложения
 
 [FSD](../../../Architecture/FSD.md) предоставляет архитектуру, которая делит приложение на 7 компонентов, каждое из которых делится на слайсы:
+
 1. `shared` — переиспользуемый код, не имеющий отношения к специфике приложения/бизнеса.(например, UIKit, libs, API)
 2. `entities` (сущности) — бизнес-сущности.(например, User, Product, Order)
 3. `features` (фичи) — взаимодействия с пользователем, действия, которые несут бизнес-ценность для пользователя.(например, SendComment, AddToCart, UsersSearch)
@@ -1090,6 +1132,7 @@ export const App = () => {
 Первым делом, нужно настроить абсолютные пути в самом конфиге TS
 
 `tsconfig.json`
+
 ```JSON
 // постановка всех путей от начала папки проекта
 "baseUrl": ".",
@@ -1104,6 +1147,7 @@ export const App = () => {
 Далее нужно добавить в интерфейс свойство базового пути конфига
 
 `config > build > types > config.ts
+
 ```TS
 export interface BuildPaths {
 	entry: string;
@@ -1116,6 +1160,7 @@ export interface BuildPaths {
 И далее добавим путь до папки `src`
 
 `webpack.config.ts
+
 ```TS
 export default (env: BuildEnv) => {
 	const paths: BuildPaths = {
@@ -1143,6 +1188,7 @@ export default (env: BuildEnv) => {
 Этот путь нужен был для настройки конфига `buildResolvers`, в котором нужно указать настройки абсолютных путей (`preferAbsolute`, `modules`, `mainFields`, `alias`)
 
 `config > build > buildResolvers.ts`
+
 ```TS
 import { ResolveOptions } from 'webpack';
 import { BuildOptions } from './types/config';
@@ -1170,11 +1216,13 @@ export function buildResolvers(options: BuildOptions): ResolveOptions {
 Все компоненты страниц, которые связаны с отображением, идут в папку `ui`. Из неё экспортируем асинхронный компонент, который будем использовать в `App`
 
 `pages > MainPage > index.ts`
+
 ```TS
 export { MainPageAsync as MainPage } from './ui/MainPage.async';
 ```
 
 `pages > AboutPage > index.ts`
+
 ```TS
 export { AboutPageAsync as AboutPage } from './ui/AboutPage.async';
 ```
@@ -1182,6 +1230,7 @@ export { AboutPageAsync as AboutPage } from './ui/AboutPage.async';
 И далее редактируем импорты и имена компонентов
 
 `src > app > App.tsx`
+
 ```TSX
 import { MainPage } from 'pages/MainPage';
 import { AboutPage } from 'pages/AboutPage';

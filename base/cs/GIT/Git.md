@@ -1,6 +1,6 @@
-#Git #GitHub 
+#Git #GitHub
 
->[!tip] [Гайд](https://githowto.com/ru/setup)
+> [!tip] [Гайд](https://githowto.com/ru/setup)
 
 - [1. Введение](_lessons/1.%20Введение.md)
 - [2. Базовые команды](_lessons/2.%20Базовые%20команды.md)
@@ -11,6 +11,7 @@
 - [7. Удалённый репозиторий](_lessons/7.%20Удалённый%20репозиторий.md)
 
 Дополнительный материалы:
+
 - [Соглашение о коммитах 1.0.0](Соглашение%20о%20коммитах%201.0.0.md)
 - [GitFlow](GitFlow.md)
 - [Github Actions](Github%20Actions.md)

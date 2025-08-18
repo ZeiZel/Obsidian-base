@@ -1,6 +1,0 @@
-@use "./base.scss";
- 
-[saved-theme=dark] code[data-theme*=\ ] {
-    color: var(--shiki-dark);
-    background-color: #3B4252;
-}

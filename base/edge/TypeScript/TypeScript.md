@@ -1,11 +1,11 @@
 ---
 tags:
-  - typescript
-  - javascript
-  - decorators
-  - generics
-  - infer
-  - tsconfig
+    - typescript
+    - javascript
+    - decorators
+    - generics
+    - infer
+    - tsconfig
 ---
 
 ## Введение
@@ -49,9 +49,8 @@ TypeScript полностью совместим с JavaScript и поддерж
 
 Применяется TS во всех JS-технологиях, включая: веб-фронтенд (Angular, React), серверный бэкенд (Node.js, Next.js), мобильные приложения (React Native) и другие.
 
-
-
 ---
+
 ## Основные типы
 
 ![](_png/8972c51fc89c2fab984a6a2e2568047d.png)
@@ -119,13 +118,14 @@ console.log(res);
 
 ### Типы в функциях
 
-Изначально мы обязаны писать типы для функции. По умолчанию компилятор предлагает нам устанавливать `any` на все переменные, которые мы не протипизировали 
+Изначально мы обязаны писать типы для функции. По умолчанию компилятор предлагает нам устанавливать `any` на все переменные, которые мы не протипизировали
 
 ![](_png/30b59f9b594071ba3c6657885f100489.png)
 
 Чтобы `any` стоял по умолчанию, мы можем в конфиге раскомментировать данную строку:
 
 `tsconfig.json`
+
 ```JSON
 "noImplicitAny": false
 ```
@@ -140,11 +140,11 @@ console.log(res);
 
 ```TS
 function getName(name: string, surname: string): string {
-	return `${name} ${surname}` 
+	return `${name} ${surname}`
 }
 
 const getNameArrow = (name: string, surname: string): string {
-	return `${name} ${surname}` 
+	return `${name} ${surname}`
 }
 ```
 
@@ -152,7 +152,7 @@ const getNameArrow = (name: string, surname: string): string {
 
 ```TS
 function getName(name, surname) {
-	return `${name} ${surname}` 
+	return `${name} ${surname}`
 }
 
 console.log(getName(true, false)); // выйдет строка true false
@@ -162,7 +162,7 @@ console.log(getName(true, false)); // выйдет строка true false
 
 ```TS
 function getName(name: string, surname: string): string {
-	return `${name} ${surname}` 
+	return `${name} ${surname}`
 }
 
 console.log(getName('Valery', true)); // Error
@@ -198,10 +198,10 @@ console.log(getName('Valery', true)); // Error
 
 Tuples или кортежи – это массивы, которым мы задали определённый список на типы данных
 
-1) Массив без определённого типа данных – можно поместить всё
-2) Массив из одного элемента (можно через запятую указывать какие типы данных будет иметь каждая позиция)
-3) Массив с определённым типом данных
-4) Юнион – он хранит определённый разрез типов данных (тут на примере вмещает в себя и стрингу, и число)
+1. Массив без определённого типа данных – можно поместить всё
+2. Массив из одного элемента (можно через запятую указывать какие типы данных будет иметь каждая позиция)
+3. Массив с определённым типом данных
+4. Юнион – он хранит определённый разрез типов данных (тут на примере вмещает в себя и стрингу, и число)
 
 ![](_png/4a2ac18edd3a60891d16e7a53f310ccc.png)
 
@@ -233,10 +233,10 @@ Tuples или кортежи – это массивы, которым мы за
 
 И вот примерно так выглядят массивы с ридонли
 
-1) Тут представлен обычный массив строк
-2) Тут уже массив строк, который изменять нельзя. Сколько будет и какие будут базовые значения, такими они и останутся – изменить нельзя
-3) Тут показан пример создания массива строк через дженерик. Он работает аналогично первому примеру
-4) Это дженерик ридонли массива `<строкового>`. Как видно, запушить в него новое значение так же нельзя и изменять тоже. Это просто ещё одна вариация записи ридонли массива через дженерик
+1. Тут представлен обычный массив строк
+2. Тут уже массив строк, который изменять нельзя. Сколько будет и какие будут базовые значения, такими они и останутся – изменить нельзя
+3. Тут показан пример создания массива строк через дженерик. Он работает аналогично первому примеру
+4. Это дженерик ридонли массива `<строкового>`. Как видно, запушить в него новое значение так же нельзя и изменять тоже. Это просто ещё одна вариация записи ридонли массива через дженерик
 
 ![](_png/f89f7aef94066ccf2efadc34973d2d86.png)
 
@@ -307,9 +307,8 @@ const adming = 0 /** Roles.ADMIN */
 
 ![](_png/b4cf6f98f3e732f1ae31993040c711fc.png)
 
-
-
 ---
+
 ## Продвинутые типы
 
 ### Union
@@ -406,8 +405,8 @@ function sumOrConcatenation(a: string | number, b: string | number) {
 
 Уже таким образом мы можем создать объект-словарь
 
-1) Неопределённое количество свойств – `[наименование: тип]`
-2) Значение – тут Юзер
+1. Неопределённое количество свойств – `[наименование: тип]`
+2. Значение – тут Юзер
 
 Однако словари создаются обычно через третью запись (дженерик)
 
@@ -467,7 +466,7 @@ function sumOrConcatenation(a: string | number, b: string | number) {
 
 ### Void
 
-`void` – это особый тип данных, который нам говорит, что функция ничего не возвращает. Функция может возвращать какое-либо значение, но мы ни в коем случае не будем его принимать и не будем ничего возвращать. 
+`void` – это особый тип данных, который нам говорит, что функция ничего не возвращает. Функция может возвращать какое-либо значение, но мы ни в коем случае не будем его принимать и не будем ничего возвращать.
 
 > `void != undefined`
 
@@ -491,8 +490,8 @@ function sumOrConcatenation(a: string | number, b: string | number) {
 
 Ну и дальше идёт кейс по ошибкам. Раньше еррор имел тип эни, но с версии «4.4», `error` – это непонятный тип. Теперь чтобы работать с ошибкой, нужно добавлять дополнительную конструкцию, которая будет проверять нам, что мы работаем конкретно с ошибкой
 
-1) Проверяем ошибку по инстансу объекта
-2) Делаем проверку через присваивание переменной к ошибке (не самый лучший вариант)
+1. Проверяем ошибку по инстансу объекта
+2. Делаем проверку через присваивание переменной к ошибке (не самый лучший вариант)
 
 ![](_png/42bb4f7ac57dd3bf43c639aa5e2f4636.png)
 
@@ -627,7 +626,7 @@ interface User {
 const a = {};
 
 function assertUser(obj: unknown): asserts obj is User {
-    if (typeof obj === 'object' && !!obj && 'name' in obj) return; 
+    if (typeof obj === 'object' && !!obj && 'name' in obj) return;
     throw new Error('Это не пользователь');
 }
 
@@ -638,7 +637,8 @@ console.log('That\'s is user: ', a.name)
 
 ![](../../_png/Pasted%20image%2020250802123715.png)
 
->[!success] Это полезно когда: 
+> [!success] Это полезно когда:
+>
 > - Нам не нужна огромная вложенность if
 > - Когда нам нужно сделать сразу несколько проверок подряд
 
@@ -649,36 +649,36 @@ console.log('That\'s is user: ', a.name)
 Отправная точка написания кода
 
 ```TypeScript
-interface IPayment {  
-   sum: number;  
-   from: number;  
-   to: number;  
-}  
-  
-enum PaymentStatus {  
-   Success = 'success',  
-   Failed = 'failed',  
-}  
-  
-interface IPaymentRequest extends IPayment { }  
-  
-interface IDataSuccess extends IPayment {  
-   databaseId: number;  
-}  
-  
-interface IDataFailed {  
-   errorMessage: string;  
-   errorCode: number;  
-}  
-  
-interface IResponseSuccess {  
-   status: PaymentStatus.Success;  
-   data: IDataSuccess;  
-}  
-  
-interface IResponseFailed {  
-   status: PaymentStatus.Failed;  
-   data: IDataFailed;  
+interface IPayment {
+   sum: number;
+   from: number;
+   to: number;
+}
+
+enum PaymentStatus {
+   Success = 'success',
+   Failed = 'failed',
+}
+
+interface IPaymentRequest extends IPayment { }
+
+interface IDataSuccess extends IPayment {
+   databaseId: number;
+}
+
+interface IDataFailed {
+   errorMessage: string;
+   errorCode: number;
+}
+
+interface IResponseSuccess {
+   status: PaymentStatus.Success;
+   data: IDataSuccess;
+}
+
+interface IResponseFailed {
+   status: PaymentStatus.Failed;
+   data: IDataFailed;
 }
 ```
 
@@ -691,26 +691,25 @@ type f = (res: IResponseSuccess | IResponseFailed) => number;
 Решение. Сразу хочется сказать, что это излишний код для проверки свойства
 
 ```TypeScript
-type res = IResponseSuccess | IResponseFailed;  
-function responseChecker(res: res): number {  
-   if (responseGuard(res)) {  
-      return res.data.databaseId; // в фейле нет свойства databaseId  
-   } else {  
-      throw new Error(res.data.errorMessage); // только в фейле есть свойство ошибки  
-   }  
-}  
-  
-function responseGuard(res): res is IResponseSuccess {  
-   if (res.data === "IDataFailed") {  
-      return true;  
-   }  
-   return false;  
+type res = IResponseSuccess | IResponseFailed;
+function responseChecker(res: res): number {
+   if (responseGuard(res)) {
+      return res.data.databaseId; // в фейле нет свойства databaseId
+   } else {
+      throw new Error(res.data.errorMessage); // только в фейле есть свойство ошибки
+   }
+}
+
+function responseGuard(res): res is IResponseSuccess {
+   if (res.data === "IDataFailed") {
+      return true;
+   }
+   return false;
 }
 ```
 
-
-
 ---
+
 ## Классы
 
 ### Вводное видео - немного об ООП
@@ -720,33 +719,33 @@ function responseGuard(res): res is IResponseSuccess {
 ![ООП | 700](_png/fc8c160bd86cca7bffc0a33c069500a1.png)
 
 - Принципы ООП:
-	- **Абстракция** - написание реальной сущности, абстрагируясь от его реальных свойств и качеств
-	- **Инкапсуляция** - обеспечивает присвоение данных и функций к определённому объекту и сокрывает его данные от внешних изменений
-	- **Полиморфизм** - один интерфейс - множество абстракций (реализаций)
-	- **Наследование** - делегирование кода дочерним элементам объекта
+    - **Абстракция** - написание реальной сущности, абстрагируясь от его реальных свойств и качеств
+    - **Инкапсуляция** - обеспечивает присвоение данных и функций к определённому объекту и сокрывает его данные от внешних изменений
+    - **Полиморфизм** - один интерфейс - множество абстракций (реализаций)
+    - **Наследование** - делегирование кода дочерним элементам объекта
 
 ![ | 550](_png/ff068bf90e57bcc8fe088e5166c5846e.png)
 
-**Класс** - это чертёж объекта. Он определяет структуру будущего инстанса. 
+**Класс** - это чертёж объекта. Он определяет структуру будущего инстанса.
 Класс пользователь содержит функционал и начертания того, что будет хранить пользователь. При регистрации нового пользователя, мы создаём инстанс юзера и присваиваем ему свои данные, сохраняя методы и свойства оригинального класса (родителя)
 
 ![](_png/7d1db108af6d1c2beec7a1992a432f97.png)
 
 ### Создание класса
 
-Синтаксис классов очень похож на стоковый JS. Дополнительно только в самом классу прописываем поля с типами и в конструкторе вписываем их. 
+Синтаксис классов очень похож на стоковый JS. Дополнительно только в самом классу прописываем поля с типами и в конструкторе вписываем их.
 
 ```TS
-class User {  
-    name: string;  
-    surname: string;  
-  
-    constructor(name: string, surname: string) {  
-        this.name = name;  
-        this.surname = surname;  
-    }  
-}  
-  
+class User {
+    name: string;
+    surname: string;
+
+    constructor(name: string, surname: string) {
+        this.name = name;
+        this.surname = surname;
+    }
+}
+
 const user = new User("Вася", "Пупкин");
 ```
 
@@ -760,10 +759,10 @@ const user = new User("Вася", "Пупкин");
 И теперь мы можем использовать классы в качестве конструктора. Так же такой функционал расширяют декораторы
 
 ```TS
-class Admin {  
-    role: number;  
-}  
-const admin = new Admin();  
+class Admin {
+    role: number;
+}
+const admin = new Admin();
 admin.role = 1;
 ```
 
@@ -774,42 +773,42 @@ admin.role = 1;
 ```
 
 ```TS
-class Admin {  
+class Admin {
     role!: number; // "Отстань, я знаю, что делаю"
-}  
-const admin = new Admin();  
+}
+const admin = new Admin();
 admin.role = 1;
 ```
 
 ### Конструктор
 
 - Что такое конструктор?
-	- Нужно сразу сказаать, что конструктор триггерится при написании оператора `new`. 
-	- Так же конструктор всегда возвращает свой объект (это функция, которая возвращает свой класс)
-	- Следующее идёт из прошлого. Мы не можем типизировать возврат конструктора
-	- Конструктор не может принимать дженерики. Их может принять только класс
-	- Так же конструктору можно описать некоторый оверлоад (с дополнительными сигнатурами). Например, можно добавить необязательные поля
+    - Нужно сразу сказаать, что конструктор триггерится при написании оператора `new`.
+    - Так же конструктор всегда возвращает свой объект (это функция, которая возвращает свой класс)
+    - Следующее идёт из прошлого. Мы не можем типизировать возврат конструктора
+    - Конструктор не может принимать дженерики. Их может принять только класс
+    - Так же конструктору можно описать некоторый оверлоад (с дополнительными сигнатурами). Например, можно добавить необязательные поля
 
 ```TS
-class User {  
-    name: string;  
-  
+class User {
+    name: string;
+
     constructor(name: string) { // function(name:string): User
-        this.name = name;  
-    }  
+        this.name = name;
+    }
 }
 ```
 
 И далее попробуем реализовать класс, который должен нормально работать и без передачи аргументов (чтобы у нас была возможность передать параметр и не передать его)
 
 ```TS
-class User {  
-    name: string;  
-  
-    constructor();  
-    constructor(name: string) {  
-        this.name = name;  
-    }  
+class User {
+    name: string;
+
+    constructor();
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 ```
 
@@ -833,117 +832,117 @@ constructor();
 Для конструктора реализации нам нужно указать, что те параметры, которые отсутствуют в одном из конструкторов - необязательны (через "`?`"). Так же, чтобы всё работало, нужно реализовать сужение типов (так как при вызове первого внешнего конструктора будет `undefined`, а при вызове второго - `string`)
 
 ```TS
-class User {  
-    name: string;  
-  
-    constructor();  
-    constructor(name: string);  
-    constructor(name?: string) {  
-        if (typeof name === 'string') {  
-            this.name = name;  
-        }    }  
-}  
-  
-const user = new User("Вася");  
+class User {
+    name: string;
+
+    constructor();
+    constructor(name: string);
+    constructor(name?: string) {
+        if (typeof name === 'string') {
+            this.name = name;
+        }    }
+}
+
+const user = new User("Вася");
 const user2 = new User();
 ```
 
 Преймущество использования такого подхода заключается в том, что мы можем описывать совершенно различные конструкторы, скрывая логику применения внутри них
 
-Например, мы хотим реализовать теперь конструктор, который будет принимать в себя либо имя, либо возраст. 
+Например, мы хотим реализовать теперь конструктор, который будет принимать в себя либо имя, либо возраст.
 Создаём третий внешний конструктор, который будет принимать в себя только число. И теперь далее в конструкторе реализации мы будем принимать не просто имя, а в переменную может попасть либо имя, либо число. В самом конструкторе реализации нужно будет продолжить сужение типов (стринга - число)
 
 ```TS
-class User {  
-    name: string;  
-    age: number;  
-  
-    constructor();  
-    constructor(name: string);  
-    constructor(age: number);  
-    constructor(ageOrName?: string | number) {  
-        if (typeof ageOrName === 'string') {  
-            this.name = ageOrName;  
-        } else if (typeof ageOrName === 'number') {  
-            this.age = ageOrName;  
-        }    }  
-}  
-  
-const userName = new User("Вася");  
-const userNull = new User();  
+class User {
+    name: string;
+    age: number;
+
+    constructor();
+    constructor(name: string);
+    constructor(age: number);
+    constructor(ageOrName?: string | number) {
+        if (typeof ageOrName === 'string') {
+            this.name = ageOrName;
+        } else if (typeof ageOrName === 'number') {
+            this.age = ageOrName;
+        }    }
+}
+
+const userName = new User("Вася");
+const userNull = new User();
 const userAge = new User(33);
 ```
 
 А теперь мы реализовали ввод сразу и имени, и возраста в конструктор
 
 ```TS
-class User {  
-    name: string;  
-    age: number;  
-  
-    constructor();  
-    constructor(name: string);  
-    constructor(age: number);  
-    constructor(name: string, age: number);  
-    constructor(ageOrName?: string | number, age?: number) {  
-        if (typeof ageOrName === 'string') {  
-		    this.name = ageOrName;  
-		} else if (typeof ageOrName === 'number') {  
-		    this.age = ageOrName;  
-		}  
-		  
-		if (typeof age === 'number') {  
-		    this.age = age;  
+class User {
+    name: string;
+    age: number;
+
+    constructor();
+    constructor(name: string);
+    constructor(age: number);
+    constructor(name: string, age: number);
+    constructor(ageOrName?: string | number, age?: number) {
+        if (typeof ageOrName === 'string') {
+		    this.name = ageOrName;
+		} else if (typeof ageOrName === 'number') {
+		    this.age = ageOrName;
 		}
-}  
-  
-const userName = new User("Вася");  
-const userNull = new User();  
-const userAge = new User(33);  
+
+		if (typeof age === 'number') {
+		    this.age = age;
+		}
+}
+
+const userName = new User("Вася");
+const userNull = new User();
+const userAge = new User(33);
 const userNameAndAge = new User("Вася", 33);
 ```
 
-Однако тут нужно объяснить одну простую истину: **делать конструкторы более чем с 3-4 перегрузками - уже нечитабельно и так делать некруто**. 
+Однако тут нужно объяснить одну простую истину: **делать конструкторы более чем с 3-4 перегрузками - уже нечитабельно и так делать некруто**.
 Чтобы нормально реализовать более громоздкую реализацию класса, нужно делать статичные методы
 
 ### Методы
 
-Методы - это свойства объекта, значениями которых является функция. 
+Методы - это свойства объекта, значениями которых является функция.
 Конкретно в классе объект записывается как функция, но без ключевого слова `function`
 
 ```TS
-enum PaymentStatus {  
-    SUCCESS,  
-    HOLD,  
-    REVERSED,  
-    FAILED  
-}  
-  
-class Payment {  
-    id: number;  
-    status: PaymentStatus;  
-    createdAt: Date;  
-    updatedAt: Date;  
-  
-    constructor(id: number) {  
-        this.id = id;  
-        this.status = PaymentStatus.HOLD;  
-        this.createdAt = new Date();  
-    }  
-  
+enum PaymentStatus {
+    SUCCESS,
+    HOLD,
+    REVERSED,
+    FAILED
+}
+
+class Payment {
+    id: number;
+    status: PaymentStatus;
+    createdAt: Date;
+    updatedAt: Date;
+
+    constructor(id: number) {
+        this.id = id;
+        this.status = PaymentStatus.HOLD;
+        this.createdAt = new Date();
+    }
+
     getPaymentLifeTime(): number {  // !
-        return new Date().getTime() - this.createdAt.getTime();  
-    }  
-  
+        return new Date().getTime() - this.createdAt.getTime();
+    }
+
     unholdPayment(): void {  // !
-        if (this.status === PaymentStatus.SUCCESS) {  
-            throw new Error("Платёж уже совершён успешно!");  
-        }        this.status = PaymentStatus.REVERSED;  
-        this.updatedAt = new Date();  
-    }  
-}  
-  
-const payment = new Payment(1);  
+        if (this.status === PaymentStatus.SUCCESS) {
+            throw new Error("Платёж уже совершён успешно!");
+        }        this.status = PaymentStatus.REVERSED;
+        this.updatedAt = new Date();
+    }
+}
+
+const payment = new Payment(1);
 const paymentTime = payment.getPaymentLifeTime();  // !
 payment.unholdPayment(); // !
 ```
@@ -957,36 +956,36 @@ return new Date().getTime() - this.createdAt.getTime();
 Так же мы можем немного улучшить код, присвоив дефолтные значения для `this.полей` класса прямо при их инициализации, а не в конструкторе
 
 ```TS
-class Payment {  
-    id: number;  
+class Payment {
+    id: number;
     status: PaymentStatus = PaymentStatus.HOLD; // Таким образом
-    createdAt: Date = new Date(); // ! 
-    updatedAt: Date;  
-  
-    constructor(id: number) {  
-        this.id = id;  
+    createdAt: Date = new Date(); // !
+    updatedAt: Date;
+
+    constructor(id: number) {
+        this.id = id;
     }
 }
 ```
 
 ### Упражнение - Перегрузка методов
 
-И сейчас опять взглянем на полиморфизм - реализуем перегрузку, при которой мы сможем поместить либо один навык пользователя, либо массив навыков. 
+И сейчас опять взглянем на полиморфизм - реализуем перегрузку, при которой мы сможем поместить либо один навык пользователя, либо массив навыков.
 
 ```TS
-class User {  
-    skills: string[];  
-  
+class User {
+    skills: string[];
+
     addSkill(skill: string): void; // !
     addSkill(skills: string[]): void; // !
-    addSkill(skillOrSkills: string | string[]): void {  
-        if (typeof skillOrSkills === "string") {  
-            this.skills.push(skillOrSkills);  
-        } else {  
-            this.skills.concat(skillOrSkills);  
-        }    }  
-}  
-  
+    addSkill(skillOrSkills: string | string[]): void {
+        if (typeof skillOrSkills === "string") {
+            this.skills.push(skillOrSkills);
+        } else {
+            this.skills.concat(skillOrSkills);
+        }    }
+}
+
 const user1 = new User().addSkill("technoPunk"); // !
 const user2 = new User().addSkill(["write", "slept"]); // !
 ```
@@ -994,14 +993,14 @@ const user2 = new User().addSkill(["write", "slept"]); // !
 Так же перегрузку можно реализовать и для функции (внутри ТС, конечно же)
 
 ```TS
-function run(info: string): void;  
-function run(info: number): void;  
-function run(info: string | number): void {  
-    if (typeof info === "string") {  
-        console.log(info);  
-    } else {  
-        info++;  
-    }  
+function run(info: string): void;
+function run(info: number): void;
+function run(info: string | number): void {
+    if (typeof info === "string") {
+        console.log(info);
+    } else {
+        info++;
+    }
 }
 ```
 
@@ -1011,37 +1010,38 @@ function run(info: string | number): void {
 function run(info: string): string;  // !
 function run(info: number): number;  // !
 function run(info: string | number): string | number {  // !
-    if (typeof info === "string") {  
+    if (typeof info === "string") {
         return info;  // !
-    } else {  
+    } else {
         return info++;  // !
-    }  
+    }
 }
 ```
 
 ### Getter и Setter
 
-Методы, которые мы инициализируем через `get` и `set`, реализуют функционал вывода/задания значения. Обычно их реализую для возможности просматривать или изменять приватные поля класса. 
+Методы, которые мы инициализируем через `get` и `set`, реализуют функционал вывода/задания значения. Обычно их реализую для возможности просматривать или изменять приватные поля класса.
+
 - Особенности геттеров и сеттеров:
-	- Тип данных сеттера по умолчанию равен типу, который возвращает геттер.
-	- Геттеры и сеттеры не могут быть асинхронными
+    - Тип данных сеттера по умолчанию равен типу, который возвращает геттер.
+    - Геттеры и сеттеры не могут быть асинхронными
 
 ```TS
-class User {  
-    _login: string;  
-    _password: string;  
-  
-    set login(login: string) {  
-        this._login = login;  
-    }  
-  
-    get login() {  
-        return this._login;  
-    }  
-}  
-  
-const user = new User();  
-user.login = "user";  
+class User {
+    _login: string;
+    _password: string;
+
+    set login(login: string) {
+        this._login = login;
+    }
+
+    get login() {
+        return this._login;
+    }
+}
+
+const user = new User();
+user.login = "user";
 console.log(user.login);
 ```
 
@@ -1049,92 +1049,92 @@ console.log(user.login);
 Однако мы до сих пор можем поменять значение внутри инстанса через прямое обращение к полю
 
 ```TS
-class User {  
-    _login: string;  
-    _password: string;  
-  
-    get login() {  
-        return this._login;  
-    }  
-}  
-  
-const user = new User();  
-user.login = "user";  
+class User {
+    _login: string;
+    _password: string;
+
+    get login() {
+        return this._login;
+    }
+}
+
+const user = new User();
+user.login = "user";
 console.log(user.login);
 ```
 
 `get`/`set` синхронны, как описывалось выше, поэтому они останаливают основной поток программы для выполнения своих функций.
-Для асинхронных функций (например, если нам нужно получить зашифрованный пароль) нам нужно использовать методы. 
+Для асинхронных функций (например, если нам нужно получить зашифрованный пароль) нам нужно использовать методы.
 
 ```TS
-async getPassword(p: string) {  
-    return await "crypted" + this._password;  
+async getPassword(p: string) {
+    return await "crypted" + this._password;
 }
 ```
 
 ### Implements
 
-Имплементация  - это сигнатура, которая позволяет нам реализовать класс по определённой абстракции. То есть мы создаём прообраз для нашего класса. Реализуется такой подход через интерфейсы и ключевое слово  `implements`.
+Имплементация - это сигнатура, которая позволяет нам реализовать класс по определённой абстракции. То есть мы создаём прообраз для нашего класса. Реализуется такой подход через интерфейсы и ключевое слово `implements`.
 
 Конкретно тут мы реализовали имплементацию методов в класс от интерфейса
 
 ```TS
-interface ILogger {  
-    log: (...args: any[]) => void; // Первая реализация метода 
+interface ILogger {
+    log: (...args: any[]) => void; // Первая реализация метода
     error(...args: any[]): void;  // Вторая
-}  
-  
-class Logger implements ILogger {  
-    log (...args: any[]): void {  
-        console.log(...args);  
-    }  
-    error(...args: any[]): void {  
-        console.log(...args);  
-    }  
+}
+
+class Logger implements ILogger {
+    log (...args: any[]): void {
+        console.log(...args);
+    }
+    error(...args: any[]): void {
+        console.log(...args);
+    }
 }
 ```
 
 Уже тут реализована имплементация, при которой мы в классе должны иметь обязательный метод `pay` и необязательное поле `price` (так как оно с "`?`")
 
 ```TS
-interface IPayment {  
-    pay: (paymentID: number) => void;  
-    price?: number; // необязательное поле  
-}  
-  
-class User implements IPayment{  
-    pay (paymentID: number | string) : void {  
-        console.log(paymentID);  
-    }  
-  
-    // price?: number | undefined;  
-}  
-  
+interface IPayment {
+    pay: (paymentID: number) => void;
+    price?: number; // необязательное поле
+}
+
+class User implements IPayment{
+    pay (paymentID: number | string) : void {
+        console.log(paymentID);
+    }
+
+    // price?: number | undefined;
+}
+
 new User().pay("StringA");
 ```
 
 Конкретно в данном случае, в функции класса, аргумент paymentID должен иметь всегда тип либо шире, чем в интерфейсе (`union` либо `any`), либо иметь тот же тип (`number`)
 
 ```TS
-class User implements IPayment{  
+class User implements IPayment{
     pay (paymentID: string) : void {  // Ошибка
-        console.log(paymentID);  
+        console.log(paymentID);
     }
 }
 ```
 
 ```TS
-class User implements IPayment{  
+class User implements IPayment{
     pay (paymentID: number | string) : void {  // Так уже можно
-        console.log(paymentID);  
+        console.log(paymentID);
     }
 }
 ```
 
->[!Note] Использовать имплементацию нужно:
->1) Для отделения реализации от абстракции
->2) Для обязательного наделения свойствами какого-либо класса (например, для нужно всем классам присваивать методы, обязательные для связи с API)
-
+> [!Note] Использовать имплементацию нужно:
+>
+> 1.  Для отделения реализации от абстракции
+> 2.  Для обязательного наделения свойствами какого-либо класса (например, для нужно всем классам присваивать методы, обязательные для связи с API)
 
 ### Extends
 
@@ -1142,31 +1142,31 @@ class User implements IPayment{
 Таким наследованием нельзя злоупотреблять, так как код будет сильно связан и его сложно будет размонолитить
 
 ```TS
-type PaymentStatus = "new" | "paid";  
-  
-class Payment {  
-    id: number;  
-    status: PaymentStatus = "new";  
-  
-    constructor(id: number) {  
-        this.id = id;  
-    }  
-  
-    pay() {  
-        this.status = "paid";  
-    }  
-}  
-  
+type PaymentStatus = "new" | "paid";
+
+class Payment {
+    id: number;
+    status: PaymentStatus = "new";
+
+    constructor(id: number) {
+        this.id = id;
+    }
+
+    pay() {
+        this.status = "paid";
+    }
+}
+
 class PersistentPayment extends Payment { // Расширяем родителем
-    dataId: number;  
-    paidAt: Date;  
-  
-    constructor() {  
-        const id = Math.random();  
-        super(id);  
-    }  
-}  
-  
+    dataId: number;
+    paidAt: Date;
+
+    constructor() {
+        const id = Math.random();
+        super(id);
+    }
+}
+
 new PersistentPayment().pay();
 ```
 
@@ -1182,21 +1182,21 @@ new PersistentPayment().pay();
 Так же и тут нужно воспользоваться супером, чтобы перенести логику метода в дочерний объект
 
 ```TS
-pay(date?: Date) {  
-    super.pay();  
-    if (date) {  
-        this.paidAt = new Date();  
+pay(date?: Date) {
+    super.pay();
+    if (date) {
+        this.paidAt = new Date();
     }
 }
 ```
 
-И тут нужно упомянуть один очень важный модификатор *`override`*. В чём заключается его задача? Он указывает нам на то, что он переопределяет родительский метод. Это сильно обезопасит наш код, так как теперь мы будем видеть ошибку, если в родительском классе мы, например, удалим этот метод
+И тут нужно упомянуть один очень важный модификатор _`override`_. В чём заключается его задача? Он указывает нам на то, что он переопределяет родительский метод. Это сильно обезопасит наш код, так как теперь мы будем видеть ошибку, если в родительском классе мы, например, удалим этот метод
 
 ```TS
-override pay(date?: Date) {  
-    super.pay();  
-    if (date) {  
-        this.paidAt = new Date();  
+override pay(date?: Date) {
+    super.pay();
+    if (date) {
+        this.paidAt = new Date();
     }
 }
 ```
@@ -1204,174 +1204,174 @@ override pay(date?: Date) {
 ### Особенности наследования
 
 Порядок вызова конструкторов
-Конкретно в этом случае, мы увидим - `user`. Дело в том, что у нас вызывается сначала родительский класс и его конструктор, а уже затем вызывается дочерний 
+Конкретно в этом случае, мы увидим - `user`. Дело в том, что у нас вызывается сначала родительский класс и его конструктор, а уже затем вызывается дочерний
 
 ```TS
-class User {  
-    name: string = "User";  
-    constructor() {  
-        console.log(this.name);  
-    }  
-}  
-  
-class Admin extends User {  
-    name: string = "Admin";  
-}  
-  
+class User {
+    name: string = "User";
+    constructor() {
+        console.log(this.name);
+    }
+}
+
+class Admin extends User {
+    name: string = "Admin";
+}
+
 new Admin(); // Выйдет User
 ```
 
 А уже в таком блоке кода выйдут оба наименования: `User` и `Admin`
 
 ```TS
-class User {  
-    name: string = "User";  
-  
-    constructor() {  
-        console.log(this.name);  
-    }  
-}  
-  
-class Admin extends User {  
-    name: string = "Admin";  
-  
-    constructor() {  
-        super();  
-        console.log(this.name);  
-    }  
-}  
-  
+class User {
+    name: string = "User";
+
+    constructor() {
+        console.log(this.name);
+    }
+}
+
+class Admin extends User {
+    name: string = "Admin";
+
+    constructor() {
+        super();
+        console.log(this.name);
+    }
+}
+
 new Admin(); // Выйдет User Admin
 ```
 
 А уже таким образом сделать нельзя. Метод супер должен всегда идти первым, если мы обращаемся к свойствам класса
 
 ```TS
-constructor() {  
-    console.log(this.name);  
+constructor() {
+    console.log(this.name);
     super();  // Error
 }
 ```
 
-Так же мы можем спокойно экстендиться от встроенных классов, которые мы уже имеем в системе. Так же вызвать `super` и как-то модифицировать логику выполнения 
+Так же мы можем спокойно экстендиться от встроенных классов, которые мы уже имеем в системе. Так же вызвать `super` и как-то модифицировать логику выполнения
 
 ```TS
-class HttpError extends Error {  
-    code: number;  
-  
-    constructor(message: string, code?: number) {  
-        super();  
-        this.code = code ?? 500;  
-    }  
+class HttpError extends Error {
+    code: number;
+
+    constructor(message: string, code?: number) {
+        super();
+        this.code = code ?? 500;
+    }
 }
 ```
 
 ### Композиция против наследования
 
-Тут мы описали класс пользователя, которого мы создаём с именем. Дальше уже у нас идёт класс, который экстендится от дженерика Массива<Пользователь>, что даёт нам возможность создавать массив (+ методы массива) пользователей (+ класс Юзер) 
+Тут мы описали класс пользователя, которого мы создаём с именем. Дальше уже у нас идёт класс, который экстендится от дженерика Массива<Пользователь>, что даёт нам возможность создавать массив (+ методы массива) пользователей (+ класс Юзер)
 Однако мы сталкиваемся с такой проблемой, что у нас могут появиться множество ненужных нам методов в списке комплита. Для бизнес-сущностей - это плохой вариант и уже стоит переписать логику для этих методов (а именно заоверрайдить их)
 Конкретно тут метод toString() переписали таким образом, что теперь он выводит строкой массив элементов с разделителем в виде "`,`" (`join` - соединяет объекты)
-*Тут показан механизм наследования*
+_Тут показан механизм наследования_
 
 ![](_png/6622b010a4ba6a5ade5abfb952db2f5e.png)
 
-А уже в данном примере мы скрыли реализацию обычного пуша в метод `push()`. Конкретно в примере добавления пользователей через такой внутренний массив - это более приоритетный вариант, чем тот, что выше 
-*Тут уже показан механизм композиции*
+А уже в данном примере мы скрыли реализацию обычного пуша в метод `push()`. Конкретно в примере добавления пользователей через такой внутренний массив - это более приоритетный вариант, чем тот, что выше
+_Тут уже показан механизм композиции_
 
 ```TS
-class UserList {  
-    name: string[];  
-    push (u: string) {  
-        this.name.push(u);      
-	} 
+class UserList {
+    name: string[];
+    push (u: string) {
+        this.name.push(u);
+	}
 }
 ```
 
 И вот более удачный пример композиции.
-Нам нужно реализовать класс Пользователь и Оплата. Конкретно тут два варианта реализации - один плохой, другой хороший. 
+Нам нужно реализовать класс Пользователь и Оплата. Конкретно тут два варианта реализации - один плохой, другой хороший.
 В первом варианте мы жёстко связываем сущности юзера и пеймента, что может привести к конфликтам свойств классов.
 Во втором случае, мы абстрагировали две сущности друг от друга, что позволит нам спокойно расширять объект в частностях
 
 ```TS
-class User {  
-    name: string = "User";  
-  
-    constructor() {  
-        console.log(this.name);  
-    }  
-}  
-  
-class Payment {  
-    payment: Date;  
-}  
-  
-class UserWithPaymentBad extends Payment {  
-    name: string;  
-}  
-  
-class UserWithPaymentGood {  
-    user: User;  
-    payment: Payment;  
-  
-    constructor(user: User, payment: Payment) {  
+class User {
+    name: string = "User";
+
+    constructor() {
+        console.log(this.name);
+    }
+}
+
+class Payment {
+    payment: Date;
+}
+
+class UserWithPaymentBad extends Payment {
+    name: string;
+}
+
+class UserWithPaymentGood {
+    user: User;
+    payment: Payment;
+
+    constructor(user: User, payment: Payment) {
     }
 }
 ```
 
-
 > [!Note] Когда что лучше использовать?
-> 1) Наследование используем, когда нам нужно расширяться в рамках одной доменной области (Гость - Юзер - Админ) 
-> 2) Композицию используем, когда мы пересекаем доменные области. Пример выше - нам нужно связать пользователя и платежи каким-то одним интерфейсом.
+>
+> 1. Наследование используем, когда нам нужно расширяться в рамках одной доменной области (Гость - Юзер - Админ)
+> 2. Композицию используем, когда мы пересекаем доменные области. Пример выше - нам нужно связать пользователя и платежи каким-то одним интерфейсом.
 
 ### Видимость свойств
 
-Видимость и доступность свойств в ТС определяется модификаторами доступа *`public`*, *`private`* и *`protected`*. Все они выполняют функцию определённой инкапсуляции свойств класса. 
+Видимость и доступность свойств в ТС определяется модификаторами доступа _`public`_, _`private`_ и _`protected`_. Все они выполняют функцию определённой инкапсуляции свойств класса.
 
-Как можно увидеть на примере, свойство `nums` мы не можем вызвать вне класса, так как оно скрыто от внешнего воздействия. Уже публичное свойство `name` мы можем увидеть и изменить. 
+Как можно увидеть на примере, свойство `nums` мы не можем вызвать вне класса, так как оно скрыто от внешнего воздействия. Уже публичное свойство `name` мы можем увидеть и изменить.
 
 ![](_png/84de27a93190a9e9537206a2df3c1e72.png)
 
 И теперь мы можем увидеть классический пример реализации класса с полноценной инкапсуляцией, когда мы можем поменять значение нужного нам свойства только через сеттер или метод и просмотреть свойство через геттер
 
 ```TS
-class Vehicle {  
-    public name: string = "BMW";  
-    private _driver: string = "Alesha";  
-    private _nums: string[] = ["ao123k"];  
-  
-    get driver() {  
-        return this._driver;  
-    }  
-  
-    set driver(carDriver: string) {  
-        this._driver = carDriver;  
-    }  
-  
-    addNums(num: string) {  
-        this._nums.push(num);  
-    }  
+class Vehicle {
+    public name: string = "BMW";
+    private _driver: string = "Alesha";
+    private _nums: string[] = ["ao123k"];
+
+    get driver() {
+        return this._driver;
+    }
+
+    set driver(carDriver: string) {
+        this._driver = carDriver;
+    }
+
+    addNums(num: string) {
+        this._nums.push(num);
+    }
 }
 ```
 
-Так же приватные поля нам доступны только внутри объекта, внутри которого мы создали эти поля. 
+Так же приватные поля нам доступны только внутри объекта, внутри которого мы создали эти поля.
 Конкретно в данном примере, мы можем получить доступ только к родительскому свойству `name`, так как оно публично
 
 ![](_png/6a873cc701cb2751c248e058009ac1df.png)
 
-Уже поле `protected` отличается от поля `private` тем, что оно наследуется к остальным экземплярам класса (но так же инкапсулирует как `private`) 
+Уже поле `protected` отличается от поля `private` тем, что оно наследуется к остальным экземплярам класса (но так же инкапсулирует как `private`)
 
 ```TS
-class Vehicle {  
-    public name: string = "BMW";  
-    private _driver: string = "Alesha";  
+class Vehicle {
+    public name: string = "BMW";
+    private _driver: string = "Alesha";
     protected run: number;
-}  
-  
-class Truck extends Vehicle {  
-    setRun(run: number) {  
-        this.run = run;  
-    }  
-}  
+}
+
+class Truck extends Vehicle {
+    setRun(run: number) {
+        this.run = run;
+    }
+}
 new Truck().setRun(30000);
 ```
 
@@ -1383,36 +1383,37 @@ new Truck().setRun(30000);
 Так же никто нам не мешает сделать приветным метод класса
 
 ```TS
-class Truck extends Vehicle {  
-    private setRun(run: number) {  
-        this.run = run;  
-    }  
-}  
+class Truck extends Vehicle {
+    private setRun(run: number) {
+        this.run = run;
+    }
+}
 new Truck().setRun(30000); // Error - нет доступа к методу
 ```
 
 ### Упражнение - Делаем корзину товаров
 
-> [!Note] Задание: 
+> [!Note] Задание:
 > Необходимо сделать корзину (`Cart`) на сайте,  
-которая имееет список продуктов (`Product`), добавленных в корзину  и переметры доставки (`Delivery`). Для Cart реализовать методы:  
-> - Добавить продукт в корзину  
-> - Удалить продукт из корзины по ID  
-> - Посчитать стоимость товаров в корзине 
-> - Задать доставку  
+> которая имееет список продуктов (`Product`), добавленных в корзину и переметры доставки (`Delivery`). Для Cart реализовать методы:
+>
+> - Добавить продукт в корзину
+> - Удалить продукт из корзины по ID
+> - Посчитать стоимость товаров в корзине
+> - Задать доставку
 > - `Checkout` - вернуть что всё ок, если есть продукты и параметры доставки  
-> `Product: id`, название и цена  
-> `Delivery`: может быть как до дома (дата и адрес) или до пункта выдачи (дата = Сегодня и `Id` магазина)
+>   `Product: id`, название и цена  
+>   `Delivery`: может быть как до дома (дата и адрес) или до пункта выдачи (дата = Сегодня и `Id` магазина)
 
-*Одна интересная особенность*: если в конструкторе записать аргументы с модификатором `public`, то эти аргументы сразу станут свойствами класса (к которым обращаемся через `this`) и их не надо будет объявлять и указывать им типы
+_Одна интересная особенность_: если в конструкторе записать аргументы с модификатором `public`, то эти аргументы сразу станут свойствами класса (к которым обращаемся через `this`) и их не надо будет объявлять и указывать им типы
 
 ```TS
-class Product {  
-    constructor(  
-        public id: number,  
-        public name: string,  
-        public price: number  
-    ) {  }  
+class Product {
+    constructor(
+        public id: number,
+        public name: string,
+        public price: number
+    ) {  }
 }
 ```
 
@@ -1420,80 +1421,80 @@ class Product {
 
 ```TS
 class Product {  // Сам продукт
-    constructor(  
-        public id: number,  
-        public name: string,  
-        public price: number  
-    ) {  }  
-}  
-  
+    constructor(
+        public id: number,
+        public name: string,
+        public price: number
+    ) {  }
+}
+
 class Delivery {  // Родительский класс доставки
-    constructor(  
-        public date: Date  
-    ) {  
+    constructor(
+        public date: Date
+    ) {
     }
-}  
-  
+}
+
 class HomeDelivery extends Delivery {  // Доставка домой
-    constructor(date: Date, public address: string) {  
-        super(date);  
-    }  
-}  
-  
+    constructor(date: Date, public address: string) {
+        super(date);
+    }
+}
+
 class ShopDelivery extends Delivery {  // Доставка в магазин
-    constructor( public shopID: number) {  
-        super(new Date());  
-    }  
-}  
-  
+    constructor( public shopID: number) {
+        super(new Date());
+    }
+}
+
 type deliveryOptions = HomeDelivery | ShopDelivery; // И далее доставка может быть одного из двух типов
-  
+
 class Cart {  // Корзина
     private products: Product[] = []; // Продукты
     private delivery: deliveryOptions; // Тип доставки
-  
-    public addProduct(product: Product): void {  
+
+    public addProduct(product: Product): void {
         this.products.push(product); // Добавляем продукт
-    }  
-  
-    public deleteProductByID(productID: number): void {  
+    }
+
+    public deleteProductByID(productID: number): void {
         this.products = this.products.filter((p: Product) => p.id !== productID);  // Удаляем продукт
-    }  
-  
+    }
+
     public getSum(): number { // Получаем сумму цены товара
-        return this.products  
-            .map((p: Product) => p.price)  
-            .reduce((p1: number, p2: number) => p1 + p2);  
-    }  
-  
-    public setDelivery(delivery: deliveryOptions): void {  
+        return this.products
+            .map((p: Product) => p.price)
+            .reduce((p1: number, p2: number) => p1 + p2);
+    }
+
+    public setDelivery(delivery: deliveryOptions): void {
         this.delivery = delivery; // Определяем тип доставки
-    }  
-  
-    public checkOut() { // Состояние заказа 
-        if (this.products.length == 0) {  
-            throw new Error("Нет товаров в корзине");  
-        }        if (!this.delivery) {  
-            throw new Error("Не указан способ доставки");  
-        }  
-        return {success: true}  
-    }  
-}  
-  
-const cart = new Cart();  
+    }
+
+    public checkOut() { // Состояние заказа
+        if (this.products.length == 0) {
+            throw new Error("Нет товаров в корзине");
+        }        if (!this.delivery) {
+            throw new Error("Не указан способ доставки");
+        }
+        return {success: true}
+    }
+}
+
+const cart = new Cart();
 
 // Добавляем товары
-cart.addProduct(new Product(1, "Печенье", 10)); 
-cart.addProduct(new Product(2, "Торт", 30));  
-cart.addProduct(new Product(3, "Шоколад", 20));  
+cart.addProduct(new Product(1, "Печенье", 10));
+cart.addProduct(new Product(2, "Торт", 30));
+cart.addProduct(new Product(3, "Шоколад", 20));
 
 // Удаляем товары
-cart.deleteProductByID(1);  
+cart.deleteProductByID(1);
 
 // Определяем тип доставки
-cart.setDelivery(new HomeDelivery(new Date(), "some home"));  
-  
-console.log(cart.getSum()); // = 50  
+cart.setDelivery(new HomeDelivery(new Date(), "some home"));
+
+console.log(cart.getSum()); // = 50
 console.log(cart.checkOut()); // success: true
 ```
 
@@ -1502,10 +1503,10 @@ console.log(cart.checkOut()); // success: true
 Модификатор static создаёт нам статическое свойство, которое можно использовать без инстанациирования объекта класса через `new`
 
 ```TS
-class UserService {  
-    static db: any;  
-}  
-  
+class UserService {
+    static db: any;
+}
+
 UserService.db = 4;
 ```
 
@@ -1513,17 +1514,17 @@ UserService.db = 4;
 В примере второй метод нестатичен и его уже вызвать без инстанциирование класса не получится
 
 ```TS
-class UserService {  
-    private static db: any;  
-  
-    static getUserByID(id: number) { // 1  
-        return this.db.findById(id);  
-    }  
-    create() { // 2  
-    }  
-}  
-  
-UserService.getUserByID(1); // 1  
+class UserService {
+    private static db: any;
+
+    static getUserByID(id: number) { // 1
+        return this.db.findById(id);
+    }
+    create() { // 2
+    }
+}
+
+UserService.getUserByID(1); // 1
 new UserService().create(); // 2
 ```
 
@@ -1531,113 +1532,113 @@ new UserService().create(); // 2
 
 ![](_png/e126ec09e0fa43762b950eb288cbccf2.png)
 
-Так же стоит упомянуть, что правильнее в статичных полях использовать обращение не через `this`, а через имя (статического) класса 
+Так же стоит упомянуть, что правильнее в статичных полях использовать обращение не через `this`, а через имя (статического) класса
 
 ```TS
-class UserService {  
-    private static db: any;  
-  
+class UserService {
+    private static db: any;
+
     static getUserByID(id: number) {
-        return UserService.db.findById(id);  
-    }  
-  
+        return UserService.db.findById(id);
+    }
+
     create() {
-        UserService.db;  
-    }  
-}  
-  
+        UserService.db;
+    }
+}
+
 const inst = new UserService().create();
 ```
 
 При инициализации инстанса класса через `new` вызывается конструктор класса. И так же при вызове статического класса вызывается поле статик вместо конструктора.
 
 ```TS
-class UserService {  
-    public static db: number;   
-      
-	constructor(id: number) {  }    
-    
-    static {  }  
-}  
-  
-new UserService(1);  
+class UserService {
+    public static db: number;
+
+	constructor(id: number) {  }
+
+    static {  }
+}
+
+new UserService(1);
 UserService.db = 1;
 ```
 
 Асинхронные функции внутри статика работать не будут
 
 ```TS
-class UserService {  
-    public static db: number;  
-        
-    static {  
+class UserService {
+    public static db: number;
+
+    static {
 	    await new Promise() // Error
-    }  
-}  
+    }
+}
 ```
 
 А вот уже статичные методы могут быть асинхронными
 
 ```TS
-class UserService {  
-    private static db: any;  
-  
+class UserService {
+    private static db: any;
+
     static async getUserByID(id: number) {
-        return UserService.db.findById(id);  
-    }  
-}  
+        return UserService.db.findById(id);
+    }
+}
 ```
 
 Однако класс статичным быть не может (чтобы весь его функционал внутри был статичным)
 
 ```TS
-static class UserService { // Error  
-}  
+static class UserService { // Error
+}
 ```
 
 Так же нужно упомянуть, что статичные функции и свойства считаются встроенными в данный класс.
 У класса `UserService` уже есть зарезервированное свойство `name`, поэтому переопределить её не получится (свойство прототипа объекта)
 
 ```TS
-class UserService {  
-    static name: string = 'UserService'; // Error  
-}  
-  
+class UserService {
+    static name: string = 'UserService'; // Error
+}
+
 UserService.name;
 ```
 
 ### Работа с this
 
 Хочется немного поговорить про контекст вызова `this`. А именно про его использование вовне.
-Конкретно в нашем примере, мы можем увидеть, что если мы вызовем функцию из инстанса класса, то получим нормальную дату. Получим нормальную дату, *потому что мы обратились ко внутреннему свойству класса*
+Конкретно в нашем примере, мы можем увидеть, что если мы вызовем функцию из инстанса класса, то получим нормальную дату. Получим нормальную дату, _потому что мы обратились ко внутреннему свойству класса_
 Когда мы будем вызвать эту же функцию из объекта, то мы получим `undefined`. Получим мы неопределённое значение ровно потому, что мы потеряем контекст вызова. Вызывая из объекта, контекстом вызова у нас будет наш объект `user`
 
 ```TS
-class Payment {  
-    private date: Date = new Date();  
-  
-    getDate() {  
-        return this.date;  
-    }  
-}  
-  
-const p = new Payment();  
-console.log(p.getDate()); // Получим нашу дату  
-  
-const user = {  
-    id: 1,  
-    paymentDate: p.getDate,  
-}  
+class Payment {
+    private date: Date = new Date();
+
+    getDate() {
+        return this.date;
+    }
+}
+
+const p = new Payment();
+console.log(p.getDate()); // Получим нашу дату
+
+const user = {
+    id: 1,
+    paymentDate: p.getDate,
+}
 console.log(user.paymentDate()); // undefined
 ```
 
 Однако, если мы используем функцию `bind()`, то мы сохраним контекст вызова нашего объекта
 
 ```TS
-const user = {  
-    id: 1,  
-    paymentDate: p.getDate.bind(p),  
-}  
+const user = {
+    id: 1,
+    paymentDate: p.getDate.bind(p),
+}
 console.log(user.paymentDate()); // дата
 ```
 
@@ -1645,19 +1646,19 @@ console.log(user.paymentDate()); // дата
 И если сейчас мы не используем `bind`, то мы получим ошибку, так как контекст вызова перешёл на user
 
 ```TS
-class Payment {  
-    private date: Date = new Date();  
-  
-    getDate(this: Payment) {  // !
-        return this.date;  
-    }  
-}  
-const p = new Payment();   
+class Payment {
+    private date: Date = new Date();
 
-const user = {  
-    id: 1,  
-    paymentDate: p.getDate,  
-}  
+    getDate(this: Payment) {  // !
+        return this.date;
+    }
+}
+const p = new Payment();
+
+const user = {
+    id: 1,
+    paymentDate: p.getDate,
+}
 
 console.log(user.paymentDate()); // Error
 ```
@@ -1665,21 +1666,21 @@ console.log(user.paymentDate()); // Error
 Однако мы можем сохранить контекст и без биндинга. Сделать нам это позволит стрелочная функция, так как она сохраняет контекст вызова
 
 ```TS
-class Payment {  
-    private date: Date = new Date();  
-  
+class Payment {
+    private date: Date = new Date();
+
     getDateArrow = () => {  // !
-        return this.date;  
-    }  
-}  
-  
-const p = new Payment();  
-console.log(p.getDate());  
-  
-const user = {  
-    id: 1,  
+        return this.date;
+    }
+}
+
+const p = new Payment();
+console.log(p.getDate());
+
+const user = {
+    id: 1,
     paymentDate: p.getDateArrow,  // !
-}  
+}
 console.log(user.paymentDate()); // Вернёт дату
 ```
 
@@ -1688,33 +1689,33 @@ console.log(user.paymentDate()); // Вернёт дату
 То есть в первом случае, у нас вызывается обычная функция родителя. Обращение к ней идёт из `PaymentPersistence` через прототип родителя `Payment`.
 
 ```TS
-class PaymentPersistence extends Payment {  
-    save() {  
-        super.getDate();  
-    }  
-}  
+class PaymentPersistence extends Payment {
+    save() {
+        super.getDate();
+    }
+}
 console.log(new PaymentPersistence().save()); // Получим дату
 ```
 
 Во втором случае, мы уже пытаемся обратиться к стрелочной функции, которая отсутствует в прототипе объекта и поэтому получаем ошибку
 
 ```TS
-class PaymentPersistence extends Payment {  
-    save() {  
-        super.getDateArrow();  
-    }  
-}  
+class PaymentPersistence extends Payment {
+    save() {
+        super.getDateArrow();
+    }
+}
 console.log(new PaymentPersistence().save()); // Получим Error в рантайме, так как данный метод не является функцией
 ```
 
 Однако, если мы обратимся через `this`, то мы непосредственно вызовем унаследованную функцию от родителя, которая уже имеется в дочернем классе
 
 ```TS
-class PaymentPersistence extends Payment {  
-    save() {  
-        this.getDateArrow();  
-    }  
-}  
+class PaymentPersistence extends Payment {
+    save() {
+        this.getDateArrow();
+    }
+}
 console.log(new PaymentPersistence().save()); // Выведет дату
 ```
 
@@ -1725,30 +1726,30 @@ console.log(new PaymentPersistence().save()); // Выведет дату
 То есть по сути функция возвращает `UserBuilder`, а именно в качестве типа наш класс
 
 ```TS
-class UserBuilder {  
-    private name: string;  
-  
+class UserBuilder {
+    private name: string;
+
     setName(name: string): UserBuilder {  // !
-        this.name = name;  
-        return this;  
-    }  
-}  
-  
+        this.name = name;
+        return this;
+    }
+}
+
 const user = new UserBuilder().setName("Олек");
 ```
 
 Однако, если мы будем возвращать конкретно наш класс, то мы можем получить определённые коллизии, поэтому стоит указать в качестве возвращаемого типа `this`
 
 ```TS
-class UserBuilder {  
-    private name: string;  
-  
+class UserBuilder {
+    private name: string;
+
     setName(name: string): this {  // !
-        this.name = name;  
-        return this;  
-    }  
-}  
-  
+        this.name = name;
+        return this;
+    }
+}
+
 const user = new UserBuilder().setName("Олек");
 ```
 
@@ -1758,36 +1759,36 @@ const user = new UserBuilder().setName("Олек");
 
 ![](_png/1a021fbfa3bed1d762255f771b3c4b9b.png)
 
-А теперь наша функция возвращает `UserBuilder` и наш новосозданный инстанс `AdminBuilder` будет иметь тип `UserBuilder` 
+А теперь наша функция возвращает `UserBuilder` и наш новосозданный инстанс `AdminBuilder` будет иметь тип `UserBuilder`
 
 ![](_png/70f242553ccc86d96813f87937fbff6e.png)
 
 Так же мы можем реализовать `typeguard` через `this`. В данном тайпгуарде мы возвращаем `boolean` проверки, что данный класс является админом. В условии, если `true`, то мы попадём в ветку, где юзер является админом
 
 ```TS
-class UserBuilder {  
-    private name: string;  
-  
-    setName(name: string): UserBuilder {  
-        this.name = name;  
-        return this;  
-    }  
-  
+class UserBuilder {
+    private name: string;
+
+    setName(name: string): UserBuilder {
+        this.name = name;
+        return this;
+    }
+
     isAdmin(): this is AdminBuilder {  // !
-        return this instanceof AdminBuilder; // !  
-    }  
-}  
-  
-class AdminBuilder extends UserBuilder {  
-    roles: string[];  
-}  
-  
-let user: UserBuilder | AdminBuilder = new UserBuilder(); // !  
-  
-if (user.isAdmin()) {  
-    console.log(user); // AdminBuilder  
-} else {  
-    console.log(user); // UserBuilder  
+        return this instanceof AdminBuilder; // !
+    }
+}
+
+class AdminBuilder extends UserBuilder {
+    roles: string[];
+}
+
+let user: UserBuilder | AdminBuilder = new UserBuilder(); // !
+
+if (user.isAdmin()) {
+    console.log(user); // AdminBuilder
+} else {
+    console.log(user); // UserBuilder
 }
 ```
 
@@ -1801,77 +1802,76 @@ if (user.isAdmin()) {
 
 ### Абстрактные классы
 
-Абстрактные классы представляют собой схемы будущих классов, которые мы будем наследовать от этих абстракций. В абстрактном классе мы описываем методы и свойства, которые обязательно должны находиться в наследниках. Притом сами абстрактные классы инстанциировать мы не можем. 
+Абстрактные классы представляют собой схемы будущих классов, которые мы будем наследовать от этих абстракций. В абстрактном классе мы описываем методы и свойства, которые обязательно должны находиться в наследниках. Притом сами абстрактные классы инстанциировать мы не можем.
 В примере мы создали абстрактный класс с абстрактным методом. Далее создали его дочерний элемент, в котором обязательно нужно создать метод handler.
 Сразу стоит упомянуть, что абстрактные методы нельзя создать в неабстрактном классе
 
 ```TS
 abstract class Controller {  // !
-    abstract handler(req: number): void;  
-}  
-  
-class userController extends Controller {  
-    handler(req: number) {  
+    abstract handler(req: number): void;
+}
+
+class userController extends Controller {
+    handler(req: number) {
     }
-}  
-  
-// new Controller(); - error  
+}
+
+// new Controller(); - error
 new userController();
 ```
 
-Так же нужно сказать, что мы можем написать обычный метод в абстрактном классе  и этот функционал перейдёт в дочерний класс. 
+Так же нужно сказать, что мы можем написать обычный метод в абстрактном классе и этот функционал перейдёт в дочерний класс.
 Нужно отметить одну особенность, что мы можем вызвать абстрактный класс внутри обычного класса. Это реализовано за счёт того, что хэндлер мы обязуемся реализовать в дочернем классе абстрактного (берётся внутренняя реализация из дочернего класса)
 
 ```TS
-abstract class Controller {  
-    abstract handler(req: number): void;  
-  
+abstract class Controller {
+    abstract handler(req: number): void;
+
     log(req: any): void {  // !
-        console.log("Start");  
+        console.log("Start");
         this.handler(req);  // !
-        console.log("End");  
-    }  
+        console.log("End");
+    }
 }
 ```
 
 ### Упражнение - Делаем абстрактный logger
 
->[!Note] Задание
-Необходимо реализовать абстрактный класс Logger с 2-мя методами  
-абстрактным - `log(message): void`  
-`printDate` - выводящий в log дату  
-К нему необходимо сделать реальный класс, который бы имел метод: `logWithDate`,  
-выводящий сначала дату, а потом заданное сообщение
+> [!Note] Задание
+> Необходимо реализовать абстрактный класс Logger с 2-мя методами  
+> абстрактным - `log(message): void`  
+> `printDate` - выводящий в log дату  
+> К нему необходимо сделать реальный класс, который бы имел метод: `logWithDate`,  
+> выводящий сначала дату, а потом заданное сообщение
 
 И вот реализация задания:
 
 ```TS
-abstract class Logger {  
-    abstract log(message: string): void;  
-  
-    printDate(date: Date) {  
-        this.log(date.toString());  
-    }  
-}  
-  
-class MyLogger extends Logger {  
-    log(message: string): void {  
-        console.log(message);  
-    }  
-  
-    logWithDate(message: string) {  
-        this.printDate(new Date());  
-        this.log(message);  
-    }  
-}  
-  
-const logger = new MyLogger();  
+abstract class Logger {
+    abstract log(message: string): void;
+
+    printDate(date: Date) {
+        this.log(date.toString());
+    }
+}
+
+class MyLogger extends Logger {
+    log(message: string): void {
+        console.log(message);
+    }
+
+    logWithDate(message: string) {
+        this.printDate(new Date());
+        this.log(message);
+    }
+}
+
+const logger = new MyLogger();
 logger.logWithDate("Моё сообщение"); // Дата \t Сообщение
 ```
 
-
-
 ---
+
 ## Компилятор TS
 
 ### 051 Вводное видео
@@ -1889,7 +1889,7 @@ tsc // скомпилирует весь проект
 tsc имя_файла1 имя_файла2 // скомпилирует определённые файлы
 ```
 
-Так же нужно упомянуть, что файл *tsconfig* - олицетворяет для ТС проект и его удаление приведёт к ошибке компиляции 
+Так же нужно упомянуть, что файл _tsconfig_ - олицетворяет для ТС проект и его удаление приведёт к ошибке компиляции
 
 И тут уже стоит пойти про модификацию тсконфига. Первым делом нужно сказать, что внутри конфига (вне опций компилятора) мы можем определять, какие файлы будут подлежать компиляции. Свойство `files` принимает в себя массив значений, которые будем компилировать
 
@@ -1903,7 +1903,7 @@ tsc имя_файла1 имя_файла2 // скомпилирует опред
 
 ![](_png/07eb9d86715283e9068bbfe1e33b81bd.png)
 
-Данный параметр позволяет нам дополнить наш основной конфиг другим *tsconfig* (дополнение и переопределение существующих параметров внешним)
+Данный параметр позволяет нам дополнить наш основной конфиг другим _tsconfig_ (дополнение и переопределение существующих параметров внешним)
 
 ```JSON
 "extends": "",
@@ -1917,7 +1917,7 @@ tsc имя_файла1 имя_файла2 // скомпилирует опред
 
 Первым делом нужно разобрать отдел `Emit` в настройках компиляции. Он отвечает за вывод компиляции
 
-Первый параметр - `outDir`. Он определяет папку вывода компиляции. 
+Первый параметр - `outDir`. Он определяет папку вывода компиляции.
 Уже `outFile` используют куда реже, так как те же модули не получится через него скомпилировать
 
 ![](_png/42b0701f9213f06ba8596fd120c442cf.png)
@@ -1928,8 +1928,8 @@ tsc имя_файла1 имя_файла2 // скомпилирует опред
 	"noEmit": true, // позволяет проверить файлы, но не выводить их куда-либо
 	"noEmitOnError": true, // запрещает компиляцию при ошибке в коде
 	"importHelpers": true, // импортирует хелперы один раз для всего проекта. Позволяет уменьшить размер файла
-	// Хелперы - это дополнительные функции из ТС-либы, которые выступают полифиллами между ТС и JS 
-	"noEmitHelpers": true, // не компилирует хелперы ТС. 
+	// Хелперы - это дополнительные функции из ТС-либы, которые выступают полифиллами между ТС и JS
+	"noEmitHelpers": true, // не компилирует хелперы ТС.
 	"importsNotUsedAsValues": "remove", // удаляет импорты типов из JS (будущая тема). Есть исключения, когда их нужно сохранить, но это бывает редко
 	"sourceMap": true // связывает JS-файлы с TS файлами (генерирует вместе с обычным JS файлом ".map", который и реализует связь)
 }
@@ -1940,7 +1940,7 @@ tsc имя_файла1 имя_файла2 // скомпилирует опред
 `"inlineSourceMap": true` - заменяет стоковый сурсмап на инлайновый, но уже внутри скомпилированного JS (использовать можно только прошлую настройку, либо эту - вместе они не работают)
 
 ```JS
-"use strict";  
+"use strict";
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwMi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3RzL2FwcDIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9
 ```
 
@@ -1964,11 +1964,11 @@ tsc имя_файла1 имя_файла2 // скомпилирует опред
 `"stripInternal": true`- не компилирует модуль, который был помечен комментарием - `/ * @internal * / `
 
 ```TS
-/* @internal */  
-class Delivery {  
-    constructor(  
-        public date: Date  
-    ) {  
+/* @internal */
+class Delivery {
+    constructor(
+        public date: Date
+    ) {
     }
 }
 ```
@@ -1977,7 +1977,7 @@ class Delivery {
 
 ### 054 Язык и окружение
 
-Блок настроек язык и окружение отвечает за общую внешнюю работу компилятора 
+Блок настроек язык и окружение отвечает за общую внешнюю работу компилятора
 
 В таргете мы указываем в какую версию JS мы компилируем файл
 
@@ -1992,8 +1992,8 @@ class Delivery {
 ```JSON
 {
 	"jsx": "preserve",
-	"jsxFactory": "",                               
-	"jsxFragmentFactory": "",                      
+	"jsxFactory": "",
+	"jsxFragmentFactory": "",
 	"jsxImportSource": "",
 	"noLib": true, // отключает все библиотеки в ТС
 	"useDefineForClassFields": true // включение использования ECMAScript формата классов (эни компилируется в объект с defineProperty)
@@ -2002,7 +2002,7 @@ class Delivery {
 
 ### **055 Модули**
 
-Блок настроек *Modules* определяет как будет компилироваться проект из модулей относительно друг друга
+Блок настроек _Modules_ определяет как будет компилироваться проект из модулей относительно друг друга
 
 ```JSON
 {
@@ -2015,9 +2015,9 @@ class Delivery {
 
 ```JSON
 "baseUrl": "./",
-"paths": {  
+"paths": {
 	// ключ - алиас, значение - путь
-	"@lib": ["./lib/lib-path"]  
+	"@lib": ["./lib/lib-path"]
 },
 ```
 
@@ -2036,18 +2036,18 @@ import {} from "@lib/файл.js";
 ### 056 Strict режим
 
 ```JSON
-/* Type Checking */  
-"strict": true, 
- "noImplicitAny": true,  
- "strictNullChecks": true, 
- "strictFunctionTypes": true,   
- "strictBindCallApply": true,  
+/* Type Checking */
+"strict": true,
+ "noImplicitAny": true,
+ "strictNullChecks": true,
+ "strictFunctionTypes": true,
+ "strictBindCallApply": true,
  "strictPropertyInitialization": false,
 ```
 
 ```JSON
 {
-	"noImplicitAny": true, // запрещаем неявно задавать any (автоматическая подстановка any). Желательно  закомментировать в новых ТС проектах либо поставить true. Мы сможем как и прежде использовать any, но мы будем знать, что мы не смогли типизировать объект 
+	"noImplicitAny": true, // запрещаем неявно задавать any (автоматическая подстановка any). Желательно  закомментировать в новых ТС проектах либо поставить true. Мы сможем как и прежде использовать any, но мы будем знать, что мы не смогли типизировать объект
 	"strictNullChecks": true // позволяет избегать неявного возвращения из функции null или undefined.
 }
 ```
@@ -2078,7 +2078,7 @@ test.apply(undefined, [1, 3]); // Error
 
 `"useUnknownInCatchVariables": true` - определяет современное поведение error (он имеет тип unknown). Стоит всегда оставлять true, так как еррор приобретёт тип any. Данный тип, например, позволит обратиться error.massage, а тот, в свою очередь, не всегда будет содержать ошибку
 
-`"alwaysStrict": true` - добавляет дирриктиву стрикта в JS  
+`"alwaysStrict": true` - добавляет дирриктиву стрикта в JS
 
 ### 057 Проверки кода
 
@@ -2088,37 +2088,37 @@ test.apply(undefined, [1, 3]); // Error
 Так же у нас имеется `@ts-ignore`, который игнорирует ошибки в одной следующей строке после комментария
 
 ```TS
-// @ts-ignore  
+// @ts-ignore
 const defualtUser = new User("Defult");
 ```
 
 Так же нужно упомянуть, что мы можем сократить запись конструктора и сразу создать внутреннее свойство - публичный нейм, добавить его в конструктор и присвоить при инициализации
 
 ```TS
-class User {  
-    name: string;  
-  
-    constructor(name: string) {  
-        this.name = name;  
-    }  
+class User {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 ```
 
 ```TS
-class User {  
-    constructor(public name: string) {  
-        this.name = name;  
-    }  
+class User {
+    constructor(public name: string) {
+        this.name = name;
+    }
 }
 ```
 
 Однако, если мы с настройкой `noUnusedParameters` попробуем записать приватное поле сразу в конструкторе, то опять получим ошибку (так как параметр не получится присвоить и он будет пустой)
 
 ```TS
-class User {  
+class User {
     constructor(private name: string) {  // Error
-        this.name = name;  
-    }  
+        this.name = name;
+    }
 }
 ```
 
@@ -2141,7 +2141,7 @@ class User {
 ![](_png/b0cbc2eea713c2072d73f3e937e1b806.png)
 
 `"noPropertyAccessFromIndexSignature": true` - запрещает обращаться к несуществующему ключу объекта через точечную запись (не создаст новый ключ при обращении).
-Требует использования обращения через 
+Требует использования обращения через
 
 ```TS
 c["имя_ключа"]
@@ -2149,39 +2149,38 @@ c["имя_ключа"]
 
 `"noImplicitOverride": true` - заставляет всегда явно задавать `override` при наследовании (стоит всегда включать)
 
-
-
 ---
+
 ## Generics
 
 ### Вводное видео
 
-**Дженерики** - это определённая функция с плейсходлдером, в которую мы можем подставить определённый тип. Он позволяет сохранить типовую динамичность функции (как в нативном JS) и сохраняет type safety в проектах. 
+**Дженерики** - это определённая функция с плейсходлдером, в которую мы можем подставить определённый тип. Он позволяет сохранить типовую динамичность функции (как в нативном JS) и сохраняет type safety в проектах.
 Мы используем дженерики для эффективного переиспользования кода.
 
 ![](_png/ea9fae282b521923c45f83963bc64abc.png)
 
 ### Пример встроенных generic
 
-Встроенные дженерики в ТС отчётливо показывают нам, какие типы должны возвращать и хранить объекты. Если создать тот же массив чисел мы можем через `number[]`, то уже определить возвращаемый из промиса тип у нас просто так не получится. 
+Встроенные дженерики в ТС отчётливо показывают нам, какие типы должны возвращать и хранить объекты. Если создать тот же массив чисел мы можем через `number[]`, то уже определить возвращаемый из промиса тип у нас просто так не получится.
 Чтобы реализовать типизацию у промиса, можно прописать `Promise<возвращаемый_тип>`
 
 ```TS
-const numArr: Array<number> = [1, 2, 3];  
-  
-async function promiseFrom() {  
-    const promiseA = await new Promise<number>((resolve, reject) => {  
-        resolve(1);  
-    })  
+const numArr: Array<number> = [1, 2, 3];
+
+async function promiseFrom() {
+    const promiseA = await new Promise<number>((resolve, reject) => {
+        resolve(1);
+    })
 }
 ```
 
-И вот пример создания записной книжки через объект (а не интерфейс), которая принимает в себя ключ(строку) - значение(булеан). 
+И вот пример создания записной книжки через объект (а не интерфейс), которая принимает в себя ключ(строку) - значение(булеан).
 
 ```TS
- const recorder: Record<string, boolean> = {  
-    drive: true,  
-    ride: true  
+ const recorder: Record<string, boolean> = {
+    drive: true,
+    ride: true
 }
 ```
 
@@ -2191,38 +2190,38 @@ async function promiseFrom() {
 Конкретно в этом случае, мы передаём пока один тип значения - дженерик тут не нужен
 
 ```TS
-function dataMiddleWare(data: string): string {  
-    console.log(`Return middleware ${data}`);  
-    return data;  
-}  
-  
+function dataMiddleWare(data: string): string {
+    console.log(`Return middleware ${data}`);
+    return data;
+}
+
 const res = dataMiddleWare("str");
 ```
 
 Но если у нас появится потребность добавить ещё один тип в качестве передаваемого значения, то нам нужно будет реализовывать сужение под каждый из принимаемых типов
 
 ```TS
-function dataMiddleWare(data: string | number): string | number {  
-    console.log(`Return middleware ${data}`);      
-if (typeof data === "string") {  
-        return data + " string";  
-    } else {  
-        return data;  
-    }  
-}  
-  
+function dataMiddleWare(data: string | number): string | number {
+    console.log(`Return middleware ${data}`);
+if (typeof data === "string") {
+        return data + " string";
+    } else {
+        return data;
+    }
+}
+
 const res = dataMiddleWare("str");
 ```
 
-И вот на помощь нам приходят дженерики. Они позволяют сделать некую обобщённую функцию, которая позволит работать с любым передаваемым типом 
-Главный признак таких функций - *они могут работать с `any`*
+И вот на помощь нам приходят дженерики. Они позволяют сделать некую обобщённую функцию, которая позволит работать с любым передаваемым типом
+Главный признак таких функций - _они могут работать с `any`_
 
 ```TS
-function dataMiddleWare<T>(data: T): T {  
-    console.log(`Return middleware ${data}`);  
-    return data;  
-}  
-  
+function dataMiddleWare<T>(data: T): T {
+    console.log(`Return middleware ${data}`);
+    return data;
+}
+
 const res = dataMiddleWare("str");
 ```
 
@@ -2235,23 +2234,23 @@ const res = dataMiddleWare("str");
 
 ![](_png/880b7c2d93b6d25be546993082b6250e.png)
 
-Далее нам нужно создать функцию, которая будет принимать в себя массив и возвращать половину от него. 
+Далее нам нужно создать функцию, которая будет принимать в себя массив и возвращать половину от него.
 Создадим обобщённый дженерик и сталкиваемся с проблемой, что компилятор нам говорит - не у всех передаваемых значений будет значение длины (которое нам нужно от массива)
-Но тут наша функция не может работать с *`any`* данными
+Но тут наша функция не может работать с _`any`_ данными
 
 ```TS
-function getHalfFromMassive<T>(data: T): T {  
+function getHalfFromMassive<T>(data: T): T {
     const lengthHalfedMassive = data.length / 2;  // Error
-    return data.slice(0, lengthHalfedMassive);   
+    return data.slice(0, lengthHalfedMassive);
 }
 ```
 
-А вот уже в данном случае, мы сможем обратиться к свойству массива, так как `data` имеет тип: `Массив<любой_тип_данных>`. И возвращаем тут тоже массив любого типа данных 
+А вот уже в данном случае, мы сможем обратиться к свойству массива, так как `data` имеет тип: `Массив<любой_тип_данных>`. И возвращаем тут тоже массив любого типа данных
 
 ```TS
-function getHalfFromMassive<T>(data: Array<T>): Array<T> {  
-    const lengthHalfedMassive = data.length / 2;  
-    return data.slice(0, lengthHalfedMassive);  
+function getHalfFromMassive<T>(data: Array<T>): Array<T> {
+    const lengthHalfedMassive = data.length / 2;
+    return data.slice(0, lengthHalfedMassive);
 }
 
 getHalfFromMassive<number>([1, 2, 3, 4]);
@@ -2263,10 +2262,10 @@ getHalfFromMassive<number>([1, 2, 3, 4]);
 const func = <T>(data: Array<T>): Array<T> => { return data; }
 ```
 
-Так же дженерикам можно задать *значение по умолчанию*
+Так же дженерикам можно задать _значение по умолчанию_
 
 ```TS
-type Constructor = new (...args: any[]) => {};  
+type Constructor = new (...args: any[]) => {};
 type GConstructor<T = {}> = new (...args: any[]) => T;
 ```
 
@@ -2275,30 +2274,30 @@ type GConstructor<T = {}> = new (...args: any[]) => T;
 Нам нужно реализовать функцию `toString`, которая будет выводить либо строку, либо `undefined` (если значение не передано)
 
 ```TS
-function toString<T>(data: T): string | undefined {  
-    if (Array.isArray(data)) {  
-        return data.toString();  
-    }  
-  
+function toString<T>(data: T): string | undefined {
+    if (Array.isArray(data)) {
+        return data.toString();
+    }
+
     switch (typeof data) {  // на каждый тип - своя реализация
-        case "string":  
-            return data;  
-        case "bigint":  
-        case "number":  
-        case "boolean":  
-        case "function":  
-            return data.toString();  
-        case "object":  
-            return JSON.stringify(data);  
-        default:  
-            return undefined;  
-    }  
-}  
-  
-console.log(toString([1, 2, 3]));  
-console.log(toString({ a: 123, b: "Logan"}));  
+        case "string":
+            return data;
+        case "bigint":
+        case "number":
+        case "boolean":
+        case "function":
+            return data.toString();
+        case "object":
+            return JSON.stringify(data);
+        default:
+            return undefined;
+    }
+}
+
+console.log(toString([1, 2, 3]));
+console.log(toString({ a: 123, b: "Logan"}));
 // можно определить самостоятельно передаваемый тип в <>
-console.log(toString<boolean>(true)); 
+console.log(toString<boolean>(true));
 ```
 
 ### Использование в типах
@@ -2309,31 +2308,31 @@ console.log(toString<boolean>(true));
 const split: <T>(data: Array<T>) => Array<T> = getHalfFromMassive;
 ```
 
-Дженерики можно использовать не только в функциях, но и в рамках описания любого типа объектов  в рамках интерфейсов или типов (а так же классов)
+Дженерики можно использовать не только в функциях, но и в рамках описания любого типа объектов в рамках интерфейсов или типов (а так же классов)
 
 ```TS
 interface ILogLine<T> {  // Interface Generic
-    name: string,  
-    data: T  
-}  
-  
+    name: string,
+    data: T
+}
+
 type LogLineType<T> = {  // Type Generic
-    name: string,  
-    data: T  
-}  
+    name: string,
+    data: T
+}
 						  // Тип дженерика интерфейса
-const logLineInterface: ILogLine<{a: number}> = {  
-    name: "Lossy",  
-    data: {  
-        a: 19  
-    }  
-}  
+const logLineInterface: ILogLine<{a: number}> = {
+    name: "Lossy",
+    data: {
+        a: 19
+    }
+}
 						  // Тип дженерика тайпа
-const logLineType: LogLineType<{a: number}> = {  
-    name: "Lossy",  
-    data: {  
-        a: 19  
-    }  
+const logLineType: LogLineType<{a: number}> = {
+    name: "Lossy",
+    data: {
+        a: 19
+    }
 }
 ```
 
@@ -2342,79 +2341,80 @@ const logLineType: LogLineType<{a: number}> = {
 В ТС есть возможность ограничить получаемые значения дженерика через extends этого дженерика типами, классами, интерфейсами или тайпами
 
 ```TS
-function kmToMiles<T extends Vehicle>(vehicle: T): T { 
+function kmToMiles<T extends Vehicle>(vehicle: T): T {
 ```
 
 И тут мы видим пример, когда мы ограничиваем передаваемые типы в дженерик-функцию, тип которой экстендится от класса `Vehicle`
 
 ```TS
-class Vehicle {  
-    run: number;  
-}  
-  
-class SCV extends Vehicle {  
-    capacity: number;  
-}  
-  
-function kmToMiles<T extends Vehicle>(vehicle: T): T { // Расширение  
-    vehicle.run = vehicle.run / 0.62;  
-    console.log(vehicle);  
-    return vehicle;  
-}  
-  
-kmToMiles(new Vehicle());  
-kmToMiles(new SCV());  
-kmToMiles({run: 143});  
-  
+class Vehicle {
+    run: number;
+}
+
+class SCV extends Vehicle {
+    capacity: number;
+}
+
+function kmToMiles<T extends Vehicle>(vehicle: T): T { // Расширение
+    vehicle.run = vehicle.run / 0.62;
+    console.log(vehicle);
+    return vehicle;
+}
+
+kmToMiles(new Vehicle());
+kmToMiles(new SCV());
+kmToMiles({run: 143});
+
 kmToMiles({a: 123123}); // Error
 ```
+
 ![](_png/c9b57fa83fd9715c7ee5310ba244a4a1.png)
 
 Так же `extends` работает и с интерфейсами
 
 ```TS
-interface Vehicle {  
-    run: number;  
-}  
-  
-interface SCV extends Vehicle {  
-    capacity: number;  
-}  
-  
-function kmToMiles<T extends Vehicle>(vehicle: T): T { // Расширение  
-    vehicle.run = vehicle.run / 0.62;  
-    console.log(vehicle);  
-    return vehicle;  
-}  
+interface Vehicle {
+    run: number;
+}
+
+interface SCV extends Vehicle {
+    capacity: number;
+}
+
+function kmToMiles<T extends Vehicle>(vehicle: T): T { // Расширение
+    vehicle.run = vehicle.run / 0.62;
+    console.log(vehicle);
+    return vehicle;
+}
 ```
 
 Так же дженерики можно экстендить `union`-типами
 
 ```TS
-function logId(id: number | string) {  
-    if (typeof id === 'string') {  
-        console.log(id);  
-        return id;   
-	} else {  
-        return id + 302;  
-    }    
+function logId(id: number | string) {
+    if (typeof id === 'string') {
+        console.log(id);
+        return id;
+	} else {
+        return id + 302;
+    }
 }
 ```
 
 ```TS
-function logId<T extends number | string>(id: T): T {  
-    console.log(id);  
-    return id;  
+function logId<T extends number | string>(id: T): T {
+    console.log(id);
+    return id;
 }
 ```
 
 Но так же мы можем добавлять в код сразу несколько дженериков
-Например, тут `T` дженерик, ограниченный юнион-типом и `Y` дженерик без ограничения 
+Например, тут `T` дженерик, ограниченный юнион-типом и `Y` дженерик без ограничения
 
 ```TS
-function logId<T extends number | string, Y>(id: T, additionalData: Y): { id: T, data: Y } {  
-    console.log(id);  
-    return { id, data: additionalData };  
+function logId<T extends number | string, Y>(id: T, additionalData: Y): { id: T, data: Y } {
+    console.log(id);
+    return { id, data: additionalData };
 }
 ```
 
@@ -2425,28 +2425,28 @@ function logId<T extends number | string, Y>(id: T, additionalData: Y): { id: T,
 Конкретно тут мы имеем определённые данные. Создаём интерфейс, где говорим, что у нас должно присутствовать свойство `id`. Далее в функции нужно указать, что мы экстендим наш дженерик интерфейсом, который содержит нужное нам свойство. Аргументом и возвращаемым типом является массив от дженерика. Внутри функции реализована сортировка через `switch`, который выбирает реализацию из указанной нами (`asc-desc`)
 
 ```TS
-const data = [  
-    {id: 1, name: 'John'},  
-    {id: 1, name: 'Lusy'},  
-    {id: 1, name: 'Andrew'},  
-];  
-  
-interface ID {  
-    id: number  
-}  
-  
-function sort<T extends ID>(data: T[], type: "asc" | "desc" = "asc"): T[] {  
-    return data.sort((a, b) => {  
-        switch (type) {  
-            case "asc":  
-                return a.id - b.id;  
-            case "desc":  
-                return b.id - a.id;  
-        }    
-    });  
-}  
-  
-console.log(sort(data));  
+const data = [
+    {id: 1, name: 'John'},
+    {id: 1, name: 'Lusy'},
+    {id: 1, name: 'Andrew'},
+];
+
+interface ID {
+    id: number
+}
+
+function sort<T extends ID>(data: T[], type: "asc" | "desc" = "asc"): T[] {
+    return data.sort((a, b) => {
+        switch (type) {
+            case "asc":
+                return a.id - b.id;
+            case "desc":
+                return b.id - a.id;
+        }
+    });
+}
+
+console.log(sort(data));
 console.log(sort(data, "desc"));
 ```
 
@@ -2455,19 +2455,19 @@ console.log(sort(data, "desc"));
 Мы можем так же спокойно задавать дженерики для классов. Они будут определять какие типы данных мы будем передавать в конструктор класса.
 
 ```TS
-class Resp<D, E> {  
-    data?: D;  
-    error?: E;  
-  
-    constructor(data?: D, error?: E) {  
-        if (data) {  
-            this.data = data;  
-        }        if (error) {  
-            this.error = error;  
-        }    
-    }  
-}  
-  
+class Resp<D, E> {
+    data?: D;
+    error?: E;
+
+    constructor(data?: D, error?: E) {
+        if (data) {
+            this.data = data;
+        }        if (error) {
+            this.error = error;
+        }
+    }
+}
+
 const resp = new Resp<string, number>("data", 0);
 ```
 
@@ -2483,12 +2483,12 @@ const resp = new Resp<string, number>("data", 0);
 Так же мы можем указать свои дженерики для наследуемого класса. Однако именам дженериков нельзя совпадать с родительскими
 
 ```TS
-class HTTPResp<F> extends Resp<string, number> {  
-    private _code?: F;  
-  
-    set code(code: F) {  
-        this._code = code;  
-    }  
+class HTTPResp<F> extends Resp<string, number> {
+    private _code?: F;
+
+    set code(code: F) {
+        this._code = code;
+    }
 }
 ```
 
@@ -2496,7 +2496,8 @@ class HTTPResp<F> extends Resp<string, number> {
 
 ### Mixins
 
-Три типа наследования: 
+Три типа наследования:
+
 - Через `extends`
 - Композиция
 - Прямое наследование
@@ -2506,53 +2507,53 @@ class HTTPResp<F> extends Resp<string, number> {
 Это обычный подход при добавлении нового функционала в классы. Им мы обычно и пользуемся. Конкретно в этом примере такой подход оптимален.
 
 ```TS
-class List {  
-    constructor(public items: string[]) {}  
-}  
-  
-type ListType = GConstructor<List>;  
-  
-class ExtendedListClass extends List {  
-    first() {  
-        return this.items[0];  
-    }  
+class List {
+    constructor(public items: string[]) {}
+}
+
+type ListType = GConstructor<List>;
+
+class ExtendedListClass extends List {
+    first() {
+        return this.items[0];
+    }
 }
 ```
 
 И вот пример миксина. Сразу нужно сказать, что миксины используются редко и обычно используются в подходе DCI.
 Что из себя представляет миксин? **Миксин** - это функция, которая возвращает класс, который мы расширили нужным нам классом.
-Конкретно в нашем примере, TBase (дженерик) мы расширили через `ListType` и этот `TBase` определили как тип значения, которое мы передаём в функцию. ***Аргумент функции** - это класс, которым мы будем расширять возвращаемый из функции класс.* 
+Конкретно в нашем примере, TBase (дженерик) мы расширили через `ListType` и этот `TBase` определили как тип значения, которое мы передаём в функцию. **\*Аргумент функции** - это класс, которым мы будем расширять возвращаемый из функции класс.\*
 
 ```TS
-type Constructor = new (...args: any[]) => {};  
-type GConstructor<T = {}> = new (...args: any[]) => T;  
-  
-class List {  
-    constructor(public items: string[]) {}  
-}  
-  
-type ListType = GConstructor<List>;  
-  
-class ExtendedListClass extends List {  
-    first() {  
-        return this.items[0];  
-    }  
-}  
+type Constructor = new (...args: any[]) => {};
+type GConstructor<T = {}> = new (...args: any[]) => T;
+
+class List {
+    constructor(public items: string[]) {}
+}
+
+type ListType = GConstructor<List>;
+
+class ExtendedListClass extends List {
+    first() {
+        return this.items[0];
+    }
+}
   // И вот реализация миксина
-function ExtendedList<TBase extends ListType>(Base: TBase) {  
-    return class ExtendedList extends Base {  
-        first() {  
-            return this.items[0];  
-        }    
-    }  
+function ExtendedList<TBase extends ListType>(Base: TBase) {
+    return class ExtendedList extends Base {
+        first() {
+            return this.items[0];
+        }
+    }
 }
 ```
 
 Чтобы воспользоваться данной конструкцией, нам нужно сначала присвоить класс какой-то переменной, потом из этой переменной инстанциировать класс
 
 ```TS
-const list = ExtendedList(List);  
-const res = new list(["first---", "second"]);  
+const list = ExtendedList(List);
+const res = new list(["first---", "second"]);
 console.log(res.first()); // first---
 ```
 
@@ -2560,94 +2561,94 @@ console.log(res.first()); // first---
 Связующим звеном для использования является `AccordionList` - он содержит конструктор `List` и свойство `isOpen` (делается это так из-за того, что нам нужно передать класс, который имеет реализацию обоих тайпов -> которые были сделаны из этих классов)
 
 ```TS
-type Constructor = new (...args: any[]) => {};  
+type Constructor = new (...args: any[]) => {};
 type GConstructor<T = {}> = new (...args: any[]) => T;  // Тайп-Дженерик-Конструктор
-  
+
 class List {  // Класс
-    constructor(public items: string[]) {}  
-}  
-  
+    constructor(public items: string[]) {}
+}
+
 class Accordion {  // Класс
-    isOpen: boolean;  
-}  
-  
+    isOpen: boolean;
+}
+
 type ListType = GConstructor<List>; // Тайп из класса
 type AccordionType = GConstructor<Accordion>;  // Тайп из класса
-  
-class ExtendedListClass extends List {  
-    first() {  
-        return this.items[0];  
-    }  
-}  
-  
-//                              Собственно, экстенд тайпов:  
-function ExtendedList<TBase extends ListType & AccordionType>(Base: TBase) {  
-    return class ExtendedList extends Base {  
-        first() {  
-            this.isOpen = true;  
-            return this.items[0];  
-        }    }  
-}  
+
+class ExtendedListClass extends List {
+    first() {
+        return this.items[0];
+    }
+}
+
+//                              Собственно, экстенд тайпов:
+function ExtendedList<TBase extends ListType & AccordionType>(Base: TBase) {
+    return class ExtendedList extends Base {
+        first() {
+            this.isOpen = true;
+            return this.items[0];
+        }    }
+}
 
 // Класс, который имеет в себе реализацию обоих классовых тайпов
-class AccordionList { // Для связки двух тайпов  
-    isOpen: boolean;  
-    constructor(public items: string[]) {}  
-}  
-  
-const list = ExtendedList(AccordionList);  
-const res = new list(["first", "second"]);  
+class AccordionList { // Для связки двух тайпов
+    isOpen: boolean;
+    constructor(public items: string[]) {}
+}
+
+const list = ExtendedList(AccordionList);
+const res = new list(["first", "second"]);
 console.log(res.first() + " " + res.isOpen);
 ```
 
->[!info] Преймущества миксинов:
-> 1) Он позволяет перенести функциональность сразу нескольких классов в один
-> 2) Позволяет примиксовать так же функциональность к исходному классу
-> 3) Тайпчекинг экстендедов класса
+> [!info] Преймущества миксинов:
+>
+> 1. Он позволяет перенести функциональность сразу нескольких классов в один
+> 2. Позволяет примиксовать так же функциональность к исходному классу
+> 3. Тайпчекинг экстендедов класса
 
->[!important] Когда использовать миксины?
-Обычно миксины не используются и вместо них применяют композицию, чтобы перенести функциональность из класса в класс. Однако, если нам нужно будет перенести и функциональность из нескольких классов и свойства этих классов, то тут уже нужно будет использовать миксины
-
-
+> [!important] Когда использовать миксины?
+> Обычно миксины не используются и вместо них применяют композицию, чтобы перенести функциональность из класса в класс. Однако, если нам нужно будет перенести и функциональность из нескольких классов и свойства этих классов, то тут уже нужно будет использовать миксины
 
 ---
+
 ## Манипуляции с типами
 
 ### 068 Keyof
 
-`keyof` говорит нам, что мы берём от определённого объекта только ключи. 
+`keyof` говорит нам, что мы берём от определённого объекта только ключи.
 Конкретно тут в примере, в константу `key` мы можем положить только ключи интерфейса `IUser`
 
 ```TS
-interface IUser {  
-    name: string;  
-    age: number;  
-}  
-  
-type keyOfUser = keyof IUser;  
-  
+interface IUser {
+    name: string;
+    age: number;
+}
+
+type keyOfUser = keyof IUser;
+
 const key: keyOfUser = "name"; // or "age"
 ```
 
 И вот пример, в котором мы хотим получить в константе `userName` имя пользователя, но встречаемся с такой проблемой, что можем написать в качестве аргумента любое значение и не увидим ошибки от компилятора
 
 ```TS
-interface IUser {  
-    name: string;  
-    age: number;  
-}  
-  
-type keyOfUser = keyof IUser;  
-  
-function getValue(obj, key) {  
-    return obj[key];  
-}  
-  
-const user: IUser = {  
-    name: 'John',  
-    age: 23  
-}  
-  
+interface IUser {
+    name: string;
+    age: number;
+}
+
+type keyOfUser = keyof IUser;
+
+function getValue(obj, key) {
+    return obj[key];
+}
+
+const user: IUser = {
+    name: 'John',
+    age: 23
+}
+
 const userName = getValue(user, 'names'); // Error
 ```
 
@@ -2658,22 +2659,22 @@ const userName = getValue(user, 'names'); // Error
 В данном случае, компилятор нам будет явно указывать, что при вызове метода `getValue()`, второе значение обязательно должно быть одним из ключей первого аргумента
 
 ```TS
-interface IUser {  
-    name: string;  
-    age: number;  
-}  
-  
-type keyOfUser = keyof IUser;  
-  
+interface IUser {
+    name: string;
+    age: number;
+}
+
+type keyOfUser = keyof IUser;
+
 function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {  // !
-    return obj[key];  
-}  
-  
-const user: IUser = {  
-    name: 'John',  
-    age: 23  
-}  
-  
+    return obj[key];
+}
+
+const user: IUser = {
+    name: 'John',
+    age: 23
+}
+
 const userName = getValue(user, 'name'); // 'John'
 ```
 
@@ -2685,15 +2686,15 @@ const userName = getValue(user, 'name'); // 'John'
 
 ```js
 [
-    { group: 1, name: 'a' },
-    { group: 1, name: 'b' },
-    { group: 2, name: 'c' },
+	{ group: 1, name: 'a' },
+	{ group: 1, name: 'b' },
+	{ group: 2, name: 'c' },
 ];
 ```
 
 При группироке по `group`:
 
-``` js
+```js
 {
     '1': [ { group: 1, name: 'a' }, { group: 1, name: 'b' } ],
     '2': [ { group: 2, name: 'c' } ]
@@ -2701,39 +2702,39 @@ const userName = getValue(user, 'name'); // 'John'
 ```
 
 ```TS
-// Начальные условия  
-interface Data {  
-    group: number;  
-    name: string;  
-}  
-  
-const data: Data[] = [  
-    {group: 1, name: 'a'},  
-    {group: 1, name: 'b'}, // key  
-    {group: 2, name: 'c'},  
-];  
-  
-// Реализация  
-interface IGroup<T> {  
-    [key: string]: T[]; // Создаём мапу свойств объекта  
-}  
-  
-type key = 'string' | 'number' | 'symbol';  
-  
-function group<T extends Record<key, any>>(array: T[], key: keyof T): IGroup<T> {  
-    return array.reduce<IGroup<T>>((map: IGroup<T>, item) => {  
-        const itemKey = item[key];  
-        let currentEl = map[itemKey];  
-        if (Array.isArray(currentEl)) {  
-            currentEl.push(item);  
-        } else {  
-            currentEl = [item];  
-        }        map[itemKey] = currentEl;  
-        return map;  
-    }, {});  
-}  
-  
-const res = group<Data>(data, 'group');  
+// Начальные условия
+interface Data {
+    group: number;
+    name: string;
+}
+
+const data: Data[] = [
+    {group: 1, name: 'a'},
+    {group: 1, name: 'b'}, // key
+    {group: 2, name: 'c'},
+];
+
+// Реализация
+interface IGroup<T> {
+    [key: string]: T[]; // Создаём мапу свойств объекта
+}
+
+type key = 'string' | 'number' | 'symbol';
+
+function group<T extends Record<key, any>>(array: T[], key: keyof T): IGroup<T> {
+    return array.reduce<IGroup<T>>((map: IGroup<T>, item) => {
+        const itemKey = item[key];
+        let currentEl = map[itemKey];
+        if (Array.isArray(currentEl)) {
+            currentEl.push(item);
+        } else {
+            currentEl = [item];
+        }        map[itemKey] = currentEl;
+        return map;
+    }, {});
+}
+
+const res = group<Data>(data, 'group');
 console.log(res);
 ```
 
@@ -2744,51 +2745,52 @@ console.log(res);
 Тут сразу нужно сказать, что компилятор ТС, когда мы пишем юнион тип данных покажет нам, что тип юнион. Однако уже внутри других структур (например, условий) мы явно увидим тип переменной (от значения внутри)
 
 ```TS
-let strOrNum: string | number = 5; // string | number  
-  
-if (strOrNum) { // number  
+let strOrNum: string | number = 5; // string | number
+
+if (strOrNum) { // number
 }
 ```
 
 Стоковый `typeof` из JS выполняет для нас операцию проверки типа данных в переменной. Однако есть и `typeof`, который используется в типах и он уже имеет свою реализацию только в ТС
 
 ```TS
-let strOrNum: string | number; // string | number  
-  
-if (Math.random() > 0.5) { // number  
-    strOrNum = 5;  
-} else {  
-    strOrNum = "str";  
-}  
-  
-if (typeof strOrNum === "string") {  
-    console.log(strOrNum + " some way of");  
-} else {  
-    console.log(strOrNum);  
+let strOrNum: string | number; // string | number
+
+if (Math.random() > 0.5) { // number
+    strOrNum = 5;
+} else {
+    strOrNum = "str";
+}
+
+if (typeof strOrNum === "string") {
+    console.log(strOrNum + " some way of");
+} else {
+    console.log(strOrNum);
 }
 ```
 
 Типовый `typeof` внутри ТС позволяет задать тип одной переменной отталкиваясь от другой переменной
 
 ```TS
-let date: string | number;  
+let date: string | number;
 let birthDate: typeof date; // string | number
 ```
 
 И обычно используется `typeof` в паре с `keyof`. В примерах ниже мы получаем типы наших объектов. Конкретно мы можем достать в качестве типа ключ объекта. Обычный `keyof` достанет только само наименование ключа из объекта, а не тип.
 
 ```TS
-const user = {  
-    name: 'John',  
-}  
-  
+const user = {
+    name: 'John',
+}
+
 type userName = keyof typeof user; // "name"
 ```
+
 ```TS
-enum Direction {  
-    Up,   
-	Down  
-}  
+enum Direction {
+    Up,
+	Down
+}
 
 type direction = keyof typeof Direction; // "Up" | "Down"
 ```
@@ -2799,32 +2801,32 @@ type direction = keyof typeof Direction; // "Up" | "Down"
 
 ```TS
 // Попадаает в рантайм JS
-interface Role {  // 
-    name: string;  
-}  
-  
-interface User {  
-    name: string;  
-    roles: Role[];  
-}  
-  
-const user: User = {  
-    name: 'Вася',  
-    roles: []  
-}  
-  
-const nameUser = user['name'];  
+interface Role {  //
+    name: string;
+}
+
+interface User {
+    name: string;
+    roles: Role[];
+}
+
+const user: User = {
+    name: 'Вася',
+    roles: []
+}
+
+const nameUser = user['name'];
 const roleNames = 'roles';
 ```
 
-И то, что не попадает в рантайм (существует только внутри ТС). 
+И то, что не попадает в рантайм (существует только внутри ТС).
 Тут хочется упомянуть, что второй тайп работать не будет, так как тут он принимает в себя не тип, а значение от рантайм-части языка
 
 ```TS
-const nameUser = user['name']; // 1 
+const nameUser = user['name']; // 1
 const roleNames = 'roles'; // 2
 
-// Работа с точки зрения типов  
+// Работа с точки зрения типов
 //1
 type roleType = User['roles'];  // Получаем тип ролей пользователя
 //2
@@ -2834,27 +2836,27 @@ type roleType2 = User[roleNames]; // Error
 Конкретно в этом примере `roleType2` работать будет, так как мы обращаемся к внутреннему средству языка - типам и через `typeof` получаем тип объекта
 
 ```TS
-const nameUser = user['name'];  
+const nameUser = user['name'];
 const roleNames = 'roles';  // === 'roles'
-  
-type roleType = User['roles'];  
+
+type roleType = User['roles'];
 type roleType2 = User[typeof roleNames]; // Ok
 ```
 
 Тут уже нужно напомнить, что константы принимают в себя литеральные типы данных (тип константы = содержащемуся в ней значению). Однако тот же трюк, что и выше, но с `let` - не пройдёт
 
 ```TS
-const nameUser = user['name'];  
+const nameUser = user['name'];
 let roleNames = 'roles';  // ! === 'string'
-  
-type roleType = User['roles'];  
+
+type roleType = User['roles'];
 type roleType2 = User[typeof roleNames]; // Error
 ```
 
 Однако с `let` получится сделать тайпоф, но нужно будет конкретно задать тип для переменной в виде нашего значения
 
 ```TS
-let roleNames: 'roles' = 'roles';  
+let roleNames: 'roles' = 'roles';
 type roleType2 = User[typeof roleNames]; // OK
 ```
 
@@ -2863,8 +2865,8 @@ type roleType2 = User[typeof roleNames]; // OK
 Но через `type name = Interface[значения][number]`, где значением является массив - в ТС мы говорим, что обращаемся к ключам объекта массив, которые представляют собой числа (0: значение, 1: значение)
 
 ```TS
-// Обращаемся к первому элементу  
-const userName = user['name'][0]; 
+// Обращаемся к первому элементу
+const userName = user['name'][0];
 // Обращаемся ко всем элементам, получая тип
 type roleType = User['roles'][number]; // === Role
 ```
@@ -2873,54 +2875,54 @@ type roleType = User['roles'][number]; // === Role
 Первым делом, мы можем кастануть наш массив как константу, тем самым создав юнион тип у переменной
 И дальше в тайпе через тайпоф определим массив нашей константы и будем просить отдельные элементы в качестве юнионов
 
-Такой подход удобен, когда нам нужно проверять тип пользователя, которого мы получаем (например) 
+Такой подход удобен, когда нам нужно проверять тип пользователя, которого мы получаем (например)
 
 ![](_png/78140d75655f0a315e6e3d801a48db36.png)
 ![](_png/6b72e53ac11edbd1304e2e63a0f53a64.png)
 ![](_png/31863924ab5d6dae3a9fde797b188b65.png)
 
-И так же мы можем получать вложенные типы из наших интерфейсов. Наш интерфейс User имеет свойство, которое принимает в себя интерфейс Permission. Сам же Permission представляет из себя объект, который принимает в себя свойство с типом Дата. 
+И так же мы можем получать вложенные типы из наших интерфейсов. Наш интерфейс User имеет свойство, которое принимает в себя интерфейс Permission. Сам же Permission представляет из себя объект, который принимает в себя свойство с типом Дата.
 Через тайп `['permissions']['endDate']` мы получаем вложенный внутри свойства permission тип свойства endDate, который уже равен Дате
 
 ```TS
-interface Role {  
-    name: string;  
-}  
-  
-interface Permission {  
-    endDate: Date;  
-}  
-  
-interface User {  
-    name: string;  
-    roles: string[];  
-    permissions: Permission;  
-}  
-  
-const user: User = {  
-    name: 'Вася',  
-    roles: [],  
-    permissions: {  
-        endDate: new Date(), // === Date  
-    }  
-}  
-  
-type roleType = User['roles'][number]; // === roles  
+interface Role {
+    name: string;
+}
+
+interface Permission {
+    endDate: Date;
+}
+
+interface User {
+    name: string;
+    roles: string[];
+    permissions: Permission;
+}
+
+const user: User = {
+    name: 'Вася',
+    roles: [],
+    permissions: {
+        endDate: new Date(), // === Date
+    }
+}
+
+type roleType = User['roles'][number]; // === roles
 type dateType = User['permissions']['endDate']; // === Date
 ```
 
 ### 072 Conditional Types
 
-*Conditional*-условия нам позволяют в одну строку записать какие-то короткие для выполнения условия
-*Conditional* же в типах позволяет нам определить какой тип будет у объекта при определённых вводных. Конкретно в примере, `data` будет иметь тип строки, если в дженерик передали `success`
+_Conditional_-условия нам позволяют в одну строку записать какие-то короткие для выполнения условия
+_Conditional_ же в типах позволяет нам определить какой тип будет у объекта при определённых вводных. Конкретно в примере, `data` будет иметь тип строки, если в дженерик передали `success`
 
 ```TS
 // Работа в JS
-const a: number = Math.random() > 0.5 ? 1 : 0;  
+const a: number = Math.random() > 0.5 ? 1 : 0;
 
 // Работа в ТС с тайпами
-interface HTTPResponse<T extends 'success' | 'failed'> {  
-    code: number;  
+interface HTTPResponse<T extends 'success' | 'failed'> {
+    code: number;
     data: T extends 'success' ? string : Error;  // !
     data2: T extends 'success' ? string : number;  // !
 }
@@ -2930,38 +2932,38 @@ interface HTTPResponse<T extends 'success' | 'failed'> {
 
 ```TS
 const success: HTTPResponse<'success'> = {  // если success
-    code: 200,  
-    data: 'success',  
-    data2: 'done'  
-}  
-  
+    code: 200,
+    data: 'success',
+    data2: 'done'
+}
+
 const error: HTTPResponse<'failed'> = {  // если failed
-    code: 400,  
-    data: new Error(),  
-    data2: 0  
+    code: 400,
+    data: new Error(),
+    data2: 0
 }
 ```
 
 Так же кондишенелы могут нам пригодиться для упрощения перегрузок больших функций. Конкретно тут в примере, мы проверяем функцию на то, какое значение мы в неё вложили - число или строку
 
 ```TS
-class User {  
-    id: number;  
-    name: string;  
-}  
-  
-class UserPersistend {  
-    dbId: string;  
-}  
-  
-function getUser(Id: number): User;  
-function getUser(dbId: string): UserPersistend;  
-function getUser(dbIdOrId: string | number): User | UserPersistend {  
-    if (typeof dbIdOrId === 'number') {  
-        return new User();  
-    } else {  
-        return new UserPersistend();  
-    }  
+class User {
+    id: number;
+    name: string;
+}
+
+class UserPersistend {
+    dbId: string;
+}
+
+function getUser(Id: number): User;
+function getUser(dbId: string): UserPersistend;
+function getUser(dbIdOrId: string | number): User | UserPersistend {
+    if (typeof dbIdOrId === 'number') {
+        return new User();
+    } else {
+        return new UserPersistend();
+    }
 }
 ```
 
@@ -2969,26 +2971,26 @@ function getUser(dbIdOrId: string | number): User | UserPersistend {
 Однако нам нужно обязательно будет скастовать `return` к нашему возвращаемому типу, так как `type` не работают в рантайме и выдают ошибку
 
 ```TS
-class User {  
-    id: number;  
-    name: string;  
-}  
-  
-class UserPersistend extends User {  
-    dbId: string;  
-}  
-  
-type UserOrUserPersistend<T extends number | string> = T extends number ? User : UserPersistend; // !  
-  
-function getUser<T extends number | string>(id: T): UserOrUserPersistend<T> { // !  
-    if (typeof id === 'number') {  
-        return new User() as UserOrUserPersistend<T>; // !  
-    } else {  
-        return new UserPersistend() as UserOrUserPersistend<T>; // !  
-    }  
-}  
-  
-const res1 = getUser(1);  
+class User {
+    id: number;
+    name: string;
+}
+
+class UserPersistend extends User {
+    dbId: string;
+}
+
+type UserOrUserPersistend<T extends number | string> = T extends number ? User : UserPersistend; // !
+
+function getUser<T extends number | string>(id: T): UserOrUserPersistend<T> { // !
+    if (typeof id === 'number') {
+        return new User() as UserOrUserPersistend<T>; // !
+    } else {
+        return new UserPersistend() as UserOrUserPersistend<T>; // !
+    }
+}
+
+const res1 = getUser(1);
 const res2 = getUser('sedsafs');
 ```
 
@@ -2997,33 +2999,33 @@ const res2 = getUser('sedsafs');
 Представим, что у нас есть определённая транзакция, которая происходит от одного значения к другому
 
 ```TS
-function runTransaction(transaction: {  
-    fromTo: [string, string] // [string, string]  
-}) {  
-    console.log(transaction);  
-}  
-  
-const transaction = {  
-    fromTo: ['1', '2'], // string[]  
-}  
-  
+function runTransaction(transaction: {
+    fromTo: [string, string] // [string, string]
+}) {
+    console.log(transaction);
+}
+
+const transaction = {
+    fromTo: ['1', '2'], // string[]
+}
+
 runTransaction(transaction); // Error
 ```
 
 Чтобы всё заработало, нужно явно типизировать нашу транзакцию так:
 
 ```TS
-const transaction: { fromTo: [string, string] } = {  
+const transaction: { fromTo: [string, string] } = {
     fromTo: ['1', '2'],
-}  
+}
 ```
 
 Либо так:
 
 ```TS
-const transaction = {  
+const transaction = {
     fromTo: ['1', '2'] as [string, string],
-} 
+}
 ```
 
 `infer` - это ключевое слово, которое выведет нам определённый тип из пока ещё несущестующего.
@@ -3034,7 +3036,7 @@ const transaction = {
 type getFirstArg<T> = T extends (first: infer First, ...args: any[]) => any ? First : never
 ```
 
-И чисто фактически мы вытащили тип в возвращаемое значение. В саму переменную транзакции мы запихнём дженерик от функции нашего тайпа. 
+И чисто фактически мы вытащили тип в возвращаемое значение. В саму переменную транзакции мы запихнём дженерик от функции нашего тайпа.
 
 ![](_png/756cd83b251c4f56f3b7ebed41aeed4e.png)
 
@@ -3042,26 +3044,26 @@ type getFirstArg<T> = T extends (first: infer First, ...args: any[]) => any ? Fi
 
 ### 074 Mapped Types
 
-Мы создали систему, где раздаём пользователям права на редактирование отдельных элементов системы. Где-то пользователь может только читать, где-то изменять или создавать. 
+Мы создали систему, где раздаём пользователям права на редактирование отдельных элементов системы. Где-то пользователь может только читать, где-то изменять или создавать.
 Нам нужно реализовать проверку того, что у пользователя есть определённое право в принципе.
 
 ```TS
-type Modifier = 'read' | 'update' | 'create';  
-  
-type UserRoles = {  
-    customers?: Modifier,  
-    projects?: Modifier,  
-    adminPanel?: Modifier,  
+type Modifier = 'read' | 'update' | 'create';
+
+type UserRoles = {
+    customers?: Modifier,
+    projects?: Modifier,
+    adminPanel?: Modifier,
 }
 ```
 
 Мы можем задать проверку наличия доступа у пользователя к определённым элементам системы либо так: пишем каждое свойство из объекта и проверяем его через булеан.
 
 ```TS
-type UserAccess = {  
-    customers?: boolean,  
-    projects?: boolean,  
-    adminPanel?: boolean,  
+type UserAccess = {
+    customers?: boolean,
+    projects?: boolean,
+    adminPanel?: boolean,
 }
 ```
 
@@ -3069,15 +3071,15 @@ type UserAccess = {
 
 ```TS
 // Мапа
-type ModifierToAccess<Type> = {  
-    [Property in keyof Type]: boolean;  
+type ModifierToAccess<Type> = {
+    [Property in keyof Type]: boolean;
 }
 
 // непосредственное использование
-type UserAccess = ModifierToAccess<UserRoles>; 
+type UserAccess = ModifierToAccess<UserRoles>;
 ```
 
-И вот пример использования самого простого мапа, который будет проверять все значения нашего объекта, чтобы они были boolean 
+И вот пример использования самого простого мапа, который будет проверять все значения нашего объекта, чтобы они были boolean
 
 ![](_png/5436b05d436dd4d108005c7ad3adcd9f.png)
 
@@ -3085,20 +3087,20 @@ type UserAccess = ModifierToAccess<UserRoles>;
 
 ```TS
 // уберёт необязательность со всех свойств
-[Property in keyof Type]-?: boolean;  
+[Property in keyof Type]-?: boolean;
 
 // добавить на все свойства необязательность свойств
-[Property in keyof Type]+?: boolean; 
+[Property in keyof Type]+?: boolean;
 
 // Добавит модификатор ридонли
-+readonly [Property in keyof Type]+?: boolean; 
++readonly [Property in keyof Type]+?: boolean;
 ```
 
 Так же через прокаст можно поменять наименование ключей в объекте
 
 ```TS
-type ModifierToAccess<Type> = {  
-    +readonly [Property in keyof Type as `canAccess${string & Property}`]-?: boolean;  
+type ModifierToAccess<Type> = {
+    +readonly [Property in keyof Type as `canAccess${string & Property}`]-?: boolean;
 }
 ```
 
@@ -3107,8 +3109,8 @@ type ModifierToAccess<Type> = {
 Так же через синтаксис `Exclude<>` мы можем убрать из маны ненужные нам значения. Первый аргумент - сами принимаемые значения, второй аргумент - то, что мы должны исключить из выборки
 
 ```TS
-type ModifierToAccess<Type> = {  
-    +readonly [Property in keyof Type as Exclude<`canAccess${string & Property}`, 'canAccessadminPanel'>]+?: boolean;  
+type ModifierToAccess<Type> = {
+    +readonly [Property in keyof Type as Exclude<`canAccess${string & Property}`, 'canAccessadminPanel'>]+?: boolean;
 }
 ```
 
@@ -3120,33 +3122,33 @@ type ModifierToAccess<Type> = {
 
 ### 075 Упражнение - Валидация форм
 
-Нам нужно провалидировать форму. Форма в себя обязательно принимает имя и пароль. Мы отдельно создали форму с именем и паролем. 
+Нам нужно провалидировать форму. Форма в себя обязательно принимает имя и пароль. Мы отдельно создали форму с именем и паролем.
 Дальше нам нужно написать тайп, который будет проверять валидна ли форма. Ключ у нас находится в множестве типа Т. Значением у свойства могут быть два объекта (которые записаны через вилку "`|`")
 И уже конечный блок кода выполняет саму валидацию полученных значений
 
 ```TS
 interface IForm {  // Интерфейс формы
-    name: string;  
-    password: string;  
-}  
-  
-const form: IForm = {  // Форма
-    name: 'Вася',  
-    password: '123',  
-}  
-  
-type Validation<T> = {  // Тайп валидации
-	[K in keyof T]: {  
-	    isValid: true  
-	} | {  
-	    isValid: false;  
-	    errorMessage: string;  
-	} 
-} 
+    name: string;
+    password: string;
+}
 
-const formValidation: Validation<IForm> = { // Валидация формы  
-    name: { isValid: true },  
-    password: { isValid: false,  errorMessage: 'Должен быть длиннее 5 символов' },  
+const form: IForm = {  // Форма
+    name: 'Вася',
+    password: '123',
+}
+
+type Validation<T> = {  // Тайп валидации
+	[K in keyof T]: {
+	    isValid: true
+	} | {
+	    isValid: false;
+	    errorMessage: string;
+	}
+}
+
+const formValidation: Validation<IForm> = { // Валидация формы
+    name: { isValid: true },
+    password: { isValid: false,  errorMessage: 'Должен быть длиннее 5 символов' },
 }
 ```
 
@@ -3155,17 +3157,18 @@ const formValidation: Validation<IForm> = { // Валидация формы
 Шаблоны литеральных типов представляют из себя плэйсхолдеры для других типов, которые позволяют нам модифицировать уже имеющиеся типы под другие сущности
 
 ```TS
-type ReadOrWrite = 'read' | 'write';  
-  
+type ReadOrWrite = 'read' | 'write';
+
 type Access = `can${ReadOrWrite}`;
 ```
+
 ![](_png/26b671830a978561d2a870afad89bfa4.png)
 
 Так же мы можем модифицировать типы внутри этих шаблонов (например, перевести полученные типы в заглавные буквы)
 
 ```TS
-type ReadOrWrite = 'read' | 'write';  
-  
+type ReadOrWrite = 'read' | 'write';
+
 type Access = `can${Uppercase<ReadOrWrite>}`;
 ```
 
@@ -3174,8 +3177,8 @@ type Access = `can${Uppercase<ReadOrWrite>}`;
 Дженерик `Capitalize<>` переводит первые буквы в заглавные
 
 ```TS
-type ReadOrWrite = 'read' | 'write';  
-  
+type ReadOrWrite = 'read' | 'write';
+
 type Access = `can${Capitalize<ReadOrWrite>}`;
 ```
 
@@ -3184,38 +3187,39 @@ type Access = `can${Capitalize<ReadOrWrite>}`;
 Так же добавив ещё один шаблон, мы увеличим количество типов вдвое (через `Bulk` добавятся неизменные варианты - пустая строка и варианты с `Bulk`)
 
 ```TS
-type ReadOrWrite = 'read' | 'write';  
-type Bulk = 'bulk' | '';  
-  
+type ReadOrWrite = 'read' | 'write';
+type Bulk = 'bulk' | '';
+
 type Access = `access${Capitalize<ReadOrWrite>}${Capitalize<Bulk>}`;
 ```
+
 ![](_png/8d0b57d38189fee6ac2a1e4fc42a588a.png)
 
-Самый простой и частый пример использования таких темплейтов - это задание шаблонов значения для разных типов ответов (например, нам нужно реализовать `error` в *http* и для другой структуры)
+Самый простой и частый пример использования таких темплейтов - это задание шаблонов значения для разных типов ответов (например, нам нужно реализовать `error` в _http_ и для другой структуры)
 
 Или на том же фронте отделить ==fade-In== и ==fade-Out== через такую конструкцию
 
 ![](_png/bb3c4ef221b3d3e0df550cbc7b111a3d.png)
 
-Так же мы можем **распаковать наш составной тип** и работать с его изначальным значением. 
+Так же мы можем **распаковать наш составной тип** и работать с его изначальным значением.
 То есть в этом примере через `infer` (в `ReadOrWriteBulk`) мы достали значение и и убрали его
 
 ```TS
-type ReadOrWrite = 'read' | 'write';  
-type Bulk = 'bulk' | '';  
-  
-type Access = `access${Capitalize<ReadOrWrite>}${Capitalize<Bulk>}`;  
-  
-type ReadOrWriteBulk<T> = T extends `can${infer R}` ? R : never; // !  
-  
+type ReadOrWrite = 'read' | 'write';
+type Bulk = 'bulk' | '';
+
+type Access = `access${Capitalize<ReadOrWrite>}${Capitalize<Bulk>}`;
+
+type ReadOrWriteBulk<T> = T extends `can${infer R}` ? R : never; // !
+
 type T = ReadOrWriteBulk<Access>;
 ```
 
 ![](_png/e1669a861ddc28d1950a3bbab6e3ef04.png)
 
 ---
-## Служебные типы
 
+## Служебные типы
 
 ### 077 Вводное видео
 
@@ -3224,95 +3228,98 @@ type T = ReadOrWriteBulk<Access>;
 ### 078 Partial, Required, Readonly
 
 У нас есть есть три дженерика, которые позволяют быстро отредактировать модификаторы доступности и обязательности ключей.
+
 - `Partial` - делает все свойства в объекте необязательными для заполнения
 - `Required` - делает все свойства в объекте необязательными для заполнения
 - `Readonly` - все свойства объекта можно заполнить только при создании и далее только просматривать
 - ==Сочетание дженериков== - можно комбинировать выбранные дженерики, чтобы модифицировать доступность более гибко
 
 ```TS
-interface User {  
-    name: string;  
-    age?: number;  
-    address: string;  
-}  
+interface User {
+    name: string;
+    age?: number;
+    address: string;
+}
 
 // Partial
-type partial = Partial<User>;  
-const personPartial: partial = {}; // Нет обязательных полей  
-  
+type partial = Partial<User>;
+const personPartial: partial = {}; // Нет обязательных полей
+
 
 // Required
-type required = Required<User>;  
-const personRequired: required = {  
-    name: 'string',  
-    age: 22, // Обязательно  
-    address: 'string',  
-};  
-  
+type required = Required<User>;
+const personRequired: required = {
+    name: 'string',
+    age: 22, // Обязательно
+    address: 'string',
+};
+
 
 // Readonly
-type readonlyP = Readonly<User>;  
-const personReadonly: readonlyP = {  
-    name: 'string',  
-    age: 22,  
-    address: 'string',  
-}  
-personReadonly.name = 'John'; // Error  
-  
+type readonlyP = Readonly<User>;
+const personReadonly: readonlyP = {
+    name: 'string',
+    age: 22,
+    address: 'string',
+}
+personReadonly.name = 'John'; // Error
+
 
 // Сочетание дженериков
-type requiredReadonly = Required<Readonly<User>>;  
-const personRequiredReadonly: requiredReadonly = {  
-    name: 'string',  
-    age: 22, // Обязательно  
-    address: 'string',  
-};  
+type requiredReadonly = Required<Readonly<User>>;
+const personRequiredReadonly: requiredReadonly = {
+    name: 'string',
+    age: 22, // Обязательно
+    address: 'string',
+};
 personReadonly.name = 'John'; // Error
 ```
 
-Все данные инструменты построены под капотом на мапах.  Partial представляет из себя мапу, которая на все ключи накидывает необязательность. `Required` делает все ключи обязательными через "`-?`". `Readonly` уже навешивает на все ключи `readonly` модификатор
+Все данные инструменты построены под капотом на мапах. Partial представляет из себя мапу, которая на все ключи накидывает необязательность. `Required` делает все ключи обязательными через "`-?`". `Readonly` уже навешивает на все ключи `readonly` модификатор
 
 ![](_png/f1317157a9a501bb128b4df7b384c6dc.png)
 
 ### 079 Pick, Omit, Extract, Exclude
 
 Первые два дженерика - `Omit` и `Pick` - представляют из себя мапы, которые возвращают нам только нужные значения интерфейса в тип.
-- `Omit` - выкидывает ненужное свойство из интерфейса и хранит в тайпе результат модификации 
+
+- `Omit` - выкидывает ненужное свойство из интерфейса и хранит в тайпе результат модификации
 - `Pick` - берёт только нужные значения из интерфейса
 
 ```TS
-interface PaymentPersistence {  
-    id: number,  
-    sum: number,  
-    from: string,  
-    to: string,  
-}  
-  
-type PaymentWithoutId = Omit<PaymentPersistence, 'id'>; // выкинет свойство id  
+interface PaymentPersistence {
+    id: number,
+    sum: number,
+    from: string,
+    to: string,
+}
+
+type PaymentWithoutId = Omit<PaymentPersistence, 'id'>; // выкинет свойство id
 type PaymentRequisits = Pick<PaymentPersistence, 'from' | 'to'>; // Берёт только 'from' и 'to'
 ```
 
 ![](_png/69058a540fc10fd4e6910a76681c5d25.png)
 
 Далее уже идут дженерики, основанные на кондишеналах внутри.
+
 - `Extract` - вытаскивает из вложенного юнион-типа только те свойства, которые удовлетворяют типу данных, который был передан вторым аргументом.
 - `Exclude` - исключает из юнион-тайпа все те значения, которые равны указанному типу во втором аргументе
 
-Конкретно в нашем примере, Extract говорит, что нам нужно достать только свойства, тип которых будет строкой 
+Конкретно в нашем примере, Extract говорит, что нам нужно достать только свойства, тип которых будет строкой
 
 ```TS
-interface PaymentPersistence {  
-    id: number,  
-    sum: number,  
-    from: string,  
-    to: string,  
-}  
-  
+interface PaymentPersistence {
+    id: number,
+    sum: number,
+    from: string,
+    to: string,
+}
+
 type PaymentWithoutId = Omit<PaymentPersistence, 'id'>;
 type PaymentRequisits = Pick<PaymentPersistence, 'from' | 'to'>;
 
 // sum не попадёт в выборку
-type ExtractEx = Extract<'from' | 'to' | PaymentWithoutId, string>; 
+type ExtractEx = Extract<'from' | 'to' | PaymentWithoutId, string>;
 
 // В выборку попадёт только PaymentWithoutId, а 'from' и 'to' будут исключены
 type ExcludeEx = Exclude<'from' | 'to' | PaymentWithoutId, string>;
@@ -3328,25 +3335,26 @@ type ExcludeEx = Exclude<'from' | 'to' | PaymentWithoutId, string>;
 
 ### 080 ReturnType, Parameters, ConstructorParameters
 
-И дальше у нас идут дженерики, которые позволяют достать типы из функции. 
+И дальше у нас идут дженерики, которые позволяют достать типы из функции.
+
 - `ReturnType<> `- возвращает тип возвращаемого значения из функции
 - `Parameters<>` - возвращает кортеж типов аргументов функции
 
 ```TS
-class User {  
-    constructor(  
-        public id: number,  
-        public name: string  
-    ) {  
+class User {
+    constructor(
+        public id: number,
+        public name: string
+    ) {
     }
-}  
-  
-function getData(id: number): User {  
-    return new User(id, 'John');  
-}  
+}
+
+function getData(id: number): User {
+    return new User(id, 'John');
+}
 
 // Вернёт то, что возвращает функция
-type RT = ReturnType<typeof getData>; // User 
+type RT = ReturnType<typeof getData>; // User
 type RT2 = ReturnType<() => void>; // void
 type RT3 = ReturnType<<T>() => T>; // unknown
 type RT4 = ReturnType<<T extends string>() => T>; // string
@@ -3360,23 +3368,25 @@ type first = PT[0]; // === number
 
 ![](_png/0f70bcd648f7c41072af166de178d45e.png)
 
-Так же доступна и такая запись для быстрого обращения к первому параметру 
+Так же доступна и такая запись для быстрого обращения к первому параметру
+
 ```TS
-type PT = Parameters<typeof getData>[0]; 
+type PT = Parameters<typeof getData>[0];
 ```
 
-И так же у нас есть подобные дженерики для работы с классами: 
+И так же у нас есть подобные дженерики для работы с классами:
+
 - `ConstructorParameters` - возвращает кортеж параметров конструктора класса
 - `InstanceType` - вернёт тип инстанса
 
 ```TS
-class User {  
-    constructor(  
-        public id: number,  
-        public name: string  
-    ) {  
+class User {
+    constructor(
+        public id: number,
+        public name: string
+    ) {
     }
-}  
+}
 
 // [id: number, name: string]
 type CP = ConstructorParameters<typeof User>;
@@ -3384,6 +3394,7 @@ type CP = ConstructorParameters<typeof User>;
 // User
 type IT = InstanceType<typeof User>;
 ```
+
 ![](_png/d9e484df87f2ddc240f7d33b267cffd4.png)
 
 ### 081 Awaited
@@ -3421,7 +3432,7 @@ async function getMenu(): Promise<IMenu[]> {
 type R = Awaited<ReturnType<typeof getMenu>>; // IMenu[]
 ```
 
-Ну и так же в этом примере представлен второй кейс использования авэйтеда. Он тут в качестве типа подставляется автоматически в качестве указания типа ретёрна из функции. 
+Ну и так же в этом примере представлен второй кейс использования авэйтеда. Он тут в качестве типа подставляется автоматически в качестве указания типа ретёрна из функции.
 Тут возвращается массив результатов асинхронных функций
 
 ```TS
@@ -3433,11 +3444,12 @@ async function getArray<T>(x: T) {
 ![](_png/7c1c5a2911054cd2e22d000bd02395c8.png)
 
 ---
+
 ## Декораторы
 
 ### Вводное видео
 
-Декораторы используются для некоторого аннотирования классов, методов, свойств, или параметров, чтобы использовать некоторое _метапрограммирование_.   
+Декораторы используются для некоторого аннотирования классов, методов, свойств, или параметров, чтобы использовать некоторое _метапрограммирование_.
 
 ![](_png/c00f134cd296fafea023273d25a97f24.png)
 
@@ -3458,29 +3470,29 @@ async function getArray<T>(x: T) {
 
 Паттерн представляет собой использование функции, в которую вкладывается тип объекта (в примере - интерфейс) и ретёрнется этот же объект, но модифицированный.
 
-По сути своей,  работаем извне мы уже над модифицированным объектом 
+По сути своей, работаем извне мы уже над модифицированным объектом
 
 ```TS
-interface IUserService {  
-    users: number;  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
-  
-function nullUser(obj: IUserService) {  
-    obj.users = 0; // Какая-то логика... 
-    return obj;  
-}  
+interface IUserService {
+    users: number;
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    public users: number = 1000;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
+function nullUser(obj: IUserService) {
+    obj.users = 0; // Какая-то логика...
+    return obj;
+}
 
 // Вывод обычного инстанса
-console.log(new UserService().getUsersInDatabase());  
+console.log(new UserService().getUsersInDatabase());
 // Вывод задекорированного инстанса
 console.log(nullUser(new UserService()).getUsersInDatabase());
 ```
@@ -3488,14 +3500,14 @@ console.log(nullUser(new UserService()).getUsersInDatabase());
 А вот и объяснение, почему декораторы на классах работают снизу вверх: верхний декоратор покрывает выполнение нижнего
 
 ```TS
-function logUser(obj: IUserService) {  
-    console.log('Users: ' + obj.users);  
-    return obj;  
-}  
-  
-console.log(new UserService().getUsersInDatabase());  
+function logUser(obj: IUserService) {
+    console.log('Users: ' + obj.users);
+    return obj;
+}
 
-console.log(nullUser(new UserService()).getUsersInDatabase());  
+console.log(new UserService().getUsersInDatabase());
+
+console.log(nullUser(new UserService()).getUsersInDatabase());
 
 console.log(logUser(nullUser(new UserService())).getUsersInDatabase()); // 'Users: 0'
 ```
@@ -3510,20 +3522,20 @@ console.log(logUser(nullUser(new UserService())).getUsersInDatabase()); // 'User
 
 ![](_png/5c95a824c81ddcda07c5ea9eb4cac886.png)
 
-- Сама функция декоратора принимает в себя таргет, типом которого является функция. 
+- Сама функция декоратора принимает в себя таргет, типом которого является функция.
 - Чтобы изменить значения объекта, нужно обратиться к нему через прототип (потому что таргет - это функция)
-- Декораторы используются до того, как создастся объект, поэтому если внутри класса будет присвоение числа, то оно сохранится и не изменится декоратором. **Поэтому все изменения и присвоения значений должны происходить внутри декоратора** 
+- Декораторы используются до того, как создастся объект, поэтому если внутри класса будет присвоение числа, то оно сохранится и не изменится декоратором. **Поэтому все изменения и присвоения значений должны происходить внутри декоратора**
 
 ```TS
 @nullUser // Объявление декоратора
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
-  
+class UserService implements IUserService {
+    public users: number = 1000;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
 function nullUser(target: Function) {  // Функция декоратора
     target.prototype.users = 0;  // Изменение значения
 }
@@ -3534,14 +3546,14 @@ console.log(new UserService().getUsersInDatabase());
 
 ```TS
 @nullUser // Объявление декоратора
-class UserService implements IUserService {  
-    public users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
-  
+class UserService implements IUserService {
+    public users: number;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
 function nullUser(target: Function) {  // Функция декоратора
     target.prototype.users = 0;  // Изменение значения
 }
@@ -3550,23 +3562,23 @@ function nullUser(target: Function) {  // Функция декоратора
 console.log(new UserService().getUsersInDatabase());
 ```
 
-Так же у нас есть второй вариант создания функции-декоратора - это объявление конструируемого класса (дженерик T) и возвращение анонимного класса, который расширяется от получаемого класса 
+Так же у нас есть второй вариант создания функции-декоратора - это объявление конструируемого класса (дженерик T) и возвращение анонимного класса, который расширяется от получаемого класса
 Этот вариант имеет больший приоритет над первым вариантом и оригинальным объектом. Тут мы непосредственно работаем с переменными декорируемого класса и эти изменения будут задаваться даже поверх тех значений, что находятся внутри класса (в отличие от первого способа, где приоритет оригинального класса выше изменения прототипов функции)
 
 ```TS
 @numUserAdvanced
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
+class UserService implements IUserService {
+    public users: number = 1000;
 
-function numUserAdvanced<T extends { new(...args: any[]): {} }>(constructor: T) {  
-    return class extends constructor {  
-        users = 3;  
-    }  
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
+function numUserAdvanced<T extends { new(...args: any[]): {} }>(constructor: T) {
+    return class extends constructor {
+        users = 3;
+    }
 }
 
 // Результат = 3
@@ -3579,19 +3591,19 @@ console.log(new UserService().getUsersInDatabase());
 
 ```TS
 @setUsers(2)  // !
-class UserService implements IUserService {  
-    public users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
+class UserService implements IUserService {
+    public users: number;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
 
 function setUsers(users: number) {  // !
-    // стрелочная функция, чтобы не терять контекст  
-    return (target: Function) => { 
-        target.prototype.users = 0;  
-    }  
+    // стрелочная функция, чтобы не терять контекст
+    return (target: Function) => {
+        target.prototype.users = 0;
+    }
 }
 
 console.log(new UserService().getUsersInDatabase()); // = 2
@@ -3601,71 +3613,71 @@ console.log(new UserService().getUsersInDatabase()); // = 2
 
 ```TS
 // Обычный декоратор
-function numUserAdvanced<T extends { new(...args: any[]): {} }>(constructor: T) {  
-    return class extends constructor {  
-        users = 3;  
-    }  
-}  
+function numUserAdvanced<T extends { new(...args: any[]): {} }>(constructor: T) {
+    return class extends constructor {
+        users = 3;
+    }
+}
 
 // Фабрика декораторов
-function setNumUsersAdvanced(users: number) {  
-    return <T extends {new(...args: any[]):{}}> (constructor: T) => {  
-        return class extends constructor {  
-            users = users;  
-        }        
-    }  
+function setNumUsersAdvanced(users: number) {
+    return <T extends {new(...args: any[]):{}}> (constructor: T) => {
+        return class extends constructor {
+            users = users;
+        }
+    }
 }
 ```
 
 ```TS
 @setNumUsersAdvanced(4)  // !
-class UserService implements IUserService {  
+class UserService implements IUserService {
     public users: number = 1000;  // !
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
 }
 
 function setNumUsersAdvanced(users: number) {  // !
-    return <T extends {new(...args: any[]):{}}>(constructor: T) => {  
-        return class extends constructor {  
-            users = users;  
-        }    
-    }  
-}  
+    return <T extends {new(...args: any[]):{}}>(constructor: T) => {
+        return class extends constructor {
+            users = users;
+        }
+    }
+}
 
-// Результат 4 
+// Результат 4
 console.log(new UserService().getUsersInDatabase());
 ```
 
 И тут стоит упомянуть, в каком порядке выполняются декораторы. Порядок инициализации - прямой, а уже исполнение происходит в обратном порядке.
 
 ```TS
-@setUsers(2)  
-@log()  
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
+@setUsers(2)
+@log()
+class UserService implements IUserService {
+    public users: number = 1000;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
 }
 
-function setUsers(users: number) {  
-    console.log('setUsers init');  
-    return (target: Function) => {  
-        console.log('setUsers run');  
-        target.prototype.users = 0;  
-    }  
-}  
-  
-function log() {  
-    console.log('log init');  
-    return (target: Function) => {  
-        console.log('log run');  
-        console.log(target);  
-    }  
+function setUsers(users: number) {
+    console.log('setUsers init');
+    return (target: Function) => {
+        console.log('setUsers run');
+        target.prototype.users = 0;
+    }
+}
+
+function log() {
+    console.log('log init');
+    return (target: Function) => {
+        console.log('log run');
+        console.log(target);
+    }
 }
 ```
 
@@ -3676,25 +3688,25 @@ function log() {
 Нам нужно создать декоратор `CreatedAt` который будет добавлять в класс дату создания его инстанса
 
 ```TS
-interface IUserService {  
-    users: number;  
-    getUsersInDatabase(): number;  
-}  
-  
-@CreatedAt  
-class UserService implements IUserService {  
-    users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
-  
-function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {  
-    return class extends constructor {  
-        createdAt: Date = new Date();  
-    }  
-}  
+interface IUserService {
+    users: number;
+    getUsersInDatabase(): number;
+}
+
+@CreatedAt
+class UserService implements IUserService {
+    users: number;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
+function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
+    return class extends constructor {
+        createdAt: Date = new Date();
+    }
+}
 
 // Выведет количество пользователей и дату
 console.log((new UserService());
@@ -3707,38 +3719,40 @@ console.log((new UserService());
 Поэтому, чтобы решить проблему с недоступными извне свойствами, нам нужно создать отдельный тайп, который будет явно указывать, что у нас есть нужное нам свойство или метод в инстансе класса
 
 ```TS
-interface IUserService {  
-    users: number;  
-    getUsersInDatabase(): number;  
-}  
-  
+interface IUserService {
+    users: number;
+    getUsersInDatabase(): number;
+}
+
 type CreatedAt = {  // !
-    createdAt: Date;  
-}  
-  
-@CreatedAt  
-class UserService implements IUserService {  
-    users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
-  
-function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {  
-    return class extends constructor {  
-        createdAt: Date = new Date();  
-    }  
-}  
+    createdAt: Date;
+}
+
+@CreatedAt
+class UserService implements IUserService {
+    users: number;
+
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
+function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
+    return class extends constructor {
+        createdAt: Date = new Date();
+    }
+}
 
 // !
 console.log((new UserService() as IUserService & CreatedAt).createdAt); // OK
 ```
+
 ![](_png/e8cb50f2a9867690b6fd271a60fd69ac.png)
 
 ### 087 Декоратор метода
 
 Структура **декоратора метода** выглядит таким образом:
+
 - Сначала принимает в себя метод
 - Потом наименование метода
 - Потом дескриптор метода (который хранит всю важную для нас информацию)
@@ -3746,28 +3760,28 @@ console.log((new UserService() as IUserService & CreatedAt).createdAt); // OK
 - И уже дальше можем прописать дополнительную логику, которая должна выполняться до самого метода (выполнится декоратор потом метод)
 
 ```TS
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    @Log  
-    getUsersInDatabase(): number {  
-        return this.users;  
-    }  
-}  
-  
-function Log(  
-	// Объект, к которому относится метод  
+class UserService implements IUserService {
+    public users: number = 1000;
+
+    @Log
+    getUsersInDatabase(): number {
+        return this.users;
+    }
+}
+
+function Log(
+	// Объект, к которому относится метод
     target: Object,
-    // Название метода  
-    propertyKey: string | symbol, 
-    // Дескриптор, который принимает в себя функцию   
-    descriptor: TypedPropertyDescriptor<(...args: any[]) => any> 
+    // Название метода
+    propertyKey: string | symbol,
+    // Дескриптор, который принимает в себя функцию
+    descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
     // Вот так выглядит корректная типизация декоратора метода:
-): TypedPropertyDescriptor<(...args: any[]) => any> | void {  
-    console.log(target);  
-    console.log(propertyKey);  
-    console.log(descriptor);  
-}  
+): TypedPropertyDescriptor<(...args: any[]) => any> | void {
+    console.log(target);
+    console.log(propertyKey);
+    console.log(descriptor);
+}
 ```
 
 ![](_png/43a2e6215e888ba272404cbf4016e908.png)
@@ -3780,75 +3794,76 @@ function Log(
 На примере можно увидеть, что теперь вместо `Error` функция выдаёт `'no error'`
 
 ```TS
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    @Log  
-    getUsersInDatabase(): number {  
+class UserService implements IUserService {
+    public users: number = 1000;
+
+    @Log
+    getUsersInDatabase(): number {
         throw new Error('Ошибка');  // ! Выкинет ошибку
-    }  
-}  
-  
-function Log(  
-    target: Object, 
+    }
+}
+
+function Log(
+    target: Object,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
-): TypedPropertyDescriptor<(...args: any[]) => any> | void {  
-    console.log(target);  
-    console.log(propertyKey);  
-    console.log(descriptor);  
-  
-    descriptor.value = () => {  
+): TypedPropertyDescriptor<(...args: any[]) => any> | void {
+    console.log(target);
+    console.log(propertyKey);
+    console.log(descriptor);
+
+    descriptor.value = () => {
         console.log('no error');  // ! Заменим функцию на другую
-    }  
+    }
 }
 ```
+
 ![](_png/f452f3e81333fdccb501dcacbd052089.png)
 
 Мы можем не только переопределять значения функции, но и дополнять их. Можно заранее сохранить значение дескриптора и вызвать его во время изменения, чтобы дополнить логику нашего метода (а не перетереть её)
 
 ```TS
-function Log(  
-    target: Object, 
+function Log(
+    target: Object,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
-): TypedPropertyDescriptor<(...args: any[]) => any> | void {  
-    console.log(target);  
-    console.log(propertyKey);  
-    console.log(descriptor);  
+): TypedPropertyDescriptor<(...args: any[]) => any> | void {
+    console.log(target);
+    console.log(propertyKey);
+    console.log(descriptor);
 
 	const oldValue = descriptor.value; // !
 
-    descriptor.value = () => {  
+    descriptor.value = () => {
 	    oldValue(); // !
         console.log('no error');  // ! Дополним функцию
-    }  
+    }
 }
 ```
 
 Так же ничто нам не мешает сделать фэктори декоратор и для метода вот таким вот образом:
 
 ```TS
-class UserService implements IUserService {  
-    public users: number = 1000;  
-  
-    @Log()  
-    getUsersInDatabase(): number {  
-        throw new Error('Ошибка');  
-    }  
-}  
+class UserService implements IUserService {
+    public users: number = 1000;
+
+    @Log()
+    getUsersInDatabase(): number {
+        throw new Error('Ошибка');
+    }
+}
 
 // Factoory Decorator
-function Log() {  
-    return (  
-        target: Object,  
-        propertyKey: string | symbol,  
-        descriptor: TypedPropertyDescriptor<(...args: any[]) => any>  
-    ): TypedPropertyDescriptor<(...args: any[]) => any> | void  => {  
-        console.log(target);  
-        console.log(propertyKey);  
-        console.log(descriptor);  
-    }   
+function Log() {
+    return (
+        target: Object,
+        propertyKey: string | symbol,
+        descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
+    ): TypedPropertyDescriptor<(...args: any[]) => any> | void  => {
+        console.log(target);
+        console.log(propertyKey);
+        console.log(descriptor);
+    }
 }
 ```
 
@@ -3857,44 +3872,44 @@ function Log() {
 Нам нужно создать декоратор, который будет обрабатывать ошибку и выводить её в зависимости от значения аргумента rethrow
 
 ```TS
-interface IUserService {  
-    users: number;  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    users: number;  
-  
-    @Catch({rethrow: true})  
-    getUsersInDatabase(): number {  
+interface IUserService {
+    users: number;
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    users: number;
+
+    @Catch({rethrow: true})
+    getUsersInDatabase(): number {
         throw new Error('Ошибка'); // Выводим ошибку
-    }  
-}  
-  
-function Catch({ rethrow }: { rethrow: boolean } = {rethrow: false}) {  
-    return (  
-        target: Object,  
-        propertyKey: string | symbol,  
-        descriptor: TypedPropertyDescriptor<(...args: any[]) => any>  
-    ): TypedPropertyDescriptor<(...args: any[]) => any> | void => {  
+    }
+}
+
+function Catch({ rethrow }: { rethrow: boolean } = {rethrow: false}) {
+    return (
+        target: Object,
+        propertyKey: string | symbol,
+        descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
+    ): TypedPropertyDescriptor<(...args: any[]) => any> | void => {
         // Сохраняем оригинальный метод
-        const method = descriptor.value; 
-        // Пишем логику для нового метода 
-        descriptor.value = async (...args: any[]) => {  
-            try { // Если ошибкинет, то  
+        const method = descriptor.value;
+        // Пишем логику для нового метода
+        descriptor.value = async (...args: any[]) => {
+            try { // Если ошибкинет, то
 	            // Вызываем срабатывание оригинального метода
-                return await method?.apply(target, args);  
+                return await method?.apply(target, args);
             } catch(e) {  // Если ошибка есть, то
                 if (e instanceof Error) {  // Если е это Error, то
                     console.log(e.message);  // Выводим сообщение
                     // Если rethrow=true, то выводим ошибку
-                    if (rethrow) { 
+                    if (rethrow) {
                         throw e;  // Выводим существующую ошибку
-                    }  
-                }  
-            }  
-        }  
-    }  
+                    }
+                }
+            }
+        }
+    }
 }
 ```
 
@@ -3905,95 +3920,95 @@ function Catch({ rethrow }: { rethrow: boolean } = {rethrow: false}) {
 
 ### 089 Декоратор свойства
 
-**Декораторы свойств** уже представляют из себя функции, которые позволят нам валидировать входящие значения, вводить новые ограничения для свойств, назначать свои геттеры и сеттеры и в принципе дополнять логику для обычных свойств таким образом, чтобы мы могли явно регулировать их.  
+**Декораторы свойств** уже представляют из себя функции, которые позволят нам валидировать входящие значения, вводить новые ограничения для свойств, назначать свои геттеры и сеттеры и в принципе дополнять логику для обычных свойств таким образом, чтобы мы могли явно регулировать их.
 
 Декоратор свойства отличается от декоратора метода только тем, что в него мы уже не передаём дескрипторы (их нужно будет редактировать через `defineProperty`).
 
-Цель такая: нам нужно написать декоратор свойства, который задаст максимальное значение для свойства *= 100*
+Цель такая: нам нужно написать декоратор свойства, который задаст максимальное значение для свойства _= 100_
 
 ```TS
-interface IUserService {  
-    users: number;  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    @Max(100) // !  
-    public users: number = 1000; // !  
-  
-    getUsersInDatabase(): number {  
-        throw new Error('Ошибка');  
-    }  
-}  
-  
-function Max(max: number) {  
-    return (  
-        target: Object, // UserService  
-        propertyKey: string | symbol // users  
-    ) => {   
-    }  
-}  
+interface IUserService {
+    users: number;
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    @Max(100) // !
+    public users: number = 1000; // !
+
+    getUsersInDatabase(): number {
+        throw new Error('Ошибка');
+    }
+}
+
+function Max(max: number) {
+    return (
+        target: Object, // UserService
+        propertyKey: string | symbol // users
+    ) => {
+    }
+}
 ```
 
 Первым делом, нам нужно описать геттеры и сеттеры для свойства, чтобы была возможность регулировать задание нового значения и получение
 
 ```TS
-function Max(max: number) {  
-    return ( target: Object, propertyKey: string | symbol ) => {  
-        let value: number;  
-  
-        const setter = function (newValue: number): void {  
-            if (newValue > max) {  
-                console.log(`Число не может быть больше ${max}`);  
-            } else {  
-                value = newValue;  
-            }  
-        }  
-  
-        const getter = function (): number {  
-            return value;  
-        } 
-    }  
-}  
+function Max(max: number) {
+    return ( target: Object, propertyKey: string | symbol ) => {
+        let value: number;
+
+        const setter = function (newValue: number): void {
+            if (newValue > max) {
+                console.log(`Число не может быть больше ${max}`);
+            } else {
+                value = newValue;
+            }
+        }
+
+        const getter = function (): number {
+            return value;
+        }
+    }
+}
 ```
 
 Так же мы можем через defineProperty поменять [дескрипторы](../../frontend/React/_lessons/03%20-%20Дополнительные%20основы%20JavaScript.md#006%20д%20Дескрипторы%20свойств%20и%20полезные%20методы%20объектов) для свойств и заменить стоковые методы (`get`/`set`) и модификаторы (читабельность, изменяемость и так далее) для этих свойств
 
 ```TS
-function Max(max: number) {  
-    return ( target: Object, propertyKey: string | symbol ) => {  
-        let value: number;  
-          
-        const setter = function (newValue: number): void {  
-            if (newValue > max) {  
-                console.log(`Число не может быть больше ${max}`);  
-            } else {  
-                value = newValue;  
-            }  
-        }  
-  
-        const getter = function (): number {  
-            return value;  
-        }  
+function Max(max: number) {
+    return ( target: Object, propertyKey: string | symbol ) => {
+        let value: number;
+
+        const setter = function (newValue: number): void {
+            if (newValue > max) {
+                console.log(`Число не может быть больше ${max}`);
+            } else {
+                value = newValue;
+            }
+        }
+
+        const getter = function (): number {
+            return value;
+        }
 
 		// ! Переопределение геттеров и сеттеров для свойства
-        Object.defineProperty(target, propertyKey, {  
-            get: getter,  
-            set: setter  
-        });  
-    }  
-}  
+        Object.defineProperty(target, propertyKey, {
+            get: getter,
+            set: setter
+        });
+    }
+}
 ```
 
 Теперь мы спокойно можем пользоваться нужным нам функционалом и значение больше 100 задать не сможем - получим предупреждение
 
 ```TS
-const userService = new UserService(); // Error потому что изначально стоит 1000  
-  
-userService.users = 1;  
-console.log(userService.users); // 1  
-  
-userService.users = 101;  
+const userService = new UserService(); // Error потому что изначально стоит 1000
+
+userService.users = 1;
+console.log(userService.users); // 1
+
+userService.users = 101;
 console.log(userService.users); // error
 ```
 
@@ -4002,128 +4017,130 @@ console.log(userService.users); // error
 **Декоратор accessor** используется не так часто, как другие декораторы. Конкретно он покрывает выполнение геттеров и сеттеров. Нам достаточно написать данный метод один раз над одним аццессором и он будет покрывать сразу оба (на оба навешивать не надо - это будет ошибкой)
 
 ```TS
-interface IUserService {  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    private _users: number = 1000;  
-  
-    @Log()  
-    set users(users: number) {  
-        this._users = users;  
-    }  
-  
-    get users() {  
-        return this._users;  
-    }   
-}  
-  
-function Log() {  
-    return (  
-        target: Object, // UserService  
-        _: string | symbol, // users  
-        descriptor: PropertyDescriptor //  
-    ) => {     
-    }  
-}  
+interface IUserService {
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    private _users: number = 1000;
+
+    @Log()
+    set users(users: number) {
+        this._users = users;
+    }
+
+    get users() {
+        return this._users;
+    }
+}
+
+function Log() {
+    return (
+        target: Object, // UserService
+        _: string | symbol, // users
+        descriptor: PropertyDescriptor //
+    ) => {
+    }
+}
 ```
 
 Дескриптор хранит ту же самую информацию, что и дескриптор для методов
 
 ![](_png/6dc18cb6b1362f606af120145f63363a.png)
 
-И конкретно тут мы описали логику модификации сеттера (геттер работает по прежнему) 
+И конкретно тут мы описали логику модификации сеттера (геттер работает по прежнему)
 `set?.apply(target, args)` - применяем сеттер на таргете (нашем классе) и вкладываем в качестве аргумента принимаемые значения
 
 ```TS
-interface IUserService {  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    private _users: number = 1000;  
-  
-    @Log()  
-    set users(users: number) {  
-        this._users = users;  
-    }  
-  
-    get users() {  
-        return this._users;  
-    }  
-  
-    getUsersInDatabase(): number {  
-        throw new Error('Ошибка');  
-    }  
-}  
-  
-function Log() {  
-    return (  
-        target: Object, // UserService  
-        _: string | symbol, // users  
-        descriptor: PropertyDescriptor //  
-    ) => {  
-        // Сохраняем старый сеттер  
-        const set = descriptor.set;  
-        // Переопределим сеттер, добавив ему логику  
-        descriptor.set = (...args: any) => {  
-            console.log(args); // [ 1 ]  
+interface IUserService {
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    private _users: number = 1000;
+
+    @Log()
+    set users(users: number) {
+        this._users = users;
+    }
+
+    get users() {
+        return this._users;
+    }
+
+    getUsersInDatabase(): number {
+        throw new Error('Ошибка');
+    }
+}
+
+function Log() {
+    return (
+        target: Object, // UserService
+        _: string | symbol, // users
+        descriptor: PropertyDescriptor //
+    ) => {
+        // Сохраняем старый сеттер
+        const set = descriptor.set;
+        // Переопределим сеттер, добавив ему логику
+        descriptor.set = (...args: any) => {
+            console.log(args); // [ 1 ]
             set?.apply(target, args);  // !
-        }    
-    }  
-}  
-  
-const userService = new UserService();  
-userService.users = 10;  
+        }
+    }
+}
+
+const userService = new UserService();
+userService.users = 10;
 console.log(userService.users); // 1
 ```
+
 ![](_png/324cd3ad68f2e3df1fcf0e4c0824fb58.png)
 
 ### 091 Декоратор параметра
 
-**Декораторы параметров** зачастую используются для *метапрограммирования*
+**Декораторы параметров** зачастую используются для _метапрограммирования_
 
 ```TS
-interface IUserService {  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    private _users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this._users;  
-    }  
-  
+interface IUserService {
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    private _users: number;
+
+    getUsersInDatabase(): number {
+        return this._users;
+    }
+
     setUsersInDatabase(
 	    @Positive() users: number,
 	    @Positive() __: number
-    ): void {  
-        this._users = users;  
-    }  
-}  
-  
-function Positive() {  
-    return (  
-        target: Object, // UserService - класс  
-        propertyKey: string | symbol, // setUsersInDatabase - метод  
-        parameterIndex: number, // индекс среди аргументов  
-    ) => {  
-        console.log(target);  
-        console.log(propertyKey);  
-        console.log(parameterIndex);  
-    }  
-}  
-  
+    ): void {
+        this._users = users;
+    }
+}
+
+function Positive() {
+    return (
+        target: Object, // UserService - класс
+        propertyKey: string | symbol, // setUsersInDatabase - метод
+        parameterIndex: number, // индекс среди аргументов
+    ) => {
+        console.log(target);
+        console.log(propertyKey);
+        console.log(parameterIndex);
+    }
+}
+
 const userService = new UserService();
 ```
+
 ![](_png/159d6d4f6e4333095952441e64bbe914.png)
 ![](_png/8063a9e1e12f912aff1eecb1cf087850.png)
 
 ### 092 Метаданные
 
-Для начала нам нужно активировать метаданные в ТС, и уже затем после компиляции мы будем получать нативный JS с метаданными, которые б 
+Для начала нам нужно активировать метаданные в ТС, и уже затем после компиляции мы будем получать нативный JS с метаданными, которые б
 
 ![](_png/5a2f8b3e4776c4f3ff2c01496fc426a4.png)
 ![](_png/194d399e64b820e432aecb167978c837.png)
@@ -4135,136 +4152,137 @@ npm init
 npm i reflect-metadata
 ```
 
-И через `Reflection` мы получаем возможность использовать методы для обработки метаданных. Метод `getOwnMetadata()` принимает в себя три аргумента: тип запрашиваемых метаданных, класс и наименование метода внутри этого класса.  Типы метаданных мы можем найти в документации.
+И через `Reflection` мы получаем возможность использовать методы для обработки метаданных. Метод `getOwnMetadata()` принимает в себя три аргумента: тип запрашиваемых метаданных, класс и наименование метода внутри этого класса. Типы метаданных мы можем найти в документации.
 Используется для валидации типов или для связывания компонентов (dependency injection)
 
 ```TS
 import 'reflect-metadata';  // !
-  
-interface IUserService {  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    private _users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this._users;  
-    }  
-  
-    setUsersInDatabase(@Positive() users: number): void {  
-        this._users = users;  
-    }  
-}  
+
+interface IUserService {
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    private _users: number;
+
+    getUsersInDatabase(): number {
+        return this._users;
+    }
+
+    setUsersInDatabase(@Positive() users: number): void {
+        this._users = users;
+    }
+}
 
 // MetaProgramming
-function Positive() {  
-    return (  
-        target: Object, // UserService - класс  
-        propertyKey: string | symbol, // setUsersInDatabase - метод  
-        parameterIndex: number, // 0 - первый среди аргументов  
-    ) => {  
-    
+function Positive() {
+    return (
+        target: Object, // UserService - класс
+        propertyKey: string | symbol, // setUsersInDatabase - метод
+        parameterIndex: number, // 0 - первый среди аргументов
+    ) => {
+
     // !
-        console.log(Reflect.getOwnMetadata('design:type', target, propertyKey));  
-        console.log(Reflect.getOwnMetadata('design:paramtypes', target, propertyKey));  
-        console.log(Reflect.getOwnMetadata('design:returntype', target, propertyKey));  
-    }  
-}  
+        console.log(Reflect.getOwnMetadata('design:type', target, propertyKey));
+        console.log(Reflect.getOwnMetadata('design:paramtypes', target, propertyKey));
+        console.log(Reflect.getOwnMetadata('design:returntype', target, propertyKey));
+    }
+}
 //
 
-const userService = new UserService();  
+const userService = new UserService();
 console.log(userService);
 ```
+
 ![](_png/fd9b69ab06ec9043e715f36ad7c4cd11.png)
 
-Метод `Positive` навешивает в метаданные каждого аргумента метку, что значение позитивно и оно нам подходит 
+Метод `Positive` навешивает в метаданные каждого аргумента метку, что значение позитивно и оно нам подходит
 
 ```TS
-function Positive() {  
-    return (  
-        target: Object, // UserService - класс  
-        propertyKey: string | symbol, // setUsersInDatabase - метод  
-        parameterIndex: number, // 0 - первый среди аргументов  
-    ) => {  
-        // Добавляем символ позитивности в метаданных для аргументов  
-        let existParams: number[] = Reflect.getOwnMetadata(POSITIVE_METADATA_KEY, target, propertyKey) || [];  
-        existParams.push(parameterIndex);  
-        Reflect.defineMetadata(POSITIVE_METADATA_KEY, existParams, target, propertyKey)  
-    }  
+function Positive() {
+    return (
+        target: Object, // UserService - класс
+        propertyKey: string | symbol, // setUsersInDatabase - метод
+        parameterIndex: number, // 0 - первый среди аргументов
+    ) => {
+        // Добавляем символ позитивности в метаданных для аргументов
+        let existParams: number[] = Reflect.getOwnMetadata(POSITIVE_METADATA_KEY, target, propertyKey) || [];
+        existParams.push(parameterIndex);
+        Reflect.defineMetadata(POSITIVE_METADATA_KEY, existParams, target, propertyKey)
+    }
 }
 ```
 
 И тут уже показана реализация валидации аргументов метода. Сначала мы присваиваем марку валидируемости для одного значения, а уже через `Validate` делаем общую проверку валидных значений
 
 ```TS
-import 'reflect-metadata';  
-  
-const POSITIVE_METADATA_KEY = Symbol('POSITIVE_METADATA_KEY');  
-  
-interface IUserService {  
-    getUsersInDatabase(): number;  
-}  
-  
-class UserService implements IUserService {  
-    private _users: number;  
-  
-    getUsersInDatabase(): number {  
-        return this._users;  
-    }  
-  
+import 'reflect-metadata';
+
+const POSITIVE_METADATA_KEY = Symbol('POSITIVE_METADATA_KEY');
+
+interface IUserService {
+    getUsersInDatabase(): number;
+}
+
+class UserService implements IUserService {
+    private _users: number;
+
+    getUsersInDatabase(): number {
+        return this._users;
+    }
+
     @Validate()  // !
     setUsersInDatabase(@Positive() users: number): void {  // !
-        this._users = users;  
-    }  
-}  
-  
+        this._users = users;
+    }
+}
+
 function Positive() {  // 1
-    return (  
-        target: Object, // UserService - класс  
-        propertyKey: string | symbol, // setUsersInDatabase - метод  
-        parameterIndex: number, // 0 - первый среди аргументов  
-    ) => {  
-        console.log(Reflect.getOwnMetadata('design:type', target, propertyKey));  
-        console.log(Reflect.getOwnMetadata('design:paramtypes', target, propertyKey));  
-        console.log(Reflect.getOwnMetadata('design:returntype', target, propertyKey));  
-  
-        // Добавляем символ позитивности в метаданных для аргументов  
-        let existParams: number[] = Reflect.getOwnMetadata(POSITIVE_METADATA_KEY, target, propertyKey) || [];  
-        existParams.push(parameterIndex);  
-        Reflect.defineMetadata(POSITIVE_METADATA_KEY, existParams, target, propertyKey)  
-    }  
-}  
-  
+    return (
+        target: Object, // UserService - класс
+        propertyKey: string | symbol, // setUsersInDatabase - метод
+        parameterIndex: number, // 0 - первый среди аргументов
+    ) => {
+        console.log(Reflect.getOwnMetadata('design:type', target, propertyKey));
+        console.log(Reflect.getOwnMetadata('design:paramtypes', target, propertyKey));
+        console.log(Reflect.getOwnMetadata('design:returntype', target, propertyKey));
+
+        // Добавляем символ позитивности в метаданных для аргументов
+        let existParams: number[] = Reflect.getOwnMetadata(POSITIVE_METADATA_KEY, target, propertyKey) || [];
+        existParams.push(parameterIndex);
+        Reflect.defineMetadata(POSITIVE_METADATA_KEY, existParams, target, propertyKey)
+    }
+}
+
 function Validate() {  // !
-    return (  
-        target: Object,  
-        propertyKey: string | symbol,  
-        descriptor: TypedPropertyDescriptor<(...args: any[]) => any>  
-    ) => {  
-        // Уже тут валидируем, помеченные как позитивные, данные  
-        let method = descriptor.value;  
-        descriptor.value = (...args: any) => {  
-            let positiveParams: number[] = Reflect.getOwnMetadata(POSITIVE_METADATA_KEY, target, propertyKey) || [];  
-            if (positiveParams) {  
-                for (let index of positiveParams) {  
-                    if (args[index] < 0 ) {  
-                        throw new Error('Number must be bigger then 0');  
-                    }  
-                }  
-            }  
-            return method?.apply(this, args);  
-        }    }  
-}  
-  
-const userService = new UserService();  
-console.log(userService.setUsersInDatabase(10));  
+    return (
+        target: Object,
+        propertyKey: string | symbol,
+        descriptor: TypedPropertyDescriptor<(...args: any[]) => any>
+    ) => {
+        // Уже тут валидируем, помеченные как позитивные, данные
+        let method = descriptor.value;
+        descriptor.value = (...args: any) => {
+            let positiveParams: number[] = Reflect.getOwnMetadata(POSITIVE_METADATA_KEY, target, propertyKey) || [];
+            if (positiveParams) {
+                for (let index of positiveParams) {
+                    if (args[index] < 0 ) {
+                        throw new Error('Number must be bigger then 0');
+                    }
+                }
+            }
+            return method?.apply(this, args);
+        }    }
+}
+
+const userService = new UserService();
+console.log(userService.setUsersInDatabase(10));
 console.log(userService.setUsersInDatabase(-1));
 ```
 
 ### 093 Порядок декораторов
 
-- Первыми у нас всегда срабатывают свойства (вне зависимости от положения в коде). 
+- Первыми у нас всегда срабатывают свойства (вне зависимости от положения в коде).
 - Дальше срабатывает инициализация метода и его параметров. А уже вызов происходит в обратном порядке.
 - Дальше происходит тот же самый порядок со статиками.
 - И уже в конце инициализируется класс с его параметром. В обратном порядке они выполняются
@@ -4272,28 +4290,28 @@ console.log(userService.setUsersInDatabase(-1));
 Порядок расположения кода влияет только на одинаковые уровни инициализации - они выполняются по порядку в коде
 
 ```TS
-function Uni(name: string): any {  
-    console.log(`Инициализация: ${name}`);  
-    return function () {  
-        console.log(`Вызов: ${name}`);  
-    }  
-}  
-  
-@Uni('Класс')  
-class MyClass {  
-    @Uni('Свойство')  
-    props?: any;  
-  
-    @Uni('Статическое свойство')  
-    static prop?: any;  
-  
-    @Uni('Метод')  
-    method(@Uni('Параметр') _: string) {  }  
-  
-    @Uni('Статический метод')  
-    static methodStatic(@Uni('Параметр статического метода') _: string) {  }  
-  
-    constructor(@Uni('Параметр конструктора') _: string) {  
+function Uni(name: string): any {
+    console.log(`Инициализация: ${name}`);
+    return function () {
+        console.log(`Вызов: ${name}`);
+    }
+}
+
+@Uni('Класс')
+class MyClass {
+    @Uni('Свойство')
+    props?: any;
+
+    @Uni('Статическое свойство')
+    static prop?: any;
+
+    @Uni('Метод')
+    method(@Uni('Параметр') _: string) {  }
+
+    @Uni('Статический метод')
+    static methodStatic(@Uni('Параметр статического метода') _: string) {  }
+
+    constructor(@Uni('Параметр конструктора') _: string) {
     }
 }
 ```
@@ -4302,13 +4320,14 @@ class MyClass {
 
 ### Декораторы 5.0
 
-С переходом на Stage 3 декораторов, были [определены новые подходы в описании декораторов TS](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#what’s-new-since-the-beta-and-rc). Декораторы немного подрезали, уменьшили количество необходимых данных для их описания и убрали декораторы параметров. 
+С переходом на Stage 3 декораторов, были [определены новые подходы в описании декораторов TS](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#what’s-new-since-the-beta-and-rc). Декораторы немного подрезали, уменьшили количество необходимых данных для их описания и убрали декораторы параметров.
 
 #### Включаем декораторы
 
 Для запуска декораторов, нам нужно выключить `experimentalDecorators` и пользоваться нативными
 
 `tsconfig.json`
+
 ```JSON
 {
   "compilerOptions": {
@@ -4322,7 +4341,7 @@ class MyClass {
 
 #### Использование
 
-Примерно так будут выглядеть новые декораторы: 
+Примерно так будут выглядеть новые декораторы:
 
 ```TS
 // Декораторы методов
@@ -4388,7 +4407,7 @@ function FieldDec<
     context: ClassFieldDecoratorContext<This, Arg>
 ) {
     return function (value: Arg) {
-        return value;     
+        return value;
     }
 }
 
@@ -4460,9 +4479,8 @@ try {
 
 ![](../../_png/Pasted%20image%2020250803110738.png)
 
-
-
 ---
+
 ## Модульность и библиотеки
 
 ### Вводное видео
@@ -4477,25 +4495,25 @@ try {
 Однако пространство имён может не поддерживаться разными линтерами и паковщиками и от этого могут быть определённые проблемы.
 
 ```TS
-namespace A {  
-    export const a = 10;  
-    export interface b {  
-        c: number;  
-    }  
-}  
-  
+namespace A {
+    export const a = 10;
+    export interface b {
+        c: number;
+    }
+}
+
 console.log(A.a); // 10
 ```
 
 Так же есть альтернативный, старый вариант записи неймспейса (по смыслу он идентичен):
 
 ```TS
-module A {  
-    export const a = 10;  
-    export interface b {  
-        c: number;  
-    }  
-}  
+module A {
+    export const a = 10;
+    export interface b {
+        c: number;
+    }
+}
 ```
 
 Чтобы скомпилировать разные ТС файлы в один файл, нужно:
@@ -4527,10 +4545,10 @@ module A {
 Модульность CommonJS работает со стоковыми настройками:
 
 ```JSON
-/* Modules */  
+/* Modules */
 "module": "commonjs",
 
-/* Emit */  
+/* Emit */
 "outDir": "./build/",
 ```
 
@@ -4560,12 +4578,13 @@ module A {
 Базовые настройки tsconfig
 
 ```JSON
-/* Modules */  
+/* Modules */
 "module": "ES6",
 
-/* Emit */  
+/* Emit */
 "outDir": "./build/",
 ```
+
 ![](_png/04f73f3c6e086069b2e0791ceef04aee.png)
 
 Далее нам нужен сервер, который запустит наш сайт (можно воспользоваться npm-пакетом)
@@ -4576,7 +4595,7 @@ npm i -g serve
 serve .
 ```
 
-И при подключении JS к HTML нам нужно будет указать не только сам файл, но и то, что он модульный 
+И при подключении JS к HTML нам нужно будет указать не только сам файл, но и то, что он модульный
 
 ```HTML
 <script src="build/app.js" type="module"></script>
@@ -4587,10 +4606,10 @@ serve .
 При таком способе, нам нужно будет импортировать так же и инструменты, которые обеспечивают импорты
 
 ```JSON
-/* Modules */  
+/* Modules */
 "module": "AMD", // Или System
 
-/* Emit */  
+/* Emit */
 "outFile": "./", // outDir комментируем
 ```
 
@@ -4603,28 +4622,28 @@ serve .
 Экспортировать и импортировать мы можем любые объекты ТС
 
 ```TS
-export interface G {  
-    name: string;  
-}   
-export type T = string | number;  
-  
-export function run() {  
-    console.log('run');  
-}  
-  
+export interface G {
+    name: string;
+}
+export type T = string | number;
+
+export function run() {
+    console.log('run');
+}
+
 export const c: number = 10;
 
 export class Test {  }
 ```
 
-Совершать `export default` мы можем только с объектами, которые мы можем увидеть в нативном JS. Дефолтно экспортнуть те же типы - нельзя 
-Так же можно совершить `export default` только с ==одним== объектом 
+Совершать `export default` мы можем только с объектами, которые мы можем увидеть в нативном JS. Дефолтно экспортнуть те же типы - нельзя
+Так же можно совершить `export default` только с ==одним== объектом
 
 ```TS
-export default type T = string | number; // Error  
-  
-export default function run() { // Ok  
-    console.log('run');  
+export default type T = string | number; // Error
+
+export default function run() { // Ok
+    console.log('run');
 }
 ```
 
@@ -4635,15 +4654,15 @@ export default function run() { // Ok
 Основным отличием `export default` является не только то, что она экспортируется только одна, а ещё и то, что мы при импорте можем задать дефолтной функции любое имя
 
 ```TS
-import running from './ts/app2.js';  
-  
+import running from './ts/app2.js';
+
 running();
 ```
 
 Так же данный синтаксис позволит нам импортировать всё из прошлого файла
 
 ```TS
-import * as all from './ts/app2.js';  
+import * as all from './ts/app2.js';
 
 console.log(all.c);
 ```
@@ -4653,48 +4672,48 @@ console.log(all.c);
 Мы можем совершить вызов дефолтной функции и остальных обычных экспортов одной инструкцией
 
 ```TS
-import run, {A, G} from './ts/app2.js';  
-  
-console.log(A.a);  
+import run, {A, G} from './ts/app2.js';
+
+console.log(A.a);
 run();
 ```
 
-1) Мы можем менять имена объектов при импорте через прокаст
-2) Мы можем импортировать и JS объекты и типы ТС одной инструкцией
+1. Мы можем менять имена объектов при импорте через прокаст
+2. Мы можем импортировать и JS объекты и типы ТС одной инструкцией
 
 ```TS
-import { Test as TClass, G } from './ts/app2.js';  
-  
-const obj: G = {  
-    name: 'test',  
-}  
-  
+import { Test as TClass, G } from './ts/app2.js';
+
+const obj: G = {
+    name: 'test',
+}
+
 new TClass();
 ```
 
 Так же в ТС присуствует возможность указывать явно, что мы импортируем тип, написав `import type { типы }`. Делается это для явного указания сборщикам и компиляторам, что это типы
 
 ```TS
-import type { G, T } from './ts/app2.js';  
-  
-const obj: G = {  
-    name: 'test',  
-}  
-  
+import type { G, T } from './ts/app2.js';
+
+const obj: G = {
+    name: 'test',
+}
+
 const num: T = 10;
 ```
 
 Либо мы можем обозначать, что мы импортируем тип прямо внутри деструктуризированного вызова, указывая `type` до написания импортируемого типа
 
 ```TS
-import { Test as TClass, type G, type T } from './ts/app2.js';  
-  
-const obj: G = {  
-    name: 'test',  
-}  
-  
-const num: T = 10;  
-  
+import { Test as TClass, type G, type T } from './ts/app2.js';
+
+const obj: G = {
+    name: 'test',
+}
+
+const num: T = 10;
+
 new TClass();
 ```
 
@@ -4709,7 +4728,7 @@ new TClass();
 ![](_png/399a3c691a774a94a2c460ec7362029f.png)
 ![](_png/e17795b259f67b9a460e70d672df2e3e.png)
 
-*И сейчас попробуем решить проблему с типизацией данной библиотеки*
+_И сейчас попробуем решить проблему с типизацией данной библиотеки_
 
 ![](_png/ac20f2c7a299425c915dcfc4f50c224d.png)
 
@@ -4717,14 +4736,14 @@ new TClass();
 npm i really-relaxed-json
 ```
 
-> **Первый вариант:** мы можем использовать таблетку, которая снимет симптомы, но не устранит проблему  - `//@ts-ignore`. Этот комментарий заставит игнорировать ошибку ТС в следующей строке
+> **Первый вариант:** мы можем использовать таблетку, которая снимет симптомы, но не устранит проблему - `//@ts-ignore`. Этот комментарий заставит игнорировать ошибку ТС в следующей строке
 
 ```TS
-//@ts-ignore  
+//@ts-ignore
 import {toJson} from 'really-relaxed-json'  // Not typed
-const rjson = '[ one two three {foo:bar} ]'  
-const json = toJson(rjson)  
-  
+const rjson = '[ one two three {foo:bar} ]'
+const json = toJson(rjson)
+
 console.log(json);
 ```
 
@@ -4733,14 +4752,14 @@ console.log(json);
 ![](_png/6660b16b98b0ff14ba2229daa7917634.png)
 
 ```TS
-declare module 'really-relaxed-json' {  
-    export function toJson(rjsonString: string, compact: boolean = true): string;  
+declare module 'really-relaxed-json' {
+    export function toJson(rjsonString: string, compact: boolean = true): string;
 }
 ```
 
 ## Порождающие паттерны
 
-#Patterns #Factory #Singleton #Builder 
+#Patterns #Factory #Singleton #Builder
 
 ### Сами порождающие паттерны
 
@@ -4766,178 +4785,178 @@ declare module 'really-relaxed-json' {
 
 ```TS
 // Статус запроса
-enum Status {  
+enum Status {
     SUCCESS,
-    EXPECTATION,  
+    EXPECTATION,
     DENY
-}  
+}
 
 // Базовая реализация страховки
-interface IInsurance {  
-    id: number;  
-    status: Status;  
-    setVehicle(vehicle: any): void;  
-    submit(): Promise<boolean>;  
-}  
+interface IInsurance {
+    id: number;
+    status: Status;
+    setVehicle(vehicle: any): void;
+    submit(): Promise<boolean>;
+}
 
 // Реализация конкретной страховки
-class TFInsurance implements IInsurance {  
-    id: number;  
-    status: Status;  
-    private vehicle: any;  
-  
-    setVehicle(vehicle: any): void {  
-        this.vehicle = vehicle;  
-    }  
-  
-    async submit(): Promise<boolean> {  
-        const res = await fetch('tf', {  
-            method: 'POST',  
-            body: JSON.stringify({ vehicle: this.vehicle }),  
-        });  
-  
-        const data = await res.json();  
-        return data.isSuccess;  
-    }  
-}  
+class TFInsurance implements IInsurance {
+    id: number;
+    status: Status;
+    private vehicle: any;
+
+    setVehicle(vehicle: any): void {
+        this.vehicle = vehicle;
+    }
+
+    async submit(): Promise<boolean> {
+        const res = await fetch('tf', {
+            method: 'POST',
+            body: JSON.stringify({ vehicle: this.vehicle }),
+        });
+
+        const data = await res.json();
+        return data.isSuccess;
+    }
+}
 
 // Реализация конкретной страховки
-class ABInsurance implements IInsurance {  
-    id: number;  
-    status: Status;  
-    private vehicle: any;  
-  
-    setVehicle(vehicle: any): void {  
-        this.vehicle = vehicle;  
-    }  
-  
-    async submit(): Promise<boolean> {  
-        const res = await fetch('ab', {  
-            method: 'POST',  
-            body: JSON.stringify({ vehicle: this.vehicle }),  
-        });  
-  
-        const data = await res.json();  
-        return data.yes;  
-    }  
-}  
-  
+class ABInsurance implements IInsurance {
+    id: number;
+    status: Status;
+    private vehicle: any;
+
+    setVehicle(vehicle: any): void {
+        this.vehicle = vehicle;
+    }
+
+    async submit(): Promise<boolean> {
+        const res = await fetch('ab', {
+            method: 'POST',
+            body: JSON.stringify({ vehicle: this.vehicle }),
+        });
+
+        const data = await res.json();
+        return data.yes;
+    }
+}
+
 // Реализация фабрики  -------------
 // Создаём абстрактный класс для отображения самой фабрики
-abstract class InsuranceFactory {  
-    db: any; // данные  
+abstract class InsuranceFactory {
+    db: any; // данные
 
 	// Создаём нужную страховку по интерфейсу
-    abstract createInsurance(): IInsurance;  
+    abstract createInsurance(): IInsurance;
 
 	// Сохраняем данные страховки
-    saveHistory(ins: IInsurance) {  
-        this.db.save(ins.id, ins.status);  
-    }  
-}  
+    saveHistory(ins: IInsurance) {
+        this.db.save(ins.id, ins.status);
+    }
+}
 
-// Создаём класс для отделения фабрики одной страховки  
-class TFInsuranceFactory extends InsuranceFactory {  
-    createInsurance(): TFInsurance {  
-        return new TFInsurance();  
-    }  
-}  
+// Создаём класс для отделения фабрики одной страховки
+class TFInsuranceFactory extends InsuranceFactory {
+    createInsurance(): TFInsurance {
+        return new TFInsurance();
+    }
+}
 
 // И другой страховки
-class ABInsuranceFactory extends InsuranceFactory {  
-    createInsurance(): ABInsurance {  
-        return new ABInsurance();  
-    }  
-}  
+class ABInsuranceFactory extends InsuranceFactory {
+    createInsurance(): ABInsurance {
+        return new ABInsurance();
+    }
+}
 
 // Использование
-const tfInsuranceFactory = new TFInsuranceFactory();  
+const tfInsuranceFactory = new TFInsuranceFactory();
 const ins = tfInsuranceFactory.createInsurance();
 tfInsuranceFactory.saveHistory(ins);
 ```
 
 Либо мы можем сделать такую реализацию (немного не ООП):
-Тут мы в класс createInsurance передаём один из ключей, которые представляют из себя типы страховок. Получая этот тип страховки по ключу, мы возвращаем этот тип и определяем его реализацию 
+Тут мы в класс createInsurance передаём один из ключей, которые представляют из себя типы страховок. Получая этот тип страховки по ключу, мы возвращаем этот тип и определяем его реализацию
 Хоть тут и гораздо более компактное представление фабрики, однако тут мы теряем возможность дописывать отдельно функциональность для каждого типа страховок
 
 ```TS
-const INSURANCE_TYPE = {  
-    tf: TFInsurance,  
-    ab: ABInsurance  
-}  
-  
-type IT = typeof INSURANCE_TYPE;  
-  
-class InsuranceFactoryAlt {  
-    db: any;  
-  
-    createInsurance<T extends keyof IT>(type: T): IT[T] {  
-        return INSURANCE_TYPE[type];  
-    }  
-  
-    saveHistory(ins: IInsurance) {  
-        this.db.save(ins.id, ins.status);  
-    }  
+const INSURANCE_TYPE = {
+    tf: TFInsurance,
+    ab: ABInsurance
+}
+
+type IT = typeof INSURANCE_TYPE;
+
+class InsuranceFactoryAlt {
+    db: any;
+
+    createInsurance<T extends keyof IT>(type: T): IT[T] {
+        return INSURANCE_TYPE[type];
+    }
+
+    saveHistory(ins: IInsurance) {
+        this.db.save(ins.id, ins.status);
+    }
 }
 ```
 
 ### 102 Singleton
 
-У нас есть одно хранилище и от него нам нужно создать только один инстанс класса - и не давать создавать другие. 
+У нас есть одно хранилище и от него нам нужно создать только один инстанс класса - и не давать создавать другие.
 
 ![](_png/ed666062268d065dd9c2b7585cd356a7.png)
 
 По итогу мы имеем сервисы, которые представляют из себя шину для работы с данными, которые находятся внутри хранилища данных
 
 ```TS
-class MyMap {  
-    // Тут храним инстанс, созданный один раз  
-    private static instance: MyMap;  
-  
-    map: Map<number, string> = new Map();  
-  
-    // Запрещаем создание инстансов через конструктор  
-    private constructor() {}  
-  
-    // Очистка мапы  
-    clean() {  
-        this.map = new Map();  
-    }  
-  
-    public static get(): MyMap {  
-        if (!MyMap.instance) {  
-            MyMap.instance = new MyMap();  
-        }        
-        
-        return MyMap.instance;  
-    }  
-}  
-  
-class Service1 {  
-    // Добавляем значение в мапу  
-    addMap(key: number, value: string): void {  
-        const myMap = MyMap.get();  
-        myMap.map.set(key, value); // сетим значения  
-    }  
-}  
-  
-class Service2 {  
-    // Получаем значение из мапы  
-    getKeys(key: number): void {  
-        const myMap = MyMap.get();  
-        console.log(myMap.map.get(key)); // выводим мапу  
-        myMap.clean(); // очищаем мапу  
-        console.log(myMap.map.get(key)); // выводим очищенную мапу  
-    }  
-}  
-  
-new Service1().addMap(1, 'Работает!'); // ввели значение  
+class MyMap {
+    // Тут храним инстанс, созданный один раз
+    private static instance: MyMap;
+
+    map: Map<number, string> = new Map();
+
+    // Запрещаем создание инстансов через конструктор
+    private constructor() {}
+
+    // Очистка мапы
+    clean() {
+        this.map = new Map();
+    }
+
+    public static get(): MyMap {
+        if (!MyMap.instance) {
+            MyMap.instance = new MyMap();
+        }
+
+        return MyMap.instance;
+    }
+}
+
+class Service1 {
+    // Добавляем значение в мапу
+    addMap(key: number, value: string): void {
+        const myMap = MyMap.get();
+        myMap.map.set(key, value); // сетим значения
+    }
+}
+
+class Service2 {
+    // Получаем значение из мапы
+    getKeys(key: number): void {
+        const myMap = MyMap.get();
+        console.log(myMap.map.get(key)); // выводим мапу
+        myMap.clean(); // очищаем мапу
+        console.log(myMap.map.get(key)); // выводим очищенную мапу
+    }
+}
+
+new Service1().addMap(1, 'Работает!'); // ввели значение
 new Service2().getKeys(1); // Работает - undefined
 ```
 
 ### 103 Prototype
 
-Данный паттерн эксплуатирует возможности JS, а именно его прототипирование. 
+Данный паттерн эксплуатирует возможности JS, а именно его прототипирование.
 Используется, когда нам нужно склонировать объект и все его данные, изменив внутри только небольшую часть данных
 
 То есть обеспечением клонирования объекта занимается какой-то один метод ==clone()==
@@ -4947,29 +4966,29 @@ new Service2().getKeys(1); // Работает - undefined
 Вот пример, где мы создали копию одного и того же пользователя, но с разными почтами
 
 ```TS
-interface Prototype<T> {  
-    clone(): T;  
-}  
-  
-class UserHistory implements Prototype<UserHistory> {  
-    createdAt: Date;  
-  
-    constructor(public email: string, public name: string) {  
-        this.createdAt = new Date();  
-    }  
-  
-    clone(): UserHistory {  
-        let target = new UserHistory(this.email, this.name);  
-        target.createdAt = this.createdAt;  
-        return target;  
-    }  
-}  
-  
-let user = new UserHistory('a@a.ru', 'Антон');  
-console.log(user);  
-  
-let user2 = user.clone();  
-user2.email = 'b@b.ru';  
+interface Prototype<T> {
+    clone(): T;
+}
+
+class UserHistory implements Prototype<UserHistory> {
+    createdAt: Date;
+
+    constructor(public email: string, public name: string) {
+        this.createdAt = new Date();
+    }
+
+    clone(): UserHistory {
+        let target = new UserHistory(this.email, this.name);
+        target.createdAt = this.createdAt;
+        return target;
+    }
+}
+
+let user = new UserHistory('a@a.ru', 'Антон');
+console.log(user);
+
+let user2 = user.clone();
+user2.email = 'b@b.ru';
 console.log(user2);
 ```
 
@@ -4977,7 +4996,7 @@ console.log(user2);
 
 ### 104 Builder
 
-Паттерн билдера часто используется, например, в контрактах, когда нам нужно передать от пользователя параметры на изображение (тип фото, высота, ширина) и получить от системы фотографию в нужном формате. 
+Паттерн билдера часто используется, например, в контрактах, когда нам нужно передать от пользователя параметры на изображение (тип фото, высота, ширина) и получить от системы фотографию в нужном формате.
 
 Основным отличием метода билдера является то, что он чейнебл - его можно вызвать много раз друг за другом. То есть объект вызывает метод build и возвращает изменённого себя
 
@@ -4987,85 +5006,86 @@ console.log(user2);
 
 ```TS
 // Форматы изображений
-enum ImageFormat {  
-    PNG = 'png',  
-    JPEG = 'jpeg',  
-}  
+enum ImageFormat {
+    PNG = 'png',
+    JPEG = 'jpeg',
+}
 
 // Параметры изображений
-interface IResolution {  
-    width: number,  
-    height: number  
-}  
+interface IResolution {
+    width: number,
+    height: number
+}
 
 // Объединение формата и разрешения изображений
-interface IImageConversion extends IResolution {  
-    format: ImageFormat  
-}  
+interface IImageConversion extends IResolution {
+    format: ImageFormat
+}
 
 // Класс для создания объекта
-class ImageBuilder {  
+class ImageBuilder {
     // Создаём переменные, которые будут хранить параметры изображений и сразу присваиваем им массив, чтобы мы могли запушить в них данные извне
-    private formats: ImageFormat[] = [];  
-    private resolutions: IResolution[] = [];  
+    private formats: ImageFormat[] = [];
+    private resolutions: IResolution[] = [];
 
 	// Реализация для PNG
-    addPng() {  
-        // includes - >ES2016  
-        if (this.formats.includes(ImageFormat.PNG)) {  
-            return this;  
-        }        
-        this.formats.push(ImageFormat.PNG);  
-        return this;  
-    }  
+    addPng() {
+        // includes - >ES2016
+        if (this.formats.includes(ImageFormat.PNG)) {
+            return this;
+        }
+        this.formats.push(ImageFormat.PNG);
+        return this;
+    }
 
 	// Реализация для JPEG
-    addJpeg() {  
-        if (this.formats.includes(ImageFormat.JPEG)) {  
-            return this;  
-        }        
-        this.formats.push(ImageFormat.JPEG);  
-        return this;  
-    }  
+    addJpeg() {
+        if (this.formats.includes(ImageFormat.JPEG)) {
+            return this;
+        }
+        this.formats.push(ImageFormat.JPEG);
+        return this;
+    }
 
 	// Добавляет для изображений параметры размеров
-    addResolution(width: number, height: number) {  
-        this.resolutions.push({ width, height });  
-        return this;  
-    }  
+    addResolution(width: number, height: number) {
+        this.resolutions.push({ width, height });
+        return this;
+    }
 
 	// Конечный метод, который преобразует наши данные в нужный формат
-    build(): IImageConversion[] {  
-        const res: IImageConversion[] = [];  
-        for (const r of this.resolutions) {  
-            for (const f of this.formats) {  
-                res.push({  
-                    format: f,  
-                    height: r.height,  
-                    width: r.width  
-                });  
-            }  
-        }  
-        return res;  
-    }  
-}  
+    build(): IImageConversion[] {
+        const res: IImageConversion[] = [];
+        for (const r of this.resolutions) {
+            for (const f of this.formats) {
+                res.push({
+                    format: f,
+                    height: r.height,
+                    width: r.width
+                });
+            }
+        }
+        return res;
+    }
+}
 
 // Вызов создания объекта
-console.log(  
-    new ImageBuilder()  
-        .addJpeg()  
-        .addPng()  
-        .addResolution(100, 50)  
-        .addResolution(200, 100)  
-        .build()  
+console.log(
+    new ImageBuilder()
+        .addJpeg()
+        .addPng()
+        .addResolution(100, 50)
+        .addResolution(200, 100)
+        .build()
 )
 ```
 
 ![](_png/a21f7d1ee075da193a13a8f9c6aa62ca.png)
 
->[!info] Когда использовать паттерн?
->- Всегда, когда нам нужно создать сложный объект и не задумываться над его обязательными свойствами (чтобы, например, передать его через АПИ на бэк или фронт)
->- При тестировании приложения 
+> [!info] Когда использовать паттерн?
+>
+> - Всегда, когда нам нужно создать сложный объект и не задумываться над его обязательными свойствами (чтобы, например, передать его через АПИ на бэк или фронт)
+> - При тестировании приложения
 
 ## Структурные паттерны
 
@@ -5082,7 +5102,7 @@ console.log(
 
 ### 106 Bridge
 
-Проблема: 
+Проблема:
 Нам нужно реализовать уведомления, которые будут приходить либо в телегу, либо в whatsapp. Так же уведомления могут быть мгновенные, либо отложенные. Расширение логики приведёт к тому, что классов для реализации функционала придётся делать больше в геометрической прогрессии
 
 ![](_png/a5dd0faa5d7f3a8800afcc8808902aa9.png)
@@ -5095,72 +5115,73 @@ console.log(
 
 ```TS
 // Интерфейс провайдера, через который будет осуществляться взаимодействие между сендером и провайдерами
-interface IProvider {  
-    sendMessage(message: string): void;  
-    connect(config: unknown): void;  
-    disconnect(): void;  
-}  
-  
-// Реализация двух провайдеров  
-class TelegramProvider implements IProvider {  
-    sendMessage(message: string): void {  
-        console.log(message);  
-    }  
-  
-    connect(config: string): void {  
-        console.log(config);  
-    }  
-  
-    disconnect(): void {  
-        console.log('Disconnected TG');  
-    }  
-}  
-  
-class WhatsUpProvider implements IProvider {  
-    sendMessage(message: string): void {  
-        console.log(message);  
-    }  
-  
-    connect(config: string): void {  
-        console.log(config);  
-    }  
-  
-    disconnect(): void {  
-        console.log('Disconnected WU');  
-    }  
-}  
-  
-// Реализация класса по отравке сообщения  
-class NotificationSender {  
-    // Принимает определённого провайдера, которые реализованы выше  
-    constructor(private provider: IProvider) {  
-    }  
-    send() {  
-        // И пользуется методами этого провайдера  
-        this.provider.connect('connect');  
-        this.provider.sendMessage('message');  
-        this.provider.disconnect();  
-    }  
-}  
-  
-// Реализация отложенного отправления сообщения  
-class DelayNotificationSender extends NotificationSender {  
-    constructor(provider: IProvider) {  
-        super(provider);  
-    }  
+interface IProvider {
+    sendMessage(message: string): void;
+    connect(config: unknown): void;
+    disconnect(): void;
+}
+
+// Реализация двух провайдеров
+class TelegramProvider implements IProvider {
+    sendMessage(message: string): void {
+        console.log(message);
+    }
+
+    connect(config: string): void {
+        console.log(config);
+    }
+
+    disconnect(): void {
+        console.log('Disconnected TG');
+    }
+}
+
+class WhatsUpProvider implements IProvider {
+    sendMessage(message: string): void {
+        console.log(message);
+    }
+
+    connect(config: string): void {
+        console.log(config);
+    }
+
+    disconnect(): void {
+        console.log('Disconnected WU');
+    }
+}
+
+// Реализация класса по отравке сообщения
+class NotificationSender {
+    // Принимает определённого провайдера, которые реализованы выше
+    constructor(private provider: IProvider) {
+    }
+    send() {
+        // И пользуется методами этого провайдера
+        this.provider.connect('connect');
+        this.provider.sendMessage('message');
+        this.provider.disconnect();
+    }
+}
+
+// Реализация отложенного отправления сообщения
+class DelayNotificationSender extends NotificationSender {
+    constructor(provider: IProvider) {
+        super(provider);
+    }
 
 	// Отправка с задержкой
-    sendDelayed() {  
+    sendDelayed() {
     }
-}  
-  
-// Вызов сендеров  
-const senderTG = new NotificationSender(new TelegramProvider());  
-senderTG.send();  
-  
-const senderWU = new NotificationSender(new WhatsUpProvider());  
+}
+
+// Вызов сендеров
+const senderTG = new NotificationSender(new TelegramProvider());
+senderTG.send();
+
+const senderWU = new NotificationSender(new WhatsUpProvider());
 senderWU.send();
 ```
+
 ![](_png/d49611c97374190f2494ac1ff7f808b6.png)
 
 ### 107 Facade
@@ -5177,57 +5198,57 @@ senderWU.send();
 
 ```TS
 // Класс, который отвечает за оповещение
-class Notify {  
-    send(template: string, to: string) {  
-        console.log(`Отправляю ${template} к ${to}`)  
-    }  
-}  
+class Notify {
+    send(template: string, to: string) {
+        console.log(`Отправляю ${template} к ${to}`)
+    }
+}
 
 // Логирование
-class Log {  
-    log(message: string) {  
-        console.log(message);  
-    }  
-}  
+class Log {
+    log(message: string) {
+        console.log(message);
+    }
+}
 
-// Шаблонизатор  
-class Template {  
+// Шаблонизатор
+class Template {
 	// Хранилище шаблонов (БД)
-    private templates = [  
-        { name: 'other', template: '<h1>Шаблон</h1>>' },  
-    ];  
+    private templates = [
+        { name: 'other', template: '<h1>Шаблон</h1>>' },
+    ];
 
-	
-    getByName(name: string) {  
+
+    getByName(name: string) {
         return this.templates.find(t => t.name === name);
-    }  
-}  
+    }
+}
 
 // И сам фасад, который скрывает все остальные методы, чтобы с ними не работать
-class NotificationFacade {  
-    private notify: Notify;  
-    private logger: Log;  
-    private template: Template;  
-  
-    constructor() {  
-        this.notify = new Notify();  
-        this.template = new Template();  
-        this.logger = new Log();  
-    }  
-  
-    send(to: string, templateName: string) {  
-        const data = this.template.getByName(templateName);  
-        if (!data) {  
-            this.logger.log('Не найден шаблон');  
-            return;  
-        }        
-        this.notify.send(data.template, to);  
-        this.logger.log('Шаблон отправлен');  
-    }  
-}  
+class NotificationFacade {
+    private notify: Notify;
+    private logger: Log;
+    private template: Template;
 
-// Использование  
-const s = new NotificationFacade();  
+    constructor() {
+        this.notify = new Notify();
+        this.template = new Template();
+        this.logger = new Log();
+    }
+
+    send(to: string, templateName: string) {
+        const data = this.template.getByName(templateName);
+        if (!data) {
+            this.logger.log('Не найден шаблон');
+            return;
+        }
+        this.notify.send(data.template, to);
+        this.logger.log('Шаблон отправлен');
+    }
+}
+
+// Использование
+const s = new NotificationFacade();
 s.send('a@a.ru', 'other'); // Есть только этот метод
 ```
 
@@ -5235,56 +5256,56 @@ s.send('a@a.ru', 'other'); // Есть только этот метод
 
 ### 108 Adapter
 
-Паттерн ==Адаптер== позволяет подготовить сходу неподходящий объект к использованию в нашем коде. 
+Паттерн ==Адаптер== позволяет подготовить сходу неподходящий объект к использованию в нашем коде.
 Самый простой пример из жизни: нам нужно воткнуть USB 3.0 в Type-C. Сделать это просто так не получится и поэтому нам нужно использовать переходик - адаптер.
 
 Пример: нам нужно адаптировать все вызовы KVDatabase к персистентной БД
 
 ![](_png/48df53448e55c0cd0ff4b98904f660b4.png)
 
-Решается проблема через адаптор, который расширяется от нашей БД и через конструктор прокидывается к нашей персистентной БД 
+Решается проблема через адаптор, который расширяется от нашей БД и через конструктор прокидывается к нашей персистентной БД
 
 ![](_png/f0800f2d5e0251937ed646316b6defe7.png)
 
 ```TS
-class KVDatabase {  
-    private db: Map<string, string> = new Map();  
-  
-    save(key: string, value: string) {  
-        this.db.set(key, value);  
-    }  
-}  
-  
-class PersistentDB {  
-    savePersistent(data: Object) {  
-        console.log(data);  
-    }  
-}  
-  
-// Сам адаптер  
-class PersistentDBAdapter extends KVDatabase {  
-    // Конструктор принимает в себя ту ДБ, под которую мы адаптируемся  
-    constructor(public database: PersistentDB) {  
-        super();  
-    }  
-  
-    override save(key: string, value: string): void {  
-        this.database.savePersistent({ key, value});  
-    }  
-}  
-  
-// Создаём функцию, которая умеет работать только с KVDatabase  
-function run(base: KVDatabase) {  
-    base.save('key', 'myValue')  
-}  
-  
-// Код работает, так как PersistentDBAdapter экстендит PersistentDB  
+class KVDatabase {
+    private db: Map<string, string> = new Map();
+
+    save(key: string, value: string) {
+        this.db.set(key, value);
+    }
+}
+
+class PersistentDB {
+    savePersistent(data: Object) {
+        console.log(data);
+    }
+}
+
+// Сам адаптер
+class PersistentDBAdapter extends KVDatabase {
+    // Конструктор принимает в себя ту ДБ, под которую мы адаптируемся
+    constructor(public database: PersistentDB) {
+        super();
+    }
+
+    override save(key: string, value: string): void {
+        this.database.savePersistent({ key, value});
+    }
+}
+
+// Создаём функцию, которая умеет работать только с KVDatabase
+function run(base: KVDatabase) {
+    base.save('key', 'myValue')
+}
+
+// Код работает, так как PersistentDBAdapter экстендит PersistentDB
 run(new PersistentDBAdapter(new PersistentDB()));
 ```
 
 ![](_png/8e342e35a58d5b6e05d6a7d788a75066.png)
 
->[!info] Этот паттерн используется для адаптации приложения к работе с другими, внешними, полезными библиотеками, которые приложение по умолчанию не сможет поддерживать
+> [!info] Этот паттерн используется для адаптации приложения к работе с другими, внешними, полезными библиотеками, которые приложение по умолчанию не сможет поддерживать
 
 ### 109 Proxy
 
@@ -5300,52 +5321,52 @@ run(new PersistentDBAdapter(new PersistentDB()));
 
 ```TS
 // Интерфейс АПИ оплаты
-interface IPaymentAPI {  
-    getPaymentDetail(id: number): IPaymentDetail | undefined;  
-}  
+interface IPaymentAPI {
+    getPaymentDetail(id: number): IPaymentDetail | undefined;
+}
 
 // Интерфейс данных оплаты
-interface IPaymentDetail {  
-    id: number;  
-    sum: number;  
-}  
-  
-// АПИ оплаты  
-class PaymentAPI implements IPaymentAPI {  
-    private data = [{ id: 1, sum: 10000}];  
-  
-    // Кэширование  
-    getPaymentDetail(id: number): IPaymentDetail | undefined {  
-        return this.data.find(d => d.id === id);  
-    }  
-}  
-  
-// Это прокси, который ограничит получение данных  
-class PaymentAccessProxy implements IPaymentAPI {  
-    constructor(private api: PaymentAPI, private userId: number) {  
-    }  
-    // Получение данных о платеже  
-    getPaymentDetail(id: number): IPaymentDetail | undefined {  
-        if (this.userId === 1) {  
-            return this.api.getPaymentDetail(id);  
-        }        
-        console.log('Попытка получить данные платежа!');  
-        return undefined;  
-    }  
-}  
-  
-// Пользователь, который может получить данные  
-const proxyAccess = new PaymentAccessProxy(new PaymentAPI(), 1);  
-console.log(proxyAccess.getPaymentDetail(1));  
-  
-// И пользователь, которому уже не доступны данные  
-const proxyUnaccess = new PaymentAccessProxy(new PaymentAPI(), 2);  
+interface IPaymentDetail {
+    id: number;
+    sum: number;
+}
+
+// АПИ оплаты
+class PaymentAPI implements IPaymentAPI {
+    private data = [{ id: 1, sum: 10000}];
+
+    // Кэширование
+    getPaymentDetail(id: number): IPaymentDetail | undefined {
+        return this.data.find(d => d.id === id);
+    }
+}
+
+// Это прокси, который ограничит получение данных
+class PaymentAccessProxy implements IPaymentAPI {
+    constructor(private api: PaymentAPI, private userId: number) {
+    }
+    // Получение данных о платеже
+    getPaymentDetail(id: number): IPaymentDetail | undefined {
+        if (this.userId === 1) {
+            return this.api.getPaymentDetail(id);
+        }
+        console.log('Попытка получить данные платежа!');
+        return undefined;
+    }
+}
+
+// Пользователь, который может получить данные
+const proxyAccess = new PaymentAccessProxy(new PaymentAPI(), 1);
+console.log(proxyAccess.getPaymentDetail(1));
+
+// И пользователь, которому уже не доступны данные
+const proxyUnaccess = new PaymentAccessProxy(new PaymentAPI(), 2);
 console.log(proxyUnaccess.getPaymentDetail(1));
 ```
 
 ![](_png/7839e12650cae2ce7f9463c8572a9939.png)
 
->[!info] Этот паттерн может быть полезен, когда нам нужно добавить дополнительные настройки логики над существующим функционалом в программе
+> [!info] Этот паттерн может быть полезен, когда нам нужно добавить дополнительные настройки логики над существующим функционалом в программе
 
 ### 110 Composite
 
@@ -5360,81 +5381,81 @@ console.log(proxyUnaccess.getPaymentDetail(1));
 ![](_png/1b71bd118fef0c8d063b14a298cf1c95.png)
 
 ```TS
-// Наш абстрактный класс, который определяет методы всем его дочерним элементам  
-abstract class DeliveryItem {  
-    // Массив корзины  
-    item: DeliveryItem[] = [];  
-  
-    // Добавить элемент в корзину   
-	addItem(item:DeliveryItem) {  
-        this.item.push(item);  
-    }  
-  
-    // Получение цены из корзины  
-    getItemPrices(): number {  
-        return this.item.reduce((acc: number, item: DeliveryItem) => {  
-            return acc += item.getPrice()  
-        }, 0);  
-    }  
-  
-    // У каждого элемента своя реализация получения цены  
-    abstract getPrice(): number;  
-}  
-  
-// Магазин  
-class DeliveryShop extends DeliveryItem {  
-    constructor(private deliveryFee: number) {  
-        super();  
-    }  
-  
-    getPrice(): number {  
-        return this.getItemPrices() + this.deliveryFee;  
-    }  
-}  
-  
-// Упаковка для товаров - корзина  
-class Package extends DeliveryItem {  
-    getPrice(): number {  
-        return this.getItemPrices();  
-    }  
-}  
-  
-// Единичный продукт  
-class Product extends DeliveryItem {  
-    // В который передаём цену  
-    constructor(private price: number) {  
-        super();  
-    }  
-  
-    // И который возвращает цену в родительский элемент  
-    getPrice(): number {  
-        return this.price;  
-    }  
-}  
-  
-// Создаём магазин товаров  
-const shop = new DeliveryShop(100);  
-shop.addItem(new Product(1000));  
-  
-// Создаём первую корзину товаров  
-const pack1 = new Package();  
-pack1.addItem(new Product(200));  
-pack1.addItem(new Product(300));  
-shop.addItem(pack1);  
-  
-// Создаём вторую корзину товаров const pack2 = new Package();  
-pack2.addItem(new Product(30));  
-shop.addItem(pack2);  
-  
-// И просто аккумулируем все цены в одном магазине  
+// Наш абстрактный класс, который определяет методы всем его дочерним элементам
+abstract class DeliveryItem {
+    // Массив корзины
+    item: DeliveryItem[] = [];
+
+    // Добавить элемент в корзину
+	addItem(item:DeliveryItem) {
+        this.item.push(item);
+    }
+
+    // Получение цены из корзины
+    getItemPrices(): number {
+        return this.item.reduce((acc: number, item: DeliveryItem) => {
+            return acc += item.getPrice()
+        }, 0);
+    }
+
+    // У каждого элемента своя реализация получения цены
+    abstract getPrice(): number;
+}
+
+// Магазин
+class DeliveryShop extends DeliveryItem {
+    constructor(private deliveryFee: number) {
+        super();
+    }
+
+    getPrice(): number {
+        return this.getItemPrices() + this.deliveryFee;
+    }
+}
+
+// Упаковка для товаров - корзина
+class Package extends DeliveryItem {
+    getPrice(): number {
+        return this.getItemPrices();
+    }
+}
+
+// Единичный продукт
+class Product extends DeliveryItem {
+    // В который передаём цену
+    constructor(private price: number) {
+        super();
+    }
+
+    // И который возвращает цену в родительский элемент
+    getPrice(): number {
+        return this.price;
+    }
+}
+
+// Создаём магазин товаров
+const shop = new DeliveryShop(100);
+shop.addItem(new Product(1000));
+
+// Создаём первую корзину товаров
+const pack1 = new Package();
+pack1.addItem(new Product(200));
+pack1.addItem(new Product(300));
+shop.addItem(pack1);
+
+// Создаём вторую корзину товаров const pack2 = new Package();
+pack2.addItem(new Product(30));
+shop.addItem(pack2);
+
+// И просто аккумулируем все цены в одном магазине
 console.log(shop.getPrice()); // 1630
 ```
 
->[!info] Данный паттерн используется тогда, когда нам нужно работать с древовидными структурами, вложенными друг в друга
+> [!info] Данный паттерн используется тогда, когда нам нужно работать с древовидными структурами, вложенными друг в друга
 
 ## Поведенческие паттерны
 
-#Patterns #Mediator #ChainOfCommand #Command #Strategy #Iterator #TemplateMethod #Observer 
+#Patterns #Mediator #ChainOfCommand #Command #Strategy #Iterator #TemplateMethod #Observer
 
 ### 111 Вводное видео
 
@@ -5442,7 +5463,7 @@ console.log(shop.getPrice()); // 1630
 
 ==Chain of Command== - построение цепочки команд, которые обрабатывают полученное значение и передают его друг за другом
 ==Mediator== - организация взаимодействия между несколькими компонентами, которые должны быть сильно связаны друг с другом и позволяет модерировать эти взаимодействия
-==Command== - позволяет вывести часть логики в команды. Организует работу объектов не напрямую друг на другом, а в команде 
+==Command== - позволяет вывести часть логики в команды. Организует работу объектов не напрямую друг на другом, а в команде
 ==State== - позволяет работать с состоянием объекта
 ==Strategy== - реализация наборов стратегий, которые взаимозаменяются на лету
 ==Iterator== - позволяет реализовать итерирование по древовидным структурам
@@ -5451,7 +5472,7 @@ console.log(shop.getPrice()); // 1630
 
 ### 112 Chain of Command
 
-Это паттерн, который разбивает логику выполнения промежуточных и необязательных команд на отдельную функциональность. 
+Это паттерн, который разбивает логику выполнения промежуточных и необязательных команд на отдельную функциональность.
 
 Мы внешний запрос, который приходит к нам в обработчик. Мы понимаем, что нам нужно произвести авторизацию данных, а затем ещё и валидацию получаемых данных
 
@@ -5462,83 +5483,83 @@ console.log(shop.getPrice()); // 1630
 ![](_png/e71a6dad4769b617e957aa52baa5cdd6.png)
 
 ```TS
-interface IMiddleware {  
-    next(mid: IMiddleware): IMiddleware;  
-    handle(request: any): any;  
-}  
-  
-abstract class AbstractMiddleware implements IMiddleware {  
-    private nextMiddleware: IMiddleware;  
-  
-    next(mid: IMiddleware): IMiddleware {  
-        this.nextMiddleware = mid;  
-        return mid;  
-    }  
-  
-    handle(request: any): any {  
-        if (this.nextMiddleware) {  
-            return this.nextMiddleware.handle(request);  
-        }        
+interface IMiddleware {
+    next(mid: IMiddleware): IMiddleware;
+    handle(request: any): any;
+}
+
+abstract class AbstractMiddleware implements IMiddleware {
+    private nextMiddleware: IMiddleware;
+
+    next(mid: IMiddleware): IMiddleware {
+        this.nextMiddleware = mid;
+        return mid;
+    }
+
+    handle(request: any): any {
+        if (this.nextMiddleware) {
+            return this.nextMiddleware.handle(request);
+        }
         return;
-    }  
-}  
-  
-// Первый обработчик для авторизации  
-class AuthMiddleware extends AbstractMiddleware {  
-    override handle(request: any): any {  
-        console.log('AuthMiddleware');  
-        if (request.userId === 1) {  
-            return super.handle(request);  
-        }       
-        return { error: 'Вы не авторизованы' };  
-    }  
-}  
-  
-// Второй обработчик для валидации  
-class ValidateMiddleware extends AbstractMiddleware {  
-    override handle(request: any): any {  
-        console.log('ValidateMiddleware');  
-        if (request.body) {  
-            return super.handle(request);  
-        }        
-        return { error: 'Нет body' };  
-    }  
-}  
-  
-// Ну и сам контроллер, который будет возвращать сообщение об успешном запросе  
-class Controller extends AbstractMiddleware {  
-    override handle(request: any): any {  
-        console.log('Controller');  
-        return { success: request };  
-    }  
-}  
-  
+    }
+}
+
+// Первый обработчик для авторизации
+class AuthMiddleware extends AbstractMiddleware {
+    override handle(request: any): any {
+        console.log('AuthMiddleware');
+        if (request.userId === 1) {
+            return super.handle(request);
+        }
+        return { error: 'Вы не авторизованы' };
+    }
+}
+
+// Второй обработчик для валидации
+class ValidateMiddleware extends AbstractMiddleware {
+    override handle(request: any): any {
+        console.log('ValidateMiddleware');
+        if (request.body) {
+            return super.handle(request);
+        }
+        return { error: 'Нет body' };
+    }
+}
+
+// Ну и сам контроллер, который будет возвращать сообщение об успешном запросе
+class Controller extends AbstractMiddleware {
+    override handle(request: any): any {
+        console.log('Controller');
+        return { success: request };
+    }
+}
+
 const controller = new Controller();  // Контроллер
 const validate = new ValidateMiddleware();  // Валидация
 const auth = new AuthMiddleware();  // Аутентификация
 
 // Раздельный вызов нужных нам запросов
-auth.next(validate).next(controller);  
-  
-console.log(auth.handle({  
-    userId: 3 // Вы не авторизованы  
-})); // Вызов без body  
-  
-console.log(auth.handle({  
-    userId: 1,  
-    body: 'I am OK!',  
+auth.next(validate).next(controller);
+
+console.log(auth.handle({
+    userId: 3 // Вы не авторизованы
+})); // Вызов без body
+
+console.log(auth.handle({
+    userId: 1,
+    body: 'I am OK!',
 })); // Успешный вызов
 ```
 
 ![](_png/99d855732b8a252e6b52df1eb5ee8be9.png)
 
->[!info] Стоит такой подход использовать, если нам нужно сделать код более модульным и разделить обязанности выполнения внутри него (если нам будет не нужен определённый функционал)
+> [!info] Стоит такой подход использовать, если нам нужно сделать код более модульным и разделить обязанности выполнения внутри него (если нам будет не нужен определённый функционал)
 
 ### 113 Mediator
 
-Данный паттерн встречается в основном на фронте, чтобы два разрозненных компонента могли знать друг о друге 
+Данный паттерн встречается в основном на фронте, чтобы два разрозненных компонента могли знать друг о друге
 
-`EventHandler` должен знать о `Notification`. `Notification` должен уметь логировать и кешировать. В свою очередь, кэширование должно знать о логах.  
+`EventHandler` должен знать о `Notification`. `Notification` должен уметь логировать и кешировать. В свою очередь, кэширование должно знать о логах.
 
 ![](_png/abe55fc33a7043171233f79bbd538940.png)
 
@@ -5549,70 +5570,70 @@ console.log(auth.handle({
 И вот реализация композиции медиатора:
 
 ```TS
-// Представление медиатора  
-interface Mediator {  
-    notify(sender: string, event: string): void;  
-}  
-  
-// Представление медиатора  
-abstract class Mediated {  
-    mediator: Mediator;  
-    setMediator(mediator: Mediator) {  
-        this.mediator = mediator;  
-    }  
-}  
-  
-// Уведомление  
-class Notifications {  
-    send() {  
-        console.log('Отправляю уведомление')  
-    }  
-}  
-  
-// Логирование  
-class Log {  
-    log(message: string) {  
-        console.log(message);  
-    }  
-}  
-  
-class EventHandler extends Mediated {  
-    myEvent() {  
-        this.mediator.notify('EventHandler', 'myEvent');  
-    }  
-}  
-  
-// Медиатор уведомления  
-class NotificationMediator implements Mediator {  
-    // Объединяет в композицию все остальные элементы  
-    constructor(  
-        public notifications: Notifications,  
-        public logger: Log,  
-        public handler: EventHandler  
-    ) {  
+// Представление медиатора
+interface Mediator {
+    notify(sender: string, event: string): void;
+}
+
+// Представление медиатора
+abstract class Mediated {
+    mediator: Mediator;
+    setMediator(mediator: Mediator) {
+        this.mediator = mediator;
     }
-    
-    notify(sender: string, event: string): void {  
-        switch (event) {  
-            case 'myEvent':  
-                this.notifications.send(); // Отправляю уведомление  
-                this.logger.log('Отправлено'); // Отправлено  
-	            break;  
-        }    
-    }  
-}  
-  
-const handler = new EventHandler(); // Инициализируем наш хэндлер  
-const logger = new Log(); // Инициализируем логгер  
-const notifications = new Notifications(); // Инициализируем уведомления  
-  
-// Создаём композицию медиатора со всеми компонентами  
-const mediator = new NotificationMediator(  
-    notifications,  
-    logger,  
-    handler  
-);  
-handler.setMediator(mediator); // Устанавливаем в хэндлер медиатор  
+}
+
+// Уведомление
+class Notifications {
+    send() {
+        console.log('Отправляю уведомление')
+    }
+}
+
+// Логирование
+class Log {
+    log(message: string) {
+        console.log(message);
+    }
+}
+
+class EventHandler extends Mediated {
+    myEvent() {
+        this.mediator.notify('EventHandler', 'myEvent');
+    }
+}
+
+// Медиатор уведомления
+class NotificationMediator implements Mediator {
+    // Объединяет в композицию все остальные элементы
+    constructor(
+        public notifications: Notifications,
+        public logger: Log,
+        public handler: EventHandler
+    ) {
+    }
+
+    notify(sender: string, event: string): void {
+        switch (event) {
+            case 'myEvent':
+                this.notifications.send(); // Отправляю уведомление
+                this.logger.log('Отправлено'); // Отправлено
+	            break;
+        }
+    }
+}
+
+const handler = new EventHandler(); // Инициализируем наш хэндлер
+const logger = new Log(); // Инициализируем логгер
+const notifications = new Notifications(); // Инициализируем уведомления
+
+// Создаём композицию медиатора со всеми компонентами
+const mediator = new NotificationMediator(
+    notifications,
+    logger,
+    handler
+);
+handler.setMediator(mediator); // Устанавливаем в хэндлер медиатор
 handler.myEvent(); // Уведомление
 ```
 
@@ -5631,111 +5652,111 @@ handler.myEvent(); // Уведомление
 И вот так реализуется паттерн команды
 
 ```TS
-// Самый обычный пользователь - абстрактные данные  
-class User {  
-    constructor(public userId: number) {  
+// Самый обычный пользователь - абстрактные данные
+class User {
+    constructor(public userId: number) {
     }
-}  
-  
-// Класс, который отвечает за сохранение команд в историю  
-class CommandHistory {  
-    // БД истории  
-    public commands: Command[] = [];  
-  
-    // Пуш в историю  
-    push(command: Command) {  
-        this.commands.push(command);  
-    }  
-  
-    // И удаление команды из истории  
-    remove(command: Command) {  
+}
+
+// Класс, который отвечает за сохранение команд в историю
+class CommandHistory {
+    // БД истории
+    public commands: Command[] = [];
+
+    // Пуш в историю
+    push(command: Command) {
+        this.commands.push(command);
+    }
+
+    // И удаление команды из истории
+    remove(command: Command) {
         this.commands = this.commands.filter(
 	        c => c.commandId !== c.commandId
-	    );  
-    }  
-}  
-  
-// Абстрактная команда  
-abstract class Command {  
-    // Идентификатор команды  
-    public commandId: number;  
-  
-    // Присвоение команды в историю для возможности отката  
-    constructor(public history: CommandHistory) {  
-        this.commandId = Math.random();  
-    }  
-  
-    // Проводит операцию над пользователем  
-    abstract execute(): void;  
-}  
-  
-// Команда для добавления пользователей  
-class AddUserCommand extends Command {  
-    constructor(  
-        private user: User, // Сам пользователь  
-        private receiver: UserService, // Получатель  
-        public history: CommandHistory // Хранилище истории  
-    ) {  
-        super(history);  
-    }  
-  
-    execute(): void {  
-        this.receiver.saveUser(this.user); // Сохранение пользователя  
-        this.history.push(this); // Пуш в историю  
-    }  
-  
-    // Отмена добавления пользователя  
-    undo() {  
-        this.receiver.deleteUser(this.user.userId);  
-        this.history.remove(this);  
-    }  
-}  
-  
-class UserService {  
-    saveUser(user: User): void {  
-        console.log(`Сохраняю пользователя с ID ${user.userId}`);  
-    }  
-  
-    deleteUser(userId: number): void {  
-        console.log(`Удаляю пользователя с ID ${userId}`);  
-    }  
-}  
-  
-class Controller {  
-    receiver: UserService;  
-    history: CommandHistory = new CommandHistory();  
-  
-    // Добавление получателя отправляемых данных  
-    addReceiver(receiver: UserService) {  
-        this.receiver = receiver;  
-    }  
-  
-    // Запуск контроллера передачи данных  
-    run() {  
-        const addUserCommand = new AddUserCommand(  
-            new User(1),  
-            this.receiver,  
-            this.history  
-        );  
-        addUserCommand.execute(); // Выполнение команды  
-        console.log(addUserCommand.history);  
-        addUserCommand.undo(); // Откат только что выполненного действия  
-        console.log(addUserCommand.history);  
-    }  
-}  
-  
-const controller = new Controller();  
-controller.addReceiver(new UserService()); // Получатель данных  
+	    );
+    }
+}
+
+// Абстрактная команда
+abstract class Command {
+    // Идентификатор команды
+    public commandId: number;
+
+    // Присвоение команды в историю для возможности отката
+    constructor(public history: CommandHistory) {
+        this.commandId = Math.random();
+    }
+
+    // Проводит операцию над пользователем
+    abstract execute(): void;
+}
+
+// Команда для добавления пользователей
+class AddUserCommand extends Command {
+    constructor(
+        private user: User, // Сам пользователь
+        private receiver: UserService, // Получатель
+        public history: CommandHistory // Хранилище истории
+    ) {
+        super(history);
+    }
+
+    execute(): void {
+        this.receiver.saveUser(this.user); // Сохранение пользователя
+        this.history.push(this); // Пуш в историю
+    }
+
+    // Отмена добавления пользователя
+    undo() {
+        this.receiver.deleteUser(this.user.userId);
+        this.history.remove(this);
+    }
+}
+
+class UserService {
+    saveUser(user: User): void {
+        console.log(`Сохраняю пользователя с ID ${user.userId}`);
+    }
+
+    deleteUser(userId: number): void {
+        console.log(`Удаляю пользователя с ID ${userId}`);
+    }
+}
+
+class Controller {
+    receiver: UserService;
+    history: CommandHistory = new CommandHistory();
+
+    // Добавление получателя отправляемых данных
+    addReceiver(receiver: UserService) {
+        this.receiver = receiver;
+    }
+
+    // Запуск контроллера передачи данных
+    run() {
+        const addUserCommand = new AddUserCommand(
+            new User(1),
+            this.receiver,
+            this.history
+        );
+        addUserCommand.execute(); // Выполнение команды
+        console.log(addUserCommand.history);
+        addUserCommand.undo(); // Откат только что выполненного действия
+        console.log(addUserCommand.history);
+    }
+}
+
+const controller = new Controller();
+controller.addReceiver(new UserService()); // Получатель данных
 controller.run(); // Запуск обработки команды
 ```
 
 ![](_png/169e2300f92ce8bd8c83d6de3ff8f902.png)
 
->[!info] Это самый рекомендуемый паттерн к использованию, так как его часто можно встретить в высоконагруженных сервисах.
+> [!info] Это самый рекомендуемый паттерн к использованию, так как его часто можно встретить в высоконагруженных сервисах.
 
 ### 115 State
 
-Паттерн State определяет, как мы можем работать с состоянием определённой логики в приложении. 
+Паттерн State определяет, как мы можем работать с состоянием определённой логики в приложении.
 
 Тут показан пример реализации состояний прямо внутри документа и подобное представление в CRM
 
@@ -5748,96 +5769,96 @@ controller.run(); // Запуск обработки команды
 Так выглядит реализация состояний документа в процессе жизненного цикла статей
 
 ```TS
-// Сам наш документ  
-class DocumentItem {  
-    public text: string; // Текст документа  
-    private state: DocumentItemState; // Статус документа  
-  
-    // При создании документ попадает в драфт    
-    constructor() {  
-        this.setState(new DraftDocumentItemState());  
-    }  
-  
-    // Получение статуса документа  
-    getState() {  
-        return this.state;  
-    }  
-  
-    // Установка статуса документа  
-    setState(state: DocumentItemState) {  
-        this.state = state;  
-    }  
-  
-    // Публикация документа  
-    publishDoc() {  
-        this.state.publish(); // Публикуем документ  
-        // Нужно указать контекст для DocumentItem, чтобы оно нормально работало        
-        this.state.setContext(this);  
-    }  
-  
-    // Удаление документа  
-    deleteDoc() {  
-        this.state.delete();  
-    }  
-}  
-  
-// Абстрактное представление статуса документа  
-abstract class DocumentItemState {  
-    public name: string;  
-    public item: DocumentItem;  
-  
-    public setContext(item: DocumentItem) {  
-        this.item = item;  
-    }  
-  
-    public abstract publish(): void;  
-    public abstract delete(): void;  
-}  
-  
-// Статус документа - драфт  
-class DraftDocumentItemState extends DocumentItemState{  
-    constructor() {  
-        super();  
-        this.name = "DraftDocument";  
-    }  
-  
-    // Публикация переведёт документ в статус опубликованного  
-    publish(): void {  
-        console.log(`На сайт отправлен текст ${this.item.text}`);  
-        this.item.setState(new PublishDocumentItemState());  
-    }  
-  
-    // Удаление драфта  
-    delete(): void {  
-        console.log('Документ удалён');  
-    }  
-}  
-  
-// Статус документа - опубликовано  
-class PublishDocumentItemState extends DocumentItemState{  
-    constructor() {  
-        super();  
-        this.name = "PublishDocument";  
-    }  
-  
-    // Нельзя опубликовать опубликованный документ  
-    publish(): void {  
-        console.log('Нельзя опубликовать дважды');  
-    }  
-  
-    // Удаление переводит документ в драфт  
-    delete(): void {  
-        console.log('Снято с публикации');  
-        this.item.setState(new DraftDocumentItemState());  
-    }  
-}  
-  
-const item = new DocumentItem(); // Создаём документ  
-item.text = 'Мой пост'; // Заполняем текстом  
-console.log(item.getState()); // Драфт  
-item.publishDoc(); // Публикуем документ  
-console.log(item.getState()); // Опубликован  
-item.deleteDoc(); // Удаляем документ  
+// Сам наш документ
+class DocumentItem {
+    public text: string; // Текст документа
+    private state: DocumentItemState; // Статус документа
+
+    // При создании документ попадает в драфт
+    constructor() {
+        this.setState(new DraftDocumentItemState());
+    }
+
+    // Получение статуса документа
+    getState() {
+        return this.state;
+    }
+
+    // Установка статуса документа
+    setState(state: DocumentItemState) {
+        this.state = state;
+    }
+
+    // Публикация документа
+    publishDoc() {
+        this.state.publish(); // Публикуем документ
+        // Нужно указать контекст для DocumentItem, чтобы оно нормально работало
+        this.state.setContext(this);
+    }
+
+    // Удаление документа
+    deleteDoc() {
+        this.state.delete();
+    }
+}
+
+// Абстрактное представление статуса документа
+abstract class DocumentItemState {
+    public name: string;
+    public item: DocumentItem;
+
+    public setContext(item: DocumentItem) {
+        this.item = item;
+    }
+
+    public abstract publish(): void;
+    public abstract delete(): void;
+}
+
+// Статус документа - драфт
+class DraftDocumentItemState extends DocumentItemState{
+    constructor() {
+        super();
+        this.name = "DraftDocument";
+    }
+
+    // Публикация переведёт документ в статус опубликованного
+    publish(): void {
+        console.log(`На сайт отправлен текст ${this.item.text}`);
+        this.item.setState(new PublishDocumentItemState());
+    }
+
+    // Удаление драфта
+    delete(): void {
+        console.log('Документ удалён');
+    }
+}
+
+// Статус документа - опубликовано
+class PublishDocumentItemState extends DocumentItemState{
+    constructor() {
+        super();
+        this.name = "PublishDocument";
+    }
+
+    // Нельзя опубликовать опубликованный документ
+    publish(): void {
+        console.log('Нельзя опубликовать дважды');
+    }
+
+    // Удаление переводит документ в драфт
+    delete(): void {
+        console.log('Снято с публикации');
+        this.item.setState(new DraftDocumentItemState());
+    }
+}
+
+const item = new DocumentItem(); // Создаём документ
+item.text = 'Мой пост'; // Заполняем текстом
+console.log(item.getState()); // Драфт
+item.publishDoc(); // Публикуем документ
+console.log(item.getState()); // Опубликован
+item.deleteDoc(); // Удаляем документ
 console.log(item.getState()); // Удалён (переведён в драфт)
 ```
 
@@ -5857,55 +5878,55 @@ console.log(item.getState()); // Удалён (переведён в драфт)
 
 ```TS
 // Создаём пользователя с токенами от разных систем
-class User {  
-    githubToken: string;  
-    jwtToken: string;  
-}  
+class User {
+    githubToken: string;
+    jwtToken: string;
+}
 
 // Интерфейс определения стратегии
-interface AuthStrategy {  
-    auth(user: User): boolean;  
-}  
+interface AuthStrategy {
+    auth(user: User): boolean;
+}
 
-// 
-class Auth {  
-    constructor(private strategy: AuthStrategy) {  
-    }  
-    
+//
+class Auth {
+    constructor(private strategy: AuthStrategy) {
+    }
+
     // Определение атуентификации
-    setStrategy(strategy: AuthStrategy) {  
-        this.strategy = strategy;  
-    }  
+    setStrategy(strategy: AuthStrategy) {
+        this.strategy = strategy;
+    }
 
 	// Аутентификация пользователя по стратегии
-    public authUser(user: User): boolean {  
-        return this.strategy.auth(user);  
-    }  
-}  
+    public authUser(user: User): boolean {
+        return this.strategy.auth(user);
+    }
+}
 
 //   Стратегия для аутентификации через JSWT
-class JSWTStrategy implements AuthStrategy {  
-    auth(user: User): boolean {  
-        if (user.jwtToken) {  
-            return true;  
-        }        return false;  
-    }  
-}  
+class JSWTStrategy implements AuthStrategy {
+    auth(user: User): boolean {
+        if (user.jwtToken) {
+            return true;
+        }        return false;
+    }
+}
 
 // Стратегия для аутентификации через GitHub
-class GithubStrategy implements AuthStrategy {  
-    auth(user: User): boolean {  
-        if (user.githubToken) {  
-            return true;  
-        }        return false;  
-    }  
-}  
+class GithubStrategy implements AuthStrategy {
+    auth(user: User): boolean {
+        if (user.githubToken) {
+            return true;
+        }        return false;
+    }
+}
 
-//  
+//
 const user = new User();  // Создание пользователя
 user.jwtToken = 'token';  // Определение токена
-const auth = new Auth(new JSWTStrategy()); // Аутентификация по стратегии 
-console.log(auth.authUser(user)); 
+const auth = new Auth(new JSWTStrategy()); // Аутентификация по стратегии
+console.log(auth.authUser(user));
 auth.setStrategy(new GithubStrategy());  // Меняем стратегию
 console.log(auth.authUser(user));
 ```
@@ -5923,107 +5944,108 @@ console.log(auth.authUser(user));
 ![](_png/da19e2d71c396d25ace01b8d27152c3b.png)
 
 ```TS
-// Отдельная задача  
-class Task {  
-    constructor(public priority: number) {  
+// Отдельная задача
+class Task {
+    constructor(public priority: number) {
     }
-}  
-  
-// Список отдельных задач  
-class TaskList {  
-    private tasks: Task[] = [];  
+}
+
+// Список отдельных задач
+class TaskList {
+    private tasks: Task[] = [];
 
 	// Сортировка тасков по приоритету
-    public sortByPriority() {  
-        this.tasks = this.tasks.sort((a, b) => {  
-             if (a.priority > b.priority) {  
-                 return 1;  
-             } else if (a.priority === b.priority) {  
-                 return 0;  
-             } else {  
-                 return -1;  
-             }  
-        });  
-    }  
+    public sortByPriority() {
+        this.tasks = this.tasks.sort((a, b) => {
+             if (a.priority > b.priority) {
+                 return 1;
+             } else if (a.priority === b.priority) {
+                 return 0;
+             } else {
+                 return -1;
+             }
+        });
+    }
 
 	// Добавление таска
-    public addTask(task: Task): void {  
-        this.tasks.push(task);  
-    }  
+    public addTask(task: Task): void {
+        this.tasks.push(task);
+    }
 
 	// Получение таска
-    public getTask(): Task[] {  
-        return this.tasks;  
-    }  
+    public getTask(): Task[] {
+        return this.tasks;
+    }
 
 	// Количество тасков
-    public count(task: Task): number {  
-        return this.tasks.length;  
-    }  
+    public count(task: Task): number {
+        return this.tasks.length;
+    }
 
 	// Создание итератора тасков
-    public getIterator() {  
-        return new PriorityTaskIterator(this);  
-    }  
-}  
-  
-// Интерфейс итератора с его методами  
-interface IIterator<T> {  
-    current(): T | undefined;  
-    next(): T | undefined;  
-    prev(): T | undefined;  
-    index(): number;  
-}  
-  
-// Итератор тасков по приоритету  
-class PriorityTaskIterator implements IIterator<Task> {  
-    private position: number = 0; // Индекс элемента  
-    private taskList: TaskList; // Ссылка на тасклист  
-  
-    // Сортирует тасклист по приоритету и сохраняет его в свою логику    
-    constructor(taskList: TaskList) {  
-        taskList.sortByPriority();  
-        this.taskList = taskList;  
-    }  
-  
-    // Выводит нынешний таск  
-    current(): Task | undefined {  
-        return this.taskList.getTask()[this.position];  
-    }  
-  
-    // Выводит индекс таска  
-    index(): number {  
-        return this.position;  
-    }  
-  
-    // Выводит следующий таск  
-    next(): Task | undefined {  
-        this.position += 1;  
-        return this.taskList.getTask()[this.position];  
-    }  
-  
-    // Выводит предыдущий таск  
-    prev(): Task | undefined {  
-        this.position -= 1;  
-        return this.taskList.getTask()[this.position];  
-    }  
-}  
-  
-// Создание тасклиста  
-const taskList = new TaskList();  
-// Добавление тасков в тасклист  
-taskList.addTask(new Task(8));  
-taskList.addTask(new Task(1));  
-taskList.addTask(new Task(3));  
-// Создание итератора  
-const iterator = taskList.getIterator();  
-// Результат работы итератора  
-console.log(iterator.current());  
-console.log(iterator.next());  
-console.log(iterator.next());  
-console.log(iterator.prev());  
+    public getIterator() {
+        return new PriorityTaskIterator(this);
+    }
+}
+
+// Интерфейс итератора с его методами
+interface IIterator<T> {
+    current(): T | undefined;
+    next(): T | undefined;
+    prev(): T | undefined;
+    index(): number;
+}
+
+// Итератор тасков по приоритету
+class PriorityTaskIterator implements IIterator<Task> {
+    private position: number = 0; // Индекс элемента
+    private taskList: TaskList; // Ссылка на тасклист
+
+    // Сортирует тасклист по приоритету и сохраняет его в свою логику
+    constructor(taskList: TaskList) {
+        taskList.sortByPriority();
+        this.taskList = taskList;
+    }
+
+    // Выводит нынешний таск
+    current(): Task | undefined {
+        return this.taskList.getTask()[this.position];
+    }
+
+    // Выводит индекс таска
+    index(): number {
+        return this.position;
+    }
+
+    // Выводит следующий таск
+    next(): Task | undefined {
+        this.position += 1;
+        return this.taskList.getTask()[this.position];
+    }
+
+    // Выводит предыдущий таск
+    prev(): Task | undefined {
+        this.position -= 1;
+        return this.taskList.getTask()[this.position];
+    }
+}
+
+// Создание тасклиста
+const taskList = new TaskList();
+// Добавление тасков в тасклист
+taskList.addTask(new Task(8));
+taskList.addTask(new Task(1));
+taskList.addTask(new Task(3));
+// Создание итератора
+const iterator = taskList.getIterator();
+// Результат работы итератора
+console.log(iterator.current());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.prev());
 console.log(iterator.index());
 ```
+
 ![](_png/b8270ba9c1183e07df00efcd098db4c7.png)
 
 ### 118 Template Method
@@ -6034,70 +6056,69 @@ console.log(iterator.index());
 
 ![](_png/f5315545fd2119154717ca2b49f3dad3.png)
 
-Чтобы не городить дублирование кода в самой форме, мы можем сделать отдельный абстрактный класс, который будет за нас хранить в себе логику отправки данных на разные АПИ. Единственное, что нужно будет сделать из формы - это вызвать SaveForm, что крайне удобно 
+Чтобы не городить дублирование кода в самой форме, мы можем сделать отдельный абстрактный класс, который будет за нас хранить в себе логику отправки данных на разные АПИ. Единственное, что нужно будет сделать из формы - это вызвать SaveForm, что крайне удобно
 
 ![](_png/17fd10d6be5b651e152a4b9ebc0e4cff.png)
 
-
 ```TS
-// Сама форма с данными  
-class Form {  
-    constructor(public name: string) {  
+// Сама форма с данными
+class Form {
+    constructor(public name: string) {
     }
-}  
-  
-// Абстрактный класс, который опишет логику поведения работы с АПИ  
-abstract class SaveForm<T> {  
-    public save(form: Form) {  
-        const res = this.fill(form);  
-        this.log(res);  
-        this.send(res);  
+}
+
+// Абстрактный класс, который опишет логику поведения работы с АПИ
+abstract class SaveForm<T> {
+    public save(form: Form) {
+        const res = this.fill(form);
+        this.log(res);
+        this.send(res);
     }
-    protected abstract fill(form: Form): T;  
-    protected log(data: T): void {  
-        console.log(data);  
-    }  
-    protected abstract send(data: T): void;  
-}  
-  
-// Первое АПИ  
-class FirstAPI extends SaveForm<string> {  
-    protected fill(form: Form): string {  
-        return form.name;  
-    }  
-  
-    protected send(data: string): void {  
-        console.log(`Отправляем ${data}`);  
-    }  
-}  
-  
-// Второе АПИ  
-class SecondAPI extends SaveForm<{fio: string}> {  
-    protected fill(form: Form): {fio: string} {  
-        return { fio: form.name };  
-    }  
-  
-    protected send(data: {fio: string}): void {  
-        console.log(`Отправляем ${data}`);  
-    }  
-}  
-  
-const form1 = new FirstAPI(); // Создаём новую форму  
-form1.save(new Form('Алек')); // Помещаем в неё данные  
-  
-const form2 = new SecondAPI(); // Инициализируем второе АПИ  
+    protected abstract fill(form: Form): T;
+    protected log(data: T): void {
+        console.log(data);
+    }
+    protected abstract send(data: T): void;
+}
+
+// Первое АПИ
+class FirstAPI extends SaveForm<string> {
+    protected fill(form: Form): string {
+        return form.name;
+    }
+
+    protected send(data: string): void {
+        console.log(`Отправляем ${data}`);
+    }
+}
+
+// Второе АПИ
+class SecondAPI extends SaveForm<{fio: string}> {
+    protected fill(form: Form): {fio: string} {
+        return { fio: form.name };
+    }
+
+    protected send(data: {fio: string}): void {
+        console.log(`Отправляем ${data}`);
+    }
+}
+
+const form1 = new FirstAPI(); // Создаём новую форму
+form1.save(new Form('Алек')); // Помещаем в неё данные
+
+const form2 = new SecondAPI(); // Инициализируем второе АПИ
 form2.save(new Form('Алек')); // Вкладываем в него форму
 ```
 
 ![](_png/17091b3ed3167f9539bcda023487a3fc.png)
 
->[!info] Используем этот паттерн, когда мы имеем одинаковые шаги в логике, но они отличаются немного в реализации
+> [!info] Используем этот паттерн, когда мы имеем одинаковые шаги в логике, но они отличаются немного в реализации
 
 ### 119 Observer
 
-Паттерн обсёрвера подразумевает под собой то, что мы создаём класс, который уведомляет другую логику о том, что ей нужно выполниться (например, выполнять функцию при срабатывании ивентлистенера) 
+Паттерн обсёрвера подразумевает под собой то, что мы создаём класс, который уведомляет другую логику о том, что ей нужно выполниться (например, выполнять функцию при срабатывании ивентлистенера)
 
-Конкретно тут нужно сделать так, чтобы лид сервис отправлял уведомления пользователю о новых действиях лида 
+Конкретно тут нужно сделать так, чтобы лид сервис отправлял уведомления пользователю о новых действиях лида
 
 ![](_png/0de979b6c04be4b97194b3e8f5573d7e.png)
 
@@ -6106,80 +6127,80 @@ form2.save(new Form('Алек')); // Вкладываем в него форму
 ![](_png/afe9dc589a4bac17fa4b60618ef2e286.png)
 
 ```TS
-// Это интерфейс объекта, который на что-то подписался  
-interface Observer {  
-    // Это метод, который срабатывает каждый раз, когда его дёрнули  
-    update(subject: Subject): void;  
-}  
-  
-// Субъект эммитит события и на него можно подписаться  
-interface Subject {  
-    // Подписка на событие  
-    attach(observer: Observer): void;  
-  
-    // Отписка  
-    detach(observer: Observer): void;  
-  
-    // Уведомление - его вызывает внешний код при срабатывании  
-    notify(): void;  
-}  
-  
-// Это новый пользователь  
-class Lead {  
-    constructor(public name: string, public phone: string) {  
+// Это интерфейс объекта, который на что-то подписался
+interface Observer {
+    // Это метод, который срабатывает каждый раз, когда его дёрнули
+    update(subject: Subject): void;
+}
+
+// Субъект эммитит события и на него можно подписаться
+interface Subject {
+    // Подписка на событие
+    attach(observer: Observer): void;
+
+    // Отписка
+    detach(observer: Observer): void;
+
+    // Уведомление - его вызывает внешний код при срабатывании
+    notify(): void;
+}
+
+// Это новый пользователь
+class Lead {
+    constructor(public name: string, public phone: string) {
     }
-}  
-  
-// Это наш конкретный субъект  
-class NewLead implements Subject {  
-    private observers: Observer[] = []; // Подписчики  
+}
+
+// Это наш конкретный субъект
+class NewLead implements Subject {
+    private observers: Observer[] = []; // Подписчики
     public state: Lead;
-    
-    attach(observer: Observer): void {  
-        if (this.observers.includes(observer)) {  
-            return;  
-        }        
-        this.observers.push(observer);  
-    }  
-  
-    detach(observer: Observer): void {  
-        const observerIndex = this.observers.indexOf(observer);  
-        if (observerIndex !== -1) return;  
-        this.observers.splice(observerIndex, 1);  
-    }  
-  
-    notify(): void {  
-        for (const observer of this.observers) {  
-            // Передаём this, чтобы передать как стейт, так и сабджект  
-            observer.update(this);  
-        }    
-    }  
-}  
-  
-// Сервис уведомления пользователя  
-class NotificationService implements Observer {  
-    update(subject: Subject): void {  
-        console.log(`NotificationService получил уведомление: ${subject}`);  
-    }  
-}  
-  
-// Уведомление сервиса  
-class LeadService implements Observer {  
-    update(subject: Subject): void {  
-        console.log(`LeadService получил уведомление: ${subject}`);  
-    }  
-}  
-  
-const subject = new NewLead(); // Создание субъекта  
-subject.state = new Lead('Антон', '00000'); // В него помещаем сам объект  
-const sub1 = new NotificationService(); // Первый сервис уведомления  
-const sub2 = new LeadService(); // Второй сервис уведомления  
-  
-subject.attach(sub1); // Подписка  
-subject.attach(sub2); // Подписка  
-  
-subject.notify(); // Уведомление  
-subject.detach(sub1); // Отписка  
+
+    attach(observer: Observer): void {
+        if (this.observers.includes(observer)) {
+            return;
+        }
+        this.observers.push(observer);
+    }
+
+    detach(observer: Observer): void {
+        const observerIndex = this.observers.indexOf(observer);
+        if (observerIndex !== -1) return;
+        this.observers.splice(observerIndex, 1);
+    }
+
+    notify(): void {
+        for (const observer of this.observers) {
+            // Передаём this, чтобы передать как стейт, так и сабджект
+            observer.update(this);
+        }
+    }
+}
+
+// Сервис уведомления пользователя
+class NotificationService implements Observer {
+    update(subject: Subject): void {
+        console.log(`NotificationService получил уведомление: ${subject}`);
+    }
+}
+
+// Уведомление сервиса
+class LeadService implements Observer {
+    update(subject: Subject): void {
+        console.log(`LeadService получил уведомление: ${subject}`);
+    }
+}
+
+const subject = new NewLead(); // Создание субъекта
+subject.state = new Lead('Антон', '00000'); // В него помещаем сам объект
+const sub1 = new NotificationService(); // Первый сервис уведомления
+const sub2 = new LeadService(); // Второй сервис уведомления
+
+subject.attach(sub1); // Подписка
+subject.attach(sub2); // Подписка
+
+subject.notify(); // Уведомление
+subject.detach(sub1); // Отписка
 subject.notify(); // Уведомление
 ```
 
@@ -6214,75 +6235,76 @@ npm i inquirer
 npm i @types/inquirer
 ```
 
-И вот представлен пример реализации программы в 43 строчки кода. Это функция, которая принимает в себя в первой части ввод пользовательских данных, во второй выполняет саму внутреннюю логику, а в третьей выдаёт логи о результатах выполнения. 
+И вот представлен пример реализации программы в 43 строчки кода. Это функция, которая принимает в себя в первой части ввод пользовательских данных, во второй выполняет саму внутреннюю логику, а в третьей выдаёт логи о результатах выполнения.
 
 Однако нужно ещё и сказать про большое количество неудобств, вызыванных такой быстрой реализацией:
-1) У нас ограниченный набор настроек . В `res` мы задали их только под один конкретный случай - выбор разрешения у видео (без возможностей добавить то же сжатие)
-2) Разделение зависимостей прямо внутри программы. У нас она состоит из получения данных от пользователя, обработки этих данных и логов
-3) Изменение этих зависимостей. Если нам нужно изменить или дополнить логику для них (например, добавить уведомление в телеграм)
+
+1. У нас ограниченный набор настроек . В `res` мы задали их только под один конкретный случай - выбор разрешения у видео (без возможностей добавить то же сжатие)
+2. Разделение зависимостей прямо внутри программы. У нас она состоит из получения данных от пользователя, обработки этих данных и логов
+3. Изменение этих зависимостей. Если нам нужно изменить или дополнить логику для них (например, добавить уведомление в телеграм)
 
 ```TS
-import { spawn } from 'child_process';  
-import inquirer from 'inquirer';  
-  
-(async function convert() {  
-    // ! Первая часть - пользовательский ввод  
-    // Спросит про ввод ширины  
-    const { result: width } = await inquirer.prompt([{  
-        type: 'number',  
-        name: 'result',  
-        message: 'Ширина'  
-    }]);  
-    // Спросит про ввод высоты  
-    const { result: height } = await inquirer.prompt([{  
-        type: 'number',  
-        name: 'result',  
-        message: 'Высота'  
-    }]);  
-    // Вводим путь  
-    const { result: path } = await inquirer.prompt([{  
-        type: 'input',  
-        name: 'result',  
-        message: 'Путь'  
-    }]);  
-    // Спросит про название выходного файла  
-    const { result: name } = await inquirer.prompt([{  
-        type: 'input',  
-        name: 'result',  
-        message: 'Название'  
-    }]);  
-  
-    // ! Вторая часть - логика программы  
-    // Генерация самой команды для ffmpeg  
-    // Spawn - нод-утилита для генерации процесса  
-    const res = spawn('ffmpeg', [  
-        '-i', path,  
-        '-c:v', 'libx264',  
-        '-s', `${width}x${height}`,  
-        path + name + '.mp4'  
-    ]);  
+import { spawn } from 'child_process';
+import inquirer from 'inquirer';
+
+(async function convert() {
+    // ! Первая часть - пользовательский ввод
+    // Спросит про ввод ширины
+    const { result: width } = await inquirer.prompt([{
+        type: 'number',
+        name: 'result',
+        message: 'Ширина'
+    }]);
+    // Спросит про ввод высоты
+    const { result: height } = await inquirer.prompt([{
+        type: 'number',
+        name: 'result',
+        message: 'Высота'
+    }]);
+    // Вводим путь
+    const { result: path } = await inquirer.prompt([{
+        type: 'input',
+        name: 'result',
+        message: 'Путь'
+    }]);
+    // Спросит про название выходного файла
+    const { result: name } = await inquirer.prompt([{
+        type: 'input',
+        name: 'result',
+        message: 'Название'
+    }]);
+
+    // ! Вторая часть - логика программы
+    // Генерация самой команды для ffmpeg
+    // Spawn - нод-утилита для генерации процесса
+    const res = spawn('ffmpeg', [
+        '-i', path,
+        '-c:v', 'libx264',
+        '-s', `${width}x${height}`,
+        path + name + '.mp4'
+    ]);
 
 	// ! Третья часть - обработка параметров
-    // Получаем чанк данных и выводим их в консоль  
-    res.stdout.on('data', (data: any) => {  
-        console.log(data.toString());  
-    });  
-    // Выводит сообщение об ошибке  
-    res.stderr.on('data', (data: any) => {  
-        console.log(data.toString());  
-    });  
-    // Выводит сообщение об окончании процесса  
-    res.on('close', () => {  
-        console.log('Готово');  
-    });  
+    // Получаем чанк данных и выводим их в консоль
+    res.stdout.on('data', (data: any) => {
+        console.log(data.toString());
+    });
+    // Выводит сообщение об ошибке
+    res.stderr.on('data', (data: any) => {
+        console.log(data.toString());
+    });
+    // Выводит сообщение об окончании процесса
+    res.on('close', () => {
+        console.log('Готово');
+    });
 }());
 ```
 
->[!warning] Однако, если посмотреть на эту программу с точки зрения микросервиса, то нам будет просто необходимым добавление абстракций, потому что расширять проект будет просто невозможно без них
+> [!warning] Однако, если посмотреть на эту программу с точки зрения микросервиса, то нам будет просто необходимым добавление абстракций, потому что расширять проект будет просто невозможно без них
 
 ### 123 Старт приложения
 
->[!note] Если в голову сразу не приходит архитектура приложения, то сначала можно написать наивную реализацию этого приложения 
+> [!note] Если в голову сразу не приходит архитектура приложения, то сначала можно написать наивную реализацию этого приложения
 
 Будем использовать Template Method для реализации однотипных задач - работа с Ansible, FFmpeg и т.д.
 Построение команды - builder
@@ -6294,6 +6316,7 @@ import inquirer from 'inquirer';
 ![](_png/634b42af82af36908447651d58ec16ef.png)
 
 Создаём проект
+
 ```bash
 mkdir command-executer // создаём папку
 cd command-executer // переходим в неё
@@ -6305,22 +6328,29 @@ tsc --init // инициализируем ТС
 
 git init // Инициализируем гит
 ```
+
 Добавляем гитигнор
+
 ```gitignore
-/build  
+/build
 /node_modules
 ```
+
 Настраиваем пути компиляции
+
 ```json
 //tsconfig
 "rootDir": "./src",
 "outDir": "./dist",
 ```
+
 Устанавливаем пакет для работы с запросами
+
 ```bash
 npm i inquirer
 npm i -D @types/inquirer
 ```
+
 Примерно так выглядит пакет
 ![](_png/4e3f22090dcd0ce8c0970c18b18600bb.png)
 
@@ -6338,37 +6368,37 @@ npm i -D @types/inquirer
 export type PromptType = 'input' | 'number' | 'password';
 
 // prompt.service.ts
-// Тут мы будем реализовывать логику сервиса ввода данных 
-import inquirer from 'inquirer';  
-import { PromptType } from "./prompt.types";  
-  
-export class PromptService {  
+// Тут мы будем реализовывать логику сервиса ввода данных
+import inquirer from 'inquirer';
+import { PromptType } from "./prompt.types";
+
+export class PromptService {
 	// Инпут делаем дженериком, чтобы мы могли точно сразу определить тип того значения, которое мы передаём в данную функцию
-    public async input<T>(message: string, type: PromptType) {  
-        const { result } = await inquirer.prompt<{ result: T }>([  
-            {  
-                type,  
-                name: 'result',  
-                message  
-            }  
-        ]);  
-        return result;  
-    }  
+    public async input<T>(message: string, type: PromptType) {
+        const { result } = await inquirer.prompt<{ result: T }>([
+            {
+                type,
+                name: 'result',
+                message
+            }
+        ]);
+        return result;
+    }
 }
 
 
 // App.ts
 // Конкретно тут мы собираем всю нашу логику приложения и запускаем его
-import { PromptService } from "./core/prompt/prompt.service";  
-  
-export class App {  
-    async run() {  
-        const result = await (new PromptService()).input<number>('Число', 'number');  
-        console.log(result);  
-    }  
-}  
-  
-const app = new App();  
+import { PromptService } from "./core/prompt/prompt.service";
+
+export class App {
+    async run() {
+        const result = await (new PromptService()).input<number>('Число', 'number');
+        console.log(result);
+    }
+}
+
+const app = new App();
 app.run();
 ```
 
@@ -6386,35 +6416,35 @@ npm i -D @types/node
 
 // stream-logger.interface.ts
 // Хранит интерфейс логгера потоков
-export interface IStreamLogger {  
-    log(...args: any[]): void;  
-    error(...args: any[]): void;  
-    end(): void;  
+export interface IStreamLogger {
+    log(...args: any[]): void;
+    error(...args: any[]): void;
+    end(): void;
 }
 
 // stream.handler.ts
 // Реализация ввода данных через node.js
 
-import { IStreamLogger } from "./stream-logger.interface";  
-import {ChildProcessWithoutNullStreams} from "child_process";  
-  
-export class StreamHandler {  
-    constructor(private logger: IStreamLogger) {  }  
+import { IStreamLogger } from "./stream-logger.interface";
+import {ChildProcessWithoutNullStreams} from "child_process";
+
+export class StreamHandler {
+    constructor(private logger: IStreamLogger) {  }
 
 	// Конкретно тут поток имеет тип из ноды, а именно поток без отсутствующих значений
-    processOutput(stream: ChildProcessWithoutNullStreams) {  
-        stream.stdout.on('data', (data: any) => {  
-            this.logger.log(data);  
-        })  
-  
-        stream.stdout.on('data', (data: any) => {  
-            this.logger.error(data);  
-        })  
-  
-        stream.on('close', () => {  
-            this.logger.end();  
-        });  
-    }  
+    processOutput(stream: ChildProcessWithoutNullStreams) {
+        stream.stdout.on('data', (data: any) => {
+            this.logger.log(data);
+        })
+
+        stream.stdout.on('data', (data: any) => {
+            this.logger.error(data);
+        })
+
+        stream.on('close', () => {
+            this.logger.end();
+        });
+    }
 }
 ```
 
@@ -6423,72 +6453,72 @@ export class StreamHandler {
 Реализация консольного вывода в приложении. Тут так же можно дорасширить его, добавив вывод в телеграмме
 
 ```TS
-import { IStreamLogger } from "../../core/handlers/stream-logger.interface";  
-  
-// Реализация вывода в приложении - реализован через синглтон  
-export class ConsoleLogger implements IStreamLogger {  
-    // Хранит инстанс класса  
-    private static logger: ConsoleLogger;  
-    // Возвращает инстанс класса  
-    public static getInstance(): ConsoleLogger {  
-        // Если его нет, то создаёт  
-        if (!ConsoleLogger.logger) {  
-            ConsoleLogger.logger = new ConsoleLogger();  
-        }        // Если есть, то вернёт имеющийся  
-        return ConsoleLogger.logger;  
-    }  
-  
-    // Выводы результатов запросов:  
-    end(): void {  
-        console.log('Готово');  
-    }  
-  
-    error(...args: any[]): void {  
-        console.log(...args);  
-    }  
-  
-    log(...args: any[]): void {  
-        console.log(...args);  
-    }  
-  
+import { IStreamLogger } from "../../core/handlers/stream-logger.interface";
+
+// Реализация вывода в приложении - реализован через синглтон
+export class ConsoleLogger implements IStreamLogger {
+    // Хранит инстанс класса
+    private static logger: ConsoleLogger;
+    // Возвращает инстанс класса
+    public static getInstance(): ConsoleLogger {
+        // Если его нет, то создаёт
+        if (!ConsoleLogger.logger) {
+            ConsoleLogger.logger = new ConsoleLogger();
+        }        // Если есть, то вернёт имеющийся
+        return ConsoleLogger.logger;
+    }
+
+    // Выводы результатов запросов:
+    end(): void {
+        console.log('Готово');
+    }
+
+    error(...args: any[]): void {
+        console.log(...args);
+    }
+
+    log(...args: any[]): void {
+        console.log(...args);
+    }
+
 }
 ```
 
 ### 127 Упражнение - Шаблонный метод исполнителя
 
-Нам нужно реализовать абстрактный ==Command Executor==, который последовательно должен представлять выполнение четырёх действий: ввод, построение команды, запуск потока, обработка потока 
+Нам нужно реализовать абстрактный ==Command Executor==, который последовательно должен представлять выполнение четырёх действий: ввод, построение команды, запуск потока, обработка потока
 
 ```TS
 // command.types.ts
 // Интерфейс комманд
-export interface ICommandExec {  
-    command: string;  
-    args: string[];  
+export interface ICommandExec {
+    command: string;
+    args: string[];
 }
 
 // command.executer.ts
 
-import {IStreamLogger} from "../handlers/stream-logger.interface";  
-import {ChildProcessWithoutNullStreams} from "child_process";  
-import {ICommandExec} from "./command.types";  
-  
-export abstract class CommandExecutor<Input> {  
-    constructor(private logger: IStreamLogger) {  
-    }  
-    public async execute() {  
-        const input = await this.prompt();  
-        const command = this.build(input);  
-        const stream = this.spawn(command);  
-        this.processStream(stream, this.logger);  
-    }  
-  
-    protected abstract prompt(): Promise<Input>;  
-  
-    protected abstract build(input: Input): ICommandExec;  
-  
-    protected abstract spawn(command: ICommandExec): ChildProcessWithoutNullStreams;  
-  
-    protected abstract processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLogger): void;  
+import {IStreamLogger} from "../handlers/stream-logger.interface";
+import {ChildProcessWithoutNullStreams} from "child_process";
+import {ICommandExec} from "./command.types";
+
+export abstract class CommandExecutor<Input> {
+    constructor(private logger: IStreamLogger) {
+    }
+    public async execute() {
+        const input = await this.prompt();
+        const command = this.build(input);
+        const stream = this.spawn(command);
+        this.processStream(stream, this.logger);
+    }
+
+    protected abstract prompt(): Promise<Input>;
+
+    protected abstract build(input: Input): ICommandExec;
+
+    protected abstract spawn(command: ICommandExec): ChildProcessWithoutNullStreams;
+
+    protected abstract processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLogger): void;
 }
 
 ```
@@ -6497,7 +6527,7 @@ export abstract class CommandExecutor<Input> {
 
 Конкретно тут мы должны будем реализовать команду, которая будет содержать финализированный набор наших опций для отдельного элемента - ffmpeg-рендера
 
-Конкретно нам нужно построить команду, которая будет хранить статичное значение и вводимые нами данные 
+Конкретно нам нужно построить команду, которая будет хранить статичное значение и вводимые нами данные
 
 ![](_png/bcb5b0db66d532d1118ed088e10ac065.png)
 
@@ -6512,79 +6542,79 @@ export abstract class CommandExecutor<Input> {
 
 ```TS
 // ffmpeg.builder.ts
-export class FfmpegBuilder {  
-    private inputPath: string;  
-    private options: Map<string, string> = new Map();  
-  
-    constructor() {  
-        this.options.set('-c:v', 'libx264');  
-    }  
-  
-    input(inputPath: string): this {  
-        this.inputPath = inputPath;  
-        return this;  
-    }  
-  
-    setVideoSize(width: number, height: number): this {  
-        this.options.set('-s', `${1920}x${1080}`);  
-        return this;  
-    }  
-  
-    output(outputPath: string): string[] {  
-        if (!this.inputPath) {  
-            throw new Error('Не задан input');  
-        }        const args: string[] = ['-i', this.inputPath];  
-        this.options.forEach((value, key) => {  
-            args.push(key);  
-            args.push(value);  
-        });  
-        args.push(outputPath);  
-        return args;  
-    }  
+export class FfmpegBuilder {
+    private inputPath: string;
+    private options: Map<string, string> = new Map();
+
+    constructor() {
+        this.options.set('-c:v', 'libx264');
+    }
+
+    input(inputPath: string): this {
+        this.inputPath = inputPath;
+        return this;
+    }
+
+    setVideoSize(width: number, height: number): this {
+        this.options.set('-s', `${1920}x${1080}`);
+        return this;
+    }
+
+    output(outputPath: string): string[] {
+        if (!this.inputPath) {
+            throw new Error('Не задан input');
+        }        const args: string[] = ['-i', this.inputPath];
+        this.options.forEach((value, key) => {
+            args.push(key);
+            args.push(value);
+        });
+        args.push(outputPath);
+        return args;
+    }
 }
 ```
 
 И в теории можно вызвать этот код так:
 
 ```TS
-new FfmpegBuilder()  
-    .input('')  
-    .setVideoSize(1920, 1080)  
+new FfmpegBuilder()
+    .input('')
+    .setVideoSize(1920, 1080)
     .output('///');
 ```
 
 ### 129 Работа с файлами
 
-Дальше нам нужно реализовать код, который будет выполнять сбор путей, их билд и спавн. 
+Дальше нам нужно реализовать код, который будет выполнять сбор путей, их билд и спавн.
 Дальше мы сможем окончательно дореализовать ffmpeg
 
 ```TS
 // file.service.ts
 
-import { join, dirname, isAbsolute } from "path";  
-import {promises} from "fs";  
-  
-export class FileService {  
-    private async isExist(path: string): Promise<boolean> {  
-        try{  
-            await promises.stat(path);  
-            return true;  
-        } catch {  
-            return false;  
-        }    
-    }  
-  
-    public getFilePath(path: string, name: string, extension: string): string {  
-        if (!isAbsolute(path)) {  
-            path = join(__dirname + '/' + path);  
-        }        return join(dirname(path) + '/' + name + '.' + extension);  
-    }  
-  
-    async deleteFileIfExists(path: string, name: string) {  
-        if (await this.isExist(path)) {  
-            promises.unlink(path);  
-        }    
-    }  
+import { join, dirname, isAbsolute } from "path";
+import {promises} from "fs";
+
+export class FileService {
+    private async isExist(path: string): Promise<boolean> {
+        try{
+            await promises.stat(path);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    public getFilePath(path: string, name: string, extension: string): string {
+        if (!isAbsolute(path)) {
+            path = join(__dirname + '/' + path);
+        }        return join(dirname(path) + '/' + name + '.' + extension);
+    }
+
+    async deleteFileIfExists(path: string, name: string) {
+        if (await this.isExist(path)) {
+            promises.unlink(path);
+        }
+    }
 }
 ```
 
@@ -6594,66 +6624,66 @@ export class FileService {
 
 ```TS
 // ffmpeg-types.ts
-import {ICommandExec} from "../../core/executor/command.types";  
-  
-export interface IFfmpegInput {  
-    width: number;  
-    height: number;  
-    path: string;  
-    name: string;  
-}  
-  
-export interface ICommandExecFfmpeg extends ICommandExec {  
-    output: string;  
+import {ICommandExec} from "../../core/executor/command.types";
+
+export interface IFfmpegInput {
+    width: number;
+    height: number;
+    path: string;
+    name: string;
+}
+
+export interface ICommandExecFfmpeg extends ICommandExec {
+    output: string;
 }
 
 
 // ffmpeg.executer.ts
 
-import {CommandExecutor} from "../../core/executor/command.executor";  
-import {IFfmpegInput, ICommandExecFfmpeg} from "./ffmpeg-types";  
-import {IStreamLogger} from "../../core/handlers/stream-logger.interface";  
-import {FileService} from "../../core/files/file.service";  
-import {PromptService} from "../../core/prompt/prompt.service";  
-import {ChildProcessWithoutNullStreams, spawn} from "child_process";  
-import {FfmpegBuilder} from "./ffmpeg.builder";  
-import {StreamHandler} from "../../core/handlers/stream.handler";  
-  
-export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {  
-    private fileService: FileService = new FileService();  
-    private promptService: PromptService = new PromptService();  
-  
-    constructor(logger: IStreamLogger) {  
-        super(logger);  
-    }  
-  
-    // Вызов ввода  
-    protected async prompt(): Promise<any> {  
-        const width = await this.promptService.input<number>('Ширина', 'number');  
-        const height = await this.promptService.input<number>('Высота', 'number');  
-        const path = await this.promptService.input<string>('Путь до файла', 'input');  
-        const name = await this.promptService.input<string>('Имя файла', 'input');  
-  
-        return {width, height, path, name};  
-    }  
-  
-    protected build({ width, height, path, name }: IFfmpegInput): ICommandExecFfmpeg {  
-        const output = this.fileService.getFilePath(path, name, 'mp4');  
-        const args = (new FfmpegBuilder())  
-            .input(path)  
-            .setVideoSize(width, height)  
-            .output(output);  
-        return { command: 'ffmpeg', args, output }  
-    }  
-    protected spawn({ output, command, args}: ICommandExecFfmpeg): ChildProcessWithoutNullStreams {  
-        this.fileService.deleteFileIfExists(output);  
-        return spawn(command, args);  
-    }  
-  
-    protected processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLogger): void {  
-        const handler = new StreamHandler(logger);  
-        handler.processOutput(stream);  
-    }  
+import {CommandExecutor} from "../../core/executor/command.executor";
+import {IFfmpegInput, ICommandExecFfmpeg} from "./ffmpeg-types";
+import {IStreamLogger} from "../../core/handlers/stream-logger.interface";
+import {FileService} from "../../core/files/file.service";
+import {PromptService} from "../../core/prompt/prompt.service";
+import {ChildProcessWithoutNullStreams, spawn} from "child_process";
+import {FfmpegBuilder} from "./ffmpeg.builder";
+import {StreamHandler} from "../../core/handlers/stream.handler";
+
+export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
+    private fileService: FileService = new FileService();
+    private promptService: PromptService = new PromptService();
+
+    constructor(logger: IStreamLogger) {
+        super(logger);
+    }
+
+    // Вызов ввода
+    protected async prompt(): Promise<any> {
+        const width = await this.promptService.input<number>('Ширина', 'number');
+        const height = await this.promptService.input<number>('Высота', 'number');
+        const path = await this.promptService.input<string>('Путь до файла', 'input');
+        const name = await this.promptService.input<string>('Имя файла', 'input');
+
+        return {width, height, path, name};
+    }
+
+    protected build({ width, height, path, name }: IFfmpegInput): ICommandExecFfmpeg {
+        const output = this.fileService.getFilePath(path, name, 'mp4');
+        const args = (new FfmpegBuilder())
+            .input(path)
+            .setVideoSize(width, height)
+            .output(output);
+        return { command: 'ffmpeg', args, output }
+    }
+    protected spawn({ output, command, args}: ICommandExecFfmpeg): ChildProcessWithoutNullStreams {
+        this.fileService.deleteFileIfExists(output);
+        return spawn(command, args);
+    }
+
+    protected processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLogger): void {
+        const handler = new StreamHandler(logger);
+        handler.processOutput(stream);
+    }
 }
 ```
 
@@ -6664,8 +6694,9 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 ![](_png/62805f6a3016c598e30000fe960c3e81.png)
 
 Это структура нашего проекта:
+
 - Все вызываемые команды (ffmpeg, dir) находятся в commands
-- Вся основная реализация проекта (идентичная для всех команд) находится в папке ==core== 
+- Вся основная реализация проекта (идентичная для всех команд) находится в папке ==core==
 - В ==out== располагается инструмент вывода у программы
 - Через ==App.ts== у нас идёт запуск проекта (==App.js== нужно врубать в консоли)
 
@@ -6675,19 +6706,20 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 
 ```TS
 // App.ts
-import {FfmpegExecutor} from "./commands/ffmpeg/ffmpeg.executor";  
+import {FfmpegExecutor} from "./commands/ffmpeg/ffmpeg.executor";
 import {ConsoleLogger} from "./out/console-logger/console-logger";
-  
-  
-export class App {  
-    async run() {  
-        await new FfmpegExecutor(ConsoleLogger.getInstance()).execute(); 
-        }  
-}  
-  
-const app = new App();  
+
+
+export class App {
+    async run() {
+        await new FfmpegExecutor(ConsoleLogger.getInstance()).execute();
+        }
+}
+
+const app = new App();
 app.run();
 ```
+
 ![](_png/92d05ea00a0860b6c7b91b3af9493a24.png)
 
 Так же очень легко можно дописать дополнительную реализацию Dir-утилиты
@@ -6695,66 +6727,66 @@ app.run();
 ```TS
 // dir.types.ts
 
-export interface DirInput {  
-    path: string;  
+export interface DirInput {
+    path: string;
 }
 
 // dir.builder.ts
 
-export class DirBuilder {  
-    private options: Map<string, string> = new Map();  
-  
-    detailOutput() {  
-        this.options.set('-l', '');  
-        return this;  
-    }  
-  
-    output(): string[] {  
-        const args: string[] = [];  
-        this.options.forEach((value, key) => {  
-            args.push(key);  
-            args.push(value);  
-        });  
-        return args;  
-    }  
+export class DirBuilder {
+    private options: Map<string, string> = new Map();
+
+    detailOutput() {
+        this.options.set('-l', '');
+        return this;
+    }
+
+    output(): string[] {
+        const args: string[] = [];
+        this.options.forEach((value, key) => {
+            args.push(key);
+            args.push(value);
+        });
+        return args;
+    }
 }
 
 // dir.executor.ts
 
-import {CommandExecutor} from "../../core/executor/command.executor";  
-import {DirInput} from "./dir.types";  
-import {PromptService} from "../../core/prompt/prompt.service";  
-import {IStreamLogger} from "../../core/handlers/stream-logger.interface";  
-import {ICommandExec} from "../../core/executor/command.types";  
-import {ChildProcessWithoutNullStreams, spawn} from "child_process";  
-import {DirBuilder} from "./dir.builder";  
-import {StreamHandler} from "../../core/handlers/stream.handler";  
-  
-export class DirExecutor extends CommandExecutor<DirInput> {  
-    private promptService: PromptService = new PromptService();  
-  
-    constructor(logger: IStreamLogger) {  
-        super(logger);  
-    }  
-  
-    protected build({path}: DirInput): ICommandExec {  
-        const args = (new DirBuilder()).detailOutput().output();  
-        return { command: 'ls', args: args.concat(path) };  
-    }  
-  
-    protected processStream(stream: ChildProcessWithoutNullStreams, output: IStreamLogger): void {  
-        const handler = new StreamHandler(output);  
-        handler.processOutput(stream);  
-    }  
-  
-    protected async prompt(): Promise<DirInput> {  
-        let path = await this.promptService.input<string>('Путь', 'input');  
-        return { path };  
-    }  
-  
-    protected spawn({command: command, args}: ICommandExec): ChildProcessWithoutNullStreams {  
-        return spawn(command, args);  
-    }  
+import {CommandExecutor} from "../../core/executor/command.executor";
+import {DirInput} from "./dir.types";
+import {PromptService} from "../../core/prompt/prompt.service";
+import {IStreamLogger} from "../../core/handlers/stream-logger.interface";
+import {ICommandExec} from "../../core/executor/command.types";
+import {ChildProcessWithoutNullStreams, spawn} from "child_process";
+import {DirBuilder} from "./dir.builder";
+import {StreamHandler} from "../../core/handlers/stream.handler";
+
+export class DirExecutor extends CommandExecutor<DirInput> {
+    private promptService: PromptService = new PromptService();
+
+    constructor(logger: IStreamLogger) {
+        super(logger);
+    }
+
+    protected build({path}: DirInput): ICommandExec {
+        const args = (new DirBuilder()).detailOutput().output();
+        return { command: 'ls', args: args.concat(path) };
+    }
+
+    protected processStream(stream: ChildProcessWithoutNullStreams, output: IStreamLogger): void {
+        const handler = new StreamHandler(output);
+        handler.processOutput(stream);
+    }
+
+    protected async prompt(): Promise<DirInput> {
+        let path = await this.promptService.input<string>('Путь', 'input');
+        return { path };
+    }
+
+    protected spawn({command: command, args}: ICommandExec): ChildProcessWithoutNullStreams {
+        return spawn(command, args);
+    }
 }
 ```
 
@@ -6762,18 +6794,18 @@ export class DirExecutor extends CommandExecutor<DirInput> {
 
 ```TS
 // App.ts
-import {ConsoleLogger} from "./out/console-logger/console-logger";  
-import {DirExecutor} from "./commands/dir/dir.executor";  
-  
-  
-export class App {  
-    async run() {  
-        // Либо мы можем подставить реализацию другой логики при первой необходимости  
-        await new DirExecutor(ConsoleLogger.getInstance()).execute();  
-    }  
-}  
-  
-const app = new App();  
+import {ConsoleLogger} from "./out/console-logger/console-logger";
+import {DirExecutor} from "./commands/dir/dir.executor";
+
+
+export class App {
+    async run() {
+        // Либо мы можем подставить реализацию другой логики при первой необходимости
+        await new DirExecutor(ConsoleLogger.getInstance()).execute();
+    }
+}
+
+const app = new App();
 app.run();
 ```
 
@@ -6783,7 +6815,7 @@ app.run();
 
 ## Типизация в библиотеках
 
-#React #TypeScript 
+#React #TypeScript
 
 ### React + TS
 
@@ -6793,9 +6825,10 @@ app.run();
 
 Конкретно тут мы описываем тот объект с пропсами, который попадает в наш компонент с помощью интерфейса
 
-Для описания того объекта, который передаётся между тегами (`<Tag>Этот объект</Tag>`) используется типизация свойства `children`, который имеет тип `ReactNode` 
+Для описания того объекта, который передаётся между тегами (`<Tag>Этот объект</Tag>`) используется типизация свойства `children`, который имеет тип `ReactNode`
 
 `components > Card > CardProps.ts`
+
 ```TS
 import { ReactChild, ReactNode } from 'react';
 
@@ -6809,6 +6842,7 @@ export interface ICardProps {
 Далее при создании компонента нужно просто тому объекту, который передаётся деструктуризированным в качестве пропса присвоить тип в виде имени интерфейса
 
 `components > Card > Card.tsx`
+
 ```TSX
 import React from 'react';
 import { ICardProps } from './CardProps';
@@ -6827,6 +6861,7 @@ export default Card;
 И теперь компилятор будет подсказывать, какие свойства обязательно должны быть переданы в компонент
 
 `components > App > App.tsx`
+
 ```TSX
 import React from 'react';
 import Card from '../Card/Card';
@@ -6846,14 +6881,14 @@ export default App;
 
 ![](_png/0f946737b0644232a60da3dfaadb9701.png)
 
-
 #### React.FunctionComponent. React.FC
 
-Если передаваемое свойство пропса имеет всего несколько фиксированных значений, то под них стоит выделить `enum` (перечисление). 
+Если передаваемое свойство пропса имеет всего несколько фиксированных значений, то под них стоит выделить `enum` (перечисление).
 
 Типизация пропса-функции выглядит просто как: `(arg: type) => returnType`
 
 `components > Card > CardProps.ts`
+
 ```TS
 import { ReactChild, ReactNode } from 'react';
 
@@ -6874,6 +6909,7 @@ export interface ICardProps {
 И более правильным вариантом для типизации самой функции и пропса, который она принимает, является использование `FunctionComponent<IПропс>` - эта запись покажет, что константа хранит функцию компонента с дженериком в виде его пропсов
 
 `components > Card > Card.tsx`
+
 ```TSX
 import React, { FunctionComponent } from 'react';
 import { CardVariant, ICardProps } from './CardProps';
@@ -6902,6 +6938,7 @@ export default Card;
 Ну и так же сама функция возвращает `JSX.Element` - это тоже можно указать
 
 `components > App > App.tsx`
+
 ```TSX
 import React from 'react';
 import Card from '../Card/Card';
@@ -6927,12 +6964,12 @@ export default App;
 
 ![](_png/4ff0c221adfbfbe9b0848f628657c952.png)
 
-
 #### Компонент UserList. IUser, IAddress
 
-Так же все глобальные сущности, которые используются сразу в нескольких компонентах, принято выносить отдельно в папку `types` 
+Так же все глобальные сущности, которые используются сразу в нескольких компонентах, принято выносить отдельно в папку `types`
 
 `types > index.ts`
+
 ```TS
 export interface IAddress {
 	street: string;
@@ -6951,6 +6988,7 @@ export interface IUser {
 И в одних интерфейсах спокойно можно использовать другие интерфейсы для описания принимаемых значений
 
 `components > UserList > UserListProps.ts`
+
 ```TS
 import { IUser } from '../../types';
 
@@ -6962,6 +7000,7 @@ export interface IUserList {
 И так выглядит вывод нескольких персонажей
 
 `components > UserList > UserList.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { IUserList } from './UserListProps';
@@ -6985,6 +7024,7 @@ export default UserList;
 А тут происходит передача моковых данных в компонент списка пользователей
 
 `components > App > App.tsx`
+
 ```TSX
 import React, { useState } from 'react';
 import Card from '../Card/Card';
@@ -7033,6 +7073,7 @@ export default App;
 Тут мы создаём отдельный `UserItem`, который используется для вывода в `UserList`
 
 `components > UserItem > UserItemProps.tsx`
+
 ```TS
 import { IUser } from '../../types';
 
@@ -7042,6 +7083,7 @@ export interface IUserItemProps {
 ```
 
 `components > UserItem > UserItem.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { IUserItemProps } from './UserItemProps';
@@ -7059,6 +7101,7 @@ export default UserItem;
 ```
 
 `components > UserList > UserList.tsx`
+
 ```TSX
 const UserList: FC<IUserList> = ({ users }) => {
 	return (
@@ -7078,6 +7121,7 @@ const UserList: FC<IUserList> = ({ users }) => {
 Примерно таким же образом выглядит типизация хука состояния, однако тут ещё в него нужно заранее поместить смежный с данными тип (`null`, `[]`): `useState<IUsers[]>([])`
 
 `components > App > App.tsx`
+
 ```TSX
 import React, { FC, useEffect, useState } from 'react';
 import Card from '../Card/Card';
@@ -7127,6 +7171,7 @@ export default App;
 Создадим ещё один глобальный интерфейс тудушки
 
 `types > index.ts`
+
 ```TS
 export interface ITodo {
 	id: number;
@@ -7135,11 +7180,12 @@ export interface ITodo {
 }
 ```
 
-И создадим общий компонент, который будет принимать в себя массив элементов динамического типа `<T>` и будет принимать в себя функцию для рендера одного элемента 
+И создадим общий компонент, который будет принимать в себя массив элементов динамического типа `<T>` и будет принимать в себя функцию для рендера одного элемента
 
 Данный компонент `List` будет рендерить любой массив элементов, который в него передали. Таким образом, мы создаём компонент с использованием обобщённых типов
 
 `components > List > ListProps.ts`
+
 ```TS
 import { ReactNode } from 'react';
 
@@ -7150,6 +7196,7 @@ export interface IListProps<T> {
 ```
 
 `components > List > List.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { IListProps } from './ListProps';
@@ -7162,6 +7209,7 @@ export default function List<T>(props: IListProps<T>) {
 Тут мы создаём компонент с отдельной тудушкой
 
 `components > TodoItem > TodoItemProps.tsx`
+
 ```TS
 import { ITodo } from '../../types';
 
@@ -7171,6 +7219,7 @@ export interface ITodoItemProps {
 ```
 
 `components > TodoItem > TodoItem.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { ITodoItemProps } from './TodoItemProps';
@@ -7190,6 +7239,7 @@ export default TodoItem;
 А тут уже подставляем компонент `List` для обоих массивов списков (персонажей и тудушек)
 
 `components > App > App.tsx`
+
 ```TSX
 import React, { FC, useEffect, useState } from 'react';
 import Card from '../Card/Card';
@@ -7255,22 +7305,23 @@ const App: FC = (): JSX.Element => {
 export default App;
 ```
 
-
 ![](_png/b6c17c16efe836ba747f2a843fc3a4b8.png)
 
 #### Типизация событий. MouseEvents, DragEvents, ChangeEvents
 
->[!warning] Очень важно в начале указать, что все ивенты нужно доставать из **React**, потому что зачастую по умолчанию они достаются из **DOM**
+> [!warning] Очень важно в начале указать, что все ивенты нужно доставать из **React**, потому что зачастую по умолчанию они достаются из **DOM**
 
 Для атрибута `onChange` в TS присвоен тип `ChangeEvent<T>`, который в качестве дженерик-типа принимает тот тег, к которому применяется типизация
 
 Для всех событий drag и drop используется один тип:
+
 - `onDrag` - `DragEvent`
 - `onDrop` - `DragEvent`
 - `onDragOver` - `DragEvent`
 - `onDragLeave` - `DragEvent`
 
 `components > EventsEx > EventsEx.tsx`
+
 ```TSX
 import React, { ChangeEvent, EventHandler, FC, useState } from 'react';
 
@@ -7293,7 +7344,7 @@ const EventsEx: FC = (): JSX.Element => {
 		console.log('DRAG');
 	};
 
-	// будет срабатывать при 
+	// будет срабатывать при
 	const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		setIsDrag(false);
@@ -7346,7 +7397,7 @@ export default EventsEx;
 
 ![](_png/569ca78bb0fc3e43df1442ca2ec479e1.png)
 
-А уже тут при драге первого блока на второй меняется цвет последнего 
+А уже тут при драге первого блока на второй меняется цвет последнего
 
 ![](_png/aa2da136c6b6d8a8e5a9dbcb58bcbfd3.png)
 
@@ -7357,6 +7408,7 @@ export default EventsEx;
 `useRef` принимает внутрь дженерика тип элемента, с которым он взаимодействует
 
 `components > EventsEx > EventsEx.tsx`
+
 ```TSX
 import React, { ChangeEvent, EventHandler, FC, useRef, useState } from 'react';
 
@@ -7377,7 +7429,7 @@ const EventsEx: FC = (): JSX.Element => {
 		<div>
 			<input ref={inputRef} type='text' placeholder={'Неуправляемый'} />
 			<input type='text' value={value} onChange={changeHandler} placeholder={'Управляемый'} />
-			
+
 			/// CODE ...
 
 		</div>
@@ -7387,7 +7439,6 @@ const EventsEx: FC = (): JSX.Element => {
 
 ![](_png/84ad9d36f87993dd777a1553d7022a05.png)
 
-
 ### Типизация react-router-dom. UseHistory, useParams, BrowserRouter
 
 Далее нам нужно будет реализовать многостраничность с помощью `react-router-dom` библиотеки
@@ -7395,6 +7446,7 @@ const EventsEx: FC = (): JSX.Element => {
 Для начала, нужно в `UserItem` установить обязательным наличие функции `onClick`, с помощью которой дальше мы будем навигироваться через `useNavigate` и переходить на страницу отдельного пользователя
 
 `components > UserItem > UserItemProps.ts`
+
 ```TSX
 import { IUser } from '../../types';
 
@@ -7405,6 +7457,7 @@ export interface IUserItemProps {
 ```
 
 `components > UserItem > UserItem.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { IUserItemProps } from './UserItemProps';
@@ -7428,6 +7481,7 @@ export default UserItem;
 Это главная страница, с которой можно перейти на нужные ссылки
 
 `components > pages > MainPage.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
@@ -7447,6 +7501,7 @@ export default MainPage;
 Это компонент страницы с тудушками
 
 `components > pages > TodosPage.tsx`
+
 ```TSX
 import React, { FC, useEffect, useState } from 'react';
 import { ITodo } from '../../types';
@@ -7484,9 +7539,10 @@ export default TodosPage;
 
 Это компонент списка пользователей
 
-Тут уже задаём при клике по элементу списка навигирование на отдельную страницу с данными по пользователю 
+Тут уже задаём при клике по элементу списка навигирование на отдельную страницу с данными по пользователю
 
 `components > pages > UsersPage.tsx`
+
 ```TSX
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -7529,6 +7585,7 @@ export default UsersPage;
 Это компонент отдельной страницы пользователя
 
 `components > pages > UserItemPage.tsx`
+
 ```TSX
 import React, { FC, useEffect, useState } from 'react';
 import { IUser } from '../../types';
@@ -7586,6 +7643,7 @@ const params = useParams<Params>();
 Тут мы уже должны реализовать пути перехода ссылок в приложении
 
 `components > App > App.tsx`
+
 ```TSX
 import React, { FC } from 'react';
 import './App.css';
@@ -7625,16 +7683,18 @@ export default App;
 
 ![](_png/b101eba144a92bb6e33dce0a62975817.png)
 
-После перехода на страницу появится краткая информация по пользователю. Кнопка *back* вернёт обратно на список пользователей
+После перехода на страницу появится краткая информация по пользователю. Кнопка _back_ вернёт обратно на список пользователей
 
 ![](_png/4ed6c690864ec946d95c2abb7a273026.png)
 
 ---
+
 ### Типизация Redux Toolkit / React-Redux
 
 Типизации в индексном файле почти нет
 
 `index.tsx`
+
 ```TSX
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -7658,6 +7718,7 @@ reportWebVitals();
 В самом `store` нужно будет только создать два типа, которые будут переиспользоваться внутри приложения (внутри кастомных хуков, которые будут типизировать стандартные функции `react-redux`)
 
 `store > index.ts`
+
 ```TS
 import { configureStore } from '@reduxjs/toolkit';
 import todoReducer from './todoSlice';
@@ -7681,6 +7742,7 @@ export type AppDispatch = typeof store.dispatch;
 Типизация `useDispatch` и `useSelector` занимает достаточно приличное время, и чтобы не типизировать каждый раз хуки из `react-redux`, можно сделать свои кастомные типизированные хуки
 
 `hooks > index.ts`
+
 ```TS
 // импортируем хуки для создания кастомных хуков
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
@@ -7698,6 +7760,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 Так выглядит нетипизированный срез:
 
 `store > todoSlice.js`
+
 ```JS
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -7731,9 +7794,10 @@ export default todoSlice.reducer;
 
 Таким образом мы типизируем срез:
 
-С помощью `PayloadAction` мы можем задать тип приходящего значения в `payload` 
+С помощью `PayloadAction` мы можем задать тип приходящего значения в `payload`
 
 `store > todoSlice.ts`
+
 ```TS
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
@@ -7781,13 +7845,14 @@ export const { addTodo, toggleComplete, removeTodo } = todoSlice.actions;
 export default todoSlice.reducer;
 ```
 
-И теперь рут будет всегда знать, что должно находиться внутри него  
+И теперь рут будет всегда знать, что должно находиться внутри него
 
 ![](_png/2b2c1a9cefd03aef327c086b8ddae756.png)
 
 Используем вместо хука `useDispatch` наш кастомный типизированный `useAppDispatch()`
 
 `components > TodoItem.tsx`
+
 ```TSX
 import { useAppDispatch } from '../hooks';
 import { toggleComplete, removeTodo } from '../store/todoSlice';
@@ -7821,22 +7886,23 @@ export default TodoItem;
 И так же используем вместо `useSelector` типизированную версию `useAppSelector()`
 
 `components > TodoList.tsx`
+
 ```TSX
-import TodoItem from './TodoItem';  
-import { FC } from 'react';  
-import { useAppSelector } from '../hooks';  
-  
-const TodoList: FC = () => {  
-   const todos = useAppSelector((state) => state.todos.list);  
-  
-   return (  
-      <ul>{todos.map((todo) => (  
-            <TodoItem key={todo.id} {...todo} />  
-         ))}  
-      </ul>   
-	);  
-};  
-  
+import TodoItem from './TodoItem';
+import { FC } from 'react';
+import { useAppSelector } from '../hooks';
+
+const TodoList: FC = () => {
+   const todos = useAppSelector((state) => state.todos.list);
+
+   return (
+      <ul>{todos.map((todo) => (
+            <TodoItem key={todo.id} {...todo} />
+         ))}
+      </ul>
+	);
+};
+
 export default TodoList;
 ```
 
@@ -7847,6 +7913,7 @@ export default TodoList;
 Ну и простая типизация компонента:
 
 `components > NewTodoForm.tsx`
+
 ```TSX
 import { FC } from 'react';
 
@@ -7875,6 +7942,7 @@ export default NewTodoForm;
 Тут так же нужно будет передать `payload` вне скобок `{}` и использовать `useAppDispatch()`
 
 `App.tsx`
+
 ```TSX
 import { useState } from 'react';
 
@@ -7912,11 +7980,13 @@ export default App;
 ![](_png/2da6f51c527248f829a21eaa7aeb6cfd.png)
 
 ---
+
 #### Типизация асинхронного Redux Toolkit
 
 Стандартный Thunk в [проекте](https://github.com/michey85/redux-toolkit-todo/blob/asyncthunk/src/store/todoSlice.js) выглядел подобным образом:
 
 `store > todoSlice.js`
+
 ```JS
 /// CODE ...
 
@@ -7984,6 +8054,7 @@ const todoSlice = createSlice({
 И тут уже типизируем все асинхронные функции редакса:
 
 `store > todoSlice.tsx`
+
 ```TSX
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { stat } from 'fs';
@@ -8144,7 +8215,7 @@ export default todoSlice.reducer;
 ```
 
 - Первый тип - это возвращаемое значение из функции
-- Второй тип - это тот `action.payload`, который попадает в функцию 
+- Второй тип - это тот `action.payload`, который попадает в функцию
 - Третий тип - это те функции, которые мы вытаскиваем из Thunk'а
 
 ![](_png/35cb78f077839483d1c2ee168d6cd8f7.png)
@@ -8152,6 +8223,7 @@ export default todoSlice.reducer;
 Теперь нужно тут заменить старый функционал на `toggleStatus` и `deleteTodo`
 
 `components > TodoItem.tsx`
+
 ```TSX
 import { useAppDispatch } from '../hooks';
 import { toggleStatus, deleteTodo } from '../store/todoSlice';
@@ -8185,6 +8257,7 @@ export default TodoItem;
 И тут добавляем новые функции запроса на сервер для получения задач `fetchTodos` и добавления новых задач `addNewTodo`
 
 `App.tsx`
+
 ```TSX
 import { useEffect, useState } from 'react';
 

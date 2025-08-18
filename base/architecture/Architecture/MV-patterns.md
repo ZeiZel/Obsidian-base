@@ -1,12 +1,12 @@
 ---
 tags:
-  - "#MVP"
-  - "#MVC"
-  - "#MVVM"
+    - '#MVP'
+    - '#MVC'
+    - '#MVVM'
 description: MV-подобные паттерны
 ---
 
->[!info] Основная суть MV-образных паттернов заключается в разделении бизнес-логики от интерфейса.
+> [!info] Основная суть MV-образных паттернов заключается в разделении бизнес-логики от интерфейса.
 
 ![](_png/1ec0976954a0a183c4a9beb1e4345501.png)
 
@@ -18,20 +18,20 @@ description: MV-подобные паттерны
 
 ![](_png/f83323ad6dabdb6bff7d2547ee4b3326.png)
 
-MVC же подразумевает то, что мы заранее выделили логику подсчёта всех значений (cos, sin, pow) в отедльной сущности (aka ==model==), а уже будем вызывать эту логику из самого интерфейса (aca ==view==) через связующее звено (aka ==controller==) 
+MVC же подразумевает то, что мы заранее выделили логику подсчёта всех значений (cos, sin, pow) в отедльной сущности (aka ==model==), а уже будем вызывать эту логику из самого интерфейса (aca ==view==) через связующее звено (aka ==controller==)
 
 ![](_png/4f600b25aaaefc2214958188fb7cc335.png)
 
 Если приводить пример из реальной жизни, то когда мы взаимодействуем с банком, то обращение идёт не напрямую с деньгами, а через определённых посредников.
 
 - View - сотрудник банка или банкомат, через который мы делаем определённые запросы на операции в банке
-- Controller - посредник для банкомата или сотрудника банка, через которых они отправляют запросы на выполнение операций 
-	- банкомат вызывает заранее подгтовленные функции по выполнению операций над нашим счётом
-	- работник обращается к корпоративному приложению для выполнения операции
-- Model - внутреннее устройство банка, которое выполняет все операции над счётом клиента 
+- Controller - посредник для банкомата или сотрудника банка, через которых они отправляют запросы на выполнение операций
+    - банкомат вызывает заранее подгтовленные функции по выполнению операций над нашим счётом
+    - работник обращается к корпоративному приложению для выполнения операции
+- Model - внутреннее устройство банка, которое выполняет все операции над счётом клиента
 
 ![](_png/6163cb8cb6d416c19dc8ba698050383b.png)
- 
+
 MVC подход используется у нас на любом этапе приложения. Начиная от клиент-серверного взаимодействия и бэкэнда, заканчивая архитектурой приложения на клиенте (web, мобильного, декстопного)
 
 ![](_png/9bbcf6c1f4453ce38a56d37ff7e7e775.png)
@@ -47,44 +47,45 @@ bun install express hbs nodemon
 Первое, что мы сделаем - это во view напишем логику отображения в шаблонизаторе.
 
 `view / user.hbs`
+
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Пользователи</title>
-    <meta charset="utf-8" />
-</head>
-<body>
-<h1>Создать нового пользователя</h1>
-<form action="/users/create" method="POST">
-    <label>Имя</label>
-    <input name="username" /><br><br>
-    <label>Возраст</label>
-    <input name="age" type="number" min="1" max="110" /><br><br>
-    <input type="submit" value="Отправить" />
-</form>
-<h1>Список пользователей</h1>
-{{#each users}}
-    <div style="border: 1px solid green; padding: 15px">
-        <h3>Username - {{this.username}}</h3>
-        <p>Возраст - {{this.age}}</p>
-        <button onclick="removeById({{this.id}})">
-            Удалить
-        </button>
-    </div>
-{{/each}}
-<script>
-    function removeById(id)  {
-        fetch(`http://localhost:5000/users/remove?id=${id}`, {
-            method: 'DELETE'
-        }).then(() => window.location.reload())
-    }
-</script>
-</body>
-<html>
+	<head>
+		<title>Пользователи</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h1>Создать нового пользователя</h1>
+		<form action="/users/create" method="POST">
+			<label>Имя</label>
+			<input name="username" /><br /><br />
+			<label>Возраст</label>
+			<input name="age" type="number" min="1" max="110" /><br /><br />
+			<input type="submit" value="Отправить" />
+		</form>
+		<h1>Список пользователей</h1>
+		{{#each users}}
+		<div style="border: 1px solid green; padding: 15px">
+			<h3>Username - {{this.username}}</h3>
+			<p>Возраст - {{this.age}}</p>
+			<button onclick="removeById({{this.id}})">Удалить</button>
+		</div>
+		{{/each}}
+		<script>
+			function removeById(id) {
+				fetch(`http://localhost:5000/users/remove?id=${id}`, {
+					method: 'DELETE',
+				}).then(() => window.location.reload());
+			}
+		</script>
+	</body>
+	<html></html>
+</html>
 ```
 
 `view / user-error.hbs`
+
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -102,6 +103,7 @@ bun install express hbs nodemon
 Далее нам нужно будет описать модель пользователя, в которой находится интерфейс этого пользователя и прямые методы для работы с ним. Тут находится только логика работы с пользователем.
 
 `domain / user / model.js`
+
 ```JS
 // aka DB
 let users = [
@@ -154,6 +156,7 @@ module.exports = {
 Далее опишем контроллер для работы с моделью. Он будет давать нам контролируемую обёртку над моделью, в которой будут находиться все проверки и взаимодействие с внешним миром.
 
 `domain / user / controller.js`
+
 ```JS
 // использует в себе модель
 const userModel = require('./model');
@@ -214,6 +217,7 @@ module.exports = {
 Ну и так же мы можем реализовать множество различных способов взаимодействия с нашей моделью. Модель просто является источником истины, которую можно провайдить различными способами через наш контроллер: с помощью [REST API](../../concepts/Клиент-сервер/REST%20API.md), [SOAP](../../concepts/Клиент-сервер/SOAP.md) или того же [GraphQL](../../concepts/Клиент-сервер/Apollo%20+%20GraphQL.md)
 
 `domain / user / rest-controller.js`
+
 ```JS
 const userModel = require('./model');
 
@@ -225,6 +229,7 @@ module.exports = {
 ```
 
 `domain / user / soap-controller.js`
+
 ```JS
 const userModel = require('./model');
 
@@ -239,6 +244,7 @@ module.exports = {
 Ну и далее нам остаётся только поднять сервер
 
 `server.js`
+
 ```TS
 const express = require('express')
 const path = require('path');
@@ -267,6 +273,7 @@ app.listen(PORT,() => console.log('server started on PORT = ' + PORT))
 Корневой HTML, в который подключаются скрипты
 
 `index.html`
+
 ```HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -289,6 +296,7 @@ app.listen(PORT,() => console.log('server started on PORT = ' + PORT))
 Описываем интерфейсы для View, Model, Controller
 
 `types / controller.ts`
+
 ```TS
 import {Model} from "./model";
 
@@ -298,11 +306,13 @@ export interface Controller {
 ```
 
 `types / model.ts`
+
 ```TS
 export interface Model {}
 ```
 
 `types / view.ts`
+
 ```TS
 import {Controller} from "./controller";
 
@@ -321,6 +331,7 @@ export interface View {
 Вот сама модель счётчика
 
 `modules / counterTwo / CounterTwoModel.ts`
+
 ```TS
 import {Model} from "../../types/model";
 
@@ -353,6 +364,7 @@ export class CounterTwoModel implements Model {
 Тут уже находится контроллер, который дёргает запросы из модели
 
 `modules / counterTwo / CounterTwoController.ts`
+
 ```TS
 import {CounterTwoModel} from "./CounterTwoModel";
 import {Controller} from "../../types/controller";
@@ -384,6 +396,7 @@ export class CounterTwoController implements Controller {
 А тут уже во View мы вызываем только методы контроллера
 
 `modules / counterTwo / CounterTwoView.ts`
+
 ```TS
 import {CounterTwoController} from "./CounterTwoController";
 import {View} from '../../types/view'
@@ -453,9 +466,10 @@ export class CounterTwoView implements View {
 
 Это модель счётчика. Она уже заранее знает про существование View и уже работает непосредственно с данными, которые находятся внутри View.
 
-Основной особенностью тут является то, что Model изменяет данные внутри себя и уведомляет View о том, что эти данные изменились. 
+Основной особенностью тут является то, что Model изменяет данные внутри себя и уведомляет View о том, что эти данные изменились.
 
 `modules / counter / CounterModel.ts`
+
 ```TS
 import {CounterView} from "./CounterView";
 
@@ -490,6 +504,7 @@ export class CounterModel {
 Это контроллер, который оборачивает в себе логику модели. Он принимает в себя модель и вызывает напрямую его методы
 
 `modules / counter / CounterController.ts`
+
 ```TS
 import {CounterModel} from "./CounterModel";
 
@@ -520,6 +535,7 @@ export class CounterController {
 Это View, в котором мы передаём методы Model в Controller
 
 `modules / counter / CounterView.ts`
+
 ```TS
 import {CounterController} from "./CounterController";
 import {CounterModel} from "./CounterModel";
@@ -582,6 +598,7 @@ export class CounterView {
 Далее опишем модель пользователя, внутри которой будет логика работы с пользователем и фильтрации списка пользователей
 
 `modules / user / UserModel.ts`
+
 ```TS
 import {delay} from "../../helpers";
 
@@ -655,6 +672,7 @@ export class UsersModel {
 Контроллер же оборачивает логику модели и предоставляет её нашей вюшке
 
 `modules / user / UserController.ts`
+
 ```TS
 import {SortField, SortOrder, UsersModel} from "./UsersModel";
 
@@ -691,6 +709,7 @@ export class UsersController {
 - через методы модели мы заносим новые значения
 
 `modules / user / UserView.ts`
+
 ```TS
 import {UsersController} from "./usersController";
 import {SortField, SortOrder, User} from "./UsersModel";
@@ -835,6 +854,7 @@ export class UsersView {
 Тут мы уже собираем наше приложение со всеми моделями и контроллерами. Основной метод `mount()` в каждом из них монтирует View на странице
 
 `mount.ts`
+
 ```TS
 import {CounterTwoView} from "./modules/counterTwo/CounterTwoView";
 import {UsersView} from "./modules/users/UsersView";
@@ -862,6 +882,7 @@ MVC представляет из себя подход, в котором мы 
 - Модель - является единственным источником истины для приложения
 - Контроллер - является интерфейсом, которым пользуется представление, для обработки и передачи данных в модель
 - Представление - это непосредственно логика интерфейса пользователя, которая пользуется контроллером.
+
 ## MVVM
 
 Этот паттерн применим только к графическим интерфейсам

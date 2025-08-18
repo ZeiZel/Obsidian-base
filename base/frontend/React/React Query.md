@@ -25,6 +25,7 @@ npm i @tanstack/react-query-devtools
 Так же добавим `ReactQueryDevtools`, который предоставит возможность отслеживать данные внутри приложения
 
 `index.ts`
+
 ```TSX
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -48,11 +49,12 @@ root.render(
 
 Далее создадим приложение, которое будет выводить посты. Посты мы храним прямо в компоненте. Так же мы создали функцию `wait()`, которая через определённое ожидание будет возвращать промис и выполнять определённое действие.
 
-Первым делом мы запросим данные по постам через `useQuery`, который принимает `queryKey` (ключ для создания уникального запроса), `queryFn` (функцию запроса данных с сервера) 
+Первым делом мы запросим данные по постам через `useQuery`, который принимает `queryKey` (ключ для создания уникального запроса), `queryFn` (функцию запроса данных с сервера)
 
-Далее для изменения данных используется `useMutation`, который принимает `mutationFn` (функция отправки запроса и мутации данных на сервере) и свойство, которое будет выполнять логику при успешном запросе `onSuccess`. В последнее свойство мы поместим метод клиента запросов `invalidateQueries()`, который обновит пришедшие посты 
+Далее для изменения данных используется `useMutation`, который принимает `mutationFn` (функция отправки запроса и мутации данных на сервере) и свойство, которое будет выполнять логику при успешном запросе `onSuccess`. В последнее свойство мы поместим метод клиента запросов `invalidateQueries()`, который обновит пришедшие посты
 
 `App.tsx`
+
 ```TSX
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -121,6 +123,7 @@ export default App;
 Глобальные настройки задаются внутри `QueryClient`, который мы задаём в корневом компоненте. Мы можем задавать опции для `queries` и `mutations`.
 
 `_app.tsx`
+
 ```TSX
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -142,9 +145,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 ```
 
-## useQuery 
+## useQuery
 
-Первым делом стоит сказать, что функция запроса по умолчанию в себя принимает объект, который содержит некоторые метаданные и ключи, которые могут пригодиться в запросе  
+Первым делом стоит сказать, что функция запроса по умолчанию в себя принимает объект, который содержит некоторые метаданные и ключи, которые могут пригодиться в запросе
 
 ```TSX
 const postsQuery = useQuery({
@@ -163,13 +166,14 @@ const postsQuery = useQuery({
 
 ![](_png/81cd2e04f85d5732bd224ff05cc03596.png)
 
-Так же все запросы, на которые мы получили ответ, будут кешироваться в памяти и при перезагрузке страницы сначала отобразятся закешированные данные, а уже потом, в фоне, будут подгружаться новые данные, которые затем отобразятся 
+Так же все запросы, на которые мы получили ответ, будут кешироваться в памяти и при перезагрузке страницы сначала отобразятся закешированные данные, а уже потом, в фоне, будут подгружаться новые данные, которые затем отобразятся
 
 ![](_png/c0304c61caa361e9cd367be5c1ef20e1.png)
 
 Чтобы данные оставались актуальными нужное нам количество времени (например, перезагружать список постов только раз в 5 минут, а не каждый раз при переходе на страницу), то можно указать, как для всего приложения время устаревания данных:
 
 `index.tsx`
+
 ```TSX
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -183,6 +187,7 @@ const queryClient = new QueryClient({
 Так и указать время устаревания для отдельного хука запроса с помощью `staleTime`:
 
 `App.tsx`
+
 ```TSX
 const postsQuery = useQuery({
 	queryKey: ['posts'],
@@ -198,6 +203,7 @@ const postsQuery = useQuery({
 Так же с помощью `refetchInterval` мы можем явно указать раз в какое время нужно заново загружать данные:
 
 `App.tsx`
+
 ```TSX
 const postsQuery = useQuery({
 	queryKey: ['posts'],
@@ -226,6 +232,7 @@ const postsQuery = useQuery({
 Изначально стоит забиндить сервис, который будет работать с запросами в приложении
 
 `app > services > country.service.ts`
+
 ```TS
 import axios from 'axios'
 
@@ -304,6 +311,7 @@ const { isLoading, data: countries } = useQuery(
 Так же хорошей практикой является реализация хуков для получение определённых данных через `react-query`
 
 `app > hooks > useCountries.ts`
+
 ```TSX
 import { useQuery } from 'react-query'
 import { CountryService, ICountry } from '../services/country.service'
@@ -331,6 +339,7 @@ export const useCountries = () => {
 Использование:
 
 `pages > index.tsx`
+
 ```TSX
 const Home: NextPage = () => {
 	const { isLoading, countries } = useCountries();
@@ -375,6 +384,7 @@ const Home: NextPage = () => {
 Уже таким образом будет выглядеть хук с передачей в него `id`
 
 `app > hooks > useCountry.ts`
+
 ```TSX
 import { useQuery } from 'react-query'
 import { CountryService, ICountry } from '../services/country.service'
@@ -402,6 +412,7 @@ export const useCountry = (id?: string) => {
 И так выглядит использование хука с передачей аргумента
 
 `pages > country > [id].tsx`
+
 ```TSX
 import { NextPage } from 'next'
 import Image from 'next/image'
@@ -449,7 +460,7 @@ export default Country
 
 ## GET запрос по кнопке "refetch"
 
-Если мы хотим реализовать переполучение данных, чтобы пользователь сам запрашивал их по своему усмотрению, то из query можно вытащить метод `refetch`, который можно передать в качестве onClick в кнопку 
+Если мы хотим реализовать переполучение данных, чтобы пользователь сам запрашивал их по своему усмотрению, то из query можно вытащить метод `refetch`, который можно передать в качестве onClick в кнопку
 
 ![](_png/d85f2953212d367023b1c8859a76ec1a.png)
 
@@ -464,6 +475,7 @@ export default Country
 Для совершения мутации используется хук `useMutation`, который отправляет запросы на изменение данных на сервере
 
 `pages > create-country.tsx`
+
 ```TSX
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -565,4 +577,3 @@ const CreateCountry: NextPage = () => {
 
 export default CreateCountry
 ```
-

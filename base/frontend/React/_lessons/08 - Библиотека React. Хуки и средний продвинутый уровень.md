@@ -1,17 +1,17 @@
-#React #ReactHooks 
+#React #ReactHooks
 
 ## 001 Введение в хуки
 
 Хуки - это функции, которые позволяют заменить функционал реакта в классах для использования внутри функциональных компонентов
 
-Хуки появились в версии ==16.8== 
+Хуки появились в версии ==16.8==
 
 Пока не существует хуков, реализующих методы жизненного цикла `getSnapshotBeforeUpdate`, `getDerivedStateFromError` и `componentDidCatch`.
 
 2 правила использования хуков:
+
 - Хуки можно вызывать только на верхнем уровне - нельзя использовать внутри циклов, условий и вложенных функций
 - Хуки стоит вызывать только из функциональных компонентов реакта (исключение только одно - это пользовательские хуки)
-
 
 ## 002 useState
 
@@ -130,8 +130,8 @@ const SliderFunction = (props) => {
 					>
 						+1
 					</button>
-					<button 
-						className='btn btn-primary me-2' 
+					<button
+						className='btn btn-primary me-2'
 						// изменяем состояние на обратное
 						onClick={() => setAutoplay(!autoplay)}
 					>
@@ -156,6 +156,7 @@ export default App;
 ```
 
 И далее мы имеем два одинаковых компонента на странице:
+
 - классовый
 - функциональный
 
@@ -190,7 +191,8 @@ function changeSlide(i) {
 ![](_png/cf93c668bc8086b97e85923066f924de.png)
 
 Так же мы можем вынести несколько состояний в одну переменную и хранить в ней объект с несколькими значениями.
-Особенность заключается в том, что в отличие от классов объекты автоматически не складываются 
+Особенность заключается в том, что в отличие от классов объекты автоматически не складываются
+
 - `this.setState(({ slide }) => ({ slide: slide + i }))` - в классах будет работать и свойство `autoplay` не потеряется
 - `setState((state) => ({ ...state, slide: state.slide + value }))` - нужно использовать в функциях деструктуризацию, потому что состояния в них иммутабельны и нужно вставлять полностью новые значения
 
@@ -218,22 +220,22 @@ function toggleAutoplay() {
 
 ![](_png/7130d6093fc2269986cf7b3a8ebd739d.png)
 
-Если функцию просто вызвать внутри установки стейта, то она будет вызваться каждый раз при перерендере 
+Если функцию просто вызвать внутри установки стейта, то она будет вызваться каждый раз при перерендере
 
 ![](_png/9fdf243f56af071c43d105bed6702e7f.png)
 
 ![](_png/0397b8bcd9479d8fa938e2a22a5dc46c.png)
-
 
 ## 003 useEffect
 
 `useEffect()` - это хук, который выполняет эффекты на определённых этапах жизненного состояния компонента
 
 Побочными действиями (эффектами) обычно являются:
+
 - дозагрузка данных
 - использования сторонних модулей
 - запуск таймаутов
-- логирование 
+- логирование
 - изменение ДОМ-структуры
 
 И далее нам нужно обновлять заголовок страницы в зависимости от состояния слайда
@@ -392,11 +394,11 @@ export default App;
 
 ![](_png/7142b6b400d1cf9bbbea3e321e54ca40.png)
 
-Если нам нужно сэмулировать работу функции `componentDidMount`, тогда нам нужно передать пустой массив зависимостей, что вызовет срабатывание функции только один раз - при загрузке 
+Если нам нужно сэмулировать работу функции `componentDidMount`, тогда нам нужно передать пустой массив зависимостей, что вызовет срабатывание функции только один раз - при загрузке
 
 ![](_png/8b0e81fa2a7694aa42e0367fd79c14d9.png)
 
->[!note] Так же мы можем создать несколько хуков `useEffect`.Желательно создавать отдельные эффекты на каждое действие.
+> [!note] Так же мы можем создать несколько хуков `useEffect`.Желательно создавать отдельные эффекты на каждое действие.
 
 И далее рассмотрим поведение, когда нам нужно реализовать поведение `componentWillUnmount`, когда при размонтировании компонента нам нужно произвести все отписки (отключить листенеры и таймауты)
 
@@ -426,7 +428,6 @@ function App() {
 
 ## 004 useCallback
 
-
 Представим такую ситуацию: нам нужно получать изображения со стороннего ресурса
 
 ```JS
@@ -444,12 +445,12 @@ const getSomeImg = () => {
 return (
 	<Container className='wrapper'>
 		<div className='slider w-50 m-auto'>
-			
-			// формируем массив изображений 
+
+			// формируем массив изображений
 			{getSomeImg().map((url, i) => (
 				<img key={i} className='d-block w-100' src={url} alt='slide' />
 			))}
-			
+
 			<div className='text-center mt-5'>
 				Active slide {slide} <br /> {autoplay ? 'auto' : null}
 			</div>
@@ -469,7 +470,7 @@ return (
 );
 ```
 
-Но теперь перед нами встаёт проблема, что после каждого изменения стейта, у нас вызывается функция отправки запроса на сервер 
+Но теперь перед нами встаёт проблема, что после каждого изменения стейта, у нас вызывается функция отправки запроса на сервер
 
 ![](_png/12ba4b36b7b4ab54c9049e047779b934.png)
 
@@ -477,9 +478,9 @@ return (
 
 ![](_png/b071c644e1e3fe2cf5921b18a7d6dd0d.png)
 
-Чтобы правильно воспользоваться функцией, нужно создать новый компонент, который будет иметь своё состояние. Внутри неё нужно и отображать те изменения, данные для которых возвращает `useCallback()`. 
+Чтобы правильно воспользоваться функцией, нужно создать новый компонент, который будет иметь своё состояние. Внутри неё нужно и отображать те изменения, данные для которых возвращает `useCallback()`.
 
-Конкретно тут мы через `useCallback` реализовали возврат новой ссылки на функцию, если изменится состояние слайда (если слайд не будет меняться, то ссылаться хук будет на старую версию функции, которая закэширована) 
+Конкретно тут мы через `useCallback` реализовали возврат новой ссылки на функцию, если изменится состояние слайда (если слайд не будет меняться, то ссылаться хук будет на старую версию функции, которая закэширована)
 
 ```JS
 const SliderFunction = (props) => {
@@ -512,7 +513,7 @@ const SliderFunction = (props) => {
 	return (
 		<Container className='wrapper'>
 			<div className='slider w-50 m-auto'>
-			
+
 				{/* тут уже просто вызываем наш компонент слайдов */}
 				<Slide getSomeImg={getSomeImg} />
 
@@ -553,12 +554,11 @@ const Slide = ({ getSomeImg }) => {
 };
 ```
 
-И теперь каждый раз мы будем вызвать мемоизированную функцию. При перезагрузке страницы те изображения, которые возвращает функция, будут закешированы в браузере. 
+И теперь каждый раз мы будем вызвать мемоизированную функцию. При перезагрузке страницы те изображения, которые возвращает функция, будут закешированы в браузере.
 
 ![](_png/5802149df12e7b1c0e25fb5d78439b07.png)
 
 ## 005 useMemo
-
 
 `useMemo()` - это хук, который возвращает мемоизированное значение (результат вычислений запоминается в кеше)
 
@@ -640,23 +640,23 @@ const SliderFunction = (props) => {
 ![](_png/78f1bf391dfdf35d1fd5ff7715cf0a9b.png)
 ![](_png/6a7c870816fa714d0f2089039d6878f2.png)
 
-
 ## 006 useRef
 
 `useRef()` - это хук, который предоставляет прямой доступ к ДОМ-элементам на странице
 
-1) Создаём переменную, которая будет хранить ссылку на нужный нам элемент
-2) Передаём реф в элемент ДОМ-дерева
-3) Вызываем срабатывание функции
+1. Создаём переменную, которая будет хранить ссылку на нужный нам элемент
+2. Передаём реф в элемент ДОМ-дерева
+3. Вызываем срабатывание функции
 
 ![](_png/ed2522230cbccfc54065dbb4139ec766.png)
 
 Далее представленный ниже код выполняет:
+
 - при изменении состояния (внутри первого инпута) `useEffect` выводит в консоль значение свойства `current` у рефа
 - при клике по текстэрии, значение в рефе будет увеличиваться на 1
-- при дальнейшем вводе в первый инпут будет выводиться значение рефа, которое уже было увеличено 
+- при дальнейшем вводе в первый инпут будет выводиться значение рефа, которое уже было увеличено
 
-Таким образом мы сохранили динамическое значение внутри свойства `current`, которое будет изменяться без перерендера компонента 
+Таким образом мы сохранили динамическое значение внутри свойства `current`, которое будет изменяться без перерендера компонента
 
 ```JS
 const Form = () => {
@@ -700,6 +700,7 @@ const Form = () => {
 	);
 };
 ```
+
 ![](_png/f2aefcc0205cf33b39ccfc76d8ba06c1.png)
 
 И при вынесении изменения свойства в эффект, можно увидеть, что компонент не перерендеривается каждый раз, а просто увеличивает свойство, находящееся в рефе
@@ -745,9 +746,10 @@ const Form = () => {
 	);
 };
 ```
+
 ![](_png/73ccc427f1678148120030f605134a45.png)
 
-Так же мы можем использовать реф для сохранения предыдущего состояния компонента. Конкретно тут после записи в первый `input` его прошлое состояние переносится в `textarea` 
+Так же мы можем использовать реф для сохранения предыдущего состояния компонента. Конкретно тут после записи в первый `input` его прошлое состояние переносится в `textarea`
 
 ```JS
 const Form = () => {
@@ -790,17 +792,17 @@ const Form = () => {
 	);
 };
 ```
+
 ![](_png/12879331913e71d4fd3f6d2d3645959f.png)
 
-
 ## 007 Практика. Перепишем весь проект на хуки
-
 
 Далее можно попробовать перевести весь старый проект с классов на хуки
 
 Основной компонент персонажа:
 
 `components > app > App.js`
+
 ```JS
 const App = () => {
 	const [selectedChar, setSelectedChar] = useState(null);
@@ -832,6 +834,7 @@ const App = () => {
 ```
 
 `components > CharList > CharList.js`
+
 ```JS
 const CharList = ({ onCharSelected }) => {
 	const [charList, setCharList] = useState([]);
@@ -948,7 +951,7 @@ const CharList = ({ onCharSelected }) => {
 
 Так же такой короткой записью можно показать, какой аргумент получает функция (`newItemLoading`) и что она вернёт наружу (`false`).
 
-Стрелочные функции используются для того, чтобы асинхронное выполнение установки состояния перевести в синхронное и выполнять по порядку. Так же использование колбэк-функции позволяет воспользоваться значением прошлого состояния 
+Стрелочные функции используются для того, чтобы асинхронное выполнение установки состояния перевести в синхронное и выполнять по порядку. Так же использование колбэк-функции позволяет воспользоваться значением прошлого состояния
 
 ![](_png/549f83170f655c53e92af97b9bab6c61.png)
 
@@ -964,6 +967,7 @@ const CharList = ({ onCharSelected }) => {
 Дальше идёт компонент информации о персонаже:
 
 `components > CharInfo > CharInfo.js`
+
 ```JS
 const CharInfo = (props) => {
 	const [char, setChar] = useState(null);
@@ -1066,6 +1070,7 @@ export default CharInfo;
 И компонент рандомного персонажа:
 
 `components > RandomChar > RandomChar.js`
+
 ```JS
 const RandomChar = () => {
 	const [char, setChar] = useState(null);
@@ -1122,10 +1127,10 @@ const RandomChar = () => {
 				<button onClick={updateChar} className='button button__main'>
 					<div className='inner'>try it</div>
 				</button>
-				<img 
-					src={mjolnir} 
-					alt='mjolnir' 
-					className='randomchar__decoration' 
+				<img
+					src={mjolnir}
+					alt='mjolnir'
+					className='randomchar__decoration'
 				/>
 			</div>
 		</div>
@@ -1166,10 +1171,7 @@ const View = ({ char }) => {
 export default RandomChar;
 ```
 
-
 ## 008 Создание собственных хуков
-
-
 
 ```JS
 const Form = () => {
@@ -1179,14 +1181,14 @@ const Form = () => {
 		<Container>
 			<form className='w-50 border mt-5 p-3 m-auto'>
 				<div className='mb-3'>
-					<input 
-						value={text} 
-						type='text' 
-						className='form-control' 
-						readOnly 
+					<input
+						value={text}
+						type='text'
+						className='form-control'
+						readOnly
 					/>
-					<label 
-						htmlFor='exampleFormControlInput1' 
+					<label
+						htmlFor='exampleFormControlInput1'
 						className='form-label mt-3'
 					>
 						Email address
@@ -1200,8 +1202,8 @@ const Form = () => {
 					/>
 				</div>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlTextarea1' 
+					<label
+						htmlFor='exampleFormControlTextarea1'
 						className='form-label'
 					>
 						Example textarea
@@ -1220,14 +1222,10 @@ const Form = () => {
 
 ![](_png/2e4bbaa55fe98ad7dfb60eca39fd03aa.png)
 
-
-
 ![](_png/39055e9feb16acbaacc4641105ec57f2.png)
 
 ![](_png/2a5804ec3a71798a33b9693b8b4110c6.png)
 ![](_png/1a38c1550cd1448537b9e07b5fa9b7d8.png)
-
-
 
 ```JS
 // первая версия
@@ -1250,7 +1248,7 @@ const validateInput = (text) => {
 };
 ```
 
-И сейчас мы добавили в работу ещё одно поле для ввода текста - код был повторён. 
+И сейчас мы добавили в работу ещё одно поле для ввода текста - код был повторён.
 Тут мы сталкиваемся с такой ситуацией, что мы постоянно повторяем код, который написали единожды
 
 ```JS
@@ -1278,8 +1276,8 @@ const Form = () => {
 						className={`form-control ${colorInput}``}
 						readOnly
 					/>
-					<label 
-						htmlFor='exampleFormControlInput1' 
+					<label
+						htmlFor='exampleFormControlInput1'
 						className='form-label mt-3'>
 						Email address
 					</label>
@@ -1292,8 +1290,8 @@ const Form = () => {
 					/>
 				</div>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlTextarea1' 
+					<label
+						htmlFor='exampleFormControlTextarea1'
 						className='form-label'>
 						Example textarea
 					</label>
@@ -1324,8 +1322,9 @@ const Form = () => {
 ![](_png/dff741e3ea8fd405377383a7ad4df502.png)
 
 Пример использования хука внутри компонента:
+
 - Инициализируем хук два раза для двух наших элементов формы
-- Мы не передаём внутрь функции `validateInput` текст (переменная `colorInput`), так как он берётся из внутреннего состояния хука, который относится к данному инпуту 
+- Мы не передаём внутрь функции `validateInput` текст (переменная `colorInput`), так как он берётся из внутреннего состояния хука, который относится к данному инпуту
 - В элементы мы передаём `value` и `onChange`, которые относятся к инкапсулированной логике их хуков
 
 ```JS
@@ -1362,8 +1361,8 @@ const Form = () => {
 						className={`form-control ${colorInput}``}
 						readOnly
 					/>
-					<label 
-						htmlFor='exampleFormControlInput1' 
+					<label
+						htmlFor='exampleFormControlInput1'
 						className='form-label mt-3'
 					>
 						Email address
@@ -1380,8 +1379,8 @@ const Form = () => {
 					/>
 				</div>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlTextarea1' 
+					<label
+						htmlFor='exampleFormControlTextarea1'
 						className='form-label'
 					>
 						Example textarea
@@ -1407,6 +1406,7 @@ const Form = () => {
 ![](_png/01876912c744a3b818aa0f2a224acc45.png)
 
 Так же можно взглянуть на:
+
 - [Топ 10 библиотек хуков в реакте](https://www.bornfight.com/blog/top-10-react-hook-libraries/)
 - [Гид по своим хукам в реакте](https://usehooks.com/)
 
@@ -1418,9 +1418,9 @@ import { useCallback, useState } from 'react';
 function App() {
     // Call the hook which returns, current value and the toggler function
     const [isTextChanged, setIsTextChanged] = useToggle();
-    
+
     return (
-        <button 
+        <button
 	        onClick={setIsTextChanged}
 	    >
 	        {isTextChanged ? 'Toggled' : 'Click to Toggle'}
@@ -1432,22 +1432,21 @@ function App() {
 const useToggle = (initialState = false) => {
     // Initialize the state
     const [state, setState] = useState(initialState);
-    
+
     // Define and memorize toggler function in case we pass down the component,
     // This function change the boolean value to it's opposite value
     const toggle = useCallback(() => setState(state => !state), []);
-    
+
     return [state, toggle]
 }
 ```
 
-
 ## 009 Практика собственных хуков на проекте
 
-
-Создадим хук, который будет получать данные о персонажах с сервера и выдавать их. Так же он будет контролировать состояние загрузки и ошибки 
+Создадим хук, который будет получать данные о персонажах с сервера и выдавать их. Так же он будет контролировать состояние загрузки и ошибки
 
 `src > hooks > http.hook.js`
+
 ```JS
 import { useCallback, useState } from 'react';
 
@@ -1502,6 +1501,7 @@ export const useHttp = () => {
 Далее нужно переделать сервис по общению с сервером под хуки и встроить в его запросы `request` из прошлого хука
 
 `src > services > marvel.service.js`
+
 ```JS
 import { useHttp } from '../hooks/http.hook';
 
@@ -1545,11 +1545,12 @@ export default useMarvelService;
 
 ```
 
-Далее нужно поменять общение с сервером в остальных компонентах. 
+Далее нужно поменять общение с сервером в остальных компонентах.
 
 Чтобы всё работало нормально, нужно так же правильно вставить `clearError`.
 
 `src > component > randomChar > RandomChar.js`
+
 ```JS
 import { Component, useEffect, useState } from 'react';
 import Spinner from '../Spinner/Spinner';
@@ -1649,9 +1650,10 @@ const View = ({ char }) => {
 export default RandomChar;
 ```
 
-Для правильного перерендера объектов карточек, нужно убрать использование переменной `content` и использовать просто `items`, который у нас генерирует другая функция. 
+Для правильного перерендера объектов карточек, нужно убрать использование переменной `content` и использовать просто `items`, который у нас генерирует другая функция.
 
 `src > component > charList > CharList.js`
+
 ```JS
 import { Component, useEffect, useRef, useState } from 'react';
 import Spinner from '../Spinner/Spinner';
@@ -1771,6 +1773,7 @@ export default CharList;
 В `CharInfo` нужно просто поменять общение с сервером на хуковый и добавить очистку ошибки, если сервер не сможет вернуть данные (чтобы в принципе информация обновлялась)
 
 `src > component > charInfo > CharInfo.js`
+
 ```JS
 import { Component, useEffect, useState } from 'react';
 
@@ -1871,18 +1874,16 @@ CharInfo.propTypes = {
 export default CharInfo;
 ```
 
-
 ## 010 Что такое batching и как он работает в React 18+
 
-
-==**Batching**== - это объединение обновления нескольких состояний в одну операцию для улучшения производительности. 
+==**Batching**== - это объединение обновления нескольких состояний в одну операцию для улучшения производительности.
 Объединение нескольких обновлений позволяет экономить ресурсы ПК за счёт единоразового перерендера
 
 У нас есть функция, которая вызывает внутри себя срабатывание изменения двух разных состояний, то есть компонент должен перерендерится два раза и вывести два лога в консоль
 
 ![](_png/300c6f88ec500bfa77bc96316743b4c5.png)
 
-Однако при каждом срабатывании функции и изменении двух состояний, мы получаем только один лог в консоль - обе эти операции совмещаются 
+Однако при каждом срабатывании функции и изменении двух состояний, мы получаем только один лог в консоль - обе эти операции совмещаются
 
 ![](_png/becd0b34d5951004b0d363e717c51de3.png)
 
@@ -1906,9 +1907,7 @@ export default CharInfo;
 
 ![](_png/9a3efad687db3ca58760f2dc9c2880ce.png)
 
-
 ## 011 (д) useTransition, useDeferredValue и другие нововведения React 18+
-
 
 `useId()` - генерирует уникальный идентификатор (он не должен использоваться для формирования атрибута `key`)
 
@@ -1924,13 +1923,13 @@ function Checkbox() {
 ```
 
 Так же были добавлены хуки для интеграции сторонних библиотек:
--   [`useSyncExternalStore`](https://ru.reactjs.org/docs/hooks-reference.html#usesyncexternalstore)
--   [`useInsertionEffect`](https://ru.reactjs.org/docs/hooks-reference.html#useinsertioneffect)
+
+- [`useSyncExternalStore`](https://ru.reactjs.org/docs/hooks-reference.html#usesyncexternalstore)
+- [`useInsertionEffect`](https://ru.reactjs.org/docs/hooks-reference.html#useinsertioneffect)
 
 Конкурентный режим — это нововведение в React. Его задача — адаптировать приложение к разным устройствам и скорости сети. Пока что Concurrent Mode — эксперимент, который может быть изменён разработчиками библиотеки, а значит, новых инструментов нет в стабильной версии.
 
 Сам конкурентный режим может ставить на рендер сразу несколько компонентов или ставить их на паузу определяя приоритет
-
 
 ```JS
 import data from './data';
@@ -1968,8 +1967,6 @@ function App() {
 export default App;
 ```
 
-
-
 ![](_png/f22d0f508989c155656dfaf8105359fd.png)
 
 И сейчас мы столкнулись с такой проблемой, что ввод в инпут очень сильно лагает. Дело в том, что наш стейт меняется сразу при вводе новых данных, что тормозит ввод новых символов из-за постоянного рендера
@@ -1990,11 +1987,9 @@ export default App;
 
 ![](_png/1166997b33f145d5bb9dfb5fd5f5c50b.png)
 
-
 ## 012 Навигация в приложении, React Router v5+
 
-
-Сейчас имеется сразу несколько версий реакт-роутер-дома, но стоит начать с пятой 
+Сейчас имеется сразу несколько версий реакт-роутер-дома, но стоит начать с пятой
 
 ![](_png/103408e6ea21c010d5abbea83bba82e5.png)
 
@@ -2005,15 +2000,18 @@ npm i react-router-dom@5.3.4
 ```
 
 И далее нам нужно закинуть в проект три компонента из роутер-дома:
+
 - `BrowserRouter` - роутер по всем страницам приложения (отслеживает переход по ссылкам)
 - `Route` - отдельный роут приложения
-- `Switch` 
+- `Switch`
 
 И далее обернём все наши страницы подобным образом:
+
 - В `BrowserRouter` (который переименовали в `Router`) поместим всё наше приложение
 - А в отдельный `Route` поместим компоненты, которые должны рендериться на отдельной странице
 
 `components > app > App.js`
+
 ```JS
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -2078,8 +2076,9 @@ export default App;
 ![](_png/52c7e7c5789238e962e31ecd9f75befa.png)
 
 Чтобы исправить проблему, у нас есть два пути решения:
-1) Главную страницу `/` расположить в конце списка свича
-2) Добавить атрибут `exact`, который обязует, чтобы рендер был только по написанию полного и правильного пути
+
+1. Главную страницу `/` расположить в конце списка свича
+2. Добавить атрибут `exact`, который обязует, чтобы рендер был только по написанию полного и правильного пути
 
 Вот пример использования первого подхода (все `/имя` нужно будет писать до `/` главной страницы)
 
@@ -2096,6 +2095,7 @@ export default App;
 И далее, чтобы добавить ссылки в наш проект, нужно в нужное место в компоненте добавить компонент `Link`, который в качестве ссылки в себя принимает атрибут `to`
 
 `components > appHeader > AppHeader.js`
+
 ```JS
 import { Link } from 'react-router-dom';
 
@@ -2144,11 +2144,12 @@ const loader = async () => {
 };
 ```
 
-Так же мы имеем атрибут `NavLink`, который позволяет нам стилизовать активную ссылку. Его особенностью является наличие атрибута `activeStyle` 
+Так же мы имеем атрибут `NavLink`, который позволяет нам стилизовать активную ссылку. Его особенностью является наличие атрибута `activeStyle`
 
 Однако, когда мы добавляем стили для наших элементов, стоит добавлять атрибут `exact`, чтобы стили применялись не ко всем элементам сразу, а только к нужным
 
 `components > appHeader > AppHeader.js`
+
 ```JS
 import { Link, NavLink } from 'react-router-dom';
 
@@ -2163,19 +2164,19 @@ const AppHeader = () => {
 			<nav className='app__menu'>
 				<ul>
 					<li>
-						<NavLink 
-							exact 
-							activeStyle={{ color: '#9F0013' }} 
+						<NavLink
+							exact
+							activeStyle={{ color: '#9F0013' }}
 							to={'/'}
-						>	
+						>
 							Characters
 						</NavLink>
 					</li>
 					/
 					<li>
-						<NavLink 
-							exact 
-							activeStyle={{ color: '#9F0013' }} 
+						<NavLink
+							exact
+							activeStyle={{ color: '#9F0013' }}
 							to={'/comics'}
 						>
 							Comics
@@ -2193,6 +2194,7 @@ const AppHeader = () => {
 И далее мы можем вынести страницы в отдельные компоненты и поместить их в папку `pages`
 
 `src > components > pages > ComicsList.js`
+
 ```JS
 import React from 'react';
 import AppBanner from '../appBanner/AppBanner';
@@ -2211,6 +2213,7 @@ export default ComicsPage;
 ```
 
 `src > components > pages > MainPage.js`
+
 ```JS
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
@@ -2250,6 +2253,7 @@ export default MainPage;
 А далее экспортировать их через `index.js`, который сократит до них путь
 
 `src > components > pages > index.js`
+
 ```JS
 import MainPage from './MainPage';
 import ComicsPage from './ComicsPage';
@@ -2260,6 +2264,7 @@ export { MainPage, ComicsPage };
 И тут используем импорт
 
 `src > components > app > App.js`
+
 ```JS
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -2290,9 +2295,7 @@ const App = () => {
 export default App;
 ```
 
-
 ## 013 React Router v6+
-
 
 И теперь нужно установить последнюю версию роутера
 
@@ -2300,15 +2303,15 @@ export default App;
 npm i react-router-dom@latest
 ```
 
->[!info] [Тут](https://github.com/remix-run/react-router/blob/main/docs/upgrading/v5.md#upgrade-to-react-router-v6) находится руководство о переходе с пятой версии на шестую
+> [!info] [Тут](https://github.com/remix-run/react-router/blob/main/docs/upgrading/v5.md#upgrade-to-react-router-v6) находится руководство о переходе с пятой версии на шестую
 
-> Вместо компонента `Switch` используется компонент `Routes`. 
+> Вместо компонента `Switch` используется компонент `Routes`.
 
-> Нужный компонент для отрисовки теперь передаётся не в качестве `child`, а передаётся внутрь атрибута `element`. 
+> Нужный компонент для отрисовки теперь передаётся не в качестве `child`, а передаётся внутрь атрибута `element`.
 
 > Теперь вместо хука `useHistory` нужно использовать `useNavigate`
 
-Теперь мы пишем не так: 
+Теперь мы пишем не так:
 
 ```TS
 const history = useHistory();
@@ -2367,6 +2370,7 @@ const UserItemPage: FC = () => {
 > Так же нужно сказать, что такого атрибута как `exact` теперь не существует. Внутри `Routes` проходит правильное сравнение ссылок, что не приводит к рендеру одного компонента внутри другого. Если нам нужно будет использовать эквивалент этому атрибуту в `NavLink`, то там мы вместо него пишем `end`
 
 `components > app > App.js`
+
 ```JS
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -2393,7 +2397,8 @@ const App = () => {
 
 > Так же нужно указать, что ссылки внутри роутов будут относиться к этим роутам. То есть, если родительский роут имеет ссылку `to='/comics'`, то при выборе внутри него ссылки `to='/deadpool'` мы перейдём по ссылке `/comics/deadpool`. В пятой версии с этим были определённые трудности.
 
-Из вышеописанных исправлений вытекает дополнительный функционал: 
+Из вышеописанных исправлений вытекает дополнительный функционал:
+
 - `to='.'` будет осуществлять переход на эту же страницу
 - `to='..'` будет вызывать страницу на один уровень выше (родительскую)
 - `to='../bayonette'` выйдет на уровень выше и перейдёт оттуда на другую страницу (которая находится в родительском компоненте)
@@ -2401,6 +2406,7 @@ const App = () => {
 > Так же из компонента `NavLink` удалили атрибуты `activeStyle` и `activeClassName`. Вместо них нужно самому делать функции по добавлению нужного функционала
 
 Исправим хедер страницы, чтобы он поддерживал 6 версию роутер-дома:
+
 - заменяем `exact` на `end`
 - заменяем `activeStyle` на `style`. Сам же стиль будет автоматически принимать в себя аргумент активности (`isActive`), чтобы мы могли навесить нужные нам стили
 
@@ -2420,7 +2426,7 @@ const AppHeader = () => {
 							// вставляем вместо exact
 							end
 							// можно так передать стили
-							style={({ isActive }) => 
+							style={({ isActive }) =>
 								({ color: isActive ? '#9F0013' : 'inherit' })}
 							to={'/'}
 						>
@@ -2432,7 +2438,7 @@ const AppHeader = () => {
 						<NavLink
 							end
 							// а можно так
-							style={({ isActive }) => 
+							style={({ isActive }) =>
 								(isActive ? { color: '#9F0013' } : {})}
 							to={'/comics'}
 						>
@@ -2449,7 +2455,6 @@ const AppHeader = () => {
 Теперь применение стилей правильно работает:
 
 ![](_png/cd5837a55ac09331e395b0680cc08080.png)
-
 
 ## 014 Практика создания динамических путей
 
@@ -2484,18 +2489,13 @@ const Error404 = () => {
 export default Error404;
 ```
 
-
-
 ```JS
-import MainPage from './MainPage';  
-import ComicsPage from './ComicsPage';  
-import Error404 from './404';  
-  
+import MainPage from './MainPage';
+import ComicsPage from './ComicsPage';
+import Error404 from './404';
+
 export { MainPage, ComicsPage, Error404 };
 ```
-
-
-
 
 ```JS
 import { ComicsPage, Error404, MainPage } from '../pages';
@@ -2531,6 +2531,7 @@ const App = () => {
 Для реализации побочной ссылки, которая будет грузиться изнутри другого роута, нужно добавить новый роут с родительским путём и указать дополнительный динамический путь через `:`. То есть ссылка будет выглядеть следующим образом: `/comics/:comicId` - передаём параметр `comicId` в динамическую ссылку
 
 `components > app > App.js`
+
 ```JS
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -2569,16 +2570,18 @@ export default App;
 В сервисе нужно иметь функцию, которая будет по `id` возвращать нужный нам комикс
 
 `service > marvel.service.js`
+
 ```JS
-const getComics = async (id) => {  
-   const res = await request(`${_apiBase}comics/${id}?${_apiKey}`);  
-   return _transformComics(res.data.results[0]);  
+const getComics = async (id) => {
+   const res = await request(`${_apiBase}comics/${id}?${_apiKey}`);
+   return _transformComics(res.data.results[0]);
 };
 ```
 
 Далее в компоненте списка комиксов поменяем ссылку `a` на `Link` и в параметры ссылки передадим `item.id`, который будет ссылаться на определённый комикс
 
 `components > comicsList > ComicsList.js`
+
 ```JS
 function renderItems(arr) {
 	const items = arr.map((item, i) => {
@@ -2601,6 +2604,7 @@ function renderItems(arr) {
 Далее нам нужно реализовать страницу отдельного комикса
 
 `components > pages > SingleComicPage.js`
+
 ```JS
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -2677,18 +2681,20 @@ export default SingleComicPage;
 Экспортируем страницу одиночного комикса
 
 `components > pages > index.js`
+
 ```JS
-import MainPage from './MainPage';  
-import ComicsPage from './ComicsPage';  
-import Error404 from './404';  
-import SingleComicPage from './SingleComicPage';  
-  
+import MainPage from './MainPage';
+import ComicsPage from './ComicsPage';
+import Error404 from './404';
+import SingleComicPage from './SingleComicPage';
+
 export { MainPage, ComicsPage, Error404, SingleComicPage };
 ```
 
-Чтобы слово *Comics* горело даже в отдельном комиксе, нужно убрать строгое сравнение ссылки через `exact` из компонента `AppHeader`
+Чтобы слово _Comics_ горело даже в отдельном комиксе, нужно убрать строгое сравнение ссылки через `exact` из компонента `AppHeader`
 
 `components > appHeader > AppHeader.js`
+
 ```JS
 import { Link, NavLink } from 'react-router-dom';
 import './appHeader.scss';
@@ -2725,22 +2731,21 @@ export default AppHeader;
 
 ![](_png/dc8ab3bfcf41f45d480efb85eb7be509.png)
 
-
 ## 015 Динамические импорты и React.lazy
-
 
 На определённом этапе разработки приложение станет настолько большим, что уже оно начнёт загружаться крайне длительное время. Но мы можем определить, какие участки приложения нам не нужны на этапе первичной загрузки и так же мы можем указать с помощью JS на эти блоки кода.
 
 Для примера создадим функцию логгера:
 
 `components > charList > someFunc.js`
+
 ```JS
-export function logger(logString = 'Hello, World!') {  
-   console.log(logString);  
-}  
-  
-export function secondLog(logString = 'Second Log!') {  
-   console.log(logString);  
+export function logger(logString = 'Hello, World!') {
+   console.log(logString);
+}
+
+export function secondLog(logString = 'Second Log!') {
+   console.log(logString);
 }
 ```
 
@@ -2753,19 +2758,20 @@ export function secondLog(logString = 'Second Log!') {
 `components > charList > CharList.js`
 ![](_png/da21b4f04980670cf47c9eae7fe82743.png)
 
-Но зачастую используется более простой синтаксис - получение нужной функции через деструктуризацию 
+Но зачастую используется более простой синтаксис - получение нужной функции через деструктуризацию
 
 `components > charList > CharList.js`
 ![](_png/5249891f812e52999a3c910a2dfd48e9.png)
 
-И если нам нужно будет вытащить дефолтную функцию, то в импортах нужно будет обратиться не к функции по имени, а к свойству `default`, которое содержит функцию 
+И если нам нужно будет вытащить дефолтную функцию, то в импортах нужно будет обратиться не к функции по имени, а к свойству `default`, которое содержит функцию
 
 ![](_png/40238ef546bdb8bd21cca38a79e75483.png)
 
 `components > charList > CharList.js`
+
 ```JS
-if (loading) {  
-   import('./someFunc').then((obj) => obj.default());  
+if (loading) {
+   import('./someFunc').then((obj) => obj.default());
 }
 ```
 
@@ -2781,6 +2787,7 @@ if (loading) {
 Далее нужно как и с промисами обработать возможную ошибку. Для этого предназначен дополнительный компонент `Suspense`. Он принимает в себя атрибут `fallback`, который будет показываться пока подгружается нужный нам компонент из динамического импорта
 
 `components > app > App.js`
+
 ```JS
 import { lazy, Suspense } from 'react';
 
@@ -2877,18 +2884,18 @@ export default App;
 
 ![](_png/2e4ec851b88fc5feba231f94dc09da00.png)
 
-После lazy-импорта количество файлов возросло в несколько раз и вес папки со скриптами вырос до 880 килобайт. Хоть скрипты и весят больше в общем, но теперь пользователь не будет скачивать все страницы сразу - он будет получать только актуальные ему страницы и подгружать их в процессе использования приложения. 
+После lazy-импорта количество файлов возросло в несколько раз и вес папки со скриптами вырос до 880 килобайт. Хоть скрипты и весят больше в общем, но теперь пользователь не будет скачивать все страницы сразу - он будет получать только актуальные ему страницы и подгружать их в процессе использования приложения.
 
 ![](_png/fb6228c40ca623f88eb6b3027d84f2bf.png)
 
->[!info] Использовать ленивую загрузку стоит уже в больших приложениях, где первая скорость загрузки уже будет переваливать за 3 секунды
->- Зачастую такую загрузку применяют уже к целым страницам приложения 
->- Но таким же образом можно выносить в ленивую загрузку и отдельные компоненты
-
+> [!info] Использовать ленивую загрузку стоит уже в больших приложениях, где первая скорость загрузки уже будет переваливать за 3 секунды
+>
+> - Зачастую такую загрузку применяют уже к целым страницам приложения
+> - Но таким же образом можно выносить в ленивую загрузку и отдельные компоненты
 
 ## 016 React.memo, Pure Component и оптимизация скорости работы приложения
 
-> `React.memo` - это компонент высшего порядка (HOC), который предназначен для мемоизации рендера компонента. Если в компонент не пришли новые пропсы или не изменился стейт, то компонент не перерендерится и сохранит ресурсы компьютера пользователя. 
+> `React.memo` - это компонент высшего порядка (HOC), который предназначен для мемоизации рендера компонента. Если в компонент не пришли новые пропсы или не изменился стейт, то компонент не перерендерится и сохранит ресурсы компьютера пользователя.
 
 Например, мы имеем форму. При нажатии на кнопку компонент формы получает новые пропсы и перерендеривается.
 
@@ -3018,10 +3025,10 @@ const Form = memo((props) => {
 		<Container>
 			<form className='w-50 border mt-5 p-3 m-auto'>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlInput1' 
+					<label
+						htmlFor='exampleFormControlInput1'
 						className='form-label mt-3'
-					>	
+					>
 						Email address
 					</label>
 					<input
@@ -3033,10 +3040,10 @@ const Form = memo((props) => {
 					/>
 				</div>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlTextarea1' 
+					<label
+						htmlFor='exampleFormControlTextarea1'
 						className='form-label'
-					>	
+					>
 						Example textarea
 					</label>
 					<textarea
@@ -3144,10 +3151,10 @@ class Form extends Component {
 			<Container>
 				<form className='w-50 border mt-5 p-3 m-auto'>
 					<div className='mb-3'>
-						<label 
-							htmlFor='exampleFormControlInput1' 
+						<label
+							htmlFor='exampleFormControlInput1'
 							className='form-label mt-3'
-						>	
+						>
 							Email address
 						</label>
 						<input
@@ -3159,10 +3166,10 @@ class Form extends Component {
 						/>
 					</div>
 					<div className='mb-3'>
-						<label 
-							htmlFor='exampleFormControlTextarea1' 
+						<label
+							htmlFor='exampleFormControlTextarea1'
 							className='form-label'
-						>	
+						>
 							Example textarea
 						</label>
 						<textarea
@@ -3181,13 +3188,13 @@ class Form extends Component {
 
 ![](_png/096f6e3d2eb9d8e66bae846d85e027c3.png)
 
-
->[!info] Вывод:
+> [!info] Вывод:
+>
 > - `memo()` используется для функциональных компонентов
-> - Для классовых компонентов используется `PureComponent` или `Component` вместе с функцией `shouldComponentUpdate()` 
+> - Для классовых компонентов используется `PureComponent` или `Component` вместе с функцией `shouldComponentUpdate()`
 > - Используется мемоизация для компонентов, которые часто получают одинаковые пропсы
 
->[!warning] Если добавить мемоизацию на компонент, который постоянно получает новые пропсы, то можно только затормозить работу приложения дополнительным сохранением данных - поэтому использовать данный функционал нужно аккуратно
+> [!warning] Если добавить мемоизацию на компонент, который постоянно получает новые пропсы, то можно только затормозить работу приложения дополнительным сохранением данных - поэтому использовать данный функционал нужно аккуратно
 
 Например, если мы передадим функцию, то компонент даже с `memo()` будет перерендериваться постоянно из-за того, что каждый раз при передаче будет создаваться новая функция (а функция является объектом в ==JS==).
 
@@ -3205,11 +3212,9 @@ class Form extends Component {
 
 ![](_png/2df75ccb14e19e1499573e7fd2221f66.png)
 
-
 ## 017 React Context и useContext
 
-
-`React.createContext` и `useContext` - это функциональность, которая позволит создать один глобальный провайдер пропсов, чтобы пользоваться ими из любого участка приложения. То есть мы можем передавать данные по дереву компонентов не прибегая к *property drill* (сверлим компоненты пропсами, которые нужно передать ниже)
+`React.createContext` и `useContext` - это функциональность, которая позволит создать один глобальный провайдер пропсов, чтобы пользоваться ими из любого участка приложения. То есть мы можем передавать данные по дереву компонентов не прибегая к _property drill_ (сверлим компоненты пропсами, которые нужно передать ниже)
 
 Вот пример антипаттерна передачи пропсов через несколько промежуточных компонентов:
 
@@ -3227,7 +3232,7 @@ class Form extends Component {
 
 - Функция `createContext` создаёт единый контекст в приложении
 - В эту функцию можно передать дефолтное значение, которое будет передаваться во все провайдеры, если в них не было передано значение в атрибут `value`
-- Сам `Provider` является компонентом и в себя он принимает любое значение своего компонента (компонент `App` раздаёт состояние `data`) 
+- Сам `Provider` является компонентом и в себя он принимает любое значение своего компонента (компонент `App` раздаёт состояние `data`)
 - `Consumer` так же является компонентом, который получает все данные из провайдера. Данный компонент получает функцию с данными в виде одного аргумента и через неё и можно отрендерить внутренности (просто так вставить компонент не получится)
 - Все компоненты, которые используют данные провайдера будут обновлены при изменении этих данных
 
@@ -3324,8 +3329,9 @@ export default App;
 ```
 
 Сам же объект, который располагается в контексте хранит в себе:
+
 - Переданные данные
-- `Provider` - раздаёт данные всем компонентом из единого места в приложении 
+- `Provider` - раздаёт данные всем компонентом из единого места в приложении
 - `Consumer` - подписывается на провайдера и следит за изменением его данных
 
 ![](_png/0aeb00964987d2a603159173ba2dab89.png)
@@ -3378,7 +3384,7 @@ class Input extends Component {
 
 ```JS
 const Input = (props) => {
-	// подписываемся на определённый контекст 
+	// подписываемся на определённый контекст
 	const context = useContext(dataContext);
 
 	return (
@@ -3438,19 +3444,19 @@ export const Form = memo((props) => {
 		<Container>
 			<form className='w-50 border mt-5 p-3 m-auto'>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlInput1' 
+					<label
+						htmlFor='exampleFormControlInput1'
 						className='form-label mt-3'
-					>	
+					>
 						Email address
 					</label>
 					<Input />
 				</div>
 				<div className='mb-3'>
-					<label 
-						htmlFor='exampleFormControlTextarea1' 
+					<label
+						htmlFor='exampleFormControlTextarea1'
 						className='form-label'
-					>	
+					>
 						Example textarea
 					</label>
 					<textarea
@@ -3583,24 +3589,24 @@ function App() {
 
 ![](_png/788f019be9a8bfb9e623d641c60df698.png)
 
-
 ## 018 useReducer
 
-
-`useReducer` - это функция, которая управляет ограниченным набором состояний. Она заменяет `useState` и позволяет нам предсказывать определённые наборы состояний компонента. 
+`useReducer` - это функция, которая управляет ограниченным набором состояний. Она заменяет `useState` и позволяет нам предсказывать определённые наборы состояний компонента.
 Хук возвращает само состояние и функцию `dispatch`, которая вызывает изменение состояния.
 `dispatch` принимает в себя объект с одним обязательным свойством `type`, которое хранит в себе тип операции
 
 Хук принимает в себя три аргумента:
+
 - Функцию-reducer, которая отвечает за изменение состояния
-- Начальное состояние 
+- Начальное состояние
 - Ленивое создание начального состояния
 
 И тут у нас построена определённая структура:
+
 - Добавлен хук `useReducer`, который будет контролировать состояние автоплея слайдера
 - Внутрь мы передаём функцию `reducer` и начальное значение состояния
 - Функция `reducer` через `switch`-конструкцию возвращает определённое значение в зависимости от переданного значения `action`. Так же эта функция принимает в себя `state`, чтобы от него иметь возможность поменять состояние
-- Далее мы вызываем работу `useReducer` из вёрстки через функцию `dispatch`, которая принимает в себя экшен. Этот экшен уже будет передан в функцию `reducer` 
+- Далее мы вызываем работу `useReducer` из вёрстки через функцию `dispatch`, которая принимает в себя экшен. Этот экшен уже будет передан в функцию `reducer`
 
 ```JS
 import { useReducer, useState } from 'react';
@@ -3726,11 +3732,9 @@ function App() {
 
 ![](_png/bad67f39f6b5bdaf88adf4c7c96c552c.png)
 
-
 ## 019 Компоненты высшего порядка (HOC)
 
-
-Первым делом нужно посмотреть на то, какой механизм отвечает за логику работы ХОКов. 
+Первым делом нужно посмотреть на то, какой механизм отвечает за логику работы ХОКов.
 За них отвечает подобная логика, когда у нас вызывается и возвращается одна функция внутри другой. Каждая из этих функций обогащает друг друга.
 
 ```JS
@@ -3968,9 +3972,9 @@ function App() {
 
 ![](_png/a51fe382e7fcf43326490e3ac20773ab.png)
 
-Так же есть второй вариант создания ХОКа, когда мы создаём функцию, которая вызывает создание функции, возвращающей компонент из переданного пропса в первую функцию. 
+Так же есть второй вариант создания ХОКа, когда мы создаём функцию, которая вызывает создание функции, возвращающей компонент из переданного пропса в первую функцию.
 
-Конкретно тут ХОК обогащает переданный компонент в него логгером при рендере на странице 
+Конкретно тут ХОК обогащает переданный компонент в него логгером при рендере на странице
 
 ```JS
 const withLogger = (WrappedComponent) => (props) => {
@@ -4004,33 +4008,33 @@ function App() {
 
 Итог:
 
->[!warning] Когда не стоит использовать HOC:
+> [!warning] Когда не стоит использовать HOC:
+>
 > - Если компоненты слишком разные и их логику не получается обобщить. Самый идеальный вариант, когда мы передаём минимальное количество пропсов в возвращаемый компонент:
-> ![](_png/7ba66b9ef77ce451db7cc330e4548253.png)
+>   ![](_png/7ba66b9ef77ce451db7cc330e4548253.png)
 > - Если в проекте имеется только один компонент, который подходит для использования вместе с компонентом высшего порядка
 > - Если приходится каждый раз модифицировать HOC при подключении нового компонента
 
->[!success] Когда использовать:
+> [!success] Когда использовать:
+>
 > - Когда много компонентов имеют схожую логику выполнения
 > - Когда понятно, что ХОК не будет расти со временем из-за схожести логики
 > - Когда нужно добавить общую логику для выполнения самых разных компонентов
-
 
 ## 020 Библиотеки и экосистема React
 
 Современная разработка веб-приложений не представляется без использования сторонних библиотек: нужно быстро выполнить задачу, нужно выполнить задачу на уровне, хочется просто не придумывать велосипед - за всем этим можно обратиться к уже готовым библиотекам
 
->[!note] Полезные ссылки, на которых можно узнать побольше о библиотеках реакта:
->- [Тут](https://proglib.io/p/8-moshchnyh-bibliotek-react-kotorye-stoit-poprobovat-v-2021-godu-2021-01-15) находится список из 10 библиотек, которые позволяет заменить простой функционал реакта
->- [Тут](https://habr.com/ru/company/ruvds/blog/554280/) находятся полезные хуки, которые можно использовать в любом проекте
->- [Тут](https://techrocks.ru/2020/01/18/13-top-react-component-libraries/) находится список библиотек компонентов реакта
->- [Тут](https://www.bornfight.com/blog/top-10-react-hook-libraries/) находится топ реакт-хук-библиотек
->- [Это](https://usehooks.com/) портал с полезными хуками реакта
->- [Тут](https://dev.to/balaevarif/react-2021-10g4) находится информация по всей актуальной экосистеме реакта
-
+> [!note] Полезные ссылки, на которых можно узнать побольше о библиотеках реакта:
+>
+> - [Тут](https://proglib.io/p/8-moshchnyh-bibliotek-react-kotorye-stoit-poprobovat-v-2021-godu-2021-01-15) находится список из 10 библиотек, которые позволяет заменить простой функционал реакта
+> - [Тут](https://habr.com/ru/company/ruvds/blog/554280/) находятся полезные хуки, которые можно использовать в любом проекте
+> - [Тут](https://techrocks.ru/2020/01/18/13-top-react-component-libraries/) находится список библиотек компонентов реакта
+> - [Тут](https://www.bornfight.com/blog/top-10-react-hook-libraries/) находится топ реакт-хук-библиотек
+> - [Это](https://usehooks.com/) портал с полезными хуками реакта
+> - [Тут](https://dev.to/balaevarif/react-2021-10g4) находится информация по всей актуальной экосистеме реакта
 
 ## 021 React Transition Group
-
 
 **React Transition Group** - классический модуль для создания анимаций в React.
 
@@ -4041,6 +4045,7 @@ npm install react-transition-group
 Компонент `Transition`. Он принимает в себя на вход `nodeRef` (элемент ссылки), `in` (элемент появляется или исчезает со страницы) и `timeout` (длительность анимации)
 
 Элемент при появлении делится на три этапа (пропс `in` в позиции `false`, что говорит об отсутствии элемента):
+
 - `onEnter` - инициализация появления
 - `onEntering` - появление
 - `onEntered` - окончание появления на странице
@@ -4054,8 +4059,6 @@ npm install react-transition-group
 Все промежутки ожидания имеют определённую длительность. Анимировать мы можем переход от `entering` к `entered` и от `exiting` к `exited`
 
 ![](_png/b3b718424189284f48dc1128842a73ff.png)
-
-
 
 > Тут стоит отметить, что свойство `display` (`none` и `block`) невозможно анимировать, поэтому их не используем
 
@@ -4234,6 +4237,7 @@ function App() {
 Далее идёт компонент `CSSTransition`. Его отличительная особенность заключается в том, что мы не должны передавать состояния внутрь компонента и рендерить весь компонент через функцию тоже не нужно. Этот компонент работает с готовыми стилями и производит анимацию на её основе.
 
 Данный компонент принимает в себя атрибут classNames, где указывается начальное наименование стилей, которые относятся к этому компоненту и далее они воспроизводятся в зависимости от их префикса:
+
 - `-enter`
 - `-enter-active`
 - `-exit`
@@ -4345,7 +4349,6 @@ const Modal = ({ showModal, setShowTrigger, onClose }) => {
 
 ![](_png/ebeba0982de795a158d2eb551aa6c42d.png)
 
-
 ## 022 Formik, Yup и работа с формами любой сложности
 
 ```bash
@@ -4437,7 +4440,7 @@ export default Basic;
  // Render Prop
  import React from 'react';
  import { Formik, Form, Field, ErrorMessage } from 'formik';
- 
+
  const Basic = () => (
    <div>
      <h1>Any place in your app!</h1>
@@ -4475,7 +4478,7 @@ export default Basic;
      </Formik>
    </div>
  );
- 
+
  export default Basic;
 ```
 
@@ -4771,11 +4774,11 @@ export default Form;
 
 ![](_png/85d9bbea3c34d449a4036e569ff949f6.png)
 
-Так же вместо того, чтобы писать везде одинаковые атрибуты, можно просто вставлять деструктурированный вызов функции `getFieldProps('имя_поля')`, который вернёт все нужные атрибуты в инпут 
+Так же вместо того, чтобы писать везде одинаковые атрибуты, можно просто вставлять деструктурированный вызов функции `getFieldProps('имя_поля')`, который вернёт все нужные атрибуты в инпут
 
 ![](_png/3bf4905e9cf9a2c75d24f4ef4c18010f.png)
 
-Далее, чтобы использовать компоненты самого формика, нужно будет переписать код на классическое поведение без хука 
+Далее, чтобы использовать компоненты самого формика, нужно будет переписать код на классическое поведение без хука
 
 - Нам нужно будет удалить все использования переменной `formik`
 - Перенести все данные из хука в компонент `Formik`
@@ -4865,6 +4868,7 @@ export default FormInput;
 ![](_png/6e742bc302fd90171463486a725ee803.png)
 
 Так же и с полем ошибки - использовать готовый компонент `ErrorMessage` куда более простой и быстрый вариант. Оно в себя принимает:
+
 - `name` - имя поля, к которому привязывается ошибка
 - `component` - тег, которым оно отрендерится на странице
 
@@ -4877,6 +4881,7 @@ export default FormInput;
 ```
 
 Ну и так же формик предоставляет хук `useField`, который позволяет нам сделать свои шаблоны под повторяющиеся формы на странице. Сам хук в себя принимает пропсы, а возвращает кортеж из значений:
+
 - `field` - хранит в себе пропсы формика (включая события `onChange`, `onBlur` и `onValue`)
 - `meta` - хранит метаданные с ошибками и был ли использован данный инпут
 
@@ -4988,34 +4993,34 @@ export default FormInput;
 
 ![](_png/b5e92fb6ae471f0a9584ca81cf4d580f.png)
 
-
 ## 024 Разбор домашнего задания
-
 
 Первым делом, нужно добавить метод, который достанет одного персонажа с сервера по имени
 
 `service > MarvelService.js`
+
 ```JS
-// Вариант модификации готового метода для поиска по имени.  
-// Вызывать его можно вот так: getAllCharacters(null, name)  
-  
-// const getAllCharacters = async (offset = _baseOffset, name = '') => {  
-//     const res = await request(`${_apiBase}characters?limit=9&offset=${offset}${name ? `&name=${name}` : '' }&${_apiKey}`);  
-//     return res.data.results.map(_transformCharacter);  
-// }  
-  
-// Или можно создать отдельный метод для поиска по имени  
-  
-// дополнительная функция для поиска персонажа по имени  
-const getCharacterByName = async (name) => {  
-   const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);  
-   return res.data.results.map(_transformCharacter);  
+// Вариант модификации готового метода для поиска по имени.
+// Вызывать его можно вот так: getAllCharacters(null, name)
+
+// const getAllCharacters = async (offset = _baseOffset, name = '') => {
+//     const res = await request(`${_apiBase}characters?limit=9&offset=${offset}${name ? `&name=${name}` : '' }&${_apiKey}`);
+//     return res.data.results.map(_transformCharacter);
+// }
+
+// Или можно создать отдельный метод для поиска по имени
+
+// дополнительная функция для поиска персонажа по имени
+const getCharacterByName = async (name) => {
+   const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+   return res.data.results.map(_transformCharacter);
 };
 ```
 
 Далее добавим компонент поиска персонажа
 
 `components > CharSearchForm > CharSearchForm.js`
+
 ```JS
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage as FormikErrorMessage } from 'formik';
@@ -5119,6 +5124,7 @@ export default CharSearchForm;
 Тут добавим компонент поиска персонажа на страницу под информацией о выбранном персонаже из списка
 
 `components > pages > MainPage.js`
+
 ```JS
 const MainPage = () => {
 	const [selectedChar, setChar] = useState(null);
@@ -5155,6 +5161,7 @@ const MainPage = () => {
 Тут будет содержаться логика поведения страницы для комикса или персонажа
 
 `components > pages > SinglePage.js`
+
 ```JS
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -5215,6 +5222,7 @@ export default SinglePage;
 И тут мы создаём лейаут для отдельного персонажа
 
 `components > pages > SingleCharacterLayout > SingleCharacterLayout.js`
+
 ```JS
 import './singleCharacterLayout.scss';
 
@@ -5243,6 +5251,7 @@ export default SingleCharacterLayout;
 И финальная часть. Уже компонент `App` определяет то, какая страница у нас загружается - персонаж или комикс. Тут в компонент передаётся `dataType`, который определяет запрос свичч-конструкции
 
 `component > app > App.js`
+
 ```JS
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -5275,9 +5284,9 @@ const App = () => {
 							</Route>
                             {/* рендер комиксов */}
 							<Route exact path='/comics/:id'>
-								<SinglePage 
-									Component={SingleComicLayout} 
-									dataType='comic' 
+								<SinglePage
+									Component={SingleComicLayout}
+									dataType='comic'
 								/>
 							</Route>
                             {/* рендер персонажей */}
@@ -5309,13 +5318,12 @@ export default App;
 
 ![](_png/cb415d47865ef0bc3350efd97e2808ba.png)
 
-
 ## 025 SEO-оптимизация веб-приложений, React-helmet
 
-
-SEO - Search Engine Optimization - это отрасль оптимизации поисковых запросов за счёт выполнения сайтом определённых требований  
+SEO - Search Engine Optimization - это отрасль оптимизации поисковых запросов за счёт выполнения сайтом определённых требований
 
 Основные показатели, влияющие на СЕО положительно:
+
 - Валидность вёрстки
 - Использования семантической вёрстки и валидность тегов
 - Скорость загрузки
@@ -5325,7 +5333,7 @@ SEO - Search Engine Optimization - это отрасль оптимизации 
 
 Обычно, чтобы бороться с такой проблемой, используют фреймворки с SSR (рендерингом страницы на стороне сервера), который сразу отдаёт отрендеренную страницу любому пользователю или роботу. Самый популярный из имеющихся - NextJS. Он хранит в себе все возможности для оптимизации страницы (сам конвертирует изображения, предоставляет роутинг, рендеринг на сервере, общение с сервером через пропсы и даёт настроить метатеги на всех страницах)
 
-Однако подход с SSR требует много вычислительных ресурсов, что приводит к сильной нагрузке на сервера. Поэтому обычно используется пререндеринг страницы через тот же `react-snap`, который будет отдавать боту готовую страницу  
+Однако подход с SSR требует много вычислительных ресурсов, что приводит к сильной нагрузке на сервера. Поэтому обычно используется пререндеринг страницы через тот же `react-snap`, который будет отдавать боту готовую страницу
 
 Чтобы настроить метатеги на странице можно воспользоваться модулем `react-helmet`, который будет работать как на клиенте, так и на сервере
 
@@ -5333,7 +5341,8 @@ SEO - Search Engine Optimization - это отрасль оптимизации 
 npm i react-helmet
 ```
 
-Добавление мета-тегов на страницу выглядит просто: 
+Добавление мета-тегов на страницу выглядит просто:
+
 - Добавляем тег `Helmet` в компонент
 - Внутрь него вставляем нужные мета-теги либо можем передавать их в качестве атрибутов компонента
 
@@ -5342,6 +5351,7 @@ npm i react-helmet
 Вставим мету на страницу со списком комиксов
 
 `components > pages > ComicsPage.js`
+
 ```JS
 import ComicsList from '../comicsList/ComicsList';
 import AppBanner from '../appBanner/AppBanner';
@@ -5366,6 +5376,7 @@ export default ComicsPage;
 Вставим мету на страницу комиксов
 
 `components > pages > SingleComicLayout.js`
+
 ```JS
 const SingleComicLayout = ({ data }) => {
 	const { title, description, pageCount, thumbnail, language, price } = data;
@@ -5395,6 +5406,7 @@ const SingleComicLayout = ({ data }) => {
 Вставим мету на страницу персонажей
 
 `components > pages > SingleCharacterLayout.js`
+
 ```JS
 const SingleCharacterLayout = ({ data }) => {
 	const { name, description, thumbnail } = data;
@@ -5418,6 +5430,7 @@ const SingleCharacterLayout = ({ data }) => {
 И так же можно убрать мета-теги из хтмлки
 
 `index.html`
+
 ```HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -5438,9 +5451,7 @@ const SingleCharacterLayout = ({ data }) => {
 
 ![](_png/d6c57c485c869f7d4ee87904e13715d7.png)
 
-
 ## 026 Принцип конечного автомата (FSM, Finite-state machine) и +1 подход к состояниям
-
 
 Начнём с того, что в приведённом примере ниже, отображение на странице зависит от данных четырёх состояний. Это очень громоздкая и зачастую непонятная конструкция, но ей пользуются для реализации вёрстки на страницах.
 
@@ -5451,6 +5462,7 @@ const SingleCharacterLayout = ({ data }) => {
 Если кнопка скрыта, то она уже имеет определённое состояние. Она не может быть выключена, так как она скрыта и так далее.
 
 На примере курьера можно привести его состояния:
+
 - Ожидание (тут он может отдохнуть, выпить кофе)
 - Получение заказа (тут он уже уточняет адрес, общается с заказчиком и так далее)
 - Доставка заказа (уже тут он перемещается к заказчику)
@@ -5459,6 +5471,7 @@ const SingleCharacterLayout = ({ data }) => {
 Данная концепция не выделяется как отдельный приём. Оно отвечает лишь за то, что мы контролируем количество состояний, которое может быть в приложении.
 
 Для работы со машиной состояний имеется несколько библиотек под JS (их стоит использовать уже вместе с `Redux`):
+
 - [Xstate](https://xstate.js.org/docs/recipes/react.html)
 - [Robot](https://thisrobot.life/)
 - [Machina.js](http://machina-js.org/)
@@ -5468,6 +5481,7 @@ const SingleCharacterLayout = ({ data }) => {
 Первым делом, мы можем удалить состояния `loading` и `error` из хука и так же установку этих состояний внутри хука
 
 `hooks > http.hook.js`
+
 ```JS
 import { useState, useCallback } from 'react';
 
@@ -5475,7 +5489,7 @@ export const useHttp = () => {
 	// Эти две строки больше НЕ НУЖНЫ, так как мы больше не используем данные состояния, а перекладываем всю ответственность на состояние process
 	// const [loading, setLoading] = useState(false);
 	// const [error, setError] = useState(null);
-	
+
 	// тут будет находиться состояние процесса
 	// начальное - ожидание
 	const [process, setProcess] = useState('waiting');
@@ -5521,6 +5535,7 @@ export const useHttp = () => {
 Возвращаем хук установки процесса и состояние самого процесса через хук сервиса общения с сервером
 
 `service > MarvelService.js`
+
 ```JS
 const useMarvelService = () => {
 	const { request, clearError, process, setProcess } = useHttp();
@@ -5543,6 +5558,7 @@ const useMarvelService = () => {
 Эта уже сама машина состояний. Тут мы определяем, какие процессы будут выполняться на разных этапах процесса
 
 `utils > setContent.js`
+
 ```JS
 import Skeleton from '../components/skeleton/Skeleton';
 import Spinner from '../components/spinner/Spinner';
@@ -5568,6 +5584,7 @@ export const setContent = (process, Component, data) => {
 И далее тут в рендере используем `setContent()`. Эта функция будет каждый раз перевызываться при изменении состояния `process`. Так же в этом же компоненте нужно вызывать `setProcess` после того, как мы получили данные внутри `updateChar`
 
 `component > charInfo > CharInfo.js`
+
 ```JS
 const CharInfo = (props) => {
 	const [char, setChar] = useState(null);
@@ -5606,6 +5623,7 @@ const CharInfo = (props) => {
 Тут так же пришлось решать проблему с тем, что в списке во время загрузки отображалось `null` (это приводит к тому, что мы поднимаемся вверх страницы и заново приходится скроллить вниз по списку). Эту проблему можно было решить только переписав функцию установки контента, где мы в загрузке показываем старый список или спиннер (если старых элементов списка нет)
 
 `component > charList > CharList.js`
+
 ```JS
 // !!!
 export const setContent = (process, Component, newItemLoading) => {
@@ -5670,6 +5688,7 @@ const CharList = (props) => {
 Список комиксов так же переводим в стейт-машину
 
 `component > comicsList > ComicsList.js`
+
 ```JS
 // !!
 export const setContent = (process, Component, newItemLoading) => {
@@ -5730,6 +5749,7 @@ const ComicsList = () => {
 Далее модифицируем компонент рандомного персонажа
 
 `component > randomChar > RandomChar.js`
+
 ```JS
 const RandomChar = () => {
 	const [char, setChar] = useState(null);
@@ -5778,7 +5798,7 @@ const RandomChar = () => {
 
 const View = ({ data }) => {
 	const { name, description, thumbnail, homepage, wiki } = data;
-	
+
 	/// CODE ...
 };
 
@@ -5790,6 +5810,7 @@ export default RandomChar;
 И так же можно установить машину состояний для отдельных страниц комиксов и персонажей
 
 `components > pages > SinglePage.js`
+
 ```JS
 const SinglePage = ({ Component, dataType }) => {
 	const { id } = useParams();
@@ -5839,6 +5860,7 @@ const SinglePage = ({ Component, dataType }) => {
 Ну и так же стоит переписать на стейт-машину компонент поиска персонажа
 
 `components > charSearchForm > CharSearchForm.js`
+
 ```JS
 // !!
 export const setContent = (process, Component, updateChar) => {
@@ -5941,9 +5963,7 @@ export default CharSearchForm;
 
 ![](_png/6ca3dfbcc05eff8a6b6a0913e861074a.png)
 
-
 ## 027 Разбираем ошибки сторонних библиотек и проблему с фокусом
-
 
 Представленную ошибку выводит модуль `react-helmet`. Такие ошибки может решить только сам разработчик и реакцию сообщества на данные баги можно найти в обсуждениях на гитхабе, если загуглить ошибку
 

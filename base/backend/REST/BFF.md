@@ -1,4 +1,3 @@
-
 Сайт, посвящённый BFF-паттернам – [https://bff-patterns.com/](https://bff-patterns.com/)
 
 Безопасность в BFF – [https://medium.com/@hasanmahira/web-app-security-understanding-the-meaning-of-the-bff-pattern-e543662d9fe](https://medium.com/@hasanmahira/web-app-security-understanding-the-meaning-of-the-bff-pattern-e543662d9fe)
@@ -24,21 +23,3 @@ Contract First — [https://www.youtube.com/watch?v=-mzzT0b9K54](https://www.yo
 Contract Testing (Arch Days) — [https://www.youtube.com/watch?v=Bt5kC8KlpG8](https://www.youtube.com/watch?v=Bt5kC8KlpG8)
 
 Contract Testing — [https://www.youtube.com/watch?v=yj3sndjLHEA](https://www.youtube.com/watch?v=yj3sndjLHEA)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

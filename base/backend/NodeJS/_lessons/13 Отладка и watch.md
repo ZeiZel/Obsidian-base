@@ -15,6 +15,7 @@ npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prett
 - конечная строка: автоматически
 
 `.prettierrc`
+
 ```JSON
 {
 	"singleQuote": true,
@@ -28,10 +29,11 @@ npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prett
 ```
 
 - `no-unused-vars` - не используемые переменные (включая функции и объекты) - отключено у нас
-- `explicit-function-return-type` - нужно явно указывать, что возвращает функция 
+- `explicit-function-return-type` - нужно явно указывать, что возвращает функция
 - `no-explicit-any` - запрещает использовать `any` - убираем эту настройку
 
 `.eslintrc`
+
 ```JSON
 {
 	"root": true,
@@ -73,6 +75,7 @@ npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prett
 Если мы будем работать в VSCode, то нужно будет сохранить эти настройки. Тут мы устанавливаем в качестве форматтиера `eslint` и форматирование будет происходить при сохранении
 
 `.vscode > settings.json`
+
 ```JSON
 {
 	"[typescript]": {
@@ -93,7 +96,7 @@ npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prett
 	},
 ```
 
-Далее нам нужно будет протипизировать возвраты функции 
+Далее нам нужно будет протипизировать возвраты функции
 
 ```TS
 export interface IBootstrapReturn {
@@ -145,6 +148,7 @@ npm i -D nodemon ts-node
 - `exec` - путь до нашего основного файла приложения (а именно для его запуска)
 
 `nodemon.json`
+
 ```JSON
 {
 	"watch": [
@@ -161,6 +165,7 @@ npm i -D nodemon ts-node
 Так же данная строка в скриптах будет запускать сам монитор нод-приложения:
 
 `package.json`
+
 ```JSON
 "scripts": {
 		"dev": "nodemon"
@@ -176,6 +181,7 @@ npm i -D nodemon ts-node
 Первым делом, чтобы нормально отлаживать приложение, нужно в конфиге ТСа добавить компиляцию карт, чтобы отладчик понимал, к какой части приложения он сейчас обращается
 
 `tsconfig.json`
+
 ```JSON
 {
 	"sourceMap": true,
@@ -185,6 +191,7 @@ npm i -D nodemon ts-node
 Далее, если мы работаем в VSCode, то нужно указать данные настройки для отладчика
 
 `.vscode > launch.json`
+
 ```JSON
 {
 	"version": "0.2.0",
@@ -218,13 +225,14 @@ npm i -D nodemon ts-node
 - `-r` - подключает дополнительный обработчик
 
 `package.json`
+
 ```JSON
 "scripts": {
 		"dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts"
 	},
 ```
 
-Далее переходим в хроме по ссылке в `about:inspect` и там настраиваем наше подключение 
+Далее переходим в хроме по ссылке в `about:inspect` и там настраиваем наше подключение
 
 ![](_png/951201734f60b81527a0aaf59a88c59d.png)
 
@@ -242,7 +250,7 @@ npm i -D nodemon ts-node
 ![](_png/9bf42932b0f055f18f4c85328946dd2c.png)
 
 ![](_png/b3284a9c6f9e987fa7a82548a3f03856.png)
-Тут мы можем увидеть flame graph  с блоками выполняемых задач. Чем длиннее будет блок, тем больше времени тратится на его выполнение. Длинные блоки стоит оптимизировать . 
+Тут мы можем увидеть flame graph с блоками выполняемых задач. Чем длиннее будет блок, тем больше времени тратится на его выполнение. Длинные блоки стоит оптимизировать .
 ![](_png/32d7f44f5f244c309db8922729db7059.png)
 
 ## 077 Мониторинг производительности
@@ -251,7 +259,7 @@ npm i -D nodemon ts-node
 
 ![](_png/c3fc0e5cff785eca8f4f4ce69326e2a8.png)
 
-Первым делом нужно установить саму клинику. Так же в пару с ней модуль имитации нагрузки на систему. 
+Первым делом нужно установить саму клинику. Так же в пару с ней модуль имитации нагрузки на систему.
 
 ```bash
 npm install -g clinic autocannon
@@ -259,7 +267,7 @@ npm install -g clinic autocannon
 
 - `clinic` - вызываем пакет
 - `doctor` - определяем какой именно инструмент будем использовать
-- `--on-port` - определяем настройки 
+- `--on-port` - определяем настройки
 - `autocannon` - через модуль нагрузки
 - `-m` - метод запроса
 - `POST` - отправка сообщения на сервер
@@ -285,6 +293,6 @@ register(req: Request, res: Response, next: NextFunction): void {
 	}
 ```
 
-И попробуем выполнить запрос. Тут мы уже получили плохой график, который явно указывает на огромный рост длительности выполнения ивент лупа. 
+И попробуем выполнить запрос. Тут мы уже получили плохой график, который явно указывает на огромный рост длительности выполнения ивент лупа.
 
 ![](_png/4ff1194b9436bb7f31b530cc00ad5752.png)

@@ -1,13 +1,12 @@
-
 ### 009 Сравнение сред выполнения JS
 
-==NodeJS== имеет своё собственное API, которое несовместимо с браузером, поэтому могут быть некоторые сложности из-за несовместимости со стандартным ==JS== (в браузере). 
+==NodeJS== имеет своё собственное API, которое несовместимо с браузером, поэтому могут быть некоторые сложности из-за несовместимости со стандартным ==JS== (в браузере).
 
 Так же нода имеет свои глобальные переменные, так как она работает непосредственно с ПК
 
 ![](_png/2e11ebc3166ac5f4125b2a42939444d0.png)
 
-Так же существует множество других сред исполнения, которые позволяют запустить JS на сервере и один из них - Deno. 
+Так же существует множество других сред исполнения, которые позволяют запустить JS на сервере и один из них - Deno.
 
 Эта технология пока молода и коммьюнити не такое и большое.
 
@@ -18,6 +17,7 @@
 REPL-режим - это режим, при котором мы можем запустить определённую среду в консоли
 
 Запускается REPL в ноде командой:
+
 ```bash
 node
 ```
@@ -29,9 +29,9 @@ node
 Для примера создадим файл `app.js`, в котором опишем небольшую логику чтения данных из файла:
 
 ```JS
-fs = require("fs");  
-  
-const data = fs.readFileSync("./data.txt");  
+fs = require("fs");
+
+const data = fs.readFileSync("./data.txt");
 console.log(data.toString());
 ```
 
@@ -44,9 +44,10 @@ console.log(data.toString());
 ![](_png/6a31fce233b2dbf85d88d07f794086e0.png)
 
 История выраженности нужности импортов достаточно небольшая и она состояла из трёх этапов:
-1) IIFE функции
-2) Второй стандарт появился в NodeJS и работал через `require`. Для работы в браузере он требовал сборку в один файл (через сборщики модулей)
-3) Последняя версия стандарта появилась сначала для работы на фронте, но в последние несколько лет её можно использовать и на бэке
+
+1. IIFE функции
+2. Второй стандарт появился в NodeJS и работал через `require`. Для работы в браузере он требовал сборку в один файл (через сборщики модулей)
+3. Последняя версия стандарта появилась сначала для работы на фронте, но в последние несколько лет её можно использовать и на бэке
 
 ![](_png/d42fce8942ebde1de702dd22275561b8.png)
 
@@ -74,40 +75,42 @@ console.log(data.toString());
 
 ### 012 CommonJS Modules
 
-Напишем небольшой пример, где мы будем определять владельца кольца. 
+Напишем небольшой пример, где мы будем определять владельца кольца.
 С помощью `module.exports = { имена экспортов };` мы определяем, что будем экспортировать из модуля
 
 `characters.js`
+
 ```JS
-let characters = [  
-   { name: 'Фродо', hasRing: false },  
-   { name: 'Бильбо', hasRing: false },  
-];  
-  
-function steelRing(characters, owner) {  
+let characters = [
+   { name: 'Фродо', hasRing: false },
+   { name: 'Бильбо', hasRing: false },
+];
+
+function steelRing(characters, owner) {
 	// тут функция конкретно изменяла вложенное в неё значение
-   characters.map(c => {  
-      if (c.name == owner) {  
-         c.hasRing = true;  
-      } else {  
-         c.hasRing = false;  
-      }  
-   });  
-}  
-  
+   characters.map(c => {
+      if (c.name == owner) {
+         c.hasRing = true;
+      } else {
+         c.hasRing = false;
+      }
+   });
+}
+
 module.exports = { characters, steelRing };
 ```
 
 Уже тут через деструктуризацию и функцию `require()`, мы получаем доступ к экспортированным объектам модуля
 
 `app.js`
+
 ```JS
-const { characters, steelRing } = require('./characters.js');  
-  
-steelRing(characters, 'Фродо');  
-  
-for (const c of characters) {  
-   console.log(c);  
+const { characters, steelRing } = require('./characters.js');
+
+steelRing(characters, 'Фродо');
+
+for (const c of characters) {
+   console.log(c);
 }
 ```
 
@@ -116,36 +119,38 @@ for (const c of characters) {
 И дальше нужно переписать код так, чтобы функция работала правильно и не мутировала внутри себя значение, а возвращала изменённое значение вовне.
 
 `characters.js`
+
 ```JS
-let characters = [  
-   { name: 'Фродо', hasRing: false },  
-   { name: 'Бильбо', hasRing: false },  
-];  
-  
-function steelRing(characters, owner) {  
-   return characters.map(c => {  
-      if (c.name == owner) {  
-         c.hasRing = true;  
-      } else {  
-         c.hasRing = false;  
-      }  
-   });  
-}  
-  
+let characters = [
+   { name: 'Фродо', hasRing: false },
+   { name: 'Бильбо', hasRing: false },
+];
+
+function steelRing(characters, owner) {
+   return characters.map(c => {
+      if (c.name == owner) {
+         c.hasRing = true;
+      } else {
+         c.hasRing = false;
+      }
+   });
+}
+
 module.exports = { characters, steelRing };
 
 ```
 
 `app.js`
+
 ```JS
-const { characters, steelRing } = require('./characters.js');  
+const { characters, steelRing } = require('./characters.js');
 
 // Нужно создать новую переменную, которая будет хранить старую версию массива и принимать изменённый
-let myChars = characters;  
-myChars = steelRing(myChars, 'Фродо');  
-  
-for (const c of characters) {  
-   console.log(c);  
+let myChars = characters;
+myChars = steelRing(myChars, 'Фродо');
+
+for (const c of characters) {
+   console.log(c);
 }
 ```
 
@@ -153,34 +158,34 @@ for (const c of characters) {
 
 ```JS
 // characters.js
-module.exports = function log() {  
-   console.log('log');  
+module.exports = function log() {
+   console.log('log');
 }
 
 // app.js
-const log = require('./characters.js');  
+const log = require('./characters.js');
 log();
 ```
 
->[!warning] Круговые зависимости, когда у нас есть импорты и экспорты между двумя файлами - могут привести к ошибке (потому как интерпретатор будет пытаться достучаться до элемента, которого пока не существует)
+> [!warning] Круговые зависимости, когда у нас есть импорты и экспорты между двумя файлами - могут привести к ошибке (потому как интерпретатор будет пытаться достучаться до элемента, которого пока не существует)
 
 И тут далее можно увидеть пример, когда мы подгружаем модуль в проект по условию (при выполнении условия - модуль подгружается)
 
 ```JS
 // characters.js
-console.log('characters.js загружен');  
-  
-module.exports = function log() {  
-   console.log('log');  
+console.log('characters.js загружен');
+
+module.exports = function log() {
+   console.log('log');
 }
 
 // app.js
-const a = 1;  
-if (a > 0) {  
-   const log = require('./characters.js');  
-   log();  
-} else {  
-   console.log('Меньше 0');  
+const a = 1;
+if (a > 0) {
+   const log = require('./characters.js');
+   log();
+} else {
+   console.log('Меньше 0');
 }
 ```
 
@@ -189,6 +194,7 @@ if (a > 0) {
 В обычной модульной системе, мы можем с помощью ключевого слова `export` экспортировать объект из модуля
 
 `characters.mjs`
+
 ```JS
 export const characters = ["Фродо", "Бильбо"];
 
@@ -200,6 +206,7 @@ export function greet(character) {
 Далее через конструкцию `import` импортировать его в другом файле
 
 `app.mjs`
+
 ```JS
 import { characters, greet } from "./characters.mjs";
 
@@ -208,9 +215,10 @@ for (const c of characters) {
 }
 ```
 
-Так же мы можем импортировать сразу все объекты через конструкцию `* as имя` 
+Так же мы можем импортировать сразу все объекты через конструкцию `* as имя`
 
 `app.mjs`
+
 ```JS
 import * as char from "./characters.mjs";
 
@@ -222,6 +230,7 @@ for (const c of char.characters) {
 Так же мы имеем дефолтный экспорт `export default` - это принимаемое значение из модуля по умолчанию
 
 `characters.mjs`
+
 ```JS
 export const characters = ["Фродо", "Бильбо"];
 
@@ -233,7 +242,9 @@ export default function log() {
 	console.log("log");
 }
 ```
+
 `app.mjs`
+
 ```JS
 import log, { characters, greet } from "./characters.mjs";
 
@@ -244,9 +255,10 @@ for (const c of characters) {
 log();
 ```
 
-Так же нам ничто не мешает объединять конструкции и импортировать дефолтную функцию + все объекты модуля 
+Так же нам ничто не мешает объединять конструкции и импортировать дефолтную функцию + все объекты модуля
 
 `app.mjs`
+
 ```JS
 import log, * as char from "./characters.mjs";
 
@@ -260,6 +272,7 @@ log();
 Дальше мы можем столкнуться с такой проблемой при большом количестве импортов, что имена совпадают у объектов. Чтобы решить проблему, можно переопределить импортируемый объект
 
 `app.mjs`
+
 ```JS
 import log, {characters, greet as hello} from "./characters.mjs";
 
@@ -273,6 +286,7 @@ log();
 Так же присутствует в ноде асинхронный импорт модуля, который позволяет произвести es module испорт из любого места. Сразу нужно сказать, что он возвращает промис, поэтому его нужно дожидаться
 
 `app.mjs`
+
 ```JS
 async function main() {
 	const { characters, greet } = await import("./characters.mjs");
@@ -287,6 +301,7 @@ main();
 Так же никто нам не мешает ловить и обрабатывать ошибки при данных импортах
 
 `app.mjs`
+
 ```JS
 async function main() {
 	try {
@@ -303,33 +318,33 @@ async function main() {
 main();
 ```
 
->[!note] По возможности стоит пользоваться конкретно таким импортом, потому что он позволяет импортировать только то, что нужно, он асинхронен и удобен
+> [!note] По возможности стоит пользоваться конкретно таким импортом, потому что он позволяет импортировать только то, что нужно, он асинхронен и удобен
 
 ### 014 Глобальные переменные
 
 Глобальные переменные - это переменные, доступ к которым мы можем получить из любого места приложения без дополнительных импортов и вызовов.
 
-Модули делятся на глобальные и глобальные модульные. Конкретно вторые зависят от того модуля, из которого мы их вызваем 
+Модули делятся на глобальные и глобальные модульные. Конкретно вторые зависят от того модуля, из которого мы их вызваем
 
 Модуль `global` - это корневой объект всех переменных. Мы можем записать `global.console`, а так же и просто `console`
 
-1) Группа глобальных объектов, которые не категоризируются
-	1) `preformance` - помогает определить производительность 
-	2) `Buffer` - читает набор байт
-	3) `AbortController` - позволяет прерывать API, основанные на промисах
-	4) `queueMicrotask` - это планировщик задач для `V8`
-	5) `WebAssembly` - хранит модули `WebAssembly`
-3) Группа таймеров
-4) Группа работы с URL
-5) Группа работы с сообщениями (используются в вебсокетах)
-6) Группа работы с событиями
-7) Группа работы с текстом (например, перевод текста в другую кодировки и обратно)
-8) Группа модулей
-	1) `__dirname` - получает путь до модуля
-	2) `__filename` - получает имя файла
-	3) `exports`
-	4) `module`
-	5) `require()`
+1. Группа глобальных объектов, которые не категоризируются
+    1. `preformance` - помогает определить производительность
+    2. `Buffer` - читает набор байт
+    3. `AbortController` - позволяет прерывать API, основанные на промисах
+    4. `queueMicrotask` - это планировщик задач для `V8`
+    5. `WebAssembly` - хранит модули `WebAssembly`
+2. Группа таймеров
+3. Группа работы с URL
+4. Группа работы с сообщениями (используются в вебсокетах)
+5. Группа работы с событиями
+6. Группа работы с текстом (например, перевод текста в другую кодировки и обратно)
+7. Группа модулей
+    1. `__dirname` - получает путь до модуля
+    2. `__filename` - получает имя файла
+    3. `exports`
+    4. `module`
+    5. `require()`
 
 ![](_png/8cf7a0d07d0166cd672998c7f89b976e.png)
 
@@ -351,10 +366,11 @@ console.log(__filename);
 
 ![](_png/1eece5bc4d032f3d718d16febf1a71fe.png)
 
-Через функции `addListener` и `on` мы подписываем слушателя на определённые события и можем выполнять их через `emit`. 
-Чтобы удалить события, нам нужно воспользоваться `removeListener`, `removeAllListeners` или `off`. Удалять события важно, так как они отвечают за огромные утечки памяти.  
+Через функции `addListener` и `on` мы подписываем слушателя на определённые события и можем выполнять их через `emit`.
+Чтобы удалить события, нам нужно воспользоваться `removeListener`, `removeAllListeners` или `off`. Удалять события важно, так как они отвечают за огромные утечки памяти.
 
 `app.js`
+
 ```JS
 // добавляем модуль ивентов
 const EventEmitter = require("events");
@@ -385,6 +401,7 @@ myEmitter.emit("connected"); // ничего не произойдет
 Таким образом мы можем передавать данные в наши листенеры
 
 `app.js`
+
 ```JS
 // Создание листенера с приёмом данных
 myEmitter.on("message", (data) => {
@@ -401,6 +418,7 @@ myEmitter.emit("message", {
 Так же функция `once()` позволяет создать событие, которое сработает только однажды, а потом удалится
 
 `app.js`
+
 ```JS
 // Это событие сработает только один раз и потом удалится
 myEmitter.once("off", () => {
@@ -414,6 +432,7 @@ myEmitter.emit("off"); // ничего не произойдёт
 Мы можем определить своё собственное максимальное количество слушателей на наше событие и получить это количество
 
 `app.js`
+
 ```JS
 console.log(myEmitter.getMaxListeners()); // 10
 myEmitter.setMaxListeners(1); // устанавливаем максимальное число листенеров на наше событие
@@ -433,7 +452,7 @@ myEmitter.on("message", (data) => {
 
 myEmitter.prependListener("message", () => {
 	console.log("Prepand"); // вызовется первым
-}); 
+});
 
 // триггерим листенер с передачей в него данных
 myEmitter.emit("message", {
@@ -444,7 +463,7 @@ myEmitter.emit("message", {
 console.log(myEmitter.listeners("message")); // выведет массив листенеров данного события
 ```
 
-Тут мы можем вывести все имена наших имеющихся событий 
+Тут мы можем вывести все имена наших имеющихся событий
 
 ```JS
 console.log(myEmitter.eventNames()); // выведет массив имён событий
@@ -461,7 +480,7 @@ myEmitter.on("error", (err) => {
 myEmitter.emit("error", new Error("BOOOOOOOOOOOOOOOOOOM!"));
 ```
 
-Использование ==Event Target== (*не рекомендуется*): 
+Использование ==Event Target== (_не рекомендуется_):
 
 ```JS
 // инициализация ивента

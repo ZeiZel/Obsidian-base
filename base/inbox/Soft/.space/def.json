@@ -1,1 +1,9 @@
-{"_filters":[],"_contexts":[],"_links":[],"_sort":{"field":"rank","asc":false,"group":false,"recursive":false},"_template":"","_templateName":"","_subfolders":""}
+{
+	"_filters": [],
+	"_contexts": [],
+	"_links": [],
+	"_sort": { "field": "rank", "asc": false, "group": false, "recursive": false },
+	"_template": "",
+	"_templateName": "",
+	"_subfolders": ""
+}

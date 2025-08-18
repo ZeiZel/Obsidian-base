@@ -22,6 +22,7 @@ npm i font-awesome --save
 То нам нужно поменять пути в основном конфиге
 
 `forge.config.ts`
+
 ```TS
 const config: ForgeConfig = {
 	packagerConfig: {},
@@ -56,6 +57,7 @@ const config: ForgeConfig = {
 И так же поменять тут входную точку в мэйн процесс
 
 `webpack.main.config.ts`
+
 ```TS
 export const mainConfig: Configuration = {
 	/**
@@ -76,6 +78,7 @@ export const mainConfig: Configuration = {
 Так выглядит основной документ
 
 `renderer > index.html`
+
 ```HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -119,6 +122,7 @@ code {
 Так выглядит основной файл ==React==
 
 `renderer > renderer.tsx`
+
 ```TSX
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
@@ -145,6 +149,7 @@ root.render(
 Так выглядит первый наш подключенный компонент со всем приложением
 
 `renderer > app > app.tsx`
+
 ```TSX
 import React, {Component} from "react";
 
@@ -291,6 +296,7 @@ export default App;
 В конфиге ТСки нужно добавить строчку `"jsx": "react-jsx"`, которая скажет, что мы работаем с библиотекой реакта
 
 `tsconfig.json`
+
 ```JSON
 {
   "compilerOptions": {
