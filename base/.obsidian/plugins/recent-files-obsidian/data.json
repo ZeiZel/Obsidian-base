@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "FSD",
+      "path": "architecture/Architecture/FSD/FSD.md"
+    },
+    {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
     },
@@ -39,10 +43,6 @@
     {
       "basename": "Продвинутый FrontEnd",
       "path": "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
-    },
-    {
-      "basename": "FSD",
-      "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
       "basename": "Плагины для разработки",

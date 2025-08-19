@@ -224,7 +224,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -291,7 +291,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275.51103591918945
+    "width": 275.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -369,19 +370,9 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
-          },
-          {
-            "id": "5590d3a98c9b49cc",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -404,20 +395,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
+                "file": "architecture/Architecture/FSD/FSD.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Алгоритмы и Структуры даных"
+              "title": "Outline of FSD"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 454.5
+    "width": 454.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -437,10 +430,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "5590d3a98c9b49cc",
+  "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
-    "frontend/React/React + Redux.md",
+    "_png/Pasted image 20250819200826.png",
     "cs/Алгоритмы и Структуры даных.md",
+    "frontend/React/React + Redux.md",
     "frontend/JavaScript/JS.md",
     "frontend/JavaScript/JavaScript.md",
     "frontend/React/Профилирование React.md",
@@ -474,7 +468,6 @@
     "frontend/React/_lessons/09 - React + Redux.md",
     "frontend/Vue/Nuxt/Nuxt.md",
     "frontend/State Managers/Zustand.md",
-    "frontend/microfrontends.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",

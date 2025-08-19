@@ -701,7 +701,6 @@ export const CONFIG: EnvConfig = {
 Теперь остаётся только создать для них публичное АПИ
 
 `src / shared / config / index.ts`
-
 ```TS
 export { CONFIG } from './env';
 export type { EnvConfig } from './env';
@@ -709,8 +708,9 @@ export type { EnvConfig } from './env';
 
 ### API клиент
 
-`src / shared / api / client.ts`
+Создаём едный инстанс клиента axios
 
+`src / shared / api / client.ts`
 ```TS
 import axios from 'axios';
 import { CONFIG } from '../config';
@@ -723,8 +723,9 @@ export const http = axios.create({
 });
 ```
 
-`src / shared / api / access-token.intecepter.ts`
+Далее рядом кладём интерцептор авторизации
 
+`src / shared / api / access-token.intecepter.ts`
 ```TS
 import { http } from './client';
 
@@ -739,16 +740,25 @@ http.interceptors.request.use(request => {
 });
 ```
 
-`src / shared / api / index.ts`
+И просто экспортируем из `shared` инстанс API
 
+`src / shared / api / index.ts`
 ```TS
 export { http } from './client'
 ```
 
+Далее уже все запросы мы будем располагать в своих отдельных слоях, которые непосредственно будут отвечать за сущность
+
 ### Библиотека
 
-`src / shared / lib / hooks / useDebounce.ts`
+`lib` хранит в себе всё то, что нам не удалось распределить по основным сегментам. 
 
+Мы можем разбить этот сегмент **по типу** - `hooks`, `components`, `helpers`. Но это будет *плохой* вариант. 
+Более *правильным* в данном контексте будет разбиение **по назначению** - `storybook`, `graphql`, `debounce`, `tests`. И уже внутри этих папок располагать хуки и хелперы, которые относятся к данной доменной области. 
+
+Пример с первым типом разделения: 
+
+`src / shared / lib / hooks / useDebounce.ts`
 ```TS
 import { useState, useEffect } from 'react';
 
@@ -772,22 +782,27 @@ export function useDebounce<T>(value: T, delay: number) {
 }
 ```
 
-`src / shared / lib / hooks / index.ts`
+И далее экспортируем элементы:
 
+`src / shared / lib / hooks / index.ts`
 ```TS
 export { useDebounce } from './useDebounce'
 ```
 
 `src / shared / lib / index.ts`
-
 ```TS
 export { useDebounce } from './hooks'
 ```
 
+>[!warning] В `lib` папки `shared` нельзя класть хелперы, которые относятся к определённой сущности! Хэлпер `divideNum` - в `shared`, а `calcCredit` - в сущность с кредитом.
+
 ### UI компоненты
 
-`src / shared / ui / Tag / Tag.module.css`
+Все ui-компоненты, которые мы используем в приложении (`Tag`, `Text`, `Heading`, `Card`) располагаются в сегменте `ui`
 
+Добавляем элемент `Tag` в `shared > ui > Tag`
+
+`src / shared / ui / Tag / Tag.module.css`
 ```CSS
 .tag {
   display: flex;
@@ -854,7 +869,6 @@ export { useDebounce } from './hooks'
 ```
 
 `src / shared / ui / Tag / Tag.props.ts`
-
 ```TS
 import type { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 import type { IconType } from '../../../assets/Icon/Icon';
@@ -870,7 +884,6 @@ export interface TagProps
 ```
 
 `src / shared / ui / Tag / Tag.tsx`
-
 ```TS
 import cn from "classnames";
 
@@ -897,10 +910,9 @@ export const Tag = ({ icon, size, color, children, className }: TagProps) => {
 };
 ```
 
-Далее просто экспортируем все элементы из данного слайса
+Далее просто экспортируем все элементы из данного сегмента
 
 `src / shared / ui / index.ts`
-
 ```TS
 export { Footer } from './Footer/Footer'
 export { Tag } from './Tag/Tag'
@@ -908,7 +920,36 @@ export { Tag } from './Tag/Tag'
 
 ### Импорты в shared
 
+Внутри `shared` разрешены импорты одних элементов в другие. Так же разрешено импортировать в один ui-элемент другие ui-элементы. 
+Но такого подхода лучше избегать и использовать композицию (добавлять те же самые слоты для вкладывания иконки, а не вшивать её). 
+
+Основная цель - делать максимально атомарные элементы.
+
+![](../../../_png/Pasted%20image%2020250819200826.png)
+
 ### Что ниже shared
+
+FSD - довольно гибкий инструмент. Нам не всегда может быть удобно располагать некоторые библиотеки в рамках чисто только наших слоёв. 
+
+Некоторые элементы нужны везде, но они могут относиться напрямую в зависимости тех или иных компонентов. 
+
+Например, иконки. Это элементы, которые удобно разместить в отдельной папке, чтобы избежать проблем с нарушением иерархии импорта или реализации композиции.
+Все иконки можно легко перенести в слой `assets`, который можно легко применить для всех других слоёв.
+
+`src / assets / Icon / Icon.tsx`
+```TSX
+import Check from './icons/check.svg?react'
+
+export const Icon = {
+	Check
+};
+
+export type IconType = keyof typeof Icon;
+```
+
+>[!success] Таким образом, иконки будут находится ниже shared слоя и не будут нарушать иерархию импортов
+
+
 
 ---
 
@@ -1052,15 +1093,85 @@ Entities - это слой концепицй из реального мира, 
 
 ### Создание Slices
 
+
+
+
+
+
+
+
+
+
+
+
 ### State managment
+
+
+
+
+
+
+
+
+
+
+
 
 ### API
 
+
+
+
+
+
+
+
+
+
 ### UI компоненты
+
+
+
+
+
+
+
+
+
+
 
 ### Выделение entities
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Кросс-импорты
+
+Кросс-импорты в FSD реализуются через договорённость. Мы в сущности указываем особый public API, который располагается в `@x/` и в нём хранится наименование слайса, для которого предназначено это публичное API.
+
+Условно: `entities/user/@x/auth`. Тут мы экспортируем из сущности `user` определённые элементы, которые нужны в сущности `auth`
+
+Пример:
+Экспортируем из сущности `user` интерфейс `User` для использования в сущности `review`
+
+`src / entities / user / @x / review.ts`
+```TS
+export type { User } from '../model/user.model'
+```
+
+
+
+
 
 ---
 
@@ -1094,11 +1205,64 @@ Features должно быть то, что переиспользуемыми!
 
 ### Применение feature
 
+У нас есть слайс `Article`, который отвечает за статью.
+
+Статью можно:
+- лайкнуть
+- распространить
+
+Фича лайка статьи
+
+`src / features / artice / ui / Like / Like.tsx`
+```TSX
+export function Like() {
+	return <>
+		Like
+	</>
+}
+```
+
+Фича распространения статьи
+
+`src / features / artice / ui / Share / Share.tsx`
+```TSX
+export function Share() {
+	return <>
+		Поделиться
+	</>
+}
+```
+
+Далее делаем глобальный экспорт
+
+`src/features/artice/index.ts`
+```TS
+export { Like } from './ui/Like/Like'
+export { Share } from './ui/Share/Share'
+```
+
 ### Специфичность CSS
+
+
+
+
+
+
+
 
 ### Упражнение - выделение features
 
+
+
+
+
+
+
 ### Упражнение - разметка страниц
+
+
+
+
 
 ---
 
