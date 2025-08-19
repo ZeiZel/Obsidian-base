@@ -1093,52 +1093,203 @@ Entities - это слой концепицй из реального мира, 
 
 ### Создание Slices
 
+Выделение сущностей напрямую зависит от доменных областей, которые покрывает наше приложение
 
-
-
-
-
-
-
-
-
-
+`src/entities/user/index.ts`
+`src/entities/review/index.ts`
+`src/entities/rating/index.ts`
+`src/entities/correction/index.ts`
+`src/entities/company/index.ts`
+`src/entities/category/index.ts`
 
 ### State managment
 
+Устанавливаем стейт-менеджер
+
+```bash
+npm i zustand
+```
+
+Описываем интерфейс пользователя
+
+`src/entities/user/model/user.model.ts`
+```TS
+export interface User {
+	email: string;
+	name: string;
+}
+```
+
+Описываем стейт пользователя
+
+`src/entities/user/model/user.store.ts`
+```TS
+import type { StateCreator } from 'zustand';
+import type { User } from '.';
+import { createWithEqualityFn } from 'zustand/traditional';
+import { devtools } from 'zustand/middleware';
+
+export type UserState = {
+	profile?: User;
+}
+
+export type UserActions = {
+	getProfile: () => void
+}
+
+type createUserStoreType = StateCreator<UserState & UserActions>;
 
 
+const userSlice: createUserStoreType = () => ({
+	profile: undefined,
+	getProfile: async () => {
+		// ... получение  профиля
+	}
+})
 
+export const useUserStore = createWithEqualityFn<UserState & UserActions>()(
+	devtools(userSlice, {
+		name: "userStore"
+	})
+)
+```
 
+Экспортируем хук для получения клиента и пользователя из модели
 
+`src/entities/user/model/index.ts`
+```TS
+export type { User } from './user.model'
+export { useUserStore } from './user.store'
+```
 
+Экспортируем сегмент модели из слайса
 
+`src/entities/user/index.ts`
+```TS
+export * from './model'
+```
 
+Экспортируем слайс из слоя
 
+`src/entities/index.ts`
+```TS
+export * from './user'
+```
 
+И теперь мы можем достать имя клиента на уровне лейаута страницы и отобразить его
+
+`src/app/layout/Layout.tsx`
+```TSX
+import { Outlet } from 'react-router'
+import { Footer } from '@/shared/ui'
+import { Icon } from '@/assets'
+import { useUserStore } from '@/entities'
+
+export function Layout() {
+	const { profile } = useUserStore()
+
+	return <div>
+		<div>Шапка</div>
+		{profile?.name}
+		<Icon.Check />
+		<Outlet />
+		<Footer />
+	</div>
+}
+```
 
 ### API
 
+Описываем базовые роуты для отдельной сущности. Тут будут находиться константы путей, куда должен полететь запрос
 
+`src / entities / user / api / routes.ts`
+```TS
+import { CONFIG } from '@/shared/config';
 
+export const USER_API = {
+	profile: `${CONFIG.API_URL}/user/me`,
+	byUsername: (username: string) => `${CONFIG.API_URL}/user/username/${username}`
+}
+```
 
+Далее описываем отдельный запрос. Интерфейсы под Request и Response должны находиться вместе с запросом.
 
+`src / entities / user / api / requests / get-profile.request.ts`
+```TS
+import { http } from '@/shared/api';
+import { USER_API } from '../routes';
+import type { User } from '../../model';
 
+export async function getProfile() {
+	// Обработка ошибки
+	const { data } = await http.get<User>(USER_API.profile);
+	return data;
+}
+```
 
+Далее собираем публичное АПИ из сегмента АПИ
 
+`src / entities / user / api / index.ts`
+```TS
+export { USER_API } from './routes';
+export { getProfile } from './requests/get-profile.request'
+```
 
+Добавляем метод для получения клиента в машину состояний
+
+`src / entities / user / model / user.store.ts`
+```TS
+import { getProfile } from '../api';
+
+const userSlice: createUserStoreType = (set) => ({
+	profile: undefined,
+	getProfile: async () => {
+		const user = await getProfile();
+		set({ profile: user });
+	}
+})
+```
+
+Примерно так выглядит итоговая структура
+
+![](../../../_png/Pasted%20image%2020250819212558.png)
 
 ### UI компоненты
 
+Создаём ui-элемент аватара пользователя. Он будет находиться тут, так как под него будет свой запрос на получение аватара и этот компонент будет служить только для отображения аватара клиента. В приложении нет других мест, где мы мог примениться этот аватар, поэтому смысла выносить его в ui-компонент - мало. 
 
+`src / entities / user / ui / Avatar / Avatar.tsx`
+```TSX
+import styles from './Avatar.module.css'
 
+export function Avatar() {
+	return <div className={styles.avatar}>
+	</div>
+}
+```
 
+`src / entities / user / ui / Avatar / Avatar.module.css`
+```CSS
+.avatar {
+	border: 1px solid white;
+	border-radius: 50px;
+}
+```
 
+Публичное АПИ из сегмента
 
+`src / entities / user / ui / index.ts`
+```TS
+export { Avatar } from './Avatar/Avatar'
+```
 
+Публичное АПИ из слайса
 
-
-
+`src / entities / user / index.ts`
+```TS
+export * from './model'
+export * from './ui'
+```
 
 ### Выделение entities
 
@@ -1168,7 +1319,6 @@ Entities - это слой концепицй из реального мира, 
 ```TS
 export type { User } from '../model/user.model'
 ```
-
 
 
 
@@ -1245,10 +1395,51 @@ export { Share } from './ui/Share/Share'
 
 
 
+`src/features/artice/ui/Like/Like.module.css`
+```CSS
+.like.like {
+	height: 100px;
+}
+```
 
 
 
+`src/features/artice/ui/Like/Like.tsx`
+```TSX
+import { Tag } from '@/shared/ui';
+import styles from './Like.module.css';
 
+export function Like() {
+	return <>
+		<Tag size='m' color='orange' icon='Check' className={styles.like}>Привет</Tag>
+	</>
+}
+```
+
+
+
+`src/shared/ui/index.ts`
+```TS
+export { Footer } from './Footer/Footer'
+export { Tag } from './Tag/Tag'
+```
+
+Добавляем фичу лайка на главную
+
+`src/pages/main/ui/MainPage/MainPage.tsx`
+```TSX
+import { Link } from 'react-router';
+import { ROUTES } from '@/shared/routes';
+import { Like } from '@/features/artice';
+
+export function MainPage() {
+	return <div>
+		Главная
+		<Link to={ROUTES.profile.index}>Профиль</Link>
+		<Like />
+	</div>
+}
+```
 
 ### Упражнение - выделение features
 
@@ -1289,11 +1480,41 @@ Widgets - это большие самодостаточные блоки инт
 
 ### Примеры Widget
 
+Создаём виджет сетки категорий
+
+`src / widgets / category / ui / CategoryGrid / CategoryGrid.tsx`
+```TSX
+export function CategoryGrid() {
+	return <></>
+}
+```
+
+Далее создаём так же публичное АПИ из слайса категорий
+
+`src/widgets/category/index.ts`
+
 ### Processes
+
+
+
+
+
+
 
 ### Упражнение - выделение виджетов
 
+
+
+
+
+
 ### Упражнение - финал декомпозиции
+
+
+
+
+
+
 
 ---
 
