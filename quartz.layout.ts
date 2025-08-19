@@ -30,7 +30,7 @@ export const sharedPageComponents: SharedLayout = {
 	footer: Footer({
 		links: {
 			'This repo on GitHub': 'https://github.com/ZeiZel/Obsidian-base',
-			'Me on GitHub': 'https://github.com/ZeiZel',
+			'Me on GitHub': 'https://github.com/zoyzeal',
 			'Contact with me': 'https://t.me/ZeiZel',
 		},
 	}),
@@ -39,7 +39,6 @@ export const sharedPageComponents: SharedLayout = {
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
 	beforeBody: [
-		Breadcrumbs({ rootName: 'Главная' }),
 		ConditionalRender({
 			component: Breadcrumbs(),
 			condition: (page) => page.fileData.slug !== 'index',
