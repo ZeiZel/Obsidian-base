@@ -1095,6 +1095,10 @@ Entities - это слой концепицй из реального мира, 
 
 Выделение сущностей напрямую зависит от доменных областей, которые покрывает наше приложение
 
+```bash
+fsd e user categoty review rating correction company -s ui, api, model
+```
+
 `src/entities/user/index.ts`
 `src/entities/review/index.ts`
 `src/entities/rating/index.ts`
@@ -1104,15 +1108,17 @@ Entities - это слой концепицй из реального мира, 
 
 ### State managment
 
+`model` - это часть слоя, которая хранит стейты, схемы валидации, интерфейсы и константы - всё то, что связано с моделью определённой сущности (слайса)
+
 Устанавливаем стейт-менеджер
 
 ```bash
 npm i zustand
 ```
 
-Описываем интерфейс пользователя
+Описываем интерфейс пользователя. Так как это корневая модель сущности, то её можно так же описать как `.model`
 
-`src/entities/user/model/user.model.ts`
+`src / entities / user / model / user.model.ts`
 ```TS
 export interface User {
 	email: string;
@@ -1200,7 +1206,7 @@ export function Layout() {
 
 ### API
 
-Описываем базовые роуты для отдельной сущности. Тут будут находиться константы путей, куда должен полететь запрос
+Описываем базовые роуты для отдельной сущности. Тут будут находиться константы путей, куда должен полететь запрос конкретно для сущности пользователя
 
 `src / entities / user / api / routes.ts`
 ```TS
@@ -1208,9 +1214,12 @@ import { CONFIG } from '@/shared/config';
 
 export const USER_API = {
 	profile: `${CONFIG.API_URL}/user/me`,
-	byUsername: (username: string) => `${CONFIG.API_URL}/user/username/${username}`
+	byUsername: (username: string) => 
+		`${CONFIG.API_URL}/user/username/${username}`
 }
 ```
+
+Все запросы мы можем положить в `api.ts` либо поделить все запросы и отдельно выделить `query` и `commands`.
 
 Далее описываем отдельный запрос. Интерфейсы под Request и Response должны находиться вместе с запросом.
 
@@ -1220,10 +1229,17 @@ import { http } from '@/shared/api';
 import { USER_API } from '../routes';
 import type { User } from '../../model';
 
-export async function getProfile() {
+interface IUserProfileRequest {}
+
+interface IUserProfileResponse extends User {
+}
+
+export async function getProfile(
+	req: IUserProfileRequest
+): Pormise<IUserProfileResponse> {
 	// Обработка ошибки
 	const { data } = await http.get<User>(USER_API.profile);
-	return data;
+	return ;
 }
 ```
 
