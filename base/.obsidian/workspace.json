@@ -370,9 +370,29 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
+          },
+          {
+            "id": "7090a3b7ceffd72f",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "06fca976d4253e7b",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -414,6 +434,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "graph:Open graph view": false,
       "switcher:Open quick switcher": false,
       "canvas:Create new canvas": false,
@@ -432,6 +453,7 @@
   },
   "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
+    "_png/Pasted image 20250821222754.png",
     "_png/Pasted image 20250819212558.png",
     "_png/Pasted image 20250819200826.png",
     "cs/Алгоритмы и Структуры даных.md",
@@ -453,7 +475,6 @@
     "_png/Pasted image 20250814220258.png",
     "_png/Pasted image 20250814220230.png",
     "_png/Pasted image 20250814220124.png",
-    "_png/Pasted image 20250814220055.png",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "index.md",
     "devops/Linux/OS/_lessons/Службы.md",
