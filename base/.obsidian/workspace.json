@@ -291,8 +291,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275.51103591918945,
-    "collapsed": true
+    "width": 275.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -385,6 +384,16 @@
             "id": "06fca976d4253e7b",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "37d4dba8ffb15f8b",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -392,7 +401,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -429,8 +438,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 454.5,
-    "collapsed": true
+    "width": 454.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -453,9 +461,17 @@
   },
   "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
-    "_png/Pasted image 20250821222754.png",
-    "_png/Pasted image 20250819212558.png",
-    "_png/Pasted image 20250819200826.png",
+    "_png/Pasted image 20250822225651.png",
+    "_png/Pasted image 20250822225611.png",
+    "_png/Pasted image 20250822225014.png",
+    "_png/Pasted image 20250822224902.png",
+    "_png/Pasted image 20250822224539.png",
+    "_png/Pasted image 20250822224435.png",
+    "_png/Pasted image 20250822223954.png",
+    "_png/Pasted image 20250822222418.png",
+    "_png/Pasted image 20250822221620.png",
+    "_png/Pasted image 20250822221039.png",
+    "_png/Pasted image 20250822220006.png",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/React + Redux.md",
     "frontend/JavaScript/JS.md",
@@ -467,14 +483,6 @@
     "frontend/React/React Foundamentals.md",
     "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "architecture/Architecture/FSD/FSD.md",
-    "_png/Pasted image 20250815223655.png",
-    "_png/Pasted image 20250815222459.png",
-    "_png/Pasted image 20250815214050.png",
-    "_png/Pasted image 20250814220536.png",
-    "_png/Pasted image 20250814220456.png",
-    "_png/Pasted image 20250814220258.png",
-    "_png/Pasted image 20250814220230.png",
-    "_png/Pasted image 20250814220124.png",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "index.md",
     "devops/Linux/OS/_lessons/Службы.md",
