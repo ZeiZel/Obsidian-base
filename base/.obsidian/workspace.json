@@ -438,7 +438,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 454.5
+    "width": 626.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -461,17 +461,17 @@
   },
   "active": "584f640f8a2f07cb",
   "lastOpenFiles": [
+    "_png/Pasted image 20250823140952.png",
+    "_png/Pasted image 20250823140226.png",
+    "_png/Pasted image 20250823135640.png",
+    "_png/Pasted image 20250823135234.png",
+    "_png/Pasted image 20250823135150.png",
+    "_png/Pasted image 20250823133304.png",
+    "_png/Pasted image 20250823131952.png",
+    "_png/Pasted image 20250823130955.png",
     "_png/Pasted image 20250822225651.png",
     "_png/Pasted image 20250822225611.png",
     "_png/Pasted image 20250822225014.png",
-    "_png/Pasted image 20250822224902.png",
-    "_png/Pasted image 20250822224539.png",
-    "_png/Pasted image 20250822224435.png",
-    "_png/Pasted image 20250822223954.png",
-    "_png/Pasted image 20250822222418.png",
-    "_png/Pasted image 20250822221620.png",
-    "_png/Pasted image 20250822221039.png",
-    "_png/Pasted image 20250822220006.png",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/React + Redux.md",
     "frontend/JavaScript/JS.md",
