@@ -8,6 +8,30 @@
         "type": "tabs",
         "children": [
           {
+            "id": "8ede4e25a09157f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Microservices/Микросервисы.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Микросервисы"
+            }
+          },
+          {
             "id": "bc089856e0886f65",
             "type": "leaf",
             "state": {
@@ -56,30 +80,6 @@
             }
           },
           {
-            "id": "584f640f8a2f07cb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "architecture/Architecture/FSD/FSD.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "FSD"
-            }
-          },
-          {
             "id": "41e66bb90725c03f",
             "type": "leaf",
             "state": {
@@ -125,30 +125,6 @@
               },
               "icon": "lucide-file",
               "title": "Nuxt"
-            }
-          },
-          {
-            "id": "8ede4e25a09157f2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/Microservices/Паттерны и практика построения микросервисов.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Паттерны и практика построения микросервисов"
             }
           },
           {
@@ -223,8 +199,7 @@
               "title": "Алгоритмы и Структуры даных"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -424,13 +399,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/Architecture/FSD/FSD.md",
+                "file": "backend/Microservices/Микросервисы.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of FSD"
+              "title": "Outline of Микросервисы"
             }
           }
         ],
@@ -459,8 +434,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "584f640f8a2f07cb",
+  "active": "8ede4e25a09157f2",
   "lastOpenFiles": [
+    "devops/docker/Docker + Ansible.md",
+    "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250823140952.png",
     "_png/Pasted image 20250823140226.png",
     "_png/Pasted image 20250823135640.png",
@@ -471,7 +448,6 @@
     "_png/Pasted image 20250823130955.png",
     "_png/Pasted image 20250822225651.png",
     "_png/Pasted image 20250822225611.png",
-    "_png/Pasted image 20250822225014.png",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/React + Redux.md",
     "frontend/JavaScript/JS.md",
@@ -482,7 +458,6 @@
     "frontend/React/React Query.md",
     "frontend/React/React Foundamentals.md",
     "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
-    "architecture/Architecture/FSD/FSD.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "index.md",
     "devops/Linux/OS/_lessons/Службы.md",
@@ -490,9 +465,8 @@
     "tools/nvim/NVim.md",
     "frontend/Vue/Vue/Vue.md",
     "frontend/Angular/Angular.md",
-    "devops/docker/Docker + Ansible.md",
     "devops/kubernetes/Kubernetes + Helm.md",
-    "backend/Microservices/Паттерны и практика построения микросервисов.md",
+    "backend/Microservices/Микросервисы.md",
     "devops/Linux/Bash/Bash.md",
     "frontend/React/_lessons/09 - React + Redux.md",
     "frontend/Vue/Nuxt/Nuxt.md",

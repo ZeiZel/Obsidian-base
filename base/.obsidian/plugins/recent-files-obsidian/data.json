@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
     },
@@ -69,16 +77,8 @@
       "path": "frontend/Angular/Angular.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Паттерны и практика построения микросервисов",
-      "path": "backend/Microservices/Паттерны и практика построения микросервисов.md"
     },
     {
       "basename": "Bash",

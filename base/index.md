@@ -189,7 +189,7 @@ description: Base homepage.
     - [React Native](mobile/React%20Native/React%20Native.md)
 - [Backend](backend/backend.md)
     - [Безбэкендный подход](backend/serverless.md)
-    - [Микросервисы](backend/Microservices/Паттерны%20и%20практика%20построения%20микросервисов.md)
+    - [Микросервисы](backend/Microservices/Микросервисы.md)
 - [Базы данных](database/database.md)
     - SQL
         - [SQLite](database/SQLite.md)
