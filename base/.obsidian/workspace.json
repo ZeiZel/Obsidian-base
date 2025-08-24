@@ -376,7 +376,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -413,7 +413,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 626.5
+    "width": 340.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -436,6 +436,8 @@
   },
   "active": "8ede4e25a09157f2",
   "lastOpenFiles": [
+    "_png/Pasted image 20250824142636.png",
+    "_png/Pasted image 20250824142441.png",
     "devops/docker/Docker + Ansible.md",
     "architecture/Architecture/FSD/FSD.md",
     "_png/Pasted image 20250823140952.png",
@@ -447,7 +449,6 @@
     "_png/Pasted image 20250823131952.png",
     "_png/Pasted image 20250823130955.png",
     "_png/Pasted image 20250822225651.png",
-    "_png/Pasted image 20250822225611.png",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/React + Redux.md",
     "frontend/JavaScript/JS.md",
