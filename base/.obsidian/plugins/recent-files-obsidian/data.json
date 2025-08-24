@@ -5,16 +5,28 @@
       "path": "backend/Microservices/Микросервисы.md"
     },
     {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "Плагины для разработки",
+      "path": "tools/nvim/_lessons/Плагины для разработки.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
+      "basename": "Продвинутая работа",
+      "path": "tools/nvim/_lessons/Продвинутая работа.md"
+    },
+    {
       "basename": "Docker + Ansible",
       "path": "devops/docker/Docker + Ansible.md"
     },
     {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "React + Redux",
@@ -53,20 +65,12 @@
       "path": "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     },
     {
-      "basename": "Плагины для разработки",
-      "path": "tools/nvim/_lessons/Плагины для разработки.md"
-    },
-    {
       "basename": "index",
       "path": "index.md"
     },
     {
       "basename": "Службы",
       "path": "devops/Linux/OS/_lessons/Службы.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
     {
       "basename": "Vue",
@@ -195,10 +199,6 @@
     {
       "basename": "mobile",
       "path": "mobile/mobile.md"
-    },
-    {
-      "basename": "edge",
-      "path": "edge/edge.md"
     }
   ],
   "omittedPaths": [],
