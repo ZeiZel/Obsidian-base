@@ -198,6 +198,30 @@
               "icon": "lucide-file",
               "title": "Алгоритмы и Структуры даных"
             }
+          },
+          {
+            "id": "1ece6f705965ccaa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "06 - Библиотека React. Базовый уровень"
+            }
           }
         ]
       }
@@ -436,32 +460,33 @@
   },
   "active": "8ede4e25a09157f2",
   "lastOpenFiles": [
-    "_png/Pasted image 20250824155457.png",
+    "_png/Pasted image 20250825215058.png",
+    "_png/Pasted image 20250825214913.png",
+    "_png/Pasted image 20250825214745.png",
+    "_png/Pasted image 20250825214653.png",
+    "_png/Pasted image 20250825214515.png",
+    "_png/Pasted image 20250825214224.png",
+    "_png/Pasted image 20250825214049.png",
+    "_png/Pasted image 20250825210613.png",
+    "_png/Pasted image 20250825210458.png",
+    "_png/Pasted image 20250825210247.png",
+    "_png/Pasted image 20250825210103.png",
+    "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
+    "frontend/React/Практический JS.md",
+    "frontend/React/Профилирование React.md",
+    "frontend/React/React Foundamentals.md",
+    "backend/Microservices/Микросервисы.md",
     "cs/Алгоритмы и Структуры даных.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "tools/nvim/_lessons/Продвинутая работа.md",
-    "backend/Microservices/Микросервисы.md",
-    "_png/Pasted image 20250824142636.png",
-    "_png/Pasted image 20250824142441.png",
     "devops/docker/Docker + Ansible.md",
     "architecture/Architecture/FSD/FSD.md",
-    "_png/Pasted image 20250823140952.png",
-    "_png/Pasted image 20250823140226.png",
-    "_png/Pasted image 20250823135640.png",
-    "_png/Pasted image 20250823135234.png",
-    "_png/Pasted image 20250823135150.png",
-    "_png/Pasted image 20250823133304.png",
-    "_png/Pasted image 20250823131952.png",
-    "_png/Pasted image 20250823130955.png",
     "frontend/React/React + Redux.md",
     "frontend/JavaScript/JS.md",
     "frontend/JavaScript/JavaScript.md",
-    "frontend/React/Профилирование React.md",
     "frontend/React/_lessons/02 - Основы JavaScript.md",
-    "frontend/React/Практический JS.md",
     "frontend/React/React Query.md",
-    "frontend/React/React Foundamentals.md",
     "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md",
     "index.md",
     "devops/Linux/OS/_lessons/Службы.md",
@@ -471,7 +496,6 @@
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/Linux/Bash/Bash.md",
     "frontend/React/_lessons/09 - React + Redux.md",
-    "frontend/Vue/Nuxt/Nuxt.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",

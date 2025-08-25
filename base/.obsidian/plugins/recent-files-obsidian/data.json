@@ -5,6 +5,22 @@
       "path": "backend/Microservices/Микросервисы.md"
     },
     {
+      "basename": "06 - Библиотека React. Базовый уровень",
+      "path": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "Профилирование React",
+      "path": "frontend/React/Профилирование React.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "frontend/React/React Foundamentals.md"
+    },
+    {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
     },
@@ -41,24 +57,12 @@
       "path": "frontend/JavaScript/JavaScript.md"
     },
     {
-      "basename": "Профилирование React",
-      "path": "frontend/React/Профилирование React.md"
-    },
-    {
       "basename": "02 - Основы JavaScript",
       "path": "frontend/React/_lessons/02 - Основы JavaScript.md"
     },
     {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
-    },
-    {
       "basename": "React Query",
       "path": "frontend/React/React Query.md"
-    },
-    {
-      "basename": "React Foundamentals",
-      "path": "frontend/React/React Foundamentals.md"
     },
     {
       "basename": "Продвинутый FrontEnd",
@@ -195,10 +199,6 @@
     {
       "basename": "obsidian",
       "path": "obsidian/obsidian.md"
-    },
-    {
-      "basename": "mobile",
-      "path": "mobile/mobile.md"
     }
   ],
   "omittedPaths": [],
