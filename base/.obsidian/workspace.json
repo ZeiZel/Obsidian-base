@@ -393,6 +393,16 @@
             "id": "37d4dba8ffb15f8b",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "eb7dcb7cf96c51aa",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -400,7 +410,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -460,6 +470,9 @@
   },
   "active": "8ede4e25a09157f2",
   "lastOpenFiles": [
+    "_png/Pasted image 20250826224912.png",
+    "_png/Pasted image 20250826223121.png",
+    "_png/Pasted image 20250826220249.png",
     "_png/Pasted image 20250825223542.png",
     "_png/Pasted image 20250825221413.png",
     "_png/Pasted image 20250825220953.png",
@@ -468,9 +481,6 @@
     "_png/Pasted image 20250825214745.png",
     "_png/Pasted image 20250825214653.png",
     "_png/Pasted image 20250825214515.png",
-    "_png/Pasted image 20250825214224.png",
-    "_png/Pasted image 20250825214049.png",
-    "_png/Pasted image 20250825210613.png",
     "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
     "frontend/React/Практический JS.md",
     "frontend/React/Профилирование React.md",
