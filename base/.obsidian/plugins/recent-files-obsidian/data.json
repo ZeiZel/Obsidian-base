@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
       "basename": "Микросервисы",
       "path": "backend/Microservices/Микросервисы.md"
     },
@@ -83,10 +87,6 @@
     {
       "basename": "Angular",
       "path": "frontend/Angular/Angular.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
       "basename": "Bash",

@@ -223,7 +223,8 @@
               "title": "06 - Библиотека React. Базовый уровень"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -368,49 +369,9 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
-          },
-          {
-            "id": "7090a3b7ceffd72f",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "06fca976d4253e7b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "37d4dba8ffb15f8b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "eb7dcb7cf96c51aa",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -433,13 +394,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/Microservices/Микросервисы.md",
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Микросервисы"
+              "title": "Outline of Kubernetes + Helm"
             }
           }
         ],
@@ -468,8 +429,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8ede4e25a09157f2",
+  "active": "bc089856e0886f65",
   "lastOpenFiles": [
+    "backend/Microservices/Микросервисы.md",
     "_png/Pasted image 20250826224912.png",
     "_png/Pasted image 20250826223121.png",
     "_png/Pasted image 20250826220249.png",
@@ -480,12 +442,10 @@
     "_png/Pasted image 20250825214913.png",
     "_png/Pasted image 20250825214745.png",
     "_png/Pasted image 20250825214653.png",
-    "_png/Pasted image 20250825214515.png",
     "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
     "frontend/React/Практический JS.md",
     "frontend/React/Профилирование React.md",
     "frontend/React/React Foundamentals.md",
-    "backend/Microservices/Микросервисы.md",
     "cs/Алгоритмы и Структуры даных.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
