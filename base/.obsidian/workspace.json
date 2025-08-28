@@ -369,9 +369,19 @@
               "icon": "spreadsheet",
               "title": "Advanced Tables"
             }
+          },
+          {
+            "id": "20df2883fd232200",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -429,7 +439,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "bc089856e0886f65",
+  "active": "20df2883fd232200",
   "lastOpenFiles": [
     "backend/Microservices/Микросервисы.md",
     "_png/Pasted image 20250826224912.png",
