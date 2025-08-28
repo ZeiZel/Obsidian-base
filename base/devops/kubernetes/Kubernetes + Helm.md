@@ -612,15 +612,46 @@ The Pod "short-app" is invalid: spec: Forbidden: pod updates may not change fiel
 
 ### Deployments
 
+Управление pods напрямую - это более низкоуровневый кейс использования k8s. Чаще всего такие изменения происходят через механизм deployments, который контролирует сразу несколько подов
 
+![](../../_png/Pasted%20image%2020250828213728.png)
 
+1. Эта сущность описывается, как `kind: Deloyment`
+2. `replicas` - количество реплик этих деплойментов, которые будут дефолтно созданы
+3. `selector` - это селекторы, по которым деплой сможет определить поды, которыми он будет рулить
+4. `template` - это раздел, в который мы можем поместить шаблон пода, которым будет управлять деплой. Конкретно здесь находится полное описание сущности типа `kind: Pod`, т.е. интерфейс описания `template` = `kind: Pod`
 
-
-
-
-
-
-
+`app-deployment.yml`
+```YML
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-app-demo
+spec:
+  # количество реплик подов
+  replicas: 1
+  # селекторы, по которым будет происходить связывание с подами
+  selector:
+    matchLabels:
+      components: frontend
+  # шаблон, который описывает то, что мы хотим запустить
+  template:
+    # тут находится всё то же самое, что и в pod
+    metadata:
+      labels:
+        components: frontend
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-api
+          ports:
+            - containerPort: 81
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 500m
+```
 
 ### Использование Deployments
 
