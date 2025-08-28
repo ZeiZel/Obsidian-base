@@ -477,6 +477,8 @@ Internal Traffic Policy:  Cluster
 Events:                   <none>
 ```
 
+
+
 ---
 
 ## Работа с объектами
@@ -501,21 +503,167 @@ pod "my-pod" deleted
 
 ### Обновление объектов
 
+В K8s доступно лёгкое обновление наших сервисов посредством изменения конфигурации
 
+Проверим, что у нас остался старый сервис и его `Image` имеет старый формат
 
+```bash
+$ kubectl describe pods short-app
 
+IPs:
+  IP:  10.244.0.4
+Containers:
+  short-app:
+    Container ID:   docker://da7564c24bc48ff4e841296ef9be550a128a1ebce36c5b1730dc01a3caf860d0
+    Image:          antonlarichev/short-app
+    Image ID:       docker-pullable://antonlarichev/short-app@sha256:ecf6b7afbfc7b40b27516953c5dffc7325d5fe95ce811f43faa064ed2c86dcd9
+    Port:           80/TCP
+```
 
+Заменим на другое изображение
 
+`pod.yml`
+```YML
+spec:
+  containers:
+    - name: short-app
+      image: antonlarichev/short-api
+```
+
+Переприменим команду `apply` и в наш планировщик попадёт задача об изменении изображения в поде
+
+```bash
+$ kubectl apply -f .
+
+service/short-app-port unchanged
+pod/short-app configured
+```
+
+И теперь можно опять запросить описание пода. Тут описаны все ивенты, которые произошли с ним. Перед обновлением изображения, под был убит, чтобы стянуть новый image и запустить заново контейнер внутри пода
+
+`Image` так же поменялся на `api`
+
+```bash
+$ kubectl describe pods short-app
+
+Containers:
+  short-app:
+    Container ID:   docker://da7564c24bc48ff4e841296ef9be550a128a1ebce36c5b1730dc01a3caf860d0
+    Image:          antonlarichev/short-api
+
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  7m14s  default-scheduler  Successfully assigned default/short-app to minikube
+  Normal  Pulling    7m13s  kubelet            Pulling image "antonlarichev/short-app"
+  Normal  Pulled     6m59s  kubelet            Successfully pulled image "antonlarichev/short-app" in 14.64s (14.64s including waiting). Image size: 109145336 bytes.
+  Normal  Created    6m59s  kubelet            Created container: short-app
+  Normal  Started    6m59s  kubelet            Started container short-app
+  Normal  Killing    4m9s   kubelet            Container short-app definition changed, will be restarted
+  Normal  Pulling    4m9s   kubelet            Pulling image "antonlarichev/short-api"
+
+```
+
+Обновление происходит следующим образом:
+1. Мы применили в первый раз конфигурацию
+2. Kube API по metadata сначала пошёл искать существующий под, ничего не нашёл и создал новый под с нашей описанной конфигурацией
+3. Изменили конфигурацию и поменяли в ней, например, `image`
+4. Применили новую конфигурацию
+5. Новая конфигурация попала в Kube. Он по metadata понял, что такой pod уже существует. Далее он сравнивает изменения, которые произошли в конфигурации и применяет эти изменения для выделенного пода
+
+![](../../_png/Pasted%20image%2020250828211537.png)
+
+Однако, у обновлений есть некоторые ограничения. Например, мы не можем изменить `containerPort` и должны будем завязаться на заранее определённом порту, либо переподнимать отдельно этот под, чтобы изменения вступили в силу
+
+`pod.yml`
+```YML
+      ports:
+        - containerPort: 81
+```
+
+```bash
+$ kubectl apply -f .
+
+service/short-app-port unchanged
+The Pod "short-app" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
+  core.PodSpec{
+        Volumes:        {{Name: "kube-api-access-drpmm", VolumeSource: {Projected: &{Sources: {{ServiceAccountToken: &{ExpirationSeconds: 3607, Path: "token"}}, {ConfigMap: &{LocalObjectReference: {Name: "kube-root-ca.crt"}, Items: {{Key: "ca.crt", Path: "ca.crt"}}}}, {DownwardAPI: &{Items: {{Path: "namespace", FieldRef: &{APIVersion: "v1", FieldPath: "metadata.namespace"}}}}}}, DefaultMode: &420}}}},
+        InitContainers: nil,
+        Containers: []core.Container{
+                {
+                        ... // 3 identical fields
+                        Args:       nil,
+                        WorkingDir: "",
+                        Ports: []core.ContainerPort{
+                                {
+                                        Name:          "",
+                                        HostPort:      0,
+-                                       ContainerPort: 80,
++                                       ContainerPort: 81,
+                                        Protocol:      "TCP",
+                                        HostIP:        "",
+                                },
+                        },
+                        EnvFrom: nil,
+
+```
+
+>[!info] Порты можно не указывать. K8s автоматически выводит наружу открытые порты. Однако указание портов является хорошей практикой для ведения ясной конфигурации. 
 
 ### Deployments
 
+
+
+
+
+
+
+
+
+
+
 ### Использование Deployments
+
+
+
+
+
+
+
+
+
+
 
 ### Масштабирование Deployments
 
+
+
+
+
+
+
+
+
+
+
 ### Обновление Image
 
+
+
+
+
+
+
+
+
 ### Rollout
+
+
+
+
+
+
+
 
 ---
 
