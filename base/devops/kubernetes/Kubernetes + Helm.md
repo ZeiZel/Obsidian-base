@@ -655,19 +655,58 @@ spec:
 
 ### Использование Deployments
 
+Поднимаем деплой
 
+```bash
+$ kubectl apply -f ./app-deployment.yml
 
+$ kubectl get all
 
+NAME                                  READY   STATUS      RESTARTS      AGE
+pod/short-app-demo-7fc4f85f64-dlqkn   0/1     OOMKilled   1 (11s ago)   17s
 
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP          24h
+service/short-app-port   NodePort    10.105.253.142   <none>        3000:31200/TCP   21h
 
+NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/short-app-demo   0/1     1            0           17s
 
+NAME                                        DESIRED   CURRENT   READY   AGE
+replicaset.apps/short-app-demo-7fc4f85f64   1         1         0       17s
+```
 
+И теперь после вывода пода, у нас появляется наше приложение с уникальным идентификатором
 
+```bash
+$ kubectl get pod
+NAME                              READY   STATUS             RESTARTS      AGE
+short-app-demo-7fc4f85f64-dlqkn   0/1     CrashLoopBackOff   4 (23s ago) 2m12s
+```
 
+Так же мы можем вывести сущность `deployment.apps`, которая будет нам отображать наши деплои. Она является более высокоуровневой по отношению к pod. 
+
+```bash
+$ kubectl get deployments.apps
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+short-app-demo   0/1     1            0           3h19m
+```
+
+Если мы запросим описание нашего деплоя, то тут мы увидим подробную информацию по его контейнерам и портам, а так же количеству реплик, которые созданы для определённого приложения
+
+```bash
+$ kubectl describe deployments.apps
+
+OldReplicaSets:  <none>
+NewReplicaSet:   short-app-demo-7fc4f85f64 (1/1 replicas created)
+Events:          <none>
+```
+
+> Теперь приложение работает ровно так же, как и раньше, когда мы его поднимали через pod. 
 
 ### Масштабирование Deployments
 
-
+Основным преимуществом использования Deplyment по отношению к поднятию Pod является возможность простого масштабирования сервисов
 
 
 
