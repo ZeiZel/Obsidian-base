@@ -708,15 +708,394 @@ Events:          <none>
 
 Основным преимуществом использования Deplyment по отношению к поднятию Pod является возможность простого масштабирования сервисов
 
+#### Работа с подами
 
+Изменим немного нашу конфигурацию деплоёмента и поменяем там изображение
 
+```YML
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-api
+```
 
+Далее применим его ещё раз
 
+```bash
+$ kubectl apply -f ./app-deployment.yml
 
+deployment.apps/short-app-demo configured
+```
 
+Если успеть быстро вывести все поды, то мы заметим, что у нас будет сразу несколько подов одного нашего сервиса. 
 
+Сейчас происходит безопасная замена одного пода на другой и старый pod k8s удалит, когда новый pod перейдёт в статус Running
+
+```bash
+$ kubectl get pods
+
+NAME                              READY   STATUS              RESTARTS   AGE
+short-app-demo-6f486d58b9-px5dm   1/1     Running             0          27s
+short-app-demo-7fc4f85f64-cdr6k   0/1     ContainerCreating   0          1s
+```
+
+Теперь попробуем изменить порт, который не удалось изменить в старом случае, когда мы работали только с подом
+
+```YML
+  template:
+    # тут находится всё то же самое, что и в pod
+    metadata:
+      labels:
+        components: frontend
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-app
+          ports:
+            - containerPort: 3000
+```
+
+Далее переприменяем конфиг и при вызове описания подов деплоя, мы получим информацию о том, что под запущен на новом порту
+
+```bash
+$ kubectl apply -f ./old/app-deployment.yml
+
+deployment.apps/short-app-demo configured
+
+$ kubectl get pods                         
+
+NAME                              READY   STATUS    RESTARTS   AGE
+short-app-demo-745dcbb6cc-87v55   1/1     Running   0          10s
+
+$ kubectl describe deployments.apps
+
+Pod Template:
+  Labels:  components=frontend
+  Containers:
+   short-app:
+    Image:      antonlarichev/short-app
+    Port:       3000/TCP
+    Host Port:  0/TCP
+```
+
+#### Работа с репликами
+
+Сейчас нам стоит почистить деплой перед тем как начать работать с выделением новых ресурсов.
+
+```bash
+$ kubectl delete deployments.apps short-app-demo 
+
+deployment.apps "short-app-demo" deleted
+```
+
+А теперь заменим количество процессорных мощностей с 500 микропроцессоров (50% загрузки процессора) до 100 (10% загрузки), а так же увеличим количество реплик с 1 до 5 штук
+
+`app-deployment.yml`
+```YML
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      components: frontend
+  template:
+    metadata:
+      labels:
+        components: frontend
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-app
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+```
+
+И теперь у нас мгновенно стало доступно 5 реплик нашего приложения. Количество необходимых реплик в конфиге мы можем менять на лету в зависимости от наших потребностей (включая автоматическую подстройку).
+
+```bash
+$ kubectl get pods                         
+
+NAME                             READY   STATUS    RESTARTS   AGE
+short-app-demo-665974dd9-nz6lx   1/1     Running   0          10s
+short-app-demo-665974dd9-p9sh9   1/1     Running   0          10s
+short-app-demo-665974dd9-r7bmw   1/1     Running   0          10s
+short-app-demo-665974dd9-rt7n2   1/1     Running   0          10s
+short-app-demo-665974dd9-vsc4m   1/1     Running   0          10s
+
+$ kubectl get deployments.apps
+
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+short-app-demo   5/5     5            5           23s
+```
 
 ### Обновление Image
+
+
+
+
+
+
+
+
+
+### Rollout
+
+
+
+
+
+---
+
+## Работа с сетью
+
+### ClusterIP
+
+
+
+
+
+
+
+
+### Пишем ClusterIP
+
+
+
+
+
+
+
+
+### Ingress
+
+
+
+
+
+
+
+
+### Подготовка minikube
+
+
+
+
+
+
+
+
+### Настройка Ingress
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## Volumes
+
+### Deployment базы
+
+
+
+
+
+
+
+
+### Env
+
+
+
+
+
+
+
+
+### Port forwarding
+
+
+
+
+
+
+
+
+### Volumes
+
+
+
+
+
+
+
+
+### Персистентность
+
+
+
+
+
+
+
+
+### PersistentVolumeClaim
+
+
+
+
+
+
+
+
+### StorageClass
+
+
+
+
+
+
+
+
+### Mount в deployment
+
+
+
+
+
+
+
+
+### Проверка работы
+
+
+
+
+
+
+
+
+
+
+---
+
+## Секреты
+
+### Секреты
+
+
+
+
+
+
+
+
+
+### Безопасность секретов
+
+
+
+
+
+
+
+
+
+### Конфиг секрета
+
+
+
+
+
+
+
+
+
+### Упражнение - пишем второй сервис
+
+
+
+
+
+
+
+
+
+### Упражнение - секрет для сервиса
+
+
+
+
+
+
+
+
+
+### Отладка проекта
+
+
+
+
+
+
+
+
+
+### Изменение ingress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## Эксплуатация
+
+### Dashboard
+
+
+
+
+
+
+
+
+
+
+### Подключение к Pod
+
+
+
+
+
+
+
+
+
+
+### ConfigMap
+
 
 
 
@@ -735,38 +1114,377 @@ Events:          <none>
 
 
 
----
 
-## Volumes
 
----
+### Healthckeck
 
-## Секреты
 
----
 
-## Эксплуатация
+
+
+
+
+
+
+
+### Namespace
+
+
+
+
+
+
+
+
+
 
 ---
 
 ## Знакомство с Helm
 
+### Зачем нужен
+
+
+
+
+
+
+
+### Установка
+
+
+
+
+
+
+
+### Компоненты
+
+
+
+
+
+
+
+### Поиск charts
+
+
+
+
+
+
+
+### Создание chart
+
+
+
+
+
+
+
+
 ---
 
 ## Шаблоны
+
+### Перенос deployment
+
+
+
+
+
+
+
+
+### Встроенные объекты
+
+
+
+
+
+
+
+
+### Задание переменных
+
+
+
+
+
+
+
+
+### Функции и pipelines
+
+
+
+
+
+
+
+
+### Упражнение - Шаблон для app
+
+
+
+
+
+
+
+
+### Упражнение - Функции
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
 ## Продвинутые шаблоны
 
+### if-else
+
+
+
+
+
+
+
+
+
+### width
+
+
+
+
+
+
+
+
+
+### range
+
+
+
+
+
+
+
+
+
+### переменные
+
+
+
+
+
+
+
+
+
+### tuple
+
+
+
+
+
+
+
+
+
+### template
+
+
+
+
+
+
+
+
+
+### include
+
+
+
+
+
+
+
+
+
+### Упражнение - API
+
+
+
+
+
+
+
+
+
+### Оптимизация chart
+
+
+
+
+
+
+
+
+
+### Упражнение - PostgreSQL
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 ## Управление репозиторием
+
+### Notes txt
+
+
+
+
+
+
+### Развёртка приложения
+
+
+
+
+
+
+### Создание репозитория
+
+
+
+
+
+
+### Использование репозитория
+
+
+
+
+
+
 
 ---
 
 ## Использование Charts
 
+### Uninstall
+
+
+
+
+
+
+
+
+
+
+
+### Rollback
+
+
+
+
+
+
+
+
+
+
+
+### Отладка релиза
+
+
+
+
+
+
+
+
+
+
+
+### Тесты
+
+
+
+
+
+
+
+
+
+
+
+### Шифрование секретов
+
+
+
+
+
+
+
+
+
+
+
+### Использование секретов
+
+
+
+
+
+
+
+
+
+
+
+### Разные окружения
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 ## Заключение
+
+- Конфигурация кластера k8s вручную
+- Работа с kubeconfig
