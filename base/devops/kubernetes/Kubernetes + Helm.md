@@ -251,9 +251,9 @@ spec:
 
 Сервисы бывают 4ёх типов:
 
-- Ingress - позволяет получить доступ к контейнеру извне
+- Ingress - позволяет получить доступ к контейнеру извне (например, по домену)
 - NodePort - позволяет прокинуть порт изнутри контейнера наружу
-- ClusterIP - позволяет общаться сервисам между друг другом (front - back)
+- ClusterIP - позволяет общаться сервисам между друг другом (front - back) внутри кластера
 - LoadBalancer - балансирует нагрузку
 
 Пользователь обращается к IP-адресу кластера, где запрос уходит на прокси, который ретранслирует через себя все запросы от кластера до определённого сервиса. Потом на сервис, который выводит порт из POD в мир.
@@ -290,6 +290,8 @@ spec:
   selectors:
     components: frontend
 ```
+
+Этот сервис `node-port.yml` позволит нам подключиться извне (то есть получить ответ вне kubernetes) по порту 31200 к сервисам, для которых он открыл доступ (к фронту). 
 
 ### Подключение к контейнеру
 
@@ -933,21 +935,103 @@ kubectl rollout restart deployment short-app-demo
 
 ### ClusterIP
 
+Сейчас мы попробуем развернуть приложение подобного вида: 
+- У нас будет кластер с доступом в него по ingress-контроллеру
+- Внутри будут крутиться по два инстанса наших сервисов, которые будут объеденены друг с другом по ClusterIP
+- api будет связан с pgsql так же по clusterip
 
+![](../../_png/Pasted%20image%2020250831133242.png)
 
+Тут нам понадобится NodePort, так как доступ по ip нам нужен будет внутри, чтобы туда не смогли постучаться снаружи
 
+![](../../_png/Pasted%20image%2020250831143046.png)
 
+NodePort на production нам не нужен и доступ в сервисы по портам 80/443 по портам будет предоставлять Ingress
 
+![](../../_png/Pasted%20image%2020250831143138.png)
 
+Сущность ClusterIP будет скрывать под собой любое количество нашего отдельного сервиса, тем самым объединяя их
+
+![](../../_png/Pasted%20image%2020250831143534.png)
+
+Доступа к этой сущности извне не будет
+
+![](../../_png/Pasted%20image%2020250831143648.png)
+
+Для проброса запросов нам понадобится отдельный Ingress сервис
+
+![](../../_png/Pasted%20image%2020250831143719.png)
+
+Сам Ingress обеспечивает доступ по домену, позволяя безопасно предоставить доступ к системе
+
+![](../../_png/Pasted%20image%2020250831143746.png)
 
 ### Пишем ClusterIP
 
+Очистим перед началом все прошлые сервисы
 
+```bash
+kubectl delete deployments.apps short-app-demo
+kubectl delete service short-app-port
+```
 
+Создаём полностью новое окружение, в котором будет наш деплой. Реплика сервисов будет только одна.
 
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: frontend
+  template:
+    metadata:
+      labels:
+        components: frontend
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-app:v1.0
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+```
 
+И поднимем новый тип сервиса `ClusterIP`, который будет доступен по 80 порту и будет содержать в себе (по селекторам) компоненты `frontend`
 
+`app-service.yml`
+```YML
+# тут будет просто v1, так как мы работаем с сервисом
+apiVersion: v1
+kind: Service
+metadata:
+  name: short-app-clusterip
+spec:
+  # поменяем тип
+  type: ClusterIP
+  ports:
+	# значение порта соответствует тому, что задано в спеке контейнеров приложения фронта
+    - port: 80
+      protocol: TCP
+  selector:
+    components: frontend
+```
 
+Применим обе конфигурации
+
+```bash
+kubectl apply -f ./app-deployment.yml
+kubectl apply -f ./app-service.yml
+```
+
+И теперь из-за отсутствия NodePort мы потеряли доступ к нашим сервисам. Через curl видно, что мы не сможем подключиться извне никак к нашим сервисам  
+
+![](../../_png/Pasted%20image%2020250831150006.png)
 
 ### Ingress
 
