@@ -833,17 +833,97 @@ short-app-demo   5/5     5            5           23s
 
 ### Обновление Image
 
+Представим такую ситуацию: 
+- у нас есть `app-deployment.yml` с сервисом типа `Deployment`
+- в нём используется `image` с тегом `latest` (как сейчас `antonlarichev/short-app:latest`)
+- нам нужно обновить образ, который соответствует этому тегу (прошлый image с тегом latest и залили новый с тем же самым тегом)
 
+Так как deployment остаётся неизменным, то применение `apply` на конфиге не даст никакого эффекта и новый image не будет загружен.
 
+#### Неправильный вариант
 
+Первый вариант, который является неверным - это удаление деплоймента и пересоздание сервиса
 
+```bash
+kubectl delete deployments.apps short-app-demo
+kubectl apply -f app-deployment.yml
+```
 
+#### Правильный вариант
 
+Самым верным вариантом для обновления изображения в кубере - это будет использование изображения Docker не с тегом `latest`, а с определённой версией 
 
+![](../../_png/Pasted%20image%2020250831125223.png)
+
+Тогда команда `apply` будет применяться, так как мы изменили изображение в самом конфиге
+
+```YML
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-app:v1.0
+```
+
+```bash
+kubectl apply -f app-deployment.yml
+```
 
 ### Rollout
 
+Команда `rollout` предоставляет доступ к...
 
+#### История изменений
+
+Группа `history` позволяет получить доступ к определённым операциям в сервисах `deployment`, `daemonset`, `statefulset`. Конкретно тут мы можем взглянуть на историю дейплоймента определённого сервиса. 
+
+В истории у нас отображается номер ревизии и причина изменения, которую мы можем указать командой после применения конфига
+
+```bash
+$ kubectl rollout history deployment short-app-demo                              
+deployment.apps/short-app-demo 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+```
+
+Сейчас для примера изменим `image` ад-хоком в деплойменте
+
+```bash
+kubectl set image deployment.apps/short-app-demo short-app=antonlarichev/short-app:latest 
+```
+И количество элементов в истории изменится
+```bash
+$ kubectl rollout history deployment short-app-demo
+deployment.apps/short-app-demo 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+3         <none>
+```
+
+#### Редеплой
+
+И решением проблемы из прошлого урока, когда у нас изображение с тегом `latest`, так же может являться `rollout`
+
+Установим последнюю сборку `latest` и установим параметр `imagePullPolicy` в `Always`, чтобы k8s всегда запрашивал новое изображение при перезапуске конфигурации  
+
+`app-deployment.yml`
+```YML
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-app:latest
+          imagePullPolicy: Always
+```
+
+С помощью `restart` мы можем перезапустить деплоймент с новой конфигурацией
+
+```bash
+kubectl rollout restart deployment short-app-demo
+```
+
+>[!warning] `rollout restart` в качестве обновления `latest` - плохая практика
+>Такой подход работы с деплоями так же является опасным, потому что последняя сборка может содержать множество багов, а откат к предыдущей версии окажется невозможным. Поэтому лучшим вариантом так же останется обновление `image` через указание версий, чтобы была возможность сделать быстрый откат до нужной версии (`v1.0` -> `v1.1`). 
 
 
 
