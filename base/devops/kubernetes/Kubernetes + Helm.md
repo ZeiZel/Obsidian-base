@@ -1120,26 +1120,50 @@ sudo nvim /etc/hosts
 
 `ingress.yml`
 ```YML
+# используем последнюю версию API для Ingress сервисов
 apiVersion: networking.k8s.io/v1
+# тут напрямую укажем Ingress
 kind: Ingress
 metadata:
   name: myingress
+  # annotations представляет собой дополнительные конфигурации контроллера
+  # конкретно тут будут храниться дополнительные конфигурации самого NGINX
   annotations:
-    nginx.ingress.kubernetes.io/add-base-url: "true"
+	# этой настройкой мы добавляем базовый url
+    nginx.ingress.kubernetes.io/add-base-url: "true" 
 spec:
+  # имя класса ingress контроллера будет содержать nginx
   ingressClassName: nginx
+  # описание правил редиректов
   rules:
-  - host: demo.test
+  - host: demo.test # корневой домен, с которого нужно обрабатывать запросы
     http:
+	  # правила путей в виде массива
       paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
+      - pathType: Prefix # смотрим на префикс запроса
+        path: "/" # при попадании на "/" корень домена
+        backend: # то, куда мы перенаправляем
+          # перенаправим запрос на сервис
+          service:  
+	        # с ClusterIP по имени (из app-service.yml)
             name: short-app-clusterip
+	        # и с портом 80 
+	        # (который указан как прослушиваемый в app-service.yml)
             port: 
               number: 80
 ```
+
+И получаем объект ingress
+
+```bash
+$ kubectl get ingress
+NAME        CLASS   HOSTS       ADDRESS   PORTS   AGE
+myingress   nginx   demo.test             80      9s
+```
+
+Теперь по домену `demo.test` у нас будет доступен фронт без обращения по ip и порту
+
+![](../../_png/Pasted%20image%2020250831172100.png)
 
 
 
