@@ -1070,24 +1070,76 @@ Ingress - это сервис, который предоставляет нам 
 
 ### Подготовка minikube
 
+Контроллер Ingress доступен в minikube через аддоны, которые мы можем дополнительно установить
 
+#### Включение ingress
 
+Выведем список аддонов
 
+```bash
+minikube addons list
+```
 
+И тут отображён список включенных и выключенных аддонов
 
+![](../../_png/Pasted%20image%2020250831154558.png)
 
+Включим аддон ingress. У нас скачается аддон ingress-nginx, после установки которого будет доступны наши сервисы по localhost ip `127.0.0.1`
+
+```bash
+minikube addons enable ingress
+```
+
+#### Создание локального домена
+
+Сначала получим актуальный ip нашего minikube
+
+```bash
+$ minikube ip
+
+192.168.49.2
+```
+
+Дальше нам нужно будет поднять отдельный домен для разработки внутри нашего ПК
+
+```bash
+sudo nvim /etc/hosts
+```
+
+И добавим строку `ip domain` в нашу конфигурацию хостов
+
+>[!info] Желательно в наименовании домена добавить `.dev`, `.test` или использовать `localhost`, чтобы форсированно не ловить редиректы на `https` от хромиумных браузеров
+
+```
+192.168.49.2		demo.test
+```
 
 ### Настройка Ingress
 
+Далее опишем Ingress контроллер в виде конфигурации k8s
 
-
-
-
-
-
-
-
-
+`ingress.yml`
+```YML
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: short-app-clusterip
+            port: 
+              number: 80
+```
 
 
 
@@ -1099,10 +1151,49 @@ Ingress - это сервис, который предоставляет нам 
 
 
 
+`postgres-deployment.yml`
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: postgres
+  template:
+    metadata:
+      labels:
+        components: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16.0
+          ports:
+            - containerPort: 5432
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "300m"
+```
 
 
 
-
+`postgres-service.yml`
+```YML
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      protocol: TCP
+  selector:
+    components: postgres
+```
 
 ### Env
 
