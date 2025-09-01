@@ -9,12 +9,72 @@
       "path": "backend/Microservices/Микросервисы.md"
     },
     {
-      "basename": "06 - Библиотека React. Базовый уровень",
-      "path": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md"
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "Практический JS",
       "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "07 - Библиотека React. Средний фундаментальный уровень",
+      "path": "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md"
+    },
+    {
+      "basename": "React + Next.js - с нуля",
+      "path": "frontend/NextJS/React + Next.js - с нуля.md"
+    },
+    {
+      "basename": "006 Практика с жизненным циклом, componentDidUpdate",
+      "path": "frontend/React/_lessons/006 Практика с жизненным циклом, componentDidUpdate.md"
+    },
+    {
+      "basename": "20 Дополнения",
+      "path": "frontend/NextJS/_lessons/20 Дополнения.md"
+    },
+    {
+      "basename": "14 Страница продуктов",
+      "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
+    },
+    {
+      "basename": "04 Старт проекта",
+      "path": "frontend/NextJS/_lessons/04 Старт проекта.md"
+    },
+    {
+      "basename": "07 Простые компоненты",
+      "path": "frontend/NextJS/_lessons/07 Простые компоненты.md"
+    },
+    {
+      "basename": "09 - React + Redux",
+      "path": "frontend/React/_lessons/09 - React + Redux.md"
+    },
+    {
+      "basename": "08 - Библиотека React. Хуки и средний продвинутый уровень",
+      "path": "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md"
+    },
+    {
+      "basename": "11 Server side rendering",
+      "path": "frontend/NextJS/_lessons/11 Server side rendering.md"
+    },
+    {
+      "basename": "08 Statefull компоненты",
+      "path": "frontend/NextJS/_lessons/08 Statefull компоненты.md"
+    },
+    {
+      "basename": "06 - Библиотека React. Базовый уровень",
+      "path": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md"
+    },
+    {
+      "basename": "03 - Дополнительные основы JavaScript",
+      "path": "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md"
+    },
+    {
+      "basename": "04 - JavaScript в работе",
+      "path": "frontend/React/_lessons/04 - JavaScript в работе.md"
+    },
+    {
+      "basename": "05 - Продвинутый JavaScript",
+      "path": "frontend/React/_lessons/05 - Продвинутый JavaScript.md"
     },
     {
       "basename": "Профилирование React",
@@ -23,10 +83,6 @@
     {
       "basename": "React Foundamentals",
       "path": "frontend/React/React Foundamentals.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "Плагины для разработки",
@@ -93,10 +149,6 @@
       "path": "devops/Linux/Bash/Bash.md"
     },
     {
-      "basename": "09 - React + Redux",
-      "path": "frontend/React/_lessons/09 - React + Redux.md"
-    },
-    {
       "basename": "Nuxt",
       "path": "frontend/Vue/Nuxt/Nuxt.md"
     },
@@ -133,10 +185,6 @@
       "path": "cs/RegExp.md"
     },
     {
-      "basename": "03 - Дополнительные основы JavaScript",
-      "path": "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md"
-    },
-    {
       "basename": "SSR",
       "path": "frontend/SSR.md"
     },
@@ -151,54 +199,6 @@
     {
       "basename": "concepts",
       "path": "concepts/concepts.md"
-    },
-    {
-      "basename": "SQLite",
-      "path": "database/SQLite.md"
-    },
-    {
-      "basename": "Valkey",
-      "path": "database/Valkey.md"
-    },
-    {
-      "basename": "architecture",
-      "path": "architecture/architecture.md"
-    },
-    {
-      "basename": "serverless",
-      "path": "backend/serverless.md"
-    },
-    {
-      "basename": "Тестирование JavaScript",
-      "path": "testing/Тестирование JavaScript.md"
-    },
-    {
-      "basename": "PWA",
-      "path": "frontend/PWA.md"
-    },
-    {
-      "basename": "7aa96c5de3ede9b2f06afffc82a22803",
-      "path": "_png/7aa96c5de3ede9b2f06afffc82a22803.png"
-    },
-    {
-      "basename": "RoadMap",
-      "path": "RoadMap/RoadMap.md"
-    },
-    {
-      "basename": "tools",
-      "path": "tools/tools.md"
-    },
-    {
-      "basename": "inbox",
-      "path": "inbox/inbox.md"
-    },
-    {
-      "basename": "testing",
-      "path": "testing/testing.md"
-    },
-    {
-      "basename": "obsidian",
-      "path": "obsidian/obsidian.md"
     }
   ],
   "omittedPaths": [],
