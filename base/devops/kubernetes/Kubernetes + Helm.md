@@ -1455,21 +1455,87 @@ StorageClass - это обозначение того, как мы должны 
 
 ### Mount в deployment
 
+Дополним конфигурацию деплоя полями `volumes` и `volumeMounts`, в которых опишем сами пространства и их связи
 
+`postgres-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: postgres
+  template:
+    metadata:
+      labels:
+        components: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16.0
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: demo
+            - name: POSTGRES_USER
+              value: demo
+            - name: POSTGRES_PASSWORD
+              value: demo
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "300m"
+		  # описываем точки монтирования в поде, которые будем маунтить в volume
+          volumeMounts:
+		      # имя пространства, куда мы будем монтироваться
+            - name: postgres-data
+              # точка монтирование
+              mountPath: /var/lib/postgresql/data
+              # наименование подпапки, которая будет хранить данные из точки монтирования в volume
+              subPath: postgres
+      # тут мы определяем список наших volumes
+      volumes:
+	    # сссылаемся на pvc сервис, который будет выделять volumes
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+```
 
+>[!warning] Сейчас в postgres есть баг, что без созданной `subPath` (т.е. в корне volume) стягивание данных работать не будет. Поэтому нам нужно указать подпапку `subPath`, куда будут помещены данные из `mountPath`. 
 
+Далее поднимаем PVC и обновляем деплой postgres
 
+```bash
+kubectl apply -f ./old/postgres-pvc.yml
+kubectl apply -f ./old/postgres-deployment.yml
+```
 
+И глянем на созданные PVC в системе
 
+```bash
+kubectl get persistentvolumeclaims
+```
+
+![](../../_png/Pasted%20image%2020250901143747.png)
 
 ### Проверка работы
 
+Применяем ещё раз скрипт создания таблицы из прошлого урока
 
+Рестартим сервис и подключаемся к нему
 
+```bash
+kubectl rollout restart deployment postgres-deployment
+kubectl port-forward pods/postgres-deployment-65b9746778-vjpfq 5432:5432
+```
 
+Теперь можно заметить, что наш сервис сохранил свои данные и не потерял созданную таблицу
 
-
-
+![](../../_png/Pasted%20image%2020250901144427.png)
 
 
 
@@ -1479,25 +1545,89 @@ StorageClass - это обозначение того, как мы должны 
 
 ### Секреты
 
+Дефолтно, мы описали переменные окружения прямо внутри наших конфигураций. Это крайне плохая практика. Все эти секьюрные данные полетят прямо к нам в гит и могут быть подспорьем для свободного доступа в нашу систему. 
 
+![](../../_png/Pasted%20image%2020250903154418.png)
 
+Для решения проблем с безопасным хранением данных, нужно использовать механизм **секретов**, которые заставят нас хранить нужные для подключения данные локально
 
+![](../../_png/Pasted%20image%2020250903155056.png)
 
+#### Императивный подход
 
+Есть несколько типов секретов: 
 
+- generic - любой тип данных
+- tls - ключи / сертификаты
+- docker-registry - для конфигурации docker registry
 
+Так же есть ещё несколько типов, которые больше нужны для конфигурации прода
+
+Командой мы будем создавать секрет дженерик-типа
+
+Мы можем создать
+- plain-строку с переменными, которые нужно передать к нам
+- ссылкой на файл, в котором хранятся переменные
+
+```bash
+kubectl create secret generic pg-secret --from-literal PASSWORD=demo
+```
+
+И получить созданные секреты для подов можем командой `get`
+
+```bash
+$ kubectl get secrets
+
+NAME        TYPE     DATA   AGE
+pg-secret   Opaque   1      11s
+```
+
+И описание сохранённых переменных окружения
+
+```bash
+$ kubectl describe secrets
+
+Name:         pg-secret
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+PASSWORD:  4 bytes
+```
 
 ### Безопасность секретов
 
+К сожалению, сохранение секретов напрямую не является безопасной практикой, так как несмотря на то, что они хранятся где-то в кластере, они всё равно лежат в определённом месте в base64
 
+Мы можем напрямую получить наш секрет сохранённый в кубере с помощью определения go-template на получение данных
 
+```bash
+$ kubectl get secrets pg-secret --template={{.data.PASSWORD}}
 
+ZGVtbw==%
+```
 
+Но по-факту это просто окажется base64 зашифрованная строка
 
+```bash
+$ kubectl get secrets pg-secret --template={{.data.PASSWORD}} | base64 -D
 
+demo%
+```
 
+>[!warning] Секрет в кубере не является панацеей и сохранение секретов в другие сервисы так же не улучшат ситуацию. Лучший вариант защиты - чёткое разграничение зон ответственности и доступа к кубер-кластеру.
 
 ### Конфиг секрета
+
+
+
+
+
+
 
 
 
