@@ -1623,63 +1623,317 @@ demo%
 
 ### Конфиг секрета
 
+Далее мы можем описать хранение наших секретов декларативным образом через создание сервиса секретов.
 
+Переведём сначала ручками наш секрет из строки demo в base64 строку
 
+```bash
+$ echo -n demo | base64
 
+ZGVtbw==
+```
 
+Опишем сервис типа Secret, в который поместим наши данные зашифрованные в формате base64
 
+`postgres-secret.yml`
+```YML
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  POSTGRES_DB: ZGVtbw==
+  POSTGRES_USER: ZGVtbw==
+  POSTGRES_PASSWORD: ZGVtbw==
+```
 
+Далее нам нужно будет применить эти секреты из сервиса секретов
 
+`postgres-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: postgres
+  template:
+    metadata:
+      labels:
+        components: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16.0
+          ports:
+            - containerPort: 5432
+          # блок переменных окружения
+          env:
+            - name: POSTGRES_DB
+              # указываем, откуда хотим подтянуть секрет
+              valueFrom:
+	            # описываем референс, откуда тянем секрет
+                secretKeyRef:
+	              # указываем имя сервиса, откуда возьмём секрет
+                  name: postgres-secret
+                  # имя секрета
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "300m"
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+```
 
+И далее создаём наш сервис секретов и переприменяем деплой постгреса
 
-
-
-
-
+```bash
+$ kubectl apply -f ./old/postgres-secret.yml
+$ kubectl apply -f ./old/postgres-deployment.yml
+```
 
 ### Упражнение - пишем второй сервис
 
+Дополняем нашу архитектуру проекта: 
+- добавим сюда два сервиса секретов (api и postgres)
+- опишем PersistentVolume для сервиса postgres
 
+![](../../_png/Pasted%20image%2020250903183033.png)
 
+Описываем отдельно сервис бэкэнда, который будет выглядеть подобно фронтовому
 
+`api-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: backend
+  template:
+    metadata:
+      labels:
+        components: backend
+    spec:
+      containers:
+        - name: short-api
+          image: antonlarichev/short-api:v1.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+```
 
+Теперь нужно описать ClusterIP, который под собой скроет все сервисы нашего бэкэнда
 
+`api-service.yml`
+```YML
+apiVersion: v1
+kind: Service
+metadata:
+  name: short-api-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      protocol: TCP
+  selector:
+    components: backend
+```
 
+И отдельно обновим тег приложения фронта до последней версии
 
+`app-deployment.yml`
+```YML
+image: antonlarichev/short-app:v1.4
+```
 
 ### Упражнение - секрет для сервиса
 
+Сейчас нам нужно собрать передать переменную окружения `DATABASE_URL` в наш api-service, которая будет собой представлять ссылку на подключение к postgres
 
+Из особенностей можно выделить: 
+- у нас все параметры определены как `demo`
+- ссылкой на подключение (`url`) будет являться наименование сервиса ClusterIP нашего postgres сервиса (`metadata.name` из `postgres-service.yml`)
 
+>[!note] `name` ClusterIP сервиса автоматически попадает в DNS k8s и позволяет разрезолвить ip этого сервиса
 
+```
+# шаблон строки подключения
+postgresql://user:password@url:5432/db
 
+# реализация в нашем кластере
+postgresql://demo:demo@postgres-clusterip:5432/demo
+```
 
+Переводим строку подключения в base64
 
+```bash
+echo -n postgresql://demo:demo@postgres-clusterip:5432/demo | base64
+```
 
+Опишем секрет, который будет хранить ссылку на подключение к нашей БД
+
+`api-secret.yml`
+```bash
+apiVersion: v1
+kind: Secret
+metadata:
+  name: short-api-secret
+type: Opaque
+data:
+  DATABASE_URL: cG9zdGdyZXNxbDovL2RlbW86ZGVtb0Bwb3N0Z3Jlcy1jbHVzdGVyaXA6NTQzMi9kZW1v
+```
+
+Дальше остаётся только передать сюда переменную с URL для подключения к БД
+
+`api-deployment.yml`
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: backend
+  template:
+    metadata:
+      labels:
+        components: backend
+    spec:
+      containers:
+        - name: short-api
+          image: antonlarichev/short-api:v1.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: short-api-secret
+                  key: DATABASE_URL
+```
 
 ### Отладка проекта
 
+Поднимем сервисы бэка и секретов
 
+```bash
+$ kubectl apply -f ./old/api-secret.yml
+secret/short-api-secret created
 
+$ kubectl apply -f ./old/api-deployment.yml
+deployment.apps/short-api-deployment created
+```
 
+Собрать логи можно командой `logs`
 
+```bash
+$ kubectl logs pods/postgres-deployment-5bfbcc7857-kpfkz
 
+PostgreSQL Database directory appears to contain a database; Skipping initialization
 
+2025-09-03 14:52:43.357 UTC [1] LOG:  starting PostgreSQL 16.0 (Debian 16.0-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2025-09-03 14:52:43.357 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-09-03 14:52:43.357 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-09-03 14:52:43.358 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-09-03 14:52:43.359 UTC [29] LOG:  database system was shut down at 2025-09-03 14:51:43 UTC
+2025-09-03 14:52:43.361 UTC [1] LOG: 
 
+```
+
+```
+$ $kubectl logs pods/short-api-deployment-57657f58d6-85f5d
+
+> short-api@0.0.1 start
+> nest start
+
+[Nest] 31  - 09/03/2025, 4:21:56 PM     LOG [NestFactory] Starting Nest application...
+[Nest] 31  - 09/03/2025, 4:21:56 PM     LOG [InstanceLoader] DatabaseModule dependencies initialized +294ms
+[Nest] 31  - 09/03/2025, 4:21:56 PM     LOG [InstanceLoader] AppModule dependencies initialized +6ms
+[Nest] 31  - 09/03/2025, 4:21:57 PM     LOG [RoutesResolver] AppController {/api}: +204ms
+[Nest] 31  - 09/03/2025, 4:21:57 PM     LOG [RouterExplorer] Mapped {/api, GET} route +90ms
+[Nest] 31  - 09/03/2025, 4:21:57 PM     LOG [RouterExplorer] Mapped {/api/:hash, GET} route +2ms
+[Nest] 31  - 09/03/2025, 4:21:57 PM     LOG [RouterExplorer] Mapped {/api, POST} route +4ms
+[Nest] 31  - 09/03/2025, 4:21:57 PM     LOG [RouterExplorer] Mapped {/api/:id, DELETE} route +2ms
+[Nest] 31  - 09/03/2025, 4:22:00 PM     LOG [NestApplication] Nest application successfully started +3595ms
+```
 
 ### Изменение ingress
 
+Сейчас добавим префикс `/api`, который будет перенаправлять запросы на имя `short-api-clusterip`, которое под собой крутит нашу апишку
 
+`ingress.yml`
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: short-app-clusterip
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: short-api-clusterip
+            port:
+              number: 3000
+```
 
+Далее применяем изменения в ингрессе
 
+```bash
+kubectl apply -f ./ingress.yml
+```
 
+И все три сервиса теперь доступны извне, работают и взаимодействуют
 
-
-
-
-
-
-
+![](../../_png/Pasted%20image%2020250903194404.png)
 
 
 
