@@ -1931,7 +1931,7 @@ spec:
 kubectl apply -f ./ingress.yml
 ```
 
-И все три сервиса теперь доступны извне, работают и взаимодействуют друг с другом
+И все три сервиса теперь доступны извне, работают и взаимодействуют друг с другом. Проверить можно посредством вывода сервиса на `127.0.0.1` через `minikube tunnel` 
 
 ![](../../_png/Pasted%20image%2020250903195429.png)
 
@@ -1943,53 +1943,221 @@ kubectl apply -f ./ingress.yml
 
 ### Dashboard
 
+Мы можем вывести общий дашборд по всем развёрнутым локально проектам через плагин миникуба
 
+```bash
+minikube dashboard
+```
 
+Тут будет находиться вся информация о кластере с: объектами, загрузкой, джобами и всеми остальными объектами
 
+![](../../_png/Pasted%20image%2020250903202648.png)
 
+Так же тут мы можем ручками заскейлить сервис, перезапустить, переименовать или удалить
 
+![](../../_png/Pasted%20image%2020250903202938.png)
 
-
-
+>[!warning] Менять конфигурации, обновлять изображения или просто дополнять конфиг через dashboard не стоит, так как изменения инфры он не сохранит
 
 ### Подключение к Pod
 
+Подключение к контейнеру внутри k8s происходит аналогично тому, как это происходит в Docker 
 
+Такая команда позволит нам прейти в интерактивный режим работы с контейнером
 
+```bash
+kubectl exec -it short-api-deployment-57657f58d6-85f5d -- /bin/bash
+```
 
+Эта команда позволит нам прямо внутри проверить все элементы, которые могут вызвать у нас вопросы
 
+![](../../_png/Pasted%20image%2020250904135734.png)
 
+Попадаем мы в сам контейнер по достаточно сложному механизму, который реализован в k8s. Наш `kubectl` не может напрямую залезть в контейнер. 
 
+Порядок выполнения команды exec: 
+- `kubectl` вызывает API, которое находится в мастер ноде
+- Мастер нода ищет контейнер и делегирует задачу из `kubectl` в `kubelet` найденной ноды
+- `kubelet` передаёт задачу в `container runtime`
+- `container runtime` через `kernel-runtime` просит исполнить операцию над определённым контейнером внутри пода
 
-
+![](../../_png/Pasted%20image%2020250904135648.png)
 
 ### ConfigMap
 
+Представим такую ситуацию, что нам нужно подложить `postgresql.conf` файл, который будет детально описывать работу нашей базы, внутрь pod контейнера
+
+![](../../_png/Pasted%20image%2020250904141539.png)
+
+ConfigMap - это отдельная сущность, которая позволяет подложить определённые данные внутрь нашего пода с помощью volume
+
+![](../../_png/Pasted%20image%2020250904141354.png)
+
+Создадим конфиг с параметрами
+
+`demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  key: value
+```
 
 
 
+`api-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: backend
+  template:
+    metadata:
+      labels:
+        components: backend
+    spec:
+      containers:
+        - name: short-api
+          image: antonlarichev/short-api:v1.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "200m"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: short-api-secret
+                  key: DATABASE_URL
+	      # опишем маунт для контейнера пространства test
+          volumeMounts:
+            - name: test
+              mountPath: /etc/test
+              readOnly: true
+      # пространства
+      volumes:
+        - name: test # имя пространства
+          # описываем тут карту конфигураций
+          configMap:
+            name: demo-config
+```
 
+Применим новые конфигурации
 
+```bash
+$ kubectl apply -f ./demo-config.yml
+$ kubectl apply -f ./api-deployment.yml
+```
 
+Внутри пода создастся папка test с файлом key
 
-
+```bash
+$ kubectl exec -it short-api-deployment-57657f58d6-85f5d -- /bin/bash
+$ cat /etc/test/key
+value
+```
 
 ### Rollout
 
+Чтобы заставить смотреть за изменениями объектов k8s, мы можем передать флаг `--watch`
 
+```bash
+kubectl get pod --watch
+```
 
+В одном терминале запустим отслеживание подов, а в другом выведем ревизии и изменим деплой
 
+```bash
+kubectl rollout history deployment short-api-deployment
+```
 
+![](../../_png/Pasted%20image%2020250904191400.png)
 
+rollout имеет несколько объектов для отображения: 
+- history - история деплоев
+- pause - остановить деплой
+- restart - перезапустить деплой
+- resume - продолжить деплой
+- status - статус деплоя
+- undo - отменить ревизию обновления
 
+![](../../_png/Pasted%20image%2020250904193032.png)
 
+Чтобы отменить деплой, который мы только что сделали и вернуться на прошлую ревизию, мы можем воспользоваться `undo` и указать конкретную ревизию `--to-revision`
 
+```bash
+kubectl rollout undo deployment short-api-deployment --to-revision=2
+```
+
+>[!info] Это очень удобный вариант в том случае, когда мы сделали очень много новых деплоев, но откатывать каждый будет крайне неээфективно и можно точечно откатить нужный нам сервис
+
+>[!warning] Однако этот механизм работает только с `deployment`
 
 ### Healthckeck
 
 
-
-
+`api-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: backend
+  template:
+    metadata:
+      labels:
+        components: backend
+    spec:
+      containers:
+        - name: short-api
+          image: antonlarichev/short-api:v1.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "200m"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: short-api-secret
+                  key: DATABASE_URL
+          volumeMounts:
+            - name: test
+              mountPath: /etc/test
+              readOnly: true
+          # healthcheck
+          livenessProbe:
+            exec: # выполняем 
+              command: # команду
+                - curl
+                - --fail
+                - http://localhost:3000/api
+            # максимальна задержка ответа в 30 секунд
+            initialDelaySeconds: 30
+            # отправляем раз в 5 секунд
+            periodSeconds: 5
+            # сервис может вернуть только одну ошибку
+            failureThreshold: 1
+      volumes:
+        - name: test
+          configMap:
+            name: demo-config
+```
 
 
 
@@ -2000,7 +2168,13 @@ kubectl apply -f ./ingress.yml
 
 
 
-
+`app-namespace.yml`
+```YML
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+```
 
 
 
