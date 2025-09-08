@@ -1,16 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "RegExp",
       "path": "cs/RegExp.md"
     },
     {
       "basename": "14 Страница продуктов",
       "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "Kubernetes + Helm",

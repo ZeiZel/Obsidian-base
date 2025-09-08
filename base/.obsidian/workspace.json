@@ -270,33 +270,9 @@
               "icon": "lucide-file",
               "title": "agile"
             }
-          },
-          {
-            "id": "caa6a63d09207600",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/RegExp.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "RegExp"
-            }
           }
         ],
-        "currentTab": 11
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -486,13 +462,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/RegExp.md",
+                "file": "agile/agile.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of RegExp"
+              "title": "Outline of agile"
             }
           }
         ],
@@ -500,7 +476,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 443.5
+    "width": 445.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -521,8 +497,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "caa6a63d09207600",
+  "active": "1b7a2b4fd2381109",
   "lastOpenFiles": [
+    "cs/RegExp.md",
     "_png/Pasted image 20250908152602.png",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
     "agile/agile.md",
@@ -536,7 +513,6 @@
     "_png/Pasted image 20250904191400.png",
     "_png/Pasted image 20250904141539.png",
     "_png/Pasted image 20250904141354.png",
-    "_png/Pasted image 20250904141339.png",
     "backend/Microservices/Микросервисы.md",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/Практический JS.md",
