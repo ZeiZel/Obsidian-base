@@ -1,14 +1,14 @@
 ---
 tags:
-    - Agile
-    - Scrum
-    - Kanban
-    - Lean
-    - SberGile
-    - Less
-banner: '_assets/img/banners/agile.png'
-banner_y: '48'
-sticker: emoji//1f30f
+  - Agile
+  - Scrum
+  - Kanban
+  - Lean
+  - SberGile
+  - Less
+aliases:
+  - Agile
+  - Scrum
 ---
 
 # Agile (Scrum, Kanban, Lean)
