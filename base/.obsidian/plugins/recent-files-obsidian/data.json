@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "RegExp",
+      "path": "cs/RegExp.md"
+    },
+    {
+      "basename": "14 Страница продуктов",
+      "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
@@ -31,10 +43,6 @@
     {
       "basename": "20 Дополнения",
       "path": "frontend/NextJS/_lessons/20 Дополнения.md"
-    },
-    {
-      "basename": "14 Страница продуктов",
-      "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
     },
     {
       "basename": "04 Старт проекта",
@@ -181,10 +189,6 @@
       "path": "database/DataGrip.md"
     },
     {
-      "basename": "RegExp",
-      "path": "cs/RegExp.md"
-    },
-    {
       "basename": "SSR",
       "path": "frontend/SSR.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "database",
       "path": "database/database.md"
-    },
-    {
-      "basename": "concepts",
-      "path": "concepts/concepts.md"
     }
   ],
   "omittedPaths": [],
