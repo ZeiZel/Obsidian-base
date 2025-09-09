@@ -3129,13 +3129,13 @@ spec:
 
 `short-service / values.yaml`
 ```YML
-env: test
+env: test # production
 ```
 
 С помощью конструкций: 
-- `- if` начинаем операцию сравнения
-- `- else` ставим conditional
-- `- end` заканчиваем операцию
+- `if` начинаем операцию сравнения
+- `else` ставим conditional
+- `end` заканчиваем операцию
 
 Оператор `eq` проверяет равенство следующих переданных в него значений
 
@@ -3154,9 +3154,29 @@ data:
   {{- end }}
 ```
 
+#### Примечание
+
+Когда мы переносим на новую строку операторы внутри `{{}}`, они тоже попадают в итоговую сборку и представляют собой пустую строку. Чтобы Helm собирал конфиги без лишних отступов, нам нужно будет добавлять `-` в начале шаблонов, чтобы эти темплейты после процессинга вырезались
+
+То есть такая запись тоже будет валидна
+
+```YML
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{ if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{ else }}
+  paymentToken: false
+  {{ end }}
+```
+
+Но будет собирать файл с такими пробелами
+
+![](../../_png/Pasted%20image%2020250909222704.png)
+
 ### with
 
-Оператор `with` позволяет нам раскрыть для определённого участка переменные без потребности указывать полный путь для их передачи
+Оператор `with` позволяет нам создать скоуп доступа к Values, относительно которого у нас будет идти обращение к его переменным. Это сильно упрощает работу с вложенными объектами. 
 
 Добавим значения, которые имеют достаточно длинный путь для их получения, но он будет соответствовать классической структуре сервиса k8s:
 
@@ -3169,7 +3189,9 @@ value:
       cpu: "100m"
 ```
 
-Тут внутри блока `with` мы получили прямой доступ ко всем ключам объекта `.Values.value.requirements.limits` 
+Тут, внутри блока `with`, мы получили прямой доступ ко всем ключам объекта `.Values.value.requirements.limits` и теперь можем обращаться к ним напрямую через `.memory` и `.cpu`. 
+
+Однако тут у нас появляется проблема по работе с глобальной областью видимости и доступ к ней предоставляется теперь внутри блока через `$`, а не просто через `.`
 
 `short-service / templates / demo-config.yml`
 ```YML
@@ -3189,6 +3211,25 @@ data:
   cpu: {{ .cpu }}
   version: {{ $.Release.Name }}
   {{- end }}
+```
+
+А вот так бы выглядела запись без `with`:
+
+```YML
+data:
+  memory: {{ .Values.value.requirements.limits.memory }}
+  cpu: {{ .Values.value.requirements.limits.cpu }}
+```
+
+На выходе из дебага мы получаем такую строку: 
+
+```bash
+data:
+  name: "V1.4"
+  paymentToken: 1234
+  memory: 128Mi
+  cpu: 100m
+  version: short-service-release
 ```
 
 ### range
@@ -3200,13 +3241,46 @@ data:
 `short-service / values.yaml`
 ```YML
 users:
+  - Valery
+  - Vasia
+```
+
+Самый простой вариант работы с `range` - это описание перебора. Внутри блока `range` в качестве нашего скоупа `.` будет являться текущий элемент массива
+
+`|-` - символ мультистрочности
+
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}  
+  # вывод обычного списка
+  users: |-
+    {{- range .Values.users }}
+    - {{ . }}
+    {{- end }}
+```
+
+![](../../_png/Pasted%20image%2020250909225043.png)
+
+Поменяем список пользователей
+
+`short-service / values.yaml`
+```YML
+users:
   - name: Valery
     role: admin
   - name: Vasia
     role: manager
+
+# Valery: admin
 ```
 
 И в данных нашего сервиса будем шарить список типа `Имя: роль`. Берём `.Values.users` и описываем шаблон элементов списка
+
+Тут нам не нужен будет символ мультистрочности, так как это кусочек YAML
 
 `short-service / templates / demo-config.yml`
 ```YML
@@ -3216,16 +3290,6 @@ metadata:
   name: demo-config
 data:
   name: {{ .Values.app.version | upper | quote }}
-  {{- if eq .Values.env "production"}}
-  paymentToken: "1234"
-  {{- else }}
-  paymentToken: false
-  {{- end }}
-  {{- with .Values.value.requirements.limits }}
-  memory: {{ .memory }}
-  cpu: {{ .cpu }}
-  version: {{ $.Release.Name }}
-  {{- end }}
   # работа со списком
   users:
     {{- range .Values.users }} # range
@@ -3233,9 +3297,16 @@ data:
     {{- end }}
 ```
 
-### переменные
+![](../../_png/Pasted%20image%2020250909225450.png)
 
+### Переменные
 
+В рамках наших шаблонов нам доступно использование переменных
+
+Переменные: 
+- начинаются с `$`
+- как в go присваивают значение через `:=`
+- доступны в рамках всего файла
 
 `short-service / templates / demo-config.yml`
 ```YML
@@ -3245,27 +3316,21 @@ metadata:
   name: demo-config
 data:
   name: {{ .Values.app.version | upper | quote }}
-  {{- if eq .Values.env "production"}}
-  paymentToken: "1234"
-  {{- else }}
-  paymentToken: false
-  {{- end }}
-  {{- with .Values.value.requirements.limits }}
-  memory: {{ .memory }}
-  cpu: {{ .cpu }}
-  version: {{ $.Release.Name }}
-  {{- end }}
+  # объявление переменной
   {{- $map := .Release.Name | upper | quote }}
   map: {{ $map }}
+  # использование переменной в массиве
   users:
     {{- range $index, $user := .Values.users }}
     {{ $user.name }}: "{{ $user.role }} - {{ $index }}"
     {{- end }}
 ```
 
+![](../../_png/Pasted%20image%2020250909230007.png)
+
 ### tuple
 
-
+Иногда нам нужна возможность создать быстро список внутри шаблона. Чтобы не заносить никуда готовый список элементов, мы можем прямо на месте воспользоваться функцией `tuple`, которая создаст и вернёт кортеж
 
 `short-service / templates / demo-config.yml`
 ```YML
@@ -3275,27 +3340,24 @@ metadata:
   name: demo-config
 data:
   name: {{ .Values.app.version | upper | quote }}
-  {{- if eq .Values.env "production"}}
-  paymentToken: "1234"
-  {{- else }}
-  paymentToken: false
-  {{- end }}
-  {{- with .Values.value.requirements.limits }}
-  memory: {{ .memory }}
-  cpu: {{ .cpu }}
-  version: {{ $.Release.Name }}
-  {{- end }}
-  {{- $map := .Release.Name | upper | quote }}
-  map: {{ $map }}
+  # список
   users: |-
+	# создаём список ["Anton", "Vasia"]
     {{- range tuple "Anton" "Vasia" }}
     - {{ . }}
     {{- end }}
 ```
 
+В итоге получаем список `users` прямо на месте
+
+![](../../_png/Pasted%20image%2020250909232623.png)
+
 ### template
 
+Часто у нас появляется в разработке такие куски кода, которые повторяются регулярно в приложении. Для упрощения работы с такими повторяющимися кусками кода, Helm предоставляет возможность работы с `template` конструкциями
 
+- объявление шаблона происходит через `define` с определением его имени
+- применение шаблона происходит через `template`, где мы первым аргументом передаём `имя_шаблона` а вторым контекст `.`, из которого сам шаблон будет брать данные
 
 `short-service / templates / demo-config.yml`
 ```YML
@@ -3312,29 +3374,20 @@ metadata:
   {{- template "chart.labels" . }}
 data:
   name: {{ .Values.app.version | upper | quote }}
-  {{- if eq .Values.env "production"}}
-  paymentToken: "1234"
-  {{- else }}
-  paymentToken: false
-  {{- end }}
-  {{- with .Values.value.requirements.limits }}
-  memory: {{ .memory }}
-  cpu: {{ .cpu }}
-  version: {{ $.Release.Name }}
-  {{- end }}
-  {{- $map := .Release.Name | upper | quote }}
-  map: {{ $map }}
-  users: |-
-    {{- range tuple "Anton" "Vasia" }}
-    - {{ . }}
-    {{- end }}
 ```
 
 ### include
 
+Уже функция `include` позволяет в Helm импортировать отдельный кусок шаблона из одного файла в другой
 
+#### Создание шаблона
 
-`short-service/templates/_temp.yml`
+Вынесем шаблон наших метаданных в отдельный `yml`.
+
+По умолчанию, все файлы, которые находятся в `template`, считаются файлами конфигурации k8s. Чтобы отцепить файл от конфигураций, нам нужно в начале его именования выделить его `_`. 
+В одном файле может использоваться сразу несколько шаблонов.
+
+`short-service / templates / _temp.yml`
 ```YML
 {{- define "chart.labels"  }}
 date: {{ now | htmlDate }}
@@ -3342,7 +3395,9 @@ version: {{ .Values.app.version }}
 {{- end }}
 ```
 
+#### Применение шаблона
 
+И через `indlude` применим по названию шаблон из другого файла. Тут так же нужно передать контекст. В нашем случае, так же нужно будет через `indent` указать количество отступов
 
 `short-service / templates / demo-config.yml`
 ```YML
@@ -3354,24 +3409,12 @@ metadata:
     {{- include "chart.labels" . | indent 4 }}
 data:
   name: {{ .Values.app.version | upper | quote }}
-  {{- if eq .Values.env "production"}}
-  paymentToken: "1234"
-  {{- else }}
-  {{- include "chart.labels" . | indent 2 }}
-  paymentToken: false
-  {{- end }}
-  {{- with .Values.value.requirements.limits }}
-  memory: {{ .memory }}
-  cpu: {{ .cpu }}
-  version: {{ $.Release.Name }}
-  {{- end }}
-  {{- $map := .Release.Name | upper | quote }}
-  map: {{ $map }}
-  users: |-
-    {{- range tuple "Anton" "Vasia" }}
-    - {{ . }}
-    {{- end }}
 ```
+
+#### Template vs Include
+
+Template более удобный, когда нам нужно вынести уникальную логику для определённого шаблона
+Include позволяет более гибко регулировать отступы через `indent`
 
 ### Упражнение - API + Оптимизация chart
 
