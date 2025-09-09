@@ -3018,7 +3018,9 @@ spec:
 
 Изначально, все значения из объектов, которые мы получаем с помощью шаблонов, мы получаем в виде строки
 
-Чтобы передать объект `limits` из переменных окружения, нам нужно перевести его из строки в yml с помощью `toYaml` и с помощью `nindent`
+Чтобы передать объект `limits` из переменных окружения, нам нужно:
+- перевести его из строки в yml с помощью `toYaml` 
+- и с помощью `nindent` мы сделаем правильные отступы для этого YML. В эту функцию нужно передать правильное количество отступов (в нашем случае 14)
 
 `short-service / templates / app-deployment.yml`
 ```YML
@@ -3032,6 +3034,85 @@ spec:
             limits: {{ .Values.app.limits | toYaml | nindent 14 }}
 ```
 
+Теперь в дебаге можно увидеть, что у нас на выходе получилась полностью правильная и завершённая конфигурация k8s для сервиса `app`
+
+```bash
+$ helm install --debug --dry-run short-service-release short-serv
+
+install.go:225: 2025-09-09 18:42:29.016768 +0300 MSK m=+0.099265251 [debug] Original chart version: ""
+install.go:242: 2025-09-09 18:42:29.017267 +0300 MSK m=+0.099764751 [debug] CHART PATH: /Users/zeizel/projects/12-kubernetes-1/short-serv
+
+NAME: short-service-release
+LAST DEPLOYED: Tue Sep  9 18:42:29 2025
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+app:
+  components: frontend
+  image: antonlarichev/short-app
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  name: short-app
+  port: 80
+  replicas: 1
+  version: v1.4
+
+HOOKS:
+MANIFEST:
+---
+# Source: short-serv/templates/demo-config.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: "V1.4"
+---
+# Source: short-serv/templates/app-service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: short-app-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    components: frontend
+---
+# Source: short-serv/templates/app-deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: 1
+  template:
+    metadata:
+      labels:
+        components: 1
+    spec:
+      containers:
+        - name: short-app
+          image: "antonlarichev/short-app:v1.4"
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+```
+
 
 
 ---
@@ -3040,93 +3121,402 @@ spec:
 
 ### if-else
 
+В шаблонизаторе Helm доступно управление потоками
 
+Представим такую ситуацию, что в проде нам нужно передавать переменную, а на тесте эта переменная будет необязательной
 
+Зададим переменную, в которой будем хранить текущее окружение
 
+`short-service / values.yaml`
+```YML
+env: test
+```
 
+С помощью конструкций: 
+- `- if` начинаем операцию сравнения
+- `- else` ставим conditional
+- `- end` заканчиваем операцию
 
+Оператор `eq` проверяет равенство следующих переданных в него значений
 
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  paymentToken: false
+  {{- end }}
+```
 
+### with
 
-### width
+Оператор `with` позволяет нам раскрыть для определённого участка переменные без потребности указывать полный путь для их передачи
 
+Добавим значения, которые имеют достаточно длинный путь для их получения, но он будет соответствовать классической структуре сервиса k8s:
 
+`short-service / values.yaml`
+```
+value:
+  requirements:
+    limits:
+      memory: "128Mi"
+      cpu: "100m"
+```
 
+Тут внутри блока `with` мы получили прямой доступ ко всем ключам объекта `.Values.value.requirements.limits` 
 
-
-
-
-
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  paymentToken: false
+  {{- end }}
+  {{- with .Values.value.requirements.limits }}
+  memory: {{ .memory }}
+  cpu: {{ .cpu }}
+  version: {{ $.Release.Name }}
+  {{- end }}
+```
 
 ### range
 
+Оператор `range` позволит нам оперировать над массивами элементов и применять их в шаблонах
 
+Добавим в Values список пользователей
 
+`short-service / values.yaml`
+```YML
+users:
+  - name: Valery
+    role: admin
+  - name: Vasia
+    role: manager
+```
 
+И в данных нашего сервиса будем шарить список типа `Имя: роль`. Берём `.Values.users` и описываем шаблон элементов списка
 
-
-
-
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  paymentToken: false
+  {{- end }}
+  {{- with .Values.value.requirements.limits }}
+  memory: {{ .memory }}
+  cpu: {{ .cpu }}
+  version: {{ $.Release.Name }}
+  {{- end }}
+  # работа со списком
+  users:
+    {{- range .Values.users }} # range
+    {{ .name }}: {{ .role }} # преобразование списка
+    {{- end }}
+```
 
 ### переменные
 
 
 
-
-
-
-
-
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  paymentToken: false
+  {{- end }}
+  {{- with .Values.value.requirements.limits }}
+  memory: {{ .memory }}
+  cpu: {{ .cpu }}
+  version: {{ $.Release.Name }}
+  {{- end }}
+  {{- $map := .Release.Name | upper | quote }}
+  map: {{ $map }}
+  users:
+    {{- range $index, $user := .Values.users }}
+    {{ $user.name }}: "{{ $user.role }} - {{ $index }}"
+    {{- end }}
+```
 
 ### tuple
 
 
 
-
-
-
-
-
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  paymentToken: false
+  {{- end }}
+  {{- with .Values.value.requirements.limits }}
+  memory: {{ .memory }}
+  cpu: {{ .cpu }}
+  version: {{ $.Release.Name }}
+  {{- end }}
+  {{- $map := .Release.Name | upper | quote }}
+  map: {{ $map }}
+  users: |-
+    {{- range tuple "Anton" "Vasia" }}
+    - {{ . }}
+    {{- end }}
+```
 
 ### template
 
 
 
+`short-service / templates / demo-config.yml`
+```YML
+{{- define "chart.labels"  }}
+  labels:
+    date: {{ now | htmlDate }}
+    version: {{ .Values.app.version }}
+{{- end}}
 
-
-
-
-
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+  {{- template "chart.labels" . }}
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  paymentToken: false
+  {{- end }}
+  {{- with .Values.value.requirements.limits }}
+  memory: {{ .memory }}
+  cpu: {{ .cpu }}
+  version: {{ $.Release.Name }}
+  {{- end }}
+  {{- $map := .Release.Name | upper | quote }}
+  map: {{ $map }}
+  users: |-
+    {{- range tuple "Anton" "Vasia" }}
+    - {{ . }}
+    {{- end }}
+```
 
 ### include
 
 
 
+`short-service/templates/_temp.yml`
+```YML
+{{- define "chart.labels"  }}
+date: {{ now | htmlDate }}
+version: {{ .Values.app.version }}
+{{- end }}
+```
 
 
 
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+  labels:
+    {{- include "chart.labels" . | indent 4 }}
+data:
+  name: {{ .Values.app.version | upper | quote }}
+  {{- if eq .Values.env "production"}}
+  paymentToken: "1234"
+  {{- else }}
+  {{- include "chart.labels" . | indent 2 }}
+  paymentToken: false
+  {{- end }}
+  {{- with .Values.value.requirements.limits }}
+  memory: {{ .memory }}
+  cpu: {{ .cpu }}
+  version: {{ $.Release.Name }}
+  {{- end }}
+  {{- $map := .Release.Name | upper | quote }}
+  map: {{ $map }}
+  users: |-
+    {{- range tuple "Anton" "Vasia" }}
+    - {{ . }}
+    {{- end }}
+```
 
+### Упражнение - API + Оптимизация chart
 
+Теперь опишем шаблонами сервисы для API
 
-### Упражнение - API
+Тут нам нужно добавить группы `api` для описания api-проекта, `database` для описания проекта бд и `postgres` для сохранения данных специфичных для postgre
 
+Пока секреты данных для подключения к БД оставим в открытом виде тут
 
+`short-service / values.yaml`
+```YML
+app:
+  name: short-app
+  image: antonlarichev/short-app
+  version: v1.4
+  components: frontend
+  port: 80
+  replicas: 1
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
 
+api:
+  name: short-api
+  image: antonlarichev/short-api
+  version: v1.0
+  components: backend
+  port: 3000
+  replicas: 1
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
+  # env переменные из сервиса Secret
+  envs:
+    - DATABASE_URL
 
+postgres:
+  name: postgres
+  image: antonlarichev/short-api
+  version: v1.0
+  components: backend
+  port: 5432
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
 
+database:
+  user: demo
+  password: demo
+  db: demo
+```
 
+Шаблон, который будет представлять собой элемент переменной окружения
 
+`short-service/templates/_common.tpl`
+```YML
+{{- define "env.template" }}
+- name: {{ .env }}
+  valueFrom:
+    secretRef:
+      name: "{{ .name }}-secret"
+      key: {{ .env }}
+{{- end }}
+```
 
+Далее перенесём весь конфиг api сюда с переносом данных из Values
 
-### Оптимизация chart
+`short-service / templates / api-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.api.name }}-deployment
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.api.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.api.components }}
+    spec:
+      containers:
+        - name: {{ .Values.api.name }}
+          image: "{{ .Values.api.image }}:{{ .Values.api.version }}"
+          ports:
+            - containerPort: {{ .Values.api.port }}
+          resources:
+            limits: {{ .Values.api.limits | toYaml | nindent 14 }}
+          # переменные окружения
+          env: # тут мы используем шаблон для задания переменных окружения
+            {{- range .Values.api.envs }}
+            {{- $data := dict "name" $.Values.api.name "env" . }}
+            {{- include "env.template" $data | indent 12 }}
+            {{- end }}
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - --fail
+                - http://localhost:3000/api
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 1
+```
 
+Описание Secret. 
 
+Тут нам нужно будет переработать секрет и воспользоваться функцией `printf`. В неё первым параметром передадим шаблонную строку с `%s` (слотами) а далее переменными, которые по порядку встанут в эти слоты. 
 
+Далее применим энкод в base64 через `b64enc` и обернём в кавычки `quote`
 
+`short-service / templates / api-secret.yml`
+```YML
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.api.name }}-secret
+type: Opaque
+data:
+   DATABASE_URL: {{ printf "postgresql://%s:%s@%s-clusterip:%d/%s" 
+  .Values.database.user 
+  .Values.database.password 
+  .Values.postgres.name 
+  (.Values.postgres.port | int64 )
+  .Values.database.db  | b64enc | quote }}
+```
 
+Описание ClusterIP
 
-
-
+`short-service / templates / api-service.yml`
+```YML
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.api.name }}-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.api.port }}
+      protocol: TCP
+  selector:
+    components: {{ .Values.api.components }}
+```
 
 ### Упражнение - PostgreSQL
 
@@ -3147,10 +3537,12 @@ spec:
 
 ### Notes txt
 
+`NOTES.txt` файл хранит в себе информацию, которая выйдет после установки (`helm install`) нашего чарта 
 
-
-
-
+`short-service / templates / NOTES.txt`
+```TXT
+Вы успешно установили приложение {{ .Release.Name }} {{ .Chart.Version }}
+```
 
 ### Развёртка приложения
 
