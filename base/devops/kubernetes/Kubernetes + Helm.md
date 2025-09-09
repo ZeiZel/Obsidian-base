@@ -2250,7 +2250,9 @@ $ kubectl config set-context --current --namespace=default
 
 ![](../../_png/Pasted%20image%2020250904203000.png)
 
-Было бы очень удобно, если бы по нашему запросу, мы могли бы скрывать часть приложений, которые относятся к другому продукту. Поделить поды на: 
+Было бы очень удобно, если бы по нашему запросу, мы могли бы скрывать часть приложений, которые относятся к другому продукту. 
+
+То есть поделить поды на: 
 - мониторинг
 - сервис доставки
 - сервис админки
@@ -2258,16 +2260,42 @@ $ kubectl config set-context --current --namespace=default
 ![](../../_png/Pasted%20image%2020250904203032.png)
 
 NS позволяет нам решить проблемы: 
-- разделения зон ответственности приложения
-- избегания конфликтов названий
-- Dev и Prod среда
+- разделения зон ответственности приложения (разделение баз данных, мониторинга, различных приложений)
+- избегания конфликтов названий (если команды могли назвать приложения одинаково)
+- Dev и Prod среда (для маленьких проектов)
 - Поделить ресурсы на окружения
 
-![](../../_png/Pasted%20image%2020250904203344.png)
+![](../../_png/Pasted%20image%2020250909104542.png)
 
-#### Конфигурация
+Но тут мы можем столкнуться с проблемой, что доступ объектов одного неймспейса к объектам другого - будет отсутствовать 
 
+Доступ останется для сервисов, но там нужно будет в название сервиса добавить пространство `<service>.namespace`
 
+Но за счёт такого ограничения, мы как раз и можем реализовать отдельные dev и prod среды
+
+![](../../_png/Pasted%20image%2020250909104634.png)
+
+Ну и с помощью этой команды мы можем получить список объектов, которые не могут входить в пространства имён
+
+```bash
+kubectl api-resources --namespaced=false
+```
+
+![](../../_png/Pasted%20image%2020250909105138.png)
+
+#### Создание
+
+##### AD-hoc
+
+Создать пространство имён легко можно так же создать командой по аналогии с другими объектами
+
+```bash
+kubectl create namespace ...
+```
+
+##### Конфигурация
+
+Так выглядит простейший сервис пространства имён:
 
 `app-namespace.yml`
 ```YML
@@ -2277,8 +2305,73 @@ metadata:
   name: my-namespace
 ```
 
+##### Применение
 
+Подтверждаем создания пространства
 
+```bash
+kubectl apply -f app-namespace.yml
+```
+
+Остаётся только поднять объект в этом пространстве имён
+
+###### Через команду
+
+Первый вариант применения нужен для локальной и быстрой проверки работоспособности в разных пространствах, либо когда нам нужно один утилитарный сервис поднять для какого-либо пространства
+
+```bash
+kubectl apply -f ./app-deployment.yml -n my-namespace
+```
+
+###### Через IaC
+
+Самый правильный и устойчивый вариант для прод деплоя
+
+Добавляем один из наших деплоев в пространство имён (метаданные -> `namespace`)
+
+`app-deployment.yml`
+```YML
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-app-deployment
+  namespace: my-namespace 
+```
+
+И применяем этот деплой `apply -f`
+
+##### Работа
+
+Выводим список подов по нашему пространству имён
+
+```bash
+$ kubectl get pods -n my-namespace
+
+NAME                                    READY   STATUS    RESTARTS   AGE
+short-app-deployment-69885ccd89-tpdl5   1/1     Running   0          17s
+```
+
+И тут нужно уточнить, что наш старый деплой остался в глобальной области видимости и теперь у нас абсолютно два несвязанных между собой инстанса `app-deployment` запущено в разных пространствах имён
+
+![](../../_png/Pasted%20image%2020250909111828.png)
+
+##### Удаление
+
+Удалить дубликат деплоя можно стандартной командой с указанием пространства имён
+
+```bash
+⇡% ➜ kubectl delete deployments.apps -n my-namespace short-app-deployment
+deployment.apps "short-app-deployment" deleted
+```
+
+##### Разделение окружений
+
+Мы можем применить такую команду сначала с `env` для дева, а потом для прода, чтобы иметь возможность протестировать работу всех наших сервисов
+
+```bash
+kubectl apply -f . -n dev-env
+```
 
 
 
@@ -2288,42 +2381,248 @@ metadata:
 
 ### Зачем нужен
 
+#### Проблема
 
+1. Повторы
 
+В достаточно большом количестве мест у нас сейчас переиспользуются одни и те же значения по типу: компонентов, лейблов, портов
 
+![](../../_png/Pasted%20image%2020250909113425.png)
 
+2. Динамические значения
 
+Так же переменные, которые могут меняться постоянно - их нам тоже придётся постоянно менять руками
+
+![](../../_png/Pasted%20image%2020250909113614.png)
+
+3. Зашифрованные данные хранятся открыто
+
+Сейчас мы, в целом, в открытом виде храним все переменные окружения и секреты, которые не стоит выносить в репозиторий
+
+4. Самостоятельное управление релизами
+
+```YML
+    spec:
+      containers:
+        - name: short-app
+          image: antonlarichev/short-app:v1.4
+```
+
+#### Чем можно решить
+
+С вышеописанными задачами справиться могут:
+- ansible
+- kubernetes
+- другие шаблонизаторы с передачей данных в kubectl (например, Jinja, Nunchacks)
+
+Однако: 
+- Ansible не заточен под работу с k8s
+- Шаблонизаторы не заточены под работу с релизами и при `rollout undo` откатится вся система до прошлого релиза
+
+#### Почему Helm?
+
+- Декларативность
+- Это пакетный менеджер (тут можно хранить собранные чарты, подтягивать уже готовые чарты для выкладки)
+- Поддерживает rollback и watch (следит за релизом и можно откатить любые части системы)
+- Имеет собственные плагины    
 
 ### Установка
 
+Лучший способ - с помощью пакетного менеджера системы
 
-
-
-
-
+```bash
+brew install helm
+```
 
 ### Компоненты
 
+CLI - это та часть, которая позволяет работать с нашими репозиториями, выкатывать релизы и работать с charts
 
+Компоненты: 
+- Chart - пакет, содержащий описание ресурсов, необходимых для работы
+- Repository - куда можно публиковать chart, чтобы делиться ими 
+- Release - пример Chart, которые работаете в кластере k8s
 
+Chart состоит из:
+- Meta-информации (зависимости)
+- Values (значения, которые должны попасть в шаблоны, включая версию image, количества реплик и так далее)
+- Templates (шаблон deployment, который нужно будет выкатить)
 
+#### Механизм работы
 
+У нас есть объект Chart, с которым работает CLI
 
+CLI может сложить Chart в репозиторий, либо забрать оттуда его
+
+После получения Chart (локально или из репы), у нас появляется возможность выкатить Chart на кластер
+
+Далее Template заполняется нашими Values и мы получаем готовый конфиг, который улетает через `kubectl` в кластер
+
+В кластере у нас хранится секрет с информацией о релизе. Если наш деплой упал или ушёл с ошибками, то он легко уйдёт в откат по информации из этого секрета.
+
+![](../../_png/Pasted%20image%2020250909115620.png)
 
 ### Поиск charts
 
+#### Добавление репозитория
 
+Начально добавляем стабильный репозиторий с чартами. Таким же образом можно добавить приватный репозторий. 
 
+```bash
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+```
 
+Проверим, что репозиторий был добавлен
 
+```bash
+$ helm repo list
 
+NAME    URL
+stable  https://charts.helm.sh/stable
+```
+
+#### Поиск
+
+Поиск осуществляется таким образом
+
+```bash
+helm search repo mysql
+```
+
+![](../../_png/Pasted%20image%2020250909120844.png)
+
+Использование сторонних пакетов - это плохой вариант. Самый безопасный и стабильный - это написание собственного чарта, который будет подходить нашей системе и кластеру
+
+#### Использование
+
+Установка стороннего чарта происходит командой `install`
+
+```bash
+$ helm install stable/mysql --generate-name
+
+WARNING: This chart is deprecated
+NAME: mysql-1757409042
+LAST DEPLOYED: Tue Sep  9 12:10:42 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+MySQL can be accessed via port 3306 on the following DNS name from within your cluster:
+mysql-1757409042.default.svc.cluster.local
+
+To get your root password run:
+
+    MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1757409042 -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
+
+To connect to your database:
+
+1. Run an Ubuntu pod that you can use as a client:
+
+    kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
+
+2. Install the mysql client:
+
+    $ apt-get update && apt-get install mysql-client -y
+
+3. Connect using the mysql cli, then provide your password:
+    $ mysql -h mysql-1757409042 -p
+
+To connect to your database directly from outside the K8s cluster:
+    MYSQL_HOST=127.0.0.1
+    MYSQL_PORT=3306
+
+    # Execute the following command to route the connection:
+    kubectl port-forward svc/mysql-1757409042 3306
+
+    mysql -h ${MYSQL_HOST} -P${MYSQL_PORT} -u root -p${MYSQL_ROOT_PASSWORD}
+```
+
+Chart после скачивания сразу полетел в наш деплой 
+
+```bash
+$ kubectl get pods
+
+NAME    READY   STATUS               RESTARTS      AGE
+mysql   0/1     ImagePullBackOff     0             2m25s
+```
+
+#### Получение информации
+
+Для получения базовой информации о чарте, можем вызвать `show chart`, где будет и версия приложения, и описание, и основная мета-информация
+
+```bash
+$ helm show chart stable/mysql
+
+apiVersion: v1
+appVersion: 5.7.30
+deprecated: true
+description: DEPRECATED - Fast, reliable, scalable, and easy to use open-source relational
+  database system.
+home: https://www.mysql.com/
+icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
+keywords:
+- mysql
+- database
+- sql
+name: mysql
+sources:
+- https://github.com/kubernetes/charts
+- https://github.com/docker-library/mysql
+version: 1.6.9
+```
+
+Для получения полной информации о чарте нужно уже будет вызвать `show all` и нам выйдет полная ридмиха
+
+```bash
+helm show all stable/mysql
+```
+
+#### Очистка
+
+Чтобы очистить чарт хельма, мы можем просто удалить деплой, который он вызвал
+
+```bash
+$ kubectl delete deployments.apps mysql-1757409042
+
+deployment.apps "mysql-1757409042" deleted
+```
 
 ### Создание chart
 
+Создадим базовую структуру Helm комадой `create`
 
+```bash
+helm create short-service
+```
 
+И примерно так будет выглядеть структура нового сервиса
 
+![](../../_png/Pasted%20image%2020250909123414.png)
 
+Этот файл содержит базовую информацию по Helm-проекту и является входной точкой
+
+`Chart.yml`
+```bash
+apiVersion: v2
+name: short-serv
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+```
+
+Уже `templates` и `values` позволяют конфигурировать шаблоны
+
+Файл `values.yml` содержит в себе данные для сборки чартов
+
+Файл `.helmignore` хранит в себе всё то, что нам не нужно передавать в репозиторий с чартами. Работает по аналогии с `.gitignore`.
+
+В `charts` располагаются зависимости
+
+В `templates` располагаются сами шаблоны helm
+
+Файл `NOTES.txt` содержит шаблон того, что мы хотим вывести человеку после завершения операции `install`
 
 
 
@@ -2333,61 +2632,405 @@ metadata:
 
 ### Перенос deployment
 
+#### Prerequisites
 
+Чистим сначала полностью наше окружение
 
+```bash
+kubectl delete deployments.apps postgres-deployment short-api-deployment short-app-deployment
 
+kubectl delete service mysql-1757409042 postgres-clusterip short-api-clusterip short-app-clusterip
 
+kubectl delete persistentvolumeclaims mysql-1757409042 postgres-pvc
 
+kubectl delete secrets mysql-1757409042 pg-secret postgres-secret short-api-secret
 
+kubectl delete configmaps demo-config mysql-1757409042-test
+
+kubectl delete ingress myingress
+```
+
+#### Старт
+
+Для начала можно просто: очистить `values.yml`, очистить `templates` и перенести в неё наши конфиги
+
+![](../../_png/Pasted%20image%2020250909130531.png)
+
+Далее мы можем создать наш первый релиз по этим конфигам. 
+
+Тут мы: 
+- первым аргументом передаём имя релиза
+- вторым наименование папки, в корне которой располагается `Chart.yml`
+
+```bash
+$ helm install short-service-release short-service
+
+NAME: short-service-release
+LAST DEPLOYED: Tue Sep  9 13:11:32 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+```
+
+Теперь у нас выложены все сервисы
+
+![](../../_png/Pasted%20image%2020250909131513.png)
+
+Helm автоматически создал секрет, который будет относиться к релизу данного чарта и хранить информацию, которая нужна хельму
+
+```bash
+$ kubectl get secrets
+
+NAME                                          TYPE                 DATA   AGE
+sh.helm.release.v1.short-service-release.v1   helm.sh/release.v1   1      4m
+```
+
+Информация представляет собой дату редактирования, имя, владельца, статус и версию
+
+```bash
+$ kubectl describe secrets sh.helm.release.v1.short-service-release.v1
+
+Name:         sh.helm.release.v1.short-service-release.v1
+Namespace:    default
+Labels:       modifiedAt=1757412692
+              name=short-service-release
+              owner=helm
+              status=deployed
+              version=1
+Annotations:  <none>
+
+Type:  helm.sh/release.v1
+
+Data
+====
+release:  2560 bytes
+```
 
 ### Встроенные объекты
 
+#### Встроенные объекты Helm
+
+- Release - информация о релизе
+- Values - переменные из файла `values.yml`
+- Chart - данные из файла `Chart.yml`
+- Files - доступ к любым файлам, кроме стандартных (позволяет получить доступ к любым файлам из файловой системы)
+- Capabilities - информация о кластере (версия кубера, операции и так далее)
+- Templates - информация о текущем шаблоне 
+
+Более подробную информацию по каждой из групп объектов можно получить в [документации](https://helm.sh/docs/chart_template_guide/builtin_objects/)
+
+#### Применение
+
+Чтобы использовать значения переменных, нужно использовать go-шаблонные строки `{{ .Values.<данные_объекта> }}`
+
+![](../../_png/Pasted%20image%2020250909132440.png)
+
+Обновим конфиг
+
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  key: {{ .Release.Name }}
+```
+
+И обновим версию чарта
+
+`short-service / Chart.yaml`
+```YML
+version: 0.1.1
+```
+
+#### Работа
+
+Чтобы просмотреть наши запущенные шаблоны:
+
+```bash
+helm ls
+```
+
+![](../../_png/Pasted%20image%2020250909133313.png)
+
+Чтобы обновить чарт, нужно будет прогнать `upgrade` с названием чарта и повторным указанием папки
+
+```bash
+$ helm upgrade short-service-release short-serv
+
+Release "short-service-release" has been upgraded. Happy Helming!
+NAME: short-service-release
+LAST DEPLOYED: Tue Sep  9 13:34:12 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+```
+
+Теперь выведем конфиг, который мы задеплоили и тут можно будет увидеть, что в ключе `key` находится значение из `.Release.Name`, которое равняется `short-service-release`
+
+```bash
+$ kubectl describe configmaps demo-config
+
+Name:         demo-config
+Namespace:    default
+Labels:       app.kubernetes.io/managed-by=Helm
+Annotations:  meta.helm.sh/release-name: short-service-release
+              meta.helm.sh/release-namespace: default
+
+Data
+====
+key:
+----
+short-service-release
 
 
+BinaryData
+====
 
-
-
-
+Events:  <none>
+```
 
 ### Задание переменных
 
+Сразу подставим в объект `Values` значение, которое будет доступно в Helm шаблонах
 
+`short-service / values.yaml`
+```YML
+name: Valery
+```
 
+И опишем нашу конфигурацию, которая будет тянуть переменные из Helm объектов
 
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  key: {{ .Release.Name }}
+  name: {{ .Values.name }}
+  chart: {{ .Chart.AppVersion }}
+```
 
+И теперь, чтобы проверить результат, нам можно просто прогнать команду генерации нашего результата, но с флагами:
+- `--debug`, что выведет результат в консоль
+- `--dry-run`, что не будет генерировать результат
 
+```bash
+$ helm install --debug --dry-run short-service-release short-serv
 
+CHART PATH: /Users/zeizel/projects/12-kubernetes-1/short-serv
+
+NAME: short-service-release
+LAST DEPLOYED: Tue Sep  9 13:50:25 2025
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+name: Valery
+
+HOOKS:
+MANIFEST:
+---
+# Source: short-serv/templates/demo-config.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  key: short-service-release
+  name: Valery # <- подставилось имя из переменной
+  chart: 1.16.0 # <- доставли версию приложения
+```
+
+Если нам нужно заменить `Computed Values` и в рамках другого окружения заменить параметры, мы можем передать флаг `--set`, который позволит в моменте кастомизировать значение
+
+```bash
+$ helm install --debug --dry-run short-service-release --set name=Oleg short-serv
+
+CHART PATH: /Users/zeizel/projects/12-kubernetes-1/short-serv
+
+NAME: short-service-release
+LAST DEPLOYED: Tue Sep  9 13:54:02 2025
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+name: Oleg
+
+COMPUTED VALUES:
+name: Oleg
+
+HOOKS:
+MANIFEST:
+```
 
 ### Функции и pipelines
 
+В Helm присутствует удобная работа с функциями, которая берёт следующие данные в строке и преобразует их
 
+Все операции находятся так же в [документации](https://helm.sh/docs/chart_template_guide/function_list/)
 
+#### Функции
 
+Например функция `upper` переведёт в UpperCase значение, а quote переведёт число в явную строку
 
+`short-service / templates / demo-config.yml`
+```YML
+data:
+  key: {{ .Release.Name }}
+  name: {{ upper .Values.name }}
+  chart: {{ quote .Chart.AppVersion }}
+```
+Результат дебага:
+```bash
+data:
+  key: short-service-release
+  name: VALERY
+  chart: "1.16.0"
+```
 
+#### Пайплайны
 
+Пайплайны работают таким образом: 
+- Сначала мы получили значение
+- Далее используем `|`, который инициализирует передачу значения в функцию дальше
+- В следующей функции мы получаем результат и так же передаём его дальше
+
+Например: 
+- `now` - получит текущую дату
+- `date "2006-01-02"` - передаст дату дальше
+- `quote` - обернёт значение в кавычки
+
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  key: {{ .Release.Name }}
+  name: {{ .Values.name | upper | quote }}
+  chart: {{ .Chart.AppVersion | quote }}
+  date: {{ now | date "2006-01-02" | quote }}
+```
+
+```bash
+data:
+  key: short-service-release
+  name: "VALERY"
+  chart: "1.16.0"
+  date: "2025-09-09"
+```
 
 ### Упражнение - Шаблон для app
 
+Дефайним общие переменные, которые будем использовать в приложении app
 
+`short-service / values.yaml`
+```YML
+# отделили переменные по домену
+app:
+  name: short-app
+  image: antonlarichev/short-app
+  version: v1.4 # версия image
+  components: frontend
+  port: 80
+  replicas: 1
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+```
 
+Передадим в конфигурацию тег изображения, который будем использовать для получения изображения с нашим фронтом. 
 
+Так как у нас в переменных используется вложенный объект, то обращаемся по `.Values(объект).app(домен).version(значение)`
 
+`short-service / templates / demo-config.yml`
+```YML
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+data:
+  name: {{ .Values.app.version | upper | quote }}
+```
 
+Передаём в сервис приложения наименование, порт и компоненты
 
+`short-service / templates / app-service.yml`
+```YML
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.app.port }}
+      protocol: TCP
+  selector:
+    components: {{ .Values.app.components }}
+```
+
+Опишем деплой. 
+
+Если нам нужно сконкатенировать строку из нескольких переменных, мы можем обернуть это в кавычки по типу:
+`"{{ .Values.<переменная> }}:{{ .Values.<переменная> }}"`  
+
+`short-service / templates / app-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-deployment
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.app.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.app.components }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: "{{ .Values.app.image }}:{{ .Values.app.version }}"
+          ports:
+            - containerPort: {{ .Values.app.port }}
+          resources:
+            limits:
+              memory: {{ .Values.app.limits.memory }}
+              cpu: {{ .Values.app.limits.cpu }}
+```
 
 ### Упражнение - Функции
 
+Изначально, все значения из объектов, которые мы получаем с помощью шаблонов, мы получаем в виде строки
 
+Чтобы передать объект `limits` из переменных окружения, нам нужно перевести его из строки в yml с помощью `toYaml` и с помощью `nindent`
 
-
-
-
-
-
-
-
-
+`short-service / templates / app-deployment.yml`
+```YML
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: "{{ .Values.app.image }}:{{ .Values.app.version }}"
+          ports:
+            - containerPort: {{ .Values.app.port }}
+          resources:
+            limits: {{ .Values.app.limits | toYaml | nindent 14 }}
+```
 
 
 

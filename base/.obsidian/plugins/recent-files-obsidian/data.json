@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
     },
@@ -11,10 +15,6 @@
     {
       "basename": "14 Страница продуктов",
       "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
       "basename": "Микросервисы",
