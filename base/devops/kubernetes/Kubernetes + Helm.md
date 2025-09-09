@@ -3685,11 +3685,13 @@ spec:
 Вы успешно установили приложение {{ .Release.Name }} {{ .Chart.Version }}
 ```
 
+![](../../_png/Pasted%20image%2020250909234729.png)
+
 ### Развёртка приложения
 
+Дошаблонируем ingress сервис
 
-
-`short-service/templates/ingress.yml`
+`short-service / templates / ingress.yml`
 ```YML
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -3717,6 +3719,16 @@ spec:
                 name: {{ .Values.api.name }}-clusterip
                 port:
                   number: {{ .Values.api.port }}
+```
+
+Далее останется: 
+- обновить шаблоны
+- отследить запуск всех сервисов
+- проверить миграции в базе и если данных нет, то создать таблицы (`CREATE TABLE`)
+
+```bash
+helm upgrade short-service-release short-service
+kubectl get all
 ```
 
 ### Создание репозитория
