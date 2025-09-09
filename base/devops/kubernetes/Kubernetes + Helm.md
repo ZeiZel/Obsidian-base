@@ -3431,7 +3431,7 @@ database:
 {{- define "env.template" }}
 - name: {{ .env }}
   valueFrom:
-    secretRef:
+    secretKeyRef:
       name: "{{ .name }}-secret"
       key: {{ .env }}
 {{- end }}
@@ -3522,12 +3522,110 @@ spec:
 
 
 
+`short-service/values.yaml`
+```YML
+postgres:
+  name: postgres
+  image: postgres
+  version: 16.0
+  components: postgres
+  port: 5432
+  limits:
+    memory: "500Mi"
+    cpu: "300m"
+  envs:
+    - POSTGRES_DB
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
+```
 
 
 
+`short-service / templates / postgres-pvc.yml`
+```YML
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ .Values.postgres.name }}-pvc"
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+```
 
 
 
+`short-service/templates/postgres-secret.yml`
+```YML
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.postgres.name }}-secret
+type: Opaque
+data:
+  POSTGRES_DB: {{ .Values.database.db | b64enc }}
+  POSTGRES_USER: {{ .Values.database.user | b64enc }}
+  POSTGRES_PASSWORD: {{ .Values.database.password | b64enc }}
+```
+
+
+
+`short-service/templates/postgres-service.yml`
+```YML
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.postgres.name }}-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.postgres.port }}
+      protocol: TCP
+  selector:
+    components: {{ .Values.postgres.components }}
+```
+
+
+
+`short-service / templates / postgres-deployment.yml`
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.postgres.name }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: {{ .Values.postgres.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.postgres.components }}
+    spec:
+      containers:
+        - name: {{ .Values.postgres.name }}
+          image: "{{ .Values.postgres.image }}:{{ .Values.postgres.version }}"
+          ports:
+            - containerPort: {{ .Values.postgres.port }}
+          resources:
+            limits: {{ .Values.postgres.limits | toYaml | nindent 14 }}
+          env:
+            {{- range .Values.postgres.envs }}
+            {{- $data := dict "name" $.Values.postgres.name "env" . }}
+            {{- include "env.template" $data | indent 12 }}
+            {{- end }}
+          volumeMounts:
+            - name: "{{ .Values.postgres.name }}-data"
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: "{{ .Values.postgres.name }}-data"
+          persistentVolumeClaim:
+            claimName: "{{ .Values.postgres.name }}-pvc"
+```
 
 
 
@@ -3548,8 +3646,35 @@ spec:
 
 
 
-
-
+`short-service/templates/ingress.yml`
+```YML
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: demo.test
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ .Values.app.name }}-clusterip
+                port:
+                  number: {{ .Values.app.port }}
+          - pathType: Prefix
+            path: "/api"
+            backend:
+              service:
+                name: {{ .Values.api.name }}-clusterip
+                port:
+                  number: {{ .Values.api.port }}
+```
 
 ### Создание репозитория
 
@@ -3610,50 +3735,74 @@ spec:
 
 
 
-
-
-
-
-
-
-
+`short-service/templates/tests/api-test.yml`
+```YML
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-api-test"
+  labels:
+    components: {{ .Values.api.components }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ .Values.api.name }}-clusterip:{{ .Values.api.port }}/api']
+  restartPolicy: Never
+```
 
 ### Шифрование секретов
 
 
 
+`secrets.yml`
+```YML
+database:
+    user: ENC[AES256_GCM,data:WHomvQ==,iv:YXO0io8C+1Vo/zyuBDyB4Sq7cq/bH8wVwiHEMVksFyI=,tag:dKOzByFjtplixw0NazGI4Q==,type:str]
+    password: ENC[AES256_GCM,data:zU73LQ==,iv:7wiOQtA8oC8C9K5+qeYlzq+mxMoBAw/ihNm1SttcCBo=,tag:8tRgbBo4GIYCl28D5+WyQg==,type:str]
+    db: ENC[AES256_GCM,data:s2I/cw==,iv:oWxgdQkUN/moQw1qAbPAGm+IGuq2iq3w4+/MzMuWvn8=,tag:DyinJpftW9ayS0M7nasFyg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-10-19T09:31:41Z"
+    mac: ENC[AES256_GCM,data:ah3WQaflPciTz4ezN4KOUoNoeb5zskgzz77qDEq4MAO1IGDDtst4nmnrUbwpAL4ysHs5hKyEebA4XGo6FLMV/hpmJ0pb7c7TG+IpGkIMDAFEPeYObSl2CkjtjCMbyhOn3SSrItoL/Syw3qFz4/lW44m5xZ9ehXhXuHaKRq+bvTY=,iv:LZhHWpBLz3N6iwfmgg1b8686uCa8zEa43/vALpe7hYk=,tag:Q50VWvdIWOoRf1FcOgClyA==,type:str]
+    pgp:
+        - created_at: "2023-10-19T09:31:41Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
 
-
-
-
-
-
-
+            hF4D85rTsTzvKXcSAQdA72l6oMM2HJu19g/ce4SnpTRczpKpl5+ogtsIZCp95wsw
+            OynmfnCgqjayKhdtUQ9hHPZq+ISc8dUHzDORy01hFVUggwHk46AdxJllvgFnxRFd
+            1GYBCQIQYPCcCDr4MxaeLze3/Re8bxO7V4+M/FCoQiM3xIHuLd6jscVfBRrVSEIR
+            BS1k0VxASSWPb2Ra6NCpNnPuwuoDdv7eQsH4WfNt0u/zKEkrJzYW+bTcLUd+J0YS
+            3SEjahesqUE=
+            =+xkd
+            -----END PGP MESSAGE-----
+          fp: A6423463E341153DFA83EC3EFD6FEB3C1B2F28BA
+    unencrypted_suffix: _unencrypted
+    version: 3.8.1
+```
 
 ### Использование секретов
 
 
 
+`.sops.yaml`
+```YML
+---
+creation_rules:
+  - pgp: "A6423463E341153DFA83EC3EFD6FEB3C1B2F28BA"
+```
 
-
-
-
-
-
-
+Теперь из файла `short-service/values.yaml` можно будет удалить блок `database`, так как теперь мы не храним секьюрные данные в нём
 
 ### Разные окружения
-
-
-
-
-
-
-
-
-
-
-
 
 
 
