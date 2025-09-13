@@ -4028,37 +4028,101 @@ Error: 1 error occurred:
 
 ### Шифрование секретов
 
+Сейчас до сих пор сохраняется проблема, что мы храним секреты публично без возможности скрыть их из репозитория
 
+`values.yml`
+```YML
+database:
+  user: demo
+  password: demo
+  db: demo
+```
+
+#### Helm secrets
+
+Есть множество решений, но самый простой и быстрый - это использование плагина для helm. 
+
+Решает вышеописанную проблему плагин `helm-secrets`. 
+
+```bash
+helm plugin install https://github.com/jkroepke/helm-secrets
+```
+
+После установки, у нас появляется команда `secrets`, которая предоставляет несколько полезных для нас операций
+
+- `encrypt`
+- `decrypt`
+- `edit`
+
+```bash
+helm secrets
+```
+
+#### Gpg
+
+Но для кодирования секретов используются gpg ключи. Для работы с ключами понадобится пакет
+
+```bash
+brew install gpg
+```
+
+Основные команды gpg:
+
+```bash
+# выведет список ключей
+gpg --list-keys
+# сгенерирует ключ
+gpg --gen-key
+```
+
+Во время генерации, нужно будет дважды ввести пароль-фразу
+
+![](../../_png/Pasted%20image%2020250913232140.png)
+
+После генерации ключа, нам нужно будет воспользоваться сгенерированным публичным ключом 
+
+![](../../_png/Pasted%20image%2020250913232643.png)
+
+#### Sops
+
+Sops позволяет на основе сгенерированного gpg-ключа собрать `secrets.yml`
+
+```bash
+brew install sops
+```
+
+Генерируем YML с секретами на основе нашего публичного gpg-ключа. 
+
+```bash
+sops -p 897FA5D8EBA85AA44F6C9B5DDB668858DCE2B6DE secrets.yml
+```
+
+После вызова этой команды, у нас откроется vi-редактор, в который мы должны будем вставить все секреты в открытом виде, чтобы в итоге получить готовый файл с секретами такого типа: 
 
 `secrets.yml`
 ```YML
 database:
-    user: ENC[AES256_GCM,data:WHomvQ==,iv:YXO0io8C+1Vo/zyuBDyB4Sq7cq/bH8wVwiHEMVksFyI=,tag:dKOzByFjtplixw0NazGI4Q==,type:str]
-    password: ENC[AES256_GCM,data:zU73LQ==,iv:7wiOQtA8oC8C9K5+qeYlzq+mxMoBAw/ihNm1SttcCBo=,tag:8tRgbBo4GIYCl28D5+WyQg==,type:str]
-    db: ENC[AES256_GCM,data:s2I/cw==,iv:oWxgdQkUN/moQw1qAbPAGm+IGuq2iq3w4+/MzMuWvn8=,tag:DyinJpftW9ayS0M7nasFyg==,type:str]
+    user: ENC[AES256_GCM,data:NOXT7g==,iv:6PHFtr77zY4njs5E5T9n+o4wlfuEci2qahDVuzyU+KM=,tag:Uhav/nkLYIEX3JB51lidKA==,type:str]
+    password: ENC[AES256_GCM,data:CJBA2w==,iv:eUiB5vC+CMQPLpZI3EHBttvTvWaA1c6wpcg0TXE1Z5s=,tag:Tso8m6qXvpN312os7syiLQ==,type:str]
+    db: ENC[AES256_GCM,data:gW+Byw==,iv:FjPBavBwLSxiVpLdilV4zl2/UtNe7FNPYZihrQ7tFik=,tag:1OOFZm6EAn0jVKB1DDtxOw==,type:str]
 sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age: []
-    lastmodified: "2023-10-19T09:31:41Z"
-    mac: ENC[AES256_GCM,data:ah3WQaflPciTz4ezN4KOUoNoeb5zskgzz77qDEq4MAO1IGDDtst4nmnrUbwpAL4ysHs5hKyEebA4XGo6FLMV/hpmJ0pb7c7TG+IpGkIMDAFEPeYObSl2CkjtjCMbyhOn3SSrItoL/Syw3qFz4/lW44m5xZ9ehXhXuHaKRq+bvTY=,iv:LZhHWpBLz3N6iwfmgg1b8686uCa8zEa43/vALpe7hYk=,tag:Q50VWvdIWOoRf1FcOgClyA==,type:str]
+    lastmodified: "2025-09-13T20:30:37Z"
+    mac: ENC[AES256_GCM,data:2t9Ol1y39IZf9AvRi/UZ3ZLt93ceaZnLNFMZVTuAm9PJ7kkB9PEW6aIxuVjhugCW4ejk+V6KEpX8geOibe66qDm4QgoUxXGxZIZBg2reGzAdvICuEcIowvM4ctl1DBq8M9GWiviqDmeYQN+YnQYfQemQe+PuAlvGyMLxD1Gwzbk=,iv:OGEs6OKX55+H4wVbHljBYFFM5lpK2cB8wJp3i5K4GtY=,tag:ADDjR+XKDm25SRc0G4SYzg==,type:str]
     pgp:
-        - created_at: "2023-10-19T09:31:41Z"
+        - created_at: "2025-09-13T20:30:15Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hF4D85rTsTzvKXcSAQdA72l6oMM2HJu19g/ce4SnpTRczpKpl5+ogtsIZCp95wsw
-            OynmfnCgqjayKhdtUQ9hHPZq+ISc8dUHzDORy01hFVUggwHk46AdxJllvgFnxRFd
-            1GYBCQIQYPCcCDr4MxaeLze3/Re8bxO7V4+M/FCoQiM3xIHuLd6jscVfBRrVSEIR
-            BS1k0VxASSWPb2Ra6NCpNnPuwuoDdv7eQsH4WfNt0u/zKEkrJzYW+bTcLUd+J0YS
-            3SEjahesqUE=
-            =+xkd
+            hF4Dc/e0lbILNO8SAQdAyqM6+fu2hYNEzRDe3r3kVuL1/TpTnj1eHSvO2JIf1XUw
+            3WiTqW+Htk6nG2YpZGWXqkVzaVPHaiNDkO2Zap4OOcUcp7BM0cCxHmSRsembdfa5
+            1GgBCQIQNytWuwtXljQHpO9e/kKNNr78TEDXkOCd4LMJrMQuHbr5nVyYHK9Fqnh9
+            MEsQSU9y849oQ6U0AmeJLBawkY9ZGrvkY5SY6CJL2pDTWtP9rS3ee6XXzpOJVgCV
+            kTe6lACbUch/AQ==
+            =rDQj
             -----END PGP MESSAGE-----
-          fp: A6423463E341153DFA83EC3EFD6FEB3C1B2F28BA
+          fp: 897FA5D8EBA85AA44F6C9B5DDB668858DCE2B6DE
     unencrypted_suffix: _unencrypted
-    version: 3.8.1
+    version: 3.10.2
 ```
 
 ### Использование секретов
