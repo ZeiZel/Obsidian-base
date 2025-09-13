@@ -4127,18 +4127,117 @@ sops:
 
 ### Использование секретов
 
+Пока мы не настроили редактирование секретов
 
+```bash
+$ helm secrets edit secrets.yml
+
+secrets.yml
+Failed to get the data key required to decrypt the SOPS file.
+
+Group 0: FAILED
+  897FA5D8EBA85AA44F6C9B5DDB668858DCE2B6DE: FAILED
+    - | could not decrypt data key with PGP key:
+```
+
+Чтобы у нас появился доступ, нам нужно экспортировать `GPG_TTY` актуально равный выводу `tty`. 
+
+Уже в окне редактирования останется только ввести пароль-фразу и откроется доступ к редактированию секретов
+
+```bash
+# установка tty
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# редактирование
+helm secrets edit secrets.yml
+```
+
+Мы можем расшифровать так же секреты в консоль 
+
+```bash
+$ helm secrets decrypt secrets.yml
+
+database:
+    user: demo
+    password: demo
+    db: demo
+```
+
+Либо вообще весь файл `secrets.yml` с помощью флага `-i` (который работает для `decrypt` и `encrypt`)
+
+```bash
+helm secrets decrypt -i secrets.yml
+```
+
+`secrets.yml`
+```YML
+database:
+    user: demo
+    password: demo
+    db: demo
+```
+
+Однако при попытке обратно зашифровать секреты, мы получим ошибку
+
+```bash
+$ helm secrets encrypt secrets.yml
+
+Could not generate data key: [failed 
+```
+
+Чтобы helm научился зашифровывать обратно, нам нужно указать публичный pgp-ключ в файле `.sops.yaml`
 
 `.sops.yaml`
 ```YML
 ---
 creation_rules:
-  - pgp: "A6423463E341153DFA83EC3EFD6FEB3C1B2F28BA"
+  - pgp: "897FA5D8EBA85AA44F6C9B5DDB668858DCE2B6DE"
 ```
 
-Теперь из файла `short-service/values.yaml` можно будет удалить блок `database`, так как теперь мы не храним секьюрные данные в нём
+После чего `encrypt` опять заработает и он опять зашифрует файл
+
+```bash
+$ helm secrets encrypt -i secrets.yml
+```
+
+`secrets.yml`
+```YML
+database:
+    user: ENC[AES256_GCM,data:FHqlsQ==,iv:HEQK5Gc41hxLw4bsh1DO7yxFGYY/e+ctrK0saKs4mSU=,tag:3nWWbjctJobbeR70Obathg==,type:str]
+    password: ENC
+```
+
+Чтобы применить секреты, нужно вызвать обновление нашего релиза через плагин `secrets`. Он задекриптит наши секреты, применит их и сразу же обновит релиз
+
+```bash
+$ helm secrets upgrade short-app-release ./short-service -f ./secrets.yml
+
+[helm-secrets] Decrypt: ./secrets.yml
+Release "short-app-release" has been upgraded. Happy Helming!
+NAME: short-app-release
+LAST DEPLOYED: Sat Sep 13 23:54:54 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 5
+NOTES:
+Вы успешно установили приложение short-app-release 0.1.1
+[helm-secrets] Removed: ./secrets.yml.dec
+```
+
+И всё работает
+
+```bash
+$ kubectl get secrets short-api-secret --template={{.data.DATABASE_URL}} | base64 -D
+postgresql://demo:demo@postgres-clusterip:5432/demo%
+```
+
+> Теперь из файла `short-service / values.yaml` можно будет удалить блок `database`, так как теперь мы не храним секьюрные данные в нём. У нас открывается спокойный доступ к отправке нашего кода в репозиторий без страха того, что секреты куда-нибудь утекут.
 
 ### Разные окружения
+
+
+
 
 
 
