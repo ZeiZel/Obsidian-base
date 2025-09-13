@@ -3881,37 +3881,149 @@ Rollback was a success! Happy Helming!
 
 ### Отладка релиза
 
+#### Lint
 
+`lint` позволяет проверить проект на поддержание best practices
 
+```bash
+$ helm lint short-service
 
+==> Linting short-service
+[INFO] Chart.yaml: icon is recommended
 
+1 chart(s) linted, 0 chart(s) failed
+```
 
+#### Template
 
+`template test` позволяет вывести собранный конфиг из всех описанных шаблонов (выведет то же самое, что и `--debug --dry-run`)
 
+```bash
+$ helm template test ./short-service
 
+---
+# Source: short-service/templates/api-secret.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: short-api-secret
+type: Opaque
+data:
+  DATABASE_URL: "cG9zdGdyZXNxbDovL2RlbW86ZGVtb0Bwb3N0Z3Jlcy1jbHVzdGVyaXA6NTQzMi9kZW1v"
+---
+# Source: short-service/templates/postgres-secret.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  POSTGRES_DB: ZGVtbw==
+  POSTGRES_USER: ZGVtbw==
+  POSTGRES_PASSWORD: ZGVtbw==
+---
+# Source: short-service/templates/postgres-pvc.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+...
+```
 
+#### Get
+
+`get` позволяет нам получить отдельные данные по нашему релизу
+
+- `all` - получаем полную конфигурацию нашего релиза
+- `values` - получаем пользовательские `values`, которые были переданы в команде при запуске
+- `hooks`
+- `manifest`
+- `metadata`
+- `notes`
+
+Получение кастомных значений
+
+```bash
+$ helm get values short-app-release
+
+USER-SUPPLIED VALUES:
+null
+```
+
+Получение полной информации по релизу
+
+```bash
+$ helm get all short-app-release
+
+NAME: short-app-release
+LAST DEPLOYED: Sat Sep 13 22:44:18 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 3
+CHART: short-service
+VERSION: 0.1.1
+APP_VERSION: 1.16.0
+USER-SUPPLIED VALUES:
+null
+
+COMPUTED VALUES:
+api:
+  components: backend
+  envs:
+```
 
 ### Тесты
 
+Helm позволяет нам описывать тесты, которые будут представлять собой поды, выполняющие фиксированные операции
 
+Тест является хуком в рамках Helm
 
-`short-service/templates/tests/api-test.yml`
+Hook - это сущность, которая должна отработать в зависимости от определённых условий
+
+Тут мы опишем сервис, который будет проверять загруженность пода командой wget
+
+`short-service / templates / tests / api-test.yml`
 ```YML
 apiVersion: v1
 kind: Pod
 metadata:
   name: "{{ .Release.Name }}-api-test"
   labels:
+    # триггерится на компонентах из api
     components: {{ .Values.api.components }}
   annotations:
+    # это хук, который отработает во время тестов
     "helm.sh/hook": test
 spec:
   containers:
     - name: wget
       image: busybox
       command: ['wget']
+      # отправляем запрос на ClusterIP сервса API по порту из values
       args: ['{{ .Values.api.name }}-clusterip:{{ .Values.api.port }}/api']
+  # нам не нужно перзапускать его после отработки
   restartPolicy: Never
+```
+
+Обновляем под и командой `test` запускаем тесты
+
+```bash
+$ helm upgrade short-app-release ./short-service
+
+$ helm test short-app-release
+
+NAME: short-app-release
+LAST DEPLOYED: Sat Sep 13 23:06:52 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 4
+TEST SUITE:     short-app-release-api-test
+Last Started:   Sat Sep 13 23:07:49 2025
+Last Completed: Sat Sep 13 23:08:23 2025
+Phase:          Failed
+NOTES:
+Вы успешно установили приложение short-app-release 0.1.1
+Error: 1 error occurred:
+        * pod short-app-release-api-test failed
 ```
 
 ### Шифрование секретов
