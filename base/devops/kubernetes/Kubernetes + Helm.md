@@ -3829,27 +3829,55 @@ my/short-service        0.1.1           1.16.0          URL Shortner service
 
 ### Uninstall
 
+Часто может быть такая ситуация, что мы локально протестировали работу сервисов и теперь нам нужно очистить все сервисы, которые связаны с данным шаблоном helm
 
+Команда `uninstall` удалит все сервисы (поды, деплои, pvc, секреты, конфиги и так далее), которые связаны с данным релизом
 
+```bash
+helm uninstall short-service-release
+```
 
+И далее раскатим релиз из нашего репозитория (прошлый урок)
 
-
-
-
-
-
+```bash
+helm install short-app-release my/short-service
+```
 
 ### Rollback
 
+`list` выводит список наших helm-проектов
+`history` позволит подробно вывести информацию по отдельному helm-проекту
 
+```bash
+helm list
+helm history short-app-release
+```
 
+![](../../_png/Pasted%20image%2020250913223938.png)
 
+Поменяем что-нибудь в проекте и обновим релиз
 
+```bash
+helm upgrade short-app-release ./short-service
+```
 
+Появился новый релиз в `history`
 
+![](../../_png/Pasted%20image%2020250913224219.png)
 
+Чтобы откатиться, нужно воспользоваться командой `rollback` и откатить релиз
 
+```bash
+$ helm rollback short-app-release 1
 
+Rollback was a success! Happy Helming!
+```
+
+И теперь `history` переведёт все прошлые релизы в `supressed` и восстановит первый релиз
+
+![](../../_png/Pasted%20image%2020250913224525.png)
+
+>[!info] Откат происходит полноценно. Если k8s дефолтно умеет откатывать только deployments, то helm может откатить все сервисы, которые мы изменили.
 
 ### Отладка релиза
 
