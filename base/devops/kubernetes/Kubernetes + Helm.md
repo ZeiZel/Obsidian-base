@@ -3480,7 +3480,9 @@ database:
 {{- end }}
 ```
 
-Далее перенесём весь конфиг api сюда с переносом данных из Values
+Далее перенесём весь конфиг api сюда с переносом данных из Values. 
+
+`livenessProbe` шаблонировать не нужно - это достаточно уникальная часть. 
 
 `short-service / templates / api-deployment.yml`
 ```YML
@@ -3508,7 +3510,7 @@ spec:
           # переменные окружения
           env: # тут мы используем шаблон для задания переменных окружения
             {{- range .Values.api.envs }}
-            {{- $data := dict "name" $.Values.api.name "env" . }}
+            {{- $data /:= dict "name" $.Values.api.name "env" . }}
             {{- include "env.template" $data | indent 12 }}
             {{- end }}
           livenessProbe:
@@ -3528,6 +3530,8 @@ spec:
 
 Далее применим энкод в base64 через `b64enc` и обернём в кавычки `quote`
 
+Если нам нужно выполнить вложенные преобразования, то мы можем обернуть значение в `()` и внутри описать операции пайплайном над данными
+
 `short-service / templates / api-secret.yml`
 ```YML
 apiVersion: v1
@@ -3537,11 +3541,13 @@ metadata:
 type: Opaque
 data:
    DATABASE_URL: {{ printf "postgresql://%s:%s@%s-clusterip:%d/%s" 
+  # параметры подключения
   .Values.database.user 
-  .Values.database.password 
+  .Values.database.password
+  .Values.database.db
+  # сервис postgres 
   .Values.postgres.name 
-  (.Values.postgres.port | int64 )
-  .Values.database.db  | b64enc | quote }}
+  (.Values.postgres.port | int64 ) | b64enc | quote }}
 ```
 
 Описание ClusterIP
@@ -3563,9 +3569,9 @@ spec:
 
 ### Упражнение - PostgreSQL
 
+Определим переменные окружения для postgres сервиса. Тут нам базово нужны переменные, которые будут отвечать за: подключение к определённой `базе`, `пользователем` с `паролем`
 
-
-`short-service/values.yaml`
+`short-service / values.yaml`
 ```YML
 postgres:
   name: postgres
@@ -3582,7 +3588,7 @@ postgres:
     - POSTGRES_PASSWORD
 ```
 
-
+Опишем сервис для выделения пространства под наш сервис
 
 `short-service / templates / postgres-pvc.yml`
 ```YML
@@ -3598,9 +3604,9 @@ spec:
     - ReadWriteOnce
 ```
 
+Сервис секретов будет в себе хранить данные для подключения к базе
 
-
-`short-service/templates/postgres-secret.yml`
+`short-service / templates / postgres-secret.yml`
 ```YML
 apiVersion: v1
 kind: Secret
@@ -3613,9 +3619,9 @@ data:
   POSTGRES_PASSWORD: {{ .Values.database.password | b64enc }}
 ```
 
+Сервис постгреса для упрощенного доступа
 
-
-`short-service/templates/postgres-service.yml`
+`short-service / templates / postgres-service.yml`
 ```YML
 apiVersion: v1
 kind: Service
@@ -3630,7 +3636,7 @@ spec:
     components: {{ .Values.postgres.components }}
 ```
 
-
+Деплоймент постгреса
 
 `short-service / templates / postgres-deployment.yml`
 ```YML
@@ -3733,16 +3739,87 @@ kubectl get all
 
 ### Создание репозитория
 
+Для создания отдельного репозитория с нашим собранным k8s из helm, нам нужно будет:
 
+1. Создать отдельный репозиторий
 
+```bash
+mkdir helm-pkg
+git init
+touch README.md
+```
 
+2. Генерация итогового бандла
 
+Helm позволяет сгенерировать итоговый бандл репозитория чартов. Путь генерации будет на месте вызова. Путь в команде указывается на директорию helm-проекта
+
+```bash
+helm package ../<helm-orig>/short-service
+```
+
+![](../../_png/Pasted%20image%2020250913205005.png)
+
+3. Создаём точку репозитория helm
+
+Теперь нам нужно сгенерировать индекс с метаданными для использования helm-репозитория
+
+```bash
+ helm repo index .
+```
+
+4. Отправляем helm-репозиторий в github
 
 ### Использование репозитория
 
+1. Собираем raw-путь
 
+Перейдём в репозиторий и получим Raw-путь из которого нужно будет только удалить `/файл`
 
+![](../../_png/Pasted%20image%2020250913210126.png)
 
+Получим такую строку с репозиторием, которая кончается веткой
+
+`https://raw.githubusercontent.com/ZeiZel/helm-repo/refs/heads/main`
+
+2. Генерируем токен для авторизации в репозиторий
+
+Генерируем токен для внешнего подключения к приватному репозиторию
+
+`https://github.com/settings/personal-access-tokens/new`
+![](../../_png/Pasted%20image%2020250913211051.png)
+
+И на выходе получаем такой токен:
+
+```
+github_pat_11AQVJOFY0uCxGD5LhEJkn_<...>
+```
+
+3. Подключаем репозиторий
+
+Подключаем новый репозиторий с нашим сервисом. Сюда мы должны передать наш ник и сгенерированный токен
+
+```bash
+$ helm repo add my --username ZeiZel --password github_pat_<...> https://raw.githubusercontent.com/ZeiZel/helm-repo/refs/heads/main
+
+"my" has been added to your repositories
+```
+
+Теперь у нас появился репозиторий `my`, в котором располагается `short-service` 
+
+```bash
+$ helm repo list
+
+NAME    URL
+stable  https://charts.helm.sh/stable
+my      https://raw.githubusercontent.com/ZeiZel/helm-repo/refs/heads/main
+
+$ helm search repo short
+
+NAME                    CHART VERSION   APP VERSION     DESCRIPTION
+my/short-service        0.1.1           1.16.0          URL Shortner service
+```
+
+>[!info] В качестве альтернативы стандартным удалённым репозиториям, можно поднять специально museum, который будет хранить helm-репозитории
 
 
 

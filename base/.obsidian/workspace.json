@@ -270,6 +270,30 @@
               "icon": "lucide-file",
               "title": "agile"
             }
+          },
+          {
+            "id": "bc439600c55db93b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tools/nvim/NeoVim - с нуля + конфигурирование.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "NeoVim - с нуля + конфигурирование"
+            }
           }
         ],
         "currentTab": 1
@@ -476,7 +500,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 445.5
+    "width": 321.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -499,6 +523,11 @@
   },
   "active": "bc089856e0886f65",
   "lastOpenFiles": [
+    "_png/Pasted image 20250913211051.png",
+    "_png/Pasted image 20250913210126.png",
+    "_png/Pasted image 20250913205005.png",
+    "tools/nvim/NeoVim - с нуля + конфигурирование.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
     "_png/Pasted image 20250909234729.png",
     "_png/Pasted image 20250909234627.png",
     "_png/Pasted image 20250909232623.png",
@@ -507,13 +536,9 @@
     "_png/Pasted image 20250909225043.png",
     "_png/Pasted image 20250909224938.png",
     "_png/Pasted image 20250909222704.png",
-    "_png/Pasted image 20250909133313.png",
-    "_png/Pasted image 20250909132440.png",
-    "_png/Pasted image 20250909131513.png",
     "agile/agile.md",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "backend/Microservices/Микросервисы.md",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/Практический JS.md",
@@ -534,7 +559,6 @@
     "frontend/React/Профилирование React.md",
     "frontend/React/React Foundamentals.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
-    "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",

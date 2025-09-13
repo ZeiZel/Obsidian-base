@@ -5,6 +5,10 @@
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
     },
@@ -95,10 +99,6 @@
     {
       "basename": "Плагины для разработки",
       "path": "tools/nvim/_lessons/Плагины для разработки.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
     {
       "basename": "Продвинутая работа",
