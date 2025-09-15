@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Vue",
+      "path": "frontend/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
@@ -105,10 +113,6 @@
       "path": "tools/nvim/_lessons/Продвинутая работа.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
-    },
-    {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
     },
@@ -143,10 +147,6 @@
     {
       "basename": "Службы",
       "path": "devops/Linux/OS/_lessons/Службы.md"
-    },
-    {
-      "basename": "Vue",
-      "path": "frontend/Vue/Vue/Vue.md"
     },
     {
       "basename": "Angular",

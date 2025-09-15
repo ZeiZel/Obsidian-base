@@ -38,7 +38,7 @@
               "type": "markdown",
               "state": {
                 "file": "devops/kubernetes/Kubernetes + Helm.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -296,7 +296,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -486,13 +486,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/kubernetes/Kubernetes + Helm.md",
+                "file": "frontend/Vue/Vue/Vue.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Kubernetes + Helm"
+              "title": "Outline of Vue"
             }
           }
         ],
@@ -521,8 +521,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "bc089856e0886f65",
+  "active": "41e66bb90725c03f",
   "lastOpenFiles": [
+    "devops/docker/Docker + Ansible.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
     "_png/Pasted image 20250914194516.png",
     "_png/Pasted image 20250913232643.png",
     "_png/Pasted image 20250913232445.png",
@@ -533,9 +535,7 @@
     "_png/Pasted image 20250913223938.png",
     "_png/Pasted image 20250913211051.png",
     "_png/Pasted image 20250913210126.png",
-    "_png/Pasted image 20250913205005.png",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "agile/agile.md",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
