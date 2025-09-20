@@ -1,36 +1,48 @@
 {
   "recentFiles": [
     {
-      "basename": "DISC",
-      "path": "agile/DISC.md"
-    },
-    {
       "basename": "Management",
       "path": "agile/Management.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
     {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
     },
     {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "Bash",
+      "path": "devops/Linux/Bash/Bash.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "DISC",
+      "path": "agile/DISC.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
     {
       "basename": "RegExp",
@@ -43,10 +55,6 @@
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
     },
     {
       "basename": "07 - Библиотека React. Средний фундаментальный уровень",
@@ -125,10 +133,6 @@
       "path": "architecture/Architecture/FSD/FSD.md"
     },
     {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
-    },
-    {
       "basename": "JS",
       "path": "frontend/JavaScript/JS.md"
     },
@@ -159,10 +163,6 @@
     {
       "basename": "Angular",
       "path": "frontend/Angular/Angular.md"
-    },
-    {
-      "basename": "Bash",
-      "path": "devops/Linux/Bash/Bash.md"
     },
     {
       "basename": "Nuxt",

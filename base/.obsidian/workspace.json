@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8ede4e25a09157f2",
+            "id": "1b7a2b4fd2381109",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "agile/DISC.md",
+                "file": "agile/Management.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,40 +28,22 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "DISC"
+              "title": "Management"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "fb79a91c64867d0b",
+        "type": "tabs",
+        "children": [
           {
-            "id": "bc089856e0886f65",
+            "id": "1ece6f705965ccaa",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/kubernetes/Kubernetes + Helm.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
-            }
-          },
-          {
-            "id": "55ceacdad2b4f6e1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/docker/Docker + Ansible.md",
+                "file": "frontend/React/Практический JS.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +58,31 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Docker + Ansible"
+              "title": "Практический JS"
+            }
+          },
+          {
+            "id": "63fa70a86f80a985",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/React/React + Redux.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "React + Redux"
             }
           },
           {
@@ -126,15 +132,22 @@
               "icon": "lucide-file",
               "title": "Nuxt"
             }
-          },
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "17f7241275bf692b",
+        "type": "tabs",
+        "children": [
           {
-            "id": "c85f4071aa1eb90a",
+            "id": "bc439600c55db93b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/Linux/Bash/Bash.md",
-                "mode": "source",
+                "file": "tools/nvim/NeoVim - с нуля + конфигурирование.md",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -148,31 +161,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Bash"
-            }
-          },
-          {
-            "id": "63fa70a86f80a985",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "frontend/React/React + Redux.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "React + Redux"
+              "title": "NeoVim - с нуля + конфигурирование"
             }
           },
           {
@@ -198,14 +187,20 @@
               "icon": "lucide-file",
               "title": "Алгоритмы и Структуры даных"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "f24b018f15e40e7e",
+        "type": "tabs",
+        "children": [
           {
-            "id": "1ece6f705965ccaa",
+            "id": "8ede4e25a09157f2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "frontend/React/Практический JS.md",
+                "file": "backend/Microservices/Микросервисы.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -220,64 +215,22 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Практический JS"
+              "title": "Микросервисы"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "a1fdbebdba11d8d4",
+        "type": "tabs",
+        "children": [
           {
-            "id": "a404184ed919b452",
+            "id": "bc089856e0886f65",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "07 - Библиотека React. Средний фундаментальный уровень"
-            }
-          },
-          {
-            "id": "1b7a2b4fd2381109",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/agile.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "agile"
-            }
-          },
-          {
-            "id": "bc439600c55db93b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "tools/nvim/NeoVim - с нуля + конфигурирование.md",
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
                 "mode": "preview",
                 "source": false,
                 "backlinks": true,
@@ -292,10 +245,59 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "NeoVim - с нуля + конфигурирование"
+              "title": "Kubernetes + Helm"
+            }
+          },
+          {
+            "id": "55ceacdad2b4f6e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/docker/Docker + Ansible.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Docker + Ansible"
+            }
+          },
+          {
+            "id": "c85f4071aa1eb90a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/Linux/Bash/Bash.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Bash"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -357,8 +359,19 @@
               "icon": "clock",
               "title": "Recent Files"
             }
+          },
+          {
+            "id": "d7c4bf9a98e423bc",
+            "type": "leaf",
+            "state": {
+              "type": "vertical-tabs",
+              "state": {},
+              "icon": "vertical-tabs",
+              "title": "Vertical tabs"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -541,32 +554,33 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8ede4e25a09157f2",
+  "active": "d7c4bf9a98e423bc",
   "lastOpenFiles": [
+    "frontend/Vue/Vue/Vue.md",
+    "frontend/React/React + Redux.md",
+    "frontend/React/Практический JS.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "devops/docker/Docker + Ansible.md",
+    "devops/Linux/Bash/Bash.md",
+    "agile/Management.md",
+    "agile/agile.md",
+    "backend/Microservices/Микросервисы.md",
+    "agile/DISC.md",
     "_png/Pasted image 20250920230612.png",
     "_png/Pasted image 20250920230603.png",
-    "agile/Management.md",
-    "agile/DISC.md",
-    "backend/Microservices/Микросервисы.md",
     "agile/TeamLeadNTeachLead.md",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
-    "frontend/Vue/Vue/Vue.md",
     "_png/Pasted image 20250915135223.png",
     "_png/Pasted image 20250915134316.png",
-    "devops/docker/Docker + Ansible.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "_png/Pasted image 20250914194516.png",
     "_png/Pasted image 20250913232643.png",
     "_png/Pasted image 20250913232445.png",
     "_png/Pasted image 20250913232300.png",
     "_png/Pasted image 20250913232140.png",
     "_png/Pasted image 20250913224525.png",
-    "_png/Pasted image 20250913224219.png",
-    "agile/agile.md",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
     "cs/Алгоритмы и Структуры даных.md",
-    "frontend/React/Практический JS.md",
     "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "frontend/NextJS/React + Next.js - с нуля.md",
     "frontend/React/_lessons/006 Практика с жизненным циклом, componentDidUpdate.md",
@@ -578,7 +592,6 @@
     "frontend/NextJS/_lessons/11 Server side rendering.md",
     "frontend/NextJS/_lessons/08 Statefull компоненты.md",
     "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
-    "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
