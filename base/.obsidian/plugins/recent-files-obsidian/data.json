@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "DISC",
+      "path": "agile/DISC.md"
+    },
+    {
+      "basename": "Management",
+      "path": "agile/Management.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
     },
@@ -13,10 +29,6 @@
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
-    },
-    {
       "basename": "agile",
       "path": "agile/agile.md"
     },
@@ -27,10 +39,6 @@
     {
       "basename": "14 Страница продуктов",
       "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
@@ -191,14 +199,6 @@
     {
       "basename": "SSR",
       "path": "frontend/SSR.md"
-    },
-    {
-      "basename": "backend",
-      "path": "backend/backend.md"
-    },
-    {
-      "basename": "database",
-      "path": "database/database.md"
     }
   ],
   "omittedPaths": [],

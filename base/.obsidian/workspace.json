@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/Microservices/Микросервисы.md",
+                "file": "agile/DISC.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Микросервисы"
+              "title": "DISC"
             }
           },
           {
@@ -86,7 +86,7 @@
               "type": "markdown",
               "state": {
                 "file": "frontend/Vue/Vue/Vue.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -278,7 +278,7 @@
               "type": "markdown",
               "state": {
                 "file": "tools/nvim/NeoVim - с нуля + конфигурирование.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -295,8 +295,7 @@
               "title": "NeoVim - с нуля + конфигурирование"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -456,6 +455,26 @@
             "id": "5c0f945ec104d877",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "afa914415f55a320",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "82c49994dfad6179",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -463,7 +482,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -486,13 +505,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "frontend/Vue/Vue/Vue.md",
+                "file": "tools/nvim/NeoVim - с нуля + конфигурирование.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Vue"
+              "title": "Outline of NeoVim - с нуля + конфигурирование"
             }
           }
         ],
@@ -500,7 +519,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 321.5
+    "width": 321.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -521,8 +541,16 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "41e66bb90725c03f",
+  "active": "8ede4e25a09157f2",
   "lastOpenFiles": [
+    "_png/Pasted image 20250920230612.png",
+    "_png/Pasted image 20250920230603.png",
+    "agile/Management.md",
+    "agile/DISC.md",
+    "backend/Microservices/Микросервисы.md",
+    "agile/TeamLeadNTeachLead.md",
+    "tools/nvim/NeoVim - с нуля + конфигурирование.md",
+    "frontend/Vue/Vue/Vue.md",
     "_png/Pasted image 20250915135223.png",
     "_png/Pasted image 20250915134316.png",
     "devops/docker/Docker + Ansible.md",
@@ -534,13 +562,9 @@
     "_png/Pasted image 20250913232140.png",
     "_png/Pasted image 20250913224525.png",
     "_png/Pasted image 20250913224219.png",
-    "_png/Pasted image 20250913223938.png",
-    "_png/Pasted image 20250913211051.png",
-    "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "agile/agile.md",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
-    "backend/Microservices/Микросервисы.md",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/Практический JS.md",
     "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
@@ -555,10 +579,6 @@
     "frontend/NextJS/_lessons/08 Statefull компоненты.md",
     "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
     "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md",
-    "frontend/React/_lessons/04 - JavaScript в работе.md",
-    "frontend/React/_lessons/05 - Продвинутый JavaScript.md",
-    "frontend/React/Профилирование React.md",
-    "frontend/React/React Foundamentals.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
