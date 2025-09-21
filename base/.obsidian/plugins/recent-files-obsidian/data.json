@@ -1,8 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "Management",
       "path": "agile/Management.md"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Untitled.base"
     },
     {
       "basename": "Vue",
@@ -27,10 +35,6 @@
     {
       "basename": "Bash",
       "path": "devops/Linux/Bash/Bash.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "Микросервисы",
@@ -195,10 +199,6 @@
     {
       "basename": "DataGrip",
       "path": "database/DataGrip.md"
-    },
-    {
-      "basename": "SSR",
-      "path": "frontend/SSR.md"
     }
   ],
   "omittedPaths": [],

@@ -30,8 +30,33 @@
               "icon": "lucide-file",
               "title": "Management"
             }
+          },
+          {
+            "id": "b1b833ceefe91b8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/agile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "agile"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "fb79a91c64867d0b",
@@ -370,8 +395,7 @@
               "title": "Vertical tabs"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -554,15 +578,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d7c4bf9a98e423bc",
+  "active": "b1b833ceefe91b8e",
   "lastOpenFiles": [
+    "agile/Management.md",
+    "Untitled.base",
+    "_png/Pasted image 20250921180627.png",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/React + Redux.md",
     "frontend/React/Практический JS.md",
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/docker/Docker + Ansible.md",
     "devops/Linux/Bash/Bash.md",
-    "agile/Management.md",
     "agile/agile.md",
     "backend/Microservices/Микросервисы.md",
     "agile/DISC.md",
@@ -577,7 +603,6 @@
     "_png/Pasted image 20250913232445.png",
     "_png/Pasted image 20250913232300.png",
     "_png/Pasted image 20250913232140.png",
-    "_png/Pasted image 20250913224525.png",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
     "cs/Алгоритмы и Структуры даных.md",
@@ -591,7 +616,6 @@
     "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
     "frontend/NextJS/_lessons/11 Server side rendering.md",
     "frontend/NextJS/_lessons/08 Statefull компоненты.md",
-    "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
@@ -600,7 +624,6 @@
     "edge/_png",
     "devops/_png",
     "cs",
-    "edge",
-    "frontend"
+    "edge"
   ]
 }
