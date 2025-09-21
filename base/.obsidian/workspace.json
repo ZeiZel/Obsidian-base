@@ -38,7 +38,7 @@
               "type": "markdown",
               "state": {
                 "file": "agile/agile.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -55,8 +55,7 @@
               "title": "agile"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "fb79a91c64867d0b",
@@ -349,6 +348,16 @@
             }
           },
           {
+            "id": "d7c4bf9a98e423bc",
+            "type": "leaf",
+            "state": {
+              "type": "vertical-tabs",
+              "state": {},
+              "icon": "vertical-tabs",
+              "title": "Vertical tabs"
+            }
+          },
+          {
             "id": "c8a96e2fe293303a",
             "type": "leaf",
             "state": {
@@ -384,22 +393,14 @@
               "icon": "clock",
               "title": "Recent Files"
             }
-          },
-          {
-            "id": "d7c4bf9a98e423bc",
-            "type": "leaf",
-            "state": {
-              "type": "vertical-tabs",
-              "state": {},
-              "icon": "vertical-tabs",
-              "title": "Vertical tabs"
-            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 343.51103591918945
+    "width": 343.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -578,8 +579,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b1b833ceefe91b8e",
+  "active": "1b7a2b4fd2381109",
   "lastOpenFiles": [
+    "agile/agile.md",
     "agile/Management.md",
     "Untitled.base",
     "_png/Pasted image 20250921180627.png",
@@ -589,7 +591,6 @@
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/docker/Docker + Ansible.md",
     "devops/Linux/Bash/Bash.md",
-    "agile/agile.md",
     "backend/Microservices/Микросервисы.md",
     "agile/DISC.md",
     "_png/Pasted image 20250920230612.png",
