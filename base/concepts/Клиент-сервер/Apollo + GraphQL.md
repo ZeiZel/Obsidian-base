@@ -109,7 +109,6 @@ module.exports = schema
 В него нам нужно будет передать rootValue (методы, которые будут работать с описанными запросами GraphQL) и нашу схему
 
 `index.js`
-
 ```JS
 const express = require('express')
 const {graphqlHTTP} = require('express-graphql')

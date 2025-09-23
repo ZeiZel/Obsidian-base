@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Management",
-      "path": "agile/Management.md"
+      "basename": "Apollo + GraphQL",
+      "path": "concepts/Клиент-сервер/Apollo + GraphQL.md"
     },
     {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "Management",
+      "path": "agile/Management.md"
     },
     {
       "basename": "Untitled",
@@ -195,10 +199,6 @@
     {
       "basename": "frontend",
       "path": "frontend/frontend.md"
-    },
-    {
-      "basename": "DataGrip",
-      "path": "database/DataGrip.md"
     }
   ],
   "omittedPaths": [],
