@@ -61,8 +61,5 @@
   "edge/TypeScript": "MiFolderTypescript",
   "frontend": "MiJs",
   "concepts/Клиент-сервер": "MiApiblueprint",
-  "concepts/Клиент-сервер/Apollo + GraphQL.md": "MiApollo",
-  "concepts/Клиент-сервер/REST API.md": "MiApiblueprint",
-  "concepts/Клиент-сервер/RPC (gRPC, tRPC).md": "MiApiblueprint",
   "concepts/Клиент-сервер/WebSocket.md": "MiApiblueprint"
 }

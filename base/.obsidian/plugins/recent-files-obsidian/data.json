@@ -1,8 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Apollo + GraphQL",
-      "path": "concepts/Клиент-сервер/Apollo + GraphQL.md"
+      "basename": "concepts",
+      "path": "concepts/concepts.md"
+    },
+    {
+      "basename": "Real-time клиент-серверное взаимодействие",
+      "path": "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md"
+    },
+    {
+      "basename": "WebSocket",
+      "path": "concepts/Клиент-сервер/WebSocket.md"
     },
     {
       "basename": "agile",
@@ -175,30 +183,6 @@
     {
       "basename": "Nuxt",
       "path": "frontend/Vue/Nuxt/Nuxt.md"
-    },
-    {
-      "basename": "Zustand",
-      "path": "frontend/State Managers/Zustand.md"
-    },
-    {
-      "basename": "microfrontends",
-      "path": "frontend/microfrontends.md"
-    },
-    {
-      "basename": "TypeScript",
-      "path": "edge/TypeScript/TypeScript.md"
-    },
-    {
-      "basename": "NestJS - с нуля",
-      "path": "backend/NestJS/NestJS - с нуля.md"
-    },
-    {
-      "basename": "атмосферный звук моря и крики чаек",
-      "path": "_png/атмосферный звук моря и крики чаек.mp3"
-    },
-    {
-      "basename": "frontend",
-      "path": "frontend/frontend.md"
     }
   ],
   "omittedPaths": [],

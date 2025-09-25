@@ -219,7 +219,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concepts/Клиент-сервер/Apollo + GraphQL.md",
+                "file": "concepts/concepts.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -234,7 +234,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Apollo + GraphQL"
+              "title": "concepts"
             }
           }
         ],
@@ -420,8 +420,7 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -538,6 +537,26 @@
             "id": "82c49994dfad6179",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "b33562052c93006d",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "5e2430caed92de42",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -545,7 +564,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 10
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -568,13 +587,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concepts/Клиент-сервер/Apollo + GraphQL.md",
+                "file": "concepts/concepts.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Apollo + GraphQL"
+              "title": "Outline of concepts"
             }
           }
         ],
@@ -606,13 +625,29 @@
   },
   "active": "fdf82fdde4a40a06",
   "lastOpenFiles": [
+    "_png/Pasted image 20250925204339.png",
+    "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+    "concepts/Клиент-сервер/WebSocket.md",
+    "concepts/concepts.md",
+    "concepts/Клиент-сервер/Клиент-сервер.md",
+    "concepts/REST API.md",
+    "_png/Pasted image 20250925202738.png",
+    "_png/Pasted image 20250925200845.png",
+    "_png/Pasted image 20250925200500.png",
+    "_png/Pasted image 20250925200425.png",
+    "_png/Pasted image 20250925200237.png",
+    "_png/Pasted image 20250925200128.png",
+    "_png/Pasted image 20250925195900.png",
+    "concepts/Клиент-сервер/SOAP.md",
+    "concepts/Клиент-сервер/RPC (gRPC, tRPC).md",
+    "concepts/Клиент-сервер/REST API.md",
+    "concepts/Клиент-сервер/Apollo + GraphQL.md",
     "agile/agile.md",
     "agile/Management.md",
     "_png/Pasted image 20250922090517.png",
     "_png/Pasted image 20250922085616.png",
     "_png/Pasted image 20250922085334.png",
     "Untitled.base",
-    "_png/Pasted image 20250921180627.png",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/React + Redux.md",
     "frontend/React/Практический JS.md",
@@ -621,27 +656,12 @@
     "devops/Linux/Bash/Bash.md",
     "backend/Microservices/Микросервисы.md",
     "agile/DISC.md",
-    "_png/Pasted image 20250920230612.png",
-    "_png/Pasted image 20250920230603.png",
     "agile/TeamLeadNTeachLead.md",
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
-    "_png/Pasted image 20250915135223.png",
-    "_png/Pasted image 20250915134316.png",
-    "_png/Pasted image 20250914194516.png",
-    "_png/Pasted image 20250913232643.png",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
     "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
-    "frontend/NextJS/React + Next.js - с нуля.md",
-    "frontend/React/_lessons/006 Практика с жизненным циклом, componentDidUpdate.md",
-    "frontend/NextJS/_lessons/20 Дополнения.md",
-    "frontend/NextJS/_lessons/04 Старт проекта.md",
-    "frontend/NextJS/_lessons/07 Простые компоненты.md",
-    "frontend/React/_lessons/09 - React + Redux.md",
-    "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "frontend/NextJS/_lessons/11 Server side rendering.md",
-    "frontend/NextJS/_lessons/08 Statefull компоненты.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
