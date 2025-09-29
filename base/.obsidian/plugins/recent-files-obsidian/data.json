@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "State-management",
+      "path": "concepts/State-management.md"
+    },
+    {
       "basename": "concepts",
       "path": "concepts/concepts.md"
     },

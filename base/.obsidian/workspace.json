@@ -219,7 +219,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concepts/concepts.md",
+                "file": "concepts/State-management.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -234,7 +234,31 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "concepts"
+              "title": "State-management"
+            }
+          },
+          {
+            "id": "9c1e095adad69653",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Real-time клиент-серверное взаимодействие"
             }
           }
         ],
@@ -587,13 +611,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concepts/concepts.md",
+                "file": "concepts/State-management.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of concepts"
+              "title": "Outline of State-management"
             }
           }
         ],
@@ -625,10 +649,15 @@
   },
   "active": "fdf82fdde4a40a06",
   "lastOpenFiles": [
-    "_png/Pasted image 20250925204339.png",
+    "concepts/concepts.md",
+    "concepts/State-management.md",
+    "_png/Pasted image 20250927145805.png",
+    "_png/Pasted image 20250927120655.png",
+    "_png/Pasted image 20250927120526.png",
     "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
     "concepts/Клиент-сервер/WebSocket.md",
-    "concepts/concepts.md",
+    "_png/Pasted image 20250927103820.png",
+    "_png/Pasted image 20250925204339.png",
     "concepts/Клиент-сервер/Клиент-сервер.md",
     "concepts/REST API.md",
     "_png/Pasted image 20250925202738.png",
@@ -636,17 +665,12 @@
     "_png/Pasted image 20250925200500.png",
     "_png/Pasted image 20250925200425.png",
     "_png/Pasted image 20250925200237.png",
-    "_png/Pasted image 20250925200128.png",
-    "_png/Pasted image 20250925195900.png",
     "concepts/Клиент-сервер/SOAP.md",
     "concepts/Клиент-сервер/RPC (gRPC, tRPC).md",
     "concepts/Клиент-сервер/REST API.md",
     "concepts/Клиент-сервер/Apollo + GraphQL.md",
     "agile/agile.md",
     "agile/Management.md",
-    "_png/Pasted image 20250922090517.png",
-    "_png/Pasted image 20250922085616.png",
-    "_png/Pasted image 20250922085334.png",
     "Untitled.base",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/React + Redux.md",
