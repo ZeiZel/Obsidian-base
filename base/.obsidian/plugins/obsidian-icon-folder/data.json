@@ -59,7 +59,5 @@
   "backend/PHP": "MiPhp",
   "backend/Golang.md": "MiGo",
   "edge/TypeScript": "MiFolderTypescript",
-  "frontend": "MiJs",
-  "concepts/Клиент-сервер": "MiApiblueprint",
-  "concepts/Клиент-сервер/WebSocket.md": "MiApiblueprint"
+  "frontend": "MiJs"
 }

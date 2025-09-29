@@ -1,20 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "Client-server architecture",
+      "path": "concepts/Client-server architecture.md"
+    },
+    {
       "basename": "State-management",
       "path": "concepts/State-management.md"
     },
     {
-      "basename": "concepts",
-      "path": "concepts/concepts.md"
-    },
-    {
-      "basename": "Real-time клиент-серверное взаимодействие",
-      "path": "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md"
-    },
-    {
-      "basename": "WebSocket",
-      "path": "concepts/Клиент-сервер/WebSocket.md"
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "agile",
@@ -71,10 +67,6 @@
     {
       "basename": "14 Страница продуктов",
       "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "07 - Библиотека React. Средний фундаментальный уровень",

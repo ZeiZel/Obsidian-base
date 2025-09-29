@@ -201,7 +201,7 @@ description: Base homepage.
         - [Valkey](database/Valkey.md)
     - ORM
         - [Prisma ORM](database/Prisma%20ORM.md)
-- [Концепты](concepts/concepts.md)
+- [Концепты](concepts/Client-server%20architecture.md)
     - [REST API](concepts/REST%20API.md)
     - GraphQL
     - gRPC

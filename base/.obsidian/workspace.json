@@ -195,7 +195,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
+                "file": "concepts/Client-server architecture.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -210,59 +210,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Алгоритмы и Структуры даных"
-            }
-          },
-          {
-            "id": "fdf82fdde4a40a06",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "concepts/State-management.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "State-management"
-            }
-          },
-          {
-            "id": "9c1e095adad69653",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Real-time клиент-серверное взаимодействие"
+              "title": "Client-server architecture"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       },
       {
         "id": "f24b018f15e40e7e",
@@ -611,13 +563,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concepts/State-management.md",
+                "file": "concepts/Client-server architecture.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of State-management"
+              "title": "Outline of Client-server architecture"
             }
           }
         ],
@@ -647,14 +599,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fdf82fdde4a40a06",
+  "active": "f134da2ce9adb7b5",
   "lastOpenFiles": [
-    "concepts/concepts.md",
     "concepts/State-management.md",
+    "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
+    "cs/Алгоритмы и Структуры даных.md",
+    "concepts/Client-server architecture.md",
     "_png/Pasted image 20250927145805.png",
     "_png/Pasted image 20250927120655.png",
     "_png/Pasted image 20250927120526.png",
-    "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
     "concepts/Клиент-сервер/WebSocket.md",
     "_png/Pasted image 20250927103820.png",
     "_png/Pasted image 20250925204339.png",
@@ -684,7 +637,6 @@
     "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
-    "cs/Алгоритмы и Структуры даных.md",
     "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
