@@ -126,5 +126,14 @@
   "Editor@@editor-grid-background-pattren": false,
   "Editor@@grid-background-pattern-size": "5px",
   "Editor@@callout-style-select": "callout-style-4",
-  "Editor@@file-line-width": "850px"
+  "Editor@@file-line-width": "850px",
+  "retroma-obsidian-theme@@theme-variant": "theme-variant-1",
+  "retroma-obsidian-theme@@window-border-radius": "12px",
+  "retroma-obsidian-theme@@button-border-radius": "8px",
+  "glass-theme-settings@@disable_fonts_settings": true,
+  "glass-theme-settings@@disable_stars_settings": true,
+  "glass-theme-settings@@disable_bold_gradient_settings": true,
+  "glass-theme-settings@@hide_navTreeArrow_settings": true,
+  "glass-theme-settings@@one_row_mobile_toolbar_settings": true,
+  "glass-theme-settings@@themes-setting": "oneDark"
 }

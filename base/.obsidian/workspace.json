@@ -92,7 +92,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "frontend/React/React + Redux.md",
+                "file": "frontend/SEO.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -107,7 +107,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "React + Redux"
+              "title": "SEO"
             }
           },
           {
@@ -159,7 +159,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       },
       {
         "id": "17f7241275bf692b",
@@ -188,33 +188,8 @@
               "icon": "lucide-file",
               "title": "NeoVim - с нуля + конфигурирование"
             }
-          },
-          {
-            "id": "f134da2ce9adb7b5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "concepts/Client-server architecture.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Client-server architecture"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "f24b018f15e40e7e",
@@ -400,7 +375,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.51103591918945
+    "width": 307.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -533,6 +508,16 @@
             "id": "5e2430caed92de42",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "fe512dab4bd0a006",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -540,7 +525,7 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -563,13 +548,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concepts/Client-server architecture.md",
+                "file": "frontend/SEO.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Client-server architecture"
+              "title": "Outline of SEO"
             }
           }
         ],
@@ -599,12 +584,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "f134da2ce9adb7b5",
+  "active": "63fa70a86f80a985",
   "lastOpenFiles": [
+    "frontend/SEO.md",
+    "frontend/Vue/Vue/Vue.md",
+    "frontend/React/React + Redux.md",
+    "frontend/React/Практический JS.md",
+    "tools/nvim/NeoVim - с нуля + конфигурирование.md",
+    "concepts/Client-server architecture.md",
     "concepts/State-management.md",
     "concepts/Клиент-сервер/Real-time клиент-серверное взаимодействие.md",
     "cs/Алгоритмы и Структуры даных.md",
-    "concepts/Client-server architecture.md",
     "_png/Pasted image 20250927145805.png",
     "_png/Pasted image 20250927120655.png",
     "_png/Pasted image 20250927120526.png",
@@ -625,19 +615,14 @@
     "agile/agile.md",
     "agile/Management.md",
     "Untitled.base",
-    "frontend/Vue/Vue/Vue.md",
-    "frontend/React/React + Redux.md",
-    "frontend/React/Практический JS.md",
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/docker/Docker + Ansible.md",
     "devops/Linux/Bash/Bash.md",
     "backend/Microservices/Микросервисы.md",
     "agile/DISC.md",
     "agile/TeamLeadNTeachLead.md",
-    "tools/nvim/NeoVim - с нуля + конфигурирование.md",
     "cs/RegExp.md",
     "frontend/NextJS/_lessons/14 Страница продуктов.md",
-    "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",

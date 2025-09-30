@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "SEO",
+      "path": "frontend/SEO.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "frontend/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "NeoVim - с нуля + конфигурирование",
+      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
+    },
+    {
       "basename": "Client-server architecture",
       "path": "concepts/Client-server architecture.md"
     },
@@ -25,18 +45,6 @@
       "path": "Untitled.base"
     },
     {
-      "basename": "Vue",
-      "path": "frontend/Vue/Vue/Vue.md"
-    },
-    {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
@@ -55,10 +63,6 @@
     {
       "basename": "DISC",
       "path": "agile/DISC.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
     {
       "basename": "RegExp",
