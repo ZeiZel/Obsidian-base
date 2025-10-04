@@ -5,6 +5,14 @@
       "path": "frontend/SEO.md"
     },
     {
+      "basename": "Management",
+      "path": "agile/Management.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
     },
@@ -31,14 +39,6 @@
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
-    },
-    {
-      "basename": "Management",
-      "path": "agile/Management.md"
     },
     {
       "basename": "Untitled",

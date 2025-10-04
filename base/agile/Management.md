@@ -1,6 +1,8 @@
 
 # Teamlead
 
+- [Родмап тимлида](https://tlroadmap.io/)
+
 Teamlead - это:
 
 - **Связующее звено** между командой разработчиков и management-частью / product owner.

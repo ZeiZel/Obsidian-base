@@ -55,8 +55,7 @@
               "title": "agile"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "fb79a91c64867d0b",
@@ -375,7 +374,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 307.50390243530273
+    "width": 278.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -586,7 +586,12 @@
   },
   "active": "63fa70a86f80a985",
   "lastOpenFiles": [
+    "_png/Pasted image 20251004122716.png",
+    "agile/Management.md",
+    "agile/agile.md",
     "frontend/SEO.md",
+    "_png/Pasted image 20251004120530.png",
+    "_png/Pasted image 20251004114938.png",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/React + Redux.md",
     "frontend/React/Практический JS.md",
@@ -606,14 +611,10 @@
     "_png/Pasted image 20250925202738.png",
     "_png/Pasted image 20250925200845.png",
     "_png/Pasted image 20250925200500.png",
-    "_png/Pasted image 20250925200425.png",
-    "_png/Pasted image 20250925200237.png",
     "concepts/Клиент-сервер/SOAP.md",
     "concepts/Клиент-сервер/RPC (gRPC, tRPC).md",
     "concepts/Клиент-сервер/REST API.md",
     "concepts/Клиент-сервер/Apollo + GraphQL.md",
-    "agile/agile.md",
-    "agile/Management.md",
     "Untitled.base",
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/docker/Docker + Ansible.md",
@@ -622,7 +623,6 @@
     "agile/DISC.md",
     "agile/TeamLeadNTeachLead.md",
     "cs/RegExp.md",
-    "frontend/NextJS/_lessons/14 Страница продуктов.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
