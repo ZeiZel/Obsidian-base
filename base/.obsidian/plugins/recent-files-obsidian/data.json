@@ -1,6 +1,46 @@
 {
   "recentFiles": [
     {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "Ссылки",
+      "path": "frontend/NextJS/_lessons/Ссылки.md"
+    },
+    {
+      "basename": "09 - React + Redux",
+      "path": "frontend/React/_lessons/09 - React + Redux.md"
+    },
+    {
+      "basename": "08 - Библиотека React. Хуки и средний продвинутый уровень",
+      "path": "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md"
+    },
+    {
+      "basename": "07 - Библиотека React. Средний фундаментальный уровень",
+      "path": "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md"
+    },
+    {
+      "basename": "06 - Библиотека React. Базовый уровень",
+      "path": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md"
+    },
+    {
+      "basename": "05 - Продвинутый JavaScript",
+      "path": "frontend/React/_lessons/05 - Продвинутый JavaScript.md"
+    },
+    {
+      "basename": "04 - JavaScript в работе",
+      "path": "frontend/React/_lessons/04 - JavaScript в работе.md"
+    },
+    {
+      "basename": "03 - Дополнительные основы JavaScript",
+      "path": "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md"
+    },
+    {
+      "basename": "02 - Основы JavaScript",
+      "path": "frontend/React/_lessons/02 - Основы JavaScript.md"
+    },
+    {
       "basename": "SEO",
       "path": "frontend/SEO.md"
     },
@@ -19,10 +59,6 @@
     {
       "basename": "React + Redux",
       "path": "frontend/React/React + Redux.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
@@ -73,10 +109,6 @@
       "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
     },
     {
-      "basename": "07 - Библиотека React. Средний фундаментальный уровень",
-      "path": "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md"
-    },
-    {
       "basename": "React + Next.js - с нуля",
       "path": "frontend/NextJS/React + Next.js - с нуля.md"
     },
@@ -97,36 +129,12 @@
       "path": "frontend/NextJS/_lessons/07 Простые компоненты.md"
     },
     {
-      "basename": "09 - React + Redux",
-      "path": "frontend/React/_lessons/09 - React + Redux.md"
-    },
-    {
-      "basename": "08 - Библиотека React. Хуки и средний продвинутый уровень",
-      "path": "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md"
-    },
-    {
       "basename": "11 Server side rendering",
       "path": "frontend/NextJS/_lessons/11 Server side rendering.md"
     },
     {
       "basename": "08 Statefull компоненты",
       "path": "frontend/NextJS/_lessons/08 Statefull компоненты.md"
-    },
-    {
-      "basename": "06 - Библиотека React. Базовый уровень",
-      "path": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md"
-    },
-    {
-      "basename": "03 - Дополнительные основы JavaScript",
-      "path": "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md"
-    },
-    {
-      "basename": "04 - JavaScript в работе",
-      "path": "frontend/React/_lessons/04 - JavaScript в работе.md"
-    },
-    {
-      "basename": "05 - Продвинутый JavaScript",
-      "path": "frontend/React/_lessons/05 - Продвинутый JavaScript.md"
     },
     {
       "basename": "Профилирование React",
@@ -155,10 +163,6 @@
     {
       "basename": "JavaScript",
       "path": "frontend/JavaScript/JavaScript.md"
-    },
-    {
-      "basename": "02 - Основы JavaScript",
-      "path": "frontend/React/_lessons/02 - Основы JavaScript.md"
     },
     {
       "basename": "React Query",
