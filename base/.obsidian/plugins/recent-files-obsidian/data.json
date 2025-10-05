@@ -1,64 +1,52 @@
 {
   "recentFiles": [
     {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
+      "basename": "Functional programming",
+      "path": "cs/Functional programming.md"
     },
     {
-      "basename": "Ссылки",
-      "path": "frontend/NextJS/_lessons/Ссылки.md"
-    },
-    {
-      "basename": "09 - React + Redux",
-      "path": "frontend/React/_lessons/09 - React + Redux.md"
-    },
-    {
-      "basename": "08 - Библиотека React. Хуки и средний продвинутый уровень",
-      "path": "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md"
-    },
-    {
-      "basename": "07 - Библиотека React. Средний фундаментальный уровень",
-      "path": "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md"
-    },
-    {
-      "basename": "06 - Библиотека React. Базовый уровень",
-      "path": "frontend/React/_lessons/06 - Библиотека React. Базовый уровень.md"
-    },
-    {
-      "basename": "05 - Продвинутый JavaScript",
-      "path": "frontend/React/_lessons/05 - Продвинутый JavaScript.md"
-    },
-    {
-      "basename": "04 - JavaScript в работе",
-      "path": "frontend/React/_lessons/04 - JavaScript в работе.md"
-    },
-    {
-      "basename": "03 - Дополнительные основы JavaScript",
-      "path": "frontend/React/_lessons/03 - Дополнительные основы JavaScript.md"
-    },
-    {
-      "basename": "02 - Основы JavaScript",
-      "path": "frontend/React/_lessons/02 - Основы JavaScript.md"
-    },
-    {
-      "basename": "SEO",
-      "path": "frontend/SEO.md"
-    },
-    {
-      "basename": "Management",
-      "path": "agile/Management.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
+      "basename": "Nuxt",
+      "path": "frontend/Vue/Nuxt/Nuxt.md"
     },
     {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
     },
     {
+      "basename": "Management",
+      "path": "agile/Management.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/React/Практический JS.md"
+    },
+    {
+      "basename": "Профилирование React",
+      "path": "frontend/React/Профилирование React.md"
+    },
+    {
+      "basename": "React Query",
+      "path": "frontend/React/React Query.md"
+    },
+    {
+      "basename": "React Foundamentals",
+      "path": "frontend/React/React Foundamentals.md"
+    },
+    {
       "basename": "React + Redux",
       "path": "frontend/React/React + Redux.md"
+    },
+    {
+      "basename": "Ссылки",
+      "path": "frontend/NextJS/_lessons/Ссылки.md"
+    },
+    {
+      "basename": "SEO",
+      "path": "frontend/SEO.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
       "basename": "NeoVim - с нуля + конфигурирование",
@@ -113,10 +101,6 @@
       "path": "frontend/NextJS/React + Next.js - с нуля.md"
     },
     {
-      "basename": "006 Практика с жизненным циклом, componentDidUpdate",
-      "path": "frontend/React/_lessons/006 Практика с жизненным циклом, componentDidUpdate.md"
-    },
-    {
       "basename": "20 Дополнения",
       "path": "frontend/NextJS/_lessons/20 Дополнения.md"
     },
@@ -135,14 +119,6 @@
     {
       "basename": "08 Statefull компоненты",
       "path": "frontend/NextJS/_lessons/08 Statefull компоненты.md"
-    },
-    {
-      "basename": "Профилирование React",
-      "path": "frontend/React/Профилирование React.md"
-    },
-    {
-      "basename": "React Foundamentals",
-      "path": "frontend/React/React Foundamentals.md"
     },
     {
       "basename": "Плагины для разработки",
@@ -165,28 +141,8 @@
       "path": "frontend/JavaScript/JavaScript.md"
     },
     {
-      "basename": "React Query",
-      "path": "frontend/React/React Query.md"
-    },
-    {
       "basename": "Продвинутый FrontEnd",
       "path": "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
-    },
-    {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
-      "basename": "Службы",
-      "path": "devops/Linux/OS/_lessons/Службы.md"
-    },
-    {
-      "basename": "Angular",
-      "path": "frontend/Angular/Angular.md"
-    },
-    {
-      "basename": "Nuxt",
-      "path": "frontend/Vue/Nuxt/Nuxt.md"
     }
   ],
   "omittedPaths": [],
