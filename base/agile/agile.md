@@ -1,11 +1,11 @@
 ---
 tags:
-  - Agile
-  - Scrum
-  - Kanban
-  - Lean
-  - SberGile
-  - Less
+  - agile
+  - scrum
+  - kanban
+  - lean
+  - sbergile
+  - less
 aliases:
   - Agile
   - Scrum

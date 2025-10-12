@@ -91,7 +91,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cs/Functional programming.md",
+                "file": "ai/AI.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -106,7 +106,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Functional programming"
+              "title": "AI"
             }
           }
         ],
@@ -177,30 +177,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "bc089856e0886f65",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/kubernetes/Kubernetes + Helm.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
-            }
-          },
-          {
             "id": "55ceacdad2b4f6e1",
             "type": "leaf",
             "state": {
@@ -248,8 +224,110 @@
               "title": "Bash"
             }
           }
+        ]
+      },
+      {
+        "id": "ddbf7fcd35ec48fe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bc089856e0886f65",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/Networks/Networks.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Networks"
+            }
+          },
+          {
+            "id": "2f6bb3a36797a3d4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/Functional programming.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Functional programming"
+            }
+          },
+          {
+            "id": "869ed4f8a950080b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ai/AI Prompts.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "AI Prompts"
+            }
+          },
+          {
+            "id": "f53471134600da35",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/Teamlead.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Teamlead"
+            }
+          }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -407,66 +485,6 @@
             }
           },
           {
-            "id": "20df2883fd232200",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "5c0f945ec104d877",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "afa914415f55a320",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "82c49994dfad6179",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "b33562052c93006d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "5e2430caed92de42",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "fe512dab4bd0a006",
             "type": "leaf",
             "state": {
@@ -509,7 +527,8 @@
               "title": "Outline of Functional programming"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -535,12 +554,25 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "7d68bc49122566e2",
+  "active": "2f6bb3a36797a3d4",
   "lastOpenFiles": [
+    "cs/Networks/Networks.md",
+    "agile/Teamlead.md",
+    "agile/agile.md",
+    "ai/AI Prompts.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "cs/Networks",
+    "backend/Microservices/Микросервисы.md",
+    "ai/AI.md",
+    "ai/AI and Data Science.md",
+    "ai/AI Engineering.md",
+    "ai/AI Agent.md",
+    "index.md",
+    "ai",
     "cs/Functional programming.md",
+    "Untitled.base",
     "frontend/Vue/Nuxt/Nuxt.md",
     "frontend/Vue/Vue/Vue.md",
-    "agile/Management.md",
     "frontend/React/Практический JS.md",
     "frontend/React/_lessons/Redux Toolkit.md",
     "frontend/React/_lessons/Ссылки.md",
@@ -553,16 +585,6 @@
     "frontend/React/_lessons/04 - JavaScript в работе.md",
     "frontend/React/_lessons/003 Трансформация данных и компонент со случайным персонажем.md",
     "frontend/React/_lessons/001 Основные принципы Redux. Теория.md",
-    "frontend/React/_lessons/001 Вступление к практическому курсу.md",
-    "frontend/React/_lessons/001 Введение в хуки.md",
-    "frontend/React/Профилирование React.md",
-    "frontend/React/React Query.md",
-    "frontend/React/React Foundamentals.md",
-    "frontend/React/React + Redux.md",
-    "frontend/NextJS/_lessons/Ссылки.md",
-    "frontend/React/_lessons/09 - React + Redux.md",
-    "frontend/React/_lessons/08 - Библиотека React. Хуки и средний продвинутый уровень.md",
-    "frontend/React/_lessons/07 - Библиотека React. Средний фундаментальный уровень.md",
     "_png/Pasted image 20251004235713.png",
     "_png/Pasted image 20251004235701.png",
     "_png/Pasted image 20251004233825.png",
@@ -573,15 +595,12 @@
     "_png/Pasted image 20250927120655.png",
     "_png/Pasted image 20250927120526.png",
     "_png/Pasted image 20250927103820.png",
-    "Untitled.base",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
     "_png",
     "RoadMap",
     "edge/_png",
-    "devops/_png",
-    "cs",
-    "edge"
+    "devops/_png"
   ]
 }

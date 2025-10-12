@@ -5,16 +5,56 @@
       "path": "cs/Functional programming.md"
     },
     {
+      "basename": "Networks",
+      "path": "cs/Networks/Networks.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
+      "basename": "AI Prompts",
+      "path": "ai/AI Prompts.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "AI and Data Science",
+      "path": "ai/AI and Data Science.md"
+    },
+    {
+      "basename": "AI Engineering",
+      "path": "ai/AI Engineering.md"
+    },
+    {
+      "basename": "AI Agent",
+      "path": "ai/AI Agent.md"
+    },
+    {
+      "basename": "index",
+      "path": "index.md"
+    },
+    {
       "basename": "Nuxt",
       "path": "frontend/Vue/Nuxt/Nuxt.md"
     },
     {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
-    },
-    {
-      "basename": "Management",
-      "path": "agile/Management.md"
     },
     {
       "basename": "Практический JS",
@@ -45,10 +85,6 @@
       "path": "frontend/SEO.md"
     },
     {
-      "basename": "agile",
-      "path": "agile/agile.md"
-    },
-    {
       "basename": "NeoVim - с нуля + конфигурирование",
       "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
@@ -65,24 +101,12 @@
       "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
-      "basename": "Untitled",
-      "path": "Untitled.base"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
       "basename": "Docker + Ansible",
       "path": "devops/docker/Docker + Ansible.md"
     },
     {
       "basename": "Bash",
       "path": "devops/Linux/Bash/Bash.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
     },
     {
       "basename": "DISC",
