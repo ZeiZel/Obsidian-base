@@ -1,24 +1,28 @@
 {
   "recentFiles": [
     {
-      "basename": "Functional programming",
-      "path": "cs/Functional programming.md"
+      "basename": "Team",
+      "path": "agile/Team.md"
     },
     {
-      "basename": "Networks",
-      "path": "cs/Networks/Networks.md"
+      "basename": "AI Prompts",
+      "path": "ai/AI Prompts.md"
     },
     {
       "basename": "Teamlead",
       "path": "agile/Teamlead.md"
     },
     {
-      "basename": "agile",
-      "path": "agile/agile.md"
+      "basename": "Networks",
+      "path": "cs/Networks/Networks.md"
     },
     {
-      "basename": "AI Prompts",
-      "path": "ai/AI Prompts.md"
+      "basename": "Functional programming",
+      "path": "cs/Functional programming.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
       "basename": "Kubernetes + Helm",
