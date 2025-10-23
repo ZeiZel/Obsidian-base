@@ -261,8 +261,7 @@ export default App;
 - В изменение состояния `set` мы должны будем добавить небольшой бойлерплейт с кастомными логами на изменение состояния, которые полетят в devtools.
 - в функции создания слайса, нам нужно будет его инстанциировать с кастомным `set` и `get`, полученным из `devtools`
 
-`model / todoStore.ts
-
+`model / todoStore.ts`
 ```TS
 import { create, StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";

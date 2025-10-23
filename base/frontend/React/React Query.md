@@ -1,4 +1,8 @@
-#ReactQuery #React
+---
+tags:
+  - reactquery
+  - react
+---
 
 TanStack Query - это библиотека для управления стейтом и кэширования данных в приложении React. Она предоставляет набор хуков, которые помогают работать с асинхронными запросами и кэшированием данных.
 
@@ -54,7 +58,6 @@ root.render(
 Далее для изменения данных используется `useMutation`, который принимает `mutationFn` (функция отправки запроса и мутации данных на сервере) и свойство, которое будет выполнять логику при успешном запросе `onSuccess`. В последнее свойство мы поместим метод клиента запросов `invalidateQueries()`, который обновит пришедшие посты
 
 `App.tsx`
-
 ```TSX
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

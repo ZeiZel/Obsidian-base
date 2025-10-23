@@ -1,6 +1,30 @@
 {
   "recentFiles": [
     {
+      "basename": "Zustand",
+      "path": "frontend/State Managers/Zustand.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "React Query",
+      "path": "frontend/React/React Query.md"
+    },
+    {
+      "basename": "Helmfile",
+      "path": "devops/kubernetes/Helmfile.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "Networks",
+      "path": "cs/Networks/Networks.md"
+    },
+    {
       "basename": "Team",
       "path": "agile/Team.md"
     },
@@ -13,10 +37,6 @@
       "path": "agile/Teamlead.md"
     },
     {
-      "basename": "Networks",
-      "path": "cs/Networks/Networks.md"
-    },
-    {
       "basename": "Functional programming",
       "path": "cs/Functional programming.md"
     },
@@ -25,16 +45,8 @@
       "path": "agile/agile.md"
     },
     {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
       "basename": "Микросервисы",
       "path": "backend/Microservices/Микросервисы.md"
-    },
-    {
-      "basename": "AI",
-      "path": "ai/AI.md"
     },
     {
       "basename": "AI and Data Science",
@@ -67,10 +79,6 @@
     {
       "basename": "Профилирование React",
       "path": "frontend/React/Профилирование React.md"
-    },
-    {
-      "basename": "React Query",
-      "path": "frontend/React/React Query.md"
     },
     {
       "basename": "React Foundamentals",

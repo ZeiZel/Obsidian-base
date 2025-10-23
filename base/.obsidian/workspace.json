@@ -255,30 +255,6 @@
             }
           },
           {
-            "id": "869ed4f8a950080b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/Team.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Team"
-            }
-          },
-          {
             "id": "f53471134600da35",
             "type": "leaf",
             "state": {
@@ -301,9 +277,81 @@
               "icon": "lucide-file",
               "title": "Teamlead"
             }
+          },
+          {
+            "id": "31d5f929cec5629d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/kubernetes/Helmfile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Helmfile"
+            }
+          },
+          {
+            "id": "a7a57c6c0698e031",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes + Helm"
+            }
+          },
+          {
+            "id": "c8de3a9f6ae2196c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/State Managers/Zustand.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Zustand"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -464,6 +512,26 @@
             "id": "fe512dab4bd0a006",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "bc5c5e206c055639",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "e3e1c4ee8e02f167",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -471,7 +539,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -494,13 +562,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Team.md",
+                "file": "frontend/State Managers/Zustand.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Team"
+              "title": "Outline of Zustand"
             }
           }
         ],
@@ -530,18 +598,20 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "869ed4f8a950080b",
+  "active": "c8de3a9f6ae2196c",
   "lastOpenFiles": [
-    "ai/AI Prompts.md",
-    "agile/Team.md",
-    "agile/Teamlead.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "frontend/React/React Query.md",
+    "devops/kubernetes/Helmfile.md",
+    "ai/AI.md",
     "cs/Networks/Networks.md",
+    "agile/Team.md",
+    "ai/AI Prompts.md",
+    "agile/Teamlead.md",
     "cs/Functional programming.md",
     "agile/agile.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "cs/Networks",
     "backend/Microservices/Микросервисы.md",
-    "ai/AI.md",
     "ai/AI and Data Science.md",
     "ai/AI Engineering.md",
     "ai/AI Agent.md",
@@ -559,8 +629,6 @@
     "frontend/React/_lessons/006 Promise (ES6).md",
     "frontend/React/_lessons/001 Что такое JS и как его подключить к странице.md",
     "frontend/React/_lessons/01 - Подготовка к работе.md",
-    "frontend/React/_lessons/04 - JavaScript в работе.md",
-    "frontend/React/_lessons/003 Трансформация данных и компонент со случайным персонажем.md",
     "_png/Pasted image 20251004235713.png",
     "_png/Pasted image 20251004235701.png",
     "_png/Pasted image 20251004233825.png",
