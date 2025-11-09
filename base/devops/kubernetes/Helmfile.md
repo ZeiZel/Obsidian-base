@@ -8,7 +8,7 @@ tags:
 
 ## Кратко о Helmfile
 
-**Helmfile** — инструмент для централизованного менеджмента множества Helm-чартов/приложений с автоматизацией деплоймента, параметризации окружений и безопасного хранения секретов.  
+**Helmfile** — инструмент для централизованного менеджмента множества Helm-чартов/приложений с автоматизацией деплоя, параметризации окружений и безопасного хранения секретов.  
 
 Helmfile-инфраструктура может описываться одним конфигом и быть гибко расширяемой — любые приложения, чарты и их значения можно “подключить” декларативно, single-source-of-truth.
 
@@ -25,6 +25,150 @@ Helmfile-инфраструктура может описываться одни
 
 ---
 
+## Установка
+
+```bash
+helm init --client-only || echo "probably helm3"  
+```
+
+
+```bash
+helm plugin install https://github.com/databus23/helm-diff  
+helm plugin install https://github.com/rimusz/helm-tiller  
+```
+
+```bash
+# default
+wget -O ~/bin/helmfile https://github.com/roboll/helmfile/releases/download/v0.102.0/helmfile_linux_amd64  
+chmod +x ~/bin/helmfile  
+
+# brew
+brew install helmfile
+```
+
+```bash
+helmfile init --force
+```
+
+---
+## Пример простой конфигурации
+
+Представим, что у нас в проекте несколько чартов разных приложений
+
+- `charts`
+	- `backend`
+	- `database`
+	- `webapp`
+
+`helmfile.yaml`
+```YAML
+# список релизов, которые нужно будет менеджментить
+releases:
+  - name: webapp # имя окружения
+    namespace: default # пространство имён
+    chart: ./charts/webapp # месторасположение чарта
+    version: "0.1.0" # версия релиза
+    wait: true # ожидаем установку
+    installed: true # требуется ли установка конкретного чарта
+  - name: backend
+    namespace: default
+    chart: ./charts/backend
+    wait: true
+  - name: database
+    namespace: default
+    chart: ./charts/database
+    wait: true
+```
+
+Эта команда выведет список всех чартов, которые менеджментит helmfile
+
+```bash
+helmfile list
+```
+
+```bash
+helmfile apply
+```
+
+```bash
+helmfile sync
+```
+
+```bash
+helmfile destroy
+```
+
+Через `set` можно установить свои значения `values`
+
+`helmfile.yaml`
+```YAML
+  - name: backend
+    namespace: default
+    chart: ./backend
+    wait: true
+    set:
+      - name: replicaCount
+        value: 2
+```
+
+Чтобы посмотреть различия в чартах, которые будут сделаны из-за изменений, нужно прогнать
+
+```bash
+helmfile diff
+```
+
+### Репозитории
+
+Мы можем подключать чарты из внешних репозиториев и сразу их применять 
+
+```YAML
+releases:
+  - name: nginx
+    namespace: default
+    chart: oci://registry-1.docker.io/bitnamicharts/nginx # link
+    version: "15.4.4"
+    wait: true
+    set:
+      - name: service.type
+        value: ClusterIP
+```
+
+`helmfile.yaml`
+```YAML
+# отдельное поле со списком
+repositories:
+ - name: prometheus-community
+   url: https://prometheus-community.github.io/helm-charts
+
+releases:
+- name: prom-norbac-ubuntu
+  namespace: prometheus
+  chart: prometheus-community/prometheus # name и имя чарта из репозитория
+  set:
+  - name: rbac.create
+    value: false
+```
+
+Определение `oci` репозитория
+
+```YAML
+repositories:
+  - name: ocirepo
+    url: registry-1.docker.io/bitnamicharts
+    oci: true
+
+releases:
+  - name: nginx
+    namespace: default
+    chart: ocirepo/nginx
+    version: 15.4.4
+    wait: true
+    set:
+      - name: service.type
+        value: ClusterIP
+```
+
+---
 ## Пример расширяемого конфигурирования
 
 ### Импорт стороннего репозитория  

@@ -223,8 +223,29 @@
               "icon": "lucide-file",
               "title": "Bash"
             }
+          },
+          {
+            "id": "7f817a3d921f9b09",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "10b0fa3b23b35b22",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "ddbf7fcd35ec48fe",
@@ -351,7 +372,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -428,8 +449,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 278.50390243530273,
-    "collapsed": true
+    "width": 278.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -532,6 +552,16 @@
             "id": "e3e1c4ee8e02f167",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "201d805407cb1273",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -539,7 +569,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -562,13 +592,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "frontend/State Managers/Zustand.md",
+                "file": "devops/kubernetes/Helmfile.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Zustand"
+              "title": "Outline of Helmfile"
             }
           }
         ],
@@ -598,16 +628,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "c8de3a9f6ae2196c",
+  "active": "31d5f929cec5629d",
   "lastOpenFiles": [
     "devops/kubernetes/Kubernetes + Helm.md",
-    "frontend/React/React Query.md",
     "devops/kubernetes/Helmfile.md",
-    "ai/AI.md",
+    "Untitled.md",
     "cs/Networks/Networks.md",
+    "agile/Teamlead.md",
+    "frontend/State Managers/Zustand.md",
+    "frontend/React/React Query.md",
+    "ai/AI.md",
     "agile/Team.md",
     "ai/AI Prompts.md",
-    "agile/Teamlead.md",
     "cs/Functional programming.md",
     "agile/agile.md",
     "cs/Networks",
@@ -627,8 +659,6 @@
     "frontend/React/_lessons/006 Практика с жизненным циклом, componentDidUpdate.md",
     "frontend/React/_lessons/006 useRef.md",
     "frontend/React/_lessons/006 Promise (ES6).md",
-    "frontend/React/_lessons/001 Что такое JS и как его подключить к странице.md",
-    "frontend/React/_lessons/01 - Подготовка к работе.md",
     "_png/Pasted image 20251004235713.png",
     "_png/Pasted image 20251004235701.png",
     "_png/Pasted image 20251004233825.png",
