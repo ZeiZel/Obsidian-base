@@ -6703,9 +6703,18 @@ body:not(.is-phone) .vertical-tab-nav-item.is-active {
 }
 
 /* Range slider */
+body {
+    --slider-thumb-border-width: 0;
+}
+
 input[type='range']::-webkit-slider-thumb {
     box-shadow: var(--toggle-thumb-shadow);
+    cursor: grab;
     transition: none;
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+    cursor: grabbing;
 }
 
 input[type=range]::-webkit-slider-thumb:is(:hover, :active) {
@@ -7109,7 +7118,7 @@ body:not(.heading-indicator-off) .markdown-preview-sizer>div>h1::before {
 }
 
 
-body.h1-divider-on :is(.markdown-preview-sizer>div>h1, .markdown-rendered>h1, .HyperMD-header-1)::after {
+body.h1-divider-on :is(.markdown-preview-sizer>div>h1, .markdown-rendered>h1, .HyperMD-header-1>.cm-header-1)::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -7197,7 +7206,7 @@ body:not(.heading-indicator-off) .markdown-preview-sizer>div>h2::before {
 }
 
 
-body.h2-divider-on :is(.markdown-preview-sizer>div>h2, .markdown-rendered>h2, .HyperMD-header-2)::after {
+body.h2-divider-on :is(.markdown-preview-sizer>div>h2, .markdown-rendered>h2, .HyperMD-header-2>.cm-header-2)::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -7284,7 +7293,7 @@ body:not(.heading-indicator-off) .markdown-preview-sizer>div>h3::before {
     left: 0px;
 }
 
-body.h3-divider-on :is(.markdown-preview-sizer>div>h3, .markdown-rendered>h3, .HyperMD-header-3)::after {
+body.h3-divider-on :is(.markdown-preview-sizer>div>h3, .markdown-rendered>h3, .HyperMD-header-3>.cm-header-3)::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -7372,7 +7381,7 @@ body:not(.heading-indicator-off) .markdown-preview-sizer>div>h4::before {
 }
 
 
-body.h4-divider-on :is(.markdown-rendered>h4, .markdown-preview-sizer>div>h4, .HyperMD-header-4)::after {
+body.h4-divider-on :is(.markdown-rendered>h4, .markdown-preview-sizer>div>h4, .HyperMD-header-4>.cm-header-4)::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -7460,7 +7469,7 @@ body:not(.heading-indicator-off) .markdown-preview-sizer>div>h5::before {
 }
 
 
-body.h5-divider-on :is(.markdown-rendered>h5, .markdown-preview-sizer>div>h5, .HyperMD-header-5)::after {
+body.h5-divider-on :is(.markdown-rendered>h5, .markdown-preview-sizer>div>h5, .HyperMD-header-5>.cm-header-5)::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -7548,7 +7557,7 @@ body:not(.heading-indicator-off) .markdown-preview-sizer>div>h6::before {
 }
 
 
-body.h6-divider-on :is(.markdown-rendered>h6, .markdown-preview-sizer>div>h6, .HyperMD-header-6)::after {
+body.h6-divider-on :is(.markdown-rendered>h6, .markdown-preview-sizer>div>h6, .HyperMD-header-6>.cm-header-6)::after {
     content: "";
     position: absolute;
     height: 1px;
@@ -7658,7 +7667,7 @@ body {
     --line-normal-opacity: 0.5;
 }
 
-.border-focus-mode .cm-lineWrapping>.cm-line.cm-active:not(:has(.mk-note-footer, .mk-floweditor-container)) {
+.border-focus-mode .cm-lineWrapping>.cm-line.cm-active {
     background-color: var(--line-active-bg);
     border-radius: var(--radius-s);
     opacity: 1;
@@ -7695,17 +7704,10 @@ body {
 
 /*general*/
 
-.line-hover-indicator .workspace-leaf-content:is([data-type="markdown"], [data-type="webviewer"]):not(:has(.document-search-container)) .markdown-preview-sizer>div:not(:has(.collapse-indicator, .mk-header)) {
-    position: relative;
-}
-
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent)::after,
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, .HyperMD-header, :has(.mk-note-footer, .collapse-indicator))::after,
-.line-hover-indicator .workspace-leaf-content:is([data-type="markdown"], [data-type="webviewer"]):not(:has(.document-search-container)) .markdown-preview-sizer>div:is(.el-ul, .el-ol)::after,
-.line-hover-indicator .workspace-leaf-content:is([data-type="markdown"], [data-type="webviewer"]):not(:has(.document-search-container)) .markdown-preview-sizer>div:not(:has(.collapse-indicator, .mk-header))::after {
+.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div::after {
     content: "";
     position: absolute;
-    left: -12px;
+    left: -24px;
     top: 3px;
     width: 3px;
     height: 0;
@@ -7715,26 +7717,22 @@ body {
     opacity: 1;
 }
 
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.HyperMD-quote:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent)::after,
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.HyperMD-quote:not(.image-embed, .mk-header, .HyperMD-header, :has(.mk-note-footer, .collapse-indicator))::after {
-    left: calc(-12px - var(--blockquote-padding));
+.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.HyperMD-quote::after {
+    left: calc(-24px - var(--blockquote-padding));
 }
 
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent):hover::after,
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:not(.image-embed, .mk-header, .HyperMD-header, :has(.mk-note-footer, .collapse-indicator)):hover::after,
-.line-hover-indicator .workspace-leaf-content:is([data-type="markdown"], [data-type="webviewer"]):not(:has(.document-search-container)) .markdown-preview-sizer>div:is(.el-ul, .el-ol):hover::after,
-.line-hover-indicator .workspace-leaf-content:is([data-type="markdown"], [data-type="webviewer"]):not(:has(.document-search-container)) .markdown-preview-sizer>div:not(:has(.collapse-indicator, .mk-header)):hover::after {
+.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>div:hover::after {
     height: calc(100% - 6px);
 }
 
 /* num */
 
-.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:not(.HyperMD-list-line-1):after,
+.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:after,
 .line-hover-indicator.focus-indicator-codeblock-line-number .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::after {
     background: unset !important;
     opacity: 0 !important;
     position: absolute !important;
-    left: -12px !important;
+    left: -24px !important;
     top: 0px !important;
     height: 100% !important;
     width: 3px !important;
@@ -7745,7 +7743,7 @@ body {
     color: var(--hover-indicator-color);
 }
 
-.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:not(.HyperMD-list-line-1):hover::after,
+.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:hover::after,
 .line-hover-indicator.focus-indicator-codeblock-line-number .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end):hover:after {
     opacity: 1 !important;
     --hover-indicator-color: var(--text-faint);
@@ -7763,9 +7761,13 @@ body {
 }
 
 /* list */
-.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:not(.HyperMD-list-line-1):after {
+.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line:after {
     content: "";
     text-indent: 0px !important;
+}
+
+.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-1::after {
+    content: "1" !important;
 }
 
 .line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-line.HyperMD-list-line.HyperMD-list-line-2::after {
@@ -7806,11 +7808,10 @@ body {
 
 /* active line */
 
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.cm-active:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent)::after,
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.cm-active:not(.image-embed, .mk-header, .HyperMD-header, :has(.mk-note-footer, .collapse-indicator))::after {
+.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.cm-active::after {
     content: "";
     position: absolute;
-    left: -12px;
+    left: -24px;
     top: 3px;
     width: 3px;
     height: calc(100% - 6px);
@@ -7820,12 +7821,11 @@ body {
     opacity: 1;
 }
 
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.cm-active.HyperMD-quote:not(:has(.mk-note-footer)):has(.cm-hmd-list-indent)::after,
-.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.cm-active.HyperMD-quote:not(.image-embed, .mk-header, .HyperMD-header, :has(.mk-note-footer, .collapse-indicator))::after {
-    left: calc(-12px - var(--blockquote-padding));
+.line-hover-indicator .workspace-leaf-content[data-type="markdown"] .markdown-source-view .cm-content>.cm-active.HyperMD-quote::after {
+    left: calc(-24px - var(--blockquote-padding));
 }
 
-.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-active.HyperMD-list-line:not(.HyperMD-list-line-1)::after,
+.line-hover-indicator.focus-indicator-list-level .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-active.HyperMD-list-line::after,
 .line-hover-indicator.focus-indicator-codeblock-line-number .workspace-leaf-content[data-type="markdown"] .cm-contentContainer .cm-active.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end):after {
     opacity: 1 !important;
     --hover-indicator-color: var(--color-accent) !important;
@@ -9090,6 +9090,14 @@ body:not(.is-mobile) .workspace-leaf-content[data-type="style-settings"] .view-c
     padding: 12px !important;
 }
 
+.setting-item.setting-item-heading.style-settings-heading {
+	border: 0;
+	padding: 8px 0 4px;
+	margin-bottom: 0;
+    margin-top:8px;
+	border-radius: 0
+}
+
 .style-settings-container {
     padding-left: var(--size-4-8);
     margin-left: var(--size-4-1);
@@ -9101,8 +9109,8 @@ body:not(.is-mobile) .workspace-leaf-content[data-type="style-settings"] .view-c
     margin-bottom: 12px;
 }
 
-.style-settings-heading.is-collapsed[data-level="0"] {
-    margin-bottom: 0;
+.style-settings-heading[data-level="0"] + .style-settings-container .style-settings-collapse-indicator {
+    margin-left: unset;
 }
 
 .setting-item+div>.setting-item-heading,

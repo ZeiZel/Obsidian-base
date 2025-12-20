@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "Zustand",
+      "path": "frontend/State Managers/Zustand.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "Helmfile",
       "path": "devops/kubernetes/Helmfile.md"
     },
@@ -21,10 +33,6 @@
       "path": "agile/Teamlead.md"
     },
     {
-      "basename": "Zustand",
-      "path": "frontend/State Managers/Zustand.md"
-    },
-    {
       "basename": "React Query",
       "path": "frontend/React/React Query.md"
     },
@@ -43,10 +51,6 @@
     {
       "basename": "Functional programming",
       "path": "cs/Functional programming.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "Микросервисы",
@@ -115,10 +119,6 @@
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
     },
     {
       "basename": "Bash",

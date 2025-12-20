@@ -1,4 +1,5 @@
 {
+  "collectAttachmentUsedByMultipleNotesMode": "Skip",
   "consistencyReportFile": "consistency-report.md",
   "emptyAttachmentFolderBehavior": "DeleteWithEmptyParents",
   "excludePaths": [
@@ -8,6 +9,7 @@
   ],
   "excludePathsFromAttachmentCollecting": [],
   "includePaths": [],
+  "moveAttachmentToProperFolderUsedByMultipleNotesMode": "CopyAll",
   "shouldChangeNoteBacklinksDisplayText": false,
   "shouldCollectAttachmentsAutomatically": false,
   "shouldDeleteAttachmentsWithNote": false,

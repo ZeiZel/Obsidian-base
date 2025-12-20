@@ -2119,24 +2119,24 @@ sudo [apt|dnf|pacman] install ansible
 
 Параметры подключения к хосту состоят из 4ёх блоков:
 
-1. Параметры подключения
-    - connection - ssh / sftp / scp
-    - host - имя хоста, к которому подключаемся
-    - port - порт (тут может понадобится кастомный ssh-порт не 22, а 2222)
-    - user - имя пользователя
-    - password - пароль. Используется, если не заданы ssh-ключи для подключения.
+1. Параметры подключения `ansible_`
+    - `connection` - ssh / sftp / scp
+    - `host` - имя хоста, к которому подключаемся
+    - `port` - порт (тут может понадобится кастомный ssh-порт не 22, а 2222)
+    - `user` - имя пользователя
+    - `password` - пароль. Используется, если не заданы ssh-ключи для подключения.
 2. Параметры ssh / scp / sftp
-    - private_key_file - путь к приватному ключу, но дефолтно используется файл в `.ssh`
-    - common_args - общие аргументы для всех типов подключения
-    - extra_args - дополнительные аргументы
-    - pipelining - ограничение количества ssh-подключений (чтобы не открывать 100 подключений одновременно)
-    - executable - дополнительная настройка выполнения
+    - `private_key_file` - путь к приватному ключу, но дефолтно используется файл в `.ssh`
+    - `common_args` - общие аргументы для всех типов подключения
+    - `extra_args` - дополнительные аргументы
+    - `pipelining` - ограничение количества ssh-подключений (чтобы не открывать 100 подключений одновременно)
+    - `executable` - дополнительная настройка выполнения
 3. Привилегии (применение команды из под sudo)
     - become - нужно ли выполнять от sudo
     - method - метод перехода (su/sudo)
     - exe, flags - настраивает поведение перехода к sudo
 4. Настройки shell
-    - shell_type - выбор shell (bash/zsh)
+    - `shell_type` - выбор shell (bash/zsh)
     - интерпретатор питона
     - екзекутер скрипта
 
@@ -2165,8 +2165,8 @@ ansible -i hosts.ini -m ping demo
 
 Модули - это отдельные блоки кода, которые можно использовать для выполнения команд на хостах и сбора возвращаемых значений.
 
-- service - поднимает сервис
-- command - выполняет команду в shell
+- `service` - поднимает сервис
+- `command` - выполняет команду в shell
 
 ```bash
 # пример использования модуля service и передачи в него аргументов -a
@@ -2290,7 +2290,7 @@ ansible -i hosts -m user -a "name=zeizel state=absent" demo
 
 ### Playbook
 
-Ansible Playbook - это описание конфигурации, оркестрации или вкладки. Оно описывает состояние удалённой системы или шаги отдельного процесса.
+Ansible Playbook - это описание конфигурации, оркестрации или выкладки. Оно описывает состояние удалённой системы или шаги отдельного процесса.
 
 Это самодокументируемая последовательность операций, которая описана в скрипте. Она сохранятся на компьютере и может повторяться из раза  в раз на всех связанных устройствах.
 
@@ -2321,11 +2321,11 @@ Ansible Playbook - это описание конфигурации, оркес�
 - name: user
   hosts: demo
   tasks:
-    - name: create user
+	- name: create user
+	  become: true # предоставит возможность запросить sudo пароль
       user:
         name: zeizel
         state: present
-	  become: true # предоставит возможность запросить sudo пароль
 ```
 
 И далее запускаем `ansible-playbook` команду. Добавляем `-K`, чтобы в случае чего запросить `sudo` пароль
@@ -2348,7 +2348,7 @@ ansible-playbook -i hosts.ini user.yml -K
 
 - ключевые слова из python (async)
 - зарезервированные слова playbook
-- `*myvar` - wildcarts и спецсимволы вначале
+- `*myvar` - wildcarts и спецсимволы в начале
 - `my var` - пробелы
 - `my-var` - дефисы
 - `5my_var` - начинать с числа
@@ -2369,13 +2369,12 @@ ansible-playbook -i hosts.ini user.yml -K
   hosts: demo
   tasks:
     - name: create user
-      vars:
+      vars: # <- переменная модуля
         user: zeizel
       become: true
       user:
         name: '{{ user }}'
         state: present
-
 ```
 
 ##### Весь плейбук
@@ -2386,7 +2385,7 @@ ansible-playbook -i hosts.ini user.yml -K
 ---
 - name: user
   hosts: demo
-  vars:
+  vars: # <- переменная плейбука
 		user: zeizel
   tasks:
     - name: create user
@@ -2563,29 +2562,697 @@ ansible-playbook -i demo-server user.yml -K --extra-vars "user=zeizel"
 
 ### Отладка
 
+При написании любых скриптов, появляется необходимость дебажить код. 
 
+В Ansible есть несколько способов дебага значений: 
 
+#### Дебаг через плейбук
 
+1. Нам нужно зарегистрировать вывод результатов таски через ключ `register` (грубо говоря, это создание переменной с результатом выполнения)
+2. Создать таску, которая проинициализирует дебаг через `debug: var: <name>`
 
+`user.yml`
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: create user  
+      user:  
+        name: '{{ user }}'  
+        state: present  
+      become: true  
+      register: out  # <- регистрация дебага
+    - debug: # <- инициализация дебага 
+        var: out
+```
+
+Получаем дебаг-значения
+
+```bash
+•% ➜  ansible-playbook -i all-servers user.yml -K
+BECOME password:
+
+PLAY [user] *****************
+
+TASK [Gathering Facts] *****************
+[WARNING]: Host '127.0.0.1' is using the discovered Python interpreter at '/opt/homebrew/bin/python3.14', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [127.0.0.1]
+
+TASK [create user] ***************
+ok: [127.0.0.1]
+
+TASK [debug] ***************
+ok: [127.0.0.1] => {
+    "out": {
+        "append": false,
+        "changed": false,
+        "comment": "zeizel",
+        "failed": false,
+        "group": 20,
+        "home": "/Users/zeizel",
+        "move_home": false,
+        "name": "zeizel",
+        "shell": "/bin/zsh",
+        "state": "present",
+        "uid": 501
+    }
+}
+
+PLAY RECAP ****************
+127.0.0.1                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+#### Debugger
+
+Либо мы можем активировать дебаг-режим
+
+Активируется он при включении поля `debugger` в плейбук со значчениями:
+
+- `always` - дебаггер будет отрабатывать всегда
+- `never` - никогда не будет отрабатывать
+- `on_failed` - только при провале задания
+- `on_unreachable` - когда хост недоступен
+- `on_skipped` - когда задача пропускается
+
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: create user  
+      user:  
+        name: '{{ user }}'  
+        state: present  
+      become: true  
+      debugger: always
+```
+
+Находясь в режиме дебага, мы получаем непосредственный доступ к данным текущей выполняемой операции
+
+У нас в доступе появляются команды: 
+- `p` - `print` - позволяет вывести определённое значение
+- `r` - `retry` - повторит текущую задачу и вернёт в режим дебага (после того, как мы сделали изменения в шаге)
+- `u` - полностью перезапустить таску с новыми переменными
+- `c` - переходит на следующий шаг выполнения задачи
+
+Доступные значения находятся в документации, но вот некоторые из них: 
+- `task` - объект с текущей задачей
+	- `name` - имя таски
+	- `args` - аргументы запуска таски
+	- `vars` - переменные таски
+- `task_vars` - все переменные, которые попали в таску
+
+```bash
+•% ➜  ansible-playbook -i all-servers user.yml -K
+
+BECOME password:
+
+PLAY [user] ************
+
+TASK [Gathering Facts] **********
+[WARNING]: Host '127.0.0.1' is using the discovered Python interpreter at '/opt/homebrew/bin/python3.14', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [127.0.0.1]
+
+TASK [create user] ************
+ok: [127.0.0.1]
+
+[127.0.0.1] TASK: create user (debug)> p task
+TASK: create user
+
+[127.0.0.1] TASK: create user (debug)> p task.args
+{'_ansible_check_mode': False,
+ '_ansible_debug': False,
+ '_ansible_diff': False,
+ '_ansible_ignore_unknown_opts': False,
+ '_ansible_keep_remote_files': False,
+ '_ansible_module_name': 'user',
+ '_ansible_no_log': False,
+ '_ansible_remote_tmp': '~/.ansible/tmp',
+ '_ansible_selinux_special_fs': ['fuse',
+                                 'nfs',
+                                 'vboxsf',
+                                 'ramfs',
+                                 '9p',
+                                 'vfat'],
+ '_ansible_shell_executable': '/bin/sh',
+ '_ansible_socket': None,
+ '_ansible_syslog_facility': 'LOG_USER',
+ '_ansible_target_log_info': None,
+ '_ansible_tmpdir': '/Users/zeizel/.ansible/tmp/ansible-tmp-1766230032.075149-16637-257421265470080/',
+ '_ansible_tracebacks_for': [],
+ '_ansible_verbosity': 0,
+ '_ansible_version': '2.20.1',
+ 
+ 'name': 'zeizel',
+ 'state': 'present'}
+ 
+[127.0.0.1] TASK: create user (debug)> p task_vars['inventory_hostname']
+'127.0.0.1'
+```
+
+Так же мы можем напрямую менять значения во время исполнения и повторить операцию `r`, чтобы увидеть, что она выполнилась с изменённым значением
+
+```bash
+[127.0.0.1] TASK: create user (debug)> task.args['name']='asdasd'
+[127.0.0.1] TASK: create user (debug)> r
+changed: [127.0.0.1]
+
+[127.0.0.1] TASK: create user (debug)> task.args['name']='zeizel'
+[127.0.0.1] TASK: create user (debug)> r
+ok: [127.0.0.1]
+```
+
+И далее нам остаётся продолжать выполняемые шаги таски через `c`. А в самом конце можем полностью проверить проходку по всем операциям с нашими новыми переменными через `u`.
+
+>[!info] Такой интерактивный режим очень полезен, так как у нас появляется возможность в моменте настроить нужное значение, повторить операцию и сразу убедиться - прошла она правильно или нет.
 
 ### Блоки и отработка ошибок
 
+Все выполняемые задачи и обработку ошибок мы можем сгруппировать в блоки в рамках Ansible и задать одинаковые параметры для них
 
+#### Блоки
 
+Все таски мы можем сгруппировать в `block` для провайда общих параметров
 
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      block:   
+		- name: create user  
+		  user:  
+			name: '{{ user }}'  
+			state: present   
+		- name: install curl  
+		  apt:  
+			name: curl  
+			update_cache: yes
+```
 
+#### Обработка ошибок
+
+Обработка ошибок происходит с помощью ключа `rescue`. В нём мы должны описать действие, которое должно выполниться, если произойдёт ошибка: откатить сервер, удалить пользователя. 
+
+В ключе `always` мы должны описать то, что должно будет происходить всегда (после ошибки или успешного выполнения тасок). Например, перезагрузка сервера.
+
+![](../../_png/Pasted%20image%2020251220161026.png)
+
+##### `rescue` и `always`
+
+Опишем поля `rescue` и `always`. Они представляют собой просто таски, которые будут выполняться.  
+
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      block:  
+        - name: create user  
+          register: error  
+          user:  
+            name: '{{ user }}'  
+            state: present  
+        - name: install curl  
+          register: error  
+          apt:  
+            name: curl  
+            update_cache: yes
+      # выполнится при ошибке таски  
+      rescue:  
+        - name: Error print  
+          debug:  
+            var: error  
+      # этот блок будет выполняться всегда после ошибки или успеха  
+      always:  
+        - name: Rebooting  
+          debug:  
+            msg: 'Rebooting pc...'
+```
+
+##### Обработка нестандартных ошибок
+
+Так же мы можем обработать ошибку, которая не является классической ошибкой (exit_code !== 0) и определить самим условия ошибки
+
+Поле `failed_when` позволит нам проверить в данном случае, что строка FAILED находится в поле `stdout` объекта `echo_failed`
+
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      block:  
+        - name: create user  
+          register: error  
+          user:  
+            name: '{{ user }}'  
+            state: present  
+        - name: install curl  
+          register: error  
+          apt:  
+            name: curl  
+            update_cache: yes  
+        - name: failed on FAILED  
+          command: echo "FAILED"  
+          register: echo_failed  
+          # если в поле stdout переменной echo_failed есть FAILED, то таска выполнилась с ошибкой  
+          failed_when: "'FAILED' in echo_failed.stdout"  
+      rescue:  
+        - name: Error print  
+          debug:  
+            var: error  
+      always:  
+        - name: Rebooting  
+          debug:  
+            msg: 'Rebooting pc...'
+```
+
+#### Работа с условиями
+
+Так же мы можем добавить условий в наш блок для выполнения задач:
+
+- `any_errors_fatal` - любая произошедшая ошибка будет валить все дальнейшие таски
+- `ignore_errors` - позволяет проигнорировать ошибку в таске
+
+Ключ `when` - самый многофункциональный блок. В нём мы можем пользоваться `register` переменными, фактами, которые собирает ansible и выполнять по условию блоки операций. 
+В данном примере мы выполним операцию только тогда, когда нашей целевой системой будет Ubuntu 
+
+```YML
+---  
+- name: user  
+  hosts: local  
+  any_errors_fatal: true # любая ошибка будет предотвращать выполнение ansible  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      when: ansible_facts['distribution'] == 'Ubuntu'  
+      block:  
+        - name: create user  
+          register: error  
+          ignore_errors: yes # игнорирование ошибки  
+          user:  
+            name: '{{ user }}'  
+            state: present  
+        - name: install curl  
+          register: error  
+          apt:  
+            name: curl  
+            update_cache: yes  
+        - name: failed on FAILED  
+          command: echo "FAILED"  
+          register: echo_failed  
+          # если в поле stdout переменной echo_failed есть FAILED, то таска выполнилась с ошибкой  
+          failed_when: "'FAILED' in echo_failed.stdout"  
+      # выполнится при ошибке таски  
+      rescue:  
+        - name: Error print  
+          debug:  
+            var: error  
+      # этот блок будет выполняться всегда после ошибки или успеха  
+      always:  
+        - name: Rebooting  
+          debug:  
+            msg: 'Rebooting pc...'
+```
+
+Теперь, так как текущая система не Ubuntu, то все таски в блоке скипаются
+
+```bash
+•% ➜  ansible-playbook -i all-servers user.yml -K
+BECOME password:
+
+PLAY [user] *********
+
+TASK [Gathering Facts] *********
+[WARNING]: Host '127.0.0.1' is using the discovered Python interpreter at '/opt/homebrew/bin/python3.14', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [127.0.0.1]
+
+TASK [create user] ************
+skipping: [127.0.0.1]
+
+TASK [install curl] **********
+skipping: [127.0.0.1]
+
+TASK [failed on FAILED] *************************
+skipping: [127.0.0.1]
+
+TASK [Rebooting] *******************
+skipping: [127.0.0.1]
+
+PLAY RECAP ***********
+127.0.0.1                  : ok=1    changed=0    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
+
+```
 
 ### Асинхронные задачи
 
+Очень часто бывает так, что операций над серверами может быть достаточно много. Так же эти операции могут выполняться длительное время. Но не всегда все эти операции нам нужно дожидаться и ускорить этот процесс можно распараллелив задачи. 
 
+Ansible предоставляет нам возможность асинхронно выполнять задачи без ожидания других тасок. 
 
+Для реализации асинхронности, у нас есть ключи:
 
+- `async` - время, которое максимально должна выполняться таска.
+- `poll` - время, раз в которое нужно будет проверять выполнение операции. Если установлено в 0, то следующая операция начнёт выполняться незамедлительно, пока выполняется прошлая. 
 
+>[!warning] Если нам нужно в дальнейшей таске отловить выполнение старой асинхронной таски, то нам нужно будет выполнять эти операции под одним юзером
+
+![](../../_png/Pasted%20image%2020251220165618.png)
+
+#### Ожидание асинхронной операции
+
+Описание асинхронной операции с таймаутом в 100 секунд (async) и периодом проверки в 5 секунд (poll)
+
+```YML
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      block:  
+        - name: sleep  
+          command: /bin/sleep 10  
+          async: 100  
+          poll: 5  
+        - name: echo  
+          command: echo "DONE"
+```
+
+Ansible сначала будет ожидать длительную операцию и только потом выполнит вторую таску echo
+
+```bash
+$ ansible-playbook -i all-servers user.yml -K
+
+BECOME password:
+
+PLAY [user] *************
+
+TASK [Gathering Facts] **********
+[WARNING]: Host '127.0.0.1' is using the discovered Python interpreter at '/opt/homebrew/bin/python3.14', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [127.0.0.1]
+
+TASK [sleep] ***********
+ASYNC POLL on 127.0.0.1: jid=j592691861136.57376 started=True finished=False
+ASYNC OK on 127.0.0.1: jid=j592691861136.57376
+changed: [127.0.0.1]
+
+TASK [echo] *********
+changed: [127.0.0.1]
+
+PLAY RECAP *********
+127.0.0.1                  : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+#### Параллельные асинхронные таски
+
+Для создания параллельно выполняемых тасок, нам нужно:
+1. `poll` установить в 0 секунд (отключить проверку)
+2. в таске, которая ждёт результата выполнения предыдущей таски, нужно отследить статус асинхронности `async_status`
+	1. в `async_status` указать `jid` (job id) задачи, от которой зависим
+3. зарегистрировать текущую таску `register`
+4. Ожидать `until` выполнение текущей таски `job_result.finished`
+5. проверять `retries` выполнение операции с задержкой `delay`
+
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      block:  
+        - name: sleep  
+          command: /bin/sleep 10  
+          async: 100  
+          poll: 0  
+          register: sleep  
+        - debug:  
+            var: sleep  
+        - name: echo  
+          command: echo "DONE"  
+    - name: check sleep status  
+      # цепляем job id из асинхронной таски  
+      async_status:  
+        jid: '{{ sleep.ansible_job_id }}'  
+      # регистрируем джобу и ожидаем её выполнения  
+      register: job_result  
+      until: job_result.finished  
+      retries: 100 # повторных попыток  
+      delay: 1 # задержка между retries  
+      become: true
+```
+
+В итоге у нас сначала стартануло выполнение таски `sleep` и сразу за ней `debug` и `echo`. После них стартанул `check sleep status`, который ждал выполнения таски `sleep`
+
+```bash
+$ ansible-playbook -i all-servers user.yml -K
+
+BECOME password:
+
+PLAY [user] *****
+
+TASK [Gathering Facts] ********
+[WARNING]: Host '127.0.0.1' is using the discovered Python interpreter at '/opt/homebrew/bin/python3.14', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [127.0.0.1]
+
+TASK [sleep] *******
+changed: [127.0.0.1]
+
+TASK [debug] *********
+ok: [127.0.0.1] => {
+    "sleep": {
+        "ansible_job_id": "j990495658061.63641",
+        "changed": true,
+        "failed": false,
+        "finished": false,
+        "results_file": "/var/root/.ansible_async/j990495658061.63641",
+        "started": true
+    }
+}
+
+TASK [echo] *******
+changed: [127.0.0.1]
+
+TASK [check sleep status] *****
+FAILED - RETRYING: [127.0.0.1]: check sleep status (100 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (99 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (98 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (97 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (96 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (95 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (94 retries left).
+FAILED - RETRYING: [127.0.0.1]: check sleep status (93 retries left).
+changed: [127.0.0.1]
+
+PLAY RECAP *************
+127.0.0.1                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+#### Исключительные операции
+
+Некоторые операции в рамках Ansible просто невозможно выполнить без указания асинхронности операции. Например, reboot сервера - тут обязательно операцию нужно сделать асинхронной, потому что от команды `reboot` нет внятного результата.
+
+```YML
+---  
+- name: user  
+  hosts: local  
+  tasks:  
+    - name: Preconfig block  
+      become: true  
+      block:  
+        - name: reboot  
+          command: reboot  
+          async: 100  
+          poll: 0
+```
+
+Но для бОльшей части таких операций уже есть свой модуль (в т.ч. reboot модуль), которые: 
+- более многофункциональны
+- легче читаются
+- проще в поддержке
+
+Так же для ожидания результата другой таски стоит использовать builtin модуль в Ansible - `wait_for`
 
 ### Упражнение - Настройка сервера
 
+Установка докера будет происходить в несколько этапов. 
+
+В качестве референса будут выступать:
+
+- [Официальная документация по установке докера на Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+- [Установка докера в группу и запуск без sudo](https://docs.docker.com/engine/install/linux-postinstall/)
+
+`config.yml`
+
+```YML
+---
+- name: Preconfig
+  hosts: home
+  tasks:
+    - name: Install Docker Engine on Ubuntu
+      become: true
+      block:
+	    # удаление конфликтующих пакетов
+        - name: Remove conflicting Docker packages
+          ignore_errors: true
+          apt:
+            state: absent
+            purge: true
+            name:
+              - docker.io
+              - docker-compose
+              - docker-compose-v2
+              - docker-doc
+              - podman-docker
+              - containerd
+              - runc
+
+	    # добавление универсального репозитория
+        - name: Add universe repo
+          apt_repository:
+            # в качестве целевой системы с учётом версии, мы берём ansible_distribution_release
+            repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
+            state: present
+
+	    # установка требуемых пакетов для docker
+        - name: Install required packages
+          apt:
+            update_cache: true
+            cache_valid_time: 86400
+            name:
+              - ca-certificates
+              - curl
+              - gnupg
+              - lsb-release
+
+	    # создание директории ключей
+        - name: Create /etc/apt/keyrings directory
+          file:
+            path: /etc/apt/keyrings
+            state: directory
+            mode: "0755"
+
+	    # добавление официальных GPG ключей
+        - name: Add Docker official GPG key
+          apt_key:
+            url: https://download.docker.com/linux/ubuntu/gpg
+            state: present
+
+	    # добавление репозитория
+        - name: Add Docker apt repository
+          copy:
+            dest: /etc/apt/sources.list.d/docker.sources
+            mode: "0644"
+            content: |
+              Types: deb
+              URIs: https://download.docker.com/linux/ubuntu
+              Suites: {{ ansible_lsb.codename | default(ansible_distribution_release) }}
+              Components: stable
+              Signed-By: /etc/apt/keyrings/docker.asc
+
+	    # обновление кэша
+        - name: Update apt cache
+          apt:
+            update_cache: true
+
+	    # установка docker пакетов
+        - name: Install Docker Engine and components
+          apt:
+            name:
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+              - docker-buildx-plugin
+              - docker-compose-plugin
+            state: present
+
+	    # запуск сервиса Docker
+        - name: Ensure Docker service is enabled and started
+          service:
+            name: docker
+            state: started
+            enabled: true
+
+	# установка python docker SDK
+    - name: Install Python Docker SDK
+      become: true
+      pip:
+        name: docker
+
+	# блок задач после установки
+    - name: Post-install Docker
+      become: true
+      block:
+        - name: Ensure docker group exists
+          group:
+            name: docker
+            state: present
+
+        - name: Add current user to docker group
+          user:
+            name: "{{ ansible_user | default(ansible_env.SUDO_USER) }}"
+            groups: docker
+            append: true
+
+        - name: Reboot to apply docker group membership
+          when: docker_reboot | default(true)
+          reboot:
+            msg: "Rebooting to apply docker group membership"
+            connect_timeout: 5
+            reboot_timeout: 600
 
 
+```
+
+Запуск конфига на сервере
+
+```bash
+ansible-playbook -i demo-server config.yml -K
+```
+
+#### Получение последней версии пакета с Github
+
+У Github есть удобное публичное API для работы с репозиториями. 
+
+Если перед нами встанет такая ситуация, что нам нужно динамически получить последнюю версию пакета, то мы можем перейти на страницу релизов репозитория:
+
+`https://github.com/docker/compose/releases`
+
+![](../../_png/Pasted%20image%2020251220200510.png)
+
+И трансформировать ссылку в такой род:
+
+`https://api.github.com/repos/docker/compose/releases/latest`
+
+![](../../_png/Pasted%20image%2020251220200727.png)
+
+Где можно будет найти поле `tag_name`
+
+И если нам нужно будет вставить определённую версию какой-либо библиотеки (или последнюю), то можно курлануть данные, записать их в регистр и переиспользовать в следующей таске
+
+```YML
+- name: Установка Docker-compose  
+  block:  
+    - name: Получение последней версии Docker-compose  
+      uri:  
+        url: https://api.github.com/repos/docker/compose/releases/latest  
+        body_format: json  
+      register: page  
+  
+    - name: Установка Docker-compose  
+      get_url:  
+        url: "https://github.com/docker/compose/releases/download/{{ page.json.tag_name }}/docker-compose-Linux-x86_64"  
+        dest: /usr/local/bin/docker-compose  
+        mode: 0755  
+  become: true
+```
 
 
 ### Ansible Lint
