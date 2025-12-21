@@ -3331,6 +3331,137 @@ Read documentation for instructions on how to ignore specific rule violations.
 Failed: 15 failure(s), 0 warning(s) in 1 files processed of 1 encountered. Last profile that met the validation criteria was 'min'.
 ```
 
+Исправим конфигурацию таким образом, чтобы:
+- избавиться от deprecated полей (заменим `ansible_distribution_release` на `ansible_facts['distribution_release']`)
+- правильно укажем модули через `ansible.builtin.`, потому что у нас доступен так же вызов старого API `ansible.legacy.`
+
+`config.yml`
+
+```YML
+---  
+- name: Install Docker Engine on Ubuntu  
+  hosts: cluster  
+  become: true  
+  gather_facts: true  
+  tasks:  
+    - name: Pre-install cleanup  
+      block:  
+        - name: Remove conflicting Docker packages  
+          ansible.builtin.apt:  
+            name:  
+              - docker.io  
+              - docker-compose  
+              - docker-compose-v2  
+              - docker-doc  
+              - podman-docker  
+              - containerd  
+              - runc  
+            state: absent  
+            purge: true  
+          failed_when: false  
+  
+        - name: Remove old Docker files  
+          ansible.builtin.file:  
+            path: "{{ item }}"  
+            state: absent  
+          loop:  
+            - /etc/apt/keyrings/docker.asc  
+            - /etc/apt/keyrings/docker.gpg  
+            - /usr/share/keyrings/docker-archive-keyring.gpg  
+            - /etc/apt/trusted.gpg.d/docker.gpg  
+            - /etc/apt/sources.list.d/docker.list  
+            - /etc/apt/sources.list.d/docker.sources  
+  
+    - name: Fix ARM64 repositories  
+      block:  
+        - name: Remove duplicate repository files  
+          ansible.builtin.file:  
+            path: "{{ item }}"  
+            state: absent  
+          loop:  
+            - /etc/apt/sources.list.d/ports_ubuntu_com_ubuntu_ports.list  
+            - /etc/apt/sources.list.d/ubuntu.sources  
+  
+        - name: Replace sources.list for ARM64  
+          ansible.builtin.copy:  
+            dest: /etc/apt/sources.list  
+            mode: "0644"  
+            backup: true  
+            content: |  
+              deb http://ports.ubuntu.com/ubuntu-ports {{ ansible_facts['distribution_release'] }} main restricted universe multiverse  
+              deb http://ports.ubuntu.com/ubuntu-ports {{ ansible_facts['distribution_release'] }}-updates main restricted universe multiverse  
+              deb http://ports.ubuntu.com/ubuntu-ports {{ ansible_facts['distribution_release'] }}-security main restricted universe multiverse  
+      when: ansible_facts['architecture'] in ['aarch64', 'arm64']  
+  
+    - name: Install prerequisites  
+      ansible.builtin.apt:  
+        name:  
+          - ca-certificates  
+          - curl  
+          - gnupg  
+        update_cache: true  
+  
+    - name: Setup Docker repository and install  
+      ansible.builtin.shell: |  
+        set -e  
+          
+        # Cleanup old Docker files  
+        rm -f /etc/apt/keyrings/docker.* /usr/share/keyrings/docker* /etc/apt/sources.list.d/docker.*  
+          
+        # Create directory  
+        mkdir -p /etc/apt/keyrings  
+          
+        # Download and import GPG key  
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg  
+        chmod 644 /etc/apt/keyrings/docker.gpg  
+          
+        # Detect architecture  
+        ARCH=$(dpkg --print-architecture)  
+          
+        # Add Docker repository  
+        echo "deb [arch=${ARCH} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable" > /etc/apt/sources.list.d/docker.list  
+          
+        # Update and install Docker  
+        apt-get update  
+        apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin  
+      args:  
+        executable: /bin/bash  
+      register: docker_install  
+      changed_when: "'Setting up docker-ce' in docker_install.stdout or 'is already the newest version' not in docker_install.stdout"  
+  
+    - name: Ensure Docker service is running  
+      ansible.builtin.service:  
+        name: docker  
+        state: started  
+        enabled: true  
+  
+    - name: Post-install configuration  
+      block:  
+        - name: Ensure docker group exists  
+          ansible.builtin.group:  
+            name: docker  
+            state: present  
+  
+        - name: Add user to docker group  
+          ansible.builtin.user:  
+            name: "{{ ansible_user | default(ansible_env.SUDO_USER | default('ubuntu')) }}"  
+            groups: docker  
+            append: true  
+  
+        - name: Reboot if needed  
+          ansible.builtin.reboot:  
+            msg: "Rebooting after Docker installation"  
+          when: docker_reboot | default(false) | bool
+```
+
+После исправления всех ошибок, выйдет такое сообщение
+
+```bash
+$ ansible-lint config.yml
+
+Passed: 0 failure(s), 0 warning(s) in 1 files processed of 1 encountered. Last profile that met the validation criteria was 'production'.
+```
+
 #### Pre-commit
 
 Для добавления pre-commit хуков, которые не дадут нам возможности закоммитить и отправить ansible конфигурацию с ошибками, нам нужно сначала установить `pre-commit`
@@ -3527,21 +3658,124 @@ ansible-playbook -i inventory config.yml -K
 
 ## Docker Swarm
 
+### Архитектура
+### Запуск
+### Сервисы и задачи
+### Секреты и конфиги
+### Statefull сервисы
+### Overlay network
+### Docker stack
+### Healthcheck
+### Отказоустойчивость
 
 
 
 
 
-
+---
 ## Ansible - продвинутые темы
 
+### Роли
 
 
 
+![](../../_png/Pasted%20image%2020251221161649.png)
+
+
+### Ansible galaxy
+
+### Подготовка сервера
+
+### Теги
+
+### Циклы
+
+### Lookup
+
+### Фильтры
+
+### Выкладка
+
+### Vault
+### Шаблоны
+### Сборка контейнеров
+### Финал выкладки
 
 
 
+---
 ## Deploy приложения на кластер
+
+### Настройка NGINX
+
+
+
+
+
+
+
+
+
+
+
+### Локальные действия
+
+
+
+
+
+
+
+
+
+
+
+### Делегирование задач
+
+
+
+
+
+
+
+
+
+
+
+### Pre_post_tasks and handlers
+
+
+
+
+
+
+
+
+
+
+
+### Работа с фактами
+
+
+
+
+
+
+
+
+
+
+
+### Отключение нод
+
+
+
+
+
+
+
+
+
 
 
 

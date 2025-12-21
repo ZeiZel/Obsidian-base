@@ -98,8 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 278.50390243530273,
-    "collapsed": true
+    "width": 385.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -179,67 +178,7 @@
             }
           },
           {
-            "id": "fe512dab4bd0a006",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "bc5c5e206c055639",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "e3e1c4ee8e02f167",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "201d805407cb1273",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "c82a3ad6c76ab237",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "16ae46aade76929e",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "7f8ec578e13aa075",
+            "id": "a268921d7fc4db3c",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -249,7 +188,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -281,12 +220,12 @@
               "title": "Outline of Docker + Ansible"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 545.5,
-    "collapsed": true
+    "width": 545.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -309,6 +248,8 @@
   },
   "active": "c781478aa3763db1",
   "lastOpenFiles": [
+    "devops/docker/Docker + Ansible.md",
+    "_png/Pasted image 20251221161649.png",
     "_png/Pasted image 20251221110934.png",
     "_png/Pasted image 20251220200727.png",
     "_png/Pasted image 20251220200510.png",
@@ -346,8 +287,6 @@
     "_png/Pasted image 20251004235713.png",
     "_png/Pasted image 20251004235701.png",
     "_png/Pasted image 20251004233825.png",
-    "_png/Pasted image 20251004122716.png",
-    "_png/Pasted image 20251004120530.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
