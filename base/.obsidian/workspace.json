@@ -281,12 +281,11 @@
               "title": "Outline of Docker + Ansible"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 321.5,
+    "width": 545.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -310,6 +309,7 @@
   },
   "active": "c781478aa3763db1",
   "lastOpenFiles": [
+    "_png/Pasted image 20251221110934.png",
     "_png/Pasted image 20251220200727.png",
     "_png/Pasted image 20251220200510.png",
     "_png/Pasted image 20251220165618.png",
@@ -348,7 +348,6 @@
     "_png/Pasted image 20251004233825.png",
     "_png/Pasted image 20251004122716.png",
     "_png/Pasted image 20251004120530.png",
-    "_png/Pasted image 20251004114938.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",

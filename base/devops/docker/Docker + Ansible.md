@@ -3254,17 +3254,113 @@ ansible-playbook -i demo-server config.yml -K
   become: true
 ```
 
-
 ### Ansible Lint
 
+Для поддержания стандарта качества кода нашего конфига состояний и скриптов Ansible, мы можем использовать линтер. 
 
+Как самую распространённую ошибку, можно выделить использование `command` вместо специализированного модуля, который позволит декларативно описать состояние, к которому должна прийти система после выполнения задачи.
 
+#### Ansible lint
 
+Устанавливается линтер отдельным пакетом
 
+```bash
+brew install ansible-lint
+```
 
+Далее останется только запустить проверку файла и ansible подсветит все возможные исправления для нашего конфига, чтобы стандартизировать его и улучшить
 
+```bash
+$ ansible-lint config.yml
+/opt/homebrew/Cellar/python@3.14/3.14.2/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 304: 'Not Modified'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+WARNING  Listing 15 violation(s) that are fatal
+ignore-errors: Use failed_when and specify error conditions instead of using ignore_errors.
+config.yml:8 Task/Handler: Remove conflicting Docker packages
 
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+config.yml:10:11 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
 
+fqcn[action-core]: Use FQCN for builtin module actions (apt_repository).
+config.yml:23:11 Use `ansible.builtin.apt_repository` or `ansible.legacy.apt_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+config.yml:29:11 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (file).
+config.yml:39:11 Use `ansible.builtin.file` or `ansible.legacy.file` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt_key).
+config.yml:45:11 Use `ansible.builtin.apt_key` or `ansible.legacy.apt_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (copy).
+config.yml:50:11 Use `ansible.builtin.copy` or `ansible.legacy.copy` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+config.yml:61:11 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+config.yml:65:11 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (service).
+config.yml:75:11 Use `ansible.builtin.service` or `ansible.legacy.service` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (pip).
+config.yml:82:7 Use `ansible.builtin.pip` or `ansible.legacy.pip` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (group).
+config.yml:89:11 Use `ansible.builtin.group` or `ansible.legacy.group` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (user).
+config.yml:94:11 Use `ansible.builtin.user` or `ansible.legacy.user` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (reboot).
+config.yml:101:11 Use `ansible.builtin.reboot` or `ansible.legacy.reboot` instead.
+
+yaml[empty-lines]: Too many blank lines (1 > 0)
+config.yml:105
+
+Read documentation for instructions on how to ignore specific rule violations.
+
+# Rule Violation Summary
+
+  1 yaml profile:basic tags:formatting,yaml
+  1 ignore-errors profile:basic tags:unpredictability
+ 13 fqcn profile:basic tags:formatting
+
+Failed: 15 failure(s), 0 warning(s) in 1 files processed of 1 encountered. Last profile that met the validation criteria was 'min'.
+```
+
+#### Pre-commit
+
+Для добавления pre-commit хуков, которые не дадут нам возможности закоммитить и отправить ansible конфигурацию с ошибками, нам нужно сначала установить `pre-commit`
+
+```bash
+brew install pre-commit
+```
+
+Далее инициализируем его в проекте
+
+```bash
+pre-commit install
+```
+
+А теперь добавляем `.yaml` конфигурацию в проект
+
+`.pre-commit-config.yaml`
+```YML
+---  
+ci:  
+  autoupdate_schedule: monthly  
+repos:  
+  - repo: https://github.com/ansible-community/ansible-lint.git  
+    rev: v25.12.1 # подставляем версию из репозитория
+    hooks:  
+      - id: ansible-lint  
+        files: \.(yaml|yml)$  
+        additional_dependencies:  
+          - ansible
+```
 
 
 
@@ -3378,6 +3474,8 @@ ssh vagrant@127.0.0.1 -p 2223
 
 #### Troubleshooting
 
+##### Отклонение подключения
+
 Так же подключение может быть отклонено, если есть мусор в файле хостов Для решения проблем, нужно перейти в указанный файл
 
 ![](_png/cb5d35e3c1d693144cde29727cd463a5.png)
@@ -3386,9 +3484,44 @@ ssh vagrant@127.0.0.1 -p 2223
 
 ![](_png/ce32a768424313fc51f7812d1a96c2a8.png)
 
+##### У меня Arm
+
+Самый лёгкий способ - это найти в [поисковике боксов](https://portal.cloud.hashicorp.com/vagrant/discover?architectures=arm64&query=ubuntu) для вагранта нужный образ, например, `bento/ubuntu-24.04` и в `web.vm.box` использовать его
+
+![](../../_png/Pasted%20image%2020251221110934.png)
+
 ### Подготовка серверов
 
-> Нужно пройти ansible
+Обновляем инвентарь нашими серверами, поднятыми вагрантом
+
+`inventory / cluster`
+
+```ini
+[cluster]  
+server1 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2223  
+server2 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2224  
+server3 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2225  
+server4 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2226  
+server5 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2227
+```
+
+И в плейбуке поменять имя хостов
+
+`config.yml`
+
+```YML
+---  
+- name: Preconfig  
+  hosts: cluster  
+  tasks:
+```
+
+И запускаем наш плейбук
+
+```bash
+ansible-playbook -i inventory config.yml -K
+```
+
 
 ---
 
