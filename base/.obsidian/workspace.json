@@ -181,6 +181,16 @@
             "id": "a268921d7fc4db3c",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "94e39b40241f6337",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -188,7 +198,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -248,7 +258,13 @@
   },
   "active": "c781478aa3763db1",
   "lastOpenFiles": [
+    "_png/Pasted image 20251224214106.png",
+    "_png/Pasted image 20251224210351.png",
+    "Design/Design.md",
+    "Design/DaVinci Resolve/Davinci resolve.md",
     "devops/docker/Docker + Ansible.md",
+    "Untitled.md",
+    "Tags",
     "_png/Pasted image 20251221161649.png",
     "_png/Pasted image 20251221110934.png",
     "_png/Pasted image 20251220200727.png",
@@ -260,7 +276,6 @@
     "agile/agile.md",
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/kubernetes/Helmfile.md",
-    "Untitled.md",
     "cs/Networks/Networks.md",
     "agile/Teamlead.md",
     "frontend/React/React Query.md",
@@ -281,18 +296,13 @@
     "frontend/React/Практический JS.md",
     "frontend/React/_lessons/Redux Toolkit.md",
     "frontend/React/_lessons/Ссылки.md",
-    "frontend/React/_lessons/Практический модуль.md",
-    "frontend/React/_lessons/006 Практика с жизненным циклом, componentDidUpdate.md",
-    "frontend/React/_lessons/006 useRef.md",
     "_png/Pasted image 20251004235713.png",
     "_png/Pasted image 20251004235701.png",
-    "_png/Pasted image 20251004233825.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
     "_png",
     "RoadMap",
-    "edge/_png",
-    "devops/_png"
+    "edge/_png"
   ]
 }

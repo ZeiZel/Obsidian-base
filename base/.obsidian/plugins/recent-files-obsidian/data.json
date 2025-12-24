@@ -5,6 +5,14 @@
       "path": "devops/docker/Docker + Ansible.md"
     },
     {
+      "basename": "Design",
+      "path": "Design/Design.md"
+    },
+    {
+      "basename": "Davinci resolve",
+      "path": "Design/DaVinci Resolve/Davinci resolve.md"
+    },
+    {
       "basename": "Zustand",
       "path": "frontend/State Managers/Zustand.md"
     },
@@ -19,10 +27,6 @@
     {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Untitled",
-      "path": "Untitled.md"
     },
     {
       "basename": "Networks",

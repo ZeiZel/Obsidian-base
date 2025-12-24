@@ -3677,12 +3677,327 @@ ansible-playbook -i inventory config.yml -K
 
 ### Роли
 
+Плейбуки нередко достигают достаточно больших размеров, чтобы с ними уже становилось тяжело работать. Поэтому были добавлены роли. 
 
+Роли - это механизм разделения скриптов на отдельные файлы. Их можно запускать для определённых хостов, переиспользовать в других плейбуках, публиковать в galaxy.
+
+Определение роли происходит по имеющейся нотации в ansible:
+
+1. В папку `roles` мы складываем роли
+2. Именуем роль её доменом использования (для понимания основной её задачи) - `deploy`, `docker`
+3. В самой роли есть своя структура директорий:
+	1. `defaults` - переменные по умолчанию
+	2. `files` - файлы роли, которые кладутся на целевую машину
+	3. `templates` - шаблоны для выкладки (jinja-шаблоны), которые сначала прогоняются через шаблонизатор и наполняются данными, а потом уже отправляются на целевой хост
+	4. `handlers` - обработчики плейбука, которые будут вызываться по окончанию таски
+	5. `library` - модули роли
+	6. `meta` - метаданные роли и её зависимости
+	7. `tasks` (обязательно) - задачи роли
+	8. `vars` - переменные
+	9. `services` и `<etc>` - любые другие папки так же можно использовать внутри 
+4. Точкой входа в роль является `tasks / main.yml`
 
 ![](../../_png/Pasted%20image%2020251221161649.png)
 
+Переместим все задачи из нашего корневого плейбука в роль `preconfig`
+
+`roles / preconfig / tasks / main.yml`
+
+```YML
+---  
+- name: Pre-install cleanup  
+  block:  
+    - name: Remove conflicting Docker packages  
+      ansible.builtin.apt:  
+        name:  
+          - docker.io  
+          - docker-compose  
+          - docker-compose-v2  
+          - docker-doc  
+          - podman-docker  
+          - containerd  
+          - runc  
+        state: absent  
+        purge: true  
+      failed_when: false  
+  
+    - name: Remove old Docker files  
+      ansible.builtin.file:  
+        path: "{{ item }}"  
+        state: absent  
+      loop:  
+        - /etc/apt/keyrings/docker.asc  
+        - /etc/apt/keyrings/docker.gpg  
+        - /usr/share/keyrings/docker-archive-keyring.gpg  
+        - /etc/apt/trusted.gpg.d/docker.gpg  
+        - /etc/apt/sources.list.d/docker.list  
+        - /etc/apt/sources.list.d/docker.sources  
+  
+- name: Fix ARM64 repositories  
+  block:  
+    - name: Remove duplicate repository files  
+      ansible.builtin.file:  
+        path: "{{ item }}"  
+        state: absent  
+      loop:  
+        - /etc/apt/sources.list.d/ports_ubuntu_com_ubuntu_ports.list  
+        - /etc/apt/sources.list.d/ubuntu.sources  
+  
+    - name: Replace sources.list for ARM64  
+      ansible.builtin.copy:  
+        dest: /etc/apt/sources.list  
+        mode: "0644"  
+        backup: true  
+        content: |  
+          deb http://ports.ubuntu.com/ubuntu-ports {{ ansible_facts['distribution_release'] }} main restricted universe multiverse  
+          deb http://ports.ubuntu.com/ubuntu-ports {{ ansible_facts['distribution_release'] }}-updates main restricted universe multiverse  
+          deb http://ports.ubuntu.com/ubuntu-ports {{ ansible_facts['distribution_release'] }}-security main restricted universe multiverse  
+  when: ansible_facts['architecture'] in ['aarch64', 'arm64']  
+  
+- name: Install prerequisites  
+  ansible.builtin.apt:  
+    name:  
+      - ca-certificates  
+      - curl  
+      - gnupg  
+    update_cache: true  
+  
+- name: Setup Docker repository and install  
+  ansible.builtin.shell: |  
+    set -e  
+      
+    # Cleanup old Docker files  
+    rm -f /etc/apt/keyrings/docker.* /usr/share/keyrings/docker* /etc/apt/sources.list.d/docker.*  
+      
+    # Create directory  
+    mkdir -p /etc/apt/keyrings  
+      
+    # Download and import GPG key  
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg  
+    chmod 644 /etc/apt/keyrings/docker.gpg  
+      
+    # Detect architecture  
+    ARCH=$(dpkg --print-architecture)  
+      
+    # Add Docker repository  
+    echo "deb [arch=${ARCH} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable" > /etc/apt/sources.list.d/docker.list  
+      
+    # Update and install Docker  
+    apt-get update  
+    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin  
+  args:  
+    executable: /bin/bash  
+  register: docker_install  
+  changed_when: "'Setting up docker-ce' in docker_install.stdout or 'is already the newest version' not in docker_install.stdout"  
+  
+- name: Ensure Docker service is running  
+  ansible.builtin.service:  
+    name: docker  
+    state: started  
+    enabled: true  
+  
+- name: Post-install configuration  
+  block:  
+    - name: Ensure docker group exists  
+      ansible.builtin.group:  
+        name: docker  
+        state: present  
+  
+    - name: Add user to docker group  
+      ansible.builtin.user:  
+        name: "{{ ansible_user | default(ansible_env.SUDO_USER | default('ubuntu')) }}"  
+        groups: docker  
+        append: true  
+  
+    - name: Reboot if needed  
+      ansible.builtin.reboot:  
+        msg: "Rebooting after Docker installation"  
+      when: docker_reboot | default(false) | bool
+```
+
+И создадим роль `deploy`
+
+`roles / deploy / tasks / main.yml`
+
+```YML
+---  
+- name: Demo  
+  command: echo "Demo"
+```
+
+И далее в корне обозначим поле `roles`, которое обозначит роль, как выполняемую. 
+
+Правила: 
+- роли выполняются последовательно, по списку, друг за другом (если не указано иного поведения в meta)
+- роль выполняется только один раз, даже если она указана в списке несколько раз (кроме случаев, когда с ролью передаются ещё и аргументы)
+
+`all.yml`
+
+```YML
+---  
+- name: Install Docker Engine on Ubuntu  
+  hosts: cluster  
+  become: true  
+  gather_facts: true  
+  roles:  
+    - preconfig  
+    - deploy
+```
+
+И далее у нас должны запуститься обе роли
+
+```bash
+ansible-playbook -i inventory all.yml -K
+```
+
+#### Meta
+
+Так же мы можем описать полезные метаданные для нашей роли, которые позволят поменять её поведение и оставить информацию по поддержке данного продукта
+
+- Поле `dependencies` скажет ansible, что нужно прогнорировать `roles` массив и выполнить сначала зависимости, а потом уже эту роль. Конкретно тут сначала выполнится `deploy`, а потом `preconfig`
+- Поле `allow_duplicates` позволяет запустить дубликат роли без передачи аргументов. Таким образом, список `roles: [ deploy, deploy ]` дважды выполнит роль `deploy`
+
+`roles / preconfig / meta / main.yml`
+
+```YML
+# спеки нашей роли
+galaxy_info:  
+  role_name: preconfig  
+  description: preconfig server to work with Docker  
+  author: Lvov Valery  
+  license: MIT  
+  min_ansible_version: 2.20  
+  platforms:  
+    - name: Ubuntu  
+      versions:  
+        - all
+
+# сначала выполнится роль deploy
+dependencies:  
+  - deploy
+
+# позволяет запустить дубликат роли
+allow_duplicates: true
+```
+
+#### Аргументы роли
+
+Мы можем повторно выполнять действия роли, если передадим вместе с ними дополнительные аргументы таким образом: 
+
+`all.yml`
+
+```YML
+---  
+- name: Install Docker Engine on Ubuntu  
+  hosts: cluster  
+  become: true  
+  gather_facts: true  
+  roles:  
+    - role: preconfig  
+      message: 'asdasda'
+    - role: deploy
+      message: 'o23uhdiou3hf'
+```
 
 ### Ansible galaxy
+
+Ansible Galaxy - это пакетный менеджер, который позволяет публиковать и скачивать роли
+
+#### Поиск
+
+Все роли, коллекции и плагины сообщества находятся на [galaxy.ansible](https://galaxy.ansible.com)
+
+![](../../_png/Pasted%20image%2020251224210351.png)
+
+Сама работа с galaxy происходит через `ansible-galaxy`, который ставится вместе с ansible. Он работает с двумя типами пакетов: `collection` и `role`
+
+Мы можем так же искать пакеты по galaxy через командную строку
+
+```bash
+$ ansible-galaxy role search mongo
+
+Found 193 roles matching your search:
+
+ Name                                                   Description
+ ----                                                   -----------
+ 030.ansible_mongodb_org_shell                          ansible-mongodb-org-shell
+ aaronpederson.mongodb                                  MongoDB is a document-oriented database.
+ abrararshad.mongo_db_push                              Archive and import mongo database to the remote machine
+ adriano-di-giovanni.mongodb                            Ansible role for MongoDB Community Edition
+ AerisCloud.mongodb                                     Installs and configure MongoDB
+```
+
+#### Установка пакетов
+
+Для установки коллекции, у нас будет команда в galaxy, которой мы можем воспользоваться
+
+```bash
+ansible-galaxy collection install debops.roles03
+```
+
+Однако, если мы установим себе эти пакеты, то только мы сможем воспользоваться нашей ролью, в которой мы применяем эти плагины, потому что они у нас нигде не зафиксированы
+
+Самый простой способ описать требования по пакетам для нашего репозитория - это `requirements`. Сюда мы можем вписать `collections` и `roles`, которые требуются для запуска описанного ansible playbook
+
+`requirements.yml`
+
+```YML
+collections:  
+  - name: community.docker
+```
+
+И далее осталось только установить требуемые пакеты
+
+```bash
+ansible-galaxy install -r requirements.yml
+```
+
+#### Проверка
+
+Просмотреть список установленных пакетов можно с помощью `list` из определённого типа пакета
+
+```bash
+$ ansible-galaxy collection list
+
+[WARNING]: Collection at '/opt/homebrew/Cellar/ansible/13.1.0/libexec/lib/python3.14/site-packages/ansible/_internal/ansible_collections/ansible/_protomatter' does not have a MANIFEST.json file, nor has it galaxy.yml: cannot detect version.
+
+# /Users/zeizel/.ansible/collections/ansible_collections
+Collection                               Version
+---------------------------------------- -------
+debops.roles03                           3.0.3
+
+# /opt/homebrew/Cellar/ansible/13.1.0/libexec/lib/python3.14/site-packages/ansible/_internal/ansible_collections
+Collection                               Version
+---------------------------------------- -------
+ansible._protomatter                     *
+
+# /opt/homebrew/Cellar/ansible/13.1.0/libexec/lib/python3.14/site-packages/ansible_collections
+Collection                               Version
+---------------------------------------- -------
+amazon.aws                               10.1.2
+ansible.netcommon                        8.2.0
+ansible.posix                            2.1.0
+ansible.utils                            6.0.0
+ansible.windows                          3.3.0
+arista.eos                               12.0.0
+awx.awx                                  24.6.1
+azure.azcollection                       3.12.0
+check_point.mgmt                         6.7.0
+chocolatey.chocolatey                    1.5.3
+cisco.aci                                2.13.0
+```
+
+#### Генератор
+
+Так же тут присутствует генератор ролей, который сразу соберёт нужную структуру папок под определённый объект
+
+```bash
+$ ansible-galaxy role init roles/name
+
+- Role roles/name was created successfully
+```
+
+![](../../_png/Pasted%20image%2020251224214106.png)
 
 ### Подготовка сервера
 
