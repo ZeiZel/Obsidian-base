@@ -5,8 +5,16 @@
       "path": "devops/docker/Docker + Ansible.md"
     },
     {
+      "basename": "Figma",
+      "path": "Design/Figma.md"
+    },
+    {
       "basename": "Design",
       "path": "Design/Design.md"
+    },
+    {
+      "basename": "NASA coding standarts",
+      "path": "cs/NASA coding standarts.md"
     },
     {
       "basename": "Davinci resolve",

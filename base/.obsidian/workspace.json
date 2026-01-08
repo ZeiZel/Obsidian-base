@@ -30,6 +30,30 @@
               "icon": "lucide-file",
               "title": "Docker + Ansible"
             }
+          },
+          {
+            "id": "89542ad633dd7c63",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design/Figma.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Figma"
+            }
           }
         ]
       }
@@ -98,7 +122,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 385.51103591918945
+    "width": 385.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -191,6 +216,16 @@
             "id": "94e39b40241f6337",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "e568235c50ed9025",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -198,7 +233,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -235,7 +270,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 545.5
+    "width": 396.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -258,20 +294,24 @@
   },
   "active": "c781478aa3763db1",
   "lastOpenFiles": [
-    "_png/Pasted image 20251224214106.png",
-    "_png/Pasted image 20251224210351.png",
+    "_png/Pasted image 20260108175431.png",
+    "_png/Pasted image 20260108161719.png",
+    "_png/Pasted image 20260108161459.png",
+    "_png/Pasted image 20260108161359.png",
+    "_png/Pasted image 20260108161328.png",
+    "_png/Pasted image 20260108161315.png",
+    "_png/Pasted image 20260108161258.png",
+    "Design/Figma.md",
     "Design/Design.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "devops/docker/Docker + Ansible.md",
+    "cs/NASA coding standarts.md",
+    "_png/Pasted image 20251225185610.png",
+    "_png/Pasted image 20251225185508.png",
+    "_png/Pasted image 20251225182057.png",
+    "_png/Pasted image 20251224214106.png",
+    "Design/DaVinci Resolve/Davinci resolve.md",
     "Untitled.md",
     "Tags",
-    "_png/Pasted image 20251221161649.png",
-    "_png/Pasted image 20251221110934.png",
-    "_png/Pasted image 20251220200727.png",
-    "_png/Pasted image 20251220200510.png",
-    "_png/Pasted image 20251220165618.png",
-    "_png/Pasted image 20251220165616.png",
-    "_png/Pasted image 20251220161026.png",
     "frontend/State Managers/Zustand.md",
     "agile/agile.md",
     "devops/kubernetes/Kubernetes + Helm.md",
@@ -294,10 +334,6 @@
     "frontend/Vue/Nuxt/Nuxt.md",
     "frontend/Vue/Vue/Vue.md",
     "frontend/React/Практический JS.md",
-    "frontend/React/_lessons/Redux Toolkit.md",
-    "frontend/React/_lessons/Ссылки.md",
-    "_png/Pasted image 20251004235713.png",
-    "_png/Pasted image 20251004235701.png",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",

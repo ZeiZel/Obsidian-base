@@ -3548,7 +3548,7 @@ Vagrant.configure("2") do |config|
 			web.vm.box = "ubuntu/focal64"
             # пробрасываем порты (хост порты 2223, 2224... на гостевой 22)
 			web.vm.network "forwarded_port", id: "ssh", host: 2222 + i, guest: 22
-            # порт для кластера
+            # поднятие приватной сети, чтобы машины видели друг друга
 			web.vm.network "private_network", ip: "10.11.10.#{i}", virtualbox__intnet: true
             # именуем хост
             web.vm.hostname = "server#{i}"
@@ -3659,13 +3659,683 @@ ansible-playbook -i inventory config.yml -K
 ## Docker Swarm
 
 ### Архитектура
+
+Docker Swarm - это технология кластеризации, встроенная в докер.
+
+Плюсы: 
+- Очень маленькая когнитивная нагрузка, по сравнению с [Kubernetes](../kubernetes/Kubernetes%20+%20Helm.md)
+- Встроен в Docker
+- Даёт много бенефитов по сравнению с обычным Docker Compose
+
+#### Преимущества
+
+- позволяет управлять кластером серверов
+- декларативная модель серверов
+- масштабирует нагрузку
+- обеспечивает безопасное соединение между серверами
+- просто накатывает обновления
+- позволяет организовать балансировку нагрузки
+
+#### Архитектура
+
+В сварме сервера делятся на две роли:
+
+- Manager - аналог master ноды из кубера, который управляет всеми задачами в кластере. Он знает всё о кластере: сколько серверов, что на них запущено, какие для них стоят задачи.  
+- Worker - нода, которая выполняет задачу от менеджера. Если ему прилетела задача развернуть два сервиса, то он развернёт два определённых сервиса. Воркер ничего не знает о кластере, кроме места, откуда он получает задачи на выполнение.
+
+Все менеджеры объединены по консенсусу RAFT, который позволяет эффективно назначить другую мастер ноду, если основная вышла из строя. 
+Все сервера менеджеров хранят данные в общем сторе (аналог `etcd`).
+Менеджер так же является подвидом воркера и может планировать поступающие в него таски и сам же их и выполнять. 
+
+![](../../_png/Pasted%20image%2020251225185610.png)
+
+Ограничения отказоустойчивости: 
+- мы можем менять роли для каждой ноды
+- сами менеджеры работают как воркеры
+- максимальное число менеджеров 7 (больше - выше нагрузка из-за обеспечения консенсуса RAFT)
+- кластер с `N` менеджерами выдержит потерю `(N-1)/2` менеджеров (то есть количество менеджеров должно быть нечётным)
+
+Если у нас 3 сервера, то мы можем поднять 3 менеджера, которые будут выступать так же в роли воркеров
+
 ### Запуск
+
+Сейчас мы будем инициализировать 5 нод - 3 менеджер ноды и 2 воркера.
+
+#### Создание воркер ноды
+
+Подключаемся к одному из наших удалённых серверов и нам нужно триггернуть инициализацию кластера. 
+
+Так как у нас два интернет соединения, то нам нужно будет для сварма через `--advertise-addr` указать ip приватной сети между машинами, который задали в Vagrant в поле `private_network`
+
+```bash
+$ docker swarm init
+
+Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on different interfaces (10.0.2.15 on eth0 and 10.11.10.2 on eth1) - specify one with --advertise-addr
+
+$ docker swarm init --advertise-addr 10.11.10.2
+
+Swarm initialized: current node (dlas9sxdfvkeldou4ethqyt7h) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-325mhyi3i0y0frhcuarls23985yry9m70k1krkbwukift5bapp-dpmyjrjewqwi0skzss0lcdnnl 10.11.10.2:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+```
+
+#### Создание мастер ноды
+
+В рамках менеджерской ноды, мы можем вызвать команду `docker swarm join-token` и указать роль `manager|worker` для генерации токена для подключения другой машины с определённой ролью для этого кластера
+
+```bash
+vagrant@server2:~$ docker swarm join-token manager
+To add a manager to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-325mhyi3i0y0frhcuarls23985yry9m70k1krkbwukift5bapp-5ck5qux8z4qwqvj4xutrxhmab 10.11.10.2:2377
+```
+
+И на втором сервере вызываем эту команду, сгенерированную на прошлом шаге, чтобы подключиться к воркер-ноде, как мастер-нода
+
+```bash
+vagrant@server3:~$ docker swarm join --token SWMTKN-1-325mhyi3i0y0frhcuarls23985yry9m70k1krkbwukift5bapp-5ck5qux8z4qwqvj4xutrxhmab 10.11.10.2:2377
+
+This node joined a swarm as a manager.
+```
+
+Все ноды можно глянуть через `node ls`
+
+```bash
+vagrant@server2:~$ docker node ls
+
+ID       HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+dlas9sxdfvkeldou4ethqyt7h *   server2  Ready Active  Leader           29.1.3
+dj7rowwp31k4ky7jart6nu9j0     server3  Ready Active  Reachable        29.1.3
+```
+
+#### Выход и переподключение к сварму
+
+Все операции сварма описаны в хелпе и они достаточно просты
+
+```bash
+vagrant@server1:~$ docker swarm
+
+Usage:  docker swarm COMMAND
+
+Manage Swarm
+
+Commands:
+  ca          Display and rotate the root CA
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  leave       Leave the swarm
+  unlock      Unlock swarm
+  unlock-key  Manage the unlock key
+  update      Update the swarm
+
+Run 'docker swarm COMMAND --help' for more information on a command.
+```
+
+Этой командой мы заставляем покинуть ноду наш сварм-кластер
+
+```bash
+vagrant@server5:~$ docker swarm leave
+
+Node left the swarm.
+```
+
+И теперь, в списке нод, этот сервер будет в статусе Down
+
+```bash
+vagrant@server1:~$ docker node ls
+ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+vf8zoum7p4oczrx0d32dcvf1i *   server1    Ready     Active         Leader           29.1.3
+dewtmbfux0190y4319m6ejrld     server2    Ready     Active         Reachable        29.1.3
+vwo3k8p811iybzp8ceh6zyj81     server3    Ready     Active                          29.1.3
+nk2txuihfmoqoqgptepxb90s6     server4    Ready     Active         Reachable        29.1.3
+upqzkpffp7mom2d8epabxpdtg     server5    Down      Active                          29.1.3
+```
+
+И заново подключается машина таким же токеном для подключения
+
+```bash
+vagrant@server5:~$ docker swarm join --token SWMTKN-1-0sy59jtf5wnfx0heevio1s27t4rxlie6qsq3eo1diarj8mbwev-0hc8wrrl429v2wo476k8nq8ja 10.11.10.1:2377
+
+This node joined a swarm as a manager.
+```
+
+Теперь у нас будет выыведено две ноды server5. 
+Чтобы почистить список, нужно воспользоваться командой `node rm`, которая удалит определённую воркер-ноду.
+
+```bash
+vagrant@server1:~$ docker node ls
+ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+vf8zoum7p4oczrx0d32dcvf1i *   server1    Ready     Active         Leader           29.1.3
+dewtmbfux0190y4319m6ejrld     server2    Ready     Active         Reachable        29.1.3
+vwo3k8p811iybzp8ceh6zyj81     server3    Ready     Active                          29.1.3
+nk2txuihfmoqoqgptepxb90s6     server4    Ready     Active         Reachable        29.1.3
+cac83v7bbd2stb1ppa0h09ebp     server5    Ready     Active         Reachable        29.1.3
+upqzkpffp7mom2d8epabxpdtg     server5    Down      Active                          29.1.3
+
+vagrant@server1:~$ docker node rm upqzkpffp7mom2d8epabxpdtg
+upqzkpffp7mom2d8epabxpdtg
+
+vagrant@server1:~$ docker node ls
+ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+vf8zoum7p4oczrx0d32dcvf1i *   server1    Ready     Active         Leader           29.1.3
+dewtmbfux0190y4319m6ejrld     server2    Ready     Active         Reachable        29.1.3
+vwo3k8p811iybzp8ceh6zyj81     server3    Ready     Active                          29.1.3
+nk2txuihfmoqoqgptepxb90s6     server4    Ready     Active         Reachable        29.1.3
+cac83v7bbd2stb1ppa0h09ebp     server5    Ready     Active         Reachable        29.1.3
+```
+
+#### Управление ролью ноды
+
+`docker node` провайдит команды `pomote / demote`, которые позволяют поднять / опустить роль ноды до воркер-менеджер.   
+
+Сейчас мы сняли роль менеджера с серверов 5 и 4 и добавили роль для сервера 3
+
+```bash
+vagrant@server1:~$ docker node ls
+ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+vf8zoum7p4oczrx0d32dcvf1i *   server1    Ready     Active         Leader           29.1.3
+dewtmbfux0190y4319m6ejrld     server2    Ready     Active         Reachable        29.1.3
+vwo3k8p811iybzp8ceh6zyj81     server3    Ready     Active                          29.1.3
+nk2txuihfmoqoqgptepxb90s6     server4    Ready     Active         Reachable        29.1.3
+cac83v7bbd2stb1ppa0h09ebp     server5    Ready     Active         Reachable        29.1.3
+
+vagrant@server1:~$ docker node demote server4
+Manager server4 demoted in the swarm.
+
+vagrant@server1:~$ docker node demote server5
+Manager server5 demoted in the swarm.
+
+vagrant@server1:~$ docker node promote server3
+Node server3 promoted to a manager in the swarm.
+
+vagrant@server1:~$ docker node ls
+ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+vf8zoum7p4oczrx0d32dcvf1i *   server1    Ready     Active         Leader           29.1.3
+dewtmbfux0190y4319m6ejrld     server2    Ready     Active         Reachable        29.1.3
+vwo3k8p811iybzp8ceh6zyj81     server3    Ready     Active         Reachable        29.1.3
+nk2txuihfmoqoqgptepxb90s6     server4    Ready     Active                          29.1.3
+cac83v7bbd2stb1ppa0h09ebp     server5    Ready     Active                          29.1.3
+```
+
+#### Инпекция
+
+Если нам нужно будет просмотреть: статусы, сетевую информацию, информацию по доступным ресурсам, то мы всегда можем обратиться к `docker node inspect`
+
+```bash
+vagrant@server1:~$ docker node inspect server4 --pretty
+ID:			nk2txuihfmoqoqgptepxb90s6
+Hostname:              	server4
+Joined at:             	2026-01-08 11:31:14.591976229 +0000 utc
+Status:
+ State:			Ready
+ Availability:         	Active
+ Address:		10.11.10.4
+Platform:
+ Operating System:	linux
+ Architecture:		aarch64
+Resources:
+ CPUs:			1
+ Memory:		1.785GiB
+Plugins:
+ Log:		awslogs, fluentd, gcplogs, gelf, journald, json-file, local, splunk, syslog
+ Network:		bridge, host, ipvlan, macvlan, null, overlay
+ Volume:		local
+Engine Version:		29.1.3
+TLS Info:
+ TrustRoot:
+-----BEGIN CERTIFICATE-----
+MIIBaTCCARCgAwIBAgIUJWvvlgPc98Slpfkx7B9799HbNHYwCgYIKoZIzj0EAwIw
+EzERMA8GA1UEAxMIc3dhcm0tY2EwHhcNMjYwMTA4MDgzNzAwWhcNNDYwMTAzMDgz
+NzAwWjATMREwDwYDVQQDEwhzd2FybS1jYTBZMBMGByqGSM49AgEGCCqGSM49AwEH
+A0IABNJ5aitJHauAqXPqTKQ6DS4CcxOAo4cS4yc1IxW0G+E4zLpoJj3TMQpQ+mU6
+kLxu6jIFwYAjASNhE9FSeagI2/6jQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB
+Af8EBTADAQH/MB0GA1UdDgQWBBQWppVsbIGn81T1IrYw1D34eWZiJjAKBggqhkjO
+PQQDAgNHADBEAiA7FpBQ74RKDrNB0H2W9bWOXKMEDvY8d4olDNhz2Usc7gIgDd72
+6lKrjQHyFhwG6loJ2/FMVQhP5HsAvbeWDAexcv4=
+-----END CERTIFICATE-----
+
+ Issuer Subject:	MBMxETAPBgNVBAMTCHN3YXJtLWNh
+ Issuer Public Key:	MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE0nlqK0kdq4Cpc+pMpDoNLgJzE4CjhxLjJzUjFbQb4TjMumgmPdMxClD6ZTqQvG7qMgXBgCMBI2ET0VJ5qAjb/g==
+```
+
+Одним из важных параметров для нас является Availability, который отвечает за статус возможности принимать новые задачи. Есть несколько статусов:
+
+- active
+	- может принимать задачи
+- paused
+	- старые задачи работают, но новые задачи не принимает 
+	- например, когда нам нужно проинспектировать высокое потребление ресурсов и отключить добавление задач, но оставить работающими старые сервисы
+- drained
+	- новые задачи не принимаются, а старые переносятся на другие ноды
+	- например, если у нас спала нагрузка и мы хотим сузить количество используемых серверов (новые задачи не принимай, а старые убивай и переноси на другие ноды)
+
+С помощью `node update`, мы можем обновить статус доступности ноды по флагу `--availability`
+
+```bash
+vagrant@server1:~$ docker node update --availability=pause server4
+server4
+
+vagrant@server1:~$ docker node inspect server4 --pretty
+ID:			nk2txuihfmoqoqgptepxb90s6
+Hostname:              	server4
+Joined at:             	2026-01-08 11:31:14.591976229 +0000 utc
+Status:
+ State:			Ready
+ Availability:         	Pause
+ Address:		10.11.10.4
+```
+
+И так же восстановить старый статус работы ноды
+
+```bash
+vagrant@server1:~$ docker node update --availability=active server4
+server4
+
+vagrant@server1:~$ docker node inspect server4 --pretty
+ID:			nk2txuihfmoqoqgptepxb90s6
+Hostname:              	server4
+Joined at:             	2026-01-08 11:31:14.591976229 +0000 utc
+Status:
+ State:			Ready
+ Availability:         	Active
+ Address:		10.11.10.4
+```
+
+Так же команда `node update` позволяет через флаги задать нам:
+
+- Лейблы для ноды
+	- Например, `database=true`, который будет говорить, что на этой ноде мы будем запускать базы данных. Это может быть полезно, так как изначально, мы не знаем, на какой ноде будет запущен сервис
+- Удалять лейблы с ноды
+- определять роль ноды (воркер/менеджер)
+
+```bash
+vagrant@server1:~$ docker node update --help
+Usage:  docker node update [OPTIONS] NODE
+
+Update a node
+
+Options:
+      --availability string   Availability of the node ("active", "pause", "drain")
+      --label-add list        Add or update a node label ("key=value")
+      --label-rm list         Remove a node label if exists
+      --role string           Role of the node ("worker", "manager")
+```
+
 ### Сервисы и задачи
+
+Сервис - это описание, которое хранится внутри Swarm и описывает систему
+Задача - это операция, которую должен выполнить воркер
+Контейнер - это коробка с нашим сервисом, которая находится внутри ноды
+
+У нас есть задача: нам нужно описать сервис, который создаст задачу на развёртку на двух нодах АПИ сервиса
+
+![](../../_png/Pasted%20image%2020260108161459.png)
+
+Внутри путь по поднятию сервиса выглядит следующим образом:
+
+- Manager
+	- Мы вызываем через API докер сварма сервис, который он должен поднять
+	- Дальше происходит создание задачи 
+	- Потом выделяется ip адрес для исполнения задачи
+	- Затем происходит привязывание задачи к ноде
+	- Потом Scheduler распределяет задачи
+- Worker
+	- пингует Scheduler на наличие задач
+	- если задача есть, то он собирает её и передаёт в executer
+
+![](../../_png/Pasted%20image%2020260108161719.png)
+
+Так же есть несколько статусов наших тасок:
+
+- new - новая
+- pending - выделены ресурсы на задачу
+- assigned - определена нода под задачу
+- accepted - нода приняла задачу
+- preparing - docker подготавливает задачу
+- starting - задача запускается
+- running - задача работает
+- complete - задача завершена без ошибки
+- failed - задача завершена с ненулевым кодом
+- shutdown - поступил сигнал о завершении задачи от Docker
+- rejected - нода не приняла задачу
+- orphaned - нода очень давно не отвечает
+- remove - задача не была завершена, но сервис удалён
+
+#### Управление сервисами
+
+Для работы с сервисами нужно использовать команду `docker service`. Она по синтаксису аналогична команде `docker run`, только запускает сервисы в рамках кластера.
+
+```bash
+vagrant@server1:~$ docker service create --name redis redis
+
+m8vrt78ta6325kxnfsfimdxu1
+overall progress: 1 out of 1 tasks
+1/1: running   [==================================================>]
+verify: Service m8vrt78ta6325kxnfsfimdxu1 converged
+
+vagrant@server1:~$ docker service ls
+
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+m8vrt78ta632   redis     replicated   1/1        redis:latest
+```
+
+>[!warning] Не стоит на одной машине запускать отдельно `docker run` контейнеры и контейнеры сервиса.
+> Дело в том, что обычно созданные контейнеры не отображаются в `docker service` списке и не управляются свармом.
+> Такой подход может привести к неразберихе и тяжело будет найти нужный сервис в рамках нашего кластера, что однозначно приведёт к утечке памяти и других ресурсов. 
+
+Инспект сервиса прозволяет увидеть режим (с репликой / без) сервиса, его параметры, изображение, ресурсы
+
+```bash
+vagrant@server1:~$ docker service inspect redis --pretty
+
+ID:		m8vrt78ta6325kxnfsfimdxu1
+Name:		redis
+Service Mode:	Replicated
+ Replicas:	1
+Placement:
+UpdateConfig:
+ Parallelism:	1
+ On failure:	pause
+ Monitoring Period: 5s
+ Max failure ratio: 0
+ Update order:      stop-first
+RollbackConfig:
+ Parallelism:	1
+ On failure:	pause
+ Monitoring Period: 5s
+ Max failure ratio: 0
+ Rollback order:    stop-first
+ContainerSpec:
+ Image:		redis:latest@sha256:47200b04138293fae39737e50878a238b13ec0781083126b1b0c63cf5d992e8d
+ Init:		false
+Resources:
+Endpoint Mode:	vip
+```
+
+`ps` выведет подробную информацию о всех контейнерах созданного сервиса и покажет сервер, где он расположился
+
+```bash
+vagrant@server1:~$ docker service ps redis
+
+ID             NAME      IMAGE          NODE      DESIRED STATE   CURRENT STATE           ERROR     PORTS
+ngi4h2ha3d35   redis.1   redis:latest   server5   Running         Running 2 minutes ago
+```
+
+Логи выводятся с информацией о названии сервиса + таской, по которой он поднят, чтобы различить логи из всех похожих сервисов
+
+```bash
+vagrant@server1:~$ docker service logs redis
+redis.1.ngi4h2ha3d35@server5    | Starting Redis Server
+redis.1.ngi4h2ha3d35@server5    | 1:C 08 Jan 2026 13:26:44.608 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis.1.ngi4h2ha3d35@server5    | 1:C 08 Jan 2026 13:26:44.609 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+```
+
+Ну и удаляется сервис командой `rm`
+
+```bash
+vagrant@server1:~$ docker service rm redis
+redis
+
+vagrant@server1:~$ docker service ls
+ID        NAME      MODE      REPLICAS   IMAGE     PORTS
+```
+
+#### Расширение инстансов
+
+Очень легко можно дублировать количество сервисов посредством команды `scale` и указать количество сервисов нужное нам
+
+```bash
+vagrant@server1:~$ docker service scale redis=2
+
+redis scaled to 2
+overall progress: 2 out of 2 tasks
+1/2: running   [==================================================>]
+2/2: running   [==================================================>]
+verify: Service redis converged
+```
+
+Вывод логов будет происходить по двум сервисам сразу
+
+```bash
+vagrant@server1:~$ docker service logs redis
+
+redis.1.0vf4ym0h7vef@server1    | Starting Redis Server
+redis.1.0vf4ym0h7vef@server1    | 1:C 08 Jan 2026 13:37:03.940 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis.1.0vf4ym0h7vef@server1    | 1:C 08 Jan 2026 13:37:03.942 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis.1.0vf4ym0h7vef@server1 
+redis.2.bijaalawbdaz@server2    | 1:M 08 Jan 2026 13:37:55.408 * <search> Initialized thread pools!
+redis.2.bijaalawbdaz@server2    | 1:M 08 Jan 2026 13:37:55.408 * <search> Disabled workers threadpool of size 0
+redis.2.bijaalawbdaz@server2  
+```
+
+#### Обновление
+
+Так же мы можем обновлять сервисы и делать это безболезненно, так как они будут обновляться каскадом (сначала первый, потом второй)
+
+```bash
+vagrant@server1:~$ docker service update redis --image=redis:5
+
+redis
+overall progress: 2 out of 2 tasks
+1/2: running   [==================================================>]
+2/2: running   [==================================================>]
+verify: Service redis converged
+```
+
+Обновить можно множество параметров на лету: версия image, ресурсы, параметры сервиса
+
 ### Секреты и конфиги
+
+Docker позволяет нам создать две сущности на нашем устройстве: 
+
+- конфиги - хранятся в открытом виде
+- секреты - хранятся на устройстве в зашифрованном виде
+
+В команду `docker create` передаём нужные флаги `--config/--secret` с указанием пути до них. Потом эти конфигурации подтянутся для создания сервиса с этими параметрами 
+
+![](../../_png/Pasted%20image%2020260108175431.png)
+
+>[!warning] Секреты хранятся в контейнере в расшированном виде и могут быть сворованы!
+> - Секреты, как и в кубере, хранятся напрямую в контейнере, и, если злоумышленник получит доступ в сервер, то расшифрованные секреты будут ему доступны.
+> - Однако команды `commit` и `archive` не будут сохранять секреты контейнера и он у нас сохранится пустой - секреты хранятся в контейнере покуда он в состоянии running
+
+#### Секреты
+
+##### Создание секрета
+
+Создадим plain текстовый файл с секретом
+
+```bash
+vagrant@server1:~$ echo '123asddd2111d' > sec.txt
+
+vagrant@server1:~$ cat sec.txt
+123asddd2111d
+```
+
+Далее от этого plain файла создадим секрет через `docker create secret` и на него можно будет взглянуть через `secret ls`
+
+```bash
+vagrant@server1:~$ docker secret create my_pass sec.txt
+mqc5ddo401q5f8f4ihio6tnsr
+
+vagrant@server1:~$ docker secret ls
+ID                          NAME      DRIVER    CREATED         UPDATED
+mqc5ddo401q5f8f4ihio6tnsr   my_pass             5 seconds ago   5 seconds ago
+```
+
+И в конце останется только запустить сервис с секретом
+
+```bash
+vagrant@server1:~$ docker service create --secret my_pass --name redis redis
+uri3scf3y1o7o8fwia1kvewyp
+overall progress: 1 out of 1 tasks
+1/1: running   [==================================================>]
+verify: Service uri3scf3y1o7o8fwia1kvewyp converged
+```
+
+Секрет так же можно проинспектировать
+
+```bash
+vagrant@server1:~$ docker secret inspect my_pass
+[
+    {
+        "ID": "mqc5ddo401q5f8f4ihio6tnsr",
+        "Version": {
+            "Index": 255
+        },
+        "CreatedAt": "2026-01-08T14:54:53.086712153Z",
+        "UpdatedAt": "2026-01-08T14:54:53.086712153Z",
+        "Spec": {
+            "Name": "my_pass",
+            "Labels": {}
+        }
+    }
+]
+```
+
+##### Вывод секрета из контейнера
+
+После того, как у нас поднялся сервис, мы можем:
+1. в `service ps` найти сервер, где он поднялся
+2. перейти на найденный сервер
+3. вывести все контейнеры через `docker ps`
+4. вызвать шелл найденного контейнера `sh`
+5. перейти в `/run/secrets`, где и будет лежать секрет
+
+```bash
+vagrant@server1:~$ docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+uri3scf3y1o7   redis     replicated   1/1        redis:latest
+
+vagrant@server1:~$ docker service ps redis
+ID             NAME      IMAGE          NODE      DESIRED STATE   CURRENT STATE           ERROR     PORTS
+fhxciekfwolz   redis.1   redis:latest   server1   Running         Running 2 minutes ago
+
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS      NAMES
+13ab2bcf8127   redis:latest   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   6379/tcp   redis.1.fhxciekfwolz0u4z9whkxaqiw
+
+vagrant@server1:~$ docker exec -it redis.1.fhxciekfwolz0u4z9whkxaqiw sh
+# ls
+# cd /run/secrets/
+# cat my_pass
+123asddd2111d
+```
+
+##### Удаление секрета
+
+Удалить секрет будет возможно только после удаления всех связанных с ним сервисов
+
+```bash
+vagrant@server1:~$ docker secret rm my_pass
+Error response from daemon: rpc error: code = InvalidArgument desc = secret 'my_pass' is in use by the following service: redis
+
+vagrant@server1:~$ docker service rm redis
+redis
+
+vagrant@server1:~$ docker secret rm my_pass
+my_pass
+```
+
+#### Конфиги
+
+Создание выглядит подобным образом, как и секреты. 
+Что секреты, что конфиги можно передать как файлами, так и stdin в пайплайне shell оболочки
+
+```bash
+vagrant@server1:~$ echo "23479867sdf" | docker config create my_conf -
+3273iwb8f2nl4dz8df452blzt
+
+vagrant@server1:~$ docker config ls
+ID                          NAME      CREATED         UPDATED
+3273iwb8f2nl4dz8df452blzt   my_conf   6 seconds ago   6 seconds ago
+```
+
+Так как конфиги хранятся в открытом виде, то прямо в поле Data инспекта находятся данные в фрмате base64
+
+```bash
+vagrant@server1:~$ docker config inspect my_conf
+[
+    {
+        "ID": "3273iwb8f2nl4dz8df452blzt",
+        "Version": {
+            "Index": 277
+        },
+        "CreatedAt": "2026-01-08T15:13:16.636565647Z",
+        "UpdatedAt": "2026-01-08T15:13:16.636565647Z",
+        "Spec": {
+            "Name": "my_conf",
+            "Labels": {},
+            "Data": "MjM0Nzk4NjdzZGYK"
+        }
+    }
+]
+```
+
+Далее нужно поднять сервис с данным конфигом
+
+```bash
+vagrant@server1:~$ docker service create --config my_conf --name redis redis
+v2qr1wd33lqiqij6w4t2vi621
+overall progress: 1 out of 1 tasks
+1/1: running   [==================================================>]
+verify: Service v2qr1wd33lqiqij6w4t2vi621 converged
+```
+
+А сам конфиг находится прямо в корне поднятого контейнера
+
+```bash
+vagrant@server1:~$ docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+v2qr1wd33lqi   redis     replicated   1/1        redis:latest
+
+vagrant@server1:~$ docker service ps redis
+ID             NAME      IMAGE          NODE      DESIRED STATE   CURRENT STATE            ERROR     PORTS
+zb0rej6vu7pk   redis.1   redis:latest   server1   Running         Running 19 seconds ago
+
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS      NAMES
+9ff7238b7c26   redis:latest   "docker-entrypoint.s…"   36 seconds ago   Up 36 seconds   6379/tcp   redis.1.zb0rej6vu7pkt60xvum8wn5i3
+
+vagrant@server1:~$ docker exec -it redis.1.zb0rej6vu7pkt60xvum8wn5i3 sh
+# cd /
+# cat my_conf
+23479867sdf
+```
+
 ### Statefull сервисы
+
+Для работы с Docker Swarm, нам нужно иметь уже готовые образы. Собрать образ, как в композе `build`, у нас не получится, так как мы не знаем, где запустится таска. Самый надёжный вариант в таком случае - поднять собственный registry, откуда будут тянутся образы собранного приложения.  
+
+
+
+
+
+
+
+
+
 ### Overlay network
+
+
+
+
+
 ### Docker stack
+
+
+
+
 ### Healthcheck
+
+
+
+
 ### Отказоустойчивость
 
 
@@ -4000,6 +4670,10 @@ $ ansible-galaxy role init roles/name
 ![](../../_png/Pasted%20image%2020251224214106.png)
 
 ### Подготовка сервера
+
+
+
+![](../../_png/Pasted%20image%2020251225182057.png)
 
 ### Теги
 
