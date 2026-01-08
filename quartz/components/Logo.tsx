@@ -7,9 +7,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
 		xmlSpace='preserve'
-		width={200}
-		height={200}
-		viewBox='0 0 210 210'
+		width={40}
+		height={40}
 		{...props}
 	>
 		<path

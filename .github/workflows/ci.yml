@@ -2,7 +2,7 @@
 name: Deploy obsidian base
 on:
   push:
-    branches: [main, master, to-custom-quartz]
+    branches: [main, master]
   workflow_dispatch:
 jobs:
   build-test-deploy:

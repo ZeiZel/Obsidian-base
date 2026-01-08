@@ -1,22 +1,40 @@
+@use '../../styles/variables.scss' as *;
+
 .darkmode {
 	cursor: pointer;
-	padding: 0;
+	padding: 0.5rem;
 	position: relative;
-	background: none;
+	background: transparent;
 	border: none;
-	width: 20px;
-	height: 20px;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
 	margin: 0;
 	text-align: inherit;
 	flex-shrink: 0;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		background-color: var(--lightgray);
+		transform: rotate(20deg);
+	}
+
+	&:active {
+		transform: rotate(20deg) scale(0.95);
+	}
 
 	& svg {
 		position: absolute;
 		width: 20px;
 		height: 20px;
-		top: calc(50% - 10px);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		fill: var(--darkgray);
-		transition: opacity 0.1s ease;
+		transition: opacity 0.3s ease, transform 0.3s ease;
 	}
 }
 
@@ -30,18 +48,22 @@
 
 :root[saved-theme='dark'] .darkmode {
 	& > .dayIcon {
-		display: none;
+		opacity: 0;
+		transform: translate(-50%, -50%) rotate(-180deg) scale(0);
 	}
 	& > .nightIcon {
-		display: inline;
+		opacity: 1;
+		transform: translate(-50%, -50%) rotate(0deg) scale(1);
 	}
 }
 
 :root .darkmode {
 	& > .dayIcon {
-		display: inline;
+		opacity: 1;
+		transform: translate(-50%, -50%) rotate(0deg) scale(1);
 	}
 	& > .nightIcon {
-		display: none;
+		opacity: 0;
+		transform: translate(-50%, -50%) rotate(180deg) scale(0);
 	}
 }

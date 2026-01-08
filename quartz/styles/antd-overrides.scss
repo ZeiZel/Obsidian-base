@@ -1,0 +1,317 @@
+// Ant Design-Inspired Theme Overrides - Gruvbox Material Soft
+// This file provides Ant Design-inspired styling for native components
+// Note: We're not actually using Ant Design components, just the design patterns
+
+// Gruvbox Material Color Variables
+:root {
+	// Light Mode Colors
+	--antd-gruvbox-light-bg: #f2e5bc;
+	--antd-gruvbox-light-surface: #ebdbb2;
+	--antd-gruvbox-light-text: #654735;
+	--antd-gruvbox-light-primary: #427b58;
+	--antd-gruvbox-light-secondary: #45707a;
+	--antd-gruvbox-light-border: #d5c4a1;
+	--antd-gruvbox-light-hover: #c9b99a;
+
+	// Dark Mode Colors
+	--antd-gruvbox-dark-bg: #32302f;
+	--antd-gruvbox-dark-surface: #3c3836;
+	--antd-gruvbox-dark-text: #d4be98;
+	--antd-gruvbox-dark-primary: #a9b665;
+	--antd-gruvbox-dark-secondary: #7daea3;
+	--antd-gruvbox-dark-border: #504945;
+	--antd-gruvbox-dark-hover: #504945;
+}
+
+// Base Ant Design component overrides
+.ant-btn,
+.ant-input,
+.ant-select,
+.ant-modal,
+.ant-drawer,
+.ant-card,
+.ant-tree {
+	border-radius: 8px;
+	transition: all 0.3s ease;
+}
+
+// Light mode overrides
+:root[saved-theme='light'] {
+	// Button overrides
+	.ant-btn-primary {
+		background-color: var(--antd-gruvbox-light-primary);
+		border-color: var(--antd-gruvbox-light-primary);
+		color: var(--antd-gruvbox-light-bg);
+
+		&:hover {
+			background-color: #5a9a70;
+			border-color: #5a9a70;
+		}
+	}
+
+	.ant-btn-default {
+		background-color: var(--antd-gruvbox-light-surface);
+		border-color: var(--antd-gruvbox-light-border);
+		color: var(--antd-gruvbox-light-text);
+
+		&:hover {
+			background-color: var(--antd-gruvbox-light-hover);
+			border-color: var(--antd-gruvbox-light-primary);
+			color: var(--antd-gruvbox-light-primary);
+		}
+	}
+
+	// Input overrides
+	.ant-input,
+	.ant-input-search .ant-input {
+		background-color: var(--antd-gruvbox-light-surface);
+		border-color: var(--antd-gruvbox-light-border);
+		color: var(--antd-gruvbox-light-text);
+
+		&:focus,
+		&:hover {
+			border-color: var(--antd-gruvbox-light-primary);
+			box-shadow: 0 0 0 2px rgba(66, 123, 88, 0.1);
+		}
+
+		&::placeholder {
+			color: #928374;
+		}
+	}
+
+	// Modal & Drawer
+	.ant-modal-content,
+	.ant-drawer-content {
+		background-color: var(--antd-gruvbox-light-bg);
+		color: var(--antd-gruvbox-light-text);
+	}
+
+	.ant-modal-header,
+	.ant-drawer-header {
+		background-color: var(--antd-gruvbox-light-surface);
+		border-bottom-color: var(--antd-gruvbox-light-border);
+		color: var(--antd-gruvbox-light-text);
+	}
+
+	.ant-modal-title,
+	.ant-drawer-title {
+		color: var(--antd-gruvbox-light-text);
+	}
+
+	// Card
+	.ant-card {
+		background-color: var(--antd-gruvbox-light-surface);
+		border-color: var(--antd-gruvbox-light-border);
+		color: var(--antd-gruvbox-light-text);
+
+		&:hover {
+			box-shadow: 0 4px 12px rgba(101, 71, 53, 0.1);
+		}
+	}
+
+	// Tree
+	.ant-tree {
+		background-color: transparent;
+		color: var(--antd-gruvbox-light-text);
+
+		.ant-tree-node-content-wrapper {
+			&:hover {
+				background-color: var(--antd-gruvbox-light-hover);
+			}
+
+			&.ant-tree-node-selected {
+				background-color: var(--antd-gruvbox-light-primary);
+				color: var(--antd-gruvbox-light-bg);
+			}
+		}
+
+		.ant-tree-switcher {
+			color: var(--antd-gruvbox-light-primary);
+		}
+	}
+
+	// Switch (for dark mode toggle)
+	.ant-switch {
+		background-color: var(--antd-gruvbox-light-border);
+
+		&.ant-switch-checked {
+			background-color: var(--antd-gruvbox-light-primary);
+		}
+	}
+
+	// Select dropdown
+	.ant-select-dropdown {
+		background-color: var(--antd-gruvbox-light-surface);
+		color: var(--antd-gruvbox-light-text);
+	}
+
+	.ant-select-item {
+		color: var(--antd-gruvbox-light-text);
+
+		&:hover {
+			background-color: var(--antd-gruvbox-light-hover);
+		}
+
+		&.ant-select-item-option-selected {
+			background-color: var(--antd-gruvbox-light-primary);
+			color: var(--antd-gruvbox-light-bg);
+		}
+	}
+}
+
+// Dark mode overrides
+:root[saved-theme='dark'] {
+	// Button overrides
+	.ant-btn-primary {
+		background-color: var(--antd-gruvbox-dark-primary);
+		border-color: var(--antd-gruvbox-dark-primary);
+		color: var(--antd-gruvbox-dark-bg);
+
+		&:hover {
+			background-color: #bbc77c;
+			border-color: #bbc77c;
+		}
+	}
+
+	.ant-btn-default {
+		background-color: var(--antd-gruvbox-dark-surface);
+		border-color: var(--antd-gruvbox-dark-border);
+		color: var(--antd-gruvbox-dark-text);
+
+		&:hover {
+			background-color: var(--antd-gruvbox-dark-hover);
+			border-color: var(--antd-gruvbox-dark-primary);
+			color: var(--antd-gruvbox-dark-primary);
+		}
+	}
+
+	// Input overrides
+	.ant-input,
+	.ant-input-search .ant-input {
+		background-color: var(--antd-gruvbox-dark-surface);
+		border-color: var(--antd-gruvbox-dark-border);
+		color: var(--antd-gruvbox-dark-text);
+
+		&:focus,
+		&:hover {
+			border-color: var(--antd-gruvbox-dark-primary);
+			box-shadow: 0 0 0 2px rgba(169, 182, 101, 0.1);
+		}
+
+		&::placeholder {
+			color: #928374;
+		}
+	}
+
+	// Modal & Drawer
+	.ant-modal-content,
+	.ant-drawer-content {
+		background-color: var(--antd-gruvbox-dark-bg);
+		color: var(--antd-gruvbox-dark-text);
+	}
+
+	.ant-modal-header,
+	.ant-drawer-header {
+		background-color: var(--antd-gruvbox-dark-surface);
+		border-bottom-color: var(--antd-gruvbox-dark-border);
+		color: var(--antd-gruvbox-dark-text);
+	}
+
+	.ant-modal-title,
+	.ant-drawer-title {
+		color: var(--antd-gruvbox-dark-text);
+	}
+
+	// Card
+	.ant-card {
+		background-color: var(--antd-gruvbox-dark-surface);
+		border-color: var(--antd-gruvbox-dark-border);
+		color: var(--antd-gruvbox-dark-text);
+
+		&:hover {
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	// Tree
+	.ant-tree {
+		background-color: transparent;
+		color: var(--antd-gruvbox-dark-text);
+
+		.ant-tree-node-content-wrapper {
+			&:hover {
+				background-color: var(--antd-gruvbox-dark-hover);
+			}
+
+			&.ant-tree-node-selected {
+				background-color: var(--antd-gruvbox-dark-primary);
+				color: var(--antd-gruvbox-dark-bg);
+			}
+		}
+
+		.ant-tree-switcher {
+			color: var(--antd-gruvbox-dark-primary);
+		}
+	}
+
+	// Switch (for dark mode toggle)
+	.ant-switch {
+		background-color: var(--antd-gruvbox-dark-border);
+
+		&.ant-switch-checked {
+			background-color: var(--antd-gruvbox-dark-primary);
+		}
+	}
+
+	// Select dropdown
+	.ant-select-dropdown {
+		background-color: var(--antd-gruvbox-dark-surface);
+		color: var(--antd-gruvbox-dark-text);
+	}
+
+	.ant-select-item {
+		color: var(--antd-gruvbox-dark-text);
+
+		&:hover {
+			background-color: var(--antd-gruvbox-dark-hover);
+		}
+
+		&.ant-select-item-option-selected {
+			background-color: var(--antd-gruvbox-dark-primary);
+			color: var(--antd-gruvbox-dark-bg);
+		}
+	}
+}
+
+// Common styles for both themes
+.ant-btn {
+	font-weight: 600;
+	box-shadow: none;
+
+	&:active {
+		transform: translateY(1px);
+	}
+}
+
+.ant-input-affix-wrapper {
+	border-radius: 8px;
+}
+
+.ant-modal-mask,
+.ant-drawer-mask {
+	backdrop-filter: blur(4px);
+}
+
+.ant-tree-title {
+	font-size: 0.95rem;
+}
+
+// Smooth transitions
+* {
+	&.ant-btn,
+	&.ant-input,
+	&.ant-card,
+	&.ant-tree-node-content-wrapper {
+		transition: all 0.2s ease;
+	}
+}

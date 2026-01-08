@@ -1,8 +1,347 @@
 @use './base.scss';
+@use './antd-overrides.scss';
 
-// put your custom CSS here!
+// Custom Gruvbox Material Enhancements
 
-[saved-theme=dark] code[data-theme*=\ ] {
-  color: var(--shiki-dark);
-  background-color: #3B4252;
+// Smooth scroll behavior
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+}
+
+// Custom scrollbar styling - Gruvbox themed
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+:root[saved-theme='light'] {
+	::-webkit-scrollbar-track {
+		background: #ebdbb2;
+		border-radius: 6px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #a89984;
+		border-radius: 6px;
+		border: 2px solid #ebdbb2;
+
+		&:hover {
+			background: #7c6f64;
+		}
+	}
+}
+
+:root[saved-theme='dark'] {
+	::-webkit-scrollbar-track {
+		background: #3c3836;
+		border-radius: 6px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #7c6f64;
+		border-radius: 6px;
+		border: 2px solid #3c3836;
+
+		&:hover {
+			background: #a89984;
+		}
+	}
+}
+
+// Link underline animation
+a:not(.internal) {
+	position: relative;
+	text-decoration: none;
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 2px;
+		bottom: -2px;
+		left: 0;
+		background-color: var(--secondary);
+		transition: width 0.3s ease;
+	}
+
+	&:hover::after {
+		width: 100%;
+	}
+}
+
+// Enhanced internal links with better hover
+a.internal {
+	transition: all 0.2s ease;
+	
+	&:hover {
+		background-color: color-mix(in srgb, var(--highlight) 80%, var(--secondary));
+		transform: translateX(2px);
+	}
+}
+
+// Card hover effects for articles
+article {
+	transition: transform 0.2s ease;
+}
+
+// Enhanced focus indicators for accessibility
+*:focus-visible {
+	outline: 3px solid var(--secondary);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+	outline: 2px solid var(--secondary);
+	outline-offset: 3px;
+}
+
+// Loading animation for images
+img {
+	animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+// Enhanced table styling
+.table-container > table {
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+	thead {
+		background-color: var(--lightgray);
+		
+		th {
+			font-weight: 700;
+			color: var(--dark);
+		}
+	}
+
+	tbody tr {
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: var(--lightgray);
+		}
+	}
+}
+
+// Enhanced callouts with Gruvbox colors
+.callout {
+	border-radius: 8px;
+	padding: 1rem 1.5rem;
+	margin: 1.5rem 0;
+	border-left: 4px solid var(--secondary);
+	background-color: color-mix(in srgb, var(--lightgray) 30%, transparent);
+	transition: all 0.2s ease;
+
+	&:hover {
+		background-color: color-mix(in srgb, var(--lightgray) 50%, transparent);
+		transform: translateX(4px);
+	}
+}
+
+// Page transition effects
+.page {
+	animation: pageEntry 0.3s ease-out;
+}
+
+@keyframes pageEntry {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+// Better list styling
+ul,
+ol {
+	padding-left: 1.5rem;
+	
+	li {
+		margin: 0.5rem 0;
+		padding-left: 0.5rem;
+		
+		&::marker {
+			color: var(--secondary);
+			font-weight: 600;
+		}
+	}
+
+	ul,
+	ol {
+		margin-top: 0.5rem;
+	}
+}
+
+// Enhanced horizontal rules
+hr {
+	background: linear-gradient(
+		to right,
+		transparent,
+		var(--lightgray) 20%,
+		var(--lightgray) 80%,
+		transparent
+	);
+	height: 2px;
+	border: none;
+	margin: 3rem auto;
+}
+
+// Code block improvements
+[saved-theme='dark'] code[data-theme*=' '] {
+	color: var(--shiki-dark);
+	background-color: #3c3836;
+}
+
+[saved-theme='light'] code[data-theme*=' '] {
+	color: var(--shiki-light);
+	background-color: #ebdbb2;
+}
+
+pre code {
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
+// Better tag styling
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 1rem 0;
+
+	a {
+		background-color: var(--lightgray);
+		color: var(--secondary);
+		padding: 0.3rem 0.8rem;
+		border-radius: 16px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		transition: all 0.2s ease;
+		border: 1px solid transparent;
+
+		&:hover {
+			background-color: var(--secondary);
+			color: var(--light);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+	}
+}
+
+// Footnotes styling
+.footnotes {
+	border-top: 2px solid var(--lightgray);
+	padding-top: 2rem;
+	margin-top: 3rem;
+	font-size: 0.9rem;
+	color: var(--gray);
+
+	ol {
+		padding-left: 1.5rem;
+	}
+
+	li {
+		margin: 0.75rem 0;
+	}
+}
+
+// Selection color with Gruvbox theme
+::selection {
+	background: var(--highlight);
+	color: var(--dark);
+}
+
+// Print styles
+@media print {
+	.sidebar,
+	.page-header,
+	.page-footer,
+	.darkmode,
+	.search {
+		display: none !important;
+	}
+
+	.page {
+		max-width: 100% !important;
+		padding: 0 !important;
+	}
+
+	a {
+		text-decoration: underline !important;
+	}
+}
+
+// Reduced motion for accessibility
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+	:root {
+		--secondary: #2d5016;
+		--tertiary: #1d4044;
+	}
+
+	:root[saved-theme='dark'] {
+		--secondary: #b8e673;
+		--tertiary: #8bd5ca;
+	}
+}
+
+// Dark mode specific enhancements
+:root[saved-theme='dark'] {
+	// Better contrast for images in dark mode
+	img {
+		filter: brightness(0.9);
+		
+		&:hover {
+			filter: brightness(1);
+		}
+	}
+
+	// Enhanced code blocks in dark mode
+	pre {
+		background-color: #282828;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	}
+}
+
+// Light mode specific enhancements
+:root[saved-theme='light'] {
+	// Warmer feel for light mode
+	body {
+		background-color: #f9f5d7;
+	}
+
+	// Enhanced shadows in light mode
+	.search-container,
+	.modal,
+	.drawer {
+		box-shadow: 0 8px 32px rgba(101, 71, 53, 0.15);
+	}
 }

@@ -19,7 +19,6 @@ import {
 	DesktopOnly,
 	TableOfContents,
 	Backlinks,
-	Logo,
 } from './quartz/components';
 
 // components shared across all pages
@@ -35,8 +34,6 @@ export const sharedPageComponents: SharedLayout = {
 		},
 	}),
 };
-
-// components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
 	beforeBody: [
 		ConditionalRender({
@@ -48,7 +45,6 @@ export const defaultContentPageLayout: PageLayout = {
 		TagList(),
 	],
 	left: [
-		Logo(),
 		PageTitle(),
 		MobileOnly(Spacer()),
 		Flex({
@@ -68,9 +64,8 @@ export const defaultContentPageLayout: PageLayout = {
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-	beforeBody: [Breadcrumbs({ rootName: 'Главная' }), ArticleTitle(), ContentMeta()],
+	beforeBody: [Breadcrumbs(), ArticleTitle(), ContentMeta()],
 	left: [
-		Logo(),
 		PageTitle(),
 		MobileOnly(Spacer()),
 		Flex({

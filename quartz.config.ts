@@ -31,7 +31,7 @@ import { customImageStructure } from './quartz/util/og';
  */
 const config: QuartzConfig = {
 	configuration: {
-		pageTitle: 'Digital garden 🌲',
+		pageTitle: 'Base',
 		pageTitleSuffix: '',
 		enableSPA: true,
 		enablePopovers: true,
@@ -52,26 +52,26 @@ const config: QuartzConfig = {
 			},
 			colors: {
 				lightMode: {
-					light: '#eff1f5', // Base (Latte variant)
-					lightgray: '#e6e9ef', // Surface0
-					gray: '#9ca0b0', // Subtext0
-					darkgray: '#4c4f69', // Text
-					dark: '#4c4f69', // Code text
-					secondary: '#1e66f5', // Links, title (Blue Latte)
-					tertiary: '#7287fd', // Visited nodes (Lavender Latte)
-					highlight: 'rgba(180, 190, 254, 0.15)', // Lavender translucent
-					textHighlight: '#f9e2af88', // Yellow highlight
+					light: '#f2e5bc', // Gruvbox Material Light Soft - background
+					lightgray: '#ebdbb2', // Surface
+					gray: '#a89984', // Gray text
+					darkgray: '#654735', // Main text (brown)
+					dark: '#3c3836', // Dark brown for emphasis
+					secondary: '#427b58', // Green for links
+					tertiary: '#45707a', // Blue-teal for visited/accents
+					highlight: 'rgba(124, 111, 100, 0.15)', // Warm brown translucent
+					textHighlight: '#d8a65788', // Warm yellow highlight
 				},
 				darkMode: {
-					light: '#1e1e2e', // Base
-					lightgray: '#313244', // Surface0 (code background)
-					gray: '#a6adc8', // Subtext0
-					darkgray: '#cdd6f4', // Text
-					dark: '#cdd6f4', // Code text
-					secondary: '#89b4fa', // Links, title (Blue)
-					tertiary: '#b4befe', // Visited nodes (Lavender)
-					highlight: 'rgba(137, 180, 250, 0.15)', // Blue translucent
-					textHighlight: '#f9e2af88', // Yellow highlight
+					light: '#32302f', // Gruvbox Material Dark Soft - background
+					lightgray: '#3c3836', // Surface (code background)
+					gray: '#7c6f64', // Subdued text
+					darkgray: '#d4be98', // Main text (warm beige)
+					dark: '#ddc7a1', // Emphasized text
+					secondary: '#a9b665', // Green for links
+					tertiary: '#7daea3', // Aqua for visited/accents
+					highlight: 'rgba(169, 182, 101, 0.15)', // Green translucent
+					textHighlight: '#d8a65788', // Warm yellow highlight
 				},
 			},
 		},
