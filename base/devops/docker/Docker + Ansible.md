@@ -4312,13 +4312,123 @@ vagrant@server1:~$ docker exec -it redis.1.zb0rej6vu7pkt60xvum8wn5i3 sh
 
 Для работы с Docker Swarm, нам нужно иметь уже готовые образы. Собрать образ, как в композе `build`, у нас не получится, так как мы не знаем, где запустится таска. Самый надёжный вариант в таком случае - поднять собственный registry, откуда будут тянутся образы собранного приложения.  
 
+Statefull cервисы - это сервисы, которые хранят своё состояние, подтягивая данные с диска
 
+Варианты реализации:
 
+1. Shared Mount - с помощью кастомных драйверов или через локальный драйвер подключаем определённое хранилище, на которое должны будут смотреть контейнеры и стягивать оттуда данные
+2. Constraint - задаём ограничение на поднятие определённого сервиса на определённых нодах (postgresql только на ноде server1, на которой хранятся данные постгреса)
 
+Constraints мы можем задавать через лейблы на ноду или через роль ноды
 
+![](../../_png/Pasted%20image%2020260108205043.png)
 
+#### Создание registry на ноде
 
+Сейчас создадим docker registry на одной выделенной ноде, с которой будем тянуть наши кастомные образы
 
+Сначала добавим лейбл на данную ноду, чтобы подцепить запускаемый сервис под эту ноду
+
+```bash
+vagrant@server1:~$ docker node update server1 --label-add registry=true
+
+server1
+```
+
+Далее нужно проинспектировать сервис и найти, что наш лейбл установился
+
+```bash
+vagrant@server1:~$ docker node inspect server1
+[
+    {
+        "ID": "vf8zoum7p4oczrx0d32dcvf1i",
+        "Version": {
+            "Index": 285
+        },
+        "CreatedAt": "2026-01-08T08:41:34.14463565Z",
+        "UpdatedAt": "2026-01-08T17:44:46.512081485Z",
+        "Spec": {
+            "Labels": {
+                "registry": "true"
+            },
+            "Role": "manager",
+            "Availability": "active"
+        },
+```
+
+Далее нам нужно поднять сам registry. В команде `service create` нет параметра `--volume`, поэтому нужно будет подробно указывать `--mount` и указать полностью путь до него. 
+
+```bash
+vagrant@server1:~$ mkdir registry
+
+vagrant@server1:~$ docker service create --name registry --publish 5000:5000 --constraint node.labels.registry==true --mount type=bind,source=/home/vagrant/registry,destination=/var/lib/registry -e REGISTRY_HTTP_ADDR=0.0.0.0:5000 registry:latest
+
+udiqsdthzpr8wee31481pvms1
+overall progress: 1 out of 1 tasks
+1/1: running   [==================================================>]
+verify: Service udiqsdthzpr8wee31481pvms1 converged
+```
+
+>[!warning] Если сервис не удалось поднять, то нужно дёрнуть команду `docker service rm <service_name>`, потому что в другом случае Swarm будет тянуть информацию о деплое сервиса по старым данным
+
+Проверяем поднятый registry
+
+```bash
+vagrant@server1:~$ docker service ls
+
+ID             NAME       MODE         REPLICAS   IMAGE             PORTS
+v2qr1wd33lqi   redis      replicated   1/1        redis:latest
+udiqsdthzpr8   registry   replicated   1/1        registry:latest   *:5000->5000/tcp
+```
+
+#### Сборка и публикация в registry
+
+Далее переходим на соседнюю воркер-ноду, в которой тянем кодовую базу, собираем образ и пушим в локальный registry
+
+```bash
+vagrant@server3:~$ git clone https://github.com/AlariCode/docker-demo.git
+
+vagrant@server3:~/docker-demo$ git checkout block-7
+
+vagrant@server3:~/docker-demo$ docker build -t localhost:5000/api:latest -f apps/api/Dockerfile .
+
+vagrant@server3:~/docker-demo$ docker push localhost:5000/api
+
+Using default tag: latest
+The push refers to repository [localhost:5000/api]
+da36886f26c8: Pushed
+fb0aa897862c: Pushed
+44d73c408d59: Pushed
+683339ce8d6b: Pushed
+686172e40c38: Pushed
+7547e952c0e5: Pushed
+51171dc7e41f: Pushed
+c41833b44d91: Pushed
+4cf6a83c0e2a: Pushed
+latest: digest: sha256:7a0b9df2f995c393fcd499cdaffce2b360ddac44dd9fa299c2a569247240acf0 size: 856
+```
+
+#### Пуллинг образа
+
+А теперь проверяем, что пулл на соседнем сервере работает
+
+```bash
+vagrant@server5:~$ docker pull localhost:5000/api:latest
+
+latest: Pulling from api
+51171dc7e41f: Pull complete
+c41833b44d91: Pull complete
+683339ce8d6b: Pull complete
+4cf6a83c0e2a: Pull complete
+686172e40c38: Pull complete
+7547e952c0e5: Pull complete
+da36886f26c8: Pull complete
+fb0aa897862c: Pull complete
+44d73c408d59: Download complete
+Digest: sha256:7a0b9df2f995c393fcd499cdaffce2b360ddac44dd9fa299c2a569247240acf0
+Status: Downloaded newer image for localhost:5000/api:latest
+localhost:5000/api:latest
+```
 
 ### Overlay network
 
