@@ -4432,19 +4432,318 @@ localhost:5000/api:latest
 
 ### Overlay network
 
+Сеть overlay - это исключительная сеть, которая нужна, чтобы обеспечивать общение между контейнерами разных нод друг с другом. 
 
+В обычном случае, нам бы понадобилось, чтобы наш контейнер мог общаться с нодой, а потом нода с другой нодой, а потом вторая нода могла направлять траффик внутрь контейнера. Но в случае с overlay, мы можем поднять виртуальную сеть, которая позволит общаться нашим контейнерам внутри друг с другом.  
 
+- `overlay network` - позволяет поднять overlay сеть
+- флаг `--attachable` позволяет общаться с обычными контейнерами в ноде, которые не связаны со свармом (не стоит использовать)
+- `--opt encrypted` позволяет зашифровать сеть, но снизит скорость работы сети. Однако можно поднять эту сеть только для общения определённых сервисов. 
 
+![](../../_png/Pasted%20image%2020260108221944.png)
+
+Но при этом существует дефолтная ingress-сеть, которая позволяет выводить порты наружу. Некоторый балансировщик и Gateway всего траффика. 
+
+Созданный ранее registry выводится через ingress (0.0.0.0)
+
+![](../../_png/Pasted%20image%2020260108222606.png)
+
+#### Собираем ip-утилиту
+
+Собрали утилиту и запушили
+
+```bash
+vagrant@server3:~$ git clone https://github.com/AlariCode/docker-demo-3.git
+
+vagrant@server3:~/docker-demo-3$ docker build -t localhost:5000/ip:latest .
+
+[+] Building 8.2s (9/9) FINISHED  docker:default
+
+vagrant@server3:~/docker-demo-3$ docker push localhost:5000/ip:latest
+
+The push refers to repository [localhost:5000/ip]
+36444af81f88: Pushed
+```
+
+#### Поднимаем IP сервис
+
+Собираем сервис сразу в трёх репликах. Он поднимется сейчас сразу на трёх разных нодах.
+
+```bash
+vagrant@server1:~$ docker service create --publish 3000:3000 --name ip --replicas=3 localhost:5000/ip:latest
+og0eym33zy6gv6cq4baawkkoy
+overall progress: 3 out of 3 tasks
+1/3: running   [==================================================>]
+2/3: running   [==================================================>]
+3/3: running   [==================================================>]
+verify: Service og0eym33zy6gv6cq4baawkkoy converged
+
+vagrant@server1:~$ docker service ls
+ID             NAME       MODE         REPLICAS   IMAGE                      PORTS
+og0eym33zy6g   ip         replicated   3/3        localhost:5000/ip:latest   *:3000->3000/tcp
+v2qr1wd33lqi   redis      replicated   1/1        redis:latest
+udiqsdthzpr8   registry   replicated   1/1        registry:latest            *:5000->5000/tcp
+
+vagrant@server1:~$ docker service ps ip
+ID             NAME      IMAGE                      NODE      DESIRED STATE   CURRENT STATE            ERROR     PORTS
+9qic5ihdxhxs   ip.1      localhost:5000/ip:latest   server5   Running         Running 25 seconds ago
+mepaei1js72s   ip.2      localhost:5000/ip:latest   server2   Running         Running 22 seconds ago
+wo2wa6ujg6k7   ip.3      localhost:5000/ip:latest   server3   Running         Running 25 seconds ago
+```
+
+#### Проверка извне
+
+Далее на любом из серверов прокидываем наружу порт 3000 (тут server1)
+
+![](../../_png/Pasted%20image%2020260108223652.png)
+
+Далее с хостовой машины отправляем curl запросы на получение ip внутри контейнера. И каждый раз ingress балансирует нагрузку перебирая по очереди каждую ноду, на которой расположен нужный сервис aka Round Robin algorithm.
+
+```bash
+curl localhost:3000
+{"eth0":["10.0.0.12"],"eth1":["172.18.0.3"]}%
+
+curl localhost:3000
+{"eth0":["10.0.0.11"],"eth1":["172.18.0.3"]}%
+
+curl localhost:3000
+{"eth0":["10.0.0.13"],"eth1":["172.18.0.3"]}%
+
+curl localhost:3000
+{"eth0":["10.0.0.12"],"eth1":["172.18.0.3"]}%
+
+curl localhost:3000
+{"eth0":["10.0.0.11"],"eth1":["172.18.0.3"]}%
+
+curl localhost:3000
+{"eth0":["10.0.0.13"],"eth1":["172.18.0.3"]}%
+```
 
 ### Docker stack
 
+В Docker Swarm есть несколько способов описания сервисов, которые нам нужно выложить. Первый из них - Docker Stack. 
 
+Этот подход выглядит по синтаксису ровно так же, как и Docker Compose.
 
+Наш оригинальный композ:
+
+`docker-compose.yml`
+```YML
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./apps/app/Dockerfile
+    restart: always
+    container_name: app
+    ports:
+    - 3001:80
+    networks:
+    - myNetwork
+  converter:
+    build:
+      context: .
+      dockerfile: ./apps/converter/Dockerfile
+    restart: always
+    container_name: converter
+    volumes:
+    - .env:/opt/app/.env
+    depends_on:
+    - rmq
+    networks:
+    - myNetwork
+  api:
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    restart: always
+    container_name: api
+    volumes:
+    - .env:/opt/app/.env
+    ports:
+    - 3002:3000
+    networks:
+    - myNetwork
+    depends_on:
+    - rmq
+  rmq:
+    image: rabbitmq:3-management
+    restart: always
+    networks:
+    - myNetwork
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=admin
+
+networks:
+  myNetwork:
+    driver: bridge
+```
+
+#### Собираем Stack compose
+
+Сначала создаём из `.env` наш секрет, так как `volume` отсутствует в композе. Создаём этот секрет на сервере, на котором находятся энвы. Это обязательно должна быть менеджерская нода
+
+```bash
+vagrant@server3:~/docker-demo$ cat .env
+AMQP_EXCHANGE=xchg_integrations
+AMQP_USER=admin
+AMQP_PASSWORD=admin
+AMQP_HOSTNAME=rmq
+AMQP_QUEUE=q_imageProcessor
+
+vagrant@server3:~/docker-demo$ docker secret create api.env .env
+72scitjrv9809u4nlvrgtft5g
+
+vagrant@server3:~/docker-demo$ docker secret ls
+ID                          NAME      DRIVER    CREATED          UPDATED
+72scitjrv9809u4nlvrgtft5g   api.env             18 seconds ago   18 seconds ago
+```
+
+Пересобранный Stack:
+
+1. Указываем `secrets`, так как `volumes` отсутствует. `target` должен заменять файл `.env` поэтому нужно будет указать выходной файл для приложения
+2. имя контейнера убираем, так как оно будет присвоено автоматически
+3. добавляем `secrets` блок
+
+`docker-stack.yml`
+```YML
+services:  
+  api:  
+    image: localhost:5000/api:latest  
+    restart: always  
+    secrets:  
+      - source: api.env  
+        target: /opt/app/.env  
+    ports:  
+      - "3002:3000"  
+    networks:  
+      - myNetwork  
+    depends_on:  
+      - rmq  
+  rmq:  
+    image: rabbitmq:3-management  
+    restart: always  
+    networks:  
+      - myNetwork  
+    environment:  
+      - RABBITMQ_DEFAULT_USER=admin  
+      - RABBITMQ_DEFAULT_PASS=admin  
+  
+networks:  
+  myNetwork:  
+    driver: overlay  
+  
+secrets:  
+  api.env:  
+    external: true
+```
+
+Остаётся только запустить сервисс указанием пути до стека
+
+```bash
+vagrant@server3:~$ docker stack deploy -c docker-stack.yml my_app
+
+Creating network my_app_myNetwork
+Creating service my_app_rmq
+Creating service my_app_api
+```
+
+И у нас поднимутся три наших сервиса из описания стека
+
+```bash
+vagrant@server3:~$ docker service ls
+
+ID             NAME         MODE         REPLICAS   IMAGE                       PORTS
+ubejo9n7pel1   my_app_api   replicated   1/1        localhost:5000/api:latest   *:3002->3000/tcp
+tnu22kzmt0bf   my_app_rmq   replicated   1/1        rabbitmq:3-management
+udiqsdthzpr8   registry     replicated   1/1        registry:latest             *:5000->5000/tcp
+```
+
+Таким образом мы можем посмотреть на сами запущенные сервисы
+
+```bash
+vagrant@server3:~$ docker stack ls
+NAME      SERVICES
+my_app    2
+
+vagrant@server3:~$ docker stack services my_app
+ID             NAME         MODE         REPLICAS   IMAGE                       PORTS
+ubejo9n7pel1   my_app_api   replicated   1/1        localhost:5000/api:latest   *:3002->3000/tcp
+tnu22kzmt0bf   my_app_rmq   replicated   1/1        rabbitmq:3-management
+
+```
+
+А через `ps` мы можем посмотреть на таски, которые запустили наши сервисы
+
+```bash
+vagrant@server3:~$ docker stack ps my_app
+
+ID             NAME           IMAGE                       NODE      DESIRED STATE   CURRENT STATE           ERROR     PORTS
+k1q5ofd5q9vn   my_app_api.1   localhost:5000/api:latest   server4   Running         Running 6 minutes ago
+tdy8kh9rk2sg   my_app_rmq.1   rabbitmq:3-management       server4   Running         Running 5 minutes ago
+```
+
+Ну и на логи можно так же взглянуть через `service` модуль
+
+```bash
+vagrant@server3:~$ docker service logs my_app_api
+
+my_app_api.1.k1q5ofd5q9vn@server4    | [Nest] 1   - 01/08/2026, 7:52:00 PM   [NestFactory] Starting Nest application...
+my_app_api.1.k1q5ofd5q9vn@server4    | [Nest] 1   - 01/08/2026, 7:52:00 PM   [InstanceLoader] DiscoveryModule dependencies initialized +14ms
+my_app_api.1.k1q5ofd5q9vn@server4    | [Nest] 1   - 01/08/2026, 7:52:27 PM   [RMQModule] Successfully connected to RMQ +5098ms
+```
 
 ### Healthcheck
 
+С помощью Healthcheck механизма, мы можем проверять работспособность сервиса и вовремя давать среагировать ноде, если сервис упал. 
 
+![](../../_png/Pasted%20image%2020260108231740.png)
 
+>[!warning] Обязательно нужно смотреть на ресурсоёмкость такой проверки, потому что часто вызывать hc, который на минуту будет съедать все ресурсы - это невыгодно! 
+> Все hc зависят от конкретной реализации внутри приложения, поэтому нужно проверять, сколько ресурсов такой запрос может потреблять. 
+
+Добавим в сервис для проверки ip контейнера строку healthcheck:
+
+```Dockerfile
+FROM node:14-alpine
+
+RUN apk add curl
+
+WORKDIR /opt/app
+
+ADD index.js .
+
+HEALTHCHECK --interval=5s --timeout=5s --start-period=5s --retries=3 \
+	CMD curl -f http://localhost:3000 || exit 1
+
+CMD ["node", "./index.js"]
+```
+
+Далее собираем, пушим и выкладываем в сварм
+
+```bash
+docker build -t localhost:5000/ip:latest .
+docker push localhost:5000/ip:latest
+docker service create --name ip localhost:5000/ip:latest
+```
+
+Далее найдём на какой ноде располагается этот сервис
+
+```bash
+vagrant@server3:~$ docker service ps ip
+
+ID             NAME      IMAGE                      NODE      DESIRED STATE   CURRENT STATE            ERROR     PORTS
+y1uk1ymbp6md   ip.1      localhost:5000/ip:latest   server5   Running         Running 52 seconds ago
+```
+
+И теперь рядом со статусом появляется подпись `(healthy)`, о которой знаем мы и Swarm. Последний, в свою очередь, следит за этим статусом и при unhealthy перезапустит контейнер. 
+
+```bash
+vagrant@server5:~$ docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS                   PORTS     NAMES
+41f8e5af5a3f   localhost:5000/ip:latest   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes (healthy)             ip.1.y1uk1ymbp6mdqslup2n1rleoq
+```
 
 ### Отказоустойчивость
 
