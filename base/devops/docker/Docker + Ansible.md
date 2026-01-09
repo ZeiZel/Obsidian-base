@@ -5165,24 +5165,281 @@ $ ansible-galaxy role init roles/name
 
 ### Подготовка сервера
 
+В Docker Swarm у нас есть два способа добавления сервисов: 
 
+- service
+	- плюсы
+		- есть возможность использовать rolling update
+		- изменить секреты получится просто перезапуском одного сервиса
+		- автоматически проверяет изменения latest
+	- минусы
+		- тут не получится описать зависимости сервисов друг от друга
+- stack
+	- плюсы
+		- все зависимости описываются в одном месте - это удобно
+		- все сервисы описаны в одном yml
+	- минусы
+		- если нужно изменить секреты, то придётся уронить весь стек
+		- image с тегом latest не получится обновить и придётся ронять весь stack - [этому багу уже более 7 лет](https://github.com/moby/moby/issues/31357)
+
+Из чего можно выделить: 
+- stack - удобно, но для небольших проектов
+- service - лучший вариант для больших проектов, чего не сможет дать stack
 
 ![](../../_png/Pasted%20image%2020251225182057.png)
 
+Ansible поддерживает и docker swarm нотацию, и docker service. 
+
+#### Обновление инвентаря
+
+Но тут перед нами встаёт проблема: сейчас инвентарь описан как `[cluster]`, а запускать сервис нужно только с одной ноды, чтобы не поднимать его несколько раз на каждом. 
+
+В связи с этим, обновим инвентарь и определим deploy-ноду (обычно, Leader), выделим менеджер и воркер ноды
+
+`inventory / cluster`
+```bash
+[deploy]
+server1 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2223
+
+[managers]
+server2 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2224
+server3 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2225
+
+[workers]
+server4 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2226
+server5 ansible_host=127.0.0.1 ansible_user=vagrant ansible_port=2227
+```
+
+#### Обновление конфигурации
+
+Разделим конфигурации настройки для трёх разных типов наших устройств
+
+`all.yml`
+```YML
+---  
+- name: Deploy server  
+  hosts: deploy  
+  become: true  
+  gather_facts: true  
+  roles:  
+    - role: preconfig  
+#    - role: deploy  
+#    - role: swarm_init  
+- name: Manager  
+  hosts: managers  
+  become: true  
+  gather_facts: true  
+  roles:  
+    - role: preconfig  
+#    - role: swarm_join  
+- name: Worker  
+  hosts: workers  
+  become: true  
+  gather_facts: true  
+  roles:  
+    - role: preconfig  
+#    - role: swarm_join
+```
+
+Далее упростим конфигурацию, установив Docker поставляемым скриптом от его разработчиков и добавим установку docker через pip
+
+`roles / preconfig / tasks / main.yml`
+```YML
+---  
+- name: Pre-install cleanup  
+  block:  
+    - name: Remove conflicting Docker packages  
+      apt:  
+        purge: true  
+        state: absent  
+        name:  
+          - docker.io  
+          - docker-compose  
+          - docker-compose-v2  
+          - docker-doc  
+          - podman-docker  
+          - containerd  
+          - runc  
+      failed_when: false  
+  
+- name: Install prerequisites  
+  apt:  
+    update_cache: true  
+    cache_valid_time: 86400  
+    name:  
+      - ca-certificates  
+      - curl  
+      - gnupg  
+      - python3-pip  
+  
+- name: Install Docker using official convenience script  
+  shell: |  
+    set -e  
+    curl -fsSL https://get.docker.com | sh  
+  args:  
+    executable: /bin/bash  
+  register: docker_install  
+  changed_when: "'Docker installed' in docker_install.stdout or 'docker is already the newest version' not in docker_install.stdout"  
+  
+- name: Ensure Docker service is running  
+  service:  
+    name: docker  
+    state: started  
+    enabled: true  
+  
+- name: Setting additional python packages  
+  block:  
+    - name: Installing pip packages  
+      pip:  
+        name: docker  
+        break_system_packages: true  
+  
+- name: Post-install configuration  
+  block:  
+    - name: Ensure docker group exists  
+      ansible.builtin.group:  
+        name: docker  
+        state: present  
+  
+    - name: Add user to docker group  
+      ansible.builtin.user:  
+        name: "{{ ansible_user | default(ansible_env.SUDO_USER | default('ubuntu')) }}"  
+        groups: docker  
+        append: true  
+  
+    - name: Reboot if needed  
+      ansible.builtin.reboot:  
+        msg: Rebooting after Docker installation  
+      when: docker_reboot | default(false) | bool
+```
+
+Запускаем установку роли
+
+```bash
+ansible-playbook -i inventory all.yml -K
+```
+
 ### Теги
+
+Теги - это инструмент, который позволяет нам разметить те блоки тасок, которые нам нужно выполнять для определённой группы.
+
+
+
+
+
+
+
+
+
+
+
 
 ### Циклы
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Lookup
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Фильтры
 
+
+
+
+
+
+
+
+
+
+
 ### Выкладка
 
+
+
+
+
+
+
+
+
+
+
+
+
 ### Vault
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Шаблоны
+
+
+
+
+
+
+
+
+
+
+
+
 ### Сборка контейнеров
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Финал выкладки
+
+
+
+
+
+
+
+
 
 
 
