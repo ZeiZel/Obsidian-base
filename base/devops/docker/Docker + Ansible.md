@@ -4747,7 +4747,92 @@ CONTAINER ID   IMAGE                      COMMAND                  CREATED      
 
 ### Отказоустойчивость
 
+Поднимем 10 сервисов ip. И поднимем ip сервис с `--mode global`, который поднимет по одному экземпляру сервиса на каждой ноде.
 
+```bash
+server1:~$ docker service scale ip=10
+
+ip scaled to 10
+overall progress: 10 out of 10 tasks
+1/10: running   [==================================================>]
+2/10: running   [==================================================>]
+3/10: running   [==================================================>]
+4/10: running   [==================================================>]
+5/10: running   [==================================================>]
+6/10: running   [==================================================>]
+7/10: running   [==================================================>]
+8/10: running   [==================================================>]
+9/10: running   [==================================================>]
+10/10: running   [==================================================>]
+verify: Service ip converged
+```
+
+```bash
+server1:~$ docker service create --name ip-global --mode global localhost:5000/ip:latest
+
+wli8enepyx4sebz7n6hxhye5e
+overall progress: 5 out of 5 tasks
+dewtmbfux019: running   [==================================================>]
+cac83v7bbd2s: running   [==================================================>]
+vf8zoum7p4oc: running   [==================================================>]
+nk2txuihfmoq: running   [==================================================>]
+vwo3k8p811iy: running   [==================================================>]
+verify: Service wli8enepyx4sebz7n6hxhye5e converged
+```
+
+```bash
+server1:~$ docker service ls
+
+ID             NAME         MODE         REPLICAS   IMAGE                       PORTS
+l39dqp87gk4z   ip           replicated   10/10      localhost:5000/ip:latest
+wli8enepyx4s   ip-global    global       5/5        localhost:5000/ip:latest
+ubejo9n7pel1   my_app_api   replicated   1/1        localhost:5000/api:latest   *:3002->3000/tcp
+tnu22kzmt0bf   my_app_rmq   replicated   1/1        rabbitmq:3-management
+udiqsdthzpr8   registry     replicated   1/1        registry:latest             *:5000->5000/tcp
+```
+
+Далее после выполнения задачи на дрейнирование ноды, с неё уйдут все контейнеры и создадутся задачи на перенос сервисов
+
+```bash
+docker node update server4 --availability drain
+```
+
+И в списке сервисов можно увидеть, что сервисов `ip-global` стало 4 (только 4 ноды используются) и перенеслись 2 сервиса `ip` на свободные ноды
+
+```bash
+vagrant@server1:~$ docker service ls
+
+ID             NAME         MODE         REPLICAS   IMAGE                       PORTS
+l39dqp87gk4z   ip           replicated   10/10      localhost:5000/ip:latest
+wli8enepyx4s   ip-global    global       4/4        localhost:5000/ip:latest
+ubejo9n7pel1   my_app_api   replicated   1/1        localhost:5000/api:latest   *:3002->3000/tcp
+tnu22kzmt0bf   my_app_rmq   replicated   1/1        rabbitmq:3-management
+udiqsdthzpr8   registry     replicated   1/1        registry:latest             *:5000->5000/tcp
+```
+
+```bash
+vagrant@server1:~$ docker service ps ip
+
+ID             NAME        IMAGE                      NODE      DESIRED STATE   CURRENT STATE             ERROR     PORTS
+y1uk1ymbp6md   ip.1        localhost:5000/ip:latest   server5   Running         Running 13 hours ago
+zexvspir1lqm   ip.2        localhost:5000/ip:latest   server3   Running         Running 9 minutes ago
+n6t931uj2rpa   ip.3        localhost:5000/ip:latest   server3   Running         Running 9 minutes ago
+3wsots893idb   ip.4        localhost:5000/ip:latest   server2   Running         Running 9 minutes ago
+nlh96g787ak7   ip.5        localhost:5000/ip:latest   server1   Running         Running 9 minutes ago
+mxwl3u60w8lj   ip.6        localhost:5000/ip:latest   server5   Running         Running 6 seconds ago
+xq5ysoxh8lwb    \_ ip.6    localhost:5000/ip:latest   server4   Shutdown        Shutdown 11 seconds ago
+fpl565cv6jm3   ip.7        localhost:5000/ip:latest   server5   Running         Running 9 minutes ago
+hdi1xpsdr8bu   ip.8        localhost:5000/ip:latest   server1   Running         Running 9 minutes ago
+qspbwcr3uvkw   ip.9        localhost:5000/ip:latest   server2   Running         Running 9 minutes ago
+js80s5hpkqbb   ip.10       localhost:5000/ip:latest   server3   Running         Running 6 seconds ago
+ewdvpoa3l9r8    \_ ip.10   localhost:5000/ip:latest   server4   Shutdown        Shutdown 11 seconds ago
+```
+
+После чего можно спокойно вывести сервер из строя и удалить его из сварама
+
+```bash
+docker node rm server4
+```
 
 
 
