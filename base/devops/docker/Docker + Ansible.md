@@ -5323,16 +5323,94 @@ ansible-playbook -i inventory all.yml -K
 
 Теги - это инструмент, который позволяет нам разметить те блоки тасок, которые нам нужно выполнять для определённой группы.
 
+Это крайне удобный механизм, так как он позволяет нам модифицировать поведение ролей в зависимости от переданных в неё данных
 
+Дополним корневой YML и добавим поля:
+- `tags` - теги, по которым можно будет выбрать исполняемые задачи
+- `test` - переменная, которая попадёт в роль при выполнении
 
+`all.yml`
+```YML
+- name: Deploy server  
+  hosts: deploy  
+  become: true  
+  gather_facts: true  
+  roles:  
+    - role: preconfig  
+      tags: preconfig  
+    - role: deploy  
+      tags: deploy  
+      test: 0
+```
 
+Добавим роль деплоя, которая должна вывести нам переданную переменную `test`
 
+`deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  command: "echo {{ test }}"  
+  register: res  
+- debug:  
+    var: res
+```
 
+Теперь с помощью флага `--tags` можно определить роли, которые мы хотим сейчас запустить 
 
+И глянем на структуру вывода. Тут есть поле stdout, по которому можно подцепиться и модифицировать дальнейшее поведение задач
 
+```bash
+•% ➜  ansible-playbook -i inventory all.yml -K --tags "deploy"
 
+BECOME password:
 
+PLAY [Deploy server] *****************************************************************************************************************************************************
 
+TASK [Gathering Facts] ***************************************************************************************************************************************************
+[WARNING]: Host 'server1' is using the discovered Python interpreter at '/usr/bin/python3.12', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [server1]
+
+TASK [deploy : Deploy] ***************************************************************************************************************************************************
+changed: [server1]
+
+TASK [deploy : debug] ****************************************************************************************************************************************************
+ok: [server1] => {
+    "res": {
+        "changed": true,
+        "cmd": [
+            "echo",
+            "0"
+        ],
+        "delta": "0:00:00.004076",
+        "end": "2026-01-09 13:12:39.177753",
+        "failed": false,
+        "msg": "",
+        "rc": 0,
+        "start": "2026-01-09 13:12:39.173677",
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "0",
+        "stdout_lines": [
+            "0"
+        ]
+    }
+}
+```
+
+Теперь переопределим результат таски. Она сейчас не будет считаться изменённой, так как в её выводе есть 0. Мы переопределили её поведение. 
+
+`deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  command: "echo {{ test }}"  
+  register: res  
+  changed_when: "'0' not in res.stdout"
+```
+
+>[!info] Таким образом у нас появляется механизмы:
+> - которые позволяют нам передавать переменные для отдельных ролей
+> - которые позволяют запускать только определённые группы ролей по тегам
 
 ### Циклы
 
