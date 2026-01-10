@@ -122,7 +122,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 385.51103591918945
+    "width": 385.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -225,6 +226,16 @@
             "id": "e568235c50ed9025",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "2f525826da796790",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -232,7 +243,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",

@@ -5414,18 +5414,377 @@ ok: [server1] => {
 
 ### Циклы
 
+Циклы в Ansible позволяют выполнить одну и ту же задачу с разными значениями по переданному списку элементов. 
 
+#### Выполнение цикла
 
+Записываем нужные нам значения для итерации через ключ `loop`
 
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: '{{ item }}'  
+  loop:  
+    - a  
+    - b
+```
 
+>[!warning] В старых версиях ansible-скриптов можно заметить запись цикла через `with_*`, чего нужно избегать и переходить полностью на `loop`
 
+И после запуска данной роли, можно заметить, что у нас запускается одна и та же задача несколько раз, но повторяется по циклу с разными значениями
 
+```bash
+$ ansible-playbook -i inventory all.yml --tags "deploy"
 
+PLAY [Deploy server] *****************************************************************************************************************************************************
 
+TASK [Gathering Facts] ***************************************************************************************************************************************************
+[WARNING]: Host 'server1' is using the discovered Python interpreter at '/usr/bin/python3.12', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [server1]
 
+TASK [deploy : Deploy] ***************************************************************************************************************************************************
+ok: [server1] => (item=a) => {
+    "msg": "a"
+}
+ok: [server1] => (item=b) => {
+    "msg": "b"
+}
+```
 
+#### Перебор массива объектов
 
+И перебор объектов будет выглядеть точно так же
 
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: '{{ item.name }} is {{ item.role }}'  
+  loop:  
+    - name: Alex  
+      role: admin  
+    - name: Carina  
+      role: manager
+```
+
+```bash
+$ ansible-playbook -i inventory all.yml --tags "deploy"
+
+PLAY [Deploy server] *****************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************************************
+[WARNING]: Host 'server1' is using the discovered Python interpreter at '/usr/bin/python3.12', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [server1]
+
+TASK [deploy : Deploy] ***************************************************************************************************************************************************
+ok: [server1] => (item={'name': 'Alex', 'role': 'admin'}) => {
+    "msg": "Alex is admin"
+}
+ok: [server1] => (item={'name': 'Carina', 'role': 'manager'}) => {
+    "msg": "Carina is manager"
+}
+```
+
+#### Преобразование в dictionary
+
+Так же мы можем преобразовать список значений в виде ключей из переменных окружения (задачи, роли и других)
+
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  vars:  
+    data:  
+      admin: Alex  
+      manager: Carina  
+  debug:  
+    msg: '{{ item.key }} is {{ item.value }}'  
+  loop: "{{ data | dict2items }}"
+```
+
+```bash
+•% ✘2 ➜  ansible-playbook -i inventory all.yml --tags "deploy"
+
+PLAY [Deploy server] *****************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************************************
+[WARNING]: Host 'server1' is using the discovered Python interpreter at '/usr/bin/python3.12', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.20/reference_appendices/interpreter_discovery.html for more information.
+ok: [server1]
+
+TASK [deploy : Deploy] ***************************************************************************************************************************************************
+ok: [server1] => (item={'key': 'admin', 'value': 'Alex'}) => {
+    "msg": "admin is Alex"
+}
+ok: [server1] => (item={'key': 'manager', 'value': 'Carina'}) => {
+    "msg": "manager is Carina"
+}
+```
+
+#### Обновление выхода
+
+В операции с циклом будем выполнять команду и сохраним результат в переменную `res`
+
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  command: echo "{{ item }}"  
+  loop:  
+    - a  
+    - b  
+  register: res  
+  
+- name: DEBUG  
+  debug:  
+    var: res
+```
+
+Теперь результатом операции в `res` будет находиться не `result`, а массив результатов наших операций `results`
+
+```bash
+•% ➜  ansible-playbook -i inventory all.yml --tags "deploy"
+
+ok: [server1] => {
+    "res": {
+        "changed": true,
+        "msg": "All items completed",
+        "results": [
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": [
+                    "echo",
+                    "a"
+                ],
+                "delta": "0:00:00.006424",
+                "end": "2026-01-10 18:33:49.411015",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "echo \"a\"",
+                        "_uses_shell": false,
+                        "argv": null,
+                        "chdir": null,
+                        "cmd": null,
+                        "creates": null,
+                        "executable": null,
+                        "expand_argument_vars": true,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true
+                    }
+                },
+                "item": "a",
+                "msg": "",
+                "rc": 0,
+                "start": "2026-01-10 18:33:49.404591",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "a",
+                "stdout_lines": [
+                    "a"
+                ]
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": [
+                    "echo",
+                    "b"
+                ],
+                "delta": "0:00:00.001196",
+                "end": "2026-01-10 18:33:49.559114",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "echo \"b\"",
+                        "_uses_shell": false,
+                        "argv": null,
+                        "chdir": null,
+                        "cmd": null,
+                        "creates": null,
+                        "executable": null,
+                        "expand_argument_vars": true,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true
+                    }
+                },
+                "item": "b",
+                "msg": "",
+                "rc": 0,
+                "start": "2026-01-10 18:33:49.557918",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "b",
+                "stdout_lines": [
+                    "b"
+                ]
+            }
+        ],
+        "skipped": false
+    }
+}
+```
+
+#### Итерация по встроенным объектам
+
+Так же мы можем проходиться по встроенным в ansible глобальным объектам 
+
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: '{{ item }}'  
+  loop: "{{ groups['all'] }}"
+```
+
+```bash
+$ ansible-playbook -i inventory all.yml --tags "deploy"
+
+ok: [server1] => (item=server1) => {
+    "msg": "server1"
+}
+ok: [server1] => (item=server2) => {
+    "msg": "server2"
+}
+ok: [server1] => (item=server3) => {
+    "msg": "server3"
+}
+ok: [server1] => (item=server4) => {
+    "msg": "server4"
+}
+ok: [server1] => (item=server5) => {
+    "msg": "server5"
+}
+ok: [server1] => (item=127.0.0.1) => {
+    "msg": "127.0.0.1"
+}
+ok: [server1] => (item=home-server) => {
+    "msg": "home-server"
+}
+ok: [server1] => (item=external-server) => {
+    "msg": "external-server"
+}
+```
+
+#### Контроль итераций
+
+Мы можем изменять поведение loop-итерации: 
+
+- `label` изменит выводимый label в поле `(item=<label>)` и не будет выводить весь объект в качестве лейбла
+- `extended` откроет доступ к объекту `ansible_loop`
+- `index_var` предоставит возможность обращаться к индексу операции
+- `pause` накинет паузу между выполнением операций в цикле
+
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: '{{ my_index }}. {{ item.name }} and {{ ansible_loop.allitems }}'  
+  loop:  
+    - name: Oleg  
+      group: admin  
+      specs:  
+        age: 24  
+        role: common  
+    - name: Peter  
+    - name: Kate  
+  loop_control:  
+    extended: true # предоставляем доступ к ansible_loop
+    index_var: my_index # имя для индекса элемента
+    label: "{{ item.name }}" # новый лейбл
+    pause: 3 # пауза в 3 секунды
+```
+
+```bash
+$ ansible-playbook -i inventory all.yml --tags "deploy"
+
+ok: [server1] => (item=Oleg) => {
+    "msg": "0. Oleg and [{'name': 'Oleg', 'group': 'admin', 'specs': {'age': 24, 'role': 'common'}}, {'name': 'Peter'}, {'name': 'Kate'}]"
+}
+ok: [server1] => (item=Peter) => {
+    "msg": "1. Peter and [{'name': 'Oleg', 'group': 'admin', 'specs': {'age': 24, 'role': 'common'}}, {'name': 'Peter'}, {'name': 'Kate'}]"
+}
+ok: [server1] => (item=Kate) => {
+    "msg": "2. Kate and [{'name': 'Oleg', 'group': 'admin', 'specs': {'age': 24, 'role': 'common'}}, {'name': 'Peter'}, {'name': 'Kate'}]"
+}
+```
+
+#### Вложенные циклы
+
+С помощью `loop_var` мы можем переопределить дефолтное наменование текущего элемента итерации.
+Например, зададим `outer_item` и теперь нам нужно будет использовать это имя для обращения к элементу итерации
+
+А с помощью ключа `include_tasks`, мы можем подключить задачи из другого файла
+
+Таким образом, объединив эти два подхода, мы можем выполнить вложенный цикл и выполнить `inner.yml` в цикле
+
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  include_tasks: inner.yml  
+  loop:  
+    - name: Oleg  
+    - name: Peter  
+    - name: Kate  
+  loop_control:  
+    loop_var: outer_item
+```
+
+`roles / deploy / tasks / inner.yml`
+```YML
+---  
+- name: Inner  
+  debug:  
+    msg: 'inner {{ item }} - outer {{ outer_item }}'  
+  loop:  
+    - 1  
+    - 2  
+    - 3
+```
+
+```bash
+ok: [server1] => (item=1) => {
+    "msg": "inner 1 - outer {'name': 'Oleg'}"
+}
+ok: [server1] => (item=2) => {
+    "msg": "inner 2 - outer {'name': 'Oleg'}"
+}
+ok: [server1] => (item=3) => {
+    "msg": "inner 3 - outer {'name': 'Oleg'}"
+}
+
+TASK [deploy : Inner] ****************************************************************************************************************************************************
+ok: [server1] => (item=1) => {
+    "msg": "inner 1 - outer {'name': 'Peter'}"
+}
+ok: [server1] => (item=2) => {
+    "msg": "inner 2 - outer {'name': 'Peter'}"
+}
+ok: [server1] => (item=3) => {
+    "msg": "inner 3 - outer {'name': 'Peter'}"
+}
+
+TASK [deploy : Inner] ****************************************************************************************************************************************************
+ok: [server1] => (item=1) => {
+    "msg": "inner 1 - outer {'name': 'Kate'}"
+}
+ok: [server1] => (item=2) => {
+    "msg": "inner 2 - outer {'name': 'Kate'}"
+}
+ok: [server1] => (item=3) => {
+    "msg": "inner 3 - outer {'name': 'Kate'}"
+}
+```
 
 ### Lookup
 
