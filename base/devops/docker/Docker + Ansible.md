@@ -6040,7 +6040,7 @@ ok: [server1] => {
 
 #### combine
 
-
+Фильтр `combine` позволяет объединять словари. Можно использовать для слияния конфигураций или добавления новых ключей к существующему объекту.
 
 ```YML
 ---  
@@ -6050,8 +6050,6 @@ ok: [server1] => {
   debug:  
     msg: "{{ admin | combine({ 'c': 4 }) }}"
 ```
-
-
 
 ```bash
 ok: [server1] => {
@@ -6063,10 +6061,9 @@ ok: [server1] => {
 }
 ```
 
-
 #### Zip
 
-
+Фильтр `zip` объединяет два списка в список кортежей, где элементы связаны по индексу. Полезно для синхронного обхода нескольких списков.
 
 ```YML
 ---  
@@ -6076,8 +6073,6 @@ ok: [server1] => {
   debug:  
     msg: "{{ admin | zip(['a','b','c']) }}"
 ```
-
-
 
 ```bash
 ok: [server1] => {
@@ -6100,7 +6095,7 @@ ok: [server1] => {
 
 #### map
 
-
+Фильтр `map` применяет функцию или фильтр к каждому элементу последовательности. В примере `extract` извлекает элементы по индексам.
 
 ```YML
 ---  
@@ -6122,7 +6117,7 @@ ok: [server1] => {
 
 #### join
 
-
+Фильтр `join` объединяет элементы списка в строку с указанным разделителем. Удобно для формирования командных строк или путей.
 
 ```YML
 ---  
@@ -6130,12 +6125,12 @@ ok: [server1] => {
   vars:  
     admin: [ '0', '1' ]  
   debug:  
-    msg: "{{ admin | join(',') }}" # 0, 1
+    msg: "{{ admin | join(',') }}" # 0,1
 ```
 
 #### json_query
 
-Этот фильтр позволяет нам запросить JSON данные по какой-нибудь апишке или стянуть JSON данные из файла
+Этот фильтр позволяет нам запросить JSON данные по какой-нибудь апишке или стянуть JSON данные из файла, используя синтаксис JMESPath для сложных запросов к структурам данных.
 
 ```YML
 ---  
@@ -6233,6 +6228,158 @@ ok: [server1] => {
 ok: [server1] => {
     "msg": "foundry.zeizel.ru"
 }
+```
+
+#### regex_search и regex_replace
+
+`regex_search` ищет первое совпадение по регулярному выражению и возвращает найденную строку или группу
+
+`regex_replace` заменяет все совпадения по регулярному выражению на указанную строку. Поддерживает группы захвата `\1`, `\2` для переиспользования частей совпадения
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    url: "test.staging.domain.com"  
+  debug:  
+    msg: "{{ url | regex_replace('(.+\\.)(.+)$', '\\1') }}" # test.
+```
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    text: "Version 9.1.85"  
+  debug:  
+    msg: "{{ text | regex_search('(\\d+\\.\\d+\\.\\d+)') }}" # 9.1.85
+```
+
+#### password_hash и hash
+
+`password_hash` генерирует хеш пароля для использования в `/etc/shadow` или других системных конфигурациях. Поддерживает алгоритмы `sha256`, `sha512`, `md5_crypt`, `bcrypt`
+
+`hash` создаёт простой хеш строки с помощью алгоритмов `sha1`, `sha256`, `sha512`, `md5`. Полезно для проверки контрольных сумм или идентификаторов
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    password: "mysecret"  
+  debug:  
+    msg: "{{ password | password_hash('sha512') }}"
+```
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    text: "hello"  
+  debug:  
+    msg: "{{ text | hash('sha256') }}" # простой хеш
+```
+
+#### b64encode и b64decode
+
+`b64encode` кодирует строку в формат Base64, что необходимо для передачи бинарных данных в текстовом формате или работы с Kubernetes Secrets
+
+`b64decode` декодирует Base64-строку обратно в исходный формат
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    text: "hello world"  
+  debug:  
+    msg: "{{ text | b64encode }}" # aGVsbG8gd29ybGQ=
+```
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    encoded: "aGVsbG8gd29ybGQ="  
+  debug:  
+    msg: "{{ encoded | b64decode }}" # hello world
+```
+
+#### select и reject
+
+`select` фильтрует список, оставляя только элементы, которые проходят указанный тест. Противоположный ему `reject` оставляет элементы, которые не проходят тест
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    numbers: [ 0, 1, 2, false, '', 3 ]  
+  debug:  
+    msg: "{{ numbers | select() | list }}" # [1, 2, 3] - только truthy значения
+```
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    numbers: [ 1, 2, 3, 4, 5 ]  
+  debug:  
+    msg: "{{ numbers | select('odd') | list }}" # [1, 3, 5]
+```
+
+#### selectattr и rejectattr
+
+`selectattr` фильтрует список словарей по значению конкретного атрибута, применяя к нему тест. `rejectattr` работает противоположно - отклоняет элементы, которые проходят тест
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    servers:  
+      - name: web1  
+        status: active  
+      - name: web2  
+        status: inactive  
+      - name: web3  
+        status: active  
+  debug:  
+    msg: "{{ servers | selectattr('status', 'equalto', 'active') | map(attribute='name') | list }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": [
+        "web1",
+        "web3"
+    ]
+}
+```
+
+#### ternary
+
+Фильтр `ternary` реализует тернарный оператор - выбирает одно из двух значений в зависимости от условия. Условие должно быть заключено в скобки, результат передаётся через pipe в `ternary(true_value, false_value)`
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    env: "prod"  
+  debug:  
+    msg: "{{ (env == 'dev') | ternary('localhost', 'db.prod.internal') }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": "db.prod.internal"
+}
+```
+
+Альтернативный вариант для проверки с `defined`:
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    debug_mode: true  
+  debug:  
+    msg: "{{ debug_mode | ternary('DEBUG', 'INFO') }}" # DEBUG
 ```
 
 ### Выкладка
