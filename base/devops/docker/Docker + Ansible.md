@@ -6384,32 +6384,276 @@ ok: [server1] => {
 
 ### Выкладка
 
+Нам нужно реализовать скрипты, которые будут в себя включать:
+
+- тег `deploy` должен развернуть всю систему, включая overlay сеть, апишку, фронт и rmq с сопутствующим подцеплением секретов
+- тег `app` должен предоставить возможность отдельно установить сервис фронта
+
+Идеал: один тег, который устанавливает всё и отдельные теги для установки отдельных сервисов
+
+![](../../_png/Pasted%20image%2020260111161850.png)
 
 
 
+`roles / deploy / meta / main.yml`
+```YML
+---  
+galaxy_info:  
+  role_name: deploy  
+  description: Deploy microservices on docker cluster  
+  author: Lvov Valery  
+  license: MIT  
+  min_ansible_version: 2.20  
+  platforms:  
+    - name: Ubuntu  
+      versions: [all]
+```
 
 
 
+`roles / deploy / vars / main.yml`
+```YML
+---  
+services:  
+  - api  
+  
+networkName: app_network
+```
 
 
 
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: creating overlay network  
+  community.docker.docker_network:  
+    name: "{{ networkName }}"  
+    driver: overlay  
+  
+- name: deploy services  
+  include: "../services/{{ item }}/service.yml"  
+  vars:  
+    - name: "{{ item }}"  
+  loop: "{{ services }}"
+```
 
 
+
+`roles / deploy / services / secret-create.yml`
+```YML
+---  
+- name: "[{{ name }}] creating secrets"  
+  vars:  
+    envFile: "{{ lookup('file', '{{ name }}/.env') }}"  
+  community.docker.docker_secret:  
+    name: "{{ name }}.env"  
+    data: "{{ envFile | b64encode }}"  
+    labels:  
+      secret: "{{ envFile | hash('sha1') }}"  
+    data_is_b64: true  
+    state: present
+```
+
+
+
+`roles / deploy / services / secret.yml`
+```YML
+---  
+- name: "[{{ name }}] Configure secret"  
+  block:  
+    - name: "[{{ name }}] Creating secret"  
+      include: "secret-create.yml"  
+  
+  rescue:  
+    - name: "[{{ name }}] Removing service"  
+      community.docker.docker_swarm_service:  
+        name: "{{ name }}"  
+        state: absent  
+  
+    - name: "[{{ name }}] Creating secret"  
+      include: "secret-create.yml"
+```
+
+Ну и создадим пока рядом пустой `roles / deploy / services / api / .env` файл с переменными этого сервиса
+
+`roles / deploy / services / api / service.yml`
+```YML
+---  
+- name: "[{{ name }}] Configuring secret"  
+  include: "../secret.yml"  
+  
+- name: "[{{ name }}] Deploying service"  
+  block:  
+    - name: "[{{ name }}] Deploy service"  
+      community.docker.docker_swarm_service:  
+        name: "{{ name }}"  
+        image: "localhost:5000/{{ name }}:latest"  
+        state: present  
+        networks:  
+          - name: "{{ networkName }}"  
+        publish:  
+          - mode: ingress  
+            protocol: tcp  
+            published_port: 3002  
+            target_port: 3000  
+        secrets:  
+          - secret_name: "{{ name }}.env"  
+            filename: "/opt/app/.env"
+```
 
 ### Vault
 
+Vault - встроенный модуль ansible, который позволяет зашифровать чувствительные данные. С ним мы можем позволить положить секреты в репозиторий в закрытом виде.  
 
+Что позволяет нам сделать `ansible-vault`:
 
+- `create` - создаёт зашифрованный файл
+- `decrypt` - расшифровывает файл
+- `edit` - позволяет редактировать файл
+- `view` - позволяет просмотреть файл
+- `encrypt` - зашифровывает файл
+- `rekey` - пересоздаёт ключ
 
+#### Создание запароленного секрета
 
+Создадим файл, который будет хранить секретные данные
 
+`group_vars / all / vault.yml`
 
+```YML
+rmq:
+  user: admin
+  password: admin
+```
 
+Чтобы зашифровать и расшифровать файл, нужно использовать: 
 
+```bash
+# зашифровываем по паролю
+$ ansible-vault encrypt group_vars/all/vault.yml
+New Vault password:
+Confirm New Vault password:
+Encryption successful
 
+# расшифровываем по паролю
+$ ansible-vault decrypt group_vars/all/vault.yml
+Vault password:
+Decryption successful
+```
 
+Во время `encrypt` контент внутри файла кодируется
 
+`group_vars / all / vault.yml`
 
+```
+$ANSIBLE_VAULT;1.1;AES256  
+32386538613862393132396239333661636136333363626535366366633933356636373432646333  
+3861636133376466346565633066633037383064303937350a316637623039323963316430636430  
+32653866626632626533363033363263313337393132636236636633643336613136383830666161  
+3536663064613331660a643736643632346463653834306465336162613333336138653430636533  
+35353933373934656336346264303438366139643334613239626133656530333137623838666531  
+6439346461633966323061393537306636316134386538643630
+```
+
+Пока фейково заполним наш `.env` данными, которые не будут работать до тех пор, пока из энвов не сделаем шаблон 
+
+`roles / deploy / services / api / .env`
+
+```
+AMQP_EXCHANGE=xchg_integrations
+AMQP_USER={{rmq.user}}
+AMQP_PASSWORD={{rmq.password}}
+AMQP_HOSTNAME=rmq
+```
+
+Для того, чтобы операция запустилась, нужно передать флаг `--ask-vault-pass`
+
+```bash
+ansible-playbook -i inventory all.yml --tags "deploy" --ask-vault-pass
+```
+
+#### Сохранение пароля по роли
+
+Чтобы подцепить пароль по роли, нужно зашифровать файл с флагом `--vault-id`, где мы укажем `роль@способ`. Роль может быть любая, а способ у нас может выглядеть, как ввод пароля (`prompt`) или указать путь до него (сам путь до файла).
+
+Роль мы можем в шифровании и дешифровании указывать любую - она не будет влиять никак на операции, только визуально разделяет принадлежность пароля какой-либо группе или окружению (`dev`, `prod`, `devops`)
+
+##### prompt
+
+```bash
+$ ansible-vault encrypt group_vars/all/vault.yml --vault-id dev@prompt
+New vault password (dev):
+Confirm new vault password (dev):
+Encryption successful
+```
+
+Теперь у нас зашифрован файл по роли dev
+
+`group_vars / all / vault.yml`
+```YML
+$ANSIBLE_VAULT;1.2;AES256;dev
+```
+
+##### file
+
+Создадим файл `.pass` и занесём пароль в него. Но обязательно нужно добавить его в `.gitignore`.
+
+`.pass`
+```
+1
+```
+
+И энкриптим файл с указанием пути до пароля
+
+```bash
+$ ansible-vault encrypt group_vars/all/vault.yml --vault-id dev@.pass
+Encryption successful
+```
+
+##### Применение в плейбуках
+
+И в плейбуке нам нужно указать ту же самую строку с `--vault-id`
+
+```bash
+ansible-playbook -i inventory all.yml --tags "deploy" --vault-id dev@.pass
+```
+
+#### Шифрование отдельной строки
+
+Иногда нам не нужно шифровать полностью весь файл и для этого ansible предоставляет возможность сгенерить в консоли отдельный зашифрованный элемент. Для этого используется `encrypt_string`
+
+```bash
+$ ansible-vault encrypt_string --vault-pass-file .pass 'app_network' --name 'networkName'
+
+Encryption successful
+networkName: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64343066396236383963356465643132333734616162313465333463346138643730633034316664
+          6361643561303338386533656430356134303037366263630a343566633437316533306632356263
+          33646562646331313037373563616461323363313164383665626564633036636233613466356630
+          3465343063656436630a633730346466376532383431323738356235326161383764333331336134
+          6266
+
+```
+
+И далее просто вставляем его руками в YML
+
+`roles / deploy / vars / main.yml`
+```YML
+---  
+services:  
+  - api  
+  
+networkName: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64343066396236383963356465643132333734616162313465333463346138643730633034316664
+          6361643561303338386533656430356134303037366263630a343566633437316533306632356263
+          33646562646331313037373563616461323363313164383665626564633036636233613466356630
+          3465343063656436630a633730346466376532383431323738356235326161383764333331336134
+          6266
+```
+
+Так же в эту команду мы можем передать `--vault-id dev@.pass`, чтобы пометить шифрование
 
 ### Шаблоны
 
