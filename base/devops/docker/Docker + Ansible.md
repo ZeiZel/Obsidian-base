@@ -6460,9 +6460,10 @@ networkName: app_network
 ```YML
 ---  
 - name: "[{{ name }}] Configure secret"  
-  block:  
-    - name: "[{{ name }}] Creating secret"  
-      include: "secret-create.yml"  
+  block:
+    - name: "[{{ name }}] Создаём секрет"
+      include: "secret-create.yml"
+  tags: "{{ name }}"
   
   rescue:  
     - name: "[{{ name }}] Removing service"  
@@ -6496,9 +6497,10 @@ networkName: app_network
             protocol: tcp  
             published_port: 3002  
             target_port: 3000  
-        secrets:  
-          - secret_name: "{{ name }}.env"  
+        secrets:
+          - secret_name: "{{ name }}.env"
             filename: "/opt/app/.env"
+  tags: "{{ name }}"
 ```
 
 ### Vault
@@ -6659,14 +6661,61 @@ networkName: !vault |
 
 
 
+`group_vars/all/vars.yml`
+```YML
+---
+rmqDefaults:
+  - name: AMQP_EXCHANGE
+    value: xchg_integrations
+  - name: AMQP_USER
+    value: "{{rmq.user}}"
+  - name: AMQP_PASSWORD
+    value: "{{rmq.password}}"
+  - name: AMQP_HOSTNAME
+    value: rmq
+```
 
 
 
+`group_vars/all/vault.yml`
+```YML
+---
+rmq:
+  user: admin
+  password: admin
+```
 
 
 
+`roles/deploy/services/api/.env.j2`
+```YML
+{% for item in rmqDefaults %}
+{{ item.name }}={{ item.value }}
+{% endfor %}
+```
 
+В конце остаётся только заменить `lookup` с `file` на `template` и подставить наш `.env.j2` шаблон
 
+`roles/deploy/services/secret-create.yml`
+```YML
+---
+- name: "[{{ name }}] creating secrets"
+  vars:
+    envFile: "{{ lookup('template', '{{ name }}/.env.j2') }}"
+  community.docker.docker_secret:
+    name: "{{ name }}.env"
+    data: "{{ envFile | b64encode }}"
+    labels:
+      secret: "{{ envFile | hash('sha1') }}"
+    data_is_b64: true
+    state: present
+
+- name: "Debug"
+  vars:
+    envFile: "{{ lookup('template', '{{ name }}/.env.j2') }}"
+  debug:
+    msg: "{{ envFile }}"
+```
 
 ### Сборка контейнеров
 
