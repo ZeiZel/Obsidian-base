@@ -55,7 +55,8 @@
               "title": "Figma"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -122,8 +123,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 385.51103591918945,
-    "collapsed": true
+    "width": 343.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -266,13 +266,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/docker/Docker + Ansible.md",
+                "file": "Design/Figma.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Docker + Ansible"
+              "title": "Outline of Figma"
             }
           }
         ],
@@ -302,8 +302,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "c781478aa3763db1",
+  "active": "89542ad633dd7c63",
   "lastOpenFiles": [
+    "_png/Pasted image 20260111190832.png",
+    "_png/Pasted image 20260111184907.png",
+    "Design/Design.md",
+    "Design/Figma.md",
+    "devops/docker/Docker + Ansible.md",
     "_png/Pasted image 20260111161850.png",
     "_png/Pasted image 20260111161745.png",
     "_png/Pasted image 20260111150916.png",
@@ -313,11 +318,6 @@
     "_png/Pasted image 20260108221944.png",
     "_png/Pasted image 20260108205043.png",
     "_png/Pasted image 20260108175431.png",
-    "_png/Pasted image 20260108161719.png",
-    "_png/Pasted image 20260108161459.png",
-    "Design/Figma.md",
-    "Design/Design.md",
-    "devops/docker/Docker + Ansible.md",
     "cs/NASA coding standarts.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Untitled.md",
