@@ -6659,9 +6659,22 @@ networkName: !vault |
 
 ### Шаблоны
 
+Ansible использует [jinja](https://jinja.palletsprojects.com/) шаблонизатор, который позволяет в yaml подставлять шаблоны вида `{{ value }}` и генерировать финальные yaml файлы. 
 
 
-`group_vars/all/vars.yml`
+Вернёмся к нашим паролям Vault. Тут у нас так же `user` и `password`. Мы их спокойно можем зашифровать.
+
+`group_vars / all / vault.yml`
+```YML
+---
+rmq:
+  user: admin
+  password: admin
+```
+
+Далее перенесём переменные окружения для rmq в `vars.yml`. Их мы сюда переносим из `.env` в `api` сервисе
+
+`group_vars / all / vars.yml`
 ```YML
 ---
 rmqDefaults:
@@ -6675,28 +6688,21 @@ rmqDefaults:
     value: rmq
 ```
 
+Далее заменим `.env` файл на генерируемый с помощью jinja шаблон. Этот шаблон будет собирать переменные окружения для файла.
 
-
-`group_vars/all/vault.yml`
-```YML
----
-rmq:
-  user: admin
-  password: admin
-```
-
-
-
-`roles/deploy/services/api/.env.j2`
+`roles / deploy / services / api / .env.j2`
 ```YML
 {% for item in rmqDefaults %}
 {{ item.name }}={{ item.value }}
 {% endfor %}
 ```
 
-В конце остаётся только заменить `lookup` с `file` на `template` и подставить наш `.env.j2` шаблон
+В конце остаётся только заменить `lookup` с `file` на `template` и подставить наш `.env.j2` шаблон в генерторе секретов.
 
-`roles/deploy/services/secret-create.yml`
+И, чтобы посмотреть вывод, мы можем повторить лукап в другой таске и вывести в дебаге результат
+
+`roles / deploy / services / secret-create.yml`
+
 ```YML
 ---
 - name: "[{{ name }}] creating secrets"
@@ -6715,6 +6721,12 @@ rmq:
     envFile: "{{ lookup('template', '{{ name }}/.env.j2') }}"
   debug:
     msg: "{{ envFile }}"
+```
+
+Далее только останется запустить `api`
+
+```bash
+ansible-playbook -i inventory all.yml --tags "api"
 ```
 
 ### Сборка контейнеров
