@@ -5788,29 +5788,452 @@ ok: [server1] => (item=3) => {
 
 ### Lookup
 
+Lookup позволяет искать информацию в зависимости от самого плагина. 
 
+#### File
 
+##### Поиск файла
 
+Лукап по файлу очень полезен может быть в ситуациях, когда нам нужно условно инклюдить файлы, если они есть, или в зависимости от данных в файле триггерить задачу
 
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: "{{ lookup('file', '../meta/main.yml') }}"
+```
 
+И теперь в выводе мы получили файлы
 
+```bash
+ok: [server1] => {
+    "msg": "---\ngalaxy_info:\n  role_name: deploy\n  description: Deploy microservices on decoker cluster\n  author: Lvov Valery\n  license: MIT\n  min_ansible_version: 2.20\n  platforms:\n    - name: Ubuntu\n      versions: [all]"
+}
+```
 
+##### Обработка ошибок
 
+Поле `errors` определит, что нужно делать ansible для обработки ошибок
 
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: "{{ lookup('file', '../meta/mains.yml', errors='warn') }}"
+```
 
+Для более подробного вывода, нужно воспользоваться флагом `-vvvvv`, который выведет подробную информацию исполнения операций ansible
 
+```bash
+$ ansible-playbook -i inventory all.yml --tags "deploy" -vvvvv
+
+TASK [deploy : Deploy] ***************************************************************************************************************************************************
+task path: /Users/zeizel/projects/ansible/roles/deploy/tasks/main.yml:2
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/roles/deploy/files/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/roles/deploy/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/roles/deploy/tasks/files/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/roles/deploy/tasks/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/files/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/files/../meta/mains.yml"
+looking for "../meta/mains.yml" at "/Users/zeizel/projects/ansible/../meta/mains.yml"
+File lookup using None as file
+[WARNING]: An error occurred while running the lookup plugin 'file': Unable to access the file '../meta/mains.yml': File not found. Use -vvvvv to see paths searched.
+ok: [server1] => {
+    "msg": null
+}
+```
+
+Сейчас операция выполнилась без ошибок и сама ошибка перешла в разряд предупреждения. Однако, мы можем заметить, что ansible ищет файлы в папке `files`
+
+##### Дефолтный files
+
+Положим мету в `deploy / files / main.yml` и обратимся в поиске просто по имени файла
+
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: "{{ lookup('file', 'main.yml') }}"
+```
+
+И файл окажется так же найденным
+
+```bash
+ok: [server1] => {
+    "msg": "---\ngalaxy_info:\n  role_name: deploy\n  description: Deploy microservices on decoker cluster\n  author: Lvov Valery\n  license: MIT\n  min_ansible_version: 2.20\n  platforms:\n    - name: Ubuntu\n      versions: [all]"
+}
+```
+
+#### Vars
+
+Этот тип операции позволяет найти среди всех переменных нужную
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    name: a  
+  debug:  
+    msg: "{{ lookup('vars', 'name') }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": "a"
+}
+```
+
+#### Документация
+
+Чтобы вывести список возможных значений для поиска из различных источников. Притом можно заметить, что не все источники находятся локально.
+
+```bash
+ansible-doc -t lookup -l
+```
+
+```bash
+amazon.aws.aws_account_attribute                     Look up AWS account attributes
+amazon.aws.aws_collection_constants                  expose various collection related constants
+amazon.aws.aws_service_ip_ranges                     Look up the IP ranges for services provided in AWS such as EC2 and S3
+amazon.aws.secretsmanager_secret                     Look up secrets stored in AWS Secrets Manager
+amazon.aws.ssm_parameter                             gets the value for a SSM parameter or all parameters under a path
+ansible.builtin.config                               Display the 'resolved' Ansible option values
+ansible.builtin.csvfile                              read data from a TSV or CSV file
+ansible.builtin.dict                                 returns key/value pair items from dictionaries
+ansible.builtin.env                                  Read the value of environment variables
+```
+
+Чтобы узнать, как работает отдельный плагин лукапа, можно вывести для него документацию
+
+```bash
+ansible-doc -t lookup password
+```
 
 ### Фильтры
 
+Фильтры - это функции, которые позволяют преобразовать данные из одного формата в другой
+
+#### default
+
+Фильтр `default` позволяет установить дефолтное значение. 
+
+В этом месте у нас устанавливается значение 5, как дефолтное, когда не прилетит никакого значения. 
+
+```YML
+---  
+- name: Deploy  
+  debug:  
+    msg: "{{ item | default(5) }}"
+```
+
+Так же `default` позволяет исключить значение с помощью `omit` и опустить передачу аргумента, тем самым избегая ошибок из-за отсутствия значения в неконсистентных исходных данных
+
+```YML
+---  
+- name: Deploy  
+  file:  
+    dest: '{{ item.path }}'  
+    state: touch  
+    mode: '{{ item.mode | default(omit) }}' # если mode отсутствует, то сюда попадёт undefined
+  loop:  
+    - path: './test'  
+    - path: './test'  
+      mode: '0755'
+```
+
+#### type_debug
+
+`type_debug` выведет тип переданного значения
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: true  
+  debug:  
+    msg: '{{ admin | type_debug }}' # bool
+```
+
+#### items2dict
+
+Фильтр `items2dict` позволяет перевести объект либо массив с ключами `key/value` в список
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin:  
+      - key: a  
+        value: 1  
+      - key: b  
+        value: 2  
+  debug:  
+    msg: '{{ admin | items2dict }}'
+```
+
+```bash
+ok: [server1] => {
+    "msg": {
+        "a": 1,
+        "b": 2
+    }
+}
+```
+
+Если мы передаём массив и у нас кастомные наименования полей, то можно задать имя для полей ключа и значения с помощью `key_name / value_name`
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin:  
+      - keys: a  
+        values: 1  
+      - keys: b  
+        values: 2  
+  debug:  
+    msg: "{{ admin | items2dict(key_name='keys', value_name='values') }}"
+```
+
+#### chaining
+
+`bool`, по возможности, переведёт попадающее в него значение в boolean тип. Строка `"true"` преобразуется в `true`.
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: "true"  
+  debug:  
+    msg: '{{ admin | bool | type_debug }}'
+```
+
+```bash
+ok: [server1] => {
+    "msg": "bool"
+}
+```
+
+#### pretty
+
+Так же присутствуют фильтры для преобразования данных в YAML / JSON
+
+- `to_yaml` / `to_json` - перевод в yaml / json
+- `to_nice_yaml` / `to_nice_json` - перевод с отступами
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: { a: 1, b: 2 }  
+  debug:  
+    msg: '{{ admin | to_nice_yaml }}'
+```
+
+```bash
+ok: [server1] => {
+    "msg": "a: 1\nb: 2\n"
+}
+```
+
+#### combine
 
 
 
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: { a: 1, b: 2 }  
+  debug:  
+    msg: "{{ admin | combine({ 'c': 4 }) }}"
+```
 
 
 
+```bash
+ok: [server1] => {
+    "msg": {
+        "a": 1,
+        "b": 2,
+        "c": 4
+    }
+}
+```
+
+
+#### Zip
 
 
 
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [1,2,3]  
+  debug:  
+    msg: "{{ admin | zip(['a','b','c']) }}"
+```
+
+
+
+```bash
+ok: [server1] => {
+    "msg": [
+        [
+            1,
+            "a"
+        ],
+        [
+            2,
+            "b"
+        ],
+        [
+            3,
+            "c"
+        ]
+    ]
+}
+```
+
+#### map
+
+
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ 0, 1 ]  
+  debug:  
+    msg: "{{ admin | map('extract', ['a','b','c']) | list }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": [
+        "a",
+        "b"
+    ]
+}
+```
+
+#### join
+
+
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ '0', '1' ]  
+  debug:  
+    msg: "{{ admin | join(',') }}" # 0, 1
+```
+
+#### json_query
+
+Этот фильтр позволяет нам запросить JSON данные по какой-нибудь апишке или стянуть JSON данные из файла
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ '0', '1' ]  
+  debug:  
+    msg: "{{ admin | json_query('app.name[*]') }}"
+```
+
+#### random
+
+Данный фильтр позволяет стянуть рандомное значение из переданного списка
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ '0', '1' ]  
+  debug:  
+    msg: "{{ admin | random }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": "1"
+}
+```
+
+#### flatten и unique
+
+`flatten` переведёт многомерный (в зависимости от параметра `level`, который дефолтно равен 2) массив в одномерный
+
+`unique` выделит только уникальные значения из списка
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ 0, 1, [0, 1], [ 3, 4, 5 ] ]  
+  debug:  
+    msg: "{{ admin | flatten | unique }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": [
+        0,
+        1,
+        3,
+        4,
+        5
+    ]
+}
+```
+
+#### intersect и union
+
+`intersect` объединяет только пересекающиеся значения массива
+
+`union` позволяет объединить два массива (сохраняя только уникальные значения)
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ 0, 1 ]  
+  debug:  
+    msg: "{{ admin | intersect([1,2]) }}" # 1
+```
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: [ 0, 1 ]  
+  debug:  
+    msg: "{{ admin | union([1,2]) }}" # 0, 1, 2
+```
+
+#### urlsplit
+
+Данный фильтр позволяет нам вытащить определённую часть урла
+
+```YML
+---  
+- name: Deploy  
+  vars:  
+    admin: "https://foundry.zeizel.ru"  
+  debug:  
+    msg: "{{ admin | urlsplit('hostname') }}"
+```
+
+```bash
+ok: [server1] => {
+    "msg": "foundry.zeizel.ru"
+}
+```
 
 ### Выкладка
 
