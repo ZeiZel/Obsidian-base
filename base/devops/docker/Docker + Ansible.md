@@ -6425,7 +6425,7 @@ galaxy_info:
 services:  
   - api  
   
-networkName: app_network
+network_name: app_network
 ```
 
 Далее нам нужна таска, которая будет создавать нам секреты на базе `docker_secret` модуля. 
@@ -6440,12 +6440,12 @@ networkName: app_network
 ---  
 - name: "[{{ name }}] creating secrets"  
   vars:  
-    envFile: "{{ lookup('file', '{{ name }}/.env') }}"  
+    env_file: "{{ lookup('file', '{{ name }}/.env') }}"  
   community.docker.docker_secret:  
     name: "{{ name }}.env"  
-    data: "{{ envFile | b64encode }}"  
+    data: "{{ env_file | b64encode }}"  
     labels:  
-      secret: "{{ envFile | hash('sha1') }}"  
+      secret: "{{ env_file | hash('sha1') }}"  
     data_is_b64: true  
     state: present
 ```
@@ -6498,7 +6498,7 @@ networkName: app_network
         image: "localhost:5000/{{ name }}:latest"  
         state: present  
         networks:  # подключение к общей сети
-          - name: "{{ networkName }}"  
+          - name: "{{ network_name }}"  
         publish:  # публикация будет происходить через ingress
           - mode: ingress  
             protocol: tcp  
@@ -6519,7 +6519,7 @@ networkName: app_network
 ---  
 - name: creating overlay network  
   community.docker.docker_network:  
-    name: "{{ networkName }}"  
+    name: "{{ network_name }}"  
     driver: overlay  
   
 - name: deploy services  
@@ -6693,7 +6693,6 @@ networkName: !vault |
 
 Ansible использует [jinja](https://jinja.palletsprojects.com/) шаблонизатор, который позволяет в yaml подставлять шаблоны вида `{{ value }}` и генерировать финальные yaml файлы. 
 
-
 Вернёмся к нашим паролям Vault. Тут у нас так же `user` и `password`. Мы их спокойно можем зашифровать.
 
 `group_vars / all / vault.yml`
@@ -6709,7 +6708,7 @@ rmq:
 `group_vars / all / vars.yml`
 ```YML
 ---
-rmqDefaults:
+rmq_defaults:
   - name: AMQP_EXCHANGE
     value: xchg_integrations
   - name: AMQP_USER
@@ -6724,7 +6723,7 @@ rmqDefaults:
 
 `roles / deploy / services / api / .env.j2`
 ```YML
-{% for item in rmqDefaults %}
+{% for item in rmq_defaults %}
 {{ item.name }}={{ item.value }}
 {% endfor %}
 ```
@@ -6739,20 +6738,20 @@ rmqDefaults:
 ---
 - name: "[{{ name }}] creating secrets"
   vars:
-    envFile: "{{ lookup('template', '{{ name }}/.env.j2') }}"
+    env_file: "{{ lookup('template', '{{ name }}/.env.j2') }}"
   community.docker.docker_secret:
     name: "{{ name }}.env"
-    data: "{{ envFile | b64encode }}"
+    data: "{{ env_file | b64encode }}"
     labels:
-      secret: "{{ envFile | hash('sha1') }}"
+      secret: "{{ env_file | hash('sha1') }}"
     data_is_b64: true
     state: present
 
 - name: "Debug"
   vars:
-    envFile: "{{ lookup('template', '{{ name }}/.env.j2') }}"
+    env_file: "{{ lookup('template', '{{ name }}/.env.j2') }}"
   debug:
-    msg: "{{ envFile }}"
+    msg: "{{ env_file }}"
 ```
 
 Далее только останется запустить `api`
@@ -6763,27 +6762,317 @@ ansible-playbook -i inventory all.yml --tags "api"
 
 ### Сборка контейнеров
 
+Далее нам нужно написать автоматизацию сборки сервисов посредством отдельной роли `build`.
+
+Воркфлоу достаточно простой: 
+
+- нужно скопировать проект из гит-репозитория
+- собрать образ
+- удалить гит-репозиторий
+
+Опишем её меты
+
+`roles / build / meta / main.yml`
+```YML
+galaxy_info:
+  role_name: build
+  description: Monorepo Building
+  author: Lvov Valery
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+```
+
+#### Глобальные переменные
+
+Для этой роли опишем дефолтными значеними папку с гит репозиторием, куда прилетит образ
+
+`roles / build / defaults / main.yml`
+```YML
+git_folder: /home/vagrant/docker
+```
+
+Уберём из переменных деплоя сервисы, так как это более глобальная сущность, которая понадобится нам во время сборки, чтобы сохранить консистентные имена (создание образа и его стягивание)
+
+`roles / deploy / vars /main.yml`
+```YML
+---
+network_name: app_network
+```
+
+И сами сервисы опишем в глобальных переменных
+
+`group_vars / all / vars.yml`
+```YML
+---
+rmq_defaults:
+  - name: AMQP_EXCHANGE
+    value: xchg_integrations
+  - name: AMQP_USER
+    value: "{{rmq.user}}"
+  - name: AMQP_PASSWORD
+    value: "{{rmq.password}}"
+  - name: AMQP_HOSTNAME
+    value: rmq
+
+registry_name: "localhost:5000/"
+
+services:
+  - name: api
+    version: latest
+  - name: rmq
+    version: latest
+
+non_build_services:
+  - name: rmq
+    version: latest
+```
+
+В итоге у нас получается данный набор задач: 
+
+- клонируем репозиторий с нашим проектом, где ветку выбираем с помощью `version`
+- собираем образ с помощью модуля `docker_image` 
+- удаляем репозиторий с устройства
+
+`roles / build / tasks / main.yml`
+```YML
+---
+- name: Клонируем репозиторий
+  ansible.builtin.git:
+    repo: "https://github.com/AlariCode/docker-demo.git"
+    dest: "{{ git_folder }}"
+    version: block-7
+
+- name: Собираем image
+  community.docker.docker_image:
+    name: "{{ registry_name }}{{ item.name }}"
+    tag: "{{ item.version }}"
+    push: true
+    build:
+      path: "{{ git_folder }}"
+      dockerfile: "{{ git_folder }}/apps/{{ item.name }}/Dockerfile"
+    source: build
+  loop: "{{ services | difference(non_build_services) }}"
+
+- name: Удаляем репозиторий
+  file:
+    state: absent
+    path: "{{ git_folder }}"
+```
+
+#### Deploy service
+
+Далее прокинем `registry_name` в задачу по деплою сервиса 
+
+`roles/deploy/services/api/service.yml`
+```YML
+- name: "[{{ name }}] Выкладка сервиса"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}{{ name }}:{{ version }}"
+```
+
+Теперь в задаче по выкладке сервисов, у нас обращение должно идти к объекту `item`, который сразу хранит и имя, и версию
+
+`roles/deploy/tasks/main.yml`
+```YML
+- name: Выкладка сервисов
+  include: "../services/{{ item.name }}/service.yml"
+  vars:
+    - name: "{{ item.name }}"
+    - version: "{{ item.version }}"
+  loop: "{{ services }}"
+```
+
+#### RMQ service
+
+Добавим деплой RMQ сервиса
+
+`roles/deploy/services/rmq/service.yml`
+```YML
+---
+- name: "[{{ name }}] Конфигурация секрета"
+  include: "../secret.yml"
+
+- name: "[{{ name }}] Выкладка сервиса"
+  tags: "{{ name }}"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}{{ name }}:{{ version }}"
+        state: present
+        networks:
+          - name: "{{ network_name }}"
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 3002
+            target_port: 3000
+        secrets:
+          - secret_name: "{{ name }}.env"
+            filename: "/opt/app/.env"
+```
+
+#### Финал
+
+В корневой файл подтянем созданную роль `build` и навесим тег, по которому сможем вызвать роль
+
+`all.yml`
+```YML
+- name: Deploy / build server
+  hosts: deploy
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: build
+      tags: build
+    - role: deploy
+      tags: deploy
+    # - swarm_init
+```
 
 
 
-
-
-
-
-
-
-
-
+```bash
+ansible-playbook -i inventory all.yml --tags="build"
+```
 
 ### Финал выкладки
 
+Далее осталось доработать скрипт для выкладки фронта, самого конвертера и rmq
+
+Для начала, нужно дополнить переменные окружения для наших сервисов:
+
+- Укажем `registry_name`, так как он будет повторяться во всех сервисах
+- Добавим в `services` наши `app` и `converter`
+- Добавим поле `configs`, которое будет хранить публичную конфигурацию конвертера
+
+`group_vars / all / vars.yml`
+```YML
+---
+rmq_defaults:
+  - name: AMQP_EXCHANGE
+    value: xchg_integrations
+  - name: AMQP_USER
+    value: "{{rmq.user}}"
+  - name: AMQP_PASSWORD
+    value: "{{rmq.password}}"
+  - name: AMQP_HOSTNAME
+    value: rmq
+
+registry_name: "localhost:5000"
+
+services:
+  - name: api
+    version: latest
+  - name: app
+    version: latest
+  - name: converter
+    version: latest
+  - name: rmq
+    version: latest
+
+non_build_services:
+  - name: rmq
+    version: latest
+
+configs:
+  converter:
+    queue: q_imageProcessor
+```
+
+#### app
+
+Опишем выкладку сервиса фронта
+
+`roles / deploy / services / app / service.yml`
+```YML
+---
+- name: "[{{ name }}] Выкладка сервиса"
+  tags: "{{ name }}"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}/{{ name }}:{{ version }}"
+        state: present
+        networks:
+          - name: "{{ network_name }}"
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 3001
+            target_port: 80
+```
+
+#### converter
+
+Выкладка конвертера так же аналогична api
+
+`roles / deploy / services / converter / service.yml`
+```YML
+---
+- name: "[{{ name }}] Конфигурация секрета"
+  include: "../secret.yml"
+
+- name: "[{{ name }}] Выкладка сервиса"
+  tags: "{{ name }}"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}/{{ name }}:{{ version }}"
+        state: present
+        networks:
+          - name: "{{ network_name }}"
+        secrets:
+          - secret_name: "{{ name }}.env"
+            filename: "/opt/app/.env"
+```
+
+Передадим такой же список секретных переменных для подключения к RMQ и укажем имя очереди `AMQP_QUEUE` из конфига
+
+`roles / deploy / services / converter / .env.j2`
+```
+{% for item in rmq_defaults %}
+{{ item.name }}={{ item.value }}
+{% endfor %}
+AMQP_QUEUE={{ configs.converter.queue }}
+```
+
+#### rmq
+
+Передаём переменные окружения в этот сервис напрямую через зашифрованный волтом `env` и тянем образ из репозитория `rabbitmq`
+
+`roles / deploy / services / rmq / service.yml`
+```YML
+---
+- name: "[{{ name }}] Выкладка сервиса"
+  tags: "{{ name }}"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "rabbitmq:3-management"
+        state: present
+        networks:
+          - name: "{{ network_name }}"
+        env:
+          - RABBITMQ_DEFAULT_USER={{ rmq.user }}
+          - RABBITMQ_DEFAULT_PASS={{ rmq.password }}
+```
 
 
 
-
-
-
-
+```bash
+ansible-playbook -i inventory all.yml --tags="build"
+```
 
 
 
