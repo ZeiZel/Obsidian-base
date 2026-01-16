@@ -6393,7 +6393,7 @@ ok: [server1] => {
 
 ![](../../_png/Pasted%20image%2020260111161850.png)
 
-
+Опишем метаданные роли
 
 `roles / deploy / meta / main.yml`
 ```YML
@@ -6409,7 +6409,15 @@ galaxy_info:
       versions: [all]
 ```
 
+Заранее определим структуру нашего скрипта: 
 
+- нам нужно отдельно иметь возможность запускать задачи под отдельные сервисы
+- сервисы нужно уметь скейлить
+- имя сети мы должны чётко определить
+
+Все сервисы будут находиться в `services / <сервис>`
+
+Переменные определения инфраструктуры можно оставить в самой роли. Это валидный вариант.
 
 `roles / deploy / vars / main.yml`
 ```YML
@@ -6420,25 +6428,13 @@ services:
 networkName: app_network
 ```
 
+Далее нам нужна таска, которая будет создавать нам секреты на базе `docker_secret` модуля. 
 
-
-`roles / deploy / tasks / main.yml`
-```YML
----  
-- name: creating overlay network  
-  community.docker.docker_network:  
-    name: "{{ networkName }}"  
-    driver: overlay  
-  
-- name: deploy services  
-  include: "../services/{{ item }}/service.yml"  
-  vars:  
-    - name: "{{ item }}"  
-  loop: "{{ services }}"
-```
-
-
-
+- Тут мы в `envFile` передаём `lookup` фильтр для поиска исходных энвов (в гитигнор) и формирование из них секретов. Этот файл ищется в папке необходимого нам сервиса.
+- Далее `name` генерируем по имени сервиса
+- `data` для секретов передаём в формате base64
+- Для того, чтобы у нас была возможность обновлять секреты в сервисах, нам нужно под что-то подцепиться. Самый простой способ это сделать - изменять лейблы. Изменять лейблы можно легко беря файл и переводя его в `hash`.
+ 
 `roles / deploy / services / secret-create.yml`
 ```YML
 ---  
@@ -6454,16 +6450,21 @@ networkName: app_network
     state: present
 ```
 
+Далее пишем полноценную обработку секрета. 
 
+Тут нам нужно: 
+
+- заинклюдить ранее созданный файл создания секрета
+- так как после повторной прогонки создания секрета, у нас таска обязательно упадёт, то нам нужно воспользоваться блоком `rescue`, в котором нужно будет удалить сервис, а потом заново выполнить задачу на создание секрета (скопировать из `block`)
 
 `roles / deploy / services / secret.yml`
 ```YML
 ---  
 - name: "[{{ name }}] Configure secret"  
-  block:
-    - name: "[{{ name }}] Создаём секрет"
-      include: "secret-create.yml"
   tags: "{{ name }}"
+  block:
+    - name: "[{{ name }}] Creating secret"
+      include: "secret-create.yml"
   
   rescue:  
     - name: "[{{ name }}] Removing service"  
@@ -6477,6 +6478,11 @@ networkName: app_network
 
 Ну и создадим пока рядом пустой `roles / deploy / services / api / .env` файл с переменными этого сервиса
 
+Сейчас нам нужно написать деплой для нашего сервиса в swarm:
+
+- Имплементируем создание секрета.
+- Далее выполняем деплой сервиса. Плагин `docker_swarm_service` стянет образ из локального registry `localhost:5000` и создаст сервис по описанным нами данным.
+
 `roles / deploy / services / api / service.yml`
 ```YML
 ---  
@@ -6484,23 +6490,49 @@ networkName: app_network
   include: "../secret.yml"  
   
 - name: "[{{ name }}] Deploying service"  
+  tags: "{{ name }}"
   block:  
     - name: "[{{ name }}] Deploy service"  
       community.docker.docker_swarm_service:  
         name: "{{ name }}"  
         image: "localhost:5000/{{ name }}:latest"  
         state: present  
-        networks:  
+        networks:  # подключение к общей сети
           - name: "{{ networkName }}"  
-        publish:  
+        publish:  # публикация будет происходить через ingress
           - mode: ingress  
             protocol: tcp  
             published_port: 3002  
             target_port: 3000  
-        secrets:
+        secrets: # стягиваем созданный секрет и кладём в `/opt/app` 
           - secret_name: "{{ name }}.env"
             filename: "/opt/app/.env"
-  tags: "{{ name }}"
+```
+
+И вот представление того самого кульминационного момента - в `main.yml` нам остаётся только:
+
+- подставить переданный `networkName` для создания overlay сети
+- далее создаём задачу на деплой сервисов, которая будет инклюдить динамически конфиг под имя сервиса и повторять их на все сервисы
+
+`roles / deploy / tasks / main.yml`
+```YML
+---  
+- name: creating overlay network  
+  community.docker.docker_network:  
+    name: "{{ networkName }}"  
+    driver: overlay  
+  
+- name: deploy services  
+  vars:  
+    - name: "{{ item }}"  
+  include: "../services/{{ item }}/service.yml"  
+  loop: "{{ services }}"
+```
+
+
+
+```bash
+ansible-playbook -i inventory all.yml --tags="deploy"
 ```
 
 ### Vault
