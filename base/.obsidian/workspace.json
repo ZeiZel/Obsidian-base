@@ -104,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -171,7 +171,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -314,13 +315,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/Python.md",
+                "file": "database/database.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Python"
+              "title": "Outline of database"
             }
           }
         ],
@@ -350,10 +351,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b0e9b32133c9bd7d",
+  "active": "77f980e165df5531",
   "lastOpenFiles": [
-    "database/database.md",
     "cs/Python.md",
+    "database/database.md",
     "devops/docker/Docker + Ansible.md",
     "_png/Pasted image 20260117160812.png",
     "_png/Pasted image 20260117155928.png",

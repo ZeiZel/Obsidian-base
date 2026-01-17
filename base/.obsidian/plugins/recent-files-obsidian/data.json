@@ -1,12 +1,12 @@
 {
   "recentFiles": [
     {
-      "basename": "Python",
-      "path": "cs/Python.md"
-    },
-    {
       "basename": "database",
       "path": "database/database.md"
+    },
+    {
+      "basename": "Python",
+      "path": "cs/Python.md"
     },
     {
       "basename": "Docker + Ansible",
