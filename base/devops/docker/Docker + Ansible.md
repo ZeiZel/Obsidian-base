@@ -6497,6 +6497,7 @@ network_name: app_network
         name: "{{ name }}"  
         image: "localhost:5000/{{ name }}:latest"  
         state: present  
+        force_update: true # обновление в любом случае
         networks:  # подключение к общей сети
           - name: "{{ network_name }}"  
         publish:  # публикация будет происходить через ingress
@@ -6837,6 +6838,8 @@ non_build_services:
 - собираем образ с помощью модуля `docker_image` 
 - удаляем репозиторий с устройства
 
+Но у нас появляется проблема - не все сервисы, которые мы будем деплоить, нам нужно собирать. Для этого мы добавили поле `non_build_services`, которое мы можем передать в `difference` и они будут исключены из списка, который есть в `services`.
+
 `roles / build / tasks / main.yml`
 ```YML
 ---
@@ -6851,10 +6854,13 @@ non_build_services:
     name: "{{ registry_name }}{{ item.name }}"
     tag: "{{ item.version }}"
     push: true
-    build:
+	force_source: true # даже если ничего в сурсах не поменялось - собирать
+    force_tag: true # пересобирать, даже если есть такой тег
+    source: build # операция сборки
+    build: # параметры сборки
       path: "{{ git_folder }}"
       dockerfile: "{{ git_folder }}/apps/{{ item.name }}/Dockerfile"
-    source: build
+  # Собираем все сервисы из списка собираемых сервисов
   loop: "{{ services | difference(non_build_services) }}"
 
 - name: Удаляем репозиторий
@@ -6937,7 +6943,7 @@ non_build_services:
     # - swarm_init
 ```
 
-
+Далее такой командой запустится сборка `api` сервиса
 
 ```bash
 ansible-playbook -i inventory all.yml --tags="build"
@@ -6976,11 +6982,11 @@ services:
   - name: converter
     version: latest
   - name: rmq
-    version: latest
+    version: 3-management
 
 non_build_services:
   - name: rmq
-    version: latest
+    version: 3-management
 
 configs:
   converter:
@@ -7002,6 +7008,7 @@ configs:
         name: "{{ name }}"
         image: "{{ registry_name }}/{{ name }}:{{ version }}"
         state: present
+        force_update: true # обновление в любом случае
         networks:
           - name: "{{ network_name }}"
         publish:
@@ -7013,7 +7020,7 @@ configs:
 
 #### converter
 
-Выкладка конвертера так же аналогична api
+Выкладка конвертера так же аналогична api, но тут нам не понадобится проброс портов, так как общение будет происходить с RMQ
 
 `roles / deploy / services / converter / service.yml`
 ```YML
@@ -7029,6 +7036,7 @@ configs:
         name: "{{ name }}"
         image: "{{ registry_name }}/{{ name }}:{{ version }}"
         state: present
+        force_update: true # обновление в любом случае
         networks:
           - name: "{{ network_name }}"
         secrets:
@@ -7059,7 +7067,7 @@ AMQP_QUEUE={{ configs.converter.queue }}
     - name: "[{{ name }}] Выкладываем сервис"
       community.docker.docker_swarm_service:
         name: "{{ name }}"
-        image: "rabbitmq:3-management"
+        image: "rabbitmq:{{ version }}"
         state: present
         networks:
           - name: "{{ network_name }}"
@@ -7068,11 +7076,21 @@ AMQP_QUEUE={{ configs.converter.queue }}
           - RABBITMQ_DEFAULT_PASS={{ rmq.password }}
 ```
 
-
+Далее мы можем отдельно запустить сборку всех сервисов и выложить их в наш кластер
 
 ```bash
 ansible-playbook -i inventory all.yml --tags="build"
+
+ansible-playbook -i inventory all.yml --tags="deploy"
 ```
+
+Прокидываем порты собранных приложений. 
+
+![](../../_png/Pasted%20image%2020260117140145.png)
+
+И теперь на `localhost:3002` доступно приложение с api, rmq, фронтом и самим конвертером
+
+![](../../_png/Pasted%20image%2020260117140250.png)
 
 
 
@@ -7081,77 +7099,569 @@ ansible-playbook -i inventory all.yml --tags="build"
 
 ### Настройка NGINX
 
+Сейчас нам нужно добавить reverse-proxy, который позволит нам не стучаться на какой-то определённый порт, чтобы отправить запрос, а биться в один домен.
 
+`group_vars / all / vars.yml`
+```YML
+# ...
 
+services:
+  - name: api
+    version: latest
+  - name: app
+    version: latest
+  - name: converter
+    version: latest
+  - name: rmq
+    version: 3-management
+  - name: nginx
+    version: latest
 
+non_build_services:
+  - name: rmq
+    version: 3-management
+  - name: nginx
+    version: latest
 
+# ...
+```
 
+И сменим версию тега на `block-14`, где базовым путём до фронта станет `http://image.local`
 
+`roles / build / tasks / main.yml`
+```YML
+---
+- name: Клонируем репозиторий
+  ansible.builtin.git:
+    repo: "https://github.com/AlariCode/docker-demo.git"
+    dest: "{{ git_folder }}"
+    version: block-14
+```
 
+Опишем конфигурацию, которая будет использоваться для проксирования запросов. 
 
+Тут у нас есть два подхода: 
 
+1. Мы можем биться в сервис напрямую через внутренний DNS докера `http://api:3000`, но тогда нам нужно будет перезапускать и NGINX при обновлении деплоя сервиса
+2. Мы можем долбиться по ip устройства и его внешнему порту (`published_port`), чтобы игресс сам разрулил адресата. 
+
+Тут будет использоваться первый подход. 
+
+Игресс описан так: 
+
+1. Рабочих процесса 2
+2. Подключений на каждый воркер максимум по 1024
+3. сервер слушает 80 порт и выводит доменное имя `image.local`
+4. при отпрвке запроса на `upload(s)`, запрос летит на сервер
+5. при отправке запроса на `/`, мы попадаем на фронт
+
+`roles / deploy / services / nginx / nginx.conf.j2`
+```nginx
+worker_processes 2;
+
+events { worker_connections 1024; }
+
+http {
+	server {
+		listen 80;
+		server_name image.local;
+
+		location ~ (/uploads/|/upload) {
+			proxy_pass http://api:3000;
+		}
+
+		location ~ (/) {
+			proxy_pass http://app;
+		}
+	}
+
+}
+```
+
+Далее нам нужно описать задачи для создания конфигов (рядом с описанием секретов), которое мы будем передавать в сервисы
+
+Создаём конфиг аналогично секретам
+
+`roles / deploy / services / config-create.yml`
+```YML
+---
+- name: "[{{ name }}] Создаём конфиг"
+  vars:
+    config_file: "{{ lookup('template', '{{ name }}/{{ config_item }}.j2') }}"
+  community.docker.docker_config:
+    name: "{{ config_item }}"
+    data: "{{ config_file | b64encode }}"
+    labels:
+      config: "{{ config_file | hash('sha1') }}"
+    data_is_b64: true
+    state: present
+```
+
+Далее подставляем создание конфига в наш сервис. Тут тоже всё аналогично секретам
+
+`roles / deploy / services / config.yml`
+```YML
+---
+- name: "[{{ name }}] Конфигурация конфига"
+  block:
+    - name: "[{{ name }}] Создаём конфиг"
+      include: "config-create.yml"
+  tags: "{{ name }}"
+
+  rescue:
+    - name: "[{{ name }}] Удаляем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        state: absent
+
+    - name: "[{{ name }}] Создаём конфиг"
+      include: "config-create.yml"
+```
+
+И опишем сервис, который будет поднимать сам NGINX: 
+
+- конфигурация конфига
+	- подключаем сюда используемый `config.yml`
+	- прогоняем в цикле все конфиги nginx (пока он у нас только один)
+	- внутрь первой таски нужно передать кастомное имя итерационного элемента (конфиге) `config_item`, которое мы используем внутри `service.yml`
+- выкладка сервиса
+	- цепляем образ nginx
+	- вклиниваем его в нашу общую сеть
+	- прокидываем его порт 80 на наш 80 (http)
+	- прокидываем описанный конфиг nginx в директорию, откуда его стянет nginx после запуска
+
+`roles / deploy / services / nginx / service.yml`
+```YML
+---
+- name: "[{{ name }}] Конфигурация конфига"
+  include: "../config.yml"
+  loop:
+    - nginx.conf
+  loop_control:
+    loop_var: config_item
+
+- name: "[{{ name }}] Выкладка сервиса"
+  tags: "{{ name }}"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "nginx:{{ version }}"
+        state: present
+        networks:
+          - name: "{{ network_name }}"
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 80
+            target_port: 80
+        configs:
+          - config_name: nginx.conf
+            filename: "/etc/nginx/nginx.conf"
+```
+
+Прокидываем порт балансировщика с `server1`
+
+![](../../_png/Pasted%20image%2020260117155928.png)
+
+Далее нам нужно изменить доменные записи нашей хостовой машины через `sudo nano /etc/hosts`, где добавим описанное нами имя для локального ip
+
+```
+127.0.0.1                       localhost demo.test image.local
+```
+
+И теперь мы можем запустить динамический деплой одного nginx
+
+```bash
+ansible-playbook -i inventory all.yml --tags="nginx"
+```
+
+Результат находится на `image.local`
+
+![](../../_png/Pasted%20image%2020260117160812.png)
 
 ### Локальные действия
 
+Далее нам нужно описать роль, которая позволит инициализировать Docker Swarm сервисы и подключать к ним другие ноды.
 
+Мы будем использовать токены в папке `/tokens`, поэтому добавляем их в игнор.
 
+`.gitignore`
+```
+.DS_store
+.pass
+/tokens
+```
 
+Сразу определим наш основной хост, из которого мы будем выполнять все операции
 
+`group_vars / all / vars.yml`
+```YML
+advertise_addr: 10.11.10.1
+```
 
+#### инициализация сварма
 
+Опишем мету для роли инициализации сварма
 
+`roles / swarm_init / meta / main.yml`
+```YML
+role_name: swarm_init
+description: Init swarm cluster
+author: Lvov Valery
+license: MIT
+min_ansible_version: 2.9
+platforms:
+- name: Ubuntu
+  versions:
+	- all
+```
 
+Далее нам нужно инициализировать сварм и для этого: 
 
+1. С помощью модуля `docker_swarm` инициализируем сервис с `advertise_addr` (выбираем одну из доступных сетей на машине) равному тому, что указали ранее в переменных окружения
+2. Далее создаём локальную директорию `./tokens`, которая будет хранить токены подключения между свармами
+3. Потом токен manager берём из контекста `token.swarm_facts.JoinTokens.Manager` будем сохранять в `token-manager`
+4. А токен воркера возьмём из `token.swarm_facts.JoinTokens.Worker` и положим в `token-worker`
+
+`roles / swarm_init / tasks / main.yml`
+```YML
+---
+- name: Инициализация swarm
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ advertise_addr }}"
+  register: token
+
+- name: Наличие директории
+  local_action:
+    module: file
+    path: ./tokens
+    state: directory
+
+- name: Сохранение токена manager
+  local_action:
+    module: copy
+    dest: ./tokens/token-manager
+    content: "{{ token.swarm_facts.JoinTokens.Manager }}"
+
+- name: Сохранение токена worker
+  local_action:
+    module: copy
+    dest: ./tokens/token-worker
+    content: "{{ token.swarm_facts.JoinTokens.Worker }}"
+```
+
+На этом инициализация сварма закончена и все токены подключения получены для подключения остальных машин
+
+##### local_action
+
+Данный модуль позволяет нам выполнить в моменте любую операцию на нашем хосте, а не на целевой машине. Например, когда нам нужно стянуть данные с удалённой машины и передать их в другое место. 
+
+Такая запись выполнит операцию на машине из инвентаря
+
+```YML
+- name: Наличие директории
+  file:
+    path: ./tokens
+    state: directory
+```
+
+А уже такая операция выполнит действие на нашей машине. Тут мы в `module` передаём тот модуль, которым мы хотим воспользоваться. 
+
+```YML
+- name: Наличие директории
+  local_action:
+    module: file
+    path: ./tokens
+    state: directory
+```
+
+#### подключение к сварму
+
+Далее создаём роль `swarm_join`, которая будет отвечать за подключение к сварму ноды
+
+`roles / swarm_join / meta / main.yml`
+```YML
+galaxy_info:
+  role_name: swarm_join
+  description: Connecting node to swarm
+  author: Lvov Valery
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+```
+
+И подключение будет происходить по переданному `type` машины через тот же модуль `docker_swarm`, но уже который приводить машину к состоянию `join`
+
+`roles / swarm_join / tasks / main.yml`
+```YML
+---
+- name: Подключение
+  vars:
+    token: "{{ lookup('file', '../../tokens/token-{{ type }}') }}"
+  community.docker.docker_swarm:
+    state: join
+    remote_addrs: "{{ advertise_addr }}"
+    join_token: "{{ token }}"
+```
+
+#### подключение
+
+Инициализация сварма `swarm_init` будет происходить на `deploy` машине (`server1`). Остальные машины должны иметь `swarm_join` операцию.  
+
+`all.yml`
+```YML
+---
+- name: Deploy / build server
+  hosts: deploy
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: build
+      tags: build
+    - role: deploy
+      tags: deploy
+    - role: swarm_init
+      tags: swarm_init
+
+- name: Manager
+  hosts: managers
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      tags: swarm_join
+      type: manager # тип машины - manager
+
+- name: Worker
+  hosts: workers
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      tags: swarm_join
+      type: worker # а тут будут подключаться worker-машины
+```
+
+Теперь мы можем запустить инициализацию сварма на нашей корневой машине и запустить подключение остальных машин к сварму
+
+```bash
+ansible-playbook -i inventory all.yml --tags="swarm_init"
+
+ansible-playbook -i inventory all.yml --tags="swarm_join"
+```
 
 ### Делегирование задач
 
+Вместо использования `local_action`, мы можем применять более удобную запись, которая не меняет синтаксиса команды - `delegate_to`. Она позволяет перенаправить выполнение таски на любое инвентарное устройство, либо на нашу локальную машину через обращение по `localhost`.
 
+`roles / swarm_init / tasks / main.yml`
+```YML
+---
+- name: Инициализация swarm
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ advertise_addr }}"
+  register: token
 
+- name: Наличие директории
+  file:
+    path: ./tokens
+    state: directory
+    mode: "0777"
+  delegate_to: localhost
 
+- name: Сохранение токена manager
+  copy:
+    dest: ./tokens/token-manager
+    content: "{{ token.swarm_facts.JoinTokens.Manager }}"
+    mode: "0644"
+  delegate_to: localhost
 
+- name: Сохранение токена worker
+  copy:
+    dest: ./tokens/token-worker
+    content: "{{ token.swarm_facts.JoinTokens.Worker }}"
+    mode: "0644"
+  delegate_to: localhost
+```
 
-
-
-
-
+>[!warning] На данный момент `local_action` **deprecated**
 
 ### Pre_post_tasks and handlers
 
+Handlers отрабатывают всегда, когда таска завершается в статусе changed
 
+#### handlers роли
 
+Хендлеры для роли описываются в папке `handlers`
 
+`roles / swarm_init / handlers / main.yml`
+```YML
+---  
+- name: Тест  
+  debug:  
+    msg: Тестовый хендлер
+```
 
+И якорем для их выполнения является поле `notify`, в которое мы кладём `name` хендлера
 
+`roles / swarm_init / tasks / main.yml`
+```YML
+---  
+- name: Инициализация swarm  
+  community.docker.docker_swarm:  
+    state: present  
+    advertise_addr: "{{ advertise_addr }}"  
+  register: token  
+  notify: Тест
+```
 
+#### pre_tasks and post_task
 
+Так же мы можем для самой описываемой группы роли описать:
 
+- `pre_tasks` - это блок тасок, которые выполнятся перед выполнением тасок
+- `post_tasks` - блок тасок, которые выполнятся после выполнения роли
 
+Примечания: 
+
+- эти таски запускаются для всех хостов, как и остальные таски
+- они так же должны иметь теги, если мы запускаем задачи по тегам
+
+`all.yml`
+```YML
+# ...
+- name: Worker
+  hosts: workers
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      type: worker
+      tags: swarm_join
+  post_tasks:
+    - name: Очистка папки token
+      file:
+        path: ./tokens
+        state: absent
+      ignore_errors: true
+      delegate_to: localhost
+      tags: swarm_join
+```
 
 ### Работа с фактами
 
 
 
+`roles / swarm_init / tasks / main.yml`
+```YML
+---
+- name: Инициализация swarm
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ advertise_addr }}"
+  register: token
+
+- name: Сохранение токенов
+  set_fact:
+    token_manager: "{{ token.swarm_facts.JoinTokens.Manager }}"
+    token_worker: "{{ token.swarm_facts.JoinTokens.Worker }}"
+    cacheable: true
+```
 
 
 
-
-
-
+`roles / swarm_join / tasks / main.yml`
+```YML
+---
+- name: Подключение
+  community.docker.docker_swarm:
+    state: join
+    remote_addrs: "{{ advertise_addr }}"
+    join_token: >
+      {{
+        hostvars['server1']['ansible_facts']['token_worker']
+        if type == 'worker' else
+        hostvars['server1']['ansible_facts']['token_manager']
+      }}
+```
 
 
 ### Отключение нод
 
 
 
+`all.yml`
+```YML
+- name: Deploy / build server
+  hosts: deploy
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: build
+      tags: build
+    - role: deploy
+      tags: deploy
+    - role: swarm_init
+      tags: swarm_init
+    - role: swarm_leave
+      node_name: server2
+      tags: swarm_leave
+```
 
 
 
+`roles / swarm_leave / meta / main.yml`
+```YML
+galaxy_info:
+  role_name: swarm_leave
+  description: Remove node from swarm
+  author: Lvov Valery
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+```
 
 
 
+`roles / swarm_leave / tasks / main.yml`
+```YML
+---
+- name: Перевод в статус drain
+  community.docker.docker_node:
+    hostname: "{{ node_name }}"
+    availability: drain
+
+- name: Ожидание остановки
+  community.docker.docker_host_info:
+    containers: true
+  register: result
+  retries: 30
+  delay: 2
+  until: result.host_info.ContainersRunning == 0
+  delegate_to: "{{ node_name }}"
+
+- name: Удаление ноды
+  community.docker.docker_swarm:
+    state: remove
+    node_id: "{{ node_name }}"
+```
 
 
 
+`roles / swarm_leave / tasks / main.yml`
+```YML
+- name: Удаление ноды
+  command: "docker node rm {{ node_name }} --force"
+```
 
 
 
