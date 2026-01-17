@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Python",
+      "path": "cs/Python.md"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
       "basename": "Docker + Ansible",
       "path": "devops/docker/Docker + Ansible.md"
     },
@@ -191,10 +199,6 @@
     {
       "basename": "JavaScript",
       "path": "frontend/JavaScript/JavaScript.md"
-    },
-    {
-      "basename": "Продвинутый FrontEnd",
-      "path": "frontend/Продвинутый FrontEnd/Продвинутый FrontEnd.md"
     }
   ],
   "omittedPaths": [],
