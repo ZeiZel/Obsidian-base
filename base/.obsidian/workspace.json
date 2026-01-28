@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "devops/docker/Docker + Ansible.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -56,30 +56,6 @@
             }
           },
           {
-            "id": "b0e9b32133c9bd7d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/Python.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Python"
-            }
-          },
-          {
             "id": "77f980e165df5531",
             "type": "leaf",
             "state": {
@@ -102,9 +78,119 @@
               "icon": "lucide-file",
               "title": "database"
             }
+          },
+          {
+            "id": "09bc43cc4a095329",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/kubernetes/Helmfile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Helmfile"
+            }
+          },
+          {
+            "id": "9fb9e42cc254ebba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/kubernetes/Kubernetes + Helm.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes + Helm"
+            }
+          },
+          {
+            "id": "fb81dcdc01e73590",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architecture/System Design/System Design.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "System Design"
+            }
+          },
+          {
+            "id": "97f50ce1c6b2ea94",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ai/AI Instruments.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "AI Instruments"
+            }
+          },
+          {
+            "id": "34c44b6ebbacbdb4",
+            "type": "leaf",
+            "state": {
+              "type": "webviewer",
+              "state": {
+                "url": "https://github.com/steveyegge/beads",
+                "title": "GitHub - steveyegge/beads: Beads - A memory upgrade for your coding agent",
+                "mode": "webview"
+              },
+              "icon": "globe-2",
+              "title": "GitHub - steveyegge/beads: Beads - A memory upgrade for your coding agent"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -171,8 +257,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273,
-    "collapsed": true
+    "width": 343.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -315,13 +400,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/database.md",
+                "file": "ai/AI Instruments.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of database"
+              "title": "Outline of AI Instruments"
             }
           }
         ],
@@ -329,8 +414,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 396.5,
-    "collapsed": true
+    "width": 396.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -351,11 +435,21 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "77f980e165df5531",
+  "active": "97f50ce1c6b2ea94",
   "lastOpenFiles": [
-    "cs/Python.md",
-    "database/database.md",
+    "_png/Pasted image 20260128211307.png",
+    "_png/Pasted image 20260128211257.png",
+    "_png/Pasted image 20260128205737.png",
+    "ai/AI Instruments.md",
+    "ai/AI.md",
+    "ai/AI Agent.md",
+    "architecture/System Design/System Design.md",
     "devops/docker/Docker + Ansible.md",
+    "architecture/System Design",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "devops/kubernetes/Helmfile.md",
+    "database/database.md",
+    "cs/Python.md",
     "_png/Pasted image 20260117160812.png",
     "_png/Pasted image 20260117155928.png",
     "_png/Pasted image 20260117140250.png",
@@ -366,20 +460,15 @@
     "Design/Design.md",
     "_png/Pasted image 20260111161850.png",
     "_png/Pasted image 20260111161745.png",
-    "_png/Pasted image 20260111150916.png",
-    "_png/Pasted image 20260108231740.png",
     "cs/NASA coding standarts.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Untitled.md",
     "Tags",
     "frontend/State Managers/Zustand.md",
     "agile/agile.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
-    "devops/kubernetes/Helmfile.md",
     "cs/Networks/Networks.md",
     "agile/Teamlead.md",
     "frontend/React/React Query.md",
-    "ai/AI.md",
     "agile/Team.md",
     "ai/AI Prompts.md",
     "cs/Functional programming.md",
@@ -387,17 +476,12 @@
     "backend/Microservices/Микросервисы.md",
     "ai/AI and Data Science.md",
     "ai/AI Engineering.md",
-    "ai/AI Agent.md",
-    "index.md",
     "ai",
     "Untitled.base",
-    "frontend/Vue/Nuxt/Nuxt.md",
-    "frontend/Vue/Vue/Vue.md",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
     "concepts",
     "_png",
-    "RoadMap",
-    "edge/_png"
+    "RoadMap"
   ]
 }

@@ -1,16 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "AI Agent",
+      "path": "ai/AI Agent.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "Helmfile",
+      "path": "devops/kubernetes/Helmfile.md"
+    },
+    {
       "basename": "database",
       "path": "database/database.md"
     },
     {
       "basename": "Python",
       "path": "cs/Python.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
     },
     {
       "basename": "Figma",
@@ -37,14 +61,6 @@
       "path": "agile/agile.md"
     },
     {
-      "basename": "Helmfile",
-      "path": "devops/kubernetes/Helmfile.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
       "basename": "Networks",
       "path": "cs/Networks/Networks.md"
     },
@@ -55,10 +71,6 @@
     {
       "basename": "React Query",
       "path": "frontend/React/React Query.md"
-    },
-    {
-      "basename": "AI",
-      "path": "ai/AI.md"
     },
     {
       "basename": "Team",
@@ -83,10 +95,6 @@
     {
       "basename": "AI Engineering",
       "path": "ai/AI Engineering.md"
-    },
-    {
-      "basename": "AI Agent",
-      "path": "ai/AI Agent.md"
     },
     {
       "basename": "index",
@@ -191,14 +199,6 @@
     {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
-    },
-    {
-      "basename": "JS",
-      "path": "frontend/JavaScript/JS.md"
-    },
-    {
-      "basename": "JavaScript",
-      "path": "frontend/JavaScript/JavaScript.md"
     }
   ],
   "omittedPaths": [],
