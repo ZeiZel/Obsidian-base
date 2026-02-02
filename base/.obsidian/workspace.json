@@ -176,21 +176,31 @@
             }
           },
           {
-            "id": "34c44b6ebbacbdb4",
+            "id": "d0d1fdbc4291704e",
             "type": "leaf",
             "state": {
-              "type": "webviewer",
+              "type": "markdown",
               "state": {
-                "url": "https://github.com/steveyegge/beads",
-                "title": "GitHub - steveyegge/beads: Beads - A memory upgrade for your coding agent",
-                "mode": "webview"
+                "file": "agile/agile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
-              "icon": "globe-2",
-              "title": "GitHub - steveyegge/beads: Beads - A memory upgrade for your coding agent"
+              "icon": "lucide-file",
+              "title": "agile"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -257,7 +267,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -400,13 +411,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ai/AI Instruments.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of AI Instruments"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -414,7 +425,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 396.5
+    "width": 396.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -435,12 +447,25 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "97f50ce1c6b2ea94",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
-    "_png/Pasted image 20260128211307.png",
-    "_png/Pasted image 20260128211257.png",
-    "_png/Pasted image 20260128205737.png",
+    "_png/Pasted image 20260202211517.png",
+    "_png/Pasted image 20260202205749.png",
+    "_png/Pasted image 20260202205620.png",
+    "_png/Pasted image 20260202205350.png",
+    "_png/Pasted image 20260202204957.png",
     "ai/AI Instruments.md",
+    "agile/agile.md",
+    "_png/Pasted image 20260131192403.png",
+    "_png/Pasted image 20260131191329.png",
+    "_png/Pasted image 20260131191229.png",
+    "_png/Pasted image 20260131171338.png",
+    "_png/Pasted image 20260131132735.png",
+    "_png/Pasted image 20260131132140.png",
+    "agile/DISC.md",
+    "agile/Team.md",
+    "agile/Teamlead.md",
+    "agile/Как быть хорошим тимлидом.md",
     "ai/AI.md",
     "ai/AI Agent.md",
     "architecture/System Design/System Design.md",
@@ -450,32 +475,19 @@
     "devops/kubernetes/Helmfile.md",
     "database/database.md",
     "cs/Python.md",
-    "_png/Pasted image 20260117160812.png",
-    "_png/Pasted image 20260117155928.png",
-    "_png/Pasted image 20260117140250.png",
-    "_png/Pasted image 20260117140145.png",
     "Design/Figma.md",
-    "_png/Pasted image 20260111190832.png",
-    "_png/Pasted image 20260111184907.png",
     "Design/Design.md",
-    "_png/Pasted image 20260111161850.png",
-    "_png/Pasted image 20260111161745.png",
     "cs/NASA coding standarts.md",
     "Design/DaVinci Resolve/Davinci resolve.md",
     "Untitled.md",
     "Tags",
     "frontend/State Managers/Zustand.md",
-    "agile/agile.md",
     "cs/Networks/Networks.md",
-    "agile/Teamlead.md",
     "frontend/React/React Query.md",
-    "agile/Team.md",
     "ai/AI Prompts.md",
     "cs/Functional programming.md",
     "cs/Networks",
     "backend/Microservices/Микросервисы.md",
-    "ai/AI and Data Science.md",
-    "ai/AI Engineering.md",
     "ai",
     "Untitled.base",
     "_png/атмосферный звук моря и крики чаек.mp3",

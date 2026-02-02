@@ -6,6 +6,8 @@ tags:
 
 ## Teamlead Roadmap
 
+
+---
 ### Роли и обязанности
 
 #### Administrator
@@ -21,22 +23,64 @@ tags:
  
 Конструирование методологии
 
-###### Получение
+Создание собственных методологий разработки, адаптированных под специфику команды и проекта. Включает выбор и комбинирование практик из различных фреймворков (Agile, Scrum, Kanban, Lean) для формирования эффективного процесса разработки.
+
+- [Конструирование методологии](https://tlroadmap.io/roles/administrator/development-cycle/development/methodology.html)
+- [Методологии разработки ПО](https://ru.wikipedia.org/wiki/Методология_разработки_программного_обеспечения)
+- [Agile методологии](https://www.atlassian.com/agile)
+
+###### Получение задач
+
+Процесс получения, анализа и приоритизации входящих задач. Включает фильтрацию запросов, оценку их важности и срочности, а также распределение по команде.
+
+- [Получение задач](https://tlroadmap.io/roles/administrator/development-cycle/task-inbox.html)
+- [Приоритизация задач](https://www.atlassian.com/agile/project-management/epics-stories-themes)
+
 ###### Выпуск задач
 
+Процесс завершения и выпуска выполненных задач, включающий приёмку и раскатку.
 
+- Приёмка — процесс проверки и принятия выполненной работы, соответствия требованиям и стандартам качества
+- Раскатка — процесс развёртывания и внедрения готового функционала в продакшн
+
+- [Приёмка](https://tlroadmap.io/roles/administrator/development-cycle/release/acceptance.html)
+- [Раскатка](https://tlroadmap.io/roles/administrator/development-cycle/release/rollout.html)
+- [Deployment стратегии](https://martinfowler.com/bliki/BlueGreenDeployment.html)
 
 ##### Проектное управление
 
+Методологии и подходы к управлению проектами, позволяющие эффективно планировать, контролировать и завершать проекты.
+
 ###### P3Express
+
+P3Express — упрощённая методология управления проектами, основанная на принципах PRINCE2, адаптированная для небольших и средних проектов. Фокусируется на практичности и минимизации бюрократии.
+
+- [P3Express](https://tlroadmap.io/roles/administrator/project-manager/p3express.html)
+- [P3Express методология](https://www.p3express.com/)
+
 ###### PDCA
-###### PMBook
 
+PDCA (Plan-Do-Check-Act) — цикл непрерывного улучшения процессов. Планирование действий, их выполнение, проверка результатов и корректировка на основе полученных данных.
 
+- [PDCA](https://tlroadmap.io/roles/administrator/project-manager/pdca.html)
+- [PDCA цикл](https://ru.wikipedia.org/wiki/PDCA)
+- [Цикл Деминга](https://www.lean.org/lexicon/pdca)
+
+###### PMBoK
+
+PMBoK (Project Management Body of Knowledge) — свод знаний по управлению проектами от PMI. Содержит стандарты, методы и практики управления проектами.
+
+- [PMBoK](https://tlroadmap.io/roles/administrator/project-manager/pmbok.html)
+- [PMBoK Guide](https://www.pmi.org/pmbok-guide-standards/foundational/pmbok)
+- [PMBoK на русском](https://ru.wikipedia.org/wiki/PMBOK)
 
 ##### Стейкхолдинг
 
+Управление заинтересованными сторонами (стейкхолдерами) проекта. Включает идентификацию всех заинтересованных лиц, анализ их влияния и интересов, построение коммуникаций и управление их ожиданиями.
 
+- [Стейкхолдинг](https://tlroadmap.io/roles/administrator/stakeholding.html)
+- [Управление стейкхолдерами](https://ru.wikipedia.org/wiki/Заинтересованная_сторона)
+- [Stakeholder Management](https://www.pmi.org/learning/library/stakeholder-management-project-success-11168)
 
 #### Integrator
 
@@ -45,9 +89,6 @@ tags:
 - [Корпоративная культура](https://tlroadmap.io/roles/integrator/corporate-culture.html)
 
 #### People Manager
-
-
-
 
 - Управление людьми
 	- [Административная работа](https://tlroadmap.io/roles/people-manager/people-management/admin.html)
@@ -95,15 +136,62 @@ tags:
 #### Technical Lead
 
 - Архитектура
+
+	Проектирование и поддержка архитектуры системы, обеспечение её масштабируемости, надёжности и соответствия требованиям.
+
 	- Архитектурное ревью
+
+		Процесс анализа и оценки архитектурных решений для выявления проблем, рисков и возможностей улучшения. Помогает поддерживать качество архитектуры и предотвращать технический долг.
+
+		- [Архитектурное ревью](https://tlroadmap.io/roles/technical-lead/architecture/review.html)
+		- [Software Architecture Review](https://martinfowler.com/articles/architectureReview.html)
+		- [Архитектурные ревью](https://www.thoughtworks.com/insights/blog/architecture-review)
+
 	- Проектирование
+
+		Процесс создания архитектуры системы с учётом требований, ограничений и долгосрочных целей. Включает выбор паттернов, технологий и структуры компонентов.
+
+		- [Проектирование](https://tlroadmap.io/roles/technical-lead/architecture/design.html)
+		- [Software Architecture](https://martinfowler.com/architecture/)
+		- [Архитектурные паттерны](https://ru.wikipedia.org/wiki/Архитектурный_паттерн)
+
 	- Эволюция
+
+		Постепенное развитие и улучшение архитектуры системы с течением времени. Включает рефакторинг, миграции и адаптацию к новым требованиям без нарушения работы системы.
+
+		- [Эволюция](https://tlroadmap.io/roles/technical-lead/architecture/evolution.html)
+		- [Evolutionary Architecture](https://www.thoughtworks.com/insights/blog/evolutionary-architecture)
+		- [Архитектурная эволюция](https://martinfowler.com/bliki/ArchitectureAsEvolution.html)
+
 	- Сбор технических требований
+
+		Процесс выявления, анализа и документирования технических требований к системе. Включает работу с нефункциональными требованиями (производительность, безопасность, масштабируемость).
+
+		- [Сбор технических требований](https://tlroadmap.io/roles/technical-lead/architecture/requirements.html)
+		- [Technical Requirements Gathering](https://www.atlassian.com/agile/project-management/requirements)
+		- [Нефункциональные требования](https://ru.wikipedia.org/wiki/Нефункциональное_требование)
 - Автоматизация цикла разработки
+
+	Настройка и поддержка автоматизированных процессов разработки для повышения скорости и качества доставки кода.
+
 	- [Continuous Integration](https://tlroadmap.io/roles/technical-lead/automation/ci.html)
 	- Автоматизация релизов
+
+		Настройка автоматизированного процесса развёртывания приложений (CI/CD pipeline). Включает автоматическое тестирование, сборку, деплой и откат изменений.
+
+		- [Автоматизация релизов](https://tlroadmap.io/roles/technical-lead/automation/release.html)
+		- [CI/CD Pipeline](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment)
+		- [Continuous Deployment](https://martinfowler.com/bliki/ContinuousDelivery.html)
+		- [GitHub Actions](https://docs.github.com/en/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/)
+
 	- [Работа с системами контроля версий](https://tlroadmap.io/roles/technical-lead/automation/vcs.html)
 - Capacity Management
+
+	Управление мощностью команды: планирование загрузки, оценка доступных ресурсов, балансировка нагрузки между членами команды. Помогает избежать перегрузки и обеспечить реалистичное планирование.
+
+	- [Capacity Management](https://tlroadmap.io/roles/technical-lead/capacity.html)
+	- [Team Capacity Planning](https://www.atlassian.com/agile/project-management/capacity-planning)
+	- [Velocity и Capacity](https://www.scrum.org/resources/blog/velocity-vs-capacity-scrum)
 - Управление знаниями
 	- [Техническая документация](https://tlroadmap.io/roles/technical-lead/knowledge-management/documentation.html)
 	- [Распространение знаний](https://tlroadmap.io/roles/technical-lead/knowledge-management/knowledge-management.html)
@@ -112,15 +200,55 @@ tags:
 	- [Code review](https://tlroadmap.io/roles/technical-lead/product-quality/code-review.html)
 	- [Управление инцидентами](https://tlroadmap.io/roles/technical-lead/product-quality/incident-management.html)
 	- Метрики и мониторинг
+
+		Сбор, анализ и визуализация метрик работы системы и команды. Включает настройку мониторинга производительности, ошибок, использования ресурсов и бизнес-метрик.
+
+		- [Метрики и мониторинг](https://tlroadmap.io/roles/technical-lead/product-quality/metrics.html)
+		- [Observability](https://www.thoughtworks.com/insights/blog/observability)
+		- [Application Performance Monitoring](https://www.atlassian.com/incident-management/kpis/metrics-monitoring)
+		- [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com/)
 	- [Нефункциональные требования](https://tlroadmap.io/roles/technical-lead/product-quality/nfr.html)
 	- Тестирование
+
+		Обеспечение качества продукта через различные виды тестирования и автоматизацию тестовых процессов.
+
 		- Нефункциональное тестирование
+
+			Тестирование характеристик системы, не связанных с функциональностью: производительность, нагрузка, безопасность, масштабируемость, отказоустойчивость.
+
+			- [Нефункциональное тестирование](https://tlroadmap.io/roles/technical-lead/product-quality/testing/non-functional.html)
+			- [Performance Testing](https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing)
+			- [Load Testing](https://k6.io/docs/test-types/load-testing/)
+			- [Security Testing](https://owasp.org/www-project-web-security-testing-guide/)
+
 		- [Тест-дизайн](https://tlroadmap.io/roles/technical-lead/product-quality/testing/test-design.html)
 		- [Оптимизация количества тестирования](https://tlroadmap.io/roles/technical-lead/product-quality/testing/test-optimization.html)
 		- Планирование тестирования
+
+			Процесс определения стратегии тестирования, выбора типов тестов, оценки времени и ресурсов, необходимых для обеспечения качества продукта.
+
+			- [Планирование тестирования](https://tlroadmap.io/roles/technical-lead/product-quality/testing/planning.html)
+			- [Test Planning](https://www.atlassian.com/agile/software-development/test-planning)
+			- [Test Strategy](https://martinfowler.com/articles/practical-test-pyramid.html)
+
 		- [Пирамида тестирования](https://tlroadmap.io/roles/technical-lead/product-quality/testing/test-pyramid.html)
 			- Автоматизация тестирования API
+
+				Создание и поддержка автоматизированных тестов для REST, GraphQL и других API. Включает тестирование эндпоинтов, валидацию ответов и проверку интеграций.
+
+				- [Автоматизация тестирования API](https://tlroadmap.io/roles/technical-lead/product-quality/testing/test-pyramid/api-testing.html)
+				- [API Testing Tools](https://www.postman.com/api-testing/)
+				- [REST API Testing](https://restfulapi.net/testing-rest-api/)
+				- [Postman](https://www.postman.com/), [REST Assured](https://rest-assured.io/)
+
 			- Автоматизация тестирования GUI
+
+				Автоматизация тестирования пользовательского интерфейса через инструменты для эмуляции действий пользователя и проверки визуальных элементов.
+
+				- [Автоматизация тестирования GUI](https://tlroadmap.io/roles/technical-lead/product-quality/testing/test-pyramid/gui-testing.html)
+				- [GUI Testing Tools](https://www.browserstack.com/guide/gui-testing)
+				- [Selenium](https://www.selenium.dev/), [Playwright](https://playwright.dev/), [Cypress](https://www.cypress.io/)
+
 			- [Unit-тестирование](https://tlroadmap.io/roles/technical-lead/product-quality/testing/test-pyramid/unit-testing.html)
 		- [Тестирование требований](https://tlroadmap.io/roles/technical-lead/product-quality/testing/testing-requirements.html)
 - Знание технологий
@@ -134,9 +262,7 @@ tags:
 
 
 
-
-
-
+---
 ### Личные навыки
 
 #### Коммуникации
@@ -152,6 +278,13 @@ tags:
 - [Работа с текстом](https://tlroadmap.io/self-skills/communications/text.html)
 
 #### Стили менеджмента
+
+Различные подходы к управлению командой и людьми. Выбор стиля зависит от ситуации, зрелости команды и контекста. Основные стили: авторитарный, демократический, делегирующий, ситуационный.
+
+- [Стили менеджмента](https://tlroadmap.io/self-skills/management-styles.html)
+- [Leadership Styles](https://www.mindtools.com/pages/article/newLDR_84.htm)
+- [Стили руководства](https://ru.wikipedia.org/wiki/Стиль_руководства)
+- [Situational Leadership](https://www.kenblanchard.com/getattachment/Products/Solutions/Situational-Leadership-II/SLII-Overview/SLII-Overview.pdf)
 #### Отношения
 
 - [Понимание ценности различий](https://tlroadmap.io/self-skills/relationship/diversity.html)
@@ -170,201 +303,32 @@ tags:
 
 #### Тайм-менеджмент
 
+Навыки эффективного управления временем и приоритетами для повышения продуктивности и достижения целей.
+
 ##### Постановка личных целей
-##### Управление приоритетами 
+
+Процесс определения и формулирования личных и профессиональных целей. Использование методологий SMART (Specific, Measurable, Achievable, Relevant, Time-bound) и OKR (Objectives and Key Results) для постановки измеримых и достижимых целей.
+
+- [Постановка личных целей](https://tlroadmap.io/self-skills/time-management/goal-setting.html)
+- [SMART Goals](https://www.mindtools.com/pages/article/smart-goals.htm)
+- [OKR Framework](https://www.whatmatters.com/resources/okr-meaning-examples)
+- [Целеполагание](https://ru.wikipedia.org/wiki/Целеполагание)
+
+##### Управление приоритетами
+
+Умение различать срочное и важное, расставлять приоритеты между задачами. Использование матрицы Эйзенхауэра, метода MoSCoW и других техник для эффективного распределения усилий.
+
+- [Управление приоритетами](https://tlroadmap.io/self-skills/time-management/prioritization.html)
+- [Матрица Эйзенхауэра](https://ru.wikipedia.org/wiki/Матрица_Эйзенхауэра)
+- [MoSCoW Method](https://www.agilebusiness.org/dsdm-project-framework/moscow-prioritisation.html)
+- [Priority Management](https://www.mindtools.com/pages/article/newHTE_91.htm)
+
 ##### Управление временем
 
+Техники и методы для эффективного использования времени: тайм-блокирование, техника Помодоро, GTD (Getting Things Done), планирование дня и недели.
 
-
-
-
-
-
-
-
-
-
-
-
-## Как быть хорошим тимлидом
-
-### Ответственность
-#### Проблемы
-
-- Разное понимание важного 
-- Разное понимание областей ответственности
-- Оценка может казаться (или являться) необъективной
-
-#### О чём нужно договориться
-
-- Продукте / проекте
-	- доставка задач в срок
-	- важные проекты
-	- ключевые метрики
-- Технические
-	- покрытие тестами
-	- время ответа
-- Люди и команда
-	- тимбилдинг
-	- bus-factor
-	- обучение людей
-
-#### Как договориться с руководством
-
-- Назначить митинг
-- Подготовить важные показатели по нескольким проектам и определить, что нужно сделать в них
-- Обсудить с руководителем
-- Принять предложения руководителя
-- Зафиксировать
-- Повторять регулярно
-
-#### Результат договорённостей
-
-- У нас есть список договорённостей и целей
-- Достижения стали измеримыми
-- Оценить результат становится проще
-- Избегание рассинхрона с руководителем
-
-### Настройка основных инструментов
-
-#### Проблемы
-
-Провал:
-- Отвлёкся и забыл про задачу
-- Цель без инструмента
-
-#### Как
-
-- Остановиться. Нужно в момент, когда нет срочных задач, всё отложить
-- Определить, что помогает, а что мешает
-- Систематизировать оба направления
-- Визуализировать цели
-- Навести порядок в препятствиях
-
-#### Пример
-
-- Выделить свои проекты в отдельные дашборды
-- Определить область, сроки, текущие задачи, статус и прогресс
-- Держать проекты перед глазами
-- Перебазировать их на тегах / лейблах
-
-Так же мы можем создавать отдельные графики для визуализации количества закрытых и открытых багов / тикетов и мониторить их метрики
-
-![](../_png/Pasted%20image%2020250921180627.png)
-
-#### Формирование задач
-
-- Задача попадает в трекер
-- Калибруем её приоритет
-- Подтверждаем необходимость
-- Стараемся держать фильтр пустым
-
-#### Результат
-
-- все договорённости на виду
-- упрощается оценка работы
-- появляется возможность вовремя менять фокус, тактику и стратегию работы
-
-### Коммуникации
-
-#### Проблема
-
-- Много переключений контекста
-- После смены контекста, нужно 5-10-20 минут на вникание
-- Теряются старые задачи и нарушаются договорённости - теряется фокус на важном
-
-#### Решение
-
-Уменьшаем трафик:
-- делегируя часть на кого-то
-- переопределяя на что-то
-
-Если мы меньше отвлекаемся, не пропускаем важное и вовремя реагируем, то это успех
-
-Мы должны оптимизировать: 
-1. Почту (Zero Inbox)
-	1. Совсем ненужное - удалить спам / flood 
-	2. Сейчас ненужное - в архив (поделить письма по автоматическим папкам)
-	3. Важное + срочное - реагируем сразу
-	4. Важное + несрочное - планируем (todo + напоминалки)
-2. Мессенджеры
-	1. Уведомлять только по личным сообщениям
-	2. Удалять ненужные комнаты
-	3. DnD
-	4. Push-уведомления
-3. Встречи
-	1. Напоминалки
-		1. За день - подготовить материал / контент / вопросы
-		2. За час - что-то сделать и ничего не планировать
-		3. 5 минут - подготовить аппаратуру ко встрече
-	2. Держать при руках мобильное приложение
-
-> Помним про матрицу Эйзенхауэра
-
-### Развитие команды
-
-#### Зачем
-
-- Решать более сложные проблемы
-- Быстрее справляться с простыми проблемами
-- Улучшить bus-factor
-
-#### Как
-
-Самый верный вариант, чтобы ничего не забыть - это создать по каждому члену команды карточки, чтобы всегда иметь перед глазами информацию
-
-Карточка содержит: 
-- навыки (неполная RACIS карта)
-	- добавить список необходимых навыков для проектов
-	- описать уровни владения (критерии оценки должны быть определимыми)
-	- проставить уровни владения каждым членом команды
-	  ![](../_png/Pasted%20image%2020250922085334.png)
-- план развития
-	- к определённому времени
-	- какую область ответственности должен закрывать
-	- маркеры и доказанный опыт
-	  ![](../_png/Pasted%20image%2020250922085616.png)
-- 1-1
-
-#### Итог
-
-- Решения принимаются объективно
-- Развитие происходит осознанно
-- Производим сбор исторических данных
-- Тратим мало времени и получаем много пользы
-
-### One-to-one
-
-Встречи 1-1 нужны, потому что:
-- Это полноценный инструмент
-- Нормализует доверие
-- Делает более прозрачным карьерный путь
-- Делает прозрачным карьерный путь и развитие
-
-Перед встречей:
-- записывать то, что хочешь донести до 1-1
-- освежать память
-
-Во время:
-- Начинать нужно с подчинённого. Мы лучше знаем и понимаем, как должен вестись диалог и какие вопросы мы хотим задать, поэтому первой темой должен стать человек
-- Нужно больше обсуждать то, что нужно человеку
-- Фиксировать результаты
-  ![](../_png/Pasted%20image%2020250922090517.png)
-
-Что ещё нужно сделать:
-- Настроить периодичность встреч
-- Не усложнять (не нужно фиксировать всё)
-- Длительность постараться сделать не больше часа (в месяц на всех человек)
-
-### Систематизация своего развития
-
-Приёмы для упрощения саморазвития:
-- выделить время для развития
-- завести карточку навыков на себя
-- уточнить у руководителя, что стоит подтянуть
-- пройти курсы
-- добавить больше каналов информации
-- Спрашивать себя приодически: как я вырос?
-- [teamlead roadmap](https://tlroadmap.io/)
-
-
+- [Управление временем](https://tlroadmap.io/self-skills/time-management/time-management.html)
+- [Time Management Techniques](https://www.mindtools.com/pages/main/newMN_HTE.htm)
+- [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique)
+- [Getting Things Done (GTD)](https://gettingthingsdone.com/)
+- [Time Blocking](https://calendar.com/blog/time-blocking/)
