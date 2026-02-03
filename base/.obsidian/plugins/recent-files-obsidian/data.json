@@ -5,12 +5,12 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "AI Instruments",
-      "path": "ai/AI Instruments.md"
-    },
-    {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
     },
     {
       "basename": "DISC",

@@ -425,8 +425,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 396.5,
-    "collapsed": true
+    "width": 396.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -449,26 +448,26 @@
   },
   "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
+    "_png/Pasted image 20260203195915.png",
+    "_png/Pasted image 20260203194424.png",
+    "agile/agile.md",
+    "architecture/System Design/System Design.md",
     "_png/Pasted image 20260202211517.png",
     "_png/Pasted image 20260202205749.png",
     "_png/Pasted image 20260202205620.png",
     "_png/Pasted image 20260202205350.png",
     "_png/Pasted image 20260202204957.png",
     "ai/AI Instruments.md",
-    "agile/agile.md",
     "_png/Pasted image 20260131192403.png",
     "_png/Pasted image 20260131191329.png",
     "_png/Pasted image 20260131191229.png",
     "_png/Pasted image 20260131171338.png",
-    "_png/Pasted image 20260131132735.png",
-    "_png/Pasted image 20260131132140.png",
     "agile/DISC.md",
     "agile/Team.md",
     "agile/Teamlead.md",
     "agile/Как быть хорошим тимлидом.md",
     "ai/AI.md",
     "ai/AI Agent.md",
-    "architecture/System Design/System Design.md",
     "devops/docker/Docker + Ansible.md",
     "architecture/System Design",
     "devops/kubernetes/Kubernetes + Helm.md",
