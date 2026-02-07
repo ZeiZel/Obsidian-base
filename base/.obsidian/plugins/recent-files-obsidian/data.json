@@ -5,6 +5,10 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
     },
@@ -23,10 +27,6 @@
     {
       "basename": "backend",
       "path": "backend/backend.md"
-    },
-    {
-      "basename": "AI Instruments",
-      "path": "ai/AI Instruments.md"
     },
     {
       "basename": "Networks",
