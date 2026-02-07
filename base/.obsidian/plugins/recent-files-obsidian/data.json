@@ -5,16 +5,36 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "The Bezos Mandath",
-      "path": "cs/The Bezos Mandath.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
+      "basename": "Client-server architecture",
+      "path": "concepts/Client-server architecture.md"
+    },
+    {
+      "basename": "REST",
+      "path": "backend/REST/REST.md"
+    },
+    {
+      "basename": "BFF",
+      "path": "backend/REST/BFF.md"
+    },
+    {
+      "basename": "backend",
+      "path": "backend/backend.md"
     },
     {
       "basename": "AI Instruments",
       "path": "ai/AI Instruments.md"
     },
     {
-      "basename": "agile",
-      "path": "agile/agile.md"
+      "basename": "Networks",
+      "path": "cs/Networks/Networks.md"
+    },
+    {
+      "basename": "The Bezos Mandath",
+      "path": "cs/The Bezos Mandath.md"
     },
     {
       "basename": "DISC",
@@ -81,10 +101,6 @@
       "path": "frontend/State Managers/Zustand.md"
     },
     {
-      "basename": "Networks",
-      "path": "cs/Networks/Networks.md"
-    },
-    {
       "basename": "React Query",
       "path": "frontend/React/React Query.md"
     },
@@ -149,10 +165,6 @@
       "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
     },
     {
-      "basename": "Client-server architecture",
-      "path": "concepts/Client-server architecture.md"
-    },
-    {
       "basename": "State-management",
       "path": "concepts/State-management.md"
     },
@@ -187,18 +199,6 @@
     {
       "basename": "07 Простые компоненты",
       "path": "frontend/NextJS/_lessons/07 Простые компоненты.md"
-    },
-    {
-      "basename": "11 Server side rendering",
-      "path": "frontend/NextJS/_lessons/11 Server side rendering.md"
-    },
-    {
-      "basename": "08 Statefull компоненты",
-      "path": "frontend/NextJS/_lessons/08 Statefull компоненты.md"
-    },
-    {
-      "basename": "Плагины для разработки",
-      "path": "tools/nvim/_lessons/Плагины для разработки.md"
     }
   ],
   "omittedPaths": [],
