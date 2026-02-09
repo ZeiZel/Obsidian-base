@@ -5,6 +5,10 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
+      "basename": "Figma",
+      "path": "Design/Figma.md"
+    },
+    {
       "basename": "AI Instruments",
       "path": "ai/AI Instruments.md"
     },
@@ -79,10 +83,6 @@
     {
       "basename": "Python",
       "path": "cs/Python.md"
-    },
-    {
-      "basename": "Figma",
-      "path": "Design/Figma.md"
     },
     {
       "basename": "Design",
