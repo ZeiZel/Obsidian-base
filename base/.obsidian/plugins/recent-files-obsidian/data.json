@@ -5,16 +5,20 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "Figma",
-      "path": "Design/Figma.md"
-    },
-    {
       "basename": "AI Instruments",
       "path": "ai/AI Instruments.md"
     },
     {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "TMUX",
+      "path": "tools/TMUX.md"
+    },
+    {
+      "basename": "Figma",
+      "path": "Design/Figma.md"
     },
     {
       "basename": "Client-server architecture",
@@ -195,10 +199,6 @@
     {
       "basename": "04 Старт проекта",
       "path": "frontend/NextJS/_lessons/04 Старт проекта.md"
-    },
-    {
-      "basename": "07 Простые компоненты",
-      "path": "frontend/NextJS/_lessons/07 Простые компоненты.md"
     }
   ],
   "omittedPaths": [],
