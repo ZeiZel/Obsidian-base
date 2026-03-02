@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
       "basename": "AI Instruments",
       "path": "ai/AI Instruments.md"
     },
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "Docker + Ansible",
+      "path": "devops/docker/Docker + Ansible.md"
     },
     {
       "basename": "TMUX",
@@ -69,10 +77,6 @@
       "path": "ai/AI Agent.md"
     },
     {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
@@ -115,10 +119,6 @@
     {
       "basename": "Functional programming",
       "path": "cs/Functional programming.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
     },
     {
       "basename": "AI and Data Science",
