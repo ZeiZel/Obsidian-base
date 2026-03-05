@@ -8,30 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "c781478aa3763db1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/docker/Docker + Ansible.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Docker + Ansible"
-            }
-          },
-          {
             "id": "89542ad633dd7c63",
             "type": "leaf",
             "state": {
@@ -150,57 +126,9 @@
               "icon": "lucide-file",
               "title": "System Design"
             }
-          },
-          {
-            "id": "97f50ce1c6b2ea94",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ai/AI Instruments.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "AI Instruments"
-            }
-          },
-          {
-            "id": "eb165803f0c34007",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/Microservices/Микросервисы.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Микросервисы"
-            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -214,7 +142,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "48c5943284c71db8",
+            "id": "a661d14d2713db58",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -224,6 +152,16 @@
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
+            }
+          },
+          {
+            "id": "d29b4086a66c80f5",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
             }
           },
           {
@@ -254,17 +192,7 @@
             }
           },
           {
-            "id": "d29b4086a66c80f5",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
-            }
-          },
-          {
-            "id": "a661d14d2713db58",
+            "id": "707597b1b9541b3b",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -358,43 +286,13 @@
             }
           },
           {
-            "id": "a268921d7fc4db3c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "94e39b40241f6337",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "e568235c50ed9025",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "2f525826da796790",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
@@ -417,10 +315,20 @@
             "state": {
               "type": "footnotes",
               "state": {
-                "file": "ai/AI Instruments.md"
+                "file": "obsidian/Obsidian.md"
               },
               "icon": "lucide-file-signature",
               "title": "Footnotes"
+            }
+          },
+          {
+            "id": "6ebeadffba40c545",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           }
         ],
@@ -447,13 +355,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ai/AI Instruments.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of AI Instruments"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -485,11 +393,18 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "97f50ce1c6b2ea94",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
-    "architecture/System Design/System Design.md",
+    "_png/Pasted image 20260305212037.png",
+    "_png/Pasted image 20260305211443.png",
+    "_png/Pasted image 20260305211424.png",
+    "_png/Pasted image 20260305210124.png",
+    "_png/Pasted image 20260305205644.png",
+    "_png/Pasted image 20260305205612.png",
     "backend/Microservices/Микросервисы.md",
+    "obsidian/Obsidian.md",
     "ai/AI Instruments.md",
+    "architecture/System Design/System Design.md",
     "agile/agile.md",
     "devops/docker/Docker + Ansible.md",
     "_png/Pasted image 20260217203144.png",
@@ -497,11 +412,6 @@
     "_png/Pasted image 20260217201744.png",
     "_png/Pasted image 20260217201734.png",
     "_png/Pasted image 20260217201721.png",
-    "_png/Pasted image 20260217201710.png",
-    "_png/Pasted image 20260217201659.png",
-    "_png/Pasted image 20260217200559.png",
-    "_png/Pasted image 20260217200550.png",
-    "_png/Pasted image 20260217200542.png",
     "tools/TMUX.md",
     "Design/Figma.md",
     "concepts/Client-server architecture.md",
@@ -522,8 +432,6 @@
     "database/database.md",
     "cs/Python.md",
     "Design/Design.md",
-    "cs/NASA coding standarts.md",
-    "Design/DaVinci Resolve/Davinci resolve.md",
     "Tags",
     "cs/Networks",
     "ai",

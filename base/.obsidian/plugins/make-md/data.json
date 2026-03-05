@@ -60,7 +60,8 @@
     "//Development/Development/Инструменты",
     "//Development/Development/Architecture",
     "//Development/Development/Architecture/Development/Architecture/FSD",
-    "//Design"
+    "//Design",
+    "//obsidian"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

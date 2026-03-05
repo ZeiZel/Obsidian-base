@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "AI Instruments",
-      "path": "ai/AI Instruments.md"
-    },
-    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Микросервисы",
       "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "Obsidian",
+      "path": "obsidian/Obsidian.md"
+    },
+    {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
     },
     {
       "basename": "agile",
@@ -195,10 +199,6 @@
     {
       "basename": "20 Дополнения",
       "path": "frontend/NextJS/_lessons/20 Дополнения.md"
-    },
-    {
-      "basename": "04 Старт проекта",
-      "path": "frontend/NextJS/_lessons/04 Старт проекта.md"
     }
   ],
   "omittedPaths": [],
