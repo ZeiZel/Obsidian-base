@@ -1,0 +1,58 @@
+{
+  "nodes": [
+    {
+      "id": "agent",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 140,
+      "height": 70,
+      "text": "## Agent\nПринимает решения"
+    },
+    {
+      "id": "environment",
+      "type": "text",
+      "x": 250,
+      "y": 0,
+      "width": 150,
+      "height": 70,
+      "text": "## Environment\nСреда"
+    },
+    {
+      "id": "action",
+      "type": "text",
+      "x": 150,
+      "y": -40,
+      "width": 90,
+      "height": 40,
+      "text": "action"
+    },
+    {
+      "id": "state-reward",
+      "type": "text",
+      "x": 130,
+      "y": 80,
+      "width": 130,
+      "height": 50,
+      "text": "state, reward"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "agent",
+      "toNode": "environment",
+      "fromSide": "right",
+      "toSide": "left",
+      "label": "action"
+    },
+    {
+      "id": "e2",
+      "fromNode": "environment",
+      "toNode": "agent",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "label": "state, reward"
+    }
+  ]
+}

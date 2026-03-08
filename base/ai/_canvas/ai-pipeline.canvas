@@ -1,0 +1,79 @@
+{
+  "nodes": [
+    {
+      "id": "analyze",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 130,
+      "height": 90,
+      "text": "## Анализ\nтребований\n\n*PRD, Stories*"
+    },
+    {
+      "id": "design",
+      "type": "text",
+      "x": 160,
+      "y": 0,
+      "width": 130,
+      "height": 90,
+      "text": "## Дизайн\nрешения\n\n*Архитектура*"
+    },
+    {
+      "id": "build",
+      "type": "text",
+      "x": 320,
+      "y": 0,
+      "width": 130,
+      "height": 90,
+      "text": "## Build\n\n*Код, Тесты*"
+    },
+    {
+      "id": "deploy",
+      "type": "text",
+      "x": 480,
+      "y": 0,
+      "width": 130,
+      "height": 90,
+      "text": "## Deploy\n\n*CI/CD*"
+    },
+    {
+      "id": "monitor",
+      "type": "text",
+      "x": 640,
+      "y": 0,
+      "width": 130,
+      "height": 90,
+      "text": "## Monitor\n\n*Метрики*"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "analyze",
+      "toNode": "design",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e2",
+      "fromNode": "design",
+      "toNode": "build",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e3",
+      "fromNode": "build",
+      "toNode": "deploy",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e4",
+      "fromNode": "deploy",
+      "toNode": "monitor",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ]
+}

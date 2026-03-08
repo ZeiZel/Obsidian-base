@@ -1,0 +1,63 @@
+{
+  "nodes": [
+    {
+      "id": "supervisor",
+      "type": "text",
+      "x": 100,
+      "y": 0,
+      "width": 160,
+      "height": 70,
+      "text": "## Supervisor\n(Manager)"
+    },
+    {
+      "id": "agent1",
+      "type": "text",
+      "x": -100,
+      "y": 150,
+      "width": 120,
+      "height": 70,
+      "text": "## Agent 1\nCoder"
+    },
+    {
+      "id": "agent2",
+      "type": "text",
+      "x": 100,
+      "y": 150,
+      "width": 120,
+      "height": 70,
+      "text": "## Agent 2\nTester"
+    },
+    {
+      "id": "agent3",
+      "type": "text",
+      "x": 300,
+      "y": 150,
+      "width": 120,
+      "height": 70,
+      "text": "## Agent 3\nDocs"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "supervisor",
+      "toNode": "agent1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "e2",
+      "fromNode": "supervisor",
+      "toNode": "agent2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "e3",
+      "fromNode": "supervisor",
+      "toNode": "agent3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ]
+}

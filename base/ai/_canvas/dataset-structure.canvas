@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "id": "dataset-title",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 50,
+      "text": "## Dataset (N samples)"
+    },
+    {
+      "id": "features",
+      "type": "text",
+      "x": 0,
+      "y": 60,
+      "width": 250,
+      "height": 120,
+      "text": "## Features (X)\n\n[x1, x2, x3, ..., xn]\n[x1, x2, x3, ..., xn]\n..."
+    },
+    {
+      "id": "target",
+      "type": "text",
+      "x": 260,
+      "y": 60,
+      "width": 140,
+      "height": 120,
+      "text": "## Target (y)\n\ny1\ny2\n..."
+    }
+  ],
+  "edges": []
+}

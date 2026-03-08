@@ -1,0 +1,210 @@
+{
+  "nodes": [
+    {
+      "id": "input-layer",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 130,
+      "height": 50,
+      "text": "## Входной слой"
+    },
+    {
+      "id": "x1",
+      "type": "text",
+      "x": 0,
+      "y": 60,
+      "width": 60,
+      "height": 40,
+      "text": "x1"
+    },
+    {
+      "id": "x2",
+      "type": "text",
+      "x": 0,
+      "y": 110,
+      "width": 60,
+      "height": 40,
+      "text": "x2"
+    },
+    {
+      "id": "x3",
+      "type": "text",
+      "x": 0,
+      "y": 160,
+      "width": 60,
+      "height": 40,
+      "text": "x3"
+    },
+    {
+      "id": "hidden-layer",
+      "type": "text",
+      "x": 180,
+      "y": 0,
+      "width": 130,
+      "height": 50,
+      "text": "## Скрытые слои"
+    },
+    {
+      "id": "h1",
+      "type": "text",
+      "x": 200,
+      "y": 60,
+      "width": 60,
+      "height": 40,
+      "text": "h1"
+    },
+    {
+      "id": "h2",
+      "type": "text",
+      "x": 200,
+      "y": 110,
+      "width": 60,
+      "height": 40,
+      "text": "h2"
+    },
+    {
+      "id": "h3",
+      "type": "text",
+      "x": 200,
+      "y": 160,
+      "width": 60,
+      "height": 40,
+      "text": "h3"
+    },
+    {
+      "id": "output-layer",
+      "type": "text",
+      "x": 360,
+      "y": 0,
+      "width": 130,
+      "height": 50,
+      "text": "## Выходной слой"
+    },
+    {
+      "id": "y1",
+      "type": "text",
+      "x": 380,
+      "y": 80,
+      "width": 60,
+      "height": 40,
+      "text": "y1"
+    },
+    {
+      "id": "y2",
+      "type": "text",
+      "x": 380,
+      "y": 140,
+      "width": 60,
+      "height": 40,
+      "text": "y2"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "x1",
+      "toNode": "h1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e2",
+      "fromNode": "x1",
+      "toNode": "h2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e3",
+      "fromNode": "x1",
+      "toNode": "h3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e4",
+      "fromNode": "x2",
+      "toNode": "h1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e5",
+      "fromNode": "x2",
+      "toNode": "h2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e6",
+      "fromNode": "x2",
+      "toNode": "h3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e7",
+      "fromNode": "x3",
+      "toNode": "h1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e8",
+      "fromNode": "x3",
+      "toNode": "h2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e9",
+      "fromNode": "x3",
+      "toNode": "h3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e10",
+      "fromNode": "h1",
+      "toNode": "y1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e11",
+      "fromNode": "h1",
+      "toNode": "y2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e12",
+      "fromNode": "h2",
+      "toNode": "y1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e13",
+      "fromNode": "h2",
+      "toNode": "y2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e14",
+      "fromNode": "h3",
+      "toNode": "y1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e15",
+      "fromNode": "h3",
+      "toNode": "y2",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ]
+}

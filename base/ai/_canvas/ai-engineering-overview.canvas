@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "research",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 150,
+      "height": 70,
+      "text": "## ML Research\n(Эксперименты)"
+    },
+    {
+      "id": "engineering",
+      "type": "text",
+      "x": 200,
+      "y": 0,
+      "width": 160,
+      "height": 70,
+      "text": "## AI Engineering\n(Интеграция)"
+    },
+    {
+      "id": "production",
+      "type": "text",
+      "x": 410,
+      "y": 0,
+      "width": 140,
+      "height": 70,
+      "text": "## Production\n(Продукт)"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "research",
+      "toNode": "engineering",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e2",
+      "fromNode": "engineering",
+      "toNode": "production",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ]
+}

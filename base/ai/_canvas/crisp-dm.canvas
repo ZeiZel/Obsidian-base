@@ -1,0 +1,102 @@
+{
+  "nodes": [
+    {
+      "id": "business",
+      "type": "text",
+      "x": 100,
+      "y": 0,
+      "width": 150,
+      "height": 60,
+      "text": "## Business\nUnderstanding"
+    },
+    {
+      "id": "data-understanding",
+      "type": "text",
+      "x": 0,
+      "y": 100,
+      "width": 150,
+      "height": 60,
+      "text": "## Data\nUnderstanding"
+    },
+    {
+      "id": "data-prep",
+      "type": "text",
+      "x": 200,
+      "y": 100,
+      "width": 150,
+      "height": 60,
+      "text": "## Data\nPreparation"
+    },
+    {
+      "id": "modeling",
+      "type": "text",
+      "x": 200,
+      "y": 200,
+      "width": 150,
+      "height": 60,
+      "text": "## Modeling"
+    },
+    {
+      "id": "evaluation",
+      "type": "text",
+      "x": 100,
+      "y": 300,
+      "width": 150,
+      "height": 60,
+      "text": "## Evaluation"
+    },
+    {
+      "id": "deployment",
+      "type": "text",
+      "x": 100,
+      "y": 400,
+      "width": 150,
+      "height": 60,
+      "text": "## Deployment"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "business",
+      "toNode": "data-understanding",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "e2",
+      "fromNode": "data-understanding",
+      "toNode": "data-prep",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "e3",
+      "fromNode": "data-prep",
+      "toNode": "modeling",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "e4",
+      "fromNode": "modeling",
+      "toNode": "evaluation",
+      "fromSide": "bottom",
+      "toSide": "right"
+    },
+    {
+      "id": "e5",
+      "fromNode": "data-understanding",
+      "toNode": "evaluation",
+      "fromSide": "bottom",
+      "toSide": "left"
+    },
+    {
+      "id": "e6",
+      "fromNode": "evaluation",
+      "toNode": "deployment",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ]
+}
