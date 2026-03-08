@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "AI Agent",
+      "path": "ai/AI Agent.md"
+    },
+    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
@@ -11,10 +23,6 @@
     {
       "basename": "Obsidian",
       "path": "obsidian/Obsidian.md"
-    },
-    {
-      "basename": "AI Instruments",
-      "path": "ai/AI Instruments.md"
     },
     {
       "basename": "agile",
@@ -71,14 +79,6 @@
     {
       "basename": "Как быть хорошим тимлидом",
       "path": "agile/Как быть хорошим тимлидом.md"
-    },
-    {
-      "basename": "AI",
-      "path": "ai/AI.md"
-    },
-    {
-      "basename": "AI Agent",
-      "path": "ai/AI Agent.md"
     },
     {
       "basename": "Kubernetes + Helm",

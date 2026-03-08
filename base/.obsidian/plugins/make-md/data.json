@@ -61,7 +61,8 @@
     "//Development/Development/Architecture",
     "//Development/Development/Architecture/Development/Architecture/FSD",
     "//Design",
-    "//obsidian"
+    "//obsidian",
+    "//ai"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
