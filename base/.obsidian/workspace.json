@@ -133,6 +133,54 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "agile/command.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "command"
+            }
+          },
+          {
+            "id": "18cb11eda651a65a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/Python.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Python"
+            }
+          },
+          {
+            "id": "7acea20d42b80e8d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "database/PostgreSQL.md",
                 "mode": "source",
                 "source": false,
@@ -150,9 +198,69 @@
               "icon": "lucide-file",
               "title": "PostgreSQL"
             }
+          },
+          {
+            "id": "29fddd001ce5c1e5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/Redis.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Redis"
+            }
+          },
+          {
+            "id": "d6676e121dfe14f3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/SQLite.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "SQLite"
+            }
+          },
+          {
+            "id": "56fd50fcdb77d81a",
+            "type": "leaf",
+            "state": {
+              "type": "mk-space",
+              "state": {
+                "path": "database"
+              },
+              "icon": "lucide-file",
+              "title": "database"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -165,6 +273,18 @@
         "id": "3a9f6fcffec95690",
         "type": "tabs",
         "children": [
+          {
+            "id": "4cc371cdec58e4ac",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "pinned": true,
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
+          },
           {
             "id": "a661d14d2713db58",
             "type": "leaf",
@@ -214,19 +334,8 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
-          },
-          {
-            "id": "4cc371cdec58e4ac",
-            "type": "leaf",
-            "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Navigator"
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -356,7 +465,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -379,20 +488,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/PostgreSQL.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PostgreSQL"
+              "title": "Outline of System Design"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 660.5
+    "width": 421.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -416,10 +526,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "53ffbeef20af95f0",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
-    "architecture/System Design/System Design.md",
+    "database/database.md",
+    "database/SQLite.md",
+    "database/Redis.md",
     "database/PostgreSQL.md",
+    "cs/Python.md",
+    "agile/command.md",
+    "agile/Teamlead.md",
+    "agile/Team.md",
+    "agile/agile.md",
+    "database/Valkey.md",
+    "database/DataGrip.md",
+    "architecture/System Design/System Design.md",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",
@@ -432,14 +552,8 @@
     "ai/_canvas/confusion-matrix.canvas",
     "database/_canvas",
     "ai/_canvas",
-    "database/database.md",
-    "database/SQLite.md",
-    "database/Valkey.md",
-    "database/Redis.md",
     "database/Prisma ORM.md",
     "database/Mongo DB.md",
-    "database/DataGrip.md",
-    "cs/Python.md",
     "ai/AI.md",
     "ai/AI and Data Science.md",
     "ai/AI Agent.md",
@@ -458,13 +572,10 @@
     "_png/Pasted image 20260305214135.png",
     "backend/Microservices/Микросервисы.md",
     "obsidian/Obsidian.md",
-    "agile/agile.md",
     "devops/docker/Docker + Ansible.md",
     "tools/TMUX.md",
     "Design/Figma.md",
     "concepts/Client-server architecture.md",
-    "backend/REST/REST.md",
-    "backend/REST/BFF.md",
     "architecture/System Design",
     "Tags",
     "cs/Networks",

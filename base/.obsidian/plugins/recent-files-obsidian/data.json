@@ -1,24 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "PostgreSQL",
-      "path": "database/PostgreSQL.md"
-    },
-    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "inner-join",
-      "path": "database/_canvas/inner-join.canvas"
-    },
-    {
-      "basename": "left-join",
-      "path": "database/_canvas/left-join.canvas"
-    },
-    {
-      "basename": "ecommerce-schema",
-      "path": "database/_canvas/ecommerce-schema.canvas"
     },
     {
       "basename": "database",
@@ -33,16 +17,36 @@
       "path": "database/Redis.md"
     },
     {
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
+    },
+    {
+      "basename": "Python",
+      "path": "cs/Python.md"
+    },
+    {
+      "basename": "command",
+      "path": "agile/command.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "Team",
+      "path": "agile/Team.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "Prisma ORM",
       "path": "database/Prisma ORM.md"
     },
     {
       "basename": "Mongo DB",
       "path": "database/Mongo DB.md"
-    },
-    {
-      "basename": "Python",
-      "path": "cs/Python.md"
     },
     {
       "basename": "AI",
@@ -75,10 +79,6 @@
     {
       "basename": "Obsidian",
       "path": "obsidian/Obsidian.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "Docker + Ansible",
@@ -119,14 +119,6 @@
     {
       "basename": "DISC",
       "path": "agile/DISC.md"
-    },
-    {
-      "basename": "Team",
-      "path": "agile/Team.md"
-    },
-    {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
     },
     {
       "basename": "Как быть хорошим тимлидом",

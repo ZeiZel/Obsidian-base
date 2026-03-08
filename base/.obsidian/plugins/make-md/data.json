@@ -65,7 +65,8 @@
     "//ai",
     "//cs",
     "//database",
-    "//database/database/_canvas"
+    "//database/database/_canvas",
+    "//agile"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
@@ -77,6 +78,8 @@
     "_assets",
     "_blocks"
   ],
+  "newFileLocation": "root",
+  "newFileFolderPath": "",
   "inlineBacklinks": false,
   "inlineContext": true,
   "inlineBacklinksExpanded": false,
