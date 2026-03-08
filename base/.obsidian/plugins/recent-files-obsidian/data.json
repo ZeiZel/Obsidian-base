@@ -1,16 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "AI Instruments",
-      "path": "ai/AI Instruments.md"
-    },
-    {
       "basename": "AI",
       "path": "ai/AI.md"
     },
     {
+      "basename": "Python",
+      "path": "cs/Python.md"
+    },
+    {
+      "basename": "AI and Data Science",
+      "path": "ai/AI and Data Science.md"
+    },
+    {
       "basename": "AI Agent",
       "path": "ai/AI Agent.md"
+    },
+    {
+      "basename": "AI Prompts",
+      "path": "ai/AI Prompts.md"
+    },
+    {
+      "basename": "AI Engineering",
+      "path": "ai/AI Engineering.md"
+    },
+    {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
     },
     {
       "basename": "System Design",
@@ -93,10 +109,6 @@
       "path": "database/database.md"
     },
     {
-      "basename": "Python",
-      "path": "cs/Python.md"
-    },
-    {
       "basename": "Design",
       "path": "Design/Design.md"
     },
@@ -117,20 +129,8 @@
       "path": "frontend/React/React Query.md"
     },
     {
-      "basename": "AI Prompts",
-      "path": "ai/AI Prompts.md"
-    },
-    {
       "basename": "Functional programming",
       "path": "cs/Functional programming.md"
-    },
-    {
-      "basename": "AI and Data Science",
-      "path": "ai/AI and Data Science.md"
-    },
-    {
-      "basename": "AI Engineering",
-      "path": "ai/AI Engineering.md"
     },
     {
       "basename": "index",

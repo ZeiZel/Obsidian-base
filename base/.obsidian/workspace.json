@@ -133,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ai/AI Instruments.md",
+                "file": "ai/AI.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -148,7 +148,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "AI Instruments"
+              "title": "AI"
             }
           }
         ],
@@ -216,7 +216,7 @@
             }
           },
           {
-            "id": "707597b1b9541b3b",
+            "id": "4cc371cdec58e4ac",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -379,13 +379,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ai/AI Instruments.md",
+                "file": "ai/AI.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of AI Instruments"
+              "title": "Outline of AI"
             }
           }
         ],
@@ -419,8 +419,13 @@
   },
   "active": "1625b8de94cf26c6",
   "lastOpenFiles": [
-    "ai/AI.md",
+    "cs/Python.md",
+    "ai/AI and Data Science.md",
     "ai/AI Agent.md",
+    "ai/AI Prompts.md",
+    "ai/AI Engineering.md",
+    "ai/AI Instruments.md",
+    "ai/AI.md",
     "architecture/System Design/System Design.md",
     "_png/Pasted image 20260305215557.png",
     "_png/Pasted image 20260305215510.png",
@@ -434,7 +439,6 @@
     "_png/Pasted image 20260305214135.png",
     "backend/Microservices/Микросервисы.md",
     "obsidian/Obsidian.md",
-    "ai/AI Instruments.md",
     "agile/agile.md",
     "devops/docker/Docker + Ansible.md",
     "tools/TMUX.md",
@@ -452,9 +456,6 @@
     "architecture/System Design",
     "devops/kubernetes/Kubernetes + Helm.md",
     "devops/kubernetes/Helmfile.md",
-    "database/database.md",
-    "cs/Python.md",
-    "Design/Design.md",
     "Tags",
     "cs/Networks",
     "ai",
