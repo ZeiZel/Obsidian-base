@@ -1,41 +1,5 @@
 #ORM #Prisma
 
-## Решение проблем
-
-###### 1) Если редактор не видит обновлённые типы после generate
-
-Если слово `data` подчёркнуто и не показываются новые типы, то нужно с _ctrl_ тыкнуть по функции `create()`, чтобы редактор подгрузил типы и увидел обновления модели
-
-![](_png/675890cc4ddefaaa2d024e2f9e3438d8.png)
-
-Так выглядит конечный файл
-
-![](_png/efaabebf4a298762729b406b65a4a708.png)
-
-##### 2) Подключение призмы к SQL Server
-
-Ссылки на решение проблемы:
-
-- [Настройки SQL Server]](https://vk.com/away.php?to=https%3A%2F%2Fgithub.com%2Ftypeorm%2Ftypeorm%2Fissues%2F2133&cc_key=)
-- [Проверка подключения через JetBrains](https://vk.com/away.php?to=https%3A%2F%2Fwww.jetbrains.com%2Fhelp%2Fdatagrip%2Fconnecting-to-sql-server-express-localdb.html%23step-2-create-the-localdb-connection&cc_key=)
-- [Решение небезопасного подключения](https://vk.com/away.php?to=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F60226370%2Fcertificate-error-when-connecting-to-sql-server&cc_key=)
-
-Всё должно быть подключено
-
-![](_png/dc7f92a5d9ca1bacca8daa0af59809bf.png)
-
-Должен быть включён TCP/IP
-
-![](_png/6d96e1dba1602e3031f51bab76ea967b.png)
-
-Выполняем все инструкции jetbrains по их ссылке.
-
-![](_png/836e1751ec2bdedbc51d86f92d17d857.png)
-
-В `datagrip` составляем запрос на подключение внутри окна `ctrl+alt+shift+s`
-
-![](_png/ece43f9ff8d7d851a4cfd18aeeb4a15f.png)
-
 ## Project Setup
 
 Первым делом, нужно установить все нужные модули для нашего проекта

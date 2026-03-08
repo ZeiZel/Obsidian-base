@@ -1,12 +1,52 @@
 {
   "recentFiles": [
     {
-      "basename": "AI",
-      "path": "ai/AI.md"
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "inner-join",
+      "path": "database/_canvas/inner-join.canvas"
+    },
+    {
+      "basename": "left-join",
+      "path": "database/_canvas/left-join.canvas"
+    },
+    {
+      "basename": "ecommerce-schema",
+      "path": "database/_canvas/ecommerce-schema.canvas"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
+      "basename": "SQLite",
+      "path": "database/SQLite.md"
+    },
+    {
+      "basename": "Redis",
+      "path": "database/Redis.md"
+    },
+    {
+      "basename": "Prisma ORM",
+      "path": "database/Prisma ORM.md"
+    },
+    {
+      "basename": "Mongo DB",
+      "path": "database/Mongo DB.md"
     },
     {
       "basename": "Python",
       "path": "cs/Python.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
     },
     {
       "basename": "AI and Data Science",
@@ -27,10 +67,6 @@
     {
       "basename": "AI Instruments",
       "path": "ai/AI Instruments.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Микросервисы",
@@ -105,10 +141,6 @@
       "path": "devops/kubernetes/Helmfile.md"
     },
     {
-      "basename": "database",
-      "path": "database/database.md"
-    },
-    {
       "basename": "Design",
       "path": "Design/Design.md"
     },
@@ -167,38 +199,6 @@
     {
       "basename": "SEO",
       "path": "frontend/SEO.md"
-    },
-    {
-      "basename": "NeoVim - с нуля + конфигурирование",
-      "path": "tools/nvim/NeoVim - с нуля + конфигурирование.md"
-    },
-    {
-      "basename": "State-management",
-      "path": "concepts/State-management.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Bash",
-      "path": "devops/Linux/Bash/Bash.md"
-    },
-    {
-      "basename": "RegExp",
-      "path": "cs/RegExp.md"
-    },
-    {
-      "basename": "14 Страница продуктов",
-      "path": "frontend/NextJS/_lessons/14 Страница продуктов.md"
-    },
-    {
-      "basename": "React + Next.js - с нуля",
-      "path": "frontend/NextJS/React + Next.js - с нуля.md"
-    },
-    {
-      "basename": "20 Дополнения",
-      "path": "frontend/NextJS/_lessons/20 Дополнения.md"
     }
   ],
   "omittedPaths": [],

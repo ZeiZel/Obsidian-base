@@ -128,12 +128,12 @@
             }
           },
           {
-            "id": "1625b8de94cf26c6",
+            "id": "53ffbeef20af95f0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ai/AI.md",
+                "file": "database/PostgreSQL.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -148,7 +148,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "AI"
+              "title": "PostgreSQL"
             }
           }
         ],
@@ -379,21 +379,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ai/AI.md",
+                "file": "database/PostgreSQL.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of AI"
+              "title": "Outline of PostgreSQL"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 396.5
+    "width": 660.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -417,16 +416,36 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "1625b8de94cf26c6",
+  "active": "53ffbeef20af95f0",
   "lastOpenFiles": [
+    "architecture/System Design/System Design.md",
+    "database/PostgreSQL.md",
+    "database/_canvas/inner-join.canvas",
+    "database/_canvas/left-join.canvas",
+    "database/_canvas/ecommerce-schema.canvas",
+    "ai/_canvas/ml-pipeline-modern.canvas",
+    "ai/_canvas/crisp-dm.canvas",
+    "ai/_canvas/ds-ml-hierarchy.canvas",
+    "ai/_canvas/mlops-pipeline.canvas",
+    "ai/_canvas/rl-loop.canvas",
+    "ai/_canvas/gan-architecture.canvas",
+    "ai/_canvas/confusion-matrix.canvas",
+    "database/_canvas",
+    "ai/_canvas",
+    "database/database.md",
+    "database/SQLite.md",
+    "database/Valkey.md",
+    "database/Redis.md",
+    "database/Prisma ORM.md",
+    "database/Mongo DB.md",
+    "database/DataGrip.md",
     "cs/Python.md",
+    "ai/AI.md",
     "ai/AI and Data Science.md",
     "ai/AI Agent.md",
     "ai/AI Prompts.md",
     "ai/AI Engineering.md",
     "ai/AI Instruments.md",
-    "ai/AI.md",
-    "architecture/System Design/System Design.md",
     "_png/Pasted image 20260305215557.png",
     "_png/Pasted image 20260305215510.png",
     "_png/Pasted image 20260305215414.png",
@@ -446,24 +465,13 @@
     "concepts/Client-server architecture.md",
     "backend/REST/REST.md",
     "backend/REST/BFF.md",
-    "backend/backend.md",
-    "cs/Networks/Networks.md",
-    "cs/The Bezos Mandath.md",
-    "agile/DISC.md",
-    "agile/Team.md",
-    "agile/Teamlead.md",
-    "agile/Как быть хорошим тимлидом.md",
     "architecture/System Design",
-    "devops/kubernetes/Kubernetes + Helm.md",
-    "devops/kubernetes/Helmfile.md",
     "Tags",
     "cs/Networks",
     "ai",
     "Untitled.base",
     "_png/атмосферный звук моря и крики чаек.mp3",
     "architecture",
-    "concepts",
-    "_png",
-    "RoadMap"
+    "concepts"
   ]
 }

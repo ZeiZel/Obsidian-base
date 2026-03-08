@@ -63,7 +63,9 @@
     "//Design",
     "//obsidian",
     "//ai",
-    "//cs"
+    "//cs",
+    "//database",
+    "//database/database/_canvas"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
