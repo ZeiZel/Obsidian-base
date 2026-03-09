@@ -278,22 +278,12 @@
             "type": "leaf",
             "pinned": true,
             "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "pinned": true,
-              "icon": "layout-grid",
-              "title": "Navigator"
-            }
-          },
-          {
-            "id": "a661d14d2713db58",
-            "type": "leaf",
-            "state": {
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
                 "autoReveal": false
               },
+              "pinned": true,
               "icon": "lucide-folder-closed",
               "title": "Files"
             }
@@ -334,8 +324,19 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
+          },
+          {
+            "id": "034678fd4509816e",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -458,6 +459,16 @@
             "id": "6ebeadffba40c545",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "00087c6e9005b93e",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -465,7 +476,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 9
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -528,6 +539,17 @@
   },
   "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
+    "_png/Pasted image 20260309164337.png",
+    "_png/Pasted image 20260309164259.png",
+    "_png/Pasted image 20260309164220.png",
+    "_png/Pasted image 20260309162454.png",
+    "_png/Pasted image 20260309162428.png",
+    "_png/Pasted image 20260309162356.png",
+    "_png/Pasted image 20260309162331.png",
+    "_png/Pasted image 20260309162318.png",
+    "_png/Pasted image 20260309162305.png",
+    "_png/Pasted image 20260309162253.png",
+    "_png/Pasted image 20260309162213.png",
     "database/database.md",
     "database/SQLite.md",
     "database/Redis.md",
@@ -560,22 +582,11 @@
     "ai/AI Prompts.md",
     "ai/AI Engineering.md",
     "ai/AI Instruments.md",
-    "_png/Pasted image 20260305215557.png",
-    "_png/Pasted image 20260305215510.png",
-    "_png/Pasted image 20260305215414.png",
-    "_png/Pasted image 20260305215359.png",
-    "_png/Pasted image 20260305215345.png",
-    "_png/Pasted image 20260305215332.png",
-    "_png/Pasted image 20260305214340.png",
-    "_png/Pasted image 20260305214238.png",
-    "_png/Pasted image 20260305214154.png",
-    "_png/Pasted image 20260305214135.png",
     "backend/Microservices/Микросервисы.md",
     "obsidian/Obsidian.md",
     "devops/docker/Docker + Ansible.md",
     "tools/TMUX.md",
     "Design/Figma.md",
-    "concepts/Client-server architecture.md",
     "architecture/System Design",
     "Tags",
     "cs/Networks",
