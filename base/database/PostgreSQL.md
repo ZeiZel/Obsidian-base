@@ -1736,6 +1736,1328 @@ WHERE table_name = 'users';
 
 ---
 
+### ENUM типы
+
+ENUM — перечисляемый тип с фиксированным набором значений.
+
+```sql
+-- Создание ENUM типа
+CREATE TYPE order_status AS ENUM (
+    'pending',
+    'processing',
+    'shipped',
+    'delivered',
+    'cancelled'
+);
+
+CREATE TYPE user_role AS ENUM ('admin', 'moderator', 'user', 'guest');
+
+-- Использование в таблице
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    status order_status DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Вставка
+INSERT INTO orders (status) VALUES ('pending');
+INSERT INTO orders (status) VALUES ('shipped');
+
+-- Ошибка: значение не из списка
+INSERT INTO orders (status) VALUES ('unknown');  -- ERROR!
+
+-- Фильтрация
+SELECT * FROM orders WHERE status = 'pending';
+SELECT * FROM orders WHERE status IN ('pending', 'processing');
+
+-- Сравнение (по порядку определения)
+SELECT * FROM orders WHERE status > 'processing';  -- shipped, delivered, cancelled
+
+-- Добавление нового значения
+ALTER TYPE order_status ADD VALUE 'refunded';
+ALTER TYPE order_status ADD VALUE 'on_hold' BEFORE 'processing';
+ALTER TYPE order_status ADD VALUE 'returned' AFTER 'delivered';
+
+-- Переименование значения (PostgreSQL 10+)
+ALTER TYPE order_status RENAME VALUE 'cancelled' TO 'canceled';
+
+-- Просмотр всех значений ENUM
+SELECT unnest(enum_range(NULL::order_status));
+
+SELECT enumlabel
+FROM pg_enum
+WHERE enumtypid = 'order_status'::regtype
+ORDER BY enumsortorder;
+
+-- Удаление ENUM типа
+DROP TYPE order_status;  -- Ошибка, если используется
+DROP TYPE order_status CASCADE;  -- Удалит зависимые колонки
+```
+
+#### ENUM vs Lookup Table
+
+```sql
+-- Подход 1: ENUM
+CREATE TYPE priority AS ENUM ('low', 'medium', 'high', 'critical');
+
+-- Подход 2: Lookup Table (справочник)
+CREATE TABLE priorities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    sort_order INTEGER,
+    color VARCHAR(7),
+    description TEXT
+);
+
+INSERT INTO priorities (name, sort_order, color) VALUES
+    ('low', 1, '#00ff00'),
+    ('medium', 2, '#ffff00'),
+    ('high', 3, '#ff8800'),
+    ('critical', 4, '#ff0000');
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(200),
+    priority_id INTEGER REFERENCES priorities(id)
+);
+```
+
+| Критерий | ENUM | Lookup Table |
+|----------|------|--------------|
+| **Производительность** | Быстрее (хранится как integer) | JOIN для получения имени |
+| **Гибкость** | Сложно изменить/удалить | Легко добавить/изменить |
+| **Дополнительные данные** | Нет (только имя) | Любые поля |
+| **Миграции** | Сложнее | Просто INSERT/UPDATE |
+| **Когда использовать** | Статичные, редко меняющиеся | Часто меняющиеся данные |
+
+---
+
+### Составные типы (Composite Types)
+
+```sql
+-- Создание составного типа
+CREATE TYPE address AS (
+    street VARCHAR(200),
+    city VARCHAR(100),
+    postal_code VARCHAR(20),
+    country VARCHAR(100)
+);
+
+CREATE TYPE money_amount AS (
+    amount DECIMAL(15, 2),
+    currency CHAR(3)
+);
+
+-- Использование в таблице
+CREATE TABLE companies (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(200),
+    headquarters address,
+    annual_revenue money_amount
+);
+
+-- Вставка
+INSERT INTO companies (name, headquarters, annual_revenue) VALUES (
+    'Acme Corp',
+    ROW('123 Main St', 'New York', '10001', 'USA'),
+    ROW(1000000.00, 'USD')
+);
+
+-- Альтернативный синтаксис
+INSERT INTO companies (name, headquarters, annual_revenue) VALUES (
+    'Tech Inc',
+    ('456 Oak Ave', 'San Francisco', '94102', 'USA')::address,
+    (5000000.00, 'EUR')::money_amount
+);
+
+-- Доступ к полям
+SELECT
+    name,
+    (headquarters).city,
+    (headquarters).country,
+    (annual_revenue).amount,
+    (annual_revenue).currency
+FROM companies;
+
+-- Обновление одного поля
+UPDATE companies
+SET headquarters.city = 'Los Angeles'
+WHERE id = 1;
+
+-- Обновление всего типа
+UPDATE companies
+SET headquarters = ROW('789 Pine St', 'Boston', '02101', 'USA')
+WHERE id = 1;
+
+-- Функция, возвращающая составной тип
+CREATE FUNCTION get_default_address() RETURNS address AS $$
+    SELECT ROW('Unknown', 'Unknown', '00000', 'Unknown')::address;
+$$ LANGUAGE SQL;
+```
+
+---
+
+### Domain типы
+
+Domain — пользовательский тип на основе существующего с добавлением ограничений.
+
+```sql
+-- Email с валидацией
+CREATE DOMAIN email AS VARCHAR(255)
+    CHECK (VALUE ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+
+-- Положительное число
+CREATE DOMAIN positive_int AS INTEGER
+    CHECK (VALUE > 0);
+
+-- Процент (0-100)
+CREATE DOMAIN percentage AS DECIMAL(5, 2)
+    CHECK (VALUE >= 0 AND VALUE <= 100);
+
+-- Телефон
+CREATE DOMAIN phone_number AS VARCHAR(20)
+    CHECK (VALUE ~ '^\+?[0-9\s\-\(\)]+$');
+
+-- URL
+CREATE DOMAIN url AS TEXT
+    CHECK (VALUE ~* '^https?://[^\s]+$');
+
+-- Непустая строка
+CREATE DOMAIN non_empty_string AS VARCHAR(1000)
+    CHECK (LENGTH(TRIM(VALUE)) > 0);
+
+-- Использование
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email email NOT NULL UNIQUE,
+    phone phone_number,
+    age positive_int,
+    website url
+);
+
+-- Вставка
+INSERT INTO users (email, phone, age) VALUES
+    ('alice@example.com', '+1-555-123-4567', 25);
+
+-- Ошибка валидации
+INSERT INTO users (email, age) VALUES ('invalid-email', -5);  -- ERROR!
+
+-- Изменение domain
+ALTER DOMAIN positive_int ADD CONSTRAINT min_age CHECK (VALUE >= 18);
+ALTER DOMAIN positive_int DROP CONSTRAINT min_age;
+
+-- Удаление
+DROP DOMAIN email;
+DROP DOMAIN email CASCADE;  -- Удалит зависимые колонки
+```
+
+---
+
+### Sequences (Последовательности)
+
+```sql
+-- Создание последовательности
+CREATE SEQUENCE order_number_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 10;  -- Кеширование для производительности
+
+-- Циклическая последовательность
+CREATE SEQUENCE rotation_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 100
+    CYCLE;  -- Начнёт сначала после 100
+
+-- Использование
+SELECT nextval('order_number_seq');  -- 1000
+SELECT nextval('order_number_seq');  -- 1001
+SELECT currval('order_number_seq');  -- 1001 (текущее значение в сессии)
+
+-- В INSERT
+INSERT INTO orders (order_number) VALUES (nextval('order_number_seq'));
+
+-- Связывание с колонкой (как SERIAL)
+CREATE TABLE invoices (
+    id INTEGER PRIMARY KEY DEFAULT nextval('order_number_seq'),
+    amount DECIMAL(10, 2)
+);
+
+-- Установка значения
+SELECT setval('order_number_seq', 5000);  -- Следующий будет 5001
+SELECT setval('order_number_seq', 5000, false);  -- Следующий будет 5000
+
+-- Информация о последовательности
+SELECT * FROM order_number_seq;
+\d order_number_seq
+
+-- Изменение
+ALTER SEQUENCE order_number_seq RESTART WITH 10000;
+ALTER SEQUENCE order_number_seq INCREMENT BY 10;
+ALTER SEQUENCE order_number_seq OWNED BY invoices.id;
+
+-- Удаление
+DROP SEQUENCE order_number_seq;
+
+-- IDENTITY (PostgreSQL 10+, стандарт SQL)
+CREATE TABLE products (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(200)
+);
+
+CREATE TABLE products_v2 (
+    id INTEGER GENERATED BY DEFAULT AS IDENTITY (START WITH 100 INCREMENT BY 10),
+    name VARCHAR(200)
+);
+```
+
+---
+
+### Блокировки (Locks)
+
+PostgreSQL использует MVCC и различные уровни блокировок.
+
+#### Типы блокировок таблиц
+
+```sql
+-- Явная блокировка таблицы
+LOCK TABLE users IN ACCESS SHARE MODE;        -- Разрешает SELECT
+LOCK TABLE users IN ROW SHARE MODE;           -- SELECT FOR UPDATE
+LOCK TABLE users IN ROW EXCLUSIVE MODE;       -- UPDATE, DELETE, INSERT
+LOCK TABLE users IN SHARE UPDATE EXCLUSIVE MODE;  -- VACUUM, CREATE INDEX CONCURRENTLY
+LOCK TABLE users IN SHARE MODE;               -- Блокирует изменения
+LOCK TABLE users IN SHARE ROW EXCLUSIVE MODE; -- Как SHARE, но только один
+LOCK TABLE users IN EXCLUSIVE MODE;           -- Блокирует всё кроме ACCESS SHARE
+LOCK TABLE users IN ACCESS EXCLUSIVE MODE;    -- Полная блокировка (ALTER TABLE, DROP)
+
+-- Блокировка с таймаутом
+SET lock_timeout = '5s';
+LOCK TABLE users IN EXCLUSIVE MODE;
+```
+
+#### Блокировки строк
+
+```sql
+-- SELECT FOR UPDATE — блокирует строки до конца транзакции
+BEGIN;
+SELECT * FROM accounts WHERE id = 1 FOR UPDATE;
+-- Другие транзакции ждут
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+COMMIT;
+
+-- FOR UPDATE NOWAIT — ошибка если заблокировано
+SELECT * FROM accounts WHERE id = 1 FOR UPDATE NOWAIT;
+
+-- FOR UPDATE SKIP LOCKED — пропустить заблокированные строки
+-- Отлично для очередей!
+SELECT * FROM tasks
+WHERE status = 'pending'
+ORDER BY created_at
+LIMIT 1
+FOR UPDATE SKIP LOCKED;
+
+-- FOR SHARE — разделяемая блокировка (другие могут читать)
+SELECT * FROM products WHERE id = 1 FOR SHARE;
+
+-- FOR KEY SHARE — только блокировка ключа (для FK)
+SELECT * FROM products WHERE id = 1 FOR KEY SHARE;
+```
+
+#### Advisory Locks (Рекомендательные блокировки / Мьютексы)
+
+Для координации на уровне приложения.
+
+```sql
+-- Сессионные блокировки (до конца сессии или явного освобождения)
+SELECT pg_advisory_lock(12345);      -- Блокировка по числу
+SELECT pg_advisory_lock(1, 2);       -- Блокировка по паре чисел
+SELECT pg_advisory_unlock(12345);    -- Освобождение
+SELECT pg_advisory_unlock_all();     -- Освободить все
+
+-- Транзакционные блокировки (автоматически освобождаются при COMMIT/ROLLBACK)
+SELECT pg_advisory_xact_lock(12345);
+
+-- Попытка без ожидания
+SELECT pg_try_advisory_lock(12345);  -- Возвращает true/false
+SELECT pg_try_advisory_xact_lock(12345);
+
+-- Разделяемые (shared) блокировки
+SELECT pg_advisory_lock_shared(12345);
+SELECT pg_advisory_xact_lock_shared(12345);
+
+-- Пример: синглтон-джоб (только один процесс)
+DO $$
+BEGIN
+    IF pg_try_advisory_lock(hashtext('daily_report_job')) THEN
+        -- Выполняем работу
+        RAISE NOTICE 'Running daily report...';
+        PERFORM pg_sleep(10);  -- Имитация работы
+        PERFORM pg_advisory_unlock(hashtext('daily_report_job'));
+    ELSE
+        RAISE NOTICE 'Job already running, skipping';
+    END IF;
+END $$;
+
+-- Пример: блокировка по сущности
+-- Блокируем пользователя 42 для обновления
+SELECT pg_advisory_xact_lock(hashtext('user'), 42);
+UPDATE users SET balance = balance - 100 WHERE id = 42;
+COMMIT;  -- Автоматическое освобождение
+
+-- Просмотр текущих advisory locks
+SELECT * FROM pg_locks WHERE locktype = 'advisory';
+
+-- Мониторинг ожиданий
+SELECT
+    blocked.pid AS blocked_pid,
+    blocked.usename AS blocked_user,
+    blocking.pid AS blocking_pid,
+    blocking.usename AS blocking_user,
+    blocked.query AS blocked_query
+FROM pg_stat_activity blocked
+JOIN pg_locks bl ON blocked.pid = bl.pid
+JOIN pg_locks lock ON bl.locktype = lock.locktype
+    AND bl.relation = lock.relation
+    AND bl.pid != lock.pid
+JOIN pg_stat_activity blocking ON lock.pid = blocking.pid
+WHERE NOT bl.granted;
+```
+
+#### Deadlock Detection
+
+```sql
+-- PostgreSQL автоматически обнаруживает deadlock и прерывает одну транзакцию
+
+-- Настройка времени обнаружения
+SET deadlock_timeout = '1s';  -- По умолчанию
+
+-- Логирование deadlock
+-- В postgresql.conf:
+-- log_lock_waits = on
+-- deadlock_timeout = 1s
+
+-- Пример deadlock:
+-- Сессия 1:
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+-- ждёт...
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;  -- DEADLOCK!
+
+-- Сессия 2:
+BEGIN;
+UPDATE accounts SET balance = balance - 50 WHERE id = 2;
+-- ждёт...
+UPDATE accounts SET balance = balance + 50 WHERE id = 1;  -- DEADLOCK!
+
+-- Предотвращение: всегда обновляйте в одинаковом порядке
+-- Например, ORDER BY id
+```
+
+---
+
+### MVCC (Multi-Version Concurrency Control)
+
+PostgreSQL не блокирует данные при чтении благодаря MVCC.
+
+```sql
+-- Каждая строка имеет системные колонки
+SELECT
+    xmin,        -- ID транзакции, создавшей строку
+    xmax,        -- ID транзакции, удалившей/обновившей (0 если активна)
+    ctid,        -- Физическое расположение (страница, позиция)
+    *
+FROM users
+LIMIT 5;
+
+-- Как работает UPDATE под капотом:
+-- 1. Создаётся новая версия строки (INSERT)
+-- 2. Старая версия помечается как удалённая (xmax)
+-- 3. Обе версии существуют до VACUUM
+
+-- Снимок (snapshot) — какие данные видит транзакция
+-- Транзакция видит:
+-- - Свои изменения
+-- - Зафиксированные изменения других транзакций (на момент снимка)
+-- Не видит:
+-- - Незафиксированные изменения других транзакций
+-- - Изменения, зафиксированные после начала (для REPEATABLE READ)
+```
+
+---
+
+### VACUUM и ANALYZE
+
+VACUUM очищает "мёртвые" версии строк.
+
+```sql
+-- Обычный VACUUM — освобождает место для переиспользования
+VACUUM users;
+VACUUM VERBOSE users;  -- С подробностями
+
+-- VACUUM FULL — полная перезапись таблицы (блокирует!)
+VACUUM FULL users;  -- Освобождает место на диске
+
+-- VACUUM ANALYZE — VACUUM + обновление статистики
+VACUUM ANALYZE users;
+
+-- Только ANALYZE — обновление статистики для планировщика
+ANALYZE users;
+ANALYZE users(email, created_at);  -- Конкретные колонки
+
+-- Автоматический VACUUM (autovacuum)
+-- Настройки в postgresql.conf:
+-- autovacuum = on
+-- autovacuum_vacuum_threshold = 50
+-- autovacuum_vacuum_scale_factor = 0.2
+-- autovacuum_analyze_threshold = 50
+-- autovacuum_analyze_scale_factor = 0.1
+
+-- Настройки для конкретной таблицы
+ALTER TABLE logs SET (
+    autovacuum_vacuum_threshold = 1000,
+    autovacuum_vacuum_scale_factor = 0.1,
+    autovacuum_enabled = true
+);
+
+-- Мониторинг "раздутия" (bloat)
+SELECT
+    relname AS table_name,
+    n_live_tup AS live_rows,
+    n_dead_tup AS dead_rows,
+    ROUND(100.0 * n_dead_tup / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_ratio,
+    last_vacuum,
+    last_autovacuum,
+    last_analyze,
+    last_autoanalyze
+FROM pg_stat_user_tables
+WHERE n_dead_tup > 0
+ORDER BY n_dead_tup DESC;
+
+-- Активность autovacuum
+SELECT
+    schemaname,
+    relname,
+    last_autovacuum,
+    autovacuum_count,
+    last_autoanalyze,
+    autoanalyze_count
+FROM pg_stat_user_tables
+ORDER BY last_autovacuum DESC NULLS LAST;
+```
+
+---
+
+### Партиционирование (Partitioning)
+
+Разделение больших таблиц на части для производительности.
+
+#### Range Partitioning
+
+```sql
+-- Главная (partitioned) таблица
+CREATE TABLE logs (
+    id BIGSERIAL,
+    created_at TIMESTAMP NOT NULL,
+    level VARCHAR(10),
+    message TEXT
+) PARTITION BY RANGE (created_at);
+
+-- Партиции по месяцам
+CREATE TABLE logs_2024_01 PARTITION OF logs
+    FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
+
+CREATE TABLE logs_2024_02 PARTITION OF logs
+    FOR VALUES FROM ('2024-02-01') TO ('2024-03-01');
+
+CREATE TABLE logs_2024_03 PARTITION OF logs
+    FOR VALUES FROM ('2024-03-01') TO ('2024-04-01');
+
+-- Default партиция (для значений вне диапазонов)
+CREATE TABLE logs_default PARTITION OF logs DEFAULT;
+
+-- INSERT автоматически направляется в нужную партицию
+INSERT INTO logs (created_at, level, message)
+VALUES ('2024-02-15', 'ERROR', 'Something went wrong');
+-- Попадёт в logs_2024_02
+
+-- Индексы создаются на каждой партиции
+CREATE INDEX ON logs (created_at);
+
+-- Отключение партиции (для архивации)
+ALTER TABLE logs DETACH PARTITION logs_2024_01;
+
+-- Подключение партиции
+ALTER TABLE logs ATTACH PARTITION logs_old
+    FOR VALUES FROM ('2023-01-01') TO ('2023-02-01');
+```
+
+#### List Partitioning
+
+```sql
+CREATE TABLE orders (
+    id BIGSERIAL,
+    region VARCHAR(50) NOT NULL,
+    amount DECIMAL(10, 2),
+    created_at TIMESTAMP
+) PARTITION BY LIST (region);
+
+CREATE TABLE orders_europe PARTITION OF orders
+    FOR VALUES IN ('UK', 'DE', 'FR', 'IT', 'ES');
+
+CREATE TABLE orders_asia PARTITION OF orders
+    FOR VALUES IN ('JP', 'CN', 'KR', 'IN');
+
+CREATE TABLE orders_americas PARTITION OF orders
+    FOR VALUES IN ('US', 'CA', 'BR', 'MX');
+
+CREATE TABLE orders_other PARTITION OF orders DEFAULT;
+```
+
+#### Hash Partitioning
+
+```sql
+-- Равномерное распределение по хешу
+CREATE TABLE events (
+    id BIGSERIAL,
+    user_id INTEGER NOT NULL,
+    event_type VARCHAR(50),
+    data JSONB
+) PARTITION BY HASH (user_id);
+
+-- 4 партиции
+CREATE TABLE events_0 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 0);
+CREATE TABLE events_1 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 1);
+CREATE TABLE events_2 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 2);
+CREATE TABLE events_3 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 3);
+```
+
+#### Автоматизация партиционирования
+
+```sql
+-- Функция для создания месячных партиций
+CREATE OR REPLACE FUNCTION create_monthly_partition(
+    table_name TEXT,
+    year INTEGER,
+    month INTEGER
+) RETURNS VOID AS $$
+DECLARE
+    partition_name TEXT;
+    start_date DATE;
+    end_date DATE;
+BEGIN
+    partition_name := format('%s_%s_%s', table_name, year, LPAD(month::TEXT, 2, '0'));
+    start_date := make_date(year, month, 1);
+    end_date := start_date + INTERVAL '1 month';
+
+    EXECUTE format(
+        'CREATE TABLE IF NOT EXISTS %I PARTITION OF %I FOR VALUES FROM (%L) TO (%L)',
+        partition_name,
+        table_name,
+        start_date,
+        end_date
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+-- Использование
+SELECT create_monthly_partition('logs', 2024, 4);
+SELECT create_monthly_partition('logs', 2024, 5);
+```
+
+---
+
+### Репликация
+
+#### Streaming Replication (физическая)
+
+```bash
+# На мастере (postgresql.conf)
+wal_level = replica
+max_wal_senders = 10
+wal_keep_size = 1GB
+
+# На мастере (pg_hba.conf)
+host replication replicator replica_ip/32 scram-sha-256
+
+# На мастере — создание пользователя
+CREATE ROLE replicator WITH REPLICATION LOGIN PASSWORD 'secret';
+
+# На реплике — базовый бэкап
+pg_basebackup -h master_ip -U replicator -D /var/lib/postgresql/data -P -R
+
+# -R создаёт standby.signal и настраивает primary_conninfo
+```
+
+#### Logical Replication (логическая)
+
+```sql
+-- На публикующем сервере
+CREATE PUBLICATION my_pub FOR TABLE users, orders;
+-- Или все таблицы
+CREATE PUBLICATION all_tables FOR ALL TABLES;
+
+-- На подписывающем сервере
+CREATE SUBSCRIPTION my_sub
+    CONNECTION 'host=master_ip dbname=mydb user=replicator password=secret'
+    PUBLICATION my_pub;
+
+-- Управление
+ALTER PUBLICATION my_pub ADD TABLE products;
+ALTER SUBSCRIPTION my_sub REFRESH PUBLICATION;
+
+-- Мониторинг
+SELECT * FROM pg_stat_replication;      -- На мастере
+SELECT * FROM pg_stat_subscription;      -- На реплике
+```
+
+---
+
+### Connection Pooling
+
+#### PgBouncer
+
+```ini
+# pgbouncer.ini
+[databases]
+mydb = host=localhost port=5432 dbname=mydb
+
+[pgbouncer]
+listen_addr = 0.0.0.0
+listen_port = 6432
+auth_type = scram-sha-256
+auth_file = /etc/pgbouncer/userlist.txt
+pool_mode = transaction  # session, transaction, statement
+max_client_conn = 1000
+default_pool_size = 20
+min_pool_size = 5
+reserve_pool_size = 5
+```
+
+```sql
+-- Подключение через PgBouncer
+psql -h localhost -p 6432 -U myuser -d mydb
+
+-- Административная консоль PgBouncer
+psql -h localhost -p 6432 -U pgbouncer pgbouncer
+
+SHOW POOLS;
+SHOW CLIENTS;
+SHOW SERVERS;
+SHOW STATS;
+RELOAD;
+```
+
+---
+
+### Extensions (Расширения)
+
+```sql
+-- Список доступных расширений
+SELECT * FROM pg_available_extensions;
+
+-- Установленные расширения
+SELECT * FROM pg_extension;
+
+-- Установка расширения
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+CREATE EXTENSION IF NOT EXISTS "hstore";
+CREATE EXTENSION IF NOT EXISTS "postgis";
+
+-- Удаление
+DROP EXTENSION pg_trgm;
+
+-- Популярные расширения:
+
+-- uuid-ossp: генерация UUID
+CREATE EXTENSION "uuid-ossp";
+SELECT uuid_generate_v4();  -- Случайный UUID
+
+-- pgcrypto: криптография
+CREATE EXTENSION pgcrypto;
+SELECT crypt('password', gen_salt('bf'));  -- bcrypt
+SELECT encode(digest('data', 'sha256'), 'hex');  -- SHA-256
+
+-- pg_trgm: нечёткий поиск (триграммы)
+CREATE EXTENSION pg_trgm;
+CREATE INDEX idx_users_name_trgm ON users USING GIN (name gin_trgm_ops);
+SELECT * FROM users WHERE name % 'Jonh';  -- Найдёт John
+SELECT similarity('hello', 'helo');  -- 0.5
+
+-- hstore: key-value хранилище
+CREATE EXTENSION hstore;
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    attributes hstore
+);
+INSERT INTO products (attributes) VALUES ('color => red, size => large');
+SELECT attributes->'color' FROM products;
+
+-- pg_stat_statements: статистика запросов
+CREATE EXTENSION pg_stat_statements;
+SELECT
+    query,
+    calls,
+    total_exec_time / 1000 as total_seconds,
+    mean_exec_time as avg_ms
+FROM pg_stat_statements
+ORDER BY total_exec_time DESC
+LIMIT 10;
+
+-- tablefunc: crosstab (pivot tables)
+CREATE EXTENSION tablefunc;
+
+-- citext: регистронезависимый текст
+CREATE EXTENSION citext;
+CREATE TABLE users (email CITEXT UNIQUE);
+-- 'Alice@Example.com' = 'alice@example.com'
+```
+
+---
+
+### Row-Level Security (RLS)
+
+Ограничение доступа к строкам на уровне БД.
+
+```sql
+-- Включение RLS для таблицы
+ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
+
+-- Создание политики
+CREATE POLICY user_documents ON documents
+    FOR ALL  -- SELECT, INSERT, UPDATE, DELETE
+    TO app_user  -- Роль
+    USING (owner_id = current_setting('app.current_user_id')::INTEGER);
+
+-- Раздельные политики для разных операций
+CREATE POLICY select_own ON documents
+    FOR SELECT
+    USING (owner_id = current_setting('app.current_user_id')::INTEGER);
+
+CREATE POLICY insert_own ON documents
+    FOR INSERT
+    WITH CHECK (owner_id = current_setting('app.current_user_id')::INTEGER);
+
+CREATE POLICY update_own ON documents
+    FOR UPDATE
+    USING (owner_id = current_setting('app.current_user_id')::INTEGER)
+    WITH CHECK (owner_id = current_setting('app.current_user_id')::INTEGER);
+
+-- Политика для админов (видят всё)
+CREATE POLICY admin_all ON documents
+    FOR ALL
+    TO admin_role
+    USING (true);
+
+-- Установка контекста в приложении
+SET app.current_user_id = '42';
+SELECT * FROM documents;  -- Видит только свои
+
+-- Принудительное применение даже для owner таблицы
+ALTER TABLE documents FORCE ROW LEVEL SECURITY;
+
+-- Отключение RLS
+ALTER TABLE documents DISABLE ROW LEVEL SECURITY;
+
+-- Удаление политики
+DROP POLICY user_documents ON documents;
+
+-- Просмотр политик
+\d documents
+SELECT * FROM pg_policies WHERE tablename = 'documents';
+```
+
+---
+
+### LISTEN / NOTIFY (Pub/Sub)
+
+Асинхронные уведомления между сессиями.
+
+```sql
+-- Сессия 1: подписка на канал
+LISTEN order_events;
+LISTEN user_events;
+
+-- Сессия 2: отправка уведомления
+NOTIFY order_events, 'New order #123';
+NOTIFY user_events;  -- Без payload
+
+-- Использование в триггере
+CREATE OR REPLACE FUNCTION notify_order_change()
+RETURNS TRIGGER AS $$
+BEGIN
+    PERFORM pg_notify(
+        'order_events',
+        json_build_object(
+            'action', TG_OP,
+            'order_id', COALESCE(NEW.id, OLD.id),
+            'timestamp', NOW()
+        )::TEXT
+    );
+    RETURN COALESCE(NEW, OLD);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER order_notify_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON orders
+    FOR EACH ROW EXECUTE FUNCTION notify_order_change();
+
+-- Отмена подписки
+UNLISTEN order_events;
+UNLISTEN *;  -- Все каналы
+```
+
+Использование в Python:
+```python
+import psycopg2
+import select
+
+conn = psycopg2.connect(dsn)
+conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+
+cur = conn.cursor()
+cur.execute("LISTEN order_events;")
+
+while True:
+    if select.select([conn], [], [], 5) == ([], [], []):
+        print("Timeout")
+    else:
+        conn.poll()
+        while conn.notifies:
+            notify = conn.notifies.pop(0)
+            print(f"Got: {notify.channel} - {notify.payload}")
+```
+
+---
+
+### Foreign Data Wrappers (FDW)
+
+Доступ к внешним источникам данных как к таблицам.
+
+```sql
+-- postgres_fdw — другой PostgreSQL сервер
+CREATE EXTENSION postgres_fdw;
+
+CREATE SERVER remote_server
+    FOREIGN DATA WRAPPER postgres_fdw
+    OPTIONS (host 'remote.host', port '5432', dbname 'remotedb');
+
+CREATE USER MAPPING FOR local_user
+    SERVER remote_server
+    OPTIONS (user 'remote_user', password 'secret');
+
+-- Импорт таблиц
+IMPORT FOREIGN SCHEMA public
+    LIMIT TO (users, orders)
+    FROM SERVER remote_server
+    INTO local_schema;
+
+-- Или создание вручную
+CREATE FOREIGN TABLE remote_users (
+    id INTEGER,
+    name VARCHAR(100),
+    email VARCHAR(255)
+) SERVER remote_server
+OPTIONS (schema_name 'public', table_name 'users');
+
+-- Запросы как к обычной таблице
+SELECT * FROM remote_users WHERE id = 1;
+
+-- file_fdw — чтение CSV/текстовых файлов
+CREATE EXTENSION file_fdw;
+CREATE SERVER file_server FOREIGN DATA WRAPPER file_fdw;
+
+CREATE FOREIGN TABLE csv_data (
+    id INTEGER,
+    name TEXT,
+    value NUMERIC
+) SERVER file_server
+OPTIONS (filename '/path/to/data.csv', format 'csv', header 'true');
+```
+
+---
+
+### Мониторинг и диагностика
+
+#### Системные представления
+
+```sql
+-- Активные сессии
+SELECT
+    pid,
+    usename,
+    application_name,
+    client_addr,
+    state,
+    query_start,
+    NOW() - query_start AS duration,
+    LEFT(query, 100) AS query
+FROM pg_stat_activity
+WHERE state != 'idle'
+ORDER BY query_start;
+
+-- Долгие запросы (> 5 минут)
+SELECT
+    pid,
+    NOW() - query_start AS duration,
+    query
+FROM pg_stat_activity
+WHERE state = 'active'
+  AND NOW() - query_start > INTERVAL '5 minutes';
+
+-- Завершение запроса
+SELECT pg_cancel_backend(pid);      -- Мягкое (отмена запроса)
+SELECT pg_terminate_backend(pid);   -- Жёсткое (убить сессию)
+
+-- Блокировки
+SELECT
+    l.pid,
+    l.locktype,
+    l.mode,
+    l.granted,
+    a.usename,
+    a.query
+FROM pg_locks l
+JOIN pg_stat_activity a ON l.pid = a.pid
+WHERE NOT l.granted;
+
+-- Размеры таблиц
+SELECT
+    relname AS table_name,
+    pg_size_pretty(pg_table_size(relid)) AS table_size,
+    pg_size_pretty(pg_indexes_size(relid)) AS indexes_size,
+    pg_size_pretty(pg_total_relation_size(relid)) AS total_size
+FROM pg_stat_user_tables
+ORDER BY pg_total_relation_size(relid) DESC
+LIMIT 10;
+
+-- Размер базы данных
+SELECT pg_size_pretty(pg_database_size('mydb'));
+
+-- Использование индексов
+SELECT
+    relname AS table_name,
+    indexrelname AS index_name,
+    idx_scan AS scans,
+    idx_tup_read AS tuples_read,
+    idx_tup_fetch AS tuples_fetched
+FROM pg_stat_user_indexes
+ORDER BY idx_scan DESC;
+
+-- Неиспользуемые индексы
+SELECT
+    relname AS table_name,
+    indexrelname AS index_name,
+    pg_size_pretty(pg_relation_size(indexrelid)) AS size
+FROM pg_stat_user_indexes
+WHERE idx_scan = 0
+  AND indexrelid NOT IN (SELECT conindid FROM pg_constraint);
+
+-- Статистика по таблицам
+SELECT
+    relname,
+    seq_scan,           -- Последовательные сканирования
+    seq_tup_read,       -- Строки прочитаны seq scan
+    idx_scan,           -- Индексные сканирования
+    idx_tup_fetch,      -- Строки прочитаны через индекс
+    n_tup_ins,          -- Вставки
+    n_tup_upd,          -- Обновления
+    n_tup_del,          -- Удаления
+    n_live_tup,         -- Живые строки
+    n_dead_tup          -- Мёртвые строки
+FROM pg_stat_user_tables
+ORDER BY seq_scan DESC;
+
+-- Cache hit ratio (должен быть > 99%)
+SELECT
+    SUM(blks_hit) * 100.0 / SUM(blks_hit + blks_read) AS cache_hit_ratio
+FROM pg_stat_database
+WHERE datname = current_database();
+
+-- Временные файлы (признак нехватки work_mem)
+SELECT
+    datname,
+    temp_files,
+    pg_size_pretty(temp_bytes) AS temp_size
+FROM pg_stat_database
+WHERE temp_files > 0;
+
+-- Статистика WAL
+SELECT * FROM pg_stat_wal;
+
+-- Статистика репликации
+SELECT
+    client_addr,
+    state,
+    sent_lsn,
+    write_lsn,
+    flush_lsn,
+    replay_lsn,
+    pg_wal_lsn_diff(sent_lsn, replay_lsn) AS replication_lag
+FROM pg_stat_replication;
+```
+
+---
+
+### Generated Columns
+
+Автоматически вычисляемые колонки (PostgreSQL 12+).
+
+```sql
+-- STORED — физически хранится
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    price DECIMAL(10, 2),
+    quantity INTEGER,
+    total DECIMAL(10, 2) GENERATED ALWAYS AS (price * quantity) STORED
+);
+
+INSERT INTO products (price, quantity) VALUES (10.00, 5);
+SELECT * FROM products;  -- total = 50.00
+
+-- Полнотекстовый поиск
+CREATE TABLE articles (
+    id SERIAL PRIMARY KEY,
+    title TEXT,
+    body TEXT,
+    search_vector TSVECTOR GENERATED ALWAYS AS (
+        setweight(to_tsvector('english', COALESCE(title, '')), 'A') ||
+        setweight(to_tsvector('english', COALESCE(body, '')), 'B')
+    ) STORED
+);
+
+CREATE INDEX idx_articles_search ON articles USING GIN(search_vector);
+
+-- Хеш для дедупликации
+CREATE TABLE files (
+    id SERIAL PRIMARY KEY,
+    content BYTEA,
+    content_hash TEXT GENERATED ALWAYS AS (encode(sha256(content), 'hex')) STORED
+);
+
+-- Нормализованные данные
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255),
+    email_normalized VARCHAR(255) GENERATED ALWAYS AS (LOWER(TRIM(email))) STORED
+);
+```
+
+---
+
+### Exclusion Constraints
+
+Запрет пересекающихся данных (бронирования, расписания).
+
+```sql
+-- Требует расширения btree_gist
+CREATE EXTENSION btree_gist;
+
+-- Бронирование комнат: нельзя забронировать одну комнату в пересекающееся время
+CREATE TABLE room_bookings (
+    id SERIAL PRIMARY KEY,
+    room_id INTEGER NOT NULL,
+    during TSTZRANGE NOT NULL,  -- Временной диапазон
+
+    EXCLUDE USING GIST (
+        room_id WITH =,         -- room_id должен быть равен
+        during WITH &&          -- И диапазоны пересекаются
+    )
+);
+
+-- Работает!
+INSERT INTO room_bookings (room_id, during) VALUES
+    (1, '[2024-03-15 10:00, 2024-03-15 12:00)');
+
+INSERT INTO room_bookings (room_id, during) VALUES
+    (1, '[2024-03-15 14:00, 2024-03-15 16:00)');  -- OK, не пересекается
+
+-- Ошибка!
+INSERT INTO room_bookings (room_id, during) VALUES
+    (1, '[2024-03-15 11:00, 2024-03-15 13:00)');  -- Пересекается с первым
+
+-- IP диапазоны без пересечений
+CREATE TABLE ip_allocations (
+    id SERIAL PRIMARY KEY,
+    network INET,
+    owner_id INTEGER,
+
+    EXCLUDE USING GIST (network inet_ops WITH &&)
+);
+```
+
+---
+
+### Массивы (подробно)
+
+```sql
+-- Объявление
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(200),
+    tags TEXT[],
+    scores INTEGER[]
+);
+
+-- Вставка
+INSERT INTO posts (title, tags, scores) VALUES
+    ('PostgreSQL Tips', ARRAY['database', 'sql', 'postgresql'], ARRAY[5, 4, 5]),
+    ('Web Development', '{"html", "css", "javascript"}', '{4, 3, 4}');
+
+-- Доступ к элементам (индексация с 1!)
+SELECT tags[1] FROM posts;  -- Первый элемент
+SELECT tags[2:3] FROM posts;  -- Срез (slice)
+
+-- Операторы
+SELECT * FROM posts WHERE 'sql' = ANY(tags);  -- Содержит элемент
+SELECT * FROM posts WHERE tags @> ARRAY['sql'];  -- Содержит все элементы
+SELECT * FROM posts WHERE tags && ARRAY['sql', 'html'];  -- Пересекается
+SELECT * FROM posts WHERE tags <@ ARRAY['sql', 'database', 'postgresql'];  -- Подмножество
+
+-- Функции
+SELECT array_length(tags, 1) FROM posts;  -- Длина
+SELECT array_dims(tags) FROM posts;  -- Размерность
+SELECT array_upper(tags, 1) FROM posts;  -- Верхняя граница
+SELECT unnest(tags) FROM posts;  -- Развернуть в строки
+SELECT array_agg(tag) FROM unnest(ARRAY['a', 'b', 'c']) AS tag;  -- Свернуть в массив
+
+-- Добавление элемента
+UPDATE posts SET tags = array_append(tags, 'new_tag') WHERE id = 1;
+UPDATE posts SET tags = tags || 'new_tag' WHERE id = 1;  -- Альтернатива
+UPDATE posts SET tags = array_prepend('first_tag', tags) WHERE id = 1;
+
+-- Удаление элемента
+UPDATE posts SET tags = array_remove(tags, 'sql') WHERE id = 1;
+
+-- Замена элемента
+UPDATE posts SET tags = array_replace(tags, 'sql', 'SQL') WHERE id = 1;
+
+-- Позиция элемента
+SELECT array_position(tags, 'sql') FROM posts;
+
+-- Конкатенация
+SELECT array_cat(ARRAY[1, 2], ARRAY[3, 4]);  -- {1,2,3,4}
+
+-- Индекс для массивов
+CREATE INDEX idx_posts_tags ON posts USING GIN(tags);
+
+-- Многомерные массивы
+CREATE TABLE matrix (
+    data INTEGER[][]
+);
+INSERT INTO matrix VALUES ('{{1,2,3},{4,5,6}}');
+SELECT data[1][2] FROM matrix;  -- 2
+```
+
+---
+
+### Оптимизация запросов (Tips)
+
+```sql
+-- 1. Используйте EXISTS вместо COUNT для проверки существования
+-- Плохо
+SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+FROM orders WHERE user_id = 1;
+
+-- Хорошо
+SELECT EXISTS (SELECT 1 FROM orders WHERE user_id = 1);
+
+-- 2. Используйте ANY вместо множества OR
+-- Плохо
+SELECT * FROM users WHERE id = 1 OR id = 2 OR id = 3;
+
+-- Хорошо
+SELECT * FROM users WHERE id = ANY(ARRAY[1, 2, 3]);
+
+-- 3. Используйте LIMIT с ORDER BY
+-- Плохо (сортирует всё)
+SELECT * FROM logs ORDER BY created_at DESC;
+
+-- Хорошо (останавливается раньше с индексом)
+SELECT * FROM logs ORDER BY created_at DESC LIMIT 100;
+
+-- 4. Избегайте SELECT *
+-- Плохо
+SELECT * FROM users WHERE id = 1;
+
+-- Хорошо (особенно с covering index)
+SELECT id, email, name FROM users WHERE id = 1;
+
+-- 5. Используйте covering indexes
+CREATE INDEX idx_users_email_covering ON users(email) INCLUDE (name, created_at);
+-- Index Only Scan без обращения к таблице
+
+-- 6. Partial indexes для частых условий
+CREATE INDEX idx_active_users ON users(email) WHERE is_active = true;
+
+-- 7. Expression indexes
+CREATE INDEX idx_users_lower_email ON users(LOWER(email));
+SELECT * FROM users WHERE LOWER(email) = 'alice@example.com';
+
+-- 8. Используйте UNION ALL вместо UNION если не нужна уникальность
+SELECT id FROM table1
+UNION ALL
+SELECT id FROM table2;
+
+-- 9. Batch INSERT
+INSERT INTO logs (message) VALUES
+    ('log1'), ('log2'), ('log3'), ...;  -- Одним запросом
+
+-- 10. Используйте COPY для массовой загрузки
+COPY users(email, name) FROM '/path/to/file.csv' WITH CSV HEADER;
+```
+
+---
+
+### Настройки производительности
+
+```sql
+-- Ключевые параметры (postgresql.conf)
+
+-- Память
+shared_buffers = '4GB'          -- 25% RAM для выделенного сервера
+effective_cache_size = '12GB'    -- 75% RAM (для планировщика)
+work_mem = '256MB'               -- Память для сортировки/хеширования
+maintenance_work_mem = '1GB'     -- Для VACUUM, CREATE INDEX
+
+-- Параллелизм
+max_parallel_workers_per_gather = 4
+max_parallel_workers = 8
+max_worker_processes = 8
+
+-- WAL
+wal_buffers = '64MB'
+checkpoint_completion_target = 0.9
+max_wal_size = '4GB'
+min_wal_size = '1GB'
+
+-- Планировщик
+random_page_cost = 1.1           -- Для SSD (по умолчанию 4.0 для HDD)
+effective_io_concurrency = 200   -- Для SSD
+
+-- Логирование медленных запросов
+log_min_duration_statement = 1000  -- Логировать запросы > 1 секунды
+
+-- Статистика
+track_activities = on
+track_counts = on
+track_io_timing = on
+track_functions = all
+
+-- Просмотр текущих настроек
+SHOW shared_buffers;
+SHOW work_mem;
+SELECT name, setting, unit, context FROM pg_settings WHERE name LIKE '%mem%';
+
+-- Изменение на лету (если context = user)
+SET work_mem = '512MB';
+```
+
+---
+
 ### Практические задания
 
 #### Уровень 1: Основы

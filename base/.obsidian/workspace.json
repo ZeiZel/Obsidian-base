@@ -230,7 +230,7 @@
               "type": "markdown",
               "state": {
                 "file": "database/SQLite.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -258,6 +258,54 @@
               "icon": "lucide-file",
               "title": "database"
             }
+          },
+          {
+            "id": "d720b63d4960b99b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "languages/english.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "english"
+            }
+          },
+          {
+            "id": "83bae6d6fe33069d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "languages/russian.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "russian"
+            }
           }
         ],
         "currentTab": 4
@@ -273,6 +321,18 @@
         "id": "3a9f6fcffec95690",
         "type": "tabs",
         "children": [
+          {
+            "id": "034678fd4509816e",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "pinned": true,
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
+          },
           {
             "id": "4cc371cdec58e4ac",
             "type": "leaf",
@@ -324,19 +384,8 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
-          },
-          {
-            "id": "034678fd4509816e",
-            "type": "leaf",
-            "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Navigator"
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -476,7 +525,7 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -513,7 +562,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421.5
+    "width": 546.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -539,6 +588,17 @@
   },
   "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
+    "agile/command.md",
+    "backend/Microservices/Микросервисы.md",
+    "architecture/System Design/System Design.md",
+    "database/PostgreSQL.md",
+    "database/Redis.md",
+    "languages/russian.md",
+    "languages/english.md",
+    "database/SQLite.md",
+    "database/database.md",
+    "frontend/Svelte.md",
+    "languages",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",
@@ -549,19 +609,12 @@
     "_png/Pasted image 20260309162318.png",
     "_png/Pasted image 20260309162305.png",
     "_png/Pasted image 20260309162253.png",
-    "_png/Pasted image 20260309162213.png",
-    "database/database.md",
-    "database/SQLite.md",
-    "database/Redis.md",
-    "database/PostgreSQL.md",
     "cs/Python.md",
-    "agile/command.md",
     "agile/Teamlead.md",
     "agile/Team.md",
     "agile/agile.md",
     "database/Valkey.md",
     "database/DataGrip.md",
-    "architecture/System Design/System Design.md",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",
@@ -582,18 +635,14 @@
     "ai/AI Prompts.md",
     "ai/AI Engineering.md",
     "ai/AI Instruments.md",
-    "backend/Microservices/Микросервисы.md",
     "obsidian/Obsidian.md",
     "devops/docker/Docker + Ansible.md",
-    "tools/TMUX.md",
-    "Design/Figma.md",
     "architecture/System Design",
     "Tags",
     "cs/Networks",
     "ai",
     "Untitled.base",
     "_png/атмосферный звук моря и крики чаек.mp3",
-    "architecture",
-    "concepts"
+    "architecture"
   ]
 }

@@ -5,28 +5,40 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "database",
-      "path": "database/database.md"
+      "basename": "command",
+      "path": "agile/command.md"
     },
     {
-      "basename": "SQLite",
-      "path": "database/SQLite.md"
-    },
-    {
-      "basename": "Redis",
-      "path": "database/Redis.md"
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
     },
     {
       "basename": "PostgreSQL",
       "path": "database/PostgreSQL.md"
     },
     {
-      "basename": "Python",
-      "path": "cs/Python.md"
+      "basename": "Redis",
+      "path": "database/Redis.md"
     },
     {
-      "basename": "command",
-      "path": "agile/command.md"
+      "basename": "russian",
+      "path": "languages/russian.md"
+    },
+    {
+      "basename": "english",
+      "path": "languages/english.md"
+    },
+    {
+      "basename": "SQLite",
+      "path": "database/SQLite.md"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
+      "basename": "Python",
+      "path": "cs/Python.md"
     },
     {
       "basename": "Teamlead",
@@ -71,10 +83,6 @@
     {
       "basename": "AI Instruments",
       "path": "ai/AI Instruments.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
     },
     {
       "basename": "Obsidian",
