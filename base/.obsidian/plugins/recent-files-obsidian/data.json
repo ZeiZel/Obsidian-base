@@ -5,6 +5,10 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
+      "basename": "Ruby",
+      "path": "backend/Ruby.md"
+    },
+    {
       "basename": "command",
       "path": "agile/command.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "Ссылки",
       "path": "frontend/NextJS/_lessons/Ссылки.md"
-    },
-    {
-      "basename": "SEO",
-      "path": "frontend/SEO.md"
     }
   ],
   "omittedPaths": [],

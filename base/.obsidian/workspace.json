@@ -562,7 +562,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 546.5
+    "width": 519.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -588,9 +588,10 @@
   },
   "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
+    "backend/Ruby.md",
+    "architecture/System Design/System Design.md",
     "agile/command.md",
     "backend/Microservices/Микросервисы.md",
-    "architecture/System Design/System Design.md",
     "database/PostgreSQL.md",
     "database/Redis.md",
     "languages/russian.md",
@@ -636,7 +637,6 @@
     "ai/AI Engineering.md",
     "ai/AI Instruments.md",
     "obsidian/Obsidian.md",
-    "devops/docker/Docker + Ansible.md",
     "architecture/System Design",
     "Tags",
     "cs/Networks",

@@ -278,6 +278,7 @@
   "lintOnFileChange": true,
   "displayLintOnFileChangeNotice": true,
   "settingsConvertedToConfigKeyValues": true,
+  "additionalFileExtensions": [],
   "foldersToIgnore": [],
   "filesToIgnore": [],
   "linterLocale": "system-default",
