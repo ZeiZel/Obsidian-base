@@ -10,15 +10,7 @@ tags:
 
 Карта компетенций технического лидера, адаптируемая под различные организации. Roadmap состоит из двух основных частей: **Роли и обязанности** (что делает тимлид) и **Личные навыки** (как он это делает).
 
-> Каждая методология — это набор правил, ритуалов и артефактов, помогающих команде двигаться в определённом направлении.
-
-**Связанные материалы:**
-- [Agile и Scrum методологии](agile.md) — подробно о фреймворках и практиках
-- [Структура IT-команды](command.md) — роли, грейды, иерархия
-- [Как быть хорошим тимлидом](Как%20быть%20хорошим%20тимлидом.md) — практические советы
-- [DISC модель](DISC.md) — типы личностей в команде
-- [Team](Team.md) — командная работа
-
+> Каждая методология -это набор правил, ритуалов и артефактов, помогающих команде двигаться в определённом направлении.
 
 ---
 ### Роли и обязанности
@@ -34,10 +26,10 @@ tags:
 **Готовые подходы**
 
 - Lean
-- [Scrum](agile.md#Scrum) — итеративная разработка спринтами
-- [Kanban](agile.md#Kanban) — визуализация потока работы
-- XP (Extreme Programming) — инженерные практики
-- [SAFe](agile.md#SAFe) (Scaled Agile Framework) — масштабирование Agile
+- [Scrum](agile.md#Scrum) -итеративная разработка спринтами
+- [Kanban](agile.md#Kanban) -визуализация потока работы
+- XP (Extreme Programming) -инженерные практики
+- [SAFe](agile.md#SAFe) (Scaled Agile Framework) -масштабирование Agile
 
 **Подробнее:** [Agile методологии и фреймворки](agile.md)
 
@@ -47,7 +39,7 @@ tags:
 
 **Ключевые принципы:**
 - Методология должна соответствовать ценностям команды
-- Чем проще работающая методология — тем лучше
+- Чем проще работающая методология -тем лучше
 - Постепенное внедрение практик вместо единовременного навязывания
 - Автоматизация рутинных процессов для экономии времени коллег
 
@@ -83,9 +75,9 @@ tags:
 ```
 
 **Инструменты:**
-- Jira, Linear, YouTrack — трекеры задач
-- Notion, Confluence — документация требований
-- Miro, FigJam — визуализация и декомпозиция
+- Jira, Linear, YouTrack -трекеры задач
+- Notion, Confluence -документация требований
+- Miro, FigJam -визуализация и декомпозиция
 
 **Техники приоритизации:**
 - MoSCoW (Must, Should, Could, Won't)
@@ -153,7 +145,7 @@ tags:
 
 ###### PDCA
 
-PDCA (Plan-Do-Check-Act) — цикл Деминга для непрерывного улучшения процессов.
+PDCA (Plan-Do-Check-Act) -цикл Деминга для непрерывного улучшения процессов.
 
 ```
     ┌─────────┐
@@ -187,7 +179,7 @@ PDCA (Plan-Do-Check-Act) — цикл Деминга для непрерывно
 
 ###### PMBoK
 
-PMBoK (Project Management Body of Knowledge) — свод знаний по управлению проектами от PMI.
+PMBoK (Project Management Body of Knowledge) -свод знаний по управлению проектами от PMI.
 
 **10 областей знаний PMBoK:**
 1. Управление интеграцией
@@ -208,15 +200,15 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 
 ###### Дополнительные фреймворки
 
-- **OKR** (Objectives and Key Results) — целеполагание
-- **PRINCE2** — процессный подход к управлению проектами
-- **Lean Six Sigma** — устранение потерь и дефектов
+- **OKR** (Objectives and Key Results) -целеполагание
+- PRINCE2 - процессный подход к управлению проектами
+- Lean Six Sigma - устранение потерь и дефектов
 
 ##### Стейкхолдинг
 
 Управление заинтересованными сторонами проекта.
 
-**Определение:** Стейкхолдер — человек, чьи действия, поведение или решения могут повлиять на результаты проекта.
+**Определение:** Стейкхолдер -человек, чьи действия, поведение или решения могут повлиять на результаты проекта.
 
 **Матрица стейкхолдеров (Influence/Interest Grid):**
 
@@ -337,19 +329,19 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 
 **7 уровней делегирования (Jurgen Appelo):**
 
-1. **Tell** — принять решение и сообщить
-2. **Sell** — принять решение и убедить
-3. **Consult** — получить совет, затем решить
-4. **Agree** — достичь консенсуса
-5. **Advise** — дать совет, решение за сотрудником
-6. **Inquire** — узнать о решении после факта
-7. **Delegate** — полная передача полномочий
+1. Tell - принять решение и сообщить
+2. Sell - принять решение и убедить
+3. Consult - получить совет, затем решить
+4. Agree - достичь консенсуса
+5. Advise - дать совет, решение за сотрудником
+6. Inquire - узнать о решении после факта
+7. Delegate - полная передача полномочий
 
 **Практики:**
-1. Провести аудит своих задач — что можно делегировать завтра?
+1. Провести аудит своих задач -что можно делегировать завтра?
 2. Подобрать подходящий уровень делегирования
 3. Назначить задачу, контролировать результат
-4. После нескольких успешных итераций — передать полную ответственность
+4. После нескольких успешных итераций -передать полную ответственность
 
 **Признаки плохого делегирования:**
 - Критичные задачи не делегируются
@@ -375,9 +367,9 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 - Конференции и митапы
 
 **Модель 70-20-10:**
-- 70% — обучение через опыт (рабочие задачи)
-- 20% — обучение через других (менторинг, обратная связь)
-- 10% — формальное обучение (курсы, книги)
+- 70% -обучение через опыт (рабочие задачи)
+- 20% -обучение через других (менторинг, обратная связь)
+- 10% -формальное обучение (курсы, книги)
 
 **Ресурсы:**
 - [Развитие](https://tlroadmap.io/roles/people-manager/people-management/development.html)
@@ -399,14 +391,14 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 
 - **SBI** (Situation-Behavior-Impact)
 - **COIN** (Context-Observation-Impact-Next steps)
-- **Feedback Sandwich** (позитив-критика-позитив) — спорная модель
+- **Feedback Sandwich** (позитив-критика-позитив) -спорная модель
 
 **Хорошие практики:**
 - Получить разрешение перед предоставлением фидбека
 - Баланс конструктивной критики и позитива
 - Личная доставка в приватной беседе
-- Своевременность — сразу после наблюдения
-- Объяснение причин — почему поведение уместно/неуместно
+- Своевременность -сразу после наблюдения
+- Объяснение причин -почему поведение уместно/неуместно
 - Запрашивать фидбек о себе у коллег
 
 **Плохие практики:**
@@ -421,7 +413,7 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 
 ###### Увольнение
 
-Процесс расставания с сотрудником — как инициированный компанией, так и добровольный уход.
+Процесс расставания с сотрудником -как инициированный компанией, так и добровольный уход.
 
 **Виды увольнений:**
 - По инициативе работодателя (performance issues)
@@ -464,10 +456,10 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 - Cultural fit
 
 **STAR метод:**
-- **S**ituation — опишите ситуацию
-- **T**ask — какая была задача
-- **A**ction — что вы сделали
-- **R**esult — каков результат
+- **S**ituation -опишите ситуацию
+- **T**ask -какая была задача
+- **A**ction -что вы сделали
+- **R**esult -каков результат
 
 **Onboarding**
 
@@ -514,9 +506,9 @@ PMBoK (Project Management Body of Knowledge) — свод знаний по уп
 | Поток | Csikszentmihalyi | Баланс сложности и навыков |
 
 **Модель Pink (Drive):**
-- **Autonomy** — самостоятельность в принятии решений
-- **Mastery** — возможность развивать навыки
-- **Purpose** — понимание целей и смысла работы
+- Autonomy - самостоятельность в принятии решений
+- Mastery - возможность развивать навыки
+- Purpose - понимание целей и смысла работы
 
 **Практические действия:**
 - Конкурентная зарплата (+10-15% к рынку)
@@ -544,7 +536,7 @@ Disengagement → External motivation → Internal motivation → Flow
 
 Регулярные приватные встречи руководителя с каждым членом команды.
 
-**Определение:** One-on-one — регулярные приватные беседы между менеджером и его прямым подчинённым для построения доверия, обсуждения производительности и выравнивания целей.
+**Определение:** One-on-one -регулярные приватные беседы между менеджером и его прямым подчинённым для построения доверия, обсуждения производительности и выравнивания целей.
 
 **Преимущества:**
 
@@ -673,7 +665,7 @@ Junior → Middle → Senior → Staff → Principal → Distinguished
 
 **Инструменты:**
 - [Spotify Team Health Check](https://engineering.atspotify.com/2014/09/squad-health-check-model/)
-- Officevibe, Culture Amp — платформы для опросов
+- Officevibe, Culture Amp -платформы для опросов
 
 **Ресурсы:**
 - [Климат в команде](https://tlroadmap.io/roles/people-manager/team-management/team-climate.html)
@@ -717,10 +709,10 @@ Forming → Storming → Norming → Performing → Adjourning
 Оценка и развитие уровня самоорганизации команды.
 
 **Уровни зрелости:**
-1. **Directing** — руководитель принимает все решения
-2. **Coaching** — руководитель объясняет решения
-3. **Supporting** — совместные решения
-4. **Delegating** — команда принимает решения
+1. Directing - руководитель принимает все решения
+2. Coaching - руководитель объясняет решения
+3. Supporting - совместные решения
+4. Delegating - команда принимает решения
 
 **Ресурсы:**
 - [Зрелость команды](https://tlroadmap.io/roles/people-manager/team-management/team-maturity.html)
@@ -932,9 +924,9 @@ Ideation → Discovery → Definition → Development → Launch → Growth → 
 - A/B testing
 
 **Инструменты:**
-- Hotjar, FullStory — сессионные записи
-- Amplitude, Mixpanel — продуктовая аналитика
-- UserTesting — тестирование юзабилити
+- Hotjar, FullStory -сессионные записи
+- Amplitude, Mixpanel -продуктовая аналитика
+- UserTesting -тестирование юзабилити
 
 **Ресурсы:**
 - [Знание пользователей](https://tlroadmap.io/roles/product-owner/product-understanding/user-knowledge.html)
@@ -949,12 +941,12 @@ Ideation → Discovery → Definition → Development → Launch → Growth → 
 Роль, отвечающая за техническое качество и архитектуру.
 
 **Связанные материалы в репозитории:**
-- [Архитектура](../architecture/architecture.md) — обзор архитектурных подходов
-- [SOLID принципы](../architecture/SOLID%20принципы.md) — принципы объектно-ориентированного дизайна
-- [System Design](../architecture/System%20Design/System%20Design.md) — проектирование систем
-- [Чистый код](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md) — практики написания качественного кода
-- [DevOps](../devops/devops.md) — автоматизация и инфраструктура
-- [CI/CD](../devops/CI-CD.md) — непрерывная интеграция и доставка
+- [Архитектура](../architecture/architecture.md) -обзор архитектурных подходов
+- [SOLID принципы](../architecture/SOLID%20принципы.md) -принципы объектно-ориентированного дизайна
+- [System Design](../architecture/System%20Design/System%20Design.md) -проектирование систем
+- [Чистый код](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md) -практики написания качественного кода
+- [DevOps](../devops/devops.md) -автоматизация и инфраструктура
+- [CI/CD](../devops/CI-CD.md) -непрерывная интеграция и доставка
 
 ##### Архитектура
 
@@ -997,13 +989,13 @@ Ideation → Discovery → Definition → Development → Launch → Growth → 
 
 **Архитектурные паттерны:**
 - Monolith
-- [Микросервисы](../backend/Microservices/Микросервисы.md) — распределённая архитектура
+- [Микросервисы](../backend/Microservices/Микросервисы.md) -распределённая архитектура
 - Event-Driven
 - CQRS
 - [Hexagonal (Ports & Adapters)](../architecture/Architecture/Onion%20Architecture.md)
 - [Clean Architecture](../architecture/Architecture/Architecture.md)
-- [MV-паттерны](../architecture/Architecture/MV-patterns.md) — MVC, MVP, MVVM
-- [FSD](../architecture/Architecture/FSD/FSD.md) — Feature-Sliced Design
+- [MV-паттерны](../architecture/Architecture/MV-patterns.md) -MVC, MVP, MVVM
+- [FSD](../architecture/Architecture/FSD/FSD.md) -Feature-Sliced Design
 
 **Ресурсы:**
 - [Проектирование](https://tlroadmap.io/roles/technical-lead/architecture/design.html)
@@ -1180,10 +1172,10 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 ```
 
 **Приоритизация:**
-- P0 (Critical) — блокирует работу
-- P1 (High) — серьёзное влияние
-- P2 (Medium) — умеренное влияние
-- P3 (Low) — минимальное влияние
+- P0 (Critical) -блокирует работу
+- P1 (High) -серьёзное влияние
+- P2 (Medium) -умеренное влияние
+- P3 (Low) -минимальное влияние
 
 **Ресурсы:**
 - [Работа с багами](https://tlroadmap.io/roles/technical-lead/product-quality/bugs.html)
@@ -1238,15 +1230,15 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 | Постмортемы | Анализ без обвинений (blameless post-mortem) |
 
 **Классификация инцидентов:**
-- **Minor** — минимальное влияние
-- **Major** — значительное влияние, требует ресурсов
-- **Critical** — критическое влияние, требует эскалации
-- **Security** — инциденты безопасности (отдельный процесс)
+- Minor - минимальное влияние
+- Major - значительное влияние, требует ресурсов
+- Critical - критическое влияние, требует эскалации
+- Security - инциденты безопасности (отдельный процесс)
 
 **Методы разрешения:**
 - Следование установленным процедурам
 - Привлечение команд с экспертизой
-- **Swarming** — коллективная работа до определения владельца
+- Swarming - коллективная работа до определения владельца
 
 **Превентивные меры:**
 - Формализация процедур
@@ -1260,9 +1252,9 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 - Недостаточное выделение ресурсов
 
 **Инструменты:**
-- PagerDuty, Opsgenie — on-call
-- Statuspage — коммуникация о статусе
-- Jira Service Management — тикеты
+- PagerDuty, Opsgenie -on-call
+- Statuspage -коммуникация о статусе
+- Jira Service Management -тикеты
 
 **Ресурсы:**
 - [Управление инцидентами](https://tlroadmap.io/roles/technical-lead/product-quality/incident-management.html)
@@ -1321,9 +1313,9 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 - Chaos Engineering
 
 **Инструменты:**
-- JMeter, Gatling, k6 — нагрузочное тестирование
-- OWASP ZAP — security testing
-- Chaos Monkey — chaos engineering
+- JMeter, Gatling, k6 -нагрузочное тестирование
+- OWASP ZAP -security testing
+- Chaos Monkey -chaos engineering
 
 **Ресурсы:**
 - [Нефункциональное тестирование](https://tlroadmap.io/roles/technical-lead/product-quality/testing/non-functional.html)
@@ -1445,7 +1437,7 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 **Ресурсы:**
 - [Чистый код](https://tlroadmap.io/roles/technical-lead/tech-quality/clean-code.html)
 - [Clean Code (Robert Martin)](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-- **Внутренние:** [Чистый Код — Роберт Мартин](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md), [SOLID принципы](../architecture/SOLID%20принципы.md)
+- **Внутренние:** [Чистый Код -Роберт Мартин](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md), [SOLID принципы](../architecture/SOLID%20принципы.md)
 
 ###### Рефакторинг
 
@@ -1466,13 +1458,13 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 
 Непрерывное выявление, оценка стоимости и устранение технического долга.
 
-**Определение:** Технический долг — несделанная работа, которая будет мешать развитию проекта в будущем. Это не баги и не низкоприоритетные фичи, а проблемы архитектуры и качества кода.
+**Определение:** Технический долг -несделанная работа, которая будет мешать развитию проекта в будущем. Это не баги и не низкоприоритетные фичи, а проблемы архитектуры и качества кода.
 
 **Последствия игнорирования:**
 - Рост времени разработки и поддержки
 - Сложность анализа кода
 - Хрупкость системы
-- В крайнем случае — необходимость полного переписывания
+- В крайнем случае -необходимость полного переписывания
 
 **Практики управления:**
 
@@ -1498,15 +1490,15 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 ---
 ### Личные навыки
 
-Личные навыки (soft skills) критически важны для тимлида — они определяют способность эффективно взаимодействовать с командой, стейкхолдерами и влиять на результаты.
+Личные навыки (soft skills) критически важны для тимлида -они определяют способность эффективно взаимодействовать с командой, стейкхолдерами и влиять на результаты.
 
 **Связанные материалы:**
-- [DISC модель](DISC.md) — понимание типов личности
-- [Team](Team.md) — командная динамика
+- [DISC модель](DISC.md) -понимание типов личности
+- [Структура IT-команды](command.md) - командная динамика
 
 #### Коммуникации
 
-Коммуникация — основной инструмент тимлида. Качество коммуникации напрямую влияет на эффективность команды, скорость решения проблем и общий климат.
+Коммуникация -основной инструмент тимлида. Качество коммуникации напрямую влияет на эффективность команды, скорость решения проблем и общий климат.
 
 ##### Коучинг
 
@@ -1519,10 +1511,10 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 - Карьерное планирование
 
 **Модель GROW:**
-- **G**oal — цель
-- **R**eality — текущая ситуация
-- **O**ptions — варианты действий
-- **W**ill — план действий
+- **G**oal -цель
+- **R**eality -текущая ситуация
+- **O**ptions -варианты действий
+- **W**ill -план действий
 
 **Ресурсы:**
 - [Коучинг](https://tlroadmap.io/self-skills/communications/coaching.html)
@@ -1530,7 +1522,7 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 
 ##### Управление конфликтами
 
-Навыки разрешения и предотвращения конфликтов. Конфликты неизбежны в любой команде — важно уметь управлять ими конструктивно.
+Навыки разрешения и предотвращения конфликтов. Конфликты неизбежны в любой команде -важно уметь управлять ими конструктивно.
 
 **Стратегии (Thomas-Kilmann):**
 
@@ -1621,11 +1613,11 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 **Ресурсы:**
 - [Фасилитация](https://tlroadmap.io/self-skills/communications/facilitation.html)
 - [Liberating Structures](https://www.liberatingstructures.com/)
-- [Retromat](https://retromat.org/) — форматы ретроспектив
+- [Retromat](https://retromat.org/) -форматы ретроспектив
 
 ##### Дача и получение обратной связи
 
-Навыки предоставления и принятия фидбека. Регулярная обратная связь — основа развития команды.
+Навыки предоставления и принятия фидбека. Регулярная обратная связь -основа развития команды.
 
 **Модель Radical Candor:**
 
@@ -1648,9 +1640,9 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 ```
 
 **Формула эффективного фидбека (SBI):**
-- **S**ituation — конкретная ситуация
-- **B**ehavior — наблюдаемое поведение
-- **I**mpact — влияние на результат
+- **S**ituation -конкретная ситуация
+- **B**ehavior -наблюдаемое поведение
+- **I**mpact -влияние на результат
 
 **Пример:**
 > "На вчерашнем standup (S), когда ты перебил коллегу (B), это создало напряжённую атмосферу и он не договорил свою мысль (I)."
@@ -1668,7 +1660,7 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 
 ##### Нетворкинг
 
-Построение и поддержание профессиональных связей. Нетворк — один из главных активов тимлида.
+Построение и поддержание профессиональных связей. Нетворк -один из главных активов тимлида.
 
 **Почему важен нетворкинг:**
 - Найм талантов (рефералы)
@@ -1725,7 +1717,7 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 
 ##### Публичные выступления
 
-Навыки презентации и выступлений — важный инструмент влияния для тимлида.
+Навыки презентации и выступлений -важный инструмент влияния для тимлида.
 
 **Типы выступлений:**
 - Внутренние презентации (команда, стейкхолдеры)
@@ -1735,11 +1727,11 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 - Подкасты и интервью
 
 **Структура выступления:**
-1. **Hook** — привлечь внимание
-2. **Problem** — обозначить проблему
-3. **Solution** — предложить решение
-4. **Proof** — доказательства (данные, примеры)
-5. **Call to Action** — призыв к действию
+1. Hook - привлечь внимание
+2. Problem - обозначить проблему
+3. Solution - предложить решение
+4. Proof - доказательства (данные, примеры)
+5. Call to Action - призыв к действию
 
 **Практики подготовки:**
 - Репетиции вслух
@@ -1760,7 +1752,7 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 
 ##### Работа с текстом
 
-Навыки письменной коммуникации. В распределённых командах текст — основной способ коммуникации.
+Навыки письменной коммуникации. В распределённых командах текст -основной способ коммуникации.
 
 **Области применения:**
 - Техническая документация
@@ -1771,11 +1763,11 @@ Reported → Triaged → In Progress → Fixed → Verified → Closed
 - README и onboarding
 
 **Принципы эффективного письма:**
-- **Ясность** — одна мысль = одно предложение
-- **Краткость** — убирать лишнее
-- **Структура** — заголовки, списки, выделения
-- **Контекст** — reader-first mindset
-- **Actionability** — чёткие следующие шаги
+- Ясность - одна мысль = одно предложение
+- Краткость - убирать лишнее
+- Структура - заголовки, списки, выделения
+- Контекст - reader-first mindset
+- Actionability - чёткие следующие шаги
 
 **Шаблон RFC:**
 ```markdown
@@ -1847,7 +1839,7 @@ Draft / Under Review / Accepted / Rejected
 - Адаптация коммуникации
 
 **Связанные модели:**
-- [DISC](DISC.md) — понимание разных типов личности
+- [DISC](DISC.md) -понимание разных типов личности
 
 **Ресурсы:**
 - [Понимание ценности различий](https://tlroadmap.io/self-skills/relationship/diversity.html)
@@ -1855,7 +1847,7 @@ Draft / Under Review / Accepted / Rejected
 
 ##### Эмоциональный интеллект
 
-Способность распознавать и управлять эмоциями — своими и других людей. EQ часто важнее IQ для лидеров.
+Способность распознавать и управлять эмоциями -своими и других людей. EQ часто важнее IQ для лидеров.
 
 **Компоненты (Goleman):**
 
@@ -1875,7 +1867,7 @@ Draft / Under Review / Accepted / Rejected
 - Способность вдохновлять и мотивировать
 
 **Связанные модели:**
-- [DISC](DISC.md) — типы личности
+- [DISC](DISC.md) -типы личности
 
 **Ресурсы:**
 - [Эмоциональный интеллект](https://tlroadmap.io/self-skills/relationship/emotional-intelligence.html)
@@ -1884,7 +1876,7 @@ Draft / Under Review / Accepted / Rejected
 
 #### Развитие себя
 
-Непрерывное развитие — ключевой навык для тимлида. Технологии и практики меняются, и лидер должен расти вместе с ними.
+Непрерывное развитие -ключевой навык для тимлида. Технологии и практики меняются, и лидер должен расти вместе с ними.
 
 ##### Работа с привычками
 
@@ -2089,8 +2081,8 @@ Draft / Under Review / Accepted / Rejected
 Определение и формулирование личных и профессиональных целей.
 
 **Методологии:**
-- **SMART** — Specific, Measurable, Achievable, Relevant, Time-bound
-- **OKR** — Objectives and Key Results
+- SMART - Specific, Measurable, Achievable, Relevant, Time-bound
+- OKR - Objectives and Key Results
 
 **Ресурсы:**
 - [Постановка личных целей](https://tlroadmap.io/self-skills/time-management/goal-setting.html)
@@ -2109,8 +2101,8 @@ Draft / Under Review / Accepted / Rejected
 | **Важно** | Делать сейчас | Планировать |
 | **Не важно** | Делегировать | Отказаться |
 
-- **MoSCoW** — Must, Should, Could, Won't
-- **Eat the Frog** — начинать с самой сложной задачи
+- MoSCoW - Must, Should, Could, Won't
+- Eat the Frog - начинать с самой сложной задачи
 
 **Ресурсы:**
 - [Управление приоритетами](https://tlroadmap.io/self-skills/time-management/prioritization.html)
@@ -2122,10 +2114,10 @@ Draft / Under Review / Accepted / Rejected
 Техники для эффективного использования времени.
 
 **Методы:**
-- **Pomodoro** — 25 минут работы, 5 минут отдыха
-- **Time Blocking** — выделение блоков времени под задачи
-- **GTD** (Getting Things Done) — система управления задачами
-- **Weekly Review** — еженедельный обзор и планирование
+- Pomodoro - 25 минут работы, 5 минут отдыха
+- Time Blocking - выделение блоков времени под задачи
+- **GTD** (Getting Things Done) -система управления задачами
+- Weekly Review - еженедельный обзор и планирование
 
 **Инструменты:**
 - Todoist, Things 3, OmniFocus
@@ -2144,18 +2136,18 @@ Draft / Under Review / Accepted / Rejected
 ### Книги и ресурсы
 
 #### Менеджмент и лидерство
-- [The Manager's Path](https://www.amazon.com/Managers-Path-Leaders-Navigating-Growth/dp/1491973897) — Camille Fournier
-- [An Elegant Puzzle](https://www.amazon.com/Elegant-Puzzle-Systems-Engineering-Management/dp/1732265186) — Will Larson
-- [Staff Engineer](https://staffeng.com/book) — Will Larson
-- [High Output Management](https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884) — Andy Grove
-- [The Five Dysfunctions of a Team](https://www.amazon.com/Five-Dysfunctions-Team-Leadership-Fable/dp/0787960756) — Patrick Lencioni
-- [Turn the Ship Around!](https://www.amazon.com/Turn-Ship-Around-Turning-Followers/dp/1591846404) — L. David Marquet
+- [The Manager's Path](https://www.amazon.com/Managers-Path-Leaders-Navigating-Growth/dp/1491973897) -Camille Fournier
+- [An Elegant Puzzle](https://www.amazon.com/Elegant-Puzzle-Systems-Engineering-Management/dp/1732265186) -Will Larson
+- [Staff Engineer](https://staffeng.com/book) -Will Larson
+- [High Output Management](https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884) -Andy Grove
+- [The Five Dysfunctions of a Team](https://www.amazon.com/Five-Dysfunctions-Team-Leadership-Fable/dp/0787960756) -Patrick Lencioni
+- [Turn the Ship Around!](https://www.amazon.com/Turn-Ship-Around-Turning-Followers/dp/1591846404) -L. David Marquet
 
 #### Техническое лидерство
 - [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/)
 - [Building Evolutionary Architectures](https://www.oreilly.com/library/view/building-evolutionary-architectures/9781491986356/)
-- [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) — Robert Martin
-- [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) — Martin Kleppmann
+- [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) -Robert Martin
+- [Designing Data-Intensive Applications](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321) -Martin Kleppmann
 - **Внутренние:** [Чистый Код](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md), [Создание микросервисов](../Books/Создание%20микросервиссов%20-%20Сэм%20Ньюмэн.md)
 
 #### Процессы и продуктивность

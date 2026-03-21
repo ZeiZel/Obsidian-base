@@ -43,6 +43,17 @@ npm run test
 - `quartz.config.ts` - Main Quartz configuration (theme, plugins, metadata)
 - `quartz.layout.ts` - Page layout components configuration
 
+## Content Writing Style (Markdown Notes)
+
+When writing or editing markdown notes in `base/`:
+
+1. **No em-dash (—) or double dash (--)** - use a regular hyphen with spaces ( - ) for separating parts of sentences, or restructure the sentence
+2. **Minimal bold** - use bold (`**text**`) no more than 1-2 times per section, only for definitions or key terms in definitions. Do NOT bold every term before a dash in lists - the term is self-evident
+3. **No CAPS for emphasis** - never use uppercase words for emphasis in text
+4. **Minimal parenthetical context** - avoid excessive use of parenthetical asides in sentences. Restructure into separate sentences if needed
+5. **Use callouts for emphasis** - use Obsidian callouts (`> [!info]`, `> [!important]`, `> [!summary]`, etc.) to highlight important blocks
+6. **Table of contents** - only the root index page of a topic section should have a TOC/navigation. Individual notes should NOT have their own TOC linking to siblings
+
 ## CI/CD
 
 GitHub Actions workflow (`.github/workflows/ci.yml`) automatically builds and deploys to GitHub Pages on push to main.
