@@ -1,6 +1,54 @@
 {
   "recentFiles": [
     {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "practices",
+      "path": "agile/practices.md"
+    },
+    {
+      "basename": "scaling",
+      "path": "agile/scaling.md"
+    },
+    {
+      "basename": "frameworks",
+      "path": "agile/frameworks.md"
+    },
+    {
+      "basename": "manifest",
+      "path": "agile/manifest.md"
+    },
+    {
+      "basename": "models",
+      "path": "agile/models.md"
+    },
+    {
+      "basename": "DISC",
+      "path": "agile/DISC.md"
+    },
+    {
+      "basename": "xp",
+      "path": "agile/xp.md"
+    },
+    {
+      "basename": "metrics",
+      "path": "agile/metrics.md"
+    },
+    {
+      "basename": "kanban",
+      "path": "agile/kanban.md"
+    },
+    {
+      "basename": "scrum",
+      "path": "agile/scrum.md"
+    },
+    {
+      "basename": "command",
+      "path": "agile/command.md"
+    },
+    {
       "basename": "agile",
       "path": "agile/agile.md"
     },
@@ -11,10 +59,6 @@
     {
       "basename": "Ruby",
       "path": "backend/Ruby.md"
-    },
-    {
-      "basename": "command",
-      "path": "agile/command.md"
     },
     {
       "basename": "Микросервисы",
@@ -47,14 +91,6 @@
     {
       "basename": "Python",
       "path": "cs/Python.md"
-    },
-    {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
-      "basename": "Team",
-      "path": "agile/Team.md"
     },
     {
       "basename": "Prisma ORM",
@@ -129,14 +165,6 @@
       "path": "cs/The Bezos Mandath.md"
     },
     {
-      "basename": "DISC",
-      "path": "agile/DISC.md"
-    },
-    {
-      "basename": "Как быть хорошим тимлидом",
-      "path": "agile/Как быть хорошим тимлидом.md"
-    },
-    {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
@@ -167,38 +195,6 @@
     {
       "basename": "Functional programming",
       "path": "cs/Functional programming.md"
-    },
-    {
-      "basename": "index",
-      "path": "index.md"
-    },
-    {
-      "basename": "Nuxt",
-      "path": "frontend/Vue/Nuxt/Nuxt.md"
-    },
-    {
-      "basename": "Vue",
-      "path": "frontend/Vue/Vue/Vue.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/React/Практический JS.md"
-    },
-    {
-      "basename": "Профилирование React",
-      "path": "frontend/React/Профилирование React.md"
-    },
-    {
-      "basename": "React Foundamentals",
-      "path": "frontend/React/React Foundamentals.md"
-    },
-    {
-      "basename": "React + Redux",
-      "path": "frontend/React/React + Redux.md"
-    },
-    {
-      "basename": "Ссылки",
-      "path": "frontend/NextJS/_lessons/Ссылки.md"
     }
   ],
   "omittedPaths": [],

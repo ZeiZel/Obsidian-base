@@ -313,7 +313,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "agile/agile.md",
+                "file": "agile/Teamlead.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -328,7 +328,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "agile"
+              "title": "Teamlead"
             }
           }
         ],
@@ -572,13 +572,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/agile.md",
+                "file": "agile/Teamlead.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of agile"
+              "title": "Outline of Teamlead"
             }
           }
         ],
@@ -586,7 +586,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 519.5
+    "width": 581.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -612,9 +612,25 @@
   },
   "active": "43aee5928693a41f",
   "lastOpenFiles": [
+    "agile/Как быть хорошим тимлидом.md",
+    "agile/Teamlead.md",
+    "agile/practices.md",
+    "agile/scaling.md",
+    "agile/frameworks.md",
+    "agile/manifest.md",
+    "agile/models.md",
+    "agile/DISC.md",
+    "agile/xp.md",
+    "agile/metrics.md",
+    "agile/cynefin.md",
+    "agile/empiricism.md",
+    "agile/kanban.md",
+    "agile/scrum.md",
+    "agile/command.md",
+    "agile/agile.md",
+    "agile/Team.md",
     "architecture/System Design/System Design.md",
     "backend/Ruby.md",
-    "agile/command.md",
     "backend/Microservices/Микросервисы.md",
     "database/PostgreSQL.md",
     "database/Redis.md",
@@ -622,7 +638,6 @@
     "languages/english.md",
     "database/SQLite.md",
     "database/database.md",
-    "frontend/Svelte.md",
     "languages",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
@@ -634,12 +649,6 @@
     "_png/Pasted image 20260309162318.png",
     "_png/Pasted image 20260309162305.png",
     "_png/Pasted image 20260309162253.png",
-    "cs/Python.md",
-    "agile/Teamlead.md",
-    "agile/Team.md",
-    "agile/agile.md",
-    "database/Valkey.md",
-    "database/DataGrip.md",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",
@@ -652,15 +661,6 @@
     "ai/_canvas/confusion-matrix.canvas",
     "database/_canvas",
     "ai/_canvas",
-    "database/Prisma ORM.md",
-    "database/Mongo DB.md",
-    "ai/AI.md",
-    "ai/AI and Data Science.md",
-    "ai/AI Agent.md",
-    "ai/AI Prompts.md",
-    "ai/AI Engineering.md",
-    "ai/AI Instruments.md",
-    "obsidian/Obsidian.md",
     "architecture/System Design",
     "Tags",
     "cs/Networks",
