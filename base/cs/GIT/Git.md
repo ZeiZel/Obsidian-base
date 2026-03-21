@@ -1,3 +1,8 @@
+---
+tags:
+  - cs
+  - git
+---
 #Git #GitHub
 
 > [!tip] [Гайд](https://githowto.com/ru/setup)

@@ -1,7 +1,9 @@
 ---
-description: Слоистая архитектура
 tags:
-    - '#OnionArchitecture'
+  - OnionArchitecture
+  - architecture
+description: Слоистая архитектура
+---
 ---
 
 Что есть часть ПО?

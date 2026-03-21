@@ -1,3 +1,7 @@
+---
+tags:
+  - edge
+---
 #esbuild #bundler
 
 ## Что это такое?

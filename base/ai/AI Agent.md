@@ -140,8 +140,7 @@ agents:
       - create_diagrams
     restrictions:
       - no_code_changes
-
-  - name: developer
+      - name
     role: "Senior Developer"
     capabilities:
       - read_code

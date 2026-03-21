@@ -1,8 +1,9 @@
 ---
-sticker: emoji//1f3f3-fe0f-200d-1f308
 tags:
-    - linux
-    - devops
+  - linux
+  - devops
+sticker: emoji//1f3f3-fe0f-200d-1f308
+---
 ---
 
 [Введение](../../../tools/nvim/_lessons/Введение.md)

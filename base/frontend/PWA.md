@@ -1,3 +1,7 @@
+---
+tags:
+  - frontend
+---
 #ServiceWorkers #Cashing
 
 Progressive Web Application. Эта технология позволяет эмулировать работу нативного приложения в браузере

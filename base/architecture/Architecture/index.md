@@ -1,3 +1,7 @@
+---
+tags:
+  - architecture
+---
 #architecture #app #environment
 
 ## Введение

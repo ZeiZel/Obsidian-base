@@ -1,9 +1,9 @@
 ---
 tags:
-    - electron
-    - desktop
-    - javascript
-    - typescript
+  - electron
+  - desktop
+  - javascript
+  - typescript
 ---
 
 # Electron - Полное руководство
@@ -978,7 +978,9 @@ contextBridge.exposeInMainWorld('api', {
 
 ### Альтернативы
 
-- Tauri - Rust + WebView (системный), бандл ~10 MB, меньше RAM
+- Tauri
+
+- Rust
 - Neutralinojs - лёгкий, использует системный WebView
 - Flutter Desktop - Dart, свой рендеринг
 - .NET MAUI - C#, нативные контролы

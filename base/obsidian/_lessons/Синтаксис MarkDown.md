@@ -1,3 +1,7 @@
+---
+tags:
+  - obsidian
+---
 # h1
 
 ## h2

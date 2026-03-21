@@ -38,8 +38,7 @@
 - Чистая архитектура
 - [Onion Architecture](Onion%20Architecture.md)
 - Frontend-архитектуры
-    - [FSD](FSD/FSD.md)
-    - [Atomic Design](Atomic%20Design.md)
+
 - Реактивная архитектура
 
 - Уровни архитектуры

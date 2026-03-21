@@ -1,3 +1,8 @@
+---
+tags:
+  - frontend
+  - базовая
+---
 #Bootstrap
 
 ### 7.2 Что такое bootstrap

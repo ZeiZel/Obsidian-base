@@ -1,10 +1,10 @@
 ---
 tags:
-    - PostgreSQL
-    - SQLite
-    - MongoDB
-    - Prisma
-    - DataBase
+  - PostgreSQL
+  - SQLite
+  - MongoDB
+  - Prisma
+  - DataBase
 ---
 
 # Базы данных

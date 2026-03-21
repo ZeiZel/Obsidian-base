@@ -1,15 +1,17 @@
 ---
 tags:
-    - '#ErrorBoundary'
-    - '#BundleAnalyzer'
-    - '#ReactTestingLibrary'
-    - '#Storybook'
-    - '#Loki'
-    - '#CI'
-    - '#Screenshot'
+  - ErrorBoundary
+  - BundleAnalyzer
+  - ReactTestingLibrary
+  - Storybook
+  - Loki
+  - CI
+  - Screenshot
+  - frontend
 ---
 
 ## 22 ErrorBoundary. Обработка React ошибок
+---
 
 В React обработка ошибок происходит за счёт классового компонента ErrorBoundary, который отображает экран ошибки при возникновении любой ошибки в приложении
 

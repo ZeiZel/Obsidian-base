@@ -1,3 +1,8 @@
+---
+tags:
+  - frontend
+  - базовая
+---
 # Верстка и создание веб сайтов 2022 - с нуля до результата (2022)
 
 #HTML #CSS #Adaptive #Bootstrap #Figma #SASS #SCSS #FlexBox #BEM #CSSGrid

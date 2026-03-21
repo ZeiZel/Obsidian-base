@@ -1,4 +1,6 @@
 ---
+tags:
+  - architecture
 description: Архитектура клиентского приложения
 ---
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - design
+  - davinci-resolve
+---
 # 4 Вкладка Cut. Сбор чернового монтажа
 
 #Cut

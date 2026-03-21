@@ -7,7 +7,7 @@ tags:
   - agile
 aliases:
   - IT-команда
-  - Team Structure
+  - agile
 ---
 
 ## IT-команда: структура, роли и процессы

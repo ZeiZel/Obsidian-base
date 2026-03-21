@@ -1,3 +1,8 @@
+---
+tags:
+  - backend
+  - rest
+---
 Сайт, посвящённый BFF-паттернам – [https://bff-patterns.com/](https://bff-patterns.com/)
 
 Безопасность в BFF – [https://medium.com/@hasanmahira/web-app-security-understanding-the-meaning-of-the-bff-pattern-e543662d9fe](https://medium.com/@hasanmahira/web-app-security-understanding-the-meaning-of-the-bff-pattern-e543662d9fe)

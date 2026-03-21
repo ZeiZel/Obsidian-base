@@ -1,3 +1,7 @@
+---
+tags:
+  - edge
+---
 #Tools #Webpack
 
 ## Теги
@@ -119,7 +123,9 @@ npm init
 npm install -D webpack webpack-cli
 ```
 
-- webpack - это сам основной функционал webpack
+- webpack
+
+- это
 - webpack-cli - это его команды в консоли
 
 ## Базовая настройка Webpack

@@ -1,3 +1,8 @@
+---
+tags:
+  - devops
+  - linux
+---
 ## Введение
 
 ![](_png/2ddc3b32035294b6b865647c8c65893c.png)

@@ -1,3 +1,8 @@
+---
+tags:
+  - backend
+  - nodejs
+---
 #NodeJS #Npm #Testing #V8
 
 - [01 Введение](../../TypeScript/_lessons/01%20Введение.md)

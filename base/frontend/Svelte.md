@@ -1,10 +1,10 @@
 ---
 tags:
-    - svelte
-    - sveltekit
-    - frontend
-    - javascript
-    - typescript
+  - svelte
+  - sveltekit
+  - frontend
+  - javascript
+  - typescript
 ---
 
 # Svelte и SvelteKit — Полное руководство

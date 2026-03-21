@@ -1,3 +1,8 @@
+---
+tags:
+  - design
+  - davinci-resolve
+---
 #DaVinciResolve #Editing #Design
 
 - [1 Введение](Модули/1%20Введение.md)

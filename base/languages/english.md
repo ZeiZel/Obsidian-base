@@ -1,6 +1,7 @@
 ---
 tags:
   - language
+  - languages
 ---
 # English Language: Complete Reference Guide
 

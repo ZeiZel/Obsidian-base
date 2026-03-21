@@ -612,6 +612,14 @@
   },
   "active": "56fa5cb9d0a2ded9",
   "lastOpenFiles": [
+    "Tags/#практики agile",
+    "Tags/#agile practices",
+    "Tags/#метрики agile",
+    "Tags/#agile metrics",
+    "Tags/#agilealiases",
+    "Tags/#тимлид",
+    "Tags/#teamlead roadmap",
+    "Tags/#managementaliases",
     "languages/russian.md",
     "devops/networking-sdsm-research.md",
     "devops/networking.md",
@@ -625,9 +633,6 @@
     "Tags/#devtools",
     "Tags/#чекер_сети",
     "Tags/#блокировка",
-    "Tags/#electron",
-    "Tags/#desktop",
-    "Tags/#javascript",
     "agile/agile.md",
     "agile/command.md",
     "agile/empiricism.md",
@@ -643,8 +648,6 @@
     "agile/metrics.md",
     "agile/cynefin.md",
     "agile/kanban.md",
-    "agile/scrum.md",
-    "languages",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",
@@ -664,9 +667,6 @@
     "ai/_canvas/mlops-pipeline.canvas",
     "ai/_canvas/rl-loop.canvas",
     "ai/_canvas/gan-architecture.canvas",
-    "ai/_canvas/confusion-matrix.canvas",
-    "database/_canvas",
-    "ai/_canvas",
-    "architecture/System Design"
+    "ai/_canvas/confusion-matrix.canvas"
   ]
 }

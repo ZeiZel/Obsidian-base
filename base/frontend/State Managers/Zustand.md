@@ -1,7 +1,9 @@
 ---
 tags:
-    - zustand
-    - react
+  - zustand
+  - react
+  - frontend
+  - state-managers
 ---
 
 ## Введение

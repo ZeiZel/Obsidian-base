@@ -4,8 +4,9 @@ tags:
   - waterfall
   - models
   - rup
+  - agile
 aliases:
-  - Development Models
+  - Development
   - Модели разработки
 ---
 

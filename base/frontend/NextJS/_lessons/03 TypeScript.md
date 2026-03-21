@@ -1,3 +1,8 @@
+---
+tags:
+  - frontend
+  - nextjs
+---
 #TypeScript
 
 ## 03 TypeScript

@@ -1,3 +1,8 @@
+---
+tags:
+  - frontend
+  - javascript
+---
 ### 001 Самое важное в JavaScript
 
 > [!info] Три главных понятия:

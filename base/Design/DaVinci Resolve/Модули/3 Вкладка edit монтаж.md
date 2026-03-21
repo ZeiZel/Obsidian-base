@@ -1,3 +1,8 @@
+---
+tags:
+  - design
+  - davinci-resolve
+---
 # 3 Вкладка edit монтаж
 
 #Edit

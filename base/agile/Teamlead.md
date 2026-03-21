@@ -31,7 +31,8 @@ aliases:
 Готовые подходы:
 
 - Lean
-- [Scrum](agile.md#Scrum) - итеративная разработка спринтами
+
+- итеративная
 - [Kanban](agile.md#Kanban) - визуализация потока работы
 - XP (Extreme Programming) - инженерные практики
 - [SAFe](agile.md#SAFe) (Scaled Agile Framework) - масштабирование Agile
@@ -1053,7 +1054,9 @@ RICE Score = (Reach × Impact × Confidence) / Effort
 Vision → Mission → Strategy → Roadmap → Tactics
 ```
 
-- Vision - картина будущего, к которому стремится продукт (3-5 лет)
+- Vision
+
+- картина
 - Mission - зачем продукт существует, какую проблему решает
 - Strategy - как именно достичь Vision, ключевые ставки и trade-offs
 - Roadmap - план реализации стратегии, последовательность шагов
@@ -2537,7 +2540,9 @@ Weekly Review (шаблон):
 | Важно | Делать сейчас | Планировать |
 | Не важно | Делегировать | Отказаться |
 
-- MoSCoW - Must, Should, Could, Won't
+- MoSCoW
+
+- Must
 - Eat the Frog - начинать с самой сложной задачи
 
 Ресурсы:

@@ -1,10 +1,10 @@
 ---
 tags:
-    - angular
-    - rxjs
-    - ngrx
-    - typescript
-    - frontend
+  - angular
+  - rxjs
+  - ngrx
+  - typescript
+  - frontend
 ---
 
 # Angular — Полное руководство

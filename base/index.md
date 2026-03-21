@@ -1,13 +1,12 @@
 ---
+tags:
+  - homepage
+  - dashboarddescription
 aliases:
     - index
     - home
     - homepage
     - dashboard
-tags:
-    - homepage
-    - dashboard
-description: Base homepage.
 ---
 
 # Obsidian Base
@@ -18,8 +17,6 @@ description: Base homepage.
 
 ## Оглавление
 
-- [agile](agile/agile.md)
-- [tools](tools/tools.md)
 - [testing](testing/testing.md)
 - [obsidian](obsidian/Obsidian.md)
 - [mobile](mobile/mobile.md)
@@ -68,26 +65,24 @@ description: Base homepage.
         - mediaqueries
         - animations
         - position
-    - Preprocessors
+        - Preprocessors
         - SASS
         - LESS
         - STYLYS
-    - Frameworks
+        - Frameworks
         - Bootstrap
-        - Materialize CSS
+        - Materialize
         - [Tailwind CSS](frontend/Tailwind%20CSS.md)
         - Panda CSS
         - CSS Modules
     - Methology
-        - BEM
+    - BEM
     - Tooling
-        - Pug
+    - Pug
 - Computer Science
     - [Алгоритмы и Структуры даных](cs/Алгоритмы%20и%20Структуры%20даных.md)
     - Безопасность
-    - [C](cs/C.md)
-    - [Python](cs/Python.md)
-- [JavaScript](frontend/JavaScript/JavaScript.md)
+
     - Language Basics
     - Dom
     - Замыкания
@@ -103,10 +98,9 @@ description: Base homepage.
     - Proxy
     - Observables
     - Events
-- [TypeScript](edge/TypeScript/TypeScript.md)
 - [Инструменты](edge/edge.md)
     - Bundlers
-        - Vite
+    - Vite
         - SWC
         - Webpack
         - RSPack
@@ -126,53 +120,50 @@ description: Base homepage.
         - Ark UI (React)
         - Taiga UI (Angular)
     - Подходы
-        - Webhooks
+    - Webhooks
     - Frameworks
-        - React / NextJS / React Router Dom
+    - React
         - Vue / Nuxt
             - Pinia
-        - Angular
+            - Angular
             - NgRx
             - RxJS
         - Svelte / SvelteKit
         - Astro
-    - State management
+        - State
         - Redux
-        - [MobX](frontend/State%20Managers/MobX.md)
         - Jotai
         - Effector
         - Context
         - Zustand
     - Forms
-        - React-hook-form
+    - React-hook-form
         - Formik
-    - Validation
+        - Validation
         - Zod
         - Yup
         - Valibot
-    - API Calls
+        - API
         - REST
-            - RTK Query
+        - RTK
             - axios
             - swr
             - react query
         - GQL
-            - Relay
+        - Relay
             - urql
             - Apollo
         - gRPC
-            -
-    - Animation
+        - -
         - Framer Motion
         - React Spring
         - GSock
         - GASP
-    - [SSR](frontend/SSR.md)
-    - [PWA](frontend/PWA.md)
+
         - Canvas
-        - WebGL + WebVR
+        - WebGL
         - WebAuthn
-        - Service Workers
+        - Service
         - Web Workers
         - Fullscreen
         - Perfomance
@@ -182,45 +173,37 @@ description: Base homepage.
         - Media
         - Filesystem
         - Gamepad
-        - Pointer Lock
+        - Pointer
         - Ambient Light Events
-    - [Микрофронтенды](frontend/microfrontends.md)
-- Mobile
+    - Mobile
     - [React Native](mobile/React%20Native/React%20Native.md)
 - [Backend](backend/backend.md)
     - [Безбэкендный подход](backend/serverless.md)
-    - [Микросервисы](backend/Microservices/Микросервисы.md)
-- [Базы данных](database/database.md)
+
     - SQL
-        - [SQLite](database/SQLite.md)
-        - [PostgreSQL](database/PostgreSQL.md)
-    - NoSQL
+        - NoSQL
         - [Mongo DB](database/Mongo%20DB.md)
     - Caching
-        - [Redis](database/Redis.md)
-        - [Valkey](database/Valkey.md)
-    - ORM
+        - ORM
         - [Prisma ORM](database/Prisma%20ORM.md)
 - [Концепты](concepts/Client-server%20architecture.md)
     - [REST API](concepts/REST%20API.md)
     - GraphQL
     - gRPC
     - Brokers
-- [Тестирование](testing/Тестирование%20JavaScript.md)
     - E2E
-        - Playwright
+    - Playwright
         - Cypress
-    - Integration
+        - Integration
     - Unit
-        - Vitest
+    - Vitest
         - Jest
         - React-testing-library
     - Screenshot
-        - Storybook
+    - Storybook
         - Loki
-- [Архитектура](architecture/architecture.md)
     - Парадигмы
-        - Объектно-ориентированное программирование
+    - Объектно-ориентированное
         - Структурное программирование
         - Функциональное программирование
     - Паттерны

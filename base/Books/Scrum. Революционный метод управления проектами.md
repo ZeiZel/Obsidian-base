@@ -1,3 +1,7 @@
+---
+tags:
+  - books
+---
 
 ![](_png/df9dfc9e679d020c084e10b0fc7ecf63.png)
 

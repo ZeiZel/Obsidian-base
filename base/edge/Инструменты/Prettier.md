@@ -1,3 +1,7 @@
+---
+tags:
+  - edge
+---
 #prettier
 
 Глобальная установка плагина:
@@ -10,7 +14,7 @@ npm install --global prettier
 
 Настройки ==prettier==:
 
-- `tabWidth` - ширина табуляции
+- ширина
 - `useTabs` - использовать табы
 - `singleQuote` - одинарные ковычки
 - `jsxSingleQuote` - одинарные кавычки в jsx

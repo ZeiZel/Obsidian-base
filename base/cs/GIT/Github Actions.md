@@ -1,3 +1,8 @@
+---
+tags:
+  - cs
+  - git
+---
 #Git #GitHub #Actions
 
 ## Github вводный курс

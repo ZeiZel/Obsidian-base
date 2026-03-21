@@ -378,10 +378,7 @@
 Напишите короткий репортаж на любое событие
 (если вы не знаете, что выбрать, напишите, про первые 5 минут после завтрака)
 
--
--
--
--
+- -
 - «В околофутболе пенальти — удар ногой по голове лежачего»: хулиган о расизме, наркоторговле и драках
   https://platfor.ma/topics/people/v-okolofutbole-penalty-udar-nogoj-po-golove-lezhachego-hulygan-o-rasyzme-narkotorgovle-y-drakah/
 
@@ -400,7 +397,11 @@
 - «Самая непонятная и непонятая молодежь за всю историю»: как 21 век покорежил нашу жизнь
   https://platfor.ma/topic/samoe-neponyatnoe-y-neponyatoe-pokolenye-za-vsyu-ystoryyu-kak-21-vek-pokorezhyl-nashu-zhyzn/
 
-- Кошмарченко - сезон 1 эпизод 7 - Валерий Харчишин (25.04.2015)
+- Кошмарченко
+
+- сезон
+
+- Валерий
   https://www.mixcloud.com/aristocratsfm/%D0%BA%D0%BE%D1%88%D0%BC%D0%B0%D1%80%D1%87%D0%B5%D0%BD%D0%BA%D0%BE-%D1%81%D0%B5%D0%B7%D0%BE%D0%BD-1-%D1%8D%D0%BF%D0%B8%D0%B7%D0%BE%D0%B4-7-%D0%B2%D0%B0%D0%BB%D0%B5%D1%80%D0%B8%D0%B9-%D1%85%D0%B0%D1%80%D1%87%D0%B8%D1%88%D0%B8%D0%BD-25042015/
 
 - Кузьмичи (о том, как смотрят футбол во второй лиге)
@@ -477,9 +478,9 @@
 
 ![](_png/1a17b3e6fddf7a4adfcdacd264eaa6bb.png)
 
-- 34:49
--
--
+- 34
+
+- -
 - ![](_png/b8a7fa9e840d6f8100abac6b0b5f7046.png)
 
 ![](_png/831299bee6b4a93ee17c32e3bbd13b2c.png)

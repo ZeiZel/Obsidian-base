@@ -1,3 +1,8 @@
+---
+tags:
+  - design
+  - davinci-resolve
+---
 # 2 Вкладка Media. Импорт материала и организация проекта
 
 #Media #Proxy

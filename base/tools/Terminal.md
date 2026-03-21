@@ -1,10 +1,10 @@
 ---
 tags:
-    - '#terminal'
-    - '#tmux'
-    - lazygit
-    - zsh
-description:
+  - terminal
+  - tmux
+  - lazygit
+  - zsh
+  - toolsdescription:
 ---
 
 > [!info] [Dotfiles](https://github.com/ZeiZel/dotfiles)

@@ -1,3 +1,7 @@
+---
+tags:
+  - frontend
+---
 ```CSS
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)

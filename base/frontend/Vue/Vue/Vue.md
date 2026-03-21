@@ -1,11 +1,11 @@
 ---
 tags:
-    - vue
-    - vue3
-    - pinia
-    - nuxt
-    - frontend
-    - typescript
+  - vue
+  - vue3
+  - pinia
+  - nuxt
+  - frontend
+  - typescript
 ---
 
 # Vue.js — Полное руководство

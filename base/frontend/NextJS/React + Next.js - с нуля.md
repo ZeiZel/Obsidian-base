@@ -1,3 +1,8 @@
+---
+tags:
+  - frontend
+  - nextjs
+---
 # React + Next.js - с нуля. TypeScript, Hooks, SSR и CSS Grid (2021)
 
 #React #NextJS #TypeScript #SSR #CSSGrid #ReactHooks #JavaScript #FrontEnd

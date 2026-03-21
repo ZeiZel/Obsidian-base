@@ -6,13 +6,13 @@ tags:
   - shape-up
   - lean
 aliases:
-  - Agile Frameworks
   - Фреймворки
 ---
 
 # Фреймворки и методологии
 
 ## GIST Framework
+---
 
 G - Goals, I - Ideas, S - Step-projects, T - Tasks. Методика продуктового менеджмента и планирования работы, предложенная Itamar Gilad.
 

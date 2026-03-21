@@ -1,3 +1,8 @@
+---
+tags:
+  - frontend
+  - javascript
+---
 # JS с нуля
 
 ## Старт проекта

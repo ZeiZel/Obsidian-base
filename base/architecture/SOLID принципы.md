@@ -1,3 +1,7 @@
+---
+tags:
+  - architecture
+---
 #Patterns #SOLID
 
 ### Введение

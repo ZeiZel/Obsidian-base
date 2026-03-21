@@ -1,9 +1,9 @@
 ---
 tags:
-    - react
-    - '#redux'
-    - frontend
-    - react-router-dom
+  - react
+  - redux
+  - frontend
+  - react-router-dom
 ---
 
 ## Введение

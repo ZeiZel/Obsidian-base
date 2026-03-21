@@ -1,3 +1,7 @@
+---
+tags:
+  - frontend
+---
 ### 11 AppRouter. Конфиг для роутера
 
 Сейчас нужно реализовать конфиг для нашего будущего роутера
@@ -1158,7 +1162,8 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-config-stan
 Устанавливаем
 
 - jest
-- типы к нему
+
+- типы
 - поддержка тайпскрипта
 - окружение браузера
 

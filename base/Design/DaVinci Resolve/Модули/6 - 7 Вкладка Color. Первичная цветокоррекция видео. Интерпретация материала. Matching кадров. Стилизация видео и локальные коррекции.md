@@ -1,3 +1,8 @@
+---
+tags:
+  - design
+  - davinci-resolve
+---
 #Color
 
 # 6 Вкладка Color. Первичная цветокоррекция видео. Интерпретация материала. Matching кадров

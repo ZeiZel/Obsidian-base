@@ -5,6 +5,7 @@ tags:
   - dora
   - kanban
   - scrum
+  - agile
 aliases:
   - Agile Metrics
   - Метрики Agile

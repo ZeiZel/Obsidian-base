@@ -1,3 +1,8 @@
+---
+tags:
+  - design
+  - davinci-resolve
+---
 # 10 Вкладка Deliver. Экспорт материала
 
 #Deliver
