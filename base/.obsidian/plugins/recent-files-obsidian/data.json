@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "electron",
+      "path": "desktop/electron/electron.md"
+    },
+    {
+      "basename": "architecture",
+      "path": "architecture/architecture.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
+      "basename": "command",
+      "path": "agile/command.md"
+    },
+    {
+      "basename": "empiricism",
+      "path": "agile/empiricism.md"
+    },
+    {
       "basename": "Teamlead",
       "path": "agile/Teamlead.md"
     },
@@ -43,14 +63,6 @@
     {
       "basename": "scrum",
       "path": "agile/scrum.md"
-    },
-    {
-      "basename": "command",
-      "path": "agile/command.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "System Design",
@@ -187,14 +199,6 @@
     {
       "basename": "Zustand",
       "path": "frontend/State Managers/Zustand.md"
-    },
-    {
-      "basename": "React Query",
-      "path": "frontend/React/React Query.md"
-    },
-    {
-      "basename": "Functional programming",
-      "path": "cs/Functional programming.md"
     }
   ],
   "omittedPaths": [],

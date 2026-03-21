@@ -311,24 +311,12 @@
             "id": "43aee5928693a41f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "agile/Teamlead.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "desktop/electron"
               },
               "icon": "lucide-file",
-              "title": "Teamlead"
+              "title": "electron"
             }
           }
         ],
@@ -572,17 +560,15 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Teamlead"
+              "title": "Outline"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -610,10 +596,27 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "43aee5928693a41f",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
-    "agile/Как быть хорошим тимлидом.md",
+    "desktop/electron/electron.md",
+    "architecture/architecture.md",
+    "desktop/electron/_lessons/Electron - Полное руководство.md",
+    "devops/networking.md",
+    "devops/networking-sdsm-research.md",
+    "devops/networks.md",
+    "devops/networking-linkmeup-research.md",
+    "desktop/electron/electron-research-2025.md",
+    "Tags/#devtools",
+    "Tags/#чекер_сети",
+    "Tags/#блокировка",
+    "Tags/#electron",
+    "Tags/#desktop",
+    "Tags/#javascript",
+    "agile/agile.md",
+    "agile/command.md",
+    "agile/empiricism.md",
     "agile/Teamlead.md",
+    "agile/Как быть хорошим тимлидом.md",
     "agile/practices.md",
     "agile/scaling.md",
     "agile/frameworks.md",
@@ -623,21 +626,10 @@
     "agile/xp.md",
     "agile/metrics.md",
     "agile/cynefin.md",
-    "agile/empiricism.md",
     "agile/kanban.md",
     "agile/scrum.md",
-    "agile/command.md",
-    "agile/agile.md",
     "agile/Team.md",
     "architecture/System Design/System Design.md",
-    "backend/Ruby.md",
-    "backend/Microservices/Микросервисы.md",
-    "database/PostgreSQL.md",
-    "database/Redis.md",
-    "languages/russian.md",
-    "languages/english.md",
-    "database/SQLite.md",
-    "database/database.md",
     "languages",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
@@ -661,12 +653,6 @@
     "ai/_canvas/confusion-matrix.canvas",
     "database/_canvas",
     "ai/_canvas",
-    "architecture/System Design",
-    "Tags",
-    "cs/Networks",
-    "ai",
-    "Untitled.base",
-    "_png/атмосферный звук моря и крики чаек.mp3",
-    "architecture"
+    "architecture/System Design"
   ]
 }

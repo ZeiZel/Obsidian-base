@@ -69,7 +69,11 @@
     "//agile",
     "//languages",
     "//backend",
-    "//backend/backend/Microservices"
+    "//backend/backend/Microservices",
+    "//desktop",
+    "//desktop/desktop/Electron",
+    "//desktop/desktop/electron",
+    "//architecture"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
