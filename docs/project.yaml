@@ -1,0 +1,125 @@
+version: "2.0"
+project:
+  name: "obsidian-base"
+  description: "Personal Zettelkasten knowledge base covering software engineering and CS topics, built with Obsidian and deployed via Quartz SSG to GitHub Pages"
+  type: "knowledge-base"
+  language: "ru"
+
+tech_stack:
+  language: "TypeScript"
+  framework: "Quartz"
+  runtime: "node"
+  ssg: "Quartz 4"
+  editor: "Obsidian"
+  deployment: "GitHub Pages"
+
+architecture:
+  style: "static-site"
+  patterns: ["Zettelkasten", "tag-based-linking"]
+  content_dir: "base/"
+  image_dir: "base/_png/"
+  ssg_dir: "quartz/"
+
+content_structure:
+  index_pattern: "{topic}/{topic}.md"
+  linking: "tags + wikilinks"
+  locale: "ru-RU"
+
+domains:
+  - name: "frontend"
+    files: 97
+    description: "React, Angular, Vue, CSS, JavaScript/TypeScript, state management"
+  - name: "backend"
+    files: 27
+    description: "Node.js, Go, microservices, serverless, API design"
+  - name: "architecture"
+    files: 10
+    description: "Design patterns, SOLID, paradigms, system design"
+  - name: "cs"
+    files: 23
+    description: "Algorithms, data structures, C, Python"
+  - name: "database"
+    files: 6
+    description: "PostgreSQL, SQLite, MongoDB, Redis, Prisma ORM"
+  - name: "devops"
+    files: 17
+    description: "Docker, CI/CD, deployment, infrastructure"
+  - name: "edge"
+    files: 10
+    description: "TypeScript, bundlers, tooling"
+  - name: "Books"
+    files: 21
+    description: "Book notes and summaries"
+  - name: "Design"
+    files: 12
+    description: "UI/UX design principles"
+  - name: "desktop"
+    files: 10
+    description: "Desktop development (Electron, Tauri)"
+  - name: "testing"
+    files: 2
+    description: "Testing strategies, Jest, Vitest, Playwright"
+  - name: "tools"
+    files: 19
+    description: "Developer tools and utilities"
+  - name: "ai"
+    files: 6
+    description: "AI/ML topics"
+  - name: "agile"
+    files: 6
+    description: "Agile methodologies"
+  - name: "mobile"
+    files: 2
+    description: "React Native, mobile development"
+  - name: "concepts"
+    files: 2
+    description: "REST API, client-server architecture"
+  - name: "languages"
+    files: 2
+    description: "Programming languages"
+
+focus_areas:
+  primary:
+    - "System Design & resilient architecture"
+    - "Backend development (Go)"
+    - "Databases (PostgreSQL, design patterns)"
+  secondary:
+    - "Frontend (React, Angular)"
+    - "DevOps"
+    - "Computer Science fundamentals"
+
+context:
+  strategy: "rag"
+  repomix_token_estimate: 11639197
+  rag:
+    indexed: true
+    collection: "codebase"
+    last_indexed: "2026-03-21"
+    indexed_files_count: 1090
+
+tooling:
+  package_manager: "bun"
+  beads:
+    enabled: true
+    workspace: ".beads"
+  gastown:
+    enabled: true
+    rig: "main"
+  repomix:
+    enabled: true
+  aider:
+    enabled: true
+
+quality_gates:
+  content:
+    threshold: 90
+    validators: [tag_consistency, link_integrity, frontmatter_present]
+  build:
+    threshold: 95
+    validators: [quartz_build_success, no_broken_links]
+
+agent_preferences:
+  code_style: "concise"
+  review_strictness: "moderate"
+  auto_fix: true
+  content_language: "ru"

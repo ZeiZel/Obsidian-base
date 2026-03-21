@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
@@ -51,10 +55,6 @@
     {
       "basename": "Team",
       "path": "agile/Team.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "Prisma ORM",

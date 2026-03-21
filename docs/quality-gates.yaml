@@ -1,0 +1,19 @@
+gates:
+  content:
+    threshold: 90
+    validators:
+      - tag_consistency: "All notes must have tags in frontmatter"
+      - link_integrity: "No broken wikilinks or markdown links"
+      - frontmatter_present: "All notes must have valid YAML frontmatter"
+      - index_pages: "Each topic directory must have an index .md file"
+  build:
+    threshold: 95
+    validators:
+      - quartz_build: "npx quartz build -d base must succeed"
+      - type_check: "npm run check must pass"
+      - formatting: "npm run format must not produce changes"
+  development:
+    threshold: 85
+    validators:
+      - code_coverage: "Quartz plugin changes must have tests"
+      - linting: "Prettier formatting enforced"

@@ -1,0 +1,24 @@
+template: epic-feature
+title: "[Feature] {feature_name}"
+priority: medium
+description: |
+  ## Overview
+  {feature_description}
+
+  ## Acceptance Criteria
+  - [ ] {criterion_1}
+  - [ ] {criterion_2}
+
+  ## Technical Approach
+  - {approach_1}
+  - {approach_2}
+
+subtasks:
+  - title: "Design {feature_name}"
+    agent: spec-architect
+  - title: "Implement {feature_name}"
+    agent: spec-developer
+  - title: "Test {feature_name}"
+    agent: spec-tester
+  - title: "Review {feature_name}"
+    agent: spec-reviewer

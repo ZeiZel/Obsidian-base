@@ -1,0 +1,21 @@
+template: epic-content
+title: "[Content] {topic_name}"
+priority: medium
+description: |
+  ## Overview
+  Add/expand knowledge base content for {topic_name}
+
+  ## Acceptance Criteria
+  - [ ] Index page created/updated
+  - [ ] Tags properly set in frontmatter
+  - [ ] Links to related topics added
+  - [ ] Images placed in _png/ directory
+  - [ ] Quartz build passes
+
+subtasks:
+  - title: "Research {topic_name}"
+    agent: web-researcher
+  - title: "Write content for {topic_name}"
+    agent: technical-writer
+  - title: "Review {topic_name}"
+    agent: spec-reviewer

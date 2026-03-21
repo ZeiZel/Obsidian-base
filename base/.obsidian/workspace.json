@@ -306,9 +306,33 @@
               "icon": "lucide-file",
               "title": "russian"
             }
+          },
+          {
+            "id": "43aee5928693a41f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/agile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "agile"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -548,13 +572,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
+                "file": "agile/agile.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of System Design"
+              "title": "Outline of agile"
             }
           }
         ],
@@ -586,10 +610,10 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fb81dcdc01e73590",
+  "active": "43aee5928693a41f",
   "lastOpenFiles": [
-    "backend/Ruby.md",
     "architecture/System Design/System Design.md",
+    "backend/Ruby.md",
     "agile/command.md",
     "backend/Microservices/Микросервисы.md",
     "database/PostgreSQL.md",
