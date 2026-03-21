@@ -74,7 +74,8 @@
     "//desktop/desktop/Electron",
     "//desktop/desktop/electron",
     "//architecture",
-    "//devops"
+    "//devops",
+    "//devops/devops/kubernetes"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Kubernetes Entities",
+      "path": "devops/kubernetes/Kubernetes Entities.md"
+    },
+    {
+      "basename": "Helmfile",
+      "path": "devops/kubernetes/Helmfile.md"
+    },
+    {
       "basename": "networks",
       "path": "devops/networks.md"
     },
@@ -183,10 +191,6 @@
     {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "Helmfile",
-      "path": "devops/kubernetes/Helmfile.md"
     }
   ],
   "omittedPaths": [],

@@ -80,6 +80,30 @@
             }
           },
           {
+            "id": "c53005f485c9892b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/kubernetes/Kubernetes Entities.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes Entities"
+            }
+          },
+          {
             "id": "9fb9e42cc254ebba",
             "type": "leaf",
             "state": {
@@ -332,7 +356,7 @@
             }
           }
         ],
-        "currentTab": 13
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -572,13 +596,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/networks.md",
+                "file": "devops/kubernetes/Kubernetes Entities.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of networks"
+              "title": "Outline of Kubernetes Entities"
             }
           }
         ],
@@ -610,8 +634,11 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "56fa5cb9d0a2ded9",
+  "active": "c53005f485c9892b",
   "lastOpenFiles": [
+    "devops/kubernetes/Helmfile.md",
+    "devops/networks.md",
+    "devops/kubernetes/Kubernetes Entities.md",
     "Tags/#практики agile",
     "Tags/#agile practices",
     "Tags/#метрики agile",
@@ -623,7 +650,6 @@
     "languages/russian.md",
     "devops/networking-sdsm-research.md",
     "devops/networking.md",
-    "devops/networks.md",
     "devops/networking-linkmeup-research.md",
     "desktop/electron/electron.md",
     "desktop/desktop.md",
@@ -632,7 +658,6 @@
     "desktop/electron/electron-research-2025.md",
     "Tags/#devtools",
     "Tags/#чекер_сети",
-    "Tags/#блокировка",
     "agile/agile.md",
     "agile/command.md",
     "agile/empiricism.md",
@@ -647,7 +672,6 @@
     "agile/xp.md",
     "agile/metrics.md",
     "agile/cynefin.md",
-    "agile/kanban.md",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",
