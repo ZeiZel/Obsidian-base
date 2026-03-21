@@ -73,7 +73,8 @@
     "//desktop",
     "//desktop/desktop/Electron",
     "//desktop/desktop/electron",
-    "//architecture"
+    "//architecture",
+    "//devops"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

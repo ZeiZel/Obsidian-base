@@ -308,15 +308,27 @@
             }
           },
           {
-            "id": "43aee5928693a41f",
+            "id": "56fa5cb9d0a2ded9",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "desktop/electron"
+                "file": "devops/networks.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "electron"
+              "title": "networks"
             }
           }
         ],
@@ -560,15 +572,17 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "devops/networks.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of networks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -596,15 +610,17 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "56fa5cb9d0a2ded9",
   "lastOpenFiles": [
-    "desktop/electron/electron.md",
-    "architecture/architecture.md",
-    "desktop/electron/_lessons/Electron - Полное руководство.md",
-    "devops/networking.md",
+    "languages/russian.md",
     "devops/networking-sdsm-research.md",
+    "devops/networking.md",
     "devops/networks.md",
     "devops/networking-linkmeup-research.md",
+    "desktop/electron/electron.md",
+    "desktop/desktop.md",
+    "architecture/architecture.md",
+    "desktop/electron/_lessons/Electron - Полное руководство.md",
     "desktop/electron/electron-research-2025.md",
     "Tags/#devtools",
     "Tags/#чекер_сети",
@@ -628,8 +644,6 @@
     "agile/cynefin.md",
     "agile/kanban.md",
     "agile/scrum.md",
-    "agile/Team.md",
-    "architecture/System Design/System Design.md",
     "languages",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",

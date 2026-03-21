@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "networks",
+      "path": "devops/networks.md"
+    },
+    {
+      "basename": "russian",
+      "path": "languages/russian.md"
+    },
+    {
       "basename": "electron",
       "path": "desktop/electron/electron.md"
     },
@@ -83,10 +91,6 @@
     {
       "basename": "Redis",
       "path": "database/Redis.md"
-    },
-    {
-      "basename": "russian",
-      "path": "languages/russian.md"
     },
     {
       "basename": "english",
@@ -183,22 +187,6 @@
     {
       "basename": "Helmfile",
       "path": "devops/kubernetes/Helmfile.md"
-    },
-    {
-      "basename": "Design",
-      "path": "Design/Design.md"
-    },
-    {
-      "basename": "NASA coding standarts",
-      "path": "cs/NASA coding standarts.md"
-    },
-    {
-      "basename": "Davinci resolve",
-      "path": "Design/DaVinci Resolve/Davinci resolve.md"
-    },
-    {
-      "basename": "Zustand",
-      "path": "frontend/State Managers/Zustand.md"
     }
   ],
   "omittedPaths": [],
