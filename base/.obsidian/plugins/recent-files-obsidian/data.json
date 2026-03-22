@@ -1,8 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "devops",
+      "path": "devops/devops.md"
+    },
+    {
       "basename": "CI-CD",
       "path": "devops/CI-CD.md"
+    },
+    {
+      "basename": "devsecops",
+      "path": "devops/devsecops.md"
+    },
+    {
+      "basename": "prometheus-grafana",
+      "path": "devops/prometheus-grafana.md"
+    },
+    {
+      "basename": "terraform",
+      "path": "devops/terraform.md"
+    },
+    {
+      "basename": "sre",
+      "path": "devops/sre.md"
+    },
+    {
+      "basename": "gitlab-ci",
+      "path": "devops/gitlab-ci.md"
+    },
+    {
+      "basename": "aws",
+      "path": "devops/aws.md"
+    },
+    {
+      "basename": "DEVOPS-AUDIT",
+      "path": "devops/DEVOPS-AUDIT.md"
     },
     {
       "basename": "docker",
@@ -31,10 +63,6 @@
     {
       "basename": "Доступ и права",
       "path": "devops/linux/os/_lessons/Доступ и права.md"
-    },
-    {
-      "basename": "devops",
-      "path": "devops/devops.md"
     },
     {
       "basename": "__temp__OS",
@@ -171,34 +199,6 @@
     {
       "basename": "Mongo DB",
       "path": "database/Mongo DB.md"
-    },
-    {
-      "basename": "AI",
-      "path": "ai/AI.md"
-    },
-    {
-      "basename": "AI and Data Science",
-      "path": "ai/AI and Data Science.md"
-    },
-    {
-      "basename": "AI Agent",
-      "path": "ai/AI Agent.md"
-    },
-    {
-      "basename": "AI Prompts",
-      "path": "ai/AI Prompts.md"
-    },
-    {
-      "basename": "AI Engineering",
-      "path": "ai/AI Engineering.md"
-    },
-    {
-      "basename": "AI Instruments",
-      "path": "ai/AI Instruments.md"
-    },
-    {
-      "basename": "Obsidian",
-      "path": "obsidian/Obsidian.md"
     }
   ],
   "omittedPaths": [],

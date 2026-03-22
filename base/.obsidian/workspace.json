@@ -83,24 +83,12 @@
             "id": "c53005f485c9892b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "devops/CI-CD.md",
-                "mode": "preview",
-                "source": true,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "devops"
               },
               "icon": "lucide-file",
-              "title": "CI-CD"
+              "title": "devops"
             }
           },
           {
@@ -606,13 +594,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/CI-CD.md",
+                "file": "devops/devops.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CI-CD"
+              "title": "Outline of devops"
             }
           }
         ],
@@ -644,8 +632,24 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "c53005f485c9892b",
+  "active": "8155ee885ed6b7bb",
   "lastOpenFiles": [
+    "devops/CI-CD.md",
+    "devops/devops.md",
+    "devops/devsecops.md",
+    "devops/prometheus-grafana.md",
+    "devops/terraform.md",
+    "devops/sre.md",
+    "devops/datadog.md",
+    "devops/logging.md",
+    "devops/database-ops.md",
+    "devops/message-queues-ops.md",
+    "devops/linux/linux-admin.md",
+    "devops/service-mesh.md",
+    "devops/gitlab-ci.md",
+    "devops/argocd.md",
+    "devops/aws.md",
+    "devops/DEVOPS-AUDIT.md",
     "devops/docker/docker.md",
     "devops/linux/os/os.md",
     "devops/linux/os/_lessons/Управление пакетами.md",
@@ -653,14 +657,11 @@
     "devops/linux/os/_lessons/Структура Linux.md",
     "devops/linux/os/_lessons/Сеть в Linux.md",
     "devops/linux/os/_lessons/Доступ и права.md",
-    "devops/devops.md",
     "devops/linux/bash/bash.md",
     "Tags/#linux",
     "Tags/#devops",
     "devops/NGINX.md",
     "devops/kubernetes/Helmfile.md",
-    "devops/kubernetes/Kubernetes Entities.md",
-    "devops/networks.md",
     "Tags/#практики agile",
     "Tags/#agile practices",
     "Tags/#метрики agile",
@@ -669,19 +670,6 @@
     "Tags/#тимлид",
     "Tags/#teamlead roadmap",
     "Tags/#managementaliases",
-    "languages/russian.md",
-    "devops/networking-sdsm-research.md",
-    "devops/networking.md",
-    "devops/networking-linkmeup-research.md",
-    "desktop/electron/electron.md",
-    "desktop/desktop.md",
-    "architecture/architecture.md",
-    "desktop/electron/_lessons/Electron - Полное руководство.md",
-    "desktop/electron/electron-research-2025.md",
-    "agile/agile.md",
-    "agile/command.md",
-    "agile/empiricism.md",
-    "agile/Teamlead.md",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",
