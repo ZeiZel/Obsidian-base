@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
       "basename": "backend",
       "path": "backend/backend.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "os",
       "path": "devops/linux/os/os.md"
-    },
-    {
-      "basename": "devsecops",
-      "path": "devops/devsecops.md"
     }
   ],
   "omittedPaths": [],

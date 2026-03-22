@@ -344,7 +344,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -603,12 +603,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -640,7 +641,7 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "c53005f485c9892b",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
     "backend/backend.md",
     "backend/Golang.md",
