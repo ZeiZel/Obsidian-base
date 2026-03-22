@@ -85,9 +85,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/kubernetes/Kubernetes Entities.md",
-                "mode": "source",
-                "source": false,
+                "file": "devops/CI-CD.md",
+                "mode": "preview",
+                "source": true,
                 "backlinks": true,
                 "backlinkOpts": {
                   "collapseAll": false,
@@ -100,7 +100,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Kubernetes Entities"
+              "title": "CI-CD"
             }
           },
           {
@@ -370,7 +370,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "034678fd4509816e",
+            "id": "2666a47be2af937a",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -382,7 +382,7 @@
             }
           },
           {
-            "id": "4cc371cdec58e4ac",
+            "id": "034678fd4509816e",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -566,6 +566,16 @@
             "id": "00087c6e9005b93e",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "0dc357aafdb55df8",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -573,7 +583,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 10
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -596,13 +606,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/kubernetes/Kubernetes Entities.md",
+                "file": "devops/CI-CD.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Kubernetes Entities"
+              "title": "Outline of CI-CD"
             }
           }
         ],
@@ -610,7 +620,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 581.5
+    "width": 374.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -636,9 +646,21 @@
   },
   "active": "c53005f485c9892b",
   "lastOpenFiles": [
+    "devops/docker/docker.md",
+    "devops/linux/os/os.md",
+    "devops/linux/os/_lessons/Управление пакетами.md",
+    "devops/linux/os/_lessons/Хранение.md",
+    "devops/linux/os/_lessons/Структура Linux.md",
+    "devops/linux/os/_lessons/Сеть в Linux.md",
+    "devops/linux/os/_lessons/Доступ и права.md",
+    "devops/devops.md",
+    "devops/linux/bash/bash.md",
+    "Tags/#linux",
+    "Tags/#devops",
+    "devops/NGINX.md",
     "devops/kubernetes/Helmfile.md",
-    "devops/networks.md",
     "devops/kubernetes/Kubernetes Entities.md",
+    "devops/networks.md",
     "Tags/#практики agile",
     "Tags/#agile practices",
     "Tags/#метрики agile",
@@ -656,22 +678,10 @@
     "architecture/architecture.md",
     "desktop/electron/_lessons/Electron - Полное руководство.md",
     "desktop/electron/electron-research-2025.md",
-    "Tags/#devtools",
-    "Tags/#чекер_сети",
     "agile/agile.md",
     "agile/command.md",
     "agile/empiricism.md",
     "agile/Teamlead.md",
-    "agile/Как быть хорошим тимлидом.md",
-    "agile/practices.md",
-    "agile/scaling.md",
-    "agile/frameworks.md",
-    "agile/manifest.md",
-    "agile/models.md",
-    "agile/DISC.md",
-    "agile/xp.md",
-    "agile/metrics.md",
-    "agile/cynefin.md",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",

@@ -1436,7 +1436,7 @@ Artifact → Deploy to Staging → Integration Tests → Deploy to Production �
 
 Инструменты:
 - ArgoCD, Spinnaker
-- [Kubernetes](../devops/kubernetes/Kubernetes%20+%20Helm.md), [Docker](../devops/docker/Docker%20+%20Ansible.md)
+- [Kubernetes](../devops/kubernetes/Kubernetes%20+%20Helm.md), [Docker](../devops/docker/docker.md)
 - Terraform, Ansible
 
 Ресурсы:
@@ -2648,7 +2648,7 @@ Weekly Review (шаблон):
 - [DevOps](../devops/devops.md)
 - [CI/CD](../devops/CI-CD.md)
 - [Kubernetes](../devops/kubernetes/Kubernetes%20+%20Helm.md)
-- [Docker](../devops/docker/Docker%20+%20Ansible.md)
+- [Docker](../devops/docker/docker.md)
 
 #### Разработка
 - [Frontend](../frontend/frontend.md)

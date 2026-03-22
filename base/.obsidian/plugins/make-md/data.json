@@ -75,7 +75,16 @@
     "//desktop/desktop/electron",
     "//architecture",
     "//devops",
-    "//devops/devops/kubernetes"
+    "//devops/devops/kubernetes",
+    "//devops/devops/docker",
+    "//devops/devops/Linux",
+    "//devops/devops/Linux/devops/Linux/Bash",
+    "//devops/devops/Linux/devops/Linux/OS",
+    "//devops/devops/linux",
+    "//devops/devops/linux/devops/linux/OS",
+    "//devops/devops/linux/devops/linux/Bash",
+    "//devops/devops/linux/devops/linux/bash",
+    "//devops/devops/linux/devops/linux/os"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

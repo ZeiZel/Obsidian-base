@@ -1,12 +1,60 @@
 {
   "recentFiles": [
     {
-      "basename": "Kubernetes Entities",
-      "path": "devops/kubernetes/Kubernetes Entities.md"
+      "basename": "CI-CD",
+      "path": "devops/CI-CD.md"
+    },
+    {
+      "basename": "docker",
+      "path": "devops/docker/docker.md"
+    },
+    {
+      "basename": "os",
+      "path": "devops/linux/os/os.md"
+    },
+    {
+      "basename": "Управление пакетами",
+      "path": "devops/linux/os/_lessons/Управление пакетами.md"
+    },
+    {
+      "basename": "Хранение",
+      "path": "devops/linux/os/_lessons/Хранение.md"
+    },
+    {
+      "basename": "Структура Linux",
+      "path": "devops/linux/os/_lessons/Структура Linux.md"
+    },
+    {
+      "basename": "Сеть в Linux",
+      "path": "devops/linux/os/_lessons/Сеть в Linux.md"
+    },
+    {
+      "basename": "Доступ и права",
+      "path": "devops/linux/os/_lessons/Доступ и права.md"
+    },
+    {
+      "basename": "devops",
+      "path": "devops/devops.md"
+    },
+    {
+      "basename": "__temp__OS",
+      "path": "devops/linux/os/__temp__OS.md"
+    },
+    {
+      "basename": "bash",
+      "path": "devops/linux/bash/bash.md"
+    },
+    {
+      "basename": "NGINX",
+      "path": "devops/NGINX.md"
     },
     {
       "basename": "Helmfile",
       "path": "devops/kubernetes/Helmfile.md"
+    },
+    {
+      "basename": "Kubernetes Entities",
+      "path": "devops/kubernetes/Kubernetes Entities.md"
     },
     {
       "basename": "networks",
@@ -151,46 +199,6 @@
     {
       "basename": "Obsidian",
       "path": "obsidian/Obsidian.md"
-    },
-    {
-      "basename": "Docker + Ansible",
-      "path": "devops/docker/Docker + Ansible.md"
-    },
-    {
-      "basename": "TMUX",
-      "path": "tools/TMUX.md"
-    },
-    {
-      "basename": "Figma",
-      "path": "Design/Figma.md"
-    },
-    {
-      "basename": "Client-server architecture",
-      "path": "concepts/Client-server architecture.md"
-    },
-    {
-      "basename": "REST",
-      "path": "backend/REST/REST.md"
-    },
-    {
-      "basename": "BFF",
-      "path": "backend/REST/BFF.md"
-    },
-    {
-      "basename": "backend",
-      "path": "backend/backend.md"
-    },
-    {
-      "basename": "Networks",
-      "path": "cs/Networks/Networks.md"
-    },
-    {
-      "basename": "The Bezos Mandath",
-      "path": "cs/The Bezos Mandath.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
     }
   ],
   "omittedPaths": [],

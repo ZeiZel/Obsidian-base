@@ -490,7 +490,7 @@ Project Manager vs Product Manager:
 - [DevOps](../devops/devops.md)
 - [CI/CD](../devops/CI-CD.md)
 - [Kubernetes](../devops/kubernetes/Kubernetes%20+%20Helm.md)
-- [Docker](../devops/docker/Docker%20+%20Ansible.md)
+- [Docker](../devops/docker/docker.md)
 
 ##### Mobile Developer
 
