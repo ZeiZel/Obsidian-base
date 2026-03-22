@@ -354,7 +354,7 @@ Project Manager vs Product Manager:
 Связанные темы:
 - [SOLID принципы](../architecture/SOLID%20принципы.md)
 - [Clean Architecture](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md)
-- [CI/CD](../devops/CI-CD.md)
+- [CI/CD](../devops/ci-cd.md)
 
 #### Product Owner (PO)
 
@@ -488,7 +488,7 @@ Project Manager vs Product Manager:
 
 Связанные темы:
 - [DevOps](../devops/devops.md)
-- [CI/CD](../devops/CI-CD.md)
+- [CI/CD](../devops/ci-cd.md)
 - [Kubernetes](../devops/kubernetes/Kubernetes%20+%20Helm.md)
 - [Docker](../devops/docker/docker.md)
 

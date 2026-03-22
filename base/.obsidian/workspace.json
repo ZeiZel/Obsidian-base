@@ -83,12 +83,24 @@
             "id": "c53005f485c9892b",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "devops"
+                "file": "devops/datadog.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "devops"
+              "title": "datadog"
             }
           },
           {
@@ -571,7 +583,7 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -594,13 +606,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/devops.md",
+                "file": "devops/datadog.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of devops"
+              "title": "Outline of datadog"
             }
           }
         ],
@@ -632,26 +644,31 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "8155ee885ed6b7bb",
+  "active": "c53005f485c9892b",
   "lastOpenFiles": [
-    "devops/CI-CD.md",
     "devops/devops.md",
+    "devops/nginx.md",
+    "devops/argocd.md",
+    "devops/sre.md",
+    "devops/gitlab-ci.md",
+    "devops/ci-cd.md",
+    "devops/kubernetes/Kubernetes Entities.md",
+    "Tags/#reverse-proxy",
+    "Tags/#load-balancing",
+    "Tags/#nginx",
+    "devops/linux/os/os.md",
     "devops/devsecops.md",
     "devops/prometheus-grafana.md",
     "devops/terraform.md",
-    "devops/sre.md",
     "devops/datadog.md",
     "devops/logging.md",
     "devops/database-ops.md",
     "devops/message-queues-ops.md",
     "devops/linux/linux-admin.md",
     "devops/service-mesh.md",
-    "devops/gitlab-ci.md",
-    "devops/argocd.md",
     "devops/aws.md",
     "devops/DEVOPS-AUDIT.md",
     "devops/docker/docker.md",
-    "devops/linux/os/os.md",
     "devops/linux/os/_lessons/Управление пакетами.md",
     "devops/linux/os/_lessons/Хранение.md",
     "devops/linux/os/_lessons/Структура Linux.md",
@@ -660,16 +677,11 @@
     "devops/linux/bash/bash.md",
     "Tags/#linux",
     "Tags/#devops",
-    "devops/NGINX.md",
-    "devops/kubernetes/Helmfile.md",
     "Tags/#практики agile",
     "Tags/#agile practices",
     "Tags/#метрики agile",
     "Tags/#agile metrics",
     "Tags/#agilealiases",
-    "Tags/#тимлид",
-    "Tags/#teamlead roadmap",
-    "Tags/#managementaliases",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",

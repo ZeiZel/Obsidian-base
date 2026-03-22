@@ -11,9 +11,9 @@ title: DevOps
 	- [Сети](networks.md)
 - Контейнеризация и веб-серверы
 	- [Docker, Compose, Swarm, Ansible, Vagrant](docker/docker.md)
-	- [NGINX](NGINX.md)
+	- [nginx](nginx.md)
 - CI/CD
-	- [CI/CD - GitHub Actions и Jenkins](CI-CD.md)
+	- [CI/CD - GitHub Actions и Jenkins](ci-cd.md)
 	- [GitLab CI/CD](gitlab-ci.md)
 - Оркестрация
 	- [Kubernetes + Helm](kubernetes/Kubernetes%20+%20Helm.md)

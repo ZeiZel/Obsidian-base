@@ -1,12 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "datadog",
+      "path": "devops/datadog.md"
+    },
+    {
       "basename": "devops",
       "path": "devops/devops.md"
     },
     {
-      "basename": "CI-CD",
-      "path": "devops/CI-CD.md"
+      "basename": "nginx",
+      "path": "devops/nginx.md"
+    },
+    {
+      "basename": "argocd",
+      "path": "devops/argocd.md"
+    },
+    {
+      "basename": "sre",
+      "path": "devops/sre.md"
+    },
+    {
+      "basename": "gitlab-ci",
+      "path": "devops/gitlab-ci.md"
+    },
+    {
+      "basename": "ci-cd",
+      "path": "devops/ci-cd.md"
+    },
+    {
+      "basename": "Kubernetes Entities",
+      "path": "devops/kubernetes/Kubernetes Entities.md"
+    },
+    {
+      "basename": "os",
+      "path": "devops/linux/os/os.md"
     },
     {
       "basename": "devsecops",
@@ -21,14 +49,6 @@
       "path": "devops/terraform.md"
     },
     {
-      "basename": "sre",
-      "path": "devops/sre.md"
-    },
-    {
-      "basename": "gitlab-ci",
-      "path": "devops/gitlab-ci.md"
-    },
-    {
       "basename": "aws",
       "path": "devops/aws.md"
     },
@@ -39,10 +59,6 @@
     {
       "basename": "docker",
       "path": "devops/docker/docker.md"
-    },
-    {
-      "basename": "os",
-      "path": "devops/linux/os/os.md"
     },
     {
       "basename": "Управление пакетами",
@@ -73,16 +89,8 @@
       "path": "devops/linux/bash/bash.md"
     },
     {
-      "basename": "NGINX",
-      "path": "devops/NGINX.md"
-    },
-    {
       "basename": "Helmfile",
       "path": "devops/kubernetes/Helmfile.md"
-    },
-    {
-      "basename": "Kubernetes Entities",
-      "path": "devops/kubernetes/Kubernetes Entities.md"
     },
     {
       "basename": "networks",
@@ -191,14 +199,6 @@
     {
       "basename": "Python",
       "path": "cs/Python.md"
-    },
-    {
-      "basename": "Prisma ORM",
-      "path": "database/Prisma ORM.md"
-    },
-    {
-      "basename": "Mongo DB",
-      "path": "database/Mongo DB.md"
     }
   ],
   "omittedPaths": [],

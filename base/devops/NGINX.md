@@ -2,10 +2,10 @@
 tags:
   - devops
   - nginx
+  - load-balancing
+  - reverse-proxy
 title: NGINX
 ---
-
-# NGINX
 
 ## Архитектура и модель работы
 
