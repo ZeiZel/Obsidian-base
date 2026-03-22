@@ -438,10 +438,10 @@ Project Manager vs Product Manager:
 
 Связанные темы:
 - [Frontend](../frontend/frontend.md)
-- [JavaScript](../frontend/JavaScript/JavaScript.md)
-- [React](../frontend/React/React%20Foundamentals.md)
+- [JavaScript](../frontend/javascript/JavaScript.md)
+- [React](../frontend/react/React%20Foundamentals.md)
 - [TypeScript](../edge/TypeScript/TypeScript.md)
-- [State Managers](../frontend/State%20Managers/Zustand.md)
+- [State Managers](../frontend/state-managers/Zustand.md)
 
 ##### Backend Developer
 
@@ -502,7 +502,7 @@ Project Manager vs Product Manager:
 - Cross-platform (React Native, Flutter)
 
 Связанные темы:
-- [React Native](../mobile/React%20Native/React%20Native.md)
+- [React Native](../mobile/react-native/react-native.md)
 
 #### QA Engineer
 

@@ -82,7 +82,14 @@
     "//devops/devops/linux/devops/linux/OS",
     "//devops/devops/linux/devops/linux/Bash",
     "//devops/devops/linux/devops/linux/bash",
-    "//devops/devops/linux/devops/linux/os"
+    "//devops/devops/linux/devops/linux/os",
+    "//frontend",
+    "//frontend/frontend/Vue",
+    "//frontend/frontend/Vue/frontend/Vue/Nuxt",
+    "//frontend/frontend/Vue/frontend/Vue/Vue",
+    "//concepts",
+    "//backend/backend/PHP",
+    "//backend/backend/REST"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

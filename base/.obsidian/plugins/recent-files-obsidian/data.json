@@ -1,6 +1,166 @@
 {
   "recentFiles": [
     {
+      "basename": "backend",
+      "path": "backend/backend.md"
+    },
+    {
+      "basename": "Golang",
+      "path": "backend/Golang.md"
+    },
+    {
+      "basename": "serverless",
+      "path": "backend/serverless.md"
+    },
+    {
+      "basename": "Ruby",
+      "path": "backend/Ruby.md"
+    },
+    {
+      "basename": "BFF",
+      "path": "backend/REST/BFF.md"
+    },
+    {
+      "basename": "REST",
+      "path": "backend/REST/REST.md"
+    },
+    {
+      "basename": "PHP",
+      "path": "backend/PHP/PHP.md"
+    },
+    {
+      "basename": "YII2",
+      "path": "backend/PHP/YII2.md"
+    },
+    {
+      "basename": "mobile",
+      "path": "mobile/mobile.md"
+    },
+    {
+      "basename": "react-native",
+      "path": "mobile/react-native/react-native.md"
+    },
+    {
+      "basename": "Obsidian",
+      "path": "obsidian/Obsidian.md"
+    },
+    {
+      "basename": "Фичи и хоткеи",
+      "path": "obsidian/_lessons/Фичи и хоткеи.md"
+    },
+    {
+      "basename": "Синхронизация с облаком или git-ом",
+      "path": "obsidian/_lessons/Синхронизация с облаком или git-ом.md"
+    },
+    {
+      "basename": "Синтаксис MarkDown",
+      "path": "obsidian/_lessons/Синтаксис MarkDown.md"
+    },
+    {
+      "basename": "Плагины",
+      "path": "obsidian/_lessons/Плагины.md"
+    },
+    {
+      "basename": "Как написать свой плагин",
+      "path": "obsidian/_lessons/Как написать свой плагин.md"
+    },
+    {
+      "basename": "Obsidian UI",
+      "path": "obsidian/_lessons/Obsidian UI.md"
+    },
+    {
+      "basename": "microfrontends",
+      "path": "frontend/microfrontends.md"
+    },
+    {
+      "basename": "next",
+      "path": "frontend/next/next.md"
+    },
+    {
+      "basename": "angular",
+      "path": "frontend/angular/angular.md"
+    },
+    {
+      "basename": "state-managers",
+      "path": "frontend/state-managers/state-managers.md"
+    },
+    {
+      "basename": "Effector",
+      "path": "frontend/state-managers/Effector.md"
+    },
+    {
+      "basename": "ui-frameworks",
+      "path": "frontend/ui-frameworks/ui-frameworks.md"
+    },
+    {
+      "basename": "Shadcn UI",
+      "path": "frontend/ui-frameworks/Shadcn UI.md"
+    },
+    {
+      "basename": "MUI",
+      "path": "frontend/ui-frameworks/MUI.md"
+    },
+    {
+      "basename": "Mantine",
+      "path": "frontend/ui-frameworks/Mantine.md"
+    },
+    {
+      "basename": "Chakra UI",
+      "path": "frontend/ui-frameworks/Chakra UI.md"
+    },
+    {
+      "basename": "soft",
+      "path": "soft/soft.md"
+    },
+    {
+      "basename": "leadership",
+      "path": "leadership.md"
+    },
+    {
+      "basename": "Client-server architecture",
+      "path": "concepts/Client-server architecture.md"
+    },
+    {
+      "basename": "State-management",
+      "path": "concepts/State-management.md"
+    },
+    {
+      "basename": "Tailwind CSS",
+      "path": "frontend/Tailwind CSS.md"
+    },
+    {
+      "basename": "RxJS",
+      "path": "frontend/RxJS.md"
+    },
+    {
+      "basename": "Web Vitals",
+      "path": "frontend/Web Vitals.md"
+    },
+    {
+      "basename": "Nuxt",
+      "path": "frontend/Vue/Nuxt/Nuxt.md"
+    },
+    {
+      "basename": "Vue",
+      "path": "frontend/Vue/Vue/Vue.md"
+    },
+    {
+      "basename": "Storybook",
+      "path": "frontend/Storybook.md"
+    },
+    {
+      "basename": "SSR",
+      "path": "frontend/SSR.md"
+    },
+    {
+      "basename": "SEO",
+      "path": "frontend/SEO.md"
+    },
+    {
+      "basename": "PWA",
+      "path": "frontend/PWA.md"
+    },
+    {
       "basename": "datadog",
       "path": "devops/datadog.md"
     },
@@ -39,166 +199,6 @@
     {
       "basename": "devsecops",
       "path": "devops/devsecops.md"
-    },
-    {
-      "basename": "prometheus-grafana",
-      "path": "devops/prometheus-grafana.md"
-    },
-    {
-      "basename": "terraform",
-      "path": "devops/terraform.md"
-    },
-    {
-      "basename": "aws",
-      "path": "devops/aws.md"
-    },
-    {
-      "basename": "DEVOPS-AUDIT",
-      "path": "devops/DEVOPS-AUDIT.md"
-    },
-    {
-      "basename": "docker",
-      "path": "devops/docker/docker.md"
-    },
-    {
-      "basename": "Управление пакетами",
-      "path": "devops/linux/os/_lessons/Управление пакетами.md"
-    },
-    {
-      "basename": "Хранение",
-      "path": "devops/linux/os/_lessons/Хранение.md"
-    },
-    {
-      "basename": "Структура Linux",
-      "path": "devops/linux/os/_lessons/Структура Linux.md"
-    },
-    {
-      "basename": "Сеть в Linux",
-      "path": "devops/linux/os/_lessons/Сеть в Linux.md"
-    },
-    {
-      "basename": "Доступ и права",
-      "path": "devops/linux/os/_lessons/Доступ и права.md"
-    },
-    {
-      "basename": "__temp__OS",
-      "path": "devops/linux/os/__temp__OS.md"
-    },
-    {
-      "basename": "bash",
-      "path": "devops/linux/bash/bash.md"
-    },
-    {
-      "basename": "Helmfile",
-      "path": "devops/kubernetes/Helmfile.md"
-    },
-    {
-      "basename": "networks",
-      "path": "devops/networks.md"
-    },
-    {
-      "basename": "russian",
-      "path": "languages/russian.md"
-    },
-    {
-      "basename": "electron",
-      "path": "desktop/electron/electron.md"
-    },
-    {
-      "basename": "architecture",
-      "path": "architecture/architecture.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
-    },
-    {
-      "basename": "command",
-      "path": "agile/command.md"
-    },
-    {
-      "basename": "empiricism",
-      "path": "agile/empiricism.md"
-    },
-    {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
-      "basename": "practices",
-      "path": "agile/practices.md"
-    },
-    {
-      "basename": "scaling",
-      "path": "agile/scaling.md"
-    },
-    {
-      "basename": "frameworks",
-      "path": "agile/frameworks.md"
-    },
-    {
-      "basename": "manifest",
-      "path": "agile/manifest.md"
-    },
-    {
-      "basename": "models",
-      "path": "agile/models.md"
-    },
-    {
-      "basename": "DISC",
-      "path": "agile/DISC.md"
-    },
-    {
-      "basename": "xp",
-      "path": "agile/xp.md"
-    },
-    {
-      "basename": "metrics",
-      "path": "agile/metrics.md"
-    },
-    {
-      "basename": "kanban",
-      "path": "agile/kanban.md"
-    },
-    {
-      "basename": "scrum",
-      "path": "agile/scrum.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "Ruby",
-      "path": "backend/Ruby.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
-    },
-    {
-      "basename": "PostgreSQL",
-      "path": "database/PostgreSQL.md"
-    },
-    {
-      "basename": "Redis",
-      "path": "database/Redis.md"
-    },
-    {
-      "basename": "english",
-      "path": "languages/english.md"
-    },
-    {
-      "basename": "SQLite",
-      "path": "database/SQLite.md"
-    },
-    {
-      "basename": "database",
-      "path": "database/database.md"
-    },
-    {
-      "basename": "Python",
-      "path": "cs/Python.md"
     }
   ],
   "omittedPaths": [],

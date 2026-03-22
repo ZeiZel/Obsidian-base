@@ -8,4 +8,4 @@ tags:
 ![](../_png/ed10608cb38c4fc6591bdbaa6d1b9611.png)
 
 Материалы:
-[React + Next.js - с нуля](NextJS/React%20+%20Next.js%20-%20с%20нуля.md)
+[React + Next.js - с нуля](next/next.md)

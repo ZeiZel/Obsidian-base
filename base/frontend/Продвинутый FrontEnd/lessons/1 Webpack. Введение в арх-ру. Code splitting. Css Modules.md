@@ -833,7 +833,7 @@ export const App = () => {
 
 В приложении будут использоватся css-переменные вместо переменных SASS.
 
-Стили будут распределены подобным образом (reset.scss находится [тут](../../Tips&Tricks/Reset&Reboot.md)):
+Стили будут распределены подобным образом (reset.scss находится [тут](../../tips-n-tricks/Reset&Reboot.md)):
 
 `src > styles > index.scss`
 

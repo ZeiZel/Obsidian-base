@@ -30,6 +30,7 @@ aliases:
 - [books](Books/Books.md)
 - [backend](backend/backend.md)
 - [inbox](inbox/inbox.md) - неструктурированные данные и шальные мысли =)
+- [soft skills](soft/soft.md) - коммуникация, лидерство, карьера, стресс, харизма
 
 ## Как стартовать в профессии?
 
@@ -176,7 +177,7 @@ aliases:
         - Pointer
         - Ambient Light Events
     - Mobile
-    - [React Native](mobile/React%20Native/React%20Native.md)
+    - [React Native](mobile/react-native/react-native.md)
 - [Backend](backend/backend.md)
     - [Безбэкендный подход](backend/serverless.md)
 

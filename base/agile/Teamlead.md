@@ -2653,7 +2653,7 @@ Weekly Review (шаблон):
 #### Разработка
 - [Frontend](../frontend/frontend.md)
 - [Backend](../backend/backend.md)
-- [JavaScript](../frontend/JavaScript/JavaScript.md)
+- [JavaScript](../frontend/javascript/JavaScript.md)
 - [TypeScript](../edge/TypeScript/TypeScript.md)
 - [Node.js](../backend/NodeJS/Node.js%20-%20с%20нуля%2C%20основы%20и%20построение%20архитектуры%20приложений.md)
 

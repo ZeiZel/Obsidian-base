@@ -83,24 +83,12 @@
             "id": "c53005f485c9892b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "devops/datadog.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "backend"
               },
               "icon": "lucide-file",
-              "title": "datadog"
+              "title": "backend"
             }
           },
           {
@@ -374,18 +362,6 @@
             "type": "leaf",
             "pinned": true,
             "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "pinned": true,
-              "icon": "layout-grid",
-              "title": "Navigator"
-            }
-          },
-          {
-            "id": "034678fd4509816e",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
@@ -432,8 +408,19 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
+          },
+          {
+            "id": "b8e079cdc0484e56",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -576,6 +563,16 @@
             "id": "0dc357aafdb55df8",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "a7a34b8733e46573",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -583,7 +580,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 11
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -606,13 +603,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "devops/datadog.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of datadog"
+              "title": "Outline"
             }
           }
         ],
@@ -646,42 +642,42 @@
   },
   "active": "c53005f485c9892b",
   "lastOpenFiles": [
-    "devops/devops.md",
-    "devops/nginx.md",
-    "devops/argocd.md",
-    "devops/sre.md",
-    "devops/gitlab-ci.md",
-    "devops/ci-cd.md",
-    "devops/kubernetes/Kubernetes Entities.md",
-    "Tags/#reverse-proxy",
-    "Tags/#load-balancing",
-    "Tags/#nginx",
-    "devops/linux/os/os.md",
-    "devops/devsecops.md",
-    "devops/prometheus-grafana.md",
-    "devops/terraform.md",
-    "devops/datadog.md",
-    "devops/logging.md",
-    "devops/database-ops.md",
-    "devops/message-queues-ops.md",
-    "devops/linux/linux-admin.md",
-    "devops/service-mesh.md",
-    "devops/aws.md",
-    "devops/DEVOPS-AUDIT.md",
-    "devops/docker/docker.md",
-    "devops/linux/os/_lessons/Управление пакетами.md",
-    "devops/linux/os/_lessons/Хранение.md",
-    "devops/linux/os/_lessons/Структура Linux.md",
-    "devops/linux/os/_lessons/Сеть в Linux.md",
-    "devops/linux/os/_lessons/Доступ и права.md",
-    "devops/linux/bash/bash.md",
-    "Tags/#linux",
-    "Tags/#devops",
-    "Tags/#практики agile",
-    "Tags/#agile practices",
-    "Tags/#метрики agile",
-    "Tags/#agile metrics",
-    "Tags/#agilealiases",
+    "backend/backend.md",
+    "backend/Golang.md",
+    "backend/serverless.md",
+    "backend/Ruby.md",
+    "backend/REST/BFF.md",
+    "backend/REST/REST.md",
+    "backend/PHP/PHP.md",
+    "backend/PHP/YII2.md",
+    "mobile/mobile.md",
+    "mobile/react-native/react-native.md",
+    "obsidian/Obsidian.md",
+    "obsidian/_lessons/Фичи и хоткеи.md",
+    "obsidian/_lessons/Синхронизация с облаком или git-ом.md",
+    "obsidian/_lessons/Синтаксис MarkDown.md",
+    "obsidian/_lessons/Плагины.md",
+    "obsidian/_lessons/Как написать свой плагин.md",
+    "obsidian/_lessons/Obsidian UI.md",
+    "frontend/microfrontends.md",
+    "frontend/next/next.md",
+    "frontend/angular/angular.md",
+    "Tags/#ngrx",
+    "Tags/#rxjs",
+    "Tags/#profiling",
+    "Tags/#tanstack-query",
+    "frontend/state-managers/state-managers.md",
+    "Tags/#reduxtoolkit",
+    "Tags/#rtk",
+    "Tags/#reacthooks",
+    "Tags/#proptypes",
+    "Tags/#api",
+    "Tags/#tips",
+    "frontend/state-managers/Effector.md",
+    "frontend/ui-frameworks/ui-frameworks.md",
+    "frontend/ui-frameworks/Shadcn UI.md",
+    "frontend/ui-frameworks/MUI.md",
+    "frontend/ui-frameworks/Mantine.md",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",

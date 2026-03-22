@@ -1,107 +1,66 @@
 ---
 tags:
   - frontend
+  - storybook
+  - testing
 ---
-Для начала развернём проект реакта и добавим в него кнопку с описанием принимаемых ею пропсов
+## Storybook
 
-`components > Button > Button.tsx`
+Storybook - инструмент для изолированной разработки, тестирования и документирования UI-компонентов. Каждый компонент описывается набором "историй" (stories), где каждая история отображает компонент в определённом состоянии.
 
-```TSX
-import React from 'react'
-import { ButtonProps } from './Button.props'
-import './Button.css';
-import cn from 'classnames';
+Основные сценарии использования:
+- разработка дизайн-систем и переиспользуемых компонентных библиотек
+- визуальное тестирование компонентов в изоляции от бизнес-логики
+- автоматическая генерация документации по компонентам
+- совместная работа между дизайнерами и разработчиками
+- тестирование edge-кейсов и состояний, которые сложно воспроизвести в приложении
 
-export const Button = ({ appearance = 'primary', children, className, ...props }: ButtonProps) => {
-    return (
-		<button
-			className={cn('button', className, {
-				['primary']: appearance == 'primary',
-				['ghost']: appearance == 'ghost',
-			})}
-			{...props}
-		>
-			{children}
-		</button>
-	);
-}
-```
+> [!info] Storybook поддерживает React, Vue, Angular, Svelte, Web Components и другие фреймворки. Примеры в этой статье используют React.
 
-`components > Button > Button.props.ts`
+## Установка и настройка
 
-```TS
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
-
-export interface ButtonProps
-	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-	children: ReactNode;
-	appearance?: 'primary' | 'ghost';
-}
-```
-
-Для установки сторибука понадобится в проекте ввести данную команду:
+Инициализация в существующем проекте:
 
 ```bash
-npx sb init
+npx storybook@latest init
 ```
 
-После установки, у нас появится скрипт для запуска сторибука
+Команда автоматически определяет фреймворк и сборщик проекта, устанавливает зависимости и создаёт конфигурацию. Начиная с версии 8, Vite используется как сборщик по умолчанию для React-проектов.
 
-`package.json`
+После установки появляются конфигурационные файлы в директории `.storybook/`.
 
-```JSON
-"scripts": {
-	"start": "react-scripts start",
-	"build": "react-scripts build",
-	"test": "react-scripts test",
-	"eject": "react-scripts eject",
-	"sb": "storybook dev -p 6006",
-	"build-storybook": "storybook build"
-},
-```
+`.storybook/main.ts` - определяет, где искать истории и какие аддоны подключены:
 
-Так же сформируются два файла конфигурации, которые будут отвечать за то, какие файлы будут и по каким параметрам определяться как источники историй для сторибука
-
-`.storybook > main.ts`
-
-```TS
-import type { StorybookConfig } from "@storybook/react-webpack5";
+```ts
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app",
-    "@storybook/addon-interactions",
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
   ],
   framework: {
-    name: "@storybook/react-webpack5",
+    name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: "tag",
-  },
-  staticDirs: ["..\\public"],
 };
 
 export default config;
 ```
 
-Сохраняет настройки лейаута
+`.storybook/preview.ts` - глобальные настройки отображения историй:
 
-`.storybook > preview.ts`
-
-```TS
-import type { Preview } from "@storybook/react";
+```ts
+import type { Preview } from '@storybook/react';
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/,
+        date: /Date$/i,
       },
     },
   },
@@ -110,133 +69,366 @@ const preview: Preview = {
 export default preview;
 ```
 
-И уже только сейчас в папке, где у нас располагается элемент, мы можем реализовать страницу сторибука с элементом
+Запуск dev-сервера:
 
-`Button.stories.js`
+```bash
+npm run storybook
+```
 
-```TSX
-import { Button } from "./Button";
+Storybook откроется на `http://localhost:6006`.
 
-export default {
-    // заголовок компонента Папка (необязательно) - Компонент
-    title: 'UI/Button',
-    // сам компонент
-    component: Button
+## CSF 3 - Component Story Format
+
+Storybook 8 использует CSF 3, где истории описываются как обычные объекты. Устаревший паттерн `Template.bind({})` больше не нужен.
+
+Ключевые элементы CSF 3:
+- meta-объект с `satisfies Meta<typeof Component>` для типобезопасности
+- каждая история - это экспортируемый объект типа `StoryObj`
+- состояние компонента задаётся через `args`
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from './Button';
+
+const meta = {
+  title: 'UI/Button',
+  component: Button,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { control: 'select', options: ['primary', 'secondary'] },
+  },
+} satisfies Meta<typeof Button>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Click me',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Cancel',
+  },
+};
+```
+
+Если компонент требует нестандартной отрисовки, можно использовать `render`:
+
+```tsx
+export const WithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Save',
+  },
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button {...args} />
+      <Button {...args} variant="secondary" />
+    </div>
+  ),
+};
+```
+
+## Args и Controls
+
+Storybook автоматически генерирует панель Controls на основе TypeScript-пропсов компонента. Для каждого пропса создаётся соответствующий элемент управления.
+
+Автоматическое сопоставление типов:
+- `string` - текстовое поле
+- `boolean` - переключатель
+- `number` - числовое поле
+- `union type` (`'a' | 'b'`) - select или radio
+- `enum` - select
+
+Ручная настройка типов контролов через `argTypes`:
+
+```tsx
+const meta = {
+  component: Card,
+  argTypes: {
+    variant: {
+      control: 'radio',
+      options: ['elevated', 'outlined', 'filled'],
+      description: 'Visual style of the card',
+    },
+    padding: {
+      control: { type: 'range', min: 0, max: 48, step: 4 },
+    },
+    backgroundColor: {
+      control: 'color',
+    },
+    createdAt: {
+      control: 'date',
+    },
+    onClose: {
+      action: 'closed',
+    },
+  },
+} satisfies Meta<typeof Card>;
+```
+
+> [!summary] Доступные типы контролов: `text`, `boolean`, `number`, `range`, `select`, `radio`, `inline-radio`, `check`, `inline-check`, `color`, `date`, `object`, `file`.
+
+## Decorators и Parameters
+
+Декораторы оборачивают истории в дополнительную разметку или провайдеры. Это полезно для тем, роутинга, стора и других контекстных зависимостей.
+
+Декоратор на уровне конкретной истории:
+
+```tsx
+export const Themed: Story = {
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme="dark">
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+};
+```
+
+Глобальные декораторы в `.storybook/preview.ts`:
+
+```ts
+const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <div style={{ margin: '2rem' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+```
+
+Parameters управляют поведением аддонов и отображением:
+
+```tsx
+const meta = {
+  component: Modal,
+  parameters: {
+    layout: 'centered',
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+    backgrounds: {
+      default: 'dark',
+      values: [
+        { name: 'light', value: '#ffffff' },
+        { name: 'dark', value: '#1a1a1a' },
+      ],
+    },
+  },
+} satisfies Meta<typeof Modal>;
+```
+
+## Interactions и Play Functions
+
+Play-функции позволяют автоматизировать взаимодействие с компонентом прямо внутри истории. Это работает как интерактивный тест, результат которого виден в панели Interactions.
+
+Используемые утилиты из `@storybook/test`:
+- `userEvent` - эмуляция действий пользователя
+- `within` - поиск элементов внутри канваса
+- `expect` - проверка утверждений
+- `fn` - создание mock-функций для отслеживания вызовов
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { expect, fn, userEvent, within } from '@storybook/test';
+import { LoginForm } from './LoginForm';
+
+const meta = {
+  component: LoginForm,
+  args: {
+    onSubmit: fn(),
+  },
+} satisfies Meta<typeof LoginForm>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const FilledForm: Story = {
+  play: async ({ canvasElement, args, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Fill in credentials', async () => {
+      await userEvent.type(canvas.getByLabelText('Email'), 'user@example.com');
+      await userEvent.type(canvas.getByLabelText('Password'), 'password123');
+    });
+
+    await step('Submit the form', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: 'Log in' }));
+    });
+
+    await expect(args.onSubmit).toHaveBeenCalledWith({
+      email: 'user@example.com',
+      password: 'password123',
+    });
+  },
+};
+```
+
+> [!important] Play-функции выполняются автоматически при открытии истории. Результат каждого шага отображается в панели Interactions с возможностью перемотки и отладки.
+
+## Autodocs
+
+Storybook умеет автоматически генерировать страницу документации по компоненту. Для включения достаточно добавить тег `autodocs` в meta-объект.
+
+```tsx
+const meta = {
+  title: 'UI/Button',
+  component: Button,
+  tags: ['autodocs'],
+} satisfies Meta<typeof Button>;
+```
+
+Autodocs собирает информацию из нескольких источников:
+- TypeScript-типы пропсов превращаются в таблицу с описанием аргументов
+- JSDoc-комментарии над компонентом и его пропсами попадают в описание
+- все экспортированные истории отображаются как примеры использования
+
+```tsx
+/** Primary action button used across the application. */
+interface ButtonProps {
+  /** Visual style variant */
+  variant: 'primary' | 'secondary';
+  /** Button content */
+  children: React.ReactNode;
+  /** Disables the button and applies muted styling */
+  disabled?: boolean;
 }
-
-// сам компонент, который будет выводиться на экран
-export const DefaultButton = () => <Button>Кнопка</Button>
 ```
 
-![](_png/b969820de29d399bb67163f402340fd4.png)
+Для более гибкого управления документацией можно создать MDX-файл рядом с историями:
 
-Но более правильным добавлением элемента в сторисы будет считаться добавление его через темплейт, что позволит нам динамически менять значение параметров компонентов прямо в сторибуке
+```mdx
+{/* Button.mdx */}
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
 
-`Button.stories.js`
+<Meta of={ButtonStories} />
 
-```JS
-import { Button } from './Button';
+# Button
 
-export default {
-	title: 'Button',
-	component: Button,
-};
+Основная кнопка приложения.
 
-// создаём шаблон для занесения в него пропсов
-const Template = (arg) => <Button {...arg} />;
+<Canvas of={ButtonStories.Primary} />
 
-// дальше привязываем контекст шаблона
-export const Default = Template.bind({});
+## Props
 
-// дальше передаём дефолтные аргументы в кнопку
-Default.args = {
-	children: 'Кнопка',
-	appearance: 'primary',
-};
+<Controls />
 ```
 
-И тут мы видим конкретные типы пропсов, которые мы можем выбрать. Это работает благодаря тому, что TS описал интерфейс принимаемых пропсов компонентом
+## Addons
 
-![](_png/ed11ddaac2a1ceaa86b51015ea29891a.png)
+Storybook имеет развитую экосистему аддонов. При инициализации устанавливается пакет `@storybook/addon-essentials`, который включает набор базовых аддонов.
 
-Так же мы можем создать несколько вариантов наших компонентов, чтобы не менять пропсы вручную
+Essentials (входят по умолчанию):
+- Controls - интерактивная панель для изменения пропсов
+- Actions - логирование событий компонента
+- Viewport - переключение размеров экрана
+- Backgrounds - смена фона канваса
+- Measure и Outline - визуализация размеров и границ элементов
 
-`Button.stories.js
+Дополнительные аддоны, которые стоит рассмотреть:
 
-```JS
-import { Button } from './Button';
-
-export default {
-	title: 'Button',
-	component: Button,
-};
-
-const Template = (arg) => <Button {...arg} />;
-
-export const Primary = Template.bind({});
-
-Primary.args = {
-	children: 'Кнопка',
-	appearance: 'primary',
-};
-
-export const Ghost = Template.bind({});
-
-Ghost.args = {
-	children: 'Кнопка',
-	appearance: 'ghost',
+```ts
+// .storybook/main.ts
+const config: StorybookConfig = {
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions', // тестирование взаимодействий
+    '@storybook/addon-a11y',         // проверка доступности
+    '@storybook/addon-designs',      // интеграция с Figma
+    '@storybook/addon-coverage',     // покрытие кода
+  ],
 };
 ```
 
-![](_png/157c7624a4f52abfddc8f5a68551eb6d.png)
+Addon a11y запускает проверки axe-core на каждой истории и показывает нарушения accessibility прямо в интерфейсе Storybook. Addon designs позволяет прикрепить ссылку на макет в Figma к конкретной истории для визуального сравнения.
 
-Но! Если мы пишем проект без TS, то типы возможных аргументов мы можем прописать самостоятельно через задание для каждого параметра своих свойств внутри свойства `argTypes`
+> [!info] Chromatic - облачный сервис от команды Storybook для визуального регрессионного тестирования. Он автоматически делает скриншоты каждой истории и сравнивает их между коммитами.
 
-```JS
-import { Button } from './Button';
+## Тестирование компонентов
 
-export default {
-	title: 'Button',
-	component: Button,
-	// типы аргументов компонента
-	argTypes: {
-		// аргумент оформления
-		appearance: {
-			type: 'string', // тип аргумента
-			description: 'Вариант внешнего вида кнопки', // описание
-			defaultValue: 'primary', // дефолтное значение
-			options: ['primary', 'ghost'], // возможные опции
-			control: { // способ переключения опций
-				type: 'radio',
-			},
-		},
-		children: {
-			type: 'string',
-			name: 'label', // имя в сторибуке
-			defaultValue: 'Кнопка',
-		},
-	},
-};
+Storybook позволяет переиспользовать истории как тесты в Vitest или Jest. Для этого используется функция `composeStories` из пакета `@storybook/react`.
 
-const Template = (arg) => <Button {...arg} />;
+```tsx
+// Button.test.tsx
+import { composeStories } from '@storybook/react';
+import { render, screen } from '@testing-library/react';
+import * as stories from './Button.stories';
 
-export const Primary = Template.bind({});
+const { Primary, Secondary } = composeStories(stories);
 
-Primary.args = {
-	children: 'Кнопка',
-	appearance: 'primary',
-};
+test('renders primary button', () => {
+  render(<Primary />);
+  expect(screen.getByRole('button')).toHaveTextContent('Click me');
+});
 
-export const Ghost = Template.bind({});
+test('applies secondary variant styles', () => {
+  render(<Secondary />);
+  expect(screen.getByRole('button')).toHaveClass('secondary');
+});
+```
 
-Ghost.args = {
-	children: 'Кнопка',
-	appearance: 'ghost',
+`composeStories` применяет все декораторы, args и параметры из истории. Компонент рендерится точно так же, как в Storybook.
+
+Для визуального регрессионного тестирования есть несколько подходов:
+- Chromatic - облачный сервис, интегрируется с CI
+- `@storybook/test-runner` - запускает play-функции в headless-браузере
+- Playwright или Cypress для скриншотного тестирования конкретных историй
+
+## Storybook + Frameworks
+
+React + Vite - конфигурация по умолчанию:
+
+```ts
+// .storybook/main.ts
+const config: StorybookConfig = {
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
 };
 ```
 
-![](_png/788a98b3abfd5ab0415e88055ecce44b.png)
+Next.js имеет отдельный фреймворк-адаптер, который поддерживает `next/image`, `next/link`, роутинг и другие специфичные API:
 
-> [!info] Но так же мы можем сделать проверку типов с помощью #PropTypes внутри самого компонента, что так же позволит заменить функционал интерфейса для отображения пропсов в сторибуке
-> ![](_png/e243eb34ac97df0cbb8187e6347965bf.png)
-> ![](_png/5165a4486ae121e919b8215c0070c1d6.png)
+```ts
+const config: StorybookConfig = {
+  framework: {
+    name: '@storybook/nextjs',
+    options: {},
+  },
+};
+```
+
+Angular:
+
+```ts
+const config: StorybookConfig = {
+  framework: {
+    name: '@storybook/angular',
+    options: {},
+  },
+};
+```
+
+Vue 3:
+
+```ts
+const config: StorybookConfig = {
+  framework: {
+    name: '@storybook/vue3-vite',
+    options: {},
+  },
+};
+```
+
+> [!summary] Storybook 8 использует Vite по умолчанию для React и Vue. Для Next.js и Angular используются специализированные адаптеры, которые учитывают особенности этих фреймворков. Webpack остаётся доступным через `@storybook/react-webpack5`, но рекомендуется миграция на Vite.
