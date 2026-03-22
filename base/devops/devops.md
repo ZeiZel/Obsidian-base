@@ -4,32 +4,51 @@ tags:
 title: DevOps
 ---
 
-[CI/CD - GitHub Actions и Jenkins](CI-CD.md)
-[GitLab CI/CD](gitlab-ci.md)
-[ArgoCD и GitOps](argocd.md)
+## Linux и основы
+
+[Linux OS](linux/os/os.md)
+[Bash scripting](linux/bash/bash.md)
+[Linux - продвинутое администрирование](linux/linux-admin.md)
+[Сети](networks.md)
+
+## Контейнеризация и веб-серверы
 
 [Docker, Compose, Swarm, Ansible, Vagrant](docker/docker.md)
+[NGINX](NGINX.md)
+
+## CI/CD
+
+[CI/CD - GitHub Actions и Jenkins](CI-CD.md)
+[GitLab CI/CD](gitlab-ci.md)
+
+## Оркестрация
+
 [Kubernetes + Helm](kubernetes/Kubernetes%20+%20Helm.md)
 [Kubernetes Entities](kubernetes/Kubernetes%20Entities.md)
 [Helmfile](kubernetes/Helmfile.md)
 
+## Infrastructure as Code и облако
+
 [Terraform](terraform.md)
 [AWS](aws.md)
+
+## GitOps и деплой
+
+[ArgoCD и GitOps](argocd.md)
+
+## Мониторинг и Observability
 
 [Prometheus и Grafana](prometheus-grafana.md)
 [DataDog](datadog.md)
 [Централизованное логирование](logging.md)
+
+## Надёжность и безопасность
+
 [SRE - Site Reliability Engineering](sre.md)
-
-[NGINX](NGINX.md)
-[Service Mesh](service-mesh.md)
-
-[Сети](networks.md)
 [DevSecOps](devsecops.md)
+
+## Инфраструктурные сервисы
 
 [Database Operations](database-ops.md)
 [Message Queues Operations](message-queues-ops.md)
-
-[Linux - продвинутое администрирование](linux/linux-admin.md)
-[Linux OS](linux/os/os.md)
-[Bash scripting](linux/bash/bash.md)
+[Service Mesh](service-mesh.md)
