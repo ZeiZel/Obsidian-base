@@ -1151,6 +1151,882 @@ nmap --script vuln 192.168.1.1        # скрипты на уязвимости
 
 ---
 
+## CNI (Container Network Interface) в Kubernetes
+
+CNI - это спецификация и набор библиотек для настройки сетевых интерфейсов Linux-контейнеров. Kubernetes делегирует всю сетевую конфигурацию pod'ов CNI-плагину.
+
+### Спецификация CNI
+
+CNI определяет контракт между container runtime и сетевым плагином. Runtime вызывает плагин как исполняемый файл с передачей конфигурации через stdin и переменные окружения.
+
+Жизненный цикл операций:
+
+| Операция | Когда вызывается | Что делает |
+|----------|-----------------|------------|
+| ADD | Создание pod | Создаёт veth pair, назначает IP, настраивает маршруты |
+| DEL | Удаление pod | Удаляет интерфейс, освобождает IP |
+| CHECK | Периодически | Проверяет корректность сетевой конфигурации |
+| VERSION | При инициализации | Возвращает поддерживаемые версии CNI |
+
+Kubernetes network model требует от CNI-плагина:
+- Каждый pod получает уникальный IP-адрес
+- Pod'ы на одной ноде общаются без NAT
+- Pod'ы на разных нодах общаются без NAT
+- Агенты на ноде общаются с pod'ами без NAT
+
+### Flannel
+
+Простейший overlay-сетевой плагин. Создаёт VXLAN-туннели между нодами, инкапсулируя pod-трафик в UDP-пакеты.
+
+Как работает:
+1. Flanneld на каждой ноде получает подсеть из общего CIDR
+2. Создаёт VXLAN-интерфейс (flannel.1)
+3. Настраивает bridge (cni0) для локальных pod'ов
+4. Маршруты между нодами через VXLAN overlay
+
+```bash
+# Установка Flannel
+kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+# Проверка работы
+kubectl get pods -n kube-flannel
+kubectl get nodes -o jsonpath='{.items[*].spec.podCIDR}'
+```
+
+Ограничения:
+- Нет поддержки NetworkPolicy
+- Только VXLAN и host-gw backend
+- Минимальный функционал, нет L7-фильтрации
+- Ограниченная observability
+
+### Calico
+
+Полноценное сетевое решение с поддержкой BGP routing, IPIP/VXLAN overlay и NetworkPolicy enforcement.
+
+Режимы работы:
+- BGP routing - прямая маршрутизация без overlay, максимальная производительность
+- IPIP overlay - IP-in-IP инкапсуляция для сетей без BGP
+- VXLAN overlay - L2 over L3, совместимость с облачными провайдерами
+- eBPF dataplane - замена iptables на eBPF-программы для ускорения обработки пакетов
+
+```yaml
+# Calico NetworkPolicy - запретить весь ingress, разрешить только порт 8080
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-8080
+  namespace: production
+spec:
+  selector: app == 'web'
+  ingress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - 8080
+  egress:
+    - action: Allow
+
+---
+# GlobalNetworkPolicy - блокировка трафика между namespace'ами
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: deny-cross-namespace
+spec:
+  namespaceSelector: environment == 'production'
+  ingress:
+    - action: Allow
+      source:
+        namespaceSelector: environment == 'production'
+    - action: Deny
+```
+
+> [!info] Felix и BIRD
+> Calico состоит из двух ключевых компонентов: Felix (агент на каждой ноде, управляет iptables/eBPF правилами и маршрутами) и BIRD (BGP daemon, распространяет маршруты между нодами).
+
+### Cilium
+
+Сетевой плагин нового поколения, построенный на eBPF. Обеспечивает сетевую связность, безопасность и observability на уровнях L3/L4/L7.
+
+Ключевые возможности:
+- eBPF dataplane - обработка пакетов в ядре без iptables
+- L7 policy - фильтрация по HTTP-методам, путям, заголовкам, gRPC-методам
+- Hubble - встроенная система наблюдаемости за сетевыми потоками
+- Service Mesh - sidecar-free mesh через eBPF
+- ClusterMesh - связь pod'ов между разными кластерами
+
+```yaml
+# Cilium L7 Network Policy - разрешить только GET /api/v1/users
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: l7-api-policy
+  namespace: production
+spec:
+  endpointSelector:
+    matchLabels:
+      app: api-server
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: frontend
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+          rules:
+            http:
+              - method: GET
+                path: "/api/v1/users"
+              - method: GET
+                path: "/api/v1/health"
+```
+
+```bash
+# Установка Cilium через Helm
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium --version 1.15.0 \
+  --namespace kube-system \
+  --set hubble.relay.enabled=true \
+  --set hubble.ui.enabled=true
+
+# Проверка статуса
+cilium status
+cilium connectivity test
+
+# Hubble - наблюдение за потоками
+hubble observe --namespace production
+hubble observe --verdict DROPPED
+```
+
+### Weave Net
+
+Mesh-сетевой плагин с автоматическим обнаружением нод и опциональным шифрованием трафика (NaCl encryption). Простая установка, но уступает Calico и Cilium по производительности и функциональности.
+
+### Сравнение CNI-плагинов
+
+| Характеристика | Flannel | Calico | Cilium | Weave Net |
+|---------------|---------|--------|--------|-----------|
+| Network Model | Overlay (VXLAN) | BGP / IPIP / VXLAN | eBPF | Mesh overlay |
+| NetworkPolicy | Нет | Да + GlobalNetworkPolicy | Да + L7 policy | Да (базовая) |
+| eBPF dataplane | Нет | Да (опционально) | Да (по умолчанию) | Нет |
+| Encryption | Нет | WireGuard | WireGuard / IPSec | NaCl |
+| Service Mesh | Нет | Нет | Да (sidecar-free) | Нет |
+| Observability | Минимальная | Prometheus metrics | Hubble (flows, DNS, HTTP) | Weave Scope |
+| Производительность | Средняя | Высокая (BGP) | Высокая (eBPF) | Средняя |
+| Сложность настройки | Низкая | Средняя | Средняя-высокая | Низкая |
+| Best for | Dev/test, простые кластеры | Production, multi-tenant | Production, L7 security | Небольшие кластеры |
+
+> [!important] Рекомендация по выбору
+> Для production-кластеров выбирайте Calico или Cilium. Flannel подходит для dev/test окружений, где не нужны NetworkPolicy. Cilium предпочтительнее при необходимости L7-фильтрации и sidecar-free service mesh.
+
+---
+
+## Cloud Networking
+
+### VPC Peering
+
+VPC Peering создаёт прямое сетевое соединение между двумя VPC. Трафик маршрутизируется по приватной сети провайдера, не проходя через интернет.
+
+Настройка:
+1. Создание peering connection (инициатор + акцептор)
+2. Обновление route tables в обоих VPC
+3. Настройка Security Groups / NACLs для разрешения трафика
+
+```hcl
+# Terraform - VPC Peering между двумя VPC
+resource "aws_vpc_peering_connection" "app_to_db" {
+  vpc_id        = aws_vpc.app.id
+  peer_vpc_id   = aws_vpc.database.id
+  peer_region   = "eu-west-1"
+  auto_accept   = false
+
+  tags = {
+    Name = "app-to-database"
+  }
+}
+
+resource "aws_route" "app_to_db" {
+  route_table_id            = aws_route_table.app.id
+  destination_cidr_block    = "10.1.0.0/16"
+  vpc_peering_connection_id = aws_vpc_peering_connection.app_to_db.id
+}
+```
+
+Ограничения VPC Peering:
+- Non-transitive - если VPC-A связан с VPC-B и VPC-B с VPC-C, VPC-A не видит VPC-C
+- CIDR не должны пересекаться
+- Один peering на пару VPC
+- DNS resolution требует отдельного включения
+
+### Transit Gateway
+
+Hub-and-spoke архитектура для соединения множества VPC и on-premises сетей через единую точку.
+
+```
+        VPC-A ──┐
+        VPC-B ──┤
+        VPC-C ──┼── Transit Gateway ──── On-Premises (VPN/DX)
+        VPC-D ──┤
+  Shared Svc ──┘
+```
+
+Преимущества перед VPC Peering:
+- Транзитивная маршрутизация - все VPC видят друг друга через TGW
+- Централизованное управление маршрутами через route tables
+- Attachments - VPC, VPN, Direct Connect, peering с другим TGW
+- Масштабируется до тысяч VPC
+
+```hcl
+resource "aws_ec2_transit_gateway" "main" {
+  description                     = "Central TGW"
+  default_route_table_association = "enable"
+  default_route_table_propagation = "enable"
+  dns_support                     = "enable"
+
+  tags = {
+    Name = "main-tgw"
+  }
+}
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "app" {
+  subnet_ids         = aws_subnet.private[*].id
+  transit_gateway_id = aws_ec2_transit_gateway.main.id
+  vpc_id             = aws_vpc.app.id
+}
+```
+
+### PrivateLink и VPC Endpoints
+
+Доступ к AWS-сервисам и сервисам третьих сторон через приватную сеть, без выхода в интернет.
+
+| Тип | Протокол | Применение |
+|-----|----------|------------|
+| Gateway Endpoint | Маршрутизация | S3, DynamoDB (бесплатно) |
+| Interface Endpoint | ENI + PrivateLink | Все остальные сервисы (SQS, SNS, ECR, KMS) |
+
+```hcl
+# Gateway Endpoint для S3
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.eu-west-1.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [aws_route_table.private.id]
+}
+
+# Interface Endpoint для ECR
+resource "aws_vpc_endpoint" "ecr_api" {
+  vpc_id              = aws_vpc.main.id
+  service_name        = "com.amazonaws.eu-west-1.ecr.api"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.private[*].id
+  security_group_ids  = [aws_security_group.vpce.id]
+  private_dns_enabled = true
+}
+```
+
+### VPN - Site-to-Site и Client VPN
+
+**Site-to-Site VPN** - IPSec-туннели между облаком и on-premises. Два туннеля для HA, подключение через Virtual Private Gateway или Transit Gateway.
+
+**Client VPN** - OpenVPN-совместимый VPN для удалённого доступа сотрудников. Поддерживает сертификатную и AD-аутентификацию.
+
+### Direct Connect / Interconnect
+
+Выделенное физическое соединение между дата-центром и облачным провайдером. Стабильная latency, высокая пропускная способность (1/10/100 Gbps), не проходит через интернет.
+
+| Провайдер | Сервис | Скорости |
+|-----------|--------|----------|
+| AWS | Direct Connect | 1, 10, 100 Gbps |
+| GCP | Cloud Interconnect | 10, 100 Gbps (Dedicated) |
+| Azure | ExpressRoute | 1, 2, 5, 10, 100 Gbps |
+
+> [!info] Выбор между VPN и Direct Connect
+> VPN подходит для быстрого старта и небольших объёмов трафика. Direct Connect нужен при требованиях к стабильной latency, высокой пропускной способности или передаче больших объёмов данных. Часто используют оба варианта - Direct Connect как основной канал, VPN как backup.
+
+---
+
+## DNS в Kubernetes
+
+### CoreDNS
+
+CoreDNS - DNS-сервер по умолчанию в Kubernetes. Работает как Deployment в namespace kube-system, обычно с 2 репликами. Каждый pod получает /etc/resolv.conf с адресом CoreDNS ClusterIP.
+
+Архитектура CoreDNS основана на plugin chain. Запрос проходит через цепочку плагинов, определённых в Corefile.
+
+```
+# Corefile - конфигурация CoreDNS
+.:53 {
+    errors
+    health {
+        lameduck 5s
+    }
+    ready
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+        ttl 30
+    }
+    prometheus :9153
+    forward . /etc/resolv.conf {
+        max_concurrent 1000
+    }
+    cache 30
+    loop
+    reload
+    loadbalance
+}
+```
+
+Основные плагины:
+
+| Плагин | Назначение |
+|--------|------------|
+| kubernetes | Обслуживает DNS-записи для Services и Pods |
+| forward | Пересылает запросы upstream DNS-серверам |
+| cache | Кэширует DNS-ответы |
+| rewrite | Переписывает DNS-запросы |
+| log | Логирование запросов для отладки |
+| prometheus | Метрики на :9153 |
+| health | Healthcheck на :8080/health |
+| ready | Readiness на :8181/ready |
+
+```yaml
+# Добавить rewrite правило в CoreDNS ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+        }
+        rewrite name legacy-api.company.com api-service.production.svc.cluster.local
+        forward . 8.8.8.8 8.8.4.4
+        cache 30
+        loop
+        reload
+        loadbalance
+    }
+```
+
+### Service Discovery через DNS
+
+Kubernetes создаёт DNS-записи для каждого Service автоматически.
+
+Формат A-записи для ClusterIP Service:
+
+```
+<service-name>.<namespace>.svc.cluster.local
+```
+
+Примеры:
+
+```bash
+# Из pod'а в том же namespace
+curl http://api-service:8080/health
+
+# Из pod'а в другом namespace
+curl http://api-service.production.svc.cluster.local:8080/health
+
+# SRV-запись (порт и протокол)
+dig _http._tcp.api-service.production.svc.cluster.local SRV
+```
+
+**Headless Service** - Service без ClusterIP (clusterIP: None). DNS возвращает IP-адреса всех pod'ов напрямую. Используется для StatefulSet, где нужен доступ к конкретным pod'ам.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: production
+spec:
+  clusterIP: None
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+---
+# DNS-записи для StatefulSet pod'ов:
+# postgres-0.postgres.production.svc.cluster.local
+# postgres-1.postgres.production.svc.cluster.local
+# postgres-2.postgres.production.svc.cluster.local
+```
+
+### External-DNS
+
+External-DNS автоматически создаёт DNS-записи во внешних DNS-провайдерах на основе Kubernetes-ресурсов.
+
+Поддерживаемые провайдеры: Route53, CloudFlare, Google Cloud DNS, Azure DNS, DigitalOcean и другие.
+
+```yaml
+# Установка External-DNS для Route53
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: external-dns
+  template:
+    metadata:
+      labels:
+        app: external-dns
+    spec:
+      serviceAccountName: external-dns
+      containers:
+        - name: external-dns
+          image: registry.k8s.io/external-dns/external-dns:v0.14.0
+          args:
+            - --source=service
+            - --source=ingress
+            - --domain-filter=example.com
+            - --provider=aws
+            - --policy=upsert-only
+            - --aws-zone-type=public
+            - --registry=txt
+            - --txt-owner-id=my-cluster
+
+---
+# Ingress с аннотацией для External-DNS
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: api.example.com
+    external-dns.alpha.kubernetes.io/ttl: "300"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-service
+                port:
+                  number: 8080
+```
+
+### ndots и DNS Resolution Performance
+
+По умолчанию Kubernetes устанавливает `ndots:5` в /etc/resolv.conf pod'а. Это означает, что любое имя с менее чем 5 точками сначала будет искаться через search domains.
+
+```bash
+# /etc/resolv.conf внутри pod'а
+nameserver 10.96.0.10
+search production.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5
+```
+
+Проблема: запрос к `api.external-service.com` (2 точки, < 5) генерирует 4 лишних DNS-запроса:
+
+```
+1. api.external-service.com.production.svc.cluster.local  -> NXDOMAIN
+2. api.external-service.com.svc.cluster.local             -> NXDOMAIN
+3. api.external-service.com.cluster.local                  -> NXDOMAIN
+4. api.external-service.com.                               -> OK
+```
+
+Оптимизация:
+
+```yaml
+# Вариант 1: уменьшить ndots в pod spec
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  dnsConfig:
+    options:
+      - name: ndots
+        value: "2"
+  containers:
+    - name: app
+      image: myapp:1.0.0
+```
+
+```yaml
+# Вариант 2: использовать FQDN с точкой на конце в коде
+# Вместо: api.external-service.com
+# Писать: api.external-service.com.
+# Это говорит резолверу: имя абсолютное, не добавляй search domains
+```
+
+> [!important] Влияние на производительность
+> В высоконагруженных системах лишние DNS-запросы создают заметную нагрузку на CoreDNS. Снижение ndots до 2 или использование FQDN с trailing dot может сократить DNS-трафик в 4-5 раз для внешних доменов.
+
+---
+
+## TLS и Certificate Management
+
+### Cert-Manager
+
+Cert-Manager - контроллер Kubernetes для автоматического выпуска и обновления TLS-сертификатов. Поддерживает Let's Encrypt, HashiCorp Vault, Venafi и self-signed CA.
+
+```bash
+# Установка cert-manager
+helm repo add jetstack https://charts.jetstack.io
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --set crds.enabled=true
+```
+
+Ключевые CRD:
+
+| CRD | Scope | Назначение |
+|-----|-------|------------|
+| Issuer | Namespace | Выпускает сертификаты в одном namespace |
+| ClusterIssuer | Cluster | Выпускает сертификаты в любом namespace |
+| Certificate | Namespace | Запрос на выпуск сертификата |
+| CertificateRequest | Namespace | Внутренний запрос (создаётся автоматически) |
+
+### Let's Encrypt - автоматические сертификаты
+
+```yaml
+# ClusterIssuer для Let's Encrypt production
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: devops@example.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+      # HTTP-01 challenge - требует доступный из интернета Ingress
+      - http01:
+          ingress:
+            ingressClassName: nginx
+      # DNS-01 challenge - для wildcard-сертификатов и приватных кластеров
+      - dns01:
+          route53:
+            region: eu-west-1
+        selector:
+          dnsZones:
+            - "example.com"
+
+---
+# Certificate для домена
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api-tls
+  namespace: production
+spec:
+  secretName: api-tls-secret
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - api.example.com
+    - "*.api.example.com"
+  duration: 2160h    # 90 дней
+  renewBefore: 360h  # обновить за 15 дней до истечения
+
+---
+# Ingress с автоматическим TLS
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.example.com
+      secretName: api-tls-secret
+  rules:
+    - host: api.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-service
+                port:
+                  number: 8080
+```
+
+Типы challenge:
+
+| Challenge | Механизм | Wildcard | Приватный кластер |
+|-----------|----------|----------|--------------------|
+| HTTP-01 | Файл на /.well-known/acme-challenge/ | Нет | Нет |
+| DNS-01 | TXT-запись _acme-challenge.domain | Да | Да |
+
+### Self-signed и CA сертификаты
+
+```yaml
+# Self-signed CA для внутренних сервисов
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+
+---
+# Корневой CA-сертификат
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: internal-ca
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: internal-ca
+  secretName: internal-ca-secret
+  duration: 87600h  # 10 лет
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+
+---
+# ClusterIssuer на базе internal CA
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: internal-ca-issuer
+spec:
+  ca:
+    secretName: internal-ca-secret
+```
+
+### mTLS (Mutual TLS)
+
+Стандартный TLS аутентифицирует только сервер. mTLS добавляет аутентификацию клиента - обе стороны предъявляют сертификаты.
+
+Когда использовать mTLS:
+- Межсервисная коммуникация в микросервисной архитектуре
+- Zero-trust networking - не доверять сети, проверять каждый запрос
+- API между организациями
+- Замена API-ключей и токенов на сертификатную аутентификацию
+
+Реализации в Kubernetes:
+- Istio - автоматический mTLS между sidecar-прокси
+- Linkerd - автоматический mTLS без конфигурации
+- Cilium - mTLS через eBPF без sidecar'ов
+- Ручная настройка через cert-manager + NGINX/Envoy
+
+```yaml
+# Istio PeerAuthentication - обязательный mTLS для namespace
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: strict-mtls
+  namespace: production
+spec:
+  mtls:
+    mode: STRICT
+```
+
+> [!info] mTLS overhead
+> mTLS добавляет latency на TLS handshake при установке соединения. Service mesh решают это через connection pooling и persistent connections между sidecar'ами. Cilium минимизирует overhead, работая в ядре через eBPF.
+
+---
+
+## Практические сценарии troubleshooting
+
+### Сценарий 1: Pod не может достучаться до другого сервиса
+
+Симптомы: HTTP timeout, connection refused, connection reset при попытке обращения pod'а к другому сервису внутри кластера.
+
+Диагностика:
+
+```bash
+# 1. Проверить, что целевой Service существует и имеет endpoints
+kubectl get svc api-service -n production
+kubectl get endpoints api-service -n production
+
+# Если endpoints пусто - selector не совпадает с labels pod'ов
+kubectl get pods -n production --show-labels | grep api
+
+# 2. Проверить DNS-резолвинг из pod'а-источника
+kubectl exec -it client-pod -n production -- nslookup api-service
+kubectl exec -it client-pod -n production -- nslookup api-service.production.svc.cluster.local
+
+# 3. Проверить сетевую доступность
+kubectl exec -it client-pod -n production -- curl -v http://api-service:8080/health
+kubectl exec -it client-pod -n production -- nc -zv api-service 8080
+
+# 4. Проверить NetworkPolicy
+kubectl get networkpolicies -n production
+kubectl describe networkpolicy -n production
+
+# 5. Проверить, что target pod слушает правильный порт
+kubectl exec -it api-pod -n production -- ss -tlnp
+kubectl exec -it api-pod -n production -- curl localhost:8080/health
+
+# 6. Проверить readiness probe целевого pod'а
+kubectl describe pod api-pod -n production | grep -A5 Readiness
+kubectl get pods -n production -o wide
+```
+
+Решение:
+
+| Причина | Решение |
+|---------|---------|
+| Endpoints пусто | Исправить selector в Service или labels в pod |
+| DNS не резолвится | Проверить CoreDNS (сценарий 2) |
+| Connection refused | Pod не слушает порт или containerPort неверный |
+| Connection timeout | NetworkPolicy блокирует, или pod на другой ноде недоступен |
+| Readiness probe fails | Pod не готов принимать трафик, проверить логи |
+
+### Сценарий 2: DNS не резолвится в Pod
+
+Симптомы: `nslookup` возвращает NXDOMAIN или timeout. Внутренние и внешние домены не резолвятся.
+
+Диагностика:
+
+```bash
+# 1. Проверить /etc/resolv.conf внутри pod'а
+kubectl exec -it my-pod -- cat /etc/resolv.conf
+# Должен содержать nameserver <CoreDNS ClusterIP>
+
+# 2. Проверить, что CoreDNS pods работают
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
+
+# 3. Проверить CoreDNS Service
+kubectl get svc kube-dns -n kube-system
+# ClusterIP должен совпадать с nameserver в resolv.conf
+
+# 4. Проверить CoreDNS ConfigMap (Corefile)
+kubectl get configmap coredns -n kube-system -o yaml
+
+# 5. Тестировать DNS напрямую
+kubectl exec -it my-pod -- dig @10.96.0.10 kubernetes.default.svc.cluster.local
+kubectl exec -it my-pod -- dig @10.96.0.10 google.com
+
+# 6. Запустить debug pod если в целевом pod'е нет dig/nslookup
+kubectl run dns-debug --image=nicolaka/netshoot --rm -it -- bash
+dig @10.96.0.10 api-service.production.svc.cluster.local
+```
+
+Решение:
+
+| Причина | Решение |
+|---------|---------|
+| CoreDNS pods в CrashLoopBackOff | Проверить логи, часто ошибка в Corefile |
+| Неверный nameserver в resolv.conf | Проверить kubelet --cluster-dns flag |
+| Upstream DNS недоступен | Проверить forward в Corefile, network connectivity нод |
+| Corefile loop detection | Убрать loop-ссылки (forward на самого себя) |
+
+### Сценарий 3: Внешний трафик не доходит до приложения
+
+Симптомы: при обращении к публичному URL приложения - 502, 503 или timeout.
+
+Диагностика (от внешнего к внутреннему):
+
+```bash
+# 1. Проверить DNS внешнего домена
+dig api.example.com
+# IP должен указывать на Load Balancer / Ingress Controller
+
+# 2. Проверить Ingress resource
+kubectl get ingress -n production
+kubectl describe ingress api -n production
+# Проверить: host, path, backend service, TLS
+
+# 3. Проверить Ingress Controller
+kubectl get pods -n ingress-nginx
+kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=100
+
+# 4. Проверить Service
+kubectl get svc api-service -n production
+kubectl get endpoints api-service -n production
+
+# 5. Проверить targetPort - частая ошибка
+kubectl get svc api-service -n production -o yaml | grep -A5 ports
+# targetPort должен совпадать с containerPort в Deployment
+
+# 6. Проверить, что pod отвечает
+kubectl port-forward svc/api-service -n production 8080:8080
+curl localhost:8080/health
+
+# 7. Проверить LoadBalancer Service (если используется)
+kubectl get svc -n ingress-nginx
+# EXTERNAL-IP не должен быть <pending>
+```
+
+Чеклист от внешнего к внутреннему:
+
+```
+DNS → LoadBalancer → Ingress Controller → Ingress Rule → Service → Endpoints → Pod
+```
+
+### Сценарий 4: Потеря пакетов между нодами
+
+Симптомы: периодические таймауты при обращении к pod'ам на других нодах. Pod'ы на одной ноде работают нормально.
+
+Диагностика:
+
+```bash
+# 1. Проверить MTU - частая проблема с overlay сетями
+# VXLAN добавляет 50 байт overhead, IPIP - 20 байт
+kubectl exec -it pod-on-node1 -- ping -s 1450 -M do <pod-ip-on-node2>
+# Если пакеты теряются, уменьшить размер до прохождения
+
+# 2. Проверить состояние CNI на нодах
+kubectl get pods -n kube-system -o wide | grep -E "calico|cilium|flannel"
+kubectl logs -n kube-system <cni-pod-on-affected-node> --tail=100
+
+# 3. Проверить сетевые интерфейсы на нодах
+# На ноде:
+ip link show
+ip addr show flannel.1    # или tunl0 для IPIP, cilium_host для Cilium
+ip route show
+
+# 4. Проверить iptables/nftables на нодах
+iptables -L -n -v | head -50
+iptables -t nat -L -n -v | head -50
+
+# 5. Проверить межнодовую связность на уровне underlay
+# С ноды 1 пингуем IP ноды 2
+ping <node2-ip>
+traceroute <node2-ip>
+
+# 6. Захват пакетов на overlay-интерфейсе
+tcpdump -i flannel.1 -c 100 host <target-pod-ip>
+```
+
+Решение:
+
+| Причина | Решение |
+|---------|---------|
+| MTU mismatch | Настроить MTU на CNI (overlay MTU = underlay MTU - overhead) |
+| CNI pod не работает | Перезапустить CNI DaemonSet, проверить логи |
+| iptables rules конфликтуют | Проверить custom rules, kube-proxy mode |
+| Cloud Security Group | Разрешить протокол overlay (VXLAN UDP 8472, IPIP protocol 4) |
+| Node network issue | Проверить underlay сеть, NIC errors, cable |
+
+> [!summary] Общий подход к сетевому troubleshooting в Kubernetes
+> Всегда идите от простого к сложному: DNS, Service, Endpoints, Pod, NetworkPolicy, CNI, underlay. Используйте debug pod с netshoot для диагностики (`kubectl run debug --image=nicolaka/netshoot --rm -it -- bash`). Проверяйте каждый слой сетевого стека последовательно.
+
+---
+
 > [!summary] Источники
 > - [linkmeup - Сети для самых маленьких](https://linkmeup.gitbook.io/sdsm/)
 > - [linkmeup.ru - СДСМ](https://linkmeup.ru/sdsm/)
