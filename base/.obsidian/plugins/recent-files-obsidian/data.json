@@ -1,16 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "FSD",
+      "path": "architecture/Architecture/FSD/FSD.md"
+    },
+    {
       "basename": "Лицензии",
       "path": "cs/Лицензии.md"
     },
     {
-      "basename": "Figma",
-      "path": "Design/Figma.md"
+      "basename": "Web Workers",
+      "path": "frontend/service-workers/Web Workers.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "Service Worker",
+      "path": "frontend/service-workers/Service Worker.md"
+    },
+    {
+      "basename": "Figma",
+      "path": "Design/Figma.md"
     },
     {
       "basename": "database",
@@ -187,18 +199,6 @@
     {
       "basename": "datadog",
       "path": "devops/datadog.md"
-    },
-    {
-      "basename": "devops",
-      "path": "devops/devops.md"
-    },
-    {
-      "basename": "nginx",
-      "path": "devops/nginx.md"
-    },
-    {
-      "basename": "argocd",
-      "path": "devops/argocd.md"
     }
   ],
   "omittedPaths": [],

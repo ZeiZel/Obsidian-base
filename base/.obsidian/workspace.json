@@ -80,19 +80,31 @@
             }
           },
           {
-            "id": "fc7f46abb4b1aa76",
+            "id": "da3bb7dd200bba0e",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "frontend/Service Workers"
+                "file": "architecture/Architecture/FSD/FSD.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "Service Workers"
+              "title": "FSD"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -328,7 +340,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -351,12 +363,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -388,20 +401,21 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fc7f46abb4b1aa76",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
-    "cs/Лицензии.md",
-    "Design/Figma.md",
+    "architecture/Architecture/FSD/FSD.md",
     "architecture/System Design/System Design.md",
+    "cs/Лицензии.md",
+    "frontend/service-workers/Web Workers.md",
+    "frontend/service-workers/Service Worker.md",
+    "Design/Figma.md",
     "database/database.md",
     "devops/kubernetes/Kubernetes + Helm.md",
     "agile/command.md",
     "backend/Supabase Push Notifications.md",
-    "frontend/Service Workers/WebPush.md",
-    "frontend/Service Workers/Offline Mode.md",
-    "frontend/Service Workers/Web Workers.md",
-    "frontend/Service Workers/Service Worker.md",
-    "frontend/Service Workers",
+    "frontend/service-workers/WebPush.md",
+    "frontend/service-workers/Offline Mode.md",
+    "frontend/service-workers",
     "_png/Pasted image 20260326201747.png",
     "_png/Pasted image 20260326195522.png",
     "backend/backend.md",
@@ -418,7 +432,6 @@
     "obsidian/_lessons/Фичи и хоткеи.md",
     "obsidian/_lessons/Синхронизация с облаком или git-ом.md",
     "obsidian/_lessons/Синтаксис MarkDown.md",
-    "obsidian/_lessons/Плагины.md",
     "Tags/#ngrx",
     "Tags/#rxjs",
     "Tags/#profiling",

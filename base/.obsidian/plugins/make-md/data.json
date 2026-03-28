@@ -90,7 +90,9 @@
     "//concepts",
     "//backend/backend/PHP",
     "//backend/backend/REST",
-    "//frontend/frontend/Service Workers"
+    "//frontend/frontend/Service Workers",
+    "//frontend/frontend/service-workers",
+    "//frontend/frontend/javascript"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
