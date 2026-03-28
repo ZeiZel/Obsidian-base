@@ -69,4 +69,5 @@ tags:
 - [[SSR]] - Server Side Rendering
 - [[SEO]] - поисковая оптимизация
 - [[PWA]] - Progressive Web Apps
+- [[Service Workers]] - Service Worker, Web Workers, WebPush, Offline Mode
 - [[react/Профилирование React]] - профилирование React-приложений

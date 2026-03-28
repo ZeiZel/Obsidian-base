@@ -32,90 +32,6 @@
             }
           },
           {
-            "id": "77f980e165df5531",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/database.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "database"
-            }
-          },
-          {
-            "id": "09bc43cc4a095329",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/kubernetes/Helmfile.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Helmfile"
-            }
-          },
-          {
-            "id": "c53005f485c9892b",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "backend"
-              },
-              "icon": "lucide-file",
-              "title": "backend"
-            }
-          },
-          {
-            "id": "9fb9e42cc254ebba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/kubernetes/Kubernetes + Helm.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Kubernetes + Helm"
-            }
-          },
-          {
             "id": "fb81dcdc01e73590",
             "type": "leaf",
             "state": {
@@ -140,12 +56,12 @@
             }
           },
           {
-            "id": "53ffbeef20af95f0",
+            "id": "17d9a94cc4b9fcbe",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "agile/command.md",
+                "file": "cs/Лицензии.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -160,191 +76,23 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "command"
+              "title": "Лицензии"
             }
           },
           {
-            "id": "18cb11eda651a65a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/Python.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Python"
-            }
-          },
-          {
-            "id": "7acea20d42b80e8d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/PostgreSQL.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "PostgreSQL"
-            }
-          },
-          {
-            "id": "29fddd001ce5c1e5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/Redis.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Redis"
-            }
-          },
-          {
-            "id": "d6676e121dfe14f3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/SQLite.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "SQLite"
-            }
-          },
-          {
-            "id": "56fd50fcdb77d81a",
+            "id": "fc7f46abb4b1aa76",
             "type": "leaf",
             "state": {
               "type": "mk-space",
               "state": {
-                "path": "database"
+                "path": "frontend/Service Workers"
               },
               "icon": "lucide-file",
-              "title": "database"
-            }
-          },
-          {
-            "id": "d720b63d4960b99b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "languages/english.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "english"
-            }
-          },
-          {
-            "id": "83bae6d6fe33069d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "languages/russian.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "russian"
-            }
-          },
-          {
-            "id": "56fa5cb9d0a2ded9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "devops/networks.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "networks"
+              "title": "Service Workers"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -603,13 +351,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of System Design"
+              "title": "Outline"
             }
           }
         ],
@@ -641,8 +388,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fb81dcdc01e73590",
+  "active": "fc7f46abb4b1aa76",
   "lastOpenFiles": [
+    "cs/Лицензии.md",
+    "Design/Figma.md",
+    "architecture/System Design/System Design.md",
+    "database/database.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "agile/command.md",
+    "backend/Supabase Push Notifications.md",
+    "frontend/Service Workers/WebPush.md",
+    "frontend/Service Workers/Offline Mode.md",
+    "frontend/Service Workers/Web Workers.md",
+    "frontend/Service Workers/Service Worker.md",
+    "frontend/Service Workers",
     "_png/Pasted image 20260326201747.png",
     "_png/Pasted image 20260326195522.png",
     "backend/backend.md",
@@ -660,26 +419,15 @@
     "obsidian/_lessons/Синхронизация с облаком или git-ом.md",
     "obsidian/_lessons/Синтаксис MarkDown.md",
     "obsidian/_lessons/Плагины.md",
-    "obsidian/_lessons/Как написать свой плагин.md",
-    "obsidian/_lessons/Obsidian UI.md",
-    "frontend/microfrontends.md",
-    "frontend/next/next.md",
-    "frontend/angular/angular.md",
     "Tags/#ngrx",
     "Tags/#rxjs",
     "Tags/#profiling",
     "Tags/#tanstack-query",
-    "frontend/state-managers/state-managers.md",
     "Tags/#reduxtoolkit",
     "Tags/#rtk",
     "Tags/#reacthooks",
     "Tags/#proptypes",
     "Tags/#api",
-    "Tags/#tips",
-    "frontend/state-managers/Effector.md",
-    "frontend/ui-frameworks/ui-frameworks.md",
-    "frontend/ui-frameworks/Shadcn UI.md",
-    "frontend/ui-frameworks/MUI.md",
     "_png/Pasted image 20260309164337.png",
     "_png/Pasted image 20260309164259.png",
     "_png/Pasted image 20260309164220.png",
@@ -688,7 +436,6 @@
     "_png/Pasted image 20260309162356.png",
     "_png/Pasted image 20260309162331.png",
     "_png/Pasted image 20260309162318.png",
-    "_png/Pasted image 20260309162305.png",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",

@@ -1,8 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "Лицензии",
+      "path": "cs/Лицензии.md"
+    },
+    {
+      "basename": "Figma",
+      "path": "Design/Figma.md"
+    },
+    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "command",
+      "path": "agile/command.md"
     },
     {
       "basename": "backend",
@@ -179,26 +199,6 @@
     {
       "basename": "argocd",
       "path": "devops/argocd.md"
-    },
-    {
-      "basename": "sre",
-      "path": "devops/sre.md"
-    },
-    {
-      "basename": "gitlab-ci",
-      "path": "devops/gitlab-ci.md"
-    },
-    {
-      "basename": "ci-cd",
-      "path": "devops/ci-cd.md"
-    },
-    {
-      "basename": "Kubernetes Entities",
-      "path": "devops/kubernetes/Kubernetes Entities.md"
-    },
-    {
-      "basename": "os",
-      "path": "devops/linux/os/os.md"
     }
   ],
   "omittedPaths": [],

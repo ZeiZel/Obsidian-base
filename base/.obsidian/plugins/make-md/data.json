@@ -89,7 +89,8 @@
     "//frontend/frontend/Vue/frontend/Vue/Vue",
     "//concepts",
     "//backend/backend/PHP",
-    "//backend/backend/REST"
+    "//backend/backend/REST",
+    "//frontend/frontend/Service Workers"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
