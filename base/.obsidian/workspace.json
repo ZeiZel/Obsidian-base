@@ -78,33 +78,9 @@
               "icon": "lucide-file",
               "title": "Лицензии"
             }
-          },
-          {
-            "id": "da3bb7dd200bba0e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "soft/career-growth.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "career-growth"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -373,17 +349,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "soft/career-growth.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of career-growth"
+              "title": "Outline of System Design"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -411,8 +386,10 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "da3bb7dd200bba0e",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
+    "cs/Лицензии.md",
+    "soft/career-growth.md",
     "soft/anxiety-management.md",
     "soft/speech-and-reading.md",
     "soft/saying-no.md",
@@ -422,7 +399,6 @@
     "soft/pressure-communication.md",
     "soft/emotional-intelligence.md",
     "architecture/Architecture/FSD/FSD.md",
-    "cs/Лицензии.md",
     "architecture/System Design/System Design.md",
     "frontend/service-workers/Web Workers.md",
     "frontend/service-workers/Service Worker.md",
@@ -441,7 +417,6 @@
     "backend/serverless.md",
     "backend/Ruby.md",
     "backend/REST/BFF.md",
-    "backend/REST/REST.md",
     "Tags/#ngrx",
     "Tags/#rxjs",
     "Tags/#profiling",

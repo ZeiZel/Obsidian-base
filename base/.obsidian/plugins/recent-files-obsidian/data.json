@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Лицензии",
+      "path": "cs/Лицензии.md"
+    },
+    {
       "basename": "career-growth",
       "path": "soft/career-growth.md"
     },
@@ -23,14 +31,6 @@
     {
       "basename": "FSD",
       "path": "architecture/Architecture/FSD/FSD.md"
-    },
-    {
-      "basename": "Лицензии",
-      "path": "cs/Лицензии.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Web Workers",
