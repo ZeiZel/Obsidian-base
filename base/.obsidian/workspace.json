@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "architecture/Architecture/FSD/FSD.md",
+                "file": "soft/career-growth.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -100,11 +100,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "FSD"
+              "title": "career-growth"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -170,7 +170,7 @@
             }
           },
           {
-            "id": "b8e079cdc0484e56",
+            "id": "5d0ea3cc7115b556",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -333,6 +333,16 @@
             "id": "a7a34b8733e46573",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "2342e7f534d82b14",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -340,7 +350,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 12
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -363,13 +373,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
+                "file": "soft/career-growth.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of System Design"
+              "title": "Outline of career-growth"
             }
           }
         ],
@@ -401,11 +411,19 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fb81dcdc01e73590",
+  "active": "da3bb7dd200bba0e",
   "lastOpenFiles": [
+    "soft/anxiety-management.md",
+    "soft/speech-and-reading.md",
+    "soft/saying-no.md",
+    "soft/conflict-resolution.md",
+    "soft/influence-and-persuasion.md",
+    "soft/negotiation.md",
+    "soft/pressure-communication.md",
+    "soft/emotional-intelligence.md",
     "architecture/Architecture/FSD/FSD.md",
-    "architecture/System Design/System Design.md",
     "cs/Лицензии.md",
+    "architecture/System Design/System Design.md",
     "frontend/service-workers/Web Workers.md",
     "frontend/service-workers/Service Worker.md",
     "Design/Figma.md",
@@ -424,14 +442,6 @@
     "backend/Ruby.md",
     "backend/REST/BFF.md",
     "backend/REST/REST.md",
-    "backend/PHP/PHP.md",
-    "backend/PHP/YII2.md",
-    "mobile/mobile.md",
-    "mobile/react-native/react-native.md",
-    "obsidian/Obsidian.md",
-    "obsidian/_lessons/Фичи и хоткеи.md",
-    "obsidian/_lessons/Синхронизация с облаком или git-ом.md",
-    "obsidian/_lessons/Синтаксис MarkDown.md",
     "Tags/#ngrx",
     "Tags/#rxjs",
     "Tags/#profiling",

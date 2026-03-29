@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "career-growth",
+      "path": "soft/career-growth.md"
+    },
+    {
+      "basename": "anxiety-management",
+      "path": "soft/anxiety-management.md"
+    },
+    {
+      "basename": "speech-and-reading",
+      "path": "soft/speech-and-reading.md"
+    },
+    {
+      "basename": "saying-no",
+      "path": "soft/saying-no.md"
+    },
+    {
+      "basename": "conflict-resolution",
+      "path": "soft/conflict-resolution.md"
     },
     {
       "basename": "FSD",
@@ -11,6 +27,10 @@
     {
       "basename": "Лицензии",
       "path": "cs/Лицензии.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Web Workers",
@@ -179,26 +199,6 @@
     {
       "basename": "Vue",
       "path": "frontend/Vue/Vue/Vue.md"
-    },
-    {
-      "basename": "Storybook",
-      "path": "frontend/Storybook.md"
-    },
-    {
-      "basename": "SSR",
-      "path": "frontend/SSR.md"
-    },
-    {
-      "basename": "SEO",
-      "path": "frontend/SEO.md"
-    },
-    {
-      "basename": "PWA",
-      "path": "frontend/PWA.md"
-    },
-    {
-      "basename": "datadog",
-      "path": "devops/datadog.md"
     }
   ],
   "omittedPaths": [],

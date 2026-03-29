@@ -92,7 +92,8 @@
     "//backend/backend/REST",
     "//frontend/frontend/Service Workers",
     "//frontend/frontend/service-workers",
-    "//frontend/frontend/javascript"
+    "//frontend/frontend/javascript",
+    "//soft"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
