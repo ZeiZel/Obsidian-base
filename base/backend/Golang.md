@@ -371,6 +371,46 @@ outer:
 	}
 ```
 
+### Приведение типов
+
+Go требует явного приведения типов - неявных конвертаций нет:
+
+```go
+// Числовые преобразования
+var i int = 42
+var f float64 = float64(i)   // int -> float64
+var u uint = uint(i)         // int -> uint
+var i32 int32 = int32(i)     // int -> int32 (возможна потеря данных!)
+
+// Осторожно с переполнением
+var big int64 = 300
+var small int8 = int8(big)   // 44 (переполнение, без ошибки!)
+
+// Строки и байты
+s := "Привет"
+b := []byte(s)               // string -> []byte (копирование)
+s2 := string(b)              // []byte -> string (копирование)
+
+// Строки и руны (для работы с Unicode)
+r := []rune(s)               // string -> []rune
+fmt.Println(len(s))          // 12 (байт)
+fmt.Println(len(r))          // 6 (символов)
+s3 := string(r)              // []rune -> string
+
+// int -> string - НЕ конвертирует число в строку
+wrong := string(65)          // "A" (символ Unicode 65)
+right := strconv.Itoa(65)    // "65"
+right2 := fmt.Sprintf("%d", 65) // "65"
+
+// Дополнительные конвертации из strconv
+strconv.FormatFloat(3.14, 'f', 2, 64)  // "3.14"
+strconv.FormatBool(true)                // "true"
+strconv.ParseBool("true")              // true, nil
+strconv.ParseInt("FF", 16, 64)         // 255, nil (hex)
+```
+
+> [!info] В Go нет неявных приведений даже между совместимыми типами. int32 и int64 - разные типы, нужно явное преобразование. Это предотвращает целый класс багов, связанных с неожиданными конвертациями.
+
 ---
 
 ## Функции
@@ -1432,6 +1472,265 @@ go run -race main.go
 
 Race detector обнаруживает конкурентные обращения к памяти без синхронизации. Всегда включайте его в тестах и CI.
 
+### Продвинутые паттерны
+
+#### Rate Limiter
+
+```go
+import "golang.org/x/time/rate"
+
+// Token bucket rate limiter
+limiter := rate.NewLimiter(rate.Every(100*time.Millisecond), 10) // 10 rps, burst 10
+
+func handleRequest(w http.ResponseWriter, r *http.Request) {
+	if !limiter.Allow() {
+		http.Error(w, "rate limit exceeded", http.StatusTooManyRequests)
+		return
+	}
+	// обработка запроса
+}
+
+// Wait - блокируется до получения токена
+func processItem(ctx context.Context, item Item) error {
+	if err := limiter.Wait(ctx); err != nil {
+		return err // context отменён
+	}
+	return callExternalAPI(item)
+}
+
+// Per-key rate limiting
+type KeyLimiter struct {
+	mu       sync.Mutex
+	limiters map[string]*rate.Limiter
+}
+
+func (kl *KeyLimiter) Get(key string) *rate.Limiter {
+	kl.mu.Lock()
+	defer kl.mu.Unlock()
+	if l, ok := kl.limiters[key]; ok {
+		return l
+	}
+	l := rate.NewLimiter(rate.Every(time.Second), 5)
+	kl.limiters[key] = l
+	return l
+}
+```
+
+#### Circuit Breaker
+
+Паттерн предохранителя защищает от каскадных сбоев при отказе зависимости:
+
+```go
+type State int
+
+const (
+	StateClosed   State = iota // нормальная работа
+	StateOpen                  // запросы блокируются
+	StateHalfOpen              // пробный запрос
+)
+
+type CircuitBreaker struct {
+	mu               sync.Mutex
+	state            State
+	failures         int
+	maxFailures      int
+	lastFailure      time.Time
+	cooldown         time.Duration
+}
+
+func NewCircuitBreaker(maxFailures int, cooldown time.Duration) *CircuitBreaker {
+	return &CircuitBreaker{
+		maxFailures: maxFailures,
+		cooldown:    cooldown,
+	}
+}
+
+func (cb *CircuitBreaker) Execute(fn func() error) error {
+	cb.mu.Lock()
+	if cb.state == StateOpen {
+		if time.Since(cb.lastFailure) > cb.cooldown {
+			cb.state = StateHalfOpen
+		} else {
+			cb.mu.Unlock()
+			return fmt.Errorf("circuit breaker is open")
+		}
+	}
+	cb.mu.Unlock()
+
+	err := fn()
+
+	cb.mu.Lock()
+	defer cb.mu.Unlock()
+	if err != nil {
+		cb.failures++
+		cb.lastFailure = time.Now()
+		if cb.failures >= cb.maxFailures {
+			cb.state = StateOpen
+		}
+		return err
+	}
+
+	cb.failures = 0
+	cb.state = StateClosed
+	return nil
+}
+```
+
+> [!info] Для production-кода используйте библиотеку sony/gobreaker, которая предоставляет готовую реализацию с метриками и гибкой настройкой.
+
+#### errgroup с ограничением параллелизма
+
+```go
+import "golang.org/x/sync/errgroup"
+
+func fetchAllURLs(ctx context.Context, urls []string) ([]string, error) {
+	g, ctx := errgroup.WithContext(ctx)
+	g.SetLimit(10) // максимум 10 одновременных горутин (Go 1.20+)
+
+	results := make([]string, len(urls))
+	for i, url := range urls {
+		i, url := i, url
+		g.Go(func() error {
+			body, err := fetchURL(ctx, url)
+			if err != nil {
+				return err
+			}
+			results[i] = body
+			return nil
+		})
+	}
+
+	if err := g.Wait(); err != nil {
+		return nil, err
+	}
+	return results, nil
+}
+```
+
+#### Or-done channel
+
+Паттерн для раннего завершения при отмене контекста:
+
+```go
+func orDone(ctx context.Context, ch <-chan int) <-chan int {
+	out := make(chan int)
+	go func() {
+		defer close(out)
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case v, ok := <-ch:
+				if !ok {
+					return
+				}
+				select {
+				case out <- v:
+				case <-ctx.Done():
+					return
+				}
+			}
+		}
+	}()
+	return out
+}
+```
+
+### Частые ошибки конкурентности
+
+#### Утечка горутин
+
+```go
+// НЕПРАВИЛЬНО - горутина висит навсегда если никто не читает из ch
+func leaky() <-chan int {
+	ch := make(chan int)
+	go func() {
+		val := expensiveComputation()
+		ch <- val // блокируется навсегда если никто не прочитает
+	}()
+	return ch
+}
+
+// ПРАВИЛЬНО - горутина завершается при отмене контекста
+func safe(ctx context.Context) <-chan int {
+	ch := make(chan int, 1) // буфер = 1, не блокируется при записи
+	go func() {
+		val := expensiveComputation()
+		select {
+		case ch <- val:
+		case <-ctx.Done():
+		}
+	}()
+	return ch
+}
+```
+
+#### Замыкание на переменную цикла
+
+```go
+// НЕПРАВИЛЬНО (до Go 1.22) - все горутины видят последнее значение i
+for i := 0; i < 5; i++ {
+	go func() {
+		fmt.Println(i) // может напечатать 5, 5, 5, 5, 5
+	}()
+}
+
+// ПРАВИЛЬНО - передать как аргумент
+for i := 0; i < 5; i++ {
+	go func(id int) {
+		fmt.Println(id)
+	}(i)
+}
+
+// С Go 1.22 переменная цикла создаётся заново на каждой итерации
+// и первый вариант тоже работает корректно
+```
+
+#### Забытый cancel
+
+```go
+// НЕПРАВИЛЬНО - утечка ресурсов контекста
+func bad() {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	// cancel никогда не вызывается - утечка
+	doWork(ctx)
+}
+
+// ПРАВИЛЬНО - defer cancel() сразу после создания
+func good() {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel() // всегда вызывай cancel
+	doWork(ctx)
+}
+```
+
+#### Конкурентная запись в map
+
+```go
+// ПАНИКА в рантайме - concurrent map writes
+m := make(map[string]int)
+for i := 0; i < 100; i++ {
+	go func(n int) {
+		m[fmt.Sprintf("key%d", n)] = n // panic!
+	}(i)
+}
+
+// ПРАВИЛЬНО - sync.Mutex
+var mu sync.Mutex
+for i := 0; i < 100; i++ {
+	go func(n int) {
+		mu.Lock()
+		m[fmt.Sprintf("key%d", n)] = n
+		mu.Unlock()
+	}(i)
+}
+
+// Или sync.Map для случаев "записать один раз, читать много"
+var sm sync.Map
+sm.Store("key", "value")
+val, ok := sm.Load("key")
+```
+
 ---
 
 ## Пакеты и модули
@@ -1976,6 +2275,492 @@ w := bufio.NewWriter(file)
 w.WriteString("buffered data")
 w.Flush() // не забыть сбросить буфер
 ```
+
+### os
+
+Пакет os предоставляет платформо-независимый интерфейс к операционной системе:
+
+```go
+import "os"
+
+// Чтение и запись файлов (Go 1.16+)
+data, err := os.ReadFile("config.json")    // читает весь файл
+err = os.WriteFile("output.txt", data, 0644) // записывает файл
+
+// Работа с файлами через хендлы
+f, err := os.Create("new.txt")   // создаёт или перезаписывает
+f, err = os.Open("existing.txt") // открывает для чтения
+f, err = os.OpenFile("app.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+defer f.Close()
+f.WriteString("log line\n")
+
+// Директории
+err = os.Mkdir("dir", 0755)            // одна директория
+err = os.MkdirAll("path/to/dir", 0755) // рекурсивно
+entries, err := os.ReadDir(".")         // содержимое директории
+
+// Удаление
+os.Remove("file.txt")      // один файл/пустая директория
+os.RemoveAll("temp_dir")   // рекурсивно
+
+// Информация о файле
+info, err := os.Stat("file.txt")
+if os.IsNotExist(err) {
+	fmt.Println("файл не существует")
+}
+fmt.Println(info.Size(), info.ModTime(), info.IsDir())
+
+// Переменные окружения
+home := os.Getenv("HOME")         // пустая строка если нет
+port, ok := os.LookupEnv("PORT")  // ok == false если нет
+os.Setenv("APP_MODE", "production")
+allEnv := os.Environ()             // []string{"KEY=value", ...}
+
+// Аргументы командной строки
+args := os.Args // [0] = путь к программе, [1:] = аргументы
+
+// Завершение программы
+os.Exit(1) // deferred функции НЕ выполняются
+```
+
+### path/filepath
+
+Работа с путями файловой системы платформо-независимым способом:
+
+```go
+import "path/filepath"
+
+// Построение путей
+full := filepath.Join("home", "user", "docs", "file.txt")
+// Linux: "home/user/docs/file.txt"
+// Windows: "home\\user\\docs\\file.txt"
+
+// Разбор пути
+dir := filepath.Dir("/home/user/file.txt")   // "/home/user"
+base := filepath.Base("/home/user/file.txt")  // "file.txt"
+ext := filepath.Ext("archive.tar.gz")         // ".gz"
+
+// Абсолютный путь
+abs, err := filepath.Abs("relative/path")
+
+// Обход дерева файлов (Go 1.16+, быстрее чем Walk)
+filepath.WalkDir(".", func(path string, d fs.DirEntry, err error) error {
+	if err != nil {
+		return err
+	}
+	if d.IsDir() && d.Name() == "node_modules" {
+		return filepath.SkipDir // пропустить директорию
+	}
+	if filepath.Ext(path) == ".go" {
+		fmt.Println(path)
+	}
+	return nil
+})
+
+// Поиск по шаблону
+matches, err := filepath.Glob("*.go")              // все .go файлы
+matches, err = filepath.Glob("internal/**/*.go")    // рекурсивно
+```
+
+### regexp
+
+Регулярные выражения в Go используют синтаксис RE2 (без обратных ссылок, гарантированно линейное время):
+
+```go
+import "regexp"
+
+// Компиляция (MustCompile паникует при ошибке - для инициализации)
+re := regexp.MustCompile(`\b[A-Z][a-z]+\b`)
+
+// Проверка на соответствие
+matched := re.MatchString("Hello World") // true
+
+// Поиск первого совпадения
+first := re.FindString("Hello World Beautiful Day") // "Hello"
+
+// Поиск всех совпадений
+all := re.FindAllString("Hello World Beautiful Day", -1)
+// ["Hello", "World", "Beautiful", "Day"]
+
+// Замена
+result := re.ReplaceAllString("Hello World", "***") // "*** ***"
+
+// Именованные группы
+re = regexp.MustCompile(`(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})`)
+match := re.FindStringSubmatch("2024-01-15")
+for i, name := range re.SubexpNames() {
+	if name != "" {
+		fmt.Printf("%s: %s\n", name, match[i])
+	}
+}
+// year: 2024, month: 01, day: 15
+
+// Замена с функцией
+re = regexp.MustCompile(`\d+`)
+result = re.ReplaceAllStringFunc("price: 100, tax: 20", func(s string) string {
+	n, _ := strconv.Atoi(s)
+	return strconv.Itoa(n * 2)
+})
+// "price: 200, tax: 40"
+```
+
+### sort и slices (Go 1.21+)
+
+```go
+import (
+	"sort"
+	"slices"
+	"maps"
+)
+
+// sort.Slice - сортировка через функцию сравнения
+users := []User{{Name: "Charlie", Age: 30}, {Name: "Alice", Age: 25}, {Name: "Bob", Age: 35}}
+sort.Slice(users, func(i, j int) bool {
+	return users[i].Age < users[j].Age
+})
+
+// sort.SliceStable - стабильная сортировка (сохраняет порядок равных элементов)
+sort.SliceStable(users, func(i, j int) bool {
+	return users[i].Name < users[j].Name
+})
+
+// slices (Go 1.21+) - типобезопасные функции для слайсов
+nums := []int{3, 1, 4, 1, 5, 9, 2, 6}
+slices.Sort(nums)                          // [1, 1, 2, 3, 4, 5, 6, 9]
+slices.SortFunc(users, func(a, b User) int {
+	return strings.Compare(a.Name, b.Name)
+})
+
+slices.Contains(nums, 5)                   // true
+idx := slices.Index(nums, 4)               // индекс элемента
+slices.Reverse(nums)                       // на месте
+compact := slices.Compact(nums)            // убирает последовательные дубли
+min := slices.Min(nums)                    // минимум
+max := slices.Max(nums)                    // максимум
+
+// Бинарный поиск (слайс должен быть отсортирован)
+idx, found := slices.BinarySearch(nums, 5)
+
+// maps (Go 1.21+) - утилиты для map
+m := map[string]int{"a": 1, "b": 2, "c": 3}
+keys := slices.Sorted(maps.Keys(m))     // отсортированные ключи
+values := slices.Collect(maps.Values(m)) // все значения
+```
+
+### math и math/rand
+
+```go
+import (
+	"math"
+	"math/rand/v2" // Go 1.22+
+	"crypto/rand"
+)
+
+// math - математические функции
+math.Abs(-3.14)     // 3.14
+math.Ceil(2.3)      // 3
+math.Floor(2.7)     // 2
+math.Round(2.5)     // 3
+math.Max(1.0, 2.0)  // 2
+math.Min(1.0, 2.0)  // 1
+math.Pow(2, 10)     // 1024
+math.Sqrt(144)      // 12
+math.Log(math.E)    // 1
+math.Log2(1024)     // 10
+
+// Константы
+math.Pi             // 3.141592653589793
+math.MaxInt64       // 9223372036854775807
+math.MaxFloat64     // 1.7976931348623157e+308
+
+// math/rand/v2 (Go 1.22+) - автоматически сеется, не нужен Seed()
+n := rand.IntN(100)              // [0, 100)
+f := rand.Float64()              // [0.0, 1.0)
+rand.Shuffle(len(items), func(i, j int) {
+	items[i], items[j] = items[j], items[i]
+})
+
+// crypto/rand - криптографически стойкие случайные числа
+b := make([]byte, 32)
+_, err := crypto_rand.Read(b) // для токенов, ключей, нонсов
+```
+
+### net/url
+
+Работа с URL и query-параметрами:
+
+```go
+import "net/url"
+
+// Парсинг URL
+u, err := url.Parse("https://api.example.com:8080/users?page=2&limit=10#section")
+fmt.Println(u.Scheme)   // "https"
+fmt.Println(u.Host)     // "api.example.com:8080"
+fmt.Println(u.Hostname()) // "api.example.com"
+fmt.Println(u.Port())   // "8080"
+fmt.Println(u.Path)     // "/users"
+fmt.Println(u.RawQuery) // "page=2&limit=10"
+fmt.Println(u.Fragment) // "section"
+
+// Работа с query-параметрами
+q := u.Query()            // url.Values (map[string][]string)
+page := q.Get("page")     // "2"
+q.Set("page", "3")
+q.Add("sort", "name")
+u.RawQuery = q.Encode()   // "limit=10&page=3&sort=name"
+
+// Построение URL
+u = &url.URL{
+	Scheme: "https",
+	Host:   "api.example.com",
+	Path:   "/users/search",
+}
+q = u.Query()
+q.Set("name", "John Doe")
+u.RawQuery = q.Encode()
+fmt.Println(u.String()) // "https://api.example.com/users/search?name=John+Doe"
+
+// Кодирование/декодирование
+encoded := url.QueryEscape("hello world & more") // "hello+world+%26+more"
+decoded, _ := url.QueryUnescape(encoded)
+pathEncoded := url.PathEscape("path/with spaces") // "path%2Fwith%20spaces"
+```
+
+### flag
+
+Разбор аргументов командной строки:
+
+```go
+import "flag"
+
+func main() {
+	// Определение флагов
+	host := flag.String("host", "localhost", "адрес сервера")
+	port := flag.Int("port", 8080, "порт сервера")
+	verbose := flag.Bool("verbose", false, "подробный вывод")
+	
+	// Привязка к существующей переменной
+	var configPath string
+	flag.StringVar(&configPath, "config", "config.yaml", "путь к конфигу")
+
+	// Кастомный usage
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n\nOptions:\n", os.Args[0])
+		flag.PrintDefaults()
+	}
+
+	flag.Parse()
+
+	// Оставшиеся аргументы (после флагов)
+	args := flag.Args() // []string
+
+	fmt.Printf("Server: %s:%d, verbose: %t\n", *host, *port, *verbose)
+	fmt.Printf("Config: %s, args: %v\n", configPath, args)
+}
+```
+
+```bash
+# Использование
+./app -host=0.0.0.0 -port=9090 -verbose -config=/etc/app.yaml arg1 arg2
+./app --host 0.0.0.0 --port 9090  # можно и через --
+```
+
+> [!info] Для сложных CLI с подкомандами (git-style) стандартный flag недостаточен. Используйте cobra или urfave/cli.
+
+### html/template и text/template
+
+Go имеет два пакета шаблонов: text/template для произвольного текста и html/template для HTML с автоматическим экранированием (защита от XSS):
+
+```go
+import "html/template"
+
+// Базовый шаблон
+const tmpl = `
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>{{.Title}}</h1>
+  {{if .Items}}
+  <ul>
+    {{range .Items}}
+    <li>{{.Name}} - {{.Price | printf "%.2f"}} руб.</li>
+    {{end}}
+  </ul>
+  {{else}}
+  <p>Нет товаров</p>
+  {{end}}
+  <p>Всего: {{len .Items}} позиций</p>
+</body>
+</html>`
+
+type PageData struct {
+	Title string
+	Items []Item
+}
+
+type Item struct {
+	Name  string
+	Price float64
+}
+
+func renderPage(w http.ResponseWriter, data PageData) error {
+	t := template.Must(template.New("page").Parse(tmpl))
+	return t.Execute(w, data)
+}
+
+// FuncMap - пользовательские функции в шаблонах
+funcMap := template.FuncMap{
+	"upper": strings.ToUpper,
+	"formatDate": func(t time.Time) string {
+		return t.Format("02.01.2006")
+	},
+}
+
+t := template.Must(template.New("page").Funcs(funcMap).Parse(`
+	<p>{{.Name | upper}}</p>
+	<p>{{.CreatedAt | formatDate}}</p>
+`))
+
+// Композиция шаблонов (define/template)
+const layout = `
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+<head><title>{{template "title" .}}</title></head>
+<body>{{template "content" .}}</body>
+</html>
+{{end}}`
+
+const page = `
+{{define "title"}}Главная{{end}}
+{{define "content"}}<h1>Привет, {{.User}}!</h1>{{end}}`
+```
+
+> [!info] html/template автоматически экранирует данные в зависимости от контекста (HTML, CSS, JS, URL). Это защищает от XSS-атак без дополнительных усилий. text/template не экранирует - используйте его только для генерации неHTML-контента (конфиги, email, код).
+
+### crypto
+
+```go
+import (
+	"crypto/sha256"
+	"crypto/hmac"
+	"crypto/rand"
+	"encoding/hex"
+	"golang.org/x/crypto/bcrypt"
+)
+
+// SHA-256 хеширование
+hash := sha256.Sum256([]byte("hello world"))
+hashHex := hex.EncodeToString(hash[:])
+// "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+
+// Хеширование потока (большие файлы)
+h := sha256.New()
+io.Copy(h, file) // хешируем не загружая весь файл в память
+sum := h.Sum(nil)
+
+// HMAC - подпись данных ключом
+mac := hmac.New(sha256.New, []byte("secret-key"))
+mac.Write([]byte("message"))
+signature := mac.Sum(nil)
+
+// Проверка HMAC (constant-time comparison)
+valid := hmac.Equal(signature, expectedSignature)
+
+// bcrypt - хеширование паролей (golang.org/x/crypto)
+hashed, err := bcrypt.GenerateFromPassword([]byte("password123"), bcrypt.DefaultCost)
+err = bcrypt.CompareHashAndPassword(hashed, []byte("password123")) // nil = совпадает
+
+// Генерация криптографически стойких токенов
+token := make([]byte, 32)
+rand.Read(token)
+tokenStr := hex.EncodeToString(token) // 64-символьный hex-токен
+```
+
+### embed (Go 1.16+)
+
+Директива `//go:embed` встраивает файлы в бинарник на этапе компиляции:
+
+```go
+import "embed"
+
+// Встраивание одного файла
+//go:embed config/defaults.json
+var defaultConfig []byte
+
+// Встраивание одного файла как строки
+//go:embed version.txt
+var version string
+
+// Встраивание директории (embed.FS реализует fs.FS)
+//go:embed static/*
+var staticFiles embed.FS
+
+// Использование с http.FileServer
+mux.Handle("/static/", http.FileServer(http.FS(staticFiles)))
+
+// Использование с html/template
+//go:embed templates/*.html
+var templateFS embed.FS
+
+tmpl := template.Must(template.ParseFS(templateFS, "templates/*.html"))
+
+// Чтение конкретного файла из embed.FS
+data, err := staticFiles.ReadFile("static/index.html")
+
+// Обход файлов
+fs.WalkDir(staticFiles, ".", func(path string, d fs.DirEntry, err error) error {
+	fmt.Println(path)
+	return nil
+})
+```
+
+> [!info] embed удобен для встраивания шаблонов, статических файлов, конфигов по умолчанию, SQL-миграций. Файлы включаются в бинарник - деплой остаётся одним файлом.
+
+### reflect
+
+Пакет reflect позволяет инспектировать и модифицировать типы и значения в рантайме:
+
+```go
+import "reflect"
+
+type User struct {
+	Name  string `json:"name" validate:"required"`
+	Email string `json:"email" validate:"required,email"`
+	Age   int    `json:"age" validate:"gte=0"`
+}
+
+u := User{Name: "Alice", Email: "alice@example.com", Age: 30}
+
+// Информация о типе
+t := reflect.TypeOf(u)
+fmt.Println(t.Name())       // "User"
+fmt.Println(t.NumField())   // 3
+
+// Итерация по полям и чтение тегов
+for i := 0; i < t.NumField(); i++ {
+	field := t.Field(i)
+	jsonTag := field.Tag.Get("json")
+	validateTag := field.Tag.Get("validate")
+	fmt.Printf("%s: json=%s validate=%s\n", field.Name, jsonTag, validateTag)
+}
+
+// Чтение значений через reflect.Value
+v := reflect.ValueOf(u)
+for i := 0; i < v.NumField(); i++ {
+	fmt.Printf("%s = %v\n", t.Field(i).Name, v.Field(i).Interface())
+}
+
+// Модификация (нужен указатель)
+v = reflect.ValueOf(&u).Elem()
+v.FieldByName("Name").SetString("Bob")
+
+// Проверка типа и kind
+fmt.Println(t.Kind())        // reflect.Struct
+fmt.Println(reflect.TypeOf(42).Kind()) // reflect.Int
+```
+
+> [!important] reflect работает медленно и лишает код типобезопасности. Используйте его только когда нет альтернативы: написание ORM, сериализация, валидация по тегам, dependency injection. Для обычного прикладного кода предпочитайте интерфейсы и дженерики.
 
 ---
 
@@ -2944,6 +3729,197 @@ GOMEMLIMIT=1GiB ./myapp
 
 ---
 
+## Внутренности Go
+
+### Компиляция и линковка
+
+Go компилирует код в нативные бинарники. Процесс компиляции проходит через несколько фаз:
+
+1. Лексический анализ и парсинг - исходный код преобразуется в AST (Abstract Syntax Tree)
+2. Type checking - проверка типов на основе AST
+3. SSA (Static Single Assignment) - промежуточное представление для оптимизаций
+4. Генерация машинного кода - платформо-зависимый код
+
+По умолчанию Go линкует статически - бинарник содержит всё необходимое и не зависит от системных библиотек. Если используется CGO, линковка становится динамической:
+
+```bash
+# Полностью статический бинарник (без CGO)
+CGO_ENABLED=0 go build -o app ./cmd/api
+
+# Кросс-компиляция для разных платформ
+GOOS=linux GOARCH=amd64 go build -o app-linux
+GOOS=darwin GOARCH=arm64 go build -o app-mac
+GOOS=windows GOARCH=amd64 go build -o app.exe
+
+# Уменьшение размера бинарника
+go build -ldflags="-s -w" -o app  # -s убирает таблицу символов, -w - DWARF
+
+# Внедрение переменных при сборке
+go build -ldflags="-X main.version=1.0.0 -X main.buildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+```
+
+Build tags позволяют включать/исключать файлы из компиляции:
+
+```go
+//go:build linux && amd64
+// +build linux,amd64
+
+package mypackage
+
+// Этот файл будет скомпилирован только для linux/amd64
+```
+
+### Планировщик Go (GMP модель)
+
+Планировщик Go мультиплексирует горутины на потоки ОС. Модель состоит из трёх сущностей:
+
+```
+ G - горутина (единица выполнения, ~2-8 KB стека)
+ M - машинный поток (OS thread)
+ P - логический процессор (контекст выполнения, привязан к M)
+
+         ┌─────────────────────────────────────────────┐
+         │          Global Run Queue (GRQ)              │
+         │   [G] [G] [G]                               │
+         └──────────────┬──────────────────────────────┘
+                        │
+    ┌───────────────────┼───────────────────┐
+    │                   │                   │
+  ┌─┴──┐             ┌─┴──┐             ┌─┴──┐
+  │ P0 │             │ P1 │             │ P2 │
+  ├────┤             ├────┤             ├────┤
+  │LRQ:│             │LRQ:│             │LRQ:│
+  │[G] │             │[G] │             │    │  <- пустая очередь
+  │[G] │             │[G] │             │    │     (work stealing)
+  │[G] │             │    │             │    │
+  └─┬──┘             └─┬──┘             └─┬──┘
+    │                   │                   │
+  ┌─┴──┐             ┌─┴──┐             ┌─┴──┐
+  │ M0 │             │ M1 │             │ M2 │
+  └────┘             └────┘             └────┘
+   OS Thread          OS Thread          OS Thread
+```
+
+- P (логический процессор) содержит локальную очередь горутин (LRQ). Количество P определяется GOMAXPROCS (по умолчанию = количество ядер CPU)
+- M (машинный поток) выполняет горутины из очереди P, к которому привязан
+- Если LRQ процессора P пуста, он "крадёт" горутины из очереди другого P (work stealing)
+- Если горутина делает системный вызов (syscall), M блокируется, P отсоединяется и привязывается к другому M
+
+Вытесняющая многозадачность (с Go 1.14): горутины вытесняются даже без явных точек переключения (вызовы функций, операции с каналами). Это предотвращает блокировку планировщика "тяжёлыми" вычислениями в одной горутине.
+
+```bash
+# Установка количества логических процессоров
+GOMAXPROCS=4 ./myapp
+
+# В коде
+runtime.GOMAXPROCS(4)
+fmt.Println(runtime.NumGoroutine()) // текущее количество горутин
+```
+
+### Модель памяти Go
+
+Модель памяти определяет условия, при которых чтение переменной в одной горутине гарантированно увидит значение, записанное другой горутиной. Ключевое понятие - happens-before.
+
+Гарантированные точки синхронизации (happens-before):
+- Запись в канал happens-before чтения из этого канала
+- Закрытие канала happens-before чтения, которое возвращает zero value
+- Отправка в небуферизованный канал happens-before завершения получения
+- sync.Mutex.Unlock() happens-before следующего Lock()
+- sync.Once.Do(f) - вызов f happens-before возврата любого Do()
+- Запуск горутины go f() happens-before начала выполнения f()
+- Операции sync/atomic обеспечивают happens-before
+
+```go
+// НЕПРАВИЛЬНО - нет гарантии что горутина увидит done == true
+var done bool
+var result string
+
+go func() {
+	result = "hello"
+	done = true
+}()
+
+for !done {} // busy-wait, может зависнуть навсегда
+fmt.Println(result)
+
+// ПРАВИЛЬНО - канал обеспечивает happens-before
+ch := make(chan struct{})
+
+go func() {
+	result = "hello"
+	close(ch) // happens-before чтения из ch
+}()
+
+<-ch
+fmt.Println(result) // гарантированно "hello"
+```
+
+> [!important] Без явной синхронизации компилятор и процессор могут переупорядочивать операции. Даже если в исходном коде запись в переменную стоит до записи в флаг, другая горутина может увидеть их в обратном порядке. Всегда используйте каналы, мьютексы или атомарные операции для межгорутинного обмена данными.
+
+### Сборщик мусора (GC)
+
+Go использует concurrent tri-color mark-and-sweep GC. "Concurrent" означает, что GC работает одновременно с приложением, минимизируя паузы (STW - stop-the-world).
+
+Три цвета объектов:
+- Белый - не посещён (потенциальный мусор)
+- Серый - посещён, но его ссылки ещё не проверены
+- Чёрный - посещён, все ссылки проверены (достижим)
+
+Фазы GC:
+1. Mark Setup (STW) - включение write barrier, подготовка к маркировке. Пауза < 1 мс
+2. Marking (concurrent) - обход графа объектов, маркировка достижимых. Работает параллельно с приложением
+3. Mark Termination (STW) - завершение маркировки, отключение write barrier. Пауза < 1 мс
+4. Sweeping (concurrent) - освобождение памяти белых объектов
+
+Write barrier гарантирует корректность: если приложение создаёт новую ссылку на белый объект из чёрного объекта во время маркировки, write barrier перекрашивает объект в серый.
+
+```bash
+# Диагностика GC
+GODEBUG=gctrace=1 ./myapp
+
+# Вывод: gc 1 @0.012s 2%: 0.021+1.2+0.014 ms clock, 0.17+0.8/1.1/0+0.11 ms cpu, 4->4->1 MB, 4 MB goal, 8 P
+#   gc 1     - номер запуска GC
+#   @0.012s  - время с момента старта программы
+#   2%       - процент времени CPU, потраченный на GC
+#   4->4->1  - heap до GC -> heap в конце GC -> live heap
+```
+
+Настройка GC:
+
+```go
+import "runtime/debug"
+
+// GOGC - порог запуска GC (процент роста heap с последнего GC)
+// По умолчанию 100 (GC запускается когда heap удваивается)
+debug.SetGCPercent(200) // GC реже, больше потребление памяти
+debug.SetGCPercent(-1)  // отключить GC (осторожно!)
+
+// GOMEMLIMIT - мягкий лимит памяти (Go 1.19+)
+debug.SetMemoryLimit(1 << 30) // 1 GiB
+
+// Чтение статистики
+var stats runtime.MemStats
+runtime.ReadMemStats(&stats)
+fmt.Printf("Alloc: %d MB\n", stats.Alloc/1024/1024)
+fmt.Printf("NumGC: %d\n", stats.NumGC)
+fmt.Printf("PauseTotalNs: %d ms\n", stats.PauseTotalNs/1e6)
+```
+
+### Стек горутин
+
+Каждая горутина начинает с маленького стека (2-8 KB). При необходимости Go автоматически увеличивает стек:
+
+1. Компилятор вставляет проверку стека в пролог каждой функции
+2. Если стека недостаточно, рантайм выделяет новый стек в 2 раза больше
+3. Данные копируются в новый стек, указатели обновляются
+4. Старый стек освобождается
+
+Это называется contiguous stacks (с Go 1.4). До этого использовались segmented stacks, которые вызывали "hot split" проблему - частое переключение между сегментами.
+
+Стек может также уменьшаться - если после GC стек используется менее чем на 1/4, он сжимается вдвое. Максимальный размер стека по умолчанию - 1 GB (настраивается через runtime/debug.SetMaxStack).
+
+---
+
 ## Production best practices
 
 ### Dockerfile (multi-stage build)
@@ -3182,9 +4158,1323 @@ gRPC:
 - samber/do - DI контейнер
 - golang.org/x/sync/errgroup - группы горутин с ошибками
 
+HTTP-клиенты:
+- resty - декларативный HTTP-клиент с retry, middleware, auto-unmarshal
+- hashicorp/go-retryablehttp - HTTP-клиент с автоматическими повторами
+
+Аутентификация:
+- golang-jwt/jwt - создание и верификация JWT токенов
+- casbin - гибкая библиотека авторизации (RBAC, ABAC, ACL)
+
+Очереди задач:
+- asynq - простая и надёжная очередь на Redis
+- machinery - распределённая очередь задач
+
+Workflow:
+- temporal - движок durable execution для сложных бизнес-процессов (подробнее ниже)
+
+Документация API:
+- swaggo/swag - генерация Swagger/OpenAPI из комментариев
+
+Миграции:
+- golang-migrate - миграции через CLI и библиотеку
+- goose - миграции с поддержкой Go-функций
+- atlas - декларативные миграции от Ariga
+
+Обработка ошибок:
+- cockroachdb/errors - расширенные ошибки со стектрейсами и sentinel wrapping
+
+---
+
+## Популярные библиотеки с примерами
+
+### cobra - CLI приложения
+
+Cobra используется в kubectl, Hugo, GitHub CLI и десятках других инструментов:
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/spf13/cobra"
+)
+
+func main() {
+	var verbose bool
+
+	rootCmd := &cobra.Command{
+		Use:   "mytool",
+		Short: "Инструмент для управления сервисами",
+	}
+
+	// Глобальный флаг для всех подкоманд
+	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "подробный вывод")
+
+	// Подкоманда deploy
+	var env string
+	deployCmd := &cobra.Command{
+		Use:   "deploy [service]",
+		Short: "Деплой сервиса",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			service := args[0]
+			fmt.Printf("Деплой %s в %s\n", service, env)
+			if verbose {
+				fmt.Println("Подробный режим включён")
+			}
+			return nil
+		},
+	}
+	deployCmd.Flags().StringVarP(&env, "env", "e", "staging", "окружение")
+
+	// Подкоманда status
+	statusCmd := &cobra.Command{
+		Use:   "status",
+		Short: "Статус сервисов",
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Println("Все сервисы работают")
+		},
+	}
+
+	rootCmd.AddCommand(deployCmd, statusCmd)
+
+	if err := rootCmd.Execute(); err != nil {
+		os.Exit(1)
+	}
+}
+```
+
+### go-playground/validator
+
+Валидация структур через теги:
+
+```go
+import "github.com/go-playground/validator/v10"
+
+type CreateUserInput struct {
+	Email    string `json:"email" validate:"required,email"`
+	Name     string `json:"name" validate:"required,min=2,max=100"`
+	Age      int    `json:"age" validate:"required,gte=18,lte=150"`
+	Password string `json:"password" validate:"required,min=8"`
+	Role     string `json:"role" validate:"required,oneof=user admin moderator"`
+	Website  string `json:"website" validate:"omitempty,url"`
+}
+
+var validate = validator.New()
+
+func validateInput(input *CreateUserInput) error {
+	if err := validate.Struct(input); err != nil {
+		// Извлечение конкретных ошибок валидации
+		for _, e := range err.(validator.ValidationErrors) {
+			fmt.Printf("Поле %s не прошло проверку %s\n", e.Field(), e.Tag())
+		}
+		return err
+	}
+	return nil
+}
+
+// Кастомный валидатор
+validate.RegisterValidation("nowhitespace", func(fl validator.FieldLevel) bool {
+	return !strings.Contains(fl.Field().String(), " ")
+})
+```
+
+### golang-jwt/jwt
+
+Создание и верификация JWT-токенов:
+
+```go
+import "github.com/golang-jwt/jwt/v5"
+
+type Claims struct {
+	UserID int64  `json:"user_id"`
+	Email  string `json:"email"`
+	Role   string `json:"role"`
+	jwt.RegisteredClaims
+}
+
+// Создание токена
+func generateToken(userID int64, email, role, secret string) (string, error) {
+	claims := Claims{
+		UserID: userID,
+		Email:  email,
+		Role:   role,
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			Issuer:    "myservice",
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString([]byte(secret))
+}
+
+// Парсинг и верификация
+func parseToken(tokenString, secret string) (*Claims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &Claims{},
+		func(token *jwt.Token) (any, error) {
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+			}
+			return []byte(secret), nil
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	claims, ok := token.Claims.(*Claims)
+	if !ok || !token.Valid {
+		return nil, fmt.Errorf("invalid token")
+	}
+	return claims, nil
+}
+```
+
+### sqlc - генерация кода из SQL
+
+sqlc генерирует типобезопасный Go-код из SQL-запросов. Конфигурация `sqlc.yaml`:
+
+```yaml
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "queries/"
+    schema: "migrations/"
+    gen:
+      go:
+        package: "db"
+        out: "internal/db"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+```
+
+SQL-запросы с аннотациями:
+
+```sql
+-- queries/users.sql
+
+-- name: GetUser :one
+SELECT id, email, name, created_at FROM users WHERE id = $1;
+
+-- name: ListUsers :many
+SELECT id, email, name, created_at FROM users ORDER BY id LIMIT $1 OFFSET $2;
+
+-- name: CreateUser :one
+INSERT INTO users (email, name) VALUES ($1, $2) RETURNING *;
+
+-- name: DeleteUser :exec
+DELETE FROM users WHERE id = $1;
+```
+
+Использование сгенерированного кода:
+
+```go
+// sqlc генерирует: internal/db/users.sql.go
+pool, _ := pgxpool.New(ctx, databaseURL)
+queries := db.New(pool)
+
+// Типобезопасные вызовы
+user, err := queries.GetUser(ctx, 42)
+users, err := queries.ListUsers(ctx, db.ListUsersParams{Limit: 10, Offset: 0})
+newUser, err := queries.CreateUser(ctx, db.CreateUserParams{
+	Email: "alice@example.com",
+	Name:  "Alice",
+})
+```
+
+### lo - утилиты с дженериками
+
+lo предоставляет набор типобезопасных хелперов, аналогичных lodash:
+
+```go
+import "github.com/samber/lo"
+
+// Map - трансформация элементов
+names := lo.Map(users, func(u User, _ int) string {
+	return u.Name
+})
+
+// Filter - фильтрация
+adults := lo.Filter(users, func(u User, _ int) bool {
+	return u.Age >= 18
+})
+
+// Reduce - свёртка
+totalAge := lo.Reduce(users, func(acc int, u User, _ int) int {
+	return acc + u.Age
+}, 0)
+
+// GroupBy - группировка
+byRole := lo.GroupBy(users, func(u User) string {
+	return u.Role
+})
+
+// Chunk - разбиение на части
+batches := lo.Chunk(items, 100) // [][]Item по 100 элементов
+
+// Uniq - уникальные элементы
+unique := lo.Uniq([]int{1, 2, 2, 3, 3, 3}) // [1, 2, 3]
+
+// Must - паника при ошибке (для инициализации)
+cfg := lo.Must(loadConfig()) // паника если err != nil
+```
+
+### testcontainers-go
+
+Интеграционные тесты с реальными зависимостями в Docker:
+
+```go
+import (
+	"testing"
+	"github.com/testcontainers/testcontainers-go"
+	"github.com/testcontainers/testcontainers-go/modules/postgres"
+	"github.com/testcontainers/testcontainers-go/wait"
+)
+
+func setupPostgres(t *testing.T) string {
+	t.Helper()
+	ctx := context.Background()
+
+	pgContainer, err := postgres.Run(ctx,
+		"postgres:16-alpine",
+		postgres.WithDatabase("testdb"),
+		postgres.WithUsername("test"),
+		postgres.WithPassword("test"),
+		testcontainers.WithWaitStrategy(
+			wait.ForLog("database system is ready to accept connections").
+				WithOccurrence(2),
+		),
+	)
+	require.NoError(t, err)
+
+	t.Cleanup(func() {
+		require.NoError(t, pgContainer.Terminate(ctx))
+	})
+
+	connStr, err := pgContainer.ConnectionString(ctx, "sslmode=disable")
+	require.NoError(t, err)
+	return connStr
+}
+
+func TestUserRepository(t *testing.T) {
+	dsn := setupPostgres(t) // поднимает реальный Postgres в Docker
+
+	db, err := sql.Open("pgx", dsn)
+	require.NoError(t, err)
+
+	// Применить миграции, создать репозиторий, выполнить тесты
+	repo := NewUserRepository(db)
+	// ...
+}
+```
+
+### asynq - очереди задач
+
+Простая очередь на базе Redis:
+
+```go
+import "github.com/hibiken/asynq"
+
+// Определение задачи
+const TypeEmailSend = "email:send"
+
+type EmailPayload struct {
+	To      string `json:"to"`
+	Subject string `json:"subject"`
+	Body    string `json:"body"`
+}
+
+// Создание задачи (клиент)
+func enqueueEmail(client *asynq.Client, payload EmailPayload) error {
+	data, _ := json.Marshal(payload)
+	task := asynq.NewTask(TypeEmailSend, data,
+		asynq.MaxRetry(3),
+		asynq.Timeout(30*time.Second),
+		asynq.Queue("emails"),
+	)
+	_, err := client.Enqueue(task)
+	return err
+}
+
+// Обработка задачи (worker)
+func handleEmailSend(ctx context.Context, t *asynq.Task) error {
+	var p EmailPayload
+	if err := json.Unmarshal(t.Payload(), &p); err != nil {
+		return fmt.Errorf("unmarshal: %w", err)
+	}
+	return sendEmail(p.To, p.Subject, p.Body)
+}
+
+// Запуск worker
+func main() {
+	srv := asynq.NewServer(
+		asynq.RedisClientOpt{Addr: "localhost:6379"},
+		asynq.Config{
+			Concurrency: 10,
+			Queues:      map[string]int{"emails": 6, "default": 3},
+		},
+	)
+
+	mux := asynq.NewServeMux()
+	mux.HandleFunc(TypeEmailSend, handleEmailSend)
+
+	if err := srv.Run(mux); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+---
+
+## Полный пример приложения
+
+Сервис сокращения URL, демонстрирующий основные паттерны Go - clean architecture, graceful shutdown, структурированное логирование, работа с PostgreSQL.
+
+### Структура проекта
+
+```
+urlshort/
+  cmd/api/main.go
+  internal/
+    domain/url.go
+    usecase/shortener.go
+    repository/postgres/url_repo.go
+    handler/http/url_handler.go
+  migrations/
+    000001_create_urls.up.sql
+  go.mod
+  Dockerfile
+  docker-compose.yml
+```
+
+### domain/url.go
+
+```go
+package domain
+
+import (
+	"context"
+	"time"
+)
+
+type URL struct {
+	ID        int64     `json:"id" db:"id"`
+	ShortCode string    `json:"short_code" db:"short_code"`
+	Original  string    `json:"original" db:"original_url"`
+	Clicks    int64     `json:"clicks" db:"clicks"`
+	CreatedAt time.Time `json:"created_at" db:"created_at"`
+}
+
+type URLRepository interface {
+	Create(ctx context.Context, url *URL) error
+	FindByCode(ctx context.Context, code string) (*URL, error)
+	IncrementClicks(ctx context.Context, code string) error
+}
+```
+
+### usecase/shortener.go
+
+```go
+package usecase
+
+import (
+	"context"
+	"crypto/rand"
+	"encoding/base64"
+	"fmt"
+	"log/slog"
+
+	"urlshort/internal/domain"
+)
+
+type Shortener struct {
+	repo   domain.URLRepository
+	logger *slog.Logger
+}
+
+func NewShortener(repo domain.URLRepository, logger *slog.Logger) *Shortener {
+	return &Shortener{repo: repo, logger: logger}
+}
+
+func (s *Shortener) Shorten(ctx context.Context, originalURL string) (*domain.URL, error) {
+	code, err := generateCode(6)
+	if err != nil {
+		return nil, fmt.Errorf("generate code: %w", err)
+	}
+
+	url := &domain.URL{
+		ShortCode: code,
+		Original:  originalURL,
+	}
+
+	if err := s.repo.Create(ctx, url); err != nil {
+		return nil, fmt.Errorf("create url: %w", err)
+	}
+
+	s.logger.Info("url shortened", "code", code, "original", originalURL)
+	return url, nil
+}
+
+func (s *Shortener) Resolve(ctx context.Context, code string) (string, error) {
+	url, err := s.repo.FindByCode(ctx, code)
+	if err != nil {
+		return "", fmt.Errorf("find url: %w", err)
+	}
+
+	_ = s.repo.IncrementClicks(ctx, code)
+	return url.Original, nil
+}
+
+func generateCode(length int) (string, error) {
+	b := make([]byte, length)
+	if _, err := rand.Read(b); err != nil {
+		return "", err
+	}
+	return base64.URLEncoding.EncodeToString(b)[:length], nil
+}
+```
+
+### repository/postgres/url_repo.go
+
+```go
+package postgres
+
+import (
+	"context"
+	"database/sql"
+	"errors"
+	"fmt"
+
+	"urlshort/internal/domain"
+)
+
+type URLRepo struct {
+	db *sql.DB
+}
+
+func NewURLRepo(db *sql.DB) *URLRepo {
+	return &URLRepo{db: db}
+}
+
+func (r *URLRepo) Create(ctx context.Context, url *domain.URL) error {
+	query := `INSERT INTO urls (short_code, original_url) VALUES ($1, $2)
+		RETURNING id, created_at`
+	return r.db.QueryRowContext(ctx, query, url.ShortCode, url.Original).
+		Scan(&url.ID, &url.CreatedAt)
+}
+
+func (r *URLRepo) FindByCode(ctx context.Context, code string) (*domain.URL, error) {
+	var url domain.URL
+	query := `SELECT id, short_code, original_url, clicks, created_at
+		FROM urls WHERE short_code = $1`
+	err := r.db.QueryRowContext(ctx, query, code).
+		Scan(&url.ID, &url.ShortCode, &url.Original, &url.Clicks, &url.CreatedAt)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, fmt.Errorf("url not found: %s", code)
+	}
+	return &url, err
+}
+
+func (r *URLRepo) IncrementClicks(ctx context.Context, code string) error {
+	_, err := r.db.ExecContext(ctx,
+		`UPDATE urls SET clicks = clicks + 1 WHERE short_code = $1`, code)
+	return err
+}
+```
+
+### handler/http/url_handler.go
+
+```go
+package http
+
+import (
+	"encoding/json"
+	"log/slog"
+	"net/http"
+
+	"urlshort/internal/usecase"
+)
+
+type Handler struct {
+	shortener *usecase.Shortener
+	logger    *slog.Logger
+}
+
+func NewHandler(shortener *usecase.Shortener, logger *slog.Logger) *Handler {
+	return &Handler{shortener: shortener, logger: logger}
+}
+
+func (h *Handler) Register(mux *http.ServeMux) {
+	mux.HandleFunc("POST /shorten", h.handleShorten)
+	mux.HandleFunc("GET /{code}", h.handleRedirect)
+	mux.HandleFunc("GET /health", h.handleHealth)
+}
+
+func (h *Handler) handleShorten(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		URL string `json:"url"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		http.Error(w, `{"error":"invalid body"}`, http.StatusBadRequest)
+		return
+	}
+
+	url, err := h.shortener.Shorten(r.Context(), input.URL)
+	if err != nil {
+		h.logger.Error("shorten failed", "err", err)
+		http.Error(w, `{"error":"internal"}`, http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(url)
+}
+
+func (h *Handler) handleRedirect(w http.ResponseWriter, r *http.Request) {
+	code := r.PathValue("code")
+
+	original, err := h.shortener.Resolve(r.Context(), code)
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	http.Redirect(w, r, original, http.StatusTemporaryRedirect)
+}
+
+func (h *Handler) handleHealth(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(`{"status":"ok"}`))
+}
+```
+
+### cmd/api/main.go
+
+```go
+package main
+
+import (
+	"context"
+	"database/sql"
+	"fmt"
+	"log/slog"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
+	_ "github.com/jackc/pgx/v5/stdlib"
+	handler "urlshort/internal/handler/http"
+	"urlshort/internal/repository/postgres"
+	"urlshort/internal/usecase"
+)
+
+func main() {
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+
+	db, err := sql.Open("pgx", os.Getenv("DATABASE_URL"))
+	if err != nil {
+		logger.Error("db open failed", "err", err)
+		os.Exit(1)
+	}
+	defer db.Close()
+
+	db.SetMaxOpenConns(25)
+	db.SetMaxIdleConns(10)
+
+	repo := postgres.NewURLRepo(db)
+	shortener := usecase.NewShortener(repo, logger)
+	h := handler.NewHandler(shortener, logger)
+
+	mux := http.NewServeMux()
+	h.Register(mux)
+
+	srv := &http.Server{
+		Addr:         fmt.Sprintf(":%s", envOrDefault("PORT", "8080")),
+		Handler:      mux,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+
+	go func() {
+		logger.Info("server starting", "addr", srv.Addr)
+		if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+			logger.Error("server error", "err", err)
+			os.Exit(1)
+		}
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	srv.Shutdown(ctx)
+	logger.Info("server stopped")
+}
+
+func envOrDefault(key, fallback string) string {
+	if v := os.Getenv(key); v != "" {
+		return v
+	}
+	return fallback
+}
+```
+
+### docker-compose.yml
+
+```yaml
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgres://app:secret@db:5432/urlshort?sslmode=disable
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: urlshort
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d urlshort"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+```
+
+> [!summary] Этот пример демонстрирует: clean architecture с разделением на слои, работу с PostgreSQL через database/sql, HTTP-сервер на стандартном net/http (Go 1.22+), graceful shutdown, структурированное логирование через slog, Docker multi-stage build.
+
+---
+
+## Temporal
+
+Temporal - движок durable execution, который гарантирует завершение бизнес-процессов даже при сбоях инфраструктуры. В отличие от обычных очередей задач, Temporal сохраняет полное состояние выполнения и автоматически восстанавливает процессы после перезапуска.
+
+Ключевые отличия от очередей (RabbitMQ, Kafka, asynq):
+- Состояние workflow сохраняется на сервере Temporal, а не в коде приложения
+- Встроенные таймеры, ретраи, саги, сигналы и запросы
+- Детерминистичное воспроизведение - при перезапуске worker восстанавливает состояние, "проигрывая" историю событий
+- Видимость - можно в любой момент запросить состояние workflow
+
+### Основные концепции
+
+```
+┌─────────────────────────────────────────────┐
+│              Temporal Server                  │
+│  ┌─────────┐  ┌──────────┐  ┌───────────┐  │
+│  │ History │  │ Matching │  │ Frontend  │  │
+│  │ Service │  │ Service  │  │ Service   │  │
+│  └─────────┘  └──────────┘  └───────────┘  │
+│              ↕ Task Queues                   │
+└─────────────────────────────────────────────┘
+         ↕                    ↕
+   ┌───────────┐        ┌──────────┐
+   │  Worker   │        │  Client  │
+   │ (Workflow │        │ (запуск, │
+   │  Activity)│        │  сигналы,│
+   │           │        │  запросы)│
+   └───────────┘        └──────────┘
+```
+
+- **Workflow** - детерминистичная функция, описывающая бизнес-процесс. Оркестрирует activities, обрабатывает сигналы, может длиться от миллисекунд до месяцев
+- **Activity** - единица работы с побочными эффектами (HTTP-запрос, запись в БД, отправка email). Может автоматически ретраиться
+- **Worker** - процесс, который подключается к Temporal Server и выполняет workflows и activities
+- **Task Queue** - именованная очередь, через которую Temporal Server распределяет задачи по workers
+- **Workflow ID** - уникальный бизнес-идентификатор процесса (например, order-12345)
+- **Run ID** - UUID конкретного запуска workflow
+
+### Workflows
+
+Workflow в Temporal - детерминистичная функция. Это означает строгие ограничения на то, что можно делать внутри:
+
+```go
+import (
+	"time"
+	"go.temporal.io/sdk/workflow"
+)
+
+// Внутри workflow НЕЛЬЗЯ:
+// - вызывать time.Now(), time.Sleep()     -> использовать workflow.Now(), workflow.Sleep()
+// - делать HTTP-запросы, обращаться к БД  -> выносить в activities
+// - использовать math/rand               -> использовать workflow.SideEffect()
+// - работать с файловой системой          -> выносить в activities
+// - использовать горутины Go              -> использовать workflow.Go()
+// - использовать каналы Go               -> использовать workflow.Channel
+
+func OrderWorkflow(ctx workflow.Context, order Order) (OrderResult, error) {
+	logger := workflow.GetLogger(ctx)
+	logger.Info("order workflow started", "orderID", order.ID)
+
+	// Настройка activity options
+	actCtx := workflow.WithActivityOptions(ctx, workflow.ActivityOptions{
+		StartToCloseTimeout: 30 * time.Second,
+		RetryPolicy: &temporal.RetryPolicy{
+			InitialInterval:    time.Second,
+			BackoffCoefficient: 2.0,
+			MaximumAttempts:    3,
+		},
+	})
+
+	// Последовательное выполнение activities
+	var validated OrderValidation
+	if err := workflow.ExecuteActivity(actCtx, ValidateOrder, order).Get(ctx, &validated); err != nil {
+		return OrderResult{}, fmt.Errorf("validate: %w", err)
+	}
+
+	var payment PaymentResult
+	if err := workflow.ExecuteActivity(actCtx, ChargePayment, order).Get(ctx, &payment); err != nil {
+		return OrderResult{}, fmt.Errorf("charge: %w", err)
+	}
+
+	// Таймер - workflow "засыпает", но Temporal помнит и разбудит
+	workflow.Sleep(ctx, 24*time.Hour) // не блокирует worker
+
+	var shipment ShipmentResult
+	if err := workflow.ExecuteActivity(actCtx, ShipOrder, order).Get(ctx, &shipment); err != nil {
+		return OrderResult{}, fmt.Errorf("ship: %w", err)
+	}
+
+	return OrderResult{
+		PaymentID:  payment.ID,
+		TrackingNo: shipment.TrackingNo,
+	}, nil
+}
+```
+
+> [!important] Детерминизм workflow критически важен. Temporal восстанавливает состояние, воспроизводя историю событий. Если код workflow изменился между запусками (например, добавилась новая activity), это приведёт к non-determinism error. Для изменений используйте версионирование через workflow.GetVersion().
+
+### Activities
+
+Activities содержат код с побочными эффектами - всё то, что нельзя делать в workflow:
+
+```go
+import (
+	"context"
+	"go.temporal.io/sdk/activity"
+)
+
+func ValidateOrder(ctx context.Context, order Order) (OrderValidation, error) {
+	// Обычный Go-код - HTTP-вызовы, БД, файлы
+	logger := activity.GetInfo(ctx).ActivityType.Name
+	// ...
+	return OrderValidation{Valid: true}, nil
+}
+
+func ChargePayment(ctx context.Context, order Order) (PaymentResult, error) {
+	// Вызов платёжного API
+	result, err := stripeClient.Charge(order.Amount, order.Currency)
+	if err != nil {
+		return PaymentResult{}, err
+	}
+	return PaymentResult{ID: result.ID}, nil
+}
+
+// Долгая activity с heartbeat
+func ProcessLargeFile(ctx context.Context, path string) error {
+	file, err := os.Open(path)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	lineCount := 0
+	for scanner.Scan() {
+		lineCount++
+		if lineCount%1000 == 0 {
+			// Heartbeat сообщает Temporal что activity жива
+			// Если worker упадёт, Temporal перезапустит activity на другом worker
+			activity.RecordHeartbeat(ctx, lineCount)
+		}
+		// обработка строки...
+	}
+	return scanner.Err()
+}
+```
+
+Activity options контролируют поведение:
+
+- StartToCloseTimeout - максимальное время выполнения одной попытки
+- ScheduleToCloseTimeout - максимальное время от постановки в очередь до завершения
+- HeartbeatTimeout - если heartbeat не приходит за это время, activity считается зависшей
+- RetryPolicy - стратегия повторных попыток
+
+### Сигналы (Signals)
+
+Сигналы позволяют отправлять данные в работающий workflow извне:
+
+```go
+// Workflow принимает сигнал
+func ApprovalWorkflow(ctx workflow.Context, request Request) (string, error) {
+	// Создание канала для сигнала
+	approvalCh := workflow.GetSignalChannel(ctx, "approval-signal")
+
+	// Выполнить предварительную проверку
+	var checkResult CheckResult
+	workflow.ExecuteActivity(ctx, PreCheck, request).Get(ctx, &checkResult)
+
+	// Ожидание сигнала одобрения (с таймаутом)
+	var approval ApprovalDecision
+	timerCtx, cancelTimer := workflow.WithCancel(ctx)
+
+	selector := workflow.NewSelector(ctx)
+
+	selector.AddReceive(approvalCh, func(ch workflow.ReceiveChannel, more bool) {
+		ch.Receive(ctx, &approval)
+		cancelTimer()
+	})
+
+	selector.AddFuture(workflow.NewTimer(timerCtx, 72*time.Hour), func(f workflow.Future) {
+		approval = ApprovalDecision{Approved: false, Reason: "timeout"}
+	})
+
+	selector.Select(ctx)
+
+	if !approval.Approved {
+		return "", fmt.Errorf("rejected: %s", approval.Reason)
+	}
+
+	// Продолжение после одобрения
+	workflow.ExecuteActivity(ctx, ExecuteRequest, request).Get(ctx, nil)
+	return "completed", nil
+}
+
+// Клиент отправляет сигнал
+func sendApproval(c client.Client, workflowID string, decision ApprovalDecision) error {
+	return c.SignalWorkflow(context.Background(), workflowID, "", "approval-signal", decision)
+}
+```
+
+### Запросы (Queries)
+
+Запросы позволяют читать состояние workflow без побочных эффектов:
+
+```go
+func OrderTrackingWorkflow(ctx workflow.Context, order Order) error {
+	status := "created"
+	var trackingNo string
+
+	// Регистрация query handler
+	err := workflow.SetQueryHandler(ctx, "get-status", func() (OrderStatus, error) {
+		return OrderStatus{
+			Status:     status,
+			TrackingNo: trackingNo,
+		}, nil
+	})
+	if err != nil {
+		return err
+	}
+
+	status = "processing"
+	workflow.ExecuteActivity(ctx, ProcessOrder, order).Get(ctx, nil)
+
+	status = "shipped"
+	workflow.ExecuteActivity(ctx, ShipOrder, order).Get(ctx, &trackingNo)
+
+	status = "delivered"
+	return nil
+}
+
+// Клиент делает запрос
+resp, err := c.QueryWorkflow(ctx, workflowID, "", "get-status")
+var status OrderStatus
+resp.Get(&status)
+fmt.Printf("Статус: %s, Трекинг: %s\n", status.Status, status.TrackingNo)
+```
+
+### Дочерние Workflows
+
+Workflow может запускать другие workflows как дочерние:
+
+```go
+func ParentWorkflow(ctx workflow.Context, orders []Order) error {
+	// Запуск дочерних workflows для каждого заказа
+	var futures []workflow.ChildWorkflowFuture
+	for _, order := range orders {
+		childCtx := workflow.WithChildOptions(ctx, workflow.ChildWorkflowOptions{
+			WorkflowID:        fmt.Sprintf("order-%d", order.ID),
+			ParentClosePolicy: enums.PARENT_CLOSE_POLICY_TERMINATE, // или ABANDON, REQUEST_CANCEL
+		})
+
+		future := workflow.ExecuteChildWorkflow(childCtx, OrderWorkflow, order)
+		futures = append(futures, future)
+	}
+
+	// Ожидание завершения всех дочерних workflows
+	for i, f := range futures {
+		var result OrderResult
+		if err := f.Get(ctx, &result); err != nil {
+			workflow.GetLogger(ctx).Error("child workflow failed",
+				"orderID", orders[i].ID, "err", err)
+			continue
+		}
+	}
+	return nil
+}
+```
+
+ParentClosePolicy определяет что происходит с дочерним workflow при завершении родителя:
+- TERMINATE - немедленно завершить
+- ABANDON - оставить работать независимо
+- REQUEST_CANCEL - запросить отмену
+
+### Таймеры и ожидание
+
+```go
+// workflow.Sleep - приостановка на указанное время
+workflow.Sleep(ctx, 24*time.Hour) // не блокирует worker, Temporal разбудит
+
+// workflow.NewTimer - создание таймера для использования в selector
+timer := workflow.NewTimer(ctx, 5*time.Minute)
+
+// workflow.Await - ожидание условия
+var approved bool
+workflow.Await(ctx, func() bool { return approved })
+
+// Selector - мультиплексирование каналов и таймеров (аналог select)
+selector := workflow.NewSelector(ctx)
+
+selector.AddReceive(signalCh, func(ch workflow.ReceiveChannel, more bool) {
+	var data SignalData
+	ch.Receive(ctx, &data)
+	// обработка сигнала
+})
+
+selector.AddFuture(workflow.NewTimer(ctx, 10*time.Minute), func(f workflow.Future) {
+	// таймаут
+})
+
+selector.Select(ctx) // блокируется до одного из событий
+```
+
+### Повторные попытки (Retries)
+
+RetryPolicy настраивается для activities и child workflows:
+
+```go
+retryPolicy := &temporal.RetryPolicy{
+	InitialInterval:        time.Second,       // начальная задержка
+	BackoffCoefficient:     2.0,               // множитель задержки
+	MaximumInterval:        time.Minute,       // максимальная задержка
+	MaximumAttempts:        5,                 // максимум попыток (0 = бесконечно)
+	NonRetryableErrorTypes: []string{          // ошибки, которые не ретраить
+		"InvalidInput",
+		"InsufficientFunds",
+	},
+}
+
+actCtx := workflow.WithActivityOptions(ctx, workflow.ActivityOptions{
+	StartToCloseTimeout: 30 * time.Second,
+	RetryPolicy:         retryPolicy,
+})
+```
+
+Для маркировки ошибки как non-retryable внутри activity:
+
+```go
+func ChargePayment(ctx context.Context, order Order) error {
+	err := gateway.Charge(order.Amount)
+	if errors.Is(err, ErrInsufficientFunds) {
+		// Эта ошибка не будет ретраиться
+		return temporal.NewNonRetryableApplicationError(
+			"insufficient funds", "InsufficientFunds", err)
+	}
+	return err
+}
+```
+
+### Saga Pattern
+
+Saga в Temporal реализуется через компенсационные действия при ошибках:
+
+```go
+func OrderSagaWorkflow(ctx workflow.Context, order Order) error {
+	actCtx := workflow.WithActivityOptions(ctx, workflow.ActivityOptions{
+		StartToCloseTimeout: 30 * time.Second,
+		RetryPolicy:         &temporal.RetryPolicy{MaximumAttempts: 3},
+	})
+
+	// Список компенсаций (выполняются в обратном порядке при ошибке)
+	var compensations []func(workflow.Context) error
+
+	// Шаг 1: Резервирование товара
+	var reservation ReservationResult
+	err := workflow.ExecuteActivity(actCtx, ReserveInventory, order).Get(ctx, &reservation)
+	if err != nil {
+		return fmt.Errorf("reserve: %w", err)
+	}
+	compensations = append(compensations, func(ctx workflow.Context) error {
+		return workflow.ExecuteActivity(actCtx, ReleaseInventory, reservation.ID).Get(ctx, nil)
+	})
+
+	// Шаг 2: Списание оплаты
+	var payment PaymentResult
+	err = workflow.ExecuteActivity(actCtx, ChargePayment, order).Get(ctx, &payment)
+	if err != nil {
+		compensate(ctx, compensations)
+		return fmt.Errorf("charge: %w", err)
+	}
+	compensations = append(compensations, func(ctx workflow.Context) error {
+		return workflow.ExecuteActivity(actCtx, RefundPayment, payment.ID).Get(ctx, nil)
+	})
+
+	// Шаг 3: Отправка
+	err = workflow.ExecuteActivity(actCtx, ShipOrder, order).Get(ctx, nil)
+	if err != nil {
+		compensate(ctx, compensations)
+		return fmt.Errorf("ship: %w", err)
+	}
+
+	// Шаг 4: Уведомление
+	_ = workflow.ExecuteActivity(actCtx, NotifyCustomer, order).Get(ctx, nil)
+
+	return nil
+}
+
+func compensate(ctx workflow.Context, compensations []func(workflow.Context) error) {
+	// Выполнение компенсаций в обратном порядке
+	for i := len(compensations) - 1; i >= 0; i-- {
+		if err := compensations[i](ctx); err != nil {
+			workflow.GetLogger(ctx).Error("compensation failed", "err", err)
+		}
+	}
+}
+```
+
+> [!info] Если на шаге ChargePayment произошла ошибка, saga автоматически вызовет ReleaseInventory (компенсация шага 1). Если ошибка на ShipOrder - вызовутся RefundPayment и ReleaseInventory в обратном порядке.
+
+### Worker
+
+Worker - процесс, который подключается к Temporal Server и выполняет workflow и activity функции:
+
+```go
+package main
+
+import (
+	"log"
+	"go.temporal.io/sdk/client"
+	"go.temporal.io/sdk/worker"
+)
+
+func main() {
+	// Подключение к Temporal Server
+	c, err := client.Dial(client.Options{
+		HostPort:  "localhost:7233",
+		Namespace: "default",
+	})
+	if err != nil {
+		log.Fatal("unable to create client", err)
+	}
+	defer c.Close()
+
+	// Создание worker для конкретной task queue
+	w := worker.New(c, "order-processing", worker.Options{
+		MaxConcurrentActivityExecutionSize:     10,
+		MaxConcurrentWorkflowTaskExecutionSize: 5,
+	})
+
+	// Регистрация workflows и activities
+	w.RegisterWorkflow(OrderWorkflow)
+	w.RegisterWorkflow(OrderSagaWorkflow)
+	w.RegisterWorkflow(ApprovalWorkflow)
+	w.RegisterActivity(ValidateOrder)
+	w.RegisterActivity(ChargePayment)
+	w.RegisterActivity(RefundPayment)
+	w.RegisterActivity(ReserveInventory)
+	w.RegisterActivity(ReleaseInventory)
+	w.RegisterActivity(ShipOrder)
+	w.RegisterActivity(NotifyCustomer)
+
+	if err := w.Run(worker.InterruptCh()); err != nil {
+		log.Fatal("unable to start worker", err)
+	}
+}
+```
+
+### Полный пример - Order Processing
+
+Пример объединяет все концепции: workflow с сигналами одобрения, activities, saga-компенсации, query для статуса:
+
+```go
+// === Типы ===
+
+type Order struct {
+	ID       string
+	UserID   string
+	Amount   int64
+	Currency string
+	Items    []OrderItem
+}
+
+type OrderItem struct {
+	ProductID string
+	Quantity  int
+}
+
+type OrderStatus struct {
+	Phase      string
+	Approved   bool
+	PaymentID  string
+	TrackingNo string
+}
+
+// === Workflow ===
+
+func OrderProcessingWorkflow(ctx workflow.Context, order Order) (OrderStatus, error) {
+	status := OrderStatus{Phase: "validating"}
+
+	// Query handler для отслеживания статуса
+	workflow.SetQueryHandler(ctx, "status", func() (OrderStatus, error) {
+		return status, nil
+	})
+
+	actCtx := workflow.WithActivityOptions(ctx, workflow.ActivityOptions{
+		StartToCloseTimeout: 30 * time.Second,
+		RetryPolicy:         &temporal.RetryPolicy{MaximumAttempts: 3},
+	})
+
+	// Валидация заказа
+	if err := workflow.ExecuteActivity(actCtx, ValidateOrder, order).Get(ctx, nil); err != nil {
+		status.Phase = "validation_failed"
+		return status, err
+	}
+
+	// Ожидание одобрения менеджером (для заказов > 10000)
+	if order.Amount > 10000 {
+		status.Phase = "awaiting_approval"
+
+		approvalCh := workflow.GetSignalChannel(ctx, "manager-approval")
+		selector := workflow.NewSelector(ctx)
+
+		var approved bool
+		selector.AddReceive(approvalCh, func(ch workflow.ReceiveChannel, more bool) {
+			ch.Receive(ctx, &approved)
+		})
+		selector.AddFuture(workflow.NewTimer(ctx, 48*time.Hour), func(f workflow.Future) {
+			approved = false
+		})
+		selector.Select(ctx)
+
+		status.Approved = approved
+		if !approved {
+			status.Phase = "rejected"
+			return status, fmt.Errorf("order not approved")
+		}
+	} else {
+		status.Approved = true
+	}
+
+	// Saga: резервирование -> оплата -> отправка
+	var compensations []func(workflow.Context) error
+
+	status.Phase = "reserving"
+	var reservationID string
+	if err := workflow.ExecuteActivity(actCtx, ReserveInventory, order).Get(ctx, &reservationID); err != nil {
+		status.Phase = "reservation_failed"
+		return status, err
+	}
+	compensations = append(compensations, func(ctx workflow.Context) error {
+		return workflow.ExecuteActivity(actCtx, ReleaseInventory, reservationID).Get(ctx, nil)
+	})
+
+	status.Phase = "charging"
+	var paymentID string
+	if err := workflow.ExecuteActivity(actCtx, ChargePayment, order).Get(ctx, &paymentID); err != nil {
+		compensate(ctx, compensations)
+		status.Phase = "payment_failed"
+		return status, err
+	}
+	status.PaymentID = paymentID
+	compensations = append(compensations, func(ctx workflow.Context) error {
+		return workflow.ExecuteActivity(actCtx, RefundPayment, paymentID).Get(ctx, nil)
+	})
+
+	status.Phase = "shipping"
+	var trackingNo string
+	if err := workflow.ExecuteActivity(actCtx, ShipOrder, order).Get(ctx, &trackingNo); err != nil {
+		compensate(ctx, compensations)
+		status.Phase = "shipping_failed"
+		return status, err
+	}
+	status.TrackingNo = trackingNo
+
+	// Уведомление (не критично, ошибка не откатывает процесс)
+	_ = workflow.ExecuteActivity(actCtx, NotifyCustomer, order).Get(ctx, nil)
+
+	status.Phase = "completed"
+	return status, nil
+}
+
+// === Запуск workflow (клиент) ===
+
+func startOrder(c client.Client, order Order) (string, error) {
+	options := client.StartWorkflowOptions{
+		ID:        fmt.Sprintf("order-%s", order.ID),
+		TaskQueue: "order-processing",
+	}
+
+	we, err := c.ExecuteWorkflow(context.Background(), options,
+		OrderProcessingWorkflow, order)
+	if err != nil {
+		return "", err
+	}
+
+	fmt.Printf("Workflow started: ID=%s RunID=%s\n", we.GetID(), we.GetRunID())
+	return we.GetID(), nil
+}
+
+// === Одобрение заказа (клиент) ===
+
+func approveOrder(c client.Client, orderID string, approved bool) error {
+	return c.SignalWorkflow(context.Background(),
+		fmt.Sprintf("order-%s", orderID), "",
+		"manager-approval", approved)
+}
+
+// === Запрос статуса (клиент) ===
+
+func getOrderStatus(c client.Client, orderID string) (OrderStatus, error) {
+	resp, err := c.QueryWorkflow(context.Background(),
+		fmt.Sprintf("order-%s", orderID), "", "status")
+	if err != nil {
+		return OrderStatus{}, err
+	}
+
+	var status OrderStatus
+	if err := resp.Get(&status); err != nil {
+		return OrderStatus{}, err
+	}
+	return status, nil
+}
+```
+
+> [!summary] Temporal workflow гарантирует, что заказ будет обработан до конца даже при падении worker-ов, перезапусках серверов или сетевых проблемах. Состояние (фаза, paymentID, trackingNo) восстанавливается автоматически через replay истории событий.
+
 ---
 
 ## Ссылки
 
 - [Микросервисы](Microservices/Микросервисы.md)
 - [REST](REST/REST.md)
+- [Temporal Go SDK](https://docs.temporal.io/develop/go)
+- [Go Standard Library](https://pkg.go.dev/std)
+- [Effective Go](https://go.dev/doc/effective_go)

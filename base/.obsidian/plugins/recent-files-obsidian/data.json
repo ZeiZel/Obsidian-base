@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Golang",
+      "path": "backend/Golang.md"
+    },
+    {
+      "basename": "Temporal Go",
+      "path": "backend/Temporal Go.md"
+    },
+    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
@@ -59,10 +67,6 @@
     {
       "basename": "backend",
       "path": "backend/backend.md"
-    },
-    {
-      "basename": "Golang",
-      "path": "backend/Golang.md"
     },
     {
       "basename": "serverless",
@@ -195,10 +199,6 @@
     {
       "basename": "Nuxt",
       "path": "frontend/Vue/Nuxt/Nuxt.md"
-    },
-    {
-      "basename": "Vue",
-      "path": "frontend/Vue/Vue/Vue.md"
     }
   ],
   "omittedPaths": [],
