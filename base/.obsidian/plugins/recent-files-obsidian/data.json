@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Golang",
-      "path": "backend/Golang.md"
+      "basename": "math",
+      "path": "cs/math.md"
     },
     {
       "basename": "Temporal Go",
       "path": "backend/Temporal Go.md"
+    },
+    {
+      "basename": "Golang",
+      "path": "backend/Golang.md"
     },
     {
       "basename": "System Design",
@@ -195,10 +199,6 @@
     {
       "basename": "Web Vitals",
       "path": "frontend/Web Vitals.md"
-    },
-    {
-      "basename": "Nuxt",
-      "path": "frontend/Vue/Nuxt/Nuxt.md"
     }
   ],
   "omittedPaths": [],

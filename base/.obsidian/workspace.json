@@ -126,9 +126,33 @@
               "icon": "lucide-file",
               "title": "Golang"
             }
+          },
+          {
+            "id": "aa693eb2271357f3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/math.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "math"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -194,7 +218,7 @@
             }
           },
           {
-            "id": "5d0ea3cc7115b556",
+            "id": "e14a2b7baf741be0",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -208,7 +232,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -367,6 +392,16 @@
             "id": "2342e7f534d82b14",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "c1ce752a4643b798",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -374,7 +409,7 @@
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 13
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -397,16 +432,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/Golang.md",
+                "file": "cs/math.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Golang"
+              "title": "Outline of math"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -435,9 +471,12 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "7ae5a168fc65c53d",
+  "active": "aa693eb2271357f3",
   "lastOpenFiles": [
     "backend/Temporal Go.md",
+    "cs/math.md",
+    "русский язык.md",
+    "backend/Golang.md",
     "architecture/System Design/System Design.md",
     "cs/Лицензии.md",
     "soft/career-growth.md",
@@ -463,9 +502,6 @@
     "_png/Pasted image 20260326201747.png",
     "_png/Pasted image 20260326195522.png",
     "backend/backend.md",
-    "backend/Golang.md",
-    "backend/serverless.md",
-    "backend/Ruby.md",
     "Tags/#ngrx",
     "Tags/#rxjs",
     "Tags/#profiling",
