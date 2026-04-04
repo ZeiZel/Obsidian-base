@@ -194,7 +194,7 @@
             }
           },
           {
-            "id": "e14a2b7baf741be0",
+            "id": "bbdc0c071560cc93",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -385,7 +385,7 @@
             }
           }
         ],
-        "currentTab": 13
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -408,13 +408,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of System Design"
+              "title": "Outline"
             }
           }
         ],
@@ -446,13 +445,13 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fb81dcdc01e73590",
+  "active": "6fa2dae8cc23e1d8",
   "lastOpenFiles": [
+    "architecture/System Design/System Design.md",
     "backend/Golang.md",
     "backend/Temporal Go.md",
     "cs/math.md",
     "русский язык.md",
-    "architecture/System Design/System Design.md",
     "cs/Лицензии.md",
     "soft/career-growth.md",
     "soft/anxiety-management.md",
