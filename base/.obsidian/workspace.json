@@ -126,33 +126,9 @@
               "icon": "lucide-file",
               "title": "Golang"
             }
-          },
-          {
-            "id": "aa693eb2271357f3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/math.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "math"
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -432,13 +408,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/math.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of math"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -446,8 +422,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -471,12 +446,12 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "aa693eb2271357f3",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
+    "backend/Golang.md",
     "backend/Temporal Go.md",
     "cs/math.md",
     "русский язык.md",
-    "backend/Golang.md",
     "architecture/System Design/System Design.md",
     "cs/Лицензии.md",
     "soft/career-growth.md",
