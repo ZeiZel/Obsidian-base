@@ -221,6 +221,18 @@
         "dimension": 37.61792452830189,
         "children": [
           {
+            "id": "6fa2dae8cc23e1d8",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          },
+          {
             "id": "55e165ebdb0aba10",
             "type": "leaf",
             "state": {
@@ -269,16 +281,6 @@
             }
           },
           {
-            "id": "6fa2dae8cc23e1d8",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
             "id": "bf31226b3be7dffb",
             "type": "leaf",
             "state": {
@@ -286,92 +288,6 @@
               "state": {},
               "icon": "spreadsheet",
               "title": "Advanced Tables"
-            }
-          },
-          {
-            "id": "2f525826da796790",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "5d6183683ced52a5",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
-            }
-          },
-          {
-            "id": "e94d9d236b311e14",
-            "type": "leaf",
-            "state": {
-              "type": "footnotes",
-              "state": {
-                "file": "obsidian/Obsidian.md"
-              },
-              "icon": "lucide-file-signature",
-              "title": "Footnotes"
-            }
-          },
-          {
-            "id": "6ebeadffba40c545",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "00087c6e9005b93e",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "0dc357aafdb55df8",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "a7a34b8733e46573",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "2342e7f534d82b14",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
             }
           },
           {
@@ -384,8 +300,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -408,12 +323,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -421,7 +337,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 366.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -445,7 +362,7 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "6fa2dae8cc23e1d8",
+  "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
     "architecture/System Design/System Design.md",
     "backend/Golang.md",
