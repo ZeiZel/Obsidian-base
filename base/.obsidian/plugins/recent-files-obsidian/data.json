@@ -5,6 +5,10 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
+      "basename": "ДЗ",
+      "path": "architecture/System Design/ДЗ.md"
+    },
+    {
       "basename": "Golang",
       "path": "backend/Golang.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "RxJS",
       "path": "frontend/RxJS.md"
-    },
-    {
-      "basename": "Web Vitals",
-      "path": "frontend/Web Vitals.md"
     }
   ],
   "omittedPaths": [],

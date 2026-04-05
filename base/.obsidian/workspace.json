@@ -203,13 +203,11 @@
               "title": "Navigator"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273,
-    "collapsed": true
+    "width": 343.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -364,6 +362,7 @@
   },
   "active": "fb81dcdc01e73590",
   "lastOpenFiles": [
+    "architecture/System Design/ДЗ.md",
     "architecture/System Design/System Design.md",
     "backend/Golang.md",
     "backend/Temporal Go.md",
@@ -392,7 +391,6 @@
     "frontend/service-workers",
     "_png/Pasted image 20260326201747.png",
     "_png/Pasted image 20260326195522.png",
-    "backend/backend.md",
     "Tags/#ngrx",
     "Tags/#rxjs",
     "Tags/#profiling",
