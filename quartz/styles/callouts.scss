@@ -4,14 +4,14 @@
 .callout {
 	border: 1px solid var(--border);
 	background-color: var(--bg);
-	border-radius: 5px;
+	border-radius: 6px;
 	padding: 0 1rem;
 	overflow-y: hidden;
 	box-sizing: border-box;
 
 	& > .callout-content {
 		display: grid;
-		transition: grid-template-rows 0.3s ease;
+		transition: grid-template-rows 0.2s ease;
 
 		& > .callout-content-inner {
 			overflow: hidden;
@@ -38,24 +38,24 @@
 	--callout-icon-fold: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E');
 
 	&[data-callout] {
-		--color: #448aff;
-		--border: #448aff44;
-		--bg: #448aff10;
+		--color: #3b82f6;
+		--border: #3b82f622;
+		--bg: #3b82f608;
 		--callout-icon: var(--callout-icon-note);
 	}
 
 	&[data-callout='abstract'] {
-		--color: #00b0ff;
-		--border: #00b0ff44;
-		--bg: #00b0ff10;
+		--color: #06b6d4;
+		--border: #06b6d422;
+		--bg: #06b6d408;
 		--callout-icon: var(--callout-icon-abstract);
 	}
 
 	&[data-callout='info'],
 	&[data-callout='todo'] {
-		--color: #00b8d4;
-		--border: #00b8d444;
-		--bg: #00b8d410;
+		--color: #0ea5e9;
+		--border: #0ea5e922;
+		--bg: #0ea5e908;
 		--callout-icon: var(--callout-icon-info);
 	}
 
@@ -64,39 +64,39 @@
 	}
 
 	&[data-callout='tip'] {
-		--color: #00bfa5;
-		--border: #00bfa544;
-		--bg: #00bfa510;
+		--color: #14b8a6;
+		--border: #14b8a622;
+		--bg: #14b8a608;
 		--callout-icon: var(--callout-icon-tip);
 	}
 
 	&[data-callout='success'] {
-		--color: #09ad7a;
-		--border: #09ad7144;
-		--bg: #09ad7110;
+		--color: #22c55e;
+		--border: #22c55e22;
+		--bg: #22c55e08;
 		--callout-icon: var(--callout-icon-success);
 	}
 
 	&[data-callout='question'] {
-		--color: #dba642;
-		--border: #dba64244;
-		--bg: #dba64210;
+		--color: #eab308;
+		--border: #eab30822;
+		--bg: #eab30808;
 		--callout-icon: var(--callout-icon-question);
 	}
 
 	&[data-callout='warning'] {
-		--color: #db8942;
-		--border: #db894244;
-		--bg: #db894210;
+		--color: #f97316;
+		--border: #f9731622;
+		--bg: #f9731608;
 		--callout-icon: var(--callout-icon-warning);
 	}
 
 	&[data-callout='failure'],
 	&[data-callout='danger'],
 	&[data-callout='bug'] {
-		--color: #db4242;
-		--border: #db424244;
-		--bg: #db424210;
+		--color: #ef4444;
+		--border: #ef444422;
+		--bg: #ef444408;
 		--callout-icon: var(--callout-icon-failure);
 	}
 
@@ -109,15 +109,16 @@
 	}
 
 	&[data-callout='example'] {
-		--color: #7a43b5;
-		--border: #7a43b544;
-		--bg: #7a43b510;
+		--color: #8b5cf6;
+		--border: #8b5cf622;
+		--bg: #8b5cf608;
 		--callout-icon: var(--callout-icon-example);
 	}
 
 	&[data-callout='quote'] {
-		--color: var(--secondary);
+		--color: var(--gray);
 		--border: var(--lightgray);
+		--bg: transparent;
 		--callout-icon: var(--callout-icon-quote);
 	}
 
@@ -130,14 +131,14 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 5px;
-	padding: 1rem 0;
+	padding: 0.75rem 0;
 	color: var(--color);
 
-	--icon-size: 18px;
+	--icon-size: 16px;
 
 	& .fold-callout-icon {
 		transition: transform 0.15s ease;
-		opacity: 0.8;
+		opacity: 0.7;
 		cursor: pointer;
 		--callout-icon: var(--callout-icon-fold);
 	}
@@ -145,6 +146,7 @@
 	& > .callout-title-inner > p {
 		color: var(--color);
 		margin: 0;
+		font-size: 0.875rem;
 	}
 
 	.callout-icon,
@@ -161,10 +163,11 @@
 		mask-size: var(--icon-size) var(--icon-size);
 		mask-position: center;
 		mask-repeat: no-repeat;
-		padding: 0.2rem 0;
+		padding: 0.15rem 0;
 	}
 
 	.callout-title-inner {
 		font-weight: $semiBoldWeight;
+		font-size: 0.875rem;
 	}
 }

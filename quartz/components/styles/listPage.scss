@@ -2,12 +2,12 @@
 
 ul.section-ul {
 	list-style: none;
-	margin-top: 2em;
+	margin-top: 1.5em;
 	padding-left: 0;
 }
 
 li.section-li {
-	margin-bottom: 1em;
+	margin-bottom: 0.75em;
 
 	& > .section {
 		display: grid;
@@ -21,11 +21,13 @@ li.section-li {
 
 		& > .desc > h3 > a {
 			background-color: transparent;
+			border-bottom: none;
 		}
 
 		& .meta {
 			margin: 0 1em 0 0;
-			opacity: 0.6;
+			opacity: 0.5;
+			font-size: 0.8rem;
 		}
 	}
 }

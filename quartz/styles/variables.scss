@@ -17,8 +17,8 @@ $tablet: '(min-width: #{map.get($breakpoints, mobile)}) and (max-width: #{map.ge
 $desktop: '(min-width: #{map.get($breakpoints, desktop)})';
 
 $pageWidth: #{map.get($breakpoints, mobile)};
-$sidePanelWidth: 320px;
-$topSpacing: 6rem;
+$sidePanelWidth: 280px;
+$topSpacing: 4rem;
 $boldWeight: 700;
 $semiBoldWeight: 600;
 $normalWeight: 400;
@@ -26,8 +26,8 @@ $normalWeight: 400;
 $mobileGrid: (
 	templateRows: 'auto auto auto auto auto',
 	templateColumns: 'auto',
-	rowGap: '5px',
-	columnGap: '5px',
+	rowGap: '0',
+	columnGap: '0',
 	templateAreas:
 		'"grid-sidebar-left"\
       "grid-header"\
@@ -38,8 +38,8 @@ $mobileGrid: (
 $tabletGrid: (
 	templateRows: 'auto auto auto auto',
 	templateColumns: '#{$sidePanelWidth} auto',
-	rowGap: '5px',
-	columnGap: '5px',
+	rowGap: '0',
+	columnGap: '0',
 	templateAreas:
 		'"grid-sidebar-left grid-header"\
       "grid-sidebar-left grid-center"\
@@ -49,8 +49,8 @@ $tabletGrid: (
 $desktopGrid: (
 	templateRows: 'auto auto auto',
 	templateColumns: '#{$sidePanelWidth} auto #{$sidePanelWidth}',
-	rowGap: '5px',
-	columnGap: '5px',
+	rowGap: '0',
+	columnGap: '24px',
 	templateAreas:
 		'"grid-sidebar-left grid-header grid-sidebar-right"\
       "grid-sidebar-left grid-center grid-sidebar-right"\

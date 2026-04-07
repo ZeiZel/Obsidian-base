@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Лицензии",
+      "path": "cs/Лицензии.md"
+    },
+    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "math",
       "path": "cs/math.md"
-    },
-    {
-      "basename": "Лицензии",
-      "path": "cs/Лицензии.md"
     },
     {
       "basename": "career-growth",

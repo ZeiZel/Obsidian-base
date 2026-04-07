@@ -1,23 +1,30 @@
 .readermode {
 	cursor: pointer;
-	padding: 0;
+	padding: 0.4rem;
 	position: relative;
 	background: none;
 	border: none;
-	width: 20px;
-	height: 20px;
+	border-radius: 6px;
+	width: 32px;
+	height: 32px;
 	margin: 0;
 	text-align: inherit;
 	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.15s ease;
+
+	&:hover {
+		background-color: var(--lightgray);
+	}
 
 	& svg {
-		position: absolute;
-		width: 20px;
-		height: 20px;
-		top: calc(50% - 10px);
-		fill: var(--darkgray);
-		stroke: var(--darkgray);
-		transition: opacity 0.1s ease;
+		width: 18px;
+		height: 18px;
+		fill: var(--gray);
+		stroke: var(--gray);
+		transition: opacity 0.15s ease;
 	}
 }
 

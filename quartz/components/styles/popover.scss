@@ -25,7 +25,7 @@
 
 	& > .popover-inner {
 		position: relative;
-		width: 30rem;
+		width: 28rem;
 		max-height: 20rem;
 		padding: 0 1rem 1rem 1rem;
 		font-weight: initial;
@@ -35,8 +35,8 @@
 		font-family: var(--bodyFont);
 		border: 1px solid var(--lightgray);
 		background-color: var(--light);
-		border-radius: 5px;
-		box-shadow: 6px 6px 36px 0 rgba(0, 0, 0, 0.25);
+		border-radius: 8px;
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 		overflow: auto;
 		overscroll-behavior: contain;
 		white-space: normal;
@@ -67,14 +67,14 @@
 	}
 
 	h1 {
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 	}
 
 	visibility: hidden;
 	opacity: 0;
 	transition:
-		opacity 0.3s ease,
-		visibility 0.3s ease;
+		opacity 0.2s ease,
+		visibility 0.2s ease;
 
 	@media all and ($mobile) {
 		display: none !important;
@@ -83,7 +83,7 @@
 
 .active-popover,
 .popover:hover {
-	animation: dropin 0.3s ease;
+	animation: dropin 0.2s ease;
 	animation-fill-mode: forwards;
-	animation-delay: 0.2s;
+	animation-delay: 0.15s;
 }

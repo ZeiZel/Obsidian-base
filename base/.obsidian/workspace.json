@@ -38,7 +38,7 @@
               "type": "markdown",
               "state": {
                 "file": "architecture/System Design/System Design.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -62,7 +62,7 @@
               "type": "markdown",
               "state": {
                 "file": "cs/Лицензии.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -128,7 +128,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -207,7 +207,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -321,13 +322,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
+                "file": "cs/Лицензии.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of System Design"
+              "title": "Outline of Лицензии"
             }
           }
         ],
@@ -360,10 +361,10 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fb81dcdc01e73590",
+  "active": "17d9a94cc4b9fcbe",
   "lastOpenFiles": [
-    "architecture/System Design/ДЗ.md",
     "architecture/System Design/System Design.md",
+    "architecture/System Design/ДЗ.md",
     "backend/Golang.md",
     "backend/Temporal Go.md",
     "cs/math.md",

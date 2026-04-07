@@ -1059,6 +1059,29 @@ var AppHelper = class {
     }
     return !!((_c = (_b = cm5or6 == null ? void 0 : cm5or6.display) == null ? void 0 : _b.input) == null ? void 0 : _c.composing);
   }
+  /**
+   * Unsafe method
+   */
+  getVisibleLineRange() {
+    var _a;
+    const markdownView = this.unsafeApp.workspace.getActiveViewOfType(import_obsidian.MarkdownView);
+    if (!markdownView) {
+      return null;
+    }
+    const cm = markdownView.editor.cm;
+    if (!(cm == null ? void 0 : cm.visibleRanges) || !((_a = cm == null ? void 0 : cm.state) == null ? void 0 : _a.doc)) {
+      return null;
+    }
+    const visibleRanges = cm.visibleRanges;
+    if (visibleRanges.length === 0) {
+      return null;
+    }
+    const first = visibleRanges[0];
+    const last = visibleRanges[visibleRanges.length - 1];
+    const fromLine = cm.state.doc.lineAt(first.from).number - 1;
+    const toLine = cm.state.doc.lineAt(last.to).number - 1;
+    return { from: fromLine, to: toLine };
+  }
   isMobile() {
     return this.unsafeApp.isMobile;
   }
@@ -7245,6 +7268,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     this.previousLinksCacheInActiveFile = /* @__PURE__ */ new Set();
     this.keymapEventHandler = [];
     this.spareEditorSuggestContext = null;
+    this.predictableCycleState = null;
     this.appHelper = new AppHelper(app);
     this.statusBar = statusBar;
   }
@@ -7310,6 +7334,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     ins.activeLeafChangeRef = app.workspace.on(
       "active-leaf-change",
       async (_) => {
+        ins.predictableCycleState = null;
         await ins.refreshCurrentFileTokens();
         ins.refreshInternalLinkTokens();
         ins.updateFrontMatterToken();
@@ -7345,31 +7370,75 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
       return;
     }
     const cursor = editor.getCursor();
+    if (this.predictableCycleState) {
+      const state = this.predictableCycleState;
+      const currentCandidate = state.candidates[state.currentIndex];
+      const expectedCh = state.replacementStartCh + currentCandidate.length;
+      if (cursor.line === state.line && cursor.ch === expectedCh) {
+        state.currentIndex = (state.currentIndex + 1) % state.candidates.length;
+        const nextCandidate = state.candidates[state.currentIndex];
+        editor.replaceRange(
+          nextCandidate,
+          { line: state.line, ch: state.replacementStartCh },
+          cursor
+        );
+        this.close();
+        this.debounceClose();
+        return;
+      }
+      this.predictableCycleState = null;
+    }
     const currentToken = this.tokenizer.tokenize(editor.getLine(cursor.line).slice(0, cursor.ch)).last();
     if (!currentToken) {
       return;
     }
-    let suggestion = this.tokenizer.tokenize(
-      editor.getRange({ line: Math.max(cursor.line - 50, 0), ch: 0 }, cursor)
-    ).reverse().slice(1).find((x) => x.startsWith(currentToken));
-    if (!suggestion) {
-      suggestion = this.tokenizer.tokenize(
-        editor.getRange(cursor, {
-          line: Math.min(cursor.line + 50, editor.lineCount() - 1),
-          ch: 0
-        })
-      ).find((x) => x.startsWith(currentToken));
-    }
-    if (!suggestion) {
+    const candidates = this.collectPredictableCandidates(
+      editor,
+      cursor,
+      currentToken
+    );
+    if (candidates.length <= 1) {
       return;
     }
+    const replacementStartCh = cursor.ch - currentToken.length;
+    this.predictableCycleState = {
+      originalToken: currentToken,
+      replacementStartCh,
+      line: cursor.line,
+      candidates,
+      currentIndex: 0
+    };
+    const suggestion = candidates[0];
     editor.replaceRange(
       suggestion,
-      { line: cursor.line, ch: cursor.ch - currentToken.length },
-      { line: cursor.line, ch: cursor.ch }
+      { line: cursor.line, ch: replacementStartCh },
+      cursor
     );
     this.close();
     this.debounceClose();
+  }
+  collectPredictableCandidates(editor, cursor, originalToken) {
+    var _a, _b;
+    const seen = /* @__PURE__ */ new Set();
+    const candidates = [];
+    const addIfNew = (token) => {
+      if (token.startsWith(originalToken) && token !== originalToken && !seen.has(token)) {
+        seen.add(token);
+        candidates.push(token);
+      }
+    };
+    const visibleRange = this.appHelper.getVisibleLineRange();
+    const rangeStart = (_a = visibleRange == null ? void 0 : visibleRange.from) != null ? _a : Math.max(cursor.line - 50, 0);
+    const rangeEnd = (_b = visibleRange == null ? void 0 : visibleRange.to) != null ? _b : Math.min(cursor.line + 50, editor.lineCount() - 1);
+    const textAbove = editor.getRange({ line: rangeStart, ch: 0 }, cursor);
+    this.tokenizer.tokenize(textAbove).reverse().slice(1).forEach(addIfNew);
+    const textBelow = editor.getRange(cursor, {
+      line: rangeEnd,
+      ch: editor.getLine(rangeEnd).length
+    });
+    this.tokenizer.tokenize(textBelow).forEach(addIfNew);
+    candidates.push(originalToken);
+    return candidates;
   }
   unregister() {
     this.app.vault.offref(this.modifyEventRef);

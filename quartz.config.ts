@@ -46,32 +46,32 @@ const config: QuartzConfig = {
 			fontOrigin: 'googleFonts',
 			cdnCaching: true,
 			typography: {
-				header: 'Schibsted Grotesk',
-				body: 'Source Sans Pro',
-				code: 'IBM Plex Mono',
+				header: 'Inter',
+				body: 'Inter',
+				code: 'JetBrains Mono',
 			},
 			colors: {
 				lightMode: {
-					light: '#f2e5bc', // Gruvbox Material Light Soft - background
-					lightgray: '#ebdbb2', // Surface
-					gray: '#a89984', // Gray text
-					darkgray: '#654735', // Main text (brown)
-					dark: '#3c3836', // Dark brown for emphasis
-					secondary: '#427b58', // Green for links
-					tertiary: '#45707a', // Blue-teal for visited/accents
-					highlight: 'rgba(124, 111, 100, 0.15)', // Warm brown translucent
-					textHighlight: '#d8a65788', // Warm yellow highlight
+					light: '#faf8f5',
+					lightgray: '#f0ece4',
+					gray: '#a09890',
+					darkgray: '#4a4540',
+					dark: '#2e2a26',
+					secondary: '#5b7ea6',
+					tertiary: '#7a6fa0',
+					highlight: 'rgba(91, 126, 166, 0.10)',
+					textHighlight: 'rgba(210, 160, 60, 0.35)',
 				},
 				darkMode: {
-					light: '#32302f', // Gruvbox Material Dark Soft - background
-					lightgray: '#3c3836', // Surface (code background)
-					gray: '#7c6f64', // Subdued text
-					darkgray: '#d4be98', // Main text (warm beige)
-					dark: '#ddc7a1', // Emphasized text
-					secondary: '#a9b665', // Green for links
-					tertiary: '#7daea3', // Aqua for visited/accents
-					highlight: 'rgba(169, 182, 101, 0.15)', // Green translucent
-					textHighlight: '#d8a65788', // Warm yellow highlight
+					light: '#1c1917',
+					lightgray: '#292524',
+					gray: '#78716c',
+					darkgray: '#d6d0c8',
+					dark: '#eae6df',
+					secondary: '#7aa2c8',
+					tertiary: '#a594c8',
+					highlight: 'rgba(122, 162, 200, 0.12)',
+					textHighlight: 'rgba(210, 160, 60, 0.25)',
 				},
 			},
 		},

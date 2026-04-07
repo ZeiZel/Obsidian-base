@@ -25,7 +25,7 @@ import {
 export const sharedPageComponents: SharedLayout = {
 	head: Head(),
 	header: [],
-	afterBody: [Graph(), Backlinks()],
+	afterBody: [],
 	footer: Footer({
 		links: {
 			'This repo on GitHub': 'https://github.com/ZeiZel/Obsidian-base',
@@ -59,7 +59,11 @@ export const defaultContentPageLayout: PageLayout = {
 		}),
 		Explorer(),
 	],
-	right: [Graph(), DesktopOnly(TableOfContents()), Backlinks()],
+	right: [
+		DesktopOnly(Graph()),
+		DesktopOnly(TableOfContents()),
+		Backlinks(),
+	],
 };
 
 // components for pages that display lists of pages  (e.g. tags or folders)

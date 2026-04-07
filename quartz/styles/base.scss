@@ -17,16 +17,18 @@ body {
 	background-color: var(--light);
 	font-family: var(--bodyFont);
 	color: var(--darkgray);
-	line-height: 1.7;
+	line-height: 1.75;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .text-highlight {
 	background-color: var(--textHighlight);
-	padding: 0 0.1rem;
-	border-radius: 5px;
+	padding: 0 0.15rem;
+	border-radius: 3px;
 }
 ::selection {
-	background: color-mix(in srgb, var(--tertiary) 60%, rgba(255, 255, 255, 0));
+	background: color-mix(in srgb, var(--tertiary) 40%, rgba(255, 255, 255, 0));
 	color: var(--darkgray);
 }
 
@@ -56,7 +58,6 @@ ul,
 .katex,
 .math {
 	overflow-wrap: anywhere;
-	/* tr and td removed from list of selectors for overflow-wrap, allowing them to use default 'normal' property value */
 }
 
 .math {
@@ -85,9 +86,9 @@ strong {
 }
 
 a {
-	font-weight: $semiBoldWeight;
+	font-weight: 500;
 	text-decoration: none;
-	transition: color 0.2s ease;
+	transition: color 0.15s ease;
 	color: var(--secondary);
 
 	&:hover {
@@ -96,10 +97,16 @@ a {
 
 	&.internal {
 		text-decoration: none;
-		background-color: var(--highlight);
-		padding: 0 0.1rem;
-		border-radius: 5px;
-		line-height: 1.4rem;
+		background-color: transparent;
+		padding: 0;
+		border-radius: 0;
+		line-height: inherit;
+		border-bottom: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
+		transition: border-color 0.15s ease, color 0.15s ease;
+
+		&:hover {
+			border-bottom-color: var(--secondary);
+		}
 
 		&.broken {
 			color: var(--secondary);
@@ -114,6 +121,7 @@ a {
 			background-color: transparent;
 			border-radius: 0;
 			padding: 0;
+			border-bottom: none;
 		}
 		&.tag-link {
 			&::before {
@@ -167,9 +175,11 @@ a {
 	margin: 0 auto;
 	& article {
 		& > h1 {
-			font-size: 2.25rem;
+			font-size: 2rem;
 			line-height: 1.2;
-			margin-bottom: 1.5rem;
+			margin-bottom: 1rem;
+			letter-spacing: -0.03em;
+			font-weight: $boldWeight;
 		}
 
 		& li:has(> input[type='checkbox']) {
@@ -224,10 +234,10 @@ a {
 		}
 
 		& .sidebar {
-			gap: 2rem;
+			gap: 1.5rem;
 			top: 0;
 			box-sizing: border-box;
-			padding: $topSpacing 2rem 2rem 2rem;
+			padding: $topSpacing 1.5rem 2rem 1.5rem;
 			display: flex;
 			height: 100vh;
 			position: sticky;
@@ -237,6 +247,7 @@ a {
 			z-index: 1;
 			grid-area: grid-sidebar-left;
 			flex-direction: column;
+			border-right: 1px solid var(--lightgray);
 			@media all and ($mobile) {
 				gap: 0;
 				align-items: center;
@@ -245,7 +256,9 @@ a {
 				height: unset;
 				flex-direction: row;
 				padding: 0;
-				padding-top: 2rem;
+				padding-top: 1rem;
+				border-right: none;
+				border-bottom: 1px solid var(--lightgray);
 			}
 		}
 
@@ -353,17 +366,9 @@ input[type='checkbox'] {
 
 blockquote {
 	margin: 1.5rem 0;
-	border-left: 4px solid var(--secondary);
-	padding: 0.5rem 0 0.5rem 1.5rem;
-	transition: all 0.2s ease;
-	background-color: color-mix(in srgb, var(--lightgray) 30%, transparent);
-	border-radius: 0 8px 8px 0;
-	font-style: italic;
-
-	&:hover {
-		border-left-color: var(--tertiary);
-		background-color: color-mix(in srgb, var(--lightgray) 50%, transparent);
-	}
+	border-left: 3px solid var(--lightgray);
+	padding: 0.5rem 0 0.5rem 1.25rem;
+	color: var(--gray);
 
 	@media all and ($mobile) {
 		padding: 0.75rem 0 0.75rem 1rem;
@@ -379,7 +384,7 @@ h6,
 thead {
 	font-family: var(--headerFont);
 	color: var(--dark);
-	font-weight: revert;
+	font-weight: $semiBoldWeight;
 	margin-bottom: 0;
 
 	article > & > a[role='anchor'] {
@@ -397,7 +402,7 @@ h6 {
 	&[id] > a[href^='#'] {
 		margin: 0 0.5rem;
 		opacity: 0;
-		transition: opacity 0.2s ease;
+		transition: opacity 0.15s ease;
 		transform: translateY(-0.1rem);
 		font-family: var(--codeFont);
 		user-select: none;
@@ -412,28 +417,32 @@ h6 {
 	}
 }
 
-// Typography improvements with better hierarchy
 h1 {
-	font-size: 2rem;
+	font-size: 1.875rem;
 	margin-top: 2.5rem;
-	margin-bottom: 1.25rem;
-	line-height: 1.3;
-	letter-spacing: -0.02em;
+	margin-bottom: 1rem;
+	line-height: 1.25;
+	letter-spacing: -0.03em;
+	font-weight: $boldWeight;
 }
 
 h2 {
 	font-size: 1.5rem;
-	margin-top: 2rem;
-	margin-bottom: 1rem;
-	line-height: 1.4;
-	letter-spacing: -0.01em;
+	margin-top: 2.25rem;
+	margin-bottom: 0.75rem;
+	line-height: 1.3;
+	letter-spacing: -0.02em;
+	font-weight: $semiBoldWeight;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--lightgray);
 }
 
 h3 {
 	font-size: 1.25rem;
 	margin-top: 1.75rem;
-	margin-bottom: 1rem;
-	line-height: 1.5;
+	margin-bottom: 0.75rem;
+	line-height: 1.4;
+	letter-spacing: -0.01em;
 }
 
 h4,
@@ -441,8 +450,8 @@ h5,
 h6 {
 	font-size: 1.1rem;
 	margin-top: 1.5rem;
-	margin-bottom: 1rem;
-	line-height: 1.6;
+	margin-bottom: 0.5rem;
+	line-height: 1.5;
 }
 
 figure[data-rehype-pretty-code-figure] {
@@ -453,13 +462,14 @@ figure[data-rehype-pretty-code-figure] {
 
 	& > [data-rehype-pretty-code-title] {
 		font-family: var(--codeFont);
-		font-size: 0.9rem;
-		padding: 0.1rem 0.5rem;
+		font-size: 0.8rem;
+		padding: 0.4rem 0.75rem;
 		border: 1px solid var(--lightgray);
+		border-bottom: none;
 		width: fit-content;
-		border-radius: 5px;
-		margin-bottom: -0.5rem;
-		color: var(--darkgray);
+		border-radius: 6px 6px 0 0;
+		color: var(--gray);
+		background: var(--lightgray);
 	}
 
 	& > pre {
@@ -470,16 +480,10 @@ figure[data-rehype-pretty-code-figure] {
 pre {
 	font-family: var(--codeFont);
 	padding: 0 0.5rem;
-	border-radius: 8px;
+	border-radius: 6px;
 	overflow-x: auto;
 	border: 1px solid var(--lightgray);
 	position: relative;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-	transition: box-shadow 0.2s ease;
-
-	&:hover {
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-	}
 
 	&:has(> code.mermaid) {
 		border: none;
@@ -492,12 +496,12 @@ pre {
 		counter-reset: line;
 		counter-increment: line 0;
 		display: grid;
-		padding: 0.5rem 0;
+		padding: 0.75rem 0;
 		overflow-x: auto;
 
 		& [data-highlighted-chars] {
 			background-color: var(--highlight);
-			border-radius: 5px;
+			border-radius: 3px;
 		}
 
 		& > [data-line] {
@@ -517,7 +521,8 @@ pre {
 				margin-right: 1rem;
 				display: inline-block;
 				text-align: right;
-				color: rgba(115, 138, 148, 0.6);
+				color: var(--gray);
+				opacity: 0.4;
 			}
 		}
 
@@ -532,29 +537,29 @@ pre {
 }
 
 code {
-	font-size: 0.9em;
+	font-size: 0.875em;
 	color: var(--dark);
 	font-family: var(--codeFont);
-	border-radius: 6px;
-	padding: 0.15rem 0.4rem;
+	border-radius: 4px;
+	padding: 0.15rem 0.35rem;
 	background: var(--lightgray);
-	border: 1px solid color-mix(in srgb, var(--lightgray) 80%, var(--gray));
-	font-weight: 500;
+	font-weight: 400;
 }
 
 tbody,
 li,
 p {
-	line-height: 1.7rem;
+	line-height: 1.75rem;
 }
 
 .table-container {
 	overflow-x: auto;
 
 	& > table {
-		margin: 1rem;
-		padding: 1.5rem;
+		margin: 1rem 0;
+		padding: 0;
 		border-collapse: collapse;
+		width: 100%;
 
 		th,
 		td {
@@ -569,12 +574,17 @@ p {
 
 th {
 	text-align: left;
-	padding: 0.4rem 0.7rem;
-	border-bottom: 2px solid var(--gray);
+	padding: 0.5rem 0.75rem;
+	border-bottom: 2px solid var(--lightgray);
+	font-weight: $semiBoldWeight;
+	font-size: 0.875rem;
+	color: var(--gray);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
 }
 
 td {
-	padding: 0.2rem 0.7rem;
+	padding: 0.5rem 0.75rem;
 }
 
 tr {
@@ -589,23 +599,18 @@ img {
 	border-radius: 8px;
 	margin: 1.5rem 0;
 	content-visibility: auto;
-	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-	transition: all 0.3s ease;
-
-	&:hover {
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-		transform: translateY(-2px);
-	}
 }
 
 p > img + em {
 	display: block;
 	transform: translateY(-1rem);
+	font-size: 0.875rem;
+	color: var(--gray);
 }
 
 hr {
 	width: 100%;
-	margin: 2rem auto;
+	margin: 2.5rem auto;
 	height: 1px;
 	border: none;
 	background-color: var(--lightgray);
@@ -614,7 +619,7 @@ hr {
 audio,
 video {
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 6px;
 }
 
 .spacer {
@@ -664,7 +669,7 @@ iframe.pdf {
 	aspect-ratio: 16 / 9;
 	height: 100%;
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 6px;
 }
 
 .navigation-progress {
@@ -672,7 +677,7 @@ iframe.pdf {
 	top: 0;
 	left: 0;
 	width: 0;
-	height: 3px;
+	height: 2px;
 	background: var(--secondary);
 	transition: width 0.2s ease;
 	z-index: 9999;

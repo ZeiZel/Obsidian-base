@@ -17,20 +17,24 @@ button.toc-header {
 	text-align: left;
 	cursor: pointer;
 	padding: 0;
-	color: var(--dark);
+	color: var(--gray);
 	display: flex;
 	align-items: center;
 
 	& h3 {
-		font-size: 1rem;
+		font-size: 0.75rem;
 		display: inline-block;
 		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-weight: $semiBoldWeight;
+		color: var(--gray);
 	}
 
 	& .fold {
 		margin-left: 0.5rem;
-		transition: transform 0.3s ease;
-		opacity: 0.8;
+		transition: transform 0.2s ease;
+		opacity: 0.5;
 	}
 
 	&.collapsed .fold {
@@ -41,26 +45,39 @@ button.toc-header {
 ul.toc-content.overflow {
 	list-style: none;
 	position: relative;
-	margin: 0.5rem 0;
+	margin: 0.4rem 0;
 	padding: 0;
 	max-height: calc(100% - 2rem);
 	overscroll-behavior: contain;
 	list-style: none;
+	border-left: 1px solid var(--lightgray);
+	padding-left: 0.75rem;
 
 	& > li > a {
-		color: var(--dark);
-		opacity: 0.35;
+		color: var(--darkgray);
+		opacity: 0.4;
+		font-size: 0.8rem;
+		line-height: 1.6;
 		transition:
-			0.5s ease opacity,
-			0.3s ease color;
+			0.15s ease opacity,
+			0.15s ease color;
+		display: block;
+		padding: 0.1rem 0;
+
 		&.in-view {
-			opacity: 0.75;
+			opacity: 0.9;
+			color: var(--secondary);
+		}
+
+		&:hover {
+			opacity: 1;
+			color: var(--secondary);
 		}
 	}
 
 	@for $i from 0 through 6 {
 		& .depth-#{$i} {
-			padding-left: calc(1rem * #{$i});
+			padding-left: calc(0.75rem * #{$i});
 		}
 	}
 }

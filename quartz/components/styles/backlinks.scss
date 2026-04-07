@@ -4,20 +4,40 @@
 	flex-direction: column;
 
 	& > h3 {
-		font-size: 1rem;
+		font-size: 0.75rem;
 		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--gray);
+		font-weight: $semiBoldWeight;
 	}
 
 	& > ul.overflow {
 		list-style: none;
 		padding: 0;
-		margin: 0.5rem 0;
+		margin: 0.4rem 0;
 		max-height: calc(100% - 2rem);
 		overscroll-behavior: contain;
 
 		& > li {
+			margin: 0.15rem 0;
+
 			& > a {
 				background-color: transparent;
+				font-size: 0.8rem;
+				color: var(--darkgray);
+				opacity: 0.7;
+				padding: 0.15rem 0.4rem;
+				border-radius: 4px;
+				display: block;
+				transition: all 0.1s ease;
+				border-bottom: none;
+
+				&:hover {
+					opacity: 1;
+					background-color: var(--lightgray);
+					color: var(--secondary);
+				}
 			}
 		}
 	}

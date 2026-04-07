@@ -1,136 +1,69 @@
 @use './base.scss';
-@use './antd-overrides.scss';
+@use './variables.scss' as *;
 
-// Custom Gruvbox Material Enhancements
+// ===================================================
+// NextJS Docs / Base UI / Border Theme Inspired Styles
+// ===================================================
 
 // Smooth scroll behavior
 html {
 	scroll-behavior: smooth;
-	scroll-padding-top: 5rem;
+	scroll-padding-top: 4rem;
 }
 
-// Custom scrollbar styling - Gruvbox themed
+// Minimal scrollbar
 ::-webkit-scrollbar {
-	width: 12px;
-	height: 12px;
+	width: 6px;
+	height: 6px;
 }
 
-:root[saved-theme='light'] {
-	::-webkit-scrollbar-track {
-		background: #ebdbb2;
-		border-radius: 6px;
-	}
-
-	::-webkit-scrollbar-thumb {
-		background: #a89984;
-		border-radius: 6px;
-		border: 2px solid #ebdbb2;
-
-		&:hover {
-			background: #7c6f64;
-		}
-	}
+::-webkit-scrollbar-track {
+	background: transparent;
 }
 
-:root[saved-theme='dark'] {
-	::-webkit-scrollbar-track {
-		background: #3c3836;
-		border-radius: 6px;
-	}
+::-webkit-scrollbar-thumb {
+	background: var(--gray);
+	border-radius: 3px;
+	opacity: 0.5;
 
-	::-webkit-scrollbar-thumb {
-		background: #7c6f64;
-		border-radius: 6px;
-		border: 2px solid #3c3836;
-
-		&:hover {
-			background: #a89984;
-		}
-	}
-}
-
-// Link underline animation
-a:not(.internal) {
-	position: relative;
-	text-decoration: none;
-
-	&::after {
-		content: '';
-		position: absolute;
-		width: 0;
-		height: 2px;
-		bottom: -2px;
-		left: 0;
-		background-color: var(--secondary);
-		transition: width 0.3s ease;
-	}
-
-	&:hover::after {
-		width: 100%;
-	}
-}
-
-// Enhanced internal links with better hover
-a.internal {
-	transition: all 0.2s ease;
-	
 	&:hover {
-		background-color: color-mix(in srgb, var(--highlight) 80%, var(--secondary));
-		transform: translateX(2px);
+		opacity: 0.8;
 	}
 }
 
-// Card hover effects for articles
-article {
-	transition: transform 0.2s ease;
+// Subtle internal link style - no background highlight, just underline
+a.internal {
+	transition: color 0.15s ease, border-color 0.15s ease;
+
+	&:hover {
+		color: var(--secondary);
+	}
 }
 
-// Enhanced focus indicators for accessibility
+// Enhanced focus indicators
 *:focus-visible {
-	outline: 3px solid var(--secondary);
+	outline: 2px solid var(--secondary);
 	outline-offset: 2px;
 	border-radius: 4px;
 }
 
-button:focus-visible,
-a:focus-visible {
-	outline: 2px solid var(--secondary);
-	outline-offset: 3px;
-}
-
-// Loading animation for images
-img {
-	animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-// Enhanced table styling
+// Clean table styling
 .table-container > table {
-	border-radius: 8px;
+	border-radius: 6px;
 	overflow: hidden;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
 	thead {
-		background-color: var(--lightgray);
-		
 		th {
-			font-weight: 700;
-			color: var(--dark);
+			font-weight: $semiBoldWeight;
+			color: var(--gray);
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
 		}
 	}
 
 	tbody tr {
-		transition: background-color 0.2s ease;
+		transition: background-color 0.1s ease;
 
 		&:hover {
 			background-color: var(--lightgray);
@@ -138,120 +71,98 @@ img {
 	}
 }
 
-// Enhanced callouts with Gruvbox colors
+// Callouts - clean, minimal borders
 .callout {
-	border-radius: 8px;
-	padding: 1rem 1.5rem;
-	margin: 1.5rem 0;
-	border-left: 4px solid var(--secondary);
-	background-color: color-mix(in srgb, var(--lightgray) 30%, transparent);
-	transition: all 0.2s ease;
-
-	&:hover {
-		background-color: color-mix(in srgb, var(--lightgray) 50%, transparent);
-		transform: translateX(4px);
-	}
+	border-radius: 6px;
+	padding: 0.75rem 1rem;
+	margin: 1.25rem 0;
+	border-left: 3px solid var(--secondary);
+	background-color: var(--lightgray);
 }
 
-// Page transition effects
+// Page entry - no animation, instant render
 .page {
-	animation: pageEntry 0.3s ease-out;
+	animation: none;
 }
 
-@keyframes pageEntry {
-	from {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-// Better list styling
+// Better list styling - subtle markers
 ul,
 ol {
 	padding-left: 1.5rem;
-	
+
 	li {
-		margin: 0.5rem 0;
-		padding-left: 0.5rem;
-		
+		margin: 0.35rem 0;
+		padding-left: 0.25rem;
+
 		&::marker {
-			color: var(--secondary);
-			font-weight: 600;
+			color: var(--gray);
 		}
 	}
 
 	ul,
 	ol {
-		margin-top: 0.5rem;
+		margin-top: 0.25rem;
 	}
 }
 
-// Enhanced horizontal rules
+// Clean horizontal rules
 hr {
-	background: linear-gradient(
-		to right,
-		transparent,
-		var(--lightgray) 20%,
-		var(--lightgray) 80%,
-		transparent
-	);
-	height: 2px;
+	background: var(--lightgray);
+	height: 1px;
 	border: none;
-	margin: 3rem auto;
+	margin: 2.5rem auto;
 }
 
-// Code block improvements
-[saved-theme='dark'] code[data-theme*=' '] {
-	color: var(--shiki-dark);
-	background-color: #3c3836;
-}
-
-[saved-theme='light'] code[data-theme*=' '] {
-	color: var(--shiki-light);
-	background-color: #ebdbb2;
+// Code block - clean border, no shadow
+pre {
+	background-color: var(--lightgray);
+	border: 1px solid color-mix(in srgb, var(--lightgray) 60%, var(--gray));
+	box-shadow: none;
+	border-radius: 6px;
 }
 
 pre code {
-	font-size: 0.9rem;
+	font-size: 0.875rem;
 	line-height: 1.6;
 }
 
-// Better tag styling
+// Inline code - subtle
+code {
+	border: none;
+	background: var(--lightgray);
+}
+
+// Tag styling - pill shape, minimal
 .tags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5rem;
-	margin: 1rem 0;
+	gap: 0.4rem;
+	margin: 0.75rem 0;
 
 	a {
 		background-color: var(--lightgray);
-		color: var(--secondary);
-		padding: 0.3rem 0.8rem;
-		border-radius: 16px;
-		font-size: 0.85rem;
-		font-weight: 600;
-		transition: all 0.2s ease;
-		border: 1px solid transparent;
+		color: var(--darkgray);
+		padding: 0.2rem 0.6rem;
+		border-radius: 100px;
+		font-size: 0.8rem;
+		font-weight: 500;
+		transition: all 0.15s ease;
+		border: 1px solid color-mix(in srgb, var(--lightgray) 50%, var(--gray));
 
 		&:hover {
 			background-color: var(--secondary);
-			color: var(--light);
-			transform: translateY(-2px);
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			color: #fff;
+			border-color: var(--secondary);
 		}
 	}
 }
 
-// Footnotes styling
+// Footnotes
 .footnotes {
-	border-top: 2px solid var(--lightgray);
-	padding-top: 2rem;
+	border-top: 1px solid var(--lightgray);
+	padding-top: 1.5rem;
 	margin-top: 3rem;
-	font-size: 0.9rem;
+	font-size: 0.875rem;
 	color: var(--gray);
 
 	ol {
@@ -259,11 +170,11 @@ pre code {
 	}
 
 	li {
-		margin: 0.75rem 0;
+		margin: 0.5rem 0;
 	}
 }
 
-// Selection color with Gruvbox theme
+// Selection
 ::selection {
 	background: var(--highlight);
 	color: var(--dark);
@@ -289,7 +200,7 @@ pre code {
 	}
 }
 
-// Reduced motion for accessibility
+// Reduced motion
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
@@ -300,48 +211,41 @@ pre code {
 	}
 }
 
-// High contrast mode support
-@media (prefers-contrast: high) {
-	:root {
-		--secondary: #2d5016;
-		--tertiary: #1d4044;
-	}
+// Images - clean, no hover effects
+img {
+	border-radius: 6px;
+	box-shadow: none;
 
-	:root[saved-theme='dark'] {
-		--secondary: #b8e673;
-		--tertiary: #8bd5ca;
+	&:hover {
+		box-shadow: none;
+		transform: none;
 	}
 }
 
-// Dark mode specific enhancements
+// Dark mode - code blocks
 :root[saved-theme='dark'] {
-	// Better contrast for images in dark mode
-	img {
-		filter: brightness(0.9);
-		
-		&:hover {
-			filter: brightness(1);
-		}
+	pre {
+		background-color: #211f1c;
+		border-color: #33302c;
 	}
 
-	// Enhanced code blocks in dark mode
-	pre {
-		background-color: #282828;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	code {
+		background-color: #292524;
+	}
+
+	img {
+		filter: none;
 	}
 }
 
-// Light mode specific enhancements
+// Light mode
 :root[saved-theme='light'] {
-	// Warmer feel for light mode
-	body {
-		background-color: #f9f5d7;
+	pre {
+		background-color: #f5f1eb;
+		border-color: #e2dcd4;
 	}
 
-	// Enhanced shadows in light mode
-	.search-container,
-	.modal,
-	.drawer {
-		box-shadow: 0 8px 32px rgba(101, 71, 53, 0.15);
+	code {
+		background-color: #ede9e2;
 	}
 }
