@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "friend_line_vk.excalidraw",
+      "path": "Excalidraw/friend_line_vk.excalidraw.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -19,10 +27,6 @@
     {
       "basename": "backend",
       "path": "backend/backend.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Лицензии",

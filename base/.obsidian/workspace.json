@@ -44,6 +44,18 @@
             }
           },
           {
+            "id": "6624650590569b4f",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/friend_line_vk.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "friend_line_vk.excalidraw"
+            }
+          },
+          {
             "id": "84b6521907180405",
             "type": "leaf",
             "state": {
@@ -171,7 +183,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -309,13 +322,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "Excalidraw/friend_line_vk.excalidraw.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline of friend_line_vk.excalidraw"
             }
           }
         ],
@@ -323,7 +336,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 366.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -347,14 +361,17 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "84b6521907180405",
+  "active": "6624650590569b4f",
   "lastOpenFiles": [
+    "Excalidraw/friend_line_vk.excalidraw.md",
+    "architecture/System Design/System Design.md",
+    "Excalidraw",
+    "backend/go/Selfgo.md",
     "_png/Pasted image 20260411202204.png",
     "_png/Pasted image 20260411202043.png",
     "backend/go/Temporal Go.md",
     "backend/go/go.md",
     "backend/go/Golang.md",
-    "backend/go/Selfgo.md",
     "_png/Pasted image 20260411200105.png",
     "Tags/#security",
     "Tags/#performance",
@@ -365,7 +382,6 @@
     "Tags/#tooling",
     "Tags/#testing",
     "Tags/#rabbitmq",
-    "Tags/#nats",
     "backend/go/10 Go Senior Topics.md",
     "backend/go/02 Go Core.md",
     "backend/go/01 Golang Basics.md",
@@ -384,9 +400,7 @@
     "_png/Pasted image 20260411082342.png",
     "_png/Pasted image 20260411082322.png",
     "_png/Pasted image 20260411082306.png",
-    "_png/Pasted image 20260411082247.png",
     "backend/Untitled.md",
-    "architecture/System Design/System Design.md",
     "cs/Лицензии.md",
     "architecture/System Design/ДЗ.md",
     "cs/math.md",
