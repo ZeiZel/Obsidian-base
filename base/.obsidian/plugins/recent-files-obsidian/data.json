@@ -1,16 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "Selfgo",
+      "path": "backend/Selfgo.md"
+    },
+    {
+      "basename": "go",
+      "path": "backend/go/go.md"
+    },
+    {
       "basename": "Golang",
-      "path": "backend/Golang.md"
+      "path": "backend/go/Golang.md"
+    },
+    {
+      "basename": "backend",
+      "path": "backend/backend.md"
+    },
+    {
+      "basename": "Temporal Go",
+      "path": "backend/go/Temporal Go.md"
     },
     {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "Temporal Go",
-      "path": "backend/Temporal Go.md"
     },
     {
       "basename": "Лицензии",
@@ -71,10 +83,6 @@
     {
       "basename": "command",
       "path": "agile/command.md"
-    },
-    {
-      "basename": "backend",
-      "path": "backend/backend.md"
     },
     {
       "basename": "serverless",
@@ -191,14 +199,6 @@
     {
       "basename": "State-management",
       "path": "concepts/State-management.md"
-    },
-    {
-      "basename": "Tailwind CSS",
-      "path": "frontend/Tailwind CSS.md"
-    },
-    {
-      "basename": "RxJS",
-      "path": "frontend/RxJS.md"
     }
   ],
   "omittedPaths": [],

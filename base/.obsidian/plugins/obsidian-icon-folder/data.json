@@ -57,7 +57,7 @@
   "inbox/Development": "Mi3d",
   "backend/Ruby.md": "MiRuby",
   "backend/PHP": "MiPhp",
-  "backend/Golang.md": "MiGo",
   "edge/TypeScript": "MiFolderTypescript",
-  "frontend": "MiJs"
+  "frontend": "MiJs",
+  "backend/go/Golang.md": "MiGo"
 }

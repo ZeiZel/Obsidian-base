@@ -69,7 +69,6 @@
     "//agile",
     "//languages",
     "//backend",
-    "//backend/backend/Microservices",
     "//desktop",
     "//desktop/desktop/Electron",
     "//desktop/desktop/electron",
@@ -88,12 +87,11 @@
     "//frontend/frontend/Vue/frontend/Vue/Nuxt",
     "//frontend/frontend/Vue/frontend/Vue/Vue",
     "//concepts",
-    "//backend/backend/PHP",
-    "//backend/backend/REST",
     "//frontend/frontend/Service Workers",
     "//frontend/frontend/service-workers",
     "//frontend/frontend/javascript",
-    "//soft"
+    "//soft",
+    "//backend/backend/go"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
