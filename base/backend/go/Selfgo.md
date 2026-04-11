@@ -6,21 +6,21 @@
 Его преимущества: 
 
 1. Он крайне прост в чтении и понимании
-   ![](../_png/Pasted%20image%2020260411075722.png)
+   ![](../../_png/Pasted%20image%2020260411075722.png)
 2. У него крайне широкая стандартная библиотека
-   ![](../_png/Pasted%20image%2020260411082143.png)
+   ![](../../_png/Pasted%20image%2020260411082143.png)
 3. Он крайне производительный
-   ![](../_png/Pasted%20image%2020260411082204.png)
+   ![](../../_png/Pasted%20image%2020260411082204.png)
 4. У него большая экосистема
-   ![](../_png/Pasted%20image%2020260411082231.png)
+   ![](../../_png/Pasted%20image%2020260411082231.png)
 5. В итоге, после сборки, мы получаем маленький бинарник, в котором находится полный рантайм и рабочее приложение
-   ![](../_png/Pasted%20image%2020260411082247.png)
+   ![](../../_png/Pasted%20image%2020260411082247.png)
 6. Строгая статическая типизация
-   ![](../_png/Pasted%20image%2020260411082306.png)
+   ![](../../_png/Pasted%20image%2020260411082306.png)
 7. Прозрачная работа с ошибками. Является такой же переменной
-   ![](../_png/Pasted%20image%2020260411082322.png)
+   ![](../../_png/Pasted%20image%2020260411082322.png)
 8. Встроенные инструменты тестирования и форматирования
-   ![](../_png/Pasted%20image%2020260411082342.png)
+   ![](../../_png/Pasted%20image%2020260411082342.png)
 
 ## Переменные и типы
 
@@ -52,7 +52,7 @@ Hello!
 
 Пакеты - это способ разделения нашего приложения на разные части, что позволяет изолировать функциональность друг от друга и упростить поддержку. 
 
-![](../_png/Pasted%20image%2020260411082430.png)
+![](../../_png/Pasted%20image%2020260411082430.png)
 
 Виды пакетов: 
 
@@ -63,7 +63,7 @@ Hello!
 
 Каждый файл в приложении обязан находиться в каком-либо пакете. 
 
-![](../_png/Pasted%20image%2020260411082459.png)
+![](../../_png/Pasted%20image%2020260411082459.png)
 
 ### Модули
 
@@ -71,7 +71,7 @@ Hello!
 
 Модуль - это отдельная часть приложения со своими пакетами. Наше приложение - это app модуль со своими пакетами. Внешние зависимости - это отдельные модули со своими пакетами. 
 
-![](../_png/Pasted%20image%2020260411084647.png)
+![](../../_png/Pasted%20image%2020260411084647.png)
 
 Сама сборка приложения без оборачивания текущего репозитория в модуль - упадёт. 
 
@@ -117,7 +117,7 @@ Hello!%
 
 Напишем небольшой калькулятор ИМТ
 
-![](../_png/Pasted%20image%2020260411090112.png)
+![](../../_png/Pasted%20image%2020260411090112.png)
 
 `var` - способ объявления переменной
 
@@ -257,8 +257,279 @@ func main() {
 
 ## Строки и функции
 
+### Ввод
+
+- `\n` - позволяет перенести строку
+- Метод `Scan` - позволяет получить ввод от пользователя. В него нужно передавать не просто переменную, а `&` указатель на эти данные
+
+`main.go`
+```Go
+package main  
+  
+import (  
+    "fmt"  
+    "math"
+)  
+  
+func main() {  
+    var userHeight float64  
+    var userWeight float64  
+    fmt.Print("__ Калькулятор ИМТ __ \n")  
+    fmt.Print("Введите свой рост в метрах: ")  
+    fmt.Scan(&userHeight)  
+    fmt.Print("Введите свой вес: ")  
+    fmt.Scan(&userWeight)  
+    var IMT = userWeight / math.Pow(userHeight, 2)  
+    fmt.Print("Ваш ИМТ: ", IMT)  
+}
+```
+
+И в конце получаем приятный вывод в консоли:
+
+```bash
+> go build && ./gomple 
+
+__ Калькулятор ИМТ __ 
+Введите свой рост в метрах: 1.79
+Введите свой вес: 100
+Ваш ИМТ: 31.210012171904747%  
+```
+
+### Форматирование
+
+Далее прокачаем наше приложение и доработаем его некоторым образом: 
+
+1. Вместо использования `\n` для переноса строки, мы можем использовать `Println`, который сразу перенесёт строку
+2. Метод `Printf` позволяет вывести отформатированную строку. 
+	1. `%v` - это базовый шаблон в строке, который позволит вставить `v` - variable 
+	2. `%.0f` - постфикс `f` отвечает за работу с `float` значениями, где мы говорим, что хотим точность в `.0` (одно) число после запятой
+
+```go
+package main  
+  
+import (  
+    "fmt"  
+    "math"
+)  
+  
+func main() {  
+    var userHeight float64  
+    var userWeight float64  
+    fmt.Println("__ Калькулятор ИМТ __")  
+    fmt.Print("Введите свой рост в см: ")  
+    fmt.Scan(&userHeight)  
+    fmt.Print("Введите свой вес: ")  
+    fmt.Scan(&userWeight)  
+    var IMT = userWeight / math.Pow(userHeight/100, 2)  
+    fmt.Printf("Ваш ИМТ: %.0f", IMT)  
+}
+```
+
+```bash
+> go build && ./gomple
+
+__ Калькулятор ИМТ __
+Введите свой рост в см: 190
+Введите свой вес: 100
+Ваш ИМТ: 28
+```
+
+### Многострочные
+
+Многосрочные выражения записываются через использование обратной одинарной кавычки. Все табы, переносы, пробелы применяются в рамках неё as is. Модификаторы строк не применяются (`\n`). 
+
+`main.go`
+```go
+    fmt.Printf(`__ Калькулятор ИМТ __  
+Введите свой рост в см: %.1f `, 12.2)
+```
+
+### Создание форматированных строк
+
+Чтобы сохранять результаты вывода и форматирования, можно пользоваться теми же самыми методами из `fmt` для вывода, но с префиксом `S`
+
+`main.go`
+```go
+package main  
+  
+import (  
+    "fmt"  
+    "math")  
+  
+func main() {  
+    var userHeight float64  
+    var userWeight float64  
+    fmt.Println("__ Калькулятор ИМТ __")  
+    fmt.Print("Введите свой рост в см: ")  
+    fmt.Scan(&userHeight)  
+    fmt.Print("Введите свой вес: ")  
+    fmt.Scan(&userWeight)  
+    var IMT = userWeight / math.Pow(userHeight/100, 2)  
+    result := fmt.Sprintf("Ваш ИМТ: %.0f", IMT)  
+    fmt.Println(result)  
+}
+```
+
+### Создание функции
+
+Функция `main` является базовой в любом Go приложении и она вызывается сразу. 
+
+Создаются новые функции аналогично `main`, только уже в них мы можем передавать аргументы. 
+
+`main.go`
+```go
+package main  
+  
+import (  
+    "fmt"  
+    "math")  
+  
+func main() {  
+    var userHeight float64  
+    var userWeight float64  
+    fmt.Println("__ Калькулятор ИМТ __")  
+    fmt.Print("Введите свой рост в см: ")  
+    fmt.Scan(&userHeight)  
+    fmt.Print("Введите свой вес: ")  
+    fmt.Scan(&userWeight)  
+    var IMT = userWeight / math.Pow(userHeight/100, 2)  
+    outputResult(IMT)  
+}  
+
+// func outputResult(imt, floatNumber float64) 
+// func outputResult(imt float64, someString string) 
+func outputResult(imt float64) {  
+    result := fmt.Sprintf("Ваш ИМТ: %.0f", imt)  
+    fmt.Println(result)  
+}
+```
+
+### Возвращение значения
+
+Чтобы вернуть значение из функции, нужно воспользоваться ключевым словом `return` и указать, какие данные должна возвращать эта функция
+
+`main.go`
+```go
+package main  
+  
+import (  
+    "fmt"  
+    "math")  
+  
+const IMTPower = 2  
+  
+func main() {  
+    var userHeight float64  
+    var userWeight float64  
+    fmt.Println("__ Калькулятор ИМТ __")  
+    fmt.Print("Введите свой рост в см: ")  
+    fmt.Scan(&userHeight)  
+    fmt.Print("Введите свой вес: ")  
+    fmt.Scan(&userWeight)  
+    IMT := calculateIMT(userWeight, userHeight)  
+    outputResult(IMT)  
+}  
+  
+func outputResult(imt float64) {  
+    result := fmt.Sprintf("Ваш ИМТ: %.0f", imt)  
+    fmt.Println(result)  
+}  
+  
+// возвращает float64
+func calculateIMT(weight, height float64) float64 {  
+    // сразу считаем и возвращаем результат
+    return weight / math.Pow(height/100, IMTPower)  
+}
+```
+
+```bash
+> go run ./main.go 
+
+__ Калькулятор ИМТ __
+Введите свой рост в см: 128
+Введите свой вес: 128
+Ваш ИМТ: 78
+```
+
+#### Несколько значений возврата строки
+
+Так же функция может вернуть сразу несколько значений. Для этого нам нужно: 
+
+1. Объявить в результате функции несколько типов `(float64, float64)`
+2. Вернуть в return значения через запятую
+
+`main.go`
+```go
+package main  
+  
+import (  
+    "fmt"  
+    "math")  
+  
+const IMTPower = 2  
+  
+func main() {  
+    fmt.Println("__ Калькулятор ИМТ __")  
+    userWeight, userHeight := getUserInput()  
+  
+    IMT := calculateIMT(userWeight, userHeight)  
+    outputResult(IMT)  
+}  
+  
+func outputResult(imt float64) {  
+    result := fmt.Sprintf("Ваш ИМТ: %.0f", imt)  
+    fmt.Println(result)  
+}  
+  
+func calculateIMT(weight, height float64) float64 {  
+    return weight / math.Pow(height/100, IMTPower)  
+}  
+  
+func getUserInput() (float64, float64) {  
+    var userHeight float64  
+    var userWeight float64  
+  
+    fmt.Print("Введите свой рост в см: ")  
+    fmt.Scan(&userHeight)  
+    fmt.Print("Введите свой вес: ")  
+    fmt.Scan(&userWeight)  
+  
+    return userWeight, userHeight  
+}
+```
+
+### Scope функций
+
+- Скоупом функции является всё, что находится в `{}`.
+- Вызывать функции можно только в рамках других функций. 
+
+Так же в Go есть альтернативная запись возврата значения, когда мы при объявлении возвращаемого типа определяем переменную и сразу в коде меняем её значение. В конце останется просто оставить `return` без его явного использования. 
+
+```go
+func calculateIMT(weight, height float64) (IMT float64) {  
+    IMT = weight / math.Pow(height/100, IMTPower)  
+    return  
+}
+```
 
 ## Управление потоком
+
+### Типы данных
+
+![](../../_png/Pasted%20image%2020260411200105.png)
+
+![](../../_png/Pasted%20image%2020260411202043.png)
+
+![](../../_png/Pasted%20image%2020260411202204.png)
+
+### Panic
+
+
+### if
+
+
+
+### Булева логика
 
 
 ## Array и Slice

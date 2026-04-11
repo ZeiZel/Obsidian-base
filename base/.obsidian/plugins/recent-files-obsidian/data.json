@@ -2,7 +2,11 @@
   "recentFiles": [
     {
       "basename": "Selfgo",
-      "path": "backend/Selfgo.md"
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "Temporal Go",
+      "path": "backend/go/Temporal Go.md"
     },
     {
       "basename": "go",
@@ -15,10 +19,6 @@
     {
       "basename": "backend",
       "path": "backend/backend.md"
-    },
-    {
-      "basename": "Temporal Go",
-      "path": "backend/go/Temporal Go.md"
     },
     {
       "basename": "System Design",
@@ -187,18 +187,6 @@
     {
       "basename": "soft",
       "path": "soft/soft.md"
-    },
-    {
-      "basename": "leadership",
-      "path": "leadership.md"
-    },
-    {
-      "basename": "Client-server architecture",
-      "path": "concepts/Client-server architecture.md"
-    },
-    {
-      "basename": "State-management",
-      "path": "concepts/State-management.md"
     }
   ],
   "omittedPaths": [],
