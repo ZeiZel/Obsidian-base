@@ -1,24 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "Лицензии",
-      "path": "cs/Лицензии.md"
+      "basename": "Golang",
+      "path": "backend/Golang.md"
     },
     {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "ДЗ",
-      "path": "architecture/System Design/ДЗ.md"
-    },
-    {
-      "basename": "Golang",
-      "path": "backend/Golang.md"
-    },
-    {
       "basename": "Temporal Go",
       "path": "backend/Temporal Go.md"
+    },
+    {
+      "basename": "Лицензии",
+      "path": "cs/Лицензии.md"
+    },
+    {
+      "basename": "ДЗ",
+      "path": "architecture/System Design/ДЗ.md"
     },
     {
       "basename": "math",

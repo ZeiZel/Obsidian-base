@@ -129,25 +129,29 @@ go generate ./...
 
 ### Пакеты и main функция
 
-Каждый файл Go принадлежит пакету. Пакет - это способ организации кода, аналогичный модулям в других языках. Имя пакета обычно совпадает с именем директории, в которой он находится.
+Для инициализации приложения, нужно создать начальную точку с любым наименованием файла. Тут обязательно должен находиться `package main` в корне - это корневая точка запуска приложения.  
 
-Исполняемая программа всегда начинается с пакета `main` и функции `main`. Это точка входа, аналог `public static void main` в Java или `if __name__ == "__main__"` в Python:
-
+`main.go`
 ```go
 package main
 
+// Импорты можно группировать в скобки и доступен будет весь модуль целиком
 import (
 	"fmt"
 	"strings"
 )
 
 func main() {
+	// присвоение переменной
 	greeting := strings.ToUpper("hello, go")
+	// вывод строки
 	fmt.Println(greeting)
 }
 ```
 
-Импорты группируются в скобки - это стандартная практика. Важная особенность Go: неиспользуемые импорты вызывают ошибку компиляции. Это не предупреждение, а именно ошибка. Язык заставляет держать код чистым.
+Каждый файл Go принадлежит пакету. Пакет - это способ организации кода, аналогичный модулям в других языках. Имя пакета обычно совпадает с именем директории, в которой он находится.
+
+Исполняемая программа всегда начинается с пакета `main` и функции `main`. Это точка входа, аналог `public static void main` в Java или `if __name__ == "__main__"` в Python
 
 ### Переменные и типы данных
 
@@ -296,10 +300,10 @@ fmt.Println(len([]rune(s)))  // 6 (символов)
 Go поддерживает стандартный набор операторов:
 
 - Арифметические: `+`, `-`, `*`, `/`, `%`
-- Сравнения: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- Сравнения: ` == `, ` != `, `<`, `>`, `<=`, `>=`
 - Логические: `&&`, `||`, `!`
 - Побитовые: `&`, `|`, `^`, `<<`, `>>`, `&^`
-- Присваивания: `=`, `:=`, `+=`, `-=`, `*=`, `/=`
+- Присваивания: ` = `, `:=`, `+=`, `-=`, `*=`, `/=`
 - Адресные: `&` (взять адрес), `*` (разыменование)
 - Канальные: `<-` (отправка/получение)
 
@@ -745,7 +749,7 @@ func filter(s []int, fn func(int) bool) []int {
 }
 ```
 
-При append, если ёмкости не хватает, Go выделяет новый массив и копирует данные. Стратегия роста: для малых слайсов cap удваивается, для больших (более 256 элементов) растёт примерно на 25%. Поэтому, если известен примерный размер, стоит передать cap в make - это снизит количество переаллокаций.
+При append, если ёмкости не хватает, Go выделяет новый массив и копирует данные. Стратегия роста (с Go 1.18): для малых слайсов cap удваивается, затем формула плавно переходит к росту примерно на 25% (порог перехода - около 256 элементов). Это приближение - реальная формула в рантайме сглаживает переход, чтобы избежать резких скачков. Поэтому, если известен примерный размер, стоит передать cap в make - это снизит количество переаллокаций.
 
 ### Maps
 
@@ -1082,6 +1086,70 @@ func (s *Stack[T]) Pop() (T, bool) {
 - Для простого полиморфизма - интерфейсы лучше
 - Когда это добавляет сложность без ощутимой пользы
 
+### Продвинутые паттерны дженериков
+
+Constraint `comparable` позволяет использовать `==` и `!=`, но имеет подводный камень - интерфейсы реализуют comparable, хотя сравнение может вызвать panic в рантайме, если конкретный тип несравниваемый:
+
+```go
+// comparable позволяет использовать тип как ключ map
+func Contains[T comparable](slice []T, target T) bool {
+	for _, v := range slice {
+		if v == target {
+			return true
+		}
+	}
+	return false
+}
+
+// Пакет cmp (Go 1.21+) предоставляет утилиты для упорядоченных типов
+import "cmp"
+
+func MaxOf[T cmp.Ordered](a, b T) T {
+	return max(a, b) // встроенная функция max с Go 1.21
+}
+
+// Generic Repository - типобезопасный интерфейс для разных сущностей
+type Entity interface {
+	GetID() int64
+}
+
+type Repository[T Entity] interface {
+	FindByID(ctx context.Context, id int64) (T, error)
+	Create(ctx context.Context, entity T) error
+	Update(ctx context.Context, entity T) error
+	Delete(ctx context.Context, id int64) error
+	List(ctx context.Context, offset, limit int) ([]T, error)
+}
+
+// Optional - обёртка для значения, которое может отсутствовать
+// Альтернатива указателю, которая явно выражает намерение
+type Optional[T any] struct {
+	value T
+	valid bool
+}
+
+func Some[T any](v T) Optional[T] {
+	return Optional[T]{value: v, valid: true}
+}
+
+func None[T any]() Optional[T] {
+	return Optional[T]{}
+}
+
+func (o Optional[T]) Get() (T, bool) {
+	return o.value, o.valid
+}
+
+func (o Optional[T]) OrElse(fallback T) T {
+	if o.valid {
+		return o.value
+	}
+	return fallback
+}
+```
+
+> [!info] Дженерики в Go намеренно проще, чем в Rust или Haskell. Нет специализации, нет вариантности, нет ассоциированных типов. Если паттерн требует сложных generic-конструкций, вероятно, лучше использовать интерфейсы или конкретные типы.
+
 ---
 
 ## Обработка ошибок
@@ -1197,6 +1265,85 @@ if errors.Is(err, os.ErrNotExist) {
 }
 ```
 
+### Продвинутые паттерны ошибок
+
+С Go 1.20 появилась возможность объединять несколько ошибок и оборачивать в одну сразу несколько причин:
+
+```go
+// errors.Join (Go 1.20+) - агрегация нескольких ошибок в одну
+func validateUser(u User) error {
+	var errs []error
+	if u.Email == "" {
+		errs = append(errs, errors.New("email is required"))
+	}
+	if u.Name == "" {
+		errs = append(errs, errors.New("name is required"))
+	}
+	if len(u.Password) < 8 {
+		errs = append(errs, errors.New("password too short"))
+	}
+	return errors.Join(errs...) // nil если errs пуст
+}
+
+// errors.Is и errors.As работают с Join - проверяют каждую ошибку в дереве
+err := validateUser(User{})
+if errors.Is(err, ErrRequired) { // найдёт внутри Join
+	// ...
+}
+
+// fmt.Errorf с несколькими %w (Go 1.20+) - оборачивание нескольких причин
+func processOrder(ctx context.Context, order Order) error {
+	dbErr := saveOrder(ctx, order)
+	cacheErr := invalidateCache(ctx, order.UserID)
+	if dbErr != nil || cacheErr != nil {
+		return fmt.Errorf("process order %d: db=%w, cache=%w", order.ID, dbErr, cacheErr)
+	}
+	return nil
+}
+```
+
+Классификация ошибок на архитектурном уровне помогает разным слоям приложения реагировать правильно:
+
+```go
+// Retriable vs permanent - определяет, стоит ли повторять операцию
+type RetriableError struct {
+	Err        error
+	RetryAfter time.Duration
+}
+
+func (e *RetriableError) Error() string { return e.Err.Error() }
+func (e *RetriableError) Unwrap() error { return e.Err }
+
+func IsRetriable(err error) bool {
+	var re *RetriableError
+	return errors.As(err, &re)
+}
+
+// Стратегия: где логировать vs где возвращать
+// Ошибки логируются один раз - на границе системы (HTTP-хендлер, consumer).
+// Внутренние слои только оборачивают и возвращают.
+// Это предотвращает дублирование логов.
+func (h *Handler) handleCreateUser(w http.ResponseWriter, r *http.Request) {
+	user, err := h.service.CreateUser(r.Context(), input)
+	if err != nil {
+		// Логируем здесь - на границе системы
+		h.logger.Error("create user failed", "err", err, "input", input.Email)
+
+		// Маппинг внутренних ошибок на HTTP-коды
+		switch {
+		case errors.Is(err, domain.ErrAlreadyExists):
+			h.respondError(w, http.StatusConflict, "user already exists")
+		case errors.Is(err, domain.ErrValidation):
+			h.respondError(w, http.StatusUnprocessableEntity, err.Error())
+		default:
+			h.respondError(w, http.StatusInternalServerError, "internal error")
+		}
+		return
+	}
+	h.respond(w, http.StatusCreated, user)
+}
+```
+
 > [!important] Не используйте panic для штатных ошибок. Panic допустим только в неисправимых ситуациях: нарушение инвариантов, ошибки инициализации, баги в коде. Для всего остального - return error.
 
 ---
@@ -1217,7 +1364,7 @@ go func() {
 	fmt.Println("выполняется конкурентно")
 }()
 
-// Горутина очень дёшева: ~2-8 KB начального стека
+// Горутина очень дёшева: ~2 KB начального стека (с Go 1.4)
 // Можно запускать сотни тысяч одновременно
 for i := 0; i < 100_000; i++ {
 	go func(id int) {
@@ -1604,7 +1751,7 @@ func fetchAll(ctx context.Context, urls []string) ([]string, error) {
 	results := make([]string, len(urls))
 
 	for i, url := range urls {
-		i, url := i, url // создаём копии для замыкания
+		i, url := i, url // копии для замыкания (не нужно с Go 1.22+)
 		g.Go(func() error {
 			body, err := fetchURL(ctx, url)
 			if err != nil {
@@ -1640,6 +1787,50 @@ for i, url := range urls {
 	})
 }
 ```
+
+### singleflight
+
+Пакет `golang.org/x/sync/singleflight` дедуплицирует одновременные вызовы одной и той же операции. Если 100 горутин одновременно запрашивают одного пользователя, реальный вызов к БД произойдёт один раз, а остальные 99 получат тот же результат:
+
+```go
+import "golang.org/x/sync/singleflight"
+
+type CachedUserRepo struct {
+	repo  UserRepository
+	cache *redis.Client
+	group singleflight.Group
+}
+
+func (r *CachedUserRepo) FindByID(ctx context.Context, id int64) (*User, error) {
+	key := fmt.Sprintf("user:%d", id)
+
+	// Проверяем кеш
+	if cached, err := r.cache.Get(ctx, key).Bytes(); err == nil {
+		var user User
+		json.Unmarshal(cached, &user)
+		return &user, nil
+	}
+
+	// singleflight: даже если 100 горутин промахнулись по кешу одновременно,
+	// в БД пойдёт только один запрос. Остальные ждут и получают тот же результат.
+	v, err, _ := r.group.Do(key, func() (any, error) {
+		user, err := r.repo.FindByID(ctx, id)
+		if err != nil {
+			return nil, err
+		}
+		// Пишем в кеш
+		data, _ := json.Marshal(user)
+		r.cache.Set(ctx, key, data, 15*time.Minute)
+		return user, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return v.(*User), nil
+}
+```
+
+Без singleflight при cache stampede (одновременном истечении кеша для популярного ключа) тысячи горутин пойдут в БД параллельно, создавая пиковую нагрузку. singleflight решает эту проблему с минимальным оверхедом.
 
 ### Race detector
 
@@ -2155,6 +2346,96 @@ func TestAPIClient(t *testing.T) {
 }
 ```
 
+### Интеграционные тесты с testcontainers
+
+testcontainers-go поднимает Docker-контейнеры внутри тестов. Это позволяет тестировать с реальной БД, Redis, Kafka без моков:
+
+```bash
+go get github.com/testcontainers/testcontainers-go
+go get github.com/testcontainers/testcontainers-go/modules/postgres
+go get github.com/testcontainers/testcontainers-go/modules/redis
+```
+
+```go
+//go:build integration
+
+package repository_test
+
+import (
+	"context"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+	"github.com/testcontainers/testcontainers-go"
+	"github.com/testcontainers/testcontainers-go/modules/postgres"
+	"github.com/testcontainers/testcontainers-go/wait"
+)
+
+func setupPostgres(t *testing.T) string {
+	t.Helper()
+	ctx := context.Background()
+
+	container, err := postgres.Run(ctx, "postgres:16-alpine",
+		postgres.WithDatabase("testdb"),
+		postgres.WithUsername("test"),
+		postgres.WithPassword("test"),
+		testcontainers.WithWaitStrategy(
+			wait.ForLog("database system is ready to accept connections").
+				WithOccurrence(2)),
+	)
+	require.NoError(t, err)
+
+	t.Cleanup(func() {
+		require.NoError(t, container.Terminate(ctx))
+	})
+
+	dsn, err := container.ConnectionString(ctx, "sslmode=disable")
+	require.NoError(t, err)
+
+	return dsn
+}
+
+func TestUserRepository_Integration(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test")
+	}
+
+	dsn := setupPostgres(t)
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	require.NoError(t, err)
+	require.NoError(t, db.AutoMigrate(&User{}))
+
+	repo := NewUserRepository(db)
+	ctx := context.Background()
+
+	// Тест создания
+	user := &User{Email: "test@example.com", Name: "Test"}
+	err = repo.Create(ctx, user)
+	require.NoError(t, err)
+	require.NotZero(t, user.ID)
+
+	// Тест чтения
+	found, err := repo.FindByID(ctx, int64(user.ID))
+	require.NoError(t, err)
+	assert.Equal(t, "Test", found.Name)
+
+	// Тест обновления
+	found.Name = "Updated"
+	err = repo.Update(ctx, found)
+	require.NoError(t, err)
+
+	// Тест удаления
+	err = repo.Delete(ctx, int64(user.ID))
+	require.NoError(t, err)
+
+	_, err = repo.FindByID(ctx, int64(user.ID))
+	assert.ErrorIs(t, err, ErrNotFound)
+}
+```
+
+Build tag `//go:build integration` отделяет интеграционные тесты от юнит-тестов. Они запускаются отдельной командой `go test -tags=integration ./...` и требуют Docker. В CI эти тесты запускаются в отдельном job с доступом к Docker.
+
 ### Мок-объекты через интерфейсы
 
 В Go моки создаются через реализацию интерфейсов. Это не требует фреймворков - достаточно определить интерфейс и написать тестовую реализацию:
@@ -2209,6 +2490,108 @@ go test -v ./...             # подробный вывод
 go test -short ./...         # пропустить долгие тесты
 go test -run TestUser ./...  # запуск тестов по имени
 go test -coverprofile=c.out ./... && go tool cover -html=c.out
+go test -shuffle=on ./...    # рандомизировать порядок тестов
+```
+
+### Продвинутые паттерны тестирования
+
+#### t.Parallel
+
+`t.Parallel()` помечает тест как параллельный. Параллельные тесты внутри одного пакета выполняются одновременно, что ускоряет тестовый набор:
+
+```go
+func TestUserService(t *testing.T) {
+	t.Parallel() // этот тест может работать параллельно с другими
+
+	tests := []struct {
+		name string
+		id   int64
+	}{
+		{name: "existing user", id: 1},
+		{name: "non-existing user", id: 999},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel() // подтесты тоже параллельны между собой
+			// тело теста
+		})
+	}
+}
+```
+
+> [!important] При использовании t.Parallel() будьте осторожны с общим состоянием. Каждый параллельный тест должен работать с собственными данными. Если тесты пишут в одну БД, нужна изоляция (отдельные транзакции или уникальные данные).
+
+#### TestMain
+
+`TestMain` позволяет выполнить глобальный setup/teardown для всех тестов в пакете:
+
+```go
+func TestMain(m *testing.M) {
+	// Setup - выполняется перед всеми тестами
+	db := setupTestDatabase()
+
+	// Запуск тестов
+	code := m.Run()
+
+	// Teardown - выполняется после всех тестов
+	db.Close()
+	os.Exit(code)
+}
+```
+
+#### Golden files
+
+Golden files хранят ожидаемый вывод в файлах `testdata/`. При первом запуске или с флагом `-update` файл создаётся, при последующих - сравнивается:
+
+```go
+var update = flag.Bool("update", false, "update golden files")
+
+func TestRender(t *testing.T) {
+	result := render(input)
+
+	golden := filepath.Join("testdata", t.Name()+".golden")
+	if *update {
+		os.MkdirAll("testdata", 0755)
+		os.WriteFile(golden, []byte(result), 0644)
+		return
+	}
+
+	expected, err := os.ReadFile(golden)
+	require.NoError(t, err)
+	assert.Equal(t, string(expected), result)
+}
+```
+
+Директория `testdata/` имеет специальный статус - Go-тулинг её игнорирует при сборке и поиске пакетов.
+
+#### Генерация моков через mockgen
+
+Ручные моки просты, но для больших интерфейсов удобнее генерировать их автоматически:
+
+```bash
+go install go.uber.org/mock/mockgen@latest
+
+# Генерация из интерфейса
+mockgen -source=repository.go -destination=mocks/mock_repository.go -package=mocks
+```
+
+```go
+//go:generate mockgen -source=repository.go -destination=mocks/mock_repository.go -package=mocks
+
+func TestUserService_GetUser(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	repo := mocks.NewMockUserRepository(ctrl)
+
+	repo.EXPECT().
+		FindByID(gomock.Any(), int64(1)).
+		Return(&User{ID: 1, Name: "Alice"}, nil)
+
+	service := NewUserService(repo)
+	user, err := service.GetUser(context.Background(), 1)
+	require.NoError(t, err)
+	assert.Equal(t, "Alice", user.Name)
+}
 ```
 
 ---
@@ -2433,6 +2816,63 @@ func Chain(handler http.Handler, middlewares ...Middleware) http.Handler {
 handler := Chain(mux, Logging(logger), Recovery())
 ```
 
+### HTTP-клиент с retry
+
+В production HTTP-запросы к внешним сервисам требуют повторных попыток при временных сбоях. Библиотека hashicorp/go-retryablehttp предоставляет HTTP-клиент с экспоненциальным backoff:
+
+```bash
+go get github.com/hashicorp/go-retryablehttp
+```
+
+```go
+import "github.com/hashicorp/go-retryablehttp"
+
+func NewHTTPClient() *http.Client {
+	retryClient := retryablehttp.NewClient()
+	retryClient.RetryMax = 3                           // максимум 3 повторные попытки
+	retryClient.RetryWaitMin = 100 * time.Millisecond  // начальная пауза
+	retryClient.RetryWaitMax = 2 * time.Second         // максимальная пауза
+	retryClient.Logger = nil                            // отключить стандартный логгер
+
+	// Кастомная логика - какие ошибки повторять
+	retryClient.CheckRetry = func(ctx context.Context, resp *http.Response, err error) (bool, error) {
+		if err != nil {
+			return true, nil // сетевые ошибки - повторять
+		}
+		// Повторять при 429 (Too Many Requests) и 5xx
+		if resp.StatusCode == 429 || resp.StatusCode >= 500 {
+			return true, nil
+		}
+		return false, nil
+	}
+
+	return retryClient.StandardClient() // возвращает обычный *http.Client
+}
+```
+
+Для простых случаев можно написать retry без внешних зависимостей:
+
+```go
+func withRetry(ctx context.Context, maxAttempts int, fn func() error) error {
+	var lastErr error
+	for attempt := 0; attempt < maxAttempts; attempt++ {
+		if err := fn(); err != nil {
+			lastErr = err
+			// Экспоненциальный backoff: 100ms, 200ms, 400ms...
+			delay := time.Duration(1<<uint(attempt)) * 100 * time.Millisecond
+			select {
+			case <-time.After(delay):
+				continue
+			case <-ctx.Done():
+				return ctx.Err()
+			}
+		}
+		return nil
+	}
+	return fmt.Errorf("after %d attempts: %w", maxAttempts, lastErr)
+}
+```
+
 ### encoding/json
 
 JSON - основной формат обмена данными в веб-приложениях. Go имеет встроенную поддержку через теги структур:
@@ -2499,6 +2939,523 @@ func (s *Status) UnmarshalJSON(data []byte) error {
 var raw map[string]json.RawMessage
 json.Unmarshal(data, &raw)
 ```
+
+### Валидация входных данных
+
+Пакет go-playground/validator позволяет валидировать структуры через теги. Валидация происходит на границе системы - при получении данных от клиента, перед записью в БД:
+
+```bash
+go get github.com/go-playground/validator/v10
+```
+
+```go
+import "github.com/go-playground/validator/v10"
+
+var validate = validator.New()
+
+type CreateUserInput struct {
+	Email    string `json:"email" validate:"required,email"`
+	Name     string `json:"name" validate:"required,min=2,max=100"`
+	Age      int    `json:"age" validate:"omitempty,gte=0,lte=150"`
+	Password string `json:"password" validate:"required,min=8,max=72"`
+	Role     string `json:"role" validate:"required,oneof=user admin moderator"`
+	Website  string `json:"website" validate:"omitempty,url"`
+}
+
+type CreateTaskInput struct {
+	Title       string `json:"title" validate:"required,min=1,max=255"`
+	Description string `json:"description" validate:"max=5000"`
+	Priority    int    `json:"priority" validate:"gte=0,lte=4"`
+	DueDate     string `json:"due_date" validate:"omitempty,datetime=2006-01-02"`
+}
+
+// Валидация в HTTP-хендлере
+func (s *Server) handleCreateUser(w http.ResponseWriter, r *http.Request) {
+	var input CreateUserInput
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		s.respondError(w, http.StatusBadRequest, "invalid JSON")
+		return
+	}
+
+	if err := validate.Struct(input); err != nil {
+		// Преобразование ошибок валидации в читаемый формат
+		var validationErrors validator.ValidationErrors
+		if errors.As(err, &validationErrors) {
+			fields := make(map[string]string)
+			for _, e := range validationErrors {
+				fields[e.Field()] = formatValidationError(e)
+			}
+			s.respond(w, http.StatusUnprocessableEntity, map[string]any{
+				"error":  "validation failed",
+				"fields": fields,
+			})
+			return
+		}
+		s.respondError(w, http.StatusBadRequest, "invalid input")
+		return
+	}
+
+	// input валиден, продолжаем обработку
+}
+
+func formatValidationError(e validator.FieldError) string {
+	switch e.Tag() {
+	case "required":
+		return "field is required"
+	case "email":
+		return "must be a valid email"
+	case "min":
+		return fmt.Sprintf("minimum length is %s", e.Param())
+	case "max":
+		return fmt.Sprintf("maximum length is %s", e.Param())
+	case "gte":
+		return fmt.Sprintf("must be at least %s", e.Param())
+	case "lte":
+		return fmt.Sprintf("must be at most %s", e.Param())
+	case "oneof":
+		return fmt.Sprintf("must be one of: %s", e.Param())
+	default:
+		return fmt.Sprintf("failed on '%s' validation", e.Tag())
+	}
+}
+```
+
+Основные теги валидации:
+
+- `required` - поле обязательно
+- `omitempty` - пропустить валидацию, если значение пустое
+- `email` - формат email
+- `url` - формат URL
+- `min`, `max` - минимум/максимум (длина для строк, значение для чисел)
+- `gte`, `lte`, `gt`, `lt` - сравнения числовых значений
+- `oneof=a b c` - одно из перечисленных значений
+- `datetime=layout` - формат даты
+- `uuid` - формат UUID
+- `ip` - формат IP-адреса
+- `excludesall` - не содержит указанных символов
+
+Кастомные валидаторы:
+
+```go
+// Регистрация кастомного валидатора
+validate.RegisterValidation("nowhitespace", func(fl validator.FieldLevel) bool {
+	return !strings.Contains(fl.Field().String(), " ")
+})
+
+// Использование
+type Input struct {
+	Username string `validate:"required,nowhitespace,min=3"`
+}
+
+// Кросс-полевая валидация
+type ChangePasswordInput struct {
+	Password        string `validate:"required,min=8"`
+	ConfirmPassword string `validate:"required,eqfield=Password"`
+}
+```
+
+> [!info] Валидация должна происходить на границе системы - в HTTP-хендлерах, gRPC-обработчиках, CLI-парсерах. Внутренние слои (сервисы, репозитории) работают с уже валидированными данными.
+
+### JWT аутентификация
+
+JWT (JSON Web Tokens) - стандартный способ аутентификации в REST API. Токен содержит закодированную информацию о пользователе и подписан секретным ключом:
+
+```bash
+go get github.com/golang-jwt/jwt/v5
+```
+
+```go
+import "github.com/golang-jwt/jwt/v5"
+
+type Claims struct {
+	UserID int64  `json:"user_id"`
+	Email  string `json:"email"`
+	Role   string `json:"role"`
+	jwt.RegisteredClaims
+}
+
+type AuthService struct {
+	secret     []byte
+	expiration time.Duration
+}
+
+func NewAuthService(secret string, expiration time.Duration) *AuthService {
+	return &AuthService{
+		secret:     []byte(secret),
+		expiration: expiration,
+	}
+}
+
+// Генерация токена
+func (s *AuthService) GenerateToken(userID int64, email, role string) (string, error) {
+	claims := Claims{
+		UserID: userID,
+		Email:  email,
+		Role:   role,
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(s.expiration)),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			Issuer:    "myservice",
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString(s.secret)
+}
+
+// Верификация токена
+func (s *AuthService) VerifyToken(tokenString string) (*Claims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &Claims{},
+		func(token *jwt.Token) (any, error) {
+			// Проверяем алгоритм подписи - защита от подмены алгоритма
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+			}
+			return s.secret, nil
+		},
+	)
+	if err != nil {
+		return nil, fmt.Errorf("parse token: %w", err)
+	}
+
+	claims, ok := token.Claims.(*Claims)
+	if !ok || !token.Valid {
+		return nil, errors.New("invalid token")
+	}
+
+	return claims, nil
+}
+
+// Middleware для аутентификации
+func (s *AuthService) AuthMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		header := r.Header.Get("Authorization")
+		if header == "" {
+			http.Error(w, `{"error":"missing authorization header"}`, http.StatusUnauthorized)
+			return
+		}
+
+		// Формат: "Bearer <token>"
+		parts := strings.SplitN(header, " ", 2)
+		if len(parts) != 2 || parts[0] != "Bearer" {
+			http.Error(w, `{"error":"invalid authorization format"}`, http.StatusUnauthorized)
+			return
+		}
+
+		claims, err := s.VerifyToken(parts[1])
+		if err != nil {
+			http.Error(w, `{"error":"invalid token"}`, http.StatusUnauthorized)
+			return
+		}
+
+		// Передаём claims через context
+		ctx := context.WithValue(r.Context(), claimsKey, claims)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+// Извлечение claims из context
+type contextKey string
+const claimsKey contextKey = "claims"
+
+func GetClaims(ctx context.Context) *Claims {
+	claims, _ := ctx.Value(claimsKey).(*Claims)
+	return claims
+}
+
+// Использование в хендлере
+func (s *Server) handleGetProfile(w http.ResponseWriter, r *http.Request) {
+	claims := GetClaims(r.Context())
+	if claims == nil {
+		s.respondError(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	user, err := s.userService.GetByID(r.Context(), claims.UserID)
+	if err != nil {
+		s.respondError(w, http.StatusInternalServerError, "failed to get user")
+		return
+	}
+
+	s.respond(w, http.StatusOK, user)
+}
+
+// Применение middleware к защищённым маршрутам
+func (s *Server) routes() {
+	s.router.HandleFunc("POST /auth/login", s.handleLogin)
+	s.router.HandleFunc("POST /auth/register", s.handleRegister)
+
+	// Защищённые маршруты
+	protected := http.NewServeMux()
+	protected.HandleFunc("GET /users/me", s.handleGetProfile)
+	protected.HandleFunc("GET /tasks", s.handleListTasks)
+	protected.HandleFunc("POST /tasks", s.handleCreateTask)
+
+	s.router.Handle("/", s.auth.AuthMiddleware(protected))
+}
+```
+
+> [!important] JWT секрет должен быть длинным (минимум 32 байта) и храниться в переменных окружения, а не в коде. Для production рассмотрите RS256 (асимметричные ключи) вместо HS256 - это позволяет верифицировать токены без знания секрета подписи.
+
+### Swagger и документация API
+
+swag генерирует OpenAPI/Swagger документацию из аннотаций в коде:
+
+```bash
+go install github.com/swaggo/swag/cmd/swag@latest
+go get github.com/swaggo/http-swagger
+```
+
+```go
+// Аннотации на уровне main.go
+// @title           Task API
+// @version         1.0
+// @description     REST API для управления задачами
+// @host            localhost:8080
+// @BasePath        /api/v1
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+
+// Аннотации хендлера
+// @Summary      Создать задачу
+// @Description  Создаёт новую задачу для текущего пользователя
+// @Tags         tasks
+// @Accept       json
+// @Produce      json
+// @Param        input body CreateTaskInput true "Данные задачи"
+// @Success      201 {object} Task
+// @Failure      400 {object} ErrorResponse
+// @Failure      401 {object} ErrorResponse
+// @Security     BearerAuth
+// @Router       /tasks [post]
+func (s *Server) handleCreateTask(w http.ResponseWriter, r *http.Request) {
+	// ...
+}
+```
+
+```bash
+# Генерация документации
+swag init -g cmd/api/main.go -o docs
+
+# Структура docs/
+# docs/docs.go     - Go-код для встраивания
+# docs/swagger.json
+# docs/swagger.yaml
+```
+
+```go
+import httpSwagger "github.com/swaggo/http-swagger"
+import _ "myproject/docs" // импорт сгенерированных docs
+
+// Подключение Swagger UI
+mux.Handle("/swagger/", httpSwagger.WrapHandler)
+// Доступен по адресу http://localhost:8080/swagger/index.html
+```
+
+### Продвинутые HTTP-паттерны
+
+#### Ограничение размера тела запроса
+
+Без ограничения клиент может отправить тело в несколько гигабайт и исчерпать память сервера:
+
+```go
+func (s *Server) handleUpload(w http.ResponseWriter, r *http.Request) {
+	// Ограничиваем тело запроса до 10 MB
+	r.Body = http.MaxBytesReader(w, r.Body, 10<<20)
+
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
+		s.respondError(w, http.StatusRequestEntityTooLarge, "file too large")
+		return
+	}
+
+	file, header, err := r.FormFile("file")
+	if err != nil {
+		s.respondError(w, http.StatusBadRequest, "invalid file")
+		return
+	}
+	defer file.Close()
+
+	// header.Filename, header.Size, header.Header содержат метаданные
+	dst, err := os.Create(filepath.Join("uploads", header.Filename))
+	if err != nil {
+		s.respondError(w, http.StatusInternalServerError, "save failed")
+		return
+	}
+	defer dst.Close()
+
+	io.Copy(dst, file)
+	s.respond(w, http.StatusOK, map[string]string{"filename": header.Filename})
+}
+```
+
+#### Streaming response
+
+Для потоковой отправки данных клиенту (прогресс загрузки, генерация отчётов):
+
+```go
+func (s *Server) handleStream(w http.ResponseWriter, r *http.Request) {
+	flusher, ok := w.(http.Flusher)
+	if !ok {
+		http.Error(w, "streaming not supported", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("X-Content-Type-Options", "nosniff")
+
+	for i := 0; i < 10; i++ {
+		fmt.Fprintf(w, "chunk %d\n", i)
+		flusher.Flush() // отправляет данные клиенту немедленно
+		time.Sleep(500 * time.Millisecond)
+	}
+}
+```
+
+### WebSocket
+
+WebSocket обеспечивает полнодуплексную связь между клиентом и сервером через одно TCP-соединение. Используется для чатов, уведомлений, real-time дашбордов:
+
+```bash
+go get nhooyr.io/websocket
+```
+
+```go
+import "nhooyr.io/websocket"
+import "nhooyr.io/websocket/wsjson"
+
+// WebSocket-хендлер
+func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
+	conn, err := websocket.Accept(w, r, &websocket.AcceptOptions{
+		OriginPatterns: []string{"localhost:*"},
+	})
+	if err != nil {
+		s.logger.Error("ws accept", "err", err)
+		return
+	}
+	defer conn.CloseNow()
+
+	ctx := conn.CloseRead(r.Context())
+
+	// Цикл чтения/записи
+	for {
+		var msg Message
+		if err := wsjson.Read(ctx, conn, &msg); err != nil {
+			if websocket.CloseStatus(err) == websocket.StatusNormalClosure {
+				return
+			}
+			s.logger.Error("ws read", "err", err)
+			return
+		}
+
+		// Обработка и ответ
+		response := processMessage(msg)
+		if err := wsjson.Write(ctx, conn, response); err != nil {
+			return
+		}
+	}
+}
+
+// Broadcast - рассылка всем подключённым клиентам
+type Hub struct {
+	mu      sync.RWMutex
+	clients map[*websocket.Conn]struct{}
+}
+
+func (h *Hub) Add(conn *websocket.Conn) {
+	h.mu.Lock()
+	h.clients[conn] = struct{}{}
+	h.mu.Unlock()
+}
+
+func (h *Hub) Remove(conn *websocket.Conn) {
+	h.mu.Lock()
+	delete(h.clients, conn)
+	h.mu.Unlock()
+}
+
+func (h *Hub) Broadcast(ctx context.Context, msg any) {
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+	for conn := range h.clients {
+		wsjson.Write(ctx, conn, msg)
+	}
+}
+```
+
+### Server-Sent Events (SSE)
+
+SSE - однонаправленный канал от сервера к клиенту. Проще WebSocket, поддерживается браузерами нативно через `EventSource`, автоматически переподключается:
+
+```go
+func (s *Server) handleSSE(w http.ResponseWriter, r *http.Request) {
+	flusher, ok := w.(http.Flusher)
+	if !ok {
+		http.Error(w, "streaming not supported", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Connection", "keep-alive")
+
+	ticker := time.NewTicker(5 * time.Second)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-r.Context().Done():
+			return // клиент отключился
+		case t := <-ticker.C:
+			// Формат SSE: "event: <тип>\ndata: <данные>\n\n"
+			fmt.Fprintf(w, "event: heartbeat\ndata: %s\n\n", t.Format(time.RFC3339))
+			flusher.Flush()
+		case msg := <-s.notifications:
+			data, _ := json.Marshal(msg)
+			fmt.Fprintf(w, "event: notification\ndata: %s\n\n", data)
+			flusher.Flush()
+		}
+	}
+}
+```
+
+> [!info] WebSocket подходит, когда нужна двусторонняя связь (чат, совместное редактирование). SSE проще и достаточен для уведомлений, обновлений статуса, live-логов. SSE работает через обычный HTTP и не требует специального проксирования.
+
+### Версионирование API
+
+Три основных подхода к версионированию REST API:
+
+```go
+// 1. URL-based (самый распространённый) - /api/v1/users, /api/v2/users
+mux := http.NewServeMux()
+
+v1 := http.NewServeMux()
+v1.HandleFunc("GET /users", handleListUsersV1)
+v1.HandleFunc("GET /users/{id}", handleGetUserV1)
+
+v2 := http.NewServeMux()
+v2.HandleFunc("GET /users", handleListUsersV2)
+v2.HandleFunc("GET /users/{id}", handleGetUserV2)
+
+mux.Handle("/api/v1/", http.StripPrefix("/api/v1", v1))
+mux.Handle("/api/v2/", http.StripPrefix("/api/v2", v2))
+
+// 2. Header-based - Accept: application/vnd.myapi.v2+json
+func handleGetUser(w http.ResponseWriter, r *http.Request) {
+	version := r.Header.Get("Accept")
+	switch {
+	case strings.Contains(version, "vnd.myapi.v2"):
+		handleGetUserV2(w, r)
+	default:
+		handleGetUserV1(w, r)
+	}
+}
+
+// 3. Query-parameter - /users?version=2
+// Наименее предпочтительный, но иногда используется для внутренних API
+```
+
+URL-based версионирование проще всего для клиентов и документации. Header-based более "чистый" с точки зрения REST, но сложнее в отладке.
 
 ---
 
@@ -2902,6 +3859,122 @@ v.FieldByName("Name").SetString("Bob")
 
 > [!important] reflect работает медленно и лишает код типобезопасности. Используйте его только когда нет альтернативы: написание ORM, сериализация, валидация по тегам. Для обычного прикладного кода предпочитайте интерфейсы и дженерики.
 
+### Новые возможности стандартной библиотеки (Go 1.21-1.23)
+
+#### sync.OnceFunc, OnceValue, OnceValues (Go 1.21)
+
+Упрощённые версии `sync.Once` для частых сценариев:
+
+```go
+// sync.OnceFunc - выполняет функцию ровно один раз
+cleanup := sync.OnceFunc(func() {
+	db.Close()
+	cache.Close()
+})
+defer cleanup()  // безопасно вызывать многократно
+defer cleanup()  // второй вызов - no-op
+
+// sync.OnceValue - lazy-инициализация с возвратом значения
+getConfig := sync.OnceValue(func() *Config {
+	return loadConfigFromFile()
+})
+cfg := getConfig() // первый вызов загружает, последующие - из кеша
+
+// sync.OnceValues - аналог с двумя возвращаемыми значениями (для result + error)
+getDB := sync.OnceValues(func() (*sql.DB, error) {
+	return sql.Open("pgx", os.Getenv("DATABASE_URL"))
+})
+db, err := getDB()
+```
+
+#### context.WithoutCancel и AfterFunc (Go 1.21)
+
+```go
+// WithoutCancel - создаёт контекст, который НЕ наследует отмену родителя
+// Полезно для фоновых задач, которые должны завершиться даже после отмены запроса
+func (s *Server) handleOrder(w http.ResponseWriter, r *http.Request) {
+	order := processOrder(r.Context())
+
+	// Отправка уведомления не должна прерваться, если клиент закрыл соединение
+	bgCtx := context.WithoutCancel(r.Context())
+	go sendNotification(bgCtx, order)
+
+	s.respond(w, http.StatusCreated, order)
+}
+
+// AfterFunc - вызывает функцию когда контекст будет отменён
+ctx, cancel := context.WithCancel(context.Background())
+stop := context.AfterFunc(ctx, func() {
+	conn.Close() // закрыть соединение при отмене контекста
+})
+// stop() отменяет регистрацию функции, если контекст ещё не отменён
+defer stop()
+```
+
+#### Range over func (Go 1.23)
+
+Итераторы на основе функций позволяют использовать `range` с пользовательскими типами:
+
+```go
+import "iter"
+
+// iter.Seq[V] - итератор, возвращающий значения
+// iter.Seq2[K, V] - итератор, возвращающий пары ключ-значение
+
+// Кастомный итератор для фильтрации
+func Filter[T any](s []T, fn func(T) bool) iter.Seq[T] {
+	return func(yield func(T) bool) {
+		for _, v := range s {
+			if fn(v) {
+				if !yield(v) {
+					return // прекращаем, если потребитель больше не хочет данных
+				}
+			}
+		}
+	}
+}
+
+// Использование с range
+nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+for v := range Filter(nums, func(n int) bool { return n%2 == 0 }) {
+	fmt.Println(v) // 2, 4, 6, 8, 10
+}
+
+// Итератор для обхода дерева
+type TreeNode[T any] struct {
+	Value T
+	Left  *TreeNode[T]
+	Right *TreeNode[T]
+}
+
+func (n *TreeNode[T]) InOrder() iter.Seq[T] {
+	return func(yield func(T) bool) {
+		if n == nil {
+			return
+		}
+		for v := range n.Left.InOrder() {
+			if !yield(v) {
+				return
+			}
+		}
+		if !yield(n.Value) {
+			return
+		}
+		for v := range n.Right.InOrder() {
+			if !yield(v) {
+				return
+			}
+		}
+	}
+}
+
+// slices.Collect собирает итератор в слайс
+evens := slices.Collect(Filter(nums, func(n int) bool { return n%2 == 0 }))
+// [2, 4, 6, 8, 10]
+```
+
+> [!info] Range over func унифицирует итерацию: слайсы, map, каналы, деревья, результаты БД - всё перебирается через range. Пакеты `slices`, `maps` и стандартная библиотека активно переходят на этот паттерн.
+
 ---
 
 ## Веб-разработка
@@ -3279,6 +4352,575 @@ CREATE TABLE users (
 CREATE INDEX idx_users_email ON users(email);
 ```
 
+### GORM
+
+GORM - полноценный ORM для Go. Он абстрагирует SQL-запросы, предоставляя работу с базой через Go-структуры. GORM поддерживает PostgreSQL, MySQL, SQLite, SQL Server.
+
+Установка:
+
+```bash
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/postgres
+```
+
+#### Подключение и настройка
+
+```go
+import (
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+)
+
+func NewDB(dsn string) (*gorm.DB, error) {
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info), // логировать SQL-запросы
+		NamingStrategy: schema.NamingStrategy{
+			TablePrefix:   "",    // префикс таблиц
+			SingularTable: false, // User -> users (множественное число)
+		},
+		TranslateError: true, // транслировать ошибки драйвера в GORM-ошибки
+	})
+	if err != nil {
+		return nil, fmt.Errorf("gorm open: %w", err)
+	}
+
+	// Настройка пула соединений через underlying *sql.DB
+	sqlDB, err := db.DB()
+	if err != nil {
+		return nil, err
+	}
+	sqlDB.SetMaxOpenConns(25)
+	sqlDB.SetMaxIdleConns(10)
+	sqlDB.SetConnMaxLifetime(5 * time.Minute)
+
+	return db, nil
+}
+```
+
+DSN для PostgreSQL выглядит так: `host=localhost user=app password=secret dbname=mydb port=5432 sslmode=disable TimeZone=UTC`. В production sslmode должен быть `require` или `verify-full`.
+
+#### Модели
+
+Модели в GORM - это обычные Go-структуры. GORM использует теги для настройки маппинга на колонки:
+
+```go
+// gorm.Model встраивает ID, CreatedAt, UpdatedAt, DeletedAt (soft delete)
+type User struct {
+	gorm.Model
+	Email    string `gorm:"uniqueIndex;size:255;not null"`
+	Name     string `gorm:"size:100;not null"`
+	Age      int    `gorm:"default:0"`
+	IsActive bool   `gorm:"default:true"`
+}
+
+// Можно определить модель без gorm.Model, указав всё явно
+type Task struct {
+	ID          uint           `gorm:"primaryKey"`
+	Title       string         `gorm:"size:255;not null"`
+	Description string         `gorm:"type:text"`
+	Status      string         `gorm:"size:20;default:'pending';index"`
+	Priority    int            `gorm:"default:0;check:priority >= 0 AND priority <= 4"`
+	UserID      uint           `gorm:"not null;index"`
+	User        User           `gorm:"foreignKey:UserID"`
+	DueDate     *time.Time     // указатель - поле может быть NULL
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	DeletedAt   gorm.DeletedAt `gorm:"index"` // soft delete
+}
+
+// Переопределение имени таблицы
+func (Task) TableName() string {
+	return "tasks"
+}
+```
+
+Основные теги GORM:
+
+- `primaryKey` - первичный ключ
+- `uniqueIndex` - уникальный индекс
+- `index` - обычный индекс
+- `size:255` - размер колонки
+- `type:text` - конкретный SQL-тип
+- `not null` - запрет NULL
+- `default:value` - значение по умолчанию
+- `check:expr` - CHECK constraint
+- `column:name` - явное имя колонки
+- `->` - только чтение, `<-:create` - только при создании
+- `-` - игнорировать поле
+
+#### Миграции через GORM
+
+AutoMigrate создаёт таблицы и добавляет недостающие колонки. Он не удаляет колонки и не меняет типы - это осознанное ограничение для безопасности:
+
+```go
+err := db.AutoMigrate(&User{}, &Task{})
+if err != nil {
+	log.Fatal("migration failed:", err)
+}
+```
+
+> [!important] AutoMigrate подходит для разработки и прототипов. В production используйте golang-migrate или goose для версионированных миграций с возможностью отката. AutoMigrate не поддерживает удаление колонок, переименование и сложные изменения схемы.
+
+#### CRUD-операции
+
+```go
+// Create - вставка записи
+user := User{Email: "alice@example.com", Name: "Alice", Age: 30}
+result := db.Create(&user)
+// user.ID заполнен автоматически после вставки
+fmt.Println(user.ID, result.RowsAffected, result.Error)
+
+// Batch insert - вставка нескольких записей за один запрос
+users := []User{
+	{Email: "bob@example.com", Name: "Bob"},
+	{Email: "carol@example.com", Name: "Carol"},
+}
+db.Create(&users) // один INSERT с несколькими VALUES
+
+// Read - чтение записей
+var user User
+db.First(&user, 1)                          // по primary key
+db.First(&user, "email = ?", "alice@example.com") // по условию
+
+var users []User
+db.Find(&users)                              // все записи
+db.Where("age > ?", 25).Find(&users)         // с условием
+db.Where("name LIKE ?", "%ali%").Find(&users) // с LIKE
+
+// Проверка "не найдено"
+result := db.First(&user, 999)
+if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+	fmt.Println("пользователь не найден")
+}
+
+// Update - обновление
+db.Model(&user).Update("name", "Alice Updated")      // одно поле
+db.Model(&user).Updates(User{Name: "Alice", Age: 31}) // несколько полей
+db.Model(&user).Updates(map[string]any{               // через map (zero values тоже обновятся)
+	"name": "Alice",
+	"age":  0,                                          // обновит на 0
+})
+
+// Разница между Updates со структурой и map:
+// Структура: zero values (0, "", false) ИГНОРИРУЮТСЯ
+// Map: zero values ОБНОВЛЯЮТСЯ
+// Это частый источник багов - если нужно обнулить поле, используйте map
+
+// Delete - удаление
+db.Delete(&user)           // soft delete если есть DeletedAt
+db.Delete(&User{}, 1)     // по ID
+db.Unscoped().Delete(&user) // физическое удаление, минуя soft delete
+```
+
+> [!info] Soft delete - когда GORM устанавливает DeletedAt вместо физического удаления строки. Все последующие запросы автоматически добавляют `WHERE deleted_at IS NULL`. Для запроса удалённых записей используйте `db.Unscoped()`.
+
+#### Запросы и Scopes
+
+```go
+// Цепочка условий
+var tasks []Task
+db.Where("status = ?", "pending").
+	Where("priority > ?", 2).
+	Order("created_at DESC").
+	Limit(10).
+	Offset(20).
+	Find(&tasks)
+
+// Select конкретных полей
+db.Select("id", "title", "status").Find(&tasks)
+
+// Count
+var count int64
+db.Model(&Task{}).Where("status = ?", "done").Count(&count)
+
+// Group и Having
+type StatusCount struct {
+	Status string
+	Count  int64
+}
+var results []StatusCount
+db.Model(&Task{}).
+	Select("status, count(*) as count").
+	Group("status").
+	Having("count(*) > ?", 5).
+	Find(&results)
+
+// Raw SQL - когда ORM недостаточно
+db.Raw("SELECT * FROM users WHERE age > ? AND name LIKE ?", 25, "%ali%").
+	Scan(&users)
+db.Exec("UPDATE users SET age = age + 1 WHERE id = ?", 1)
+
+// Scopes - переиспользуемые фрагменты запросов
+func Active(db *gorm.DB) *gorm.DB {
+	return db.Where("is_active = ?", true)
+}
+
+func OlderThan(age int) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		return db.Where("age > ?", age)
+	}
+}
+
+func Paginate(page, pageSize int) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		offset := (page - 1) * pageSize
+		return db.Offset(offset).Limit(pageSize)
+	}
+}
+
+// Scopes компонуются
+db.Scopes(Active, OlderThan(25), Paginate(2, 10)).Find(&users)
+```
+
+Scopes позволяют вынести часто используемые условия в переиспользуемые функции. Это чище, чем дублировать `.Where()` во всех запросах.
+
+#### Ассоциации
+
+GORM поддерживает все стандартные типы связей между таблицами:
+
+```go
+// Has Many - пользователь имеет много задач
+type User struct {
+	gorm.Model
+	Name  string
+	Tasks []Task `gorm:"foreignKey:UserID"`
+}
+
+// Belongs To - задача принадлежит пользователю
+type Task struct {
+	gorm.Model
+	Title  string
+	UserID uint
+	User   User `gorm:"foreignKey:UserID"`
+}
+
+// Many to Many - задача имеет много тегов, тег имеет много задач
+type Tag struct {
+	gorm.Model
+	Name  string
+	Tasks []Task `gorm:"many2many:task_tags;"`
+}
+
+type Task struct {
+	gorm.Model
+	Title string
+	Tags  []Tag `gorm:"many2many:task_tags;"`
+}
+
+// Preload - загрузка связанных данных (решение проблемы N+1)
+var user User
+db.Preload("Tasks").First(&user, 1)                    // загрузить все задачи пользователя
+db.Preload("Tasks", "status = ?", "pending").First(&user, 1) // с условием
+
+// Вложенный Preload
+db.Preload("Tasks.Tags").First(&user, 1)
+
+// Joins - загрузка через JOIN вместо отдельного запроса
+db.Joins("User").Find(&tasks) // INNER JOIN
+
+// Создание со связанными данными
+user := User{
+	Name: "Alice",
+	Tasks: []Task{
+		{Title: "First task"},
+		{Title: "Second task"},
+	},
+}
+db.Create(&user) // создаст пользователя и обе задачи
+
+// Добавление связи к существующей записи
+db.Model(&user).Association("Tasks").Append(&Task{Title: "Third task"})
+```
+
+> [!important] Preload выполняет отдельный SQL-запрос для каждой связи. Для сложных запросов с множеством связей это может быть неэффективно. В таких случаях используйте Joins или Raw SQL.
+
+#### Hooks (хуки жизненного цикла)
+
+Хуки позволяют выполнять логику до или после операций с БД:
+
+```go
+// BeforeCreate вызывается перед INSERT
+func (u *User) BeforeCreate(tx *gorm.DB) error {
+	if u.Email == "" {
+		return errors.New("email is required")
+	}
+	u.Email = strings.ToLower(u.Email)
+	return nil
+}
+
+// AfterCreate вызывается после успешного INSERT
+func (u *User) AfterCreate(tx *gorm.DB) error {
+	// например, отправить приветственное письмо
+	return nil
+}
+
+// BeforeUpdate вызывается перед UPDATE
+func (u *User) BeforeUpdate(tx *gorm.DB) error {
+	u.UpdatedAt = time.Now()
+	return nil
+}
+
+// BeforeDelete вызывается перед DELETE
+func (t *Task) BeforeDelete(tx *gorm.DB) error {
+	if t.Status == "in_progress" {
+		return errors.New("cannot delete task in progress")
+	}
+	return nil
+}
+```
+
+Доступные хуки: BeforeCreate, AfterCreate, BeforeUpdate, AfterUpdate, BeforeSave, AfterSave, BeforeDelete, AfterDelete, AfterFind. Если хук возвращает ошибку, операция отменяется.
+
+#### Транзакции в GORM
+
+```go
+// Автоматическая транзакция - GORM сам управляет commit/rollback
+err := db.Transaction(func(tx *gorm.DB) error {
+	if err := tx.Create(&user).Error; err != nil {
+		return err // rollback
+	}
+	if err := tx.Create(&task).Error; err != nil {
+		return err // rollback
+	}
+	return nil // commit
+})
+
+// Вложенные транзакции через SavePoint
+err := db.Transaction(func(tx *gorm.DB) error {
+	tx.Create(&user)
+
+	// Вложенная транзакция - savepoint
+	err := tx.Transaction(func(tx2 *gorm.DB) error {
+		tx2.Create(&task)
+		return someError // откатит только task, не user
+	})
+
+	return nil // user сохранится
+})
+
+// Ручная транзакция
+tx := db.Begin()
+if err := tx.Create(&user).Error; err != nil {
+	tx.Rollback()
+	return err
+}
+tx.Commit()
+```
+
+`db.Transaction()` - предпочтительный способ. Он автоматически делает rollback при ошибке или panic, что исключает случайное "забыл rollback".
+
+#### GORM в паттерне Repository
+
+```go
+type TaskRepository struct {
+	db *gorm.DB
+}
+
+func NewTaskRepository(db *gorm.DB) *TaskRepository {
+	return &TaskRepository{db: db}
+}
+
+func (r *TaskRepository) Create(ctx context.Context, task *Task) error {
+	return r.db.WithContext(ctx).Create(task).Error
+}
+
+func (r *TaskRepository) FindByID(ctx context.Context, id uint) (*Task, error) {
+	var task Task
+	err := r.db.WithContext(ctx).Preload("User").Preload("Tags").First(&task, id).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, ErrNotFound
+	}
+	return &task, err
+}
+
+func (r *TaskRepository) List(ctx context.Context, filter TaskFilter) ([]Task, int64, error) {
+	query := r.db.WithContext(ctx).Model(&Task{})
+
+	if filter.Status != "" {
+		query = query.Where("status = ?", filter.Status)
+	}
+	if filter.UserID > 0 {
+		query = query.Where("user_id = ?", filter.UserID)
+	}
+
+	var total int64
+	query.Count(&total)
+
+	var tasks []Task
+	err := query.
+		Preload("User").
+		Order("created_at DESC").
+		Offset(filter.Offset()).
+		Limit(filter.Limit()).
+		Find(&tasks).Error
+
+	return tasks, total, err
+}
+
+func (r *TaskRepository) Update(ctx context.Context, task *Task) error {
+	return r.db.WithContext(ctx).Save(task).Error
+}
+
+func (r *TaskRepository) Delete(ctx context.Context, id uint) error {
+	return r.db.WithContext(ctx).Delete(&Task{}, id).Error
+}
+```
+
+> [!info] Всегда передавайте `context.Context` через `WithContext(ctx)`. Это позволяет GORM корректно обрабатывать таймауты и отмену запросов, что критично для production-приложений.
+
+### Продвинутые паттерны баз данных
+
+#### Оптимистичная блокировка
+
+Оптимистичная блокировка предотвращает потерю обновлений при конкурентном доступе без блокировки строки. Каждая запись хранит номер версии, и UPDATE проверяет, что версия не изменилась:
+
+```go
+type Task struct {
+	ID      int64  `db:"id"`
+	Title   string `db:"title"`
+	Version int    `db:"version"` // номер версии для оптимистичной блокировки
+}
+
+func (r *TaskRepo) Update(ctx context.Context, task *Task) error {
+	result, err := r.db.ExecContext(ctx,
+		`UPDATE tasks SET title = $1, version = version + 1
+		 WHERE id = $2 AND version = $3`,
+		task.Title, task.ID, task.Version,
+	)
+	if err != nil {
+		return fmt.Errorf("update task: %w", err)
+	}
+
+	rows, _ := result.RowsAffected()
+	if rows == 0 {
+		return ErrConcurrentModification // кто-то обновил запись раньше
+	}
+
+	task.Version++ // обновляем локальную версию
+	return nil
+}
+```
+
+В GORM оптимистичная блокировка настраивается через плагин или вручную через `UpdateColumn("version", gorm.Expr("version + 1"))` с условием `Where("version = ?", task.Version)`.
+
+#### Cursor-based пагинация
+
+Offset-пагинация (`OFFSET 10000 LIMIT 20`) неэффективна для больших таблиц - БД всё равно сканирует и пропускает 10000 строк. Cursor-based пагинация использует значение последнего элемента предыдущей страницы:
+
+```go
+type Cursor struct {
+	LastID    int64     `json:"last_id"`
+	LastDate  time.Time `json:"last_date"`
+}
+
+type Page[T any] struct {
+	Items      []T     `json:"items"`
+	NextCursor *string `json:"next_cursor,omitempty"` // base64-encoded Cursor
+	HasMore    bool    `json:"has_more"`
+}
+
+func (r *TaskRepo) ListByCursor(ctx context.Context, cursor *Cursor, limit int) (*Page[Task], error) {
+	query := `SELECT id, title, created_at FROM tasks WHERE 1=1`
+	args := []any{}
+	argIdx := 1
+
+	if cursor != nil {
+		// Составной курсор: сначала по дате, потом по ID для стабильности
+		query += fmt.Sprintf(
+			` AND (created_at, id) < ($%d, $%d)`, argIdx, argIdx+1)
+		args = append(args, cursor.LastDate, cursor.LastID)
+		argIdx += 2
+	}
+
+	query += fmt.Sprintf(` ORDER BY created_at DESC, id DESC LIMIT $%d`, argIdx)
+	args = append(args, limit+1) // запрашиваем +1, чтобы узнать, есть ли ещё
+
+	rows, err := r.db.QueryContext(ctx, query, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var tasks []Task
+	for rows.Next() {
+		var t Task
+		rows.Scan(&t.ID, &t.Title, &t.CreatedAt)
+		tasks = append(tasks, t)
+	}
+
+	page := &Page[Task]{HasMore: len(tasks) > limit}
+	if page.HasMore {
+		tasks = tasks[:limit] // убираем лишний элемент
+	}
+	page.Items = tasks
+
+	if len(tasks) > 0 && page.HasMore {
+		last := tasks[len(tasks)-1]
+		c := Cursor{LastID: last.ID, LastDate: last.CreatedAt}
+		encoded := base64.StdEncoding.EncodeToString(mustMarshal(c))
+		page.NextCursor = &encoded
+	}
+
+	return page, nil
+}
+```
+
+#### Nullable колонки
+
+Стандартная библиотека предоставляет `sql.Null*` типы для работы с NULL значениями в БД:
+
+```go
+type User struct {
+	ID       int64          `db:"id"`
+	Name     string         `db:"name"`
+	Bio      sql.NullString `db:"bio"`       // может быть NULL
+	Age      sql.NullInt64  `db:"age"`       // может быть NULL
+	DeletedAt sql.NullTime  `db:"deleted_at"` // может быть NULL
+}
+
+// Проверка и извлечение значения
+if user.Bio.Valid {
+	fmt.Println(user.Bio.String)
+}
+
+// Установка NULL
+user.Bio = sql.NullString{} // Valid == false -> NULL
+
+// Установка значения
+user.Bio = sql.NullString{String: "Developer", Valid: true}
+```
+
+Для pgx есть пакет `pgtype` с более полной поддержкой PostgreSQL-типов: массивы, JSON, inet, cidr и другие.
+
+#### sqlc - генерация Go-кода из SQL
+
+sqlc принимает SQL-запросы и генерирует типобезопасный Go-код. В отличие от ORM, SQL пишется вручную, а Go-код генерируется:
+
+```sql
+-- queries/users.sql
+
+-- name: GetUser :one
+SELECT id, email, name, created_at FROM users WHERE id = $1;
+
+-- name: ListUsers :many
+SELECT id, email, name, created_at FROM users
+WHERE active = true ORDER BY created_at DESC LIMIT $1 OFFSET $2;
+
+-- name: CreateUser :one
+INSERT INTO users (email, name) VALUES ($1, $2) RETURNING *;
+
+-- name: UpdateUser :exec
+UPDATE users SET name = $1 WHERE id = $2;
+```
+
+```bash
+# sqlc генерирует Go-файлы из SQL
+sqlc generate
+```
+
+sqlc создаёт структуры для параметров и результатов, методы с правильными типами и обработкой ошибок. Преимущество - полный контроль над SQL с типобезопасностью Go.
+
 ---
 
 ## gRPC и Protocol Buffers
@@ -3377,6 +5019,270 @@ func loggingInterceptor(
 ```
 
 > [!info] gRPC использует HTTP/2, поддерживает streaming и генерирует типобезопасный клиент из proto-файлов. Лучше подходит для межсервисной коммуникации. REST лучше для публичных API и работы с браузерами.
+
+---
+
+## Кеширование с Redis
+
+Redis - in-memory хранилище, используемое для кеширования, очередей, rate limiting и pub/sub. В Go основная библиотека - go-redis:
+
+```bash
+go get github.com/redis/go-redis/v9
+```
+
+### Подключение и базовые операции
+
+```go
+import "github.com/redis/go-redis/v9"
+
+func NewRedisClient(url, password string, db int) *redis.Client {
+	return redis.NewClient(&redis.Options{
+		Addr:         url,
+		Password:     password,
+		DB:           db,
+		DialTimeout:  5 * time.Second,
+		ReadTimeout:  3 * time.Second,
+		WriteTimeout: 3 * time.Second,
+		PoolSize:     10,
+		MinIdleConns: 3,
+	})
+}
+
+func main() {
+	rdb := NewRedisClient("localhost:6379", "", 0)
+	defer rdb.Close()
+
+	ctx := context.Background()
+
+	// Проверка подключения
+	if err := rdb.Ping(ctx).Err(); err != nil {
+		log.Fatal("redis ping:", err)
+	}
+
+	// Строковые значения
+	rdb.Set(ctx, "key", "value", 10*time.Minute)  // с TTL
+	val, err := rdb.Get(ctx, "key").Result()
+	if errors.Is(err, redis.Nil) {
+		fmt.Println("ключ не найден")
+	}
+
+	// Хеши - для хранения структурированных данных
+	rdb.HSet(ctx, "user:1", map[string]any{
+		"name":  "Alice",
+		"email": "alice@example.com",
+		"age":   30,
+	})
+	name, _ := rdb.HGet(ctx, "user:1", "name").Result()
+	all, _ := rdb.HGetAll(ctx, "user:1").Result() // map[string]string
+
+	// Списки - для очередей
+	rdb.LPush(ctx, "queue:tasks", "task1", "task2")
+	task, _ := rdb.RPop(ctx, "queue:tasks").Result()
+
+	// Множества - для уникальных значений
+	rdb.SAdd(ctx, "tags:1", "go", "backend", "api")
+	tags, _ := rdb.SMembers(ctx, "tags:1").Result()
+
+	// Инкремент (атомарный)
+	rdb.Incr(ctx, "counter:visits")
+	rdb.IncrBy(ctx, "counter:visits", 10)
+
+	// TTL и удаление
+	rdb.Expire(ctx, "key", 1*time.Hour)
+	rdb.Del(ctx, "key")
+
+	_ = val
+	_ = name
+	_ = all
+	_ = task
+	_ = tags
+}
+```
+
+### Паттерн Cache-Aside
+
+Самый распространённый паттерн кеширования. Сначала проверяем кеш, при промахе идём в БД и записываем результат в кеш:
+
+```go
+type CachedUserRepository struct {
+	repo  UserRepository
+	cache *redis.Client
+	ttl   time.Duration
+}
+
+func NewCachedUserRepository(repo UserRepository, cache *redis.Client) *CachedUserRepository {
+	return &CachedUserRepository{
+		repo:  repo,
+		cache: cache,
+		ttl:   15 * time.Minute,
+	}
+}
+
+func (r *CachedUserRepository) FindByID(ctx context.Context, id int64) (*User, error) {
+	// 1. Проверяем кеш
+	key := fmt.Sprintf("user:%d", id)
+	cached, err := r.cache.Get(ctx, key).Bytes()
+	if err == nil {
+		var user User
+		if err := json.Unmarshal(cached, &user); err == nil {
+			return &user, nil // cache hit
+		}
+	}
+
+	// 2. Cache miss - идём в БД
+	user, err := r.repo.FindByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	// 3. Записываем в кеш
+	data, _ := json.Marshal(user)
+	r.cache.Set(ctx, key, data, r.ttl)
+
+	return user, nil
+}
+
+// Инвалидация кеша при обновлении
+func (r *CachedUserRepository) Update(ctx context.Context, user *User) error {
+	if err := r.repo.Update(ctx, user); err != nil {
+		return err
+	}
+	// Удаляем устаревший кеш
+	r.cache.Del(ctx, fmt.Sprintf("user:%d", user.ID))
+	return nil
+}
+```
+
+### Распределённые блокировки
+
+Redis позволяет реализовать распределённые блокировки для координации между инстансами приложения:
+
+```go
+func (r *CachedUserRepository) AcquireLock(ctx context.Context, key string, ttl time.Duration) (bool, error) {
+	// SET key value NX EX seconds - атомарная операция
+	ok, err := r.cache.SetNX(ctx, "lock:"+key, "1", ttl).Result()
+	return ok, err
+}
+
+func (r *CachedUserRepository) ReleaseLock(ctx context.Context, key string) error {
+	return r.cache.Del(ctx, "lock:"+key).Err()
+}
+```
+
+> [!info] Для production-ready распределённых блокировок используйте библиотеку go-redsync, которая реализует алгоритм Redlock. Простой SetNX не учитывает случаи, когда клиент умирает, не сняв блокировку (хотя TTL частично решает эту проблему).
+
+---
+
+## Очереди сообщений
+
+Очереди сообщений обеспечивают асинхронную связь между сервисами. Они развязывают producer и consumer, позволяют обрабатывать пики нагрузки и гарантируют доставку при временных сбоях.
+
+### Apache Kafka
+
+Kafka - распределённый лог для high-throughput обработки потоков данных:
+
+```bash
+go get github.com/segmentio/kafka-go
+```
+
+```go
+import "github.com/segmentio/kafka-go"
+
+// Producer - запись сообщений
+func NewKafkaWriter(brokers []string, topic string) *kafka.Writer {
+	return &kafka.Writer{
+		Addr:         kafka.TCP(brokers...),
+		Topic:        topic,
+		Balancer:     &kafka.LeastBytes{},
+		BatchSize:    100,
+		BatchTimeout: 10 * time.Millisecond,
+		RequiredAcks: kafka.RequireAll, // ack от всех реплик
+	}
+}
+
+func publishEvent(ctx context.Context, w *kafka.Writer, key string, value []byte) error {
+	return w.WriteMessages(ctx, kafka.Message{
+		Key:   []byte(key),
+		Value: value,
+		Headers: []kafka.Header{
+			{Key: "content-type", Value: []byte("application/json")},
+		},
+	})
+}
+
+// Consumer - чтение сообщений через consumer group
+func NewKafkaReader(brokers []string, topic, groupID string) *kafka.Reader {
+	return kafka.NewReader(kafka.ReaderConfig{
+		Brokers:        brokers,
+		Topic:          topic,
+		GroupID:        groupID,
+		MinBytes:       1,
+		MaxBytes:       10e6, // 10 MB
+		CommitInterval: time.Second,
+		StartOffset:    kafka.LastOffset,
+	})
+}
+
+func consumeMessages(ctx context.Context, reader *kafka.Reader, handler func(kafka.Message) error) error {
+	for {
+		msg, err := reader.FetchMessage(ctx)
+		if err != nil {
+			if errors.Is(err, context.Canceled) {
+				return nil
+			}
+			return fmt.Errorf("fetch: %w", err)
+		}
+
+		if err := handler(msg); err != nil {
+			slog.Error("handle message", "err", err, "offset", msg.Offset)
+			continue // или отправить в dead letter queue
+		}
+
+		// Коммит offset только после успешной обработки (at-least-once)
+		if err := reader.CommitMessages(ctx, msg); err != nil {
+			return fmt.Errorf("commit: %w", err)
+		}
+	}
+}
+```
+
+### Идемпотентность обработки сообщений
+
+При at-least-once доставке сообщение может прийти повторно. Обработчик должен быть идемпотентным - повторная обработка не должна менять результат:
+
+```go
+type IdempotentHandler struct {
+	processed map[string]struct{} // в production - Redis или таблица в БД
+	mu        sync.Mutex
+	handler   func(kafka.Message) error
+}
+
+func (h *IdempotentHandler) Handle(msg kafka.Message) error {
+	// Уникальный ключ сообщения
+	messageID := string(msg.Headers[0].Value) // или генерировать из key+offset
+
+	h.mu.Lock()
+	if _, ok := h.processed[messageID]; ok {
+		h.mu.Unlock()
+		return nil // уже обработано, пропускаем
+	}
+	h.mu.Unlock()
+
+	if err := h.handler(msg); err != nil {
+		return err
+	}
+
+	h.mu.Lock()
+	h.processed[messageID] = struct{}{}
+	h.mu.Unlock()
+	return nil
+}
+```
+
+> [!summary] Когда что использовать
+> - Kafka - высокий throughput, упорядоченность внутри партиции, replay сообщений, event sourcing
+> - NATS - низкая латентность, простота, pub/sub и request/reply, микросервисная связь
+> - RabbitMQ - гибкая маршрутизация (exchanges, routing keys), приоритеты сообщений, legacy-интеграция
 
 ---
 
@@ -3593,13 +5499,20 @@ func main() {
 
 ### Конфигурация
 
+Конфигурация приложения должна приходить из окружения (12-factor app). Есть несколько подходов:
+
+**caarlos0/env** - парсинг переменных окружения в структуры:
+
 ```go
+import "github.com/caarlos0/env/v10"
+
 type Config struct {
 	Port        int    `env:"PORT" envDefault:"8080"`
 	DatabaseURL string `env:"DATABASE_URL,required"`
 	RedisURL    string `env:"REDIS_URL" envDefault:"localhost:6379"`
 	LogLevel    string `env:"LOG_LEVEL" envDefault:"info"`
 	JWTSecret   string `env:"JWT_SECRET,required"`
+	Debug       bool   `env:"DEBUG" envDefault:"false"`
 }
 
 func Load() (*Config, error) {
@@ -3610,6 +5523,114 @@ func Load() (*Config, error) {
 	return &cfg, nil
 }
 ```
+
+**viper** - работа с конфигурационными файлами, переменными окружения и флагами:
+
+```bash
+go get github.com/spf13/viper
+```
+
+```go
+import "github.com/spf13/viper"
+
+type Config struct {
+	Server   ServerConfig   `mapstructure:"server"`
+	Database DatabaseConfig `mapstructure:"database"`
+	Redis    RedisConfig    `mapstructure:"redis"`
+	Auth     AuthConfig     `mapstructure:"auth"`
+}
+
+type ServerConfig struct {
+	Port         int           `mapstructure:"port"`
+	ReadTimeout  time.Duration `mapstructure:"read_timeout"`
+	WriteTimeout time.Duration `mapstructure:"write_timeout"`
+}
+
+type DatabaseConfig struct {
+	URL             string `mapstructure:"url"`
+	MaxOpenConns    int    `mapstructure:"max_open_conns"`
+	MaxIdleConns    int    `mapstructure:"max_idle_conns"`
+	ConnMaxLifetime string `mapstructure:"conn_max_lifetime"`
+}
+
+type RedisConfig struct {
+	URL      string `mapstructure:"url"`
+	Password string `mapstructure:"password"`
+	DB       int    `mapstructure:"db"`
+}
+
+type AuthConfig struct {
+	JWTSecret      string        `mapstructure:"jwt_secret"`
+	TokenExpiry    time.Duration `mapstructure:"token_expiry"`
+}
+
+func LoadConfig(path string) (*Config, error) {
+	viper.SetConfigFile(path)
+	viper.SetConfigType("yaml")
+
+	// Переменные окружения перезаписывают файл конфигурации
+	viper.AutomaticEnv()
+	viper.SetEnvPrefix("APP")                          // APP_SERVER_PORT, APP_DATABASE_URL
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_")) // server.port -> SERVER_PORT
+
+	// Значения по умолчанию
+	viper.SetDefault("server.port", 8080)
+	viper.SetDefault("server.read_timeout", "10s")
+	viper.SetDefault("server.write_timeout", "10s")
+	viper.SetDefault("database.max_open_conns", 25)
+	viper.SetDefault("database.max_idle_conns", 10)
+
+	if err := viper.ReadInConfig(); err != nil {
+		// Файл конфигурации не обязателен, если есть env-переменные
+		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
+			return nil, fmt.Errorf("read config: %w", err)
+		}
+	}
+
+	var cfg Config
+	if err := viper.Unmarshal(&cfg); err != nil {
+		return nil, fmt.Errorf("unmarshal config: %w", err)
+	}
+
+	return &cfg, nil
+}
+```
+
+Файл конфигурации `config.yaml`:
+
+```yaml
+server:
+  port: 8080
+  read_timeout: 10s
+  write_timeout: 10s
+
+database:
+  url: "postgres://app:secret@localhost:5432/mydb?sslmode=disable"
+  max_open_conns: 25
+  max_idle_conns: 10
+  conn_max_lifetime: 5m
+
+redis:
+  url: "localhost:6379"
+  password: ""
+  db: 0
+
+auth:
+  jwt_secret: "change-me-in-production"
+  token_expiry: 24h
+```
+
+Файл `.env` для локальной разработки (не коммитить в git):
+
+```env
+DATABASE_URL=postgres://app:secret@localhost:5432/mydb?sslmode=disable
+JWT_SECRET=dev-secret-key-change-in-production
+REDIS_URL=localhost:6379
+LOG_LEVEL=debug
+PORT=8080
+```
+
+> [!important] Приоритет конфигурации: флаги командной строки > переменные окружения > файл конфигурации > значения по умолчанию. Секреты (пароли, API-ключи, JWT secret) никогда не коммитятся в репозиторий. В production используйте vault, AWS Secrets Manager или аналоги.
 
 ### Health Checks
 
@@ -3629,7 +5650,11 @@ func (s *Server) handleReadyz(w http.ResponseWriter, r *http.Request) {
 
 Liveness проба (healthz) показывает, что процесс жив. Readiness проба (readyz) показывает, что приложение готово принимать трафик - зависимости доступны.
 
-### OpenTelemetry
+### Observability: Traces, Metrics, Logs
+
+Observability строится на трёх столпах: трейсы показывают путь запроса через систему, метрики отражают агрегированное состояние, логи содержат детали конкретных событий. Все три должны быть связаны через trace_id.
+
+#### OpenTelemetry (Traces)
 
 ```go
 import (
@@ -3655,6 +5680,102 @@ func (s *UserService) GetUser(ctx context.Context, id int64) (*User, error) {
 	return user, nil
 }
 ```
+
+#### Prometheus (Metrics)
+
+```bash
+go get github.com/prometheus/client_golang/prometheus
+go get github.com/prometheus/client_golang/prometheus/promhttp
+```
+
+```go
+import (
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+// RED метрики: Rate (запросы/сек), Errors (процент ошибок), Duration (время ответа)
+var (
+	httpRequestsTotal = promauto.NewCounterVec(prometheus.CounterOpts{
+		Name: "http_requests_total",
+		Help: "Total number of HTTP requests",
+	}, []string{"method", "path", "status"})
+
+	httpRequestDuration = promauto.NewHistogramVec(prometheus.HistogramOpts{
+		Name:    "http_request_duration_seconds",
+		Help:    "HTTP request duration in seconds",
+		Buckets: []float64{0.01, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5},
+	}, []string{"method", "path"})
+
+	activeConnections = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "active_connections",
+		Help: "Number of active connections",
+	})
+)
+
+// Middleware для автоматического сбора метрик
+func MetricsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		wrapped := &responseWriter{ResponseWriter: w, statusCode: 200}
+
+		next.ServeHTTP(wrapped, r)
+
+		duration := time.Since(start).Seconds()
+		status := strconv.Itoa(wrapped.statusCode)
+
+		httpRequestsTotal.WithLabelValues(r.Method, r.URL.Path, status).Inc()
+		httpRequestDuration.WithLabelValues(r.Method, r.URL.Path).Observe(duration)
+	})
+}
+
+type responseWriter struct {
+	http.ResponseWriter
+	statusCode int
+}
+
+func (rw *responseWriter) WriteHeader(code int) {
+	rw.statusCode = code
+	rw.ResponseWriter.WriteHeader(code)
+}
+
+// Эндпоинт для Prometheus
+mux.Handle("GET /metrics", promhttp.Handler())
+```
+
+#### Корреляция логов и трейсов
+
+Связывание логов с трейсами через trace_id позволяет от алерта по метрике перейти к трейсу и от трейса к конкретным логам:
+
+```go
+import "go.opentelemetry.io/otel/trace"
+
+func LoggerWithTrace(ctx context.Context, logger *slog.Logger) *slog.Logger {
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		return logger.With(
+			"trace_id", span.SpanContext().TraceID().String(),
+			"span_id", span.SpanContext().SpanID().String(),
+		)
+	}
+	return logger
+}
+
+// Использование в хендлере
+func (s *Server) handleGetUser(w http.ResponseWriter, r *http.Request) {
+	logger := LoggerWithTrace(r.Context(), s.logger)
+	logger.Info("processing request", "user_id", r.PathValue("id"))
+	// В логе будет trace_id, по которому можно найти трейс в Jaeger/Tempo
+}
+```
+
+> [!summary] Три столпа observability
+> - Logs - детали событий, отладка. slog с JSON + trace_id
+> - Metrics - агрегированное состояние. Prometheus + RED метод (Rate, Errors, Duration)
+> - Traces - путь запроса через сервисы. OpenTelemetry + Jaeger/Tempo
+>
+> Все три должны быть связаны через trace_id для сквозной диагностики.
 
 ---
 
@@ -3874,7 +5995,93 @@ fmt.Printf("Alloc: %d MB, NumGC: %d\n", stats.Alloc/1024/1024, stats.NumGC)
 
 ### Стек горутин
 
-Каждая горутина начинает с маленького стека (2-8 KB). При необходимости Go автоматически увеличивает стек: компилятор вставляет проверку в пролог каждой функции, и если стека не хватает, рантайм выделяет новый стек в 2 раза больше, копирует данные и обновляет указатели. Стек может и уменьшаться - если после GC используется менее 1/4 стека, он сжимается вдвое.
+Каждая горутина начинает с маленького стека в 2 KB (ранние версии использовали 8 KB, затем 4 KB, с Go 1.4 - 2 KB). При необходимости Go автоматически увеличивает стек: компилятор вставляет проверку в пролог каждой функции, и если стека не хватает, рантайм выделяет новый стек в 2 раза больше, копирует данные и обновляет указатели. Стек может и уменьшаться - если после GC используется менее 1/4 стека, он сжимается вдвое.
+
+### unsafe и cgo
+
+Пакет `unsafe` позволяет обойти систему типов Go. Это нужно для низкоуровневых операций, взаимодействия с C-кодом и некоторых оптимизаций:
+
+```go
+import "unsafe"
+
+// Размер и выравнивание типов
+fmt.Println(unsafe.Sizeof(int64(0)))     // 8
+fmt.Println(unsafe.Sizeof(struct{ a bool; b int64 }{})) // 16 (с padding)
+fmt.Println(unsafe.Alignof(int64(0)))    // 8
+
+// unsafe.Pointer - универсальный указатель для конвертации между типами
+// Конвертация []byte в string без копирования (zero-copy)
+func bytesToString(b []byte) string {
+	return unsafe.String(unsafe.SliceData(b), len(b))
+}
+
+// unsafe.Offsetof - смещение поля в структуре (полезно для atomic доступа)
+type Config struct {
+	_       int32
+	Version int64 // unsafe.Offsetof(Config{}.Version) == 8
+}
+```
+
+> [!important] unsafe лишает код гарантий безопасности памяти. Результат может зависеть от версии Go, платформы и оптимизаций компилятора. Используйте только когда нет безопасной альтернативы и тщательно тестируйте.
+
+cgo позволяет вызывать C-код из Go и наоборот:
+
+```go
+// #include <stdlib.h>
+// #include <string.h>
+import "C"
+import "unsafe"
+
+func cStrLen(s string) int {
+	cs := C.CString(s)          // Go string -> C string (выделяет память через malloc)
+	defer C.free(unsafe.Pointer(cs)) // обязательно освободить
+	return int(C.strlen(cs))
+}
+```
+
+cgo имеет существенную стоимость: каждый вызов C-функции стоит примерно 50-100 нс (против ~5 нс для обычного вызова Go-функции), потому что планировщик должен закрепить горутину за потоком ОС. Флаг `CGO_ENABLED=0` полностью отключает cgo, что даёт статически слинкованный бинарник без зависимости от libc.
+
+---
+
+## Кодогенерация
+
+Директива `//go:generate` запускает произвольные команды при вызове `go generate ./...`. Это стандартный способ генерации кода в Go:
+
+```go
+//go:generate stringer -type=Status
+//go:generate mockgen -source=repository.go -destination=mocks/mock_repository.go -package=mocks
+
+type Status int
+
+const (
+	StatusPending  Status = iota
+	StatusActive
+	StatusInactive
+)
+
+// После go generate появится файл status_string.go с методом String() для Status
+// StatusPending.String() -> "StatusPending"
+```
+
+Основные инструменты кодогенерации:
+
+- `stringer` - генерация метода String() для enum-подобных констант
+- `mockgen` (uber/mock) - генерация моков из интерфейсов для тестов
+- `sqlc` - генерация Go-кода из SQL-запросов
+- `buf` / `protoc-gen-go` - генерация Go-кода из proto-файлов для gRPC
+- `oapi-codegen` - генерация Go-кода из OpenAPI-спецификации
+
+```bash
+# Установка инструментов
+go install golang.org/x/tools/cmd/stringer@latest
+go install go.uber.org/mock/mockgen@latest
+go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+
+# Запуск всей кодогенерации проекта
+go generate ./...
+```
+
+> [!info] Сгенерированные файлы обычно коммитятся в репозиторий, чтобы сборка не зависела от установленных инструментов. Файлы помечают комментарием `// Code generated ... DO NOT EDIT.` в первой строке - go vet и линтеры их пропускают.
 
 ---
 
@@ -3910,40 +6117,247 @@ ENTRYPOINT ["./server"]
 
 Multi-stage build позволяет использовать полный Go-образ для сборки, но итоговый образ содержит только бинарник и минимальные зависимости.
 
+> [!info] Вместо alpine можно использовать scratch (полностью пустой образ) или distroless от Google. scratch даёт минимальный размер, но в нём нет shell для дебага. distroless - компромисс между безопасностью и удобством.
+
+### Docker Compose для разработки
+
+Docker Compose позволяет поднять все зависимости локально одной командой:
+
+```yaml
+# docker-compose.yml
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://app:secret@postgres:5432/mydb?sslmode=disable
+      - REDIS_URL=redis:6379
+      - LOG_LEVEL=debug
+      - JWT_SECRET=dev-secret
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - .:/app  # для hot-reload в dev
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+  migrate:
+    image: migrate/migrate
+    volumes:
+      - ./migrations:/migrations
+    command: ["-path", "/migrations", "-database", "postgres://app:secret@postgres:5432/mydb?sslmode=disable", "up"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  redisdata:
+```
+
+```bash
+# Поднять всё
+docker compose up -d
+
+# Только зависимости (БД, Redis), приложение запускается локально
+docker compose up -d postgres redis
+
+# Запустить миграции
+docker compose run --rm migrate
+
+# Посмотреть логи
+docker compose logs -f app
+
+# Остановить и удалить
+docker compose down
+docker compose down -v  # вместе с volumes (данные БД будут удалены)
+```
+
 ### Makefile
 
 ```makefile
-.PHONY: build run test lint migrate
+.PHONY: build run test lint migrate fmt check help
 
 APP_NAME := myservice
 BUILD_DIR := ./bin
+VERSION := $(shell git describe --tags --always --dirty)
+BUILD_TIME := $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
 
-build:
-	go build -ldflags="-s -w" -o $(BUILD_DIR)/$(APP_NAME) ./cmd/api
+## Основные команды
 
-run:
+build: ## Собрать бинарник
+	CGO_ENABLED=0 go build \
+		-ldflags="-s -w -X main.version=$(VERSION) -X main.buildTime=$(BUILD_TIME)" \
+		-o $(BUILD_DIR)/$(APP_NAME) ./cmd/api
+
+run: ## Запустить приложение локально
 	go run ./cmd/api
 
-test:
+## Качество кода
+
+test: ## Запустить тесты
 	go test -race -cover -count=1 ./...
 
-lint:
+test-integration: ## Запустить интеграционные тесты (требует БД)
+	go test -race -tags=integration -count=1 ./...
+
+test-coverage: ## Сгенерировать отчёт покрытия
+	go test -race -coverprofile=coverage.out ./...
+	go tool cover -html=coverage.out -o coverage.html
+
+lint: ## Запустить линтер
 	golangci-lint run ./...
 
-migrate-up:
+fmt: ## Отформатировать код
+	gofumpt -w .
+	goimports -w -local github.com/myorg/$(APP_NAME) .
+
+check: fmt lint test ## Полная проверка перед коммитом
+
+## База данных
+
+migrate-up: ## Применить миграции
 	migrate -path migrations -database "$(DATABASE_URL)" up
 
-migrate-down:
+migrate-down: ## Откатить последнюю миграцию
 	migrate -path migrations -database "$(DATABASE_URL)" down 1
 
-generate:
+migrate-create: ## Создать новую миграцию (NAME=create_users)
+	migrate create -ext sql -dir migrations -seq $(NAME)
+
+## Docker
+
+docker-build: ## Собрать Docker-образ
+	docker build -t $(APP_NAME):$(VERSION) -t $(APP_NAME):latest .
+
+docker-up: ## Поднять все зависимости
+	docker compose up -d postgres redis
+
+docker-down: ## Остановить зависимости
+	docker compose down
+
+## Генерация
+
+generate: ## Запустить go generate
 	go generate ./...
 
-docker-build:
-	docker build -t $(APP_NAME):latest .
+swagger: ## Сгенерировать Swagger-документацию
+	swag init -g cmd/api/main.go -o docs
+
+## Утилиты
+
+deps: ## Обновить зависимости
+	go mod tidy
+	go mod verify
+
+tools: ## Установить инструменты разработки
+	go install mvdan.cc/gofumpt@latest
+	go install golang.org/x/tools/cmd/goimports@latest
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	go install github.com/swaggo/swag/cmd/swag@latest
+	go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+help: ## Показать справку
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+.DEFAULT_GOAL := help
+```
+
+Makefile становится единой точкой входа для всех команд проекта. Новый разработчик запускает `make help` и видит все доступные действия. `make check` перед коммитом запускает форматирование, линтер и тесты.
+
+### Форматирование кода
+
+Go имеет единый стиль форматирования, зафиксированный инструментами. Споров о стиле нет - за тебя решает форматтер:
+
+```bash
+# go fmt - стандартный форматтер, встроен в Go
+go fmt ./...
+
+# gofumpt - строгая версия go fmt с дополнительными правилами
+# Например, убирает пустые строки в начале функций,
+# группирует импорты, выравнивает присваивания
+go install mvdan.cc/gofumpt@latest
+gofumpt -w .
+
+# goimports - go fmt + автоматическое управление импортами
+# Добавляет недостающие, удаляет неиспользуемые, группирует
+go install golang.org/x/tools/cmd/goimports@latest
+goimports -w -local github.com/myorg/myproject .
+```
+
+Флаг `-local` в goimports задаёт префикс для локальных импортов. Это создаёт третью группу импортов:
+
+```go
+import (
+	// Стандартная библиотека
+	"context"
+	"fmt"
+
+	// Внешние зависимости
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+
+	// Локальные пакеты проекта
+	"github.com/myorg/myproject/internal/domain"
+	"github.com/myorg/myproject/internal/service"
+)
+```
+
+Настройка IDE: большинство редакторов (VS Code, GoLand) запускают goimports или gofumpt при сохранении файла. Для VS Code настройка в settings.json:
+
+```json
+{
+  "go.formatTool": "goimports",
+  "editor.formatOnSave": true,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  }
+}
 ```
 
 ### golangci-lint
+
+golangci-lint - агрегатор линтеров. Он запускает десятки проверок за один проход, значительно быстрее, чем запускать каждый линтер отдельно:
+
+```bash
+# Установка
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+# Запуск
+golangci-lint run ./...
+
+# С автоисправлением (где возможно)
+golangci-lint run --fix ./...
+```
 
 Файл `.golangci.yml` настраивает набор линтеров:
 
@@ -3953,23 +6367,143 @@ run:
 
 linters:
   enable:
-    - errcheck
-    - govet
-    - staticcheck
-    - unused
-    - gosimple
-    - ineffassign
-    - revive
-    - gocritic
-    - gosec
-    - prealloc
-    - misspell
+    # Обязательные - ловят реальные баги
+    - errcheck        # проверяет, что ошибки не игнорируются
+    - govet           # аналог go vet, находит подозрительные конструкции
+    - staticcheck     # набор статических анализаторов
+    - unused          # находит неиспользуемый код
+    - gosimple        # предлагает упрощение кода
+    - ineffassign     # находит бесполезные присваивания
+
+    # Стиль и качество
+    - revive          # замена устаревшего golint, настраиваемый
+    - gocritic        # продвинутые проверки стиля и производительности
+    - misspell        # опечатки в комментариях и строках
+
+    # Безопасность
+    - gosec           # находит потенциальные уязвимости
+
+    # Производительность
+    - prealloc        # предлагает преаллокацию слайсов
+    - bodyclose       # проверяет закрытие resp.Body
+    - noctx           # проверяет использование context в HTTP-запросах
+
+    # Ошибки
+    - errorlint       # правильное использование errors.Is/As и %w
+    - wrapcheck       # проверяет оборачивание ошибок из внешних пакетов
+
+linters-settings:
+  revive:
+    rules:
+      - name: exported
+        arguments:
+          - "checkPrivateReceivers"
+      - name: unexported-return
+        disabled: true
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - performance
+      - style
+  gosec:
+    excludes:
+      - G104  # не жаловаться на незакрытые ресурсы (часто ложные срабатывания)
 
 issues:
   exclude-dirs:
     - vendor
     - gen
+    - docs
+  exclude-rules:
+    - path: _test\.go  # послабления для тестов
+      linters:
+        - gosec
+        - errcheck
 ```
+
+Описание ключевых линтеров:
+
+- errcheck - находит места, где возвращаемая ошибка игнорируется. Игнорирование ошибки в Go - почти всегда баг
+- staticcheck - набор из десятков проверок: неиспользуемые присваивания, некорректные форматные строки, неэффективный код
+- gosec - находит уязвимости: SQL-инъекции, использование слабых алгоритмов, hardcoded credentials
+- gocritic - предлагает улучшения: замена if-else на switch, использование strings.Builder вместо конкатенации
+- errorlint - проверяет, что ошибки сравниваются через errors.Is, а не через ==, и оборачиваются через %w
+- bodyclose - проверяет, что resp.Body закрывается после HTTP-запроса. Незакрытый Body приводит к утечке соединений
+- noctx - проверяет, что HTTP-запросы используют context для возможности отмены и таймаутов
+
+> [!info] golangci-lint стоит запускать в CI на каждый pull request. Локально можно запускать реже, но перед коммитом - обязательно. Для интеграции с pre-commit хуками используйте `golangci-lint run --new-from-rev=HEAD~1` - проверит только изменённые файлы.
+
+### CI/CD с GitHub Actions
+
+Минимальный CI-пайплайн для Go-проекта:
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v4
+        with:
+          version: latest
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: Run tests
+        env:
+          DATABASE_URL: postgres://test:test@localhost:5432/testdb?sslmode=disable
+          REDIS_URL: localhost:6379
+        run: go test -race -cover -count=1 ./...
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: Build
+        run: CGO_ENABLED=0 go build -o app ./cmd/api
+```
+
+Пайплайн запускает три задачи: линтер, тесты с реальной БД и сборку. lint и test запускаются параллельно, build ждёт их завершения.
 
 ### Graceful shutdown
 
@@ -4023,6 +6557,97 @@ func main() {
 	}
 }
 ```
+
+---
+
+## Безопасность
+
+### Защита от инъекций
+
+SQL-инъекции предотвращаются параметризованными запросами. Никогда не конкатенируйте пользовательский ввод в SQL:
+
+```go
+// Неправильно - SQL-инъекция
+query := fmt.Sprintf("SELECT * FROM users WHERE email = '%s'", userInput)
+
+// Правильно - параметризованный запрос
+db.QueryContext(ctx, "SELECT * FROM users WHERE email = $1", userInput)
+```
+
+### CORS
+
+CORS (Cross-Origin Resource Sharing) контролирует, какие домены могут обращаться к API из браузера:
+
+```go
+func CORSMiddleware(allowedOrigins []string) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			origin := r.Header.Get("Origin")
+			for _, allowed := range allowedOrigins {
+				if origin == allowed {
+					w.Header().Set("Access-Control-Allow-Origin", origin)
+					break
+				}
+			}
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+			w.Header().Set("Access-Control-Max-Age", "86400")
+
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
+
+			next.ServeHTTP(w, r)
+		})
+	}
+}
+```
+
+### HTTPS/TLS в production
+
+```go
+server := &http.Server{
+	Addr:    ":443",
+	Handler: handler,
+	TLSConfig: &tls.Config{
+		MinVersion: tls.VersionTLS12,
+		CurvePreferences: []tls.CurveID{
+			tls.X25519,
+			tls.CurveP256,
+		},
+	},
+}
+
+// С сертификатом Let's Encrypt через autocert
+import "golang.org/x/crypto/acme/autocert"
+
+manager := &autocert.Manager{
+	Cache:      autocert.DirCache("certs"),
+	Prompt:     autocert.AcceptTOS,
+	HostPolicy: autocert.HostWhitelist("example.com", "www.example.com"),
+}
+
+server.TLSConfig = manager.TLSConfig()
+server.ListenAndServeTLS("", "") // сертификаты управляются автоматически
+```
+
+### Безопасные заголовки
+
+```go
+func SecurityHeaders(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("X-XSS-Protection", "1; mode=block")
+		w.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+		w.Header().Set("Content-Security-Policy", "default-src 'self'")
+		next.ServeHTTP(w, r)
+	})
+}
+```
+
+> [!important] Секреты (JWT-ключи, пароли БД, API-ключи) передаются через переменные окружения или secret managers (HashiCorp Vault, AWS Secrets Manager). Никогда не коммитьте секреты в git. Используйте `.env` только для локальной разработки и добавьте его в `.gitignore`.
 
 ---
 

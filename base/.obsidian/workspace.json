@@ -35,72 +35,12 @@
             "id": "fb81dcdc01e73590",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "architecture/System Design/System Design.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "architecture/System Design"
               },
               "icon": "lucide-file",
               "title": "System Design"
-            }
-          },
-          {
-            "id": "17d9a94cc4b9fcbe",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/Лицензии.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Лицензии"
-            }
-          },
-          {
-            "id": "ed24236ec9888c97",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/Temporal Go.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Temporal Go"
             }
           },
           {
@@ -125,6 +65,30 @@
               },
               "icon": "lucide-file",
               "title": "Golang"
+            }
+          },
+          {
+            "id": "ed24236ec9888c97",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Temporal Go.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Temporal Go"
             }
           }
         ],
@@ -194,7 +158,7 @@
             }
           },
           {
-            "id": "bbdc0c071560cc93",
+            "id": "55f75b78bc19426e",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -203,7 +167,8 @@
               "title": "Navigator"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -293,13 +258,38 @@
             "id": "c1ce752a4643b798",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "0d6abe5951bc5e7c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "125753127115252e",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 7
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -322,13 +312,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/Лицензии.md",
+                "file": "backend/Golang.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Лицензии"
+              "title": "Outline of Golang"
             }
           }
         ],
@@ -336,8 +326,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -361,15 +350,15 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "17d9a94cc4b9fcbe",
+  "active": "7ae5a168fc65c53d",
   "lastOpenFiles": [
     "architecture/System Design/System Design.md",
-    "architecture/System Design/ДЗ.md",
     "backend/Golang.md",
     "backend/Temporal Go.md",
+    "cs/Лицензии.md",
+    "architecture/System Design/ДЗ.md",
     "cs/math.md",
     "русский язык.md",
-    "cs/Лицензии.md",
     "soft/career-growth.md",
     "soft/anxiety-management.md",
     "soft/speech-and-reading.md",
