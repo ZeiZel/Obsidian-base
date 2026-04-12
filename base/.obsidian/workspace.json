@@ -104,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -322,13 +322,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/friend_line_vk.excalidraw.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of friend_line_vk.excalidraw"
+              "title": "Outline of Selfgo"
             }
           }
         ],
@@ -361,18 +361,26 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "6624650590569b4f",
+  "active": "84b6521907180405",
   "lastOpenFiles": [
-    "Excalidraw/friend_line_vk.excalidraw.md",
+    "_png/Pasted image 20260412193109.png",
+    "_png/Pasted image 20260412192448.png",
+    "_png/Pasted image 20260412192413.png",
+    "_png/Pasted image 20260412192351.png",
+    "_png/Pasted image 20260412173043.png",
+    "_png/Pasted image 20260412172959.png",
+    "_png/Pasted image 20260412172854.png",
+    "_png/Pasted image 20260412172740.png",
+    "_png/Pasted image 20260412172609.png",
     "architecture/System Design/System Design.md",
-    "Excalidraw",
     "backend/go/Selfgo.md",
+    "Excalidraw/friend_line_vk.excalidraw.md",
+    "Excalidraw",
     "_png/Pasted image 20260411202204.png",
     "_png/Pasted image 20260411202043.png",
     "backend/go/Temporal Go.md",
     "backend/go/go.md",
     "backend/go/Golang.md",
-    "_png/Pasted image 20260411200105.png",
     "Tags/#security",
     "Tags/#performance",
     "Tags/#senior",
@@ -393,13 +401,6 @@
     "backend/go/04 Go Networking.md",
     "backend/go/03 Go OS and Runtime.md",
     "backend/backend.md",
-    "_png/Pasted image 20260411090112.png",
-    "_png/Pasted image 20260411084647.png",
-    "_png/Pasted image 20260411082459.png",
-    "_png/Pasted image 20260411082430.png",
-    "_png/Pasted image 20260411082342.png",
-    "_png/Pasted image 20260411082322.png",
-    "_png/Pasted image 20260411082306.png",
     "backend/Untitled.md",
     "cs/Лицензии.md",
     "architecture/System Design/ДЗ.md",
@@ -408,7 +409,6 @@
     "soft/career-growth.md",
     "soft/anxiety-management.md",
     "soft/speech-and-reading.md",
-    "soft/saying-no.md",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",
