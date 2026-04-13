@@ -5,12 +5,8 @@
       "path": "backend/go/Selfgo.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "friend_line_vk.excalidraw",
-      "path": "Excalidraw/friend_line_vk.excalidraw.md"
+      "basename": "10-advanced",
+      "path": "backend/go/10-advanced.md"
     },
     {
       "basename": "Temporal Go",
@@ -21,8 +17,24 @@
       "path": "backend/go/go.md"
     },
     {
-      "basename": "Golang",
-      "path": "backend/go/Golang.md"
+      "basename": "09-deploy",
+      "path": "backend/go/09-deploy.md"
+    },
+    {
+      "basename": "06-microservices",
+      "path": "backend/go/06-microservices.md"
+    },
+    {
+      "basename": "01-basics",
+      "path": "backend/go/01-basics.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "friend_line_vk.excalidraw",
+      "path": "Excalidraw/friend_line_vk.excalidraw.md"
     },
     {
       "basename": "backend",
@@ -187,10 +199,6 @@
     {
       "basename": "Chakra UI",
       "path": "frontend/ui-frameworks/Chakra UI.md"
-    },
-    {
-      "basename": "soft",
-      "path": "soft/soft.md"
     }
   ],
   "omittedPaths": [],

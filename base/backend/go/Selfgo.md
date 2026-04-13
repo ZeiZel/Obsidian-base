@@ -522,64 +522,433 @@ func calculateIMT(weight, height float64) (IMT float64) {
 
 ![](../../_png/Pasted%20image%2020260411202204.png)
 
-### Panic
-
-
-
-
-
 ### If
 
 
 
+`main.go`
+```Go
+func main() {
+	fmt.Println("__ Калькулятор ИМТ __")
+	userWeight, userHeight := getUserInput()
 
+	IMT := calculateIMT(userWeight, userHeight)
+
+	isLean := IMT < 16
+
+	if isLean {
+		fmt.Println("У вас слишком малый вес")
+	}
+
+	outputResult(IMT)
+}
+```
+
+
+
+```bash
+> go run ./main.go
+
+__ Калькулятор ИМТ __
+Введите свой рост в см: 195
+Введите свой вес: 54
+У вас слишком малый вес
+Ваш ИМТ: 14
+```
 
 ### Булева логика
 
 
 
+![](../../_png/Pasted%20image%2020260413164934.png)
 
+
+
+![](../../_png/Pasted%20image%2020260413165000.png)
+
+
+
+![](../../_png/Pasted%20image%2020260413165021.png)
 
 ### else if
 
 
 
+`main.go`
+```go
+func main() {
+	fmt.Println("__ Калькулятор ИМТ __")
+	userWeight, userHeight := getUserInput()
 
+	IMT := calculateIMT(userWeight, userHeight)
+
+	if IMT < 16 {
+		fmt.Println("У вас слишком малый вес")
+	} else if IMT <= 18.5 {
+		fmt.Println("У вас средний недостаточный вес")
+	} else {
+		fmt.Println("У вас избыточный вес")
+	}
+
+	outputResult(IMT)
+}
+```
 
 ### Switch
 
 
 
+`main.go`
+```go
+func main() {
+	fmt.Println("__ Калькулятор ИМТ __")
+	userWeight, userHeight := getUserInput()
 
+	IMT := calculateIMT(userWeight, userHeight)
+
+	switch IMT {
+	case 1:
+		fmt.Println("Ваш индекс массы тела равен 1")
+	case 2:
+		fmt.Println("Ваш индекс массы тела равен 2")
+	}
+
+	switch {
+	case IMT < 16:
+		fmt.Println("У вас слишком малый вес")
+	case IMT >= 16:
+		fmt.Println("Ваш ИМТ чуть лучше плохого")
+	}
+
+	if IMT < 16 {
+		fmt.Println("У вас слишком малый вес")
+	} else if IMT <= 18.5 {
+		fmt.Println("У вас средний недостаточный вес")
+	} else {
+		fmt.Println("У вас избыточный вес")
+	}
+
+	outputResult(IMT)
+}
+```
 
 ### Циклы
 
+В отличие от других ЯПов, в GO существует только один вид цикла - for. С помощью него можно сделать любые переборы 
 
+![](../../_png/Pasted%20image%2020260413170601.png)
 
+Классическая запись цикла `for`. Прямо сейчас она выведет 10 чисел: от 0 до 9. 
 
+```go
+for i := 0; i < 10; i++ {
+	fmt.Printf("%d\n", i)
+}
+```
+
+```bash
+> go run ./main.go
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+Тут `for` будет выполняться пока условие не станет `false`. Грубо говоря, это аналог `while` из других языков.  
+
+```go
+var i int = 0; 
+
+for i < 10 {
+	fmt.Printf("%d\n", i)
+	i++
+}
+```
+
+А такая запись образует бесконечный цикл, так как тут нет никаких условий. 
+
+```go
+for {
+	fmt.Printf("%d\n", i)
+}
+```
 
 ### break и continue
 
+Так же, если нам нужно модифицировать прохождение циклов и управлять ими, то мы можем воспользоваться: 
 
+- `continue` - оператор, который пропустит выполнение цикла в данной итерации
+- `break` - остановит выполнение цикла
 
+`main.go`
+```go
+for i := 0; i < 10; i++ {
+	if i%2 == 0 {
+		continue
+	}
+
+	fmt.Printf("%d\n", i)
+
+	if i == 7 {
+		fmt.Println("loop breaked")
+		break
+	}
+}
+```
+
+```bash
+❯ go run ./main.go
+1
+3
+5
+7
+loop breaked
+```
 
 #### Повторение ввода
 
 
 
+`main.go`
+```go
+package main
 
+import (
+	"fmt"
+	"math"
+)
+
+const IMTPower = 2
+
+func main() {
+	fmt.Println("__ Калькулятор ИМТ __")
+
+	for {
+		userWeight, userHeight := getUserInput()
+		IMT := calculateIMT(userWeight, userHeight)
+		outputResult(IMT)
+
+		isUserChoiceContinue := selectUserChice()
+
+		if !isUserChoiceContinue {
+			break
+		}
+	}
+}
+
+func selectUserChice() bool {
+	fmt.Println("Хотите ли вы продолжить ввод? y/n")
+
+	isContinue := ""
+
+	for {
+		fmt.Scan(&isContinue)
+
+		if isContinue == "y" || isContinue == "Y" {
+			fmt.Println("Повтор")
+			return true
+		} else if isContinue == "n" {
+			fmt.Println("До свидания")
+			return false
+		} else {
+			fmt.Println("Введено неверное значение")
+			continue
+		}
+	}
+}
+
+func outputResult(imt float64) {
+	switch {
+	case imt < 16:
+		fmt.Println()
+	case imt >= 16:
+		fmt.Println("Ваш ИМТ чуть лучше плохого")
+	}
+}
+
+func calculateIMT(weight, height float64) (IMT float64) {
+	IMT = weight / math.Pow(height/100, IMTPower)
+	return IMT
+}
+
+func getUserInput() (float64, float64) {
+	var userHeight float64
+	var userWeight float64
+
+	fmt.Print("Введите свой рост в см: ")
+	fmt.Scan(&userHeight)
+	fmt.Print("Введите свой вес: ")
+	fmt.Scan(&userWeight)
+
+	return userWeight, userHeight
+}
+```
+
+
+
+```bash
+> go run ./main.go
+
+__ Калькулятор ИМТ __
+Введите свой рост в см: 190
+Введите свой вес: 100
+Ваш ИМТ чуть лучше плохого
+Хотите ли вы продолжить ввод? y/n
+sdf
+Введено неверное значение
+dsf
+Введено неверное значение
+sdf
+Введено неверное значение
+e
+Введено неверное значение
+Y
+Повтор
+Введите свой рост в см: 190
+Введите свой вес: 100
+Ваш ИМТ чуть лучше плохого
+Хотите ли вы продолжить ввод? y/n
+y
+Повтор
+Введите свой рост в см: 190
+Введите свой вес: 90
+Ваш ИМТ чуть лучше плохого
+Хотите ли вы продолжить ввод? y/n
+n
+До свидания
+```
 
 ### Error
 
+Ошибка в Go - это такое же значение, как и любое другое, которое возвращает функция. Его обязательно нужно обрабатывать. 
+
+Для работы с ошибками в Go используется библиотека `errors`. С помощью неё можно создать инстанс ошибки через функцию `New`, которая принимает в себя ошибку формата UPPER_CASE. 
+
+- `nil` - это значение, которое говорит об "отсутствии значения"
+- Обычно, ошибки возвращают последним значением из функции. 
+
+`main.go`
+```Go
+func main() {
+	fmt.Println("__ Калькулятор ИМТ __")
+
+	for {
+		userWeight, userHeight := getUserInput()
+		
+		// получаем ошибку вторым аргументом
+		IMT, err := calculateIMT(userWeight, userHeight)
+		// обрабатываем ошибку
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		outputResult(IMT)
+
+		isUserChoiceContinue := selectUserChice()
+
+		if !isUserChoiceContinue {
+			break
+		}
+	}
+}
+
+func calculateIMT(weight, height float64) (float64, error) {
+	// если пользователь ввёл не числа, а любые другие символы или значения меньше нуля
+	if weight <= 0 || height <= 0 {
+		// то вернём нулевой ИМТ и ошибку
+		return 0, errors.New("VALUES_MUST_BE_EXISTED")
+	}
+	
+	IMT := weight / math.Pow(height/100, IMTPower)
+	
+	// а если всё хорошо, то вернём nil
+	return IMT, nil
+}
+```
+
+
+
+```bash
+> go run ./main.go
+
+__ Калькулятор ИМТ __
+Введите свой рост в см: d
+Введите свой вес: d
+VALUES_MUST_BE_EXISTED
+Введите свой рост в см: asdasd
+Введите свой вес: VALUES_MUST_BE_EXISTED
+Введите свой рост в см: Введите свой вес: VALUES_MUST_BE_EXISTED
+Введите свой рост в см: Введите свой вес: VALUES_MUST_BE_EXISTED
+Введите свой рост в см: 190
+Введите свой вес: 100
+Ваш ИМТ чуть лучше плохого
+Хотите ли вы продолжить ввод? y/n
+```
+
+Если нам нужно проигнорировать ошибку (или любую другую возвращаемую переменную), то мы можем просто указать её с `_` нижнего подчёркивания и она будет игнорироваться. 
+
+```go
+IMT, _ := calculateIMT(userWeight, userHeight)
+```
 
 ### Panic
 
+`panic` - это механизм экстренного выхода из приложения с nonzero stdout value. 
 
-### if
+Таким экстренным выводом нам стоит пользоваться, когда приложение не может продолжать работу. 
 
+Зачастую, этим стоит пользоваться в консольных утилитах. В API же достаточно обрабатывать ошибки и возвращать ответ. 
 
+`main.go`
+```go
+func main() {
+	fmt.Println("__ Калькулятор ИМТ __")
 
-### Булева логика
+	for {
+		userWeight, userHeight := getUserInput()
+		IMT, err := calculateIMT(userWeight, userHeight)
+		if err != nil {
+			// fmt.Println(err)
+			// continue
+
+			panic("Произошла ошибка ввода данных")
+		}
+
+		outputResult(IMT)
+
+		isUserChoiceContinue := selectUserChice()
+
+		if !isUserChoiceContinue {
+			break
+		}
+	}
+}
+
+```
+
+В выводе мы получим ошибку с указанием `пакет.функция` места ошибки
+
+```bash
+> go run ./main.go
+
+__ Калькулятор ИМТ __
+Введите свой рост в см: asd
+Введите свой вес: panic: Произошла ошибка ввода данных
+
+goroutine 1 [running]:
+main.main()
+        /Users/zeizel/projects/go/main.go:21 +0x84
+exit status 2
+```
+
 
 
 ## Array и Slice
