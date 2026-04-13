@@ -195,10 +195,6 @@
     {
       "basename": "Mantine",
       "path": "frontend/ui-frameworks/Mantine.md"
-    },
-    {
-      "basename": "Chakra UI",
-      "path": "frontend/ui-frameworks/Chakra UI.md"
     }
   ],
   "omittedPaths": [],

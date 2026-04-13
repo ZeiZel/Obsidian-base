@@ -1022,14 +1022,14 @@ func main() {
 
 ![](../../_png/Pasted%20image%2020260413200042.png)
 
-
-
 ```go
 func main() {
+	// базовый массив
 	transactions := [5]int{1, 2, 3, 4, 5}
 
 	fmt.Println(transactions)
 
+	// слайсы от базы
 	slice := transactions[1:3]
 	fromToEnd := transactions[1:]
 	startTo := transactions[:4]
@@ -1126,6 +1126,7 @@ transactionsNewPartial: restored 4 4
 ![](../../_png/Pasted%20image%2020260413201752.png)
 
 ### Динамические массивы
+
 
 
 
