@@ -959,24 +959,187 @@ exit status 2
 
 ### Массивы
 
+Массив - это объединение однотипных данных, которые кладутся в свою ячейку памяти и им присваивается свой определённый индекс. 
 
+![](../../_png/Pasted%20image%2020260413191540.png)
 
+Объявление массива происходит через присвоение конструкции `[<длина>]<тип>{<значения...>}`
 
+```go
+package main
 
+func main() {
+	var transactions [3]int
+	transactions = [3]int{1, 2, 3}
+	banks := [4]string{"Tinkoff", "Alfa", "Sber", "Sovcombank"}
+}
+```
 
-
-### Make
-### Увеличение cap
 ### Работа с массивами
+
+`Println` умеет выводить массивы. Если мы выделим больше памяти под массив, но не зададим все значения, то у нас значения будут проставлены их дефолты (для int - 0, для string - "")
+
+`main.go`
+```Go
+package main
+
+import "fmt"
+
+func main() {
+	transactions := [3]int{1, 2}
+	banks := [4]string{"Tinkoff", "Alfa"}
+
+	fmt.Println(transactions)
+	fmt.Println(banks)
+
+	// обращаемся к значению
+	fmt.Println(transactions[0])
+
+	// меняем значение
+	banks[0] = "Точка"
+
+	fmt.Println(banks)
+}
+```
+
+И такой вывод будет:
+
+```bash
+> go run ./main.go
+
+[1 2 0]
+[Tinkoff Alfa  ]
+1
+[Точка Alfa  ]
+```
+
 ### slice
+
+Механизм slice позволяет нам взять из массива только определённый диапазон значений: 
+
+- 1 - это начальный индекс, который мы берём
+- 3 - это конечный индекс, до которого не включительно мы берём значение
+
+![](../../_png/Pasted%20image%2020260413200042.png)
+
+
+
+```go
+func main() {
+	transactions := [5]int{1, 2, 3, 4, 5}
+
+	fmt.Println(transactions)
+
+	slice := transactions[1:3]
+	fromToEnd := transactions[1:]
+	startTo := transactions[:4]
+	all := transactions[:]
+
+	fmt.Println(slice)
+	fmt.Println(fromToEnd)
+	fmt.Println(startTo)
+	fmt.Println(all)
+}
+```
+
+```bash
+> go run ./main.go
+
+[1 2 3 4 5]
+[2 3]
+[2 3 4 5]
+[1 2 3 4]
+[1 2 3 4 5]
+```
+
 ### Cap и Len
+
+Слайсы имеют другую природу работы с массивами в Go. 
+
+Когда мы просто присваиваем другой переменной наш массив, мы копируем массив из одной ячейки памяти в другую. Таким образом мы удваиваем занятое место в памяти, что может быть не всегда эффективно. 
+
+Когда мы применяем `slice`, то место мы уже используем более эффективно, так как мы создаём определённое окошко на данные, с которыми будет работать разработчик. 
+
+Но представим такую ситуацию, что мы создадим ещё один слайс поверх нашего слайса, как в примере. `transactionsNewPartial` будет слайсом над слайсом `transactionsPartial`, в которой будет только один элемент. Сам по себе `transactionsNewPartial` работает сейчас с отдельной ячейкой от оригинального массива. Однако, если мы решим вывести вместимость (`cap`) и длину (`len`), то увидим разные значения - длина `transactionsNewPartial` будет равна 1, а вместимость `4`
+
+`main.go`
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// базовый массив
+	transactions := [5]int{1, 2, 3, 4, 5}
+
+	// переприсваиваем этот массив
+	transactionsNew := transactions
+	transactionsNew[0] = 30 // и меняем значение
+
+	fmt.Println(transactions)    // оригинальный массив [1 2 3 4 5]
+	fmt.Println(transactionsNew) // его копия           [30 2 3 4 5]
+
+	transactionsPartial := transactions[1:] // берём слайс
+	transactionsPartial[0] = 120 // присваиваем другое значение
+
+	fmt.Println(transactions)        // [1 120 3 4 5]
+	fmt.Println(transactionsPartial) // [120 3 4 5]
+
+	transactionsNewPartial := transactionsPartial[:1]
+	transactionsNewPartial[0] = 150
+
+	fmt.Println(transactions)           // [1 150 3 4 5]
+	fmt.Println(transactionsNewPartial) // [ 150 ]
+	fmt.Println("transactions", len(transactionsNewPartial), cap(transactionsNewPartial)) // 1 4
+	fmt.Println("transactionsNewPartial", len(transactionsNewPartial), cap(transactionsNewPartial)) // 1 4
+
+	// переприсвоим слайсу самого себя, но увиличим окно под capacity 
+	transactionsNewPartial = transactionsNewPartial[0:4]
+
+	fmt.Println("transactionsNewPartial: restored", len(transactionsNewPartial), cap(transactionsNewPartial)) // 4 4
+}
+```
+
+```bash
+> go run ./main.go
+
+[1 2 3 4 5]
+[30 2 3 4 5]
+[1 120 3 4 5]
+[120 3 4 5]
+[1 150 3 4 5]
+[150]
+transactions 1 4
+transactionsNewPartial 1 4
+transactionsNewPartial: restored 4 4
+```
+
+По сути: 
+
+- `len` - это длина текущего инстанса, который у нас на руках (длина окошка, длина самого массива)
+- `cap` - это потенциальная вместимость данного элемента
+
+`cap` показывает реальную вместимость данного элемента, включая слайсы. Но показывает он только вместимость, которая идёт слева направо (от стартовой точки слайса и до самого конца массива, не включая выбранный участок). 
+
+В примере с `transactionsNewPartial`, мы смогли увеличить его окно за счёт capacity его родителя-ссылки, который хранил эту вместимость. Так как мы сделали слайс в `transactionsNewPartial` с 0 до 1 элемента, то у нашего родителя `transactionsPartial` осталась его прошлая вместимость справа (после 1 индекса) ещё в 3 элемента, что оставило нам пул, который мы смогли вернуть `transactionsNewPartial`. 
+
+![](../../_png/Pasted%20image%2020260413201752.png)
+
 ### Динамические массивы
+
+
+
+
+
+
 #### массив транзакций
 ### unpack
 ### циклы по массивам
 #### Рассчёт баланса
 
+### Make
 
+### Увеличение cap
 
 
 ## Map
