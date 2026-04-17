@@ -1127,21 +1127,306 @@ transactionsNewPartial: restored 4 4
 
 ### Динамические массивы
 
+Динамические массивы в Go реализованы за счёт слайсов. При начальной инициализации массива, мы обязаны опустить длину массива (не указывать её). Таким образом мы создадим сразу слайс. Затем, с помощью функции `append`, мы сможем добавить новый элемент в массив. 
 
+Сам `append` смотрит на capacity массива и, если его не хватает, то сначала увеличивает вместимость, а потом уже добавляет элемент.
 
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    transactions := []int{1, 2, 3, 4, 5}  
+    newTransactions := append(transactions, 4)  
+  
+    fmt.Println(transactions)  
+    fmt.Println(newTransactions)  
+}
+```
 
+```bash
+> go run ./main.go 
 
+[1 2 3 4 5]
+[1 2 3 4 5 4]
+```
 
+Если мы хотим просто расширить наш массив со слайсом, то мы можем просто переприсвоить к старому массиву новый из `append`
+
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    transactions := []int{1, 2, 3, 4, 5}  
+    transactions = append(transactions, 4)  
+  
+    fmt.Println(transactions)  
+}
+```
+
+Однако нужно отметить, что `append` создаёт новый указатель на новый массив в памяти, поэтому если мы через него увеличим старый массив, то ссылка оборвётся
+
+То есть в этом примере мы создаём `temp` переменную из слайса `transactions`, где второй мы расширили через `append` и вместо того, чтобы в `temp` у нас появился новый элемент, мы получаем два разных массива. Теперь в обеих переменных указатели на разные массивы
+
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    transactions := []int{1, 2, 3, 4, 5}  
+    temp := transactions  
+    transactions = append(transactions, 4)  
+  
+    fmt.Println(temp)  
+    fmt.Println(transactions)  
+}
+```
+
+```bash
+go run ./main.go 
+[1 2 3 4 5]
+[1 2 3 4 5 4]
+```
+
+Так же `append` позволяет добавить сразу несколько значений
+
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    transactions := []int{1, 2, 3, 4, 5}  
+    transactions = append(transactions, 4, 5, 6, 7)
+}
+```
+
+#### Unpack
+
+А если нам нужно смёрджить другой слайс в наш, то тут поможет `unpack` синтаксис, который деструктуризирует массив и применит его как список аргументов через запятую
+
+```Go
+
+func main() {  
+    transactions := []int{1, 2, 3, 4, 5}  
+    transactions2 := []int{6, 7, 8}  
+    transactions = append(transactions, transactions2...)
+}
+```
 
 #### массив транзакций
-### unpack
+
+Пример задания массива транзакций
+
+`main.go`
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    var transactions []float64  
+  
+    for {  
+       transaction := scanTransaction()  
+  
+       if transaction == 0 {  
+          break  
+       }  
+  
+       transactions = append(transactions, transaction)  
+    }  
+  
+    fmt.Println(transactions)  
+}  
+  
+func scanTransaction() float64 {  
+    var transaction float64  
+    fmt.Print("Введите транзакцию: ")  
+    fmt.Scan(&transaction)  
+    return transaction  
+}
+```
+
 ### циклы по массивам
+
+
+
+`main.go`
+```Go
+func main() {
+	tr1 := []int{1,2,3,4,5}
+	
+	for index, value := range tr1 {
+		fmt.Println(index, value)
+	}
+}
+```
+
+```bash
+> go run ./main.go 
+
+0 1
+1 2
+2 3
+3 4
+4 5
+```
+
 #### Рассчёт баланса
+
+
+
+`main.go`
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    var transactions []float64  
+    var sum float64  
+  
+    for {  
+       transaction := scanTransaction()  
+  
+       if transaction == 0 {  
+          break  
+       }  
+  
+       transactions = append(transactions, transaction)  
+    }  
+  
+    for _, transaction := range transactions {  
+       sum += transaction  
+    }  
+  
+    fmt.Println(sum)  
+}  
+  
+func scanTransaction() float64 {  
+    var transaction float64  
+    fmt.Print("Введите транзакцию: ")  
+    fmt.Scan(&transaction)  
+    return transaction  
+}
+```
+
+```bash
+> go run ./main.go 
+
+Введите транзакцию: 12
+Введите транзакцию: 20
+Введите транзакцию: -30
+Введите транзакцию: 40
+Введите транзакцию: 100
+Введите транзакцию: n
+142
+```
 
 ### Make
 
+Операция `append` в Go каждый раз проводит операцию увеличения пространства. Она сильно медленнее, чем просто добавление нового элемента в массив. Поэтому есть метод создания массива сразу с определённым capacity, что ускоряет запись
+
+Операция `make` позволит создать слайс с массивом, у которого уже заранее будет предопределено capacity фиксированного размера. 
+
+Первым аргументом мы передаём тип массива, который нам нужно будет создать. Вторым аргументом определяется количество начальных значений + capacity. Дефолтно устанавливаются начальные значения под выбранный тип. Сам `make` возвращает слайс. 
+
+```Go
+tr1 := make([]string, 2) // получим ["", ""]
+tr1 = append(tr1, "1") // получим ["", "", "1"], так как значения уже были 
+```
+
+Третим аргументом задаётся максимальный capacity, с которым создаётся slice
+
+```Go
+tr1 := make([]string, 0, 2) // получим [2]int{}
+tr1 = append(tr1, "1") // ["1"] 
+```
+
+Однако, если мы выйдёт за пределы capacity, то наш массив станет сразу из capacity 2 в 4 из-за особенностей **увеличения cap**
+
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    tr := make([]string, 0, 2)  
+    fmt.Println(len(tr), cap(tr))  
+    tr = append(tr, "1")  
+    fmt.Println(len(tr), cap(tr))  
+    tr = append(tr, "2")  
+    fmt.Println(len(tr), cap(tr))  
+    tr = append(tr, "3")  
+    fmt.Println(len(tr), cap(tr))  
+    fmt.Println(tr)  
+}
+```
+
+```bash
+> go run ./main.go 
+
+0 2 # cap 2
+1 2
+2 2
+3 4 # момент X - cap 4
+[1 2 3]
+```
+
 ### Увеличение cap
 
+Увеличение cap в Go происходит с помощью функции по определённой схеме, которая в простом виде представлена в исходниках Go. 
+
+В [этом файле](https://github.com/golang/go/blob/master/src/runtime/slice.go) расписана логика работы слайсов в Go. 
+
+У нас всего есть 3 проверки: 
+
+1. Если новое значение cap больше предыдущего в 2 раза, то ставим просто новое значение
+2. Если старое значение cap меньше трешхолда (который = 256), то cap увеличится в два раза 
+3. Уже далее, когда cap 256 и более, то мы плавно будем снижать до 1.25 множитель добавленных cap при увеличении slice на каждой итерации
+
+`src / runtime / slice.go`
+```Go
+// nextslicecap computes the next appropriate slice length.
+func nextslicecap(newLen, oldCap int) int {
+	newcap := oldCap
+	doublecap := newcap + newcap
+	if newLen > doublecap {
+		return newLen
+	}
+
+	const threshold = 256
+	if oldCap < threshold {
+		return doublecap
+	}
+	for {
+		// Transition from growing 2x for small slices
+		// to growing 1.25x for large slices. This formula
+		// gives a smooth-ish transition between the two.
+		newcap += (newcap + 3*threshold) >> 2
+
+		// We need to check `newcap >= newLen` and whether `newcap` overflowed.
+		// newLen is guaranteed to be larger than zero, hence
+		// when newcap overflows then `uint(newcap) > uint(newLen)`.
+		// This allows to check for both with the same comparison.
+		if uint(newcap) >= uint(newLen) {
+			break
+		}
+	}
+
+	// Set newcap to the requested cap when
+	// the newcap calculation overflowed.
+	if newcap <= 0 {
+		return newLen
+	}
+	return newcap
+}
+```
 
 ## Map
 
