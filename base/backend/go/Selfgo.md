@@ -1431,6 +1431,31 @@ func nextslicecap(newLen, oldCap int) int {
 ## Map
 
 ### Map
+
+Map - это базовая конструкция списка ключ-значение.  
+
+`main.go`
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+	// map[<тип_ключа>]<тип_значения>
+    m := map[string]string{  
+       "google": "https://google.com",  
+    }  
+  
+    fmt.Println(m)  
+}
+```
+
+```bash
+> go run ./main.go 
+
+map[google:https://google.com]
+```
+
 ### Изменение Map
 ### Итерация по Map
 #### Утилита закладок
