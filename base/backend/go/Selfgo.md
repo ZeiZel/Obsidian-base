@@ -1457,14 +1457,272 @@ map[google:https://google.com]
 ```
 
 ### Изменение Map
+
+
+
+`main.go`
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    m := map[string]string{  
+       "yahoo": "yahoo.com",  
+    }  
+    fmt.Println(m)  
+    fmt.Println(m["yahoo"])  
+    m["yahoo"] = "https://yahoo.com"  
+    fmt.Println(m)  
+    m["Google"] = "https://google.com"  
+    m["Yandex"] = "https://yandex.ru"  
+    fmt.Println(m)  
+    delete(m, "Yandex")  
+    delete(m, "Y")  
+    fmt.Println(m["Y"])  
+    fmt.Println(m)  
+}
+```
+
+```bash
+> go run ./main.go 
+
+map[yahoo:yahoo.com]
+yahoo.com
+map[yahoo:https://yahoo.com]
+map[Google:https://google.com Yandex:https://yandex.ru yahoo:https://yahoo.com]
+			# пустая строка, так как получаем не существующее значение
+map[Google:https://google.com yahoo:https://yahoo.com]
+```
+
 ### Итерация по Map
+
+
+
+`main.go`
+```go
+func main() {
+	m := map[string]int{ "a": 1, "b": 2 }
+	
+	for key, value := range m {
+		fmt.Println(key, value)
+	}
+}
+```
+
+```bash
+> go run ./main.go 
+
+b 2
+a 1
+```
+
 #### Утилита закладок
+
+
+
+`main.go`
+```Go
+package main  
+  
+import "fmt" 
+  
+func main() {  
+    bookmarks := map[string]string{}  
+  
+    fmt.Println("Приложение для закладок")  
+  
+    for {  
+       variant := getMenu()  
+  
+       switch variant {  
+       case 1:  
+          printBookmarks(bookmarks)  
+       case 2:  
+          bookmarks = addBookmark(bookmarks)  
+       case 3:  
+          bookmarks = deleteBookmark(bookmarks)  
+       case 4:  
+          break  
+       }  
+    }  
+}  
+  
+func getMenu() (variant int) {  
+    fmt.Println("Выберите вариант: ")  
+    fmt.Println("1. Посмотреть закладки")  
+    fmt.Println("2. Добавить закладку")  
+    fmt.Println("3. Удалить закладку")  
+    fmt.Println("4. Выход")  
+    fmt.Scan(&variant)  
+    return variant  
+}  
+  
+func printBookmarks(bookmarks map[string]string) {  
+    if len(bookmarks) == 0 {  
+       fmt.Println("Закладок пока нет")  
+    }  
+  
+    for key, value := range bookmarks {  
+       fmt.Println(key, ": ", value)  
+    }  
+}  
+  
+func addBookmark(bookmarks map[string]string) map[string]string {  
+    var newBookmarkKey string  
+    var newBookmarkValue string  
+  
+    fmt.Println("Добавление закладки")  
+  
+    fmt.Print("Введите ключ: ")  
+    fmt.Scan(&newBookmarkKey)  
+    fmt.Print("Введите значение: ")  
+    fmt.Scan(&newBookmarkValue)  
+  
+    bookmarks[newBookmarkKey] = newBookmarkValue  
+  
+    return bookmarks  
+}  
+  
+func deleteBookmark(bookmarks map[string]string) map[string]string {  
+    var deleteBookmarkKey string  
+  
+    fmt.Println("Удаление закладки")  
+  
+    fmt.Print("Введите ключ: ")  
+    fmt.Scan(&deleteBookmarkKey)  
+  
+    delete(bookmarks, deleteBookmarkKey)  
+  
+    return bookmarks  
+}
+```
+
+```bash
+> go run ./main.go 
+
+Приложение для закладок
+
+Выберите вариант:
+1. Посмотреть закладки
+2. Добавить закладку
+3. Удалить закладку
+4. Выход
+1
+
+Закладок пока нет
+
+Выберите вариант:
+5. Посмотреть закладки
+6. Добавить закладку
+7. Удалить закладку
+8. Выход
+2
+
+Добавление закладки
+Введите ключ: yandex
+Введите значение: https://ya.ru
+
+Выберите вариант:
+9. Посмотреть закладки
+10. Добавить закладку
+11. Удалить закладку
+12. Выход
+1
+
+yandex :  https://ya.ru
+
+Выберите вариант:
+13. Посмотреть закладки
+14. Добавить закладку
+15. Удалить закладку
+16. Выход
+3
+
+Удаление закладки
+Введите ключ: yandex
+
+Выберите вариант:
+17. Посмотреть закладки
+18. Добавить закладку
+19. Удалить закладку
+20. Выход
+1
+
+Закладок пока нет
+
+Выберите вариант:
+21. Посмотреть закладки
+22. Добавить закладку
+23. Удалить закладку
+24. Выход
+4
+```
+
 ### Labels
+
+Когда мы запускаем `break` внутри `switch`, который находится в другой итерационной конструкции (`for` или такой же `switch`), то мы применяем остановку для дальнейшего выполнения именно этой конструкции. 
+
+И теперь, указав Label Menu, мы сможем на него сослаться, чтобы указать, что мы прерываем не выполнение `switch`, а выполнение `for`
+
+```Go
+func main() {  
+    bookmarks := map[string]string{}  
+  
+    fmt.Println("Приложение для закладок")  
+  
+Menu:  
+    for {  
+       variant := getMenu()  
+  
+    Switch:  
+       switch variant {  
+       case 1:  
+          printBookmarks(bookmarks)  
+       case 2:  
+          bookmarks = addBookmark(bookmarks)  
+       case 3:  
+          bookmarks = deleteBookmark(bookmarks)  
+       case 4:  
+          break Menu  
+       }  
+    }  
+}
+```
+
 ### Type alias
+
+Для оптимизации записи длинных типов, мы можем воспользоваться ключевым словом `type`, которое позволит в себя положить определение типа элемента. 
+
+Это даёт эффективное переиспользование типа и более понятное обозначение бизнес-сущности, которая привязана к определённому элементу
+
+`main.go`
+```Go
+type bookmarkMap = map[string]string  
+  
+func main() {  
+    bookmarks := bookmarkMap{}  
+  
+    fmt.Println("Приложение для закладок")
+    
+// ...
+
+func addBookmark(bookmarks bookmarkMap) bookmarkMap {
+```
+
 ### Make для Map
 
+У Map есть точно такая же проблема выделения памяти для новых элементов, как и в массивах.
 
+У Map нет capacity. Мы можем только в моменте рассчитать длину. И, в связи с этим, `make` не будет устанавливать `capacity` - он просто выделит память под определённое количество элементов сразу. 
 
+```Go
+m := make(bookmarkMap, 3)  
+m["a"] = "a"  
+m["b"] = "b"  
+m["c"] = "c"  
+fmt.Println(m)
+```
 
 
 
@@ -1472,15 +1730,163 @@ map[google:https://google.com]
 
 ### Все типы данных
 
+Типы данных в Go делятся на 4 группы: 
 
+- Base types
+- Aggregate type
+- Reference type
+- Interface type
 
+![](../../_png/Pasted%20image%2020260418142800.png)
 
+#### Передача по ссылке
+
+Когда мы работаем с ссылочным типом данных, при передаче в функцию, мы кладём не значение, а ссылку на элемент в памяти
+
+![](../../_png/Pasted%20image%2020260418143232.png)
+
+Таким образом, при передаче slice в функцию, мы будем внутри неё работать с ссылкой на значения в памяти и менять напрямую их. Такой подход позволит не переприсваивать значение из функции обратно в нашу переменную, а сразу напрямую мутировать данные
+
+```Go
+func add(a []int) {  
+    a[0] = 3  
+}  
+  
+func main() {  
+    a := []int{1}  
+    a[0] = 2  
+    add(a)  
+    fmt.Println(a) // [ 3 ]
+}
+```
+
+#### Передача по значению
+
+Когда мы передаём в функцию значение, мы не меняем оригинальное значение, а работаем с новым экземпляром значения из аргумента
+
+![](../../_png/Pasted%20image%2020260418144507.png)
+
+А уже в этих двух случаях мы будем работать с разными элементами в памяти, так как в функцию будет передаваться значение, а не указатель на место этого значения в памяти. 
+
+```Go
+func add(a [1]int) {  
+    a[0] = 3  
+}  
+  
+func main() {  
+    a := [1]int{}  
+    a[0] = 2  
+    add(a)  
+    fmt.Println(a) // [ 2 ]
+}
+```
+
+```Go
+func add(a string) {  
+    a = "2" 
+}  
+  
+func main() {  
+    a := "1"
+    add(a)  
+    fmt.Println(a) // "1"
+}
+```
+
+#### Доработка bookmarks
+
+В итоге мы можем переписать приложение закладок и убрать присваивание нового Map, так как это ссылочный тип данных и при передаче в функцию, мы будем внутри работать со ссылкой и менять значения во фрейме в памяти
+
+`main.go`
+```Go
+package main  
+  
+import "fmt"  
+  
+type bookmarkMap = map[string]string  
+  
+func main() {  
+    bookmarks := bookmarkMap{}  
+  
+    fmt.Println("Приложение для закладок")  
+  
+Menu:  
+    for {  
+       variant := getMenu()  
+  
+       switch variant {  
+       case 1:  
+          printBookmarks(bookmarks)  
+       case 2:  
+          addBookmark(bookmarks)  
+       case 3:  
+          deleteBookmark(bookmarks)  
+       case 4:  
+          break Menu  
+       }  
+    }  
+}  
+  
+func getMenu() (variant int) {  
+    fmt.Println("Выберите вариант: ")  
+    fmt.Println("1. Посмотреть закладки")  
+    fmt.Println("2. Добавить закладку")  
+    fmt.Println("3. Удалить закладку")  
+    fmt.Println("4. Выход")  
+    fmt.Scan(&variant)  
+    return variant  
+}  
+  
+func printBookmarks(bookmarks bookmarkMap) {  
+    if len(bookmarks) == 0 {  
+       fmt.Println("Закладок пока нет")  
+    }  
+  
+    for key, value := range bookmarks {  
+       fmt.Println(key, ": ", value)  
+    }  
+}  
+  
+func addBookmark(bookmarks bookmarkMap) {  
+    var newBookmarkKey string  
+    var newBookmarkValue string  
+  
+    fmt.Println("Добавление закладки")  
+  
+    fmt.Print("Введите ключ: ")  
+    fmt.Scan(&newBookmarkKey)  
+    fmt.Print("Введите значение: ")  
+    fmt.Scan(&newBookmarkValue)  
+  
+    bookmarks[newBookmarkKey] = newBookmarkValue  
+}  
+  
+func deleteBookmark(bookmarks bookmarkMap) {  
+    var deleteBookmarkKey string  
+  
+    fmt.Println("Удаление закладки")  
+  
+    fmt.Print("Введите ключ: ")  
+    fmt.Scan(&deleteBookmarkKey)  
+  
+    delete(bookmarks, deleteBookmarkKey)  
+}
+```
 
 ### Что такое указатель
 
+Указатель - это переменная, которая хранит адрес в памяти. 
 
+![](../../_png/Pasted%20image%2020260418150427.png)
 
+Чтобы получить адрес в памяти определённой переменной, нам нужно обратиться к ней с `&`
 
+![](../../_png/Pasted%20image%2020260418150529.png)
+
+Зачем это нужно: 
+
+1. Мы избегаем лишнее копирование. Когда мы передаём значение напрямую в функцию, мы всегда её копируем. 
+2. Мутирует значение. Указатель позволяет передать адрес в памяти и сразу изменять нужное значение
 
 ### Создание Указателя
 
