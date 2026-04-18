@@ -1458,7 +1458,7 @@ map[google:https://google.com]
 
 ### Изменение Map
 
-
+Изменение и добавление значений в Map выглядит подобным образом, как и для массивов. Только в качестве ключей, мы используем предопределённые по типу значения
 
 `main.go`
 ```Go
@@ -1497,7 +1497,7 @@ map[Google:https://google.com yahoo:https://yahoo.com]
 
 ### Итерация по Map
 
-
+Итерация по Map работает так же, как и с массивами
 
 `main.go`
 ```go
@@ -1890,38 +1890,246 @@ func deleteBookmark(bookmarks bookmarkMap) {
 
 ### Создание Указателя
 
+Создаётся указатель через обращение к переменной оператором `&`. В переменную с указателем кладётся ссылка на область памяти, в котором на данный момент находится значение переменной 
 
-
-
+```go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    a := 5  
+    pointerA := &a
+    res := double(a)  
+    fmt.Println(res) // 10  
+    fmt.Println(pointerA) // 0x3f1979206020
+}  
+  
+func double(num int) int {  
+    return num * 2  
+}
+```
 
 ### Использование Указателя
 
+И для обращения к данным, на которые смотрит указатель, нам нужно добавить использовать dereference оператор `*`. Его мы вешаем на сами значения, с которыми работаем и на типы, у которых в начале так же должен идти star символ, что обозначает указатель `*int` 
 
-
-
+```go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    a := 5  
+    double(&a)  
+    fmt.Println(a) // 10  
+}  
+  
+func double(num *int) {  
+    *num = *num * 2  
+}
+```
 
 #### Reverse массива
+
+
+
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    arr := [4]int{1, 2, 3, 4}  
+    reverse(&arr)  
+    fmt.Println(arr)  
+}  
+  
+func reverse(arr *[4]int) {  
+    for index, value := range *arr {  
+       (*arr)[len(arr) - 1 - index] = value  
+    }  
+}
+```
+
+```bash
+> go run ./main.go 
+
+[4 3 2 1]
+```
 
 
 
 ## Struct
 
 ### Зачем нужны
-### Функция конструктор
-### Валидация данных
-#### Перенос генерации
-### Композиция
+
+Когда мы работаем с большими объектами, нам приходится передавать их друг за другом в правильной последовательности. Часто это приводит к ошибкам по невнимательности. 
+
+```Go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    outputPassword(login, password, url)  
+}  
+  
+func promptData(prompt string) string {  
+    fmt.Print(prompt)  
+    var res string  
+    fmt.Scan(&res)  
+    return res  
+}  
+  
+func outputPassword(login, password, url string) {  
+    fmt.Println(login, password, url)  
+}
+```
+
 ### Описание struct
+
+Описание структуры начинается с `type <имя> struct { <поле> <тип> }`
+
+```Go
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}
+```
+
 ### Создание инстанса
+
+Отличия явной и неявной передачи аргументов в структуру: 
+
+- Неявная
+	- Нужно передавать аргументы в той же последовательности, в которой и были объявлены в структуре
+	- Нужно передавать все аргументы
+- Явная
+	- Последовательность аргументов не важна
+	- Пустой аргумент будет дефолтно равен пустому значению по типу
+
+`main.go`
+```Go  
+// Просто пустой account  
+accountNull := account{}  
+  
+// неявная передача  
+account1 := account{  
+    login, // login  
+    "",    // password  
+    url,   // url  
+}  
+  
+// явная передача  
+account2 := account{  
+    url:      url,  
+    password: password,  
+}
+```
+
 ### Передача структур
+
+Удобство структур в том, что мы можем просто указать тип аргумента функции в виде этой структуры `acc account` и работать с этими данными, как с объектом. 
+
+При передаче структуры напрямую в функцию, мы создаём новую копию, а не работаем с ссылкой. 
+
+`main.go`
+```Go
+package main  
+  
+import "fmt"  
+  
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount := account{  
+       url:      url,  
+       login:    login,  
+       password: password,  
+    }  
+  
+    outputPassword(userAccount)  
+}  
+  
+func promptData(prompt string) string {  
+    fmt.Print(prompt + ": ")  
+    var res string  
+    fmt.Scan(&res)  
+    return res  
+}  
+  
+func outputPassword(acc account) {  
+    fmt.Println(acc)  
+    fmt.Println(acc.password)  
+}
+```
+
+```bash
+> go run ./main.go 
+
+Введите логин: argver
+Введите пароль: aoaoapasswrdlss
+Введите URL: https://coco.co
+{argver aoaoapasswrdlss https://coco.co}
+aoaoapasswrdlss
+```
+
 ### Использование указателей
+
+Создаётся указатель на структуру таким же образом, как и для любого другого значения. 
+
+Однако тут стоит отметить, что у нас есть возможность обращаться к данным структуры даже без dereference оператора. Мы можем опустить `*` и сразу обращаться к ключам структуры
+
+Изменение структуры при передаче указателем будет работать так же, как и для других типов данных
+
+```Go
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount := account{  
+       url:      url,  
+       login:    login,  
+       password: password,  
+    }  
+  
+    outputPassword(&userAccount)  
+}
+  
+func outputPassword(acc *account) {  
+    fmt.Println(acc.login, (*acc).password)  
+}
+```
+
 ### Rune
+
+
+
 #### Генерация пароля
 ### Методы
 ### Сутация struct
 
+### Функция конструктор
 
+### Валидация данных
+#### Перенос генерации
 
+### Композиция
 
 
 
