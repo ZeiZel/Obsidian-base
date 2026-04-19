@@ -2185,6 +2185,8 @@ func generatePassword(n int) string {
 
 Методы структуры описываются через обращение к структуре после `func` в `(<имя_структуры>)`. Таким образом мы привязываем функцию к структуре и переводим её в метод. Методы мы стараемся класть рядом со структурами. Таким образом, мы позволяем сразу обращаться функциям из инстансов структуры. 
 
+Есть две записи создания метода под структуру, но каждая из них создаёт копию. 
+
 ```go
 type account struct {  
     login    string  
@@ -2223,41 +2225,355 @@ func main() {
 }
 ```
 
-### Сутация struct
+#### Мутация struct
 
+Для того, чтобы получить структуру указателем, достаточно в типе показать, что мы получаем указатель на структуру
 
+`main.go`
+```Go
+package main  
+  
+import (  
+    "fmt"  
+    "math/rand/v2")  
+  
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+func (acc account) outputPassword() {  
+    fmt.Println(acc)  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
 
+func (acc *account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    (*acc).password = string(res)  
+}  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    url := promptData("Введите URL")  
+  
+    userAccount := account{  
+       url:   url,  
+       login: login,  
+    }  
+  
+    userAccount.generatePassword(12)  
+    userAccount.outputPassword()  
+}  
+  
+func promptData(prompt string) string {  
+    fmt.Print(prompt + ": ")  
+    var res string  
+    fmt.Scan(&res)  
+    return res  
+}
+```
 
+```bash
+> go run ./main.go 
 
+Введите логин: asdasfffffwq
+Введите URL: ya.ru
+{asdasfffffwq Z*FDgggyJXwN ya.ru}
+```
 
 ### Функция конструктор
 
+Функция-конструктор - это инициализатор нашей структуры. Это условная конструкция, которую принято реализовывать в Go для начального создания объектов по структурам. Тут принято сохранять логику валидации и начальных конфигураций для создания объектов. 
 
+```Go
+func newAccount(login, password, url string) *account {  
+    return &account{login, password, url}  
+}  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount := newAccount(login, password, url)  
+  
+    userAccount.generatePassword(12)  
+    userAccount.outputPassword()  
+}
+```
 
+### Валидация данных + перенос генерации
 
+Валидация данных в конструкторе - это одна из важнейших его задач. 
 
-### Валидация данных
+Пример валидации значения `url` через `url.ParseRequestURI` в рамках конструктора. 
 
+`main.go`
+```Go
+package main  
+  
+import (  
+    "errors"  
+    "fmt"    "math/rand/v2"    "net/url")  
+  
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+func (acc account) outputPassword() {  
+    fmt.Println(acc)  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
+  
+func (acc *account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    (*acc).password = string(res)  
+}  
+  
+func newAccount(login, password, urlString string) (*account, error) {  
+	// проверяем наличие логина
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+	// валидируем переданный URL
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := account{login: login, password: password, url: urlString}  
+  
+	// проверяем ряем наличие пароля и генерируем, если отсутствует
+    if newAcc.password == "" {  
+       newAcc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := newAccount(login, password, url)  
+  
+    if err != nil {  
+		// выводим ошибку
+	    fmt.Println(err)  
+  
+       return  
+    }  
+  
+    userAccount.outputPassword()  
+}  
+  
+func promptData(prompt string) string {  
+    fmt.Print(prompt + ": ")  
+    var res string  
+	// добавляем возможность ввода пустой строки
+    fmt.Scanln(&res)  
+    return res  
+}
+```
 
+```bash
+> go run ./main.go 
 
+Введите логин: a1a
+Введите пароль: 
+Введите URL: ya.ru
+failed parse URL
 
-#### Перенос генерации
+> go run ./main.go 
 
-
-
-
+Введите логин: a1a
+Введите пароль: 
+Введите URL: https://ya.ru
+{a1a NYZNjfVc2uU* https://ya.ru}
+```
 
 ### Композиция
 
+Композиция структур в Go осуществляется за счёт вложения структуры в другую структуру
 
+`main.go`
+```Go
+// базовая структура
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+// новая структура на базе account
+type accountWithTS struct {  
+    createdAt time.Time  
+    updatedAt time.Time
+    // имплементируем композицию структур на базе вложения  
+    account
+}
 
+// оставляем этот метод на account
+func (acc *account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    (*acc).password = string(res)  
+}
 
+// теперь мы работаем только с новой структурой
+func newAccountWithTS(login, password, urlString string) (*accountWithTS, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+
+	// содаём новый инстанс
+    newAcc := accountWithTS{  
+       createdAt: time.Now(),  
+       updatedAt: time.Now(),  
+       // имплементируем account
+       account: account{  
+          login:    login,  
+          password: password,  
+          url:      urlString,  
+       },  
+    }  
+  
+    if newAcc.password == "" {  
+       // обращаться к методам account мы можем напрямую, либо оригинальную структуру через account.
+       newAcc.generatePassword(12)  
+       newAcc.account.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := newAccountWithTS(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    userAccount.outputPassword()  
+}
+```
+
+Либо мы можем воспользоваться второй записью и явно указать имя для композиции. 
+
+Тут мы указали `acc`, поэтому теперь обращаться к методам этой структуры мы можем только напрямую
+
+`main.go`
+```Go
+  
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+type accountWithTS struct {  
+    createdAt time.Time  
+    updatedAt time.Time  
+    acc       account
+}  
+  
+func (acc account) outputPassword() {  
+    fmt.Println(acc)  
+}  
+
+func newAccountWithTS(login, password, urlString string) (*accountWithTS, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := accountWithTS{  
+       createdAt: time.Now(),  
+       updatedAt: time.Now(),  
+       acc: account{  
+          login:    login,  
+          password: password,  
+          url:      urlString,  
+       },  
+    }  
+  
+    if newAcc.acc.password == "" {  
+	   // обращение ТОЛЬКО через acc.
+       newAcc.acc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := newAccountWithTS(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    userAccount.acc.outputPassword()  
+}
+```
 
 
 
 ## Пакеты
 
 ### Разделение кода
+
+
+
+
+
+
+
+
 ### Добавление пакета
 ### Импорт и экспорт
 ### Добавление сторонних пакетов
