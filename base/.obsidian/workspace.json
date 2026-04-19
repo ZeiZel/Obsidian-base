@@ -146,7 +146,7 @@
             }
           },
           {
-            "id": "55f75b78bc19426e",
+            "id": "35d3938fb1c8b8fb",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -269,13 +269,24 @@
             "id": "125753127115252e",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "ee4b08d2a858dd3b",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 8
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -336,7 +347,7 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "27f092496f158954",
+  "active": "ee4b08d2a858dd3b",
   "lastOpenFiles": [
     "_png/Pasted image 20260418150529.png",
     "_png/Pasted image 20260418150427.png",

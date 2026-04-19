@@ -2155,11 +2155,73 @@ for _, ch := range string(str) {
 
 
 
+```Go
+package main  
+  
+import (  
+    "fmt"  
+    "math/rand/v2"
+)  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
+  
+func main() {  
+    fmt.Println(generatePassword(12))
+}
+
+func generatePassword(n int) string {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+		// rand.IntN - подставляет псевнослучайное число от 0 до переданного аргумента
+		res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    return string(res)  
+}
+```
 
 ### Методы
 
+Методы структуры описываются через обращение к структуре после `func` в `(<имя_структуры>)`. Таким образом мы привязываем функцию к структуре и переводим её в метод. Методы мы стараемся класть рядом со структурами. Таким образом, мы позволяем сразу обращаться функциям из инстансов структуры. 
 
+```go
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}
 
+// Есть две записи: 
+
+// 1. либо так, но придётся передавать структуру аргументом
+func (account) outputPassword(acc *account) {
+
+// 2. либо так и тут мы сразу будем подхватывать данные текущего инстанса, который вызвал метод
+func (acc account) outputPassword() {  
+    fmt.Println(acc.login, acc.password)  
+}
+```
+
+Далее применяем в коде через вызов от инстанса структуры
+
+```go
+func main() {  
+    fmt.Println(generatePassword(12))  
+  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount := account{  
+       url:      url,  
+       login:    login,  
+       password: password,  
+    }  
+  
+    userAccount.outputPassword()  
+}
+```
 
 ### Сутация struct
 
