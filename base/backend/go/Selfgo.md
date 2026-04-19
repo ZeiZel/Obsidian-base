@@ -2567,14 +2567,135 @@ func main() {
 
 ### Разделение кода
 
+Разделение кода на свои смысловые блоки - важна часть разработки. Хранение всех сущностей и логики в одном конкретном месте - это антипаттерн, так как возможность найти ответственные компоненты и быстро переключаться между разными сущностями - уже будет отсутствовать. 
 
+Чтобы просто разделить код на разные файлы, достаточно вынести код в разные файлы в рамках одного пакета. В нашем случае - `package main`. 
 
+Первый файл с полной логикой аккаунта: 
 
+`account.go`
+```Go
+package main  
+  
+import (  
+    "errors"  
+    "fmt"    
+    "math/rand/v2"    
+    "net/url"    
+    "time"
+)  
+  
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+type accountWithTS struct {  
+    createdAt time.Time  
+    updatedAt time.Time  
+    acc       account}  
+  
+func (acc account) outputPassword() {  
+    fmt.Println(acc)  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
+  
+func (acc *account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    (*acc).password = string(res)  
+}  
+  
+func newAccountWithTS(login, password, urlString string) (*accountWithTS, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := accountWithTS{  
+       createdAt: time.Now(),  
+       updatedAt: time.Now(),  
+       acc: account{  
+          login:    login,  
+          password: password,  
+          url:      urlString,  
+       },  
+    }  
+  
+    if newAcc.acc.password == "" {  
+       newAcc.acc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}
+```
 
+Второй файл с основной функцией: 
 
+`main.go`
+```go
+package main  
+  
+import "fmt"  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := newAccountWithTS(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    userAccount.acc.outputPassword()  
+}  
+  
+func promptData(prompt string) string {  
+    fmt.Print(prompt + ": ")  
+    var res string  
+    fmt.Scanln(&res)  
+    return res  
+}
+```
 
+Теперь команды для запуска и сборки целого приложения должны будут включать не один корневой файл `./main.go`, а всё приложение `.`, чтобы компилятор подтянул все файлы `.go`
+
+```bash
+> go run .
+
+> go build
+```
 
 ### Добавление пакета
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Импорт и экспорт
 ### Добавление сторонних пакетов
 #### Package файлов
