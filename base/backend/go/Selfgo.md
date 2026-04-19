@@ -2683,22 +2683,269 @@ func promptData(prompt string) string {
 
 ### Добавление пакета
 
+Деление на пакеты позволяет вынести переиспользуемую часть кода и расшарить его на несколько других пакетов, либо, в дальнейшем, вообще вынести этот пакет в отдельный модуль в рамках другого репозитория. 
 
+![](../../_png/Pasted%20image%2020260419181715.png)
 
+Как делить на пакеты: 
 
+- по использованию (`utils`, `shared`) - отдельные переиспользуемые модули в разных пакетах
+- по доменным / предметным областям (`user`, `payment`, `account`) - модули по сущностям 
+- по бизнес-задачам (модули для сборка данных и отправки данных) - деление на модули по разному типу выполняемых задач 
 
+Для создания нового пакета `account`, нам потребуется переименовать пакет и переместить все файлы, которые связаны с другими пакетами, кроме `main`, в одноимённую директорию
 
-
-
-
-
-
-
-
+`account / account.go`
+```Go
+package account  
+  
+import (  
+    "errors"  
+    "fmt"    
+    "math/rand/v2"    
+    "net/url"    
+    "time"
+)
+  
+type account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+type accountWithTS struct {  
+    createdAt time.Time  
+    updatedAt time.Time  
+    acc       account}  
+  
+func (acc account) outputPassword() {  
+    fmt.Println(acc)  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
+  
+func (acc *account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    (*acc).password = string(res)  
+}  
+  
+func newAccountWithTS(login, password, urlString string) (*accountWithTS, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := accountWithTS{  
+       createdAt: time.Now(),  
+       updatedAt: time.Now(),  
+       acc: account{  
+          login:    login,  
+          password: password,  
+          url:      urlString,  
+       },  
+    }  
+  
+    if newAcc.acc.password == "" {  
+       newAcc.acc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}
+```
 
 ### Импорт и экспорт
+
+#### Экспорт
+
+Для экспорта элементов из пакета, их нужно объявлять в PascalCase (с заглавной буквы). Больше ничего для экспорта не требуется. 
+
+Не стоит открывать в мир все методы и константы. Важно соблюдать инкапсуляцию и предоставлять понятный API для взаимодействия с пакетом
+
+`account / account.go`
+```Go
+package account  
+  
+import (  
+    "errors"  
+    "fmt"    "math/rand/v2"    "net/url"    "time")  
+  
+type Account struct {  
+    login    string  
+    password string  
+    url      string  
+}  
+  
+type accountWithTS struct {  
+    createdAt time.Time  
+    updatedAt time.Time  
+    Account}  
+  
+func (acc Account) OutputPassword() {  
+    fmt.Println(acc)  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
+  
+func (acc *Account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    (*acc).password = string(res)  
+}  
+  
+func NewAccountWithTS(login, password, urlString string) (*accountWithTS, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := accountWithTS{  
+       createdAt: time.Now(),  
+       updatedAt: time.Now(),  
+       Account: Account{  
+          login:    login,  
+          password: password,  
+          url:      urlString,  
+       },  
+    }  
+  
+    if newAcc.password == "" {  
+       newAcc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}
+```
+
+#### Импорт
+
+Чтобы импортировать пакет, нужно взять имя модуля
+
+`go.mod`
+```go
+module github.com/ZeiZel/gomple
+```
+
+И вставить его в `import`, и в конце добавить имя вставляемого пакета. Дальше остаётся только применять экспортируемые элементы пакета с заглавной буквы
+
+`main.go`
+```Go
+package main  
+  
+import (  
+    "fmt"  
+
+	// и далее обращаемся по имени модуля  
+    "github.com/ZeiZel/gomple/account"
+)  
+  
+func main() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := account.NewAccountWithTS(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    userAccount.OutputPassword()  
+}  
+  
+func promptData(prompt string) string {  
+    fmt.Print(prompt + ": ")  
+    var res string  
+    fmt.Scanln(&res)  
+    return res  
+}
+```
+
 ### Добавление сторонних пакетов
+
+Все пакеты для работы с Go находятся на [pkg.go.dev](https://pkg.go.dev/)
+
+Чтобы установить в проект новую внешнюю зависимость, нам достаточно указать ссылку на github с нужным репозиторием
+
+```bash
+go get github.com/fatih/color
+```
+
+И далее мы увидим плоское представление всех зависимостей в проекте через данный файл: 
+
+`go.mod`
+```go
+module github.com/ZeiZel/gomple  
+  
+go 1.26  
+  
+require (  
+    github.com/fatih/color v1.19.0 // indirect  
+    github.com/mattn/go-colorable v0.1.14 // indirect  
+    github.com/mattn/go-isatty v0.0.20 // indirect  
+    golang.org/x/sys v0.42.0 // indirect  
+)
+```
+
+> - Рядом с этим файлом будет находиться `go.sum`, который будет хранить хэши всех этих пакетов, чтобы избежать подмены
+> - Оба этих файла нужно коммитить, чтобы восстановить зависимости
+
+Когда мы будем ставить зависимости после клонирования проекта, нужно будет их стянуть через эту команду: 
+
+```bash
+go get
+```
+
+Чтобы импортировать внешнюю зависимость, нам нужно вставить в импорт установленный модуль
+
+`main.go`
+```go
+import (  
+    "fmt"  
+  
+    "github.com/ZeiZel/gomple/account"    
+    // импортируем внешнюю зависимость
+    "github.com/fatih/color"
+)
+
+func promptData(prompt string) string {  
+    color.Cyan(prompt + ": ")  
+    var res string  
+    fmt.Scanln(&res)  
+    return res  
+}
+```
+
+![](../../_png/Pasted%20image%2020260419191346.png)
+
 #### Package файлов
+
+
+
+
+
+
+
 ### Go mod tidy
 
 
