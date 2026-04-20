@@ -3027,51 +3027,329 @@ files.WriteFile("Это запись в файл!", "file.txt")
 
 ### Stack frame
 
+Stack Frame - это определённая коробка с вызовами. Каждая отдельная функция - это новый stack frame, в рамках которого происходят вызовы операций. 
 
+В нашей небольшой функции по записи строкового контента в файл самым первым фреймом стека вызовов будет функция `main`. В ней произойдёт вызов другого фрейма - `WriteFile`. 
 
+В новом фрейме `WriteFile` будут происходить следующие операции: 
 
+1. Сначала выделится память под все описанные переменные (`content` с количеством памяти под тип данных string, `name`, `file` и `err`).
+   ![](../../_png/Pasted%20image%2020260420121729.png)
+2. Далее эти переменные будут заполняться в результате выполнения операций
+   ![](../../_png/Pasted%20image%2020260420122324.png)
 
-
+Потом уже происходит удаление `WriteFile` из стека и продолжают выполняться операции в функции `main`, если они есть
 
 ### Defer
 
+Ключевое слово `defer` добавляет операцию следующей в стеке вызовов. Таким образом, мы можем отложить выполнение операции на самый конец выполнения в функции. 
 
+Сама последовательность операций в `defer` выполняется согласно стеку LIFO
 
+```go
+func main() {
+	defer fmt.Println(1)
+	defer fmt.Println(2)
+}
+```
 
+```bash
+> go run .
 
+2
+1
+```
 
+Добавим операцию закрытия потока записи в файл в `defer` и она выполнится после выполнения всех операций в функции. 
+
+`files / files.go`
+```go
+func WriteFile(content string, name string) {  
+    file, err := os.Create(name)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+       return  
+    }  
+  
+    defer file.Close()  
+  
+    _, err = file.WriteString(content)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+       return  
+    }  
+  
+    fmt.Println("Файл успешно записан")  
+}
+```
 
 ### Чтение из файла
 
+Чтобы читать файл, мы можем воспользоваться двумя функциями: 
 
+- `Open` - открываем файл и читаем его порционно. Первым аргументом получаем `file` и работаем с байтами
+- `ReadFile` - читаем файл полностью (сразу грузим весь в память)
 
+`files / files.go`
+```Go
+func ReadFile(path string) (string, error) {  
+    data, err := os.ReadFile(path)  
+  
+    if err != nil {  
+       return "", err  
+  
+    }  
+  
+    fmt.Println(data)  
+    fmt.Println(string(data))  
+  
+    return string(data), nil  
+}
+```
 
+```bash
+go run .
 
+Файл успешно записан
 
+[208 173 209 130 208 190 32 208 183 208 176 208 191 208 184 209 129 209 140 32 208 178 32 209 132 208 176 208 185 208 187 33]
 
-### JSON
-
-
-
-
-
-
+Это запись в файл!
+```
 
 ### Struct tags
 
+Структурные теги позволяют нам указать мета-информацию для типов. Мы можем ими воспользоваться, чтобы сказать другим пакетам, как нужно обрабатывать данные в структуре. Например, мы можем подсказать парсеру, какое поле и как должно выглядеть при переводе в JSON и чтении из него. 
 
+`reflect` - это встроенная библиотека, которая позволяет работать с типами в рантайме. 
 
+`account / account.go`
+```Go
+type Account struct {  
+					// указываем теги `ключ1:"значение1" ключ2:"значение2"`
+    login    string `json:"login" xml:"login_data"`  
+    password string `json:"password"`  
+    url      string `json:"url"`  
+}
 
+func NewAccountWithTS(login, password, urlString string) (*accountWithTS, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := accountWithTS{  
+       createdAt: time.Now(),  
+       updatedAt: time.Now(),  
+       Account: Account{  
+          login:    login,  
+          password: password,  
+          url:      urlString,  
+       },  
+    }  
+  
+	// получаем мета теги
+    field, isExist := reflect.TypeOf(newAcc).FieldByName("login")  
+    fmt.Println(string(field.Tag), isExist)  
+  
+    if newAcc.password == "" {  
+       newAcc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}
+```
 
+```bash
+Введите логин: 
+asdasd
+Введите пароль: 
+asfqwc
+Введите URL: 
+https://asd.com
 
+json:"login" xml:"login_data" true
+
+{asdasd asfqwc https://asd.com}
+```
 
 ### Сохранение JSON
 
 
 
+`files / files.go`
+```go
+func WriteFile(content []byte, name string) {  
+    file, err := os.Create(name)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+       return  
+    }  
+  
+    defer file.Close()  
+  
+    _, err = file.Write(content)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+       return  
+    }  
+  
+    fmt.Println("Файл успешно записан")  
+}
+```
 
 
 
+`account / account.go`
+```Go
+package account  
+  
+import (  
+    "encoding/json"  
+    "errors"    
+    "fmt"    
+    "math/rand/v2"    
+    "net/url"    
+    "time"
+)  
+  
+type Account struct {  
+    Login     string    `json:"login" xml:"login_data"`  
+    Password  string    `json:"password"`  
+    Url       string    `json:"url"`  
+    CreatedAt time.Time `json:"createdAt"`  
+    UpdatedAt time.Time `json:"updatedAt"`  
+}  
+  
+func (acc Account) OutputPassword() {  
+    fmt.Println(acc)  
+}  
+  
+func (acc Account) ToBytes() ([]byte, error) {  
+    file, err := json.Marshal(acc)  
+  
+    if err != nil {  
+       return nil, err  
+    }  
+  
+    return file, nil  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")  
+  
+func (acc *Account) generatePassword(n int) {  
+    res := make([]rune, n)  
+  
+    for i := range res {  
+       res[i] = letterRunes[rand.IntN(len(letterRunes))]  
+    }  
+  
+    acc.Password = string(res)  
+}  
+  
+func NewAccount(login, password, urlString string) (*Account, error) {  
+    if login == "" {  
+       return nil, errors.New("login required")  
+    }  
+  
+    _, err := url.ParseRequestURI(urlString)  
+  
+    if err != nil {  
+       return nil, errors.New("failed parse URL")  
+    }  
+  
+    newAcc := Account{  
+       Login:     login,  
+       Password:  password,  
+       Url:       urlString,  
+       CreatedAt: time.Now(),  
+       UpdatedAt: time.Now(),  
+    }  
+  
+    if newAcc.Password == "" {  
+       newAcc.generatePassword(12)  
+    }  
+  
+    return &newAcc, nil  
+}
+```
+
+
+
+`main.go`
+```Go
+package main  
+  
+import (  
+    "fmt"  
+  
+    "github.com/ZeiZel/gomple/account"    
+    "github.com/ZeiZel/gomple/files"    
+    "github.com/fatih/color"
+)  
+  
+func main() {  
+    createAccount()  
+}  
+  
+func createAccount() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := account.NewAccount(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    file, err := userAccount.ToBytes()  
+  
+    if err != nil {  
+       fmt.Println(err)  
+    }  
+  
+    files.WriteFile(file, "data.json")  
+}  
+  
+func promptData(prompt string) string {  
+    color.Cyan(prompt + ": ")  
+    var res string  
+    fmt.Scanln(&res)  
+    return res  
+}
+```
+
+
+
+```bash
+> go run .
+
+Введите логин: 
+olegov@asd.ru
+Введите пароль:    
+Введите URL: 
+https://some.com
+Файл успешно записан
+```
+
+И на выходе мы получим сгенерированный файл
+
+`data.json`
+```JSON
+{"login":"olegov@asd.ru","password":"4pWU4rqFRXMF","url":"https://some.com","createdAt":"2026-04-20T18:05:14.008917+03:00","updatedAt":"2026-04-20T18:05:14.008917+03:00"}
+```
 
 #### Меню выбора
 
