@@ -3182,10 +3182,11 @@ json:"login" xml:"login_data" true
 
 ### Сохранение JSON
 
-
+Доработаем метод записи в файл. Контент нам нужно принимать в виде массива байт. Запись контента происходит через функцию `Write`
 
 `files / files.go`
 ```go
+// на вход - массив байт с контентом и name - путь к файлу
 func WriteFile(content []byte, name string) {  
     file, err := os.Create(name)  
   
@@ -3207,7 +3208,7 @@ func WriteFile(content []byte, name string) {
 }
 ```
 
-
+Назовём все функции в PascalCase, так как их нужно будет использовать вне пакета. Поля структуры мы так же будем использовать вне, поэтому их тоже переводим в PascalCase и вешаем на них теги `json`, чтобы парсер мог их перевести
 
 `account / account.go`
 ```Go
@@ -3233,7 +3234,8 @@ type Account struct {
 func (acc Account) OutputPassword() {  
     fmt.Println(acc)  
 }  
-  
+
+// переводим структуру в байты для записи
 func (acc Account) ToBytes() ([]byte, error) {  
     file, err := json.Marshal(acc)  
   
@@ -3283,7 +3285,7 @@ func NewAccount(login, password, urlString string) (*Account, error) {
 }
 ```
 
-
+Далее в родительской функции выносим отдельную функцию `createAccount`, которая будет отвечать за полный процесс создания и записи аккаунта. 
 
 `main.go`
 ```Go
@@ -3299,6 +3301,110 @@ import (
   
 func main() {  
     createAccount()  
+}  
+  
+func createAccount() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := account.NewAccount(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+	// переводим аккаунт в байты
+    file, err := userAccount.ToBytes()  
+  
+    if err != nil {  
+       fmt.Println(err)  
+    }  
+  
+	// записываем аккаунт в файл
+    files.WriteFile(file, "data.json")  
+}  
+  
+func promptData(prompt string) string {  
+    color.Cyan(prompt + ": ")  
+    var res string  
+    fmt.Scanln(&res)  
+    return res  
+}
+```
+
+Запускаем программу
+
+```bash
+> go run .
+
+Введите логин: 
+olegov@asd.ru
+Введите пароль:    
+Введите URL: 
+https://some.com
+Файл успешно записан
+```
+
+И на выходе мы получим сгенерированный файл
+
+`data.json`
+```JSON
+{"login":"olegov@asd.ru","password":"4pWU4rqFRXMF","url":"https://some.com","createdAt":"2026-04-20T18:05:14.008917+03:00","updatedAt":"2026-04-20T18:05:14.008917+03:00"}
+```
+
+#### Меню выбора
+
+Добавим меню для выбора операции, которую будет реализовывать приложение 
+
+`main.go`
+```Go
+package main  
+  
+import (  
+    "fmt"  
+  
+    "github.com/ZeiZel/gomple/account"    "github.com/ZeiZel/gomple/files"    "github.com/fatih/color")  
+  
+func main() {  
+    fmt.Println("__Менеджер паролей__")  
+      
+Menu:  
+    for {  
+       variant := getMenu()  
+       switch variant {  
+       case 1:  
+          createAccount()  
+       case 2:  
+          findAccount()  
+       case 3:  
+          deleteAccount()  
+       default:  
+          break Menu  
+       }  
+    }  
+  
+}  
+  
+func getMenu() int {  
+    var variant int  
+    fmt.Println("Выберите вариант:")  
+    fmt.Println("1. Создать аккаунт")  
+    fmt.Println("2. Найти аккаунт")  
+    fmt.Println("3. Удалить аккаунт")  
+    fmt.Println("4. Выход")  
+    fmt.Scan(&variant)  
+    return variant  
+}  
+  
+func findAccount() {  
+  
+}  
+  
+func deleteAccount() {  
+  
 }  
   
 func createAccount() {  
@@ -3331,74 +3437,495 @@ func promptData(prompt string) string {
 }
 ```
 
+### Slice struct
 
+В рамках приложения, нам нужно реализовать возможность работать с массивом значений аккаунта. Для этого нам понадобится возможность работы со слайсами структур
+
+Для начала создадим отдельный файл в пакете `account`, который будет отвечать за работу с хранилищем. Это будет его зоной ответственности.
+
+Пакет `json` отвечает за работу с JSON. Функция `Marshal` переводит объекты Go в JSON. 
+
+`account / vault.go`
+```Go
+package account  
+  
+import (  
+    "encoding/json"  
+    "time")  
+  
+// хранилище будет представлять собой массив структур аккаунта
+type Vault struct {  
+    Accounts  []Account `json:"accounts"`  
+    UpdatedAt time.Time `json:"updatedAt"`  
+}  
+
+// создаём новое хранилище
+func NewVault() *Vault {  
+    return &Vault{  
+       Accounts:  []Account{},  
+       UpdatedAt: time.Now(),  
+    }  
+}  
+  
+// добавление аккаунта в хранилище
+func (vault *Vault) AddAccount(acc Account) {  
+	// добавляем новый аккаунт
+    vault.Accounts = append(vault.Accounts, acc)  
+    // актуализируем время обновления
+    vault.UpdatedAt = time.Now()  
+}  
+  
+// переносим сюда перевод в байты
+func (acc Vault) ToBytes() ([]byte, error) {  
+	// переводим структуру в JSON через Marshal
+    file, err := json.Marshal(acc)  
+  
+    if err != nil {  
+       return nil, err  
+    }  
+  
+    return file, nil  
+}
+```
+
+Затем в `createAccount` инстанциируем работу с хранилищем и переходим на запись через него
+
+`main.go`
+```Go
+func createAccount() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := account.NewAccount(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    vault := account.NewVault()  
+    vault.AddAccount(*userAccount)  
+    file, err := vault.ToBytes()  
+  
+    if err != nil {  
+       fmt.Println(err)  
+    }  
+  
+    files.WriteFile(file, "data.json")  
+}
+```
+
+Добавляем аккаунт через приложение
+
+```bash
+go run .
+__Менеджер паролей__
+Выберите вариант:
+1. Создать аккаунт
+2. Найти аккаунт
+3. Удалить аккаунт
+4. Выход
+1
+Введите логин: 
+asdasff
+Введите пароль: 
+
+Введите URL: 
+https://asdf.com
+Файл успешно записан
+```
+
+И получается такая запись
+
+`data.json`
+```JSON
+{  
+  "accounts": [  
+    {  
+      "login": "asdasff",  
+      "password": "-JaOjaFVW*hl",  
+      "url": "https://asdf.com",  
+      "createdAt": "2026-04-21T18:34:50.049708+03:00",  
+      "updatedAt": "2026-04-21T18:34:50.049708+03:00"  
+    }  
+  ],  
+  "updatedAt": "2026-04-21T18:34:50.049713+03:00"  
+}
+```
+
+### Чтение JSON
+
+Реализуем метод для чтения файлов на базе возврата байт
+
+`files / files.go`
+```Go
+func ReadFile(name string) ([]byte, error) {  
+    data, err := os.ReadFile(name)  
+  
+    if err != nil {  
+       return nil, err  
+  
+    }  
+  
+    return data, nil  
+}
+```
+
+В хранилище будем проверять существование файла с данными и через `Unmarshal` переводить JSON структуру в объекты Go и потом использовать этот список
+
+`account / vault.go`
+```Go
+func NewVault() *Vault {  
+    data, err := os.ReadFile("data.json")  
+  
+    if err != nil {  
+       return &Vault{  
+          Accounts:  []Account{},  
+          UpdatedAt: time.Now(),  
+       }  
+    }  
+  
+    var vault Vault  
+    err = json.Unmarshal(data, &vault)  
+  
+    if err != nil {  
+       color.Red(err.Error())  
+    }  
+  
+    return &vault  
+}
+```
+
+Далее в `createAccount` сократим запись и будем просто инстанциировать хранилище и передавать туда новый аккаунт пользователя
+
+`main.go`
+```Go
+func createAccount() {  
+    login := promptData("Введите логин")  
+    password := promptData("Введите пароль")  
+    url := promptData("Введите URL")  
+  
+    userAccount, err := account.NewAccount(login, password, url)  
+  
+    if err != nil {  
+       fmt.Println(err)  
+  
+       return  
+    }  
+  
+    vault := account.NewVault()  
+    vault.AddAccount(*userAccount)  
+}
+```
+
+Записываем новый аккаунт в хранилище
+
+```bash
+go run .
+__Менеджер паролей__
+Выберите вариант:
+1. Создать аккаунт
+2. Найти аккаунт
+3. Удалить аккаунт
+4. Выход
+1 
+Введите логин: 
+b.sd
+Введите пароль: 
+
+Введите URL: 
+https://b.com
+Файл успешно записан
+```
+
+Теперь появился новый аккаунт
+
+`data.json`
+```JSON
+{  
+  "accounts": [  
+    {  
+      "login": "asdasff",  
+      "password": "-JaOjaFVW*hl",  
+      "url": "https://asdf.com",  
+      "createdAt": "2026-04-21T18:34:50.049708+03:00",  
+      "updatedAt": "2026-04-21T18:34:50.049708+03:00"  
+    },  
+    {  
+      "login": "b.sd",  
+      "password": "cJncCLl9Bx2t",  
+      "url": "https://b.com",  
+      "createdAt": "2026-04-21T19:43:22.334711+03:00",  
+      "updatedAt": "2026-04-21T19:43:22.334711+03:00"  
+    }  
+  ],  
+  "updatedAt": "2026-04-21T19:43:22.33651+03:00"  
+}
+```
+
+#### Поиск пароля
+
+Сначала дополним вывод этого аккаунта дополнительной информацией
+
+`account / account.go`
+```Go
+func (acc *Account) Output() {
+	color.Cyan(acc.Login)
+	color.Cyan(acc.Password)
+	color.Cyan(acc.Url)
+}
+```
+
+Далее добавим в хранилище функцию, которая будет искать аккаунт по введённому url. Возвращать мы будем список аккаунтов, так как под один url может быть сразу несколько разных паролей.
+
+`account / vault.go`
+```Go
+func (vault *Vault) FindAccountsByUrl(url string) []Account {
+	var accounts []Account
+	
+	// проходимся по слайсу аккаунтов
+	for _, account := range vault.Accounts {
+		// Contains проверяет, включена ли строка в другую строку
+		isMatched := strings.Contains(account.Url, url)
+		
+		if isMatched {
+			accounts = append(accounts, account)
+		}
+	}
+	
+	return accounts
+}
+```
+
+Далее в `main` перенесём создание хранилища. Доработаем функцию `findAccount`, в которой сначала получим url от пользователя, а потом будем искать по хранилищу аккаунты. 
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+
+	"github.com/ZeiZel/gomple/account"
+
+	"github.com/fatih/color"
+)
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault()
+Menu:
+	for {
+		variant := getMenu()
+		switch variant {
+		case 1:
+			createAccount(vault)
+		case 2:
+			findAccount(vault)
+		case 3:
+			deleteAccount()
+		default:
+			break Menu
+		}
+	}
+
+}
+
+func getMenu() int {
+	var variant int
+	fmt.Println("Выберите вариант:")
+	fmt.Println("1. Создать аккаунт")
+	fmt.Println("2. Найти аккаунт")
+	fmt.Println("3. Удалить аккаунт")
+	fmt.Println("4. Выход")
+	fmt.Scan(&variant)
+	return variant
+}
+
+func findAccount(vault *account.Vault) {
+	url := promptData("Введите URL для поиска")
+	
+	accounts := vault.FindAccountsByUrl(url)
+	
+	if len(accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	
+	for _, account := range accounts {
+		account.Output()
+	}
+}
+
+func deleteAccount() {
+
+}
+
+func createAccount(vault *account.Vault) {
+	login := promptData("Введите логин")
+	password := promptData("Введите пароль")
+	url := promptData("Введите URL")
+	myAccount, err := account.NewAccount(login, password, url)
+	if err != nil {
+		fmt.Println("Неверный формат URL или Логин")
+		return
+	}
+	vault.AddAccount(*myAccount)
+}
+
+func promptData(prompt string) string {
+	fmt.Print(prompt + ": ")
+	var res string
+	fmt.Scanln(&res)
+	return res
+}
+```
+
+#### Удаление пароля
+
+Теперь нужно реализовать удаление аккаунта по URL. Для этого так же нужно будет доработать хранилище и добавить в него новый метод. 
+
+Сначала вынесем переиспользуемую логику записи хранилища в файл через `save`. Это будет метод, инкапсулированный только в этом пакете `account` и он будет работать только с `vault`. 
+`AddAccount` почти полностью переедет на `save`. 
+
+В функции `DeleteAccountByUrl` мы так же добавим логику поиска аккаунта, но тут мы уже будем не удалять, а собирать новый слайс Accounts из всех элементов, которые НЕ совпадают по условию и потом этот список сохраним в хранилище через `save`.
+
+`accounts / vault.go`
+```Go
+func (vault *Vault) DeleteAccountByUrl(url string) bool {
+	var accounts []Account
+	
+	isDeleted := false
+	
+	for _, account := range vault.Accounts {
+		isMatched := strings.Contains(account.Url, url)
+		
+		if !isMatched {
+			accounts = append(accounts, account)
+			continue
+		}
+		
+		isDeleted = true
+	}
+	
+	vault.Accounts = accounts
+	
+	vault.save()
+	
+	return isDeleted
+}
+
+// добавление аккаунта
+func (vault *Vault) AddAccount(acc Account) {
+	vault.Accounts = append(vault.Accounts, acc)
+	vault.save()
+}
+
+
+// переиспользуемый метод для сохранения обновлённого состояния хранилища
+func (vault *Vault) save() {
+	vault.UpdatedAt = time.Now()
+	data, err := vault.ToBytes()
+	if err != nil {
+		color.Red("Не удалось перобразовать")
+	}
+	files.WriteFile(data, "data.json")
+}
+```
+
+Далее имплементируем новую логику в `main` функцию
+
+`main.go`
+```Go
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault()
+Menu:
+	for {
+		variant := getMenu()
+		switch variant {
+		case 1:
+			createAccount(vault)
+		case 2:
+			findAccount(vault)
+		case 3:
+			deleteAccount(vault)
+		default:
+			break Menu
+		}
+	}
+
+}
+
+func deleteAccount(vault *account.Vault) {
+	url := promptData("Введите URL для поиска")
+	
+	isDeleted := vault.DeleteAccountByUrl(url)
+	
+	if isDeleted {
+		color.Green("Удалено")
+	} else {
+		color.Red("Не найдено")
+	}
+}
+```
+
+И теперь наше финальное приложение может: сохранить, найти и удалить нужный нам аккаунт
 
 ```bash
 > go run .
 
+__Менеджер паролей__
+Выберите вариант:
+1. Создать аккаунт
+2. Найти аккаунт
+3. Удалить аккаунт
+4. Выход
+1
 Введите логин: 
-olegov@asd.ru
-Введите пароль:    
+geleoroner
+Введите пароль: 
+
 Введите URL: 
-https://some.com
+https://gel.com
 Файл успешно записан
+Выберите вариант:
+1. Создать аккаунт
+2. Найти аккаунт
+3. Удалить аккаунт
+4. Выход
+2
+Введите URL для поиска: 
+gel
+geleoroner
+o!0qV3QvqjaQ
+https://gel.com
+Выберите вариант:                                                                                                                                                             
+5. Создать аккаунт
+6. Найти аккаунт
+7. Удалить аккаунт
+8. Выход
+3
+Введите URL для поиска: 
+gel                                                                                                                                                                           
+Файл успешно записан
+Удалено
+Выберите вариант:                                                                                                                                                             
+9. Создать аккаунт
+10. Найти аккаунт
+11. Удалить аккаунт
+12. Выход
+2
+Введите URL для поиска: 
+gel                                                                                                                                                                           
+Аккаунтов не найдено
+Выберите вариант:                                                                                                                                                             
+13. Создать аккаунт
+14. Найти аккаунт
+15. Удалить аккаунт
+16. Выход
 ```
-
-И на выходе мы получим сгенерированный файл
-
-`data.json`
-```JSON
-{"login":"olegov@asd.ru","password":"4pWU4rqFRXMF","url":"https://some.com","createdAt":"2026-04-20T18:05:14.008917+03:00","updatedAt":"2026-04-20T18:05:14.008917+03:00"}
-```
-
-#### Меню выбора
-
-
-
-
-
-
-
-
-### Slice struct
-
-
-
-
-
-
-
-
-
-
-
-### Чтение JSON
-
-
-
-
-
-
-
-#### Поиск пароля
-
-
-
-
-
-
-
-#### Удаление пароля
-
-
-
-
-
-
-
-
-
-
 
 
 
