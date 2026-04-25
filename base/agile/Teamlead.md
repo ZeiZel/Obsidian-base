@@ -1237,7 +1237,7 @@ TAM (Total Addressable Market)    - весь потенциальный рыно
 
 Связанные материалы в репозитории:
 - [Архитектура](../architecture/architecture.md) - обзор архитектурных подходов
-- [SOLID принципы](../architecture/SOLID%20принципы.md) - принципы объектно-ориентированного дизайна
+- [SOLID принципы](../cs/principles/SOLID%20принципы.md) - принципы объектно-ориентированного дизайна
 - [System Design](../architecture/System%20Design/System%20Design.md) - проектирование систем
 - [Чистый код](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md) - практики написания качественного кода
 - [DevOps](../devops/devops.md) - автоматизация и инфраструктура
@@ -1814,7 +1814,7 @@ Best Practices:
 Написание понятного, поддерживаемого кода.
 
 Принципы:
-- [SOLID](../architecture/SOLID%20принципы.md) - пять принципов объектно-ориентированного дизайна
+- [SOLID](../cs/principles/SOLID%20принципы.md) - пять принципов объектно-ориентированного дизайна
 - DRY (Don't Repeat Yourself) - устранение дублирования логики
 - KISS (Keep It Simple, Stupid) - простейшее решение, удовлетворяющее требованиям
 - YAGNI (You Aren't Gonna Need It) - не реализовывать функциональность, пока она не нужна
@@ -1824,7 +1824,7 @@ Best Practices:
 Ресурсы:
 - [Чистый код](https://tlroadmap.io/roles/technical-lead/tech-quality/clean-code.html)
 - [Clean Code (Robert Martin)](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-- **Внутренние:** [Чистый Код - Роберт Мартин](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md), [SOLID принципы](../architecture/SOLID%20принципы.md)
+- **Внутренние:** [Чистый Код - Роберт Мартин](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md), [SOLID принципы](../cs/principles/SOLID%20принципы.md)
 
 ###### Рефакторинг
 
@@ -2638,7 +2638,7 @@ Weekly Review (шаблон):
 
 #### Архитектура и разработка
 - [Архитектура](../architecture/architecture.md)
-- [SOLID принципы](../architecture/SOLID%20принципы.md)
+- [SOLID принципы](../cs/principles/SOLID%20принципы.md)
 - [System Design](../architecture/System%20Design/System%20Design.md)
 - [MV-паттерны](../architecture/Architecture/MV-patterns.md)
 - [FSD](../architecture/Architecture/FSD/FSD.md)

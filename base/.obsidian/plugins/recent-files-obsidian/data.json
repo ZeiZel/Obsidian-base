@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Git",
+      "path": "cs/GIT/Git.md"
+    },
+    {
       "basename": "SOLID принципы",
-      "path": "architecture/SOLID принципы.md"
+      "path": "cs/principles/SOLID принципы.md"
+    },
+    {
+      "basename": "Соглашение о коммитах 1.0.0",
+      "path": "cs/GIT/Соглашение о коммитах 1.0.0.md"
+    },
+    {
+      "basename": "GitFlow",
+      "path": "cs/GIT/GitFlow.md"
+    },
+    {
+      "basename": "Github Actions",
+      "path": "cs/GIT/Github Actions.md"
     },
     {
       "basename": "computer science",
@@ -159,46 +175,6 @@
     {
       "basename": "PHP",
       "path": "backend/PHP/PHP.md"
-    },
-    {
-      "basename": "YII2",
-      "path": "backend/PHP/YII2.md"
-    },
-    {
-      "basename": "mobile",
-      "path": "mobile/mobile.md"
-    },
-    {
-      "basename": "react-native",
-      "path": "mobile/react-native/react-native.md"
-    },
-    {
-      "basename": "Obsidian",
-      "path": "obsidian/Obsidian.md"
-    },
-    {
-      "basename": "Фичи и хоткеи",
-      "path": "obsidian/_lessons/Фичи и хоткеи.md"
-    },
-    {
-      "basename": "Синхронизация с облаком или git-ом",
-      "path": "obsidian/_lessons/Синхронизация с облаком или git-ом.md"
-    },
-    {
-      "basename": "Синтаксис MarkDown",
-      "path": "obsidian/_lessons/Синтаксис MarkDown.md"
-    },
-    {
-      "basename": "Плагины",
-      "path": "obsidian/_lessons/Плагины.md"
-    },
-    {
-      "basename": "Как написать свой плагин",
-      "path": "obsidian/_lessons/Как написать свой плагин.md"
-    },
-    {
-      "basename": "Obsidian UI",
-      "path": "obsidian/_lessons/Obsidian UI.md"
     }
   ],
   "omittedPaths": [],

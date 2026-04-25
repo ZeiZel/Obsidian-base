@@ -352,7 +352,7 @@ Project Manager vs Product Manager:
 | Staff Engineer | IC-трек, техническое влияние через экспертизу |
 
 Связанные темы:
-- [SOLID принципы](../architecture/SOLID%20принципы.md)
+- [SOLID принципы](../cs/principles/SOLID%20принципы.md)
 - [Clean Architecture](../Books/Чистый%20код/Чистый%20Код%20-%20Роберт%20Мартин.md)
 - [CI/CD](../devops/ci-cd.md)
 
@@ -760,7 +760,7 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed
 Влияние: команда из 5-10 человек, продукт или модуль.
 
 Связанные темы:
-- [SOLID принципы](../architecture/SOLID%20принципы.md)
+- [SOLID принципы](../cs/principles/SOLID%20принципы.md)
 - [Архитектура](../architecture/Architecture/Architecture.md)
 
 #### Staff / Principal Engineer

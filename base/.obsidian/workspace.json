@@ -133,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "architecture/SOLID принципы.md",
+                "file": "cs/principles/SOLID принципы.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -150,9 +150,33 @@
               "icon": "lucide-file",
               "title": "SOLID принципы"
             }
+          },
+          {
+            "id": "0a283d10ea245ab5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/GIT/Git.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Git"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -380,21 +404,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "cs/GIT/Git.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline of Git"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 366.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -418,8 +442,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "592c30cf28ba1596",
+  "active": "2666a47be2af937a",
   "lastOpenFiles": [
+    "cs/GIT/_lessons/7. Удалённый репозиторий.md",
+    "cs/GIT/Git.md",
+    "cs/GIT/_lessons/1. Введение.md",
+    "cs/GIT/_lessons/3. Начало работы с Git.md",
+    "cs/GIT/_lessons/4. Ветки и изменения.md",
+    "cs/GIT/_lessons/5. Удаление.md",
+    "cs/GIT/_lessons/6. Продвинутая работа.md",
+    "cs/principles/SOLID принципы.md",
+    "cs/GIT/Соглашение о коммитах 1.0.0.md",
+    "cs/principles",
+    "cs/GIT/GitFlow.md",
+    "cs/GIT/Github Actions.md",
     "cs/computer science.md",
     "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
     "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
@@ -445,18 +481,7 @@
     "backend/go/Temporal Go.md",
     "backend/go/go.md",
     "backend/go/09-deploy.md",
-    "backend/go/06-microservices.md",
-    "backend/go/01-basics.md",
-    "backend/go/08-tools-and-ecosystem.md",
-    "backend/go/07-testing.md",
-    "backend/go/05-concurrency.md",
-    "backend/go/04-databases.md",
-    "backend/go/03-networking.md",
-    "backend/go/02-os-and-fs.md",
-    "architecture/System Design/System Design.md",
-    "Excalidraw/friend_line_vk.excalidraw.md",
     "Excalidraw",
-    "backend/go/Golang.md",
     "Tags/#security",
     "Tags/#performance",
     "Tags/#senior",
@@ -465,7 +490,6 @@
     "Tags/#deploy",
     "Tags/#tooling",
     "Tags/#testing",
-    "Tags/#rabbitmq",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",
