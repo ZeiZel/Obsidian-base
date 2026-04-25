@@ -9,18 +9,6 @@
       "path": "cs/principles/SOLID принципы.md"
     },
     {
-      "basename": "Соглашение о коммитах 1.0.0",
-      "path": "cs/GIT/Соглашение о коммитах 1.0.0.md"
-    },
-    {
-      "basename": "GitFlow",
-      "path": "cs/GIT/GitFlow.md"
-    },
-    {
-      "basename": "Github Actions",
-      "path": "cs/GIT/Github Actions.md"
-    },
-    {
       "basename": "computer science",
       "path": "cs/computer science.md"
     },

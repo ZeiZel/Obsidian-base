@@ -380,8 +380,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 8
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -442,20 +441,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "2666a47be2af937a",
+  "active": "0a283d10ea245ab5",
   "lastOpenFiles": [
-    "cs/GIT/_lessons/7. Удалённый репозиторий.md",
+    "cs/GIT/Соглашение о коммитах 1.0.0.md",
     "cs/GIT/Git.md",
+    "cs/GIT/GitFlow.md",
+    "cs/GIT/Github Actions.md",
+    "cs/GIT/_lessons/7. Удалённый репозиторий.md",
     "cs/GIT/_lessons/1. Введение.md",
     "cs/GIT/_lessons/3. Начало работы с Git.md",
     "cs/GIT/_lessons/4. Ветки и изменения.md",
     "cs/GIT/_lessons/5. Удаление.md",
     "cs/GIT/_lessons/6. Продвинутая работа.md",
     "cs/principles/SOLID принципы.md",
-    "cs/GIT/Соглашение о коммитах 1.0.0.md",
     "cs/principles",
-    "cs/GIT/GitFlow.md",
-    "cs/GIT/Github Actions.md",
     "cs/computer science.md",
     "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
     "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
