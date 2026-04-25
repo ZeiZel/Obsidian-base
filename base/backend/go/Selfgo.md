@@ -3932,18 +3932,143 @@ gel
 ## Интерфейсы
 
 ### Изменение files
-### Ограничения Generic
-### Generic Structs
-#### Generic ввода
+
+Когда мы будем расширять приложение, мы столкнёмся с той проблемой, что писать и читать мы будем из многих источников. Нам нужно будет уметь записывать в файл, в облако, в любой другой вид хранилища и так же нужно будет уметь из них читать. Сейчас мы жёстко зависимы от чтения и записи в один файл. 
+
+Поэтому для начала создадим первый инстанс источника данных - JSON DataBase
+
+`files / files.go`
+```Go
+package files
+
+import (
+	"fmt"
+	"os"
+)
+
+type JsonDb struct {
+	filename string
+}
+
+func NewJsonDb(name string) *JsonDb {
+	return &JsonDb{
+		filename: name,
+	}
+}
+
+func (db *JsonDb) Read() ([]byte, error) {
+	// ...
+}
+
+func (db *JsonDb) Write(content []byte) {
+	// ...
+}
+```
+
+И применим её в хранилище
+
+`account / vault.go`
+```Go
+package account  
+  
+import (  
+    "encoding/json"  
+    "strings"    "time"  
+    "github.com/ZeiZel/gomple/files"    "github.com/fatih/color")  
+  
+type Vault struct {  
+    Accounts  []Account `json:"accounts"`  
+    UpdatedAt time.Time `json:"updatedAt"`  
+}  
+  
+func NewVault() *Vault {  
+    db := files.NewJsonDb("data.json")  
+    file, err := db.Read()  
+    // ...
+}  
+  
+func (vault *Vault) save() {  
+    // ...
+  
+    db := files.NewJsonDb("data.json")  
+    db.Write(data)  
+}
+```
+
 ### Внедрение зависимостей
+
+
+
+
+
+
 ### Второй провайдер
+
+
+
+
 ### Создание интерфейса
+
+
+
 ### Встроенный интерфейс
+
+
+
+
 ### Any тип
+
+
+
+
 ### Type switch
+
+
+
+
 ### Получение типа
+
+
+
+
+
+
 ### Generic
 
+
+
+
+
+
+
+
+
+
+
+
+
+### Ограничения Generic
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Generic Structs
+
+
+
+
+
+
+#### Generic ввода
 
 
 

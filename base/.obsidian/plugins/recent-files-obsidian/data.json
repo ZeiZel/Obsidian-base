@@ -1,6 +1,46 @@
 {
   "recentFiles": [
     {
+      "basename": "SOLID принципы",
+      "path": "architecture/SOLID принципы.md"
+    },
+    {
+      "basename": "computer science",
+      "path": "cs/computer science.md"
+    },
+    {
+      "basename": "Немного про ООП (by ExtremeCode)",
+      "path": "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md"
+    },
+    {
+      "basename": "ООП на простых примерах. Объектно-ориентированное программирование",
+      "path": "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md"
+    },
+    {
+      "basename": "RegExp",
+      "path": "cs/RegExp.md"
+    },
+    {
+      "basename": "The Bezos Mandath",
+      "path": "cs/The Bezos Mandath.md"
+    },
+    {
+      "basename": "C",
+      "path": "cs/C.md"
+    },
+    {
+      "basename": "Functional programming",
+      "path": "cs/Functional programming.md"
+    },
+    {
+      "basename": "math",
+      "path": "cs/math.md"
+    },
+    {
+      "basename": "Задачи с Leetcode",
+      "path": "cs/Задачи с Leetcode.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -51,10 +91,6 @@
     {
       "basename": "ДЗ",
       "path": "architecture/System Design/ДЗ.md"
-    },
-    {
-      "basename": "math",
-      "path": "cs/math.md"
     },
     {
       "basename": "career-growth",
@@ -163,42 +199,6 @@
     {
       "basename": "Obsidian UI",
       "path": "obsidian/_lessons/Obsidian UI.md"
-    },
-    {
-      "basename": "microfrontends",
-      "path": "frontend/microfrontends.md"
-    },
-    {
-      "basename": "next",
-      "path": "frontend/next/next.md"
-    },
-    {
-      "basename": "angular",
-      "path": "frontend/angular/angular.md"
-    },
-    {
-      "basename": "state-managers",
-      "path": "frontend/state-managers/state-managers.md"
-    },
-    {
-      "basename": "Effector",
-      "path": "frontend/state-managers/Effector.md"
-    },
-    {
-      "basename": "ui-frameworks",
-      "path": "frontend/ui-frameworks/ui-frameworks.md"
-    },
-    {
-      "basename": "Shadcn UI",
-      "path": "frontend/ui-frameworks/Shadcn UI.md"
-    },
-    {
-      "basename": "MUI",
-      "path": "frontend/ui-frameworks/MUI.md"
-    },
-    {
-      "basename": "Mantine",
-      "path": "frontend/ui-frameworks/Mantine.md"
     }
   ],
   "omittedPaths": [],

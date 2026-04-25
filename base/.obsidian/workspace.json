@@ -78,9 +78,81 @@
               "icon": "lucide-file",
               "title": "Selfgo"
             }
+          },
+          {
+            "id": "e755db9b994014f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/RegExp.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "RegExp"
+            }
+          },
+          {
+            "id": "79025dfe0ef56696",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/computer science.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "computer science"
+            }
+          },
+          {
+            "id": "592c30cf28ba1596",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architecture/SOLID принципы.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "SOLID принципы"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -159,8 +231,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273,
-    "collapsed": true
+    "width": 343.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -347,10 +418,19 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "27f092496f158954",
+  "active": "592c30cf28ba1596",
   "lastOpenFiles": [
-    "_png/Pasted image 20260420122324.png",
+    "cs/computer science.md",
+    "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
+    "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
+    "cs/RegExp.md",
+    "cs/The Bezos Mandath.md",
+    "cs/C.md",
+    "cs/Functional programming.md",
+    "cs/math.md",
+    "cs/Задачи с Leetcode.md",
     "backend/go/Selfgo.md",
+    "_png/Pasted image 20260420122324.png",
     "_png/Pasted image 20260420121729.png",
     "_png/Pasted image 20260419191346.png",
     "_png/Pasted image 20260419181715.png",
@@ -386,14 +466,6 @@
     "Tags/#tooling",
     "Tags/#testing",
     "Tags/#rabbitmq",
-    "backend/go/10 Go Senior Topics.md",
-    "backend/go/02 Go Core.md",
-    "backend/go/01 Golang Basics.md",
-    "backend/go/09 Go Deploy and Production.md",
-    "backend/go/08 Go Tooling and Testing.md",
-    "backend/go/07 Go Microservices.md",
-    "backend/go/06 Go Concurrency.md",
-    "backend/go/05 Go Database.md",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",

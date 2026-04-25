@@ -1797,6 +1797,7 @@ var DEFAULT_SETTINGS = {
   excludeInternalLinkPathGlobPatterns: [],
   excludeSelfInternalLink: false,
   excludeExistingInActiveFileInternalLinks: false,
+  excludeUnresolvedInternalLinks: false,
   updateInternalLinksOnSave: true,
   insertAliasTransformedFromDisplayedInternalLink: {
     enabled: false,
@@ -2699,6 +2700,20 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
               this.plugin.settings.excludeExistingInActiveFileInternalLinks
             ).onChange(async (value) => {
               this.plugin.settings.excludeExistingInActiveFileInternalLinks = value;
+              await this.plugin.saveSettings({ internalLink: true });
+            });
+          });
+        }
+      );
+      addFilterableSetting(
+        "Exclude unresolved internal links",
+        "Exclude internal links that point to non-existing files (phantom links) from the suggestions.",
+        (setting) => {
+          setting.addToggle((tc) => {
+            tc.setValue(
+              this.plugin.settings.excludeUnresolvedInternalLinks
+            ).onChange(async (value) => {
+              this.plugin.settings.excludeUnresolvedInternalLinks = value;
               await this.plugin.saveSettings({ internalLink: true });
             });
           });
@@ -5033,7 +5048,7 @@ var InternalLinkWordProvider = class {
         ];
       }
     });
-    const unresolvedInternalLinkWords = this.appHelper.searchPhantomLinks().map(({ path: path2, link }) => {
+    const unresolvedInternalLinkWords = option.excludeUnresolvedLinks ? [] : this.appHelper.searchPhantomLinks().map(({ path: path2, link }) => {
       return {
         value: link,
         type: "internalLink",
@@ -7804,7 +7819,8 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
       makeSynonymAboutEmoji: this.settings.matchingWithoutEmoji,
       makeSynonymAboutAccentsDiacritics: this.settings.treatAccentDiacriticsAsAlphabeticCharacters,
       frontMatterKeyForExclusion: this.settings.frontMatterKeyForExclusionInternalLink,
-      tagsForExclusion: this.settings.tagsForExclusionInternalLink
+      tagsForExclusion: this.settings.tagsForExclusionInternalLink,
+      excludeUnresolvedLinks: this.settings.excludeUnresolvedInternalLinks
     });
     this.statusBar.setInternalLinkIndexed(
       this.internalLinkWordProvider.wordCount
