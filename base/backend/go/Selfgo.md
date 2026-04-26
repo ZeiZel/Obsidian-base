@@ -6442,16 +6442,164 @@ func main() {
 
 
 
+`main.go`
+```Go
+func main() {
+	path := flag.String("file", "url.txt", "path to URL file")
+	flag.Parse()
+	file, err := os.ReadFile(*path)
+	if err != nil {
+		panic(err.Error())
+	}
+	urlSlice := strings.Split(string(file), "\n")
+	respCh := make(chan int)
+	errCh := make(chan error)
+	for _, url := range urlSlice {
+		go ping(url, respCh, errCh)
+	}
+	for range urlSlice {
+		select {
+		case err := <-errCh:
+			fmt.Println(err)
+		case res := <-respCh:
+			fmt.Println(res)
+		}
+	}
+}
+```
+
 
 
 ## HTTP сервер
 
 ### Выбор HTTP сервера
+
+
+
+
+
+
 ### Простейший сервер
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("Hello")
+}
+
+func main() {
+	http.HandleFunc("/hello", hello)
+	fmt.Println("Server is listening on port 8081")
+	http.ListenAndServe(":8081", nil)
+}
+```
+
 ### Как работают запросы
+
+
+
+
+
+
 ### Свой ServerMux
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("Hello")
+}
+
+func main() {
+	router := http.NewServeMux()
+	router.HandleFunc("/hello", hello)
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 ### Методы и коды ответа
+
+
+
+
+
+
 ### Handler
+
+
+
+`handler.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+type HelloHandler struct{}
+
+func NewHelloHandler(router *http.ServeMux) {
+	handler := &HelloHandler{}
+	router.HandleFunc("/hello", handler.Hello())
+}
+
+func (handler *HelloHandler) Hello() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Hello")
+	}
+}
+```
+
+
+
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	router := http.NewServeMux()
+	
+	// применяем хэндлер
+	NewHelloHandler(router)
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
 
 
 
@@ -6459,33 +6607,848 @@ func main() {
 ## Архитектура
 
 ### Структура приложения
+
+
+
+`internal / hello / handler.go`
+```Go
+package hello
+
+import (
+	"fmt"
+	"net/http"
+)
+```
+
+
+
+`cmd / main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"go/adv-demo/internal/hello"
+	"net/http"
+)
+
+func main() {
+	router := http.NewServeMux()
+	hello.NewHelloHandler(router)
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 ### Конфигурация
+
+
+
+`.env`
+```
+DSN=""
+```
+
+
+
+`configs/config.go`
+```Go
+package configs
+
+import (
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
+type Config struct {
+	Db DbConfig
+}
+
+type DbConfig struct {
+	Dsn string
+}
+
+func LoadConfig() *Config {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Error loading .env file, using default config")
+	}
+	return &Config{
+		Db: DbConfig{
+			Dsn: os.Getenv("DSN"),
+		},
+	}
+}
+```
+
+
+
+`cmd / main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/hello"
+	"net/http"
+)
+
+func main() {
+	conf := configs.LoadConfig()
+	// ...
+}
+```
+
 ### Обзор приложения
+
+
+
+
+
+
+
 ### Декомпозиция модуля
+
+
+
+
+
+
+
 #### Модуль авторизация
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"fmt"
+	"net/http"
+)
+
+type AuthHandler struct{}
+
+func NewAuthHandler(router *http.ServeMux) {
+	handler := &AuthHandler{}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Login")
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Register")
+	}
+}
+```
+
+
+
+`cmd / main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"go/adv-demo/internal/auth"
+	"net/http"
+)
+
+func main() {
+	router := http.NewServeMux()
+	auth.NewAuthHandler(router)
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 ### Передача зависимостей
+
+
+
+`.env`
+```
+DSN=""
+TOKEN="123"
+```
+
+
+
+`configs/config.go`
+```Go
+package configs
+
+import (
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
+type Config struct {
+	Db   DbConfig
+	Auth AuthConfig
+}
+
+type DbConfig struct {
+	Dsn string
+}
+
+type AuthConfig struct {
+	Secret string
+}
+
+func LoadConfig() *Config {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Error loading .env file, using default config")
+	}
+	return &Config{
+		Db: DbConfig{
+			Dsn: os.Getenv("DSN"),
+		},
+		Auth: AuthConfig{
+			Secret: os.Getenv("TOKEN"),
+		},
+	}
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"net/http"
+)
+
+type AuthHandlerDeps struct {
+	*configs.Config
+}
+
+type AuthHandler struct {
+	*configs.Config
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config: deps.Config,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println(handler.Config.Auth.Secret)
+		fmt.Println("Login")
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Register")
+	}
+}
+```
+
+
+
+`cmd / main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/auth"
+	"net/http"
+)
+
+func main() {
+	conf := configs.LoadConfig()
+	router := http.NewServeMux()
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config: conf,
+	})
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 ### Ответ от API
+
+
+
+`internal/auth/payload.go`
+```Go
+package auth
+
+type LoginResponse struct {
+	Token string `json:"token"`
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"encoding/json"
+	"fmt"
+	"go/adv-demo/configs"
+	"net/http"
+)
+
+type AuthHandlerDeps struct {
+	*configs.Config
+}
+
+type AuthHandler struct {
+	*configs.Config
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config: deps.Config,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println(handler.Config.Auth.Secret)
+		fmt.Println("Login")
+		res := LoginResponse{
+			Token: "123",
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(201)
+		json.NewEncoder(w).Encode(res)
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Register")
+	}
+}
+```
+
 #### Пакет ответа
+
+
+
+`pkg/res/res.go`
+```Go
+package res
+
+import (
+	"encoding/json"
+	"net/http"
+)
+
+func Json(w http.ResponseWriter, data any, statusCode int) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	json.NewEncoder(w).Encode(data)
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/res"
+	"net/http"
+)
+
+type AuthHandlerDeps struct {
+	*configs.Config
+}
+
+type AuthHandler struct {
+	*configs.Config
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config: deps.Config,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println(handler.Config.Auth.Secret)
+		fmt.Println("Login")
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Register")
+	}
+}
+```
+
 
 
 ## Запрос и валидация
 
 ### Чтение body
+
+
+
+`internal/auth/payload.go`
+```Go
+package auth
+
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginResponse struct {
+	Token string `json:"token"`
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"encoding/json"
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/res"
+	"net/http"
+)
+
+type AuthHandlerDeps struct {
+	*configs.Config
+}
+
+type AuthHandler struct {
+	*configs.Config
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config: deps.Config,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		// Прочитать body
+		var payload LoginRequest
+		err := json.NewDecoder(req.Body).Decode(&payload)
+		if err != nil {
+			res.Json(w, err.Error(), 402)
+		}
+		fmt.Println(payload)
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Println("Register")
+	}
+}
+```
+
 #### Простая валидация
+
+
+
+`internal/auth/handler.go`
+```Go
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		// Прочитать body
+		var payload LoginRequest
+		err := json.NewDecoder(req.Body).Decode(&payload)
+		if err != nil {
+			res.Json(w, err.Error(), 402)
+			return
+		}
+		if payload.Email == "" {
+			res.Json(w, "Email required", 402)
+			return
+		}
+		if payload.Password == "" {
+			res.Json(w, "Password required", 402)
+			return
+		}
+		fmt.Println(payload)
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+```
+
 ### Regexp
+
+
+
+`internal/auth/handler.go`
+```Go
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		// Прочитать body
+		var payload LoginRequest
+		err := json.NewDecoder(req.Body).Decode(&payload)
+		if err != nil {
+			res.Json(w, err.Error(), 402)
+			return
+		}
+		if payload.Email == "" {
+			res.Json(w, "Email required", 402)
+			return
+		}
+		_, err = mail.ParseAddress(payload.Email)
+		if err != nil {
+			res.Json(w, "Wrong email", 402)
+			return
+		}
+		if payload.Password == "" {
+			res.Json(w, "Password required", 402)
+			return
+		}
+		fmt.Println(payload)
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+```
+
 ### Go validator
+
+
+
+`go.mod`
+```
+module go/adv-demo
+
+go 1.22.5
+
+require (
+	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/validator/v10 v10.22.0 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
+	github.com/leodido/go-urn v1.4.0 // indirect
+	golang.org/x/crypto v0.19.0 // indirect
+	golang.org/x/net v0.21.0 // indirect
+	golang.org/x/sys v0.17.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
+)
+```
+
+
+
+`internal/auth/payload.go`
+```Go
+package auth
+
+type LoginRequest struct {
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required"`
+}
+
+type LoginResponse struct {
+	Token string `json:"token"`
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"encoding/json"
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/res"
+	"net/http"
+
+	"github.com/go-playground/validator/v10"
+)
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		// Прочитать body
+		var payload LoginRequest
+		err := json.NewDecoder(req.Body).Decode(&payload)
+		if err != nil {
+			res.Json(w, err.Error(), 402)
+			return
+		}
+		validate := validator.New()
+		err = validate.Struct(payload)
+		if err != nil {
+			res.Json(w, err.Error(), 402)
+			return
+		}
+		fmt.Println(payload)
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+```
+
 ### Вынос обработчика
+
+
+
+`pkg/req/validate.go`
+```Go
+package req
+
+import (
+	"github.com/go-playground/validator/v10"
+)
+
+func IsValid[T any](payload T) error {
+	validate := validator.New()
+	err := validate.Struct(payload)
+	return err
+}
+```
+
+
+
+`pkg/req/handle.go`
+```Go
+package req
+
+import (
+	"go/adv-demo/pkg/res"
+	"net/http"
+)
+
+func HandleBody[T any](w *http.ResponseWriter, r *http.Request) (*T, error) {
+	body, err := Decode[T](r.Body)
+	if err != nil {
+		res.Json(*w, err.Error(), 402)
+		return nil, err
+	}
+	err = IsValid(body)
+	if err != nil {
+		res.Json(*w, err.Error(), 402)
+		return nil, err
+	}
+	return &body, nil
+}
+```
+
+
+
+`pkg/req/decode.go`
+```Go
+package req
+
+import (
+	"encoding/json"
+	"io"
+)
+
+func Decode[T any](body io.ReadCloser) (T, error) {
+	var payload T
+	err := json.NewDecoder(body).Decode(&payload)
+	if err != nil {
+		return payload, err
+	}
+	return payload, nil
+}
+```
+
 #### Регистрация
+
+
+
+`internal/auth/payload.go`
+```Go
+type RegisterRequest struct {
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required"`
+	Name     string `json:"name" validate:"required"`
+}
+
+type RegisterResponse struct {
+	Token string `json:"token"`
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/req"
+	"go/adv-demo/pkg/res"
+	"net/http"
+)
+
+type AuthHandlerDeps struct {
+	*configs.Config
+}
+
+type AuthHandler struct {
+	*configs.Config
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config: deps.Config,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LoginRequest](&w, r)
+		if err != nil {
+			return
+		}
+		fmt.Println(body)
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[RegisterRequest](&w, r)
+		if err != nil {
+			return
+		}
+		fmt.Println(body)
+	}
+}
+```
+
 
 
 ## Подключение к БД
 
 ### Развёртывание PgSQL
+
+
+
+
+
+
+
 ### Подключение к базе
+
+
+
+
+
+
+
 ### Выбор ORM
+
+
+
+
+
+
+
 ### Подключение к GORM
+
+
+
+
+
+
+
 ### Описание модели
+
+
+
+
+
+
+
 ### Автомиграции
+
+
+
+
+
 
 
 ## CRUD
@@ -6573,6 +7536,33 @@ func main() {
 ### Mock запросов
 #### Тест регистрации
 ### Отладка тестов
+
+
+
+
+
+
 ### Финал проекта
+
+Переводим обновление и удаление на хэндлеры с middlewares
+
+`main.go`
+```Go
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+		EventBus:       deps.EventBus,
+	}
+	router.Handle("POST /link", middleware.IsAuthed(handler.Create(), deps.Config))
+	
+	// 
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	
+	// 
+	router.Handle("DELETE /link/{id}", middleware.IsAuthed(handler.Delete(), deps.Config))
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
+}
+```
 
 
