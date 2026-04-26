@@ -7407,9 +7407,29 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 
 
 
+`.gitignore`
+```
+/.env
+/postgres-data
+```
 
 
 
+`docker-compose.yml`
+```YML
+services:
+  postgres:
+    container_name: postgres_go
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: my_pass
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres-data:/data/postgres
+    ports:
+      - "5432:5432"
+```
 
 ### Подключение к базе
 
@@ -7423,31 +7443,134 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 
 
 
-
-
-
-
 ### Подключение к GORM
 
 
 
+`pkg/db/db.go`
+```Go
+package db
+
+import (
+	"go/adv-demo/configs"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+type Db struct {
+	*gorm.DB
+}
+
+func NewDb(conf *configs.Config) *Db {
+	db, err := gorm.Open(postgres.Open(conf.Db.Dsn), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	return &Db{db}
+}
+```
 
 
 
+`cmd / main.go`
+```Go
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/pkg/db"
+	"net/http"
+)
+
+func main() {
+	conf := configs.LoadConfig()
+	_ = db.NewDb(conf)
+	router := http.NewServeMux()
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config: conf,
+	})
+```
 
 ### Описание модели
 
 
 
+`go.mod`
+```
+require (
+	github.com/go-playground/validator/v10 v10.22.0
+	github.com/joho/godotenv v1.5.1
+	gorm.io/driver/postgres v1.5.9
+	gorm.io/gorm v1.25.11
+)
+```
 
 
 
+`internal/link/model.go`
+```Go
+package link
+
+import (
+	"math/rand"
+
+	"gorm.io/gorm"
+)
+
+type Link struct {
+	gorm.Model
+	Url  string `json:"url"`
+	Hash string `json:"hash" gorm:"uniqueIndex"`
+}
+
+func NewLink(url string) *Link {
+	return &Link{
+		Url:  url,
+		Hash: RandStringRunes(6),
+	}
+}
+
+var letterRunes = []rune("abcdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ")
+
+func RandStringRunes(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
+}
+```
 
 ### Автомиграции
 
 
 
+`migrations/auto.go`
+```Go
+package main
 
+import (
+	"go/adv-demo/internal/link"
+	"os"
+
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+	db, err := gorm.Open(postgres.Open(os.Getenv("DSN")), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	db.AutoMigrate(&link.Link{})
+}
+```
 
 
 
