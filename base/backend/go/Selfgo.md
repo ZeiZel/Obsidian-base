@@ -6005,10 +6005,34 @@ func TestGetWeatherWrongFormat(t *testing.T) {
 
 
 
+`go.mod`
+```Go
+module go/adv-demo
+
+go 1.23
+```
+
+`main.go`
+```Go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Привет")
+}
+```
+
+
+
 ![](../../_png/Pasted%20image%2020260412192351.png)
 
 
 ![](../../_png/Pasted%20image%2020260412192413.png)
+
+
+
+
 
 ### Модель памяти
 
@@ -6033,9 +6057,72 @@ func TestGetWeatherWrongFormat(t *testing.T) {
 
 ### Stack frames
 ### Heap
+
+
+
+`main.go`
+```Go
+package main
+
+import "fmt"
+
+type User struct {
+	Name string
+}
+
+func main() {
+	user := &User{
+		Name: "Вася",
+	}
+	fmt.Println(user)
+}
+```
+
 ### Pointer на heap
+
+
+
+`main.go`
+```Go
+package main
+
+type User struct {
+	Name string
+}
+
+func main() {
+	age := getAge()
+	canDrink(age)
+}
+
+func canDrink(age *int) bool {
+	return *age >= 18
+}
+
+func getAge() *int {
+	age := 18
+	return &age
+}
+```
+
 ### Go allocator
 ### Пример с Reader
+
+
+
+`main.go`
+```Go
+package main
+
+type Reader interface {
+	Read(p []byte) (n int, err error)
+}
+
+type Reader2 interface {
+	Read() (p []byte, err error)
+}
+```
+
 ### Работа GC
 
 
@@ -6050,17 +6137,311 @@ func TestGetWeatherWrongFormat(t *testing.T) {
 
 ### Что такое Gorutine
 ### Запуск Gorutine
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	go printHi()
+	go fmt.Println("Привет из main 2")
+	go fmt.Println("Привет из main")
+	time.Sleep(time.Second)
+}
+
+func printHi() {
+	fmt.Println("Привет из gr")
+}
+```
+
 #### Ускорение работы
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
+
+// 10 конкурентных запросов на GET по адресу google.com
+// Вывести в консоль 10 StatusCode
+
+func main() {
+	t := time.Now()
+	for i := 0; i < 10; i++ {
+		go getHttpCode()
+	}
+	time.Sleep(time.Millisecond * 1100)
+	fmt.Println(time.Since(t))
+}
+
+func getHttpCode() {
+	resp, err := http.Get("https://google.com")
+	if err != nil {
+		fmt.Printf("Ошибка %s", err.Error())
+	}
+	fmt.Printf("Код: %d\n", resp.StatusCode)
+}
+```
+
 ### WaitGroup
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"sync"
+	"time"
+)
+
+// 10 конкурентных запросов на GET по адресу google.com
+// Вывести в консоль 10 StatusCode
+
+func main() {
+	t := time.Now()
+	var wg sync.WaitGroup
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			getHttpCode()
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	fmt.Println(time.Since(t))
+}
+
+func getHttpCode() {
+	resp, err := http.Get("https://google.com")
+	if err != nil {
+		fmt.Printf("Ошибка %s", err.Error())
+	}
+	fmt.Printf("Код: %d\n", resp.StatusCode)
+}
+```
+
 ### Планировщик
 ### Цикл планировщика
 ### Channels
 ### Создание канала
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	code := make(chan int)
+	go getHttpCode(code)
+	<-code
+}
+
+func getHttpCode(codeCh chan int) {
+	resp, err := http.Get("https://google.com")
+	if err != nil {
+		fmt.Printf("Ошибка %s", err.Error())
+	}
+	fmt.Printf("Код: %d\n", resp.StatusCode)
+	codeCh <- resp.StatusCode
+}
+```
+
 ### Чтение данных
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	code := make(chan int)
+	for i := 0; i < 10; i++ {
+		go getHttpCode(code)
+	}
+	for res := range code {
+		fmt.Printf("Код: %d\n", res)
+	}
+}
+
+func getHttpCode(codeCh chan int) {
+	resp, err := http.Get("https://google.com")
+	if err != nil {
+		fmt.Printf("Ошибка %s", err.Error())
+	}
+	codeCh <- resp.StatusCode
+}
+```
+
 ### Закрытие канала
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"sync"
+)
+
+func main() {
+	code := make(chan int)
+	var wg sync.WaitGroup
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			getHttpCode(code)
+			wg.Done()
+		}()
+	}
+	go func() {
+		wg.Wait()
+		close(code)
+	}()
+	for res := range code {
+		fmt.Printf("Код: %d\n", res)
+	}
+}
+
+func getHttpCode(codeCh chan int) {
+	resp, err := http.Get("https://google.com")
+	if err != nil {
+		fmt.Printf("Ошибка %s", err.Error())
+	}
+	codeCh <- resp.StatusCode
+}
+```
+
 #### Сумма Slice
+
+
+
+`main.go`
+```Go
+package main
+
+import "fmt"
+
+func sumPart(arr []int, ch chan int) {
+	sum := 0
+	for _, num := range arr {
+		sum += num
+	}
+	ch <- sum
+}
+
+func main() {
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+	numGoroutines := 3
+	ch := make(chan int, numGoroutines)
+
+	partSize := len(arr) / numGoroutines
+
+	for i := 0; i < numGoroutines; i++ {
+		start := i * partSize
+		end := start + partSize
+		go sumPart(arr[start:end], ch)
+	}
+
+	totalSum := 0
+	for i := 0; i < numGoroutines; i++ {
+		totalSum += <-ch
+	}
+	fmt.Println("Total sum: ", totalSum)
+}
+```
+
 ### Обработка ошибок
+
+
+
+`url.txt`
+```txt
+https://google.com
+https://purpleschool.ru
+htts://ya.ru
+```
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"flag"
+	"fmt"
+	"net/http"
+	"os"
+	"strings"
+)
+
+func ping(url string, respCh chan int, errCh chan error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		errCh <- err
+		return
+	}
+	respCh <- resp.StatusCode
+}
+
+func main() {
+	path := flag.String("file", "url.txt", "path to URL file")
+	flag.Parse()
+	file, err := os.ReadFile(*path)
+	if err != nil {
+		panic(err.Error())
+	}
+	urlSlice := strings.Split(string(file), "\n")
+	respCh := make(chan int)
+	errCh := make(chan error)
+	for _, url := range urlSlice {
+		go ping(url, respCh, errCh)
+	}
+	for i := 0; i < len(urlSlice); i++ {
+		errRes := <-errCh
+		fmt.Println(errRes)
+		res := <-respCh
+		fmt.Println(res)
+	}
+}
+```
+
 ### Select
+
+
+
 
 
 ## HTTP сервер
