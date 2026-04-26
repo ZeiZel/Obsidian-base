@@ -5605,54 +5605,381 @@ func GetWeather(geo geo.GeoData, format int) string {
 
 
 
+`geo / geo_test.go`
+```Go
+package geo_test
 
+import "testing"
 
+func TestGetMyLocation(t *testing.T) {
+	// Arange - подготовка, expected результат, данные для функции
 
+	// Act - выполняем функцию
+
+	// Assert - проверка результата с expected
+
+}
+```
 
 ### Первый тест
 
 
 
+`geo/geo.go`
+```Go
+func GetMyLocation(city string) (*GeoData, error) {
+	if city != "" {
+		isCity := checkCity(city)
+		if !isCity {
+			// - panic("Такого города нет")
+			return nil, errors.New("NOCITY")
+		}
+		return &GeoData{
+			City: city,
+		}, nil
+	}
+```
 
 
 
+`geo / geo_test.go`
+```Go
+package geo_test
+
+import (
+	"demo/weather/geo"
+	"testing"
+)
+
+func TestGetMyLocation(t *testing.T) {
+	// Arange - подготовка, expected результат, данные для функции
+	city := "London"
+	expected := geo.GeoData{
+		City: "London",
+	}
+	// Act - выполняем функцию
+	got, err := geo.GetMyLocation(city)
+	// Assert - проверка результата с expected
+	if err != nil {
+		t.Error(err)
+	}
+	if got.City != expected.City {
+		t.Errorf("Ожидалось %v, получение %v", expected, got)
+	}
+}
+```
 
 ### Debug теста
 
 
 
+`geo/geo_test.go`
+```Go
+package geo_test
 
+import (
+	"demo/weather/geo"
+	"testing"
+)
 
-
+func TestGetMyLocation(t *testing.T) {
+	// Arrange - подготовка, expected результат, данные для функции
+	city := "Moscow"
+	expected := geo.GeoData{
+		City: "Moscow",
+	}
+	// Act - выполняем функцию
+	got, err := geo.GetMyLocation(city)
+	// Assert - проверка результата с expected
+	if err != nil {
+		t.Error(err)
+	}
+	if got.City != expected.City {
+		t.Errorf("Ожидалось %v, получение %v", expected, got)
+	}
+}
+```
 
 ### Негативный тест
 
 
 
+`geo / geo.go`
+```Go
+var ErrNoCity = errors.New("NOCITY")
+var ErrNot200 = errors.New("NOT200")
+
+func GetMyLocation(city string) (*GeoData, error) {
+	if city != "" {
+		isCity := checkCity(city)
+		if !isCity {
+			return nil, ErrNoCity
+		}
+		return &GeoData{
+			City: city,
+		}, nil
+	}
+	resp, err := http.Get("https://ipapi.co/json/")
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		return nil, ErrNot200
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	var geo GeoData
+	json.Unmarshal(body, &geo)
+	return &geo, nil
+}
+```
 
 
 
+`geo/geo_test.go`
+```Go
+package geo_test
+
+import (
+	"demo/weather/geo"
+	"testing"
+)
+
+func TestGetMyLocation(t *testing.T) {
+	// Arrange - подготовка, expected результат, данные для функции
+	city := "London"
+	expected := geo.GeoData{
+		City: "London",
+	}
+	// Act - выполняем функцию
+	got, err := geo.GetMyLocation(city)
+	// Assert - проверка результата с expected
+	if err != nil {
+		t.Error(err)
+	}
+	if got.City != expected.City {
+		t.Errorf("Ожидалось %v, получение %v", expected, got)
+	}
+}
+
+func TestGetMyLocationNoCity(t *testing.T) {
+	city := "Londonasdsf"
+	_, err := geo.GetMyLocation(city)
+	if err != geo.ErrNoCity {
+		t.Errorf("Ожидалось %v, получение %v", geo.ErrNoCity, err)
+	}
+}
+```
 
 #### Тест погоды
 
 
 
+`weather / weather_test.go`
+```Go
+package weather_test
 
+import (
+	"demo/weather/geo"
+	"demo/weather/weather"
+	"strings"
+	"testing"
+)
 
-
+func TestGetWeather(t *testing.T) {
+	expected := "Moscow"
+	geoData := geo.GeoData{
+		City: expected,
+	}
+	format := 3
+	result := weather.GetWeather(geoData, format)
+	if !strings.Contains(result, expected) {
+		t.Errorf("Ожидалось %v, получение %v", expected, result)
+	}
+}
+```
 
 #### Ошибки
 
 
 
+`weather/weather.go`
+```Go
+package weather
+
+import (
+	"demo/weather/geo"
+	"errors"
+	"fmt"
+	"io"
+	"net/http"
+	"net/url"
+)
+
+// не подходящий формат
+var ErrWrongFormat = errors.New("WRONG_FORMAT")
+
+// добавляем в возврат вторым параметром ошибку
+func GetWeather(geo geo.GeoData, format int) (string, error) {
+	if format < 1 || format > 4 {
+		return "", ErrWrongFormat
+	}
+	
+	baseUrl, err := url.Parse("https://wttr.in/" + geo.City)
+	if err != nil {
+		fmt.Println(err.Error())
+		return "", errors.New("ERROR_URL")
+	}
+	params := url.Values{}
+	params.Add("format", fmt.Sprint(format))
+	baseUrl.RawQuery = params.Encode()
+	resp, err := http.Get(baseUrl.String())
+	if err != nil {
+		fmt.Println(err.Error())
+		return "", errors.New("ERROR_HTTP")
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err.Error())
+		return "", errors.New("ERROR_READBODY")
+	}
+	return string(body), nil
+}
+```
 
 
 
+`maing.go`
+```Go
+package main
+
+import (
+	"demo/weather/geo"
+	"demo/weather/weather"
+	"flag"
+	"fmt"
+)
+
+func main() {
+	fmt.Println("Новый проект")
+	city := flag.String("city", "", "Город пользователя")
+	format := flag.Int("format", 1, "Формат вывода погоды")
+
+	flag.Parse()
+
+	fmt.Println(*city)
+	geoData, err := geo.GetMyLocation(*city)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	// возвращаем ошибку
+	weatherData, _ := weather.GetWeather(*geoData, *format)
+	fmt.Println(weatherData)
+}
+```
+
+
+
+`weather/weather_test.go`
+```Go
+package weather_test
+
+import (
+	"demo/weather/geo"
+	"demo/weather/weather"
+	"strings"
+	"testing"
+)
+
+func TestGetWeather(t *testing.T) {
+	expected := "Moscow"
+	geoData := geo.GeoData{
+		City: expected,
+	}
+	format := 3
+	
+	result, err := weather.GetWeather(geoData, format)
+	
+	if err != nil {
+		t.Errorf("Пришла ошибка %v", err)
+	}
+	if !strings.Contains(result, expected) {
+		t.Errorf("Ожидалось %v, получение %v", expected, result)
+	}
+}
+
+func TestGetWeatherWrongFormat(t *testing.T) {
+	expected := "Moscow"
+	geoData := geo.GeoData{
+		City: expected,
+	}
+	format := 124
+	_, err := weather.GetWeather(geoData, format)
+	if err != weather.ErrWrongFormat {
+		t.Errorf("Ожидалось %v, получение %v", weather.ErrWrongFormat, err)
+	}
+}
+```
 
 ### Группы тестов
 
+С помощью `testing.Run` мы можем запустить функцию с тестом. Это сильно может нам помочь, чтобы сразу занести все пограничные значения определённых данных
 
+`weather / weather_test.go`
+```Go
+package weather_test
 
+import (
+	"demo/weather/geo"
+	"demo/weather/weather"
+	"strings"
+	"testing"
+)
+
+func TestGetWeather(t *testing.T) {
+	expected := "Moscow"
+	geoData := geo.GeoData{
+		City: expected,
+	}
+	format := 3
+	result, err := weather.GetWeather(geoData, format)
+	if err != nil {
+		t.Errorf("Пришла ошибка %v", err)
+	}
+	if !strings.Contains(result, expected) {
+		t.Errorf("Ожидалось %v, получение %v", expected, result)
+	}
+}
+
+var testCases = []struct {
+	name   string
+	format int
+}{
+	{name: "Big format", format: 147},
+	{name: "0 format", format: 0},
+	{name: "Minus format", format: -1},
+}
+
+func TestGetWeatherWrongFormat(t *testing.T) {
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			expected := "Moscow"
+			geoData := geo.GeoData{
+				City: expected,
+			}
+			_, err := weather.GetWeather(geoData, tc.format)
+			if err != weather.ErrWrongFormat {
+				t.Errorf("Ожидалось %v, получение %v", weather.ErrWrongFormat, err)
+			}
+		})
+	}
+}
+```
 
 
 
