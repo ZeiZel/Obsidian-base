@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "89542ad633dd7c63",
+            "id": "94e736312e022a2f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/Figma.md",
+                "file": "architecture/System Design/System Design.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -26,18 +26,6 @@
                   "backlinkCollapsed": false,
                   "unlinkedCollapsed": true
                 }
-              },
-              "icon": "lucide-file",
-              "title": "Figma"
-            }
-          },
-          {
-            "id": "fb81dcdc01e73590",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "architecture/System Design"
               },
               "icon": "lucide-file",
               "title": "System Design"
@@ -56,7 +44,7 @@
             }
           },
           {
-            "id": "27f092496f158954",
+            "id": "fae567c1b9242142",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,105 +66,9 @@
               "icon": "lucide-file",
               "title": "Selfgo"
             }
-          },
-          {
-            "id": "e755db9b994014f2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/RegExp.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "RegExp"
-            }
-          },
-          {
-            "id": "79025dfe0ef56696",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/computer science.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "computer science"
-            }
-          },
-          {
-            "id": "592c30cf28ba1596",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/principles/SOLID принципы.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "SOLID принципы"
-            }
-          },
-          {
-            "id": "0a283d10ea245ab5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/GIT/Git.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Git"
-            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -240,22 +132,13 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
-          },
-          {
-            "id": "35d3938fb1c8b8fb",
-            "type": "leaf",
-            "state": {
-              "type": "mk-path-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Navigator"
-            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -380,7 +263,8 @@
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -403,13 +287,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/GIT/Git.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Git"
+              "title": "Outline of Selfgo"
             }
           }
         ],
@@ -417,7 +301,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 366.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -441,10 +326,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "0a283d10ea245ab5",
+  "active": "fae567c1b9242142",
   "lastOpenFiles": [
+    "architecture/System Design/System Design.md",
+    "architecture/Architecture/Architecture.md",
+    "Excalidraw/friend_line_vk.excalidraw.md",
+    "Design/Figma.md",
+    "cs/principles/SOLID принципы.md",
+    "cs/computer science.md",
+    "cs/RegExp.md",
+    "backend/go/Selfgo.md",
+    "cs/GIT/GIT.md",
+    "Tags/#git #github #cs +#commitconvetionals +#gitflow",
+    "Tags/#git #github #cs #commitconvetionals +#gitflow",
     "cs/GIT/Соглашение о коммитах 1.0.0.md",
-    "cs/GIT/Git.md",
     "cs/GIT/GitFlow.md",
     "cs/GIT/Github Actions.md",
     "cs/GIT/_lessons/7. Удалённый репозиторий.md",
@@ -453,18 +348,14 @@
     "cs/GIT/_lessons/4. Ветки и изменения.md",
     "cs/GIT/_lessons/5. Удаление.md",
     "cs/GIT/_lessons/6. Продвинутая работа.md",
-    "cs/principles/SOLID принципы.md",
     "cs/principles",
-    "cs/computer science.md",
     "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
     "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
-    "cs/RegExp.md",
     "cs/The Bezos Mandath.md",
     "cs/C.md",
     "cs/Functional programming.md",
     "cs/math.md",
     "cs/Задачи с Leetcode.md",
-    "backend/go/Selfgo.md",
     "_png/Pasted image 20260420122324.png",
     "_png/Pasted image 20260420121729.png",
     "_png/Pasted image 20260419191346.png",
@@ -476,10 +367,6 @@
     "_png/Pasted image 20260418142800.png",
     "backend/go/![](...._pngPasted%20image%2020260413201752.png).md",
     "_png/Pasted image 20260413201752.png",
-    "backend/go/10-advanced.md",
-    "backend/go/Temporal Go.md",
-    "backend/go/go.md",
-    "backend/go/09-deploy.md",
     "Excalidraw",
     "Tags/#security",
     "Tags/#performance",
@@ -487,8 +374,6 @@
     "Tags/#docker",
     "Tags/#production",
     "Tags/#deploy",
-    "Tags/#tooling",
-    "Tags/#testing",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",

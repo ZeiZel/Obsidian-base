@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "Git",
-      "path": "cs/GIT/Git.md"
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Architecture",
+      "path": "architecture/Architecture/Architecture.md"
+    },
+    {
+      "basename": "friend_line_vk.excalidraw",
+      "path": "Excalidraw/friend_line_vk.excalidraw.md"
+    },
+    {
+      "basename": "Figma",
+      "path": "Design/Figma.md"
     },
     {
       "basename": "SOLID принципы",
@@ -13,16 +29,20 @@
       "path": "cs/computer science.md"
     },
     {
+      "basename": "RegExp",
+      "path": "cs/RegExp.md"
+    },
+    {
+      "basename": "GIT",
+      "path": "cs/GIT/GIT.md"
+    },
+    {
       "basename": "Немного про ООП (by ExtremeCode)",
       "path": "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md"
     },
     {
       "basename": "ООП на простых примерах. Объектно-ориентированное программирование",
       "path": "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md"
-    },
-    {
-      "basename": "RegExp",
-      "path": "cs/RegExp.md"
     },
     {
       "basename": "The Bezos Mandath",
@@ -43,10 +63,6 @@
     {
       "basename": "Задачи с Leetcode",
       "path": "cs/Задачи с Leetcode.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "Pasted image 20260420122324",
@@ -75,14 +91,6 @@
     {
       "basename": "01-basics",
       "path": "backend/go/01-basics.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "friend_line_vk.excalidraw",
-      "path": "Excalidraw/friend_line_vk.excalidraw.md"
     },
     {
       "basename": "backend",
@@ -127,10 +135,6 @@
     {
       "basename": "Service Worker",
       "path": "frontend/service-workers/Service Worker.md"
-    },
-    {
-      "basename": "Figma",
-      "path": "Design/Figma.md"
     },
     {
       "basename": "database",

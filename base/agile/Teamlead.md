@@ -1465,7 +1465,7 @@ Trunk-Based Development требует зрелого CI и практики fea
 - [Работа с системами контроля версий](https://tlroadmap.io/roles/technical-lead/automation/vcs.html)
 - [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)
 - [Trunk-Based Development](https://trunkbaseddevelopment.com/)
-- **Внутренние:** [Git](../cs/GIT/Git.md), [GitFlow](../cs/GIT/GitFlow.md), [GitHub Actions](../cs/GIT/Github%20Actions.md), [Conventional Commits](../cs/GIT/Соглашение%20о%20коммитах%201.0.0.md)
+- **Внутренние:** [Git](../cs/GIT/GIT.md), [GitFlow](../cs/GIT/GitFlow.md), [GitHub Actions](../cs/GIT/Github%20Actions.md), [Conventional Commits](../cs/GIT/Соглашение%20о%20коммитах%201.0.0.md)
 
 ##### Capacity Management
 
@@ -2664,7 +2664,7 @@ Weekly Review (шаблон):
 - [Redis](../database/Redis.md)
 
 #### Git и версионирование
-- [Git](../cs/GIT/Git.md)
+- [Git](../cs/GIT/GIT.md)
 - [GitFlow](../cs/GIT/GitFlow.md)
 - [GitHub Actions](../cs/GIT/Github%20Actions.md)
 

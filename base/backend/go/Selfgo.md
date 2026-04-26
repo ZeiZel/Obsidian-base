@@ -3999,69 +3999,547 @@ func (vault *Vault) save() {
 
 
 
+`account / vault.go`
+```Go
+package account
+
+import (
+	"demo/password/files"
+	"encoding/json"
+	"strings"
+	"time"
+
+	"github.com/fatih/color"
+)
+
+type Vault struct {
+	Accounts  []Account `json:"accounts"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+type VaultWithDb struct {
+	Vault
+	db files.JsonDb
+}
+
+func NewVault(db *files.JsonDb) *VaultWithDb {
+	file, err := db.Read()
+	if err != nil {
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db: *db,
+		}
+	}
+	var vault Vault
+	err = json.Unmarshal(file, &vault)
+	if err != nil {
+		color.Red("Не удалось разобрать файл data.json")
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db: *db,
+		}
+	}
+	return &VaultWithDb{
+		Vault: vault,
+		db:    *db,
+	}
+}
+
+func (vault *VaultWithDb) DeleteAccountByUrl(url string) bool {
+	var accounts []Account
+	isDeleted := false
+	for _, account := range vault.Accounts {
+		isMatched := strings.Contains(account.Url, url)
+		if !isMatched {
+			accounts = append(accounts, account)
+			continue
+		}
+		isDeleted = true
+	}
+	vault.Accounts = accounts
+	vault.save()
+	return isDeleted
+}
+
+func (vault *VaultWithDb) FindAccountsByUrl(url string) []Account {
+	var accounts []Account
+	for _, account := range vault.Accounts {
+		isMatched := strings.Contains(account.Url, url)
+		if isMatched {
+			accounts = append(accounts, account)
+		}
+	}
+	return accounts
+}
+
+func (vault *VaultWithDb) AddAccount(acc Account) {
+	vault.Accounts = append(vault.Accounts, acc)
+	vault.save()
+}
+
+func (vault *Vault) ToBytes() ([]byte, error) {
+	file, err := json.Marshal(vault)
+	if err != nil {
+		return nil, err
+	}
+	return file, nil
+}
+
+func (vault *VaultWithDb) save() {
+	vault.UpdatedAt = time.Now()
+	data, err := vault.Vault.ToBytes()
+	if err != nil {
+		color.Red("Не удалось перобразовать")
+	}
+	vault.db.Write(data)
+}
+```
 
 
+
+`main.go`
+```go
+package main
+
+import (
+	"demo/password/account"
+	"demo/password/files"
+	"fmt"
+
+	"github.com/fatih/color"
+)
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault(files.NewJsonDb("data.json"))
+Menu:
+	for {
+		variant := getMenu()
+		switch variant {
+		case 1:
+			createAccount(vault)
+		case 2:
+			findAccount(vault)
+		case 3:
+			deleteAccount(vault)
+		default:
+			break Menu
+		}
+	}
+
+}
+
+func getMenu() int {
+	var variant int
+	fmt.Println("Выберите вариант:")
+	fmt.Println("1. Создать аккаунт")
+	fmt.Println("2. Найти аккаунт")
+	fmt.Println("3. Удалить аккаунт")
+	fmt.Println("4. Выход")
+	fmt.Scan(&variant)
+	return variant
+}
+
+func findAccount(vault *account.VaultWithDb) {
+	url := promptData("Введите URL для поиска")
+	accounts := vault.FindAccountsByUrl(url)
+	if len(accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	for _, account := range accounts {
+		account.Output()
+	}
+}
+
+func deleteAccount(vault *account.VaultWithDb) {
+	url := promptData("Введите URL для поиска")
+	isDeleted := vault.DeleteAccountByUrl(url)
+	if isDeleted {
+		color.Green("Удалено")
+	} else {
+		color.Red("Не найдено")
+	}
+}
+
+func createAccount(vault *account.VaultWithDb) {
+	login := promptData("Введите логин")
+	password := promptData("Введите пароль")
+	url := promptData("Введите URL")
+	myAccount, err := account.NewAccount(login, password, url)
+	if err != nil {
+		fmt.Println("Неверный формат URL или Логин")
+		return
+	}
+	vault.AddAccount(*myAccount)
+}
+
+func promptData(prompt string) string {
+	fmt.Print(prompt + ": ")
+	var res string
+	fmt.Scanln(&res)
+	return res
+}
+```
 
 ### Второй провайдер
 
 
 
+`cloud/cloud.go`
+```Go
+package cloud
+
+type CloudDb struct {
+	url string
+}
+
+func NewCloudDb(url string) *CloudDb {
+	return &CloudDb{
+		url: url,
+	}
+}
+
+func (db *CloudDb) Read() ([]byte, error) {
+	return []byte{}, nil
+}
+
+func (db *CloudDb) Write(content []byte) {
+}
+```
 
 ### Создание интерфейса
 
 
 
+`account / vault.go`
+```Go
+package account
+
+import (
+	"encoding/json"
+	"strings"
+	"time"
+
+	"github.com/fatih/color"
+)
+
+type Db interface {
+	Read() ([]byte, error)
+	Write([]byte)
+}
+
+type Vault struct {
+	Accounts  []Account `json:"accounts"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+type VaultWithDb struct {
+	Vault
+	db Db
+}
+
+func NewVault(db Db) *VaultWithDb {
+	file, err := db.Read()
+	if err != nil {
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db: db,
+		}
+	}
+	var vault Vault
+	err = json.Unmarshal(file, &vault)
+	if err != nil {
+		color.Red("Не удалось разобрать файл data.json")
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db: db,
+		}
+	}
+	return &VaultWithDb{
+		Vault: vault,
+		db:    db,
+	}
+}
+```
+
+
+
+`main.go`
+```Go
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	// vault := account.NewVault(files.NewJsonDb("data.json"))
+	vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
+```
+
 ### Встроенный интерфейс
 
 
 
+`account / vault.go`
+```Go
+package account
+
+import (
+	"encoding/json"
+	"strings"
+	"time"
+
+	"github.com/fatih/color"
+)
+
+type ByteReader interface {
+	Read() ([]byte, error)
+}
+
+type ByteWriter interface {
+	Write([]byte)
+}
+
+type Db interface {
+	ByteReader
+	ByteWriter
+}
+
+type Vault struct {
+	Accounts  []Account `json:"accounts"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+type VaultWithDb struct {
+	Vault
+	db Db
+}
+```
 
 ### Any тип
 
 
 
+`output / errors.go`
+```Go
+package output
+
+func PrintError(value any) {
+	// color.Red(value)
+}
+```
+
+
+
+`main.go`
+```Go
+import (
+	"demo/password/account"
+	"demo/password/files"
+	"demo/password/output"
+	"fmt"
+
+	"github.com/fatih/color"
+)
+
+func main() {
+	output.PrintError(1)
+	output.PrintError("sd")
+```
 
 ### Type switch
 
 
 
+`output / errors.go`
+```Go
+package output
+
+import "github.com/fatih/color"
+
+func PrintError(value any) {
+	switch t := value.(type) {
+	case string:
+		color.Red(t)
+	case int:
+		color.Red("Код ошибки: %d", t)
+	case error:
+		color.Red(t.Error())
+	default:
+		color.Red("Неизвестный тип ошибки")
+	}
+}
+```
+
+
+
+`account/vault.go`
+```Go
+func NewVault(db Db) *VaultWithDb {
+	file, err := db.Read()
+	if err != nil {
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db: db,
+		}
+	}
+	var vault Vault
+	err = json.Unmarshal(file, &vault)
+	if err != nil {
+		// color.Red("Не удалось разобрать файл data.json")
+		
+		output.PrintError("Не удалось разобрать файл data.json") // свежая ошибка
+		
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db: db,
+		}
+	}
+	return &VaultWithDb{
+		Vault: vault,
+		db:    db,
+	}
+}
+
+func (vault *VaultWithDb) save() {
+	vault.UpdatedAt = time.Now()
+	data, err := vault.Vault.ToBytes()
+	if err != nil {
+		// color.Red("Не удалось перобразовать")
+		output.PrintError(err) // теперь выводим свежую ошибку
+	}
+	vault.db.Write(data)
+}
+```
+
+
+
+`files/files.go`
+```Go
+func (db *JsonDb) Write(content []byte) {
+	file, err := os.Create(db.filename)
+	if err != nil {
+		// - fmt.Println(err)
+		output.PrintError(err)
+	}
+	defer file.Close()
+	_, err = file.Write(content)
+	if err != nil {
+		// - fmt.Println(err)
+		output.PrintError(err)
+		return
+	}
+	fmt.Println("Запись успешна")
+}
+```
+
+
+
+`main.go`
+```Go
+func deleteAccount(vault *account.VaultWithDb) {
+	url := promptData("Введите URL для поиска")
+	isDeleted := vault.DeleteAccountByUrl(url)
+	if isDeleted {
+		color.Green("Удалено")
+	} else {
+		// - color.Red("Не найдено")
+		output.PrintError("Не найдено")
+	}
+}
+
+func createAccount(vault *account.VaultWithDb) {
+	login := promptData("Введите логин")
+	password := promptData("Введите пароль")
+	url := promptData("Введите URL")
+	myAccount, err := account.NewAccount(login, password, url)
+	if err != nil {
+		// - fmt.Println("Неверный формат URL или Логин")
+		output.PrintError("Неверный формат URL или Логин")
+		return
+	}
+	vault.AddAccount(*myAccount)
+}
+```
 
 ### Получение типа
 
 
 
+`output / errors.go`
+```Go
+package output
 
+import "github.com/fatih/color"
 
+func PrintError(value any) {
+	intValue, ok := value.(int)
+	if ok {
+		color.Red("Код ошибки: %d", intValue)
+		return
+	}
+	strValue, ok := value.(string)
+	if ok {
+		color.Red(strValue)
+		return
+	}
+	errorValue, ok := value.(error)
+	if ok {
+		color.Red(errorValue.Error())
+		return
+	}
+	color.Red("Неизвестный тип ошибки")
+}
+```
 
 ### Generic
 
 
 
-
-
-
-
-
-
-
-
-
+`output / errors.go`
+```Go
+func sum[T int | float32 | float64 | int16 | int32 | string](a, b T) T {
+	return a + b
+}
+```
 
 ### Ограничения Generic
 
 
 
+`output / errors.go`
+```Go
+package output
 
+import (
+	"demo/password/account"
 
+	"github.com/fatih/color"
+)
 
-
-
-
-
-
-
+func sum[T account.Account](a, b T) T {
+	// return a + b
+}
+```
 
 ### Generic Structs
+
+
+
 
 
 
@@ -4072,14 +4550,357 @@ func (vault *Vault) save() {
 
 
 
+`main.go`
+```Go
+package main
+
+import (
+	"demo/password/account"
+	"demo/password/files"
+	"demo/password/output"
+	"fmt"
+
+	"github.com/fatih/color"
+)
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault(files.NewJsonDb("data.json"))
+	// vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
+Menu:
+	for {
+		variant := promptData([]string{
+			"1. Создать аккаунт",
+			"2. Найти аккаунт",
+			"3. Удалить аккаунт",
+			"4. Выход",
+			"Выберите вариант",
+		})
+		switch variant {
+		case "1":
+			createAccount(vault)
+		case "2":
+			findAccount(vault)
+		case "3":
+			deleteAccount(vault)
+		default:
+			break Menu
+		}
+	}
+
+}
+
+func findAccount(vault *account.VaultWithDb) {
+	url := promptData([]string{"Введите URL для поиска"})
+	accounts := vault.FindAccountsByUrl(url)
+	if len(accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	for _, account := range accounts {
+		account.Output()
+	}
+}
+
+func deleteAccount(vault *account.VaultWithDb) {
+	url := promptData([]string{"Введите URL для поиска"})
+	isDeleted := vault.DeleteAccountByUrl(url)
+	if isDeleted {
+		color.Green("Удалено")
+	} else {
+		output.PrintError("Не найдено")
+	}
+}
+
+func createAccount(vault *account.VaultWithDb) {
+	login := promptData([]string{"Введите логин"})
+	password := promptData([]string{"Введите пароль"})
+	url := promptData([]string{"Введите URL"})
+	myAccount, err := account.NewAccount(login, password, url)
+	if err != nil {
+		output.PrintError("Неверный формат URL или Логин")
+		return
+	}
+	vault.AddAccount(*myAccount)
+}
+
+func promptData[T any](prompt []T) string {
+	for i, line := range prompt {
+		if i == len(prompt)-1 {
+			fmt.Printf("%v: ", line)
+		} else {
+			fmt.Println(line)
+		}
+	}
+	var res string
+	fmt.Scanln(&res)
+	return res
+}
+```
+
+
 
 ## Продвинутые функции
 
 ### Тип функции
+
+
+
+`main.go`
+```go
+var menu = map[string]func(*account.VaultWithDb){
+	"1": createAccount,
+	"2": findAccount,
+	"3": deleteAccount,
+}
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault(files.NewJsonDb("data.json"))
+	// vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
+Menu:
+	for {
+		variant := promptData([]string{
+			"1. Создать аккаунт",
+			"2. Найти аккаунт",
+			"3. Удалить аккаунт",
+			"4. Выход",
+			"Выберите вариант",
+		})
+		menuFunc := menu[variant]
+		if menuFunc == nil {
+			break Menu
+		}
+		menuFunc(vault)
+	}
+
+}
+```
+
 ### Передача функции
+
+
+
+`account / vault.go`
+```Go
+func (vault *VaultWithDb) FindAccounts(str string, checker func(Account, string) bool) []Account {
+	var accounts []Account
+	for _, account := range vault.Accounts {
+		isMatched := checker(account, str)
+		if isMatched {
+			accounts = append(accounts, account)
+		}
+	}
+	return accounts
+}
+```
+
+
+
+`main.go`
+```Go
+func findAccount(vault *account.VaultWithDb) {
+	url := promptData([]string{"Введите URL для поиска"})
+	accounts := vault.FindAccounts(url, checkUrl)
+	if len(accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	for _, account := range accounts {
+		account.Output()
+	}
+}
+
+func checkUrl(acc account.Account, str string) bool {
+	return strings.Contains(acc.Url, str)
+}
+```
+
 ### Анонимные функции
+
+
+
+`main.go`
+```Go
+func findAccount(vault *account.VaultWithDb) {
+	url := promptData([]string{"Введите URL для поиска"})
+	// accounts := vault.FindAccounts(url, checkUrl)
+	accounts := vault.FindAccounts(url, func(acc account.Account, str string) bool {
+		return strings.Contains(acc.Url, str)
+	})
+	
+	if len(accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	
+	for _, account := range accounts {
+		account.Output()
+	}
+}
+
+// эту функцию удаляем
+// func checkUrl(acc account.Account, str string) bool {
+// 	return strings.Contains(acc.Url, str)
+// }
+```
+
 #### Поиск по логину
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"demo/password/account"
+	"demo/password/files"
+	"demo/password/output"
+	"fmt"
+	"strings"
+
+	"github.com/fatih/color"
+)
+
+var menu = map[string]func(*account.VaultWithDb){
+	"1": createAccount,
+	"2": findAccountByUrl,
+	"3": findAccountByLogin,
+	"4": deleteAccount,
+}
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault(files.NewJsonDb("data.json"))
+	// vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
+Menu:
+	for {
+		variant := promptData([]string{
+			"1. Создать аккаунт",
+			"2. Найти аккаунт по URL",
+			"3. Найти аккаунт по логину",
+			"4. Удалить аккаунт",
+			"5. Выход",
+			"Выберите вариант",
+		})
+		menuFunc := menu[variant]
+		if menuFunc == nil {
+			break Menu
+		}
+		menuFunc(vault)
+	}
+
+}
+
+func findAccountByUrl(vault *account.VaultWithDb) {
+	url := promptData([]string{"Введите URL для поиска"})
+	accounts := vault.FindAccounts(url, func(acc account.Account, str string) bool {
+		return strings.Contains(acc.Url, str)
+	})
+	outputResult(&accounts)
+}
+
+func findAccountByLogin(vault *account.VaultWithDb) {
+	login := promptData([]string{"Введите логин для поиска"})
+	accounts := vault.FindAccounts(login, func(acc account.Account, str string) bool {
+		return strings.Contains(acc.Login, str)
+	})
+	outputResult(&accounts)
+}
+
+func outputResult(accounts *[]account.Account) {
+	// если аккаунтов нет, то выведем сообщение
+	if len(*accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	
+	for _, account := range *accounts {
+		account.Output()
+	}
+}
+```
+
 ### Динамическое число аргументов
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"demo/password/account"
+	"demo/password/files"
+	"demo/password/output"
+	"fmt"
+	"strings"
+
+	"github.com/fatih/color"
+)
+
+var menu = map[string]func(*account.VaultWithDb){
+	"1": createAccount,
+	"2": findAccountByUrl,
+	"3": findAccountByLogin,
+	"4": deleteAccount,
+}
+
+// выносим массив вариантом
+var menuVariants = []string{
+	"1. Создать аккаунт",
+	"2. Найти аккаунт по URL",
+	"3. Найти аккаунт по логину",
+	"4. Удалить аккаунт",
+	"5. Выход",
+	"Выберите вариант",
+}
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault(files.NewJsonDb("data.json"))
+Menu:
+	for {
+		// деструктуризируем и вкладываем сюда массив вариантов
+		variant := promptData(menuVariants...)
+		menuFunc := menu[variant]
+		if menuFunc == nil {
+			break Menu
+		}
+		menuFunc(vault)
+	}
+
+}
+
+func findAccountByUrl(vault *account.VaultWithDb) {
+	// оставляем здесь строку
+	url := promptData("Введите URL для поиска")
+	// ...
+}
+
+func findAccountByLogin(vault *account.VaultWithDb) {
+	// оставляем здесь строку
+	login := promptData("Введите логин для поиска")
+	// ...
+}
+
+func deleteAccount(vault *account.VaultWithDb) {
+	// оставляем здесь строку
+	url := promptData("Введите URL для поиска")
+	// ...
+}
+
+func createAccount(vault *account.VaultWithDb) {
+	// оставляем здесь строку
+	login := promptData("Введите логин")
+	password := promptData("Введите пароль")
+	url := promptData("Введите URL")
+	// ...
+}
+
+// и сюда мы передаём деструктуризированный массив строк
+func promptData(prompt ...string) string {
+	// ...
+}
+```
+
 ### Замыкание
 
 
@@ -4087,38 +4908,747 @@ func (vault *Vault) save() {
 ## Env и шифрование
 
 ### Получение env
+
+
+
+`main.go`
+```go
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	res := os.Getenv("VAR")
+	fmt.Println(res)
+
+	for _, e := range os.Environ() {
+		pair := strings.SplitN(e, "=", 2)
+		fmt.Println(pair[0])
+	}
+}
+```
+
 ### чтение env
+
+
+
+`.gitignore`
+```
+data.json
+/.env*
+```
+
+
+
+```bash
+go get github.com/joho/godotenv
+```
+
+
+
+`maing.go`
+```go
+
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	err := godotenv.Load()
+	if err != nil {
+		output.PrintError("Не удалось найти env файл")
+	}
+	res := os.Getenv("VAR")
+	fmt.Println(res)
+
+	for _, e := range os.Environ() {
+		pair := strings.SplitN(e, "=", 2)
+		fmt.Println(pair[0])
+	}
+}
+```
+
 ### Encrypter struct
+
+
+
+`encrypter / encrypter.go`
+```Go
+package encrypter
+
+import "os"
+
+type Encrypter struct {
+	Key string
+}
+
+func NewEncrypter() *Encrypter {
+	key := os.Getenv("KEY")
+	
+	if key == "" {
+		panic("Не передан параметр KEY в переменные окружения")
+	}
+	
+	return &Encrypter{
+		Key: key,
+	}
+}
+
+func (enc *Encrypter) Encrypt(plainStr string) string {
+	return ""
+}
+
+func (enc *Encrypter) Decrypt(encryptedStr string) string {
+	return ""
+}
+```
+
+
+
+`account / vault.go`
+```Go
+package account
+
+import (
+	"demo/password/encrypter"
+	"demo/password/output"
+	"encoding/json"
+	"strings"
+	"time"
+)
+
+type VaultWithDb struct {
+	Vault
+	db  Db
+	// добавляем внедрение энкриптера
+	enc encrypter.Encrypter
+}
+
+// внедряем encrypter в структуру
+func NewVault(db Db, enc encrypter.Encrypter) *VaultWithDb {
+	file, err := db.Read()
+	
+	if err != nil {
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db:  db,
+			enc: enc,
+		}
+	}
+	
+	var vault Vault
+	err = json.Unmarshal(file, &vault)
+	
+	if err != nil {
+		output.PrintError("Не удалось разобрать файл data.json")
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db:  db,
+			enc: enc,
+		}
+	}
+	
+	return &VaultWithDb{
+		Vault: vault,
+		db:    db,
+		enc:   enc,
+	}
+}
+```
+
+
+
+`main.go`
+```Go
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	
+	err := godotenv.Load()
+	
+	if err != nil {
+		output.PrintError("Не удалось найти env файл")
+	}
+	
+	vault := account.NewVault(
+		files.NewJsonDb("data.json"), 
+		// внедряем созданный энкриптер
+		*encrypter.NewEncrypter()
+	)
+
+Menu:
+	for {
+		variant := promptData(menuVariants...)
+		menuFunc := menu[variant]
+		if menuFunc == nil {
+			break Menu
+		}
+		menuFunc(vault)
+	}
+
+}
+```
+
+
 ### Шифрование данных
+
+
+
+`encrypter/encrypter.go`
+```Go
+package encrypter
+
+import (
+	"crypto/aes"
+	"crypto/cipher"
+	"crypto/rand"
+	"io"
+	"os"
+)
+
+type Encrypter struct {
+	Key string
+}
+
+func NewEncrypter() *Encrypter {
+	key := os.Getenv("KEY")
+	if key == "" {
+		panic("Не передан параметр KEY в переменные окружения")
+	}
+	return &Encrypter{
+		Key: key,
+	}
+}
+
+func (enc *Encrypter) Encrypt(plainStr []byte) []byte {
+	block, err := aes.NewCipher([]byte(enc.Key))
+	if err != nil {
+		panic(err.Error())
+	}
+	aesGSM, err := cipher.NewGCM(block)
+	if err != nil {
+		panic(err.Error())
+	}
+	nonce := make([]byte, aesGSM.NonceSize())
+	_, err = io.ReadFull(rand.Reader, nonce)
+	if err != nil {
+		panic(err.Error())
+	}
+	return aesGSM.Seal(nonce, nonce, plainStr, nil)
+}
+
+func (enc *Encrypter) Decrypt(encryptedStr []byte) []byte {
+}
+```
+
 ### Расшифровка данных
+
+
+
+`encrypter / encrypter.go`
+```Go
+func (enc *Encrypter) Decrypt(encryptedStr []byte) []byte {
+	block, err := aes.NewCipher([]byte(enc.Key))
+	
+	if err != nil {
+		panic(err.Error())
+	}
+	
+	aesGSM, err := cipher.NewGCM(block)
+	
+	if err != nil {
+		panic(err.Error())
+	}
+	
+	nonceSize := aesGSM.NonceSize()
+	nonce, cipherText := encryptedStr[:nonceSize], encryptedStr[nonceSize:]
+	plainText, err := aesGSM.Open(nil, nonce, cipherText, nil)
+	
+	if err != nil {
+		panic(err.Error())
+	}
+	return plainText
+}
+```
+
 #### Применение шифрования
+
+
+
+`.gitignore`
+```
+/.env*
+/*.vault
+```
+
+
+
+`account / vault.go`
+```Go
+func NewVault(db Db, enc encrypter.Encrypter) *VaultWithDb {
+	file, err := db.Read()
+	if err != nil {
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db:  db,
+			enc: enc,
+		}
+	}
+	// для получения данных сразу их декриптим
+	data := enc.Decrypt(file)
+	var vault Vault
+	
+	// достаём JSON из data
+	err = json.Unmarshal(data, &vault)
+	// логируем найденные
+	color.Cyan("Найдено %d аккаунтов", len(vault.Accounts))
+	
+	if err != nil {
+		output.PrintError("Не удалось разобрать файл data.vault")
+		return &VaultWithDb{
+			Vault: Vault{
+				Accounts:  []Account{},
+				UpdatedAt: time.Now(),
+			},
+			db:  db,
+			enc: enc,
+		}
+	}
+	return &VaultWithDb{
+		Vault: vault,
+		db:    db,
+		enc:   enc,
+	}
+}
+
+func (vault *VaultWithDb) save() {
+	vault.UpdatedAt = time.Now()
+	data, err := vault.Vault.ToBytes()
+	encData := vault.enc.Encrypt(data)
+	if err != nil {
+		output.PrintError(err)
+	}
+	vault.db.Write(encData)
+}
+```
+
+
+
+`main.go`
+```Go
+func main() {
+	fmt.Println("__Менеджер паролей__")
+	err := godotenv.Load()
+	if err != nil {
+		output.PrintError("Не удалось найти env файл")
+	}
+	
+	// vault := account.NewVault(files.NewJsonDb("data.json"), *encrypter.NewEncrypter())
+	// пакуем все данные в файл data.vault
+	vault := account.NewVault(files.NewJsonDb("data.vault"), *encrypter.NewEncrypter())
+	
+Menu:
+	for {
+		variant := promptData(menuVariants...)
+		menuFunc := menu[variant]
+		if menuFunc == nil {
+			break Menu
+		}
+		menuFunc(vault)
+	}
+
+}
+
+```
+
 
 
 ## HTTP запросы
 
 ### Создание нового проекта
+
+
+
+`go.mod`
+```Go
+module demo/weather
+
+go 1.22.1
+```
+
+
+
+`main.go`
+```Go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Новый проект")
+}
+```
+
 ### План проекта
+
+
+
+
+
+
 ### CLI флаги
+
+
+
+`maing.go`
+```Go
+import (
+	"flag"
+	"fmt"
+)
+
+func main() {
+	fmt.Println("Новый проект")
+	city := flag.String("city", "", "Город пользователя")
+	format := flag.Int("format", 1, "Формат вывода погоды")
+
+	flag.Parse()
+
+	fmt.Println(*city)
+	fmt.Println(*format)
+}
+```
+
 ### Readers
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"flag"
+	"fmt"
+	"io"
+	"strings"
+)
+
+func main() {
+	fmt.Println("Новый проект")
+	city := flag.String("city", "", "Город пользователя")
+	format := flag.Int("format", 1, "Формат вывода погоды")
+
+	flag.Parse()
+
+	fmt.Println(*city)
+	fmt.Println(*format)
+
+	r := strings.NewReader("Привет! Я поток данных")
+	block := make([]byte, 4)
+	for {
+		_, err := r.Read(block)
+		fmt.Printf("%q\n", block)
+		if err == io.EOF {
+			break
+		}
+	}
+}
+```
+
 ### Первый HTTP запрос
+
+
+
+`geo / geo.go`
+```Go
+package geo
+
+import (
+	"encoding/json"
+	"errors"
+	"io"
+	"net/http"
+)
+
+type GeoData struct {
+	City string `json:"city"`
+}
+
+func GetMyLocation(city string) (*GeoData, error) {
+	if city != "" {
+		return &GeoData{
+			City: city,
+		}, nil
+	}
+	resp, err := http.Get("https://ipapi.co/json/")
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		return nil, errors.New("NOT200")
+	}
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	var geo GeoData
+	json.Unmarshal(body, &geo)
+	return &geo, nil
+}
+```
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"demo/weather/geo"
+	"flag"
+	"fmt"
+)
+
+func main() {
+	fmt.Println("Новый проект")
+	city := flag.String("city", "", "Город пользователя")
+
+	flag.Parse()
+
+	fmt.Println(*city)
+	geoData, err := geo.GetMyLocation(*city)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(geoData)
+}
+```
+
 ### Query параметры
+
+
+
+`weather/weather.go`
+```Go
+package weather
+
+import (
+	"demo/weather/geo"
+	"fmt"
+	"io"
+	"net/http"
+	"net/url"
+)
+
+func GetWeather(geo geo.GeoData, format int) string {
+	baseUrl, err := url.Parse("https://wttr.in/" + geo.City)
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	params := url.Values{}
+	params.Add("format", string(format))
+	baseUrl.RawQuery = params.Encode()
+	resp, err := http.Get(baseUrl.String())
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	return string(body)
+}
+```
+
+
+
+`main.go`
+```Go
+package main
+
+import (
+	"demo/weather/geo"
+	"demo/weather/weather"
+	"flag"
+	"fmt"
+)
+
+func main() {
+	fmt.Println("Новый проект")
+	city := flag.String("city", "", "Город пользователя")
+	format := flag.Int("format", 1, "Формат вывода погоды")
+
+	flag.Parse()
+
+	fmt.Println(*city)
+	geoData, err := geo.GetMyLocation(*city)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	weatherData := weather.GetWeather(*geoData, *format)
+	fmt.Println(weatherData)
+}
+```
+
 ### Debug приложения
+
+
+
+`weather / weather.go`
+```Go
+func GetWeather(geo geo.GeoData, format int) string {
+	baseUrl, err := url.Parse("https://wttr.in/" + geo.City)
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	params := url.Values{}
+	// params.Add("format", string(format))
+	// 
+	params.Add("format", fmt.Sprint(format))
+	baseUrl.RawQuery = params.Encode()
+	resp, err := http.Get(baseUrl.String())
+```
+
 ### Post запрос
 
 
 
+`geo/geo.go`
+```Go
+package geo
 
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"io"
+	"net/http"
+)
+
+type GeoData struct {
+	City string `json:"city"`
+}
+
+type CityPopulationResponce struct {
+	Error bool `json:"error"`
+}
+
+func GetMyLocation(city string) (*GeoData, error) {
+	if city != "" {
+		isCity := checkCity(city)
+		if !isCity {
+			panic("Такого города нет")
+		}
+		return &GeoData{
+			City: city,
+		}, nil
+	}
+	resp, err := http.Get("https://ipapi.co/json/")
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		return nil, errors.New("NOT200")
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	var geo GeoData
+	json.Unmarshal(body, &geo)
+	return &geo, nil
+}
+
+func checkCity(city string) bool {
+	postBody, _ := json.Marshal(map[string]string{
+		"city": city,
+	})
+	resp, err := http.Post("https://countriesnow.space/api/v0.1/countries/population/cities", "application/json", bytes.NewBuffer(postBody))
+	if err != nil {
+		return false
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return false
+	}
+	var populationResponce CityPopulationResponce
+	json.Unmarshal(body, &populationResponce)
+	return !populationResponce.Error
+}
+```
+
+
+
+`weather / weather.go`
+```Go
+func GetWeather(geo geo.GeoData, format int) string {
+	// ...
+	defer resp.Body.Close()
+	// ...
+}
+```
 
 
 
 ## Тесты
 
 ### Arrange act Assert
+
+
+
+
+
+
+
 ### Первый тест
+
+
+
+
+
+
+
 ### Debug теста
+
+
+
+
+
+
+
 ### Негативный тест
+
+
+
+
+
+
+
 #### Тест погоды
+
+
+
+
+
+
+
 #### Ошибки
+
+
+
+
+
+
+
 ### Группы тестов
 
 
