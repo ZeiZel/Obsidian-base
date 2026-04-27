@@ -1119,6 +1119,169 @@ git push --force
 
 
 ---
+
+## Продвинутые инструменты Git
+
+### git worktree — несколько рабочих деревьев
+
+```bash
+# Создать новое рабочее дерево для существующей ветки
+git worktree add ../hotfix hotfix-branch
+
+# Создать с новой веткой
+git worktree add -b feature/new-ui ../new-ui
+
+# Посмотреть список
+git worktree list
+
+# Удалить
+git worktree remove ../hotfix
+```
+
+Когда использовать: нужно переключиться на hotfix не прерывая текущую работу, без stash. Каждое дерево — отдельная папка с общим `.git`.
+
+### git filter-repo — переписывание истории
+
+> [!WARNING] Перезаписывает историю. Все участники должны сделать `git clone` заново после этого.
+
+```bash
+# Установить (pip)
+pip install git-filter-repo
+
+# Удалить файл из всей истории (например, случайно закоммиченный секрет)
+git filter-repo --path secrets.env --invert-paths
+
+# Изменить email автора во всех коммитах
+git filter-repo --email-callback 'return b"new@email.com"'
+```
+
+Предпочитай `git filter-repo` вместо устаревшего `git filter-branch` — быстрее и безопаснее.
+
+### git bisect — бинарный поиск регрессии
+
+```bash
+git bisect start
+git bisect bad                    # текущий коммит сломан
+git bisect good v1.2.0            # этот тег работал
+
+# Git переключает коммиты, ты тестируешь:
+git bisect good   # или
+git bisect bad
+
+# Автоматизированный поиск
+git bisect run npm test
+
+git bisect reset   # выйти
+```
+
+Находит за O(log n) проверок коммит, который сломал функциональность.
+
+### git reflog — журнал ссылок
+
+```bash
+git reflog                        # все действия с HEAD
+git reflog show feature/auth      # действия с веткой
+
+# Восстановить удалённый коммит
+git checkout -b recovery abc1234  # хеш из reflog
+
+# Откатиться после неудачного rebase
+git reset --hard HEAD@{3}
+```
+
+> [!TIP] reflog хранится локально 90 дней. Это спасательный круг при любых катастрофах.
+
+### git stash — детально
+
+```bash
+git stash push -m "WIP: auth form"
+git stash list
+git stash pop                      # применить и удалить
+git stash apply stash@{2}          # применить без удаления
+git stash branch feature/new stash@{0}  # создать ветку из stash
+git stash --include-untracked      # включить неотслеживаемые файлы
+git stash drop stash@{1}
+git stash clear
+```
+
+### git cherry-pick — перенос коммитов
+
+```bash
+git cherry-pick abc1234
+git cherry-pick abc1234..def5678   # диапазон
+git cherry-pick -n abc1234         # без автокоммита (--no-commit)
+```
+
+Используй когда нужно перенести конкретный фикс из одной ветки в другую без merge.
+
+### git rebase — интерактивный
+
+```bash
+# Переписать последние 5 коммитов
+git rebase -i HEAD~5
+```
+
+В редакторе доступны команды:
+
+- `pick` — оставить как есть
+- `squash` / `s` — объединить с предыдущим
+- `fixup` / `f` — объединить, выбросить сообщение
+- `reword` / `r` — изменить сообщение
+- `edit` / `e` — остановиться для изменений
+- `drop` / `d` — удалить коммит
+
+```bash
+# Rebase поверх другой базы
+git rebase --onto main feature/old feature/new
+
+# Когда rebase, когда merge:
+# rebase — для feature-веток перед PR (чистая история)
+# merge — для интеграции в main/develop (сохраняет контекст)
+```
+
+### git submodule и git subtree
+
+```bash
+# Submodule — ссылка на конкретный коммит другого репо
+git submodule add https://github.com/org/lib libs/lib
+git submodule update --init --recursive
+
+# Subtree — вливает историю другого репо
+git subtree add --prefix=libs/lib https://github.com/org/lib main --squash
+```
+
+| | Submodule | Subtree |
+|--|-----------|---------|
+| **Хранение** | Ссылка на коммит | Копия кода в репо |
+| **Обновление** | `git submodule update` | `git subtree pull` |
+| **Сложность** | Выше (нужно знать про submodules) | Ниже для клонирующих |
+| **Изменения** | Не смешиваются с основным репо | Смешиваются в истории |
+
+### Git Hooks — автоматизация
+
+```bash
+# .git/hooks/pre-commit (chmod +x)
+#!/bin/sh
+npm run lint && npm run test:unit
+```
+
+Популярные хуки:
+- `pre-commit` — линтинг, форматирование
+- `commit-msg` — валидация формата сообщения
+- `pre-push` — запуск тестов
+
+```bash
+# Для JS-проектов: husky
+npm install --save-dev husky
+npx husky init
+echo "npm run lint" > .husky/pre-commit
+```
+
+Husky автоматически устанавливает хуки при `npm install` (через `prepare` скрипт).
+
+
+
+---
 ## Подходы
 
 ### Gitflow
@@ -1160,117 +1323,121 @@ git push --force
 > - Много merge коммитов
 > - Сложный путь до релиза
 
+### Conventional Commits
 
+> Спецификация: https://www.conventionalcommits.org/en/v1.0.0/
 
-### Соглашение о коммитах
+Соглашение о коммитах — простой набор правил для создания понятной истории коммитов. Совместимо с [Семантическим Версионированием](https://semver.org/lang/ru/).
 
-#### Главное
-
-Спецификация «Соглашение о коммитах» — простое соглашение о том, как нужно писать сообщения коммитов. Оно описывает простой набор правил для создания понятной истории коммитов, а также позволяет проще разрабатывать инструменты автоматизации, основанные на истории коммитов. Данное соглашение совместимо с [Семантическим Версионированием](https://semver.org/lang/ru/), описывая новые функции, исправления и изменения, нарушающие обратную совместимость в сообщениях коммитов.
-
-Сообщения коммитов должны быть следующей структуры:
-
+#### Структура сообщения
 
 ```
-<тип>[необязательный контекст]: <описание>
+<тип>[опциональный скоп]: <краткое описание>
 
-[необязательное тело]
+[опциональное тело — подробное объяснение]
 
-[необязательная(ые) сноска(и)]
+[опциональный футер: ссылки, breaking changes]
 ```
 
-Коммит содержит следующие структурные элементы для передачи намерений пользователям вашей библиотеки:
+#### Типы коммитов
 
-1. **fix:** коммит *типа* `fix` исправляет баг в вашем коде (соответствует [`PATCH`](https://semver.org/lang/ru/#%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%BE) в Cемантическом Версионировании).
-2. **feat:** коммит *типа* `feat` добавляет новую функцию в ваш код (соответствует [`MINOR`](https://semver.org/lang/ru/#%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%BE) в Cемантическом Версионировании).
-3. **BREAKING CHANGE:** коммит, который имеет *сноску* `BREAKING CHANGE` или коммит, заканчивающийся восклицательным знаком (`!`) после *типа* или *контекста*, вводящий изменение(я), нарушающие обратную совместимость (соответствует [`MAJOR`](https://semver.org/lang/ru/#%D0%BA%D1%80%D0%B0%D1%82%D0%BA%D0%BE) в Cемантическом Версионировании). `BREAKING CHANGE` может быть частью коммита любого *типа*.
-4. Другие *типы* коммитов разрешены. Например, [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (основан на [соглашении Angular](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)) рекомендует `build`, `chore`, `ci`, `docs`, `style`, `refactor`, `perf`, `test` и другие.
-5. Другие *сноски* коммитов могут быть аналогичны соглашению [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
+| Тип | Что означает | Влияние на SemVer |
+|-----|-------------|-------------------|
+| `feat` | Новая функциональность | MINOR (0.X.0) |
+| `fix` | Исправление бага | PATCH (0.0.X) |
+| `BREAKING CHANGE` | Несовместимое изменение API | MAJOR (X.0.0) |
+| `build` | Изменения сборки, зависимостей | — |
+| `chore` | Служебные задачи (не затрагивают продукт) | — |
+| `ci` | Конфигурация CI/CD | — |
+| `docs` | Только документация | — |
+| `style` | Форматирование (пробелы, запятые), не CSS | — |
+| `refactor` | Рефакторинг (не фича, не баг) | — |
+| `perf` | Оптимизация производительности | — |
+| `test` | Добавление/исправление тестов | — |
+| `revert` | Откат предыдущего коммита | — |
 
-Дополнительные *типы* не требуются «Соглашению о коммитах» и не имеют неявного эффекта в семантическом версионировании (если только они не включают `BREAKING CHANGE`). *Контекст* может быть добавлен к *типу* коммита, чтобы предоставить дополнительную контекстную информацию; она содержится в скобках. Например, `feat(parser): add ability to parse arrays`.
+#### Scope — область изменений
 
-#### Примеры
-
-##### Сообщение коммита с *описанием* и *сноской* `BREAKING CHANGE`
-
-```
-feat: allow provided config object to extend other configs
-
-BREAKING CHANGE: `extends` key in config file is now used for extending other config files
-```
-
-##### Сообщение коммита с `!` для привлечения внимания к `BREAKING CHANGE`
-
-```
-feat!: send an email to the customer when a product is shipped
-```
-
-##### Сообщение коммита с *контекстом* и `!` для привлечения внимания к `BREAKING CHANGE`
+Scope — существительное в скобках, указывающее область кода:
 
 ```
-feat(api)!: send an email to the customer when a product is shipped
+feat(auth): add OAuth2 support
+fix(api): handle null response from payment service
+docs(readme): update installation steps
 ```
 
-##### Сообщение коммита вместе с `!` и *сноской* `BREAKING CHANGE`
+#### Breaking Changes — два способа
 
+**Способ 1: `!` в типе**
 ```
-chore!: drop support for Node 6
-
-BREAKING CHANGE: use JavaScript features not available in Node 6.
-```
-
-##### Сообщение коммита без *тела*
-
-```
-docs: correct spelling of CHANGELOG
+feat!: migrate to new authentication flow
+feat(api)!: rename endpoint /users to /accounts
 ```
 
-##### Сообщение коммита с *контекстом*
-
+**Способ 2: Футер `BREAKING CHANGE:`**
 ```
-feat(lang): add polish language
-```
+feat: migrate to new auth
 
-##### Сообщение коммита с *телом* из нескольких абзацев и несколькими *сносками*
-
-```
-fix: prevent racing of requests
-
-Introduce a request id and a reference to latest request. Dismiss
-incoming responses other than from latest request.
-
-Remove timeouts which were used to mitigate the racing issue but are
-obsolete now.
-
-Reviewed-by: Z
-Refs: #123
+BREAKING CHANGE: JWT tokens now expire after 15 minutes instead of 1 hour.
+Update your token refresh logic accordingly.
 ```
 
-#### Спецификация
+#### Реальные примеры
 
-Слова «MUST», «MUST NOT», «REQUIRED», «SHALL», «MAY» и «OPTIONAL» в данном документе должны интерпретироваться как в [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+```bash
+# Простая фича
+feat(cart): add quantity selector to product card
 
-1. Коммиты должны (MUST) начинается с *типа*, который является существительным: `feat`, `fix` и т.д. За ним следует необязательный (OPTIONAL) *контекст*, необязательный (OPTIONAL) восклицательный знак (`!`) и обязательные (REQUIRED) двоеточие (`:`) и пробел ( ).
-2. *Тип* `feat` должен (MUST) использоваться, когда коммит добавляет новый функционал в ваше приложение или вашу библиотеку.
-3. *Тип* `fix` должен (MUST) использоваться, когда коммит исправляет баг в вашем приложении или вашей библиотеке.
-4. *Контекст* может (MAY) следовать после *типа*. *Контекст* должен (MUST) быть существительным, заключённым в круглые скобки, описывающий часть кодовой базы, которую затронул коммит. Например, `fix(parser)`.
-5. *Описание* должно (MUST) следовать сразу за двоеточием (`:`) и пробелом ( ) после *типа* или *контекста*. *Описание* представляет собой краткое изложение изменений кода. Например, `fix: array parsing issue when multiple spaces were contained in string`.
-6. *Тело* коммита может (MAY) следовать после короткого *описания*, добавляя дополнительную контекстную информацию об изменениях в коде. *Тело* должно (MUST) отделяться от *описания* одной пустой строкой.
-7. *Тело* коммита имеет произвольную форму и может (MAY) состоять из любого количества абзацев, разделённых новой строкой.
-8. В одной или нескольких *сносках* может (MAY) быть одна пустая строка после *тела*. Каждая *сноска* должна (MUST) состоять из токена слова, за которым следует разделитель `:<пробел>` или `<пробел>#`, за которым следует строковое значение (основано на [git trailer format](https://git-scm.com/docs/git-interpret-trailers)).
-9. Токен *сноски* должен (MUST) использовать `-` вместо пробельных символов. Например, `Acked-by` (это помогает отличить раздел *сноски* от его *тела*, состоящего из нескольких абзацев). Исключение составляет `BREAKING CHANGE`, которое может (MAY) также использоваться как токен.
-10. *Сноска* может (MAY) содержать пробелы и символы новой строки, а считывание должно (MUST) завершаться при обнаружении следующей допустимой пары токен-разделитель *сноски*.
-11. Критические изменения должны (MUST) быть указаны в *типе*, *контексте* или *сноске* коммита.
-12. Если `BREAKING CHANGE` включено в *сноску*, то оно должно (MUST) состоять из прописного текста `BREAKING CHANGE`, за которым следует двоеточие (`:`), пробел ( ) и *описание*. Например, `BREAKING CHANGE: environment variables now take precedence over config files`.
-13. Если критические изменения находятся в *типе* или *контексте*, то они должны (MUST) быть обозначены восклицательным знаком (`!`), непосредственно перед двоеточием (`:`). Если используется восклицательный знак (`!`), то `BREAKING CHANGE` может (MAY) быть опущен в *сноске*, а *описание* коммита должно (SHALL) использоваться для описания критического изменения.
-14. В ваших сообщениях коммитов могут (MAY) использоваться *типы*, отличные от `feat` и `fix`. Например, `docs: updated ref docs`.
-15. Единицы информации, которые составляют «Соглашение о коммитах», не должны (MUST NOT) обрабатываться разработчиками как чувствительные к регистру, за исключением `BREAKING CHANGE`, которое должно (MUST) быть прописными.
-16. `BREAKING-CHANGE` должен (MUST) быть синонимом `BREAKING CHANGE` при использовании в качестве токена в *сноске*.
+# Баг с указанием scope
+fix(checkout): prevent duplicate order submission on double-click
 
-#### Зачем использовать «Соглашение о коммитах»
+# Документация
+docs: add API authentication examples to README
 
-- Автоматическое создание списков изменения.
-- Автоматическое определение семантического повышения версии (на основе *типов* совершённых коммитов).
-- Информирование товарищей по команде, общественности и других заинтересованных сторон о характере изменений.
-- Запуск процессов сборки и публикации.
-- Упрощать людям участие в ваших проектах, позволив им изучить более структурированную историю коммитов.
+# Рефакторинг без изменений поведения
+refactor(user-service): extract validation logic to separate module
+
+# CI/CD изменение
+ci: add caching for node_modules in GitHub Actions
+
+# Breaking change через !
+feat(api)!: remove deprecated v1 endpoints
+
+# Breaking change с телом и футером
+fix(auth): update token validation
+
+Previously tokens were validated client-side only.
+Now all tokens are validated server-side on each request.
+
+BREAKING CHANGE: Clients must handle 401 responses and refresh tokens.
+Refs: #247
+
+# Revert
+revert: feat(payments): add Apple Pay support
+
+Refs: abc1234
+```
+
+#### Связь с Semantic Versioning
+
+```
+fix: ...     → 1.0.0 → 1.0.1  (patch)
+feat: ...    → 1.0.1 → 1.1.0  (minor)
+feat!: ...   → 1.1.0 → 2.0.0  (major)
+```
+
+#### Инструменты
+
+```bash
+# commitlint — валидация сообщений коммитов
+npm install --save-dev @commitlint/cli @commitlint/config-conventional
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+# + подключить к husky commit-msg хуку
+
+# commitizen — интерактивное создание коммитов
+npm install --save-dev commitizen cz-conventional-changelog
+npx cz  # вместо git commit
+
+# semantic-release — автоматический релиз по коммитам
+npm install --save-dev semantic-release
+```

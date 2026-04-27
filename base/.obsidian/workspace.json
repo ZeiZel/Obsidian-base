@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "cs/GIT/Git.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -64,11 +64,35 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Selfgo"
+              "title": "Git"
+            }
+          },
+          {
+            "id": "d314e4407d84f2f7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/programming.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "programming"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -137,8 +161,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273,
-    "collapsed": true
+    "width": 343.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -287,13 +310,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "cs/programming.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline of programming"
             }
           }
         ],
@@ -301,8 +324,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -326,8 +348,15 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fae567c1b9242142",
+  "active": "d314e4407d84f2f7",
   "lastOpenFiles": [
+    "cs/GIT/Git.md",
+    "cs/GIT/GIT.md",
+    "backend/go/Selfgo.md",
+    "_lessons/1. Введение.md",
+    "_lessons",
+    "cs/programming.md",
+    "cs/principles.md",
     "architecture/System Design/System Design.md",
     "architecture/Architecture/Architecture.md",
     "Excalidraw/friend_line_vk.excalidraw.md",
@@ -335,8 +364,6 @@
     "cs/principles/SOLID принципы.md",
     "cs/computer science.md",
     "cs/RegExp.md",
-    "backend/go/Selfgo.md",
-    "cs/GIT/GIT.md",
     "Tags/#git #github #cs +#commitconvetionals +#gitflow",
     "Tags/#git #github #cs #commitconvetionals +#gitflow",
     "cs/GIT/Соглашение о коммитах 1.0.0.md",
@@ -353,9 +380,6 @@
     "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
     "cs/The Bezos Mandath.md",
     "cs/C.md",
-    "cs/Functional programming.md",
-    "cs/math.md",
-    "cs/Задачи с Leetcode.md",
     "_png/Pasted image 20260420122324.png",
     "_png/Pasted image 20260420121729.png",
     "_png/Pasted image 20260419191346.png",
@@ -365,7 +389,6 @@
     "_png/Pasted image 20260418144507.png",
     "_png/Pasted image 20260418143232.png",
     "_png/Pasted image 20260418142800.png",
-    "backend/go/![](...._pngPasted%20image%2020260413201752.png).md",
     "_png/Pasted image 20260413201752.png",
     "Excalidraw",
     "Tags/#security",
@@ -373,7 +396,6 @@
     "Tags/#senior",
     "Tags/#docker",
     "Tags/#production",
-    "Tags/#deploy",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",

@@ -1,8 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "programming",
+      "path": "cs/programming.md"
+    },
+    {
+      "basename": "Git",
+      "path": "cs/GIT/Git.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "1. Введение",
+      "path": "_lessons/1. Введение.md"
     },
     {
       "basename": "System Design",
@@ -31,10 +43,6 @@
     {
       "basename": "RegExp",
       "path": "cs/RegExp.md"
-    },
-    {
-      "basename": "GIT",
-      "path": "cs/GIT/GIT.md"
     },
     {
       "basename": "Немного про ООП (by ExtremeCode)",
