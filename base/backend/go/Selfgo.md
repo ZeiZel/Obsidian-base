@@ -7577,88 +7577,2947 @@ func main() {
 ## CRUD
 
 #### Handler ссылок
+
+
+
+`internal/link/handler.go`
+```Go
+package link
+
+import (
+	"net/http"
+)
+
+type LinkHandlerDeps struct {
+}
+
+type LinkHandler struct {
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{}
+	router.HandleFunc("POST /link", handler.Create())
+	router.HandleFunc("PATCH /link/{id}", handler.Update())
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{alias}", handler.GoTo())
+}
+
+func (handler *LinkHandler) Create() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (handler *LinkHandler) Update() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (handler *LinkHandler) Delete() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (handler *LinkHandler) GoTo() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/internal/link"
+	"go/adv-demo/pkg/db"
+	"net/http"
+)
+
+func main() {
+	conf := configs.LoadConfig()
+	_ = db.NewDb(conf)
+	router := http.NewServeMux()
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config: conf,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{})
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	}
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 ### Параметр запроса
+
+
+
+`internal/link/handler.go`
+```Go
+package link
+
+import (
+	"fmt"
+	"net/http"
+)
+
+type LinkHandlerDeps struct {
+}
+
+type LinkHandler struct {
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{}
+	router.HandleFunc("POST /link", handler.Create())
+	router.HandleFunc("PATCH /link/{id}", handler.Update())
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+}
+
+func (handler *LinkHandler) Create() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (handler *LinkHandler) Update() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+
+func (handler *LinkHandler) Delete() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		id := r.PathValue("id")
+		fmt.Println(id)
+	}
+}
+
+func (handler *LinkHandler) GoTo() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+	}
+}
+```
+
 ### Паттерн репозитория
+
+
+
+`internal/link/repository.go`
+```Go
+package link
+
+import "go/adv-demo/pkg/db"
+
+type LinkRepository struct {
+	Database *db.Db
+}
+
+func NewLinkRepository(database *db.Db) *LinkRepository {
+	return &LinkRepository{
+		Database: database,
+	}
+}
+
+func (repo *LinkRepository) Create(link *Link) {
+
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+type LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+	}
+```
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config: conf,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+	})
+```
+
 ### Создание ссылки
+
+
+
+`internal/link/payload.go`
+```Go
+package link
+
+type LinkCreateRequest struct {
+	Url string `json:"url" validate:"required,url"`
+}
+```
+
+
+
+`internal/link/repository.go`
+```Go
+func (repo *LinkRepository) Create(link *Link) (*Link, error) {
+	result := repo.Database.DB.Create(link)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return link, nil
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) Create() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LinkCreateRequest](&w, r)
+		if err != nil {
+			return
+		}
+		link := NewLink(body.Url)
+		createdLink, err := handler.LinkRepository.Create(link)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		res.Json(w, createdLink, 201)
+
+	}
+}
+```
+
 ### Получение ссылки
+
+
+
+`internal/link/repository.go`
+```Go
+func (repo *LinkRepository) GetByHash(hash string) (*Link, error) {
+	var link Link
+	result := repo.Database.DB.First(&link, "hash = ?", hash)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &link, nil
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) GoTo() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		hash := r.PathValue("hash")
+		link, err := handler.LinkRepository.GetByHash(hash)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
+	}
+}
+```
+
 #### Проверка hash
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) Create() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LinkCreateRequest](&w, r)
+		if err != nil {
+			return
+		}
+		link := NewLink(body.Url)
+		for {
+			existedLink, _ := handler.LinkRepository.GetByHash(link.Hash)
+			if existedLink == nil {
+				break
+			}
+			link.GenerateHash()
+		}
+		createdLink, err := handler.LinkRepository.Create(link)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		res.Json(w, createdLink, 201)
+
+	}
+}
+```
+
+
+
+`internal/link/model.go`
+```Go
+func NewLink(url string) *Link {
+	link := &Link{
+		Url: url,
+	}
+	link.GenerateHash()
+	return link
+}
+
+func (link *Link) GenerateHash() {
+	link.Hash = RandStringRunes(6)
+}
+```
+
 ### Изменение ссылки
+
+
+
+`internal/link/payload.go`
+```Go
+package link
+
+type LinkCreateRequest struct {
+	Url string `json:"url" validate:"required,url"`
+}
+type LinkUpdateRequest struct {
+	Url  string `json:"url" validate:"required,url"`
+	Hash string `json:"hash,omitempty"`
+}
+```
+
+
+
+`internal/link/repository.go`
+```Go
+import (
+	"go/adv-demo/pkg/db"
+
+	"gorm.io/gorm/clause"
+)
+
+func (repo *LinkRepository) Update(link *Link) (*Link, error) {
+	result := repo.Database.DB.Clauses(clause.Returning{}).Updates(link)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return link, nil
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+import (
+	"fmt"
+	"go/adv-demo/pkg/req"
+	"go/adv-demo/pkg/res"
+	"net/http"
+	"strconv"
+
+	"gorm.io/gorm"
+)
+
+
+func (handler *LinkHandler) Update() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LinkUpdateRequest](&w, r)
+		if err != nil {
+			return
+		}
+		idString := r.PathValue("id")
+		id, err := strconv.ParseUint(idString, 10, 32)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+		}
+		link, err := handler.LinkRepository.Update(&Link{
+			Model: gorm.Model{ID: uint(id)},
+			Url:   body.Url,
+			Hash:  body.Hash,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+		}
+		res.Json(w, link, 201)
+	}
+}
+```
+
 ### Удаление ссылки
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) Delete() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		idString := r.PathValue("id")
+		id, err := strconv.ParseUint(idString, 10, 32)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+		}
+		err = handler.LinkRepository.Delete(uint(id))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		res.Json(w, nil, 200)
+	}
+}
+```
+
+
+
+`internal/link/repository.go`
+```Go
+func (repo *LinkRepository) Delete(id uint) error {
+	result := repo.Database.DB.Delete(&Link{}, id)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+```
+
 #### Проверка наличия
+
+
+
+`internal/link/repository.go`
+```Go
+func (repo *LinkRepository) GetById(id uint) (*Link, error) {
+	var link Link
+	result := repo.Database.DB.First(&link, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &link, nil
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) Update() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LinkUpdateRequest](&w, r)
+		if err != nil {
+			return
+		}
+		idString := r.PathValue("id")
+		id, err := strconv.ParseUint(idString, 10, 32)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		link, err := handler.LinkRepository.Update(&Link{
+			Model: gorm.Model{ID: uint(id)},
+			Url:   body.Url,
+			Hash:  body.Hash,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		res.Json(w, link, 201)
+	}
+}
+
+func (handler *LinkHandler) Delete() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		idString := r.PathValue("id")
+		id, err := strconv.ParseUint(idString, 10, 32)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		_, err = handler.LinkRepository.GetById(uint(id))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		err = handler.LinkRepository.Delete(uint(id))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		res.Json(w, nil, 200)
+	}
+}
+```
+
 
 
 ## Middleware
 
 ### Что такое middleware
+
+
+
 ### Первый обработчик
+
+
+
+`pkg/middleware/logs.go`
+```Go
+package middleware
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func Logging(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Logging")
+		next.ServeHTTP(w, r)
+		fmt.Println("After")
+	})
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+server := http.Server{
+	Addr:    ":8081",
+	// - Handler: router,
+	Handler: middleware.Logging(router),
+}
+
+```
+
 ### Wrapper Writer
+
+
+
+`pkg/middleware/common.go`
+```Go
+package middleware
+
+import "net/http"
+
+type WrapperWriter struct {
+	http.ResponseWriter
+	StatusCode int
+}
+
+func (w *WrapperWriter) WriteHeader(statusCode int) {
+	w.ResponseWriter.WriteHeader(statusCode)
+	w.StatusCode = statusCode
+}
+```
+
+
+
+`pkg/middleware/logs.go`
+```Go
+package middleware
+
+import (
+	"log"
+	"net/http"
+	"time"
+)
+
+func Logging(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		wrapper := &WrapperWriter{
+			ResponseWriter: w,
+			StatusCode:     http.StatusOK,
+		}
+		next.ServeHTTP(wrapper, r)
+		log.Println(wrapper.StatusCode, r.Method, r.URL.Path, time.Since(start))
+	})
+}
+```
+
 ### CORS
+
+
+
+`pkg/middleware/cors.go`
+```Go
+package middleware
+
+import "net/http"
+
+func CORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		origin := r.Header.Get("Origin")
+		if origin == "" {
+			next.ServeHTTP(w, r)
+			return
+		}
+		header := w.Header()
+		header.Set("Access-Control-Allow-Origin", origin)
+		header.Set("Access-Control-Allow-Credentials", "true")
+
+		if r.Method == http.MethodOptions {
+			header.Set("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,HEAD,PATCH")
+			header.Set("Access-Control-Allow-Headers", "authorization,content-type,content-length")
+			header.Set("Access-Control-Max-Age", "86400")
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+server := http.Server{
+	Addr:    ":8081",
+	// - Handler: middleware.Logging(router),
+	Handler: middleware.CORS(middleware.Logging(router)),
+}
+```
+
 ### Stack middleware
+
+
+
+`pkg/middleware/chain.go`
+```Go
+package middleware
+
+import "net/http"
+
+type Middleware func(http.Handler) http.Handler
+
+func Chain(middlewares ...Middleware) Middleware {
+	return func(next http.Handler) http.Handler {
+		for i := len(middlewares) - 1; i >= 0; i-- {
+			next = middlewares[i](next)
+		}
+		return next
+	}
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+// Middlewares
+stack := middleware.Chain(
+	middleware.CORS,
+	middleware.Logging,
+)
+
+server := http.Server{
+	Addr:    ":8081",
+	// - Handler: middleware.CORS(middleware.Logging(router)),
+	Handler: stack(router),
+}
+```
+
 #### Получение bearer
+
+
+
+`pkg/middleware/auth.go`
+```Go
+package middleware
+
+import (
+	"fmt"
+	"net/http"
+	"strings"
+)
+
+func IsAuthed(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authedHeader := r.Header.Get("Authorization")
+		token := strings.TrimPrefix(authedHeader, "Bearer ")
+		fmt.Println(token)
+		next.ServeHTTP(w, r)
+	})
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+stack := middleware.Chain(
+	middleware.CORS,
+	middleware.Logging,
+	middleware.IsAuthed,
+)
+```
+
 ### Middleware для роутеров
+
+
+
+`cmd / main.go`
+```Go
+stack := middleware.Chain(
+	middleware.CORS,
+	middleware.Logging,
+)
+```
+
+
+
+`internal/link/handler.go`
+```Go
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update()))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+}
+```
+
+
 
 
 ## Авторизация
 
 ### Что такое JWT
+
+
+
+`internal/user/model.go`
+```Go
+package user
+
+import "gorm.io/gorm"
+
+type User struct {
+	gorm.Model
+	Email    string `gorm:"index"`
+	Password string
+	Name     string
+}
+```
+
+
+
+`migrations/auto.go`
+```Go
+func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+	db, err := gorm.Open(postgres.Open(os.Getenv("DSN")), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	
+								// передаём указатель на пользователя 
+	db.AutoMigrate(&link.Link{}, &user.User{})
+}
+```
+
 #### Модель пользователя
+
+
+
+`internal/user/repository.go`
+```Go
+package user
+
+import "go/adv-demo/pkg/db"
+
+type UserRepository struct {
+	database *db.Db
+}
+
+func NewUserRepository(database *db.Db) *UserRepository {
+	return &UserRepository{database: database}
+}
+
+func (repo *UserRepository) Create(user *User) (*User, error) {
+	result := repo.database.DB.Create(user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return user, nil
+}
+
+func (repo *UserRepository) FindByEmail(email string) (*User, error) {
+	var user User
+	result := repo.database.DB.First(&user, "email = ?", email)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+```
+
 #### Репозиторий пользователей
+
+
+
+
 ### Сервис авторизации
+
+
+
+`internal/auth/errors.go`
+```Go
+ackage auth
+
+const (
+	ErrUserExists = "user exists"
+)
+```
+
+
+
+`internal/auth/service.go`
+```Go
+package auth
+
+import (
+	"errors"
+	"go/adv-demo/internal/user"
+)
+
+type AuthService struct {
+	UserRepository *user.UserRepository
+}
+
+func NewAuthService(userRepository *user.UserRepository) *AuthService {
+	return &AuthService{UserRepository: userRepository}
+}
+
+func (service *AuthService) Register(email, password, name string) (string, error) {
+	existedUser, _ := service.UserRepository.FindByEmail(email)
+	if existedUser != nil {
+		return "", errors.New(ErrUserExists)
+	}
+	user := &user.User{
+		Email:    email,
+		Password: "",
+		Name:     name,
+	}
+	_, err := service.UserRepository.Create(user)
+	if err != nil {
+		return "", err
+	}
+	return user.Email, nil
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+ype AuthHandlerDeps struct {
+	*configs.Config
+	*AuthService
+}
+
+type AuthHandler struct {
+	*configs.Config
+	*AuthService
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config:      deps.Config,
+		AuthService: deps.AuthService,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[RegisterRequest](&w, r)
+		if err != nil {
+			return
+		}
+		handler.AuthService.Register(body.Email, body.Password, body.Name)
+	}
+}
+```
+
+
+
+`cmd / main.go`
+```Go
+func main() {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+```
+
 ### Bcrypt
+
+
+
+`internal/auth/service.go`
+```Go
+import (
+	"errors"
+	"go/adv-demo/internal/user"
+
+	"golang.org/x/crypto/bcrypt"
+)
+
+func (service *AuthService) Register(email, password, name string) (string, error) {
+	existedUser, _ := service.UserRepository.FindByEmail(email)
+	
+	if existedUser != nil {
+		return "", errors.New(ErrUserExists)
+	}
+	
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	
+	if err != nil {
+		return "", err
+	}
+	user := &user.User{
+		Email:    email,
+		Password: string(hashedPassword),
+		Name:     name,
+	}
+	
+	_, err = service.UserRepository.Create(user)
+	
+	if err != nil {
+		return "", err
+	}
+	
+	return user.Email, nil
+}
+```
+
 #### Логин пользователя
+
+
+`internal/auth/errors.go`
+```Go
+package auth
+
+const (
+	ErrUserExists      = "user exists"
+	ErrWrongCredetials = "wrong email or password"
+)
+```
+
+
+
+`internal/auth/service.go`
+```Go
+func (service *AuthService) Login(email, password string) (string, error) {
+	existedUser, _ := service.UserRepository.FindByEmail(email)
+	if existedUser == nil {
+		return "", errors.New(ErrWrongCredetials)
+	}
+	err := bcrypt.CompareHashAndPassword([]byte(existedUser.Password), []byte(password))
+	if err != nil {
+		return "", errors.New(ErrWrongCredetials)
+	}
+	return existedUser.Email, nil
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LoginRequest](&w, r)
+		if err != nil {
+			return
+		}
+		email, err := handler.AuthService.Login(body.Email, body.Password)
+		fmt.Println(email, err)
+		data := LoginResponse{
+			Token: "123",
+		}
+		res.Json(w, data, 200)
+	}
+}
+```
+
 ### Создание JWT
+
+
+
+```bash
+go get github.com/golang-jwt/jwt/v5 
+```
+
+
+
+`pkg/jwt/jwt.go`
+```Go
+package jwt
+
+import "github.com/golang-jwt/jwt/v5"
+
+type JWT struct {
+	Secret string
+}
+
+func NewJWT(secret string) *JWT {
+	return &JWT{
+		Secret: secret,
+	}
+}
+
+func (j *JWT) Create(email string) (string, error) {
+	t := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"email": email,
+	})
+	s, err := t.SignedString([]byte(j.Secret))
+	if err != nil {
+		return "", err
+	}
+	return s, nil
+}
+```
+
 #### Финал авторизации
+
+
+
+`configs/config.go`
+```Go
+func LoadConfig() *Config {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Error loading .env file, using default config")
+	}
+	return &Config{
+		Db: DbConfig{
+			Dsn: os.Getenv("DSN"),
+		},
+		Auth: AuthConfig{
+			Secret: os.Getenv("SECRET"),
+		},
+	}
+}
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+package auth
+
+import (
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/jwt"
+	"go/adv-demo/pkg/req"
+	"go/adv-demo/pkg/res"
+	"net/http"
+)
+
+type AuthHandlerDeps struct {
+	*configs.Config
+	*AuthService
+}
+
+type AuthHandler struct {
+	*configs.Config
+	*AuthService
+}
+
+func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	handler := &AuthHandler{
+		Config:      deps.Config,
+		AuthService: deps.AuthService,
+	}
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
+
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LoginRequest](&w, r)
+		if err != nil {
+			return
+		}
+		email, err := handler.AuthService.Login(body.Email, body.Password)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(email)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data := LoginResponse{
+			Token: token,
+		}
+		res.Json(w, data, 200)
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[RegisterRequest](&w, r)
+		if err != nil {
+			return
+		}
+		email, err := handler.AuthService.Register(body.Email, body.Password, body.Name)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(email)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data := RegisterResponse{
+			Token: token,
+		}
+		res.Json(w, data, 200)
+	}
+}
+```
+
+
 
 
 ## Контекст
 
 ### Что такое контекст
+
+
+
+
+
+
+
+
 ### WithTimeout
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	ctx := context.Background()
+	ctxWithTimeout, cencel := context.WithTimeout(ctx, 4*time.Second)
+	defer cencel()
+
+	done := make(chan struct{})
+	go func() {
+		time.Sleep(3 * time.Second)
+		close(done)
+	}()
+
+	select {
+	case <-done:
+		fmt.Println("Done task")
+	case <-ctxWithTimeout.Done():
+		fmt.Println("Timeout")
+	}
+}
+```
+
 ### WithValue
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	type key int
+	const EmailKey key = 0
+	ctx := context.Background()
+	ctxWithValue := context.WithValue(ctx, EmailKey, "a@a.ru")
+
+	if userEmail, ok := ctxWithValue.Value(EmailKey).(string); ok {
+		fmt.Println(userEmail)
+	} else {
+		fmt.Println("No value")
+	}
+
+}
+```
+
 ### WithCancel
+
+
+
+`cmd/main.go`
+```Go
+func tickOperation(ctx context.Context) {
+	ticker := time.NewTicker(200 * time.Millisecond)
+	for {
+		select {
+		case <-ticker.C:
+			fmt.Println("Tick")
+		case <-ctx.Done():
+			fmt.Println("Cancel")
+			return
+		}
+	}
+}
+
+func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	go tickOperation(ctx)
+
+	time.Sleep(2 * time.Second)
+	cancel()
+	time.Sleep(2 * time.Second)
+}
+```
+
 ### Получение email из JWT
+
+
+
+`pkg/jwt/jwt.go`
+```Go
+package jwt
+
+import "github.com/golang-jwt/jwt/v5"
+
+type JWTData struct {
+	Email string
+}
+
+type JWT struct {
+	Secret string
+}
+
+func NewJWT(secret string) *JWT {
+	return &JWT{
+		Secret: secret,
+	}
+}
+
+func (j *JWT) Create(data JWTData) (string, error) {
+	t := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"email": data.Email,
+	})
+	s, err := t.SignedString([]byte(j.Secret))
+	if err != nil {
+		return "", err
+	}
+	return s, nil
+}
+
+func (j *JWT) Parse(token string) (bool, *JWTData) {
+	t, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
+		return []byte(j.Secret), nil
+	})
+	if err != nil {
+		return false, nil
+	}
+	email := t.Claims.(jwt.MapClaims)["email"]
+	return t.Valid, &JWTData{
+		Email: email.(string),
+	}
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+		Config:         conf,
+	})
+```
+
+
+
+`internal/auth/handler.go`
+```Go
+func (handler *AuthHandler) Login() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LoginRequest](&w, r)
+		if err != nil {
+			return
+		}
+		email, err := handler.AuthService.Login(body.Email, body.Password)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+		
+		// 
+		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(jwt.JWTData{
+			Email: email,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data := LoginResponse{
+			Token: token,
+		}
+		res.Json(w, data, 200)
+	}
+}
+
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[RegisterRequest](&w, r)
+		if err != nil {
+			return
+		}
+		email, err := handler.AuthService.Register(body.Email, body.Password, body.Name)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+		
+		// 
+		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(jwt.JWTData{
+			Email: email,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data := RegisterResponse{
+			Token: token,
+		}
+		res.Json(w, data, 200)
+	}
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+type LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+	Config         *configs.Config
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+
+	// 
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+}
+```
+
 ### Запись в контекст
+
+
+
+`pkg/middleware/auth.go`
+```Go
+package middleware
+
+import (
+	"context"
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/jwt"
+	"net/http"
+	"strings"
+)
+
+type key string
+
+const (
+	ContextEmailKey key = "ContextEmailKey"
+)
+
+func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authedHeader := r.Header.Get("Authorization")
+		token := strings.TrimPrefix(authedHeader, "Bearer ")
+		_, data := jwt.NewJWT(config.Auth.Secret).Parse(token)
+		ctx := context.WithValue(r.Context(), ContextEmailKey, data.Email)
+		req := r.WithContext(ctx)
+		next.ServeHTTP(w, req)
+	})
+}
+```
+
 #### Чтение из контекста
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) Update() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// получаем email из контекста
+		email, ok := r.Context().Value(middleware.ContextEmailKey).(string)
+		if ok {
+			fmt.Println(email)
+		}
+		
+		body, err := req.HandleBody[LinkUpdateRequest](&w, r)
+		if err != nil {
+			return
+		}
+		idString := r.PathValue("id")
+		id, err := strconv.ParseUint(idString, 10, 32)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		link, err := handler.LinkRepository.Update(&Link{
+			Model: gorm.Model{ID: uint(id)},
+			Url:   body.Url,
+			Hash:  body.Hash,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		res.Json(w, link, 201)
+	}
+}
+```
+
 ### Unauthed
+
+
+
+`pkg/middleware/auth.go`
+```Go
+
+func writeUnauthed(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusUnauthorized)
+	w.Write([]byte(http.StatusText(http.StatusUnauthorized)))
+}
+
+func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authedHeader := r.Header.Get("Authorization")
+		if !strings.HasPrefix(authedHeader, "Bearer ") {
+			writeUnauthed(w)
+			return
+		}
+		token := strings.TrimPrefix(authedHeader, "Bearer ")
+		isValid, data := jwt.NewJWT(config.Auth.Secret).Parse(token)
+		if !isValid {
+			writeUnauthed(w)
+			return
+		}
+		ctx := context.WithValue(r.Context(), ContextEmailKey, data.Email)
+		req := r.WithContext(ctx)
+		next.ServeHTTP(w, req)
+	})
+}
+```
+
 
 
 ## Продвинутая работа с БД
 
 ### Формирование запроса
+
+
+
+`internal/link/repository.go`
+```Go
+func (repo *LinkRepository) GetLinks(limit, offset int) []Link {
+	var links []Link
+	repo.Database.
+		Table("links").
+		Where("deleted_at is null").
+		Order("id asc").
+		Limit(limit).
+		Offset(offset).
+		Scan(&links)
+	return links
+}
+```
+
 ### Limit и offset
+
+
+
+`internal/link/repository.go`
+```Go
+func (repo *LinkRepository) Count() int64 {
+	var count int64
+	repo.Database.
+		Table("links").
+		Where("deleted_at is null").
+		Count(&count)
+	return count
+}
+
+func (repo *LinkRepository) GetAll(limit, offset int) []Link {
+	var links []Link
+	repo.Database.
+		Table("links").
+		Where("deleted_at is null").
+		Order("id asc").
+		Limit(limit).
+		Offset(offset).
+		Scan(&links)
+	return links
+}
+```
+
 ### Count
+
+
+
+`internal/link/handler.go`
+```Go
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
+}
+
+func (handler *LinkHandler) GetAll() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
+		if err != nil {
+			http.Error(w, "Invalid limit", http.StatusBadRequest)
+			return
+		}
+	}
+}
+```
+
 ### Query параметры
+
+
+
+`internal/link/payload.go`
+```Go
+package link
+
+type LinkCreateRequest struct {
+	Url string `json:"url" validate:"required,url"`
+}
+
+type LinkUpdateRequest struct {
+	Url  string `json:"url" validate:"required,url"`
+	Hash string `json:"hash,omitempty"`
+}
+
+type GetAllLinksResponse struct {
+	Links []Link `json:"links"`
+	Count int64  `json:"count"`
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+func (handler *LinkHandler) GetAll() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
+		if err != nil {
+			http.Error(w, "Invalid limit", http.StatusBadRequest)
+			return
+		}
+		offset, err := strconv.Atoi(r.URL.Query().Get("offset"))
+		if err != nil {
+			http.Error(w, "Invalid offset", http.StatusBadRequest)
+			return
+		}
+		links := handler.LinkRepository.GetAll(limit, offset)
+		count := handler.LinkRepository.Count()
+		res.Json(w, GetAllLinksResponse{
+			Links: links,
+			Count: count,
+		}, 200)
+	}
+}
+```
+
 #### Список ссылок
+
+
+
+
+
+
+
+
 ### Один ко многим
+
+
+
+`internal/link/model.go`
+```Go
+import (
+	"go/adv-demo/internal/stat"
+	"math/rand"
+
+	"gorm.io/gorm"
+)
+
+type Link struct {
+	gorm.Model
+	Url   string      `json:"url"`
+	Hash  string      `json:"hash" gorm:"uniqueIndex"`
+	Stats []stat.Stat `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+}
+```
+
+
+
+`internal/stat/model.go`
+```Go
+package stat
+
+import (
+	"gorm.io/datatypes"
+	"gorm.io/gorm"
+)
+
+type Stat struct {
+	gorm.Model
+	LinkId uint           `json:"link_id"`
+	Clicks int            `json:"clicks"`
+	Date   datatypes.Date `json:"date"`
+}
+```
+
+
+
+`migrations/auto.go`
+```Go
+func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+	db, err := gorm.Open(postgres.Open(os.Getenv("DSN")), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	
+	// 
+	db.AutoMigrate(&link.Link{}, &user.User{}, &stat.Stat{})
+}
+```
+
+
 ### Добавление клика
+
+
+
+`internal/stat/repository.go`
+```Go
+package stat
+
+import (
+	"go/adv-demo/pkg/db"
+	"time"
+
+	"gorm.io/datatypes"
+)
+
+type StatRepository struct {
+	*db.Db
+}
+
+func NewStatRepository(db *db.Db) *StatRepository {
+	return &StatRepository{
+		Db: db,
+	}
+}
+
+func (repo *StatRepository) AddClick(linkId uint) {
+	var stat Stat
+	currentDate := datatypes.Date(time.Now())
+	repo.Db.Find(&stat, "link_id = ? and date = ?", linkId, currentDate)
+	if stat.ID == 0 {
+		repo.Db.Create(&Stat{
+			LinkId: linkId,
+			Clicks: 1,
+			Date:   currentDate,
+		})
+	} else {
+		stat.Clicks += 1
+		repo.Db.Save(&stat)
+	}
+}
+```
+
 #### Простое добавление
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+	statRepository := stat.NewStatRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+		StatRepository: statRepository,
+		Config:         conf,
+	})
+```
+
+
+
+`internal/link/handler.go`
+```Go
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/stat"
+	"go/adv-demo/pkg/middleware"
+	"go/adv-demo/pkg/req"
+	"go/adv-demo/pkg/res"
+	"net/http"
+	"strconv"
+
+	"gorm.io/gorm"
+)
+
+type LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+	StatRepository *stat.StatRepository
+	Config         *configs.Config
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+	StatRepository *stat.StatRepository
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+		
+		// 
+		StatRepository: deps.StatRepository,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
+}
+
+func (handler *LinkHandler) GoTo() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		hash := r.PathValue("hash")
+		link, err := handler.LinkRepository.GetByHash(hash)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		
+		// 
+		handler.StatRepository.AddClick(link.ID)
+		http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
+	}
+}
+
+```
+
 ### Правильный DI
+
+
+
+`pkg/di/interfaces.go`
+```Go
+package di
+
+type IStatRepository interface {
+	AddClick(linkId uint)
+}
+```
+
+
+
+`internal/link/handler.go`
+```Go
+ype LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+	StatRepository di.IStatRepository
+	Config         *configs.Config
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+	StatRepository di.IStatRepository
+}
+```
+
 ### Eventbus
+
+
+
+`pkg/event/eventbus.go`
+```Go
+package event
+
+type Event struct {
+	Type string
+	Data any
+}
+
+type EventBus struct {
+	bus chan Event
+}
+
+func NewEventBus() *EventBus {
+	return &EventBus{
+		bus: make(chan Event),
+	}
+}
+
+func (e *EventBus) Publush(event Event) {
+	e.bus <- event
+}
+
+func (e *EventBus) Subscribe() <-chan Event {
+	return e.bus
+}
+```
+
 ### Отправка события
+
+
+
+`pkg/event/eventbus.go`
+```Go
+ackage event
+
+const (
+	EventLinkVisited = "link.visited"
+)
+```
+
+
+
+`internal/link/handler.go`
+```Go
+type LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+	Config         *configs.Config
+	EventBus       *event.EventBus
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+	EventBus       *event.EventBus
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+		EventBus:       deps.EventBus,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
+}
+
+func (handler *LinkHandler) GoTo() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		hash := r.PathValue("hash")
+		
+		link, err := handler.LinkRepository.GetByHash(hash)
+		
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+
+		go handler.EventBus.Publush(event.Event{
+			Type: event.EventLinkVisited,
+			Data: link.ID,
+		})
+		
+		http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
+	}
+}
+```
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+	eventBus := event.NewEventBus()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+		Config:         conf,
+		EventBus:       eventBus,
+	})
+```
+
 ### Получение события
+
+
+
+`internal/stat/service.go`
+```Go
+package stat
+
+import (
+	"go/adv-demo/pkg/event"
+	"log"
+)
+
+type StatServiceDeps struct {
+	EventBus       *event.EventBus
+	StatRepository *StatRepository
+}
+
+type StatService struct {
+	EventBus       *event.EventBus
+	StatRepository *StatRepository
+}
+
+func NewStatService(deps *StatServiceDeps) *StatService {
+	return &StatService{
+		EventBus:       deps.EventBus,
+		StatRepository: deps.StatRepository,
+	}
+}
+
+func (s *StatService) AddClick() {
+	for msg := range s.EventBus.Subscribe() {
+		if msg.Type == event.EventLinkVisited {
+			id, ok := msg.Data.(uint)
+			if !ok {
+				log.Fatalln("Bad EventLinkVisited Data: ", msg.Data)
+				continue
+			}
+			s.StatRepository.AddClick(id)
+		}
+	}
+}
+```
+
 #### Финал Eventbus
+
+
+
+`cmd/main.go`
+```Go
+func main() {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+	eventBus := event.NewEventBus()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+	statRepository := stat.NewStatRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
+	statService := stat.NewStatService(&stat.StatServiceDeps{
+		EventBus:       eventBus,
+		StatRepository: statRepository,
+	})
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+		Config:         conf,
+		EventBus:       eventBus,
+	})
+
+	// Middlewares
+	stack := middleware.Chain(
+		middleware.CORS,
+		middleware.Logging,
+	)
+
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: stack(router),
+	}
+
+	go statService.AddClick()
+
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 #### Handler статистики
+
+
+
+`internal/stat/handler.go`
+```Go
+package stat
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/pkg/middleware"
+	"net/http"
+	"time"
+)
+
+const (
+	FilterByDay   = "day"
+	FilterByMonth = "month"
+)
+
+type StatHandlerDeps struct {
+	StatRepository *StatRepository
+	Config         *configs.Config
+}
+
+type StatHandler struct {
+	StatRepository *StatRepository
+}
+
+func NewStatHandler(router *http.ServeMux, deps StatHandlerDeps) {
+	handler := &StatHandler{
+		StatRepository: deps.StatRepository,
+	}
+	router.Handle("GET /stat", middleware.IsAuthed(handler.GetStat(), deps.Config))
+}
+
+func (h *StatHandler) GetStat() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		from, err := time.Parse("2006-01-02", r.URL.Query().Get("from"))
+		if err != nil {
+			http.Error(w, "Invalid from param", http.StatusBadRequest)
+			return
+		}
+		to, err := time.Parse("2006-01-02", r.URL.Query().Get("to"))
+		if err != nil {
+			http.Error(w, "Invalid to param", http.StatusBadRequest)
+			return
+		}
+		by := r.URL.Query().Get("by")
+		if by != FilterByDay && by != FilterByMonth {
+			http.Error(w, "Invalid by param", http.StatusBadRequest)
+			return
+		}
+		fmt.Println(from, to, by)
+	}
+}
+```
+
+
+
+`main.go`
+```Go
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+		Config:         conf,
+		EventBus:       eventBus,
+	})
+	
+	// 
+	stat.NewStatHandler(router, stat.StatHandlerDeps{
+		StatRepository: statRepository,
+		Config:         conf,
+	})
+```
+
 ### Group by
+
+
+
+`internal/stat/payload.go`
+```Go
+package stat
+
+type GetStatResponse struct {
+	Period string `json:"period"`
+	Sum    int    `json:"sum"`
+}
+```
+
+
+
+`internal/stat/repository.go`
+```Go
+func (repo *StatRepository) GetStats(by string, from, to time.Time) []GetStatResponse {
+	var stats []GetStatResponse
+	var selectQuery string
+	switch by {
+	case GroupByDay:
+		selectQuery = "to_char(date, 'YYYY-MM-DD') as period, sum(clicks)"
+	case GroupByMonth:
+		selectQuery = "to_char(date, 'YYYY-MM') as period, sum(clicks)"
+	}
+	repo.DB.Table("stats").
+		Select(selectQuery).
+		Where("date BETWEEN ? AND ?", from, to).
+		Group("period").
+		Order("period").
+		Scan(&stats)
+	return stats
+}
+```
+
+
+
+`internal/stat/handler.go`
+```Go
+const (
+	GroupByDay   = "day"
+	GroupByMonth = "month"
+)
+
+func (h *StatHandler) GetStat() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		from, err := time.Parse("2006-01-02", r.URL.Query().Get("from"))
+		if err != nil {
+			http.Error(w, "Invalid from param", http.StatusBadRequest)
+			return
+		}
+		to, err := time.Parse("2006-01-02", r.URL.Query().Get("to"))
+		if err != nil {
+			http.Error(w, "Invalid to param", http.StatusBadRequest)
+			return
+		}
+
+		by := r.URL.Query().Get("by")
+		if by != GroupByDay && by != GroupByMonth {
+			http.Error(w, "Invalid by param", http.StatusBadRequest)
+			return
+		}
+
+		stats := h.StatRepository.GetStats(by, from, to)
+		res.Json(w, stats, 200)
+	}
+}
+```
+
 ### Group by в GORM
+
+
+
 ### GORM Session
+
+
+
+
+### Изменение приложения
+
+
+
+`cmd/main.go`
+```Go
+package main
+
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/internal/link"
+	"go/adv-demo/internal/stat"
+	"go/adv-demo/internal/user"
+	"go/adv-demo/pkg/db"
+	"go/adv-demo/pkg/event"
+	"go/adv-demo/pkg/middleware"
+	"net/http"
+)
+
+func App() http.Handler {
+	conf := configs.LoadConfig()
+	db := db.NewDb(conf)
+	router := http.NewServeMux()
+	eventBus := event.NewEventBus()
+
+	// Repositories
+	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+	statRepository := stat.NewStatRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
+	statService := stat.NewStatService(&stat.StatServiceDeps{
+		EventBus:       eventBus,
+		StatRepository: statRepository,
+	})
+
+	// Handler
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config:      conf,
+		AuthService: authService,
+	})
+	link.NewLinkHandler(router, link.LinkHandlerDeps{
+		LinkRepository: linkRepository,
+		Config:         conf,
+		EventBus:       eventBus,
+	})
+	stat.NewStatHandler(router, stat.StatHandlerDeps{
+		StatRepository: statRepository,
+		Config:         conf,
+	})
+
+	go statService.AddClick()
+
+	// Middlewares
+	stack := middleware.Chain(
+		middleware.CORS,
+		middleware.Logging,
+	)
+	return stack(router)
+}
+
+func main() {
+	app := App()
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: app,
+	}
+	fmt.Println("Server is listening on port 8081")
+	server.ListenAndServe()
+}
+```
+
 
 
 ## Тестирование API
 
 ### Виды тестирования
+
+
+
+
+
+
+
+
+
 ### Изменение приложения
+
+
+
+
+
+
+
+
+
 ### E2E тест
+
+
+
+`.gitignore`
+```
+/postgres-data
+/.env
+/cmd/.env
+```
+
+
+
+`cmd/auth_test.go`
+```Go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"go/adv-demo/internal/auth"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+)
+
+func TestLoginSuccess(t *testing.T) {
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+
+	data, _ := json.Marshal(&auth.LoginRequest{
+		Email:    "a2@a.ru",
+		Password: "1",
+	})
+
+	res, err := http.Post(ts.URL+"/auth/login", "application/json", bytes.NewReader(data))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.StatusCode != 200 {
+		t.Fatalf("Expected %d got %d", 200, res.StatusCode)
+	}
+}
+```
+
 #### Отрицательный тест
+
+
+
+`cmd/auth_test.go`
+```Go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"go/adv-demo/internal/auth"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+)
+
+func TestLoginSuccess(t *testing.T) {
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+
+	data, _ := json.Marshal(&auth.LoginRequest{
+		Email:    "a2@a.ru",
+		Password: "1",
+	})
+
+	res, err := http.Post(ts.URL+"/auth/login", "application/json", bytes.NewReader(data))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.StatusCode != 200 {
+		t.Fatalf("Expected %d got %d", 200, res.StatusCode)
+	}
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var resData auth.LoginResponse
+	err = json.Unmarshal(body, &resData)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if resData.Token == "" {
+		t.Fatal("Token empty")
+	}
+}
+
+func TestLoginFail(t *testing.T) {
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+
+	data, _ := json.Marshal(&auth.LoginRequest{
+		Email:    "a2@a.ru",
+		Password: "2",
+	})
+
+	res, err := http.Post(ts.URL+"/auth/login", "application/json", bytes.NewReader(data))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.StatusCode != 401 {
+		t.Fatalf("Expected %d got %d", 401, res.StatusCode)
+	}
+}
+```
+
 ### Подготовка тестового окружения
+
+
+
+`cmd/auth_test.go`
+```Go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"go/adv-demo/internal/auth"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"testing"
+
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+func initDb() *gorm.DB {
+	err := godotenv.Load("cmd/.env")
+	if err != nil {
+		panic(err)
+	}
+	db, err := gorm.Open(postgres.Open(os.Getenv("DSN")), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	return db
+}
+
+func TestLoginSuccess(t *testing.T) {
+	// Prepare
+	db := initDb()
+
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+```
+
 ### Предварительные данные
+
+
+
+`cmd/auth_test.go`
+```Go
+func initDb() *gorm.DB {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+
+	// ...
+
+	return db
+}
+
+func initData(db *gorm.DB) {
+	db.Create(&user.User{
+		Email:    "a2@a.ru",
+		Password: "$2a$10$fOFzfotZx.uhK2BkJTy4AuVb6ejteFYEUkREKD/nBR6fZx4afcmYS",
+		Name:     "Вася",
+	})
+}
+
+func TestLoginSuccess(t *testing.T) {
+	// Prepare
+	db := initDb()
+	initData(db)
+```
+
 ### Очистка данных
+
+
+
+`cmd/auth_test.go`
+```Go
+// функция для очистки данных
+func removeData(db *gorm.DB) {
+	db.Unscoped().
+		Where("email = ?", "a2@a.ru").
+		Delete(&user.User{})
+}
+
+func TestLoginSuccess(t *testing.T) {
+	// Prepare
+	db := initDb()
+	initData(db)
+
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+
+	data, _ := json.Marshal(&auth.LoginRequest{
+		Email:    "a2@a.ru",
+		Password: "1",
+	})
+
+	res, err := http.Post(ts.URL+"/auth/login", "application/json", bytes.NewReader(data))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.StatusCode != 200 {
+		t.Fatalf("Expected %d got %d", 200, res.StatusCode)
+	}
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var resData auth.LoginResponse
+	err = json.Unmarshal(body, &resData)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if resData.Token == "" {
+		t.Fatal("Token empty")
+	}
+	removeData(db)
+}
+
+func TestLoginFail(t *testing.T) {
+	db := initDb()
+	initData(db)
+	ts := httptest.NewServer(App())
+	defer ts.Close()
+
+@@ -86,4 +95,5 @@
+	if res.StatusCode != 401 {
+		t.Fatalf("Expected %d got %d", 401, res.StatusCode)
+	}
+	removeData(db)
+}
+```
+
 ### Unit тесты
+
+
+
+`pkg/jwt/jwt_test.go`
+```Go
+package jwt_test
+
+import (
+	"go/adv-demo/pkg/jwt"
+	"testing"
+)
+
+func TestJWTCreate(t *testing.T) {
+	const email = "a@a.ru"
+	jwtService := jwt.NewJWT("/2+XnmJGz1j3ehIVI/5P9kl+CghrE3DcS7rnT+qar5w=")
+	token, err := jwtService.Create(jwt.JWTData{
+		Email: email,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	isValid, data := jwtService.Parse(token)
+	if !isValid {
+		t.Fatal("Token is invalid")
+	}
+	if data.Email != email {
+		t.Fatalf("Email %s not equal %s", data.Email, email)
+	}
+}
+```
+
 ### Mock данных
+
+
+
+`internal/auth/service_test.go`
+```Go
+package auth_test
+
+import (
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/internal/user"
+	"testing"
+)
+
+type MockUserRepository struct{}
+
+func (repo *MockUserRepository) Create(u *user.User) (*user.User, error) {
+	return &user.User{
+		Email: "a@a.ru",
+	}, nil
+}
+
+func (repo *MockUserRepository) FindByEmail(email string) (*user.User, error) {
+	return nil, nil
+}
+
+func TestRegisterSuccess(t *testing.T) {
+	const initialEmail = "a@a.ru"
+	authService := auth.NewAuthService(&MockUserRepository{})
+	email, err := authService.Register(initialEmail, "1", "Вася")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if email != initialEmail {
+		t.Fatalf("Email %s do not math %s", email, initialEmail)
+	}
+}
+```
+
+
+
+`pkg/di/interfaces.go`
+```Go
+package di
+
+import "go/adv-demo/internal/user"
+
+type IStatRepository interface {
+	AddClick(linkId uint)
+}
+
+type IUserRepository interface {
+	Create(user *user.User) (*user.User, error)
+	FindByEmail(email string) (*user.User, error)
+}
+```
+
+
+
+`internal/auth/service.go`
+```Go
+package auth
+
+import (
+	"errors"
+	"go/adv-demo/internal/user"
+	"go/adv-demo/pkg/di"
+
+	"golang.org/x/crypto/bcrypt"
+)
+
+type AuthService struct {
+	UserRepository di.IUserRepository
+}
+
+func NewAuthService(userRepository di.IUserRepository) *AuthService {
+	return &AuthService{UserRepository: userRepository}
+}
+```
+
 ### Mock базы
+
+
+
+`internal/auth/handler_test.go`
+```Go
+package auth_test
+
+import (
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/internal/user"
+	"go/adv-demo/pkg/db"
+	"testing"
+
+	"github.com/DATA-DOG/go-sqlmock"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+func TestLoginSuccess(t *testing.T) {
+	database, mock, err := sqlmock.New()
+	if err != nil {
+		t.Fatal("Failed init mock db")
+		return
+	}
+	gormDb, err := gorm.Open(postgres.New(postgres.Config{
+		Conn: database,
+	}))
+	if err != nil {
+		t.Fatal("Failed init gorm")
+		return
+	}
+	userRepo := user.NewUserRepository(&db.Db{
+		DB: gormDb,
+	})
+	handler := auth.AuthHandler{
+		Config: &configs.Config{
+			Auth: configs.AuthConfig{
+				Secret: "secret",
+			},
+		},
+		AuthService: auth.NewAuthService(userRepo),
+	}
+}
+```
+
 ### HTTPTest
+
+
+
+`internal/auth/handler_test.go`
+```Go
+package auth_test
+
+import (
+	"bytes"
+	"encoding/json"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/internal/user"
+	"go/adv-demo/pkg/db"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/DATA-DOG/go-sqlmock"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+func bootstrap() (*auth.AuthHandler, sqlmock.Sqlmock, error) {
+	database, mock, err := sqlmock.New()
+	if err != nil {
+		return nil, nil, err
+	}
+	gormDb, err := gorm.Open(postgres.New(postgres.Config{
+		Conn: database,
+	}))
+	if err != nil {
+		return nil, nil, err
+	}
+	userRepo := user.NewUserRepository(&db.Db{
+		DB: gormDb,
+	})
+	handler := auth.AuthHandler{
+		Config: &configs.Config{
+			Auth: configs.AuthConfig{
+				Secret: "secret",
+			},
+		},
+		AuthService: auth.NewAuthService(userRepo),
+	}
+	return &handler, mock, nil
+}
+
+func TestLoginSuccess(t *testing.T) {
+	handler, _, err := bootstrap()
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	data, _ := json.Marshal(&auth.LoginRequest{
+		Email:    "a2@a.ru",
+		Password: "1",
+	})
+	reader := bytes.NewReader(data)
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodPost, "/auth/login", reader)
+	handler.Login()(w, req)
+	if w.Code != http.StatusOK {
+		t.Errorf("got %d, expected %d", w.Code, 200)
+	}
+}
+```
+
 ### Mock запросов
+
+
+
+`internal/auth/handler_test.go`
+```Go
+func TestLoginSuccess(t *testing.T) {
+	handler, mock, err := bootstrap()
+	rows := sqlmock.NewRows([]string{"email", "password"}).
+		AddRow("a2@a.ru", "$2a$10$fOFzfotZx.uhK2BkJTy4AuVb6ejteFYEUkREKD/nBR6fZx4afcmYS")
+	mock.ExpectQuery("SELECT").WillReturnRows(rows)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	data, _ := json.Marshal(&auth.LoginRequest{
+		Email:    "a2@a.ru",
+		Password: "1",
+	})
+	reader := bytes.NewReader(data)
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodPost, "/auth/login", reader)
+	handler.Login()(w, req)
+	if w.Code != http.StatusOK {
+		t.Errorf("got %d, expected %d", w.Code, 200)
+	}
+}
+```
+
 #### Тест регистрации
+
+
+
+`internal/auth/handler.go`
+```Go
+func (handler *AuthHandler) Register() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[RegisterRequest](&w, r)
+		if err != nil {
+			return
+		}
+		email, err := handler.AuthService.Register(body.Email, body.Password, body.Name)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(jwt.JWTData{
+			Email: email,
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		data := RegisterResponse{
+			Token: token,
+		}
+		res.Json(w, data, 201)
+	}
+}
+```
+
+
+
+`internal/auth/handler_test.go`
+```Go
+func TestLoginHandlerSuccess(t *testing.T) {
+	handler, mock, err := bootstrap()
+	rows := sqlmock.NewRows([]string{"email", "password"}).
+		AddRow("a2@a.ru", "$2a$10$fOFzfotZx.uhK2BkJTy4AuVb6ejteFYEUkREKD/nBR6fZx4afcmYS")
+@@ -62,3 +62,28 @@ func TestLoginSuccess(t *testing.T) {
+		t.Errorf("got %d, expected %d", w.Code, 200)
+	}
+}
+
+func TestRegisterHandlerSuccess(t *testing.T) {
+	handler, mock, err := bootstrap()
+	rows := sqlmock.NewRows([]string{"email", "password", "name"})
+	mock.ExpectQuery("SELECT").WillReturnRows(rows)
+	mock.ExpectBegin()
+	mock.ExpectQuery("INSERT").WillReturnRows(sqlmock.NewRows([]string{"id"}).AddRow(1))
+	mock.ExpectCommit()
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	data, _ := json.Marshal(&auth.RegisterRequest{
+		Email:    "a2@a.ru",
+		Password: "1",
+		Name:     "Вася",
+	})
+	reader := bytes.NewReader(data)
+	w := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodPost, "/auth/register", reader)
+	handler.Register()(w, req)
+	if w.Code != http.StatusCreated {
+		t.Errorf("got %d, expected %d", w.Code, 201)
+	}
+}
+```
+
 ### Отладка тестов
+
+
+
+
+
+
+
+
+
 
 
 
