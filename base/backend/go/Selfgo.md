@@ -3957,10 +3957,12 @@ func NewJsonDb(name string) *JsonDb {
 }
 
 func (db *JsonDb) Read() ([]byte, error) {
+	data, err := os.ReadFile(db.filename)
 	// ...
 }
 
 func (db *JsonDb) Write(content []byte) {
+	file, err := os.Create(db.filename)
 	// ...
 }
 ```
@@ -3997,7 +3999,10 @@ func (vault *Vault) save() {
 
 ### Внедрение зависимостей
 
+Внедрение зависимостей - это подход, при котором мы определяем базовую структуру объекта и по этому контракту внедряем один объект в другой. 
+Таким образом мы можем создать структуру, которая принимает в себя сущность, работающую с базой данных Mongo, и передать её в Vault. Так же создать сущность, которая работает с облачной БД, и так же внедрить её в другой инстанс Vault. Но обязательным условием для сущностей, которые мы передадим в Vault, чтобы они имели одинаковые методы для функционирования (например, `Read` и `Write`).
 
+Нашей целью будет создание Vault, который будет получать на вход объект базы и использовать его как зависимость
 
 `account / vault.go`
 ```Go
@@ -4017,24 +4022,30 @@ type Vault struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
+// новая структура - хранилище с базой
 type VaultWithDb struct {
 	Vault
 	db files.JsonDb
 }
 
+// контруктор будет возвращать новый VaultWithDb и на вход получать зависимость в виде нужной базы
 func NewVault(db *files.JsonDb) *VaultWithDb {
 	file, err := db.Read()
+	
 	if err != nil {
 		return &VaultWithDb{
 			Vault: Vault{
 				Accounts:  []Account{},
 				UpdatedAt: time.Now(),
 			},
+			// внедряем базу
 			db: *db,
 		}
 	}
+	
 	var vault Vault
 	err = json.Unmarshal(file, &vault)
+	
 	if err != nil {
 		color.Red("Не удалось разобрать файл data.json")
 		return &VaultWithDb{
@@ -4045,12 +4056,15 @@ func NewVault(db *files.JsonDb) *VaultWithDb {
 			db: *db,
 		}
 	}
+	
+	// создаём новый инстанс хранилища с БД из полученного vault файла 
 	return &VaultWithDb{
 		Vault: vault,
 		db:    *db,
 	}
 }
 
+// зависимость от нового Vault
 func (vault *VaultWithDb) DeleteAccountByUrl(url string) bool {
 	var accounts []Account
 	isDeleted := false
@@ -4067,6 +4081,7 @@ func (vault *VaultWithDb) DeleteAccountByUrl(url string) bool {
 	return isDeleted
 }
 
+// зависимость от нового Vault
 func (vault *VaultWithDb) FindAccountsByUrl(url string) []Account {
 	var accounts []Account
 	for _, account := range vault.Accounts {
@@ -4078,11 +4093,13 @@ func (vault *VaultWithDb) FindAccountsByUrl(url string) []Account {
 	return accounts
 }
 
+// зависимость от нового Vault
 func (vault *VaultWithDb) AddAccount(acc Account) {
 	vault.Accounts = append(vault.Accounts, acc)
 	vault.save()
 }
 
+// остаётся работать с Vault, так как сохраняем мы только данные хранилища
 func (vault *Vault) ToBytes() ([]byte, error) {
 	file, err := json.Marshal(vault)
 	if err != nil {
@@ -4091,105 +4108,75 @@ func (vault *Vault) ToBytes() ([]byte, error) {
 	return file, nil
 }
 
+// зависимость от нового Vault
 func (vault *VaultWithDb) save() {
 	vault.UpdatedAt = time.Now()
+	
+	// переводим данные через внедрённый Vault
 	data, err := vault.Vault.ToBytes()
+	
 	if err != nil {
 		color.Red("Не удалось перобразовать")
 	}
+	
+	// сохраняем данные через внедрённый db
 	vault.db.Write(data)
 }
 ```
 
-
+И далее нам остаётся только внедрить зависимость от внешней структуры базы 
 
 `main.go`
 ```go
-package main
-
-import (
-	"demo/password/account"
-	"demo/password/files"
-	"fmt"
-
-	"github.com/fatih/color"
-)
-
-func main() {
-	fmt.Println("__Менеджер паролей__")
-	vault := account.NewVault(files.NewJsonDb("data.json"))
-Menu:
-	for {
-		variant := getMenu()
-		switch variant {
-		case 1:
-			createAccount(vault)
-		case 2:
-			findAccount(vault)
-		case 3:
-			deleteAccount(vault)
-		default:
-			break Menu
-		}
-	}
-
-}
-
-func getMenu() int {
-	var variant int
-	fmt.Println("Выберите вариант:")
-	fmt.Println("1. Создать аккаунт")
-	fmt.Println("2. Найти аккаунт")
-	fmt.Println("3. Удалить аккаунт")
-	fmt.Println("4. Выход")
-	fmt.Scan(&variant)
-	return variant
+package main  
+  
+import (  
+    "fmt"  
+  
+    "github.com/ZeiZel/gomple/account"    
+    "github.com/ZeiZel/gomple/files"    
+    "github.com/fatih/color"
+)  
+  
+func main() {  
+    fmt.Println("__Менеджер паролей__")  
+  
+    db := files.NewJsonDb("data.json")  
+    vault := account.NewVault(db)  
+  
+Menu:  
+    for {  
+       variant := getMenu()  
+       switch variant {  
+       case 1:  
+          createAccount(vault)  
+       case 2:  
+          findAccount(vault)  
+       case 3:  
+          deleteAccount(vault)  
+       default:  
+          break Menu  
+       }  
+    }  
+  
 }
 
 func findAccount(vault *account.VaultWithDb) {
-	url := promptData("Введите URL для поиска")
-	accounts := vault.FindAccountsByUrl(url)
-	if len(accounts) == 0 {
-		color.Red("Аккаунтов не найдено")
-	}
-	for _, account := range accounts {
-		account.Output()
-	}
+		// ..
 }
 
 func deleteAccount(vault *account.VaultWithDb) {
-	url := promptData("Введите URL для поиска")
-	isDeleted := vault.DeleteAccountByUrl(url)
-	if isDeleted {
-		color.Green("Удалено")
-	} else {
-		color.Red("Не найдено")
-	}
+		// ..
 }
 
 func createAccount(vault *account.VaultWithDb) {
-	login := promptData("Введите логин")
-	password := promptData("Введите пароль")
-	url := promptData("Введите URL")
-	myAccount, err := account.NewAccount(login, password, url)
-	if err != nil {
-		fmt.Println("Неверный формат URL или Логин")
-		return
-	}
-	vault.AddAccount(*myAccount)
-}
-
-func promptData(prompt string) string {
-	fmt.Print(prompt + ": ")
-	var res string
-	fmt.Scanln(&res)
-	return res
+	// ..
 }
 ```
 
 ### Второй провайдер
 
-
+Далее создадим второй провайдер данных - облачная база данных. Она будет иметь ровно такие же методы `Read` и `Write`, как и уже существующая JSON DB
 
 `cloud/cloud.go`
 ```Go
@@ -4213,9 +4200,11 @@ func (db *CloudDb) Write(content []byte) {
 }
 ```
 
+Однако тут мы уже сталкиваемся с проблемой, что мы не можем имплементировать одновременно и эту CloudDb, и JsonDb. У нас есть возможность явно описать только одину из этих структур в качестве зависимости
+
 ### Создание интерфейса
 
-
+Интерфейс - это абстрактная единица, которая позволяет нам описать принимаемую структуру просто описывая типы без конкретной реализации.
 
 `account / vault.go`
 ```Go
@@ -4229,6 +4218,8 @@ import (
 	"github.com/fatih/color"
 )
 
+
+// интерфейс базы даннх
 type Db interface {
 	Read() ([]byte, error)
 	Write([]byte)
@@ -4241,9 +4232,11 @@ type Vault struct {
 
 type VaultWithDb struct {
 	Vault
+	// принимаем интерфейс
 	db Db
 }
 
+// конструктор принимает интерфейс, но не в виде указателя
 func NewVault(db Db) *VaultWithDb {
 	file, err := db.Read()
 	if err != nil {
@@ -4274,7 +4267,7 @@ func NewVault(db Db) *VaultWithDb {
 }
 ```
 
-
+И далее мы можем передать сюда любой из ранее созданных провайдеров, так как они соответствуют требуемуму интефрейсу 
 
 `main.go`
 ```Go
@@ -4286,7 +4279,7 @@ func main() {
 
 ### Встроенный интерфейс
 
-
+Так же мы можем разбивать большие интерфейсы на отдельные части, чтобы объединять их или переиспользовать в отдельных участках
 
 `account / vault.go`
 ```Go
@@ -4300,16 +4293,19 @@ import (
 	"github.com/fatih/color"
 )
 
+// интерфейс для чтения
 type ByteReader interface {
 	Read() ([]byte, error)
 }
 
+// интерфейс для записи
 type ByteWriter interface {
 	Write([]byte)
 }
 
+// применение embedded интерфейсов и составление одного
 type Db interface {
-	ByteReader
+	ByteReader // эти интерфейсы вставит все свои описанные методы
 	ByteWriter
 }
 
@@ -4326,7 +4322,11 @@ type VaultWithDb struct {
 
 ### Any тип
 
+Для того чтобы обозначить, что функция принимает любой тип, мы должны описать принимаемое значение, как `interface{}` или его более простым и быстрым алиасом `any`. 
 
+`any` используется всегда, когда мы не знаем, какой тип данных мы получим. Например `fmt.Print` принимает в себя `any`
+
+Реализуем функцию, которая будет выводить ошибку
 
 `output / errors.go`
 ```Go
@@ -4337,14 +4337,12 @@ func PrintError(value any) {
 }
 ```
 
-
+И теперь в созданную функцию мы можем передать любой тип данных
 
 `main.go`
 ```Go
 import (
-	"demo/password/account"
-	"demo/password/files"
-	"demo/password/output"
+	"github.com/ZeiZel/gomple/output"
 	"fmt"
 
 	"github.com/fatih/color"

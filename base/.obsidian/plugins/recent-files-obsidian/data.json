@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
       "basename": "programming",
       "path": "cs/programming.md"
     },
@@ -9,8 +13,12 @@
       "path": "cs/GIT/Git.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "principles",
+      "path": "cs/principles.md"
+    },
+    {
+      "basename": "SOLID принципы",
+      "path": "cs/principles/SOLID принципы.md"
     },
     {
       "basename": "1. Введение",
@@ -31,10 +39,6 @@
     {
       "basename": "Figma",
       "path": "Design/Figma.md"
-    },
-    {
-      "basename": "SOLID принципы",
-      "path": "cs/principles/SOLID принципы.md"
     },
     {
       "basename": "computer science",

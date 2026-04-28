@@ -90,9 +90,57 @@
               "icon": "lucide-file",
               "title": "programming"
             }
+          },
+          {
+            "id": "f3d07fe4630ab862",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/principles.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "principles"
+            }
+          },
+          {
+            "id": "b1d273de94651ba6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/go/Selfgo.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Selfgo"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -161,7 +209,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -310,13 +359,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/programming.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of programming"
+              "title": "Outline of Selfgo"
             }
           }
         ],
@@ -324,7 +373,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 366.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -348,20 +398,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "d314e4407d84f2f7",
+  "active": "b1d273de94651ba6",
   "lastOpenFiles": [
+    "cs/programming.md",
     "cs/GIT/Git.md",
+    "cs/principles.md",
+    "cs/principles/SOLID принципы.md",
     "cs/GIT/GIT.md",
     "backend/go/Selfgo.md",
     "_lessons/1. Введение.md",
     "_lessons",
-    "cs/programming.md",
-    "cs/principles.md",
     "architecture/System Design/System Design.md",
     "architecture/Architecture/Architecture.md",
     "Excalidraw/friend_line_vk.excalidraw.md",
     "Design/Figma.md",
-    "cs/principles/SOLID принципы.md",
     "cs/computer science.md",
     "cs/RegExp.md",
     "Tags/#git #github #cs +#commitconvetionals +#gitflow",
