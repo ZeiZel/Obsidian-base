@@ -4456,7 +4456,8 @@ func createAccount(vault *account.VaultWithDb) {
 
 ### Получение типа
 
-
+Так же альтернативно мы можем проверять определённый тип значения с помощью конструкции `value.(<type>)`. Первым аргументом вернёт преобразованное из `any` значение в нужный тип данных, а вторым его статус (может ли оно быть переведено или нет в этот тип данных из `any`). 
+Эта конструкция так же нужна именно для сужения типов и может подойти, когда у нас крайне ветвистая структура и много логики проверок 
 
 `output / errors.go`
 ```Go
@@ -4470,83 +4471,137 @@ func PrintError(value any) {
 		color.Red("Код ошибки: %d", intValue)
 		return
 	}
+	
 	strValue, ok := value.(string)
 	if ok {
 		color.Red(strValue)
 		return
 	}
+	
 	errorValue, ok := value.(error)
 	if ok {
 		color.Red(errorValue.Error())
 		return
 	}
+	
 	color.Red("Неизвестный тип ошибки")
 }
 ```
 
 ### Generic
 
+Очень часто такое бывает, что нам нужно передавать в качестве аргумента какую-то определённую группу аргументов, тип которых различается, но функционал - нет. Без такой возможности, мы будем писать одинаковые функции под каждый тип:
 
+```Go
+func sumInt(a, b int) int {
+	return a + b
+}
 
-`output / errors.go`
+func sumFloat32(a, b float32) float32 {
+	return a + b
+}
+
+func sumFloat64(a, b float64) float64 {
+	return a + b
+}
+```
+
+И вместо того, чтобы разделять функции по типам, мы можем задать центральный Generic, в рамках которого мы сможем выполнять операции доступные для переданного перечня типа данных
+
 ```Go
 func sum[T int | float32 | float64 | int16 | int32 | string](a, b T) T {
 	return a + b
 }
 ```
 
+Мы можем передать несколько дженериков через запятую и определить для них разные типы. Однако мы не можем передавать структуры и интерфейсы в качестве значений типов дженериков
+
 ### Ограничения Generic
 
+Мы не можем сужать типы по дженерикам. Единственный способ реализовать сужение - это насильно привести значение к `any`
 
+```Go
+func sum[T int | float32 | float64 | int16 | int32 | string](a, b T) T {
+	switch t := a.(type) { // не можем
+	}
+	
+	switch t := any(a).(type) { // можем
+	case string:
+		fmt.Println(t)
+	}
+}
+```
 
-`output / errors.go`
+Мы не можем вернуть какое-то одно цельное значение из union по дженерику. 
+Если у нас в типах есть строка и число, то вернуть только строку мы не можем. Мы можем вернуть только результат операции переменных.
+
+```Go
+func sum[T int | float32 | float64 | int16 | int32 | string](a, b T) T {
+	return "" // не можем
+	return 1 // не можем
+}
+
+func sum[T int | float32 | float64 | int16 | int32](a, b T) T {
+	return 1 // можем
+}
+```
+
+Мы Не можем использовать интерфейсы в дженериках
+
+```Go
+func sum[T int | float32 | float64 | error](a, b T) T { // ошибка
+	return 1
+}
+```
+
+Мы можем использовать дженерики в функциях, но не можем их использовать в методах структур
+
+```Go
+// эта запись будет невалидной, так как дженерик в методах невозможен
+func (vault *VaultWithDb) FindAccountsByUrl[V any](url string) []Account {
+```
+
+Однако мы Можем использовать в качестве дженерика структуру 
+
 ```Go
 package output
 
 import (
-	"demo/password/account"
-
+	"github.com/ZeiZel/gomple/account"
 	"github.com/fatih/color"
 )
 
-func sum[T account.Account](a, b T) T {
-	// return a + b
+func sum[T account.Account](a T) T {  
+    return a  
 }
 ```
 
 ### Generic Structs
 
+Мы можем использовать дженерики в структурах, чтобы передавать динамические значения
 
+```Go
+type List[T any] struct {
+	elements []T
+}
 
-
-
-
-
-
+func (l *List[T]) addElement() {
+}
+```
 
 #### Generic ввода
 
-
+Функция `promptData` принимает в качестве аргумента слайс строк и выводит их друг под другом последовательно. Справа от последнего переданного элемента, мы должны вывести `:`
 
 `main.go`
 ```Go
-package main
-
-import (
-	"demo/password/account"
-	"demo/password/files"
-	"demo/password/output"
-	"fmt"
-
-	"github.com/fatih/color"
-)
-
 func main() {
 	fmt.Println("__Менеджер паролей__")
 	vault := account.NewVault(files.NewJsonDb("data.json"))
 	// vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
 Menu:
 	for {
+		// передаём сюда слайс со всеми опциями
 		variant := promptData([]string{
 			"1. Создать аккаунт",
 			"2. Найти аккаунт",
@@ -4554,6 +4609,7 @@ Menu:
 			"4. Выход",
 			"Выберите вариант",
 		})
+		
 		switch variant {
 		case "1":
 			createAccount(vault)
@@ -4590,9 +4646,11 @@ func deleteAccount(vault *account.VaultWithDb) {
 }
 
 func createAccount(vault *account.VaultWithDb) {
+	// передаём сюда слайс от строки
 	login := promptData([]string{"Введите логин"})
 	password := promptData([]string{"Введите пароль"})
 	url := promptData([]string{"Введите URL"})
+	
 	myAccount, err := account.NewAccount(login, password, url)
 	if err != nil {
 		output.PrintError("Неверный формат URL или Логин")
@@ -4601,6 +4659,7 @@ func createAccount(vault *account.VaultWithDb) {
 	vault.AddAccount(*myAccount)
 }
 
+// принимает дженерик от слайса
 func promptData[T any](prompt []T) string {
 	for i, line := range prompt {
 		if i == len(prompt)-1 {
