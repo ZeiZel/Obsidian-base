@@ -4355,7 +4355,11 @@ func main() {
 
 ### Type switch
 
+Механизм сужения типов в Go можно реализовать за счёт использования switch-case + типа из значения. 
 
+С помощью конструкции `value.(type)`, мы получаем из значения его тип. Таким образом, мы можем пройтись по switch-case со значениями типов и выполнить определённую логику. 
+
+Важно учесть, что конструкция `t := value.(type)` работает только в рамках switch
 
 `output / errors.go`
 ```Go
@@ -4377,40 +4381,20 @@ func PrintError(value any) {
 }
 ```
 
-
+Далее имплементируем эту функцию
 
 `account/vault.go`
 ```Go
 func NewVault(db Db) *VaultWithDb {
-	file, err := db.Read()
-	if err != nil {
-		return &VaultWithDb{
-			Vault: Vault{
-				Accounts:  []Account{},
-				UpdatedAt: time.Now(),
-			},
-			db: db,
-		}
-	}
-	var vault Vault
-	err = json.Unmarshal(file, &vault)
+	// ..
 	if err != nil {
 		// color.Red("Не удалось разобрать файл data.json")
 		
 		output.PrintError("Не удалось разобрать файл data.json") // свежая ошибка
 		
-		return &VaultWithDb{
-			Vault: Vault{
-				Accounts:  []Account{},
-				UpdatedAt: time.Now(),
-			},
-			db: db,
-		}
+		// ..
 	}
-	return &VaultWithDb{
-		Vault: vault,
-		db:    db,
-	}
+	// ..
 }
 
 func (vault *VaultWithDb) save() {
@@ -4423,8 +4407,6 @@ func (vault *VaultWithDb) save() {
 	vault.db.Write(data)
 }
 ```
-
-
 
 `files/files.go`
 ```Go
@@ -4444,8 +4426,6 @@ func (db *JsonDb) Write(content []byte) {
 	fmt.Println("Запись успешна")
 }
 ```
-
-
 
 `main.go`
 ```Go
