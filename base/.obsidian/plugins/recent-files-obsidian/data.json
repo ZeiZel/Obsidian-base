@@ -5,6 +5,14 @@
       "path": "backend/go/Selfgo.md"
     },
     {
+      "basename": "friend_line_vk.excalidraw",
+      "path": "Excalidraw/friend_line_vk.excalidraw.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
       "basename": "programming",
       "path": "cs/programming.md"
     },
@@ -25,16 +33,8 @@
       "path": "_lessons/1. Введение.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
       "basename": "Architecture",
       "path": "architecture/Architecture/Architecture.md"
-    },
-    {
-      "basename": "friend_line_vk.excalidraw",
-      "path": "Excalidraw/friend_line_vk.excalidraw.md"
     },
     {
       "basename": "Figma",

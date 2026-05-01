@@ -1428,6 +1428,8 @@ func nextslicecap(newLen, oldCap int) int {
 }
 ```
 
+
+
 ## Map
 
 ### Map
@@ -4221,8 +4223,10 @@ import (
 
 // интерфейс базы даннх
 type Db interface {
-	Read() ([]byte, error)
-	Write([]byte)
+	// можно записать интерфейс с именем переменной 
+	Read() (arg []byte, err error)
+	// и без имени переменной - просто передав типы
+	Write([]byte) // после () пишем возврат функции
 }
 
 type Vault struct {
@@ -4680,10 +4684,17 @@ func promptData[T any](prompt []T) string {
 
 ### Тип функции
 
+Запись типа функции выглядит почти так же, как это выглядело бы в интефрейсе
 
+```Go
+var menu = map[string]func(string, int)(int, error){}
+```
+
+И далее реализуем выбор списка меню не через switch, а через получение функции из мапы
 
 `main.go`
 ```go
+// методы списка меню
 var menu = map[string]func(*account.VaultWithDb){
 	"1": createAccount,
 	"2": findAccount,
@@ -4703,10 +4714,16 @@ Menu:
 			"4. Выход",
 			"Выберите вариант",
 		})
+		
+		// получаем функцию из списка
 		menuFunc := menu[variant]
+		
+		// проверяем существование
 		if menuFunc == nil {
 			break Menu
 		}
+		
+		// вызываем
 		menuFunc(vault)
 	}
 
@@ -4715,29 +4732,43 @@ Menu:
 
 ### Передача функции
 
+Так же мы можем передавать функции, как аргумент, в другую функцию
 
+Например, нам нужно универсонализировать функцию `FindAccountsByUrl`, которую мы переименуем в `FindAccounts`. Вместо посика по URL, она будет передавать в `checker` полностью всю сущность `Account` и строку для поиска, а возвращать по интерфейсу `bool` с результатом поиска. 
 
 `account / vault.go`
 ```Go
-func (vault *VaultWithDb) FindAccounts(str string, checker func(Account, string) bool) []Account {
+func (vault *VaultWithDb) FindAccounts(
+	str string, 
+	checker func(Account, string) bool
+) []Account {
 	var accounts []Account
+	
 	for _, account := range vault.Accounts {
 		isMatched := checker(account, str)
 		if isMatched {
 			accounts = append(accounts, account)
 		}
 	}
+	
 	return accounts
 }
 ```
 
-
+Далее в `findAccount` мы вызываем `FindAccounts`, в который передаём искомый url и саму функцию `checkUrl`, по которой будет происходить поиск. Искать мы будем так же по url. 
+Но теперь у нас есть возможность создавать вне основной функции сколько угодно функций для поиска по разным параметрам нашей сущности. 
 
 `main.go`
 ```Go
+func checkUrl(acc account.Account, str string) bool {
+	return strings.Contains(acc.Url, str)
+}
+
 func findAccount(vault *account.VaultWithDb) {
 	url := promptData([]string{"Введите URL для поиска"})
+	
 	accounts := vault.FindAccounts(url, checkUrl)
+	
 	if len(accounts) == 0 {
 		color.Red("Аккаунтов не найдено")
 	}
@@ -4745,24 +4776,23 @@ func findAccount(vault *account.VaultWithDb) {
 		account.Output()
 	}
 }
-
-func checkUrl(acc account.Account, str string) bool {
-	return strings.Contains(acc.Url, str)
-}
 ```
 
 ### Анонимные функции
 
-
+Так же для экономии места мы можем передать анонимную функцию с той же самой сигнатурой, только без имени. Таким образом мы сразу создадим и передадим функцию в качестве аргумента
 
 `main.go`
 ```Go
 func findAccount(vault *account.VaultWithDb) {
 	url := promptData([]string{"Введите URL для поиска"})
-	// accounts := vault.FindAccounts(url, checkUrl)
-	accounts := vault.FindAccounts(url, func(acc account.Account, str string) bool {
-		return strings.Contains(acc.Url, str)
-	})
+	// - accounts := vault.FindAccounts(url, checkUrl)
+	accounts := vault.FindAccounts(
+		url, 
+		func(acc account.Account, str string) bool {
+			return strings.Contains(acc.Url, str)
+		}
+	)
 	
 	if len(accounts) == 0 {
 		color.Red("Аккаунтов не найдено")
@@ -4781,7 +4811,7 @@ func findAccount(vault *account.VaultWithDb) {
 
 #### Поиск по логину
 
-
+Нужно реализовать отдельный метод поиска аккаунта по логину
 
 `main.go`
 ```Go
@@ -4843,8 +4873,8 @@ func findAccountByLogin(vault *account.VaultWithDb) {
 	outputResult(&accounts)
 }
 
+// переиспользуемый метод для вывода аккаунтов
 func outputResult(accounts *[]account.Account) {
-	// если аккаунтов нет, то выведем сообщение
 	if len(*accounts) == 0 {
 		color.Red("Аккаунтов не найдено")
 	}
@@ -4857,22 +4887,16 @@ func outputResult(accounts *[]account.Account) {
 
 ### Динамическое число аргументов
 
+Динамическое число аргументов описывается через `...<тип>`, что говорит нам о том, что функция получит все аргументы, которые мы передадим просто через запятую, в виде слайса. 
 
+То есть заменив передачу аргументов в `promptData` из `[]string` на `...string`, мы избавляем себя от необходимости передавать аргументы в виде массива. Сама функция в итоге не изменит своей логики, так как все промпты в неё попадут в виде слайса. 
+
+Объявлять такую запись можно только в конце после всех аргументов функции, а до неё число аргументов не ограничено. 
+
+Так же мы можем деструктуризировать уже имеющийся массив в список аргументов через запятую, если добавим оператор деструктуризации `<массив>...`
 
 `main.go`
 ```Go
-package main
-
-import (
-	"demo/password/account"
-	"demo/password/files"
-	"demo/password/output"
-	"fmt"
-	"strings"
-
-	"github.com/fatih/color"
-)
-
 var menu = map[string]func(*account.VaultWithDb){
 	"1": createAccount,
 	"2": findAccountByUrl,
@@ -4933,12 +4957,49 @@ func createAccount(vault *account.VaultWithDb) {
 }
 
 // и сюда мы передаём деструктуризированный массив строк
-func promptData(prompt ...string) string {
-	// ...
+func promptData(prompts ...string) string {  
+    for i, line := range prompts {  
+       if i == len(prompts)-1 {  
+          fmt.Printf("%v: ", line)  
+       } else {  
+          fmt.Println(line)  
+       }  
+    }  
+    var res string  
+    fmt.Scan(&res)  
+    return res  
 }
 ```
 
 ### Замыкание
+
+Замыкание - это механизм языка, который подразумевает сохранение и использование контекста вызова и создания функции. 
+
+В данном примере мы создали из родительской функции - дочернюю. Дочерняя функция сохраняет контекст родительской, если первая использует данные из второй. 
+
+`main.go`
+```Go
+func menuCounter(label string) func(int) {  
+    i := 0  
+    return func(outer int) {  
+       i++  
+       fmt.Printf("[%s] - [%d] - Количество вызовов: %d", label, outer, i)  
+    }  
+}  
+  
+func main() {  
+    fmt.Println("__Менеджер паролей__")  
+    vault := account.NewVault(files.NewJsonDb("data.json"))  
+  
+    counter := menuCounter("first")  
+    counter2 := menuCounter("second")  
+  
+Menu:  
+    for {  
+       counter(1)  
+       counter2(2)  
+       variant := promptData(menuVariants...)
+```
 
 
 
@@ -4946,7 +5007,8 @@ func promptData(prompt ...string) string {
 
 ### Получение env
 
-
+С помощью `Getenv` мы получаем определённую переменную.
+С помощью `Environ` мы получаем все переменные, которые нам доступны, в окружении. 
 
 `main.go`
 ```go
@@ -4956,15 +5018,23 @@ func main() {
 	fmt.Println(res)
 
 	for _, e := range os.Environ() {
+		// разбиваем строку на 2 по разделителю =
 		pair := strings.SplitN(e, "=", 2)
 		fmt.Println(pair[0])
 	}
 }
 ```
 
-### чтение env
+### Чтение env
 
+Env файлы - это основной формат хранения секретов во время локальной разработки. Этот стандарт применяется при разработке любого приложения на любом языке. 
 
+`.env`
+```
+KEY=23523242574376835675
+```
+
+Он всегда должен добавляться в `.gitignore`. 
 
 `.gitignore`
 ```
@@ -4972,23 +5042,29 @@ data.json
 /.env*
 ```
 
-
+Для автоматизации чтения переменных окружения для приложения из `.env` во время разработки, стоит установить библиотеку `godotenv`
 
 ```bash
 go get github.com/joho/godotenv
 ```
 
-
+Применяется она крайне просто: нам достаточно вызвать `godotenv.Load` и все переменные из `.env` будут доступны в окружении приложения. 
 
 `maing.go`
 ```go
 
 func main() {
 	fmt.Println("__Менеджер паролей__")
+	
+	// загружаем переменную в окружение
 	err := godotenv.Load()
+	
+	// обрабатываем отсутстве хоть какого-либо .env.*
 	if err != nil {
 		output.PrintError("Не удалось найти env файл")
 	}
+	
+	// получаем переменную из .env
 	res := os.Getenv("VAR")
 	fmt.Println(res)
 
@@ -4999,9 +5075,15 @@ func main() {
 }
 ```
 
+И теперь сохраним зависимость `godotenv` в приложении, как прямую
+
+```bash
+go mod tidy
+```
+
 ### Encrypter struct
 
-
+Создаём отдельный пакет, который будет заниматься шифрованием и дешифрованием данных на основе ключа из переменной окружения. 
 
 `encrypter / encrypter.go`
 ```Go
@@ -5014,8 +5096,10 @@ type Encrypter struct {
 }
 
 func NewEncrypter() *Encrypter {
+	// получаем ключ
 	key := os.Getenv("KEY")
 	
+	// если его нет, то паникуем
 	if key == "" {
 		panic("Не передан параметр KEY в переменные окружения")
 	}
@@ -5025,16 +5109,16 @@ func NewEncrypter() *Encrypter {
 	}
 }
 
-func (enc *Encrypter) Encrypt(plainStr string) string {
+func (enc *Encrypter) Encrypt(plainStr []byte) []byte {
 	return ""
 }
 
-func (enc *Encrypter) Decrypt(encryptedStr string) string {
+func (enc *Encrypter) Decrypt(encryptedStr []byte) []byte {
 	return ""
 }
 ```
 
-
+Далее добавляем в структуру зависимость от энкриптера
 
 `account / vault.go`
 ```Go
@@ -5093,13 +5177,14 @@ func NewVault(db Db, enc encrypter.Encrypter) *VaultWithDb {
 }
 ```
 
-
+Далее в основной функции просто инжектируем энкриптер
 
 `main.go`
 ```Go
 func main() {
 	fmt.Println("__Менеджер паролей__")
 	
+	// загружаем окружение
 	err := godotenv.Load()
 	
 	if err != nil {
@@ -5125,61 +5210,82 @@ Menu:
 }
 ```
 
-
 ### Шифрование данных
 
+Далее реализуем метод для шифрования данных: 
 
+1. Сначала мы создаём блочный шифр AES из нашего key
+	1. AES - блочный шифр, работает с блоками по 128 бит.
+	2. Наш секретный ключ `Key` должен быть 16, 24 или 32 байта → AES-128/192/256
+2. Далее мы должны обернуть AES в режим GCM
+	1. GCM (Galois/Counter Mode) — режим работы блочного шифра. Переход в этот режим два свойства одновременно:
+		1. Шифрование (конфиденциальность)
+		2. Аутентификацию (целостность + защита от подмены данных)
+	2. Все вышеописанные свойства называются AEAD - Authenticated Encryption with Associated Data.
+3. Генерируем Nonce
+	1. Nonce (Number used ONCE) — одноразовое случайное число, 12 байт для GCM.
+	2. Это даёт нам возможность гарантировать, что одни и те же данные, зашифрованные одним ключом, каждый раз дают РАЗНЫЙ шифротекст
+4. Шифруем через Seal
+	1. Seal(dst, nonce, plaintext, additionalData) → зашифрованные байты + тег аутентификации.
+		1. Первый аргумент dst=nonce означает: PREPEND nonce прямо перед шифротекстом.
+		2. Итоговый результат: `[ nonce (12 байт) | ciphertext | auth tag (16 байт) ]`
+
+>[!warning] Повторное использование nonce с тем же ключом — критическая уязвимость!
 
 `encrypter/encrypter.go`
 ```Go
 package encrypter
 
 import (
-	"crypto/aes"
-	"crypto/cipher"
-	"crypto/rand"
-	"io"
-	"os"
+    "crypto/aes"    // AES — симметричный блочный шифр 
+    "crypto/cipher" // Интерфейсы для режимов блочного шифрования
+    "crypto/rand"   // Криптографически безопасный генератор случайных чисел
+    "io"            // Для io.ReadFull — гарантирует полное чтение буфера
+    "os"
 )
 
-type Encrypter struct {
-	Key string
-}
-
-func NewEncrypter() *Encrypter {
-	key := os.Getenv("KEY")
-	if key == "" {
-		panic("Не передан параметр KEY в переменные окружения")
-	}
-	return &Encrypter{
-		Key: key,
-	}
-}
-
 func (enc *Encrypter) Encrypt(plainStr []byte) []byte {
-	block, err := aes.NewCipher([]byte(enc.Key))
-	if err != nil {
-		panic(err.Error())
-	}
-	aesGSM, err := cipher.NewGCM(block)
-	if err != nil {
-		panic(err.Error())
-	}
-	nonce := make([]byte, aesGSM.NonceSize())
-	_, err = io.ReadFull(rand.Reader, nonce)
-	if err != nil {
-		panic(err.Error())
-	}
-	return aesGSM.Seal(nonce, nonce, plainStr, nil)
-}
+    // 1
+    block, err := aes.NewCipher([]byte(enc.Key))
+    if err != nil {
+        panic(err.Error())
+    }
 
-func (enc *Encrypter) Decrypt(encryptedStr []byte) []byte {
+    // 2
+    aesGCM, err := cipher.NewGCM(block)
+    if err != nil {
+        panic(err.Error())
+    }
+
+    // 3
+    nonce := make([]byte, aesGCM.NonceSize()) // обычно 12 байт
+    _, err = io.ReadFull(rand.Reader, nonce)  // заполняем случайными байтами из ОС
+    if err != nil {
+        panic(err.Error())
+    }
+
+    // 4
+    // При расшифровке: сначала читаем первые 12 байт как nonce, остальное — данные.
+    return aesGCM.Seal(nonce, nonce, plainStr, nil)
 }
 ```
 
+| Термин       | Расшифровка                                   | Суть                                                 |
+| ------------ | --------------------------------------------- | ---------------------------------------------------- |
+| **AES**      | Advanced Encryption Standard                  | Симметричный блочный шифр (стандарт шифрования NIST) |
+| **GCM**      | Galois/Counter Mode                           | Режим шифрования + аутентификации                    |
+| **Nonce**    | Number used ONCE                              | Одноразовое случайное число (12 байт)                |
+| **AEAD**     | Authenticated Encryption with Associated Data | Гарантирует и конфиденциальность, и целостность      |
+| **Auth tag** | Authentication tag                            | 16-байтная «подпись» шифротекста                     |
+| **Seal**     | —                                             | Зашифровать и приклеить auth tag                     |
+
 ### Расшифровка данных
 
+Расшифровка текста всю первую половину операций будет выглядеть точно так же, как и шифрование. Во всём остальном всё куда проще: 
 
+1. Достаём длину nonce
+2. Далее разбиваем зашифрованный текст на две части, где первой будет nonce, а второй  зашифрованный текст
+3. Далее, через GCM с помощью nonce расшифровываем текст
 
 `encrypter / encrypter.go`
 ```Go
@@ -5190,26 +5296,36 @@ func (enc *Encrypter) Decrypt(encryptedStr []byte) []byte {
 		panic(err.Error())
 	}
 	
-	aesGSM, err := cipher.NewGCM(block)
+	aesGCM, err := cipher.NewGCM(block)
 	
 	if err != nil {
 		panic(err.Error())
 	}
 	
-	nonceSize := aesGSM.NonceSize()
+	// 1
+	nonceSize := aesGCM.NonceSize()
+	// 2
 	nonce, cipherText := encryptedStr[:nonceSize], encryptedStr[nonceSize:]
-	plainText, err := aesGSM.Open(nil, nonce, cipherText, nil)
+	// 3
+	plainText, err := aesGCM.Open(nil, nonce, cipherText, nil)
 	
 	if err != nil {
 		panic(err.Error())
 	}
+	
 	return plainText
 }
 ```
 
 #### Применение шифрования
 
+Сначала нам нужно сгенерировать правильный ключ по стандартам AES на любом из доступных ресурсов
 
+```bash
+KEY=2a042ae034904841deda1723bd014546
+```
+
+Далее мы будем сохранять наши данные уже не в `.json`, а в `.vault`, так как теперь у нас будет хранится в зашифрованном формате
 
 `.gitignore`
 ```
@@ -5217,7 +5333,7 @@ func (enc *Encrypter) Decrypt(encryptedStr []byte) []byte {
 /*.vault
 ```
 
-
+Далее нам остаётся только интегрировать шифрование в `save` и дешифрование при создании `Vault` в конструкторе
 
 `account / vault.go`
 ```Go
@@ -5233,6 +5349,7 @@ func NewVault(db Db, enc encrypter.Encrypter) *VaultWithDb {
 			enc: enc,
 		}
 	}
+	
 	// для получения данных сразу их декриптим
 	data := enc.Decrypt(file)
 	var vault Vault
@@ -5263,41 +5380,49 @@ func NewVault(db Db, enc encrypter.Encrypter) *VaultWithDb {
 func (vault *VaultWithDb) save() {
 	vault.UpdatedAt = time.Now()
 	data, err := vault.Vault.ToBytes()
+	
+	// шифруем байты
 	encData := vault.enc.Encrypt(data)
 	if err != nil {
 		output.PrintError(err)
 	}
+	
+	// сохраняем шифрованные данные в байтах
 	vault.db.Write(encData)
 }
 ```
 
-
+Далее переименовываем файл, в который мы будем записывать данные
 
 `main.go`
 ```Go
 func main() {
-	fmt.Println("__Менеджер паролей__")
-	err := godotenv.Load()
-	if err != nil {
-		output.PrintError("Не удалось найти env файл")
-	}
+	// ..
 	
-	// vault := account.NewVault(files.NewJsonDb("data.json"), *encrypter.NewEncrypter())
 	// пакуем все данные в файл data.vault
 	vault := account.NewVault(files.NewJsonDb("data.vault"), *encrypter.NewEncrypter())
 	
-Menu:
-	for {
-		variant := promptData(menuVariants...)
-		menuFunc := menu[variant]
-		if menuFunc == nil {
-			break Menu
-		}
-		menuFunc(vault)
-	}
-
+	// ...
 }
 
+```
+
+Теперь у нас работает и запись, и чтение шифрованных данных
+
+```bash
+> go run .
+
+Выберите вариант: 1
+Введите URL: https://ya.ru          
+Введите логин: olegooloft
+Введите пароль: asdfqw32wwwwwc3a3
+Файл успешно записан
+
+Выберите вариант: 2
+Введите URL для поиска: ya
+olegooloft
+asdfqw32wwwwwc3a3
+https://ya.ru
 ```
 
 
