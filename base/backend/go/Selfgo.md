@@ -6335,6 +6335,17 @@ go build .
 ![](../../_png/Pasted%20image%2020260501170725.png)
 
 ### Stack frames
+
+
+
+![](../../_png/Pasted%20image%2020260501171537.png)
+
+
+
+
+
+
+
 ### Heap
 
 
