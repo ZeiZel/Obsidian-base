@@ -373,8 +373,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -400,21 +399,21 @@
   },
   "active": "b1d273de94651ba6",
   "lastOpenFiles": [
-    "_png/Pasted image 20260502111009.png",
-    "_png/Pasted image 20260502110454.png",
-    "_png/Pasted image 20260502102535.png",
-    "_png/Pasted image 20260502102512.png",
-    "_png/Pasted image 20260502102433.png",
-    "_png/Pasted image 20260502102344.png",
-    "_png/Pasted image 20260502102130.png",
-    "_png/Pasted image 20260501171946.png",
-    "_png/Pasted image 20260501171919.png",
-    "_png/Pasted image 20260501171811.png",
-    "_png/Pasted image 20260501171537.png",
+    "_png/Pasted image 20260502121610.png",
+    "_png/Pasted image 20260502121446.png",
+    "_png/Pasted image 20260502121418.png",
+    "_png/Pasted image 20260502121405.png",
+    "_png/Pasted image 20260502121301.png",
+    "_png/Pasted image 20260502121227.png",
+    "_png/Pasted image 20260502121155.png",
+    "_png/Pasted image 20260502121143.png",
+    "_png/Pasted image 20260502120012.png",
+    "_png/Pasted image 20260502115848.png",
+    "cs/programming.md",
     "backend/go/Selfgo.md",
+    "_png/Pasted image 20260502111009.png",
     "Excalidraw/friend_line_vk.excalidraw.md",
     "architecture/System Design/System Design.md",
-    "cs/programming.md",
     "cs/GIT/Git.md",
     "cs/principles.md",
     "cs/principles/SOLID принципы.md",

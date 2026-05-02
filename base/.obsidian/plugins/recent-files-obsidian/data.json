@@ -5,16 +5,16 @@
       "path": "backend/go/Selfgo.md"
     },
     {
+      "basename": "programming",
+      "path": "cs/programming.md"
+    },
+    {
       "basename": "friend_line_vk.excalidraw",
       "path": "Excalidraw/friend_line_vk.excalidraw.md"
     },
     {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "programming",
-      "path": "cs/programming.md"
     },
     {
       "basename": "Git",
