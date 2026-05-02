@@ -373,7 +373,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 366.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -399,6 +400,10 @@
   },
   "active": "b1d273de94651ba6",
   "lastOpenFiles": [
+    "_png/Pasted image 20260502145940.png",
+    "_png/Pasted image 20260502145815.png",
+    "_png/Pasted image 20260502145735.png",
+    "_png/Pasted image 20260502145721.png",
     "_png/Pasted image 20260502121610.png",
     "_png/Pasted image 20260502121446.png",
     "_png/Pasted image 20260502121418.png",
@@ -406,12 +411,8 @@
     "_png/Pasted image 20260502121301.png",
     "_png/Pasted image 20260502121227.png",
     "_png/Pasted image 20260502121155.png",
-    "_png/Pasted image 20260502121143.png",
-    "_png/Pasted image 20260502120012.png",
-    "_png/Pasted image 20260502115848.png",
     "cs/programming.md",
     "backend/go/Selfgo.md",
-    "_png/Pasted image 20260502111009.png",
     "Excalidraw/friend_line_vk.excalidraw.md",
     "architecture/System Design/System Design.md",
     "cs/GIT/Git.md",
