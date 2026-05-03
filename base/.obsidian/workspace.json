@@ -329,6 +329,16 @@
             "id": "ee4b08d2a858dd3b",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "8b29022a14345bc4",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -336,7 +346,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 9
       },
       {
         "id": "2df1decc2eef0b0b",

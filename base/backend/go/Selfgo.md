@@ -6894,36 +6894,107 @@ Channels - каналы - это структура данных, которая
 
 ### Создание канала
 
+Каналы описываются структурой `chan` по определённому типу (например, `int`). 
 
+Запись и чтение из канала описывается оператором `<-`.
+
+Основной особенностью канала является то, что основной поток будет ожидать чтения из канала и использовать `Sleep` или `WaitGroup` - не нужно.
 
 `main.go`
 ```Go
-package main
-
-import (
-	"fmt"
-	"net/http"
-)
-
-func main() {
-	code := make(chan int)
-	go getHttpCode(code)
-	<-code
-}
-
-func getHttpCode(codeCh chan int) {
-	resp, err := http.Get("https://google.com")
-	if err != nil {
-		fmt.Printf("Ошибка %s", err.Error())
-	}
-	fmt.Printf("Код: %d\n", resp.StatusCode)
-	codeCh <- resp.StatusCode
+package main  
+  
+import (  
+    "fmt"  
+    "net/http")  
+  
+func main() {  
+	// создаём канал
+    code := make(chan int)  
+    go getHttpCode(code)  
+	// читаем из канала
+    <-code  
+}  
+  
+// передаём канал как аргумент
+func getHttpCode(codeCh chan int) {  
+    resp, err := http.Get("https://google.com")  
+  
+    if err != nil {  
+       fmt.Printf("Ошибка: %s\n", err.Error())  
+       return  
+    }  
+  
+    fmt.Printf("Статус код: %d\n", resp.StatusCode)  
+  
+	// запись в канал
+    codeCh <- resp.StatusCode  
 }
 ```
 
 ### Чтение данных
 
+Запись результата канала в переменную выглядит таким образом:  
 
+```Go
+func main() {
+	code := make(chan int)
+	
+	go getHttpCode(code)
+	
+	// записываем результат в переменную
+	res := <-code
+	
+	// выводим
+	fmt.Printf("Код: %d\n", res)
+}
+```
+
+Если мы запишем ожидание выполнения кода таким образом, то мы столкнёмся с тем, что выведем только первое выполнение горутины и остальные дожидаться не будем
+
+```Go
+func main() {
+	code := make(chan int)
+	
+	for i := 0; i < 10; i++ {
+		go getHttpCode(code)
+	}
+	
+	res := <-code
+	
+	// выводим
+	fmt.Printf("Код: %d\n", res)
+}
+```
+
+Либо доставать каждое сообщение из буфера по-отдельности :)
+
+```Go
+func main() {
+	code := make(chan int)
+	
+	for i := 0; i < 10; i++ {
+		go getHttpCode(code)
+	}
+	
+	res := <-code
+	res1 := <-code
+	res2 := <-code
+	res3 := <-code
+	res4 := <-code
+	res5 := <-code
+	res6 := <-code
+	<-code
+	<-code
+	<-code
+	<-code
+	
+	// выводим
+	fmt.Printf("Код: %d\n", res)
+}
+```
+
+Поэтому, чтобы обработать все сообщения, по каналу мы можем проходиться через конструкцию `range` 
 
 `main.go`
 ```Go
@@ -6936,9 +7007,11 @@ import (
 
 func main() {
 	code := make(chan int)
+	
 	for i := 0; i < 10; i++ {
 		go getHttpCode(code)
 	}
+	
 	for res := range code {
 		fmt.Printf("Код: %d\n", res)
 	}
@@ -6946,12 +7019,35 @@ func main() {
 
 func getHttpCode(codeCh chan int) {
 	resp, err := http.Get("https://google.com")
+	
 	if err != nil {
 		fmt.Printf("Ошибка %s", err.Error())
 	}
+	
 	codeCh <- resp.StatusCode
 }
 ```
+
+Однако при такой записи, мы будем вечно ожидать выполнения range и никогда не выйдем из приложения, так как мы не знаем про то, когда остановиться. 
+
+```bash
+> go run ./main.go 
+
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+
+# процесс продолжается
+```
+
+Для решения этой проблемы, существует механизм закрытия каналов
 
 ### Закрытие канала
 
