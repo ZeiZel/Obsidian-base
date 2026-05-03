@@ -7125,41 +7125,62 @@ func getHttpCode(codeCh chan int) {
 
 #### Сумма Slice
 
+Достаточно часто наши тяжёлые математические операции придётся разбивать на горутины, чтобы процессорное время не проставивало без дела. Максимально эффективное использование выделенных ресурсов - наша основная цель. 
 
+Обработаем массив из 12 значений в трёх горутинах.
 
 `main.go`
 ```Go
-package main
+package main  
+  
+import "fmt"  
 
-import "fmt"
+// операция для суммироваия значений
+func sumPart(arr []int, ch chan int) {  
+    var sum int  
+  
+    for _, value := range arr {  
+       sum += value  
+    }  
+  
+    ch <- sum  
+}  
+  
+var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}  
+var numOfGoroutines = 3  
+  
+func main() {  
+    sumCh := make(chan int)  
 
-func sumPart(arr []int, ch chan int) {
-	sum := 0
-	for _, num := range arr {
-		sum += num
-	}
-	ch <- sum
+	// размер каждой партиции, с которой будет работать горутина
+    partitionSize := len(arr) / numOfGoroutines  
+  
+	// создаём три горутины с задачами
+    for i := 0; i < numOfGoroutines; i++ {  
+       start := i * partitionSize  
+       end := start + partitionSize  
+       go sumPart(arr[start:end], sumCh)  
+    }  
+  
+    totalSum := 0  
+
+	// и проходимся по каналу 3 раза
+    for i := 0; i < numOfGoroutines; i++ {
+	   // за счёт операции ожидания получения значения из канала, поток будет останавливаться и дожидаться получения очередного значения
+	   // но а сам основной поток закроется за счёт того, что операция получения выполняется всего 3 раза
+       totalSum += <-sumCh  
+    }  
+  
+    fmt.Printf("Всего: %d\n", totalSum)  
 }
+```
 
-func main() {
-	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
-	numGoroutines := 3
-	ch := make(chan int, numGoroutines)
+И в результате мы получим итог и закроем выполнение основного потока. 
 
-	partSize := len(arr) / numGoroutines
+```bash
+> go run ./main.go 
 
-	for i := 0; i < numGoroutines; i++ {
-		start := i * partSize
-		end := start + partSize
-		go sumPart(arr[start:end], ch)
-	}
-
-	totalSum := 0
-	for i := 0; i < numGoroutines; i++ {
-		totalSum += <-ch
-	}
-	fmt.Println("Total sum: ", totalSum)
-}
+Всего: 78
 ```
 
 ### Обработка ошибок
