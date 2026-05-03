@@ -7051,44 +7051,76 @@ func getHttpCode(codeCh chan int) {
 
 ### Закрытие канала
 
+Для закрытия канала используется функция `close`. 
 
+Чтобы реализовать закрытие канала и дождаться выполнения всех горутин, нам понадобится связка самих Goroutine + `close` + `WaitGroup`
 
 `main.go`
 ```Go
-package main
+package main  
+  
+import (  
+    "fmt"  
+    "net/http"    
+    "sync"
+)  
+  
+func main() {  
+    code := make(chan int)  
 
-import (
-	"fmt"
-	"net/http"
-	"sync"
-)
+    var wg sync.WaitGroup  
 
-func main() {
-	code := make(chan int)
-	var wg sync.WaitGroup
-	for i := 0; i < 10; i++ {
-		wg.Add(1)
-		go func() {
-			getHttpCode(code)
-			wg.Done()
-		}()
-	}
-	go func() {
-		wg.Wait()
-		close(code)
-	}()
-	for res := range code {
-		fmt.Printf("Код: %d\n", res)
-	}
+    for i := 0; i < 10; i++ {  
+	   // добавляем в очередь каунтер+1
+       wg.Add(1)
+       // ожидаем в отдельной горутине выполнения операции
+       go func() {
+          getHttpCode(code)  
+          wg.Done()  
+       }()  
+    }  
+
+	// выносим в отдельную горутину ожидание окончания счётчика и закрытие канала
+	// делается это для того, чтобы сразу не закрывать канал и не блокировать основной поток
+	// Wait - блокирует дальнейшее выполнение потока, а значит и откладывает `close`
+    go func() {  
+       wg.Wait()  
+       close(code)  
+    }()  
+  
+	// в основном потоке делаем вывод всех данных
+    for res := range code {  
+       fmt.Printf("Код: %d\n", res)  
+    }  
+}  
+  
+func getHttpCode(codeCh chan int) {  
+    resp, err := http.Get("https://google.com")  
+  
+    if err != nil {  
+       fmt.Printf("Ошибка: %s\n", err.Error())  
+       return  
+    }  
+  
+    codeCh <- resp.StatusCode  
 }
+```
 
-func getHttpCode(codeCh chan int) {
-	resp, err := http.Get("https://google.com")
-	if err != nil {
-		fmt.Printf("Ошибка %s", err.Error())
-	}
-	codeCh <- resp.StatusCode
-}
+И теперь наше приложение выйдет, так как канал закроется
+
+```bash
+> go run ./main.go 
+
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
+Код: 200
 ```
 
 #### Сумма Slice
