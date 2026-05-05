@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "cs/GIT/Git.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -32,13 +32,37 @@
             }
           },
           {
+            "id": "09e4fea20fbf8824",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/javascript/JavaScript.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "JavaScript"
+            }
+          },
+          {
             "id": "ca7634b6b2b5223b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "frontend/react/Практический JS.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -62,7 +86,7 @@
               "type": "markdown",
               "state": {
                 "file": "architecture/System Design/System Design.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -104,13 +128,61 @@
             }
           },
           {
+            "id": "636e1aa0b8b9e649",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/Алгоритмы и Структуры даных.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Алгоритмы и Структуры даных"
+            }
+          },
+          {
+            "id": "cb186324d5c26638",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/NASA coding standarts.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "NASA coding standarts"
+            }
+          },
+          {
             "id": "f3d07fe4630ab862",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "cs/principles.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -134,7 +206,7 @@
               "type": "markdown",
               "state": {
                 "file": "backend/go/Selfgo.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -150,8 +222,33 @@
               "icon": "lucide-file",
               "title": "Selfgo"
             }
+          },
+          {
+            "id": "e6acd44d64f46597",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "edge/TypeScript/TypeScript.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "TypeScript"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -380,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/GIT/Git.md",
+                "file": "cs/programming.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Git"
+              "title": "Outline of programming"
             }
           }
         ],
@@ -419,20 +516,26 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "3627a9f6c69f68f1",
+  "active": "d314e4407d84f2f7",
   "lastOpenFiles": [
-    "frontend/javascript/JavaScript.md",
-    "5. Удаление.md",
     "cs/GIT/Git.md",
+    "frontend/javascript/JavaScript.md",
+    "frontend/javascript/_lessons/14 – Инструкции.md",
+    "frontend/javascript/_lessons/13 - Обработка ошибок.md",
     "frontend/react/Практический JS.md",
+    "architecture/System Design/System Design.md",
+    "cs/programming.md",
+    "cs/Алгоритмы и Структуры даных.md",
+    "cs/NASA coding standarts.md",
+    "cs/principles.md",
+    "backend/go/Selfgo.md",
+    "edge/TypeScript/TypeScript.md",
+    "cs/Functional programming.md",
+    "5. Удаление.md",
     "frontend/react/React + Redux.md",
     "frontend/javascript/JS.md",
     "frontend/javascript/_lessons/05 - Мутация объектов.md",
     "Excalidraw/friend_line_vk.excalidraw.md",
-    "architecture/System Design/System Design.md",
-    "cs/programming.md",
-    "cs/principles.md",
-    "backend/go/Selfgo.md",
     "_png/Pasted image 20260502185836.png",
     "_png/Pasted image 20260502185744.png",
     "_png/Pasted image 20260502185707.png",
@@ -454,12 +557,6 @@
     "Tags/#git #github #cs +#commitconvetionals +#gitflow",
     "Tags/#git #github #cs #commitconvetionals +#gitflow",
     "cs/GIT/Соглашение о коммитах 1.0.0.md",
-    "cs/GIT/GitFlow.md",
-    "cs/GIT/Github Actions.md",
-    "cs/GIT/_lessons/7. Удалённый репозиторий.md",
-    "cs/GIT/_lessons/1. Введение.md",
-    "cs/GIT/_lessons/3. Начало работы с Git.md",
-    "cs/GIT/_lessons/4. Ветки и изменения.md",
     "cs/principles",
     "Excalidraw",
     "Tags/#security",

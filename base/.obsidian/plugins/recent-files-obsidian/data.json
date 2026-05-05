@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "programming",
+      "path": "cs/programming.md"
+    },
+    {
       "basename": "Git",
       "path": "cs/GIT/Git.md"
     },
@@ -11,6 +15,34 @@
     {
       "basename": "Практический JS",
       "path": "frontend/react/Практический JS.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "NASA coding standarts",
+      "path": "cs/NASA coding standarts.md"
+    },
+    {
+      "basename": "principles",
+      "path": "cs/principles.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "TypeScript",
+      "path": "edge/TypeScript/TypeScript.md"
+    },
+    {
+      "basename": "Functional programming",
+      "path": "cs/Functional programming.md"
     },
     {
       "basename": "React + Redux",
@@ -27,22 +59,6 @@
     {
       "basename": "friend_line_vk.excalidraw",
       "path": "Excalidraw/friend_line_vk.excalidraw.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "programming",
-      "path": "cs/programming.md"
-    },
-    {
-      "basename": "principles",
-      "path": "cs/principles.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "SOLID принципы",
@@ -83,10 +99,6 @@
     {
       "basename": "C",
       "path": "cs/C.md"
-    },
-    {
-      "basename": "Functional programming",
-      "path": "cs/Functional programming.md"
     },
     {
       "basename": "math",
@@ -187,14 +199,6 @@
     {
       "basename": "Ruby",
       "path": "backend/Ruby.md"
-    },
-    {
-      "basename": "BFF",
-      "path": "backend/REST/BFF.md"
-    },
-    {
-      "basename": "REST",
-      "path": "backend/REST/REST.md"
     }
   ],
   "omittedPaths": [],
