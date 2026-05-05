@@ -56,13 +56,61 @@
             }
           },
           {
+            "id": "d314e4407d84f2f7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/programming.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "programming"
+            }
+          },
+          {
+            "id": "f3d07fe4630ab862",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/principles.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "principles"
+            }
+          },
+          {
             "id": "ca7634b6b2b5223b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "frontend/react/Практический JS.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -101,30 +149,6 @@
               },
               "icon": "lucide-file",
               "title": "System Design"
-            }
-          },
-          {
-            "id": "d314e4407d84f2f7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/programming.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "programming"
             }
           },
           {
@@ -176,30 +200,6 @@
             }
           },
           {
-            "id": "f3d07fe4630ab862",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/principles.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "principles"
-            }
-          },
-          {
             "id": "b1d273de94651ba6",
             "type": "leaf",
             "state": {
@@ -248,7 +248,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -477,13 +477,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/programming.md",
+                "file": "cs/principles.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of programming"
+              "title": "Outline of principles"
             }
           }
         ],
@@ -516,18 +516,18 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "d314e4407d84f2f7",
+  "active": "f3d07fe4630ab862",
   "lastOpenFiles": [
+    "cs/programming.md",
+    "cs/principles.md",
+    "architecture/System Design/System Design.md",
+    "frontend/react/Практический JS.md",
     "cs/GIT/Git.md",
     "frontend/javascript/JavaScript.md",
     "frontend/javascript/_lessons/14 – Инструкции.md",
     "frontend/javascript/_lessons/13 - Обработка ошибок.md",
-    "frontend/react/Практический JS.md",
-    "architecture/System Design/System Design.md",
-    "cs/programming.md",
     "cs/Алгоритмы и Структуры даных.md",
     "cs/NASA coding standarts.md",
-    "cs/principles.md",
     "backend/go/Selfgo.md",
     "edge/TypeScript/TypeScript.md",
     "cs/Functional programming.md",

@@ -9,11 +9,18 @@ tags:
 
 # Основы JS
 
-## 001 Что такое JS и как его подключить к странице
+## Что такое JS и как его подключить к странице
 
-Подключается скрипт к сайту таким образом. Больше никаких тегов внутри прописывать не надо. Если присутствует тег «type», то его нужно будет убрать. Скрипт мы помещаем в самый конец, так как он работает только с существующей вёрсткой на сайте и так же может долго загружаться, что застопорит загрузку сайта
+Подключение скрипта происходит с помощью тега `script`, в который мы кладём путь до файла с `.js`
 
-![](../../_png/53ffe82b8bd765f5a8c6cd074fbac72b.png)
+```html
+<body>
+	<h1>Hello, world!</h1>
+	<script src="./src/js/index.js"></script>
+</body>
+```
+
+Подключать стоит файл в самом низу вёрстки страницы, чтобы скрипт не стоппорил загрузку страницы и работал с готовым дом-деревом
 
 ## 003 Переменные и строгий режим
 
@@ -18882,7 +18889,6 @@ export const { useGetHeroesQuery, useCreateHeroMutation } = apiSlice;
 ![](../../_png/8a45a2d40886061b454479142418d1d5.png)
 
 `api > apiSlice.js`
-
 ```JS
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -19007,41 +19013,3 @@ export default HeroesList;
 >
 > - RTK Query предлагает нам не пользоваться каким-либо единственным хранилищем состояния, а пользоваться активным взаимодействием с сервером для актуализации данных
 > - В браузере же данные хранятся только в кешированном формате (то есть тех данных, что хранится просто в нашем стейте просто нет - они в памяти браузера)
-
-# Ссылки
-
-002 -Github
-https://github.com/AlariCode/top-app-demo
-
-002 -Figma
-https://www.figma.com/file/eHIyKZXUUtMf1BQiuv6tTA/%D0%9A%D1%83%D1%80%D1%81-2-NextJS?node-id=0%3A1
-
-002 -Telegram
-https://t.me/purple_code
-
-002 - Telegram
-https://t.me/purple_code_channel
-
-004 VSCode
-https://code.visualstudio.com
-
-004 Insomnia
-https://insomnia.rest/download
-
-004 NodeJS
-https://nodejs.org/en/
-
-004 NVM
-https://github.com/nvm-sh/nvm
-
-007 TypeScript-Deep-Dive
-https://basarat.gitbook.io/typescript/
-
-029 -
-https://www.figma.com/file/eHIyKZXUUtMf1BQiuv6tTA/%D0%9A%D1%83%D1%80%D1%81-2-NextJS?node-id=1%3A2
-
-114 AI-ARIA-Authoring-Practices
-https://www.w3.org/TR/wai-aria-practices-1.1/
-
-118 MDN-Web-Docs-ARIA
-https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques

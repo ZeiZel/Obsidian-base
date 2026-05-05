@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "principles",
+      "path": "cs/principles.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/react/Практический JS.md"
+    },
+    {
       "basename": "programming",
       "path": "cs/programming.md"
     },
@@ -13,10 +21,6 @@
       "path": "frontend/javascript/JavaScript.md"
     },
     {
-      "basename": "Практический JS",
-      "path": "frontend/react/Практический JS.md"
-    },
-    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
@@ -27,10 +31,6 @@
     {
       "basename": "NASA coding standarts",
       "path": "cs/NASA coding standarts.md"
-    },
-    {
-      "basename": "principles",
-      "path": "cs/principles.md"
     },
     {
       "basename": "Selfgo",
