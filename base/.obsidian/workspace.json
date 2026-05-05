@@ -8,6 +8,54 @@
         "type": "tabs",
         "children": [
           {
+            "id": "3627a9f6c69f68f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cs/GIT/Git.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Git"
+            }
+          },
+          {
+            "id": "ca7634b6b2b5223b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frontend/react/Практический JS.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Практический JS"
+            }
+          },
+          {
             "id": "94e736312e022a2f",
             "type": "leaf",
             "state": {
@@ -29,42 +77,6 @@
               },
               "icon": "lucide-file",
               "title": "System Design"
-            }
-          },
-          {
-            "id": "6624650590569b4f",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/friend_line_vk.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "friend_line_vk.excalidraw"
-            }
-          },
-          {
-            "id": "fae567c1b9242142",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/GIT/Git.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Git"
             }
           },
           {
@@ -139,8 +151,7 @@
               "title": "Selfgo"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -369,13 +380,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "cs/GIT/Git.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline of Git"
             }
           }
         ],
@@ -408,8 +419,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "b1d273de94651ba6",
+  "active": "3627a9f6c69f68f1",
   "lastOpenFiles": [
+    "frontend/javascript/JavaScript.md",
+    "5. Удаление.md",
+    "cs/GIT/Git.md",
+    "frontend/react/Практический JS.md",
+    "frontend/react/React + Redux.md",
+    "frontend/javascript/JS.md",
+    "frontend/javascript/_lessons/05 - Мутация объектов.md",
+    "Excalidraw/friend_line_vk.excalidraw.md",
+    "architecture/System Design/System Design.md",
+    "cs/programming.md",
+    "cs/principles.md",
+    "backend/go/Selfgo.md",
     "_png/Pasted image 20260502185836.png",
     "_png/Pasted image 20260502185744.png",
     "_png/Pasted image 20260502185707.png",
@@ -420,13 +443,6 @@
     "_png/Pasted image 20260502173538.png",
     "_png/Pasted image 20260502173502.png",
     "_png/Pasted image 20260502172347.png",
-    "_png/Pasted image 20260502172135.png",
-    "cs/programming.md",
-    "backend/go/Selfgo.md",
-    "Excalidraw/friend_line_vk.excalidraw.md",
-    "architecture/System Design/System Design.md",
-    "cs/GIT/Git.md",
-    "cs/principles.md",
     "cs/principles/SOLID принципы.md",
     "cs/GIT/GIT.md",
     "_lessons/1. Введение.md",
@@ -444,12 +460,7 @@
     "cs/GIT/_lessons/1. Введение.md",
     "cs/GIT/_lessons/3. Начало работы с Git.md",
     "cs/GIT/_lessons/4. Ветки и изменения.md",
-    "cs/GIT/_lessons/5. Удаление.md",
-    "cs/GIT/_lessons/6. Продвинутая работа.md",
     "cs/principles",
-    "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md",
-    "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md",
-    "cs/The Bezos Mandath.md",
     "Excalidraw",
     "Tags/#security",
     "Tags/#performance",

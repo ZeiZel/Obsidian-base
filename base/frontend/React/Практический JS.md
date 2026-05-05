@@ -7,7 +7,6 @@ tags:
 
 #JavaScript #React #FrontEnd #Redux
 
-
 # Основы JS
 
 ## 001 Что такое JS и как его подключить к странице

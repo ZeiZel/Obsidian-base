@@ -1,12 +1,28 @@
 {
   "recentFiles": [
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "Git",
+      "path": "cs/GIT/Git.md"
     },
     {
-      "basename": "programming",
-      "path": "cs/programming.md"
+      "basename": "JavaScript",
+      "path": "frontend/javascript/JavaScript.md"
+    },
+    {
+      "basename": "Практический JS",
+      "path": "frontend/react/Практический JS.md"
+    },
+    {
+      "basename": "React + Redux",
+      "path": "frontend/react/React + Redux.md"
+    },
+    {
+      "basename": "JS",
+      "path": "frontend/javascript/JS.md"
+    },
+    {
+      "basename": "05 - Мутация объектов",
+      "path": "frontend/javascript/_lessons/05 - Мутация объектов.md"
     },
     {
       "basename": "friend_line_vk.excalidraw",
@@ -17,12 +33,16 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "Git",
-      "path": "cs/GIT/Git.md"
+      "basename": "programming",
+      "path": "cs/programming.md"
     },
     {
       "basename": "principles",
       "path": "cs/principles.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "SOLID принципы",
@@ -175,10 +195,6 @@
     {
       "basename": "REST",
       "path": "backend/REST/REST.md"
-    },
-    {
-      "basename": "PHP",
-      "path": "backend/PHP/PHP.md"
     }
   ],
   "omittedPaths": [],
