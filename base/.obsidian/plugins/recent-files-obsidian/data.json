@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "friend_line_vk.excalidraw",
+      "path": "Excalidraw/friend_line_vk.excalidraw.md"
+    },
+    {
+      "basename": "system-design",
+      "path": "interview/system-design.md"
+    },
+    {
       "basename": "principles",
       "path": "cs/principles.md"
     },
@@ -19,10 +31,6 @@
     {
       "basename": "JavaScript",
       "path": "frontend/javascript/JavaScript.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
@@ -55,10 +63,6 @@
     {
       "basename": "05 - Мутация объектов",
       "path": "frontend/javascript/_lessons/05 - Мутация объектов.md"
-    },
-    {
-      "basename": "friend_line_vk.excalidraw",
-      "path": "Excalidraw/friend_line_vk.excalidraw.md"
     },
     {
       "basename": "SOLID принципы",
@@ -195,10 +199,6 @@
     {
       "basename": "serverless",
       "path": "backend/serverless.md"
-    },
-    {
-      "basename": "Ruby",
-      "path": "backend/Ruby.md"
     }
   ],
   "omittedPaths": [],

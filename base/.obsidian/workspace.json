@@ -86,7 +86,7 @@
               "type": "markdown",
               "state": {
                 "file": "architecture/System Design/System Design.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -495,7 +495,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 366.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -519,10 +520,12 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "94e736312e022a2f",
   "lastOpenFiles": [
-    "Excalidraw/friend_line_vk.excalidraw.md",
+    "backend/Microservices/Микросервисы.md",
     "architecture/System Design/System Design.md",
+    "Excalidraw/friend_line_vk.excalidraw.md",
+    "interview/system-design.md",
     "agile/command.md",
     "cs/GIT/Git.md",
     "cs/programming.md",
@@ -549,8 +552,6 @@
     "backend/NodeJS/_lessons/07 Node Package Manager.md",
     "backend/NodeJS/_lessons/06 Движок V8.md",
     "backend/NodeJS/_lessons/05 Многопоточность.md",
-    "backend/NodeJS/_lessons/04 Как работает Node.js_.md",
-    "backend/NodeJS/_lessons/03 Начало работы с Node.js.md",
     "_png/Pasted image 20260502185836.png",
     "_png/Pasted image 20260502185744.png",
     "_png/Pasted image 20260502185707.png",
