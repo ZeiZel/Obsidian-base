@@ -1,0 +1,23 @@
+{
+  "active_plan": "/Users/zeizel/projects/Obsidian-base/.sisyphus/plans/system-design-interview-note.md",
+  "started_at": "2026-05-09T06:59:18.940Z",
+  "session_ids": [
+    "ses_1f4ad227effe0E5l6CiReb7VNt"
+  ],
+  "plan_name": "system-design-interview-note",
+  "worktree_path": null,
+  "session_origins": {
+    "ses_1f4ad227effe0E5l6CiReb7VNt": "direct"
+  },
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "**Research: структура DDIA/Alex Xu + сбор инфраструктурных спецификаций**",
+      "session_id": "ses_1f452596effeWwAUZVkYy85IvD",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-05-09T07:42:05.348Z"
+    }
+  }
+}
