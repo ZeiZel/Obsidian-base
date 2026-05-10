@@ -491,7 +491,8 @@
               "title": "Outline of System Design"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",

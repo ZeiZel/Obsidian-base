@@ -1,0 +1,58 @@
+{
+  "active_plan": "/Users/zeizel/projects/Obsidian-base/.sisyphus/plans/system-design-gaps.md",
+  "started_at": "2026-05-09T15:34:27.204Z",
+  "session_ids": [
+    "ses_1f31108ffffeP2Yh3EOG5WqzXD"
+  ],
+  "session_origins": {
+    "ses_1f31108ffffeP2Yh3EOG5WqzXD": "direct"
+  },
+  "plan_name": "system-design-gaps",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "WAF (Web Application Firewall)",
+      "session_id": "ses_1f29c5f3affeWhplUc0YBtAaYi",
+      "agent": "Sisyphus-Junior",
+      "category": "writing",
+      "updated_at": "2026-05-09T15:39:04.270Z"
+    },
+    "todo:2": {
+      "task_key": "todo:2",
+      "task_label": "2",
+      "task_title": "Таблица инструментов проксирования",
+      "session_id": "ses_1f29b072effeSXoOaPLrtIL3ne",
+      "agent": "Sisyphus-Junior",
+      "category": "writing",
+      "updated_at": "2026-05-09T15:40:56.410Z"
+    },
+    "todo:5": {
+      "task_key": "todo:5",
+      "task_label": "5",
+      "task_title": "Расширение Service Discovery",
+      "session_id": "ses_1f298ce92ffe2Jo8N4xbC0RmPk",
+      "agent": "Sisyphus-Junior",
+      "category": "writing",
+      "updated_at": "2026-05-09T15:43:31.067Z"
+    },
+    "todo:9": {
+      "task_key": "todo:9",
+      "task_label": "9",
+      "task_title": "Chaos Engineering",
+      "session_id": "ses_1f29625a4ffeHMPMMfLk3VsI6a",
+      "agent": "Sisyphus-Junior",
+      "category": "writing",
+      "updated_at": "2026-05-09T15:48:08.261Z"
+    },
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "**Plan Compliance Audit** — `oracle`",
+      "session_id": "ses_1f29184b1ffeyRHN3svd3eA359",
+      "agent": "oracle",
+      "updated_at": "2026-05-09T15:50:24.302Z"
+    }
+  }
+}
