@@ -115,7 +115,7 @@
   "library2": {
     "type": "excalidrawlib",
     "version": 2,
-    "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.22.1",
+    "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.22.3",
     "libraryItems": []
   },
   "imageElementNotice": true,
@@ -128,6 +128,7 @@
   "scriptEngineSettings": {},
   "previousRelease": "2.22.1",
   "showReleaseNotes": true,
+  "excalidrawMasteryPromoCollapsed": false,
   "compareManifestToPluginVersion": true,
   "showNewVersionNotification": true,
   "latexBoilerplate": "\\color{blue}",

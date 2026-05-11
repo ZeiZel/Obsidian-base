@@ -1,12 +1,36 @@
 {
   "recentFiles": [
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "yandex_taxi.excalidraw",
+      "path": "Excalidraw/yandex_taxi.excalidraw.md"
     },
     {
       "basename": "friend_line_vk.excalidraw",
       "path": "Excalidraw/friend_line_vk.excalidraw.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "leetcode.excalidraw",
+      "path": "Excalidraw/leetcode.excalidraw.md"
+    },
+    {
+      "basename": "google_drive.excalidraw",
+      "path": "Excalidraw/google_drive.excalidraw.md"
+    },
+    {
+      "basename": "booking.excalidraw",
+      "path": "Excalidraw/booking.excalidraw.md"
+    },
+    {
+      "basename": "whatsapp.excalidraw",
+      "path": "Excalidraw/whatsapp.excalidraw.md"
     },
     {
       "basename": "system-design",
@@ -39,10 +63,6 @@
     {
       "basename": "NASA coding standarts",
       "path": "cs/NASA coding standarts.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "TypeScript",
@@ -179,26 +199,6 @@
     {
       "basename": "Web Workers",
       "path": "frontend/service-workers/Web Workers.md"
-    },
-    {
-      "basename": "Service Worker",
-      "path": "frontend/service-workers/Service Worker.md"
-    },
-    {
-      "basename": "database",
-      "path": "database/database.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "command",
-      "path": "agile/command.md"
-    },
-    {
-      "basename": "serverless",
-      "path": "backend/serverless.md"
     }
   ],
   "omittedPaths": [],

@@ -8,85 +8,37 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3627a9f6c69f68f1",
+            "id": "92b6ebae396bf953",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "excalidraw",
               "state": {
-                "file": "cs/GIT/Git.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "file": "Excalidraw/friend_line_vk.excalidraw.md"
               },
-              "icon": "lucide-file",
-              "title": "Git"
+              "icon": "excalidraw-icon",
+              "title": "friend_line_vk.excalidraw"
             }
           },
           {
-            "id": "d314e4407d84f2f7",
+            "id": "36d1c94c2ccf2935",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "excalidraw",
               "state": {
-                "file": "cs/programming.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "file": "Excalidraw/yandex_taxi.excalidraw.md"
               },
-              "icon": "lucide-file",
-              "title": "programming"
+              "icon": "excalidraw-icon",
+              "title": "yandex_taxi.excalidraw"
             }
           },
           {
-            "id": "f3d07fe4630ab862",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/principles.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "principles"
-            }
-          },
-          {
-            "id": "94e736312e022a2f",
+            "id": "b80c5f4825b75ec3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "architecture/System Design/System Design.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -102,45 +54,9 @@
               "icon": "lucide-file",
               "title": "System Design"
             }
-          },
-          {
-            "id": "92b6ebae396bf953",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/friend_line_vk.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "friend_line_vk.excalidraw"
-            }
-          },
-          {
-            "id": "b1d273de94651ba6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/go/Selfgo.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Selfgo"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       },
       {
         "id": "8817216554fe2a8e",
@@ -482,13 +398,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
+                "file": "Excalidraw/yandex_taxi.excalidraw.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of System Design"
+              "title": "Outline of yandex_taxi.excalidraw"
             }
           }
         ],
@@ -521,18 +437,26 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "94e736312e022a2f",
+  "active": "36d1c94c2ccf2935",
   "lastOpenFiles": [
-    "backend/Microservices/Микросервисы.md",
-    "architecture/System Design/System Design.md",
+    "_png/Pasted Image 20260511201133_019.png",
+    "_png/Pasted Image 20260511201132_982.png",
     "Excalidraw/friend_line_vk.excalidraw.md",
+    "Excalidraw/yandex_taxi.excalidraw.md",
+    "architecture/System Design/System Design.md",
+    "Excalidraw/booking.excalidraw.md",
+    "Excalidraw/google_drive.excalidraw.md",
+    "Excalidraw/leetcode.excalidraw.md",
+    "backend/go/Selfgo.md",
+    "Excalidraw/whatsapp.excalidraw.md",
+    "whatsapp.excalidraw.md",
+    "backend/Microservices/Микросервисы.md",
     "interview/system-design.md",
     "agile/command.md",
     "cs/GIT/Git.md",
     "cs/programming.md",
     "frontend/javascript/JavaScript.md",
     "cs/principles.md",
-    "backend/go/Selfgo.md",
     "cs/Алгоритмы и Структуры даных.md",
     "cs/computer science.md",
     "interview/react.md",
@@ -546,13 +470,6 @@
     "interview",
     "backend/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
     "backend/NodeJS/_lessons/12 Dependency Injection.md",
-    "backend/NodeJS/_lessons/11 Первый шаг к архитектуре.md",
-    "backend/NodeJS/_lessons/09 Приложение 2 - API с ExpressJS.md",
-    "backend/NodeJS/_lessons/08 Приложение 1 - CLI прогноз погоды.md",
-    "backend/NodeJS/_lessons/13 Отладка и watch.md",
-    "backend/NodeJS/_lessons/07 Node Package Manager.md",
-    "backend/NodeJS/_lessons/06 Движок V8.md",
-    "backend/NodeJS/_lessons/05 Многопоточность.md",
     "_png/Pasted image 20260502185836.png",
     "_png/Pasted image 20260502185744.png",
     "_png/Pasted image 20260502185707.png",
@@ -562,7 +479,6 @@
     "_png/Pasted image 20260502174000.png",
     "_png/Pasted image 20260502173538.png",
     "_png/Pasted image 20260502173502.png",
-    "_png/Pasted image 20260502172347.png",
     "_lessons",
     "Tags/#git #github #cs +#commitconvetionals +#gitflow",
     "Tags/#git #github #cs #commitconvetionals +#gitflow",
