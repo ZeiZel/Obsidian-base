@@ -1,20 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "yandex_taxi.excalidraw",
-      "path": "Excalidraw/yandex_taxi.excalidraw.md"
-    },
-    {
-      "basename": "friend_line_vk.excalidraw",
-      "path": "Excalidraw/friend_line_vk.excalidraw.md"
-    },
-    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "Безопасность",
+      "path": "architecture/System Design/Безопасность.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
     },
     {
       "basename": "leetcode.excalidraw",
@@ -29,8 +25,20 @@
       "path": "Excalidraw/booking.excalidraw.md"
     },
     {
+      "basename": "yandex_taxi.excalidraw",
+      "path": "Excalidraw/yandex_taxi.excalidraw.md"
+    },
+    {
       "basename": "whatsapp.excalidraw",
       "path": "Excalidraw/whatsapp.excalidraw.md"
+    },
+    {
+      "basename": "friend_line_vk.excalidraw",
+      "path": "Excalidraw/friend_line_vk.excalidraw.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "system-design",
@@ -191,14 +199,6 @@
     {
       "basename": "conflict-resolution",
       "path": "soft/conflict-resolution.md"
-    },
-    {
-      "basename": "FSD",
-      "path": "architecture/Architecture/FSD/FSD.md"
-    },
-    {
-      "basename": "Web Workers",
-      "path": "frontend/service-workers/Web Workers.md"
     }
   ],
   "omittedPaths": [],

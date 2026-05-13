@@ -20,6 +20,18 @@
             }
           },
           {
+            "id": "acccb05f756158fe",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/whatsapp.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "whatsapp.excalidraw"
+            }
+          },
+          {
             "id": "36d1c94c2ccf2935",
             "type": "leaf",
             "state": {
@@ -29,6 +41,66 @@
               },
               "icon": "excalidraw-icon",
               "title": "yandex_taxi.excalidraw"
+            }
+          },
+          {
+            "id": "216b9fdbe6a7b968",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/booking.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "booking.excalidraw"
+            }
+          },
+          {
+            "id": "c3f4730784cc64cd",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/google_drive.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "google_drive.excalidraw"
+            }
+          },
+          {
+            "id": "b1dc3376c1527c12",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/leetcode.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "leetcode.excalidraw"
+            }
+          },
+          {
+            "id": "66f4c4b8d7f2ccd0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Microservices/Микросервисы.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Микросервисы"
             }
           },
           {
@@ -54,9 +126,33 @@
               "icon": "lucide-file",
               "title": "System Design"
             }
+          },
+          {
+            "id": "b48cb76d20b8736f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architecture/System Design/Безопасность.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Безопасность"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 7
       },
       {
         "id": "8817216554fe2a8e",
@@ -375,7 +471,7 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -398,13 +494,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/yandex_taxi.excalidraw.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of yandex_taxi.excalidraw"
+              "title": "Outline of System Design"
             }
           }
         ],
@@ -412,8 +508,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5,
-    "collapsed": true
+    "width": 366.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -437,20 +532,31 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "36d1c94c2ccf2935",
+  "active": "b80c5f4825b75ec3",
   "lastOpenFiles": [
-    "_png/Pasted Image 20260511201133_019.png",
-    "_png/Pasted Image 20260511201132_982.png",
-    "Excalidraw/friend_line_vk.excalidraw.md",
-    "Excalidraw/yandex_taxi.excalidraw.md",
+    "_png/Pasted image 20260513151153.png",
+    "_png/Pasted image 20260513151107.png",
+    "_png/Pasted image 20260513143914.png",
+    "_png/Pasted image 20260513143824.png",
+    "_png/Pasted image 20260513143759.png",
+    "_png/Pasted image 20260513143744.png",
+    "_png/Pasted image 20260513143706.png",
+    "_png/Pasted image 20260513143640.png",
+    "_png/Pasted image 20260513143606.png",
+    "_png/Pasted image 20260513143500.png",
+    "_png/Pasted image 20260513143445.png",
+    "architecture/System Design/Безопасность.md",
     "architecture/System Design/System Design.md",
-    "Excalidraw/booking.excalidraw.md",
-    "Excalidraw/google_drive.excalidraw.md",
-    "Excalidraw/leetcode.excalidraw.md",
-    "backend/go/Selfgo.md",
-    "Excalidraw/whatsapp.excalidraw.md",
-    "whatsapp.excalidraw.md",
     "backend/Microservices/Микросервисы.md",
+    "Excalidraw/leetcode.excalidraw.md",
+    "Excalidraw/google_drive.excalidraw.md",
+    "Excalidraw/booking.excalidraw.md",
+    "Excalidraw/yandex_taxi.excalidraw.md",
+    "Excalidraw/whatsapp.excalidraw.md",
+    "Excalidraw/friend_line_vk.excalidraw.md",
+    "concepts/Client-server architecture.md",
+    "backend/go/Selfgo.md",
+    "whatsapp.excalidraw.md",
     "interview/system-design.md",
     "agile/command.md",
     "cs/GIT/Git.md",
@@ -468,17 +574,6 @@
     "interview/react",
     "interview/javascript",
     "interview",
-    "backend/NodeJS/Node.js - с нуля, основы и построение архитектуры приложений.md",
-    "backend/NodeJS/_lessons/12 Dependency Injection.md",
-    "_png/Pasted image 20260502185836.png",
-    "_png/Pasted image 20260502185744.png",
-    "_png/Pasted image 20260502185707.png",
-    "_png/Pasted image 20260502185533.png",
-    "_png/Pasted image 20260502181311.png",
-    "_png/Pasted image 20260502174707.png",
-    "_png/Pasted image 20260502174000.png",
-    "_png/Pasted image 20260502173538.png",
-    "_png/Pasted image 20260502173502.png",
     "_lessons",
     "Tags/#git #github #cs +#commitconvetionals +#gitflow",
     "Tags/#git #github #cs #commitconvetionals +#gitflow",
