@@ -5,6 +5,10 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
+      "basename": "Client-server architecture",
+      "path": "concepts/Client-server architecture.md"
+    },
+    {
       "basename": "Безопасность",
       "path": "architecture/System Design/Безопасность.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "saying-no",
       "path": "soft/saying-no.md"
-    },
-    {
-      "basename": "conflict-resolution",
-      "path": "soft/conflict-resolution.md"
     }
   ],
   "omittedPaths": [],
