@@ -4,89 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "808ff3645485fda9",
+        "id": "8817216554fe2a8e",
         "type": "tabs",
         "children": [
           {
-            "id": "92b6ebae396bf953",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/friend_line_vk.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "friend_line_vk.excalidraw"
-            }
-          },
-          {
-            "id": "acccb05f756158fe",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/whatsapp.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "whatsapp.excalidraw"
-            }
-          },
-          {
-            "id": "36d1c94c2ccf2935",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/yandex_taxi.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "yandex_taxi.excalidraw"
-            }
-          },
-          {
-            "id": "216b9fdbe6a7b968",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/booking.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "booking.excalidraw"
-            }
-          },
-          {
-            "id": "c3f4730784cc64cd",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/google_drive.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "google_drive.excalidraw"
-            }
-          },
-          {
-            "id": "b1dc3376c1527c12",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/leetcode.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "leetcode.excalidraw"
-            }
-          },
-          {
-            "id": "66f4c4b8d7f2ccd0",
+            "id": "67697483e6c0f6c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/Microservices/Микросервисы.md",
-                "mode": "preview",
+                "file": "backend/go/Selfgo.md",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -100,11 +28,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Микросервисы"
+              "title": "Selfgo"
             }
           },
           {
-            "id": "b80c5f4825b75ec3",
+            "id": "81064822a7c5263b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -128,110 +56,7 @@
             }
           }
         ],
-        "currentTab": 7
-      },
-      {
-        "id": "8817216554fe2a8e",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "81064822a7c5263b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "interview/web.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "web"
-            }
-          },
-          {
-            "id": "24617a515cf82cab",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "interview/react.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "react"
-            }
-          },
-          {
-            "id": "8ff79b5a8075f605",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "interview/javascript.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "javascript"
-            }
-          },
-          {
-            "id": "faaa3691a5485094",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Алгоритмы и Структуры даных"
-            }
-          }
-        ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -276,7 +101,7 @@
               "type": "recent-files",
               "state": {},
               "icon": "clock",
-              "title": "Recent Files"
+              "title": "Recent files"
             }
           },
           {
@@ -460,8 +285,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "icon": "lucide-ghost",
+              "title": "git-view"
             }
           },
           {
@@ -508,44 +333,44 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "b80c5f4825b75ec3",
+  "active": "81064822a7c5263b",
   "lastOpenFiles": [
-    "_png/Pasted image 20260514102359.png",
-    "_png/Pasted image 20260514102347.png",
-    "_png/Pasted image 20260514102300.png",
-    "_png/Pasted image 20260514102241.png",
-    "_png/Pasted image 20260514101659.png",
-    "_png/Pasted image 20260514100906.png",
-    "_png/Pasted image 20260514100843.png",
-    "_png/Pasted image 20260514100831.png",
-    "_png/Pasted image 20260514100759.png",
-    "_png/Pasted image 20260514093036.png",
-    "_png/Pasted image 20260514092949.png",
+    "_png/Pasted image 20260521202501.png",
+    "_png/Pasted image 20260521202043.png",
+    "_png/Pasted image 20260521202025.png",
+    "_png/Pasted image 20260521202012.png",
+    "_png/Pasted image 20260521201956.png",
+    "_png/Pasted image 20260521201049.png",
+    "_png/Pasted image 20260521201030.png",
+    "_png/Pasted image 20260521201013.png",
+    "_png/Pasted image 20260521200954.png",
+    "_png/Pasted image 20260521200939.png",
+    "_png/Pasted image 20260521200534.png",
     "architecture/System Design/System Design.md",
-    "concepts/Client-server architecture.md",
-    "architecture/System Design/Безопасность.md",
-    "backend/Microservices/Микросервисы.md",
-    "Excalidraw/leetcode.excalidraw.md",
+    "backend/go/Selfgo.md",
+    "interview/web.md",
+    "agile/agile.md",
+    "agile/Teamlead.md",
+    "agile/xp.md",
+    "agile/cynefin.md",
+    "agile/models.md",
+    "agile/empiricism.md",
+    "agile/scaling.md",
+    "agile/scrum.md",
+    "agile/practices.md",
+    "agile/manifest.md",
+    "agile/frameworks.md",
+    "agile/command.md",
+    "soft/soft.md",
+    "soft/stress-sapolsky.md",
+    "soft/leadership.md",
+    "soft/goal-setting.md",
+    "soft/charisma.md",
+    "soft/anxiety-management.md",
     "Excalidraw/google_drive.excalidraw.md",
+    "Excalidraw/leetcode.excalidraw.md",
     "Excalidraw/booking.excalidraw.md",
     "Excalidraw/yandex_taxi.excalidraw.md",
-    "Excalidraw/whatsapp.excalidraw.md",
-    "Excalidraw/friend_line_vk.excalidraw.md",
-    "backend/go/Selfgo.md",
-    "whatsapp.excalidraw.md",
-    "interview/system-design.md",
-    "agile/command.md",
-    "cs/GIT/Git.md",
-    "cs/programming.md",
-    "frontend/javascript/JavaScript.md",
-    "cs/principles.md",
-    "cs/Алгоритмы и Структуры даных.md",
-    "cs/computer science.md",
-    "interview/react.md",
-    "interview/javascript.md",
-    "interview/web.md",
-    "backend/NestJS/NestJS - с нуля.md",
-    "backend/go/03-networking.md",
     "interview/web",
     "interview/react",
     "interview/javascript",

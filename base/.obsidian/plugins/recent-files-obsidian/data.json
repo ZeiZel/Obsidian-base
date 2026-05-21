@@ -5,24 +5,88 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "Client-server architecture",
-      "path": "concepts/Client-server architecture.md"
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
     },
     {
-      "basename": "Безопасность",
-      "path": "architecture/System Design/Безопасность.md"
+      "basename": "web",
+      "path": "interview/web.md"
     },
     {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
-      "basename": "leetcode.excalidraw",
-      "path": "Excalidraw/leetcode.excalidraw.md"
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "cynefin",
+      "path": "agile/cynefin.md"
+    },
+    {
+      "basename": "models",
+      "path": "agile/models.md"
+    },
+    {
+      "basename": "empiricism",
+      "path": "agile/empiricism.md"
+    },
+    {
+      "basename": "scaling",
+      "path": "agile/scaling.md"
+    },
+    {
+      "basename": "scrum",
+      "path": "agile/scrum.md"
+    },
+    {
+      "basename": "practices",
+      "path": "agile/practices.md"
+    },
+    {
+      "basename": "manifest",
+      "path": "agile/manifest.md"
+    },
+    {
+      "basename": "frameworks",
+      "path": "agile/frameworks.md"
+    },
+    {
+      "basename": "command",
+      "path": "agile/command.md"
+    },
+    {
+      "basename": "soft",
+      "path": "soft/soft.md"
+    },
+    {
+      "basename": "stress-sapolsky",
+      "path": "soft/stress-sapolsky.md"
+    },
+    {
+      "basename": "leadership",
+      "path": "soft/leadership.md"
+    },
+    {
+      "basename": "goal-setting",
+      "path": "soft/goal-setting.md"
+    },
+    {
+      "basename": "charisma",
+      "path": "soft/charisma.md"
+    },
+    {
+      "basename": "anxiety-management",
+      "path": "soft/anxiety-management.md"
     },
     {
       "basename": "google_drive.excalidraw",
       "path": "Excalidraw/google_drive.excalidraw.md"
+    },
+    {
+      "basename": "leetcode.excalidraw",
+      "path": "Excalidraw/leetcode.excalidraw.md"
     },
     {
       "basename": "booking.excalidraw",
@@ -41,8 +105,16 @@
       "path": "Excalidraw/friend_line_vk.excalidraw.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "Client-server architecture",
+      "path": "concepts/Client-server architecture.md"
+    },
+    {
+      "basename": "Безопасность",
+      "path": "architecture/System Design/Безопасность.md"
     },
     {
       "basename": "system-design",
@@ -127,78 +199,6 @@
     {
       "basename": "ООП на простых примерах. Объектно-ориентированное программирование",
       "path": "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md"
-    },
-    {
-      "basename": "The Bezos Mandath",
-      "path": "cs/The Bezos Mandath.md"
-    },
-    {
-      "basename": "C",
-      "path": "cs/C.md"
-    },
-    {
-      "basename": "math",
-      "path": "cs/math.md"
-    },
-    {
-      "basename": "Задачи с Leetcode",
-      "path": "cs/Задачи с Leetcode.md"
-    },
-    {
-      "basename": "Pasted image 20260420122324",
-      "path": "_png/Pasted image 20260420122324.png"
-    },
-    {
-      "basename": "10-advanced",
-      "path": "backend/go/10-advanced.md"
-    },
-    {
-      "basename": "Temporal Go",
-      "path": "backend/go/Temporal Go.md"
-    },
-    {
-      "basename": "go",
-      "path": "backend/go/go.md"
-    },
-    {
-      "basename": "09-deploy",
-      "path": "backend/go/09-deploy.md"
-    },
-    {
-      "basename": "06-microservices",
-      "path": "backend/go/06-microservices.md"
-    },
-    {
-      "basename": "01-basics",
-      "path": "backend/go/01-basics.md"
-    },
-    {
-      "basename": "backend",
-      "path": "backend/backend.md"
-    },
-    {
-      "basename": "Лицензии",
-      "path": "cs/Лицензии.md"
-    },
-    {
-      "basename": "ДЗ",
-      "path": "architecture/System Design/ДЗ.md"
-    },
-    {
-      "basename": "career-growth",
-      "path": "soft/career-growth.md"
-    },
-    {
-      "basename": "anxiety-management",
-      "path": "soft/anxiety-management.md"
-    },
-    {
-      "basename": "speech-and-reading",
-      "path": "soft/speech-and-reading.md"
-    },
-    {
-      "basename": "saying-no",
-      "path": "soft/saying-no.md"
     }
   ],
   "omittedPaths": [],
