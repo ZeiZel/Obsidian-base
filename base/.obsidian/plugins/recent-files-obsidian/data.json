@@ -5,6 +5,14 @@
       "path": "architecture/System Design/System Design.md"
     },
     {
+      "basename": "go",
+      "path": "backend/go/go.md"
+    },
+    {
+      "basename": "06-microservices",
+      "path": "backend/go/06-microservices.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "RegExp",
       "path": "cs/RegExp.md"
-    },
-    {
-      "basename": "Немного про ООП (by ExtremeCode)",
-      "path": "cs/ООП/Великое ООП/Немного про ООП (by ExtremeCode).md"
-    },
-    {
-      "basename": "ООП на простых примерах. Объектно-ориентированное программирование",
-      "path": "cs/ООП/ООП в TypeScript/ООП на простых примерах. Объектно-ориентированное программирование.md"
     }
   ],
   "omittedPaths": [],

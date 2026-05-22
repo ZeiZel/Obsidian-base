@@ -90,8 +90,8 @@
             "state": {
               "type": "vertical-tabs",
               "state": {},
-              "icon": "vertical-tabs",
-              "title": "Vertical tabs"
+              "icon": "lucide-ghost",
+              "title": "vertical-tabs"
             }
           },
           {
@@ -131,8 +131,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -266,6 +265,16 @@
             "id": "8b29022a14345bc4",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "1c3491affaca3232",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -273,7 +282,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 10
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -336,18 +345,20 @@
   },
   "active": "81064822a7c5263b",
   "lastOpenFiles": [
-    "_png/Pasted image 20260521202501.png",
-    "_png/Pasted image 20260521202043.png",
-    "_png/Pasted image 20260521202025.png",
-    "_png/Pasted image 20260521202012.png",
-    "_png/Pasted image 20260521201956.png",
-    "_png/Pasted image 20260521201049.png",
-    "_png/Pasted image 20260521201030.png",
-    "_png/Pasted image 20260521201013.png",
-    "_png/Pasted image 20260521200954.png",
-    "_png/Pasted image 20260521200939.png",
-    "_png/Pasted image 20260521200534.png",
+    "_png/Pasted image 20260522224103.png",
+    "_png/Pasted image 20260522224038.png",
+    "_png/Pasted image 20260522223330.png",
+    "_png/Pasted image 20260522223248.png",
+    "_png/Pasted image 20260522223033.png",
+    "_png/Pasted image 20260522222914.png",
+    "_png/Pasted image 20260522222749.png",
+    "_png/Pasted image 20260522222138.png",
+    "_png/Pasted image 20260522222114.png",
+    "_png/Pasted image 20260522222035.png",
+    "_png/Pasted image 20260522221154.png",
+    "backend/go/go.md",
     "architecture/System Design/System Design.md",
+    "backend/go/06-microservices.md",
     "backend/go/Selfgo.md",
     "interview/web.md",
     "agile/agile.md",
@@ -370,8 +381,6 @@
     "soft/anxiety-management.md",
     "Excalidraw/google_drive.excalidraw.md",
     "Excalidraw/leetcode.excalidraw.md",
-    "Excalidraw/booking.excalidraw.md",
-    "Excalidraw/yandex_taxi.excalidraw.md",
     "interview/web",
     "interview/react",
     "interview/javascript",
