@@ -7,18 +7,24 @@
 
 1. Он крайне прост в чтении и понимании
    ![](../../_png/Pasted%20image%2020260411075722.png)
+   
 2. У него крайне широкая стандартная библиотека
    ![](../../_png/Pasted%20image%2020260411082143.png)
+   
 3. Он крайне производительный
    ![](../../_png/Pasted%20image%2020260411082204.png)
+   
 4. У него большая экосистема
    ![](../../_png/Pasted%20image%2020260411082231.png)
+   
 5. В итоге, после сборки, мы получаем маленький бинарник, в котором находится полный рантайм и рабочее приложение
    ![](../../_png/Pasted%20image%2020260411082247.png)
 6. Строгая статическая типизация
    ![](../../_png/Pasted%20image%2020260411082306.png)
-7. Прозрачная работа с ошибками. Является такой же переменной
+7. Прозрачная работа с ошибками. Они являются такими же переменными
+   
    ![](../../_png/Pasted%20image%2020260411082322.png)
+   
 8. Встроенные инструменты тестирования и форматирования
    ![](../../_png/Pasted%20image%2020260411082342.png)
 
@@ -151,7 +157,7 @@ var userWeight = 84.0;
 var IMT = userWeight / math.Pow(float64(userHeight), 2);
 ```
 
-
+Далее исправим наше приложение
 
 `main.go`
 ```go
@@ -177,7 +183,6 @@ func main() {
 
 25.925925925925924
 ```
-
 
 ### Варианты записи переменных
 
@@ -340,7 +345,7 @@ __ Калькулятор ИМТ __
 
 `main.go`
 ```go
-    fmt.Printf(`__ Калькулятор ИМТ __  
+	fmt.Printf(`__ Калькулятор ИМТ __  
 Введите свой рост в см: %.1f `, 12.2)
 ```
 
@@ -739,7 +744,7 @@ func main() {
 		IMT := calculateIMT(userWeight, userHeight)
 		outputResult(IMT)
 
-		isUserChoiceContinue := selectUserChice()
+		isUserChoiceContinue := selectUserChoice()
 
 		if !isUserChoiceContinue {
 			break
@@ -747,7 +752,7 @@ func main() {
 	}
 }
 
-func selectUserChice() bool {
+func selectUserChoice() bool {
 	fmt.Println("Хотите ли вы продолжить ввод? y/n")
 
 	isContinue := ""
@@ -794,8 +799,6 @@ func getUserInput() (float64, float64) {
 	return userWeight, userHeight
 }
 ```
-
-
 
 ```bash
 > go run ./main.go
@@ -989,28 +992,17 @@ func main() {
 	transactions := [3]int{1, 2}
 	banks := [4]string{"Tinkoff", "Alfa"}
 
-	fmt.Println(transactions)
-	fmt.Println(banks)
+	fmt.Println(transactions) // [1 2 0]
+	fmt.Println(banks)        // [Tinkoff Alfa  ]
 
 	// обращаемся к значению
-	fmt.Println(transactions[0])
+	fmt.Println(transactions[0]) // 1
 
 	// меняем значение
 	banks[0] = "Точка"
 
-	fmt.Println(banks)
+	fmt.Println(banks) // [Точка Alfa  ]
 }
-```
-
-И такой вывод будет:
-
-```bash
-> go run ./main.go
-
-[1 2 0]
-[Tinkoff Alfa  ]
-1
-[Точка Alfa  ]
 ```
 
 ### slice
@@ -1027,7 +1019,7 @@ func main() {
 	// базовый массив
 	transactions := [5]int{1, 2, 3, 4, 5}
 
-	fmt.Println(transactions)
+	fmt.Println(transactions) // [1 2 3 4 5]
 
 	// слайсы от базы
 	slice := transactions[1:3]
@@ -1035,21 +1027,11 @@ func main() {
 	startTo := transactions[:4]
 	all := transactions[:]
 
-	fmt.Println(slice)
-	fmt.Println(fromToEnd)
-	fmt.Println(startTo)
-	fmt.Println(all)
+	fmt.Println(slice)     // [2 3]
+	fmt.Println(fromToEnd) // [2 3 4 5]
+	fmt.Println(startTo)   // [1 2 3 4]
+	fmt.Println(all)       // [1 2 3 4 5]
 }
-```
-
-```bash
-> go run ./main.go
-
-[1 2 3 4 5]
-[2 3]
-[2 3 4 5]
-[1 2 3 4]
-[1 2 3 4 5]
 ```
 
 ### Cap и Len
@@ -1090,28 +1072,26 @@ func main() {
 
 	fmt.Println(transactions)           // [1 150 3 4 5]
 	fmt.Println(transactionsNewPartial) // [ 150 ]
-	fmt.Println("transactions", len(transactionsNewPartial), cap(transactionsNewPartial)) // 1 4
-	fmt.Println("transactionsNewPartial", len(transactionsNewPartial), cap(transactionsNewPartial)) // 1 4
+	fmt.Println(
+		"transactionsPartial", 
+		len(transactionsPartial), 
+		cap(transactionsPartial)
+	) // transactionsPartial 1 4
+	fmt.Println(
+		"transactionsNewPartial", 
+		len(transactionsNewPartial), 
+		cap(transactionsNewPartial)
+	) // transactionsNewPartial 1 4
 
 	// переприсвоим слайсу самого себя, но увиличим окно под capacity 
 	transactionsNewPartial = transactionsNewPartial[0:4]
 
-	fmt.Println("transactionsNewPartial: restored", len(transactionsNewPartial), cap(transactionsNewPartial)) // 4 4
+	fmt.Println(
+		"transactionsNewPartial: restored", 
+		len(transactionsNewPartial), 
+		cap(transactionsNewPartial)
+	) // transactionsNewPartial: restored 4 4
 }
-```
-
-```bash
-> go run ./main.go
-
-[1 2 3 4 5]
-[30 2 3 4 5]
-[1 120 3 4 5]
-[120 3 4 5]
-[1 150 3 4 5]
-[150]
-transactions 1 4
-transactionsNewPartial 1 4
-transactionsNewPartial: restored 4 4
 ```
 
 По сути: 
@@ -1140,16 +1120,9 @@ func main() {
     transactions := []int{1, 2, 3, 4, 5}  
     newTransactions := append(transactions, 4)  
   
-    fmt.Println(transactions)  
-    fmt.Println(newTransactions)  
+    fmt.Println(transactions)    // [1 2 3 4 5]
+    fmt.Println(newTransactions) // [1 2 3 4 5 4]
 }
-```
-
-```bash
-> go run ./main.go 
-
-[1 2 3 4 5]
-[1 2 3 4 5 4]
 ```
 
 Если мы хотим просто расширить наш массив со слайсом, то мы можем просто переприсвоить к старому массиву новый из `append`
@@ -1181,15 +1154,9 @@ func main() {
     temp := transactions  
     transactions = append(transactions, 4)  
   
-    fmt.Println(temp)  
-    fmt.Println(transactions)  
+    fmt.Println(temp)         // [1 2 3 4 5]
+    fmt.Println(transactions) // [1 2 3 4 5 4]
 }
-```
-
-```bash
-go run ./main.go 
-[1 2 3 4 5]
-[1 2 3 4 5 4]
 ```
 
 Так же `append` позволяет добавить сразу несколько значений
@@ -1254,7 +1221,7 @@ func scanTransaction() float64 {
 
 ### циклы по массивам
 
-
+Циклы по массивам реализуются через оператор `range`, который возвращает первым аргументом `index`, а вторым само значение `value`
 
 `main.go`
 ```Go
@@ -1279,7 +1246,7 @@ func main() {
 
 #### Рассчёт баланса
 
-
+Реализуем полностью логику рассчёта баланса в зависимости от транзакций, которые введёт пользователь
 
 `main.go`
 ```Go
@@ -1357,25 +1324,15 @@ import "fmt"
   
 func main() {  
     tr := make([]string, 0, 2)  
-    fmt.Println(len(tr), cap(tr))  
+    fmt.Println(len(tr), cap(tr)) // 0 2 # cap 2
     tr = append(tr, "1")  
-    fmt.Println(len(tr), cap(tr))  
+    fmt.Println(len(tr), cap(tr)) // 1 2
     tr = append(tr, "2")  
-    fmt.Println(len(tr), cap(tr))  
+    fmt.Println(len(tr), cap(tr)) // 2 2
     tr = append(tr, "3")  
-    fmt.Println(len(tr), cap(tr))  
-    fmt.Println(tr)  
+    fmt.Println(len(tr), cap(tr)) // 3 4 - момент X, когда cap стал 4
+    fmt.Println(tr)               // [1 2 3]
 }
-```
-
-```bash
-> go run ./main.go 
-
-0 2 # cap 2
-1 2
-2 2
-3 4 # момент X - cap 4
-[1 2 3]
 ```
 
 ### Увеличение cap
@@ -1424,6 +1381,7 @@ func nextslicecap(newLen, oldCap int) int {
 	if newcap <= 0 {
 		return newLen
 	}
+	
 	return newcap
 }
 ```
@@ -1521,7 +1479,7 @@ a 1
 
 #### Утилита закладок
 
-
+Далее реализуем утилиту для сохранения закладок. Map станет основным инструментом для хранения данных в формате ключ-значение. 
 
 `main.go`
 ```Go
@@ -1944,7 +1902,7 @@ import "fmt"
 func main() {  
     arr := [4]int{1, 2, 3, 4}  
     reverse(&arr)  
-    fmt.Println(arr)  
+    fmt.Println(arr)  // [4 3 2 1]
 }  
   
 func reverse(arr *[4]int) {  
@@ -1952,12 +1910,6 @@ func reverse(arr *[4]int) {
        (*arr)[len(arr) - 1 - index] = value  
     }  
 }
-```
-
-```bash
-> go run ./main.go 
-
-[4 3 2 1]
 ```
 
 
@@ -2039,7 +1991,7 @@ account2 := account{
 
 Удобство структур в том, что мы можем просто указать тип аргумента функции в виде этой структуры `acc account` и работать с этими данными, как с объектом. 
 
-При передаче структуры напрямую в функцию, мы создаём новую копию, а не работаем с ссылкой. 
+При передаче структуры напрямую в функцию, мы создаём новую копию, а не работаем со ссылкой. 
 
 `main.go`
 ```Go
@@ -2175,7 +2127,7 @@ func generatePassword(n int) string {
     res := make([]rune, n)  
   
     for i := range res {  
-		// rand.IntN - подставляет псевнослучайное число от 0 до переданного аргумента
+		// rand.IntN - подставляет псевдослучайное число от 0 до переданного аргумента
 		res[i] = letterRunes[rand.IntN(len(letterRunes))]  
     }  
   
@@ -2771,7 +2723,7 @@ func newAccountWithTS(login, password, urlString string) (*accountWithTS, error)
 
 Для экспорта элементов из пакета, их нужно объявлять в PascalCase (с заглавной буквы). Больше ничего для экспорта не требуется. 
 
-Не стоит открывать в мир все методы и константы. Важно соблюдать инкапсуляцию и предоставлять понятный API для взаимодействия с пакетом
+>[!warning] Не стоит открывать в мир все методы и константы. Важно соблюдать инкапсуляцию и предоставлять понятный API для взаимодействия с пакетом
 
 `account / account.go`
 ```Go
@@ -4553,7 +4505,7 @@ func sum[T int | float32 | float64 | int16 | int32](a, b T) T {
 Мы Не можем использовать интерфейсы в дженериках
 
 ```Go
-func sum[T int | float32 | float64 | error](a, b T) T { // ошибка
+func sum[T int | float32 | float64 | error | DB](a, b T) T { // ошибка
 	return 1
 }
 ```
@@ -4734,7 +4686,7 @@ Menu:
 
 Так же мы можем передавать функции, как аргумент, в другую функцию
 
-Например, нам нужно универсонализировать функцию `FindAccountsByUrl`, которую мы переименуем в `FindAccounts`. Вместо посика по URL, она будет передавать в `checker` полностью всю сущность `Account` и строку для поиска, а возвращать по интерфейсу `bool` с результатом поиска. 
+Например, нам нужно универсонализировать функцию `FindAccountsByUrl`, которую мы переименуем в `FindAccounts`. Вместо поиска по URL, она будет передавать в `checker` полностью всю сущность `Account` и строку для поиска, а возвращать по интерфейсу `bool` с результатом поиска. 
 
 `account / vault.go`
 ```Go
@@ -5613,7 +5565,7 @@ func GetMyLocation(city string) (*GeoData, error) {
 }
 ```
 
-В конце остаётся только добавть запрос города в основную функцию
+В конце остаётся только добавить запрос города в основную функцию
 
 `main.go`
 ```Go
@@ -6336,13 +6288,15 @@ go build .
 
 ### Stack frames
 
-Работа стек фрейма на простом приложении Go, которое имеет переменную `x`, которая умножается надвое и кладётся в переменную `y`, а потом выводится результат.
+Работа стек фрейма на примере простого приложения Go. 
+
+Мы имеем переменную `x`, которая умножается надвое и кладётся в переменную `y`, а потом выводится результат.
 
 Первым шагом, у нас создаётся фрейм с функцией `main`, которая присваивает в переменную `x` число 10.
 
 ![](../../_png/Pasted%20image%2020260501171537.png)
 
-Вторым шагом, мы стек поинтер уже проваливается в следующий стек, так как нам нужно выполнить операцию и получить новое значение от `x`
+Вторым шагом, стек поинтер уже проваливается в следующий стек, так как нам нужно выполнить операцию и получить новое значение от `x`
 
 ![](../../_png/Pasted%20image%2020260501171811.png)
 
@@ -6471,7 +6425,6 @@ func getAge() *int {
 
 - Ячейки сформированной памяти освобождаются неравномерно и нужно их дефрагментировать
 - При частом добавлении новых переменных, каждый раз выполняется выделение дополнительной памяти
-- 
 
 ![](../../_png/Pasted%20image%2020260502110454.png)
 

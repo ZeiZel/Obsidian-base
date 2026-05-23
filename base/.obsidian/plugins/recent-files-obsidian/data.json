@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
@@ -11,10 +15,6 @@
     {
       "basename": "06-microservices",
       "path": "backend/go/06-microservices.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "web",
