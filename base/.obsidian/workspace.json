@@ -295,8 +295,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "git-view"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           },
           {
@@ -319,7 +319,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 606.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -345,19 +345,19 @@
   },
   "active": "81064822a7c5263b",
   "lastOpenFiles": [
-    "_png/Pasted image 20260522224103.png",
-    "_png/Pasted image 20260522224038.png",
-    "_png/Pasted image 20260522223330.png",
-    "_png/Pasted image 20260522223248.png",
-    "_png/Pasted image 20260522223033.png",
-    "_png/Pasted image 20260522222914.png",
-    "_png/Pasted image 20260522222749.png",
-    "_png/Pasted image 20260522222138.png",
-    "_png/Pasted image 20260522222114.png",
-    "_png/Pasted image 20260522222035.png",
-    "_png/Pasted image 20260522221154.png",
-    "backend/go/go.md",
+    "_png/Pasted image 20260523135423.png",
+    "_png/Pasted image 20260523135236.png",
+    "_png/Pasted image 20260523135220.png",
+    "_png/Pasted image 20260523135209.png",
+    "_png/Pasted image 20260523133712.png",
+    "_png/Pasted image 20260523133633.png",
+    "_png/Pasted image 20260523133613.png",
+    "_png/Pasted image 20260523133224.png",
+    "_png/Pasted image 20260523133104.png",
+    "_png/Pasted image 20260523133049.png",
+    "_png/Pasted image 20260523133038.png",
     "architecture/System Design/System Design.md",
+    "backend/go/go.md",
     "backend/go/06-microservices.md",
     "backend/go/Selfgo.md",
     "interview/web.md",
