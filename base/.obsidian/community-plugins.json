@@ -24,5 +24,6 @@
   "dataview",
   "templater-obsidian",
   "obsidian-list-callouts",
-  "obsidian-hover-editor"
+  "obsidian-hover-editor",
+  "vertical-tabs"
 ]

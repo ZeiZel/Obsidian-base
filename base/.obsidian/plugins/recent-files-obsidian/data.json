@@ -1,6 +1,90 @@
 {
   "recentFiles": [
     {
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
+      "basename": "speech-and-reading",
+      "path": "soft/speech-and-reading.md"
+    },
+    {
+      "basename": "emotional-intelligence",
+      "path": "soft/emotional-intelligence.md"
+    },
+    {
+      "basename": "social-skills",
+      "path": "soft/social-skills.md"
+    },
+    {
+      "basename": "stress-sapolsky",
+      "path": "soft/stress-sapolsky.md"
+    },
+    {
+      "basename": "soft",
+      "path": "soft/soft.md"
+    },
+    {
+      "basename": "saying-no",
+      "path": "soft/saying-no.md"
+    },
+    {
+      "basename": "influence-and-persuasion",
+      "path": "soft/influence-and-persuasion.md"
+    },
+    {
+      "basename": "goal-setting",
+      "path": "soft/goal-setting.md"
+    },
+    {
+      "basename": "conflict-resolution",
+      "path": "soft/conflict-resolution.md"
+    },
+    {
+      "basename": "communication",
+      "path": "soft/communication.md"
+    },
+    {
+      "basename": "charisma",
+      "path": "soft/charisma.md"
+    },
+    {
+      "basename": "career-growth",
+      "path": "soft/career-growth.md"
+    },
+    {
+      "basename": "anxiety-management",
+      "path": "soft/anxiety-management.md"
+    },
+    {
+      "basename": "metrics",
+      "path": "agile/metrics.md"
+    },
+    {
+      "basename": "kanban",
+      "path": "agile/kanban.md"
+    },
+    {
+      "basename": "command",
+      "path": "agile/command.md"
+    },
+    {
+      "basename": "DISC",
+      "path": "agile/DISC.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
+      "basename": "scrum",
+      "path": "agile/scrum.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -21,14 +105,6 @@
       "path": "interview/web.md"
     },
     {
-      "basename": "agile",
-      "path": "agile/agile.md"
-    },
-    {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
       "basename": "cynefin",
       "path": "agile/cynefin.md"
     },
@@ -45,10 +121,6 @@
       "path": "agile/scaling.md"
     },
     {
-      "basename": "scrum",
-      "path": "agile/scrum.md"
-    },
-    {
       "basename": "practices",
       "path": "agile/practices.md"
     },
@@ -61,32 +133,8 @@
       "path": "agile/frameworks.md"
     },
     {
-      "basename": "command",
-      "path": "agile/command.md"
-    },
-    {
-      "basename": "soft",
-      "path": "soft/soft.md"
-    },
-    {
-      "basename": "stress-sapolsky",
-      "path": "soft/stress-sapolsky.md"
-    },
-    {
       "basename": "leadership",
       "path": "soft/leadership.md"
-    },
-    {
-      "basename": "goal-setting",
-      "path": "soft/goal-setting.md"
-    },
-    {
-      "basename": "charisma",
-      "path": "soft/charisma.md"
-    },
-    {
-      "basename": "anxiety-management",
-      "path": "soft/anxiety-management.md"
     },
     {
       "basename": "google_drive.excalidraw",
@@ -151,54 +199,6 @@
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "NASA coding standarts",
-      "path": "cs/NASA coding standarts.md"
-    },
-    {
-      "basename": "TypeScript",
-      "path": "edge/TypeScript/TypeScript.md"
-    },
-    {
-      "basename": "Functional programming",
-      "path": "cs/Functional programming.md"
-    },
-    {
-      "basename": "React + Redux",
-      "path": "frontend/react/React + Redux.md"
-    },
-    {
-      "basename": "JS",
-      "path": "frontend/javascript/JS.md"
-    },
-    {
-      "basename": "05 - Мутация объектов",
-      "path": "frontend/javascript/_lessons/05 - Мутация объектов.md"
-    },
-    {
-      "basename": "SOLID принципы",
-      "path": "cs/principles/SOLID принципы.md"
-    },
-    {
-      "basename": "1. Введение",
-      "path": "_lessons/1. Введение.md"
-    },
-    {
-      "basename": "Architecture",
-      "path": "architecture/Architecture/Architecture.md"
-    },
-    {
-      "basename": "Figma",
-      "path": "Design/Figma.md"
-    },
-    {
-      "basename": "computer science",
-      "path": "cs/computer science.md"
-    },
-    {
-      "basename": "RegExp",
-      "path": "cs/RegExp.md"
     }
   ],
   "omittedPaths": [],
