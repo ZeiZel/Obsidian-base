@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "scrum",
+      "path": "agile/scrum.md"
+    },
+    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
     },
@@ -75,14 +87,6 @@
     {
       "basename": "agile",
       "path": "agile/agile.md"
-    },
-    {
-      "basename": "scrum",
-      "path": "agile/scrum.md"
-    },
-    {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
     },
     {
       "basename": "Selfgo",
@@ -195,10 +199,6 @@
     {
       "basename": "JavaScript",
       "path": "frontend/javascript/JavaScript.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     }
   ],
   "omittedPaths": [],
