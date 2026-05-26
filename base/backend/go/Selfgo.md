@@ -7138,7 +7138,9 @@ func main() {
 
 ### Обработка ошибок
 
+Чтобы обрабатывать ошибки из нескольких горутин, мы должны реализовать отдельный канал, который будет возвращать ошибку из определённой горутины.  
 
+Например, создадим файл с ссылками. Одна из ссылок будет иметь неправильный протокол. 
 
 `url.txt`
 ```txt
@@ -7147,7 +7149,7 @@ https://purpleschool.ru
 htts://ya.ru
 ```
 
-
+Далее реализуем небольшое приложение, которое будет брать ссылки из файла и пинговать. 
 
 `main.go`
 ```Go
@@ -7163,26 +7165,34 @@ import (
 
 func ping(url string, respCh chan int, errCh chan error) {
 	resp, err := http.Get(url)
+	
 	if err != nil {
 		errCh <- err
 		return
 	}
+	
 	respCh <- resp.StatusCode
 }
 
 func main() {
 	path := flag.String("file", "url.txt", "path to URL file")
 	flag.Parse()
+	
 	file, err := os.ReadFile(*path)
+	
 	if err != nil {
 		panic(err.Error())
 	}
+	
 	urlSlice := strings.Split(string(file), "\n")
+	
 	respCh := make(chan int)
 	errCh := make(chan error)
+	
 	for _, url := range urlSlice {
 		go ping(url, respCh, errCh)
 	}
+	
 	for i := 0; i < len(urlSlice); i++ {
 		errRes := <-errCh
 		fmt.Println(errRes)
@@ -7192,34 +7202,73 @@ func main() {
 }
 ```
 
+Однако в таком цикле есть фатальная проблема - мы неминуемо попадём в deadlock, так как мы ожидаем отдельно сообщения сразу из обоих каналов. 
+
+То есть мы: 
+
+1. Сначала ожидаем сообщение из канала ошибки
+2. Потом из канала успеха
+3. Потом из канала ошибки. И второй ошибки уже нет. Мы остаёмся на этом канале и не выходим из него - то есть код не перейдёт к выполнению дальше. 
+
+В такой записи нам нужно для резолва цикла получить 6 сообщений: по одному из каждого канала на каждую итерацию.  
+
+```bash
+> go run .
+
+parse "h===ts://ya.ru": first path segment in URL cannot contain colon
+200
+fatal error: all goroutines are asleep - deadlock!
+```
+
+И нам нужна возможность собрать данные в один момент только из одного потока. Для этого нам нужен будет Select
+
 ### Select
 
+Чтобы решить проблему, которая перед нами встала, нужно воспользоваться конструкцией `select`, которая выбирает первое прилетевшее сообщение из какого либо канала и его обрабатывает. 
 
+Мы создали три горутины, поэтому у нас будет 3 ответных сообщения. Мы проходимся по списку ответов URL и на каждую итерацию мы будем брать по одному новому, первому прилетевшему сообщению из канала.  
 
 `main.go`
 ```Go
-func main() {
-	path := flag.String("file", "url.txt", "path to URL file")
-	flag.Parse()
-	file, err := os.ReadFile(*path)
-	if err != nil {
-		panic(err.Error())
-	}
-	urlSlice := strings.Split(string(file), "\n")
-	respCh := make(chan int)
-	errCh := make(chan error)
-	for _, url := range urlSlice {
-		go ping(url, respCh, errCh)
-	}
-	for range urlSlice {
-		select {
-		case err := <-errCh:
-			fmt.Println(err)
-		case res := <-respCh:
-			fmt.Println(res)
-		}
-	}
+func main() {  
+    path := flag.String("file", "url.txt", "path to URL file")  
+    flag.Parse()  
+  
+    file, err := os.ReadFile(*path)  
+  
+    if err != nil {  
+       panic(err.Error())  
+    }  
+  
+    urlSlice := strings.Split(string(file), "\n")  
+    respCh := make(chan int)  
+    errCh := make(chan error)  
+  
+    for _, url := range urlSlice {  
+       go ping(url, respCh, errCh)  
+    }  
+  
+	// коротка запись проходки по массиву, которая автоматически берёт длину
+    for range urlSlice {  
+	   // опеределяем switch на одну из операций
+       select {  
+       case err := <-errCh:  
+          fmt.Println(err)  
+       case res := <-respCh:  
+          fmt.Println(res)  
+       }  
+    }  
 }
+```
+
+Таким образом, мы обработаем сразу все сообщения из горутин
+
+```bash
+> go run .
+
+parse "h===ts://ya.ru": first path segment in URL cannot contain colon
+200
+200
 ```
 
 
@@ -7228,14 +7277,32 @@ func main() {
 
 ### Выбор HTTP сервера
 
+Например, в NodeJS у нас достаточно скудный базовый инструментарий для создания своего API. Там мы должны строить огромный `switch-case` с роутами, методами под каждый роут и логикой выполнения операции под каждую разрезолвленную ветку. Поэтому, для упрощения разработки, люди берут fastify, express или NestJS. 
 
+В Go есть смежные варианты, которые можно выбрать, но базовый инструментарий, который предоставляет сама стандартная библиотека, крайне широк и самодостаточен. 
 
+Когда мы выбираем базу в качестве API сервера, нам нужно определиться с несколькими параметрами: 
 
+- Middleware
+- Простой роутинг
+- Передача контекста запроса
+- Лёгкое логирование
 
+Как таковая производительность от инструмента к инструменту - не меняется. Меняется интерфейс вызова команд, но каких-то крайних отличий нет. 
+
+![](../../_png/Pasted%20image%2020260526211559.png)
+
+| HttpRouter                                    | Frameworks                    |
+| --------------------------------------------- | ----------------------------- |
+| Встроен в стандартную библиотеку              | Сторонняя зависимость         |
+| Часть функционала нужно будет написать руками | Много встроенного функционала |
 
 ### Простейший сервер
 
+Создаём самый простой сервер на основе функционала пакета `net/http`: 
 
+1. `ListenAndServe` - заставляет слушать приложение определённый порт на устройстве пользователя. Первым аргументом передаём адрес, а вторым кастомный ServeMux. Изначально используется глобальный ServeMux, который могут переопределять библиотеки, поэтому по-хорошему сюда нужно передать новый инстанс. 
+2. `HandleFunc` - привязывает определённый обработчик к определённому пути сервера. 
 
 `main.go`
 ```Go
@@ -7255,6 +7322,19 @@ func main() {
 	fmt.Println("Server is listening on port 8081")
 	http.ListenAndServe(":8081", nil)
 }
+```
+
+Далее протестируем наш API любым инструментом (Bruno, Insomnia, Postman) и отправим GET запрос
+
+![](../../_png/Pasted%20image%2020260526214040.png)
+
+И в консоли после запуска выйдет сначала уведомление о том, что сервер запущен. После отправки запроса выйдет сообщение, которое выводит функция `hello()`.
+
+```bash
+> go run .
+
+Server now listening on port 8081
+Hello
 ```
 
 ### Как работают запросы

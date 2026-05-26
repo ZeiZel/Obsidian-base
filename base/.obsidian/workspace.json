@@ -32,37 +32,6 @@
             }
           },
           {
-            "id": "81064822a7c5263b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "architecture/System Design/System Design.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "System Design"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "b5d90254cd79687d",
-        "type": "tabs",
-        "children": [
-          {
             "id": "cb318054b57eae23",
             "type": "leaf",
             "state": {
@@ -84,6 +53,54 @@
               },
               "icon": "lucide-file",
               "title": "Teamlead Balun Courses"
+            }
+          },
+          {
+            "id": "e700caf6cc99de19",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "soft/vocabularity - голосовой тренинг.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "vocabularity - голосовой тренинг"
+            }
+          },
+          {
+            "id": "81064822a7c5263b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architecture/System Design/System Design.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "System Design"
             }
           }
         ]
@@ -406,60 +423,6 @@
           }
         ],
         "currentTab": 6
-      },
-      {
-        "id": "640e2042f2f3d807",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "e700caf6cc99de19",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "soft/vocabularity - голосовой тренинг.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "vocabularity - голосовой тренинг"
-            }
-          },
-          {
-            "id": "e853e68a9654105b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "soft/speech-and-reading.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "speech-and-reading"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -534,7 +497,8 @@
               "title": "Vertical tabs"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -707,13 +671,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead Balun Courses.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Teamlead Balun Courses"
+              "title": "Outline of Selfgo"
             }
           }
         ],
@@ -745,14 +709,17 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "cb318054b57eae23",
+  "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260526214040.png",
+    "_png/Pasted image 20260526211559.png",
+    "agile/Teamlead Balun Courses.md",
+    "architecture/System Design/System Design.md",
     "_png/Pasted image 20260525193557.png",
     "_png/Pasted image 20260525191838.png",
     "_png/Pasted image 20260525191049.png",
     "_png/Pasted image 20260525190906.png",
     "agile/Teamlead.md",
-    "agile/Teamlead Balun Courses.md",
     "agile/scrum.md",
     "soft/vocabularity - голосовой тренинг.md",
     "_png/Pasted image 20260524214442.png",
@@ -760,8 +727,6 @@
     "_png/Pasted image 20260524214045.png",
     "_png/Pasted image 20260524213432.png",
     "_png/Pasted image 20260524213425.png",
-    "_png/Pasted image 20260524213134.png",
-    "_png/Pasted image 20260524212830.png",
     "soft/speech-and-reading.md",
     "soft/emotional-intelligence.md",
     "soft/social-skills.md",
@@ -781,7 +746,6 @@
     "agile/DISC.md",
     "agile/agile.md",
     "backend/go/Selfgo.md",
-    "architecture/System Design/System Design.md",
     "backend/go/go.md",
     "interview/web",
     "interview/react",

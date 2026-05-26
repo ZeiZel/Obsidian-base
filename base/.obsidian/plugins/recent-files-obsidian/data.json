@@ -1,8 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Teamlead",
@@ -87,14 +95,6 @@
     {
       "basename": "agile",
       "path": "agile/agile.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "go",
