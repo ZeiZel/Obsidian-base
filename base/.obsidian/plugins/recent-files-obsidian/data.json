@@ -5,6 +5,10 @@
       "path": "backend/go/Selfgo.md"
     },
     {
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "scrum",
       "path": "agile/scrum.md"
-    },
-    {
-      "basename": "vocabularity - голосовой тренинг",
-      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "speech-and-reading",

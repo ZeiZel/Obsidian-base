@@ -502,7 +502,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 343.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -685,7 +686,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 464.5
+    "width": 464.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -711,22 +713,23 @@
   },
   "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260527202538.png",
+    "soft/vocabularity - голосовой тренинг.md",
+    "backend/go/Selfgo.md",
+    "_png/Pasted image 20260527194250.png",
+    "_png/Pasted image 20260527194118.png",
+    "_png/Pasted image 20260527193807.png",
+    "_png/Pasted image 20260527193658.png",
+    "_png/Pasted image 20260527193648.png",
+    "_png/Pasted image 20260527193146.png",
     "_png/Pasted image 20260526214040.png",
     "_png/Pasted image 20260526211559.png",
     "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
     "_png/Pasted image 20260525193557.png",
     "_png/Pasted image 20260525191838.png",
-    "_png/Pasted image 20260525191049.png",
-    "_png/Pasted image 20260525190906.png",
     "agile/Teamlead.md",
     "agile/scrum.md",
-    "soft/vocabularity - голосовой тренинг.md",
-    "_png/Pasted image 20260524214442.png",
-    "_png/Pasted image 20260524214406.png",
-    "_png/Pasted image 20260524214045.png",
-    "_png/Pasted image 20260524213432.png",
-    "_png/Pasted image 20260524213425.png",
     "soft/speech-and-reading.md",
     "soft/emotional-intelligence.md",
     "soft/social-skills.md",
@@ -745,7 +748,6 @@
     "agile/command.md",
     "agile/DISC.md",
     "agile/agile.md",
-    "backend/go/Selfgo.md",
     "backend/go/go.md",
     "interview/web",
     "interview/react",
