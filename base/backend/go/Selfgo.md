@@ -8235,75 +8235,109 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 
 ### Вынос обработчика
 
+Каждый текущий хэндлер будет представлять собой серию из большого количества копирования кода. Чтобы не приходить к длинному спагетти-коду, стоит вынести повторяющийся функционал в отдельные функции-хэлперы в `pkg`. 
 
+Какой функционал здесь выделяется: 
 
-`pkg/req/validate.go`
+1. Декодирование body
+2. Валидация body
+3. Целиковая обработка body, которая будет включать в себя первые две функции и возврат 400 ошибки
+4. Обработка response (уже реализовано)
+
+Для начала, выделим функцию валидации body
+
+`pkg / req / validate.go`
 ```Go
-package req
-
-import (
-	"github.com/go-playground/validator/v10"
-)
-
-func IsValid[T any](payload T) error {
-	validate := validator.New()
-	err := validate.Struct(payload)
-	return err
+package req  
+  
+import (  
+    "github.com/go-playground/validator/v10"  
+)  
+  
+func IsValid[T any](payload T) error {  
+    validate := validator.New()  
+    err := validate.Struct(payload)  
+    return err  
 }
 ```
 
+Далее декодируем тело запроса
 
-
-`pkg/req/handle.go`
+`pkg / req / decode.go`
 ```Go
-package req
-
-import (
-	"go/adv-demo/pkg/res"
-	"net/http"
-)
-
-func HandleBody[T any](w *http.ResponseWriter, r *http.Request) (*T, error) {
-	body, err := Decode[T](r.Body)
-	if err != nil {
-		res.Json(*w, err.Error(), 402)
-		return nil, err
-	}
-	err = IsValid(body)
-	if err != nil {
-		res.Json(*w, err.Error(), 402)
-		return nil, err
-	}
-	return &body, nil
+package req  
+  
+import (  
+    "encoding/json"  
+    "io"
+)  
+  
+func Decode[T any](body io.ReadCloser) (T, error) {  
+    var payload T  
+    err := json.NewDecoder(body).Decode(&payload)  
+  
+    if err != nil {  
+       return payload, err  
+    }  
+  
+    return payload, nil  
 }
 ```
 
+И в конце объединим всё в одну функцию для обработки тела: декодирование -> проверка ошибки -> валидация -> проверка ошибки. 
 
-
-`pkg/req/decode.go`
+`pkg / req / handle.go`
 ```Go
-package req
+package req  
+  
+import (  
+    "ZeiZel/go-adv/pkg/res"  
+    "net/http"
+)  
+  
+func HandleBody[T any](w *http.ResponseWriter, r *http.Request) (*T, error) {  
+    body, err := Decode[T](r.Body)  
+    if err != nil {  
+       res.Json(*w, err.Error(), 400)  
+       return nil, err  
+    }  
+  
+    err = IsValid[T](body)  
+    if err != nil {  
+       res.Json(*w, err.Error(), 400)  
+       return nil, err  
+    }  
+  
+    return &body, nil  
+}
+```
 
-import (
-	"encoding/json"
-	"io"
-)
+В итоге, наш хэндлер упрощается до такой записи: 
 
-func Decode[T any](body io.ReadCloser) (T, error) {
-	var payload T
-	err := json.NewDecoder(body).Decode(&payload)
-	if err != nil {
-		return payload, err
-	}
-	return payload, nil
+`internal / auth / handler.go`
+```Go
+func (handler *AuthHandler) Login() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+       body, err := req.HandleBody[LoginRequest](&w, r)  
+  
+	   if err != nil {  
+	      res.Json(w, err.Error(), 400)  
+	   }
+       fmt.Printf(body.Email, err)  
+  
+       response := LoginResponse{  
+          Token: handler.Config.Auth.Token,  
+       }  
+       res.Json(w, response, 201)  
+    }  
 }
 ```
 
 #### Регистрация
 
+Создадим отдельную структуру с данными для регистрации
 
-
-`internal/auth/payload.go`
+`internal / auth / payload.go`
 ```Go
 type RegisterRequest struct {
 	Email    string `json:"email" validate:"required,email"`
@@ -8316,60 +8350,29 @@ type RegisterResponse struct {
 }
 ```
 
+И далее применим для регистрации
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
-package auth
-
-import (
-	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/req"
-	"go/adv-demo/pkg/res"
-	"net/http"
-)
-
-type AuthHandlerDeps struct {
-	*configs.Config
-}
-
-type AuthHandler struct {
-	*configs.Config
-}
-
-func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
-	handler := &AuthHandler{
-		Config: deps.Config,
-	}
-	router.HandleFunc("POST /auth/login", handler.Login())
-	router.HandleFunc("POST /auth/register", handler.Register())
-}
-
-func (handler *AuthHandler) Login() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		body, err := req.HandleBody[LoginRequest](&w, r)
-		if err != nil {
-			return
-		}
-		fmt.Println(body)
-		data := LoginResponse{
-			Token: "123",
-		}
-		res.Json(w, data, 200)
-	}
-}
-
-func (handler *AuthHandler) Register() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		body, err := req.HandleBody[RegisterRequest](&w, r)
-		if err != nil {
-			return
-		}
-		fmt.Println(body)
-	}
+// ...
+func (handler *AuthHandler) Register() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+       body, err := req.HandleBody[RegisterRequest](&w, r)  
+       if err != nil {  
+          return  
+       }  
+       fmt.Println(body)  
+    }  
 }
 ```
+
+Если отправим неправильные данные, то получим ошибки
+
+![](../../_png/Pasted%20image%2020260530225541.png)
+
+А если отправим верные, то получим 200 без ошибок валидации
+
+![](../../_png/Pasted%20image%2020260530225619.png)
 
 
 
@@ -8412,6 +8415,10 @@ services:
 
 
 ### Выбор ORM
+
+
+
+
 
 
 
@@ -8516,9 +8523,9 @@ func RandStringRunes(n int) string {
 
 ### Автомиграции
 
+Так же нам понадобится отдельный скрипт, который мы должны будем вызывать при изменении формата данных в базе. Автоматическая миграция за нас выполнит пересборку данных в таблицах, чтобы их обновить. 
 
-
-`migrations/auto.go`
+`migrations / auto.go`
 ```Go
 package main
 
@@ -8540,6 +8547,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	// включение автоматической миграции
 	db.AutoMigrate(&link.Link{})
 }
 ```
