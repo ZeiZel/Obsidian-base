@@ -8013,9 +8013,9 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 
 ### Чтение body
 
+Сначала добавим структуру данных, которую будем ожидать от клиента
 
-
-`internal/auth/payload.go`
+`internal / auth / payload.go`
 ```Go
 package auth
 
@@ -8029,82 +8029,57 @@ type LoginResponse struct {
 }
 ```
 
+Далее нам нужно будет прочитать body с помощью `json.NewDecoder`, который декодирует тело и сохранит его в переменную отдельным методом `Decode`. 
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
-package auth
-
-import (
-	"encoding/json"
-	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/res"
-	"net/http"
-)
-
-type AuthHandlerDeps struct {
-	*configs.Config
-}
-
-type AuthHandler struct {
-	*configs.Config
-}
-
-func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
-	handler := &AuthHandler{
-		Config: deps.Config,
-	}
-	router.HandleFunc("POST /auth/login", handler.Login())
-	router.HandleFunc("POST /auth/register", handler.Register())
-}
-
+// ..
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		// Прочитать body
+		
 		var payload LoginRequest
 		err := json.NewDecoder(req.Body).Decode(&payload)
 		if err != nil {
 			res.Json(w, err.Error(), 402)
 		}
 		fmt.Println(payload)
+		
 		data := LoginResponse{
 			Token: "123",
 		}
 		res.Json(w, data, 200)
-	}
-}
-
-func (handler *AuthHandler) Register() http.HandlerFunc {
-	return func(w http.ResponseWriter, req *http.Request) {
-		fmt.Println("Register")
 	}
 }
 ```
 
 #### Простая валидация
 
+Самая простая валидация будет выглядеть следующим образом: 
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		// Прочитать body
 		var payload LoginRequest
+		
 		err := json.NewDecoder(req.Body).Decode(&payload)
+		
+		// валидация тела через ветвления
 		if err != nil {
-			res.Json(w, err.Error(), 402)
+			res.Json(w, err.Error(), 400)
 			return
 		}
 		if payload.Email == "" {
-			res.Json(w, "Email required", 402)
+			// возвращаем ошибку 
+			res.Json(w, "Email required", 400)
+			// прерываем выполнение функции
 			return
 		}
 		if payload.Password == "" {
-			res.Json(w, "Password required", 402)
+			res.Json(w, "Password required", 400)
 			return
 		}
+
 		fmt.Println(payload)
 		data := LoginResponse{
 			Token: "123",
@@ -8114,15 +8089,49 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 }
 ```
 
+Если отправим правильную структуру данных, то получим ответ
+
+![](../../_png/Pasted%20image%2020260530204624.png)
+
+В противном случае, получим ошибку
+
+![](../../_png/Pasted%20image%2020260530204616.png)
+
+>[!info] Однако это самый неэффективный метод валидации, так как большие структуры проверять таким образом будет крайне громоздко. 
+
 ### Regexp
 
+Первый вариант валидации - через RegExp, которые можно найти в интернете. Для работы с ними, потребуется воспользоваться пакетом `regexp`, где мы сначала инстанциируем правило через `Compile`, а затем проверяем через `MatchString`. 
 
+```Go
+// запись через двойные кавычки с экранированием
+regexp.Compile("[A-Za-z0-9\\._%+\\-]+@[A-Za-z0-9\\.\\-]+\\-[A-Za-z]{2,}")
+// запись через косые кавычки без экранирования
+reg, err := regexp.Compile(`[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\. [A-Za-z]{2,}`)
 
-`internal/auth/handler.go`
+if !reg.MatchString(payload.Email) {
+	res.Json(w, "Wrong email", 400)
+	return
+}
+```
+
+Второй вариант - сразу проверят совпадение
+
+```Go
+match, err := regexp.MatchString(`[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\. [A-Za-z]{2,}`, payload.Email)
+
+if !match {
+	res.Json(w, "Wrong email", 400)
+	return
+}
+```
+
+И третий, самый простой вариант, встроенная библиотека `mail`, которая возвращает спаршенный адрес
+
+`internal / auth / handler.go`
 ```Go
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		// Прочитать body
 		var payload LoginRequest
 		err := json.NewDecoder(req.Body).Decode(&payload)
 		if err != nil {
@@ -8133,11 +8142,13 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			res.Json(w, "Email required", 402)
 			return
 		}
+		
 		_, err = mail.ParseAddress(payload.Email)
 		if err != nil {
 			res.Json(w, "Wrong email", 402)
 			return
 		}
+		
 		if payload.Password == "" {
 			res.Json(w, "Password required", 402)
 			return
@@ -8153,29 +8164,15 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 
 ### Go validator
 
+Но, чтобы упростить валидацию, нам обязательно нужно воспользоваться специальным пакетом для валидации, который позволяет проверить значение по заданным нами правилам. 
 
+Устанавливаем валидатор 
 
-`go.mod`
-```
-module go/adv-demo
-
-go 1.22.5
-
-require (
-	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
-	github.com/go-playground/locales v0.14.1 // indirect
-	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.22.0 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
-	github.com/leodido/go-urn v1.4.0 // indirect
-	golang.org/x/crypto v0.19.0 // indirect
-	golang.org/x/net v0.21.0 // indirect
-	golang.org/x/sys v0.17.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
-)
+```bash
+go get github.com/go-playground/validator/v10
 ```
 
-
+Далее довешиваем теги `validate` для структур. Все возможные валидации нужно брать из документации валидатора. 
 
 `internal/auth/payload.go`
 ```Go
@@ -8191,9 +8188,9 @@ type LoginResponse struct {
 }
 ```
 
+И в конце нам остаётся просто применить этот валидатор
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 package auth
 
@@ -8216,12 +8213,17 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			res.Json(w, err.Error(), 402)
 			return
 		}
+		
+		// инстанциируем валидатор
 		validate := validator.New()
+		// валидируем структуру
 		err = validate.Struct(payload)
+		// проверяем наличие ошибок
 		if err != nil {
 			res.Json(w, err.Error(), 402)
 			return
 		}
+		
 		fmt.Println(payload)
 		data := LoginResponse{
 			Token: "123",
