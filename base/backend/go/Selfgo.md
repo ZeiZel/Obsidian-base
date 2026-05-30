@@ -8380,7 +8380,25 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 
 ### Развёртывание PgSQL
 
+Добавим композ с параметрами для запуска контейнера
 
+`docker-compose.yml`
+```YML
+services:  
+  postgres:  
+    container_name: postgres_go  
+    image: postgres:18.4  
+    environment:  
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}  
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pgpass}  
+      PGDATA: /data/postgres  
+    volumes:  
+      - ./postgres-data:/data/postgres  
+    ports:  
+      - "5432:5432"
+```
+
+Далее уберём из отслеживания гитом volume контейнера с данными postgresql
 
 `.gitignore`
 ```
@@ -8388,31 +8406,33 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 /postgres-data
 ```
 
+Далее запустим контейнер
 
-
-`docker-compose.yml`
-```YML
-services:
-  postgres:
-    container_name: postgres_go
-    image: postgres:16.4
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: my_pass
-      PGDATA: /data/postgres
-    volumes:
-      - ./postgres-data:/data/postgres
-    ports:
-      - "5432:5432"
+```bash
+docker compose up -d
 ```
 
 ### Подключение к базе
 
+После того, как мы подняли базу в прошлом шаге, нужно к ней подключиться. Сделать это можно через внешний интерфейс PgSQL, через CLI утилиту или через расширения для IDE. 
 
+В расширении передаём данные для подключения
 
+![](../../_png/Pasted%20image%2020260530232901.png)
 
+У нас появится база
 
+![](../../_png/Pasted%20image%2020260530232907.png)
 
+И далее создадим новый кастомный запрос для выполнения SQL кода
+
+![](../../_png/Pasted%20image%2020260530233056.png)
+
+Создадим БД `link`
+
+```SQL
+CREATE DATABASE link;
+```
 
 ### Выбор ORM
 
