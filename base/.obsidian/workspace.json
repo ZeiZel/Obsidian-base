@@ -686,8 +686,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 464.5,
-    "collapsed": true
+    "width": 464.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -713,21 +712,21 @@
   },
   "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260530112029.png",
+    "_png/Pasted image 20260530112000.png",
+    "_png/Pasted image 20260530095635.png",
+    "_png/Pasted image 20260530095626.png",
+    "_png/Pasted image 20260530094026.png",
+    "_png/Pasted image 20260530090207.png",
+    "_png/Pasted image 20260530090158.png",
     "_png/Pasted image 20260527202538.png",
     "soft/vocabularity - голосовой тренинг.md",
     "backend/go/Selfgo.md",
     "_png/Pasted image 20260527194250.png",
     "_png/Pasted image 20260527194118.png",
     "_png/Pasted image 20260527193807.png",
-    "_png/Pasted image 20260527193658.png",
-    "_png/Pasted image 20260527193648.png",
-    "_png/Pasted image 20260527193146.png",
-    "_png/Pasted image 20260526214040.png",
-    "_png/Pasted image 20260526211559.png",
     "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
-    "_png/Pasted image 20260525193557.png",
-    "_png/Pasted image 20260525191838.png",
     "agile/Teamlead.md",
     "agile/scrum.md",
     "soft/speech-and-reading.md",

@@ -7496,8 +7496,6 @@ func main() {
 }
 ```
 
-
-
 ```bash
 > go run .
 
@@ -7507,8 +7505,34 @@ Hello
 
 
 
-
 ## Архитектура
+
+### Обзор приложения
+
+Сейчас мы будем вести разработку приложения для сокращения ссылок. 
+
+Оно будет выполнять следующие задачи: 
+
+1. Регистрация / вход для получения доступа к функционалу.
+2. Создание ссылки: передаём длинную ссылку и возвращаем короткую.
+3. Редирект при получении ссылки: когда мы переходим на наш домен с определённым id, то он берётся и возвращает клиенту редирект
+4. Обработка статистики: сохранение информации по переходам
+
+![](../../_png/Pasted%20image%2020260530090207.png)
+
+Основных сущностей у нас будет 3: 
+
+- User
+	- register
+	- login
+- Link
+	- create
+	- goTo
+	- get
+- Stat: 
+	- get
+
+![](../../_png/Pasted%20image%2020260530090158.png)
 
 ### Структура приложения
 
@@ -7516,13 +7540,13 @@ Hello
 
 Всего выделяют следующие модули: 
 
-- cmd - основные приложения для текущего проекта
-- internal - Внутренний код приложения и библиотек. Это код, который не должен использоваться в других приложениях и библиотеках.
-- pkg - Код библиотек, пригодных для использования в сторонних приложениях
-- configs - Шаблоны файлов конфигураций и файлы настроек по-умолчанию.
-- migrations - миграции БД 
-- assets - хранение статических ассетов
-- api - описания API через openapi, надстройки и применения библиотек
+- `cmd` - основные приложения для текущего проекта
+- `internal` - Внутренний код приложения и библиотек. Это код, который не должен использоваться в других приложениях и библиотеках.
+- `pkg` - Код библиотек, пригодных для использования в сторонних приложениях
+- `configs` - Шаблоны файлов конфигураций и файлы настроек по-умолчанию.
+- `migrations` - миграции БД 
+- `assets` - хранение статических ассетов
+- `api` - описания API через openapi, надстройки и применения библиотек
 
 Переносим всю логику нашего хэндлера методов сущности `Hello` в новый internal пакет по имени сущности - `hello`
 
@@ -7559,18 +7583,34 @@ func main() {
 }
 ```
 
+### Декомпозиция модуля
+
+В приложении будет применяться Layered Architecture. 
+
+Структура: 
+
+- Handler - http обработчик запроса
+- Service - дополнительный сервис с бизнес-логикой
+- Repository - репозиторий доступа БД к сущности
+- Payload (dto) - описание структур передаваемых и возвращаемых данных
+- Errors - список errors для модуля
+
+>[!info] Иногда, когда смысла не будет выносить хэндлер в сервис, мы будем напрямую из него обращаться в репозиторий.
+
+![](../../_png/Pasted%20image%2020260530094026.png)
+
 ### Конфигурация
 
-
+Зададим переменную окружения
 
 `.env`
 ```
 DSN=""
 ```
 
+Далее реализуем модуль получения всех конфигураций
 
-
-`configs/config.go`
+`configs / config.go`
 ```Go
 package configs
 
@@ -7581,19 +7621,25 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type Config struct {
-	Db DbConfig
-}
-
+// конфиг подключения к базе
 type DbConfig struct {
 	Dsn string
 }
 
+// общая конфигурация приложения
+type Config struct {
+	Db DbConfig
+}
+
 func LoadConfig() *Config {
+	// получаем переменные окружения
 	err := godotenv.Load()
+	
 	if err != nil {
 		log.Println("Error loading .env file, using default config")
 	}
+	
+	// формируем полную конфигурацию
 	return &Config{
 		Db: DbConfig{
 			Dsn: os.Getenv("DSN"),
@@ -7602,7 +7648,7 @@ func LoadConfig() *Config {
 }
 ```
 
-
+Далее просто подключаем конфигурацию в main точке входа
 
 `cmd / main.go`
 ```Go
@@ -7621,27 +7667,13 @@ func main() {
 }
 ```
 
-### Обзор приложения
-
-
-
-
-
-
-
-### Декомпозиция модуля
-
-
-
-
-
-
-
 #### Модуль авторизация
 
+Реализуем в модуле авторизации хэндлеры. 
 
+Так как это POST запросы, то нужно прямо в строке с адресом пути к этим хэндлерам добавить в начале метод, по которому они будут вызываться. В нашем случае - POST. 
 
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 package auth
 
@@ -7651,12 +7683,6 @@ import (
 )
 
 type AuthHandler struct{}
-
-func NewAuthHandler(router *http.ServeMux) {
-	handler := &AuthHandler{}
-	router.HandleFunc("POST /auth/login", handler.Login())
-	router.HandleFunc("POST /auth/register", handler.Register())
-}
 
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
@@ -7669,9 +7695,17 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 		fmt.Println("Register")
 	}
 }
+
+func NewAuthHandler(router *http.ServeMux) {
+	handler := &AuthHandler{}
+	
+	// Method Path
+	router.HandleFunc("POST /auth/login", handler.Login())
+	router.HandleFunc("POST /auth/register", handler.Register())
+}
 ```
 
-
+И далее подключим хэндлеры к роутеру в приложении
 
 `cmd / main.go`
 ```Go
@@ -7697,9 +7731,27 @@ func main() {
 }
 ```
 
+Если мы отправим GET на эти запросы, то получим в ответ стандартный 405. 
+
+![](../../_png/Pasted%20image%2020260530095626.png)
+
+Если мы отправим POST запрос, то получим правильный ответ
+
+![](../../_png/Pasted%20image%2020260530095635.png)
+
+```bash
+> go run cmd/main.go 
+
+Server now listening on port 8081
+Login
+Register
+```
+
 ### Передача зависимостей
 
+Далее нам нужно добавить базовую структуру передачи зависимостей в другие части приложения. Это нам нужно, чтобы шарить конфиг по приложению. 
 
+Для начала добавим переменную `TOKEN` в окружение
 
 `.env`
 ```
@@ -7707,7 +7759,7 @@ DSN=""
 TOKEN="123"
 ```
 
-
+Далее создадим отдельную структуру `AuthConfig`, которая будет хранить переменные, связанные с авторизацей. В данном случае, наш `TOKEN`
 
 `configs/config.go`
 ```Go
@@ -7720,17 +7772,17 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type Config struct {
-	Db   DbConfig
-	Auth AuthConfig
-}
-
 type DbConfig struct {
 	Dsn string
 }
 
 type AuthConfig struct {
 	Secret string
+}
+
+type Config struct {
+	Db   DbConfig
+	Auth AuthConfig
 }
 
 func LoadConfig() *Config {
@@ -7749,9 +7801,13 @@ func LoadConfig() *Config {
 }
 ```
 
+Чтобы правильно передать зависимость в хэндлер, нужно:
 
+1. создать отдельную структуру `AuthHandlerDeps`, которая будет представлять внешнее представление зависимостей для других компонентов 
+2. и в `AuthHandler` указать структуру, которую мы будем хранить 
+3. В данном случае внешний интерфейс и внутреннее представление будут одинаковыми
 
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 package auth
 
@@ -7761,15 +7817,19 @@ import (
 	"net/http"
 )
 
+// внешний интерфейс зависимостей
 type AuthHandlerDeps struct {
 	*configs.Config
 }
 
+// внутреннее представление зависимостей
 type AuthHandler struct {
 	*configs.Config
 }
 
+// добавляем поле deps
 func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
+	// инжектим зависимости
 	handler := &AuthHandler{
 		Config: deps.Config,
 	}
@@ -7779,6 +7839,7 @@ func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
 
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
+		// получаем зависимость
 		fmt.Println(handler.Config.Auth.Secret)
 		fmt.Println("Login")
 	}
@@ -7791,7 +7852,7 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 }
 ```
 
-
+И в `main` передаём зависимости
 
 `cmd / main.go`
 ```Go
@@ -7805,8 +7866,10 @@ import (
 )
 
 func main() {
+	// конфигурация
 	conf := configs.LoadConfig()
 	router := http.NewServeMux()
+	// передача зависимостей из конфигурации
 	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
 		Config: conf,
 	})
@@ -7823,9 +7886,11 @@ func main() {
 
 ### Ответ от API
 
+Нам нужно реализовать ответ нашего эндпоинта в формате JSON клиенту. 
 
+Первое, что нам нужно сделать - это описать Payload наших данных; структуру ответа сервера. 
 
-`internal/auth/payload.go`
+`internal / auth / payload.go`
 ```Go
 package auth
 
@@ -7834,7 +7899,7 @@ type LoginResponse struct {
 }
 ```
 
-
+Далее доработаем ответ метода `Login`. За формирование response клиенту отвечает первый аргумент, который попадает к нам в функцию - `ResponseWriter`. Модифицируя его, мы обновляем данные, которые прилетят обратно клиенту. 
 
 `internal/auth/handler.go`
 ```Go
@@ -7867,11 +7932,16 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(handler.Config.Auth.Secret)
 		fmt.Println("Login")
+		
+		// создаём структуру ответа
 		res := LoginResponse{
 			Token: "123",
 		}
+		// модифицируем заголовок и добавляем в него тип контента
 		w.Header().Set("Content-Type", "application/json")
+		// далее записываем статус ответа
 		w.WriteHeader(201)
+		// И биндим собранную структуру к response
 		json.NewEncoder(w).Encode(res)
 	}
 }
@@ -7883,11 +7953,19 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 }
 ```
 
+Теперь мы получаем от сервера ответ в формате JSON с нашим статус кодом и правильными заголовками
+
+![](../../_png/Pasted%20image%2020260530112000.png)
+
+![](../../_png/Pasted%20image%2020260530112029.png)
+
 #### Пакет ответа
 
+Для оптимизации записи ответа, куда удобнее будет использовать заранее подготовленную функцию, которая упростит задачу записи ответа. 
 
+Реализуем в `pkg` отдельную shareable функцию для подготовки ответа - `Json`
 
-`pkg/res/res.go`
+`pkg / res / res.go`
 ```Go
 package res
 
@@ -7903,9 +7981,9 @@ func Json(w http.ResponseWriter, data any, statusCode int) {
 }
 ```
 
+И теперь просто применим её в нашем хэндлере
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 package auth
 
@@ -7916,36 +7994,15 @@ import (
 	"net/http"
 )
 
-type AuthHandlerDeps struct {
-	*configs.Config
-}
-
-type AuthHandler struct {
-	*configs.Config
-}
-
-func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
-	handler := &AuthHandler{
-		Config: deps.Config,
-	}
-	router.HandleFunc("POST /auth/login", handler.Login())
-	router.HandleFunc("POST /auth/register", handler.Register())
-}
+// ...
 
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		fmt.Println(handler.Config.Auth.Secret)
-		fmt.Println("Login")
 		data := LoginResponse{
 			Token: "123",
 		}
+		
 		res.Json(w, data, 200)
-	}
-}
-
-func (handler *AuthHandler) Register() http.HandlerFunc {
-	return func(w http.ResponseWriter, req *http.Request) {
-		fmt.Println("Register")
 	}
 }
 ```
@@ -9660,12 +9717,23 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 
 ### Что такое контекст
 
+Контекст - это встроенный пакет стандартной библиотеки Go, который предоставляет набор инструментов для управления параллельными операциями и передачей данных. 
 
+>[!info] Это инструмент, который плотно взаимодействует с горутинами. 
 
+Возможности: 
 
+- Передача key/value
+- Сигналы отмены
+- Deadlines
 
+Но самое главное заключается в том, что Context встроен в роутер и можно в любой момент получить данные по предыдущим обработчикам в этом контексте из request. 
 
-
+```Go
+func HelloHandler(w http.ResponseWriter, req *http.Request) {
+	req.Context()
+}
+```
 
 ### WithTimeout
 
