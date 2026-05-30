@@ -102,6 +102,30 @@
               "icon": "lucide-file",
               "title": "System Design"
             }
+          },
+          {
+            "id": "f66f73e1e85de372",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "competitions_map.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "competitions_map"
+            }
           }
         ],
         "currentTab": 1
@@ -498,13 +522,11 @@
               "title": "Vertical tabs"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273,
-    "collapsed": true
+    "width": 343.50390243530273
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -687,7 +709,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 464.5
+    "width": 300.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -713,6 +735,10 @@
   },
   "active": "cb318054b57eae23",
   "lastOpenFiles": [
+    "_png/Pasted image 20260530151836.png",
+    "_png/Pasted image 20260530151020.png",
+    "competitions_map.md",
+    "agile/Teamlead Balun Courses.md",
     "backend/go/Selfgo.md",
     "_png/Pasted image 20260530112029.png",
     "_png/Pasted image 20260530112000.png",
@@ -724,8 +750,6 @@
     "_png/Pasted image 20260527202538.png",
     "soft/vocabularity - голосовой тренинг.md",
     "_png/Pasted image 20260527194250.png",
-    "_png/Pasted image 20260527194118.png",
-    "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
     "agile/Teamlead.md",
     "agile/scrum.md",
@@ -747,7 +771,6 @@
     "agile/command.md",
     "agile/DISC.md",
     "agile/agile.md",
-    "backend/go/go.md",
     "interview/web",
     "interview/react",
     "interview/javascript",

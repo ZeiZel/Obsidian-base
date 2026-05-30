@@ -5,6 +5,10 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
+      "basename": "competitions_map",
+      "path": "competitions_map.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "Git",
       "path": "cs/GIT/Git.md"
-    },
-    {
-      "basename": "JavaScript",
-      "path": "frontend/javascript/JavaScript.md"
     }
   ],
   "omittedPaths": [],
