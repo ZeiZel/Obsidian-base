@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -11,10 +15,6 @@
     {
       "basename": "competitions_map",
       "path": "competitions_map.md"
-    },
-    {
-      "basename": "vocabularity - голосовой тренинг",
-      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "System Design",
