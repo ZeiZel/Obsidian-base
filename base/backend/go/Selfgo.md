@@ -8746,7 +8746,7 @@ func (handler *LinkHandler) Delete() http.HandlerFunc {
 ```Go
 package link
 
-import "go/adv-demo/pkg/db"
+import "ZeiZel/go-adv/pkg/db"
 
 type LinkRepository struct {
 	Database *db.Db
