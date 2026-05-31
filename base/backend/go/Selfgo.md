@@ -8436,17 +8436,27 @@ CREATE DATABASE link;
 
 ### Выбор ORM
 
+ORM - это инструмент, который предоставляет нам Объектно-Ориентированное представление для работы с Базой Данных. 
 
+Всего у нас на выбор есть 3 главных инструмента: 
 
-
-
-
+- gorm - самая популярная и широкая по функционалу библиотека
+- sqlx - миниатюрная библиотека для работы с SQL, в которой меньше функционала
+- ent - аналог Entity Framework
 
 ### Подключение к GORM
 
+Сначала составим нашу DSN строку для подключения к базе
 
+`.env`
+```bash
+DSN="host=localhost user=postgres password=pgpass dbname=link port=5432 sslmode=disable"  
+TOKEN=123
+```
 
-`pkg/db/db.go`
+Дальше реализуем модуль для работы с базой данных. Тут мы сразу отключаем подключение к БД через интерфейс GORM
+
+`pkg / db / db.go`
 ```Go
 package db
 
@@ -8462,15 +8472,18 @@ type Db struct {
 }
 
 func NewDb(conf *configs.Config) *Db {
+	// создаём инстанс db gorm и передаём туда драйвер postgres и конфиг gorm
 	db, err := gorm.Open(postgres.Open(conf.Db.Dsn), &gorm.Config{})
+	
 	if err != nil {
 		panic(err)
 	}
+	
 	return &Db{db}
 }
 ```
 
-
+Дальше просто инстанциируем DB
 
 `cmd / main.go`
 ```Go
@@ -8493,57 +8506,64 @@ func main() {
 
 ### Описание модели
 
+Далее опишем модель для работы с ссылками. Она будет выполнять все основные CRUD операции для работы непосредственно с моделью данных сохраняемой ссылки. 
 
-
-`go.mod`
-```
-require (
-	github.com/go-playground/validator/v10 v10.22.0
-	github.com/joho/godotenv v1.5.1
-	gorm.io/driver/postgres v1.5.9
-	gorm.io/gorm v1.25.11
-)
-```
-
-
-
-`internal/link/model.go`
+`internal / link / model.go`
 ```Go
-package link
+package link  
+  
+import (  
+    "math/rand"  
+  
+    "gorm.io/gorm"
+)  
+  
+type Link struct {  
+	// представление модели в gorm, которое хранит базовые поля любой сущности
+    gorm.Model  
+    Link string `json:"link"`  
+    // поле хэша должно быть уникальным, поэтому это uniqueIndex
+    Hash string `json:"hash" gorm:"uniqueIndex"`  
+}  
+  
+// создания объекта по модели ссылки
+func NewLink(url string) *Link {  
+    return &Link{  
+       Link: url,  
+       Hash: randStringRunes(10),  
+    }  
+}  
+  
+var letterRunes = []rune("abcdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPRSTUVWZYZ")  
 
-import (
-	"math/rand"
-
-	"gorm.io/gorm"
-)
-
-type Link struct {
-	gorm.Model
-	Url  string `json:"url"`
-	Hash string `json:"hash" gorm:"uniqueIndex"`
+// генерация рандомного хэша  
+func randStringRunes(n int) string {  
+    b := make([]rune, n)  
+      
+    for i := range b {  
+       b[i] = letterRunes[rand.Intn(len(letterRunes))]  
+    }  
+      
+    return string(b)  
 }
+```
 
-func NewLink(url string) *Link {
-	return &Link{
-		Url:  url,
-		Hash: RandStringRunes(6),
-	}
-}
+Сам функционал `gorm.Model` просто включает в себя базовые поля: id, дату создания, обновления и дату удаления (для мягкого удаления записей)
 
-var letterRunes = []rune("abcdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ")
-
-func RandStringRunes(n int) string {
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letterRunes[rand.Intn(len(letterRunes))]
-	}
-	return string(b)
+```Go
+type Model struct {  
+    ID        uint `gorm:"primarykey"`  
+    CreatedAt time.Time  
+    UpdatedAt time.Time  
+    DeletedAt DeletedAt `gorm:"index"`  
 }
 ```
 
 ### Автомиграции
 
-Так же нам понадобится отдельный скрипт, который мы должны будем вызывать при изменении формата данных в базе. Автоматическая миграция за нас выполнит пересборку данных в таблицах, чтобы их обновить. 
+Так же GORM предоставляет функционал автоматических миграций данных. 
+
+Это удобно, когда мы хотим накатить новые модели данных на таблицы или обновить формат старых. 
 
 `migrations / auto.go`
 ```Go
@@ -8572,116 +8592,134 @@ func main() {
 }
 ```
 
+Так как у нас появилось несколько входных точек, то будет куда удобнее воспользоваться Makefile, в котором мы сразу опишем команды для запуска отдельных приложений и скриптов
+
+`Makefile`
+```Makefile
+run:  
+    go run cmd/main.go  
+  
+migrate:  
+    go run migrations/auto.go
+```
+
+Выполняем миграцию
+
+```bash
+make migrate
+```
+
+И теперь в нашей базе данных появилась таблица `links`, в которой находятся описанные нами поля
+
+![](../../_png/Pasted%20image%2020260531161529.png)
+
 
 
 ## CRUD
 
 #### Handler ссылок
 
+Далее нужно разработать болванку под хэндлер ссылок, в которой будут находиться все операции над ссылками
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
-package link
+package link  
+  
+import (  
+    "ZeiZel/go-adv/configs"  
+    "net/http"
+)  
+  
+type LinkHandlerDeps struct {  
+    *configs.Config  
+}  
+  
+type LinkHandler struct {  
+    *configs.Config  
+}  
+  
+// инстанциируем роуты
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {  
+    handler := LinkHandler{  
+       Config: deps.Config,  
+    }  
 
-import (
-	"net/http"
-)
+	// кастомный путь, который назовём как hash
+    router.HandleFunc("GET /{hash}", handler.GoTo())  
+    router.HandleFunc("POST /link", handler.Create())  
+    // из слага пути будем доставать id операции
+    router.HandleFunc("PATCH /link/{id}", handler.Update())  
+    router.HandleFunc("DELETE /link/{id}", handler.Delete())  
+}  
 
-type LinkHandlerDeps struct {
-}
-
-type LinkHandler struct {
-}
-
-func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
-	handler := &LinkHandler{}
-	router.HandleFunc("POST /link", handler.Create())
-	router.HandleFunc("PATCH /link/{id}", handler.Update())
-	router.HandleFunc("DELETE /link/{id}", handler.Delete())
-	router.HandleFunc("GET /{alias}", handler.GoTo())
-}
-
-func (handler *LinkHandler) Create() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
-func (handler *LinkHandler) Update() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
-func (handler *LinkHandler) Delete() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
-func (handler *LinkHandler) GoTo() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
+// создаём ссылку
+func (handler *LinkHandler) Create() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+    }  
+}  
+  
+// обновляем ссылку
+func (handler *LinkHandler) Update() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+    }  
+}  
+  
+// удаляем ссылку
+func (handler *LinkHandler) Delete() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+    }  
+}  
+  
+// получаем основную ссылку и редиректимся
+func (handler *LinkHandler) GoTo() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+    }  
 }
 ```
 
+И в конце просто применяем созданные хэндлеры к нашему роутеру
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
-package main
-
-import (
-	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/internal/link"
-	"go/adv-demo/pkg/db"
-	"net/http"
-)
-
-func main() {
-	conf := configs.LoadConfig()
-	_ = db.NewDb(conf)
-	router := http.NewServeMux()
-
-	// Handler
-	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
-		Config: conf,
-	})
-	link.NewLinkHandler(router, link.LinkHandlerDeps{})
-
-	server := http.Server{
-		Addr:    ":8081",
-		Handler: router,
-	}
-
-	fmt.Println("Server is listening on port 8081")
-	server.ListenAndServe()
+package main  
+  
+import (  
+    "ZeiZel/go-adv/configs"  
+    "ZeiZel/go-adv/internal/auth"    
+    "ZeiZel/go-adv/internal/link"    
+    "ZeiZel/go-adv/pkg/db"    
+    "fmt"    
+    "net/http"
+)  
+  
+func main() {  
+    conf := configs.LoadConfig()  
+    _ = db.NewDb(conf)  
+    router := http.NewServeMux()  
+    auth.NewAuthHandler(router, auth.AuthHandlerDeps{  
+       Config: conf,  
+    })  
+    link.NewLinkHandler(router, link.LinkHandlerDeps{  
+       Config: conf,  
+    })  
+  
+    server := http.Server{  
+       Addr:    ":8081",  
+       Handler: router,  
+    }  
+  
+    fmt.Println("Server now listening on port 8081")  
+  
+    server.ListenAndServe()  
 }
 ```
 
 ### Параметр запроса
 
+Для получения переданного алиаса, нужно воспользоваться методом `PathValue` из `Request`
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
-package link
-
-import (
-	"fmt"
-	"net/http"
-)
-
-type LinkHandlerDeps struct {
-}
-
-type LinkHandler struct {
-}
-
 func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	handler := &LinkHandler{}
 	router.HandleFunc("POST /link", handler.Create())
@@ -8690,37 +8728,21 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	router.HandleFunc("GET /{hash}", handler.GoTo())
 }
 
-func (handler *LinkHandler) Create() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
-func (handler *LinkHandler) Update() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
 func (handler *LinkHandler) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id := r.PathValue("id")
 		fmt.Println(id)
 	}
 }
-
-func (handler *LinkHandler) GoTo() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
 ```
 
 ### Паттерн репозитория
 
+Репозиторий - это отдельная сущность на подобии хэндлера, которая выполняет операции над нашей базой данных. Никакие другие слои приложения не должны напрямую обращаться к БД, так как это не их зона ответственности. 
 
+Первым делом, создадим репозиторий для сущности `link`, который имплементирует создание новой ссылки
 
-`internal/link/repository.go`
+`internal / link / repository.go`
 ```Go
 package link
 
@@ -8741,9 +8763,9 @@ func (repo *LinkRepository) Create(link *Link) {
 }
 ```
 
+И далее добавим в зависимости хэндлера репозиторий ссылки
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 type LinkHandlerDeps struct {
 	LinkRepository *LinkRepository
@@ -8757,11 +8779,19 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	handler := &LinkHandler{
 		LinkRepository: deps.LinkRepository,
 	}
+
+// ...
+
+func (handler *LinkHandler) Create() http.HandlerFunc {  
+    return func(w http.ResponseWriter, r *http.Request) {  
+       handler.LinkRepository.Database.Create(Link{})  
+    }  
+}
 ```
 
+А в головной функции останется инстанциировать репозиторий и передать его в хэндлер
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 func main() {
 	conf := configs.LoadConfig()
@@ -8784,7 +8814,7 @@ func main() {
 
 
 
-`internal/link/payload.go`
+`internal / link / payload.go`
 ```Go
 package link
 
@@ -8795,7 +8825,7 @@ type LinkCreateRequest struct {
 
 
 
-`internal/link/repository.go`
+`internal / link / repository.go`
 ```Go
 func (repo *LinkRepository) Create(link *Link) (*Link, error) {
 	result := repo.Database.DB.Create(link)
