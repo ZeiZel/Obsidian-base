@@ -8936,38 +8936,11 @@ func (handler *LinkHandler) GoTo() http.HandlerFunc {
 
 #### Проверка hash
 
+Далее нам нужно решить проблему повторяющегося хэша. Когда мы будем сохранять короткую ссылку, мы можем столкнуться с проблемой, что такой хэш уже существует. Поэтому нам нужно добавить возможность перегенерации хэша для ссылки. 
 
+Первым делом, нужно вынести операцию генерации хэша в отдельную функцию. 
 
-`internal / link / handler.go`
-```Go
-func (handler *LinkHandler) Create() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		body, err := req.HandleBody[LinkCreateRequest](&w, r)
-		if err != nil {
-			return
-		}
-		link := NewLink(body.Url)
-		for {
-			existedLink, _ := handler.LinkRepository.GetByHash(link.Hash)
-			if existedLink == nil {
-				break
-			}
-			link.GenerateHash()
-		}
-		createdLink, err := handler.LinkRepository.Create(link)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-		res.Json(w, createdLink, 201)
-
-	}
-}
-```
-
-
-
-`internal/link/model.go`
+`internal / link / model.go`
 ```Go
 func NewLink(url string) *Link {
 	link := &Link{
@@ -8982,26 +8955,63 @@ func (link *Link) GenerateHash() {
 }
 ```
 
+Далее нам нужно будет добавить в цикле проверку существования ссылки по определённому хэшу до записи созданной модели в базу
+
+`internal / link / handler.go`
+```Go
+func (handler *LinkHandler) Create() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[LinkCreateRequest](&w, r)
+		if err != nil {
+			return
+		}
+		
+		// создаём модель с новой ссылкой
+		link := NewLink(body.Url)
+		
+		// проверяем существование ссылки по определённому хэшу
+		for {
+			existedLink, _ := handler.LinkRepository.GetByHash(link.Hash)
+			if existedLink == nil {
+				break
+			}
+			link.GenerateHash()
+		}
+		
+		// и только теперь сохраняем модель в базу данных
+		createdLink, err := handler.LinkRepository.Create(link)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		
+		res.Json(w, createdLink, http.StatusCreated)
+
+	}
+}
+```
+
 ### Изменение ссылки
 
+Добавим новую структуру `LinkUpdateRequest`, которая будет представлять собой тело запроса на изменение данных, куда мы передаём: hash для поиска и url, как новое значение ссылки
 
-
-`internal/link/payload.go`
+`internal / link / payload.go`
 ```Go
 package link
 
 type LinkCreateRequest struct {
 	Url string `json:"url" validate:"required,url"`
 }
+
 type LinkUpdateRequest struct {
 	Url  string `json:"url" validate:"required,url"`
 	Hash string `json:"hash,omitempty"`
 }
 ```
 
+Далее нужно добавить метод `Update` в репозиторий, который с помощью метода `Clauses` будет искать сущность и через `Update` обновлять по uniqueId (коим является hash)
 
-
-`internal/link/repository.go`
+`internal / link / repository.go`
 ```Go
 import (
 	"go/adv-demo/pkg/db"
@@ -9011,16 +9021,18 @@ import (
 
 func (repo *LinkRepository) Update(link *Link) (*Link, error) {
 	result := repo.Database.DB.Clauses(clause.Returning{}).Updates(link)
+	
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	
 	return link, nil
 }
 ```
 
+В конце останется только добавить хэндлер для обновления ссылки
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 import (
 	"fmt"
@@ -9039,20 +9051,25 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
+		// получаем id ссылки
 		idString := r.PathValue("id")
 		id, err := strconv.ParseUint(idString, 10, 32)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
+		
 		link, err := handler.LinkRepository.Update(&Link{
 			Model: gorm.Model{ID: uint(id)},
 			Url:   body.Url,
 			Hash:  body.Hash,
 		})
+		
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
-		res.Json(w, link, 201)
+		
+		res.Json(w, link, http.StatusCreated)
 	}
 }
 ```
