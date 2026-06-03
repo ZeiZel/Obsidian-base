@@ -8812,7 +8812,7 @@ func main() {
 
 ### Создание ссылки
 
-
+Сначала опишем принимаемый payload данных для сохранения ссылки
 
 `internal / link / payload.go`
 ```Go
@@ -8823,79 +8823,122 @@ type LinkCreateRequest struct {
 }
 ```
 
+Далее нам нужно в методе репозитория `Create` реализовать запись в БД значения через GORM. 
 
+Чтобы записать данные в базу, нам достаточно просто вызвать метод `Create` самого GORM, который сам разрулит, в какую таблицу нужно занести данные благодаря тому, что в структуре `Link` мы передали `gorm.Model`. 
+
+Всё, что содержит Model структуру, разруливается автоматом благодаря связи данных и БД. 
 
 `internal / link / repository.go`
 ```Go
 func (repo *LinkRepository) Create(link *Link) (*Link, error) {
+	// можно указать конкретную таблицу, куда полетят данные
+	// result := repo.Database.DB.Table("link").Create(link)
+	// но из-за наличия gorm.Model - это не обязательно
 	result := repo.Database.DB.Create(link)
+	
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	
 	return link, nil
 }
 ```
 
+Далее остаётся только имплементировать репозиторий
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 func (handler *LinkHandler) Create() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// парсим тело ответа
 		body, err := req.HandleBody[LinkCreateRequest](&w, r)
+		
 		if err != nil {
 			return
 		}
+		
+		// создаём инстанс ссылки
 		link := NewLink(body.Url)
+		
+		// записываем в базу ссылку через репозиторий
 		createdLink, err := handler.LinkRepository.Create(link)
+		
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		res.Json(w, createdLink, 201)
-
+		
+		// отвечаем успешным респонсом создания
+		res.Json(w, createdLink, http.StatusCreated)
 	}
 }
 ```
 
+Когда отправляем запрос с неверной ссылкой, получаем ошибку валидации
+
+![](../../_png/Pasted%20image%2020260603200825.png)
+
+Когда отправляем правильную ссылку, получаем полную сохранённую структуру в базе данных
+
+![](../../_png/Pasted%20image%2020260603200836.png)
+
+И в базу все данные записываются
+
+![](../../_png/Pasted%20image%2020260603201228.png)
+
 ### Получение ссылки
 
+Сначала нам нужно получить ссылку по хэшу, который прилетел нам с клиента. Для реализации этого в GORM существует метод `First`, который принимает в себя:
 
+1. Указатель на переменную, куда нужно сложить результат
+2. Строку с SQL условиями, где в `?` подставляется строка, по которой ищем (можно вставлять сколько угодно `?`)
+3. И сами значения, которые должны будут подставиться вместо `?` (передаём дальше через запятую, сколько нужно аргументов) 
 
-`internal/link/repository.go`
+`internal / link / repository.go`
 ```Go
 func (repo *LinkRepository) GetByHash(hash string) (*Link, error) {
 	var link Link
 	result := repo.Database.DB.First(&link, "hash = ?", hash)
+	
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	
 	return &link, nil
 }
 ```
 
+В конце останется только имплементировать в хэндлере
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 func (handler *LinkHandler) GoTo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// берём из пути слаг с именем хэш
 		hash := r.PathValue("hash")
+		
 		link, err := handler.LinkRepository.GetByHash(hash)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
+		
+		// делаем редирект на найденную ссылку
 		http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
 	}
 }
 ```
 
+В результате нам прилетит редирект на нужную ссылку
+
+![](../../_png/Pasted%20image%2020260603203920.png)
+
 #### Проверка hash
 
 
 
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 func (handler *LinkHandler) Create() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
