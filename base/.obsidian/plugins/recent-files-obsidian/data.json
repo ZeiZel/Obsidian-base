@@ -1,6 +1,46 @@
 {
   "recentFiles": [
     {
+      "basename": "nvim",
+      "path": "tools/nvim/nvim.md"
+    },
+    {
+      "basename": "Базовые motion",
+      "path": "tools/nvim/_lessons/Базовые motion.md"
+    },
+    {
+      "basename": "Удаление и копирование",
+      "path": "tools/nvim/_lessons/Удаление и копирование.md"
+    },
+    {
+      "basename": "Преобразование текста",
+      "path": "tools/nvim/_lessons/Преобразование текста.md"
+    },
+    {
+      "basename": "Visual mode и макросы",
+      "path": "tools/nvim/_lessons/Visual mode и макросы.md"
+    },
+    {
+      "basename": "Основы lua",
+      "path": "tools/nvim/_lessons/Основы lua.md"
+    },
+    {
+      "basename": "Конфигурация",
+      "path": "tools/nvim/_lessons/Конфигурация.md"
+    },
+    {
+      "basename": "Плагины UI",
+      "path": "tools/nvim/_lessons/Плагины UI.md"
+    },
+    {
+      "basename": "Плагины для разработки",
+      "path": "tools/nvim/_lessons/Плагины для разработки.md"
+    },
+    {
+      "basename": "Продвинутая работа",
+      "path": "tools/nvim/_lessons/Продвинутая работа.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -11,10 +51,6 @@
     {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
-    },
-    {
-      "basename": "competitions_map",
-      "path": "competitions_map.md"
     },
     {
       "basename": "System Design",
@@ -163,42 +199,6 @@
     {
       "basename": "whatsapp.excalidraw",
       "path": "Excalidraw/whatsapp.excalidraw.md"
-    },
-    {
-      "basename": "friend_line_vk.excalidraw",
-      "path": "Excalidraw/friend_line_vk.excalidraw.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
-    },
-    {
-      "basename": "Client-server architecture",
-      "path": "concepts/Client-server architecture.md"
-    },
-    {
-      "basename": "Безопасность",
-      "path": "architecture/System Design/Безопасность.md"
-    },
-    {
-      "basename": "system-design",
-      "path": "interview/system-design.md"
-    },
-    {
-      "basename": "principles",
-      "path": "cs/principles.md"
-    },
-    {
-      "basename": "Практический JS",
-      "path": "frontend/react/Практический JS.md"
-    },
-    {
-      "basename": "programming",
-      "path": "cs/programming.md"
-    },
-    {
-      "basename": "Git",
-      "path": "cs/GIT/Git.md"
     }
   ],
   "omittedPaths": [],

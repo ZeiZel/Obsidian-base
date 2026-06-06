@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "architecture/System Design/System Design.md",
+                "file": "tools/nvim/nvim.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -100,34 +100,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "System Design"
-            }
-          },
-          {
-            "id": "f66f73e1e85de372",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "competitions_map.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "competitions_map"
+              "title": "nvim"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "7c06d5c9031d17fe",
@@ -670,8 +647,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 10
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -694,13 +670,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline"
             }
           }
         ],
@@ -708,7 +683,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300.5
+    "width": 488.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -732,8 +707,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "67697483e6c0f6c0",
+  "active": "6fa2dae8cc23e1d8",
   "lastOpenFiles": [
+    "tools/nvim/nvim.md",
+    "tools/nvim/_lessons/Базовые motion.md",
+    "tools/nvim/_lessons/Удаление и копирование.md",
+    "tools/nvim/_lessons/Преобразование текста.md",
+    "tools/nvim/_lessons/Visual mode и макросы.md",
+    "tools/nvim/_lessons/Основы lua.md",
+    "tools/nvim/_lessons/Конфигурация.md",
+    "tools/nvim/_lessons/Плагины UI.md",
+    "tools/nvim/_lessons/Плагины для разработки.md",
+    "tools/nvim/_lessons/Продвинутая работа.md",
+    "competitions_map.md",
+    "backend/go/Selfgo.md",
     "_png/Pasted image 20260603203920.png",
     "_png/Pasted image 20260603201228.png",
     "_png/Pasted image 20260603201116.png",
@@ -745,10 +732,7 @@
     "_png/Pasted image 20260531212922.png",
     "_png/Pasted image 20260531212831.png",
     "_png/Pasted image 20260531212717.png",
-    "_png/Pasted image 20260531212609.png",
-    "backend/go/Selfgo.md",
     "agile/Teamlead Balun Courses.md",
-    "competitions_map.md",
     "architecture/System Design/System Design.md",
     "agile/Teamlead.md",
     "agile/scrum.md",
@@ -761,15 +745,6 @@
     "soft/influence-and-persuasion.md",
     "soft/goal-setting.md",
     "soft/conflict-resolution.md",
-    "soft/communication.md",
-    "soft/charisma.md",
-    "soft/career-growth.md",
-    "soft/anxiety-management.md",
-    "agile/metrics.md",
-    "agile/kanban.md",
-    "agile/command.md",
-    "agile/DISC.md",
-    "agile/agile.md",
     "interview/web",
     "interview/react",
     "interview/javascript",
