@@ -5,42 +5,6 @@
       "path": "tools/nvim/nvim.md"
     },
     {
-      "basename": "Базовые motion",
-      "path": "tools/nvim/_lessons/Базовые motion.md"
-    },
-    {
-      "basename": "Удаление и копирование",
-      "path": "tools/nvim/_lessons/Удаление и копирование.md"
-    },
-    {
-      "basename": "Преобразование текста",
-      "path": "tools/nvim/_lessons/Преобразование текста.md"
-    },
-    {
-      "basename": "Visual mode и макросы",
-      "path": "tools/nvim/_lessons/Visual mode и макросы.md"
-    },
-    {
-      "basename": "Основы lua",
-      "path": "tools/nvim/_lessons/Основы lua.md"
-    },
-    {
-      "basename": "Конфигурация",
-      "path": "tools/nvim/_lessons/Конфигурация.md"
-    },
-    {
-      "basename": "Плагины UI",
-      "path": "tools/nvim/_lessons/Плагины UI.md"
-    },
-    {
-      "basename": "Плагины для разработки",
-      "path": "tools/nvim/_lessons/Плагины для разработки.md"
-    },
-    {
-      "basename": "Продвинутая работа",
-      "path": "tools/nvim/_lessons/Продвинутая работа.md"
-    },
-    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
@@ -187,18 +151,6 @@
     {
       "basename": "leetcode.excalidraw",
       "path": "Excalidraw/leetcode.excalidraw.md"
-    },
-    {
-      "basename": "booking.excalidraw",
-      "path": "Excalidraw/booking.excalidraw.md"
-    },
-    {
-      "basename": "yandex_taxi.excalidraw",
-      "path": "Excalidraw/yandex_taxi.excalidraw.md"
-    },
-    {
-      "basename": "whatsapp.excalidraw",
-      "path": "Excalidraw/whatsapp.excalidraw.md"
     }
   ],
   "omittedPaths": [],

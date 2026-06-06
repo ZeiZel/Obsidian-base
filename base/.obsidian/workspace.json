@@ -670,12 +670,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "tools/nvim/nvim.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of nvim"
             }
           }
         ],
@@ -707,15 +708,18 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "6fa2dae8cc23e1d8",
+  "active": "656d24955483df37",
   "lastOpenFiles": [
     "tools/nvim/nvim.md",
+    "tools/nvim/_lessons/Visual mode и макросы.md",
     "tools/nvim/_lessons/Базовые motion.md",
+    "tools/nvim/_lessons/Введение.md",
+    "tools/nvim/_lessons/Конфигурация.md",
+    "tools/nvim/_png/Pasted image 20240929155030.png",
+    "tools/nvim/_png/Pasted image 20240922085853.png",
     "tools/nvim/_lessons/Удаление и копирование.md",
     "tools/nvim/_lessons/Преобразование текста.md",
-    "tools/nvim/_lessons/Visual mode и макросы.md",
     "tools/nvim/_lessons/Основы lua.md",
-    "tools/nvim/_lessons/Конфигурация.md",
     "tools/nvim/_lessons/Плагины UI.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "tools/nvim/_lessons/Продвинутая работа.md",
@@ -730,8 +734,6 @@
     "_png/Pasted image 20260531213058.png",
     "_png/Pasted image 20260531212953.png",
     "_png/Pasted image 20260531212922.png",
-    "_png/Pasted image 20260531212831.png",
-    "_png/Pasted image 20260531212717.png",
     "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
     "agile/Teamlead.md",
@@ -744,7 +746,6 @@
     "soft/saying-no.md",
     "soft/influence-and-persuasion.md",
     "soft/goal-setting.md",
-    "soft/conflict-resolution.md",
     "interview/web",
     "interview/react",
     "interview/javascript",
