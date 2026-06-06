@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tools/nvim/nvim.md",
+                "file": "tools/nvim.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -670,7 +670,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tools/nvim/nvim.md",
+                "file": "tools/nvim.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -708,9 +708,21 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "656d24955483df37",
+  "active": "81064822a7c5263b",
   "lastOpenFiles": [
-    "tools/nvim/nvim.md",
+    "tools/nvim.md",
+    "tools/TMUX.md",
+    "tools/ZSH.md",
+    "soft/communication.md",
+    "languages/russian.md",
+    "soft/charisma.md",
+    "soft/career-growth.md",
+    "soft/anxiety-management.md",
+    "tools/Aerospace.md",
+    "tools/Flameshot.md",
+    "tools/Yazi.md",
+    "tools/tools.md",
+    "tools/Terminal.md",
     "tools/nvim/_lessons/Visual mode и макросы.md",
     "tools/nvim/_lessons/Базовые motion.md",
     "tools/nvim/_lessons/Введение.md",
@@ -734,18 +746,6 @@
     "_png/Pasted image 20260531213058.png",
     "_png/Pasted image 20260531212953.png",
     "_png/Pasted image 20260531212922.png",
-    "agile/Teamlead Balun Courses.md",
-    "architecture/System Design/System Design.md",
-    "agile/Teamlead.md",
-    "agile/scrum.md",
-    "soft/speech-and-reading.md",
-    "soft/emotional-intelligence.md",
-    "soft/social-skills.md",
-    "soft/stress-sapolsky.md",
-    "soft/soft.md",
-    "soft/saying-no.md",
-    "soft/influence-and-persuasion.md",
-    "soft/goal-setting.md",
     "interview/web",
     "interview/react",
     "interview/javascript",

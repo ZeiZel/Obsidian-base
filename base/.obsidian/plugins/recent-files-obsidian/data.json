@@ -2,7 +2,35 @@
   "recentFiles": [
     {
       "basename": "nvim",
-      "path": "tools/nvim/nvim.md"
+      "path": "tools/nvim.md"
+    },
+    {
+      "basename": "TMUX",
+      "path": "tools/TMUX.md"
+    },
+    {
+      "basename": "ZSH",
+      "path": "tools/ZSH.md"
+    },
+    {
+      "basename": "communication",
+      "path": "soft/communication.md"
+    },
+    {
+      "basename": "russian",
+      "path": "languages/russian.md"
+    },
+    {
+      "basename": "charisma",
+      "path": "soft/charisma.md"
+    },
+    {
+      "basename": "career-growth",
+      "path": "soft/career-growth.md"
+    },
+    {
+      "basename": "anxiety-management",
+      "path": "soft/anxiety-management.md"
     },
     {
       "basename": "Selfgo",
@@ -63,22 +91,6 @@
     {
       "basename": "conflict-resolution",
       "path": "soft/conflict-resolution.md"
-    },
-    {
-      "basename": "communication",
-      "path": "soft/communication.md"
-    },
-    {
-      "basename": "charisma",
-      "path": "soft/charisma.md"
-    },
-    {
-      "basename": "career-growth",
-      "path": "soft/career-growth.md"
-    },
-    {
-      "basename": "anxiety-management",
-      "path": "soft/anxiety-management.md"
     },
     {
       "basename": "metrics",
