@@ -103,7 +103,8 @@
               "title": "nvim"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "7c06d5c9031d17fe",
@@ -682,13 +683,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline of Teamlead Balun Courses"
             }
           }
         ],
@@ -721,15 +722,20 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "67697483e6c0f6c0",
+  "active": "cb318054b57eae23",
   "lastOpenFiles": [
-    "_png/Pasted image 20260607184904.png",
-    "_png/Pasted image 20260607183756.png",
-    "_png/Pasted image 20260607183657.png",
-    "_png/Pasted image 20260607183618.png",
-    "_png/Pasted image 20260607181925.png",
-    "_png/Pasted image 20260607181837.png",
-    "_png/Pasted image 20260607175841.png",
+    "_png/Pasted image 20260607213952.png",
+    "_png/Pasted image 20260607213747.png",
+    "_png/Pasted image 20260607213731.png",
+    "_png/Pasted image 20260607213709.png",
+    "_png/Pasted image 20260607213437.png",
+    "_png/Pasted image 20260607201118.png",
+    "_png/Pasted image 20260607201025.png",
+    "_png/Pasted image 20260607200230.png",
+    "_png/Pasted image 20260607200003.png",
+    "_png/Pasted image 20260607195843.png",
+    "_png/Pasted image 20260607195607.png",
+    "backend/go/Selfgo.md",
     "tools/nvim.md",
     "soft/vocabularity - голосовой тренинг.md",
     "tools/TMUX.md",
@@ -748,17 +754,12 @@
     "tools/nvim/_lessons/Базовые motion.md",
     "tools/nvim/_lessons/Введение.md",
     "tools/nvim/_lessons/Конфигурация.md",
-    "tools/nvim/_png/Pasted image 20240929155030.png",
-    "tools/nvim/_png/Pasted image 20240922085853.png",
     "tools/nvim/_lessons/Удаление и копирование.md",
     "tools/nvim/_lessons/Преобразование текста.md",
     "tools/nvim/_lessons/Основы lua.md",
     "tools/nvim/_lessons/Плагины UI.md",
     "tools/nvim/_lessons/Плагины для разработки.md",
     "tools/nvim/_lessons/Продвинутая работа.md",
-    "competitions_map.md",
-    "_png/Pasted image 20260603203920.png",
-    "_png/Pasted image 20260603201228.png",
     "interview/web",
     "interview/react",
     "interview/javascript",
