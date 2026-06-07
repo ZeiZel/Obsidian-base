@@ -1,8 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
       "basename": "nvim",
       "path": "tools/nvim.md"
+    },
+    {
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "TMUX",
@@ -31,14 +39,6 @@
     {
       "basename": "anxiety-management",
       "path": "soft/anxiety-management.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
-      "basename": "vocabularity - голосовой тренинг",
-      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "Teamlead Balun Courses",

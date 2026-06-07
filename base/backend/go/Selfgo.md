@@ -9009,18 +9009,23 @@ type LinkUpdateRequest struct {
 }
 ```
 
-Далее нужно добавить метод `Update` в репозиторий, который с помощью метода `Clauses` будет искать сущность и через `Update` обновлять по uniqueId (коим является hash)
+Далее нужно добавить метод `Update` в репозиторий, который с помощью `Updates` обновит определённую ссылку. Ссылка будет найдена с помощью данных по самой модели, которые автоматически создаёт GORM для модели. 
+Метод `Clauses` здесь только добавляет возврат полной модели, а не только обновлённой её части. Его можно и выпустить, если нам не нужно никуда возвращать данные. 
 
 `internal / link / repository.go`
 ```Go
-import (
-	"go/adv-demo/pkg/db"
-
-	"gorm.io/gorm/clause"
+import (  
+    "ZeiZel/go-adv/pkg/db"  
+    "errors"  
+    "gorm.io/gorm"    
+    "gorm.io/gorm/clause"
 )
 
 func (repo *LinkRepository) Update(link *Link) (*Link, error) {
-	result := repo.Database.DB.Clauses(clause.Returning{}).Updates(link)
+	result := repo.Database.DB.
+		// создание нового объекта 
+		Clauses(clause.Returning{}).
+		Updates(link)
 	
 	if result.Error != nil {
 		return nil, result.Error
@@ -9034,14 +9039,12 @@ func (repo *LinkRepository) Update(link *Link) (*Link, error) {
 
 `internal / link / handler.go`
 ```Go
-import (
-	"fmt"
-	"go/adv-demo/pkg/req"
-	"go/adv-demo/pkg/res"
-	"net/http"
-	"strconv"
-
-	"gorm.io/gorm"
+import (  
+    "ZeiZel/go-adv/pkg/req"  
+    "ZeiZel/go-adv/pkg/res"    
+    "net/http"    
+    "strconv"  
+    "gorm.io/gorm"
 )
 
 
@@ -9054,19 +9057,23 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 		
 		// получаем id ссылки
 		idString := r.PathValue("id")
+		// парсим id как число
 		id, err := strconv.ParseUint(idString, 10, 32)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 		
+		// создаём новую структуру ссылки и передаём в репозиторий для обновления
 		link, err := handler.LinkRepository.Update(&Link{
-			Model: gorm.Model{ID: uint(id)},
+			Model: gorm.Model{ID: uint(id)}, // переводим в uint
 			Url:   body.Url,
 			Hash:  body.Hash,
 		})
 		
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 		
 		res.Json(w, link, http.StatusCreated)
@@ -9074,11 +9081,30 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 }
 ```
 
+И при отправке обновлённой ссылки, мы получили полностью новую обновлённую модель 
+
+![](../../_png/Pasted%20image%2020260607175841.png)
+
 ### Удаление ссылки
 
+Добавляем в репозиторий метод для очистки данных из текущего репозитория. Сигнатура метода `Delete` сначала принимает структуру, с которой мы работаем (определение таблицы) и в кратком формате можем передать `id` либо передать строку для поиска, как в методе `Update`
 
+`internal / link / repository.go`
+```Go
+func (repository *LinkRepository) Delete(id uint) error {  
+    result := repository.Database.DB.Delete(&Link{}, id)  
+  
+    if result.Error != nil {  
+       return result.Error  
+    }  
+  
+    return nil  
+}
+```
 
-`internal/link/handler.go`
+Далее добавим небольшой `Delete` хэндлер, который получит `id` и передаст его в репозиторий
+
+`internal / link / handler.go`
 ```Go
 func (handler *LinkHandler) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -9086,74 +9112,53 @@ func (handler *LinkHandler) Delete() http.HandlerFunc {
 		id, err := strconv.ParseUint(idString, 10, 32)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
+		
 		err = handler.LinkRepository.Delete(uint(id))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
+		
 		res.Json(w, nil, 200)
 	}
 }
 ```
 
+Далее отправим запрос на удаление
 
+![](../../_png/Pasted%20image%2020260607181837.png)
 
-`internal/link/repository.go`
-```Go
-func (repo *LinkRepository) Delete(id uint) error {
-	result := repo.Database.DB.Delete(&Link{}, id)
-	if result.Error != nil {
-		return result.Error
-	}
-	return nil
-}
-```
+И в базе у записи заполнилось поле deleted_at
+
+![](../../_png/Pasted%20image%2020260607181925.png)
 
 #### Проверка наличия
 
+Далее нам нужно реализовать в репозитории поиск записи по id, чтобы сразу отбивать ошибкой DELETE запрос, если его не существует, так как дефолтно ответ всегда 200, даже при удалении несуществующей записи.  
 
+Добавим метод `GetById`.
 
-`internal/link/repository.go`
+`internal / link / repository.go`
 ```Go
 func (repo *LinkRepository) GetById(id uint) (*Link, error) {
 	var link Link
+	// ищем первое значение
 	result := repo.Database.DB.First(&link, id)
+	
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	
 	return &link, nil
 }
 ```
 
+Далее нужно добавить проверку существования записи по определённому `id`
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
-func (handler *LinkHandler) Update() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		body, err := req.HandleBody[LinkUpdateRequest](&w, r)
-		if err != nil {
-			return
-		}
-		idString := r.PathValue("id")
-		id, err := strconv.ParseUint(idString, 10, 32)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-		link, err := handler.LinkRepository.Update(&Link{
-			Model: gorm.Model{ID: uint(id)},
-			Url:   body.Url,
-			Hash:  body.Hash,
-		})
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-		res.Json(w, link, 201)
-	}
-}
-
 func (handler *LinkHandler) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		idString := r.PathValue("id")
@@ -9162,20 +9167,28 @@ func (handler *LinkHandler) Delete() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		
+		// проверяем существование записи по id
 		_, err = handler.LinkRepository.GetById(uint(id))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
+		
 		err = handler.LinkRepository.Delete(uint(id))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+		
 		res.Json(w, nil, 200)
 	}
 }
 ```
+
+И теперь при отправке несуществующей записи, мы получим 404 вместо 200, которые летели раньше. 
+
+![](../../_png/Pasted%20image%2020260607183756.png)
 
 
 
@@ -9183,7 +9196,15 @@ func (handler *LinkHandler) Delete() http.HandlerFunc {
 
 ### Что такое middleware
 
+Middleware - это подход, при котором мы реализовываем функцию-обработчик, что выполняет действие, преобразовывает или обогащает запрос
 
+![](../../_png/Pasted%20image%2020260607184904.png)
+
+| Плюсы                                      | Минусы                          |
+| ------------------------------------------ | ------------------------------- |
+| Удобство за счёт универсальной точки входа | Неявное преобразование запросов |
+
+>[!success] В идеальном варианте, middleware должен минимально влиять на запрос. 
 
 ### Первый обработчик
 

@@ -103,8 +103,7 @@
               "title": "nvim"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "7c06d5c9031d17fe",
@@ -498,11 +497,13 @@
               "title": "Vertical tabs"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 343.50390243530273
+    "width": 561.5110359191895,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -641,13 +642,24 @@
             "id": "1c3491affaca3232",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "ec815b2c85decb99",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 11
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -670,13 +682,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tools/nvim.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of nvim"
+              "title": "Outline of Selfgo"
             }
           }
         ],
@@ -684,7 +696,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 488.5
+    "width": 488.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -708,9 +721,17 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "81064822a7c5263b",
+  "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260607184904.png",
+    "_png/Pasted image 20260607183756.png",
+    "_png/Pasted image 20260607183657.png",
+    "_png/Pasted image 20260607183618.png",
+    "_png/Pasted image 20260607181925.png",
+    "_png/Pasted image 20260607181837.png",
+    "_png/Pasted image 20260607175841.png",
     "tools/nvim.md",
+    "soft/vocabularity - голосовой тренинг.md",
     "tools/TMUX.md",
     "tools/ZSH.md",
     "soft/communication.md",
@@ -736,16 +757,8 @@
     "tools/nvim/_lessons/Плагины для разработки.md",
     "tools/nvim/_lessons/Продвинутая работа.md",
     "competitions_map.md",
-    "backend/go/Selfgo.md",
     "_png/Pasted image 20260603203920.png",
     "_png/Pasted image 20260603201228.png",
-    "_png/Pasted image 20260603201116.png",
-    "_png/Pasted image 20260603200836.png",
-    "_png/Pasted image 20260603200825.png",
-    "soft/vocabularity - голосовой тренинг.md",
-    "_png/Pasted image 20260531213058.png",
-    "_png/Pasted image 20260531212953.png",
-    "_png/Pasted image 20260531212922.png",
     "interview/web",
     "interview/react",
     "interview/javascript",
