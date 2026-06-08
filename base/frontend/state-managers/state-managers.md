@@ -30,17 +30,18 @@ tags:
 
 ## Сравнение
 
-| Критерий | Zustand | MobX | Jotai | Effector | Valtio |
-|---|---|---|---|---|---|
-| Парадигма | Flux-like | Observable | Atomic | Event-driven | Proxy |
-| Размер (gzip) | ~1.1 KB | ~16 KB | ~3.2 KB | ~10 KB | ~3.8 KB |
-| Кривая обучения | Низкая | Средняя | Низкая | Высокая | Низкая |
-| TypeScript | Хорошая | Хорошая | Отличная | Отличная | Хорошая |
-| Фреймворки | React | React, Vue, Angular | React | React, Vue, Solid | React, Vue |
-| Бойлерплейт | Минимальный | Минимальный | Минимальный | Средний | Минимальный |
-| DevTools | Redux DevTools | MobX DevTools | Jotai DevTools | Inspector | Redux DevTools |
-| SSR | Через persist | Ручная настройка | Через Provider | Встроенный (Scope) | Ручная настройка |
-| React Suspense | Нет | Нет | Да | Нет | Нет |
+| Критерий | Zustand | MobX | Jotai | Effector | Valtio | Signals |
+|---|---|---|---|---|---|---|
+| NPM | [zustand](https://www.npmjs.com/package/zustand) | [mobx](https://www.npmjs.com/package/mobx) | [jotai](https://www.npmjs.com/package/jotai) | [effector](https://www.npmjs.com/package/effector) | [valtio](https://www.npmjs.com/package/valtio) | [@preact/signals-react](https://www.npmjs.com/package/@preact/signals-react) |
+| Парадигма | Flux-like | Observable | Atomic | Event-driven | Proxy | Fine-grained reactivity |
+| Размер (gzip) | ~1.1 KB | ~16 KB | ~3.2 KB | ~10 KB | ~3.8 KB | ~1.3 KB |
+| Кривая обучения | Низкая | Средняя | Низкая | Высокая | Низкая | Средняя |
+| TypeScript | Хорошая | Хорошая | Отличная | Отличная | Хорошая | Хорошая |
+| Фреймворки | React | React, Vue, Angular | React | React, Vue, Solid | React, Vue | Preact, React |
+| Бойлерплейт | Минимальный | Минимальный | Минимальный | Средний | Минимальный | Минимальный |
+| DevTools | Redux DevTools | MobX DevTools | Jotai DevTools | Inspector | Redux DevTools | Ограниченно |
+| SSR | Через persist | Ручная настройка | Через Provider | Встроенный (Scope) | Ручная настройка | Зависит от интеграции |
+| React Suspense | Нет | Нет | Да | Нет | Нет | Нет |
 
 ---
 

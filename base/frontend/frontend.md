@@ -63,6 +63,7 @@ tags:
 
 ## Инструменты и практики
 
+- [[tips-n-tricks/tips-n-tricks]] - frontend лайфхаки, подходы, CSS presets, React-практики, организация кода, helper-функции и подбор библиотек
 - [[RxJS]] - реактивное программирование (Angular, React, Vue)
 - [[Web Vitals]] - метрики производительности и оптимизация
 - [[microfrontends]] - микрофронтенды на базе NX и Module Federation

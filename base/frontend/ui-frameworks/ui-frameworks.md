@@ -9,14 +9,14 @@ tags:
 
 ## Сравнение фреймворков
 
-| Фреймворк | Компоненты | Bundle size | Кастомизация | TypeScript | Дизайн-система | Фреймворки |
-|---|---|---|---|---|---|---|
-| Ant Design | 60+ | ~350 KB | Design Tokens | Нативный | Ant Design | React |
-| MUI | 50+ | ~300 KB | Theme + sx | Нативный | Material Design | React |
-| Mantine | 100+ | ~200 KB | CSS Variables | Нативный | Собственная | React |
-| shadcn/ui | 40+ | ~0 KB (copy) | Tailwind + CSS Vars | Нативный | Radix-based | React, Next.js |
-| Chakra UI | 50+ | ~160 KB | Theme tokens | Нативный | Собственная | React |
-| Base UI | 25+ | ~50 KB | Любой CSS | Нативный | Headless | React |
+| Фреймворк | NPM | Компоненты | Bundle size | Кастомизация | TypeScript | Дизайн-система | Фреймворки |
+|---|---|---|---|---|---|---|---|
+| Ant Design | [antd](https://www.npmjs.com/package/antd) | 60+ | ~350 KB | Design Tokens | Нативный | Ant Design | React |
+| MUI | [@mui/material](https://www.npmjs.com/package/@mui/material) | 50+ | ~300 KB | Theme + sx | Нативный | Material Design | React |
+| Mantine | [@mantine/core](https://www.npmjs.com/package/@mantine/core) | 100+ | ~200 KB | CSS Variables | Нативный | Собственная | React |
+| shadcn/ui | [shadcn](https://www.npmjs.com/package/shadcn) | 40+ | ~0 KB (copy) | Tailwind + CSS Vars | Нативный | Radix-based | React, Next.js |
+| Chakra UI | [@chakra-ui/react](https://www.npmjs.com/package/@chakra-ui/react) | 50+ | ~160 KB | Theme tokens | Нативный | Собственная | React |
+| Base UI | [@base-ui-components/react](https://www.npmjs.com/package/@base-ui-components/react) | 25+ | ~50 KB | Любой CSS | Нативный | Headless | React |
 
 > [!info] Bundle size
 > Указан примерный размер при полном импорте. На практике tree-shaking значительно уменьшает итоговый бандл. shadcn/ui не является npm-пакетом - компоненты копируются в проект, поэтому размер зависит от того, сколько компонентов добавлено.

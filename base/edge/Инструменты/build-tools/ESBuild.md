@@ -4,6 +4,8 @@ tags:
 ---
 #esbuild #bundler
 
+[NPM: esbuild](https://www.npmjs.com/package/esbuild)
+
 ## Что это такое?
 
 ESBuild - это сборщик пакетов
@@ -15,7 +17,18 @@ ESBuild - это сборщик пакетов
 - Минималистичный
 - Достаточно новый и на современных технологиях
 
-Из недостатков можно выделить то, что у него меньше решений различных вопросов (нет настройки css modules) и чуть меньше коммюнити
+Из недостатков можно выделить то, что у него меньше готовых решений для отдельных frontend-сценариев и меньше возможностей на уровне экосистемы, чем у Webpack/Vite.
+
+## Где ESBuild особенно полезен
+
+- сборка TypeScript-библиотек;
+- быстрый transpile в dev-инструментах;
+- сборка CLI;
+- backend-bundling для Node.js;
+- минификация;
+- внутренние build-скрипты.
+
+Важно: esbuild быстро трансформирует TypeScript в JavaScript, но не выполняет полноценную проверку типов. Для этого отдельно запускают `tsc --noEmit`.
 
 ## Как стартовать?
 
@@ -28,6 +41,30 @@ ESBuild - это сборщик пакетов
 ```bash
 esbuild ./src/index.js --bundle --outdir="dist"
 ```
+
+Для TypeScript:
+
+```bash
+esbuild ./src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js
+```
+
+## Полезные флаги
+
+```bash
+esbuild src/index.ts \
+  --bundle \
+  --minify \
+  --sourcemap \
+  --platform=node \
+  --target=node20 \
+  --outfile=dist/index.js
+```
+
+- `bundle` - собирает зависимости в один граф.
+- `platform` - задаёт окружение: `browser`, `node`, `neutral`.
+- `target` - версия JS/рантайма.
+- `sourcemap` - генерирует sourcemap для дебага.
+- `external` - исключает пакет из бандла.
 
 ## Конфигурация
 
@@ -43,7 +80,7 @@ ESBuild смотрит так же на нашу конфигурацию TS
     // запрет на any
     "noImplicitAny": true,
     "module": "ESNext",
-    // в какой формат копилируем, в данном случае ecmascript 6
+    // в какой формат компилируем, в данном случае ecmascript 6
     "target": "es6",
     "jsx": "react-jsx",
     // Компилятор будет обрабатывать не только TS файлы, но и JS файлы
@@ -313,3 +350,21 @@ ESBuild.build(config)
 	"start": "ts-node config/build/esbuild-dev.ts"
 },
 ```
+
+## Плюсы
+
+- очень высокая скорость сборки;
+- простой API и CLI;
+- хорош для библиотек, CLI и backend-bundling.
+
+## Минусы
+
+- не делает полноценный TypeScript typecheck;
+- меньше возможностей и плагинов, чем у Webpack;
+- для сложных frontend-приложений часто нужен слой выше.
+
+## Когда использовать
+
+- нужна быстрая трансформация TS/JS;
+- собирается библиотека, CLI или Node.js-сервис;
+- typecheck запускается отдельно через `tsc --noEmit`.

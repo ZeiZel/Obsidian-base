@@ -5,16 +5,44 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "css-presets",
+      "path": "frontend/tips-n-tricks/css-presets.md"
+    },
+    {
+      "basename": "css-features",
+      "path": "frontend/tips-n-tricks/css-features.md"
+    },
+    {
+      "basename": "react-best-practices",
+      "path": "frontend/tips-n-tricks/react-best-practices.md"
+    },
+    {
+      "basename": "helpers-and-types",
+      "path": "frontend/tips-n-tricks/helpers-and-types.md"
+    },
+    {
+      "basename": "frontend-libraries",
+      "path": "frontend/tips-n-tricks/frontend-libraries.md"
+    },
+    {
+      "basename": "mixin-content",
+      "path": "frontend/tips-n-tricks/mixin-content.md"
     },
     {
       "basename": "nvim",
       "path": "tools/nvim.md"
     },
     {
+      "basename": "edge",
+      "path": "edge/edge.md"
+    },
+    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "TMUX",
@@ -135,34 +163,6 @@
     {
       "basename": "empiricism",
       "path": "agile/empiricism.md"
-    },
-    {
-      "basename": "scaling",
-      "path": "agile/scaling.md"
-    },
-    {
-      "basename": "practices",
-      "path": "agile/practices.md"
-    },
-    {
-      "basename": "manifest",
-      "path": "agile/manifest.md"
-    },
-    {
-      "basename": "frameworks",
-      "path": "agile/frameworks.md"
-    },
-    {
-      "basename": "leadership",
-      "path": "soft/leadership.md"
-    },
-    {
-      "basename": "google_drive.excalidraw",
-      "path": "Excalidraw/google_drive.excalidraw.md"
-    },
-    {
-      "basename": "leetcode.excalidraw",
-      "path": "Excalidraw/leetcode.excalidraw.md"
     }
   ],
   "omittedPaths": [],

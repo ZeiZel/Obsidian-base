@@ -29,7 +29,6 @@ tags:
 
 #### Почему TypeScript:
 
-- это
 - Предлагает строгую типизацию, улучшая безопасность и качество кода.
 - Упрощает рефакторинг и повышает читаемость кода, предоставляя автокомплит и поддержку IDE.
 - Поддержка TypeScript широко распространена среди фреймворков и библиотек (Angular, React, Node.js и др.)
@@ -131,7 +130,7 @@ console.log(res);
 "noImplicitAny": false
 ```
 
-И теперь ошибок нет- мы можем не подписывать `any`
+И теперь ошибок нет - мы можем не подписывать `any`
 
 ![](_png/e0bfce20c602a793f79338a14dd2851d.png)
 
@@ -144,7 +143,7 @@ function getName(name: string, surname: string): string {
 	return `${name} ${surname}`
 }
 
-const getNameArrow = (name: string, surname: string): string {
+const getNameArrow = (name: string, surname: string): string => {
 	return `${name} ${surname}`
 }
 ```
