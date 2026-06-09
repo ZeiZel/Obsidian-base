@@ -5,6 +5,10 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
       "basename": "css-presets",
       "path": "frontend/tips-n-tricks/css-presets.md"
     },
@@ -35,10 +39,6 @@
     {
       "basename": "edge",
       "path": "edge/edge.md"
-    },
-    {
-      "basename": "vocabularity - голосовой тренинг",
-      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "Selfgo",

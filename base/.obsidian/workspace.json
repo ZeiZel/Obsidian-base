@@ -56,12 +56,12 @@
             }
           },
           {
-            "id": "81064822a7c5263b",
+            "id": "b63d9b7faf73e599",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "frontend/tips-n-tricks/css-presets.md",
+                "file": "soft/vocabularity - голосовой тренинг.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -76,7 +76,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "css-presets"
+              "title": "vocabularity - голосовой тренинг"
             }
           }
         ],
@@ -474,12 +474,12 @@
               "title": "Vertical tabs"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 225.51103591918945,
-    "collapsed": true
+    "width": 376.51103591918945
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -628,6 +628,36 @@
             "id": "ec815b2c85decb99",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "6c8b9d472a4aad2e",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "0ea26c8c2e373c05",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "ae3cdb1c37a24c69",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -635,7 +665,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 14
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -658,13 +688,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead Balun Courses.md",
+                "file": "soft/vocabularity - голосовой тренинг.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Teamlead Balun Courses"
+              "title": "Outline of vocabularity - голосовой тренинг"
             }
           }
         ],
@@ -699,6 +729,9 @@
   },
   "active": "cb318054b57eae23",
   "lastOpenFiles": [
+    "soft/vocabularity - голосовой тренинг.md",
+    "agile/Teamlead Balun Courses.md",
+    "frontend/tips-n-tricks/css-presets.md",
     "_png/Pasted image 20260608224129.png",
     "_png/Pasted image 20260608224116.png",
     "_png/Pasted image 20260608223610.png",
@@ -708,7 +741,6 @@
     "_png/Pasted image 20260608223116.png",
     "_png/Pasted image 20260608222849.png",
     "_png/Pasted image 20260608221558.png",
-    "frontend/tips-n-tricks/css-presets.md",
     "frontend/tips-n-tricks/css-features.md",
     "frontend/tips-n-tricks/react-best-practices.md",
     "frontend/tips-n-tricks/helpers-and-types.md",
@@ -732,7 +764,6 @@
     "edge/Инструменты/quality-tools/TypeScript Config.md",
     "edge/Инструменты/quality-tools/ESLint.md",
     "edge/Инструменты/package-managers/PNPM.md",
-    "edge/Инструменты/build-tools/tsup.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
@@ -743,7 +774,6 @@
     "edge/Инструменты/engines",
     "edge/Инструменты/validators",
     "_png/Pasted image 20260607213952.png",
-    "_png/Pasted image 20260607213747.png",
     "interview/web",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
