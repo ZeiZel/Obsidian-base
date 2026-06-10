@@ -1,12 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
-    },
-    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "whatsapp.excalidraw",
+      "path": "Excalidraw/whatsapp.excalidraw.md"
+    },
+    {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "css-presets",
@@ -71,10 +79,6 @@
     {
       "basename": "anxiety-management",
       "path": "soft/anxiety-management.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Teamlead",
