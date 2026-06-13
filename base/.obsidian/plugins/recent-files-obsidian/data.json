@@ -1,20 +1,28 @@
 {
   "recentFiles": [
     {
-      "basename": "vocabularity - голосовой тренинг",
-      "path": "soft/vocabularity - голосовой тренинг.md"
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
+    },
+    {
+      "basename": "cynefin",
+      "path": "agile/cynefin.md"
     },
     {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "whatsapp.excalidraw",
-      "path": "Excalidraw/whatsapp.excalidraw.md"
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "whatsapp.excalidraw",
+      "path": "Excalidraw/whatsapp.excalidraw.md"
     },
     {
       "basename": "css-presets",
@@ -47,10 +55,6 @@
     {
       "basename": "edge",
       "path": "edge/edge.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "TMUX",
@@ -155,10 +159,6 @@
     {
       "basename": "web",
       "path": "interview/web.md"
-    },
-    {
-      "basename": "cynefin",
-      "path": "agile/cynefin.md"
     },
     {
       "basename": "models",
