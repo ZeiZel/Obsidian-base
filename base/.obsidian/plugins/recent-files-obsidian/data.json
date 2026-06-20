@@ -5,20 +5,20 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "cynefin",
-      "path": "agile/cynefin.md"
-    },
-    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "cynefin",
+      "path": "agile/cynefin.md"
     },
     {
       "basename": "whatsapp.excalidraw",

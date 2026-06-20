@@ -32,30 +32,6 @@
             }
           },
           {
-            "id": "cb318054b57eae23",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/Teamlead Balun Courses.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Teamlead Balun Courses"
-            }
-          },
-          {
             "id": "b63d9b7faf73e599",
             "type": "leaf",
             "state": {
@@ -102,9 +78,33 @@
               "icon": "lucide-file",
               "title": "System Design"
             }
+          },
+          {
+            "id": "31bae1f9fb12f665",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/Teamlead Balun Courses.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Teamlead Balun Courses"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -169,7 +169,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -250,8 +251,8 @@
             "state": {
               "type": "advanced-tables-toolbar",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "advanced-tables-toolbar"
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
             }
           },
           {
@@ -279,7 +280,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -292,8 +293,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "git-view"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           },
           {
@@ -340,26 +341,27 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "cb318054b57eae23",
+  "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
+    "_png/Pasted image 20260620210607.png",
+    "architecture/System Design/System Design.md",
+    "soft/vocabularity - голосовой тренинг.md",
+    "202606202104.md",
+    "agile/Teamlead Balun Courses.md",
+    "_png/Pasted image 20260620172554.png",
+    "_png/Pasted image 20260620171924.png",
+    "_png/Pasted image 20260620171914.png",
+    "_png/Pasted image 20260620163432.png",
+    "_png/Pasted image 20260620145549.png",
     "_png/Pasted image 20260620135223.png",
     "backend/go/Selfgo.md",
-    "architecture/System Design/System Design.md",
-    "agile/Teamlead Balun Courses.md",
     "_png/Pasted image 20260613164432.png",
     "_png/Pasted image 20260613163101.png",
     "agile/cynefin.md",
-    "soft/vocabularity - голосовой тренинг.md",
     "Excalidraw/whatsapp.excalidraw.md",
     "frontend/tips-n-tricks/css-presets.md",
     "_png/Pasted image 20260608224129.png",
     "_png/Pasted image 20260608224116.png",
-    "_png/Pasted image 20260608223610.png",
-    "_png/Pasted image 20260608223531.png",
-    "_png/Pasted image 20260608223211.png",
-    "_png/Pasted image 20260608223146.png",
-    "_png/Pasted image 20260608223116.png",
-    "_png/Pasted image 20260608222849.png",
     "frontend/tips-n-tricks/css-features.md",
     "frontend/tips-n-tricks/react-best-practices.md",
     "frontend/tips-n-tricks/helpers-and-types.md",
@@ -377,7 +379,6 @@
     "edge/Инструменты/editor/VSCode.md",
     "edge/Инструменты/utilities/ts-pattern.md",
     "edge/Инструменты/utilities/neverthrow.md",
-    "edge/Инструменты/quality-tools/ts-reset.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
