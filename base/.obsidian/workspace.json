@@ -313,7 +313,7 @@
               "type": "outline",
               "state": {
                 "file": "agile/Teamlead Balun Courses.md",
-                "followCursor": false,
+                "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
@@ -321,7 +321,8 @@
               "title": "Outline of Teamlead Balun Courses"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -351,6 +352,7 @@
   },
   "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
+    "_png/Pasted image 20260623214924.png",
     "_png/Pasted image 20260623194709.png",
     "_png/Pasted image 20260623194649.png",
     "_png/Pasted image 20260623194505.png",
@@ -361,7 +363,6 @@
     "_png/Pasted image 20260623151721.png",
     "_png/Pasted image 20260623151657.png",
     "_png/Pasted image 20260623151348.png",
-    "_png/Pasted image 20260623150354.png",
     "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
     "soft/vocabularity - голосовой тренинг.md",
