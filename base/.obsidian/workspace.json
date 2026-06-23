@@ -273,14 +273,23 @@
             "id": "05c0fb7cb660d828",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "0636a9be14e5411a",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -312,8 +321,7 @@
               "title": "Outline of Teamlead Balun Courses"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -343,21 +351,21 @@
   },
   "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
-    "_png/Pasted image 20260621122034.png",
-    "_png/Pasted image 20260621120732.png",
-    "_png/Pasted image 20260621120517.png",
-    "_png/Pasted image 20260621111620.png",
-    "_png/Pasted image 20260620215441.png",
-    "_png/Pasted image 20260620210607.png",
+    "_png/Pasted image 20260623194709.png",
+    "_png/Pasted image 20260623194649.png",
+    "_png/Pasted image 20260623194505.png",
+    "_png/Pasted image 20260623194326.png",
+    "_png/Pasted image 20260623194140.png",
+    "_png/Pasted image 20260623154557.png",
+    "_png/Pasted image 20260623152604.png",
+    "_png/Pasted image 20260623151721.png",
+    "_png/Pasted image 20260623151657.png",
+    "_png/Pasted image 20260623151348.png",
+    "_png/Pasted image 20260623150354.png",
+    "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
     "soft/vocabularity - голосовой тренинг.md",
     "202606202104.md",
-    "agile/Teamlead Balun Courses.md",
-    "_png/Pasted image 20260620172554.png",
-    "_png/Pasted image 20260620171924.png",
-    "_png/Pasted image 20260620171914.png",
-    "_png/Pasted image 20260620163432.png",
-    "_png/Pasted image 20260620145549.png",
     "backend/go/Selfgo.md",
     "agile/cynefin.md",
     "Excalidraw/whatsapp.excalidraw.md",

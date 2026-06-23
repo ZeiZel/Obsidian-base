@@ -135,5 +135,6 @@
   "glass-theme-settings@@disable_bold_gradient_settings": true,
   "glass-theme-settings@@hide_navTreeArrow_settings": true,
   "glass-theme-settings@@one_row_mobile_toolbar_settings": true,
-  "glass-theme-settings@@themes-setting": "oneDark"
+  "glass-theme-settings@@themes-setting": "oneDark",
+  "Appearance-dark@@theme-dark-style-select": "theme-dark-background-default"
 }
