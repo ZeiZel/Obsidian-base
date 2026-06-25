@@ -102,6 +102,30 @@
               "icon": "lucide-file",
               "title": "Teamlead Balun Courses"
             }
+          },
+          {
+            "id": "5dd63e48edad2b5f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/agile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "agile"
+            }
           }
         ],
         "currentTab": 3
@@ -169,8 +193,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -289,7 +312,8 @@
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -352,20 +376,21 @@
   },
   "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
+    "_png/Pasted image 20260625164137.png",
+    "_png/Pasted image 20260625163551.png",
+    "_png/Pasted image 20260625163107.png",
+    "_png/Pasted image 20260625162718.png",
+    "_png/Pasted image 20260625143722.png",
+    "agile/Teamlead Balun Courses.md",
+    "_png/Pasted image 20260625130541.png",
+    "agile/agile.md",
+    "soft/vocabularity - голосовой тренинг.md",
+    "architecture/System Design/System Design.md",
     "_png/Pasted image 20260624214614.png",
     "_png/Pasted image 20260624214417.png",
     "_png/Pasted image 20260624214340.png",
     "_png/Pasted image 20260624210643.png",
     "_png/Pasted image 20260624210612.png",
-    "_png/Pasted image 20260624210518.png",
-    "_png/Pasted image 20260623232825.png",
-    "_png/Pasted image 20260623232805.png",
-    "_png/Pasted image 20260623232551.png",
-    "_png/Pasted image 20260623232540.png",
-    "_png/Pasted image 20260623232527.png",
-    "agile/Teamlead Balun Courses.md",
-    "architecture/System Design/System Design.md",
-    "soft/vocabularity - голосовой тренинг.md",
     "202606202104.md",
     "backend/go/Selfgo.md",
     "agile/cynefin.md",
@@ -387,7 +412,6 @@
     "edge/Инструменты/monorepo/NX.md",
     "edge/Инструменты/editor/VSCode.md",
     "edge/Инструменты/utilities/ts-pattern.md",
-    "edge/Инструменты/utilities/neverthrow.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",

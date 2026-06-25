@@ -5,12 +5,16 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Selfgo",
@@ -143,10 +147,6 @@
     {
       "basename": "DISC",
       "path": "agile/DISC.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "go",
