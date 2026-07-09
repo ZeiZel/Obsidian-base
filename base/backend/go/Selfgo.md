@@ -9198,6 +9198,8 @@ func (handler *LinkHandler) Delete() http.HandlerFunc {
 
 Middleware - это подход, при котором мы реализовываем функцию-обработчик, что выполняет действие, преобразовывает или обогащает запрос
 
+Сам запрос и другие элементы системы ничего не знают про этот обработчик. 
+
 ![](../../_png/Pasted%20image%2020260607184904.png)
 
 | Плюсы                                      | Минусы                          |
@@ -9208,9 +9210,13 @@ Middleware - это подход, при котором мы реализовы�
 
 ### Первый обработчик
 
+Middleware в Go - это конструкция функции, которая возвращает другую функцию. 
 
+Она принимает наш `http.Handler` и возвращает так же `http.Handler`. 
 
-`pkg/middleware/logs.go`
+Поместим этот обработчик в `pkg` директорию, так как его можно переиспользовать и в другом проекте. 
+
+`pkg / middleware / logs.go`
 ```Go
 package middleware
 
@@ -9219,18 +9225,23 @@ import (
 	"net/http"
 )
 
+// принимает http.Handler и возвращает его же
 func Logging(next http.Handler) http.Handler {
+	// эта функция принимает функцию с сигнатурой функции http.HandlerFunc
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// выполняем логику до выполнения запроса
 		fmt.Println("Logging")
+		// триггерим обработку запроса
 		next.ServeHTTP(w, r)
+		// выполняем операцию после возвращения запроса
 		fmt.Println("After")
 	})
 }
 ```
 
+Применяем middleware. Обработчик оборачивает целиковый router. 
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 server := http.Server{
 	Addr:    ":8081",
@@ -9240,30 +9251,44 @@ server := http.Server{
 
 ```
 
+```bash
+Logging
+<Request>
+After
+```
+
 ### Wrapper Writer
 
+Далее нам нужно реализовать расширенный Logging наших запросов, в который мы включим: время выполнения запроса, длительность выполнения, статус код, метод и путь
 
+Сначала реализуем механизм обёртки `http.ResponseWriter`. Эта обёртка нам нужна будет, чтобы обернуть оригинальный запрос и достать из него `StatusCode` в middleware. 
 
-`pkg/middleware/common.go`
+В самой обёртке нам нужно будет только реализовать модифицированный `WriteHeader`, который будет выполнять оригинальный метод `WriteHeader` и выполнять нашу логику по сохранению в структуру `StatusCode`
+
+`pkg / middleware / common.go`
 ```Go
 package middleware
 
 import "net/http"
 
+// опишем через композицию интерфейс кастомного враппера
 type WrapperWriter struct {
 	http.ResponseWriter
 	StatusCode int
 }
 
+// и далее переопределим WriteHeader, чтобы он так же заполнял внутреннее поле StatusCode при записи статуса
 func (w *WrapperWriter) WriteHeader(statusCode int) {
 	w.ResponseWriter.WriteHeader(statusCode)
 	w.StatusCode = statusCode
 }
 ```
 
+И теперь нам нужно имплементировать `WrapperWriter` и время выполнения запроса через `time`. 
 
+Так же тут мы используем `log` библиотеку, которая сразу даст дату и время вывода лога. 
 
-`pkg/middleware/logs.go`
+`pkg / middleware / logs.go`
 ```Go
 package middleware
 
@@ -9275,50 +9300,78 @@ import (
 
 func Logging(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// время начала запроса
 		start := time.Now()
+		// оборачиваем запрос в обёртку
 		wrapper := &WrapperWriter{
 			ResponseWriter: w,
+			// и сразу прокидываем 200 статус код
 			StatusCode:     http.StatusOK,
 		}
+		// пердаём в запрос модифицированный Writer
 		next.ServeHTTP(wrapper, r)
-		log.Println(wrapper.StatusCode, r.Method, r.URL.Path, time.Since(start))
+		// логируем данные по запросу
+		log.Println(
+			wrapper.StatusCode, 
+			r.Method, 
+			r.URL.Path, 
+			// время, которое прошло с переданного (start)
+			time.Since(start)
+		)
 	})
 }
 ```
 
+```bash
+2024/09/12 11:13:23 201 PATCH /Link/3 34.449958ms
+```
+
 ### CORS
 
+Далее добавим ещё один middleware, который будет у нас отвечать за реализацию CORS
 
+CORS - это функционал ограничения общения между разными доменами
 
-`pkg/middleware/cors.go`
+Конкретно в данном случае CORS будет разрешать принимать запросы с любого домена. Но в реальной разработке нужно подкладывать список доступных доменов, с которых мы сможем получать запросы. 
+
+`pkg / middleware / cors.go`
 ```Go
 package middleware
 
 import "net/http"
 
+// CORS middleware
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// берём Origin из запроса
 		origin := r.Header.Get("Origin")
+		
+		// если его нет, то просто выполянем запрос
 		if origin == "" {
 			next.ServeHTTP(w, r)
 			return
 		}
+		
+		// обновляем заголовок нашего ответа
 		header := w.Header()
-		header.Set("Access-Control-Allow-Origin", origin)
-		header.Set("Access-Control-Allow-Credentials", "true")
+		header.Set("Access-Control-Allow-Origin", origin) // разрешаем текущий origin
+		header.Set("Access-Control-Allow-Credentials", "true") // разрешаем CORS
 
+		// если у нас браузер отправляет метод OPTIONS, то будет правильно вернуть ему список доступных методов и заголовков
 		if r.Method == http.MethodOptions {
 			header.Set("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,HEAD,PATCH")
 			header.Set("Access-Control-Allow-Headers", "authorization,content-type,content-length")
 			header.Set("Access-Control-Max-Age", "86400")
 			return
 		}
+		
+		// и теперь можем приступить к выполнению запроса
 		next.ServeHTTP(w, r)
 	})
 }
 ```
 
-
+Далее для применения ещё одного middleware, нам достаточно будет обернуть его в другой
 
 `cmd/main.go`
 ```Go
@@ -9331,31 +9384,39 @@ server := http.Server{
 
 ### Stack middleware
 
+Посредников у нас может быть большое количество, поэтому нам нужно будет научить стакать все Middlewares
 
+Реализуем функцию Chain, которая будет оборачивать в себя каждый middleware
 
-`pkg/middleware/chain.go`
+`pkg / middleware / chain.go`
 ```Go
 package middleware
 
 import "net/http"
 
+// тип middleware
 type Middleware func(http.Handler) http.Handler
 
 func Chain(middlewares ...Middleware) Middleware {
+	// возвращаем middleware
 	return func(next http.Handler) http.Handler {
+		// проходимся по всем middleware
 		for i := len(middlewares) - 1; i >= 0; i-- {
+			// оборачиваем каждый друг в друга
 			next = middlewares[i](next)
 		}
+		
+		// возвращаем итоговый стек middleware
 		return next
 	}
 }
 ```
 
+Теперь остаётся только применить новый stack middleware 
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
-// Middlewares
+// Middlewares - стакаем все middleware
 stack := middleware.Chain(
 	middleware.CORS,
 	middleware.Logging,
@@ -9364,15 +9425,15 @@ stack := middleware.Chain(
 server := http.Server{
 	Addr:    ":8081",
 	// - Handler: middleware.CORS(middleware.Logging(router)),
-	Handler: stack(router),
+	Handler: stack(router), // применяем stack middlewares
 }
 ```
 
 #### Получение bearer
 
+Далее нужно будет реализовать функцию для вытаскивания Bearer токена из заголовка запроса. 
 
-
-`pkg/middleware/auth.go`
+`pkg / middleware / auth.go`
 ```Go
 package middleware
 
@@ -9384,7 +9445,9 @@ import (
 
 func IsAuthed(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// проверяем наличие заголовка
 		authedHeader := r.Header.Get("Authorization")
+		// убираем базовую часть с Bearer, чтобы достать только токен
 		token := strings.TrimPrefix(authedHeader, "Bearer ")
 		fmt.Println(token)
 		next.ServeHTTP(w, r)
@@ -9392,9 +9455,9 @@ func IsAuthed(next http.Handler) http.Handler {
 }
 ```
 
+Далее применяем заголовок ко всему стеку
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 stack := middleware.Chain(
 	middleware.CORS,
@@ -9403,9 +9466,21 @@ stack := middleware.Chain(
 )
 ```
 
+Теперь у нас происходит проверка авторизации на всех запросах
+
+```bash
+> go run cmd/main.go
+
+Server is listening on port 8081
+LDJKJSLD
+2024/09/13 16:15:27 201 PATCH /Link/3 7.952583ms
+```
+
 ### Middleware для роутеров
 
+Проверять токен на всех роутах не очень нужно, так как часть наших запросов будет оставаться публичной. По-сути GET должен оставаться public, чтобы каждый мог переходить по ссылке. 
 
+Поэтому уберём проверку авторизации из stack. 
 
 `cmd / main.go`
 ```Go
@@ -9415,15 +9490,16 @@ stack := middleware.Chain(
 )
 ```
 
+А потом применим этот middleware только для одного роута и заменим тут `HandleFunc` на `Handle`, так как сигнатура вызова тоже поменяется
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	handler := &LinkHandler{
 		LinkRepository: deps.LinkRepository,
 	}
 	router.HandleFunc("POST /link", handler.Create())
+	// оборачиваем пока только один роут в Guard
 	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update()))
 	router.HandleFunc("DELETE /link/{id}", handler.Delete())
 	router.HandleFunc("GET /{hash}", handler.GoTo())
@@ -9432,14 +9508,38 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 
 
 
-
 ## Авторизация
 
 ### Что такое JWT
 
+JWT - JSON Web Token - это стандарт авторизации через токены JSON, которые возвращает сервер. По токенам происходит подтверждение статуса авторизации пользователя. 
+
+Последовательность работы: 
+
+1. Клиент отправляет данные для авторизации
+2. В случае успешной авторизации клиент получает обратно JWT (token)
+3. При отправке запроса, который требует авторизацию, пользователь отправляет заголовок вида `Authorization: Bearer {{token}}`, который будет проверен на сервере. 
+4. Сервер проверяет токен по хранимому на его стороне секрету и декодирует этот токен. 
+5. Затем проверенный запрос выполняется на сервере. 
+
+>[!attention] Но проблема этой схемы заключается в том, что тут токен не ограничен по времени. Если злоумышленник сворует данные токена, то сможет пользоваться им, чтобы выполнять действия от лица пользователя. 
+
+![](../../_png/Pasted%20image%2020260709084756.png)
+
+Поэтому есть более продвинутая версия с токеном, который ограничен по времени, но обновляется за счёт refresh token. 
+
+Как у нас работает эта логика: 
+
+1. Пользователь обратно на запрос авторизации получает `token` и `refresh token`. 
+2. По этому `refresh token` пользователь получает новые `token` и `refresh token`. 
+
+![](../../_png/Pasted%20image%2020260709084920.png)
+
+#### Модель пользователя
 
 
-`internal/user/model.go`
+
+`internal / user / model.go`
 ```Go
 package user
 
@@ -9455,7 +9555,7 @@ type User struct {
 
 
 
-`migrations/auto.go`
+`migrations / auto.go`
 ```Go
 func main() {
 	err := godotenv.Load(".env")
@@ -9472,11 +9572,12 @@ func main() {
 }
 ```
 
-#### Модель пользователя
+
+#### Репозиторий пользователей
 
 
 
-`internal/user/repository.go`
+`internal / user / repository.go`
 ```Go
 package user
 
@@ -9507,11 +9608,6 @@ func (repo *UserRepository) FindByEmail(email string) (*User, error) {
 	return &user, nil
 }
 ```
-
-#### Репозиторий пользователей
-
-
-
 
 ### Сервис авторизации
 

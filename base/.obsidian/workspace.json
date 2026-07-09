@@ -104,6 +104,30 @@
             }
           },
           {
+            "id": "278c8e89f745604f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/Teamlead.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Teamlead"
+            }
+          },
+          {
             "id": "5dd63e48edad2b5f",
             "type": "leaf",
             "state": {
@@ -127,8 +151,7 @@
               "title": "agile"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -197,7 +220,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 529.5
+    "width": 418.5
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -306,6 +329,26 @@
             "id": "0636a9be14e5411a",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "f7c86f82a13ff6dd",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "3f22c85ec9197d38",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -313,7 +356,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 9
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -336,13 +379,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead Balun Courses.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Teamlead Balun Courses"
+              "title": "Outline of Selfgo"
             }
           }
         ],
@@ -374,10 +417,22 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "31bae1f9fb12f665",
+  "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
-    "agile/agile.md",
+    "_png/Pasted image 20260709084920.png",
+    "_png/Pasted image 20260709084756.png",
     "agile/Teamlead Balun Courses.md",
+    "backend/go/Selfgo.md",
+    "agile/agile.md",
+    "agile/practices.md",
+    "agile/models.md",
+    "agile/metrics.md",
+    "agile/manifest.md",
+    "agile/empiricism.md",
+    "agile/DISC.md",
+    "agile/cynefin.md",
+    "agile/command.md",
+    "agile/Teamlead.md",
     "_png/Pasted image 20260625193449.png",
     "_png/Pasted image 20260625192525.png",
     "_png/Pasted image 20260625164137.png",
@@ -389,10 +444,7 @@
     "soft/vocabularity - голосовой тренинг.md",
     "architecture/System Design/System Design.md",
     "_png/Pasted image 20260624214614.png",
-    "_png/Pasted image 20260624214417.png",
     "202606202104.md",
-    "backend/go/Selfgo.md",
-    "agile/cynefin.md",
     "Excalidraw/whatsapp.excalidraw.md",
     "frontend/tips-n-tricks/css-presets.md",
     "frontend/tips-n-tricks/css-features.md",
@@ -403,14 +455,6 @@
     "tools/nvim.md",
     "frontend/tips-n-tricks/tips-n-tricks.md",
     "edge/Инструменты/Инструменты.md",
-    "frontend/tips-n-tricks/dynamic-class-search.md",
-    "frontend/tips-n-tricks/visually-hidden.md",
-    "frontend/tips-n-tricks/reset-and-reboot.md",
-    "frontend/tips-n-tricks/frontend-code-organization.md",
-    "frontend/tips-n-tricks/frontend-approaches.md",
-    "edge/Инструменты/monorepo/NX.md",
-    "edge/Инструменты/editor/VSCode.md",
-    "edge/Инструменты/utilities/ts-pattern.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",

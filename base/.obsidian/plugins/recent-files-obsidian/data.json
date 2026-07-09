@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
     },
@@ -9,20 +13,24 @@
       "path": "agile/agile.md"
     },
     {
+      "basename": "metrics",
+      "path": "agile/metrics.md"
+    },
+    {
+      "basename": "DISC",
+      "path": "agile/DISC.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "System Design",
       "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
-      "basename": "cynefin",
-      "path": "agile/cynefin.md"
     },
     {
       "basename": "whatsapp.excalidraw",
@@ -89,14 +97,6 @@
       "path": "soft/anxiety-management.md"
     },
     {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
-      "basename": "scrum",
-      "path": "agile/scrum.md"
-    },
-    {
       "basename": "speech-and-reading",
       "path": "soft/speech-and-reading.md"
     },
@@ -133,22 +133,6 @@
       "path": "soft/conflict-resolution.md"
     },
     {
-      "basename": "metrics",
-      "path": "agile/metrics.md"
-    },
-    {
-      "basename": "kanban",
-      "path": "agile/kanban.md"
-    },
-    {
-      "basename": "command",
-      "path": "agile/command.md"
-    },
-    {
-      "basename": "DISC",
-      "path": "agile/DISC.md"
-    },
-    {
       "basename": "go",
       "path": "backend/go/go.md"
     },
@@ -159,14 +143,6 @@
     {
       "basename": "web",
       "path": "interview/web.md"
-    },
-    {
-      "basename": "models",
-      "path": "agile/models.md"
-    },
-    {
-      "basename": "empiricism",
-      "path": "agile/empiricism.md"
     }
   ],
   "omittedPaths": [],
