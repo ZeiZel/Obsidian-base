@@ -10086,14 +10086,29 @@ func HelloHandler(w http.ResponseWriter, req *http.Request) {
 
 ### WithTimeout
 
+Инициализация пустого контекста происходит через вызов `context.Background`. Она создаёт контекст без таймеров, значений и дедлайнов. 
 
+Потом нам нужно в этот контекст положить какую-либо функциональность. Для этого мы воспользуемся методом `WithTimeout`, который положит в контекст конкретный таймаут для горутин. 
 
-`cmd/main.go`
+Чтобы достать факт того, что таймаут в контексте уже вышел, нам нужно будет вызвать `ctxWithTimeout.Done()`
+
+`cmd / main.go`
 ```Go
+package main
+
+import (
+	"context"
+	"fmt"
+	"time"
+)
+
 func main() {
+	// создание пустого контекста, который потом можно будет преобразовать
 	ctx := context.Background()
-	ctxWithTimeout, cencel := context.WithTimeout(ctx, 4*time.Second)
-	defer cencel()
+	// далее создаём таймер внутри нашего контекста ctx
+	ctxWithTimeout, cancel := context.WithTimeout(ctx, 2*time.Second)
+	// закрываем контекст в самом конце выполнения стека
+	defer cancel()
 
 	done := make(chan struct{})
 	go func() {
@@ -10102,8 +10117,10 @@ func main() {
 	}()
 
 	select {
+	// если горутина выполнила операцию, то выполним следующую операцию
 	case <-done:
-		fmt.Println("Done task")
+		fmt.Println("Succeed")
+	// если контекст отвалился по таймауту, то свалимся в этот кейс
 	case <-ctxWithTimeout.Done():
 		fmt.Println("Timeout")
 	}
@@ -10112,22 +10129,30 @@ func main() {
 
 ### WithValue
 
+Далее переходим к `WithValue`, который позволяет подвязать определённые данные под контекст. 
 
+Сразу нужно обратить внимание на две вещи: 
 
-`cmd/main.go`
+1. Значения из `ctxWithValue.Value` (используется для получения значения) возвращаются в `any` типе и их нужно кастовать. 
+2. Тут мы сразу в условии описали присвоение значения и проверку условия через `;`
+
+`cmd / main.go`
 ```Go
 func main() {
+	// создаём отдельный тип для ключа контекста, чтобы избежать коллизий
 	type key int
 	const EmailKey key = 0
+	// создаём контекст
 	ctx := context.Background()
-	ctxWithValue := context.WithValue(ctx, EmailKey, "a@a.ru")
+	// присваиваем в контекст значение
+	ctxWithValue := context.WithValue(ctx, EmailKey, "asdasd@mail.ru")
 
+	// получаем из контекста данные и кастуем из any к строке, а потом проверяем, что значение кастанулось корректно
 	if userEmail, ok := ctxWithValue.Value(EmailKey).(string); ok {
 		fmt.Println(userEmail)
 	} else {
-		fmt.Println("No value")
+		fmt.Println("Not email")
 	}
-
 }
 ```
 
