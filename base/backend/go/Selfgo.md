@@ -9537,7 +9537,9 @@ JWT - JSON Web Token - это стандарт авторизации через
 
 #### Модель пользователя
 
+Нужно реализовать модель пользователя, в которой мы опишем поля для авторизации. Этого будет достаточно в рамках маленького проекта, но в рамках большого стоит вынести данные авторизации отдельно от пользователя. 
 
+Создадим отдельный модуль `user` и в рамках него опишем модель
 
 `internal / user / model.go`
 ```Go
@@ -9547,13 +9549,13 @@ import "gorm.io/gorm"
 
 type User struct {
 	gorm.Model
-	Email    string `gorm:"index"`
+	Email    string `gorm:"index"` // это поле будет являться индексом для быстрого поиска
 	Password string
 	Name     string
 }
 ```
 
-
+Далее нужно будет обновить автомиграцию и добавить туда новую модель пользователя
 
 `migrations / auto.go`
 ```Go
@@ -9567,15 +9569,21 @@ func main() {
 		panic(err)
 	}
 	
-								// передаём указатель на пользователя 
-	db.AutoMigrate(&link.Link{}, &user.User{})
+	db.AutoMigrate(
+		&link.Link{}, 
+		// передаём указатель на пользователя 
+		&user.User{},
+	)
 }
 ```
 
+```bash
+go run migration/auto.go
+```
 
 #### Репозиторий пользователей
 
-
+Далее нужно реализовать репозиторий пользователя, в рамках которого нам нужно будет создавать пользователя и находить его по Email
 
 `internal / user / repository.go`
 ```Go
@@ -9583,48 +9591,61 @@ package user
 
 import "go/adv-demo/pkg/db"
 
+// создадим структуру репозитория пользователя
 type UserRepository struct {
 	database *db.Db
 }
 
+// инстанс репозитория пользователя
 func NewUserRepository(database *db.Db) *UserRepository {
 	return &UserRepository{database: database}
 }
 
+// создание пользователя
 func (repo *UserRepository) Create(user *User) (*User, error) {
 	result := repo.database.DB.Create(user)
+	
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	
 	return user, nil
 }
 
+// поиск пользователя по почте
 func (repo *UserRepository) FindByEmail(email string) (*User, error) {
 	var user User
+	
 	result := repo.database.DB.First(&user, "email = ?", email)
+	
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	
 	return &user, nil
 }
 ```
 
 ### Сервис авторизации
 
+Дальше нужно реализовать сервис авторизации пока без шифрования пароля. 
 
+Сервис - это сущность, которая хранит бизнес-логику. В нашем процессе авторизации потребуется реализовать Сервис, так как логики будет достаточно. 
 
-`internal/auth/errors.go`
+Для начала добавим константу сообщения о том, что наш пользователь уже существует. 
+
+`internal / auth / errors.go`
 ```Go
-ackage auth
+package auth
 
 const (
 	ErrUserExists = "user exists"
 )
 ```
 
+Далее приступим к реализации сервиса авторизации. Тут мы будем манипулировать как раз репозиторием пользователя.  
 
-
-`internal/auth/service.go`
+`internal / auth / service.go`
 ```Go
 package auth
 
@@ -9633,41 +9654,55 @@ import (
 	"go/adv-demo/internal/user"
 )
 
+// структура сервиса авторизации, которая принимает репозиторий в DI
 type AuthService struct {
 	UserRepository *user.UserRepository
 }
 
+// Конструктор сервиса авторизации
 func NewAuthService(userRepository *user.UserRepository) *AuthService {
 	return &AuthService{UserRepository: userRepository}
 }
 
+// Метод регистрации пользователя
 func (service *AuthService) Register(email, password, name string) (string, error) {
+	// ищем пользователя по email - его не должно существовать в системе
 	existedUser, _ := service.UserRepository.FindByEmail(email)
+	
+	// если он есть, то выбрасываем ошибку
 	if existedUser != nil {
 		return "", errors.New(ErrUserExists)
 	}
+	
+	// создаём пользователя пока без пароля
 	user := &user.User{
 		Email:    email,
 		Password: "",
 		Name:     name,
 	}
+	
+	// создаём этого пользователя через репозиторий
 	_, err := service.UserRepository.Create(user)
+	
 	if err != nil {
 		return "", err
 	}
+	
 	return user.Email, nil
 }
 ```
 
+Далее опишем ручку регистрации в хэндлере авторизации. В неё нам теперь нужно просто добавить вызов метода `Register` из `AuthService`
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
-ype AuthHandlerDeps struct {
+// передача зависимости AuthService
+type AuthHandlerDeps struct {
 	*configs.Config
 	*AuthService
 }
 
+// передача зависимости AuthService
 type AuthHandler struct {
 	*configs.Config
 	*AuthService
@@ -9676,24 +9711,31 @@ type AuthHandler struct {
 func NewAuthHandler(router *http.ServeMux, deps AuthHandlerDeps) {
 	handler := &AuthHandler{
 		Config:      deps.Config,
+		// передача зависимости AuthService
 		AuthService: deps.AuthService,
 	}
 	router.HandleFunc("POST /auth/login", handler.Login())
 	router.HandleFunc("POST /auth/register", handler.Register())
 }
 
+// регистрация
 func (handler *AuthHandler) Register() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		body, err := req.HandleBody[RegisterRequest](&w, r)
+		
 		if err != nil {
 			return
 		}
+		
+		// имплементируем вызов
 		handler.AuthService.Register(body.Email, body.Password, body.Name)
 	}
 }
 ```
 
+И в конце нам остаётся только добавить новый `authService` и передать в него `userRepository` для работы с пользователем. 
 
+Потом подключаем `NewAuthHandler`, который докинет новые роуты
 
 `cmd / main.go`
 ```Go
@@ -9704,7 +9746,7 @@ func main() {
 
 	// Repositories
 	linkRepository := link.NewLinkRepository(db)
-	userRepository := user.NewUserRepository(db)
+	userRepository := user.NewUserRepository(db) // создаём репозиторий пользователя 
 
 	// Services
 	authService := auth.NewAuthService(userRepository)
@@ -9718,9 +9760,15 @@ func main() {
 
 ### Bcrypt
 
+Сначала установим зависимость, которая позволит нам шифровать полученные пароли. 
 
+```bash
+go get -u golang.org/x/crypto/bcrypt
+```
 
-`internal/auth/service.go`
+Далее имплементируем шифрование пароля пользователя через библиотеку `bcrypt`. С помощью метода `GenerateFromPassword`
+
+`internal / auth / service.go`
 ```Go
 import (
 	"errors"
@@ -9736,13 +9784,20 @@ func (service *AuthService) Register(email, password, name string) (string, erro
 		return "", errors.New(ErrUserExists)
 	}
 	
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	// генерируем закодированный пароль из brypt
+	hashedPassword, err := bcrypt.GenerateFromPassword(
+		[]byte(password), 
+		// так же передаём степень 2^x раундов шифрования
+		// MinCost = 4, DefaultCost = 10, MaxCost = 31
+		bcrypt.DefaultCost,
+	)
 	
 	if err != nil {
 		return "", err
 	}
 	user := &user.User{
 		Email:    email,
+		// а сюда передаём массив байт сгенерированного шифра в виде строки
 		Password: string(hashedPassword),
 		Name:     name,
 	}
@@ -9759,8 +9814,11 @@ func (service *AuthService) Register(email, password, name string) (string, erro
 
 #### Логин пользователя
 
+Далее нужно реализовать логин пользователя в систему. 
 
-`internal/auth/errors.go`
+Сначала предусмотрим ошибку, что пользователь ввёл неверные пароль или почту 
+
+`internal / auth / errors.go`
 ```Go
 package auth
 
@@ -9770,26 +9828,40 @@ const (
 )
 ```
 
+Дальше реализуем сервис по логину пользователя. 
 
+Тут уже нам нужно: 
 
-`internal/auth/service.go`
+1. Сначала найти пользователя по почте через метод репозитория
+2. Далее нужно будет сравнить собранный зашифрованный пароль и тот, что сохранён в базе через `CompareHashAndPassword`
+
+`internal / auth / service.go`
 ```Go
 func (service *AuthService) Login(email, password string) (string, error) {
+	// проверяем, существует ли пользователь
 	existedUser, _ := service.UserRepository.FindByEmail(email)
+	
+	// кидаем ошибку, если нет
 	if existedUser == nil {
 		return "", errors.New(ErrWrongCredetials)
 	}
+	
+	// далее сверяем, что пароль пользователя собирается ровно в такой же шифрованный массив байт
 	err := bcrypt.CompareHashAndPassword([]byte(existedUser.Password), []byte(password))
+	
 	if err != nil {
 		return "", errors.New(ErrWrongCredetials)
 	}
+	
 	return existedUser.Email, nil
 }
 ```
 
+Далее нам остаётся только доработать хэндлер авторизации и вызвать там `Login` из `AuthService`. 
 
+Пока мы фейково будем возвращать при успехе токен Bearer
 
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -9797,11 +9869,17 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
+		// проверяем авторизацию пользователя
 		email, err := handler.AuthService.Login(body.Email, body.Password)
+		
 		fmt.Println(email, err)
+		
+		// собираем фейковый токен
 		data := LoginResponse{
 			Token: "123",
 		}
+		
 		res.Json(w, data, 200)
 	}
 }
@@ -9809,15 +9887,17 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 
 ### Создание JWT
 
+Далее нам нужно перейти к реализации создания JWT
 
+Установим библиотеку jwt-go, которая позволит легко орудовать JWT. 
 
 ```bash
 go get github.com/golang-jwt/jwt/v5 
 ```
 
+Далее добавим новый пакейдж, который будет собирать JWT
 
-
-`pkg/jwt/jwt.go`
+`pkg / jwt / jwt.go`
 ```Go
 package jwt
 
@@ -9834,28 +9914,47 @@ func NewJWT(secret string) *JWT {
 }
 
 func (j *JWT) Create(email string) (string, error) {
-	t := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"email": email,
-	})
+	t := jwt.NewWithClaims(
+		// выбираем метод генерации JWT
+		jwt.SigningMethodHS256, 
+		// далее собираем payload, который будем сохранять в JWT
+		jwt.MapClaims{
+			"email": email,
+		},
+	)
+	
+	// Далее собираем подписанную строку нашим секретом
 	s, err := t.SignedString([]byte(j.Secret))
+	
 	if err != nil {
 		return "", err
 	}
+	
 	return s, nil
 }
 ```
 
 #### Финал авторизации
 
+Добавим SHA256 секрет для генерации JWT
 
+`.env`
+```env
+DSN=...
+SECRET="/2+ХnmJGz1jЗehIVI/5P9kl+CghrEЗDcS7rnT+qar5w="
+```
 
-`configs/config.go`
+Потом добавим в конфигурацию загрузку секрета
+
+`configs / config.go`
 ```Go
 func LoadConfig() *Config {
 	err := godotenv.Load()
+	
 	if err != nil {
 		log.Println("Error loading .env file, using default config")
 	}
+	
 	return &Config{
 		Db: DbConfig{
 			Dsn: os.Getenv("DSN"),
@@ -9867,9 +9966,10 @@ func LoadConfig() *Config {
 }
 ```
 
+Потом нам остаётся имплементировать вызов нашего JWT в функициях регистрации и авторизации. 
+Логика генерации токена и возвращения его пользователю будет абсолютно одинаковыми, поэтому выглядеть будут идентично. 
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 package auth
 
@@ -9906,19 +10006,28 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
+		// проверяем авторизацию пользователя
 		email, err := handler.AuthService.Login(body.Email, body.Password)
+		// если получили ошибку
 		if err != nil {
+			// то возвращаем ошибку http, что пользователь не авторизован
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
+		
+		// генерируем JWT по почте с секретом из конфигуратора
 		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(email)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+		
+		// и теперь в теле мы можем вернуть настоящий JWT
 		data := LoginResponse{
 			Token: token,
 		}
+		
 		res.Json(w, data, 200)
 	}
 }
@@ -9929,24 +10038,27 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
 		email, err := handler.AuthService.Register(body.Email, body.Password, body.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
+		
 		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(email)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+		
 		data := RegisterResponse{
 			Token: token,
 		}
+		
 		res.Json(w, data, 200)
 	}
 }
 ```
-
 
 
 
