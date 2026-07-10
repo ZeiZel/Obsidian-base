@@ -388,8 +388,7 @@
               "title": "Outline of Selfgo"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -417,7 +416,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "67697483e6c0f6c0",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
     "_png/Pasted image 20260710201534.png",
     "agile/Teamlead Balun Courses.md",
