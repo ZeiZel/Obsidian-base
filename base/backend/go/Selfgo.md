@@ -10158,43 +10158,69 @@ func main() {
 
 ### WithCancel
 
+Метод `WithCancel` принимает в себя контекст и возвращает метод `cancel` вторым аргументом. Он позволяет нам отправить сигнал `Done`, под который подвяжется горутина и остановит своё выполнение. 
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 func tickOperation(ctx context.Context) {
+	// создадим норвый тикер, который вернёт канал
+	// из канала мы будем брать тики раз в 200мс
 	ticker := time.NewTicker(200 * time.Millisecond)
+
 	for {
 		select {
+		// собираем тик из канала
 		case <-ticker.C:
 			fmt.Println("Tick")
+		// собираем ивент отмены по контексту
 		case <-ctx.Done():
-			fmt.Println("Cancel")
+			fmt.Println("Done")
 			return
 		}
 	}
 }
 
 func main() {
-	ctx, cancel := context.WithCancel(context.Background())
-	go tickOperation(ctx)
+	// создаём контекст с отменой
+	ctxWithCancel, cancel := context.WithCancel(context.Background())
 
-	time.Sleep(2 * time.Second)
+	// стартуем операции с тиками
+	go tickOperation(ctxWithCancel)
+
+	time.Sleep(2000 * time.Millisecond)
+
+	// выполняем отмену
 	cancel()
-	time.Sleep(2 * time.Second)
+
+	time.Sleep(2000 * time.Millisecond)
 }
+```
+
+```bash
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Done
 ```
 
 ### Получение email из JWT
 
+Сначала реализуем метод `Parse`, который из JWT достанет данные, определит валидные ли они и вернёт описанную структуру данных.
 
-
-`pkg/jwt/jwt.go`
+`pkg / jwt / jwt.go`
 ```Go
 package jwt
 
 import "github.com/golang-jwt/jwt/v5"
 
+// сохранять в JWT будем почту
 type JWTData struct {
 	Email string
 }
@@ -10220,23 +10246,78 @@ func (j *JWT) Create(data JWTData) (string, error) {
 	return s, nil
 }
 
+// сохранять в JWT будем почту
 func (j *JWT) Parse(token string) (bool, *JWTData) {
+	// парсим JWT 
 	t, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
 		return []byte(j.Secret), nil
 	})
 	if err != nil {
 		return false, nil
 	}
+	
+	// далее достаём email из Claims поля JWT
 	email := t.Claims.(jwt.MapClaims)["email"]
+	
+	// далее возвращаем состояние валидности и полную JWTData, которую мы достали из JWT
 	return t.Valid, &JWTData{
 		Email: email.(string),
 	}
 }
 ```
 
+Далее добавим парсер в middleware `IsAuthed`, который извне будет получать конфиг, чтобы достать секрет и парсить по нему токен
 
+`pkg / middleware / auth.go`
+```Go
+								// добавляем конфиг
+func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authedHeader := r.Header.Get("Authorization")
+		token := strings.TrimPrefix(authedHeader, "Bearer ")
+		
+		// далее добавим проверку валидности
+		isValid, data := jwt.NewJWT(config.Auth.Secret).Parse(token)
+		
+		// прологируем данные
+		fmt.Println(isValid)
+		fmt.Println(data)
+		
+		next.ServeHTTP(w, r)
+	})
+}
+```
 
-`cmd/main.go`
+Теперь нужно передать конфиг в хэндлере
+
+`internal / link / handler.go`
+```Go
+type LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+	// добавляем конфигурацию в зависимости
+	Config         *configs.Config
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+
+	// прокидываем конфиг в middleware
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+}
+```
+
+И тут нам нужно передать зависимость в виде конфигурации в хэндлер
+
+`cmd / main.go`
 ```Go
 func main() {
 	conf := configs.LoadConfig()
@@ -10257,13 +10338,14 @@ func main() {
 	})
 	link.NewLinkHandler(router, link.LinkHandlerDeps{
 		LinkRepository: linkRepository,
+		// так же передадим конфигурацию в хэндлер ссылок
 		Config:         conf,
 	})
 ```
 
+Теперь остаётся только добавить в авторизацию запись email в токен
 
-
-`internal/auth/handler.go`
+`internal / auth / handler.go`
 ```Go
 func (handler *AuthHandler) Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -10271,13 +10353,14 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
 		email, err := handler.AuthService.Login(body.Email, body.Password)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
 		
-		// 
+		// далее добавим передачу email в генерацию JWT
 		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(jwt.JWTData{
 			Email: email,
 		})
@@ -10285,9 +10368,11 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+		
 		data := LoginResponse{
 			Token: token,
 		}
+		
 		res.Json(w, data, 200)
 	}
 }
@@ -10298,13 +10383,14 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
 		email, err := handler.AuthService.Register(body.Email, body.Password, body.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
 		
-		// 
+		// далее добавим передачу email в генерацию JWT
 		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(jwt.JWTData{
 			Email: email,
 		})
@@ -10320,37 +10406,35 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 }
 ```
 
+И на выходе при отправке авторизованного запроса, получим, что он валиден и почту смогли распарсить
 
+```bash
+> go run cmd/main.go
 
-`internal/link/handler.go`
-```Go
-type LinkHandlerDeps struct {
-	LinkRepository *LinkRepository
-	Config         *configs.Config
-}
+Server is listening on port 8081
 
-type LinkHandler struct {
-	LinkRepository *LinkRepository
-}
+true 
+&{a2@a.ru}
 
-func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
-	handler := &LinkHandler{
-		LinkRepository: deps.LinkRepository,
-	}
-	router.HandleFunc("POST /link", handler.Create())
+2024/09/20 12:21:04 201 PATCH /Link/3 29.252208ms
+```
 
-	// 
-	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
-	router.HandleFunc("DELETE /link/{id}", handler.Delete())
-	router.HandleFunc("GET /{hash}", handler.GoTo())
-}
+Если передать невалидный токен и отправить запрос, то мы получим ошибку
+
+```bash
+› go run cmd/main.go
+
+false
+<nil>
+
+2024/09/20 12:21:29 201 PATCH /Link/3 7.667333ms
 ```
 
 ### Запись в контекст
 
+Далее нам нужно записать расшифрованную почту из JWT в контекст запроса. Для этого нам нужно будет полностью пересоздать request с новым контекстом
 
-
-`pkg/middleware/auth.go`
+`pkg / middleware / auth.go`
 ```Go
 package middleware
 
@@ -10362,8 +10446,10 @@ import (
 	"strings"
 )
 
+// инициализируем ключ
 type key string
 
+// создаём константу с ключами контекста
 const (
 	ContextEmailKey key = "ContextEmailKey"
 )
@@ -10372,9 +10458,16 @@ func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authedHeader := r.Header.Get("Authorization")
 		token := strings.TrimPrefix(authedHeader, "Bearer ")
+		
+		// берём data
 		_, data := jwt.NewJWT(config.Auth.Secret).Parse(token)
+		// создаём новый контекст на базе контекста из оригинального запроса
 		ctx := context.WithValue(r.Context(), ContextEmailKey, data.Email)
+		
+		// генерируем новый запрос с новым контекстом
 		req := r.WithContext(ctx)
+		
+		// передаём новый request в middleware
 		next.ServeHTTP(w, req)
 	})
 }
@@ -10382,9 +10475,9 @@ func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
 
 #### Чтение из контекста
 
+Далее нам нужно будет просто прочитать значение из контекста `request` в хэндлере
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 func (handler *LinkHandler) Update() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -10398,12 +10491,14 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 		if err != nil {
 			return
 		}
+		
 		idString := r.PathValue("id")
 		id, err := strconv.ParseUint(idString, 10, 32)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		
 		link, err := handler.LinkRepository.Update(&Link{
 			Model: gorm.Model{ID: uint(id)},
 			Url:   body.Url,
@@ -10413,6 +10508,7 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		
 		res.Json(w, link, 201)
 	}
 }
@@ -10420,31 +10516,40 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 
 ### Unauthed
 
+Далее нам нужно реализовать отбивку неавторизованных запросов. Для этого нам нужно реализовать в middleware guard по статусам. 
 
-
-`pkg/middleware/auth.go`
+`pkg / middleware / auth.go`
 ```Go
-
+// функция для автоматической записи неавторизованного статуса 
 func writeUnauthed(w http.ResponseWriter) {
+	// записываем статус код
 	w.WriteHeader(http.StatusUnauthorized)
+	// записываем текст ответа
+	// StatusText переводит код статуса в текст
 	w.Write([]byte(http.StatusText(http.StatusUnauthorized)))
 }
 
 func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// если нет заголовка авторизации, то отбиваем запрос
 		authedHeader := r.Header.Get("Authorization")
 		if !strings.HasPrefix(authedHeader, "Bearer ") {
 			writeUnauthed(w)
 			return
 		}
+		
 		token := strings.TrimPrefix(authedHeader, "Bearer ")
+
+		// если вернулся невалидный токен, то отбиваем запрос
 		isValid, data := jwt.NewJWT(config.Auth.Secret).Parse(token)
 		if !isValid {
 			writeUnauthed(w)
 			return
 		}
+		
 		ctx := context.WithValue(r.Context(), ContextEmailKey, data.Email)
 		req := r.WithContext(ctx)
+		
 		next.ServeHTTP(w, req)
 	})
 }
