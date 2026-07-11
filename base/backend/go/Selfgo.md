@@ -8390,7 +8390,7 @@ services:
     image: postgres:18.4  
     environment:  
       POSTGRES_USER: ${POSTGRES_USER:-postgres}  
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pgpass}  
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-my_pass}  
       PGDATA: /data/postgres  
     volumes:  
       - ./postgres-data:/data/postgres  
@@ -8450,7 +8450,7 @@ ORM - это инструмент, который предоставляет н�
 
 `.env`
 ```bash
-DSN="host=localhost user=postgres password=pgpass dbname=link port=5432 sslmode=disable"  
+DSN="host=localhost user=postgres password=my_pass dbname=link port=5432 sslmode=disable"  
 TOKEN=123
 ```
 
@@ -10554,6 +10554,20 @@ func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
 	})
 }
 ```
+
+И в итоге мы получаем такую последовательность: 
+
+1) Неверная авторизация
+
+![](../../_png/Pasted%20image%2020260711211514.png)
+
+2) Верная авторизация
+
+![](../../_png/Pasted%20image%2020260711211451.png)
+
+3) Неавторизованный запрос
+
+![](../../_png/Pasted%20image%2020260711211636.png)
 
 
 

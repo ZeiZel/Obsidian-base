@@ -355,8 +355,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 9
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -388,7 +387,8 @@
               "title": "Outline of Selfgo"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -416,11 +416,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "4d30a7c31882a75b",
+  "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260711211636.png",
+    "_png/Pasted image 20260711211514.png",
+    "_png/Pasted image 20260711211451.png",
+    "backend/go/Selfgo.md",
     "_png/Pasted image 20260710201534.png",
     "agile/Teamlead Balun Courses.md",
-    "backend/go/Selfgo.md",
     "_png/Pasted image 20260709084920.png",
     "_png/Pasted image 20260709084756.png",
     "agile/agile.md",
@@ -438,9 +441,6 @@
     "_png/Pasted image 20260625164137.png",
     "_png/Pasted image 20260625163551.png",
     "_png/Pasted image 20260625163107.png",
-    "_png/Pasted image 20260625162718.png",
-    "_png/Pasted image 20260625143722.png",
-    "_png/Pasted image 20260625130541.png",
     "soft/vocabularity - голосовой тренинг.md",
     "architecture/System Design/System Design.md",
     "202606202104.md",
