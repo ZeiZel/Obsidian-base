@@ -10815,14 +10815,14 @@ go run ./migrations/auto.go
 
 ### Добавление клика
 
-Далее нам нужно будет реализовать репозиторий, который будет сохранять статистику по ссылкам. Первое, что мы реализуем - это 
+Далее нам нужно будет реализовать репозиторий, который будет сохранять статистику по ссылкам. Первое, что мы реализуем - это отслеживание клика по ссылке. 
 
 `internal / stat / repository.go`
 ```Go
 package stat
 
 import (
-	"go/adv-demo/pkg/db"
+	"ZeiZel/gomple/pkg/db"
 	"time"
 
 	"gorm.io/datatypes"
@@ -10838,10 +10838,16 @@ func NewStatRepository(db *db.Db) *StatRepository {
 	}
 }
 
+// добавление клика ссылке
 func (repo *StatRepository) AddClick(linkId uint) {
+	// статистика
 	var stat Stat
+	// текущая дата
 	currentDate := datatypes.Date(time.Now())
+	// ищем в базе данных уже существующую статистику по данной ссылке
 	repo.Db.Find(&stat, "link_id = ? and date = ?", linkId, currentDate)
+	
+	// если ID статистики = 0, то нужно создать записо со стистикой
 	if stat.ID == 0 {
 		repo.Db.Create(&Stat{
 			LinkId: linkId,
@@ -10849,6 +10855,7 @@ func (repo *StatRepository) AddClick(linkId uint) {
 			Date:   currentDate,
 		})
 	} else {
+		// если статистика уже существует, то нужно просто увеличить каунтер кликов
 		stat.Clicks += 1
 		repo.Db.Save(&stat)
 	}
