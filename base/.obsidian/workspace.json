@@ -349,13 +349,24 @@
             "id": "3f22c85ec9197d38",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "c3d7585ea3122064",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 10
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -418,6 +429,11 @@
   },
   "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260715201053.png",
+    "_png/Pasted image 20260715201049.png",
+    "_png/Pasted image 20260715200641.png",
+    "_png/Pasted image 20260715200635.png",
+    "_png/Pasted image 20260715200634.png",
     "_png/Pasted image 20260711211636.png",
     "_png/Pasted image 20260711211514.png",
     "_png/Pasted image 20260711211451.png",
@@ -436,11 +452,6 @@
     "agile/cynefin.md",
     "agile/command.md",
     "agile/Teamlead.md",
-    "_png/Pasted image 20260625193449.png",
-    "_png/Pasted image 20260625192525.png",
-    "_png/Pasted image 20260625164137.png",
-    "_png/Pasted image 20260625163551.png",
-    "_png/Pasted image 20260625163107.png",
     "soft/vocabularity - голосовой тренинг.md",
     "architecture/System Design/System Design.md",
     "202606202104.md",

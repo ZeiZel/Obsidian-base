@@ -7532,7 +7532,7 @@ Hello
 - Stat: 
 	- get
 
-![](../../_png/Pasted%20image%2020260530090158.png)
+![](../../_png/Pasted%20image%2020260715201053.png)
 
 ### Структура приложения
 
@@ -8428,10 +8428,10 @@ docker compose up -d
 
 ![](../../_png/Pasted%20image%2020260530233056.png)
 
-Создадим БД `link`
+Создадим БД `links`
 
 ```SQL
-CREATE DATABASE link;
+CREATE DATABASE links;
 ```
 
 ### Выбор ORM
@@ -8450,7 +8450,7 @@ ORM - это инструмент, который предоставляет н�
 
 `.env`
 ```bash
-DSN="host=localhost user=postgres password=my_pass dbname=link port=5432 sslmode=disable"  
+DSN="host=localhost user=postgres password=my_pass dbname=links port=5432 sslmode=disable"  
 TOKEN=123
 ```
 
@@ -10575,56 +10575,81 @@ func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
 
 ### Формирование запроса
 
+Формирование запроса к БД через ORM будет строиться похожим образом, как это бы выглядело, если бы мы писали свой запрос в базу
 
-
-`internal/link/repository.go`
-```Go
-func (repo *LinkRepository) GetLinks(limit, offset int) []Link {
-	var links []Link
-	repo.Database.
-		Table("links").
-		Where("deleted_at is null").
-		Order("id asc").
-		Limit(limit).
-		Offset(offset).
-		Scan(&links)
-	return links
-}
+```SQL
+SELECT * FROM "Links"    # таблица, откуда будут браться данные
+WHERE deleted_at IS null # условие, по которому ищем
+ORDER BY id ASC          # сортировка по полю id в порядке восхождения записи (1, 2, 3...)
+LIMIT 5                  # лимит выдаваемых записей (для пагинации)
+OFFSET 0                 # смещение поиска (как раз смещение пагинации)
 ```
 
 ### Limit и offset
 
+GORM позволяет строить продвинутые цепочки запросов подобные стандартным SQL запросам. 
 
+Нам нужно реализовать получение списка ссылок с пагианцией. В этом нам поможет наш предыдущий запрос, так как у нас тут по паттерну Builder будет собираться запрос. 
 
-`internal/link/repository.go`
+`internal / link / repository.go`
 ```Go
-func (repo *LinkRepository) Count() int64 {
-	var count int64
-	repo.Database.
-		Table("links").
-		Where("deleted_at is null").
-		Count(&count)
-	return count
-}
-
+// получаем извне limit и offset 
 func (repo *LinkRepository) GetAll(limit, offset int) []Link {
+	// заполнять результат будем сюда
 	var links []Link
+	
 	repo.Database.
+		// таблица ссылок
 		Table("links").
-		Where("deleted_at is null").
-		Order("id asc").
+		// где дата удаления == null
+		Where("deleted_at IS null").
+		// сортируем 
+		Order("id ASC").
 		Limit(limit).
 		Offset(offset).
 		Scan(&links)
+		
 	return links
 }
 ```
 
+
 ### Count
 
+С таким запросом, база данных вернёт нам число записей, которые удовлетворяют нашему условию 
 
+```SQL
+SELECT COUNT (*)
+FROM "links"
+WHERE deleted_at IS null
+```
 
-`internal/link/handler.go`
+И имплементация в коде будет выглядеть подобным образом: 
+
+`internal / link / repository.go`
+```Go
+func (repo *LinkRepository) Count() int64 {
+	var count int64
+	
+	repo.Database.
+		Table("links").
+		Where("deleted_at is null").
+		// получаем число записей
+		Count(&count)
+		
+	return count
+}
+```
+
+### Query параметры
+
+Далее нам нужно реализовать авторизованную ручку, которая будет возвращать список из всех имеющихся ссылок. 
+
+Получаем query параметр в запросе из `request.URL` объекта, который иммеет метод `Query`, который инстанциирует работу с query-параметрами и оттуда применяем метод `Get`, который позволяет получить сам параметр.  
+
+Метод `strconv.Atoi` переводит string (получаемый из `Query.Get`) в int. 
+
+`internal / link / handler.go`
 ```Go
 func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	handler := &LinkHandler{
@@ -10634,12 +10659,17 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
 	router.HandleFunc("DELETE /link/{id}", handler.Delete())
 	router.HandleFunc("GET /{hash}", handler.GoTo())
+	
+	// получаем все ссылки
 	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
 }
 
+// ручка для получения всех ссылок
 func (handler *LinkHandler) GetAll() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// достаём параметр limit из Query
 		limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
+		
 		if err != nil {
 			http.Error(w, "Invalid limit", http.StatusBadRequest)
 			return
@@ -10648,9 +10678,9 @@ func (handler *LinkHandler) GetAll() http.HandlerFunc {
 }
 ```
 
-### Query параметры
+#### Список ссылок
 
-
+Добавим тип, который будет описывать возвращаемую структуру
 
 `internal/link/payload.go`
 ```Go
@@ -10665,30 +10695,39 @@ type LinkUpdateRequest struct {
 	Hash string `json:"hash,omitempty"`
 }
 
+// структура ответа для get all
 type GetAllLinksResponse struct {
 	Links []Link `json:"links"`
 	Count int64  `json:"count"`
 }
 ```
 
+Далее нужно доработать ручку, которая вернёт нам количество ссылок и все ссылки по ограничителям
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 func (handler *LinkHandler) GetAll() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// парсим и берём limit и offset
+	
 		limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
 		if err != nil {
 			http.Error(w, "Invalid limit", http.StatusBadRequest)
 			return
 		}
+		
 		offset, err := strconv.Atoi(r.URL.Query().Get("offset"))
 		if err != nil {
 			http.Error(w, "Invalid offset", http.StatusBadRequest)
 			return
 		}
+		
+		// получаем список ссылок
 		links := handler.LinkRepository.GetAll(limit, offset)
+		// получаем количество ссылок
 		count := handler.LinkRepository.Count()
+		
+		// формируем структуру ответа
 		res.Json(w, GetAllLinksResponse{
 			Links: links,
 			Count: count,
@@ -10697,20 +10736,42 @@ func (handler *LinkHandler) GetAll() http.HandlerFunc {
 }
 ```
 
-#### Список ссылок
-
-
-
-
-
-
-
+![](../../_png/Pasted%20image%2020260715200641.png)
 
 ### Один ко многим
 
+Далее нам нужно будет реализовать модуль статистики в приложении. Связь будет один ко многим, так как у нас будут разные статистики для одной ссылки. 
 
+Добавляем саму модель статистики, которая будет иметь ключ в виде id ссылки, клики и дата
 
-`internal/link/model.go`
+Для сохранения только даты без времени, нужно воспользоваться библиотекой `gorm.io/datatypes` из Gorm, из которой нужно будет взять кастомный тип `Date`
+
+`internal / stat / model.go`
+```Go
+package stat
+
+import (
+	"gorm.io/datatypes"
+	"gorm.io/gorm"
+)
+
+type Stat struct {
+	gorm.Model
+	LinkId uint           `json:"link_id"`
+	Clicks int            `json:"clicks"`
+	
+	// храним только дату без времени
+	Date   datatypes.Date `json:"date"`
+}
+```
+
+Далее добавим в модель ссылки объекты статистики с явным описанием зависимостей для GORM: 
+
+- `constraint` - зависимость
+	- `OnUpdate:CASCADE` - обновление ссылки каскадно обновит все подвязанные stats
+	- `OnDelete:SET NULL` - установим статистику null, если удалится ссылка 
+
+`internal / link / model.go`
 ```Go
 import (
 	"go/adv-demo/internal/stat"
@@ -10727,28 +10788,9 @@ type Link struct {
 }
 ```
 
+Далее нужно добавить новую статистику в миграцию 
 
-
-`internal/stat/model.go`
-```Go
-package stat
-
-import (
-	"gorm.io/datatypes"
-	"gorm.io/gorm"
-)
-
-type Stat struct {
-	gorm.Model
-	LinkId uint           `json:"link_id"`
-	Clicks int            `json:"clicks"`
-	Date   datatypes.Date `json:"date"`
-}
-```
-
-
-
-`migrations/auto.go`
+`migrations / auto.go`
 ```Go
 func main() {
 	err := godotenv.Load(".env")
@@ -10760,17 +10802,22 @@ func main() {
 		panic(err)
 	}
 	
-	// 
+											   // миграция в статистике
 	db.AutoMigrate(&link.Link{}, &user.User{}, &stat.Stat{})
 }
 ```
 
+Далее остаётся мигрировать данные
+
+```bash
+go run ./migrations/auto.go
+```
 
 ### Добавление клика
 
+Далее нам нужно будет реализовать репозиторий, который будет сохранять статистику по ссылкам. Первое, что мы реализуем - это 
 
-
-`internal/stat/repository.go`
+`internal / stat / repository.go`
 ```Go
 package stat
 
