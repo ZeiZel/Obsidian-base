@@ -5,12 +5,16 @@
       "path": "backend/go/Selfgo.md"
     },
     {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
-    },
-    {
       "basename": "agile",
       "path": "agile/agile.md"
+    },
+    {
+      "basename": "SEO",
+      "path": "frontend/SEO.md"
+    },
+    {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "metrics",

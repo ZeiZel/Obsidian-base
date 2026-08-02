@@ -172,7 +172,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "pinned": true,
               "icon": "lucide-folder-closed",
@@ -195,7 +197,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "crawlers",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -395,7 +397,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Selfgo"
+              "title": "Outline"
             }
           }
         ],
@@ -427,8 +429,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "67697483e6c0f6c0",
+  "active": "2666a47be2af937a",
   "lastOpenFiles": [
+    "agile/agile.md",
+    "frontend/SEO.md",
+    "backend/go/Selfgo.md",
+    "_png/Pasted image 20260717154243.png",
     "_png/Pasted image 20260715201053.png",
     "_png/Pasted image 20260715201049.png",
     "_png/Pasted image 20260715200641.png",
@@ -437,12 +443,8 @@
     "_png/Pasted image 20260711211636.png",
     "_png/Pasted image 20260711211514.png",
     "_png/Pasted image 20260711211451.png",
-    "backend/go/Selfgo.md",
     "_png/Pasted image 20260710201534.png",
     "agile/Teamlead Balun Courses.md",
-    "_png/Pasted image 20260709084920.png",
-    "_png/Pasted image 20260709084756.png",
-    "agile/agile.md",
     "agile/practices.md",
     "agile/models.md",
     "agile/metrics.md",

@@ -10864,9 +10864,73 @@ func (repo *StatRepository) AddClick(linkId uint) {
 
 #### Простое добавление
 
+Сначала имплементируем простой вариант добавления статистики по кликам по ссылке. Это будет инжект репозитория прямо в `NewLinkHandler`. 
 
+Сначала укажем, какую зависимость мы принимаем извне и имплементируем вызов метода `AddClick` в `GoTo` переходе по ссылке
 
-`cmd/main.go`
+`internal / link / handler.go`
+```Go
+import (
+	"fmt"
+	"go/adv-demo/configs"
+	"go/adv-demo/internal/stat"
+	"go/adv-demo/pkg/middleware"
+	"go/adv-demo/pkg/req"
+	"go/adv-demo/pkg/res"
+	"net/http"
+	"strconv"
+
+	"gorm.io/gorm"
+)
+
+type LinkHandlerDeps struct {
+	LinkRepository *LinkRepository
+	// добавляем зависимость
+	StatRepository *stat.StatRepository
+	Config         *configs.Config
+}
+
+type LinkHandler struct {
+	LinkRepository *LinkRepository
+	// добавляем зависимость
+	StatRepository *stat.StatRepository
+}
+
+func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
+	handler := &LinkHandler{
+		LinkRepository: deps.LinkRepository,
+		
+		// Внедряем зависимость из списка пропсов
+		StatRepository: deps.StatRepository,
+	}
+	router.HandleFunc("POST /link", handler.Create())
+	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
+	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
+	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
+}
+
+func (handler *LinkHandler) GoTo() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		hash := r.PathValue("hash")
+		link, err := handler.LinkRepository.GetByHash(hash)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		
+		// добавляем статистику по клику на ссылку
+		handler.StatRepository.AddClick(link.ID)
+		
+		http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
+	}
+}
+
+```
+
+И в самом конце остаётся просто добавить зависимость в `main`
+
+`cmd / main.go`
 ```Go
 func main() {
 	conf := configs.LoadConfig()
@@ -10888,75 +10952,24 @@ func main() {
 	})
 	link.NewLinkHandler(router, link.LinkHandlerDeps{
 		LinkRepository: linkRepository,
+		// внедряем репозиторий статистики в хжндлер ссылок
 		StatRepository: statRepository,
 		Config:         conf,
 	})
 ```
 
-
-
-`internal/link/handler.go`
-```Go
-import (
-	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/stat"
-	"go/adv-demo/pkg/middleware"
-	"go/adv-demo/pkg/req"
-	"go/adv-demo/pkg/res"
-	"net/http"
-	"strconv"
-
-	"gorm.io/gorm"
-)
-
-type LinkHandlerDeps struct {
-	LinkRepository *LinkRepository
-	StatRepository *stat.StatRepository
-	Config         *configs.Config
-}
-
-type LinkHandler struct {
-	LinkRepository *LinkRepository
-	StatRepository *stat.StatRepository
-}
-
-func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
-	handler := &LinkHandler{
-		LinkRepository: deps.LinkRepository,
-		
-		// 
-		StatRepository: deps.StatRepository,
-	}
-	router.HandleFunc("POST /link", handler.Create())
-	router.Handle("PATCH /link/{id}", middleware.IsAuthed(handler.Update(), deps.Config))
-	router.HandleFunc("DELETE /link/{id}", handler.Delete())
-	router.HandleFunc("GET /{hash}", handler.GoTo())
-	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
-}
-
-func (handler *LinkHandler) GoTo() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		hash := r.PathValue("hash")
-		link, err := handler.LinkRepository.GetByHash(hash)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			return
-		}
-		
-		// 
-		handler.StatRepository.AddClick(link.ID)
-		http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
-	}
-}
-
-```
+>[!warning] Реализованный тут подход будет не совсем корректным, так как если мы решим импортировать зависимость из Link внутри Stat, то столкнёмся с круговыми зависимостями. 
+>Когда мы импортируем зависимость из внешнего модуля, мы должны импортировать по интерфейсу, а не по конкретной реализованной структуре другого пакета.
 
 ### Правильный DI
 
+Правильный же путь по DI - это отвязка от конкретной реализации и переход на удовлетворение интерфейса. 
 
+Для начала, выделим отдельный пакет `di`, который будет хранить в себе информацию по нашим DI инструментам. 
 
-`pkg/di/interfaces.go`
+Реализуем `IStatRepository`, который будет собой представлять интерфейс с типизированным методом. Именно этот интерфейс мы будем использовать в `Link`, чтобы не импортировать напрямую `stat` и не создавать ошибку `circle-imports`. 
+
+`pkg / di / interfaces.go`
 ```Go
 package di
 
@@ -10965,11 +10978,11 @@ type IStatRepository interface {
 }
 ```
 
+Далее нам нужно применить этот интерфейс в `link/handler` вместо прямого импорта `stat`. 
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
-ype LinkHandlerDeps struct {
+type LinkHandlerDeps struct {
 	LinkRepository *LinkRepository
 	StatRepository di.IStatRepository
 	Config         *configs.Config
@@ -10981,33 +10994,62 @@ type LinkHandler struct {
 }
 ```
 
+Сразу нужно уточнить, что использовать интерфейсы для моделей, чтобы использовать трушный DI, у нас не получится, так как для того же GORM нужны именно структуры, которые копировать кодом не стоит. Тут лучше импортировать. 
+
+![](../../_png/Pasted%20image%2020260717154243.png)
+
 ### Eventbus
 
+Дальше у нас идёт проблема ценности - сейчас наш пользовать при переходе по ссылке ожидает, когда мы запишем клик в базу. Это крайне некорректный подход, так как целевое действие пользователя должно выполняться мгновенно. Запись же клика - это побочное действие. 
+
+`internal / link / handler.go`
+```Go
+// это действие мы должны выполнять параллельно нашему основному, чтобы не задерживать пользователя
+handler.StatRepository.AddClick(link.ID)
+
+http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
+```
+
+Мы можем попробвать эту команду выполнить просто горутиной, но у нас появится проблема со внешней коммуникацией, если нам нужно будет ответить, что не удалось выполнить действие. У нас образуется просто гора необработанных записей в базу. 
+
+`internal / link / handler.go`
+```Go
+go handler.StatRepository.AddClick(link.ID)
+
+http.Redirect(w, r, link.Url, http.StatusTemporaryRedirect)
+```
 
 
-`pkg/event/eventbus.go`
+Поэтому самым правильным решением для нас будет создание внешней шины ивентов, которая позволит на неё подписаться и прочитать сообщение. 
+
+`pkg / event / eventbus.go`
 ```Go
 package event
 
+// структура самого события
 type Event struct {
 	Type string
 	Data any
 }
 
+// структура шины событий
 type EventBus struct {
 	bus chan Event
 }
 
+// конструктор шины событий
 func NewEventBus() *EventBus {
 	return &EventBus{
 		bus: make(chan Event),
 	}
 }
 
-func (e *EventBus) Publush(event Event) {
+// метод добавления ивента
+func (e *EventBus) Publish(event Event) {
 	e.bus <- event
 }
 
+// метод подписки на ивенты
 func (e *EventBus) Subscribe() <-chan Event {
 	return e.bus
 }
@@ -11015,9 +11057,11 @@ func (e *EventBus) Subscribe() <-chan Event {
 
 ### Отправка события
 
+Далее нам нужно научиться отправлять события статистики в шину. Читать научимся чуть позже. 
 
+Сначала создадим константу с наименованием события. 
 
-`pkg/event/eventbus.go`
+`pkg / event / eventbus.go`
 ```Go
 ackage event
 
@@ -11026,13 +11070,14 @@ const (
 )
 ```
 
+Далее нужно будет имплементировать шину в хэндлер ссылок. Сейчас мы уходим от того, чтобы вызывать сам метод добавления статистики в пользу создания ивента в шине, который потом разберётся в отдельном месте. 
 
-
-`internal/link/handler.go`
+`internal / link / handler.go`
 ```Go
 type LinkHandlerDeps struct {
 	LinkRepository *LinkRepository
 	Config         *configs.Config
+	// добавляем зависимость шины
 	EventBus       *event.EventBus
 }
 
@@ -11044,6 +11089,7 @@ type LinkHandler struct {
 func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	handler := &LinkHandler{
 		LinkRepository: deps.LinkRepository,
+		// добавляем зависимость шины
 		EventBus:       deps.EventBus,
 	}
 	router.HandleFunc("POST /link", handler.Create())
@@ -11064,6 +11110,7 @@ func (handler *LinkHandler) GoTo() http.HandlerFunc {
 			return
 		}
 
+		// И теперь мы НЕ вызываем метод, а кладём событие создания в шину 
 		go handler.EventBus.Publush(event.Event{
 			Type: event.EventLinkVisited,
 			Data: link.ID,
@@ -11074,40 +11121,40 @@ func (handler *LinkHandler) GoTo() http.HandlerFunc {
 }
 ```
 
+И в конце остаётся просто имплементировать создание шины ивентов и инжектнуть её в хэндлер ссылок
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 func main() {
 	conf := configs.LoadConfig()
 	db := db.NewDb(conf)
 	router := http.NewServeMux()
+	// создаём единую корневую шину
 	eventBus := event.NewEventBus()
 
-	// Repositories
 	linkRepository := link.NewLinkRepository(db)
 	userRepository := user.NewUserRepository(db)
 
-	// Services
 	authService := auth.NewAuthService(userRepository)
 
-	// Handler
 	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
 		Config:      conf,
 		AuthService: authService,
 	})
+	
 	link.NewLinkHandler(router, link.LinkHandlerDeps{
 		LinkRepository: linkRepository,
 		Config:         conf,
+		// и передаём 
 		EventBus:       eventBus,
 	})
 ```
 
 ### Получение события
 
+Теперь нам нужно научиться ловить события, которые мы сгенерировали. Для этого нам нужно будет собрать отдельный сервис, который и будет отвечать за метод `AddClick`. Эта функция будет вызываться как горутина и запустит отслеживание создание ивента, чтобы потом его подхватить и выполнить запись. 
 
-
-`internal/stat/service.go`
+`internal / stat / service.go`
 ```Go
 package stat
 
@@ -11134,13 +11181,17 @@ func NewStatService(deps *StatServiceDeps) *StatService {
 }
 
 func (s *StatService) AddClick() {
+	// подписываемся на channel, который возвращает Subscribe метод
 	for msg := range s.EventBus.Subscribe() {
+		// если ивент равен тому, который мы ожидаем
 		if msg.Type == event.EventLinkVisited {
+			// достаём данные
 			id, ok := msg.Data.(uint)
 			if !ok {
 				log.Fatalln("Bad EventLinkVisited Data: ", msg.Data)
 				continue
 			}
+			// записываем в репозиторий нужный ивент
 			s.StatRepository.AddClick(id)
 		}
 	}
@@ -11149,24 +11200,24 @@ func (s *StatService) AddClick() {
 
 #### Финал Eventbus
 
+В конце нам остаётся только добавить репозиторий статистики, добавить его в сервис статистики и вызвать метод `AddClick` отдельной горутиной (чтобы не блокировать основной поток)
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 func main() {
 	conf := configs.LoadConfig()
 	db := db.NewDb(conf)
 	router := http.NewServeMux()
-	eventBus := event.NewEventBus()
+	eventBus := event.NewEventBus() // глобальная очередь сообщений
 
 	// Repositories
 	linkRepository := link.NewLinkRepository(db)
 	userRepository := user.NewUserRepository(db)
-	statRepository := stat.NewStatRepository(db)
+	statRepository := stat.NewStatRepository(db) // репозиторий статистики
 
 	// Services
 	authService := auth.NewAuthService(userRepository)
-	statService := stat.NewStatService(&stat.StatServiceDeps{
+	statService := stat.NewStatService(&stat.StatServiceDeps{ // сервис статистики
 		EventBus:       eventBus,
 		StatRepository: statRepository,
 	})
@@ -11193,6 +11244,7 @@ func main() {
 		Handler: stack(router),
 	}
 
+	// поднимаем горутину, которая будет слушать очередь и выполнять добавление клика ссылкам
 	go statService.AddClick()
 
 	fmt.Println("Server is listening on port 8081")
@@ -11202,23 +11254,27 @@ func main() {
 
 #### Handler статистики
 
+Далее нам нужно будет реализовать отдельный Handler для возврата статистики по ссылке. 
 
+Тут нам нужно будет добавить авторизованную ручку `/stat`, которая вернёт статистику по ссылке. Фильтровать статистику будем по `by` (группировка), `from` (начальная дата) и `to` (конечная дата) параметрам. 
 
-`internal/stat/handler.go`
+`internal / stat / handler.go`
 ```Go
 package stat
 
 import (
-	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/middleware"
 	"net/http"
 	"time"
+
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/pkg/middleware"
+	"ZeiZel/gomple/pkg/res"
 )
 
+// константа с параметрами, по которым будем группировать
 const (
-	FilterByDay   = "day"
-	FilterByMonth = "month"
+	GroupByDay   = "day"
+	GroupByMonth = "month"
 )
 
 type StatHandlerDeps struct {
@@ -11239,27 +11295,39 @@ func NewStatHandler(router *http.ServeMux, deps StatHandlerDeps) {
 
 func (h *StatHandler) GetStat() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// парсим начальную дату в параметре query "from" формата yyyy-MM-dd
 		from, err := time.Parse("2006-01-02", r.URL.Query().Get("from"))
 		if err != nil {
 			http.Error(w, "Invalid from param", http.StatusBadRequest)
 			return
 		}
+
+		// так же парсим конечную дату
 		to, err := time.Parse("2006-01-02", r.URL.Query().Get("to"))
 		if err != nil {
 			http.Error(w, "Invalid to param", http.StatusBadRequest)
 			return
 		}
+
+		// формируем формат группировки статистики
 		by := r.URL.Query().Get("by")
-		if by != FilterByDay && by != FilterByMonth {
+		if by != GroupByDay && by != GroupByMonth {
 			http.Error(w, "Invalid by param", http.StatusBadRequest)
 			return
 		}
-		fmt.Println(from, to, by)
+
+		// получаем статистику по ссылке (пока не реализован)
+		stats := h.StatRepository.GetStats(by, from, to)
+
+		// пишем в ответ запрос
+		res.Json(w, stats, 200)
 	}
 }
 ```
 
+> Далее нам нужно будет реализовать метод `GetStats` в репозитории статистики 
 
+И добавляем новый handler к нашему роутеру 
 
 `main.go`
 ```Go
@@ -11283,9 +11351,34 @@ func (h *StatHandler) GetStat() http.HandlerFunc {
 
 ### Group by
 
+- Функция `to_char` позволяет привести один тип данных к тому, который нам нужен. Поле даты будем форматировать в `ГОД-МЕСЯЦ`. Конструкция `AS` позволит сохранить это с определённым именем и использовать это вдальнейшем. 
+- Функция `sum` будет суммировать клики по записям. 
+- `GROUP BY` - это сущность, которая описывает, по какому значению мы будем группировать записи. Конкретно в нашем примере, она позволит собирать 
 
+```SQL
+SELECT to_char(date, 'YYYY-MM') AS period, sum(clicks) FROM stats
+WHERE date BETWEEN '01/01/2025' AND '01/01/2027'
+GROUP BY period
+ORDER BY period
+```
 
-`internal/stat/payload.go`
+И в выводе получим сгруппированные по дате ссылки
+
+```bash
+ period  | sum 
+---------+-----
+ 2026-07 |   2
+ 2026-08 |   2
+(2 rows)
+```
+
+### Group by в GORM
+
+Далее, имплементируем запрос данных по кликам за определённый период прямо в Go приложении через ресты. 
+
+Сначала соберём структуру нашего ответа: 
+
+`internal / stat / payload.go`
 ```Go
 package stat
 
@@ -11295,66 +11388,58 @@ type GetStatResponse struct {
 }
 ```
 
+Далее имплементируем метод репозитория, который позволит нам фильтровать данные. 
 
-
-`internal/stat/repository.go`
+`internal / stat / repository.go`
 ```Go
 func (repo *StatRepository) GetStats(by string, from, to time.Time) []GetStatResponse {
 	var stats []GetStatResponse
 	var selectQuery string
+	
+	// формируем строку группировки по by параментру и используем константы из handler
 	switch by {
 	case GroupByDay:
 		selectQuery = "to_char(date, 'YYYY-MM-DD') as period, sum(clicks)"
 	case GroupByMonth:
 		selectQuery = "to_char(date, 'YYYY-MM') as period, sum(clicks)"
 	}
+	
+	// из таблицы статистика
 	repo.DB.Table("stats").
+		// берём данные по нашей собранный строке группировки
 		Select(selectQuery).
+		// где выбираем записи по датам "от" и "до"
 		Where("date BETWEEN ? AND ?", from, to).
-		Group("period").
-		Order("period").
+		Group("period"). // с группировкой
+		Order("period"). // и сортировкой по полю периода
+		// и в конце сохраняем в переменную
 		Scan(&stats)
+		
 	return stats
 }
 ```
 
+Теперь у нас заведётся Rest с ответами по статистике ссылке. Ранее мы уже вызывали `GetStats` в хэндлере. 
 
+В итоге получим такой ответ с сервера: 
 
-`internal/stat/handler.go`
-```Go
-const (
-	GroupByDay   = "day"
-	GroupByMonth = "month"
-)
+```JSON
+Status: 200 OK
+Content-Length: 60 B
+URL: http://localhost:8081/stat?by=month&from=2026-01-01&to=2027-01-01
+Duration: 185ms
 
-func (h *StatHandler) GetStat() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		from, err := time.Parse("2006-01-02", r.URL.Query().Get("from"))
-		if err != nil {
-			http.Error(w, "Invalid from param", http.StatusBadRequest)
-			return
-		}
-		to, err := time.Parse("2006-01-02", r.URL.Query().Get("to"))
-		if err != nil {
-			http.Error(w, "Invalid to param", http.StatusBadRequest)
-			return
-		}
-
-		by := r.URL.Query().Get("by")
-		if by != GroupByDay && by != GroupByMonth {
-			http.Error(w, "Invalid by param", http.StatusBadRequest)
-			return
-		}
-
-		stats := h.StatRepository.GetStats(by, from, to)
-		res.Json(w, stats, 200)
-	}
-}
+[
+  {
+    period: "2026-07",
+    sum: 2
+  },
+  {
+    period: "2026-08",
+    sum: 2
+  }
+]
 ```
-
-### Group by в GORM
-
-
 
 ### GORM Session
 
