@@ -11443,40 +11443,111 @@ Duration: 185ms
 
 ### GORM Session
 
+В GORM существует такая сущность, как сессии. 
+
+Первый пример. Мы можем создать базу для запроса и относительно неё повторять операции. 
+
+```Go
+func (repo *LinkRepository) GetAll(limit, offset int) []Link {
+	var links []Link
+
+	query := repo.Database.Table("links").
+		Where("deleted_at IS null").Session(&gorm.Session{})
+
+	query.
+		Order("id ASC").
+		Limit(limit).
+		Offset(offset).
+		Scan(&links)
+
+	query.Count()
+
+	return links
+}
+```
+
+Второй пример. Мы можем расширять запросы с помощью сессий. Если у нас ECommerce и приложение с большим количеством фильтров, то мы можем через условие добавлять фильтры к нашему запросу в базу. 
+
+```Go
+func (repo *StatRepository) GetStats(by string, from, to time.Time) []GetStatResponse {
+	var stats []GetStatResponse
+	var selectQuery string
+	switch by {
+	case GroupByDay:
+		selectQuery = "to_char(date, 'YYYY-MM-DD') as period, sum(clicks)"
+	case GroupByMonth:
+		selectQuery = "to_char(date, 'YYYY-MM') as period, sum(clicks)"
+	}
+
+	// база запроса
+	query := repo.DB.Table("stats").
+		Select(selectQuery).Session(&gorm.Session{})
+
+	// условное добавление блока в запрос сессии
+	if true {
+		query.Where("count > 10")
+	}
+
+	// остальная обязательная часть
+	query.
+		Where("date BETWEEN ? AND ?", from, to).
+		Group("period").
+		Order("period").
+		Scan(&stats)
+
+	return stats
+}
+```
+
+>[!info] GORM Сессии - это важный инструмент для формирования сложных запросов к БД  
 
 
+
+## Тестирование API
+
+### Виды тестирования
+
+Виды тестирования преимущественно делятся на 4 типа: 
+
+- e2e - полное приложение 
+- integration - интеграция между разными сервисами
+- service - целиковый микросервис
+- unit - отдельные компоненты
+
+![](../../_png/Pasted%20image%2020260802191204.png)
 
 ### Изменение приложения
 
+Чтобы сделать приложение более тестируемопригодным под e2e, нужно вынести инициацлизацию app части приложения в отдельную функцию. Из неё мы будем получать все сущности приложения уже в самом тесте. 
 
-
-`cmd/main.go`
+`cmd / main.go`
 ```Go
 package main
 
 import (
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/internal/link"
-	"go/adv-demo/internal/stat"
-	"go/adv-demo/internal/user"
-	"go/adv-demo/pkg/db"
-	"go/adv-demo/pkg/event"
-	"go/adv-demo/pkg/middleware"
 	"net/http"
+
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/auth"
+	"ZeiZel/gomple/internal/link"
+	"ZeiZel/gomple/internal/stat"
+	"ZeiZel/gomple/internal/user"
+	"ZeiZel/gomple/pkg/db"
+	"ZeiZel/gomple/pkg/event"
+	"ZeiZel/gomple/pkg/middleware"
 )
 
 func App() http.Handler {
 	conf := configs.LoadConfig()
-	db := db.NewDb(conf)
+	dbInstance := db.NewDb(conf)
 	router := http.NewServeMux()
 	eventBus := event.NewEventBus()
 
 	// Repositories
-	linkRepository := link.NewLinkRepository(db)
-	userRepository := user.NewUserRepository(db)
-	statRepository := stat.NewStatRepository(db)
+	linkRepository := link.NewLinkRepository(dbInstance)
+	userRepository := user.NewUserRepository(dbInstance)
+	statRepository := stat.NewStatRepository(dbInstance)
 
 	// Services
 	authService := auth.NewAuthService(userRepository)
@@ -11516,74 +11587,75 @@ func main() {
 		Addr:    ":8081",
 		Handler: app,
 	}
+
 	fmt.Println("Server is listening on port 8081")
-	server.ListenAndServe()
+
+	err := server.ListenAndServe()
+	if err != nil {
+		fmt.Println("Server is failed to start")
+		return
+	}
 }
 ```
 
-
-
-## Тестирование API
-
-### Виды тестирования
-
-
-
-
-
-
-
-
-
-### Изменение приложения
-
-
-
-
-
-
-
-
-
 ### E2E тест
 
+Нам нужно будет сохранить копию наших `.env` прямо в директории с e2e-тестом, так как он будет запускаться из директории вызова. 
 
+Для этого скопируем наш актуальный `.env` в `/cmd` директорию, где у нас лежит `main.go`
+
+Обновим gitignore, чтобы он 
 
 `.gitignore`
 ```
 /postgres-data
-/.env
-/cmd/.env
+/**/.env
 ```
 
+Далее опишем первый тест на попытку сформировать успешную авторизацию
 
-
-`cmd/auth_test.go`
+`cmd / auth_test.go`
 ```Go
 package main
 
 import (
 	"bytes"
 	"encoding/json"
-	"go/adv-demo/internal/auth"
+	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
+
+	"ZeiZel/gomple/internal/auth"
+	"ZeiZel/gomple/internal/user"
+
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func TestLoginSuccess(t *testing.T) {
+	// поднимаем тестовый сервер
 	ts := httptest.NewServer(App())
+	// закрываем его в конце выполнения стека
 	defer ts.Close()
 
+	// собираем запрос для отправки на сервер
 	data, _ := json.Marshal(&auth.LoginRequest{
 		Email:    "a2@a.ru",
 		Password: "1",
 	})
 
+	// и отправляем его на тестовый сервер 
 	res, err := http.Post(ts.URL+"/auth/login", "application/json", bytes.NewReader(data))
+	
+	// если ошибка, то тест падает
 	if err != nil {
 		t.Fatal(err)
 	}
+	
+	// если пользователь не авторизвался, то 
 	if res.StatusCode != 200 {
 		t.Fatalf("Expected %d got %d", 200, res.StatusCode)
 	}
@@ -11592,22 +11664,10 @@ func TestLoginSuccess(t *testing.T) {
 
 #### Отрицательный тест
 
+Далее нам нужно доработать тест успешной авторизации и провальной авторизации. 
 
-
-`cmd/auth_test.go`
+`cmd / auth_test.go`
 ```Go
-package main
-
-import (
-	"bytes"
-	"encoding/json"
-	"go/adv-demo/internal/auth"
-	"io"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-)
-
 func TestLoginSuccess(t *testing.T) {
 	ts := httptest.NewServer(App())
 	defer ts.Close()
@@ -11624,20 +11684,28 @@ func TestLoginSuccess(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Fatalf("Expected %d got %d", 200, res.StatusCode)
 	}
+	
+	// читаем тело ответа
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
+	
+	// запишем данные ответа на запрос логина пользователя
 	var resData auth.LoginResponse
+	// расшифруем ответ от сервера в структуру
 	err = json.Unmarshal(body, &resData)
+	// если не вышло, то выплюнем ошибку
 	if err != nil {
 		t.Fatal(err)
 	}
+	// если токена нет, то так же выведем ошибку
 	if resData.Token == "" {
 		t.Fatal("Token empty")
 	}
 }
 
+// фейл логина
 func TestLoginFail(t *testing.T) {
 	ts := httptest.NewServer(App())
 	defer ts.Close()
@@ -11651,6 +11719,8 @@ func TestLoginFail(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	
+	// если мы получили ошибку по почте не 401, то тест упал
 	if res.StatusCode != 401 {
 		t.Fatalf("Expected %d got %d", 401, res.StatusCode)
 	}
@@ -11659,29 +11729,25 @@ func TestLoginFail(t *testing.T) {
 
 ### Подготовка тестового окружения
 
+Сначала создадим ещё одну тестовую БД, чтобы выполнять на ней тесты. 
 
+```SQL
+CREATE DATABASE link_test;
+```
 
-`cmd/auth_test.go`
+И обновим креды для подключения к тестовой базе 
+
+`cmd / .env`
+```
+DSN="host=localhost user=postgres password=my_pass dbname=link_test port=5434 sslmode=disable"
+```
+
+Далее нам нужно будет добавить в код тест для инициализации БД
+
+`cmd / auth_test.go`
 ```Go
-package main
-
-import (
-	"bytes"
-	"encoding/json"
-	"go/adv-demo/internal/auth"
-	"io"
-	"net/http"
-	"net/http/httptest"
-	"os"
-	"testing"
-
-	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-)
-
 func initDb() *gorm.DB {
-	err := godotenv.Load("cmd/.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		panic(err)
 	}
@@ -11700,23 +11766,16 @@ func TestLoginSuccess(t *testing.T) {
 	defer ts.Close()
 ```
 
+>[!warning] Не стоит добавлять в код теста вызов автомиграции. 
+>Тестовую базу стоит отдельно автомигрировать, так как мы можем вызывать прямо в коде наши ручные миграции (перенос полей и данных). 
+
 ### Предварительные данные
 
+Добавим функцию для инициализации данных. Она будет сразу добавлять для теста запись, которая будет использоваться в течение выполнения операции. 
 
-
-`cmd/auth_test.go`
+`cmd / auth_test.go`
 ```Go
-func initDb() *gorm.DB {
-	err := godotenv.Load(".env")
-	if err != nil {
-		panic(err)
-	}
-
-	// ...
-
-	return db
-}
-
+// функция для установки предварительных данных в БД
 func initData(db *gorm.DB) {
 	db.Create(&user.User{
 		Email:    "a2@a.ru",
@@ -11728,17 +11787,18 @@ func initData(db *gorm.DB) {
 func TestLoginSuccess(t *testing.T) {
 	// Prepare
 	db := initDb()
-	initData(db)
+	initData(db) // применяем тестовые данные к БД
 ```
 
 ### Очистка данных
 
+Далее нужно добавить автоочистку данных после выполнения тесткейса. 
 
-
-`cmd/auth_test.go`
+`cmd / auth_test.go`
 ```Go
 // функция для очистки данных
 func removeData(db *gorm.DB) {
+	// Unscoped превентит запись поля deleted_at и просто удаляет запись из БД
 	db.Unscoped().
 		Where("email = ?", "a2@a.ru").
 		Delete(&user.User{})
@@ -11749,33 +11809,9 @@ func TestLoginSuccess(t *testing.T) {
 	db := initDb()
 	initData(db)
 
-	ts := httptest.NewServer(App())
-	defer ts.Close()
-
-	data, _ := json.Marshal(&auth.LoginRequest{
-		Email:    "a2@a.ru",
-		Password: "1",
-	})
-
-	res, err := http.Post(ts.URL+"/auth/login", "application/json", bytes.NewReader(data))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if res.StatusCode != 200 {
-		t.Fatalf("Expected %d got %d", 200, res.StatusCode)
-	}
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		t.Fatal(err)
-	}
-	var resData auth.LoginResponse
-	err = json.Unmarshal(body, &resData)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if resData.Token == "" {
-		t.Fatal("Token empty")
-	}
+	// ...
+	
+	// очищаем данные
 	removeData(db)
 }
 
@@ -11785,40 +11821,51 @@ func TestLoginFail(t *testing.T) {
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
-@@ -86,4 +95,5 @@
 	if res.StatusCode != 401 {
 		t.Fatalf("Expected %d got %d", 401, res.StatusCode)
 	}
+	
+	// очищаем данные
 	removeData(db)
 }
 ```
 
 ### Unit тесты
 
+Unit-тесты хорошо подходят для тестирования чистых функций, которые не имеют side-effects. Конкретно большая часть функций из `pkg` должна подходить под этот критерий отлично для тестирования. 
 
-
-`pkg/jwt/jwt_test.go`
+`pkg / jwt / jwt_test.go` 
 ```Go
 package jwt_test
 
 import (
-	"go/adv-demo/pkg/jwt"
 	"testing"
+
+	"ZeiZel/gomple/pkg/jwt"
 )
 
+// создание JWT
 func TestJWTCreate(t *testing.T) {
 	const email = "a@a.ru"
+	
+	// инициализация JWT сервиса по секрету из .env
 	jwtService := jwt.NewJWT("/2+XnmJGz1j3ehIVI/5P9kl+CghrE3DcS7rnT+qar5w=")
+	
+	// записываем по структуре payload токена данные почты в него
 	token, err := jwtService.Create(jwt.JWTData{
 		Email: email,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
+	
+	// парсим полученный токен с почтой обратно
 	isValid, data := jwtService.Parse(token)
+	// почта должна парситься в структуру
 	if !isValid {
 		t.Fatal("Token is invalid")
 	}
+	// проверяем, что распаршенная почта совпадает с целевой
 	if data.Email != email {
 		t.Fatalf("Email %s not equal %s", data.Email, email)
 	}
@@ -11829,7 +11876,7 @@ func TestJWTCreate(t *testing.T) {
 
 
 
-`internal/auth/service_test.go`
+`internal / auth / service_test.go`
 ```Go
 package auth_test
 

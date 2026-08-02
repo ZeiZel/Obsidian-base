@@ -10,6 +10,7 @@
   "excludePathsFromAttachmentCollecting": [],
   "includePaths": [],
   "moveAttachmentToProperFolderUsedByMultipleNotesMode": "CopyAll",
+  "shouldAddCommandsToFileMenu": true,
   "shouldChangeNoteBacklinksDisplayText": false,
   "shouldCollectAttachmentsAutomatically": false,
   "shouldDeleteAttachmentsWithNote": false,

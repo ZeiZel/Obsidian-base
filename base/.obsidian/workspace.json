@@ -218,7 +218,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -429,8 +430,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2666a47be2af937a",
+  "active": "67697483e6c0f6c0",
   "lastOpenFiles": [
+    "_png/Pasted image 20260802191204.png",
     "agile/agile.md",
     "frontend/SEO.md",
     "backend/go/Selfgo.md",
@@ -466,7 +468,6 @@
     "frontend/tips-n-tricks/mixin-content.md",
     "tools/nvim.md",
     "frontend/tips-n-tricks/tips-n-tricks.md",
-    "edge/Инструменты/Инструменты.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
