@@ -11874,46 +11874,18 @@ func TestJWTCreate(t *testing.T) {
 
 ### Mock данных
 
+Далее нам нужно протестировать метод `Register` из сервиса авторизации. Тут мы сталкиваемся с проблемой, что для его работы, нам нужно будет поднять `UserRepository` и саму БД, в которой будем хранить данные. 
 
+Для выхода из этой ситуации, мы можем использовать два разных подхода: 
 
-`internal / auth / service_test.go`
-```Go
-package auth_test
+1. Мокать данные в БД
+2. Мокать сами данные
 
-import (
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/internal/user"
-	"testing"
-)
+Сейчас мы попробуем замокать сами данные. Однако встретимся с такой проблемой, что мы явно завязаны на реализации, а не на интерфейсе. Нам нужно в сервисе авторизации отвязаться от реализации `UserRepository` и заменить его на абстрактный интерфейс. 
 
-type MockUserRepository struct{}
+Создадим интерфейс репозитория пользователя: 
 
-func (repo *MockUserRepository) Create(u *user.User) (*user.User, error) {
-	return &user.User{
-		Email: "a@a.ru",
-	}, nil
-}
-
-func (repo *MockUserRepository) FindByEmail(email string) (*user.User, error) {
-	return nil, nil
-}
-
-func TestRegisterSuccess(t *testing.T) {
-	const initialEmail = "a@a.ru"
-	authService := auth.NewAuthService(&MockUserRepository{})
-	email, err := authService.Register(initialEmail, "1", "Вася")
-	if err != nil {
-		t.Fatal(err)
-	}
-	if email != initialEmail {
-		t.Fatalf("Email %s do not math %s", email, initialEmail)
-	}
-}
-```
-
-
-
-`pkg/di/interfaces.go`
+`pkg / di / interfaces.go`
 ```Go
 package di
 
@@ -11929,26 +11901,61 @@ type IUserRepository interface {
 }
 ```
 
+Далее имплементируем этот DI интерфейс в `AuthService` 
 
-
-`internal/auth/service.go`
+`internal / auth / service.go`
 ```Go
-package auth
-
-import (
-	"errors"
-	"go/adv-demo/internal/user"
-	"go/adv-demo/pkg/di"
-
-	"golang.org/x/crypto/bcrypt"
-)
-
 type AuthService struct {
 	UserRepository di.IUserRepository
 }
 
 func NewAuthService(userRepository di.IUserRepository) *AuthService {
 	return &AuthService{UserRepository: userRepository}
+}
+```
+
+И теперь в самом тесте мы не будем зависеть от реального `UserRepository` и можем использовать наш кастомный 
+
+`internal / auth / service_test.go`
+```Go
+package auth_test
+
+import (
+	"go/adv-demo/internal/auth"
+	"go/adv-demo/internal/user"
+	"testing"
+)
+
+// мок репозитория пользователя
+type MockUserRepository struct{}
+
+// моковое создание репозитория пользователя
+func (repo *MockUserRepository) Create(u *user.User) (*user.User, error) {
+	// которое сразу будет возвращать пользователя
+	return &user.User{
+		Email: "a@a.ru",
+	}, nil
+}
+
+// моковый поиск по почте
+func (repo *MockUserRepository) FindByEmail(email string) (*user.User, error) {
+	return nil, nil
+}
+
+// проверка регистрации
+func TestRegisterSuccess(t *testing.T) {
+	const initialEmail = "a@a.ru"
+	
+	// теперь мы можем инициализировать сервис авторизации за счёт мокового репозитория пользователя
+	authService := auth.NewAuthService(&MockUserRepository{})
+	
+	email, err := authService.Register(initialEmail, "1", "Вася")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if email != initialEmail {
+		t.Fatalf("Email %s do not math %s", email, initialEmail)
+	}
 }
 ```
 
