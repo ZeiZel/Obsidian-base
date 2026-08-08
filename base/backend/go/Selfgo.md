@@ -12114,7 +12114,7 @@ func TestLoginSuccess(t *testing.T) {
 
 `internal / auth / handler_test.go`
 ```Go
-func TestLoginSuccess(t *testing.T) {
+func TestLoginHandlerSuccess(t *testing.T) {
 	handler, mock, err := bootstrap()
 	
 	// добавляем новую строку в моковую БД с данными по пользователю
@@ -12159,28 +12159,27 @@ func TestLoginSuccess(t *testing.T) {
 
 #### Тест регистрации
 
+Далее нужно реализовать тест регистрации. 
 
+Тут нам уже нужна операция изменения в БД, поэтому нам из моков нужно будет взять `ExpectBegin` для старта мутирующей транзакции и `ExpectCommit` для её подтверждения. 
 
 `internal / auth / handler_test.go`
 ```Go
-func TestLoginHandlerSuccess(t *testing.T) {
-	handler, mock, err := bootstrap()
-	
-	rows := sqlmock.NewRows([]string{"email", "password"}).
-		AddRow("a2@a.ru", "$2a$10$fOFzfotZx.uhK2BkJTy4AuVb6ejteFYEUkREKD/nBR6fZx4afcmYS")
-	
-	func TestLoginSuccess(t *testing.T) {
-		t.Errorf("got %d, expected %d", w.Code, 200)
-	}
-}
-
 func TestRegisterHandlerSuccess(t *testing.T) {
 	handler, mock, err := bootstrap()
+	// добавляется поле имени
 	rows := sqlmock.NewRows([]string{"email", "password", "name"})
 	mock.ExpectQuery("SELECT").WillReturnRows(rows)
+	
+	// операция создания нового id записи: 
+	
+	// начинаем транзакцию
 	mock.ExpectBegin()
+	// выполняем
 	mock.ExpectQuery("INSERT").WillReturnRows(sqlmock.NewRows([]string{"id"}).AddRow(1))
+	// коммитим
 	mock.ExpectCommit()
+	
 	if err != nil {
 		t.Fatal(err)
 		return
@@ -12194,6 +12193,8 @@ func TestRegisterHandlerSuccess(t *testing.T) {
 	w := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodPost, "/auth/register", reader)
 	handler.Register()(w, req)
+	
+	// проверям статус создания 201
 	if w.Code != http.StatusCreated {
 		t.Errorf("got %d, expected %d", w.Code, http.StatusCreated)
 	}
@@ -12202,19 +12203,9 @@ func TestRegisterHandlerSuccess(t *testing.T) {
 
 ### Отладка тестов
 
+Когда мы не понимаем, в чём проблема и почему наш код не работает, нам нужно перейти в дебаг, который позволит шаг за шагом найти корневую причину бага. 
 
-
-
-
-
-
-
-
-
-
-
-
-
+![](../../_png/Pasted%20image%2020260808180605.png)
 
 ### Финал проекта
 
