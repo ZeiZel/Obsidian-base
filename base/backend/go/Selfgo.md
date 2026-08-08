@@ -6211,7 +6211,7 @@ go mod init ZeiZel/go-adv
 
 `go.mod`
 ```Go
-module go/adv-demo
+module ZeiZel/gomple
 
 go 1.26
 ```
@@ -7564,7 +7564,7 @@ package hello
 package main
 
 import (
-	"go/adv-demo/internal/hello"
+	"ZeiZel/gomple/internal/hello"
 	"fmt"
 	"net/http"
 )
@@ -7656,8 +7656,8 @@ package main
 
 import (
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/hello"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/hello"
 	"net/http"
 )
 
@@ -7713,7 +7713,7 @@ package main
 
 import (
 	"fmt"
-	"go/adv-demo/internal/auth"
+	"ZeiZel/gomple/internal/auth"
 	"net/http"
 )
 
@@ -7813,7 +7813,7 @@ package auth
 
 import (
 	"fmt"
-	"go/adv-demo/configs"
+	"ZeiZel/gomple/configs"
 	"net/http"
 )
 
@@ -7860,8 +7860,8 @@ package main
 
 import (
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/auth"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/auth"
 	"net/http"
 )
 
@@ -7908,7 +7908,7 @@ package auth
 import (
 	"encoding/json"
 	"fmt"
-	"go/adv-demo/configs"
+	"ZeiZel/gomple/configs"
 	"net/http"
 )
 
@@ -7989,8 +7989,8 @@ package auth
 
 import (
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/res"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/pkg/res"
 	"net/http"
 )
 
@@ -8002,7 +8002,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			Token: "123",
 		}
 		
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 ```
@@ -8047,7 +8047,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		data := LoginResponse{
 			Token: "123",
 		}
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 ```
@@ -8084,7 +8084,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		data := LoginResponse{
 			Token: "123",
 		}
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 ```
@@ -8157,7 +8157,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		data := LoginResponse{
 			Token: "123",
 		}
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 ```
@@ -8197,8 +8197,8 @@ package auth
 import (
 	"encoding/json"
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/res"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/pkg/res"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
@@ -8228,7 +8228,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 		data := LoginResponse{
 			Token: "123",
 		}
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 ```
@@ -8328,7 +8328,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
        response := LoginResponse{  
           Token: handler.Config.Auth.Token,  
        }  
-       res.Json(w, response, 201)  
+       res.Json(w, response, http.StatusOK)  
     }  
 }
 ```
@@ -8461,7 +8461,7 @@ TOKEN=123
 package db
 
 import (
-	"go/adv-demo/configs"
+	"ZeiZel/gomple/configs"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -8489,9 +8489,9 @@ func NewDb(conf *configs.Config) *Db {
 ```Go
 import (
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/pkg/db"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/auth"
+	"ZeiZel/gomple/pkg/db"
 	"net/http"
 )
 
@@ -8570,7 +8570,7 @@ type Model struct {
 package main
 
 import (
-	"go/adv-demo/internal/link"
+	"ZeiZel/gomple/internal/link"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -9589,7 +9589,7 @@ go run migration/auto.go
 ```Go
 package user
 
-import "go/adv-demo/pkg/db"
+import "ZeiZel/gomple/pkg/db"
 
 // создадим структуру репозитория пользователя
 type UserRepository struct {
@@ -9651,7 +9651,7 @@ package auth
 
 import (
 	"errors"
-	"go/adv-demo/internal/user"
+	"ZeiZel/gomple/internal/user"
 )
 
 // структура сервиса авторизации, которая принимает репозиторий в DI
@@ -9772,7 +9772,7 @@ go get -u golang.org/x/crypto/bcrypt
 ```Go
 import (
 	"errors"
-	"go/adv-demo/internal/user"
+	"ZeiZel/gomple/internal/user"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -9880,7 +9880,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			Token: "123",
 		}
 		
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 ```
@@ -9974,10 +9974,10 @@ func LoadConfig() *Config {
 package auth
 
 import (
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/jwt"
-	"go/adv-demo/pkg/req"
-	"go/adv-demo/pkg/res"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/pkg/jwt"
+	"ZeiZel/gomple/pkg/req"
+	"ZeiZel/gomple/pkg/res"
 	"net/http"
 )
 
@@ -10028,7 +10028,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			Token: token,
 		}
 		
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 
@@ -10055,7 +10055,7 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 			Token: token,
 		}
 		
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusCreated)
 	}
 }
 ```
@@ -10373,7 +10373,7 @@ func (handler *AuthHandler) Login() http.HandlerFunc {
 			Token: token,
 		}
 		
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusOK)
 	}
 }
 
@@ -10401,7 +10401,7 @@ func (handler *AuthHandler) Register() http.HandlerFunc {
 		data := RegisterResponse{
 			Token: token,
 		}
-		res.Json(w, data, 200)
+		res.Json(w, data, http.StatusCreated)
 	}
 }
 ```
@@ -10440,8 +10440,8 @@ package middleware
 
 import (
 	"context"
-	"go/adv-demo/configs"
-	"go/adv-demo/pkg/jwt"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/pkg/jwt"
 	"net/http"
 	"strings"
 )
@@ -10774,7 +10774,7 @@ type Stat struct {
 `internal / link / model.go`
 ```Go
 import (
-	"go/adv-demo/internal/stat"
+	"ZeiZel/gomple/internal/stat"
 	"math/rand"
 
 	"gorm.io/gorm"
@@ -10872,11 +10872,11 @@ func (repo *StatRepository) AddClick(linkId uint) {
 ```Go
 import (
 	"fmt"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/stat"
-	"go/adv-demo/pkg/middleware"
-	"go/adv-demo/pkg/req"
-	"go/adv-demo/pkg/res"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/stat"
+	"ZeiZel/gomple/pkg/middleware"
+	"ZeiZel/gomple/pkg/req"
+	"ZeiZel/gomple/pkg/res"
 	"net/http"
 	"strconv"
 
@@ -11159,7 +11159,7 @@ func main() {
 package stat
 
 import (
-	"go/adv-demo/pkg/event"
+	"ZeiZel/gomple/pkg/event"
 	"log"
 )
 
@@ -11889,7 +11889,7 @@ func TestJWTCreate(t *testing.T) {
 ```Go
 package di
 
-import "go/adv-demo/internal/user"
+import "ZeiZel/gomple/internal/user"
 
 type IStatRepository interface {
 	AddClick(linkId uint)
@@ -11921,8 +11921,8 @@ func NewAuthService(userRepository di.IUserRepository) *AuthService {
 package auth_test
 
 import (
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/internal/user"
+	"ZeiZel/gomple/internal/auth"
+	"ZeiZel/gomple/internal/user"
 	"testing"
 )
 
@@ -11961,18 +11961,19 @@ func TestRegisterSuccess(t *testing.T) {
 
 ### Mock базы
 
+Mock БД - это подход, который позволяет нам проверить интеграцию между несколькими функциями без поднятия тяжеловесной реальной базы. 
 
+С помощью пакета `DATA-DOG/go-sqlmock` можно поднять моковую базу данных. 
 
-`internal/auth/handler_test.go`
+`internal / auth / handler_test.go`
 ```Go
 package auth_test
 
 import (
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/internal/user"
-	"go/adv-demo/pkg/db"
-	"testing"
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/auth"
+	"ZeiZel/gomple/internal/user"
+	"ZeiZel/gomple/pkg/db"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"gorm.io/driver/postgres"
@@ -11980,27 +11981,39 @@ import (
 )
 
 func TestLoginSuccess(t *testing.T) {
+	// мокаем базу и на выходе получаем строку подключения, моки и ошибку
 	database, mock, err := sqlmock.New()
+	
+	// если моковая БД не смогла подняться, то нужно вывести ошибку
 	if err != nil {
 		t.Fatal("Failed init mock db")
 		return
 	}
+	
+	// GORM подключаем к моковой БД
 	gormDb, err := gorm.Open(postgres.New(postgres.Config{
 		Conn: database,
 	}))
+	
 	if err != nil {
 		t.Fatal("Failed init gorm")
 		return
 	}
+	
+	// в репозиторий прокинем GORM с подключением к моковой БД
 	userRepo := user.NewUserRepository(&db.Db{
 		DB: gormDb,
 	})
+	
+	// поднимаем хэндлер и проверяем его работу
 	handler := auth.AuthHandler{
+		// добавляем сразу сервис конфигурации
 		Config: &configs.Config{
 			Auth: configs.AuthConfig{
 				Secret: "secret",
 			},
 		},
+		// и прокидываем сервис авторизации
 		AuthService: auth.NewAuthService(userRepo),
 	}
 }
@@ -12008,42 +12021,48 @@ func TestLoginSuccess(t *testing.T) {
 
 ### HTTPTest
 
+Далее нужно протестировать отправку запроса на Login пользователя. Запрос будет полностью построен в рамках теста и отправлен без запущенного сервера. 
 
-
-`internal/auth/handler_test.go`
+`internal / auth / handler_test.go`
 ```Go
 package auth_test
 
 import (
 	"bytes"
 	"encoding/json"
-	"go/adv-demo/configs"
-	"go/adv-demo/internal/auth"
-	"go/adv-demo/internal/user"
-	"go/adv-demo/pkg/db"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"ZeiZel/gomple/configs"
+	"ZeiZel/gomple/internal/auth"
+	"ZeiZel/gomple/internal/user"
+	"ZeiZel/gomple/pkg/db"
+
 	"github.com/DATA-DOG/go-sqlmock"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
+// вынесем повторяющуюся логику создания хэндлера авторизации в общий bootstrap
 func bootstrap() (*auth.AuthHandler, sqlmock.Sqlmock, error) {
 	database, mock, err := sqlmock.New()
 	if err != nil {
 		return nil, nil, err
 	}
+	
 	gormDb, err := gorm.Open(postgres.New(postgres.Config{
 		Conn: database,
 	}))
 	if err != nil {
 		return nil, nil, err
 	}
+	
 	userRepo := user.NewUserRepository(&db.Db{
 		DB: gormDb,
 	})
+	
 	handler := auth.AuthHandler{
 		Config: &configs.Config{
 			Auth: configs.AuthConfig{
@@ -12052,23 +12071,35 @@ func bootstrap() (*auth.AuthHandler, sqlmock.Sqlmock, error) {
 		},
 		AuthService: auth.NewAuthService(userRepo),
 	}
+	
 	return &handler, mock, nil
 }
 
 func TestLoginSuccess(t *testing.T) {
+	// получаем хэндлер 
 	handler, _, err := bootstrap()
 	if err != nil {
 		t.Fatal(err)
 		return
 	}
+	
+	// собираем данные для отправки авторизации
 	data, _ := json.Marshal(&auth.LoginRequest{
 		Email:    "a2@a.ru",
 		Password: "1",
 	})
+	
+	// создаём ридер и врайтер для запроса
 	reader := bytes.NewReader(data)
 	w := httptest.NewRecorder()
+	// создаём факт запроса
 	req := httptest.NewRequest(http.MethodPost, "/auth/login", reader)
+	
+	// далее вызываем Login() и получаем метод запроса
+	// в результат мы сразу передаём 
 	handler.Login()(w, req)
+	
+	// либо можно статус стянуть из полного пути w.Result().StatusCode
 	if w.Code != http.StatusOK {
 		t.Errorf("got %d, expected %d", w.Code, 200)
 	}
@@ -12077,19 +12108,33 @@ func TestLoginSuccess(t *testing.T) {
 
 ### Mock запросов
 
+Далее нам нужно реализовать имитацию возврата данных из БД, чтобы наш тест для проверки авторизации начал работать. 
 
+Для этого нам нужно добавить представление нашей таблицы в качестве моков и занести нужные данные в эти строки. 
 
-`internal/auth/handler_test.go`
+`internal / auth / handler_test.go`
 ```Go
 func TestLoginSuccess(t *testing.T) {
 	handler, mock, err := bootstrap()
-	rows := sqlmock.NewRows([]string{"email", "password"}).
+	
+	// добавляем новую строку в моковую БД с данными по пользователю
+	rows := sqlmock.
+		// описываем типы в мапе строки
+		NewRows([]string{"email", "password"}).
+		// добавляем данные по строке
 		AddRow("a2@a.ru", "$2a$10$fOFzfotZx.uhK2BkJTy4AuVb6ejteFYEUkREKD/nBR6fZx4afcmYS")
+	
+	// далее мы должны Точно указать в ExpectQuery, что при обращении к моковой базе с определённой строкой запроса (у нас просто любой "SELECT ...")
+	// мы должны вернуть rows, которые передали в WillReturnRows
+	// то есть при вызове любого SELECT к моковой БД, мы должны вернуть наши rows
 	mock.ExpectQuery("SELECT").WillReturnRows(rows)
+	
+	// в конце проверяем накопленные ошибки по операциям над базой
 	if err != nil {
 		t.Fatal(err)
 		return
 	}
+	
 	data, _ := json.Marshal(&auth.LoginRequest{
 		Email:    "a2@a.ru",
 		Password: "1",
@@ -12104,47 +12149,27 @@ func TestLoginSuccess(t *testing.T) {
 }
 ```
 
+Теперь тест успешно проходит
+
+```
+[6.006ms] [rows:0] SELECT * FROM "users" WHERE email = 'a2@a.ru' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+=== RUN   TestLoginHandlerSuccess
+--- PASS: TestLoginHandlerSuccess (0.90s)
+```
+
 #### Тест регистрации
 
 
 
-`internal/auth/handler.go`
-```Go
-func (handler *AuthHandler) Register() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		body, err := req.HandleBody[RegisterRequest](&w, r)
-		if err != nil {
-			return
-		}
-		email, err := handler.AuthService.Register(body.Email, body.Password, body.Name)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusUnauthorized)
-			return
-		}
-		token, err := jwt.NewJWT(handler.Config.Auth.Secret).Create(jwt.JWTData{
-			Email: email,
-		})
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		data := RegisterResponse{
-			Token: token,
-		}
-		res.Json(w, data, 201)
-	}
-}
-```
-
-
-
-`internal/auth/handler_test.go`
+`internal / auth / handler_test.go`
 ```Go
 func TestLoginHandlerSuccess(t *testing.T) {
 	handler, mock, err := bootstrap()
+	
 	rows := sqlmock.NewRows([]string{"email", "password"}).
 		AddRow("a2@a.ru", "$2a$10$fOFzfotZx.uhK2BkJTy4AuVb6ejteFYEUkREKD/nBR6fZx4afcmYS")
-@@ -62,3 +62,28 @@ func TestLoginSuccess(t *testing.T) {
+	
+	func TestLoginSuccess(t *testing.T) {
 		t.Errorf("got %d, expected %d", w.Code, 200)
 	}
 }
@@ -12170,7 +12195,7 @@ func TestRegisterHandlerSuccess(t *testing.T) {
 	req := httptest.NewRequest(http.MethodPost, "/auth/register", reader)
 	handler.Register()(w, req)
 	if w.Code != http.StatusCreated {
-		t.Errorf("got %d, expected %d", w.Code, 201)
+		t.Errorf("got %d, expected %d", w.Code, http.StatusCreated)
 	}
 }
 ```

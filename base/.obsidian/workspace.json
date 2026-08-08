@@ -197,7 +197,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "crawlers",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -218,12 +218,11 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 418.5
+    "width": 548.66796875
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -406,7 +405,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 576.94921875
+    "width": 496.375
   },
   "left-ribbon": {
     "hiddenItems": {
