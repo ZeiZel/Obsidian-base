@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Temporal Go",
+      "path": "backend/go/Temporal Go.md"
+    },
+    {
+      "basename": "go",
+      "path": "backend/go/go.md"
+    },
+    {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "agile",
@@ -11,10 +27,6 @@
     {
       "basename": "SEO",
       "path": "frontend/SEO.md"
-    },
-    {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "metrics",
@@ -31,10 +43,6 @@
     {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "whatsapp.excalidraw",
@@ -135,10 +143,6 @@
     {
       "basename": "conflict-resolution",
       "path": "soft/conflict-resolution.md"
-    },
-    {
-      "basename": "go",
-      "path": "backend/go/go.md"
     },
     {
       "basename": "06-microservices",
