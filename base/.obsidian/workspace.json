@@ -133,7 +133,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "agile/agile.md",
+                "file": "backend/go/Selfgo.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -148,16 +148,16 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "agile"
+              "title": "Selfgo"
             }
           },
           {
-            "id": "163f9dbf337fc5c7",
+            "id": "60b5ad3954aa7fbd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/go/Temporal Go.md",
+                "file": "cs/Алгоритмы и Структуры даных.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -172,11 +172,35 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Temporal Go"
+              "title": "Алгоритмы и Структуры даных"
+            }
+          },
+          {
+            "id": "6a6e6f48f4d9dbf4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/database.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "database"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -222,7 +246,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "—",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -416,7 +440,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Temporal Go.md",
+                "file": "database/database.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -453,17 +477,22 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "163f9dbf337fc5c7",
+  "active": "6a6e6f48f4d9dbf4",
   "lastOpenFiles": [
-    "backend/go/go.md",
+    "cs/Алгоритмы и Структуры даных.md",
+    "Untitled.base",
+    "database/database.md",
     "backend/go/Selfgo.md",
+    "agile/agile.md",
+    "backend/go/Go.md",
+    "backend/go/Temporal Go.md",
+    "backend/go/go.md",
     "architecture/System Design/System Design.md",
     "_png/Pasted image 20260810112432.png",
     "agile/Teamlead Balun Courses.md",
     "_png/Pasted image 20260809103157.png",
     "_png/Pasted image 20260808180605.png",
     "_png/Pasted image 20260802191204.png",
-    "agile/agile.md",
     "frontend/SEO.md",
     "_png/Pasted image 20260717154243.png",
     "_png/Pasted image 20260715201053.png",
@@ -486,11 +515,6 @@
     "frontend/tips-n-tricks/css-presets.md",
     "frontend/tips-n-tricks/css-features.md",
     "frontend/tips-n-tricks/react-best-practices.md",
-    "frontend/tips-n-tricks/helpers-and-types.md",
-    "frontend/tips-n-tricks/frontend-libraries.md",
-    "frontend/tips-n-tricks/mixin-content.md",
-    "tools/nvim.md",
-    "frontend/tips-n-tricks/tips-n-tricks.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
@@ -500,7 +524,6 @@
     "edge/Инструменты/build-tools",
     "edge/Инструменты/engines",
     "edge/Инструменты/validators",
-    "interview/web",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",

@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "Temporal Go",
-      "path": "backend/go/Temporal Go.md"
+      "basename": "database",
+      "path": "database/database.md"
     },
     {
-      "basename": "go",
-      "path": "backend/go/go.md"
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Untitled.base"
     },
     {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "agile",
+      "path": "agile/agile.md"
     },
     {
       "basename": "System Design",
@@ -19,10 +27,6 @@
     {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "SEO",
@@ -143,10 +147,6 @@
     {
       "basename": "conflict-resolution",
       "path": "soft/conflict-resolution.md"
-    },
-    {
-      "basename": "06-microservices",
-      "path": "backend/go/06-microservices.md"
     },
     {
       "basename": "web",
