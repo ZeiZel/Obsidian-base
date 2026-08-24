@@ -1,7 +1,8 @@
 {
   "callouts": {
     "custom": [
-      "greeting"
+      "greeting",
+      "book"
     ],
     "settings": {
       "greeting": [
@@ -9,6 +10,27 @@
           "changes": {
             "icon": "lucide-crown",
             "color": "244, 235, 138"
+          }
+        }
+      ],
+      "book": [
+        {
+          "changes": {
+            "icon": "lucide-book-open-text"
+          }
+        },
+        {
+          "condition": {
+            "colorScheme": "light"
+          },
+          "changes": {}
+        },
+        {
+          "condition": {
+            "colorScheme": "dark"
+          },
+          "changes": {
+            "color": "168, 130, 255"
           }
         }
       ]

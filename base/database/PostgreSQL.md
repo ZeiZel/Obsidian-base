@@ -6,3099 +6,2279 @@ tags:
   - backend
 ---
 
-## PostgreSQL
+## Руководство по PostgreSQL
 
-PostgreSQL (Postgres) — мощная объектно-реляционная СУБД с открытым исходным кодом. Поддерживает ACID-транзакции, сложные запросы, JSON, полнотекстовый поиск, расширения и многое другое.
+### Глава 1. Введение в PostgreSQL
 
----
+#### Что такое PostgreSQL. Установка сервера
 
-### Установка и настройка
+PostgreSQL — свободная объектно-реляционная СУБД с транзакциями, ограничениями целостности, расширяемой системой типов, индексами, JSON, полнотекстовым поиском и средствами конкурентной работы. Она работает по клиент-серверной модели: сервер хранит данные и выполняет запросы, а `psql`, pgAdmin и приложения подключаются к нему по сети или через локальный Unix-сокет.
 
-#### Установка
+Актуальные установочные пакеты публикуются на [официальной странице загрузки](https://www.postgresql.org/download/). Для учебного компьютера достаточно локального сервера и клиента; pgAdmin необязателен.
 
-**macOS:**
-```bash
-brew install postgresql@16
-brew services start postgresql@16
+**Ubuntu/Debian.** Версия в системном репозитории может отставать. Если нужна именно ветка 18, сначала подключают официальный PGDG-репозиторий по инструкции PostgreSQL, затем устанавливают пакет:
 
-# Добавить в PATH
-echo 'export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"' >> ~/.zshrc
-```
-
-**Ubuntu/Debian:**
 ```bash
 sudo apt update
-sudo apt install postgresql postgresql-contrib
-
-# Запуск сервиса
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
+sudo apt install postgresql-18 postgresql-client-18
+sudo systemctl enable --now postgresql
 ```
 
-**Windows:**
-Скачать установщик с [postgresql.org](https://www.postgresql.org/download/windows/)
-
-**Docker:**
-```bash
-docker run --name postgres -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:16
-```
-
-#### Подключение
+**Fedora/RHEL-подобные системы.** После подключения официального репозитория PGDG устанавливают сервер и инициализируют кластер:
 
 ```bash
-# Подключение к локальному серверу
-psql -U postgres
-
-# Подключение к конкретной БД
-psql -h localhost -U username -d database_name
-
-# Строка подключения
-psql "postgresql://user:password@localhost:5432/dbname"
+sudo dnf install postgresql18-server postgresql18
+sudo /usr/pgsql-18/bin/postgresql-18-setup initdb
+sudo systemctl enable --now postgresql-18
 ```
 
-#### psql — консольный клиент
+**macOS.** Один из простых вариантов — Homebrew:
 
-```sql
--- Мета-команды psql
-\l              -- Список баз данных
-\c dbname       -- Подключиться к БД
-\dt             -- Список таблиц
-\d tablename    -- Структура таблицы
-\di             -- Список индексов
-\dv             -- Список представлений
-\df             -- Список функций
-\du             -- Список пользователей
-\x              -- Расширенный вывод (вертикальный)
-\timing         -- Показывать время выполнения
-\i file.sql     -- Выполнить SQL-файл
-\q              -- Выход
-
--- Примеры
-\d+ users       -- Подробная информация о таблице
-\dt public.*    -- Таблицы в схеме public
+```bash
+brew install postgresql@18
+brew services start postgresql@18
 ```
 
-#### pgAdmin — графический интерфейс
+В Windows удобнее использовать графический установщик EnterpriseDB: он предлагает выбрать компоненты, каталог данных, пароль административной роли, порт и локаль.
 
-pgAdmin — официальный GUI для PostgreSQL. После установки:
+![Выбор дистрибутива PostgreSQL для Windows](https://metanit.com/sql/postgresql/pics/postgres10.png)
 
-1. **Servers** → Add New Server
-2. Указать: Name, Host (localhost), Port (5432), Username, Password
-3. В дереве объектов видны: Databases → Schemas → Tables
+![Запуск установщика PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres1.png)
 
-**Что смотреть в pgAdmin:**
-- **Query Tool** — выполнение SQL-запросов
-- **Properties** — свойства объектов (таблицы, индексы)
-- **Statistics** — статистика использования
-- **Dependencies** — зависимости объектов
-- **ERD Tool** — визуализация связей таблиц
+![Выбор каталога установки PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres2.png)
 
----
+![Выбор устанавливаемых компонентов PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres3.png)
 
-### Основы SQL
+![Выбор каталога данных PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres4.png)
 
-#### Создание базы данных
+![Настройка пароля административной роли postgres](https://metanit.com/sql/postgresql/pics/postgres5.png)
+
+![Настройка порта PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres6.png)
+
+![Выбор локали кластера PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres7.png)
+
+![Сводка параметров установки PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres8.png)
+
+![Процесс установки PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres11.png)
+
+![Завершение установки PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres9.png)
+
+Стандартный TCP-порт PostgreSQL — `5432`. Основные параметры находятся в `postgresql.conf`, а правила аутентификации — в `pg_hba.conf`; точное расположение файлов зависит от ОС и способа установки. Узнать используемые сервером пути можно запросами:
 
 ```sql
--- Создание БД
-CREATE DATABASE shop;
-
--- Создание с параметрами
-CREATE DATABASE shop
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'ru_RU.UTF-8'
-    LC_CTYPE = 'ru_RU.UTF-8'
-    TEMPLATE = template0;
-
--- Удаление БД
-DROP DATABASE IF EXISTS shop;
-
--- Список БД
-SELECT datname FROM pg_database;
+show config_file;
+show hba_file;
+show data_directory;
+show port;
 ```
 
-#### Типы данных
+Проверка клиента, сервера и готовности подключения:
 
-##### Числовые
-
-| Тип | Размер | Диапазон | Описание |
-|-----|--------|----------|----------|
-| `SMALLINT` | 2 байта | -32768 до 32767 | Малое целое |
-| `INTEGER` / `INT` | 4 байта | -2.1 млрд до 2.1 млрд | Целое |
-| `BIGINT` | 8 байт | ±9.2 квинтиллиона | Большое целое |
-| `DECIMAL(p,s)` | переменный | до 131072 цифр | Точное число |
-| `NUMERIC(p,s)` | переменный | то же | Синоним DECIMAL |
-| `REAL` | 4 байта | 6 знаков точности | Число с плавающей точкой |
-| `DOUBLE PRECISION` | 8 байт | 15 знаков точности | Двойная точность |
-| `SERIAL` | 4 байта | автоинкремент | Автоматический ID |
-| `BIGSERIAL` | 8 байт | автоинкремент | Большой автоматический ID |
-
-```sql
--- Примеры
-price DECIMAL(10, 2)   -- До 10 цифр, 2 после запятой
-quantity INTEGER
-id SERIAL PRIMARY KEY
+```bash
+psql --version
+pg_isready -h localhost -p 5432
+sudo -u postgres psql
 ```
 
-##### Строковые
-
-| Тип | Описание |
-|-----|----------|
-| `CHAR(n)` | Строка фиксированной длины (дополняется пробелами) |
-| `VARCHAR(n)` | Строка переменной длины (до n символов) |
-| `TEXT` | Строка неограниченной длины |
-
 ```sql
-code CHAR(5)           -- Всегда 5 символов
-name VARCHAR(100)      -- До 100 символов
-description TEXT       -- Без ограничений
+show server_version;
+select version();
 ```
 
-##### Дата и время
-
-| Тип | Описание | Пример |
-|-----|----------|--------|
-| `DATE` | Дата | 2024-01-15 |
-| `TIME` | Время | 14:30:00 |
-| `TIMESTAMP` | Дата и время | 2024-01-15 14:30:00 |
-| `TIMESTAMPTZ` | С временной зоной | 2024-01-15 14:30:00+03 |
-| `INTERVAL` | Интервал времени | 1 year 2 months |
+Роль `postgres` обладает широкими правами и предназначена для администрирования, а не для повседневной работы приложения. Разделим владельца объектов, роль миграций и runtime-роль. Пароли не передаём в аргументах командной строки: `\password` запросит значение интерактивно и не оставит его в истории shell. Миграции входят как `app_migrator`, затем делают `set role app_owner`; поэтому default privileges, настроенные для `app_owner`, применяются к создаваемым объектам.
 
 ```sql
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-updated_at TIMESTAMPTZ DEFAULT NOW()
-duration INTERVAL
+create role app_owner nologin;
+create role app_migrator login noinherit nosuperuser nocreatedb nocreaterole;
+\password app_migrator
+grant app_owner to app_migrator;
+
+create role app_runtime login noinherit nosuperuser nocreatedb nocreaterole noreplication;
+\password app_runtime
+
+create database app_db owner app_owner;
+revoke all on database app_db from public;
+grant connect on database app_db to app_migrator, app_runtime;
 ```
 
-##### Логический и другие
-
-| Тип | Описание |
-|-----|----------|
-| `BOOLEAN` | true / false / null |
-| `UUID` | Универсальный уникальный идентификатор |
-| `JSON` | JSON-данные (текст) |
-| `JSONB` | JSON в бинарном формате (быстрее) |
-| `ARRAY` | Массив значений |
-| `BYTEA` | Бинарные данные |
+После подключения к `app_db` миграции выполняются с `set role app_owner`, а runtime получает только нужные приложению права:
 
 ```sql
-is_active BOOLEAN DEFAULT true
-id UUID DEFAULT gen_random_uuid()
-metadata JSONB
-tags TEXT[]            -- Массив строк
-numbers INTEGER[]      -- Массив чисел
+revoke create on schema public from public;
+grant usage on schema public to app_runtime;
+grant select, insert, update, delete on all tables in schema public to app_runtime;
+grant usage, select on all sequences in schema public to app_runtime;
+
+alter default privileges for role app_owner in schema public
+grant select, insert, update, delete on tables to app_runtime;
+
+alter default privileges for role app_owner in schema public
+grant usage, select on sequences to app_runtime;
 ```
 
----
+Это учебная основа принципа наименьших привилегий. В реальном проекте права часто делят ещё точнее: отдельно для миграций, runtime-приложения и аналитического чтения.
 
-### Создание и изменение таблиц
+#### Графический клиент pgAdmin
 
-#### CREATE TABLE
+pgAdmin — графический клиент и средство администрирования PostgreSQL. Он позволяет регистрировать серверы, просматривать базы, схемы и таблицы, выполнять SQL, изучать планы запросов и управлять ролями. Это отдельное приложение: установка pgAdmin не означает установку сервера PostgreSQL, и наоборот.
+
+В Linux pgAdmin устанавливают из [официального репозитория проекта](https://www.pgadmin.org/download/). После запуска локальный сервер регистрируют через `Servers` → `Register` → `Server`.
+
+![Регистрация сервера в pgAdmin на Ubuntu](https://metanit.com/sql/postgresql/pics/pgadmin12.png)
+
+На вкладке `General` задаётся произвольное понятное имя подключения.
+
+![Имя подключения в pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin13.png)
+
+На вкладке `Connection` для локального сервера обычно указывают `localhost`, порт `5432`, служебную базу `postgres` или рабочую базу и имя роли. Пароль вводят в интерфейсе, а не записывают в заметку или команду.
+
+![Параметры подключения к PostgreSQL в pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin14.png)
+
+В Windows pgAdmin обычно можно выбрать как компонент графического установщика PostgreSQL.
+
+![Запуск pgAdmin в Windows](https://metanit.com/sql/postgresql/pics/pgadmin1.png)
+
+![Ввод пароля подключения в pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin3.png)
+
+После подключения дерево объектов показывает базы данных, роли и табличные пространства. Внутри базы находятся схемы, а уже внутри схем — таблицы, представления, функции и другие объекты. Имя `public` — лишь схема по умолчанию, а не сама база данных.
+
+![Дерево баз данных и ролей в pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin4.png)
+
+Базу можно создать через контекстное меню `Databases` → `Create` → `Database`.
+
+![Открытие формы создания базы данных в pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin5.png)
+
+![Заполнение параметров новой базы данных](https://metanit.com/sql/postgresql/pics/pgadmin6.png)
+
+![Созданная база данных в дереве pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin7.png)
+
+Для повторяемой настройки окружения предпочтительнее хранить DDL в миграциях, а не создавать объекты вручную: так изменения можно проверить, применить на другом стенде и откатить предусмотренным проектом способом.
+
+#### Запросы SQL в pgAdmin
+
+Query Tool выполняет SQL в контексте выбранной базы данных. Перед запуском всегда проверяйте активное подключение: один и тот же запрос в разных базах изменит разные данные.
+
+![Открытие Query Tool для выбранной базы](https://metanit.com/sql/postgresql/pics/pgadmin8.png)
+
+Создадим небольшую таблицу и добавим строку. Современный PostgreSQL предлагает `generated ... as identity` вместо исторического псевдотипа `serial`: identity явно связывает генерацию значения со столбцом и лучше выражает намерение схемы.
 
 ```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    name VARCHAR(100),
-    age INTEGER CHECK (age >= 0 AND age <= 150),
-    balance DECIMAL(12, 2) DEFAULT 0.00,
-    is_active BOOLEAN DEFAULT true,
-    role VARCHAR(20) DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table users (
+    id bigint generated always as identity primary key,
+    name text not null,
+    age integer check (age >= 0)
 );
 
--- С комментариями
-COMMENT ON TABLE users IS 'Пользователи системы';
-COMMENT ON COLUMN users.email IS 'Email пользователя (уникальный)';
+insert into users (name, age)
+values ('Tom', 33)
+returning id, name, age;
 ```
 
-#### Ограничения (Constraints)
+![Создание таблицы и строки через Query Tool](https://metanit.com/sql/postgresql/pics/pgadmin9.png)
+
+Таблица создаётся в текущей схеме, обычно `public`. К объекту можно обращаться полным именем `public.users`; это особенно полезно, если в базе несколько схем.
+
+![Таблица в схеме public в pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin10.png)
+
+Получим только необходимые столбцы:
 
 ```sql
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,                              -- Первичный ключ
-    sku VARCHAR(50) UNIQUE,                             -- Уникальное значение
-    name VARCHAR(200) NOT NULL,                         -- Обязательное поле
-    price DECIMAL(10, 2) CHECK (price >= 0),            -- Проверка значения
-    category_id INTEGER REFERENCES categories(id),      -- Внешний ключ
+select id, name, age
+from users;
+```
 
-    -- Составной уникальный ключ
-    UNIQUE (sku, category_id),
+![Результат SELECT в Data Output pgAdmin](https://metanit.com/sql/postgresql/pics/pgadmin11.png)
 
-    -- Именованное ограничение
-    CONSTRAINT positive_price CHECK (price > 0)
+Query Tool выполняет выделенный фрагмент либо весь редактор. Команды DDL и DML можно объединять в явную транзакцию, чтобы либо применить изменения вместе, либо отменить их:
+
+```sql
+begin;
+
+update users
+set age = age + 1
+where id = 1;
+
+rollback;
+```
+
+#### Консольный клиент psql
+
+`psql` — штатный интерактивный клиент PostgreSQL. Он выполняет SQL и собственные метакоманды, начинающиеся с обратной косой черты. Такой клиент удобен для серверов без графической оболочки, диагностики и автоматизируемых сценариев.
+
+![Запуск консольного клиента psql](https://metanit.com/sql/postgresql/pics/psql1.png)
+
+Подключение к локальной базе. Флаг `-W` запрашивает пароль интерактивно; пароль не следует помещать в URI или аргументы процесса. Для автоматизации используют защищённый файл `.pgpass` с правами `0600` либо менеджер секретов.
+
+```bash
+psql -h localhost -p 5432 -U app_runtime -d app_db -W
+```
+
+![Диалог подключения psql](https://metanit.com/sql/postgresql/pics/psql2.png)
+
+Полезные метакоманды:
+
+```text
+\conninfo          текущее подключение
+\l                 список баз данных
+\c app_db          подключиться к другой базе
+\dn                список схем
+\dt public.*       список таблиц схемы public
+\d public.users    описание таблицы
+\timing on         измерять время запросов
+\q                 выйти
+```
+
+SQL завершается точкой с запятой, а метакоманды `psql` — нет:
+
+```sql
+create database playground;
+```
+
+```text
+\c playground
+```
+
+```sql
+create table users (
+    id bigint generated always as identity primary key,
+    name text not null,
+    age integer
 );
 
--- Внешний ключ с действиями
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id)
-        REFERENCES users(id)
-        ON DELETE CASCADE      -- Удалить заказы при удалении пользователя
-        ON UPDATE CASCADE      -- Обновить при изменении id
+insert into users (name, age)
+values ('Tom', 33)
+returning id;
+```
+
+![Создание базы и таблицы в psql](https://metanit.com/sql/postgresql/pics/psql3.png)
+
+```sql
+select id, name, age
+from users;
+```
+
+![Добавление и чтение данных в psql](https://metanit.com/sql/postgresql/pics/psql4.png)
+
+Для файлов со скриптами применяют `psql -f migration.sql`, а внутри интерактивной сессии — `\i migration.sql`. Для CI полезен режим остановки при первой ошибке:
+
+```bash
+psql -X -v ON_ERROR_STOP=1 -d app_db -f migration.sql
+```
+
+### Глава 2. Определение структуры данных
+
+#### Создание и удаление базы данных
+
+База данных в PostgreSQL — изолированное пространство объектов внутри одного кластера сервера. Соединение всегда открывается с конкретной базой; обычный SQL-запрос не обращается к таблице другой базы напрямую.
+
+В pgAdmin Query Tool нужно открыть из любой уже существующей базы, например `postgres`.
+
+![Выбор Query Tool для создания базы](https://metanit.com/sql/postgresql/pics/2.1.png)
+
+Создадим базу с явным владельцем. Выполнять это должна роль с правом `createdb` или суперпользователь:
+
+```sql
+create database users_db owner app_owner;
+```
+
+![Выполнение CREATE DATABASE в pgAdmin](https://metanit.com/sql/postgresql/pics/2.2.png)
+
+После обновления узла `Databases` новая база появляется в дереве.
+
+![Обновление списка баз данных в pgAdmin](https://metanit.com/sql/postgresql/pics/2.3.png)
+
+![Созданная база данных в pgAdmin](https://metanit.com/sql/postgresql/pics/2.4.png)
+
+У `create database` есть параметры кодировки, локали, шаблона и табличного пространства, но менять их следует осознанно: часть параметров определяется шаблоном и не изменяется после создания. Для большинства проектов подходят UTF-8 и настройки локали, выбранные при инициализации кластера.
+
+Удаление базы необратимо и требует завершить активные соединения. Подключаться при этом нужно к другой базе:
+
+```sql
+drop database users_db with (force);
+```
+
+`with (force)` разрывает доступные серверу соединения, но не превращает операцию в безопасную: перед удалением всё равно проверяют имя окружения, наличие резервной копии и владельца данных. Если база нужна временно, часто безопаснее создать отдельную тестовую базу и удалять только её автоматизированным скриптом.
+
+#### Создание и удаление таблиц
+
+Таблица задаёт структуру строк: для каждого столбца определяются имя, тип и ограничения. В production-схеме имена обычно пишут в `snake_case` без кавычек: PostgreSQL приводит некавыченные идентификаторы к нижнему регистру, тогда как `"MixedCase"` придётся всегда заключать в кавычки.
+
+![Открытие Query Tool для создания таблицы](https://metanit.com/sql/postgresql/pics/2.5.png)
+
+```sql
+create table customers (
+    id bigint generated always as identity primary key,
+    first_name text not null,
+    last_name text not null,
+    email text,
+    age integer check (age >= 0)
+);
+```
+
+![Созданная таблица customers в pgAdmin](https://metanit.com/sql/postgresql/pics/2.6.png)
+
+`create table if not exists` подавляет ошибку существования, но не проверяет совпадение уже имеющейся структуры с ожидаемой. Для последовательного изменения схемы используют миграции.
+
+```sql
+create table if not exists audit_events (
+    id bigint generated always as identity primary key,
+    payload jsonb not null,
+    created_at timestamptz not null default now()
+);
+```
+
+Удаление таблицы уничтожает её данные, индексы и принадлежащие ей ограничения:
+
+```sql
+drop table customers;
+```
+
+`drop table ... cascade` дополнительно удаляет зависимые объекты. Применять `cascade` без просмотра зависимостей опасно; в миграциях лучше перечислять ожидаемые изменения явно.
+
+#### Типы данных в PostgreSQL
+
+Тип ограничивает допустимые значения и определяет операции, индексы и формат хранения. Чем точнее тип соответствует предметной области, тем меньше проверок остаётся приложению.
+
+**Целые и вещественные числа.** `smallint`, `integer` и `bigint` хранят целые числа размером 2, 4 и 8 байт. `real` и `double precision` используют двоичную плавающую точку и подходят для приближённых вычислений. Для денег и других точных десятичных величин обычно применяют `numeric(p, s)`, где `p` — общая точность, а `s` — масштаб. Тип `money` зависит от локали вывода и часто неудобен для обмена данными.
+
+**Автогенерируемые ключи.** `smallserial`, `serial` и `bigserial` — исторические псевдотипы, создающие последовательность и `default nextval(...)`. В новой схеме предпочтительнее стандартный identity-столбец:
+
+```sql
+create table products (
+    id bigint generated always as identity primary key,
+    name text not null,
+    stock integer not null default 0 check (stock >= 0),
+    price numeric(12, 2) not null check (price >= 0)
+);
+```
+
+`generated always` запрещает случайную ручную подстановку идентификатора; при осознанном импорте её можно разрешить через `overriding system value`. Вариант `generated by default` допускает ручное значение сразу.
+
+**Строки и байты.** `text` хранит строку произвольной длины. `varchar(n)` добавляет проверку максимальной длины, но обычно не быстрее `text`. `char(n)` дополняет значение пробелами до фиксированной длины и нужен редко. `bytea` хранит двоичные данные; крупные файлы часто выгоднее держать в объектном хранилище, оставляя в БД метаданные и ссылку.
+
+**Дата и время.** `date` хранит дату, `time` — время суток, `interval` — длительность. `timestamp without time zone` не обозначает временную зону и подходит для «настенных» значений вроде времени открытия. `timestamptz` хранит конкретный момент времени, нормализованный внутренне; исходное имя зоны (`Europe/Moscow`) он не сохраняет, а выводит момент в зоне текущей сессии. Для событий обычно выбирают `timestamptz`:
+
+```sql
+create table events (
+    id bigint generated always as identity primary key,
+    starts_at timestamptz not null,
+    created_at timestamptz not null default now()
 );
 
--- Варианты ON DELETE / ON UPDATE:
--- CASCADE    — каскадное действие
--- SET NULL   — установить NULL
--- SET DEFAULT — установить значение по умолчанию
--- RESTRICT   — запретить (по умолчанию)
--- NO ACTION  — отложенная проверка
+set timezone = 'Europe/Moscow';
+
+insert into events (starts_at)
+values ('2026-08-23 18:00:00+03:00');
 ```
 
-#### ALTER TABLE
+**Логические значения.** `boolean` хранит `true`, `false` или `null`, если столбец допускает отсутствие значения.
+
+**Сетевые типы.** `inet` хранит IPv4/IPv6-адрес и при необходимости длину маски, сохраняя биты узла. `cidr` представляет именно сеть и требует, чтобы биты узла были нулевыми. Также доступны `macaddr` и `macaddr8`.
 
 ```sql
--- Добавление колонки
-ALTER TABLE users ADD COLUMN phone VARCHAR(20);
-
--- Удаление колонки
-ALTER TABLE users DROP COLUMN phone;
-
--- Изменение типа
-ALTER TABLE users ALTER COLUMN name TYPE VARCHAR(200);
-
--- Установка/удаление DEFAULT
-ALTER TABLE users ALTER COLUMN is_active SET DEFAULT true;
-ALTER TABLE users ALTER COLUMN is_active DROP DEFAULT;
-
--- NOT NULL
-ALTER TABLE users ALTER COLUMN email SET NOT NULL;
-ALTER TABLE users ALTER COLUMN name DROP NOT NULL;
-
--- Переименование
-ALTER TABLE users RENAME COLUMN name TO full_name;
-ALTER TABLE users RENAME TO customers;
-
--- Добавление ограничения
-ALTER TABLE users ADD CONSTRAINT email_format
-    CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
-
--- Удаление ограничения
-ALTER TABLE users DROP CONSTRAINT email_format;
-
--- Добавление внешнего ключа
-ALTER TABLE orders ADD FOREIGN KEY (user_id) REFERENCES users(id);
+select
+    '192.168.1.15/24'::inet as host_address,
+    '192.168.1.0/24'::cidr as network;
 ```
 
-#### DROP TABLE
+**UUID.** `uuid` занимает 16 байт и проверяет формат. В PostgreSQL 18 функция `uuidv7()` создаёт UUID версии 7, удобный для новых распределённых идентификаторов; `gen_random_uuid()` создаёт UUID версии 4.
 
 ```sql
--- Удаление таблицы
-DROP TABLE users;
-
--- Если существует
-DROP TABLE IF EXISTS users;
-
--- Каскадное удаление (удалит зависимые объекты)
-DROP TABLE users CASCADE;
+create table api_keys (
+    id uuid primary key default uuidv7(),
+    label text not null
+);
 ```
 
----
-
-### CRUD-операции
-
-#### INSERT — вставка данных
+**JSON.** `json` сохраняет исходный текст почти без преобразования. `jsonb` хранит разобранное бинарное представление, не сохраняет пробелы и порядок ключей, а при повторяющихся ключах оставляет одно значение. Для запросов и индексации обычно выбирают `jsonb`:
 
 ```sql
--- Вставка одной записи
-INSERT INTO users (email, name, age)
-VALUES ('alice@example.com', 'Alice', 25);
+create table documents (
+    id bigint generated always as identity primary key,
+    body jsonb not null check (jsonb_typeof(body) = 'object')
+);
 
--- Вставка нескольких записей
-INSERT INTO users (email, name, age) VALUES
-    ('bob@example.com', 'Bob', 30),
-    ('carol@example.com', 'Carol', 28),
-    ('dave@example.com', 'Dave', 35);
-
--- Вставка с возвратом данных
-INSERT INTO users (email, name)
-VALUES ('eve@example.com', 'Eve')
-RETURNING id, email, created_at;
-
--- Вставка из другой таблицы
-INSERT INTO users_archive (email, name)
-SELECT email, name FROM users WHERE is_active = false;
-
--- Вставка с обработкой конфликтов (UPSERT)
-INSERT INTO users (email, name)
-VALUES ('alice@example.com', 'Alice Updated')
-ON CONFLICT (email)
-DO UPDATE SET name = EXCLUDED.name, updated_at = NOW();
-
--- Игнорировать конфликт
-INSERT INTO users (email, name)
-VALUES ('alice@example.com', 'Alice')
-ON CONFLICT (email) DO NOTHING;
+create index documents_body_gin_idx
+on documents using gin (body);
 ```
 
-#### SELECT — выборка данных
+PostgreSQL также поддерживает массивы, диапазоны, геометрические, полнотекстовые, XML, перечислимые и пользовательские типы. Выбор типа должен следовать смыслу данных, а не только их внешнему виду: телефон — `text`, сумма — `numeric`, IP-адрес — `inet`, структурированный документ для запросов — `jsonb`.
+
+#### Ограничения столбцов и таблиц
+
+Ограничения защищают инварианты независимо от того, какое приложение записывает данные. Им полезно давать устойчивые имена: это упрощает миграции и диагностику.
+
+`primary key` одновременно требует уникальность и `not null`; ключ может состоять из нескольких столбцов. Identity отвечает только за генерацию числа и сам по себе не делает столбец ключом.
 
 ```sql
--- Все колонки
-SELECT * FROM users;
+create table order_lines (
+    order_id bigint not null,
+    product_id bigint not null,
+    quantity integer not null check (quantity > 0),
+    unit_price numeric(12, 2) not null check (unit_price >= 0),
+    constraint order_lines_pk primary key (order_id, product_id)
+);
+```
 
--- Конкретные колонки
-SELECT id, email, name FROM users;
+`unique` запрещает дубли значений, но в PostgreSQL по умолчанию считает `null` не равным другому `null`, поэтому допускает несколько строк без значения. Если отсутствие значения тоже должно встречаться один раз, используйте `nulls not distinct`:
 
--- С псевдонимами
-SELECT
+```sql
+create table customers (
+    id bigint generated always as identity,
+    email text,
+    phone text,
+    constraint customers_pk primary key (id),
+    constraint customers_email_uq unique nulls not distinct (email),
+    constraint customers_phone_uq unique (phone)
+);
+```
+
+`not null` требует наличие значения. `default` вычисляет значение, когда столбец отсутствует в `insert` или указан оператор `default`; явный `null` значение по умолчанию не включает.
+
+```sql
+create table tasks (
+    id bigint generated always as identity primary key,
+    title text not null,
+    status text not null default 'new',
+    created_at timestamptz not null default now()
+);
+```
+
+`check` принимает строку, если условие равно `true` **или** `unknown`. Поэтому проверка `check (age >= 0)` сама по себе допускает `null`; если значение обязательно, дополнительно нужен `not null`.
+
+```sql
+create table profiles (
+    user_id bigint primary key,
+    age integer not null,
+    email text not null,
+    constraint profiles_age_ck check (age between 0 and 130),
+    constraint profiles_email_ck check (email <> '')
+);
+```
+
+Ограничения видны в pgAdmin и системных каталогах.
+
+![Список ограничений таблицы в pgAdmin](https://metanit.com/sql/postgresql/pics/2.7.png)
+
+Получить определения ограничений программно:
+
+```sql
+select
+    conname,
+    pg_get_constraintdef(oid) as definition
+from pg_constraint
+where conrelid = 'public.profiles'::regclass
+order by conname;
+```
+
+#### Внешние ключи
+
+Внешний ключ требует, чтобы значение в дочерней таблице соответствовало первичному или уникальному ключу родительской таблицы. Он предотвращает «осиротевшие» ссылки, но не создаёт индекс на дочерних столбцах автоматически.
+
+```sql
+create table customers (
+    id bigint generated always as identity primary key,
+    name text not null
+);
+
+create table orders (
+    id bigint generated always as identity primary key,
+    customer_id bigint not null,
+    quantity integer not null check (quantity > 0),
+    constraint orders_customer_fk
+        foreign key (customer_id)
+        references customers (id)
+        on delete restrict
+);
+
+create index orders_customer_id_idx
+on orders (customer_id);
+```
+
+Индекс на `orders.customer_id` ускоряет соединения и проверку зависимых строк при изменении или удалении клиента. Для маленькой таблицы он может быть несущественным, но в рабочей схеме такой индекс обычно нужен.
+
+Действия при изменении родительской строки:
+
+- `no action` — вариант по умолчанию; проверка может быть отложенной у deferrable-ограничения;
+- `restrict` — запрещает действие без возможности отложить эту проверку;
+- `cascade` — переносит обновление ключа или удаляет зависимые строки;
+- `set null` — записывает `null`, поэтому дочерний столбец должен его допускать;
+- `set default` — записывает значение по умолчанию, которое всё равно должно ссылаться на существующую родительскую строку.
+
+Каскадное удаление удобно для объектов, не имеющих смысла без владельца, но способно удалить большой граф данных. Выбор действия — часть бизнес-модели, а не техническая формальность.
+
+```sql
+create table order_items (
+    order_id bigint not null,
+    line_no integer not null,
+    product_name text not null,
+    constraint order_items_pk primary key (order_id, line_no),
+    constraint order_items_order_fk
+        foreign key (order_id)
+        references orders (id)
+        on delete cascade
+);
+
+create index order_items_order_id_idx
+on order_items (order_id);
+```
+
+Для циклической загрузки данных ограничение можно сделать `deferrable initially deferred`, чтобы оно проверялось в конце транзакции. Отключать внешние ключи ради обычного импорта не следует.
+
+#### Изменение таблиц
+
+`alter table` добавляет, удаляет и переименовывает столбцы, меняет типы, значения по умолчанию и ограничения. В рабочей базе изменение оценивают не только синтаксически: операция может переписать таблицу, долго удерживать блокировку или перестать помещаться в допустимое окно обслуживания.
+
+Добавление nullable-столбца:
+
+```sql
+alter table customers
+add column phone text;
+```
+
+Если существующие строки должны получить обязательное значение, безопасный многошаговый вариант удобнее одной тяжёлой миграции:
+
+```sql
+alter table customers
+add column status text;
+
+update customers
+set status = 'active'
+where status is null;
+
+alter table customers
+alter column status set default 'active';
+
+alter table customers
+alter column status set not null;
+```
+
+Удаление и переименование:
+
+```sql
+alter table customers
+drop column phone;
+
+alter table customers
+rename column status to account_status;
+
+alter table customers
+rename to users;
+```
+
+При изменении типа PostgreSQL пытается выполнить неявное преобразование. Если его нет или нужна особая логика, задают `using`:
+
+```sql
+alter table users
+alter column age type smallint
+using age::smallint;
+```
+
+Именованные ограничения проще удалять и заменять:
+
+```sql
+alter table users
+add constraint users_age_ck check (age between 0 and 130) not valid;
+
+alter table users
+validate constraint users_age_ck;
+
+alter table users
+drop constraint users_age_ck;
+```
+
+`not valid` позволяет добавить `check` или внешний ключ без немедленного полного сканирования старых строк; новые изменения уже проверяются. Затем `validate constraint` отдельно проверяет накопленные данные с более мягким профилем блокировок. Конкретный план миграции всё равно нужно испытывать на объёме, близком к production.
+
+### Глава 3. Операции с данными
+
+#### Добавление данных. Команда Insert
+
+`insert` создаёт строки. Почти всегда следует явно перечислять столбцы: тогда добавление нового столбца или изменение физического порядка не ломает запрос.
+
+```sql
+create table products (
+    id bigint generated always as identity primary key,
+    product_name text not null,
+    manufacturer text not null,
+    product_count integer not null default 0 check (product_count >= 0),
+    price numeric(12, 2) not null check (price >= 0),
+    constraint products_name_manufacturer_uq
+        unique (product_name, manufacturer)
+);
+
+insert into products (
+    product_name,
+    manufacturer,
+    product_count,
+    price
+)
+values ('Galaxy S9', 'Samsung', 4, 63000.00);
+```
+
+![Результат INSERT в pgAdmin](https://metanit.com/sql/postgresql/pics/3.1.png)
+
+Несколько строк передаются одним списком `values`. Это сокращает сетевые обращения и обычно эффективнее последовательности одиночных вставок:
+
+```sql
+insert into products (
+    product_name,
+    manufacturer,
+    product_count,
+    price
+)
+values
+    ('iPhone 6', 'Apple', 3, 36000.00),
+    ('Galaxy S8', 'Samsung', 2, 46000.00),
+    ('Galaxy S8 Plus', 'Samsung', 1, 56000.00)
+returning id, product_name;
+```
+
+`returning` отдаёт фактически записанные значения, включая identity, defaults и изменения триггеров. Это надёжнее отдельного запроса «последнего идентификатора».
+
+![Возвращение созданного идентификатора через RETURNING](https://metanit.com/sql/postgresql/pics/3.2.png)
+
+Для конфликта с уникальным ограничением PostgreSQL поддерживает атомарный upsert:
+
+```sql
+insert into products (
+    product_name,
+    manufacturer,
+    product_count,
+    price
+)
+values ('Galaxy S9', 'Samsung', 2, 62000.00)
+on conflict (product_name, manufacturer)
+do update
+set
+    product_count = products.product_count + excluded.product_count,
+    price = excluded.price
+returning id, product_count, price;
+```
+
+`on conflict` привязан к уникальному индексу или ограничению и специально решает конкурентный конфликт вставки. `merge` поддерживает более общую ветвящуюся синхронизацию источника и цели, но не является механической заменой upsert: его конкурентное поведение и подходящее уникальное ограничение нужно анализировать отдельно.
+
+```sql
+merge into products as target
+using (
+    values ('Pixel 10', 'Google', 5, 79900.00)
+) as source (product_name, manufacturer, product_count, price)
+on target.product_name = source.product_name
+and target.manufacturer = source.manufacturer
+when matched then
+    update set
+        product_count = source.product_count,
+        price = source.price
+when not matched then
+    insert (product_name, manufacturer, product_count, price)
+    values (
+        source.product_name,
+        source.manufacturer,
+        source.product_count,
+        source.price
+    );
+```
+
+Для массовой загрузки предназначен `copy`. Серверный `copy from '/path/file.csv'` читает файл от имени ОС-пользователя сервера и требует серверных прав. Метакоманда `\copy` читает локальный файл клиента и обычно удобнее:
+
+```text
+\copy products (product_name, manufacturer, product_count, price) from './products.csv' with (format csv, header true)
+```
+
+Импорт выполняют в контролируемой транзакции, проверяют кодировку, разделители, `null` и ограничения. Для недоверенных данных полезна staging-таблица, из которой валидные строки затем переносятся в основную схему.
+
+#### Получение данных. Команда Select
+
+`select` формирует результирующий набор. Для прикладного кода лучше перечислять нужные столбцы: `select *` затрудняет контроль контракта и может переносить лишние данные.
+
+```sql
+select
     id,
-    email AS user_email,
-    name AS user_name,
-    age * 12 AS age_in_months
-FROM users;
+    product_name,
+    manufacturer,
+    product_count,
+    price
+from products;
+```
 
--- DISTINCT — уникальные значения
-SELECT DISTINCT role FROM users;
-SELECT DISTINCT ON (role) * FROM users;
+![Выбор всех данных таблицы products](https://metanit.com/sql/postgresql/pics/3.3.png)
 
--- Вычисляемые поля
-SELECT
-    name,
+```sql
+select product_name, price
+from products;
+```
+
+![Выбор отдельных столбцов таблицы](https://metanit.com/sql/postgresql/pics/3.4.png)
+
+В списке `select` разрешены выражения. Псевдоним `as` задаёт имя вычисляемого столбца в результате:
+
+```sql
+select
+    product_name,
+    manufacturer,
+    product_count,
     price,
-    quantity,
-    price * quantity AS total
-FROM products;
+    price * product_count as total_value
+from products;
 ```
 
-#### WHERE — фильтрация
+![Псевдонимы и вычисляемые столбцы SELECT](https://metanit.com/sql/postgresql/pics/3.5.png)
+
+SQL не гарантирует порядок строк без `order by`. Даже если результат сегодня выглядит отсортированным по `id`, план выполнения или состояние таблицы может изменить порядок.
 
 ```sql
--- Операторы сравнения
-SELECT * FROM users WHERE age > 25;
-SELECT * FROM users WHERE age >= 25;
-SELECT * FROM users WHERE age < 30;
-SELECT * FROM users WHERE age <= 30;
-SELECT * FROM users WHERE age = 25;
-SELECT * FROM users WHERE age <> 25;  -- Не равно
-SELECT * FROM users WHERE age != 25;  -- Не равно (альтернатива)
-
--- Логические операторы
-SELECT * FROM users WHERE age > 25 AND is_active = true;
-SELECT * FROM users WHERE age < 20 OR age > 60;
-SELECT * FROM users WHERE NOT is_active;
-
--- BETWEEN — диапазон
-SELECT * FROM users WHERE age BETWEEN 20 AND 30;
-SELECT * FROM orders WHERE created_at BETWEEN '2024-01-01' AND '2024-12-31';
-
--- IN — список значений
-SELECT * FROM users WHERE role IN ('admin', 'moderator');
-SELECT * FROM users WHERE id IN (SELECT user_id FROM orders);
-
--- NULL
-SELECT * FROM users WHERE phone IS NULL;
-SELECT * FROM users WHERE phone IS NOT NULL;
-
--- LIKE — поиск по шаблону
-SELECT * FROM users WHERE name LIKE 'A%';      -- Начинается с A
-SELECT * FROM users WHERE name LIKE '%son';    -- Заканчивается на son
-SELECT * FROM users WHERE name LIKE '%ali%';   -- Содержит ali
-SELECT * FROM users WHERE name LIKE 'A_ice';   -- A + любой символ + ice
-
--- ILIKE — без учёта регистра
-SELECT * FROM users WHERE name ILIKE '%alice%';
-
--- Регулярные выражения
-SELECT * FROM users WHERE email ~ '^[a-z]+@';
-SELECT * FROM users WHERE email ~* '^[a-z]+@';  -- Без учёта регистра
+select id, product_name, price
+from products
+order by price desc, id asc;
 ```
 
-#### ORDER BY — сортировка
+В реальном приложении значения не склеивают со строкой SQL: параметры передаются средствами драйвера. Это сохраняет типизацию протокола и предотвращает SQL-инъекции.
+
+#### Фильтрация. WHERE
+
+`where` оставляет строки, для которых условие истинно. Основные сравнения: `=`, `<>` или `!=`, `<`, `>`, `<=`, `>=`.
 
 ```sql
--- По возрастанию (по умолчанию)
-SELECT * FROM users ORDER BY name;
-SELECT * FROM users ORDER BY name ASC;
-
--- По убыванию
-SELECT * FROM users ORDER BY created_at DESC;
-
--- По нескольким полям
-SELECT * FROM users ORDER BY role ASC, name ASC;
-
--- NULL в начале/конце
-SELECT * FROM users ORDER BY phone NULLS FIRST;
-SELECT * FROM users ORDER BY phone NULLS LAST;
-
--- По порядковому номеру колонки
-SELECT name, age FROM users ORDER BY 2 DESC;
+select id, product_name, manufacturer, price
+from products
+where manufacturer = 'Apple';
 ```
 
-#### LIMIT и OFFSET — пагинация
+![Фильтрация товаров по производителю](https://metanit.com/sql/postgresql/pics/3.6.png)
+
+Строковые сравнения зависят от collation и чувствительны к регистру в обычном `=`. Для нечувствительного поиска часто применяют `lower(...)`, `ilike` или специализированный тип/индекс, но способ должен соответствовать правилам конкретной предметной области.
 
 ```sql
--- Первые 10 записей
-SELECT * FROM users LIMIT 10;
+select id, product_name, price
+from products
+where price < 39000.00;
 
--- Пропустить 20, взять 10 (страница 3)
-SELECT * FROM users LIMIT 10 OFFSET 20;
-
--- Альтернативный синтаксис
-SELECT * FROM users OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY;
+select id, product_name, price, product_count
+from products
+where price * product_count > 90000.00;
 ```
 
-#### UPDATE — обновление
+![Фильтрация по вычисляемому условию](https://metanit.com/sql/postgresql/pics/3.7.png)
+
+Условия соединяются операторами `and`, `or` и `not`. У `and` приоритет выше, чем у `or`, поэтому смешанные условия лучше явно группировать скобками.
 
 ```sql
--- Обновление одного поля
-UPDATE users SET is_active = false WHERE id = 1;
+select id, product_name, manufacturer, price
+from products
+where manufacturer = 'Samsung'
+  and price > 50000.00;
+```
 
--- Обновление нескольких полей
-UPDATE users
-SET
-    name = 'Alice Smith',
-    email = 'alice.smith@example.com',
-    updated_at = NOW()
-WHERE id = 1;
+![Логическое условие AND](https://metanit.com/sql/postgresql/pics/3.8.png)
 
--- Обновление с возвратом
-UPDATE users
-SET balance = balance + 100
-WHERE id = 1
-RETURNING id, balance;
+```sql
+select id, product_name, manufacturer, price
+from products
+where manufacturer = 'Samsung'
+   or price > 50000.00;
+```
 
--- Обновление по подзапросу
-UPDATE products
-SET price = price * 1.1
-WHERE category_id IN (SELECT id FROM categories WHERE name = 'Electronics');
+![Логическое условие OR](https://metanit.com/sql/postgresql/pics/3.9.png)
 
--- Обновление из другой таблицы
-UPDATE users u
-SET total_orders = (
-    SELECT COUNT(*) FROM orders o WHERE o.user_id = u.id
+```sql
+select id, product_name, manufacturer
+from products
+where manufacturer <> 'Samsung';
+```
+
+![Логическое отрицание условия](https://metanit.com/sql/postgresql/pics/3.10.png)
+
+`null` означает неизвестное или отсутствующее значение. Сравнения `column = null` и `column <> null` дают `unknown`, а не `true`; нужны `is null` и `is not null`:
+
+```sql
+select id, product_name
+from products
+where product_count is null;
+
+select id, product_name
+from products
+where product_count is not null;
+```
+
+Это проявление трёхзначной логики SQL: условие может быть `true`, `false` или `unknown`. Оператор `is distinct from` полезен, когда `null` требуется сравнивать как обычное сопоставимое состояние:
+
+```sql
+select id, product_name
+from products
+where manufacturer is distinct from 'Samsung';
+```
+
+#### Обновление данных. Команда UPDATE
+
+`update` изменяет существующие строки. Без `where` обновляются все строки таблицы, поэтому перед массовой операцией полезно выполнить `select` с тем же условием и проверить ожидаемое количество. Ниже показан учебный откат: `commit` выполняют только после проверки результата.
+
+```sql
+begin;
+
+update products
+set price = price + 3000.00
+returning id, product_name, price;
+
+rollback;
+```
+
+![Массовое обновление цен через UPDATE](https://metanit.com/sql/postgresql/pics/3.11.png)
+
+Ограниченное обновление:
+
+```sql
+update products
+set manufacturer = 'Samsung Inc.'
+where manufacturer = 'Samsung'
+returning id, product_name, manufacturer;
+```
+
+![Обновление строк с условием WHERE](https://metanit.com/sql/postgresql/pics/3.12.png)
+
+Одним запросом можно изменить несколько столбцов. Выражения справа вычисляются по исходной версии строки, а `returning` показывает итог:
+
+```sql
+update products
+set
+    manufacturer = 'Samsung',
+    product_count = product_count + 3
+where manufacturer = 'Samsung Inc.'
+returning id, manufacturer, product_count;
+```
+
+Критичное изменение выполняют в транзакции. Сначала можно проверить строки и заблокировать их от конкурентного изменения:
+
+```sql
+begin;
+
+select id, product_name, price
+from products
+where manufacturer = 'Apple'
+for update;
+
+update products
+set price = round(price * 1.05, 2)
+where manufacturer = 'Apple'
+returning id, price;
+
+commit;
+```
+
+Долгая транзакция удерживает блокировки и старые версии строк, поэтому пользовательскую проверку нельзя оставлять открытой на неопределённое время.
+
+#### Удаление данных. Команда DELETE
+
+`delete` удаляет строки, соответствующие `where`. Как и у `update`, отсутствие условия означает действие над всей таблицей.
+
+```sql
+delete from products
+where manufacturer = 'Apple'
+returning id, product_name;
+```
+
+![Удаление строк через DELETE](https://metanit.com/sql/postgresql/pics/3.13.png)
+
+Составное условие:
+
+```sql
+delete from products
+where manufacturer = 'HTC'
+  and price < 15000.00
+returning id, product_name;
+```
+
+Удаление всех строк сохраняет саму таблицу. В учебном примере используем транзакцию и откат; `commit` допустим только после проверки возвращённых идентификаторов:
+
+```sql
+begin;
+
+delete from products
+returning id;
+
+rollback;
+```
+
+`truncate table products;` обычно быстрее для полной очистки большой таблицы, но имеет другие блокировки, поведение триггеров и правила внешних ключей. `restart identity` дополнительно сбрасывает принадлежащие таблице последовательности, а `cascade` затрагивает зависимые таблицы; эти параметры нельзя подставлять автоматически вместо `delete`.
+
+Если удаление должно быть обратимым с точки зрения продукта, часто применяют soft delete — например, `deleted_at timestamptz`. Это не бесплатная замена физическому удалению: все запросы, уникальные ограничения, индексы, аудит и политика хранения должны учитывать удалённое состояние.
+
+```sql
+alter table products
+add column deleted_at timestamptz;
+
+update products
+set deleted_at = now()
+where id = 42
+  and deleted_at is null
+returning id, deleted_at;
+```
+
+### Глава 4. Запросы
+
+В примерах этой главы используется таблица товаров:
+
+```sql
+create table products (
+    id bigint generated always as identity primary key,
+    product_name varchar(80) not null,
+    company varchar(80) not null,
+    product_count integer not null default 0 check (product_count >= 0),
+    price numeric(12, 2) not null check (price >= 0),
+    is_discounted boolean
 );
+
+insert into products (product_name, company, product_count, price, is_discounted)
+values
+    ('iPhone X', 'Apple', 3, 76000, false),
+    ('iPhone 8', 'Apple', 2, 71000, true),
+    ('iPhone 7', 'Apple', 5, 42000, true),
+    ('Galaxy S9', 'Samsung', 2, 46000, false),
+    ('Galaxy S8 Plus', 'Samsung', 1, 56000, true),
+    ('Desire 12', 'HTC', 5, 28000, true),
+    ('Nokia 9', 'HMD Global', 6, 38000, null);
 ```
 
-#### DELETE — удаление
+#### DISTINCT. Выборка уникальных значений
+
+`distinct` удаляет повторяющиеся строки из результата. Уникальность проверяется по всей комбинации выражений после `select`, а не по каждому столбцу отдельно.
 
 ```sql
--- Удаление по условию
-DELETE FROM users WHERE id = 1;
+select distinct company
+from products
+order by company;
 
--- Удаление нескольких записей
-DELETE FROM users WHERE is_active = false;
-
--- Удаление с возвратом
-DELETE FROM users WHERE id = 1 RETURNING *;
-
--- Удаление всех записей (медленнее TRUNCATE)
-DELETE FROM users;
-
--- TRUNCATE — быстрое удаление всех записей
-TRUNCATE TABLE users;
-TRUNCATE TABLE users RESTART IDENTITY;  -- Сбросить SERIAL
-TRUNCATE TABLE users, orders CASCADE;   -- Каскадно
+select distinct company, is_discounted
+from products
+order by company, is_discounted nulls last;
 ```
 
----
+![DISTINCT и выбор уникальных значений в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.1.png)
 
-### Агрегатные функции
+PostgreSQL также поддерживает `distinct on`: он оставляет первую строку каждой группы. Какая именно строка станет первой, обязательно задают детерминированным `order by`. Выражения `distinct on` должны совпадать с первыми выражениями сортировки.
 
 ```sql
--- COUNT — количество
-SELECT COUNT(*) FROM users;
-SELECT COUNT(phone) FROM users;  -- Не считает NULL
-SELECT COUNT(DISTINCT role) FROM users;
-
--- SUM — сумма
-SELECT SUM(price) FROM products;
-SELECT SUM(price * quantity) AS total FROM order_items;
-
--- AVG — среднее
-SELECT AVG(age) FROM users;
-SELECT ROUND(AVG(price), 2) AS avg_price FROM products;
-
--- MIN / MAX
-SELECT MIN(price), MAX(price) FROM products;
-SELECT MIN(created_at), MAX(created_at) FROM orders;
-
--- STRING_AGG — конкатенация строк
-SELECT STRING_AGG(name, ', ') FROM users;
-SELECT STRING_AGG(name, ', ' ORDER BY name) FROM users;
-
--- ARRAY_AGG — в массив
-SELECT ARRAY_AGG(name) FROM users;
+select distinct on (company)
+    company,
+    product_name,
+    price
+from products
+order by company, price desc, id;
 ```
 
-#### GROUP BY — группировка
+Здесь для каждой компании выбирается самый дорогой товар; `id` разрешает ничью цен. Без достаточного `order by` выбор строки внутри группы не определён. Обычный `distinct` полезен для результата без дублей, но не заменяет исправление ошибочного соединения, которое само породило лишние строки.
+
+#### ORDER BY. Сортировка
+
+SQL не гарантирует порядок строк без `order by`. Сортировать можно по столбцу, выражению, псевдониму результата и нескольким критериям. `asc` используется по умолчанию, `desc` задаёт убывание; положение `null` лучше указывать явно.
 
 ```sql
--- Количество пользователей по ролям
-SELECT role, COUNT(*) as count
-FROM users
-GROUP BY role;
-
--- Сумма заказов по пользователям
-SELECT
-    user_id,
-    COUNT(*) as order_count,
-    SUM(total) as total_amount
-FROM orders
-GROUP BY user_id;
-
--- Группировка по нескольким полям
-SELECT
-    EXTRACT(YEAR FROM created_at) as year,
-    EXTRACT(MONTH FROM created_at) as month,
-    COUNT(*) as orders_count
-FROM orders
-GROUP BY year, month
-ORDER BY year, month;
-
--- HAVING — фильтрация групп
-SELECT role, COUNT(*) as count
-FROM users
-GROUP BY role
-HAVING COUNT(*) > 5;
-
--- Разница WHERE и HAVING
-SELECT category_id, AVG(price) as avg_price
-FROM products
-WHERE is_active = true           -- Фильтрация ДО группировки
-GROUP BY category_id
-HAVING AVG(price) > 100;         -- Фильтрация ПОСЛЕ группировки
+select product_name, product_count, price
+from products
+order by product_count, id;
 ```
 
-#### GROUPING SETS, ROLLUP, CUBE
+![ORDER BY и сортировка в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.2.png)
 
 ```sql
--- GROUPING SETS — несколько группировок
-SELECT category_id, brand, SUM(price)
-FROM products
-GROUP BY GROUPING SETS (
-    (category_id, brand),
-    (category_id),
-    (brand),
+select
+    product_name,
+    product_count * price as stock_value
+from products
+order by stock_value desc, product_name, id;
+```
+
+![Сортировка по вычисляемому столбцу в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.3.png)
+
+Выражение необязательно выводить в результирующем наборе:
+
+```sql
+select product_name, price, product_count
+from products
+order by price * product_count desc, id;
+```
+
+![Выражение в ORDER BY в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.6.png)
+
+Сортировка по убыванию:
+
+```sql
+select product_name, company
+from products
+order by company desc, id;
+```
+
+![Сортировка по убыванию в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.4.png)
+
+При нескольких критериях PostgreSQL сравнивает следующий критерий только для строк, равных по предыдущему:
+
+```sql
+select product_name, price, company
+from products
+order by company asc, product_name desc, id;
+```
+
+![Сортировка по нескольким столбцам в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.5.png)
+
+Для воспроизводимого результата добавляйте уникальный последний критерий, обычно первичный ключ. Это особенно важно перед `limit`, `offset`, оконными функциями и `distinct on`.
+
+#### Получение диапазона строк. LIMIT и OFFSET
+
+`limit` ограничивает число строк, а `offset` пропускает заданное число. Пагинация осмысленна только с детерминированной сортировкой.
+
+```sql
+select id, product_name, price
+from products
+order by product_name, id
+limit 4;
+```
+
+![Оператор LIMIT в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.7.png)
+
+```sql
+select id, product_name, price
+from products
+order by product_name, id
+limit 3 offset 2;
+```
+
+![LIMIT и OFFSET в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.8.png)
+
+`limit all` равнозначен отсутствию ограничения. Большой `offset` дорог: сервер всё равно должен найти и отбросить предыдущие строки, а параллельные вставки и удаления могут сдвигать страницы. Для длинных лент обычно применяют keyset pagination — продолжают выборку после последнего увиденного ключа:
+
+```sql
+select id, product_name, price
+from products
+where (price, id) < (56000, 5)
+order by price desc, id desc
+limit 20;
+```
+
+Кортеж в `where` должен повторять направление и смысл сортировки; значения курсора передаёт клиент. Смешанные направления, `null` и изменяемые ключи требуют отдельной логики, поэтому нельзя механически заменять любой `offset` этим шаблоном.
+
+#### Операторы фильтрации
+
+`in` проверяет принадлежность набору, `between` — попадание в замкнутый диапазон, `like` — соответствие строковому шаблону. Эти выражения применяются внутри `where` или `having`.
+
+```sql
+select id, product_name, company
+from products
+where company in ('Samsung', 'HTC', 'Huawei')
+order by id;
+```
+
+![Оператор IN в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.9.png)
+
+```sql
+select id, product_name, price
+from products
+where price between 20000 and 50000
+order by price, id;
+```
+
+![Оператор BETWEEN в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.10.png)
+
+Обе границы `between` включаются. Для полуинтервала дат часто понятнее писать `created_at >= ... and created_at < ...`.
+
+В `like` знак `%` означает любое число символов, а `_` — ровно один. `ilike` выполняет регистронезависимое сопоставление по правилам текущей локали.
+
+```sql
+select id, product_name
+from products
+where product_name like 'iPhone%'
+order by id;
+```
+
+![Оператор LIKE в PostgreSQL](https://metanit.com/sql/postgresql/pics/5.11.png)
+
+`null` означает неизвестное значение и подчиняется трёхзначной логике: сравнения `= null` и `<> null` не возвращают `true`. Проверяйте `is null`, `is not null`, а для безопасного сравнения, где два `null` считаются равными, используйте `is not distinct from`.
+
+```sql
+select id, product_name
+from products
+where is_discounted is null;
+
+select id, product_name
+from products
+where is_discounted is distinct from true
+order by id;
+```
+
+Особенно осторожно применяйте `not in` к подзапросу: один `null` в его результате может сделать условие неизвестным для всех строк. Для антисоединения надёжнее коррелированный `not exists`:
+
+```sql
+select p.id, p.product_name
+from products as p
+where not exists (
+    select 1
+    from products as other
+    where other.company = p.company
+      and other.is_discounted is true
+)
+order by p.id;
+```
+
+Этот запрос выбирает товары компаний, у которых нет ни одной модели с подтверждённой скидкой.
+
+#### Агрегатные функции
+
+Агрегатная функция сворачивает набор строк в одно значение. Основные функции: `count`, `sum`, `avg`, `min`, `max`, `bool_and`, `bool_or`, `string_agg`. Почти все агрегаты игнорируют `null` и на пустом наборе возвращают `null`; исключение — `count`, возвращающий `0`. `count(*)` считает строки, а `count(expression)` — только строки с ненулевым результатом выражения.
+
+```sql
+select avg(price) as average_price
+from products;
+```
+
+![Функция AVG в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.1.png)
+
+```sql
+select
+    count(*) as row_count,
+    count(is_discounted) as known_discount_count,
+    count(distinct company) as company_count
+from products;
+```
+
+![Функция COUNT в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.2.png)
+
+`min` и `max` находят крайние значения, `sum` — сумму. Для пустого набора сумму при необходимости заменяют нулём через `coalesce`.
+
+```sql
+select
+    min(price) as min_price,
+    max(price) as max_price,
+    coalesce(sum(product_count), 0) as units,
+    coalesce(sum(product_count * price), 0) as stock_value
+from products;
+```
+
+`filter` позволяет считать несколько условных метрик за один проход:
+
+```sql
+select
+    count(*) as all_products,
+    count(*) filter (where is_discounted) as discounted_products,
+    avg(price) filter (where company = 'Apple') as apple_average_price
+from products;
+```
+
+`bool_or` отвечает, истинно ли условие хотя бы для одной ненулевой строки, а `bool_and` — истинно ли оно для всех ненулевых строк.
+
+```sql
+select
+    bool_or(is_discounted) as has_discount,
+    bool_and(is_discounted) as all_known_rows_discounted
+from products;
+```
+
+`string_agg` объединяет строки. Порядок внутри агрегата не гарантируется общим `order by` запроса, поэтому его задают в аргументах функции:
+
+```sql
+select string_agg(product_name, ', ' order by product_name) as product_names
+from products;
+```
+
+![Функция STRING_AGG в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.4.png)
+
+```sql
+select string_agg(distinct company, ', ' order by company) as companies
+from products;
+```
+
+Несколько агрегатов можно вычислять одновременно:
+
+```sql
+select
+    count(*) as model_count,
+    sum(product_count) as unit_count,
+    min(price) as min_price,
+    max(price) as max_price,
+    avg(price) as average_price
+from products;
+```
+
+![Несколько агрегатных функций в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.3.png)
+
+#### Группировка
+
+`group by` разделяет входные строки на группы, после чего агрегаты вычисляются для каждой группы. В `select` можно выводить агрегаты и столбцы группировки; остальные столбцы допустимы лишь когда PostgreSQL может доказать их функциональную зависимость от сгруппированного первичного ключа.
+
+```sql
+select company, count(*) as model_count
+from products
+group by company
+order by company;
+```
+
+![Группировка и GROUP BY в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.5.png)
+
+```sql
+select company, count(*) as model_count
+from products
+where price > 30000
+group by company
+order by model_count desc, company;
+```
+
+![GROUP BY и сортировка в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.6.png)
+
+`where` фильтрует отдельные строки до группировки, а `having` — уже сформированные группы после неё.
+
+```sql
+select company, count(*) as model_count
+from products
+group by company
+having count(*) > 1
+order by company;
+```
+
+![HAVING в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.7.png)
+
+```sql
+select
+    company,
+    count(*) as model_count,
+    sum(product_count) as unit_count
+from products
+where price * product_count > 80000
+group by company
+having sum(product_count) > 2
+order by unit_count desc, company;
+```
+
+![Фильтрация и сортировка сгруппированных данных](https://metanit.com/sql/postgresql/pics/6.8.png)
+
+`grouping sets` вычисляет несколько явно перечисленных вариантов группировки одним запросом. Пустой набор `()` означает общий итог. Функция `grouping` помогает отличить итоговый `null` от настоящего `null` в данных.
+
+```sql
+select
+    company,
+    is_discounted,
+    count(*) as product_count,
+    grouping(company, is_discounted) as grouping_mask
+from products
+group by grouping sets (
+    (company, is_discounted),
+    (company),
     ()
-);
-
--- ROLLUP — иерархическая группировка
-SELECT
-    EXTRACT(YEAR FROM created_at) as year,
-    EXTRACT(MONTH FROM created_at) as month,
-    SUM(total) as total
-FROM orders
-GROUP BY ROLLUP (year, month);
-
--- CUBE — все комбинации
-SELECT category_id, brand, SUM(price)
-FROM products
-GROUP BY CUBE (category_id, brand);
+)
+order by company nulls last, is_discounted nulls last;
 ```
 
----
+На исходной странице рядом с `grouping sets` повторно использовано то же изображение `6.8.png`; здесь оно приведено один раз выше и не рассматривается как иллюстрация результата `grouping sets`.
 
-### JOIN — соединение таблиц
+`rollup(a, b)` создаёт иерархические наборы `(a, b)`, `(a)` и `()`, поэтому удобен для промежуточных и общих итогов.
 
 ```sql
--- Пример таблиц
-CREATE TABLE categories (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+select
+    company,
+    count(*) as model_count,
+    sum(product_count) as unit_count
+from products
+group by rollup (company)
+order by company nulls last;
+```
+
+![Оператор ROLLUP в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.9.png)
+
+```sql
+select
+    company,
+    product_count,
+    count(*) as model_count,
+    sum(product_count) as unit_count
+from products
+group by rollup (company, product_count)
+order by company nulls last, product_count nulls last;
+```
+
+![ROLLUP по нескольким критериям в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.10.png)
+
+`cube(a, b)` создаёт все комбинации: `(a, b)`, `(a)`, `(b)` и `()`. Число наборов растёт как `2^n`, поэтому много измерений может резко увеличить результат.
+
+```sql
+select
+    company,
+    product_name,
+    sum(product_count * price) as total_value,
+    grouping(company, product_name) as grouping_mask
+from products
+group by cube (company, product_name)
+order by company nulls last, product_name nulls last;
+```
+
+![Оператор CUBE в PostgreSQL](https://metanit.com/sql/postgresql/pics/6.11.png)
+
+![Детальные группы CUBE](https://metanit.com/sql/postgresql/pics/6.11.1.png)
+
+![Итоги CUBE по компаниям](https://metanit.com/sql/postgresql/pics/6.11.2.png)
+
+![Итоги CUBE по товарам](https://metanit.com/sql/postgresql/pics/6.11.3.png)
+
+#### Подзапросы
+
+Подзапрос — `select`, вложенный в другое выражение. Он может вернуть одно значение, одну строку, столбец или таблицу. Скалярный подзапрос обязан вернуть не более одной строки: ноль строк превращается в `null`, а несколько вызывают ошибку.
+
+Для примеров с зависимыми сущностями определим покупателей и заказы:
+
+```sql
+create table customers (
+    id bigint generated always as identity primary key,
+    first_name text not null
 );
 
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
-    price DECIMAL(10, 2),
-    category_id INTEGER REFERENCES categories(id)
+create table orders (
+    id bigint generated always as identity primary key,
+    product_id bigint not null references products (id) on delete restrict,
+    customer_id bigint not null references customers (id) on delete restrict,
+    created_at date not null,
+    product_count integer not null default 1 check (product_count > 0),
+    price numeric(12, 2) not null check (price >= 0)
 );
 ```
+
+```sql
+select id, product_name, price
+from products
+where price = (
+    select min(price)
+    from products
+)
+order by id;
+
+select id, product_name, price
+from products
+where price > (
+    select avg(price)
+    from products
+)
+order by price desc, id;
+```
+
+![Подзапросы в PostgreSQL](https://metanit.com/sql/postgresql/pics/7.1.png)
+
+Коррелированный подзапрос ссылается на текущую строку внешнего запроса. Например, следующий запрос выводит товары дороже средней цены своей компании:
+
+```sql
+select
+    p.id,
+    p.product_name,
+    p.company,
+    p.price
+from products as p
+where p.price > (
+    select avg(other.price)
+    from products as other
+    where other.company = p.company
+)
+order by p.company, p.price desc, p.id;
+```
+
+![Коррелированный подзапрос в PostgreSQL](https://metanit.com/sql/postgresql/pics/7.2.png)
+
+![Сравнение со средним значением коррелированным подзапросом](https://metanit.com/sql/postgresql/pics/7.3.png)
+
+Логически коррелированный подзапрос зависит от внешней строки, но не следует считать, что PostgreSQL буквально запускает его заново для каждой строки: планировщик может преобразовать запрос в соединение или выбрать иной план. Реальное выполнение проверяют через `explain (analyze, buffers)` на репрезентативных данных.
+
+Для проверки наличия строк используйте `exists`: база может остановить поиск после первого совпадения. `not exists` безопаснее `not in`, когда подзапрос способен вернуть `null`.
+
+```sql
+select c.id, c.first_name
+from customers as c
+where exists (
+    select 1
+    from orders as o
+    where o.customer_id = c.id
+)
+order by c.id;
+
+select c.id, c.first_name
+from customers as c
+where not exists (
+    select 1
+    from orders as o
+    where o.customer_id = c.id
+)
+order by c.id;
+```
+
+Подзапрос в `from` образует производную таблицу и должен иметь псевдоним. `lateral` разрешает такой таблице ссылаться на предыдущие элементы `from`; это удобно, например, для нескольких лучших строк на каждую группу.
+
+```sql
+select c.id, c.first_name, recent.created_at, recent.price
+from customers as c
+left join lateral (
+    select o.created_at, o.price
+    from orders as o
+    where o.customer_id = c.id
+    order by o.created_at desc, o.id desc
+    limit 2
+) as recent on true
+order by c.id, recent.created_at desc nulls last;
+```
+
+CTE через `with` даёт имя промежуточному запросу. В современных версиях PostgreSQL не рекурсивный CTE обычно может быть встроен планировщиком; `materialized` принудительно вычисляет его отдельно, а `not materialized` просит встроить. Это инструмент управления планом, а не универсальная оптимизация.
+
+```sql
+with company_stats as (
+    select company, avg(price) as average_price
+    from products
+    group by company
+)
+select p.product_name, p.company, p.price, s.average_price
+from products as p
+join company_stats as s using (company)
+where p.price > s.average_price
+order by p.company, p.price desc, p.id;
+```
+
+Оконная функция вычисляет значение по связанным строкам, но не сворачивает их в одну строку, как `group by`:
+
+```sql
+select
+    id,
+    product_name,
+    company,
+    price,
+    avg(price) over (partition by company) as company_average_price,
+    row_number() over (
+        partition by company
+        order by price desc, id
+    ) as price_position
+from products
+order by company, price_position;
+```
+
+### Глава 5. Составные типы данных
+
+#### Массивы
+
+PostgreSQL позволяет хранить в одном столбце массив значений одного типа. Тип обозначается квадратными скобками: `text[]`, `integer[]`. Индексация массива по умолчанию начинается с `1`, хотя PostgreSQL технически допускает другие нижние границы.
+
+```sql
+create table posts (
+    id bigint generated always as identity primary key,
+    title text not null,
+    body text not null,
+    tags text[] not null default '{}'
+);
+
+insert into posts (title, body, tags)
+values (
+    'PostgreSQL arrays',
+    'Short article text',
+    array['sql', 'postgres', 'database', 'plpgsql']
+);
+```
+
+![Массивы в PostgreSQL](https://metanit.com/sql/postgresql/pics/4.1.png)
+
+Можно извлечь элемент или срез. В срезе обе границы включаются:
+
+```sql
+select tags, tags[1], tags[1:3]
+from posts
+where id = 1;
+```
+
+![Чтение массива в PostgreSQL](https://metanit.com/sql/postgresql/pics/4.2.png)
+
+Массив обновляется целиком либо по индексу:
+
+```sql
+update posts
+set tags = array['sql', 'postgres', 'database']
+where id = 1;
+
+update posts
+set tags[2] = 'postgresql'
+where id = 1;
+```
+
+![Обновление массива в PostgreSQL](https://metanit.com/sql/postgresql/pics/4.3.png)
+
+Операторы `@>` и `<@` проверяют включение массивов, `&&` — пересечение, `= any(array)` — присутствие значения. `unnest` превращает элементы массива в строки.
+
+```sql
+select id, title
+from posts
+where tags @> array['postgres']
+order by id;
+
+select p.id, p.title, tag
+from posts as p
+cross join lateral unnest(p.tags) as tag
+order by p.id, tag;
+```
+
+Для поиска по массивам можно создать GIN-индекс:
+
+```sql
+create index posts_tags_gin_idx
+on posts using gin (tags);
+```
+
+Массив удобен для небольшого атомарного списка, который обычно читается и изменяется вместе с владельцем. Если элементы имеют собственные атрибуты, ссылки, права, часто обновляются отдельно или требуют строгой уникальности между строками, нормализованная дочерняя таблица обычно проще. Размерность массива в объявлении вроде `integer[3]` не обеспечивает фиксированную длину без отдельного `check`.
+
+#### Перечисления enum
+
+Enum задаёт закрытый упорядоченный набор строковых меток. Столбец такого типа принимает только объявленные значения; регистр имеет значение.
+
+```sql
+create type request_state as enum (
+    'created',
+    'approved',
+    'finished'
+);
+
+create table requests (
+    id bigint generated always as identity primary key,
+    title text not null,
+    status request_state not null default 'created'
+);
+
+insert into requests (title, status)
+values ('Request 1', 'created');
+
+update requests
+set status = 'approved'
+where id = 1;
+```
+
+![Перечисления в PostgreSQL](https://metanit.com/sql/postgresql/pics/4.4.png)
+
+Новую метку можно добавить и при необходимости расположить относительно существующей:
+
+```sql
+alter type request_state
+add value 'blocked' after 'approved';
+```
+
+Переименовать метку можно через `alter type ... rename value`. Удаление или произвольное переупорядочивание меток не является простым изменением: обычно создают новый тип, преобразуют столбцы и удаляют старый тип после проверки зависимостей.
+
+```sql
+create type request_state_v2 as enum (
+    'created',
+    'approved',
+    'done'
+);
+
+alter table requests
+alter column status drop default;
+
+alter table requests
+alter column status type request_state_v2
+using status::text::request_state_v2;
+
+alter table requests
+alter column status set default 'created';
+
+drop type request_state;
+```
+
+Преимущество enum — строгая доменная проверка в самой БД. Цена — более тяжёлые миграции и связь всех использующих столбцов с одним типом. Для часто меняющегося справочника с дополнительными атрибутами лучше отдельная таблица и внешний ключ; для простого ограничения иногда достаточно `text` с `check`.
+
+### Глава 6. Соединение таблиц
+
+Примеры используют определённые выше таблицы покупателей, товаров и заказов. В реальной схеме таблицы связываются внешними ключами; псевдонимы делают запросы короче и снимают неоднозначность одинаковых имён столбцов.
+
+#### Неявное соединение таблиц
+
+Исторический синтаксис перечисляет таблицы через запятую. Без условия он создаёт декартово произведение: каждая строка первой таблицы соединяется с каждой строкой второй.
+
+```sql
+select o.id as order_id, c.id as customer_id
+from orders as o, customers as c;
+```
+
+![Неявное соединение без условия в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.1.png)
+
+Условие в `where` превращает произведение в эквисоединение:
+
+```sql
+select o.id, o.created_at, c.first_name
+from orders as o, customers as c
+where o.customer_id = c.id
+order by o.id;
+```
+
+![Неявное соединение таблиц с условием](https://metanit.com/sql/postgresql/pics/8.2.png)
+
+Для трёх таблиц понадобятся две связи:
+
+```sql
+select c.first_name, p.product_name, o.created_at
+from orders as o, customers as c, products as p
+where o.customer_id = c.id
+  and o.product_id = p.id
+order by o.id;
+```
+
+![Неявное соединение трёх таблиц](https://metanit.com/sql/postgresql/pics/8.3.png)
+
+Этот синтаксис полезно уметь читать, но в новом коде используйте явный `join ... on`: он отделяет условия связи от фильтров и снижает риск забыть одно условие. Если декартово произведение действительно нужно, намерение лучше выразить через `cross join`.
 
 #### INNER JOIN
 
-Возвращает только совпадающие записи из обеих таблиц.
+`join` и `inner join` эквивалентны. В результат попадают только пары строк, удовлетворяющие условию `on`.
 
 ```sql
-SELECT
+select o.created_at, o.product_count, p.product_name
+from orders as o
+join products as p on p.id = o.product_id
+order by o.id;
+```
+
+![JOIN ON в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.4.png)
+
+Соединения можно строить цепочкой:
+
+```sql
+select o.created_at, c.first_name, p.product_name
+from orders as o
+join products as p on p.id = o.product_id
+join customers as c on c.id = o.customer_id
+order by o.created_at, o.id;
+```
+
+![Соединение нескольких таблиц в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.5.png)
+
+Условие связи обычно находится в `on`, а фильтр итоговых строк — в `where`. Для `inner join` планировщик часто может перенести равносильный предикат, но такое разделение лучше показывает намерение:
+
+```sql
+select o.created_at, c.first_name, p.product_name
+from orders as o
+join products as p on p.id = o.product_id
+join customers as c on c.id = o.customer_id
+where p.price > 45000
+order by c.first_name, o.id;
+```
+
+Если обе стороны связи не уникальны по ключу соединения, строки могут размножаться. Это нормальная семантика соединения; прежде чем добавлять `distinct`, проверьте кардинальность и ключи.
+
+#### OUTER JOIN и CROSS JOIN
+
+Внешнее соединение сохраняет несовпавшие строки: `left join` — из левой таблицы, `right join` — из правой, `full join` — из обеих. Недостающие столбцы другой стороны получают `null`. Слово `outer` необязательно.
+
+```sql
+select c.id, c.first_name, o.id as order_id, o.created_at
+from customers as c
+left join orders as o on o.customer_id = c.id
+order by c.id, o.id;
+```
+
+![Левое внешнее соединение в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.6.png)
+
+`inner join` исключит покупателя без заказов, а `left join` сохранит его:
+
+```sql
+select c.id, c.first_name, o.id as order_id
+from customers as c
+join orders as o on o.customer_id = c.id
+order by c.id, o.id;
+
+select c.id, c.first_name, o.id as order_id
+from customers as c
+left join orders as o on o.customer_id = c.id
+order by c.id, o.id;
+```
+
+![Сравнение INNER JOIN и LEFT JOIN](https://metanit.com/sql/postgresql/pics/8.7.png)
+
+`right join` логически симметричен `left join`; на практике запрос часто легче читать, если поменять таблицы местами и использовать `left join`.
+
+```sql
+select c.first_name, o.created_at, o.product_count
+from orders as o
+right join customers as c on o.customer_id = c.id
+order by c.id, o.id;
+```
+
+![Правое внешнее соединение в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.8.png)
+
+`full join` сохраняет несовпавшие строки обеих сторон:
+
+```sql
+select c.id as customer_id, o.id as order_id
+from customers as c
+full join orders as o on o.customer_id = c.id
+order by customer_id nulls last, order_id nulls last;
+```
+
+Можно соединять несколько таблиц:
+
+```sql
+select c.first_name, o.created_at, p.product_name, p.company
+from orders as o
+left join customers as c on c.id = o.customer_id
+left join products as p on p.id = o.product_id
+order by o.id;
+```
+
+![Цепочка LEFT JOIN в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.9.png)
+
+Размещение фильтра критично для внешнего соединения. Предикат правой таблицы в `where` удаляет строки с `null` и фактически превращает соответствующую часть `left join` во внутреннюю. Если нужно сохранить все строки слева и присоединить только подходящие строки справа, условие размещают в `on`:
+
+```sql
+select c.id, c.first_name, o.id as order_id
+from customers as c
+left join orders as o
+    on o.customer_id = c.id
+   and o.price > 55000
+order by c.id, o.id;
+```
+
+![LEFT JOIN с фильтрацией и сортировкой](https://metanit.com/sql/postgresql/pics/8.10.png)
+
+Покупателей без заказов можно найти антисоединением. Проверять лучше ненулевой ключ правой таблицы:
+
+```sql
+select c.id, c.first_name
+from customers as c
+left join orders as o on o.customer_id = c.id
+where o.id is null
+order by c.id;
+```
+
+Часто ещё яснее эквивалентный `not exists`.
+
+`cross join` явно создаёт декартово произведение и не принимает `on`:
+
+```sql
+select o.id as order_id, c.id as customer_id
+from orders as o
+cross join customers as c
+order by o.id, c.id;
+```
+
+![CROSS JOIN в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.11.png)
+
+Он полезен для генерации всех комбинаций, календарных сеток и параметров, но результат имеет произведение размеров входов и может быстро стать огромным. `full join` нужен, когда требуется сохранить несовпавшие строки обеих сторон; для заполнения общего ключа в таком результате часто применяют `coalesce(left_id, right_id)`.
+
+#### Группировка в соединениях
+
+Соединение сначала формирует набор строк, затем `group by` агрегирует его. Внутреннее соединение показывает только покупателей с заказами:
+
+```sql
+select c.id, c.first_name, count(o.id) as order_count
+from customers as c
+join orders as o on o.customer_id = c.id
+group by c.id, c.first_name
+order by c.id;
+```
+
+![Группировка в INNER JOIN](https://metanit.com/sql/postgresql/pics/8.12.png)
+
+Левое соединение сохраняет покупателей без заказов. Здесь важно считать `o.id`, а не `*`: для покупателя без заказов соединение всё равно создаёт одну строку, но `o.id` в ней равен `null`, поэтому `count(o.id)` даст `0`.
+
+```sql
+select c.id, c.first_name, count(o.id) as order_count
+from customers as c
+left join orders as o on o.customer_id = c.id
+group by c.id, c.first_name
+order by c.id;
+```
+
+![Группировка в LEFT JOIN](https://metanit.com/sql/postgresql/pics/8.13.png)
+
+Сумма по отсутствующим строкам равна `null`, поэтому для нуля применяют `coalesce`:
+
+```sql
+select
     p.id,
-    p.name AS product_name,
-    p.price,
-    c.name AS category_name
-FROM products p
-INNER JOIN categories c ON p.category_id = c.id;
-
--- Сокращённая запись
-SELECT p.*, c.name AS category
-FROM products p
-JOIN categories c ON p.category_id = c.id;
+    p.product_name,
+    p.company,
+    coalesce(sum(o.product_count * o.price), 0) as order_total
+from products as p
+left join orders as o on o.product_id = p.id
+group by p.id, p.product_name, p.company
+order by p.id;
 ```
 
-```
-┌─────────────────┐     ┌─────────────────┐
-│    products     │     │   categories    │
-├─────────────────┤     ├─────────────────┤
-│ id=1, cat_id=1  │◄───►│ id=1, name=...  │  ✓ Совпадение
-│ id=2, cat_id=2  │◄───►│ id=2, name=...  │  ✓ Совпадение
-│ id=3, cat_id=99 │     │                 │  ✗ Нет совпадения
-└─────────────────┘     └─────────────────┘
-```
+![GROUP BY и JOIN в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.14.png)
 
-#### LEFT JOIN (LEFT OUTER JOIN)
+Если нужно агрегировать несколько независимых связей «один ко многим», прямое соединение обеих дочерних таблиц способно перемножить строки и завысить суммы. В таком случае сначала агрегируйте каждую дочернюю таблицу отдельно, затем присоединяйте готовые итоги.
 
-Все записи из левой таблицы + совпадающие из правой.
+#### Объединение множеств. UNION
+
+`union` располагает результаты запросов друг под другом, а не рядом, как `join`. Все ветви должны возвращать одинаковое число столбцов с совместимыми типами. Имена результата берутся из первой ветви.
+
+Для примеров операций над множествами создадим отдельные таблицы клиентов и сотрудников банка:
 
 ```sql
-SELECT
-    p.name AS product,
-    c.name AS category
-FROM products p
-LEFT JOIN categories c ON p.category_id = c.id;
-
--- Продукты без категории
-SELECT p.*
-FROM products p
-LEFT JOIN categories c ON p.category_id = c.id
-WHERE c.id IS NULL;
-```
-
-```
-┌─────────────────┐     ┌─────────────────┐
-│    products     │     │   categories    │
-├─────────────────┤     ├─────────────────┤
-│ id=1, cat_id=1  │◄───►│ id=1            │  ✓
-│ id=2, cat_id=2  │◄───►│ id=2            │  ✓
-│ id=3, cat_id=99 │────►│ NULL            │  ✓ (LEFT сохраняет)
-└─────────────────┘     └─────────────────┘
-```
-
-#### RIGHT JOIN (RIGHT OUTER JOIN)
-
-Все записи из правой таблицы + совпадающие из левой.
-
-```sql
-SELECT
-    p.name AS product,
-    c.name AS category
-FROM products p
-RIGHT JOIN categories c ON p.category_id = c.id;
-
--- Категории без продуктов
-SELECT c.*
-FROM products p
-RIGHT JOIN categories c ON p.category_id = c.id
-WHERE p.id IS NULL;
-```
-
-#### FULL OUTER JOIN
-
-Все записи из обеих таблиц.
-
-```sql
-SELECT
-    p.name AS product,
-    c.name AS category
-FROM products p
-FULL OUTER JOIN categories c ON p.category_id = c.id;
-```
-
-#### CROSS JOIN
-
-Декартово произведение (каждая запись с каждой).
-
-```sql
-SELECT
-    p.name AS product,
-    c.name AS color
-FROM products p
-CROSS JOIN colors c;
-
--- Эквивалентно
-SELECT p.name, c.name
-FROM products p, colors c;
-```
-
-#### Самосоединение (Self Join)
-
-```sql
--- Сотрудники и их менеджеры
-CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    manager_id INTEGER REFERENCES employees(id)
+create table bank_customers (
+    id bigint generated always as identity primary key,
+    first_name text not null,
+    last_name text not null,
+    account_sum numeric(12, 2) not null default 0
 );
 
-SELECT
-    e.name AS employee,
-    m.name AS manager
-FROM employees e
-LEFT JOIN employees m ON e.manager_id = m.id;
-```
-
-#### Множественные JOIN
-
-```sql
-SELECT
-    o.id AS order_id,
-    u.name AS customer,
-    p.name AS product,
-    oi.quantity,
-    oi.price
-FROM orders o
-JOIN users u ON o.user_id = u.id
-JOIN order_items oi ON o.id = oi.order_id
-JOIN products p ON oi.product_id = p.id
-WHERE o.created_at > '2024-01-01';
-```
-
----
-
-### Подзапросы
-
-#### В WHERE
-
-```sql
--- Скалярный подзапрос
-SELECT * FROM products
-WHERE price > (SELECT AVG(price) FROM products);
-
--- С IN
-SELECT * FROM users
-WHERE id IN (SELECT user_id FROM orders WHERE total > 1000);
-
--- С NOT IN (осторожно с NULL!)
-SELECT * FROM users
-WHERE id NOT IN (
-    SELECT user_id FROM orders WHERE user_id IS NOT NULL
+create table employees (
+    id bigint generated always as identity primary key,
+    first_name text not null,
+    last_name text not null
 );
 
--- С EXISTS (обычно быстрее IN)
-SELECT * FROM users u
-WHERE EXISTS (
-    SELECT 1 FROM orders o WHERE o.user_id = u.id
+insert into bank_customers (first_name, last_name, account_sum)
+values
+    ('Tom', 'Smith', 2000),
+    ('Sam', 'Brown', 3000),
+    ('Paul', 'Ins', 4200),
+    ('Mark', 'Adams', 2500);
+
+insert into employees (first_name, last_name)
+values
+    ('Homer', 'Simpson'),
+    ('Tom', 'Smith'),
+    ('Mark', 'Adams'),
+    ('Nick', 'Svensson');
+```
+
+```sql
+select first_name, last_name
+from bank_customers
+union
+select first_name, last_name
+from employees
+order by first_name, last_name;
+```
+
+![Объединение выборок оператором UNION](https://metanit.com/sql/postgresql/pics/8.15.png)
+
+`union` удаляет дубли, что требует дополнительной работы. `union all` сохраняет их и обычно быстрее; используйте его по умолчанию, если дедупликация не является частью требования.
+
+```sql
+select first_name, last_name
+from bank_customers
+union all
+select first_name, last_name
+from employees
+order by first_name, last_name;
+```
+
+![Оператор UNION ALL в PostgreSQL](https://metanit.com/sql/postgresql/pics/8.17.png)
+
+Общий `order by` пишется после последней ветви и обращается к именам или номерам столбцов итогового набора:
+
+```sql
+select first_name || ' ' || last_name as full_name
+from bank_customers
+union
+select first_name || ' ' || last_name as full_name
+from employees
+order by full_name;
+```
+
+![Сортировка результата UNION](https://metanit.com/sql/postgresql/pics/8.16.png)
+
+Ветви могут читать одну таблицу, но взаимоисключающие условия часто проще выразить одним `case`:
+
+```sql
+select
+    first_name,
+    last_name,
+    case
+        when account_sum < 3000 then account_sum * 1.1
+        else account_sum * 1.3
+    end as total_sum
+from bank_customers
+order by first_name, last_name;
+```
+
+![Объединение выборок одной таблицы](https://metanit.com/sql/postgresql/pics/8.18.png)
+
+Если типы неоднозначны, приводите их явно. `limit` или локальная сортировка отдельной ветви требуют скобок; итоговый порядок всё равно задаётся внешним `order by`.
+
+#### Разность множеств. EXCEPT
+
+`except` возвращает строки первой выборки, которых нет во второй, и удаляет дубли. Число столбцов и их типы должны быть совместимы, как у `union`.
+
+```sql
+select first_name, last_name
+from bank_customers
+except
+select first_name, last_name
+from employees
+order by first_name, last_name;
+```
+
+![Разность множеств через EXCEPT](https://metanit.com/sql/postgresql/pics/8.19.png)
+
+Порядок операндов важен:
+
+```sql
+select first_name, last_name
+from employees
+except
+select first_name, last_name
+from bank_customers
+order by first_name, last_name;
+```
+
+![Обратная разность множеств через EXCEPT](https://metanit.com/sql/postgresql/pics/8.20.png)
+
+`except all` учитывает кратность: если строка встречается слева `m` раз, а справа `n` раз, результат содержит `max(m - n, 0)` копий. Обычный `except` возвращает каждую оставшуюся строку один раз.
+
+```sql
+select value
+from (values (1), (1), (2)) as left_values (value)
+except all
+select value
+from (values (1)) as right_values (value);
+```
+
+Для антисоединения таблиц по ключу часто понятнее `not exists`, особенно если нужно вернуть дополнительные столбцы левой таблицы. В отличие от `not in`, `except` имеет собственную семантику множеств и сопоставляет `null` при дедупликации как одинаковые значения.
+
+#### Пересечение множеств. INTERSECT
+
+`intersect` возвращает строки, присутствующие в обеих выборках, и удаляет дубли.
+
+```sql
+select first_name, last_name
+from employees
+intersect
+select first_name, last_name
+from bank_customers
+order by first_name, last_name;
+```
+
+![Пересечение множеств через INTERSECT](https://metanit.com/sql/postgresql/pics/8.21.png)
+
+`intersect all` сохраняет минимальную кратность строки в двух наборах: `min(m, n)` копий. Как и другие операции над множествами, он требует одинакового количества совместимых по типу столбцов.
+
+```sql
+select value
+from (values (1), (1), (2)) as first_values (value)
+intersect all
+select value
+from (values (1), (1), (1), (3)) as second_values (value);
+```
+
+У `intersect` приоритет выше, чем у `union` и `except`. В сложной цепочке используйте скобки, чтобы порядок вычисления был очевиден. Финальный `order by` относится ко всему составному запросу.
+
+---
+### Дополнение 1. Индексы, статистика и планы запросов
+
+#### Индексы и их цена
+
+Индекс — отдельная структура данных, которая ускоряет подходящие условия поиска, соединения и сортировку, но не делает таблицу «быстрой вообще». PostgreSQL 18.6 по умолчанию создаёт B-tree: он подходит для равенства, диапазонов, `order by` и проверки уникальности. Первичный ключ и ограничения `unique` уже создают уникальные индексы, а внешний ключ на дочерней таблице — нет; индекс на его столбцах часто нужен для соединений и для быстрых `update`/`delete` родительской строки.
+
+Каждый индекс занимает место, вытесняет данные из кэша и удорожает `insert`, `update`, `delete`, `vacuum`, резервное копирование и репликацию. Индекс добавляют под измеренный запрос, а не под каждый столбец. На загруженной production-таблице обычно рассматривают `create index concurrently`: он меньше мешает записи, но работает дольше, выполняет больше работы и не допускается внутри блока транзакции.
+
+```sql
+create table app.orders (
+    order_id bigint generated always as identity primary key,
+    customer_id bigint not null references app.customers (customer_id),
+    created_at timestamptz not null default now()
 );
 
--- С NOT EXISTS
-SELECT * FROM users u
-WHERE NOT EXISTS (
-    SELECT 1 FROM orders o WHERE o.user_id = u.id
-);
-
--- Сравнение с ANY/ALL
-SELECT * FROM products
-WHERE price > ANY (SELECT price FROM products WHERE category_id = 1);
-
-SELECT * FROM products
-WHERE price > ALL (SELECT price FROM products WHERE category_id = 1);
+create index idx_orders_customer_id
+    on app.orders (customer_id);
 ```
 
-#### В FROM (производные таблицы)
+#### Составные, частичные и покрывающие индексы
+
+В составном B-tree порядок столбцов важен: равенства по левым столбцам и затем условие диапазона обычно сильнее всего сужают сканирование. Частичный индекс хранит только строки, удовлетворяющие предикату; планировщик применит его, только если сможет доказать, что условие запроса подразумевает этот предикат. Индекс выражения полезен, когда запрос использует ровно такое выражение, например `lower(email)`.
+
+`include` добавляет неключевые значения в листья индекса и иногда позволяет index-only scan. Эти столбцы не участвуют в поиске и уникальности, зато увеличивают индекс; широкие или часто изменяемые поля следует включать осторожно. Один индекс под реальный шаблон запроса обычно лучше нескольких почти одинаковых.
 
 ```sql
-SELECT
-    category_name,
-    avg_price
-FROM (
-    SELECT
-        c.name AS category_name,
-        AVG(p.price) AS avg_price
-    FROM products p
-    JOIN categories c ON p.category_id = c.id
-    GROUP BY c.name
-) AS category_stats
-WHERE avg_price > 100;
+create index idx_orders_customer_created_paid
+    on app.orders (customer_id, created_at desc)
+    include (total_amount)
+    where status = 'paid';
+
+create unique index idx_users_email_normalized
+    on app.users (lower(email));
 ```
 
-#### В SELECT
+#### GIN, GiST, BRIN и специализированные индексы
+
+Помимо B-tree PostgreSQL предоставляет hash, GiST, SP-GiST, GIN и BRIN. Hash обслуживает равенство, но B-tree часто универсальнее. GIN — инвертированный индекс для массивов, `jsonb` и полнотекстового поиска; он хорошо читает составные значения, но может быть дорогим при записи. GiST — каркас для диапазонов, геометрии, пересечений и поиска ближайших значений, а SP-GiST полезен для естественно разбиваемых пространств вроде префиксов и точек.
+
+BRIN хранит сводки по диапазонам физических блоков. Он очень мал и особенно полезен на огромных таблицах, где значение коррелирует с порядком строк, например время в append-only журнале, но возвращает кандидатов с последующей перепроверкой. Тип индекса выбирают по операторам запроса и доступному operator class, а результат подтверждают планом и нагрузочным измерением.
 
 ```sql
-SELECT
-    p.name,
-    p.price,
-    (SELECT AVG(price) FROM products) AS avg_price,
-    p.price - (SELECT AVG(price) FROM products) AS diff_from_avg
-FROM products p;
+create index idx_articles_tags_gin
+    on app.articles using gin (tags);
+
+create index idx_bookings_period_gist
+    on app.bookings using gist (booked_during);
+
+create index idx_events_created_brin
+    on app.events using brin (created_at)
+    with (pages_per_range = 128);
 ```
 
-#### Коррелированные подзапросы
+#### EXPLAIN, ANALYZE и статистика
 
-Ссылаются на внешний запрос.
+`explain` показывает предполагаемый план, а `explain analyze` действительно выполняет запрос и дополняет план фактическими строками и временем. Сравнивайте прежде всего оценённое и фактическое число строк: большой разрыв часто указывает на устаревшую статистику, зависимые столбцы или неудачный предикат. `buffers` показывает обращения к буферам, но один запуск не заменяет измерения на репрезентативных данных с учётом прогретого и холодного кэша.
+
+`analyze` собирает статистику, обычно этим занимается autovacuum. После большой загрузки данных ручной `analyze` может помочь раньше. Важно: `explain analyze` для `insert`, `update`, `delete` и `merge` выполняет изменения. Транзакция с `rollback` отменит обычные изменения БД, но всё равно выполнит триггеры и функции; внешние побочные эффекты могут оказаться необратимыми.
 
 ```sql
--- Последний заказ каждого пользователя
-SELECT *
-FROM orders o1
-WHERE created_at = (
-    SELECT MAX(created_at)
-    FROM orders o2
-    WHERE o2.user_id = o1.user_id
-);
+analyze app.orders;
 
--- Продукты дороже среднего в своей категории
-SELECT *
-FROM products p1
-WHERE price > (
-    SELECT AVG(price)
-    FROM products p2
-    WHERE p2.category_id = p1.category_id
-);
+explain (analyze, buffers, settings)
+select order_id, total_amount
+from app.orders
+where customer_id = 42
+  and status = 'paid'
+order by created_at desc
+limit 20;
+
+begin;
+explain (analyze, buffers, wal)
+update app.orders
+set status = 'archived'
+where created_at < current_date - interval '1 year';
+rollback;
 ```
 
-#### LATERAL
+### Дополнение 2. Транзакции, MVCC и конкурентный доступ
 
-Позволяет ссылаться на предыдущие FROM.
+#### Транзакции и точки сохранения
+
+Без явного `begin` каждый SQL-оператор выполняется в собственной неявной транзакции. Явная транзакция объединяет связанные изменения по принципу «всё или ничего». Точка сохранения позволяет отменить только часть работы; это особенно полезно, потому что после ошибки PostgreSQL считает транзакцию прерванной до `rollback` или `rollback to savepoint`.
+
+Последовательности стоят отдельно от обычного отката: значение, выданное `nextval`, не возвращается при `rollback`, поэтому у `identity` допустимы пропуски. Они обеспечивают уникальные номера, но не непрерывную юридическую нумерацию.
 
 ```sql
--- Топ-3 заказа для каждого пользователя
-SELECT u.name, top_orders.*
-FROM users u
-CROSS JOIN LATERAL (
-    SELECT o.id, o.total
-    FROM orders o
-    WHERE o.user_id = u.id
-    ORDER BY o.total DESC
-    LIMIT 3
-) AS top_orders;
+begin;
+
+update app.orders
+set status = 'processing'
+where order_id = 10;
+
+savepoint before_optional_note;
+
+insert into app.order_notes (order_id, note)
+values (10, 'started by worker');
+
+rollback to savepoint before_optional_note;
+commit;
 ```
 
----
+#### Уровни изоляции и повтор операций
 
-### CTE (Common Table Expressions)
+В PostgreSQL `read uncommitted` ведёт себя как `read committed`. При `read committed` каждый оператор получает новый снимок на начало оператора; два `select` в одной транзакции могут увидеть разные зафиксированные данные. `repeatable read` использует один снимок на транзакцию и в PostgreSQL не допускает фантомных чтений, но конфликтующие изменения могут закончиться ошибкой сериализации. `serializable` добавляет Serializable Snapshot Isolation и гарантирует результат, эквивалентный некоторому последовательному выполнению, ценой возможного отката.
 
-Именованные подзапросы для читаемости и переиспользования.
+Приложение должно повторять целую транзакцию при SQLSTATE `40001` (`serialization_failure`) и обычно при `40P01` (`deadlock_detected`): заново читать данные и повторять бизнес-решение, а не только последний запрос. Число попыток ограничивают, между ними используют экспоненциальную задержку со случайным разбросом, а необратимые внешние эффекты выносят за повторяемую секцию или защищают идемпотентностью.
 
 ```sql
--- Простой CTE
-WITH active_users AS (
-    SELECT * FROM users WHERE is_active = true
+begin transaction isolation level serializable;
+
+select balance
+from app.accounts
+where account_id = 10;
+
+update app.accounts
+set balance = balance - 100
+where account_id = 10;
+
+commit;
+```
+
+#### MVCC, VACUUM и ANALYZE
+
+MVCC даёт запросу снимок видимых версий строк: обычное чтение не блокирует обычную запись, а запись не блокирует обычное чтение. `update` и `delete` оставляют старые версии, пока они потенциально видимы активным транзакциям. Такие dead tuples занимают место; долгие транзакции и забытые idle-in-transaction сессии удерживают старые снимки и мешают очистке.
+
+Autovacuum освобождает версии для повторного использования, поддерживает visibility map и предотвращает переполнение идентификаторов транзакций; `analyze` обновляет статистику планировщика. Его обычно настраивают для особенно активно изменяемых таблиц, а не отключают. Обычный `vacuum` работает параллельно с большинством операций, тогда как `vacuum full` переписывает таблицу и требует сильной блокировки.
+
+```sql
+select relname, n_live_tup, n_dead_tup, last_autovacuum, last_autoanalyze
+from pg_stat_user_tables
+order by n_dead_tup desc;
+
+vacuum (analyze, verbose) app.orders;
+```
+
+#### Блокировки строк и очереди
+
+`select ... for update` блокирует выбранные строки для конкурирующих изменений, а `for no key update` — более слабый режим, подходящий, когда ключевые значения не меняются. `nowait` сразу возвращает ошибку вместо ожидания. Захватывайте строки в устойчивом порядке и держите транзакции короткими, чтобы уменьшить ожидания и вероятность взаимной блокировки.
+
+`skip locked` пропускает уже захваченные строки и потому даёт несогласованный срез. Это плохой выбор для обычных пользовательских выборок, но полезный шаблон для нескольких обработчиков очереди. Блокировка живёт до завершения транзакции, поэтому получение задания и перевод его в состояние обработки должны быть одной короткой транзакцией.
+
+```sql
+begin;
+
+with next_job as (
+    select job_id
+    from app.jobs
+    where status = 'ready'
+    order by job_id
+    for update skip locked
+    limit 1
 )
-SELECT * FROM active_users WHERE age > 25;
+update app.jobs as job
+set status = 'running', started_at = clock_timestamp()
+from next_job
+where job.job_id = next_job.job_id
+returning job.*;
 
--- Несколько CTE
-WITH
-    active_users AS (
-        SELECT * FROM users WHERE is_active = true
-    ),
-    user_orders AS (
-        SELECT user_id, COUNT(*) as order_count
-        FROM orders
-        GROUP BY user_id
-    )
-SELECT
-    u.name,
-    COALESCE(uo.order_count, 0) as orders
-FROM active_users u
-LEFT JOIN user_orders uo ON u.id = uo.user_id;
+commit;
 
--- Рекурсивный CTE
-WITH RECURSIVE subordinates AS (
-    -- Начальное условие
-    SELECT id, name, manager_id, 1 AS level
-    FROM employees
-    WHERE manager_id IS NULL
-
-    UNION ALL
-
-    -- Рекурсивная часть
-    SELECT e.id, e.name, e.manager_id, s.level + 1
-    FROM employees e
-    JOIN subordinates s ON e.manager_id = s.id
-)
-SELECT * FROM subordinates ORDER BY level, name;
+select account_id
+from app.accounts
+where account_id = 10
+for update nowait;
 ```
 
----
+### Дополнение 3. Роли, права и безопасное подключение
 
-### Оконные функции
+#### Роли и принцип наименьших привилегий
 
-Вычисления по группам без агрегации строк.
+Роль приложения не должна быть superuser, владельцем таблиц или создателем ролей и баз. Практичная схема разделяет владельца объектов без права входа, роль миграций, runtime-роль сервиса и групповую роль только для чтения. Миграции временно делают `set role app_owner`, runtime получает лишь необходимые DML-права, а человеку или отчётному сервису назначают членство в `app_readonly`.
+
+Пароли и сертификаты не записывают в SQL-файлы, командную строку или репозиторий. Их передаёт доверенное хранилище через механизм драйвера или защищённый файл с корректными правами.
+
+Следующий блок — самостоятельный фрагмент целевой конфигурации. Он предполагает, что `app_db` и схема `app` уже существуют; если настройка из главы 1 уже выполнена, `create role` повторно не запускают: роли уже соответствуют этой модели.
 
 ```sql
--- ROW_NUMBER — порядковый номер
-SELECT
-    name,
-    price,
-    category_id,
-    ROW_NUMBER() OVER (ORDER BY price DESC) as row_num,
-    ROW_NUMBER() OVER (PARTITION BY category_id ORDER BY price DESC) as row_in_category
-FROM products;
+create role app_owner nologin;
+create role app_migrator login noinherit nosuperuser nocreatedb nocreaterole;
+create role app_runtime login noinherit nosuperuser nocreatedb nocreaterole noreplication;
+create role app_readonly nologin;
 
--- RANK / DENSE_RANK
-SELECT
-    name,
-    price,
-    RANK() OVER (ORDER BY price DESC) as rank,        -- Пропускает при равенстве
-    DENSE_RANK() OVER (ORDER BY price DESC) as dense  -- Не пропускает
-FROM products;
-
--- LAG / LEAD — предыдущее/следующее значение
-SELECT
-    name,
-    price,
-    LAG(price) OVER (ORDER BY id) as prev_price,
-    LEAD(price) OVER (ORDER BY id) as next_price,
-    price - LAG(price) OVER (ORDER BY id) as price_diff
-FROM products;
-
--- FIRST_VALUE / LAST_VALUE
-SELECT
-    name,
-    price,
-    FIRST_VALUE(price) OVER (
-        PARTITION BY category_id ORDER BY price
-    ) as min_in_category
-FROM products;
-
--- SUM / AVG / COUNT с окном
-SELECT
-    name,
-    price,
-    SUM(price) OVER () as total,
-    SUM(price) OVER (PARTITION BY category_id) as category_total,
-    SUM(price) OVER (ORDER BY id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total
-FROM products;
-
--- NTILE — разбиение на N групп
-SELECT
-    name,
-    price,
-    NTILE(4) OVER (ORDER BY price) as quartile
-FROM products;
+grant app_owner to app_migrator;
+alter database app_db owner to app_owner;
+alter schema app owner to app_owner;
 ```
 
-#### Рамки окна (Frame)
+#### GRANT, REVOKE и права по умолчанию
+
+Проверяйте права на каждом уровне: подключение к базе, `usage` на схему, операции над таблицами, последовательностями и функциями. Права владельца нельзя ограничить обычным `revoke`, поэтому runtime не должен владеть объектами. После отзыва стандартных прав у `public` выдавайте только необходимое; владельцу схемы отдельно остаётся право создавать объекты.
+
+`alter default privileges` действует только на будущие объекты и только для указанной роли-создателя. Если миграции не делают `set role app_owner`, настроенные для `app_owner` значения не сработают. Существующие объекты требуют отдельного `grant` или `revoke`.
 
 ```sql
--- ROWS BETWEEN
-SUM(price) OVER (
-    ORDER BY id
-    ROWS BETWEEN 2 PRECEDING AND CURRENT ROW  -- Текущая + 2 предыдущих
-)
+revoke all on database app_db from public;
+revoke create on schema public from public;
 
-SUM(price) OVER (
-    ORDER BY id
-    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW  -- Все до текущей (running total)
-)
+grant connect on database app_db to app_runtime, app_readonly;
+grant usage on schema app to app_runtime, app_readonly;
+grant select, insert, update, delete on all tables in schema app to app_runtime;
+grant select on all tables in schema app to app_readonly;
+grant usage, select on all sequences in schema app to app_runtime;
 
-SUM(price) OVER (
-    ORDER BY id
-    ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING  -- Скользящее среднее по 3
-)
+alter default privileges for role app_owner in schema app
+    grant select, insert, update, delete on tables to app_runtime;
+alter default privileges for role app_owner in schema app
+    grant select on tables to app_readonly;
+alter default privileges for role app_owner in schema app
+    grant usage, select on sequences to app_runtime;
+alter default privileges for role app_owner
+    revoke execute on functions from public;
+alter default privileges for role app_owner in schema app
+    grant execute on functions to app_runtime;
 ```
 
----
+#### pg_hba.conf, SCRAM и TLS
 
-### Индексы
+`pg_hba.conf` проверяется сверху вниз: применяется первая строка, совпавшая по типу соединения, базе, роли и адресу; при неудачной аутентификации поиск следующей строки не продолжается. Поэтому правила делают узкими и располагают от наиболее конкретных к более общим; если совпадения нет, подключение отклоняется. Не используйте `trust` для сетевого доступа и не открывайте рабочую базу всему `0.0.0.0/0`; `listen_addresses`, firewall и HBA решают разные части задачи.
 
-Ускоряют поиск, замедляют запись.
+Для парольной аутентификации используйте `scram-sha-256`; изменение `password_encryption` не преобразует старые пароли, их нужно безопасно заменить. Для сетевого подключения сервер включает TLS и `hostssl`, а клиент использует `sslmode=verify-full` с доверенным корневым сертификатом: проверяются и цепочка сертификатов, и имя сервера. При поддержке инфраструктурой полезно требовать SCRAM channel binding.
 
-#### Создание индексов
+```conf
+hostssl app_db app_runtime 10.20.0.0/24 scram-sha-256
+hostssl app_db app_readonly 10.20.1.0/24 scram-sha-256
+```
+
+```bash
+psql "host=db.example.internal dbname=app_db user=app_runtime sslmode=verify-full sslrootcert=/etc/ssl/certs/company_ca.pem channel_binding=require"
+```
+
+#### Безопасность схем, search_path и RLS
+
+Любая схема с правом `create`, попавшая в `search_path`, фактически считается доверенной: пользователь может создать одноимённую функцию, оператор или таблицу. У runtime отзывают создание объектов, критичные запросы квалифицируют именем схемы, а `security definer`-функции фиксируют безопасный `search_path` из доверенных схем с `pg_temp` в конце. Значения передают параметрами драйвера, а не конкатенацией SQL.
+
+RLS ограничивает строки после обычных `grant`: без подходящей политики действует default deny. Владелец таблицы обычно обходит политики, superuser и роль с `bypassrls` обходят их всегда; при необходимости владельца проверяют через `force row level security`. Контекст арендатора должен задаваться проверенным кодом приложения локально для транзакции, а не приниматься на веру из произвольного пользовательского ввода.
 
 ```sql
--- B-tree (по умолчанию) — для =, <, >, BETWEEN
-CREATE INDEX idx_users_email ON users(email);
+alter role app_runtime in database app_db
+    set search_path = pg_catalog, app;
 
--- Уникальный индекс
-CREATE UNIQUE INDEX idx_users_email_unique ON users(email);
-
--- Составной индекс
-CREATE INDEX idx_orders_user_date ON orders(user_id, created_at DESC);
-
--- Частичный индекс (только часть данных)
-CREATE INDEX idx_active_users ON users(email) WHERE is_active = true;
-
--- Индекс на выражение
-CREATE INDEX idx_users_lower_email ON users(LOWER(email));
-
--- GIN — для массивов и JSONB
-CREATE INDEX idx_products_tags ON products USING GIN(tags);
-CREATE INDEX idx_products_metadata ON products USING GIN(metadata);
-
--- GiST — для геоданных, полнотекстового поиска
-CREATE INDEX idx_locations_point ON locations USING GIST(coordinates);
-
--- BRIN — для больших таблиц с упорядоченными данными
-CREATE INDEX idx_logs_created ON logs USING BRIN(created_at);
-
--- Конкурентное создание (без блокировки)
-CREATE INDEX CONCURRENTLY idx_users_name ON users(name);
-```
-
-#### Управление индексами
-
-```sql
--- Удаление индекса
-DROP INDEX idx_users_email;
-DROP INDEX CONCURRENTLY idx_users_email;
-
--- Перестроение
-REINDEX INDEX idx_users_email;
-REINDEX TABLE users;
-
--- Просмотр индексов таблицы
-SELECT indexname, indexdef
-FROM pg_indexes
-WHERE tablename = 'users';
-
--- Размер индексов
-SELECT
-    indexname,
-    pg_size_pretty(pg_relation_size(indexname::regclass)) as size
-FROM pg_indexes
-WHERE tablename = 'users';
-```
-
-#### Когда использовать индексы
-
-**Создавать:**
-- Первичные ключи (создаются автоматически)
-- Внешние ключи
-- Поля в WHERE, ORDER BY, JOIN
-- Уникальные поля
-
-**Не создавать:**
-- Маленькие таблицы (< 1000 строк)
-- Часто обновляемые колонки
-- Колонки с низкой кардинальностью (пол, статус)
-
----
-
-### Анализ запросов (EXPLAIN)
-
-```sql
--- План выполнения
-EXPLAIN SELECT * FROM users WHERE email = 'alice@example.com';
-
--- С реальным временем выполнения
-EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'alice@example.com';
-
--- Подробный вывод
-EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)
-SELECT * FROM users WHERE email = 'alice@example.com';
-
--- JSON-формат
-EXPLAIN (ANALYZE, FORMAT JSON)
-SELECT * FROM users WHERE id = 1;
-```
-
-#### Чтение плана
-
-```
-Seq Scan on users  (cost=0.00..35.50 rows=1 width=100) (actual time=0.015..0.250 rows=1 loops=1)
-  Filter: (email = 'alice@example.com'::text)
-  Rows Removed by Filter: 999
-```
-
-| Операция | Описание |
-|----------|----------|
-| **Seq Scan** | Полный перебор таблицы (плохо для больших таблиц) |
-| **Index Scan** | Поиск по индексу + чтение таблицы |
-| **Index Only Scan** | Только индекс (лучший вариант) |
-| **Bitmap Index Scan** | Для нескольких условий |
-| **Nested Loop** | Вложенный цикл (для маленьких таблиц) |
-| **Hash Join** | Хэш-соединение (для средних) |
-| **Merge Join** | Слияние (для отсортированных) |
-
-**cost** — относительная стоимость (startup..total)
-**rows** — ожидаемое/реальное количество строк
-**width** — размер строки в байтах
-
----
-
-### Представления (Views)
-
-Виртуальные таблицы на основе запроса.
-
-```sql
--- Создание представления
-CREATE VIEW active_users AS
-SELECT id, email, name
-FROM users
-WHERE is_active = true;
-
--- Использование как таблицы
-SELECT * FROM active_users WHERE name LIKE 'A%';
-
--- Создание или замена
-CREATE OR REPLACE VIEW active_users AS
-SELECT id, email, name, created_at
-FROM users
-WHERE is_active = true;
-
--- Удаление
-DROP VIEW active_users;
-DROP VIEW IF EXISTS active_users CASCADE;
-```
-
-#### Материализованные представления
-
-Сохраняют результат запроса физически.
-
-```sql
--- Создание
-CREATE MATERIALIZED VIEW mv_sales_by_month AS
-SELECT
-    DATE_TRUNC('month', created_at) as month,
-    SUM(total) as total_sales,
-    COUNT(*) as order_count
-FROM orders
-GROUP BY month;
-
--- Использование
-SELECT * FROM mv_sales_by_month;
-
--- Обновление данных
-REFRESH MATERIALIZED VIEW mv_sales_by_month;
-
--- Конкурентное обновление (без блокировки)
-REFRESH MATERIALIZED VIEW CONCURRENTLY mv_sales_by_month;
--- Требует уникальный индекс
-CREATE UNIQUE INDEX ON mv_sales_by_month(month);
-```
-
----
-
-### Транзакции
-
-ACID-гарантии: Atomicity, Consistency, Isolation, Durability.
-
-```sql
--- Начало транзакции
-BEGIN;
--- или
-START TRANSACTION;
-
--- Операции
-UPDATE accounts SET balance = balance - 100 WHERE id = 1;
-UPDATE accounts SET balance = balance + 100 WHERE id = 2;
-
--- Фиксация
-COMMIT;
-
--- Откат
-ROLLBACK;
-
--- Точки сохранения
-BEGIN;
-UPDATE accounts SET balance = balance - 100 WHERE id = 1;
-SAVEPOINT transfer_started;
-UPDATE accounts SET balance = balance + 100 WHERE id = 2;
--- Ошибка? Откат к точке
-ROLLBACK TO SAVEPOINT transfer_started;
-COMMIT;
-```
-
-#### Уровни изоляции
-
-```sql
--- Установка уровня
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-
-BEGIN ISOLATION LEVEL SERIALIZABLE;
--- ...
-COMMIT;
-```
-
-| Уровень | Dirty Read | Non-repeatable Read | Phantom Read |
-|---------|------------|---------------------|--------------|
-| **READ UNCOMMITTED** | Да | Да | Да |
-| **READ COMMITTED** (default) | Нет | Да | Да |
-| **REPEATABLE READ** | Нет | Нет | Да |
-| **SERIALIZABLE** | Нет | Нет | Нет |
-
----
-
-### Функции и процедуры
-
-#### Функции (возвращают значение)
-
-```sql
--- Простая функция
-CREATE OR REPLACE FUNCTION add_numbers(a INTEGER, b INTEGER)
-RETURNS INTEGER AS $$
-BEGIN
-    RETURN a + b;
-END;
-$$ LANGUAGE plpgsql;
-
-SELECT add_numbers(2, 3);  -- 5
-
--- Функция с запросом
-CREATE OR REPLACE FUNCTION get_user_orders(p_user_id INTEGER)
-RETURNS TABLE(order_id INTEGER, total DECIMAL, created_at TIMESTAMP) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT o.id, o.total, o.created_at
-    FROM orders o
-    WHERE o.user_id = p_user_id
-    ORDER BY o.created_at DESC;
-END;
-$$ LANGUAGE plpgsql;
-
-SELECT * FROM get_user_orders(1);
-
--- SQL-функция (проще и быстрее)
-CREATE OR REPLACE FUNCTION get_active_users_count()
-RETURNS BIGINT AS $$
-    SELECT COUNT(*) FROM users WHERE is_active = true;
-$$ LANGUAGE SQL;
-```
-
-#### Процедуры (без возврата, с транзакциями)
-
-```sql
--- Процедура (PostgreSQL 11+)
-CREATE OR REPLACE PROCEDURE transfer_money(
-    from_account INTEGER,
-    to_account INTEGER,
-    amount DECIMAL
-)
-LANGUAGE plpgsql AS $$
-BEGIN
-    UPDATE accounts SET balance = balance - amount WHERE id = from_account;
-    UPDATE accounts SET balance = balance + amount WHERE id = to_account;
-    COMMIT;
-END;
+create function app.account_balance(p_account_id bigint)
+returns numeric
+language sql
+security definer
+set search_path = pg_catalog, app, pg_temp
+as $$
+    select balance
+    from app.accounts
+    where account_id = p_account_id;
 $$;
 
-CALL transfer_money(1, 2, 100.00);
+revoke all on function app.account_balance(bigint) from public;
+grant execute on function app.account_balance(bigint) to app_runtime;
+
+alter table app.orders enable row level security;
+
+create policy orders_by_tenant on app.orders
+using (tenant_id = current_setting('app.tenant_id', true)::uuid)
+with check (tenant_id = current_setting('app.tenant_id', true)::uuid);
 ```
 
-#### Переменные и управляющие конструкции
+### Дополнение 4. Резервное копирование и восстановление
 
-```sql
-CREATE OR REPLACE FUNCTION process_order(p_order_id INTEGER)
-RETURNS TEXT AS $$
-DECLARE
-    v_total DECIMAL;
-    v_status TEXT;
-    v_user_name TEXT;
-BEGIN
-    -- Присваивание из запроса
-    SELECT o.total, u.name INTO v_total, v_user_name
-    FROM orders o
-    JOIN users u ON o.user_id = u.id
-    WHERE o.id = p_order_id;
+#### Логические дампы pg_dump
 
-    -- Условия
-    IF v_total > 1000 THEN
-        v_status := 'VIP';
-    ELSIF v_total > 500 THEN
-        v_status := 'Premium';
-    ELSE
-        v_status := 'Standard';
-    END IF;
+`pg_dump` делает согласованный логический снимок одной базы без остановки сервера, но не сохраняет общие для кластера роли и tablespace. Plain-формат — читаемый SQL для `psql`. Custom (`-Fc`) и directory (`-Fd`) предназначены для `pg_restore`, позволяют выбирать объекты и менять порядок; directory поддерживает параллельный dump, а custom и directory — параллельное восстановление. Такие копии удобны для переноса между архитектурами и обычно на более новую версию PostgreSQL.
 
-    -- Цикл
-    FOR i IN 1..5 LOOP
-        RAISE NOTICE 'Iteration: %', i;
-    END LOOP;
-
-    -- Цикл по запросу
-    FOR record IN SELECT * FROM order_items WHERE order_id = p_order_id LOOP
-        RAISE NOTICE 'Item: %, Qty: %', record.product_id, record.quantity;
-    END LOOP;
-
-    RETURN format('Order %s for %s: %s', p_order_id, v_user_name, v_status);
-
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN 'Order not found';
-    WHEN OTHERS THEN
-        RETURN format('Error: %', SQLERRM);
-END;
-$$ LANGUAGE plpgsql;
-```
-
----
-
-### Триггеры
-
-Автоматический запуск функции при событиях.
-
-```sql
--- Триггерная функция
-CREATE OR REPLACE FUNCTION update_modified_at()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = NOW();
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Триггер
-CREATE TRIGGER trigger_update_modified
-    BEFORE UPDATE ON users
-    FOR EACH ROW
-    EXECUTE FUNCTION update_modified_at();
-
--- Триггер с условием
-CREATE TRIGGER trigger_log_price_change
-    AFTER UPDATE OF price ON products
-    FOR EACH ROW
-    WHEN (OLD.price IS DISTINCT FROM NEW.price)
-    EXECUTE FUNCTION log_price_change();
-```
-
-#### Типы триггеров
-
-| Параметр | Варианты |
-|----------|----------|
-| **Время** | BEFORE, AFTER, INSTEAD OF |
-| **Событие** | INSERT, UPDATE, DELETE, TRUNCATE |
-| **Уровень** | FOR EACH ROW, FOR EACH STATEMENT |
-
-```sql
--- OLD и NEW в триггерах
--- OLD — старое значение (UPDATE, DELETE)
--- NEW — новое значение (INSERT, UPDATE)
-
-CREATE OR REPLACE FUNCTION audit_trigger()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        INSERT INTO audit_log (action, new_data)
-        VALUES ('INSERT', row_to_json(NEW));
-        RETURN NEW;
-    ELSIF TG_OP = 'UPDATE' THEN
-        INSERT INTO audit_log (action, old_data, new_data)
-        VALUES ('UPDATE', row_to_json(OLD), row_to_json(NEW));
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        INSERT INTO audit_log (action, old_data)
-        VALUES ('DELETE', row_to_json(OLD));
-        RETURN OLD;
-    END IF;
-END;
-$$ LANGUAGE plpgsql;
-```
-
----
-
-### Нормализация и проектирование БД
-
-#### Нормальные формы
-
-##### 1NF (Первая нормальная форма)
-- Атомарность: каждая ячейка содержит одно значение
-- Нет повторяющихся групп
-
-```sql
--- Плохо (нарушает 1NF)
-CREATE TABLE orders_bad (
-    id INTEGER,
-    products TEXT  -- "Product1, Product2, Product3"
-);
-
--- Хорошо
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY
-);
-
-CREATE TABLE order_items (
-    order_id INTEGER REFERENCES orders(id),
-    product_id INTEGER REFERENCES products(id),
-    quantity INTEGER
-);
-```
-
-##### 2NF (Вторая нормальная форма)
-- Соответствует 1NF
-- Все неключевые атрибуты зависят от всего ключа
-
-```sql
--- Плохо (нарушает 2NF)
-CREATE TABLE order_items_bad (
-    order_id INTEGER,
-    product_id INTEGER,
-    quantity INTEGER,
-    product_name TEXT,  -- Зависит только от product_id
-    PRIMARY KEY (order_id, product_id)
-);
-
--- Хорошо
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
-CREATE TABLE order_items (
-    order_id INTEGER,
-    product_id INTEGER REFERENCES products(id),
-    quantity INTEGER,
-    PRIMARY KEY (order_id, product_id)
-);
-```
-
-##### 3NF (Третья нормальная форма)
-- Соответствует 2NF
-- Нет транзитивных зависимостей
-
-```sql
--- Плохо (нарушает 3NF)
-CREATE TABLE employees_bad (
-    id SERIAL PRIMARY KEY,
-    name TEXT,
-    department_id INTEGER,
-    department_name TEXT  -- Зависит от department_id, не от id
-);
-
--- Хорошо
-CREATE TABLE departments (
-    id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
-CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name TEXT,
-    department_id INTEGER REFERENCES departments(id)
-);
-```
-
-#### Типичная структура интернет-магазина
-
-```sql
--- Пользователи
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    name VARCHAR(100),
-    phone VARCHAR(20),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Адреса (один пользователь — много адресов)
-CREATE TABLE addresses (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    city VARCHAR(100) NOT NULL,
-    street VARCHAR(200) NOT NULL,
-    building VARCHAR(20),
-    apartment VARCHAR(20),
-    postal_code VARCHAR(20),
-    is_default BOOLEAN DEFAULT false
-);
-
--- Категории (иерархия)
-CREATE TABLE categories (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    parent_id INTEGER REFERENCES categories(id),
-    slug VARCHAR(100) UNIQUE NOT NULL
-);
-
--- Бренды
-CREATE TABLE brands (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    logo_url TEXT
-);
-
--- Продукты
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
-    description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
-    sku VARCHAR(50) UNIQUE,
-    category_id INTEGER REFERENCES categories(id),
-    brand_id INTEGER REFERENCES brands(id),
-    stock_quantity INTEGER DEFAULT 0,
-    is_active BOOLEAN DEFAULT true,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Изображения продуктов
-CREATE TABLE product_images (
-    id SERIAL PRIMARY KEY,
-    product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-    url TEXT NOT NULL,
-    is_primary BOOLEAN DEFAULT false,
-    sort_order INTEGER DEFAULT 0
-);
-
--- Заказы
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id),
-    address_id INTEGER REFERENCES addresses(id),
-    status VARCHAR(20) DEFAULT 'pending',
-    total DECIMAL(12, 2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT valid_status CHECK (
-        status IN ('pending', 'paid', 'shipped', 'delivered', 'cancelled')
-    )
-);
-
--- Позиции заказа
-CREATE TABLE order_items (
-    id SERIAL PRIMARY KEY,
-    order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
-    product_id INTEGER NOT NULL REFERENCES products(id),
-    quantity INTEGER NOT NULL CHECK (quantity > 0),
-    price DECIMAL(10, 2) NOT NULL,  -- Цена на момент заказа
-
-    UNIQUE (order_id, product_id)
-);
-
--- Индексы
-CREATE INDEX idx_products_category ON products(category_id);
-CREATE INDEX idx_products_brand ON products(brand_id);
-CREATE INDEX idx_products_active ON products(is_active) WHERE is_active = true;
-CREATE INDEX idx_orders_user ON orders(user_id);
-CREATE INDEX idx_orders_status ON orders(status);
-CREATE INDEX idx_orders_created ON orders(created_at DESC);
-```
-
-#### ER-диаграмма (связи)
-
-```
-┌─────────────┐       ┌─────────────┐
-│    users    │       │  addresses  │
-├─────────────┤       ├─────────────┤
-│ id (PK)     │───┐   │ id (PK)     │
-│ email       │   │   │ user_id(FK) │───┘
-│ name        │   │   │ city        │
-└─────────────┘   │   │ street      │
-                  │   └─────────────┘
-                  │
-                  │   ┌─────────────┐
-                  └──►│   orders    │
-                      ├─────────────┤      ┌─────────────┐
-                      │ id (PK)     │◄────►│ order_items │
-                      │ user_id(FK) │      ├─────────────┤
-                      │ status      │      │ order_id(FK)│
-                      └─────────────┘      │product_id   │
-                                           └──────┬──────┘
-                                                  │
-┌─────────────┐       ┌─────────────┐             │
-│ categories  │       │  products   │◄────────────┘
-├─────────────┤       ├─────────────┤
-│ id (PK)     │◄─────►│ id (PK)     │
-│ name        │       │ name        │
-│ parent_id   │───┘   │category_id  │
-└─────────────┘       │ price       │
-                      └─────────────┘
-```
-
----
-
-### Работа с JSON
-
-```sql
--- JSON vs JSONB
--- JSON: хранит как текст, сохраняет форматирование
--- JSONB: бинарный, быстрее запросы, поддерживает индексы
-
-CREATE TABLE events (
-    id SERIAL PRIMARY KEY,
-    data JSONB NOT NULL
-);
-
--- Вставка
-INSERT INTO events (data) VALUES
-('{"type": "click", "page": "/home", "user_id": 1}'),
-('{"type": "purchase", "amount": 99.99, "items": [1, 2, 3]}');
-
--- Доступ к полям
-SELECT
-    data->>'type' AS event_type,          -- Как текст
-    data->'user_id' AS user_id,           -- Как JSON
-    (data->>'amount')::DECIMAL AS amount  -- С преобразованием
-FROM events;
-
--- Путь к вложенным элементам
-SELECT data #>> '{items, 0}' AS first_item FROM events;
-
--- Фильтрация
-SELECT * FROM events WHERE data->>'type' = 'click';
-SELECT * FROM events WHERE data @> '{"type": "click"}';  -- Содержит
-
--- Проверка ключа
-SELECT * FROM events WHERE data ? 'user_id';        -- Есть ключ
-SELECT * FROM events WHERE data ?| ARRAY['a', 'b']; -- Любой из ключей
-SELECT * FROM events WHERE data ?& ARRAY['a', 'b']; -- Все ключи
-
--- Индексы для JSONB
-CREATE INDEX idx_events_data ON events USING GIN(data);
-CREATE INDEX idx_events_type ON events ((data->>'type'));
-
--- Функции работы с JSON
-SELECT jsonb_pretty(data) FROM events;
-SELECT jsonb_array_elements(data->'items') FROM events WHERE data ? 'items';
-SELECT jsonb_object_keys(data) FROM events;
-```
-
----
-
-### Полнотекстовый поиск
-
-```sql
--- Создание колонки для поиска
-ALTER TABLE products ADD COLUMN search_vector TSVECTOR;
-
--- Обновление вектора
-UPDATE products SET search_vector =
-    setweight(to_tsvector('russian', COALESCE(name, '')), 'A') ||
-    setweight(to_tsvector('russian', COALESCE(description, '')), 'B');
-
--- Индекс
-CREATE INDEX idx_products_search ON products USING GIN(search_vector);
-
--- Поиск
-SELECT name, description
-FROM products
-WHERE search_vector @@ to_tsquery('russian', 'телефон & samsung');
-
--- С ранжированием
-SELECT
-    name,
-    ts_rank(search_vector, query) AS rank
-FROM products, to_tsquery('russian', 'телефон') AS query
-WHERE search_vector @@ query
-ORDER BY rank DESC;
-
--- Автоматическое обновление через триггер
-CREATE FUNCTION products_search_update() RETURNS TRIGGER AS $$
-BEGIN
-    NEW.search_vector :=
-        setweight(to_tsvector('russian', COALESCE(NEW.name, '')), 'A') ||
-        setweight(to_tsvector('russian', COALESCE(NEW.description, '')), 'B');
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_products_search
-    BEFORE INSERT OR UPDATE ON products
-    FOR EACH ROW EXECUTE FUNCTION products_search_update();
-```
-
----
-
-### Бэкап и восстановление
+Проверяйте stderr и код завершения команды. Directory-цель не должна существовать до запуска, а параллельный dump создаёт несколько подключений и увеличивает нагрузку.
 
 ```bash
-# pg_dump — создание бэкапа
-pg_dump -U postgres dbname > backup.sql
-pg_dump -U postgres -Fc dbname > backup.dump  # Сжатый формат
-pg_dump -U postgres -t users dbname > users.sql  # Одна таблица
-
-# pg_restore — восстановление
-pg_restore -U postgres -d dbname backup.dump
-psql -U postgres -d dbname < backup.sql
-
-# Только схема
-pg_dump -U postgres --schema-only dbname > schema.sql
-
-# Только данные
-pg_dump -U postgres --data-only dbname > data.sql
-
-# pg_dumpall — все базы данных
-pg_dumpall -U postgres > all_databases.sql
+pg_dump --format=plain --file=/srv/backups/app_db.sql app_db
+pg_dump --format=custom --file=/srv/backups/app_db.dump app_db
+pg_dump --format=directory --jobs=4 --file=/srv/backups/app_db_dir app_db
 ```
 
----
+#### Восстановление через psql и pg_restore
 
-### Права доступа
+Plain SQL восстанавливают через `psql`, архивы — через `pg_restore`. Восстановление проверяют в заранее созданной чистой базе и останавливают при первой ошибке. `--clean` удаляет объекты в целевой базе, поэтому его применяют только к точно выбранной disposable-среде или по проверенному runbook.
 
-```sql
--- Создание пользователя
-CREATE USER app_user WITH PASSWORD 'secret';
-CREATE ROLE readonly;
-
--- Права на БД
-GRANT CONNECT ON DATABASE shop TO app_user;
-
--- Права на схему
-GRANT USAGE ON SCHEMA public TO app_user;
-
--- Права на таблицы
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly;
-GRANT SELECT, INSERT, UPDATE ON users TO app_user;
-GRANT ALL PRIVILEGES ON products TO app_user;
-
--- Права на последовательности (для SERIAL)
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO app_user;
-
--- Права по умолчанию
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-    GRANT SELECT ON TABLES TO readonly;
-
--- Отзыв прав
-REVOKE INSERT ON users FROM app_user;
-
--- Просмотр прав
-\dp users
-SELECT grantee, privilege_type
-FROM information_schema.role_table_grants
-WHERE table_name = 'users';
-```
-
----
-
-### ENUM типы
-
-ENUM — перечисляемый тип с фиксированным набором значений.
-
-```sql
--- Создание ENUM типа
-CREATE TYPE order_status AS ENUM (
-    'pending',
-    'processing',
-    'shipped',
-    'delivered',
-    'cancelled'
-);
-
-CREATE TYPE user_role AS ENUM ('admin', 'moderator', 'user', 'guest');
-
--- Использование в таблице
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    status order_status DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT NOW()
-);
-
--- Вставка
-INSERT INTO orders (status) VALUES ('pending');
-INSERT INTO orders (status) VALUES ('shipped');
-
--- Ошибка: значение не из списка
-INSERT INTO orders (status) VALUES ('unknown');  -- ERROR!
-
--- Фильтрация
-SELECT * FROM orders WHERE status = 'pending';
-SELECT * FROM orders WHERE status IN ('pending', 'processing');
-
--- Сравнение (по порядку определения)
-SELECT * FROM orders WHERE status > 'processing';  -- shipped, delivered, cancelled
-
--- Добавление нового значения
-ALTER TYPE order_status ADD VALUE 'refunded';
-ALTER TYPE order_status ADD VALUE 'on_hold' BEFORE 'processing';
-ALTER TYPE order_status ADD VALUE 'returned' AFTER 'delivered';
-
--- Переименование значения (PostgreSQL 10+)
-ALTER TYPE order_status RENAME VALUE 'cancelled' TO 'canceled';
-
--- Просмотр всех значений ENUM
-SELECT unnest(enum_range(NULL::order_status));
-
-SELECT enumlabel
-FROM pg_enum
-WHERE enumtypid = 'order_status'::regtype
-ORDER BY enumsortorder;
-
--- Удаление ENUM типа
-DROP TYPE order_status;  -- Ошибка, если используется
-DROP TYPE order_status CASCADE;  -- Удалит зависимые колонки
-```
-
-#### ENUM vs Lookup Table
-
-```sql
--- Подход 1: ENUM
-CREATE TYPE priority AS ENUM ('low', 'medium', 'high', 'critical');
-
--- Подход 2: Lookup Table (справочник)
-CREATE TABLE priorities (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) UNIQUE NOT NULL,
-    sort_order INTEGER,
-    color VARCHAR(7),
-    description TEXT
-);
-
-INSERT INTO priorities (name, sort_order, color) VALUES
-    ('low', 1, '#00ff00'),
-    ('medium', 2, '#ffff00'),
-    ('high', 3, '#ff8800'),
-    ('critical', 4, '#ff0000');
-
-CREATE TABLE tasks (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(200),
-    priority_id INTEGER REFERENCES priorities(id)
-);
-```
-
-| Критерий | ENUM | Lookup Table |
-|----------|------|--------------|
-| **Производительность** | Быстрее (хранится как integer) | JOIN для получения имени |
-| **Гибкость** | Сложно изменить/удалить | Легко добавить/изменить |
-| **Дополнительные данные** | Нет (только имя) | Любые поля |
-| **Миграции** | Сложнее | Просто INSERT/UPDATE |
-| **Когда использовать** | Статичные, редко меняющиеся | Часто меняющиеся данные |
-
----
-
-### Составные типы (Composite Types)
-
-```sql
--- Создание составного типа
-CREATE TYPE address AS (
-    street VARCHAR(200),
-    city VARCHAR(100),
-    postal_code VARCHAR(20),
-    country VARCHAR(100)
-);
-
-CREATE TYPE money_amount AS (
-    amount DECIMAL(15, 2),
-    currency CHAR(3)
-);
-
--- Использование в таблице
-CREATE TABLE companies (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(200),
-    headquarters address,
-    annual_revenue money_amount
-);
-
--- Вставка
-INSERT INTO companies (name, headquarters, annual_revenue) VALUES (
-    'Acme Corp',
-    ROW('123 Main St', 'New York', '10001', 'USA'),
-    ROW(1000000.00, 'USD')
-);
-
--- Альтернативный синтаксис
-INSERT INTO companies (name, headquarters, annual_revenue) VALUES (
-    'Tech Inc',
-    ('456 Oak Ave', 'San Francisco', '94102', 'USA')::address,
-    (5000000.00, 'EUR')::money_amount
-);
-
--- Доступ к полям
-SELECT
-    name,
-    (headquarters).city,
-    (headquarters).country,
-    (annual_revenue).amount,
-    (annual_revenue).currency
-FROM companies;
-
--- Обновление одного поля
-UPDATE companies
-SET headquarters.city = 'Los Angeles'
-WHERE id = 1;
-
--- Обновление всего типа
-UPDATE companies
-SET headquarters = ROW('789 Pine St', 'Boston', '02101', 'USA')
-WHERE id = 1;
-
--- Функция, возвращающая составной тип
-CREATE FUNCTION get_default_address() RETURNS address AS $$
-    SELECT ROW('Unknown', 'Unknown', '00000', 'Unknown')::address;
-$$ LANGUAGE SQL;
-```
-
----
-
-### Domain типы
-
-Domain — пользовательский тип на основе существующего с добавлением ограничений.
-
-```sql
--- Email с валидацией
-CREATE DOMAIN email AS VARCHAR(255)
-    CHECK (VALUE ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
-
--- Положительное число
-CREATE DOMAIN positive_int AS INTEGER
-    CHECK (VALUE > 0);
-
--- Процент (0-100)
-CREATE DOMAIN percentage AS DECIMAL(5, 2)
-    CHECK (VALUE >= 0 AND VALUE <= 100);
-
--- Телефон
-CREATE DOMAIN phone_number AS VARCHAR(20)
-    CHECK (VALUE ~ '^\+?[0-9\s\-\(\)]+$');
-
--- URL
-CREATE DOMAIN url AS TEXT
-    CHECK (VALUE ~* '^https?://[^\s]+$');
-
--- Непустая строка
-CREATE DOMAIN non_empty_string AS VARCHAR(1000)
-    CHECK (LENGTH(TRIM(VALUE)) > 0);
-
--- Использование
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email email NOT NULL UNIQUE,
-    phone phone_number,
-    age positive_int,
-    website url
-);
-
--- Вставка
-INSERT INTO users (email, phone, age) VALUES
-    ('alice@example.com', '+1-555-123-4567', 25);
-
--- Ошибка валидации
-INSERT INTO users (email, age) VALUES ('invalid-email', -5);  -- ERROR!
-
--- Изменение domain
-ALTER DOMAIN positive_int ADD CONSTRAINT min_age CHECK (VALUE >= 18);
-ALTER DOMAIN positive_int DROP CONSTRAINT min_age;
-
--- Удаление
-DROP DOMAIN email;
-DROP DOMAIN email CASCADE;  -- Удалит зависимые колонки
-```
-
----
-
-### Sequences (Последовательности)
-
-```sql
--- Создание последовательности
-CREATE SEQUENCE order_number_seq
-    START WITH 1000
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 10;  -- Кеширование для производительности
-
--- Циклическая последовательность
-CREATE SEQUENCE rotation_seq
-    START WITH 1
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 100
-    CYCLE;  -- Начнёт сначала после 100
-
--- Использование
-SELECT nextval('order_number_seq');  -- 1000
-SELECT nextval('order_number_seq');  -- 1001
-SELECT currval('order_number_seq');  -- 1001 (текущее значение в сессии)
-
--- В INSERT
-INSERT INTO orders (order_number) VALUES (nextval('order_number_seq'));
-
--- Связывание с колонкой (как SERIAL)
-CREATE TABLE invoices (
-    id INTEGER PRIMARY KEY DEFAULT nextval('order_number_seq'),
-    amount DECIMAL(10, 2)
-);
-
--- Установка значения
-SELECT setval('order_number_seq', 5000);  -- Следующий будет 5001
-SELECT setval('order_number_seq', 5000, false);  -- Следующий будет 5000
-
--- Информация о последовательности
-SELECT * FROM order_number_seq;
-\d order_number_seq
-
--- Изменение
-ALTER SEQUENCE order_number_seq RESTART WITH 10000;
-ALTER SEQUENCE order_number_seq INCREMENT BY 10;
-ALTER SEQUENCE order_number_seq OWNED BY invoices.id;
-
--- Удаление
-DROP SEQUENCE order_number_seq;
-
--- IDENTITY (PostgreSQL 10+, стандарт SQL)
-CREATE TABLE products (
-    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name VARCHAR(200)
-);
-
-CREATE TABLE products_v2 (
-    id INTEGER GENERATED BY DEFAULT AS IDENTITY (START WITH 100 INCREMENT BY 10),
-    name VARCHAR(200)
-);
-```
-
----
-
-### Блокировки (Locks)
-
-PostgreSQL использует MVCC и различные уровни блокировок.
-
-#### Типы блокировок таблиц
-
-```sql
--- Явная блокировка таблицы
-LOCK TABLE users IN ACCESS SHARE MODE;        -- Разрешает SELECT
-LOCK TABLE users IN ROW SHARE MODE;           -- SELECT FOR UPDATE
-LOCK TABLE users IN ROW EXCLUSIVE MODE;       -- UPDATE, DELETE, INSERT
-LOCK TABLE users IN SHARE UPDATE EXCLUSIVE MODE;  -- VACUUM, CREATE INDEX CONCURRENTLY
-LOCK TABLE users IN SHARE MODE;               -- Блокирует изменения
-LOCK TABLE users IN SHARE ROW EXCLUSIVE MODE; -- Как SHARE, но только один
-LOCK TABLE users IN EXCLUSIVE MODE;           -- Блокирует всё кроме ACCESS SHARE
-LOCK TABLE users IN ACCESS EXCLUSIVE MODE;    -- Полная блокировка (ALTER TABLE, DROP)
-
--- Блокировка с таймаутом
-SET lock_timeout = '5s';
-LOCK TABLE users IN EXCLUSIVE MODE;
-```
-
-#### Блокировки строк
-
-```sql
--- SELECT FOR UPDATE — блокирует строки до конца транзакции
-BEGIN;
-SELECT * FROM accounts WHERE id = 1 FOR UPDATE;
--- Другие транзакции ждут
-UPDATE accounts SET balance = balance - 100 WHERE id = 1;
-COMMIT;
-
--- FOR UPDATE NOWAIT — ошибка если заблокировано
-SELECT * FROM accounts WHERE id = 1 FOR UPDATE NOWAIT;
-
--- FOR UPDATE SKIP LOCKED — пропустить заблокированные строки
--- Отлично для очередей!
-SELECT * FROM tasks
-WHERE status = 'pending'
-ORDER BY created_at
-LIMIT 1
-FOR UPDATE SKIP LOCKED;
-
--- FOR SHARE — разделяемая блокировка (другие могут читать)
-SELECT * FROM products WHERE id = 1 FOR SHARE;
-
--- FOR KEY SHARE — только блокировка ключа (для FK)
-SELECT * FROM products WHERE id = 1 FOR KEY SHARE;
-```
-
-#### Advisory Locks (Рекомендательные блокировки / Мьютексы)
-
-Для координации на уровне приложения.
-
-```sql
--- Сессионные блокировки (до конца сессии или явного освобождения)
-SELECT pg_advisory_lock(12345);      -- Блокировка по числу
-SELECT pg_advisory_lock(1, 2);       -- Блокировка по паре чисел
-SELECT pg_advisory_unlock(12345);    -- Освобождение
-SELECT pg_advisory_unlock_all();     -- Освободить все
-
--- Транзакционные блокировки (автоматически освобождаются при COMMIT/ROLLBACK)
-SELECT pg_advisory_xact_lock(12345);
-
--- Попытка без ожидания
-SELECT pg_try_advisory_lock(12345);  -- Возвращает true/false
-SELECT pg_try_advisory_xact_lock(12345);
-
--- Разделяемые (shared) блокировки
-SELECT pg_advisory_lock_shared(12345);
-SELECT pg_advisory_xact_lock_shared(12345);
-
--- Пример: синглтон-джоб (только один процесс)
-DO $$
-BEGIN
-    IF pg_try_advisory_lock(hashtext('daily_report_job')) THEN
-        -- Выполняем работу
-        RAISE NOTICE 'Running daily report...';
-        PERFORM pg_sleep(10);  -- Имитация работы
-        PERFORM pg_advisory_unlock(hashtext('daily_report_job'));
-    ELSE
-        RAISE NOTICE 'Job already running, skipping';
-    END IF;
-END $$;
-
--- Пример: блокировка по сущности
--- Блокируем пользователя 42 для обновления
-SELECT pg_advisory_xact_lock(hashtext('user'), 42);
-UPDATE users SET balance = balance - 100 WHERE id = 42;
-COMMIT;  -- Автоматическое освобождение
-
--- Просмотр текущих advisory locks
-SELECT * FROM pg_locks WHERE locktype = 'advisory';
-
--- Мониторинг ожиданий
-SELECT
-    blocked.pid AS blocked_pid,
-    blocked.usename AS blocked_user,
-    blocking.pid AS blocking_pid,
-    blocking.usename AS blocking_user,
-    blocked.query AS blocked_query
-FROM pg_stat_activity blocked
-JOIN pg_locks bl ON blocked.pid = bl.pid
-JOIN pg_locks lock ON bl.locktype = lock.locktype
-    AND bl.relation = lock.relation
-    AND bl.pid != lock.pid
-JOIN pg_stat_activity blocking ON lock.pid = blocking.pid
-WHERE NOT bl.granted;
-```
-
-#### Deadlock Detection
-
-```sql
--- PostgreSQL автоматически обнаруживает deadlock и прерывает одну транзакцию
-
--- Настройка времени обнаружения
-SET deadlock_timeout = '1s';  -- По умолчанию
-
--- Логирование deadlock
--- В postgresql.conf:
--- log_lock_waits = on
--- deadlock_timeout = 1s
-
--- Пример deadlock:
--- Сессия 1:
-BEGIN;
-UPDATE accounts SET balance = balance - 100 WHERE id = 1;
--- ждёт...
-UPDATE accounts SET balance = balance + 100 WHERE id = 2;  -- DEADLOCK!
-
--- Сессия 2:
-BEGIN;
-UPDATE accounts SET balance = balance - 50 WHERE id = 2;
--- ждёт...
-UPDATE accounts SET balance = balance + 50 WHERE id = 1;  -- DEADLOCK!
-
--- Предотвращение: всегда обновляйте в одинаковом порядке
--- Например, ORDER BY id
-```
-
----
-
-### MVCC (Multi-Version Concurrency Control)
-
-PostgreSQL не блокирует данные при чтении благодаря MVCC.
-
-```sql
--- Каждая строка имеет системные колонки
-SELECT
-    xmin,        -- ID транзакции, создавшей строку
-    xmax,        -- ID транзакции, удалившей/обновившей (0 если активна)
-    ctid,        -- Физическое расположение (страница, позиция)
-    *
-FROM users
-LIMIT 5;
-
--- Как работает UPDATE под капотом:
--- 1. Создаётся новая версия строки (INSERT)
--- 2. Старая версия помечается как удалённая (xmax)
--- 3. Обе версии существуют до VACUUM
-
--- Снимок (snapshot) — какие данные видит транзакция
--- Транзакция видит:
--- - Свои изменения
--- - Зафиксированные изменения других транзакций (на момент снимка)
--- Не видит:
--- - Незафиксированные изменения других транзакций
--- - Изменения, зафиксированные после начала (для REPEATABLE READ)
-```
-
----
-
-### VACUUM и ANALYZE
-
-VACUUM очищает "мёртвые" версии строк.
-
-```sql
--- Обычный VACUUM — освобождает место для переиспользования
-VACUUM users;
-VACUUM VERBOSE users;  -- С подробностями
-
--- VACUUM FULL — полная перезапись таблицы (блокирует!)
-VACUUM FULL users;  -- Освобождает место на диске
-
--- VACUUM ANALYZE — VACUUM + обновление статистики
-VACUUM ANALYZE users;
-
--- Только ANALYZE — обновление статистики для планировщика
-ANALYZE users;
-ANALYZE users(email, created_at);  -- Конкретные колонки
-
--- Автоматический VACUUM (autovacuum)
--- Настройки в postgresql.conf:
--- autovacuum = on
--- autovacuum_vacuum_threshold = 50
--- autovacuum_vacuum_scale_factor = 0.2
--- autovacuum_analyze_threshold = 50
--- autovacuum_analyze_scale_factor = 0.1
-
--- Настройки для конкретной таблицы
-ALTER TABLE logs SET (
-    autovacuum_vacuum_threshold = 1000,
-    autovacuum_vacuum_scale_factor = 0.1,
-    autovacuum_enabled = true
-);
-
--- Мониторинг "раздутия" (bloat)
-SELECT
-    relname AS table_name,
-    n_live_tup AS live_rows,
-    n_dead_tup AS dead_rows,
-    ROUND(100.0 * n_dead_tup / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_ratio,
-    last_vacuum,
-    last_autovacuum,
-    last_analyze,
-    last_autoanalyze
-FROM pg_stat_user_tables
-WHERE n_dead_tup > 0
-ORDER BY n_dead_tup DESC;
-
--- Активность autovacuum
-SELECT
-    schemaname,
-    relname,
-    last_autovacuum,
-    autovacuum_count,
-    last_autoanalyze,
-    autoanalyze_count
-FROM pg_stat_user_tables
-ORDER BY last_autovacuum DESC NULLS LAST;
-```
-
----
-
-### Партиционирование (Partitioning)
-
-Разделение больших таблиц на части для производительности.
-
-#### Range Partitioning
-
-```sql
--- Главная (partitioned) таблица
-CREATE TABLE logs (
-    id BIGSERIAL,
-    created_at TIMESTAMP NOT NULL,
-    level VARCHAR(10),
-    message TEXT
-) PARTITION BY RANGE (created_at);
-
--- Партиции по месяцам
-CREATE TABLE logs_2024_01 PARTITION OF logs
-    FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
-
-CREATE TABLE logs_2024_02 PARTITION OF logs
-    FOR VALUES FROM ('2024-02-01') TO ('2024-03-01');
-
-CREATE TABLE logs_2024_03 PARTITION OF logs
-    FOR VALUES FROM ('2024-03-01') TO ('2024-04-01');
-
--- Default партиция (для значений вне диапазонов)
-CREATE TABLE logs_default PARTITION OF logs DEFAULT;
-
--- INSERT автоматически направляется в нужную партицию
-INSERT INTO logs (created_at, level, message)
-VALUES ('2024-02-15', 'ERROR', 'Something went wrong');
--- Попадёт в logs_2024_02
-
--- Индексы создаются на каждой партиции
-CREATE INDEX ON logs (created_at);
-
--- Отключение партиции (для архивации)
-ALTER TABLE logs DETACH PARTITION logs_2024_01;
-
--- Подключение партиции
-ALTER TABLE logs ATTACH PARTITION logs_old
-    FOR VALUES FROM ('2023-01-01') TO ('2023-02-01');
-```
-
-#### List Partitioning
-
-```sql
-CREATE TABLE orders (
-    id BIGSERIAL,
-    region VARCHAR(50) NOT NULL,
-    amount DECIMAL(10, 2),
-    created_at TIMESTAMP
-) PARTITION BY LIST (region);
-
-CREATE TABLE orders_europe PARTITION OF orders
-    FOR VALUES IN ('UK', 'DE', 'FR', 'IT', 'ES');
-
-CREATE TABLE orders_asia PARTITION OF orders
-    FOR VALUES IN ('JP', 'CN', 'KR', 'IN');
-
-CREATE TABLE orders_americas PARTITION OF orders
-    FOR VALUES IN ('US', 'CA', 'BR', 'MX');
-
-CREATE TABLE orders_other PARTITION OF orders DEFAULT;
-```
-
-#### Hash Partitioning
-
-```sql
--- Равномерное распределение по хешу
-CREATE TABLE events (
-    id BIGSERIAL,
-    user_id INTEGER NOT NULL,
-    event_type VARCHAR(50),
-    data JSONB
-) PARTITION BY HASH (user_id);
-
--- 4 партиции
-CREATE TABLE events_0 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 0);
-CREATE TABLE events_1 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 1);
-CREATE TABLE events_2 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 2);
-CREATE TABLE events_3 PARTITION OF events FOR VALUES WITH (MODULUS 4, REMAINDER 3);
-```
-
-#### Автоматизация партиционирования
-
-```sql
--- Функция для создания месячных партиций
-CREATE OR REPLACE FUNCTION create_monthly_partition(
-    table_name TEXT,
-    year INTEGER,
-    month INTEGER
-) RETURNS VOID AS $$
-DECLARE
-    partition_name TEXT;
-    start_date DATE;
-    end_date DATE;
-BEGIN
-    partition_name := format('%s_%s_%s', table_name, year, LPAD(month::TEXT, 2, '0'));
-    start_date := make_date(year, month, 1);
-    end_date := start_date + INTERVAL '1 month';
-
-    EXECUTE format(
-        'CREATE TABLE IF NOT EXISTS %I PARTITION OF %I FOR VALUES FROM (%L) TO (%L)',
-        partition_name,
-        table_name,
-        start_date,
-        end_date
-    );
-END;
-$$ LANGUAGE plpgsql;
-
--- Использование
-SELECT create_monthly_partition('logs', 2024, 4);
-SELECT create_monthly_partition('logs', 2024, 5);
-```
-
----
-
-### Репликация
-
-#### Streaming Replication (физическая)
+Архив сначала можно просмотреть через `pg_restore --list`, восстановить выборочно и распараллелить. `--no-owner` полезен, когда исходных ролей нет, но после него нужно явно проверить нового владельца и права.
 
 ```bash
-# На мастере (postgresql.conf)
-wal_level = replica
-max_wal_senders = 10
-wal_keep_size = 1GB
+createdb app_restore
+psql -X --set ON_ERROR_STOP=on --dbname=app_restore --file=/srv/backups/app_db.sql
 
-# На мастере (pg_hba.conf)
-host replication replicator replica_ip/32 scram-sha-256
-
-# На мастере — создание пользователя
-CREATE ROLE replicator WITH REPLICATION LOGIN PASSWORD 'secret';
-
-# На реплике — базовый бэкап
-pg_basebackup -h master_ip -U replicator -D /var/lib/postgresql/data -P -R
-
-# -R создаёт standby.signal и настраивает primary_conninfo
+pg_restore --list /srv/backups/app_db.dump
+pg_restore --exit-on-error --no-owner --jobs=4 --dbname=app_restore /srv/backups/app_db.dump
 ```
 
-#### Logical Replication (логическая)
+#### Глобальные объекты, физические копии и PITR
 
-```sql
--- На публикующем сервере
-CREATE PUBLICATION my_pub FOR TABLE users, orders;
--- Или все таблицы
-CREATE PUBLICATION all_tables FOR ALL TABLES;
+Роли, tablespace и другие общие объекты сохраняют отдельно через `pg_dumpall --globals-only`; такой файл может содержать чувствительные хэши паролей и требует строгой защиты. Физическая копия охватывает кластер целиком и привязана к формату данных версии PostgreSQL. Нельзя просто копировать работающий `pgdata`: используйте согласованный snapshot при остановленном сервере либо `pg_basebackup` и документированный механизм PostgreSQL.
 
--- На подписывающем сервере
-CREATE SUBSCRIPTION my_sub
-    CONNECTION 'host=master_ip dbname=mydb user=replicator password=secret'
-    PUBLICATION my_pub;
+PITR требует базовой физической копии и непрерывной цепочки архивированных WAL до нужной точки. Одного `pg_dump` для PITR недостаточно. Настраивают `wal_level = replica` или выше, надёжное архивирование с контролем ошибок, `restore_command` и ровно одну цель восстановления; конкретную процедуру обязательно репетируют для своей платформы и версии.
 
--- Управление
-ALTER PUBLICATION my_pub ADD TABLE products;
-ALTER SUBSCRIPTION my_sub REFRESH PUBLICATION;
-
--- Мониторинг
-SELECT * FROM pg_stat_replication;      -- На мастере
-SELECT * FROM pg_stat_subscription;      -- На реплике
+```bash
+pg_dumpall --globals-only --file=/srv/backups/globals.sql
+pg_basebackup --pgdata=/srv/backups/base --format=plain --wal-method=stream
 ```
 
----
-
-### Connection Pooling
-
-#### PgBouncer
-
-```ini
-# pgbouncer.ini
-[databases]
-mydb = host=localhost port=5432 dbname=mydb
-
-[pgbouncer]
-listen_addr = 0.0.0.0
-listen_port = 6432
-auth_type = scram-sha-256
-auth_file = /etc/pgbouncer/userlist.txt
-pool_mode = transaction  # session, transaction, statement
-max_client_conn = 1000
-default_pool_size = 20
-min_pool_size = 5
-reserve_pool_size = 5
+```conf
+restore_command = 'cp /srv/wal_archive/%f %p'
+recovery_target_time = '2026-08-23 10:15:00+03'
+recovery_target_action = 'promote'
 ```
 
-```sql
--- Подключение через PgBouncer
-psql -h localhost -p 6432 -U myuser -d mydb
-
--- Административная консоль PgBouncer
-psql -h localhost -p 6432 -U pgbouncer pgbouncer
-
-SHOW POOLS;
-SHOW CLIENTS;
-SHOW SERVERS;
-SHOW STATS;
-RELOAD;
+```bash
+# Выполнять только на остановленной восстановленной копии;
+# PGDATA должен указывать на её data_directory.
+touch "$PGDATA/recovery.signal"
 ```
 
----
+#### Проверка восстановления и политика хранения
 
-### Extensions (Расширения)
+Копия становится доказанным backup только после успешного тестового восстановления и проверки данных, ограничений, расширений, владельцев и прав. Дамп из недоверенного источника опасен: при восстановлении сервер может выполнить произвольный SQL, выбранный superuser исходной системы. Plain-файл анализируют как код, а архив сначала превращают в SQL через `pg_restore --file` и проверяют в изолированной среде с минимальными привилегиями.
 
-```sql
--- Список доступных расширений
-SELECT * FROM pg_available_extensions;
+Политика хранения исходит из RPO и RTO: задаёт частоту, срок жизни полных и инкрементальных копий, непрерывность WAL для всего окна PITR, шифрование, неизменяемую/offsite-копию и контролируемое удаление. Регулярная репетиция должна включать потерю основной площадки и доступность ключей расшифрования; результаты и фактическое время восстановления фиксируют.
 
--- Установленные расширения
-SELECT * FROM pg_extension;
+```bash
+shasum -a 256 /srv/backups/app_db.dump
+pg_restore --file=/srv/backups/review.sql /srv/backups/app_db.dump
 
--- Установка расширения
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pg_trgm";
-CREATE EXTENSION IF NOT EXISTS "hstore";
-CREATE EXTENSION IF NOT EXISTS "postgis";
-
--- Удаление
-DROP EXTENSION pg_trgm;
-
--- Популярные расширения:
-
--- uuid-ossp: генерация UUID
-CREATE EXTENSION "uuid-ossp";
-SELECT uuid_generate_v4();  -- Случайный UUID
-
--- pgcrypto: криптография
-CREATE EXTENSION pgcrypto;
-SELECT crypt('password', gen_salt('bf'));  -- bcrypt
-SELECT encode(digest('data', 'sha256'), 'hex');  -- SHA-256
-
--- pg_trgm: нечёткий поиск (триграммы)
-CREATE EXTENSION pg_trgm;
-CREATE INDEX idx_users_name_trgm ON users USING GIN (name gin_trgm_ops);
-SELECT * FROM users WHERE name % 'Jonh';  -- Найдёт John
-SELECT similarity('hello', 'helo');  -- 0.5
-
--- hstore: key-value хранилище
-CREATE EXTENSION hstore;
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    attributes hstore
-);
-INSERT INTO products (attributes) VALUES ('color => red, size => large');
-SELECT attributes->'color' FROM products;
-
--- pg_stat_statements: статистика запросов
-CREATE EXTENSION pg_stat_statements;
-SELECT
-    query,
-    calls,
-    total_exec_time / 1000 as total_seconds,
-    mean_exec_time as avg_ms
-FROM pg_stat_statements
-ORDER BY total_exec_time DESC
-LIMIT 10;
-
--- tablefunc: crosstab (pivot tables)
-CREATE EXTENSION tablefunc;
-
--- citext: регистронезависимый текст
-CREATE EXTENSION citext;
-CREATE TABLE users (email CITEXT UNIQUE);
--- 'Alice@Example.com' = 'alice@example.com'
+createdb app_restore_check
+pg_restore --exit-on-error --no-owner --dbname=app_restore_check /srv/backups/app_db.dump
+psql -X --dbname=app_restore_check --command='select count(*) from app.orders;'
 ```
-
----
-
-### Row-Level Security (RLS)
-
-Ограничение доступа к строкам на уровне БД.
-
-```sql
--- Включение RLS для таблицы
-ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
-
--- Создание политики
-CREATE POLICY user_documents ON documents
-    FOR ALL  -- SELECT, INSERT, UPDATE, DELETE
-    TO app_user  -- Роль
-    USING (owner_id = current_setting('app.current_user_id')::INTEGER);
-
--- Раздельные политики для разных операций
-CREATE POLICY select_own ON documents
-    FOR SELECT
-    USING (owner_id = current_setting('app.current_user_id')::INTEGER);
-
-CREATE POLICY insert_own ON documents
-    FOR INSERT
-    WITH CHECK (owner_id = current_setting('app.current_user_id')::INTEGER);
-
-CREATE POLICY update_own ON documents
-    FOR UPDATE
-    USING (owner_id = current_setting('app.current_user_id')::INTEGER)
-    WITH CHECK (owner_id = current_setting('app.current_user_id')::INTEGER);
-
--- Политика для админов (видят всё)
-CREATE POLICY admin_all ON documents
-    FOR ALL
-    TO admin_role
-    USING (true);
-
--- Установка контекста в приложении
-SET app.current_user_id = '42';
-SELECT * FROM documents;  -- Видит только свои
-
--- Принудительное применение даже для owner таблицы
-ALTER TABLE documents FORCE ROW LEVEL SECURITY;
-
--- Отключение RLS
-ALTER TABLE documents DISABLE ROW LEVEL SECURITY;
-
--- Удаление политики
-DROP POLICY user_documents ON documents;
-
--- Просмотр политик
-\d documents
-SELECT * FROM pg_policies WHERE tablename = 'documents';
-```
-
----
-
-### LISTEN / NOTIFY (Pub/Sub)
-
-Асинхронные уведомления между сессиями.
-
-```sql
--- Сессия 1: подписка на канал
-LISTEN order_events;
-LISTEN user_events;
-
--- Сессия 2: отправка уведомления
-NOTIFY order_events, 'New order #123';
-NOTIFY user_events;  -- Без payload
-
--- Использование в триггере
-CREATE OR REPLACE FUNCTION notify_order_change()
-RETURNS TRIGGER AS $$
-BEGIN
-    PERFORM pg_notify(
-        'order_events',
-        json_build_object(
-            'action', TG_OP,
-            'order_id', COALESCE(NEW.id, OLD.id),
-            'timestamp', NOW()
-        )::TEXT
-    );
-    RETURN COALESCE(NEW, OLD);
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER order_notify_trigger
-    AFTER INSERT OR UPDATE OR DELETE ON orders
-    FOR EACH ROW EXECUTE FUNCTION notify_order_change();
-
--- Отмена подписки
-UNLISTEN order_events;
-UNLISTEN *;  -- Все каналы
-```
-
-Использование в Python:
-```python
-import psycopg2
-import select
-
-conn = psycopg2.connect(dsn)
-conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-
-cur = conn.cursor()
-cur.execute("LISTEN order_events;")
-
-while True:
-    if select.select([conn], [], [], 5) == ([], [], []):
-        print("Timeout")
-    else:
-        conn.poll()
-        while conn.notifies:
-            notify = conn.notifies.pop(0)
-            print(f"Got: {notify.channel} - {notify.payload}")
-```
-
----
-
-### Foreign Data Wrappers (FDW)
-
-Доступ к внешним источникам данных как к таблицам.
-
-```sql
--- postgres_fdw — другой PostgreSQL сервер
-CREATE EXTENSION postgres_fdw;
-
-CREATE SERVER remote_server
-    FOREIGN DATA WRAPPER postgres_fdw
-    OPTIONS (host 'remote.host', port '5432', dbname 'remotedb');
-
-CREATE USER MAPPING FOR local_user
-    SERVER remote_server
-    OPTIONS (user 'remote_user', password 'secret');
-
--- Импорт таблиц
-IMPORT FOREIGN SCHEMA public
-    LIMIT TO (users, orders)
-    FROM SERVER remote_server
-    INTO local_schema;
-
--- Или создание вручную
-CREATE FOREIGN TABLE remote_users (
-    id INTEGER,
-    name VARCHAR(100),
-    email VARCHAR(255)
-) SERVER remote_server
-OPTIONS (schema_name 'public', table_name 'users');
-
--- Запросы как к обычной таблице
-SELECT * FROM remote_users WHERE id = 1;
-
--- file_fdw — чтение CSV/текстовых файлов
-CREATE EXTENSION file_fdw;
-CREATE SERVER file_server FOREIGN DATA WRAPPER file_fdw;
-
-CREATE FOREIGN TABLE csv_data (
-    id INTEGER,
-    name TEXT,
-    value NUMERIC
-) SERVER file_server
-OPTIONS (filename '/path/to/data.csv', format 'csv', header 'true');
-```
-
----
-
-### Мониторинг и диагностика
-
-#### Системные представления
-
-```sql
--- Активные сессии
-SELECT
-    pid,
-    usename,
-    application_name,
-    client_addr,
-    state,
-    query_start,
-    NOW() - query_start AS duration,
-    LEFT(query, 100) AS query
-FROM pg_stat_activity
-WHERE state != 'idle'
-ORDER BY query_start;
-
--- Долгие запросы (> 5 минут)
-SELECT
-    pid,
-    NOW() - query_start AS duration,
-    query
-FROM pg_stat_activity
-WHERE state = 'active'
-  AND NOW() - query_start > INTERVAL '5 minutes';
-
--- Завершение запроса
-SELECT pg_cancel_backend(pid);      -- Мягкое (отмена запроса)
-SELECT pg_terminate_backend(pid);   -- Жёсткое (убить сессию)
-
--- Блокировки
-SELECT
-    l.pid,
-    l.locktype,
-    l.mode,
-    l.granted,
-    a.usename,
-    a.query
-FROM pg_locks l
-JOIN pg_stat_activity a ON l.pid = a.pid
-WHERE NOT l.granted;
-
--- Размеры таблиц
-SELECT
-    relname AS table_name,
-    pg_size_pretty(pg_table_size(relid)) AS table_size,
-    pg_size_pretty(pg_indexes_size(relid)) AS indexes_size,
-    pg_size_pretty(pg_total_relation_size(relid)) AS total_size
-FROM pg_stat_user_tables
-ORDER BY pg_total_relation_size(relid) DESC
-LIMIT 10;
-
--- Размер базы данных
-SELECT pg_size_pretty(pg_database_size('mydb'));
-
--- Использование индексов
-SELECT
-    relname AS table_name,
-    indexrelname AS index_name,
-    idx_scan AS scans,
-    idx_tup_read AS tuples_read,
-    idx_tup_fetch AS tuples_fetched
-FROM pg_stat_user_indexes
-ORDER BY idx_scan DESC;
-
--- Неиспользуемые индексы
-SELECT
-    relname AS table_name,
-    indexrelname AS index_name,
-    pg_size_pretty(pg_relation_size(indexrelid)) AS size
-FROM pg_stat_user_indexes
-WHERE idx_scan = 0
-  AND indexrelid NOT IN (SELECT conindid FROM pg_constraint);
-
--- Статистика по таблицам
-SELECT
-    relname,
-    seq_scan,           -- Последовательные сканирования
-    seq_tup_read,       -- Строки прочитаны seq scan
-    idx_scan,           -- Индексные сканирования
-    idx_tup_fetch,      -- Строки прочитаны через индекс
-    n_tup_ins,          -- Вставки
-    n_tup_upd,          -- Обновления
-    n_tup_del,          -- Удаления
-    n_live_tup,         -- Живые строки
-    n_dead_tup          -- Мёртвые строки
-FROM pg_stat_user_tables
-ORDER BY seq_scan DESC;
-
--- Cache hit ratio (должен быть > 99%)
-SELECT
-    SUM(blks_hit) * 100.0 / SUM(blks_hit + blks_read) AS cache_hit_ratio
-FROM pg_stat_database
-WHERE datname = current_database();
-
--- Временные файлы (признак нехватки work_mem)
-SELECT
-    datname,
-    temp_files,
-    pg_size_pretty(temp_bytes) AS temp_size
-FROM pg_stat_database
-WHERE temp_files > 0;
-
--- Статистика WAL
-SELECT * FROM pg_stat_wal;
-
--- Статистика репликации
-SELECT
-    client_addr,
-    state,
-    sent_lsn,
-    write_lsn,
-    flush_lsn,
-    replay_lsn,
-    pg_wal_lsn_diff(sent_lsn, replay_lsn) AS replication_lag
-FROM pg_stat_replication;
-```
-
----
-
-### Generated Columns
-
-Автоматически вычисляемые колонки (PostgreSQL 12+).
-
-```sql
--- STORED — физически хранится
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    price DECIMAL(10, 2),
-    quantity INTEGER,
-    total DECIMAL(10, 2) GENERATED ALWAYS AS (price * quantity) STORED
-);
-
-INSERT INTO products (price, quantity) VALUES (10.00, 5);
-SELECT * FROM products;  -- total = 50.00
-
--- Полнотекстовый поиск
-CREATE TABLE articles (
-    id SERIAL PRIMARY KEY,
-    title TEXT,
-    body TEXT,
-    search_vector TSVECTOR GENERATED ALWAYS AS (
-        setweight(to_tsvector('english', COALESCE(title, '')), 'A') ||
-        setweight(to_tsvector('english', COALESCE(body, '')), 'B')
-    ) STORED
-);
-
-CREATE INDEX idx_articles_search ON articles USING GIN(search_vector);
-
--- Хеш для дедупликации
-CREATE TABLE files (
-    id SERIAL PRIMARY KEY,
-    content BYTEA,
-    content_hash TEXT GENERATED ALWAYS AS (encode(sha256(content), 'hex')) STORED
-);
-
--- Нормализованные данные
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(255),
-    email_normalized VARCHAR(255) GENERATED ALWAYS AS (LOWER(TRIM(email))) STORED
-);
-```
-
----
-
-### Exclusion Constraints
-
-Запрет пересекающихся данных (бронирования, расписания).
-
-```sql
--- Требует расширения btree_gist
-CREATE EXTENSION btree_gist;
-
--- Бронирование комнат: нельзя забронировать одну комнату в пересекающееся время
-CREATE TABLE room_bookings (
-    id SERIAL PRIMARY KEY,
-    room_id INTEGER NOT NULL,
-    during TSTZRANGE NOT NULL,  -- Временной диапазон
-
-    EXCLUDE USING GIST (
-        room_id WITH =,         -- room_id должен быть равен
-        during WITH &&          -- И диапазоны пересекаются
-    )
-);
-
--- Работает!
-INSERT INTO room_bookings (room_id, during) VALUES
-    (1, '[2024-03-15 10:00, 2024-03-15 12:00)');
-
-INSERT INTO room_bookings (room_id, during) VALUES
-    (1, '[2024-03-15 14:00, 2024-03-15 16:00)');  -- OK, не пересекается
-
--- Ошибка!
-INSERT INTO room_bookings (room_id, during) VALUES
-    (1, '[2024-03-15 11:00, 2024-03-15 13:00)');  -- Пересекается с первым
-
--- IP диапазоны без пересечений
-CREATE TABLE ip_allocations (
-    id SERIAL PRIMARY KEY,
-    network INET,
-    owner_id INTEGER,
-
-    EXCLUDE USING GIST (network inet_ops WITH &&)
-);
-```
-
----
-
-### Массивы (подробно)
-
-```sql
--- Объявление
-CREATE TABLE posts (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(200),
-    tags TEXT[],
-    scores INTEGER[]
-);
-
--- Вставка
-INSERT INTO posts (title, tags, scores) VALUES
-    ('PostgreSQL Tips', ARRAY['database', 'sql', 'postgresql'], ARRAY[5, 4, 5]),
-    ('Web Development', '{"html", "css", "javascript"}', '{4, 3, 4}');
-
--- Доступ к элементам (индексация с 1!)
-SELECT tags[1] FROM posts;  -- Первый элемент
-SELECT tags[2:3] FROM posts;  -- Срез (slice)
-
--- Операторы
-SELECT * FROM posts WHERE 'sql' = ANY(tags);  -- Содержит элемент
-SELECT * FROM posts WHERE tags @> ARRAY['sql'];  -- Содержит все элементы
-SELECT * FROM posts WHERE tags && ARRAY['sql', 'html'];  -- Пересекается
-SELECT * FROM posts WHERE tags <@ ARRAY['sql', 'database', 'postgresql'];  -- Подмножество
-
--- Функции
-SELECT array_length(tags, 1) FROM posts;  -- Длина
-SELECT array_dims(tags) FROM posts;  -- Размерность
-SELECT array_upper(tags, 1) FROM posts;  -- Верхняя граница
-SELECT unnest(tags) FROM posts;  -- Развернуть в строки
-SELECT array_agg(tag) FROM unnest(ARRAY['a', 'b', 'c']) AS tag;  -- Свернуть в массив
-
--- Добавление элемента
-UPDATE posts SET tags = array_append(tags, 'new_tag') WHERE id = 1;
-UPDATE posts SET tags = tags || 'new_tag' WHERE id = 1;  -- Альтернатива
-UPDATE posts SET tags = array_prepend('first_tag', tags) WHERE id = 1;
-
--- Удаление элемента
-UPDATE posts SET tags = array_remove(tags, 'sql') WHERE id = 1;
-
--- Замена элемента
-UPDATE posts SET tags = array_replace(tags, 'sql', 'SQL') WHERE id = 1;
-
--- Позиция элемента
-SELECT array_position(tags, 'sql') FROM posts;
-
--- Конкатенация
-SELECT array_cat(ARRAY[1, 2], ARRAY[3, 4]);  -- {1,2,3,4}
-
--- Индекс для массивов
-CREATE INDEX idx_posts_tags ON posts USING GIN(tags);
-
--- Многомерные массивы
-CREATE TABLE matrix (
-    data INTEGER[][]
-);
-INSERT INTO matrix VALUES ('{{1,2,3},{4,5,6}}');
-SELECT data[1][2] FROM matrix;  -- 2
-```
-
----
-
-### Оптимизация запросов (Tips)
-
-```sql
--- 1. Используйте EXISTS вместо COUNT для проверки существования
--- Плохо
-SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
-FROM orders WHERE user_id = 1;
-
--- Хорошо
-SELECT EXISTS (SELECT 1 FROM orders WHERE user_id = 1);
-
--- 2. Используйте ANY вместо множества OR
--- Плохо
-SELECT * FROM users WHERE id = 1 OR id = 2 OR id = 3;
-
--- Хорошо
-SELECT * FROM users WHERE id = ANY(ARRAY[1, 2, 3]);
-
--- 3. Используйте LIMIT с ORDER BY
--- Плохо (сортирует всё)
-SELECT * FROM logs ORDER BY created_at DESC;
-
--- Хорошо (останавливается раньше с индексом)
-SELECT * FROM logs ORDER BY created_at DESC LIMIT 100;
-
--- 4. Избегайте SELECT *
--- Плохо
-SELECT * FROM users WHERE id = 1;
-
--- Хорошо (особенно с covering index)
-SELECT id, email, name FROM users WHERE id = 1;
-
--- 5. Используйте covering indexes
-CREATE INDEX idx_users_email_covering ON users(email) INCLUDE (name, created_at);
--- Index Only Scan без обращения к таблице
-
--- 6. Partial indexes для частых условий
-CREATE INDEX idx_active_users ON users(email) WHERE is_active = true;
-
--- 7. Expression indexes
-CREATE INDEX idx_users_lower_email ON users(LOWER(email));
-SELECT * FROM users WHERE LOWER(email) = 'alice@example.com';
-
--- 8. Используйте UNION ALL вместо UNION если не нужна уникальность
-SELECT id FROM table1
-UNION ALL
-SELECT id FROM table2;
-
--- 9. Batch INSERT
-INSERT INTO logs (message) VALUES
-    ('log1'), ('log2'), ('log3'), ...;  -- Одним запросом
-
--- 10. Используйте COPY для массовой загрузки
-COPY users(email, name) FROM '/path/to/file.csv' WITH CSV HEADER;
-```
-
----
-
-### Настройки производительности
-
-```sql
--- Ключевые параметры (postgresql.conf)
-
--- Память
-shared_buffers = '4GB'          -- 25% RAM для выделенного сервера
-effective_cache_size = '12GB'    -- 75% RAM (для планировщика)
-work_mem = '256MB'               -- Память для сортировки/хеширования
-maintenance_work_mem = '1GB'     -- Для VACUUM, CREATE INDEX
-
--- Параллелизм
-max_parallel_workers_per_gather = 4
-max_parallel_workers = 8
-max_worker_processes = 8
-
--- WAL
-wal_buffers = '64MB'
-checkpoint_completion_target = 0.9
-max_wal_size = '4GB'
-min_wal_size = '1GB'
-
--- Планировщик
-random_page_cost = 1.1           -- Для SSD (по умолчанию 4.0 для HDD)
-effective_io_concurrency = 200   -- Для SSD
-
--- Логирование медленных запросов
-log_min_duration_statement = 1000  -- Логировать запросы > 1 секунды
-
--- Статистика
-track_activities = on
-track_counts = on
-track_io_timing = on
-track_functions = all
-
--- Просмотр текущих настроек
-SHOW shared_buffers;
-SHOW work_mem;
-SELECT name, setting, unit, context FROM pg_settings WHERE name LIKE '%mem%';
-
--- Изменение на лету (если context = user)
-SET work_mem = '512MB';
-```
-
----
-
-### Практические задания
-
-#### Уровень 1: Основы
-
-1. Создайте базу данных `library` с таблицами `authors`, `books`, `genres`. Установите связи между ними.
-
-2. Заполните таблицы тестовыми данными (минимум 10 авторов, 30 книг, 5 жанров).
-
-3. Напишите запросы:
-   - Все книги определённого автора
-   - Количество книг по жанрам
-   - Авторы, у которых больше 3 книг
-
-4. Добавьте таблицу `readers` и `borrowed_books` для учёта выдачи книг.
-
-#### Уровень 2: JOIN и подзапросы
-
-5. Выведите книги, которые никогда не брали читатели.
-
-6. Найдите самого активного читателя (по количеству взятых книг).
-
-7. Выведите авторов, все книги которых относятся к одному жанру.
-
-8. Напишите запрос с рангом книг по популярности (сколько раз брали).
-
-#### Уровень 3: Продвинутое
-
-9. Создайте представление `popular_books` с книгами, взятыми более 5 раз.
-
-10. Напишите функцию `get_recommendations(reader_id)`, которая возвращает книги на основе предпочтений читателя.
-
-11. Создайте триггер, который не позволяет выдать книгу, если все экземпляры на руках.
-
-12. Реализуйте полнотекстовый поиск по названиям и описаниям книг.
-
----
-
-## Ссылки
-
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
-- [PostgreSQL Tutorial](https://www.postgresqltutorial.com/)
-- [Use The Index, Luke](https://use-the-index-luke.com/)
-- [[Python#SQLAlchemy|Python SQLAlchemy]]
-- [[backend/Database|Databases Overview]]

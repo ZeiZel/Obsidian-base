@@ -90,17 +90,6 @@ sudo systemctl enable redis-server
 sudo systemctl status redis-server
 ```
 
-#### Windows (WSL2)
-
-```bash
-# В WSL2 Ubuntu
-sudo apt update
-sudo apt install redis-server
-
-# Запуск
-sudo service redis-server start
-```
-
 #### Docker
 
 ```bash

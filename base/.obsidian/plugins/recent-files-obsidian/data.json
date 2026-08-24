@@ -1,6 +1,62 @@
 {
   "recentFiles": [
     {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
+    },
+    {
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "vocabularity - голосовой тренинг",
+      "path": "soft/vocabularity - голосовой тренинг.md"
+    },
+    {
+      "basename": "SQLite",
+      "path": "database/SQLite.md"
+    },
+    {
+      "basename": "Redis",
+      "path": "database/Redis.md"
+    },
+    {
+      "basename": "Prisma ORM",
+      "path": "database/Prisma ORM.md"
+    },
+    {
+      "basename": "Go",
+      "path": "backend/go/Go.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "Python",
+      "path": "backend/Python.md"
+    },
+    {
+      "basename": "Rust",
+      "path": "backend/Rust.md"
+    },
+    {
+      "basename": "backend",
+      "path": "backend/backend.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "Kubernetes Entities",
+      "path": "devops/kubernetes/Kubernetes Entities.md"
+    },
+    {
       "basename": "database",
       "path": "database/database.md"
     },
@@ -13,20 +69,8 @@
       "path": "Untitled.base"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
       "basename": "agile",
       "path": "agile/agile.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "SEO",
@@ -39,14 +83,6 @@
     {
       "basename": "DISC",
       "path": "agile/DISC.md"
-    },
-    {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
-      "basename": "vocabularity - голосовой тренинг",
-      "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "whatsapp.excalidraw",

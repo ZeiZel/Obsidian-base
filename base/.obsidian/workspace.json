@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "backend/go/Go.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Selfgo"
+              "title": "Go"
             }
           },
           {
@@ -104,78 +104,6 @@
             }
           },
           {
-            "id": "278c8e89f745604f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/Teamlead.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Teamlead"
-            }
-          },
-          {
-            "id": "5dd63e48edad2b5f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/go/Selfgo.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Selfgo"
-            }
-          },
-          {
-            "id": "60b5ad3954aa7fbd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Алгоритмы и Структуры даных"
-            }
-          },
-          {
             "id": "6a6e6f48f4d9dbf4",
             "type": "leaf",
             "state": {
@@ -198,9 +126,129 @@
               "icon": "lucide-file",
               "title": "database"
             }
+          },
+          {
+            "id": "f7d3138dc3c04324",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/PostgreSQL.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "PostgreSQL"
+            }
+          },
+          {
+            "id": "6225362347eae2e6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Python.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Python"
+            }
+          },
+          {
+            "id": "0720739c4bb5fb66",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Rust.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Rust"
+            }
+          },
+          {
+            "id": "38dc933caa911ce5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/SQLite.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "SQLite"
+            }
+          },
+          {
+            "id": "9dd0baaeba8418c5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "database/Redis.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Redis"
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -410,6 +458,16 @@
             "id": "c3d7585ea3122064",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "3e00316cc3abd411",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -417,7 +475,7 @@
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 11
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -440,7 +498,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "database/database.md",
+                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -454,7 +512,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 496.375
+    "width": 568.75390625
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -477,19 +535,30 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "6a6e6f48f4d9dbf4",
+  "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
+    "database/PostgreSQL.md",
+    "agile/Teamlead Balun Courses.md",
+    "architecture/System Design/System Design.md",
+    "soft/vocabularity - голосовой тренинг.md",
+    "database/SQLite.md",
+    "database/SQLite.new.md",
+    "database/Redis.md",
+    "database/Prisma ORM.md",
+    "backend/go/Go.md",
+    "backend/go/Selfgo.md",
+    "backend/Python.md",
+    "backend/Rust.md",
+    "backend/backend.md",
+    "agile/Teamlead.md",
+    "devops/kubernetes/Kubernetes Entities.md",
+    "database/database.md",
     "cs/Алгоритмы и Структуры даных.md",
     "Untitled.base",
-    "database/database.md",
-    "backend/go/Selfgo.md",
     "agile/agile.md",
-    "backend/go/Go.md",
     "backend/go/Temporal Go.md",
     "backend/go/go.md",
-    "architecture/System Design/System Design.md",
     "_png/Pasted image 20260810112432.png",
-    "agile/Teamlead Balun Courses.md",
     "_png/Pasted image 20260809103157.png",
     "_png/Pasted image 20260808180605.png",
     "_png/Pasted image 20260802191204.png",
@@ -505,16 +574,6 @@
     "agile/metrics.md",
     "agile/manifest.md",
     "agile/empiricism.md",
-    "agile/DISC.md",
-    "agile/cynefin.md",
-    "agile/command.md",
-    "agile/Teamlead.md",
-    "soft/vocabularity - голосовой тренинг.md",
-    "202606202104.md",
-    "Excalidraw/whatsapp.excalidraw.md",
-    "frontend/tips-n-tricks/css-presets.md",
-    "frontend/tips-n-tricks/css-features.md",
-    "frontend/tips-n-tricks/react-best-practices.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",

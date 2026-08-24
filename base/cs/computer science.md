@@ -13,5 +13,5 @@ tags:
 - [[Networks]] - сети
 - [[GIT/GIT]] - система контроля версий
 - [[Задачи с Leetcode]] - задачи с Leetcode
-- [[Python]] - язык Python
+- [[../backend/Python]] - язык Python
 - [[C]] - язык C
