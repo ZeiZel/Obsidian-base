@@ -5,6 +5,10 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
+      "basename": "Go",
+      "path": "backend/go/Go.md"
+    },
+    {
       "basename": "PostgreSQL",
       "path": "database/PostgreSQL.md"
     },
@@ -27,10 +31,6 @@
     {
       "basename": "Prisma ORM",
       "path": "database/Prisma ORM.md"
-    },
-    {
-      "basename": "Go",
-      "path": "backend/go/Go.md"
     },
     {
       "basename": "Selfgo",

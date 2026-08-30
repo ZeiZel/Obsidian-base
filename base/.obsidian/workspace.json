@@ -484,8 +484,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 12
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -545,8 +544,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "26b3cfd2b130acb2",
+  "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
+    "_png/Pasted image 20260830141633.png",
+    "backend/go/Go.md",
     "agile/Teamlead Balun Courses.md",
     "database/PostgreSQL.md",
     "architecture/System Design/System Design.md",
@@ -555,7 +556,6 @@
     "database/SQLite.new.md",
     "database/Redis.md",
     "database/Prisma ORM.md",
-    "backend/go/Go.md",
     "backend/go/Selfgo.md",
     "backend/Python.md",
     "backend/Rust.md",
@@ -583,7 +583,6 @@
     "agile/models.md",
     "agile/metrics.md",
     "agile/manifest.md",
-    "agile/empiricism.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
