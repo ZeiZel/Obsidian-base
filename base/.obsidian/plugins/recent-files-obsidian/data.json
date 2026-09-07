@@ -1,12 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "Go",
+      "path": "backend/go/Go.md"
+    },
+    {
+      "basename": "terminal",
+      "path": "tools/terminal.md"
+    },
+    {
+      "basename": "C",
+      "path": "cs/C.md"
+    },
+    {
+      "basename": "Rust",
+      "path": "backend/Rust.md"
+    },
+    {
+      "basename": "ZSH",
+      "path": "tools/ZSH.md"
+    },
+    {
+      "basename": "TMUX",
+      "path": "tools/TMUX.md"
+    },
+    {
+      "basename": "nvim",
+      "path": "tools/nvim.md"
+    },
+    {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "Go",
-      "path": "backend/go/Go.md"
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "PostgreSQL",
@@ -33,16 +61,8 @@
       "path": "database/Prisma ORM.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
       "basename": "Python",
       "path": "backend/Python.md"
-    },
-    {
-      "basename": "Rust",
-      "path": "backend/Rust.md"
     },
     {
       "basename": "backend",
@@ -63,10 +83,6 @@
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "Untitled",
-      "path": "Untitled.base"
     },
     {
       "basename": "agile",
@@ -113,20 +129,8 @@
       "path": "frontend/tips-n-tricks/mixin-content.md"
     },
     {
-      "basename": "nvim",
-      "path": "tools/nvim.md"
-    },
-    {
       "basename": "edge",
       "path": "edge/edge.md"
-    },
-    {
-      "basename": "TMUX",
-      "path": "tools/TMUX.md"
-    },
-    {
-      "basename": "ZSH",
-      "path": "tools/ZSH.md"
     },
     {
       "basename": "communication",

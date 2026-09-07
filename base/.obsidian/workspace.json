@@ -246,9 +246,32 @@
               "icon": "lucide-file",
               "title": "Redis"
             }
+          },
+          {
+            "id": "9eccf7ab8928cd15",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tools/terminal.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "terminal"
+            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -294,7 +317,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "—",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -478,6 +501,16 @@
             "id": "26b3cfd2b130acb2",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "91a34f52047af3f4",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -507,7 +540,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -544,11 +576,20 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "31bae1f9fb12f665",
+  "active": "6fa2dae8cc23e1d8",
   "lastOpenFiles": [
-    "_png/Pasted image 20260830141633.png",
     "backend/go/Go.md",
+    "tools/terminal.md",
+    "cs/C.md",
+    "backend/Rust.md",
+    "tools/ZSH.md",
+    "tools/TMUX.md",
+    "tools/nvim.md",
+    "whatsapp.excalidraw.md",
+    "Untitled.base",
     "agile/Teamlead Balun Courses.md",
+    "backend/go/Selfgo.md",
+    "_png/Pasted image 20260830141633.png",
     "database/PostgreSQL.md",
     "architecture/System Design/System Design.md",
     "soft/vocabularity - голосовой тренинг.md",
@@ -556,15 +597,12 @@
     "database/SQLite.new.md",
     "database/Redis.md",
     "database/Prisma ORM.md",
-    "backend/go/Selfgo.md",
     "backend/Python.md",
-    "backend/Rust.md",
     "backend/backend.md",
     "agile/Teamlead.md",
     "devops/kubernetes/Kubernetes Entities.md",
     "database/database.md",
     "cs/Алгоритмы и Структуры даных.md",
-    "Untitled.base",
     "agile/agile.md",
     "backend/go/Temporal Go.md",
     "backend/go/go.md",
@@ -572,17 +610,11 @@
     "_png/Pasted image 20260809103157.png",
     "_png/Pasted image 20260808180605.png",
     "_png/Pasted image 20260802191204.png",
-    "frontend/SEO.md",
     "_png/Pasted image 20260717154243.png",
     "_png/Pasted image 20260715201053.png",
     "_png/Pasted image 20260715201049.png",
     "_png/Pasted image 20260715200641.png",
     "_png/Pasted image 20260715200635.png",
-    "_png/Pasted image 20260715200634.png",
-    "agile/practices.md",
-    "agile/models.md",
-    "agile/metrics.md",
-    "agile/manifest.md",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
