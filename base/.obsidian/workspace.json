@@ -490,8 +490,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 15
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -514,7 +513,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -551,11 +549,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "22133bbebabb2cc1",
+  "active": "6fa2dae8cc23e1d8",
   "lastOpenFiles": [
+    "agile/Teamlead Balun Courses.md",
     "backend/go/Go.md",
     "backend/go/Selfgo.md",
-    "agile/Teamlead Balun Courses.md",
     "backend/Python.md",
     "backend/Rust.md",
     "tools/terminal.md",
