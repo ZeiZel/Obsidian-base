@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
+    },
+    {
       "basename": "Go",
       "path": "backend/go/Go.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "Python",
+      "path": "backend/Python.md"
+    },
+    {
+      "basename": "Rust",
+      "path": "backend/Rust.md"
     },
     {
       "basename": "terminal",
@@ -11,10 +27,6 @@
     {
       "basename": "C",
       "path": "cs/C.md"
-    },
-    {
-      "basename": "Rust",
-      "path": "backend/Rust.md"
     },
     {
       "basename": "ZSH",
@@ -27,14 +39,6 @@
     {
       "basename": "nvim",
       "path": "tools/nvim.md"
-    },
-    {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
     },
     {
       "basename": "PostgreSQL",
@@ -59,10 +63,6 @@
     {
       "basename": "Prisma ORM",
       "path": "database/Prisma ORM.md"
-    },
-    {
-      "basename": "Python",
-      "path": "backend/Python.md"
     },
     {
       "basename": "backend",
