@@ -8,6 +8,30 @@
         "type": "tabs",
         "children": [
           {
+            "id": "cea9ce970f741801",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/agile.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "agile"
+            }
+          },
+          {
             "id": "31bae1f9fb12f665",
             "type": "leaf",
             "state": {
@@ -29,30 +53,6 @@
               },
               "icon": "lucide-file",
               "title": "Teamlead Balun Courses"
-            }
-          },
-          {
-            "id": "cea9ce970f741801",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/agile.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "agile"
             }
           },
           {
@@ -643,7 +643,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/agile.md",
+                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -680,7 +680,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "cea9ce970f741801",
+  "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
     "agile/agile.md",
     "agile/Teamlead Balun Courses.md",
