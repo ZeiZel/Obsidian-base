@@ -56,6 +56,30 @@
             }
           },
           {
+            "id": "6c41952490cbdcec",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Microservices/Микросервисы.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Микросервисы"
+            }
+          },
+          {
             "id": "31bae1f9fb12f665",
             "type": "leaf",
             "state": {
@@ -176,36 +200,12 @@
             }
           },
           {
-            "id": "0720739c4bb5fb66",
+            "id": "85dbcc1a042137c4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/Rust.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Rust"
-            }
-          },
-          {
-            "id": "9eccf7ab8928cd15",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "tools/terminal.md",
+                "file": "database/Redis.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -220,11 +220,107 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "terminal"
+              "title": "Redis"
+            }
+          },
+          {
+            "id": "ce196b2eac5afb53",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "devops/NGINX.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "NGINX"
+            }
+          },
+          {
+            "id": "404f0cbbc758f29b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backend/Kafka.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Kafka"
+            }
+          },
+          {
+            "id": "29e5555d9242d7dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concepts/GraphQL.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "GraphQL"
+            }
+          },
+          {
+            "id": "af091984d50c7891",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concepts/gRPC.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "gRPC"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -295,7 +391,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 338.38671875
+    "width": 391.7734375
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -484,6 +580,16 @@
             "id": "22133bbebabb2cc1",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "aab542ecafd4fcf1",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -513,6 +619,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -526,7 +633,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 408.84375
+    "width": 538.87109375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -549,14 +656,27 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "6fa2dae8cc23e1d8",
+  "active": "31bae1f9fb12f665",
   "lastOpenFiles": [
+    "concepts/gRPC.md",
+    "concepts/GraphQL.md",
+    "concepts/Client-server architecture.md",
+    "backend/Kafka.md",
+    "devops/NGINX.md",
+    "database/Redis.md",
     "agile/Teamlead Balun Courses.md",
-    "backend/go/Go.md",
-    "backend/go/Selfgo.md",
+    "Kafka.md",
+    "backend/Microservices/Микросервисы.md",
+    "database/PostgreSQL.md",
     "backend/Python.md",
     "backend/Rust.md",
     "tools/terminal.md",
+    "devops/docker/docker.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "database/database.md",
+    "architecture/System Design/System Design.md",
+    "backend/go/Selfgo.md",
+    "backend/go/Go.md",
     "cs/C.md",
     "tools/ZSH.md",
     "tools/TMUX.md",
@@ -564,21 +684,8 @@
     "whatsapp.excalidraw.md",
     "Untitled.base",
     "_png/Pasted image 20260830141633.png",
-    "database/PostgreSQL.md",
-    "architecture/System Design/System Design.md",
     "soft/vocabularity - голосовой тренинг.md",
     "database/SQLite.md",
-    "database/SQLite.new.md",
-    "database/Redis.md",
-    "database/Prisma ORM.md",
-    "backend/backend.md",
-    "agile/Teamlead.md",
-    "devops/kubernetes/Kubernetes Entities.md",
-    "database/database.md",
-    "cs/Алгоритмы и Структуры даных.md",
-    "agile/agile.md",
-    "backend/go/Temporal Go.md",
-    "backend/go/go.md",
     "_png/Pasted image 20260810112432.png",
     "_png/Pasted image 20260809103157.png",
     "_png/Pasted image 20260808180605.png",

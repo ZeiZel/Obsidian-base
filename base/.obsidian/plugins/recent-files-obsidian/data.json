@@ -5,12 +5,36 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "Go",
-      "path": "backend/go/Go.md"
+      "basename": "gRPC",
+      "path": "concepts/gRPC.md"
     },
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "GraphQL",
+      "path": "concepts/GraphQL.md"
+    },
+    {
+      "basename": "Client-server architecture",
+      "path": "concepts/Client-server architecture.md"
+    },
+    {
+      "basename": "Kafka",
+      "path": "backend/Kafka.md"
+    },
+    {
+      "basename": "NGINX",
+      "path": "devops/NGINX.md"
+    },
+    {
+      "basename": "Redis",
+      "path": "database/Redis.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
     },
     {
       "basename": "Python",
@@ -23,6 +47,30 @@
     {
       "basename": "terminal",
       "path": "tools/terminal.md"
+    },
+    {
+      "basename": "docker",
+      "path": "devops/docker/docker.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "database",
+      "path": "database/database.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "Go",
+      "path": "backend/go/Go.md"
     },
     {
       "basename": "C",
@@ -41,24 +89,12 @@
       "path": "tools/nvim.md"
     },
     {
-      "basename": "PostgreSQL",
-      "path": "database/PostgreSQL.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
-    },
-    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
     },
     {
       "basename": "SQLite",
       "path": "database/SQLite.md"
-    },
-    {
-      "basename": "Redis",
-      "path": "database/Redis.md"
     },
     {
       "basename": "Prisma ORM",
@@ -75,10 +111,6 @@
     {
       "basename": "Kubernetes Entities",
       "path": "devops/kubernetes/Kubernetes Entities.md"
-    },
-    {
-      "basename": "database",
-      "path": "database/database.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
@@ -167,30 +199,6 @@
     {
       "basename": "stress-sapolsky",
       "path": "soft/stress-sapolsky.md"
-    },
-    {
-      "basename": "soft",
-      "path": "soft/soft.md"
-    },
-    {
-      "basename": "saying-no",
-      "path": "soft/saying-no.md"
-    },
-    {
-      "basename": "influence-and-persuasion",
-      "path": "soft/influence-and-persuasion.md"
-    },
-    {
-      "basename": "goal-setting",
-      "path": "soft/goal-setting.md"
-    },
-    {
-      "basename": "conflict-resolution",
-      "path": "soft/conflict-resolution.md"
-    },
-    {
-      "basename": "web",
-      "path": "interview/web.md"
     }
   ],
   "omittedPaths": [],

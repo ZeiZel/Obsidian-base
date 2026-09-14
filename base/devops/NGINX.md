@@ -7,1070 +7,1167 @@ tags:
 title: NGINX
 ---
 
-## Архитектура и модель работы
+## Что такое NGINX и почему он быстрый
 
-NGINX - высокопроизводительный веб-сервер, reverse proxy и load balancer, созданный для обработки десятков тысяч одновременных соединений с минимальным потреблением ресурсов.
+NGINX — веб-сервер, reverse proxy, load balancer, кэширующий прокси и TCP/UDP-прокси. Держит десятки тысяч одновременных соединений на скромном железе.
 
-Архитектура состоит из двух типов процессов:
-
-- master process - читает конфигурацию, управляет worker-процессами, открывает порты, записывает в лог. Работает с привилегиями root
-- worker process - обрабатывает клиентские запросы. Каждый worker работает в однопоточном event loop, обслуживая тысячи соединений без создания отдельных потоков или процессов
+**Два типа процессов:**
 
 ```
-                    ┌──────────────┐
-                    │    Master    │
-                    │   Process    │
-                    └──────┬───────┘
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-        ┌──────────┐ ┌──────────┐ ┌──────────┐
-        │ Worker 1 │ │ Worker 2 │ │ Worker N │
-        │ (epoll)  │ │ (epoll)  │ │ (epoll)  │
-        └──────────┘ └──────────┘ └──────────┘
+          ┌──────────────┐
+          │    Master    │  root: читает конфиг, открывает порты,
+          │              │  управляет воркерами, ротация логов
+          └──────┬───────┘
+     ┌───────────┼───────────┐
+     ▼           ▼           ▼
+┌──────────┐ ┌──────────┐ ┌──────────┐
+│ Worker 1 │ │ Worker 2 │ │ Worker N │  непривилегированные:
+│ (epoll)  │ │ (epoll)  │ │ (epoll)  │  обрабатывают запросы
+└──────────┘ └──────────┘ └──────────┘
 ```
 
-**Event-driven модель** использует системные вызовы `epoll` (Linux), `kqueue` (FreeBSD/macOS) для асинхронной обработки I/O. Один worker обслуживает тысячи соединений в неблокирующем режиме, переключаясь между ними по мере готовности данных.
+**Почему быстрый:**
 
-> [!info] NGINX vs Apache
-> Apache по умолчанию создает отдельный поток или процесс на каждое соединение (prefork/worker MPM), что приводит к высокому потреблению памяти при большом числе соединений. NGINX использует фиксированное количество worker-процессов с event-driven архитектурой, что дает предсказуемое потребление ресурсов под любой нагрузкой. Apache лучше подходит для сценариев с .htaccess и mod_php, NGINX - для reverse proxy, статики и высоконагруженных систем.
+- Event-driven: один воркер в однопоточном цикле обслуживает тысячи соединений через `epoll` (Linux) / `kqueue` (BSD), переключаясь по готовности данных. Нет потока на соединение → нет переключений контекста и мегабайт стека на клиента.
+- `sendfile()` — zero-copy отдача файлов без копирования в user space.
+- Предсказуемое потребление памяти: воркеров фиксированное число, память растёт линейно от числа соединений, а не от числа потоков.
 
-## Установка и управление
+**Обратная сторона:** воркер однопоточный, поэтому любая блокирующая операция (медленный диск, DNS-резолв, тяжёлый Lua) стопорит все соединения этого воркера. Отсюда `aio threads`, отдельный `resolver` и запрет на блокирующий код в модулях.
 
-### Установка из пакетного менеджера
+**NGINX vs Apache.** Классический тезис «Apache = поток на соединение» верен для `prefork`/`worker` MPM; современный `event` MPM у Apache тоже событийный и разрыв уже не драматический. Реальная разница сегодня: Apache силён в `.htaccess`, per-directory конфигурации и встроенных интерпретаторах (`mod_php`); NGINX — в reverse proxy, статике, кэше и высоконагруженном edge. Для нового бэкенда почти всегда NGINX (или Envoy/Caddy/HAProxy — см. §2).
+
+---
+
+## Место в архитектуре (System Design)
+
+### Где nginx стоит
+
+```
+Клиент → DNS → CDN (статика, edge-кэш)
+              → Cloud LB / L4 (ALB, NLB, keepalived+VRRP)
+                 → NGINX (L7: TLS, роутинг, кэш, rate limit, auth)
+                    → Приложение (Go/Node/Java) → БД, Redis, Kafka
+```
+
+Типичные роли nginx:
+
+1. **Edge / API gateway** — TLS-терминация, роутинг по домену и пути, rate limiting, security headers, кэш, статика.
+2. **Балансировщик перед пулом инстансов** — L7 с health checks и retry.
+3. **Ingress в Kubernetes** — тот же edge, но конфигурация генерируется контроллером (см. §23).
+4. **Sidecar / локальный прокси** — реже, обычно здесь Envoy.
+5. **L4-прокси** (`stream`) — TCP/UDP перед PostgreSQL, Redis, DNS, gRPC-пассsthrough.
+
+### L4 vs L7
+
+| |L4 (`stream`)|L7 (`http`)|
+|---|---|---|
+|Видит|IP, порт, TCP-поток, SNI (через `ssl_preread`)|метод, URI, заголовки, тело|
+|Умеет|балансировать, TLS-терминацию/passthrough|роутинг по пути, кэш, rate limit, переписывание заголовков|
+|Стоимость|минимальная, почти прозрачно|парсинг + буферизация|
+|Когда|БД, очереди, произвольные протоколы, TLS-passthrough|HTTP/gRPC/WebSocket|
+
+### Чем заменяют nginx и когда
+
+|Инструмент|Сильная сторона|Когда брать вместо nginx|
+|---|---|---|
+|**HAProxy**|L4/L7-балансировка, богатые active health checks, отличная статистика|чистая балансировка с жёсткими требованиями к health checks и наблюдаемости|
+|**Envoy**|динамическая конфигурация через xDS без reload, богатая телеметрия, основа service mesh (Istio)|микросервисы, mesh, canary/retry/outlier detection как первоклассные фичи|
+|**Traefik**|авто-дискавери из Docker/k8s, авто-TLS|динамическая среда, где конфиг не хочется писать руками|
+|**Caddy**|автоматический Let's Encrypt из коробки, простой конфиг|небольшие сервисы, где TLS-автоматизация важнее тонкой настройки|
+|**Cloud LB (ALB/NLB, GCLB)**|managed, масштабируется сам, интеграция с WAF/ACM|когда не хочется владеть слоем балансировки|
+|**CDN (Cloudflare, Fastly)**|кэш и защита на edge ближе к пользователю|статика, DDoS, глобальная аудитория|
+
+NGINX выигрывает, когда нужен один компонент, который хорошо делает всё сразу: TLS + статика + кэш + прокси + rate limit, с конфигом в git и без внешних зависимостей.
+
+### Отказоустойчивость и ёмкость
+
+- **nginx сам по себе — точка отказа.** Минимум два инстанса: VIP через keepalived/VRRP, или облачный L4-балансировщик перед ними, или DaemonSet в k8s за Service type=LoadBalancer.
+- **Ёмкость:** `worker_processes × worker_connections` — верхняя граница соединений. При проксировании одно клиентское соединение съедает **два** дескриптора (клиент + бэкенд), поэтому `worker_rlimit_nofile ≥ worker_connections × 2`.
+- **Stateless.** Конфигурация nginx не хранит состояние сессий (кроме shared-зон кэша и лимитов, локальных для инстанса). Поэтому rate limit на двух инстансах считается независимо — реальный лимит удваивается. Для точного глобального лимита нужен внешний счётчик (Redis) на уровне приложения.
+
+## Версии: что изменилось и почему это важно
+
+- **1.30.x — текущая stable** (апрель 2026). Принесла из ветки 1.29: Early Hints (103), HTTP/2 к бэкенду, Encrypted ClientHello, **sticky sessions для upstream в open source**, Multipath TCP, и — важное для конфигов — **версия HTTP к проксируемому серверу по умолчанию теперь 1.1 с включённым keep-alive**.
+- **1.31.x — mainline**: добавлены метод балансировки `least_time` и **поддержка HTTP forward proxy** в open source.
+- Практические следствия для старых конспектов:
+    - `proxy_http_version 1.1;` больше не обязателен для keepalive к upstream (но `proxy_set_header Connection "";` при использовании пула `keepalive` всё ещё нужен, и явное указание версии не вредит).
+    - Sticky sessions больше не только в Plus.
+    - Активные health checks — **по-прежнему только NGINX Plus**; в open source только пассивные (`max_fails`/`fail_timeout`).
+- Обновляйтесь: в 1.30.x за 2026 год закрыт ряд CVE (rewrite-модуль, HTTP/2-инъекция в proxy, slice, charset). Пин на старую минорную версию в Dockerfile — это накопление уязвимостей.
+
+## Установка и управление процессом
 
 ```bash
-# Ubuntu/Debian - официальный репозиторий NGINX
-curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo gpg --dearmor -o /usr/share/keyrings/nginx-archive-keyring.gpg
-
+# Ubuntu/Debian — официальный репозиторий nginx.org
+curl -fsSL https://nginx.org/keys/nginx_signing.key \
+  | sudo gpg --dearmor -o /usr/share/keyrings/nginx-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
 http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" \
-| sudo tee /etc/apt/sources.list.d/nginx.list
-
+  | sudo tee /etc/apt/sources.list.d/nginx.list
 sudo apt update && sudo apt install nginx
-
-# CentOS/RHEL
-sudo yum install epel-release
-sudo yum install nginx
-
-# macOS
-brew install nginx
 ```
 
-### Сборка из исходников
+Сборка из исходников нужна только ради сторонних модулей (brotli, geoip2, ModSecurity, njs) или конкретного OpenSSL. Альтернатива — динамические модули (`--add-dynamic-module` + `load_module`), чтобы не пересобирать всё.
 
-Сборка из исходников нужна, когда требуются нестандартные модули или конкретная версия OpenSSL.
+### Управление
 
 ```bash
-wget https://nginx.org/download/nginx-1.26.2.tar.gz
-tar -xzf nginx-1.26.2.tar.gz
-cd nginx-1.26.2
-
-./configure \
-    --prefix=/etc/nginx \
-    --sbin-path=/usr/sbin/nginx \
-    --with-http_ssl_module \
-    --with-http_v2_module \
-    --with-http_v3_module \
-    --with-http_realip_module \
-    --with-http_gzip_static_module \
-    --with-http_stub_status_module \
-    --with-stream \
-    --with-stream_ssl_module \
-    --with-openssl=/path/to/openssl-3.x
-
-make && sudo make install
+nginx -t                 # проверить синтаксис — ВСЕГДА перед reload
+nginx -T                 # вывести полный развёрнутый конфиг (все include)
+nginx -V                 # версия + флаги сборки + список модулей
+nginx -s reload          # graceful: применить новый конфиг без разрыва соединений
+nginx -s quit            # graceful shutdown: дождаться завершения запросов
+nginx -s stop            # немедленно, рвёт соединения
+nginx -s reopen          # переоткрыть логи (для logrotate)
 ```
 
-### Управление процессом
+**Что происходит при `reload`:**
 
-```bash
-# Проверка конфигурации перед применением
-nginx -t
+1. Master читает и валидирует новый конфиг. Ошибка → старые воркеры продолжают работать со старым конфигом, новый не применяется. Поэтому `nginx -t` обязателен: без него сломанный конфиг может тихо не примениться.
+2. Master запускает новые воркеры с новым конфигом.
+3. Старым воркерам шлётся сигнал «завершиться мягко»: они перестают принимать новые соединения и доживают текущие.
+4. Старые воркеры висят, пока не закроются keep-alive и long-lived соединения (WebSocket!). Ограничивается `worker_shutdown_timeout 30s;` — без него после частых reload у вас будет зоопарк старых воркеров, жрущих память.
 
-# Перезагрузка конфигурации без остановки (graceful)
-nginx -s reload
+**Обновление бинарника без даунтайма:** `kill -USR2 <master_pid>` (поднять новый master), `kill -WINCH <old_master>` (мягко погасить старые воркеры), затем `QUIT` старому master или `HUP` для отката.
 
-# Быстрая остановка (прерывает активные соединения)
-nginx -s stop
+**Ротация логов:** logrotate + `kill -USR1` (или `nginx -s reopen`) в `postrotate`.
 
-# Плавная остановка (дожидается завершения активных запросов)
-nginx -s quit
-
-# Повторное открытие лог-файлов (для logrotate)
-nginx -s reopen
-
-# Через systemd
-sudo systemctl start nginx
-sudo systemctl reload nginx
-sudo systemctl status nginx
 ```
-
-> [!important]
-> Всегда выполняйте `nginx -t` перед `nginx -s reload`. Ошибка в конфигурации при reload не обрушит текущий процесс, но новая конфигурация не применится, а ошибка может остаться незамеченной.
-
-## Структура конфигурации
-
-Конфигурация NGINX построена на иерархии контекстов. Каждый контекст содержит директивы, а вложенные контексты наследуют директивы от родительских.
-
-```nginx
-# Main контекст (глобальный уровень)
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log warn;
-pid /run/nginx.pid;
-
-events {
-    # Events контекст - настройки обработки соединений
-    worker_connections 4096;
-    use epoll;
-    multi_accept on;
-}
-
-http {
-    # HTTP контекст - настройки HTTP-сервера
-    include /etc/nginx/mime.types;
-
-    server {
-        # Server контекст - виртуальный хост
-        listen 80;
-        server_name example.com;
-
-        location / {
-            # Location контекст - обработка конкретных URI
-            root /var/www/html;
-        }
-
-        location /api/ {
-            # Другой location - проксирование к бэкенду
-            proxy_pass http://backend;
-        }
-    }
-}
-
-stream {
-    # Stream контекст - TCP/UDP проксирование (L4)
-    server {
-        listen 5432;
-        proxy_pass postgresql_cluster;
-    }
-}
-```
-
-Иерархия наследования: `main → events / http → server → location`. Директивы, установленные в `http`, наследуются во все `server` блоки, а из `server` - во все `location`. Более специфичный контекст может переопределить наследованное значение.
-
-## Основные директивы
-
-```nginx
-# Количество worker-процессов. auto = по числу CPU ядер
-worker_processes auto;
-
-# Максимальное число файловых дескрипторов на worker
-worker_rlimit_nofile 65535;
-
-events {
-    # Максимальное число одновременных соединений на один worker
-    # Реальный лимит = worker_processes * worker_connections
-    worker_connections 4096;
-
-    # Механизм мультиплексирования (epoll для Linux, kqueue для BSD)
-    use epoll;
-
-    # Принимать все новые соединения сразу, а не по одному
-    multi_accept on;
-}
-
-http {
-    # Использовать системный вызов sendfile для передачи файлов
-    # Обходит копирование данных из kernel space в user space
-    sendfile on;
-
-    # Отправлять заголовки и начало файла в одном пакете
-    # Работает только совместно с sendfile
-    tcp_nopush on;
-
-    # Отключить алгоритм Nagle - отправлять данные без задержки
-    # Важно для WebSocket и keep-alive соединений
-    tcp_nodelay on;
-
-    # Время ожидания между запросами в keep-alive соединении
-    keepalive_timeout 65;
-
-    # Таймаут на чтение тела запроса от клиента
-    client_body_timeout 30;
-
-    # Таймаут на чтение заголовков запроса от клиента
-    client_header_timeout 30;
-
-    # Таймаут на отправку ответа клиенту
-    send_timeout 30;
-
-    # Максимальный размер тела запроса (upload limit)
-    client_max_body_size 100m;
-}
-```
-
-## Виртуальные хосты (server blocks)
-
-Server block определяет виртуальный хост - набор правил для обработки запросов к конкретному домену и порту.
-
-```nginx
-# Основной сайт
-server {
-    listen 80;
-    listen [::]:80;                    # IPv6
-    server_name example.com www.example.com;
-
-    root /var/www/example.com/html;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-
-# API на отдельном поддомене
-server {
-    listen 80;
-    server_name api.example.com;
-
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-    }
-}
-
-# Сервер по умолчанию - обрабатывает запросы без совпадения server_name
-server {
-    listen 80 default_server;
-    server_name _;
-    return 444;    # Закрыть соединение без ответа
-}
-```
-
-Порядок выбора server block при поступлении запроса:
-
-1. NGINX выбирает все server блоки с совпадающей парой IP:port из директивы `listen`
-2. Среди них ищет совпадение `server_name` с заголовком Host запроса
-3. Если совпадений нет, используется `default_server` для этого порта
-4. Если `default_server` не указан, используется первый server block в конфигурации
-
-## Location blocks
-
-Location определяет, как обрабатывать запросы по конкретным URI. Приоритет обработки от высшего к низшему:
-
-```nginx
-server {
-    listen 80;
-    server_name example.com;
-
-    # 1. Exact match (=) - наивысший приоритет
-    # Совпадение только для точного URI /health
-    location = /health {
-        return 200 "ok";
-        add_header Content-Type text/plain;
-    }
-
-    # 2. Preferential prefix (^~) - если совпадает, regex не проверяются
-    # Все URI, начинающиеся с /static/
-    location ^~ /static/ {
-        root /var/www;
-        expires 30d;
-    }
-
-    # 3. Regex case-sensitive (~)
-    location ~ \.php$ {
-        fastcgi_pass unix:/run/php/php-fpm.sock;
-        include fastcgi_params;
-    }
-
-    # 4. Regex case-insensitive (~*)
-    location ~* \.(jpg|jpeg|png|gif|ico|svg|webp)$ {
-        root /var/www/images;
-        expires 90d;
-        add_header Cache-Control "public, immutable";
-    }
-
-    # 5. Prefix match (без модификатора) - наименьший приоритет
-    # Если ни один regex не совпал, используется самый длинный prefix
-    location /api/ {
-        proxy_pass http://backend;
-    }
-
-    # Корневой prefix - матчит все, что не попало в другие location
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-```
-
-> [!summary] Алгоритм выбора location
-> 1. Проверяются все prefix-location, запоминается самый длинный совпавший
-> 2. Если самый длинный prefix имеет модификатор `=` (exact) - используется он, поиск прекращается
-> 3. Если самый длинный prefix имеет модификатор `^~` - используется он, regex не проверяются
-> 4. Проверяются regex-location в порядке появления в конфигурации. Первый совпавший побеждает
-> 5. Если ни один regex не совпал, используется запомненный самый длинный prefix
-
-## Раздача статического контента
-
-### root vs alias
-
-```nginx
-# root - путь к файлу = root + URI
-location /static/ {
-    root /var/www;
-    # Запрос /static/app.js → /var/www/static/app.js
-}
-
-# alias - путь к файлу = alias + остаток URI после location
-location /files/ {
-    alias /var/www/static/;
-    # Запрос /files/app.js → /var/www/static/app.js
-}
-```
-
-### try_files и кеширование
-
-```nginx
-server {
-    listen 80;
-    server_name cdn.example.com;
-    root /var/www/static;
-
-    # SPA - все несуществующие пути отдают index.html
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    # Статические ассеты с хешем в имени - агрессивное кеширование
-    location ~* \.(js|css|woff2|ttf)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-        access_log off;
-    }
-
-    # Изображения - умеренное кеширование
-    location ~* \.(jpg|jpeg|png|gif|ico|svg|webp|avif)$ {
-        expires 30d;
-        add_header Cache-Control "public";
-        access_log off;
-    }
-
-    # Включить листинг директории (для отладки, не для production)
-    location /debug/files/ {
-        alias /var/www/uploads/;
-        autoindex on;
-        autoindex_exact_size off;
-        autoindex_localtime on;
-    }
-}
-```
-
-## Reverse Proxy
-
-Основной сценарий использования NGINX в production - проксирование запросов к приложениям на бэкенде.
-
-```nginx
-server {
-    listen 80;
-    server_name app.example.com;
-
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-
-        # Передача оригинальных заголовков клиента на бэкенд
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Request-ID $request_id;
-
-        # Таймауты подключения к бэкенду
-        proxy_connect_timeout 10s;     # Таймаут установки TCP-соединения
-        proxy_send_timeout 30s;        # Таймаут отправки запроса на бэкенд
-        proxy_read_timeout 60s;        # Таймаут чтения ответа от бэкенда
-
-        # Буферизация ответов от бэкенда
-        proxy_buffering on;
-        proxy_buffer_size 8k;          # Буфер для заголовков ответа
-        proxy_buffers 8 8k;            # Количество и размер буферов для тела ответа
-        proxy_busy_buffers_size 16k;   # Размер буферов, которые могут отправляться клиенту
-                                       # пока остальные буферы ещё заполняются
-
-        # HTTP версия для соединения с бэкендом
-        proxy_http_version 1.1;
-
-        # Перенаправить на следующий upstream при ошибке
-        proxy_next_upstream error timeout http_502 http_503;
-        proxy_next_upstream_tries 2;
-        proxy_next_upstream_timeout 10s;
-    }
-
-    # Проксирование с изменением URI
-    location /api/v1/ {
-        # Запрос /api/v1/users → http://backend:8080/users
-        proxy_pass http://backend:8080/;
-    }
-
-    # Проксирование без изменения URI
-    location /service/ {
-        # Запрос /service/health → http://backend:8080/service/health
-        proxy_pass http://backend:8080;
-    }
-}
-```
-
-> [!important]
-> Обратите внимание на слэш в конце `proxy_pass`. `proxy_pass http://backend/` (со слэшем) заменит location prefix в URI, а `proxy_pass http://backend` (без слэша) передаст полный оригинальный URI.
-
-## WebSocket Proxying
-
-WebSocket требует обновления HTTP-соединения через заголовки Upgrade и Connection.
-
-```nginx
-map $http_upgrade $connection_upgrade {
-    default upgrade;
-    ''      close;
-}
-
-server {
-    listen 80;
-    server_name ws.example.com;
-
-    location /ws/ {
-        proxy_pass http://127.0.0.1:8080;
-        proxy_http_version 1.1;
-
-        # Заголовки для WebSocket handshake
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-
-        # Увеличенные таймауты для long-lived соединений
-        proxy_read_timeout 3600s;
-        proxy_send_timeout 3600s;
-    }
-}
-```
-
-## Load Balancing
-
-### Upstream блок и алгоритмы
-
-```nginx
-# Round Robin (по умолчанию) - равномерное распределение
-upstream backend_rr {
-    server 10.0.1.10:8080 weight=3;     # Получает 3x больше запросов
-    server 10.0.1.11:8080 weight=1;
-    server 10.0.1.12:8080 weight=1;
-
-    server 10.0.1.20:8080 backup;        # Используется только если все основные недоступны
-
-    # Параметры health check
-    # max_fails - число неудачных попыток, после которого сервер считается недоступным
-    # fail_timeout - время, на которое сервер выводится из ротации, и окно для подсчета max_fails
-    server 10.0.1.13:8080 max_fails=3 fail_timeout=30s;
-}
-
-# Least Connections - запрос идет на сервер с наименьшим числом активных соединений
-upstream backend_lc {
-    least_conn;
-    server 10.0.1.10:8080;
-    server 10.0.1.11:8080;
-    server 10.0.1.12:8080;
-}
-
-# IP Hash - привязка клиента к серверу по IP (session persistence)
-upstream backend_ip {
-    ip_hash;
-    server 10.0.1.10:8080;
-    server 10.0.1.11:8080;
-    server 10.0.1.12:8080 down;    # Временно выведен из ротации
-}
-
-# Generic Hash - произвольный ключ хеширования
-upstream backend_hash {
-    hash $request_uri consistent;    # consistent hashing минимизирует перебалансировку
-    server 10.0.1.10:8080;
-    server 10.0.1.11:8080;
-    server 10.0.1.12:8080;
-}
-
-# Random with Two Choices - выбирает 2 случайных сервера, отправляет на менее загруженный
-upstream backend_random {
-    random two least_conn;
-    server 10.0.1.10:8080;
-    server 10.0.1.11:8080;
-    server 10.0.1.12:8080;
-}
-```
-
-### Keep-alive к upstream
-
-```nginx
-upstream backend {
-    server 10.0.1.10:8080;
-    server 10.0.1.11:8080;
-
-    # Пул keep-alive соединений к каждому бэкенду
-    keepalive 32;
-    keepalive_requests 1000;
-    keepalive_timeout 60s;
-}
-
-server {
-    location / {
-        proxy_pass http://backend;
-        proxy_http_version 1.1;
-        proxy_set_header Connection "";    # Обязательно для keep-alive к upstream
-    }
-}
-```
-
-> [!info] Активные health checks
-> Бесплатная версия NGINX поддерживает только пассивные health checks через `max_fails` и `fail_timeout`. Активные health checks, которые периодически отправляют запросы на бэкенды, доступны только в NGINX Plus. Как альтернатива - модуль `nginx_upstream_check_module` от Tengine.
-
-## SSL/TLS
-
-### Базовая конфигурация
-
-```nginx
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    server_name example.com www.example.com;
-
-    # Сертификат и ключ
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-
-    # Протоколы - только TLS 1.2 и 1.3
-    ssl_protocols TLSv1.2 TLSv1.3;
-
-    # Шифры - сервер определяет приоритет
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
-
-    # Кеш SSL-сессий для ускорения повторных подключений
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 1d;
-    ssl_session_tickets off;    # Отключить для perfect forward secrecy
-
-    # OCSP Stapling - NGINX сам получает статус сертификата и отдает клиенту
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;
-    resolver 1.1.1.1 8.8.8.8 valid=300s;
-    resolver_timeout 5s;
-
-    # Diffie-Hellman параметры для DHE шифров
-    ssl_dhparam /etc/nginx/dhparam.pem;    # openssl dhparam -out dhparam.pem 4096
-
-    # HSTS - принудительный HTTPS на 1 год
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
-    location / {
-        root /var/www/html;
-    }
-}
-
-# Редирект HTTP → HTTPS
-server {
-    listen 80;
-    listen [::]:80;
-    server_name example.com www.example.com;
-    return 301 https://$host$request_uri;
-}
-```
-
-### HTTP/2 и HTTP/3
-
-```nginx
-server {
-    # HTTP/2 включается директивой http2 (с NGINX 1.25.1)
-    listen 443 ssl;
-    http2 on;
-
-    # HTTP/3 (QUIC) - требует сборки с --with-http_v3_module
-    listen 443 quic reuseport;
-    add_header Alt-Svc 'h3=":443"; ma=86400' always;
-
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-    ssl_protocols TLSv1.2 TLSv1.3;
-
-    location / {
-        proxy_pass http://backend;
-    }
-}
-```
-
-## Rate Limiting
-
-Rate limiting защищает от DDoS-атак, брутфорса и чрезмерного потребления ресурсов.
-
-```nginx
-http {
-    # Определение зон ограничения
-    # $binary_remote_addr занимает 4 байта вместо 7-15 у $remote_addr
-    # 10m зоны хватает для ~160 000 IP-адресов
-
-    # Общий лимит - 30 запросов в секунду на IP
-    limit_req_zone $binary_remote_addr zone=general:10m rate=30r/s;
-
-    # Лимит для API - 10 запросов в секунду на IP
-    limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
-
-    # Лимит для login - 5 запросов в минуту на IP
-    limit_req_zone $binary_remote_addr zone=login:10m rate=5r/m;
-
-    # Лимит одновременных соединений
-    limit_conn_zone $binary_remote_addr zone=addr:10m;
-
-    # Код ответа при превышении лимита (по умолчанию 503)
-    limit_req_status 429;
-    limit_conn_status 429;
-
-    server {
-        listen 80;
-        server_name api.example.com;
-
-        # Общий лимит - burst позволяет всплески до 20 запросов
-        # nodelay - всплесковые запросы обрабатываются сразу, а не ставятся в очередь
-        location / {
-            limit_req zone=general burst=20 nodelay;
-            limit_conn addr 100;
-            proxy_pass http://backend;
-        }
-
-        location /api/ {
-            limit_req zone=api burst=10 nodelay;
-            proxy_pass http://backend;
-        }
-
-        # Строгий лимит для эндпоинта аутентификации
-        location /api/auth/login {
-            limit_req zone=login burst=3;    # Без nodelay - запросы встают в очередь
-            proxy_pass http://backend;
-        }
-    }
-}
-```
-
-> [!info] burst и nodelay
-> `burst=20` создает очередь на 20 запросов. Без `nodelay` избыточные запросы обрабатываются с задержкой, выдерживая установленный rate. С `nodelay` запросы из burst обрабатываются мгновенно, но следующие запросы сверх burst получат 429 до восстановления "токенов" в bucket.
-
-## Кеширование
-
-Proxy cache позволяет NGINX сохранять ответы от бэкенда и отдавать их без обращения к upstream.
-
-```nginx
-http {
-    # Определение кеша
-    # levels=1:2 - двухуровневая иерархия директорий
-    # keys_zone=app_cache:10m - 10MB для хранения ключей в shared memory
-    # max_size=10g - максимальный размер кеша на диске
-    # inactive=60m - удалять записи, к которым не обращались 60 минут
-    # use_temp_path=off - писать файлы сразу в cache directory
-    proxy_cache_path /var/cache/nginx/app
-        levels=1:2
-        keys_zone=app_cache:10m
-        max_size=10g
-        inactive=60m
-        use_temp_path=off;
-
-    server {
-        listen 80;
-        server_name app.example.com;
-
-        location / {
-            proxy_pass http://backend;
-            proxy_cache app_cache;
-
-            # Ключ кеша
-            proxy_cache_key "$scheme$request_method$host$request_uri";
-
-            # Время жизни кеша по кодам ответа
-            proxy_cache_valid 200 302 10m;
-            proxy_cache_valid 404 1m;
-            proxy_cache_valid any 5m;
-
-            # Минимальное число запросов перед кешированием
-            proxy_cache_min_uses 2;
-
-            # Условия обхода кеша
-            proxy_cache_bypass $http_cache_control $cookie_nocache;
-            proxy_no_cache $http_pragma;
-
-            # Заголовок для диагностики - HIT, MISS, BYPASS, EXPIRED
-            add_header X-Cache-Status $upstream_cache_status always;
-
-            # Отдавать устаревший кеш, если бэкенд недоступен
-            proxy_cache_use_stale error timeout updating http_500 http_502 http_503;
-
-            # Блокировка - только один запрос обновляет кеш, остальные ждут
-            proxy_cache_lock on;
-            proxy_cache_lock_timeout 5s;
-
-            # Фоновое обновление кеша
-            proxy_cache_background_update on;
-        }
-
-        # Кеш не нужен для мутирующих запросов
-        location /api/ {
-            proxy_pass http://backend;
-            proxy_cache off;
-        }
-    }
-}
-```
-
-## Security Headers
-
-```nginx
-server {
-    listen 443 ssl;
-    http2 on;
-    server_name secure.example.com;
-
-    # Запретить встраивание в iframe (защита от clickjacking)
-    add_header X-Frame-Options "SAMEORIGIN" always;
-
-    # Запретить MIME-type sniffing
-    add_header X-Content-Type-Options "nosniff" always;
-
-    # Скрыть версию NGINX
-    server_tokens off;
-
-    # Content Security Policy
-    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.example.com; frame-ancestors 'self';" always;
-
-    # Политика реферера
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-
-    # Permissions Policy (бывший Feature-Policy)
-    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()" always;
-
-    # HSTS
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
-    location / {
-        proxy_pass http://backend;
-    }
-}
-```
-
-> [!important]
-> Директива `add_header` в дочернем контексте полностью заменяет заголовки из родительского. Если вы добавляете `add_header` в `location`, все `add_header` из `server` перестают действовать для этого location. Используйте модуль `headers-more` или дублируйте заголовки в каждом location.
-
-## Gzip Compression
-
-```nginx
-http {
-    gzip on;
-
-    # Минимальный размер ответа для сжатия (маленькие ответы сжимать бессмысленно)
-    gzip_min_length 1024;
-
-    # Уровень сжатия (1-9). 4-6 - оптимальный баланс CPU/сжатие
-    gzip_comp_level 5;
-
-    # MIME-типы для сжатия (text/html сжимается всегда)
-    gzip_types
-        text/plain
-        text/css
-        text/xml
-        text/javascript
-        application/json
-        application/javascript
-        application/xml
-        application/xml+rss
-        application/atom+xml
-        image/svg+xml
-        font/woff2;
-
-    # Добавить заголовок Vary: Accept-Encoding
-    # Важно для корректной работы CDN и прокси
-    gzip_vary on;
-
-    # Сжимать ответы от проксируемых серверов
-    gzip_proxied any;
-
-    # Не сжимать для старых IE
-    gzip_disable "msie6";
-
-    # Число и размер буферов для сжатия
-    gzip_buffers 16 8k;
-
-    # Предварительно сжатые файлы (Brotli/gzip static)
-    # Если существует app.js.gz, отдать его вместо сжатия на лету
-    gzip_static on;
-}
-```
-
-## Логирование
-
-### Форматы логов
-
-```nginx
-http {
-    # Стандартный формат
-    log_format main '$remote_addr - $remote_user [$time_local] '
-                    '"$request" $status $body_bytes_sent '
-                    '"$http_referer" "$http_user_agent"';
-
-    # Расширенный формат с информацией о проксировании
-    log_format upstream_log '$remote_addr - $remote_user [$time_local] '
-                            '"$request" $status $body_bytes_sent '
-                            'rt=$request_time urt=$upstream_response_time '
-                            'us=$upstream_status ua=$upstream_addr';
-
-    # JSON формат - удобен для парсинга в ELK/Loki
-    log_format json_log escape=json
-        '{'
-            '"time": "$time_iso8601",'
-            '"remote_addr": "$remote_addr",'
-            '"request_method": "$request_method",'
-            '"request_uri": "$request_uri",'
-            '"status": $status,'
-            '"body_bytes_sent": $body_bytes_sent,'
-            '"request_time": $request_time,'
-            '"upstream_response_time": "$upstream_response_time",'
-            '"upstream_status": "$upstream_status",'
-            '"http_user_agent": "$http_user_agent",'
-            '"http_referer": "$http_referer",'
-            '"request_id": "$request_id"'
-        '}';
-
-    # Использование
-    access_log /var/log/nginx/access.log main;
-    access_log /var/log/nginx/access.json.log json_log;
-    error_log /var/log/nginx/error.log warn;
-
-    server {
-        # Условное логирование - не логировать health checks
-        map $request_uri $loggable {
-            ~*^/health 0;
-            ~*^/metrics 0;
-            default 1;
-        }
-
-        access_log /var/log/nginx/app.log json_log if=$loggable;
-
-        # Отключить access log для статики
-        location ~* \.(js|css|png|jpg|gif|ico)$ {
-            access_log off;
-        }
-    }
-}
-```
-
-### Ротация логов
-
-```bash
-# /etc/logrotate.d/nginx
 /var/log/nginx/*.log {
-    daily
-    missingok
-    rotate 30
-    compress
-    delaycompress
-    notifempty
-    create 0640 nginx adm
-    sharedscripts
+    daily missingok rotate 30 compress delaycompress notifempty
+    create 0640 nginx adm sharedscripts
     postrotate
         [ -f /run/nginx.pid ] && kill -USR1 $(cat /run/nginx.pid)
     endscript
 }
 ```
 
-Сигнал `USR1` заставляет NGINX переоткрыть файлы логов, что необходимо после ротации.
+## Структура конфигурации
 
-## Директива map
+Контексты и наследование: `main → events / http → server → location`. Директива из `http` наследуется во все `server`, из `server` — во все `location`; более специфичный контекст переопределяет.
 
-Map создает переменные на основе значений других переменных. Вычисляется лениво - только при первом обращении к переменной.
+```nginx
+# main
+user nginx;
+worker_processes auto;
+worker_rlimit_nofile 65535;
+error_log /var/log/nginx/error.log warn;
+pid /run/nginx.pid;
+
+events {
+    worker_connections 16384;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    # ... общие настройки
+    include /etc/nginx/conf.d/*.conf;   # по файлу на сайт/сервис
+}
+
+stream {          # L4 TCP/UDP — отдельный от http контекст
+    # ...
+}
+```
+
+**Раскладка файлов:** `nginx.conf` — только глобальное; `conf.d/<service>.conf` — по серверу на сервис; `snippets/` — переиспользуемые куски (`include snippets/proxy-headers.conf;`, `include snippets/ssl.conf;`). Не дублируйте `proxy_set_header` в двадцати местах.
+
+**Важно про наследование:** `add_header`, `proxy_set_header`, `limit_req` и ряд других директив **не аддитивны**: если задать хоть одну в дочернем контексте, все унаследованные того же типа перестают действовать. Это причина №1 «почему пропали мои security headers в /api» (см. §16).
+
+---
+
+## Как nginx обрабатывает запрос
+
+### Выбор `server`
+
+1. Отбираются все `server` с совпадающей парой `IP:port` из `listen`.
+2. Среди них ищется совпадение `server_name` с заголовком `Host`: точное имя → маска `*.example.com` → маска `mail.*` → регулярка (в порядке появления).
+3. Нет совпадений → `default_server` для этого порта.
+4. Нет `default_server` → первый `server` в конфиге.
+
+Полезный дефолт-заглушка, чтобы не отдавать случайный сайт по IP:
+
+```nginx
+server {
+    listen 80 default_server;
+    listen 443 ssl default_server;
+    server_name _;
+    ssl_certificate     /etc/nginx/ssl/dummy.crt;   # для 443 сертификат обязателен
+    ssl_certificate_key /etc/nginx/ssl/dummy.key;
+    return 444;   # nginx-специфичный: закрыть соединение без ответа
+}
+```
+
+### Выбор `location` — точный алгоритм
+
+```nginx
+location = /health            { }   # 1. exact
+location ^~ /static/          { }   # 2. preferential prefix (regex не проверяются)
+location ~ \.php$             { }   # 3. regex, case-sensitive
+location ~* \.(jpg|png|webp)$ { }   # 4. regex, case-insensitive
+location /api/                { }   # 5. prefix
+location /                    { }   #    fallback
+```
+
+1. Проверяются все prefix-локейшены, запоминается **самый длинный** совпавший.
+2. Если он с ` = ` — используется он, поиск прекращается.
+3. Если он с `^~` — используется он, регулярки не проверяются.
+4. Иначе проверяются regex-локейшены **в порядке их появления в конфиге**; первый совпавший побеждает.
+5. Если ни одна регулярка не совпала — используется запомненный самый длинный prefix.
+
+Отсюда практика: `location = /health` для health-чека (самый быстрый матч), `^~ /static/` чтобы статика не проходила через дорогие регулярки.
+
+### 6.3 Фазы обработки запроса
+
+Понимание фаз объясняет большинство «магических» багов:
+
+```
+POST_READ      → realip (set_real_ip_from)
+SERVER_REWRITE → rewrite на уровне server
+FIND_CONFIG    → выбор location
+REWRITE        → rewrite/set/if внутри location
+POST_REWRITE   → перезапуск цикла, если URI изменился
+PREACCESS      → limit_req, limit_conn, degradation
+ACCESS         → allow/deny, auth_basic, auth_request
+TRY_FILES      → try_files
+CONTENT        → proxy_pass / fastcgi_pass / root / return
+LOG            → access_log
+```
+
+Следствия:
+
+- `realip` отрабатывает раньше `limit_req` — поэтому лимиты считаются по реальному IP клиента, но **только если** realip настроен (§9.2).
+- `if` внутри `location` работает на фазе REWRITE, **до** выбора content-хендлера, поэтому `if` + `proxy_pass` даёт неинтуитивные результаты.
+- `limit_req` срабатывает до `auth_request` — лимит применяется к неаутентифицированным запросам тоже (обычно это то, что нужно).
+
+### 6.4 rewrite, return, try_files, if
+
+```nginx
+# return — самый дешёвый способ. Используйте его, когда можно.
+return 301 https://$host$request_uri;
+return 200 "ok";
+return 444;                       # закрыть соединение без ответа
+
+# rewrite regex replacement [flag]
+rewrite ^/old/(.*)$ /new/$1 permanent;   # 301 клиенту
+rewrite ^/old/(.*)$ /new/$1 redirect;    # 302 клиенту
+rewrite ^/api/v1/(.*)$ /$1 break;        # переписать URI, остаться в этом location
+rewrite ^/api/v1/(.*)$ /$1 last;         # переписать и заново искать location
+```
+
+- `last` → новый цикл поиска location (максимум 10 итераций, потом 500).
+- `break` → остановить обработку rewrite-директив, остаться здесь.
+- Без флага → продолжить выполнение следующих rewrite в этом блоке.
+
+**«If is evil».** Внутри `location` безопасны только два случая: `return ...` и `rewrite ... last`. Всё остальное (особенно `if` + `proxy_pass`, `if` + `add_header`) ведёт себя непредсказуемо, потому что `if` создаёт вложенный конфигурационный контекст. Вместо `if` используйте `map`, `try_files`, отдельные `location`. В контексте `server` (например, `if ($blocked) { return 403; }`) это приемлемо.
+
+**try_files и именованные локейшены:**
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;         # SPA
+}
+
+location / {
+    try_files $uri @backend;                  # статика, иначе на бэкенд
+}
+location @backend {                           # именованный location
+    proxy_pass http://app;
+}
+```
+
+**Кастомные ошибки:**
+
+```nginx
+error_page 404 /404.html;
+error_page 500 502 503 504 /50x.html;
+location = /50x.html { root /usr/share/nginx/html; internal; }
+
+# Перехватывать коды ошибок ОТ БЭКЕНДА и отдавать свои страницы
+proxy_intercept_errors on;
+
+# Фоллбэк на другой location при ошибке
+error_page 502 503 504 = @maintenance;
+location @maintenance { return 503 "under maintenance"; }
+```
+
+---
+
+## 7. Переменные, map, split_clients, geo
+
+### map — вычисляемые переменные
+
+`map` объявляется **только в контексте `http`** (частая ошибка — засунуть его в `server`; конфиг не пройдёт `nginx -t`). Вычисляется лениво, при первом обращении.
 
 ```nginx
 http {
-    # Определение бэкенда по домену
-    map $host $backend {
-        default        http://default_backend;
-        api.example.com    http://api_backend;
-        admin.example.com  http://admin_backend;
+    # WebSocket upgrade
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        ''      close;
     }
 
-    # Определение типа устройства
-    map $http_user_agent $is_mobile {
-        default 0;
-        ~*mobile 1;
-        ~*android 1;
-        ~*iphone 1;
-    }
-
-    # Формирование CORS заголовка
-    map $http_origin $cors_origin {
-        default "";
-        ~^https://(.+\.)?example\.com$ $http_origin;
-        ~^https://(.+\.)?staging\.example\.com$ $http_origin;
-    }
-
-    # Ограничение rate limit для белого списка
+    # Белый список для rate limit: пустой ключ = лимит не применяется
     map $remote_addr $limit_key {
-        default $binary_remote_addr;
-        10.0.0.0/8 "";        # Не лимитировать внутреннюю сеть
+        default        $binary_remote_addr;
+        10.0.0.0/8     "";
         192.168.0.0/16 "";
     }
 
-    limit_req_zone $limit_key zone=api:10m rate=10r/s;
+    # CORS: отражать только доверенные Origin
+    map $http_origin $cors_origin {
+        default "";
+        ~^https://(.+\.)?example\.com$ $http_origin;
+    }
 
-    server {
-        listen 80;
-
-        location / {
-            proxy_pass $backend;
-
-            # Условный CORS
-            add_header Access-Control-Allow-Origin $cors_origin always;
-        }
+    # Не логировать health checks и метрики
+    map $request_uri $loggable {
+        ~*^/health  0;
+        ~*^/metrics 0;
+        default     1;
     }
 }
 ```
 
-## Geo и GeoIP
+### split_clients — canary и A/B
 
-### Блокировка по IP
+Детерминированное разбиение трафика по хешу ключа:
 
 ```nginx
 http {
-    # Geo модуль - определение переменных по IP клиента
-    geo $blocked {
-        default 0;
-        10.0.0.0/8 0;          # Внутренняя сеть - разрешено
-        192.168.0.0/16 0;
-        203.0.113.0/24 1;      # Заблокированная подсеть
-        198.51.100.50 1;       # Заблокированный IP
+    split_clients "${remote_addr}${http_user_agent}" $variant {
+        5%   "canary";     # 5% на новую версию
+        *    "stable";
+    }
+
+    map $variant $backend_pool {
+        canary  http://backend_v2;
+        default http://backend_v1;
     }
 
     server {
-        if ($blocked) {
-            return 403;
-        }
-
-        location / {
-            proxy_pass http://backend;
-        }
+        location / { proxy_pass $backend_pool; }
     }
 }
 ```
 
-### GeoIP2 - блокировка по стране
+Канареечный деплой по заголовку (для ручного тестирования) — через `map`:
 
 ```nginx
-# Требует модуля ngx_http_geoip2_module и базы MaxMind GeoLite2
-load_module modules/ngx_http_geoip2_module.so;
+map $http_x_canary $backend_pool {
+    "1"     http://backend_v2;
+    default http://backend_v1;
+}
+```
 
+### geo — переменные по IP
+
+```nginx
+geo $blocked {
+    default        0;
+    10.0.0.0/8     0;
+    203.0.113.0/24 1;
+}
+server {
+    if ($blocked) { return 403; }
+}
+```
+
+GeoIP2 (модуль `ngx_http_geoip2_module` + база MaxMind) даёт страну/город:
+
+```nginx
+geoip2 /usr/share/GeoIP/GeoLite2-Country.mmdb {
+    $geoip2_country_code country iso_code;
+}
+map $geoip2_country_code $allowed_country { default yes; XX no; }
+```
+
+### Полезные встроенные переменные
+
+`$remote_addr`, `$http_*`, `$args`, `$request_uri` (исходный, с query), `$uri` (нормализованный, после rewrite), `$scheme`, `$host`, `$request_id` (уникальный ID запроса), `$request_time`, `$upstream_addr`, `$upstream_status`, `$upstream_response_time`, `$upstream_connect_time`, `$upstream_cache_status`, `$ssl_protocol`, `$ssl_client_s_dn`.
+
+---
+
+## 8. Статика
+
+### root vs alias
+
+```nginx
+location /static/ {
+    root /var/www;            # путь = root + URI → /var/www/static/app.js
+}
+location /files/ {
+    alias /var/www/static/;   # путь = alias + остаток → /var/www/static/app.js
+}
+```
+
+Правило: с `alias` всегда следите за слэшами и **не используйте `alias` внутри regex-location** без явного capture — источник path traversal.
+
+### Кэширование и отдача
+
+```nginx
+server {
+    root /var/www/app;
+
+    location / {
+        try_files $uri $uri/ /index.html;   # SPA
+    }
+
+    # Ассеты с хешем в имени — неизменяемые
+    location ~* \.(js|css|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    location ~* \.(jpg|jpeg|png|gif|svg|webp|avif)$ {
+        expires 30d;
+        add_header Cache-Control "public";
+        access_log off;
+    }
+}
+```
+
+### I/O и сжатие
+
+```nginx
 http {
-    geoip2 /usr/share/GeoIP/GeoLite2-Country.mmdb {
-        $geoip2_country_code country iso_code;
+    sendfile on;            # zero-copy отдача файлов
+    tcp_nopush on;          # заголовки + начало файла одним пакетом (только с sendfile)
+    tcp_nodelay on;         # отключить Nagle: важно для keep-alive и WebSocket
+    aio threads;            # асинхронный I/O через пул потоков (предпочтительнее "aio on")
+
+    # Кэш метаданных открытых файлов
+    open_file_cache max=10000 inactive=60s;
+    open_file_cache_valid 30s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors on;
+
+    gzip on;
+    gzip_min_length 1024;       # мелочь сжимать бессмысленно
+    gzip_comp_level 5;          # 4–6 — баланс CPU/размер
+    gzip_vary on;               # Vary: Accept-Encoding — обязательно для CDN
+    gzip_proxied any;
+    gzip_types text/plain text/css text/xml application/json
+               application/javascript application/xml image/svg+xml;
+    gzip_static on;             # отдать app.js.gz, если он лежит рядом
+
+    # Brotli (модуль ngx_brotli, собирается отдельно) — на 15–20% лучше gzip
+    # brotli on;
+    # brotli_static on;
+    # brotli_types ...;
+}
+```
+
+### X-Accel-Redirect — приватные файлы через nginx
+
+Классический паттерн: бэкенд проверяет права, а сам файл (гигабайты видео) отдаёт nginx, не занимая воркер приложения.
+
+```nginx
+location /protected/ {
+    internal;                       # напрямую снаружи недоступно
+    alias /var/storage/private/;
+}
+```
+
+Приложение отвечает `200` с заголовком `X-Accel-Redirect: /protected/file.mp4` и пустым телом — nginx подменяет ответ содержимым файла.
+
+---
+
+## 9. Reverse proxy
+
+### 9.1 Базовая конфигурация
+
+```nginx
+# snippets/proxy.conf
+proxy_set_header Host              $host;
+proxy_set_header X-Real-IP         $remote_addr;
+proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Host  $host;
+proxy_set_header X-Request-ID      $request_id;   # сквозная трассировка
+
+proxy_connect_timeout 5s;     # установка TCP-соединения — должен быть коротким
+proxy_send_timeout    30s;    # отправка запроса
+proxy_read_timeout    60s;    # ожидание ответа (не всего ответа, а паузы между чтениями)
+
+proxy_next_upstream error timeout http_502 http_503;
+proxy_next_upstream_tries 2;
+proxy_next_upstream_timeout 10s;
+```
+
+```nginx
+location / {
+    proxy_pass http://backend;
+    include snippets/proxy.conf;
+}
+```
+
+**Слэш в `proxy_pass`:**
+
+|Конфигурация|Запрос|Уйдёт на бэкенд как|
+|---|---|---|
+|`location /api/ { proxy_pass http://b:8080/; }`|`/api/users`|`/users` (префикс заменён)|
+|`location /api/ { proxy_pass http://b:8080; }`|`/api/users`|`/api/users` (URI как есть)|
+
+**Осторожно с `proxy_next_upstream`:** по умолчанию nginx не повторяет неидемпотентные запросы (POST/PATCH/LOCK). Если добавить ключевое слово `non_idempotent` — повтор POST приведёт к дублю платежа/заказа. Делайте это только если бэкенд идемпотентен по `Idempotency-Key`.
+
+### 9.2 realip — критически важно
+
+Когда nginx стоит за облачным LB, CDN или другим прокси, `$remote_addr` — это IP прокси, а не клиента. Последствия: в логах бесполезные адреса, geo-блокировка не работает, а **`limit_req_zone $binary_remote_addr` лимитирует весь трафик как один клиент**.
+
+```nginx
+# Доверяем только своим прокси/подсетям CDN
+set_real_ip_from 10.0.0.0/8;
+set_real_ip_from 172.16.0.0/12;
+set_real_ip_from 173.245.48.0/20;     # пример: подсеть CDN
+real_ip_header   X-Forwarded-For;
+real_ip_recursive on;                  # взять последний недоверенный IP из цепочки
+```
+
+Обратная сторона: **никогда не доверяйте `X-Forwarded-For` от произвольного источника**. Если `set_real_ip_from` шире, чем ваши реальные прокси, любой клиент подделает заголовок и обойдёт rate limit и блокировки.
+
+Для L4 (когда перед nginx стоит TCP-балансировщик) правильный способ — PROXY protocol:
+
+```nginx
+server {
+    listen 443 ssl proxy_protocol;
+    set_real_ip_from 10.0.0.0/8;
+    real_ip_header proxy_protocol;
+}
+```
+
+### 9.3 Буферизация
+
+```nginx
+proxy_buffering on;              # дефолт: nginx вычитывает ответ бэкенда в буферы
+proxy_buffer_size 8k;            # буфер под заголовки ответа
+proxy_buffers 8 16k;             # буферы под тело
+proxy_busy_buffers_size 32k;     # сколько можно отдавать клиенту, пока остальное читается
+proxy_max_temp_file_size 1024m;  # 0 = запретить сброс на диск
+```
+
+Буферизация нужна, чтобы медленный клиент не держал соединение с бэкендом («slow client attack»): nginx быстро забирает ответ, освобождает воркер приложения и раздаёт клиенту сам.
+
+**Но она ломает стриминг.** Для Server-Sent Events, стриминга LLM-ответов,длинных `text/event-stream`:
+
+```nginx
+location /events {
+    proxy_pass http://backend;
+    proxy_buffering off;          # отдавать по мере поступления
+    proxy_cache off;
+    proxy_read_timeout 1h;
+    chunked_transfer_encoding on;
+}
+```
+
+Альтернатива без правки nginx: бэкенд отдаёт заголовок `X-Accel-Buffering: no` — nginx отключит буферизацию для этого ответа.
+
+**Загрузка файлов:** тело запроса больше `client_body_buffer_size` пишется во временный файл на диск. Для потоковой загрузки в бэкенд:
+
+```nginx
+location /upload {
+    proxy_request_buffering off;   # стримить тело сразу в бэкенд
+    client_max_body_size 5g;
+    proxy_pass http://backend;
+}
+```
+
+### 9.4 HTTPS-бэкенды и unix-сокеты
+
+```nginx
+location / {
+    proxy_pass https://secure-backend;
+    proxy_ssl_verify on;                                  # по умолчанию OFF (!)
+    proxy_ssl_trusted_certificate /etc/nginx/ssl/ca.pem;
+    proxy_ssl_name backend.internal;                      # SNI
+    proxy_ssl_server_name on;
+    proxy_ssl_session_reuse on;
+    # mTLS к бэкенду:
+    proxy_ssl_certificate     /etc/nginx/ssl/client.crt;
+    proxy_ssl_certificate_key /etc/nginx/ssl/client.key;
+}
+```
+
+Unix-сокет вместо TCP на том же хосте экономит сетевой стек:
+
+```nginx
+upstream app { server unix:/run/app.sock; }
+```
+
+---
+
+## 10. WebSocket, gRPC, HTTP/2, HTTP/3
+
+### WebSocket
+
+```nginx
+map $http_upgrade $connection_upgrade { default upgrade; '' close; }
+
+location /ws/ {
+    proxy_pass http://backend;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade    $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_read_timeout  3600s;    # иначе соединение порвётся по таймауту
+    proxy_send_timeout  3600s;
+}
+```
+
+Помните: долгоживущие соединения продлевают жизнь старых воркеров при `reload` — ставьте `worker_shutdown_timeout`.
+
+### gRPC
+
+```nginx
+upstream grpc_backend {
+    server app1:50051;
+    server app2:50051;
+    keepalive 32;
+}
+
+server {
+    listen 443 ssl;
+    http2 on;                      # gRPC требует HTTP/2
+
+    location / {
+        grpc_pass grpc://grpc_backend;        # grpcs:// для TLS к бэкенду
+        grpc_set_header X-Real-IP $remote_addr;
+        grpc_read_timeout 300s;
+        grpc_send_timeout 300s;
     }
 
-    map $geoip2_country_code $allowed_country {
-        default yes;
-        CN no;
-        RU no;
+    # Отдельный роут на конкретный сервис
+    location /wallet.v1.WalletService/ {
+        grpc_pass grpc://wallet_backend;
     }
+}
+```
+
+Почему это важно: gRPC держит **долгоживущие HTTP/2-соединения**, и обычная L4-балансировка (или k8s Service) закрепляет клиента за одним подом навсегда — нагрузка перекашивается. L7-балансировка nginx/Envoy распределяет отдельные gRPC-стримы, а не соединения. Это стандартный вопрос на собеседовании по микросервисам.
+
+### HTTP/2 и HTTP/3
+
+```nginx
+server {
+    listen 443 ssl;
+    http2 on;                       # директива http2 (с 1.25.1), не параметр listen
+
+    listen 443 quic reuseport;      # HTTP/3, нужен --with-http_v3_module
+    http3 on;
+    add_header Alt-Svc 'h3=":443"; ma=86400' always;   # анонс поддержки h3
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+}
+```
+
+Для QUIC нужно открыть **UDP/443** в фаерволе — забывают постоянно. HTTP/2 даёт мультиплексирование (нет head-of-line blocking на уровне HTTP), HTTP/3 переносит это на QUIC поверх UDP, убирая HOL-блокировку на уровне TCP — заметнее всего на плохих мобильных сетях.
+
+---
+
+## 11. Load balancing
+
+```nginx
+upstream backend {
+    # --- алгоритм (по умолчанию round robin) ---
+    least_conn;                 # на сервер с наименьшим числом активных соединений
+    # least_time header;        # 1.31+: минимальное время ответа + активные соединения
+    # ip_hash;                  # закрепление клиента по IP
+    # hash $request_uri consistent;   # произвольный ключ, consistent hashing
+    # random two least_conn;    # 2 случайных, из них менее загруженный
+
+    server 10.0.1.10:8080 weight=3;
+    server 10.0.1.11:8080;
+    server 10.0.1.12:8080 max_fails=3 fail_timeout=30s max_conns=100;
+    server 10.0.1.13:8080 backup;   # только если все основные недоступны
+    server 10.0.1.14:8080 down;     # выведен вручную
+
+    keepalive 32;               # пул idle-соединений к бэкендам НА КАЖДЫЙ воркер
+    keepalive_requests 1000;
+    keepalive_timeout 60s;
+
+    zone backend_zone 64k;      # shared memory: общее состояние для всех воркеров
+}
+
+server {
+    location / {
+        proxy_pass http://backend;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";   # обязательно при использовании keepalive
+    }
+}
+```
+
+### Выбор алгоритма
+
+|Алгоритм|Когда|
+|---|---|
+|round robin|бэкенды одинаковые, запросы однородные — дефолт|
+|`least_conn`|запросы разной длительности (часть долгих)|
+|`least_time`|бэкенды разной мощности или нестабильная сеть (1.31+)|
+|`hash $key consistent`|нужна привязка к серверу по ключу (шардирование кэша) с минимальной перебалансировкой при изменении пула|
+|`ip_hash`|примитивная привязка сессии; ломается за NAT и CDN|
+|`random two least_conn`|большие пулы, где полный обход списка дорог («power of two choices»)|
+
+### Sticky sessions
+
+С 1.30 доступны в open source. Но сначала честный ответ: **sticky — это костыль**. Правильное решение — сделать приложение stateless и хранить сессии в Redis/JWT. Прилипание ломает равномерность нагрузки, мешает выводу инстанса из ротации и превращает падение одного пода в потерю сессий его пользователей. Используйте, только если переписать приложение нельзя.
+
+### Health checks
+
+- **Пассивные (open source):** `max_fails=3 fail_timeout=30s` — сервер выводится из ротации после N неудач в окне и возвращается через `fail_timeout`. Ключевое ограничение: они реагируют **только на реальный трафик**. Упавший бэкенд при низком RPS обнаружится нескоро, а первые N запросов всё равно получат ошибку.
+- **Активные (`health_check`) — только NGINX Plus.** В open source альтернативы: `nginx_upstream_check_module` (Tengine), внешний скрипт, перегенерирующий upstream, или Consul-template. В Kubernetes эту роль берёт на себя readinessProbe: не готовый под просто исчезает из Endpoints.
+
+### Динамический DNS — самая частая продовая ловушка
+
+Имена в `upstream` резолвятся **один раз при старте/reload**. В Docker/Kubernetes контейнер перезапустился, IP сменился — nginx продолжает долбиться в старый адрес и отдаёт 502, пока его не перезагрузят.
+
+```nginx
+# Вариант 1: переменная в proxy_pass заставляет резолвить в рантайме
+server {
+    resolver 127.0.0.11 valid=10s ipv6=off;   # 127.0.0.11 — DNS Docker; в k8s — kube-dns
+    resolver_timeout 3s;
+
+    location / {
+        set $upstream http://app-service:3000;
+        proxy_pass $upstream;
+    }
+}
+```
+
+Важный побочный эффект: при переменной в `proxy_pass` nginx **не нормализует URI автоматически** — часто нужно дописывать `$request_uri` вручную. Вариант 2 — `resolve` в `server` внутри `upstream` (NGINX Plus) или внешний генератор конфига.
+
+---
+
+## 12. Кэширование ответов
+
+```nginx
+http {
+    proxy_cache_path /var/cache/nginx/app
+        levels=1:2                 # двухуровневая иерархия каталогов
+        keys_zone=app_cache:10m    # shared memory под ключи (~80k ключей на 10m)
+        max_size=10g               # лимит на диске
+        inactive=60m               # удалять, если не обращались 60 минут
+        use_temp_path=off;         # писать сразу в целевой каталог
 
     server {
-        if ($allowed_country = no) {
-            return 403;
-        }
-
         location / {
             proxy_pass http://backend;
+            proxy_cache app_cache;
+
+            proxy_cache_key "$scheme$request_method$host$request_uri";
+            proxy_cache_valid 200 302 10m;
+            proxy_cache_valid 404 1m;
+            proxy_cache_min_uses 2;         # кэшировать со 2-го запроса
+
+            # Обход кэша
+            proxy_cache_bypass $http_cache_control $cookie_nocache;
+            proxy_no_cache $http_pragma;
+
+            # Отдавать протухшее, если бэкенд лёг — graceful degradation
+            proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+            proxy_cache_background_update on;   # обновлять в фоне, клиенту отдавать stale
+            proxy_cache_lock on;                # только один запрос идёт на бэкенд
+            proxy_cache_lock_timeout 5s;        # остальные ждут → защита от stampede
+
+            proxy_cache_revalidate on;          # условные запросы по ETag/Last-Modified
+
+            add_header X-Cache-Status $upstream_cache_status always;  # HIT/MISS/BYPASS/EXPIRED/STALE/UPDATING
         }
     }
 }
 ```
 
-## Stream Module (L4 TCP/UDP)
+**Ловушки, которые ловят все:**
 
-Stream модуль позволяет проксировать и балансировать TCP/UDP трафик на транспортном уровне.
+1. **`Set-Cookie` от бэкенда отключает кэширование ответа целиком.** Если бэкенд шлёт сессионную куку на каждый ответ, кэш просто не работает. Лечение — убедиться, что бэкенд не шлёт куку для кэшируемых роутов, либо:
+    
+    ```nginx
+    proxy_ignore_headers Set-Cookie Cache-Control Expires X-Accel-Expires;proxy_hide_header Set-Cookie;     # ОПАСНО: убедитесь, что ответ реальнопубличный
+    ```
+    
+2. **`Cache-Control: no-store/private` от бэкенда** тоже отключает кэш — по умолчанию nginx его уважает.
+3. **`Vary`**: если бэкенд отдаёт `Vary: Accept-Encoding`, nginx хранит отдельные копии. `Vary: *` — кэширование отключается.
+4. **Ключ кэша.** Дефолт — `$scheme$proxy_host$request_uri`. Если ответ зависит от пользователя, а ключ его не учитывает, вы отдадите чужие данные. Если зависит от языка — добавьте `$http_accept_language`. Никогда не кэшируйте персонализированные ответы без `$cookie_session` в ключе (а лучше вообще не кэшируйте).
+5. **Инвалидация.** `proxy_cache_purge` — только в Plus; в open source — сторонний `ngx_cache_purge` или удаление файлов из каталога кэша. На практике проще управлять через `proxy_cache_valid` и версионирование URL.
+6. **Большие файлы и Range-запросы** — модуль `slice`: режет объект на куски и кэширует их отдельно, иначе один Range-запрос вытянет и закэширует весь гигабайтный файл.
+
+Диагностика всегда через `X-Cache-Status` — без него отладка кэша превращается в гадание.
+
+---
+
+## 13. Rate limiting и защита
 
 ```nginx
-# Загрузка модуля (если собран динамически)
-load_module modules/ngx_stream_module.so;
+http {
+    # $binary_remote_addr — 4 байта вместо 7–15 у $remote_addr; 10m ≈ 160k IP
+    limit_req_zone $limit_key zone=general:10m rate=30r/s;
+    limit_req_zone $limit_key zone=api:10m     rate=10r/s;
+    limit_req_zone $limit_key zone=login:10m   rate=5r/m;
+    limit_conn_zone $binary_remote_addr zone=addr:10m;
 
+    limit_req_status 429;
+    limit_conn_status 429;
+    # limit_req_dry_run on;    # считать и логировать, но не блокировать — для обкатки лимитов
+
+    server {
+        location / {
+            limit_req zone=general burst=20 nodelay;
+            limit_conn addr 100;
+        }
+        location /api/ {
+            limit_req zone=api burst=10 nodelay;
+        }
+        location = /api/auth/login {
+            limit_req zone=login burst=3;         # без nodelay: запросы ставятся в очередь
+        }
+        # Ограничение скорости отдачи (например, для скачивания)
+        location /downloads/ {
+            limit_rate_after 10m;
+            limit_rate 1m;
+        }
+    }
+}
+```
+
+**`burst` и `nodelay`.** Алгоритм — leaky bucket. `burst=20` создаёт очередь на 20 запросов сверх rate. Без `nodelay` избыточные запросы **задерживаются**, выравниваясь под rate (клиент ждёт). С `nodelay` они выполняются мгновенно, но «токены» тратятся, и следующие сверх burst получают 429. Есть промежуточный вариант `delay=5`: первые 5 из burst — без задержки, остальные с задержкой.
+
+**Важно:** `limit_req` считает по `$binary_remote_addr`, который за прокси будет адресом прокси — сначала настройте realip (§9.2), иначе лимит либо не работает, либо режет всех.
+
+**Помните про распределённость:** на трёх инстансах nginx лимит фактически утраивается — зоны локальны для процесса (в open source; синхронизация зон есть только в Plus).
+
+Дополнительно: `limit_except` (разрешить только определённые методы), `allow`/`deny` для админок, `auth_basic` для внутренних тулов, ModSecurity/Coraza как WAF, `client_body_timeout`/`client_header_timeout` против Slowloris.
+
+---
+
+## 14. TLS
+
+```nginx
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers off;    # для TLS1.3 актуален выбор клиента
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
+
+    # Возобновление сессий: снижает latency повторных подключений
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 1d;
+    ssl_session_tickets on;
+    # Тикеты безопасны при регулярной ротации ключа (ssl_session_ticket_key + перезапуск).
+    # Отключать их стоит, только если ротацию организовать нельзя: в TLS 1.3 это
+    # полностью убивает resumption и 0-RTT. Forward secrecy обеспечивает ECDHE, не это.
+
+    ssl_stapling on;                  # OCSP stapling: nginx сам получает статус сертификата
+    ssl_stapling_verify on;
+    ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;
+    resolver 1.1.1.1 8.8.8.8 valid=300s;
+    resolver_timeout 5s;
+
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+}
+
+server {                              # редирект HTTP → HTTPS
+    listen 80;
+    server_name example.com;
+    location /.well-known/acme-challenge/ { root /var/www/certbot; }   # для ACME
+    location / { return 301 https://$host$request_uri; }
+}
+```
+
+**Автоматизация сертификатов:** certbot с `--nginx` или `--webroot`, acme.sh, cert-manager в k8s, либо модуль `nginx-acme` (получение сертификатов силами самого nginx). Проверьте, что renew hook делает `nginx -s reload`.
+
+**HSTS preload** добавляйте только осознанно: `preload` в списке браузеров откатить почти невозможно, и весь домен с поддоменами навсегда останется HTTPS-only.
+
+### mTLS (взаимная аутентификация)
+
+```nginx
+server {
+    listen 443 ssl;
+    ssl_client_certificate /etc/nginx/ssl/ca.pem;   # CA, которым подписаны клиенты
+    ssl_verify_client on;                            # или optional
+    ssl_verify_depth 2;
+    ssl_crl /etc/nginx/ssl/crl.pem;
+
+    location / {
+        proxy_pass http://backend;
+        proxy_set_header X-Client-DN     $ssl_client_s_dn;
+        proxy_set_header X-Client-Verify $ssl_client_verify;
+        proxy_set_header X-Client-Serial $ssl_client_serial;
+    }
+}
+```
+
+Это типовой способ аутентификации service-to-service и партнёрских интеграций.
+
+### TLS passthrough (не терминировать TLS на nginx)
+
+Когда сертификат должен оставаться на бэкенде — L4 с чтением SNI без расшифровки:
+
+```nginx
 stream {
-    # TCP балансировка для PostgreSQL
-    upstream postgresql {
+    map $ssl_preread_server_name $upstream_pool {
+        api.example.com   api_backend;
+        admin.example.com admin_backend;
+        default           default_backend;
+    }
+    upstream api_backend { server 10.0.1.10:443; }
+
+    server {
+        listen 443;
+        ssl_preread on;            # прочитать SNI из ClientHello
+        proxy_pass $upstream_pool;
+    }
+}
+```
+
+---
+
+## 15. Аутентификация и делегирование
+
+### auth_request — внешний сервис авторизации
+
+nginx делает подзапрос к auth-сервису; `2xx` → пропустить, `401/403` → отклонить. Позволяет вынести проверку JWT/сессии в один сервис и не дублировать её в каждом бэкенде.
+
+```nginx
+location /private/ {
+    auth_request /_auth;
+
+    # Забрать данные из ответа auth-сервиса и передать бэкенду
+    auth_request_set $user_id $upstream_http_x_user_id;
+    proxy_set_header X-User-Id $user_id;
+
+    proxy_pass http://backend;
+}
+
+location = /_auth {
+    internal;
+    proxy_pass http://auth-service/verify;
+    proxy_pass_request_body off;           # тело не нужно
+    proxy_set_header Content-Length "";
+    proxy_set_header X-Original-URI $request_uri;
+    proxy_set_header X-Original-Method $request_method;
+}
+```
+
+Цена: **дополнительный подзапрос на каждый запрос** — auth-сервис должен быть быстрым (кэш в Redis) и рядом. Валидация JWT нативно есть только в Plus (`auth_jwt`); в open source — njs или auth_request.
+
+Для внутренних тулов достаточно `auth_basic` + `auth_basic_user_file` (htpasswd).
+
+---
+
+## 16. Заголовки безопасности и CORS
+
+```nginx
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'self'" always;
+server_tokens off;     # скрыть версию nginx
+```
+
+**Главная ловушка:** `add_header` **не наследуется аддитивно**. Если в `location` появился хоть один `add_header`, все `add_header` из `server`/`http` для этого location перестают действовать. Решения:
+
+- держать заголовки в `snippets/security-headers.conf` и `include` в каждый location;
+- модуль `headers-more` (`more_set_headers`), который лишён этой семантики.
+
+Флаг `always` заставляет отдавать заголовок и для ошибочных кодов (4xx/5xx) — без него заголовки пропадут на страницах ошибок.
+
+### CORS с preflight
+
+```nginx
+map $http_origin $cors_origin {
+    default "";
+    ~^https://(.+\.)?example\.com$ $http_origin;
+}
+
+location /api/ {
+    if ($request_method = OPTIONS) {
+        add_header Access-Control-Allow-Origin      $cors_origin always;
+        add_header Access-Control-Allow-Methods     "GET, POST, PUT, PATCH, DELETE, OPTIONS" always;
+        add_header Access-Control-Allow-Headers     "Authorization, Content-Type, X-Request-Id" always;
+        add_header Access-Control-Allow-Credentials "true" always;
+        add_header Access-Control-Max-Age           86400 always;
+        add_header Content-Length 0;
+        return 204;
+    }
+
+    add_header Access-Control-Allow-Origin      $cors_origin always;
+    add_header Access-Control-Allow-Credentials "true" always;
+    add_header Vary Origin always;      # иначе кэш отдаст чужой Origin
+
+    proxy_pass http://backend;
+}
+```
+
+Никогда не сочетайте `Access-Control-Allow-Origin: *` с `Allow-Credentials: true` — браузер отклонит, а если бы принял, это была бы дыра.
+
+---
+
+## 17. Forward proxy (прямой прокси)
+
+Reverse proxy защищает **серверы**, forward proxy обслуживает **клиентов**, регулируя их доступ наружу (корпоративный egress, фильтрация, аудит).
+
+**Историческая правда:** nginx для этого не предназначался. Варианты по состоянию на 2026:
+
+**1. HTTP (без CONNECT) — костыль, работает давно:**
+
+```nginx
+server {
+    listen 3128;
+    resolver 1.1.1.1 ipv6=off;
+    location / {
+        proxy_pass http://$http_host$request_uri;
+        proxy_set_header Host $http_host;
+    }
+}
+```
+
+Только plain HTTP. HTTPS так не проксируется — клиент шлёт `CONNECT`, а nginx его не понимает.
+
+**2. HTTPS через CONNECT:**
+
+- **NGINX Plus (R36+)**: штатная директива `tunnel_pass` — включает CONNECT-туннель в `server`/`location`. Требует `resolver`; по умолчанию туннелирует на `$host:$request_port`; доступ обязательно ограничивают через `geo`/`allow`. Остальные методы (GET/POST) в этом режиме нужно явно запрещать.
+    
+    ```nginx
+    server {    listen 10.10.1.11:3128;    resolver 1.1.1.1;    tunnel_pass;}
+    ```
+    
+- **Open source, mainline 1.31.0+**: поддержка HTTP forward proxy добавлена в ядро.
+- **Open source, старые версии**: сторонний модуль `ngx_http_proxy_connect_module` (chobits) — требует пересборки.
+
+**3. L4 / прозрачный прокси** через `stream` + `ssl_preread`: получить SNI из ClientHello и проксировать TCP без расшифровки и без CONNECT (см. §14).
+
+**Практический вывод:** если вам нужен полноценный egress-прокси с ACL, аутентификацией и логированием — берите **Squid** (классика) или **Envoy** (если уже в mesh). nginx как forward proxy рассматривайте, только если вы уже на 1.31+/Plus и сценарий простой.
+
+---
+
+## 18. Stream module (L4 TCP/UDP)
+
+```nginx
+stream {
+    log_format basic '$remote_addr [$time_local] $protocol $status '
+                     '$bytes_sent $bytes_received $session_time $upstream_addr';
+    access_log /var/log/nginx/stream.log basic;
+
+    # TCP: балансировка PostgreSQL (read-реплики)
+    upstream pg_replicas {
         least_conn;
         server 10.0.1.10:5432 max_fails=3 fail_timeout=30s;
         server 10.0.1.11:5432 max_fails=3 fail_timeout=30s;
         server 10.0.1.12:5432 backup;
     }
-
     server {
         listen 5432;
-        proxy_pass postgresql;
+        proxy_pass pg_replicas;
         proxy_connect_timeout 5s;
-        proxy_timeout 3600s;    # Таймаут неактивности соединения
+        proxy_timeout 1h;            # таймаут неактивности соединения
+        proxy_protocol on;           # передать реальный IP клиента бэкенду
     }
 
-    # TCP балансировка для Redis Sentinel
-    upstream redis {
-        server 10.0.1.10:6379;
-        server 10.0.1.11:6379;
-    }
-
-    server {
-        listen 6379;
-        proxy_pass redis;
-        proxy_connect_timeout 3s;
-    }
-
-    # UDP балансировка для DNS
-    upstream dns_servers {
-        server 10.0.1.10:53;
-        server 10.0.1.11:53;
-    }
-
+    # UDP: DNS
+    upstream dns { server 10.0.1.10:53; server 10.0.1.11:53; }
     server {
         listen 53 udp;
-        proxy_pass dns_servers;
-        proxy_responses 1;    # Ожидаемое количество UDP-ответов
+        proxy_pass dns;
+        proxy_responses 1;           # сколько ответных датаграмм ожидать
         proxy_timeout 5s;
     }
 
-    # SSL termination для MySQL
+    # TLS-терминация перед не-HTTP сервисом
     server {
         listen 3307 ssl;
-        ssl_certificate /etc/nginx/ssl/mysql.crt;
+        ssl_certificate     /etc/nginx/ssl/mysql.crt;
         ssl_certificate_key /etc/nginx/ssl/mysql.key;
         proxy_pass 10.0.1.10:3306;
     }
 }
 ```
 
-## Мониторинг
+Ограничение: балансировка БД через L4 **не заменяет** pgbouncer/patroni. nginx не знает, кто мастер, а кто реплика, и не умеет разруливать failover — он просто раскидывает TCP-соединения.
 
-### stub_status
+---
+
+## 19. Деплойные паттерны
+
+**Canary:** `split_clients` по проценту (§7) или роутинг по заголовку/куке для ручной проверки.
+
+**Blue-green:** два upstream, переключение одной строкой + `nginx -s reload` (граничные соединения доживают на старом).
+
+**Страница обслуживания:**
 
 ```nginx
-server {
-    listen 8080;
-    server_name localhost;
-
-    # Доступ только из внутренней сети
-    allow 10.0.0.0/8;
-    allow 127.0.0.1;
-    deny all;
-
-    location /nginx_status {
-        stub_status;
-    }
+location / {
+    if (-f /var/www/maintenance.on) { return 503; }
+    proxy_pass http://backend;
+}
+error_page 503 @maintenance;
+location @maintenance {
+    root /var/www/errors;
+    rewrite ^ /maintenance.html break;
 }
 ```
 
-Вывод `stub_status`:
+**Graceful degradation:** `proxy_cache_use_stale` + `error_page 502 = @fallback` — отдавать кэш или заглушку вместо 502.
+
+**Zero-downtime деплой приложения:** readiness-эндпоинт + вывод инстанса из ротации (в k8s — readinessProbe; на голом железе — `down` в upstream + reload, либо Consul-template).
+
+---
+
+## 20. Логирование
+
+```nginx
+http {
+    log_format json_log escape=json '{'
+        '"time":"$time_iso8601",'
+        '"remote_addr":"$remote_addr",'
+        '"method":"$request_method",'
+        '"uri":"$request_uri",'
+        '"status":$status,'
+        '"bytes":$body_bytes_sent,'
+        '"rt":$request_time,'                    # полное время запроса
+        '"urt":"$upstream_response_time",'       # время ответа бэкенда
+        '"uct":"$upstream_connect_time",'        # время установки соединения
+        '"us":"$upstream_status",'
+        '"ua":"$upstream_addr",'
+        '"cache":"$upstream_cache_status",'
+        '"host":"$host",'
+        '"referer":"$http_referer",'
+        '"agent":"$http_user_agent",'
+        '"xff":"$http_x_forwarded_for",'
+        '"rid":"$request_id"'                    # сквозной ID → в бэкенд и в трейс
+    '}';
+
+    map $request_uri $loggable { ~*^/health 0; ~*^/metrics 0; default 1; }
+
+    # buffer/flush снижают дисковый I/O на высоких RPS
+    access_log /var/log/nginx/access.json.log json_log buffer=64k flush=5s if=$loggable;
+    error_log  /var/log/nginx/error.log warn;
+
+    # Или сразу в syslog → Loki/ELK, без файлов и ротации
+    # access_log syslog:server=127.0.0.1:514,tag=nginx json_log;
+}
+```
+
+**Трассировка.** `$request_id` генерируется nginx; передавайте его бэкенду (`proxy_set_header X-Request-ID $request_id;`), логируйте с обеих сторон и кладите в trace-контекст — по одному ID соберётся весь путь запроса. Разница `$request_time` и `$upstream_response_time` показывает, где время: у клиента (медленная сеть), в nginx или на бэкенде.
+
+**Уровни `error_log`:** `warn` в проде; `debug` требует сборки с `--with-debug` и даёт огромный объём — включайте точечно через `debug_connection 10.0.0.5;`.
+
+---
+
+## 21. Мониторинг
+
+```nginx
+server {
+    listen 127.0.0.1:8080;
+    location /nginx_status { stub_status; allow 127.0.0.1; deny all; }
+}
+```
 
 ```
 Active connections: 291
@@ -1079,51 +1176,49 @@ server accepts handled requests
 Reading: 6 Writing: 179 Waiting: 106
 ```
 
-- Active connections - текущие активные соединения (включая waiting)
-- accepts - общее число принятых соединений
-- handled - общее число обработанных соединений (должно совпадать с accepts)
-- requests - общее число обработанных запросов
-- Reading - соединения, в которых NGINX читает заголовки запроса
-- Writing - соединения, в которых NGINX отправляет ответ
-- Waiting - keep-alive соединения в ожидании нового запроса
+- `accepts` ≠ `handled` → упёрлись в `worker_connections` или лимит дескрипторов.
+- `Waiting` — keep-alive соединения в простое; большая доля — нормально.
+- `Reading`/`Writing` — активная работа.
 
-### Prometheus nginx-exporter
+**Prometheus:** `nginx/nginx-prometheus-exporter` поверх `stub_status`. Метрики: `nginx_connections_active/reading/writing/waiting`, `nginx_http_requests_total`, `nginx_connections_accepted/handled`.
 
-```yaml
-# docker-compose.yml
-services:
-  nginx-exporter:
-    image: nginx/nginx-prometheus-exporter:1.1
-    command:
-      - --nginx.scrape-uri=http://nginx:8080/nginx_status
-    ports:
-      - "9113:9113"
-```
+Проблема: `stub_status` не даёт разбивки по кодам ответов, upstream и вхостам. Варианты глубже:
 
-Основные метрики для мониторинга:
+- модуль **VTS** (`nginx-module-vts`) — метрики по вхостам, upstream, кодам;
+- экспорт из **логов** (`mtail`, `grok_exporter`, promtail+Loki) — гибко, но дороже;
+- NGINX Plus API.
 
-- `nginx_connections_active` - активные соединения
-- `nginx_connections_reading` / `writing` / `waiting`
-- `nginx_http_requests_total` - общее число запросов
-- `nginx_connections_accepted` / `handled`
+**Что алертить:** доля 5xx, p99 `$request_time`, `$upstream_response_time` по upstream, рост 499, `accepts != handled`, доля `X-Cache-Status=MISS`, срок жизни TLS-сертификата, рестарты воркеров в error.log.
 
-Для более глубокого мониторинга используйте VTS (Virtual Host Traffic Status) модуль, который предоставляет метрики по виртуальным хостам, upstream и кодам ответов.
+---
 
-## Performance Tuning
-
-### Системные лимиты
+## 22. Performance tuning
 
 ```nginx
-# Максимальное число файловых дескрипторов на worker
-# Должно быть >= worker_connections * 2 (каждое соединение = 2 дескриптора: клиент + бэкенд)
-worker_rlimit_nofile 65535;
+worker_processes auto;              # = числу ядер
+worker_rlimit_nofile 65535;         # ≥ worker_connections × 2
+worker_shutdown_timeout 30s;        # не копить старые воркеры после reload
 
 events {
     worker_connections 16384;
+    # use epoll;        — выбирается автоматически, указывать не нужно
+    # multi_accept on;  — в большинстве случаев не помогает, может вредить
+}
+
+http {
+    keepalive_timeout 65;
+    keepalive_requests 1000;
+    client_max_body_size 100m;
+    client_body_buffer_size 16k;
+    client_header_buffer_size 4k;
+    large_client_header_buffers 4 16k;   # поднять при "Request Header Or Cookie Too Large"
+    client_body_timeout 30;
+    client_header_timeout 30;
+    send_timeout 30;
 }
 ```
 
-Системные лимиты на уровне ОС:
+ОС:
 
 ```bash
 # /etc/security/limits.conf
@@ -1138,180 +1233,51 @@ net.ipv4.tcp_tw_reuse = 1
 net.core.netdev_max_backlog = 65535
 ```
 
-### Кеширование открытых файлов
+`listen 80 backlog=65535;` — согласуйте с `somaxconn`.
 
-```nginx
-http {
-    # Кеш метаданных файлов (дескрипторы, размеры, время модификации)
-    open_file_cache max=10000 inactive=60s;
-    open_file_cache_valid 30s;        # Время между проверками актуальности кеша
-    open_file_cache_min_uses 2;       # Минимальное число обращений для кеширования
-    open_file_cache_errors on;        # Кешировать ошибки (файл не найден)
-}
-```
+**Что реально даёт эффект** (в порядке убывания): keepalive к бэкендам, кэширование ответов, gzip/brotli для текста, `open_file_cache` для статики, sendfile. Тюнинг `multi_accept` и подобного — шум на фоне отсутствующего кэша.
 
-### Буферы
+---
 
-```nginx
-http {
-    # Буферы для чтения заголовков запроса клиента
-    # Увеличивайте при ошибке "Request Header Or Cookie Too Large"
-    large_client_header_buffers 4 16k;
+## 23. Docker и Kubernetes
 
-    # Буфер для тела запроса клиента
-    client_body_buffer_size 16k;
-
-    # Буфер для заголовков запроса
-    client_header_buffer_size 4k;
-
-    # Буферы для проксирования
-    proxy_buffer_size 8k;             # Заголовки ответа от upstream
-    proxy_buffers 8 16k;              # Тело ответа от upstream
-    proxy_busy_buffers_size 32k;      # Буферы, отправляемые клиенту
-}
-```
-
-### Оптимальная production конфигурация
-
-```nginx
-user nginx;
-worker_processes auto;
-worker_rlimit_nofile 65535;
-error_log /var/log/nginx/error.log warn;
-pid /run/nginx.pid;
-
-events {
-    worker_connections 16384;
-    use epoll;
-    multi_accept on;
-}
-
-http {
-    include /etc/nginx/mime.types;
-    default_type application/octet-stream;
-
-    # Скрыть версию
-    server_tokens off;
-
-    # I/O оптимизация
-    sendfile on;
-    tcp_nopush on;
-    tcp_nodelay on;
-    aio on;
-
-    # Таймауты
-    keepalive_timeout 65;
-    keepalive_requests 1000;
-    client_body_timeout 30;
-    client_header_timeout 30;
-    send_timeout 30;
-
-    # Буферы
-    client_max_body_size 100m;
-    client_body_buffer_size 16k;
-    large_client_header_buffers 4 16k;
-
-    # Кеш файлов
-    open_file_cache max=10000 inactive=60s;
-    open_file_cache_valid 30s;
-    open_file_cache_min_uses 2;
-    open_file_cache_errors on;
-
-    # Gzip
-    gzip on;
-    gzip_comp_level 5;
-    gzip_min_length 1024;
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_types text/plain text/css text/xml text/javascript
-               application/json application/javascript application/xml
-               application/xml+rss application/atom+xml image/svg+xml;
-
-    # Логирование
-    log_format json_log escape=json
-        '{'
-            '"time":"$time_iso8601",'
-            '"remote_addr":"$remote_addr",'
-            '"method":"$request_method",'
-            '"uri":"$request_uri",'
-            '"status":$status,'
-            '"bytes":$body_bytes_sent,'
-            '"rt":$request_time,'
-            '"urt":"$upstream_response_time",'
-            '"ua":"$http_user_agent",'
-            '"rid":"$request_id"'
-        '}';
-
-    access_log /var/log/nginx/access.json.log json_log;
-
-    include /etc/nginx/conf.d/*.conf;
-}
-```
-
-## NGINX в Docker и Kubernetes
-
-### Docker
+### Dockerfile
 
 ```dockerfile
-FROM nginx:1.26-alpine
+# Непривилегированный официальный образ: уже слушает 8080, все права расставлены
+FROM nginxinc/nginx-unprivileged:1.30-alpine
 
-# Удалить дефолтную конфигурацию
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Копировать кастомную конфигурацию
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY conf.d/ /etc/nginx/conf.d/
-
-# Создать директорию для кеша
-RUN mkdir -p /var/cache/nginx && \
-    chown -R nginx:nginx /var/cache/nginx && \
-    chown -R nginx:nginx /var/log/nginx && \
-    chown -R nginx:nginx /etc/nginx/conf.d
-
-# Использовать непривилегированного пользователя
-USER nginx
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/nginx.conf
+COPY --chown=nginx:nginx conf.d/    /etc/nginx/conf.d/
 
 EXPOSE 8080
 
+# В alpine нет curl — используем wget из busybox
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8080/health || exit 1
+    CMD wget -q -O /dev/null http://127.0.0.1:8080/health || exit 1
 ```
 
-### Kubernetes ConfigMap
+Если всё же строите non-root на базе обычного `nginx`: кроме `/var/cache/nginx` и `/var/log/nginx` нужно отдать права на `/var/lib/nginx` и путь pid-файла (или перенести `pid` в `/tmp`), а `listen` перевести на порт > 1024.
+
+Логи в контейнере штатно шлют в stdout/stderr симлинками (`/dev/stdout`), ротация внутри образа не нужна.
+
+### Kubernetes: nginx как Deployment
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
-metadata:
-  name: nginx-config
-  namespace: production
+metadata: { name: nginx-config }
 data:
   nginx.conf: |
-    user nginx;
     worker_processes auto;
-    error_log /var/log/nginx/error.log warn;
-
-    events {
-        worker_connections 4096;
-    }
-
+    events { worker_connections 4096; }
     http {
         include /etc/nginx/mime.types;
         server_tokens off;
         sendfile on;
-        tcp_nopush on;
-        keepalive_timeout 65;
-        gzip on;
-        gzip_types text/plain text/css application/json application/javascript;
-
         server {
             listen 8080;
-
-            location /health {
-                return 200 "ok";
-                access_log off;
-            }
-
+            location = /health { return 200 "ok"; access_log off; }
             location / {
                 proxy_pass http://app-service:3000;
                 proxy_set_header Host $host;
@@ -1324,200 +1290,159 @@ data:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: nginx
-  namespace: production
+metadata: { name: nginx }
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
+  selector: { matchLabels: { app: nginx } }
   template:
     metadata:
-      labels:
-        app: nginx
+      labels: { app: nginx }
+      annotations:
+        # Пересоздать поды при изменении ConfigMap: смонтированный ConfigMap
+        # сам по себе nginx не перезагружает
+        checksum/config: "<sha256 конфига, подставляется Helm/kustomize>"
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
       containers:
-      - name: nginx
-        image: nginx:1.26-alpine
-        ports:
-        - containerPort: 8080
-        volumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 500m
-            memory: 256Mi
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 3
-          periodSeconds: 5
+        - name: nginx
+          image: nginxinc/nginx-unprivileged:1.30-alpine
+          ports: [{ containerPort: 8080 }]
+          volumeMounts:
+            - { name: nginx-config, mountPath: /etc/nginx/nginx.conf, subPath: nginx.conf }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 500m, memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          lifecycle:
+            preStop:
+              exec: { command: ["/bin/sh", "-c", "sleep 5 && nginx -s quit"] }
       volumes:
-      - name: nginx-config
-        configMap:
-          name: nginx-config
+        - name: nginx-config
+          configMap: { name: nginx-config }
 ```
 
-### NGINX Ingress Controller
+Нюансы:
+
+- Смонтированный ConfigMap обновляется в поде с задержкой и **не вызывает reload**. Нужна checksum-аннотация (пересоздание подов) или sidecar-reloader.
+- `preStop` со `sleep` даёт kube-proxy время убрать под из Endpoints до остановки — иначе часть запросов улетит в закрывающийся под.
+- Порт > 1024, потому что контейнер работает не от root.
+
+### Ingress: важное изменение 2025–2026
+
+Сообщество Kubernetes объявило о **ретайременте контроллера Ingress NGINX** с рекомендацией переходить на **Gateway API**: best-effort поддержка держалась до марта 2026, после чего нет ни релизов, ни багфиксов, ни исправлений уязвимостей. Планировавшийся преемник **InGate тоже закрыт** — контрибьюторов не нашлось, и прямого наследника не назвали. Существующие деплойменты продолжают работать, чарты и образы остаются доступны, но риск накапливается: новые CVE закрывать некому.
+
+Отдельно: аннотация `nginx.ingress.kubernetes.io/configuration-snippet` (инъекция произвольного конфига) относится именно к тому классу фич, который признали security-проблемой, и в поздних версиях контроллера отключена по умолчанию. Не закладывайтесь на неё.
+
+Что делать:
+
+- **Новые кластеры** — Gateway API с активно поддерживаемой реализацией (Envoy Gateway, kgateway, Istio, Traefik, шлюз облачного провайдера).
+- **Хочется остаться на nginx** — есть отдельный живой проект **NGINX Ingress Controller от F5** (`nginx/kubernetes-ingress`), это не тот же самый контроллер: другой репозиторий, другие CRD и аннотации.
+- **Существующие кластеры** — инвентаризация аннотаций и план миграции; аннотации делятся на те, что имеют прямой аналог в Gateway API, те, что переносятся в policy-ресурсы реализации, и те, что придётся переписать.
+
+Пример Ingress ниже — для legacy-кластеров, как справка:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
-  namespace: production
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
     nginx.ingress.kubernetes.io/limit-rps: "30"
-    nginx.ingress.kubernetes.io/limit-burst-multiplier: "5"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header X-Frame-Options "SAMEORIGIN" always;
-      add_header X-Content-Type-Options "nosniff" always;
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - app.example.com
-    - api.example.com
-    secretName: app-tls
+    - hosts: [app.example.com]
+      secretName: app-tls
   rules:
-  - host: app.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend-service
-            port:
-              number: 80
-  - host: api.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: api-service
-            port:
-              number: 8080
+    - host: app.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: { name: frontend-service, port: { number: 80 } }
 ```
 
-## Типичные ошибки и troubleshooting
+---
 
-### 502 Bad Gateway
+## 24. Troubleshooting
 
-Причина - NGINX не может получить ответ от upstream.
+|Симптом|Причины|Что делать|
+|---|---|---|
+|**502 Bad Gateway**|бэкенд не слушает или упал; неверный адрес в `proxy_pass`; устаревший DNS у upstream; бэкенд закрыл keep-alive соединение раньше nginx; SELinux|`curl` к бэкенду напрямую, `tail -f error.log`, `ss -tlnp`, проверить §11 про DNS, `setsebool -P httpd_can_network_connect 1`|
+|**504 Gateway Timeout**|бэкенд не ответил за `proxy_read_timeout`|поднять таймаут — но это симптом, чинить производительность бэкенда|
+|**413 Request Entity Too Large**|тело больше `client_max_body_size`|поднять в нужном `location`|
+|**499 Client Closed Request**|клиент ушёл, не дождавшись ответа|искать долгие ответы; массовые 499 = деградация или слишком короткий таймаут у клиента|
+|**400 Request Header Or Cookie Too Large**|большие куки/JWT|`large_client_header_buffers 4 16k`|
+|**worker_connections are not enough**|упёрлись в лимит|поднять `worker_connections` и `worker_rlimit_nofile`, проверить `accepts != handled`|
+|Пропали security headers в одном location|`add_header` в дочернем контексте перебил родительские|§16|
+|Кэш всегда MISS|`Set-Cookie` или `Cache-Control: private` от бэкенда, `proxy_cache_min_uses`|§12|
+|Rate limit режет всех как одного|нет realip за прокси|§9.2|
+|SSE/стриминг «залипает»|`proxy_buffering on`|§9.3|
+|Память растёт после деплоев|старые воркеры живут из-за WebSocket|`worker_shutdown_timeout`|
+|Конфиг «не применился»|`reload` при ошибке в конфиге|всегда `nginx -t` перед reload|
+|502 после рестарта контейнера бэкенда|DNS закэширован при старте|§11, динамический resolver|
 
-Диагностика:
+Инструменты диагностики: `nginx -T` (полный развёрнутый конфиг), `nginx -V` (модули), `error_log ... debug` вместе с `debug_connection <ip>` (точечный debug без потопа логов), `$upstream_*` переменные в access-логе, `curl -v -H 'Host: example.com'`, `ss -s`, `tcpdump`.
 
-```bash
-# Проверить, работает ли бэкенд
-curl -v http://127.0.0.1:3000/health
+---
 
-# Проверить логи NGINX
-tail -f /var/log/nginx/error.log
+## 25. Production-чеклист
 
-# Проверить сетевую связность
-ss -tlnp | grep 3000
-```
+- [ ] `worker_processes auto`, `worker_rlimit_nofile`, `worker_shutdown_timeout` выставлены
+- [ ] `nginx -t` в CI и перед каждым reload
+- [ ] Версия не старше текущей stable-ветки, CVE отслеживаются
+- [ ] TLS 1.2+, HSTS, OCSP stapling, автопродление сертификатов с reload-хуком
+- [ ] `realip` настроен, `set_real_ip_from` строго по доверенным подсетям
+- [ ] Security headers + `server_tokens off`, заголовки вынесены в snippet и включены во все location
+- [ ] Rate limiting на публичных и auth-эндпоинтах, проверено, что считает по реальному IP
+- [ ] Таймауты заданы для всех `proxy_*` и клиентских директив
+- [ ] `proxy_next_upstream` не повторяет неидемпотентные запросы
+- [ ] Кэш: есть `X-Cache-Status`, `use_stale` + `cache_lock`, проверено поведение с `Set-Cookie`
+- [ ] Health-эндпоинт, probes, readiness выводит инстанс из ротации
+- [ ] Логи в JSON, `$request_id` пробрасывается в бэкенд, в логе есть `$upstream_response_time`
+- [ ] Метрики в Prometheus, алерты на 5xx, p99, срок жизни сертификата
+- [ ] Динамический DNS для upstream решён (resolver или генерация конфига)
+- [ ] Есть второй инстанс nginx и способ переключения (VIP/keepalived или облачный LB)
+- [ ] Стриминговые эндпоинты с `proxy_buffering off`
+- [ ] Конфиг в git, деплой воспроизводим, секреты не зашиты в образ
 
-Типичные причины:
-- Бэкенд не запущен или упал
-- Неправильный адрес/порт в `proxy_pass`
-- Бэкенд перегружен и не принимает соединения
-- SELinux блокирует сетевые подключения NGINX (`setsebool -P httpd_can_network_connect 1`)
+---
 
-### 504 Gateway Timeout
+## 26. Вопросы с собеседований
 
-Причина - бэкенд не ответил за отведенное время.
-
-```nginx
-# Увеличить таймауты
-location /api/ {
-    proxy_pass http://backend;
-    proxy_connect_timeout 30s;
-    proxy_read_timeout 120s;    # Увеличить для долгих операций
-    proxy_send_timeout 30s;
-}
-```
-
-Если проблема повторяется, это сигнал о проблемах производительности бэкенда, а не конфигурации NGINX.
-
-### 413 Request Entity Too Large
-
-Причина - тело запроса превышает `client_max_body_size`.
-
-```nginx
-# Глобально или в конкретном location
-client_max_body_size 100m;
-
-# Для эндпоинта загрузки файлов
-location /upload/ {
-    client_max_body_size 500m;
-    proxy_pass http://backend;
-}
-```
-
-### 499 Client Closed Request
-
-NGINX-специфичный код - клиент закрыл соединение до получения ответа. Частая причина - слишком долгий ответ бэкенда, и клиент не дождался.
-
-### Permission denied при подключении к upstream
-
-```bash
-# SELinux на CentOS/RHEL
-setsebool -P httpd_can_network_connect 1
-
-# Проверить права на сокет (для Unix-сокетов)
-ls -la /run/php/php-fpm.sock
-# Должно быть: srw-rw---- nginx www-data
-```
-
-### Отладка конфигурации
-
-```bash
-# Показать скомпилированную конфигурацию (все include развернуты)
-nginx -T
-
-# Проверить синтаксис
-nginx -t
-
-# Версия и модули
-nginx -V
-
-# Тест конкретного файла конфигурации
-nginx -t -c /path/to/nginx.conf
-```
-
-> [!summary] Чеклист production-конфигурации
-> - `worker_processes auto` и `worker_rlimit_nofile` выставлены
-> - SSL/TLS настроен с TLSv1.2+ и HSTS
-> - Security headers добавлены (X-Frame-Options, CSP, nosniff)
-> - `server_tokens off` скрывает версию
-> - Rate limiting для публичных эндпоинтов
-> - Gzip включен для текстовых типов
-> - Логирование в JSON для парсинга в ELK/Loki
-> - Health check endpoint для мониторинга и Kubernetes probes
-> - `proxy_next_upstream` для отказоустойчивости
-> - `proxy_cache_use_stale` для graceful degradation
-> - Таймауты выставлены для всех proxy-директив
-> - `nginx -t` выполняется перед каждым reload
+1. **Почему nginx держит больше соединений, чем Apache prefork?** Event loop поверх epoll вместо потока на соединение: память растёт от числа соединений, а не потоков. У Apache есть event MPM, и разрыв сегодня меньше, чем в 2010-х.
+2. **Как выбирается `server` и `location`?** §6.1–6.2, включая приоритет ` = `, `^~`, regex в порядке объявления, затем самый длинный prefix.
+3. **`root` vs `alias`?** root добавляет весь URI к пути, alias заменяет префикс location.
+4. **Что делает `nginx -s reload` и может ли он уронить прод?** Поднимаются новые воркеры, старые доживают запросы. При ошибке конфига новый не применяется, старые продолжают работать — поэтому `nginx -t` обязателен.
+5. **Как передать бэкенду реальный IP клиента?** `X-Forwarded-For` плюс обязательно `set_real_ip_from`/`real_ip_header`, на L4 — PROXY protocol. И почему доверять XFF от произвольного источника нельзя.
+6. **`least_conn` vs round robin, когда `ip_hash`?** §11.
+7. **Есть ли активные health checks в open source?** Нет, только пассивные `max_fails`/`fail_timeout`, и они реагируют лишь на реальный трафик.
+8. **Почему после рестарта контейнера бэкенда сыплются 502?** DNS для upstream резолвится один раз при старте; лечится resolver + переменная в `proxy_pass`.
+9. **Зачем `proxy_buffering` и когда его выключают?** Защита бэкенда от медленных клиентов; выключают для SSE и стриминга.
+10. **Почему ответы не кэшируются?** `Set-Cookie` или `Cache-Control` от бэкенда, `Vary`, `proxy_cache_min_uses`.
+11. **Как защититься от cache stampede?** `proxy_cache_lock` + `proxy_cache_use_stale updating` + `proxy_cache_background_update`.
+12. **`burst` vs `nodelay` в `limit_req`?** Leaky bucket: очередь на burst, с nodelay — мгновенная обработка всплеска, без — выравнивание задержками.
+13. **Почему rate limit на трёх инстансах фактически тройной?** Зоны локальны для процесса и хоста; синхронизация только в Plus.
+14. **Как сделать canary?** `split_clients` по проценту или роутинг по заголовку через `map`.
+15. **Куда пропали security headers в `/api`?** `add_header` не наследуется аддитивно.
+16. **Почему «if is evil»?** `if` в location создаёт вложенный конфигурационный контекст; безопасны только `return` и `rewrite ... last`.
+17. **Как роутить по домену, не терминируя TLS?** `stream` + `ssl_preread` по SNI.
+18. **Чем nginx хуже Envoy для микросервисов?** Нет динамической конфигурации без reload (xDS), беднее телеметрия, нет первоклассных outlier detection и retry-политик.
+19. **Как балансировать gRPC и почему L4 плохо подходит?** Долгоживущие HTTP/2-соединения закрепляются за одним подом; нужен L7 (`grpc_pass`), который распределяет стримы.
+20. **Что такое `auth_request` и какова цена?** Делегирование авторизации подзапросом к отдельному сервису; дополнительный RTT на каждый запрос, auth-сервис становится критическим путём.
+21. **Что происходит с WebSocket при reload?** Соединения живут на старых воркерах до `worker_shutdown_timeout`.
+22. **Умеет ли nginx быть forward proxy?** §17: исторически нет; CONNECT появился в Plus (`tunnel_pass`) и в open source mainline 1.31; для серьёзного egress берут Squid/Envoy.
