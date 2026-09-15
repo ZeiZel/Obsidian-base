@@ -299,7 +299,7 @@ __export(main_exports, {
 module.exports = __toCommonJS(main_exports);
 var import_obsidian9 = require("obsidian");
 
-// node_modules/.pnpm/ts-deepmerge@7.0.3/node_modules/ts-deepmerge/esm/index.js
+// node_modules/.pnpm/ts-deepmerge@8.0.0/node_modules/ts-deepmerge/esm/index.js
 var isObject = (obj) => {
   if (typeof obj === "object" && obj !== null) {
     if (typeof Object.getPrototypeOf === "function") {
@@ -310,6 +310,17 @@ var isObject = (obj) => {
   }
   return false;
 };
+var UNSAFE_KEYS = /* @__PURE__ */ new Set([
+  "__proto__",
+  "constructor",
+  "prototype",
+  "toString",
+  "valueOf",
+  "hasOwnProperty",
+  "isPrototypeOf",
+  "propertyIsEnumerable",
+  "toLocaleString"
+]);
 var merge = (...objects) => objects.reduce((result, current) => {
   if (current === void 0) {
     return result;
@@ -318,7 +329,7 @@ var merge = (...objects) => objects.reduce((result, current) => {
     throw new TypeError("Arguments provided to ts-deepmerge must be objects, not arrays.");
   }
   Object.keys(current).forEach((key) => {
-    if (["__proto__", "constructor", "prototype"].includes(key)) {
+    if (UNSAFE_KEYS.has(key)) {
       return;
     }
     if (Array.isArray(result[key]) && Array.isArray(current[key])) {
@@ -647,8 +658,8 @@ function removeFromPattern(pattern, removeChars) {
 }
 function normalizeAccentsDiacritics(text2) {
   return text2.replace(/[^\u0000-\u007E]/g, (x) => {
-    var _a;
-    return (_a = diacritics_map_default[x]) != null ? _a : x;
+    var _a2;
+    return (_a2 = diacritics_map_default[x]) != null ? _a2 : x;
   });
 }
 function synonymAliases(value, option) {
@@ -817,8 +828,8 @@ function isEOTinCodeBlock(text2) {
   return inCodeBlock;
 }
 function isInsideInlineCode(lineUntilCursor) {
-  var _a, _b;
-  const backquotes = (_b = (_a = lineUntilCursor.match(/`/g)) == null ? void 0 : _a.length) != null ? _b : 0;
+  var _a2, _b;
+  const backquotes = (_b = (_a2 = lineUntilCursor.match(/`/g)) == null ? void 0 : _a2.length) != null ? _b : 0;
   return backquotes % 2 === 1;
 }
 
@@ -849,14 +860,14 @@ var AppHelper = class {
     return one.line === other.line && one.ch === other.ch;
   }
   getAliases(file) {
-    var _a, _b;
+    var _a2, _b;
     return (_b = (0, import_obsidian.parseFrontMatterAliases)(
-      (_a = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter
+      (_a2 = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a2.frontmatter
     )) != null ? _b : [];
   }
   getFrontMatter(file) {
-    var _a, _b, _c, _d;
-    const frontMatter = (_a = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter;
+    var _a2, _b, _c, _d;
+    const frontMatter = (_a2 = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a2.frontmatter;
     if (!frontMatter) {
       return void 0;
     }
@@ -877,17 +888,17 @@ var AppHelper = class {
     };
   }
   getTagsProperty(file) {
-    var _a, _b, _c;
-    const frontMatter = (_a = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter;
+    var _a2, _b, _c;
+    const frontMatter = (_a2 = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a2.frontmatter;
     if (!frontMatter) {
       return [];
     }
     return (_c = (_b = (0, import_obsidian.parseFrontMatterTags)(frontMatter)) == null ? void 0 : _b.map((x) => x.slice(1))) != null ? _c : [];
   }
   getBoolFrontMatter(file, key) {
-    var _a, _b;
+    var _a2, _b;
     return Boolean(
-      (_b = (_a = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter) == null ? void 0 : _b[key]
+      (_b = (_a2 = this.unsafeApp.metadataCache.getFileCache(file)) == null ? void 0 : _a2.frontmatter) == null ? void 0 : _b[key]
     );
   }
   getMarkdownViewInActiveLeaf() {
@@ -900,28 +911,28 @@ var AppHelper = class {
     return this.unsafeApp.workspace.getActiveFile();
   }
   isActiveFile(file) {
-    var _a;
-    return ((_a = this.getActiveFile()) == null ? void 0 : _a.path) === file.path;
+    var _a2;
+    return ((_a2 = this.getActiveFile()) == null ? void 0 : _a2.path) === file.path;
   }
   getPreviousFile() {
-    var _a;
-    const fName = (_a = this.unsafeApp.workspace.getLastOpenFiles()) == null ? void 0 : _a[1];
+    var _a2;
+    const fName = (_a2 = this.unsafeApp.workspace.getLastOpenFiles()) == null ? void 0 : _a2[1];
     if (!fName) {
       return null;
     }
     return this.getMarkdownFileByPath(fName);
   }
   getCurrentDirname() {
-    var _a, _b, _c;
-    return (_c = (_b = (_a = this.getActiveFile()) == null ? void 0 : _a.parent) == null ? void 0 : _b.path) != null ? _c : null;
+    var _a2, _b, _c;
+    return (_c = (_b = (_a2 = this.getActiveFile()) == null ? void 0 : _a2.parent) == null ? void 0 : _b.path) != null ? _c : null;
   }
   getCurrentEditor() {
-    var _a, _b;
-    return (_b = (_a = this.getMarkdownViewInActiveLeaf()) == null ? void 0 : _a.editor) != null ? _b : null;
+    var _a2, _b;
+    return (_b = (_a2 = this.getMarkdownViewInActiveLeaf()) == null ? void 0 : _a2.editor) != null ? _b : null;
   }
   getSelection() {
-    var _a;
-    return (_a = this.getCurrentEditor()) == null ? void 0 : _a.getSelection();
+    var _a2;
+    return (_a2 = this.getCurrentEditor()) == null ? void 0 : _a2.getSelection();
   }
   getCurrentOffset(editor) {
     return editor.posToOffset(editor.getCursor());
@@ -936,7 +947,7 @@ var AppHelper = class {
     return this.getCurrentLine(editor).slice(0, editor.getCursor().ch);
   }
   optimizeMarkdownLinkText(linkText) {
-    var _a;
+    var _a2;
     const activeFile = this.getActiveFile();
     if (!activeFile) {
       return null;
@@ -954,7 +965,7 @@ var AppHelper = class {
       activeFile.path
     );
     if (markdownLink.startsWith("[[")) {
-      const text2 = (_a = markdownLink.matchAll(/^\[\[(?<text>.+)]]$/g).next().value.groups) == null ? void 0 : _a.text;
+      const text2 = (_a2 = markdownLink.matchAll(/^\[\[(?<text>.+)]]$/g).next().value.groups) == null ? void 0 : _a2.text;
       return { displayed: text2, link: text2 };
     } else {
       const { displayed, link } = markdownLink.matchAll(/^\[(?<displayed>.+)]\(\<?(?<link>.+)\.md\>?\)$/g).next().value.groups;
@@ -962,19 +973,19 @@ var AppHelper = class {
     }
   }
   linkText2Path(linkText) {
-    var _a, _b;
+    var _a2, _b;
     const activeFile = this.getActiveFile();
     if (!activeFile) {
       return null;
     }
-    return (_b = (_a = this.unsafeApp.metadataCache.getFirstLinkpathDest(
+    return (_b = (_a2 = this.unsafeApp.metadataCache.getFirstLinkpathDest(
       linkText,
       activeFile.path
-    )) == null ? void 0 : _a.path) != null ? _b : null;
+    )) == null ? void 0 : _a2.path) != null ? _b : null;
   }
   inMathBlock(editor) {
-    var _a, _b;
-    const numberOfDollarPair = (_b = (_a = this.getContentUntilCursor(editor).match(/\$\$\n/g)) == null ? void 0 : _a.length) != null ? _b : 0;
+    var _a2, _b;
+    const numberOfDollarPair = (_b = (_a2 = this.getContentUntilCursor(editor).match(/\$\$\n/g)) == null ? void 0 : _a2.length) != null ? _b : 0;
     return numberOfDollarPair % 2 !== 0;
   }
   /**
@@ -992,14 +1003,14 @@ var AppHelper = class {
     );
   }
   getResolvedLinks(file) {
-    var _a, _b;
+    var _a2, _b;
     return (_b = Object.keys(
-      (_a = this.unsafeApp.metadataCache.resolvedLinks[file.path]) != null ? _a : {}
+      (_a2 = this.unsafeApp.metadataCache.resolvedLinks[file.path]) != null ? _a2 : {}
     )) != null ? _b : [];
   }
   getUnresolvedLinks(file) {
-    var _a;
-    const countsByLink = (_a = this.unsafeApp.metadataCache.unresolvedLinks[file.path]) != null ? _a : {};
+    var _a2;
+    const countsByLink = (_a2 = this.unsafeApp.metadataCache.unresolvedLinks[file.path]) != null ? _a2 : {};
     return new Set(Object.keys(countsByLink));
   }
   getMarkdownFileByPath(path2) {
@@ -1013,9 +1024,9 @@ var AppHelper = class {
     return abstractFile;
   }
   openMarkdownFile(file, newLeaf, offset = 0) {
-    var _a;
+    var _a2;
     const leaf = this.unsafeApp.workspace.getLeaf(newLeaf);
-    leaf.openFile(file, (_a = this.unsafeApp.workspace.activeLeaf) == null ? void 0 : _a.getViewState()).then(() => {
+    leaf.openFile(file, (_a2 = this.unsafeApp.workspace.activeLeaf) == null ? void 0 : _a2.getViewState()).then(() => {
       this.unsafeApp.workspace.setActiveLeaf(leaf, true, true);
       const viewOfType = this.unsafeApp.workspace.getActiveViewOfType(import_obsidian.MarkdownView);
       if (viewOfType) {
@@ -1027,7 +1038,7 @@ var AppHelper = class {
     });
   }
   getCurrentFrontMatter() {
-    var _a, _b;
+    var _a2, _b;
     const editor = this.getCurrentEditor();
     if (!editor) {
       return null;
@@ -1053,19 +1064,19 @@ var AppHelper = class {
     if (!currentKeyLocation) {
       return null;
     }
-    return (_b = (_a = currentKeyLocation.groups) == null ? void 0 : _a.key) != null ? _b : null;
+    return (_b = (_a2 = currentKeyLocation.groups) == null ? void 0 : _a2.key) != null ? _b : null;
   }
   /**
    * Unsafe method
    */
   isIMEOn() {
-    var _a, _b, _c;
+    var _a2, _b, _c;
     if (!this.unsafeApp.workspace.getActiveViewOfType(import_obsidian.MarkdownView)) {
       return false;
     }
     const markdownView = this.unsafeApp.workspace.activeLeaf.view;
     const cm5or6 = markdownView.editor.cm;
-    if (((_a = cm5or6 == null ? void 0 : cm5or6.inputState) == null ? void 0 : _a.composing) > 0) {
+    if (((_a2 = cm5or6 == null ? void 0 : cm5or6.inputState) == null ? void 0 : _a2.composing) > 0) {
       return true;
     }
     return !!((_c = (_b = cm5or6 == null ? void 0 : cm5or6.display) == null ? void 0 : _b.input) == null ? void 0 : _c.composing);
@@ -1074,13 +1085,13 @@ var AppHelper = class {
    * Unsafe method
    */
   getVisibleLineRange() {
-    var _a;
+    var _a2;
     const markdownView = this.unsafeApp.workspace.getActiveViewOfType(import_obsidian.MarkdownView);
     if (!markdownView) {
       return null;
     }
     const cm = markdownView.editor.cm;
-    if (!(cm == null ? void 0 : cm.visibleRanges) || !((_a = cm == null ? void 0 : cm.state) == null ? void 0 : _a.doc)) {
+    if (!(cm == null ? void 0 : cm.visibleRanges) || !((_a2 = cm == null ? void 0 : cm.state) == null ? void 0 : _a2.doc)) {
       return null;
     }
     const visibleRanges = cm.visibleRanges;
@@ -1103,8 +1114,8 @@ var AppHelper = class {
     return !this.unsafeApp.vault.config.useMarkdownLinks;
   }
   get newLinkFormat() {
-    var _a;
-    return (_a = this.unsafeApp.vault.config.newLinkFormat) != null ? _a : "shortest";
+    var _a2;
+    return (_a2 = this.unsafeApp.vault.config.newLinkFormat) != null ? _a2 : "shortest";
   }
 };
 
@@ -1112,8 +1123,10 @@ var AppHelper = class {
 var import_obsidian3 = require("obsidian");
 
 // src/composables/settings/useFilterSetting.ts
+var ALWAYS_VISIBLE = () => true;
 var useFilterSetting = (group) => {
   const filterTargets = [];
+  const conditionalElements = [];
   let latestQuery = "";
   const applyFilter = (query) => {
     latestQuery = query;
@@ -1122,30 +1135,45 @@ var useFilterSetting = (group) => {
     for (const target of filterTargets) {
       const searchText = target.getSearchText().toLowerCase();
       const isMatch = shouldShowAll || searchText.includes(normalizedQuery);
-      target.settingEl.toggle(isMatch);
+      target.settingEl.toggle(isMatch && target.isVisible());
+    }
+    for (const target of conditionalElements) {
+      target.el.toggle(target.isVisible());
     }
   };
-  const addFilterTarget = (element2, getSearchText) => {
-    filterTargets.push({ settingEl: element2, getSearchText });
+  const addFilterTarget = (element2, getSearchText, isVisible) => {
+    filterTargets.push({ settingEl: element2, getSearchText, isVisible });
     applyFilter(latestQuery);
   };
-  const addFilterableSetting = (name, desc, build) => {
+  const addFilterableSetting = (name, desc, build, option) => {
     const searchText = name.trim();
     group.addSetting((setting) => {
+      var _a2;
       setting.setName(name);
       if (desc) {
         setting.setDesc(desc);
       }
       build(setting);
-      addFilterTarget(setting.settingEl, () => searchText);
+      addFilterTarget(
+        setting.settingEl,
+        () => searchText,
+        (_a2 = option == null ? void 0 : option.visible) != null ? _a2 : ALWAYS_VISIBLE
+      );
     });
+  };
+  const addConditionalElement = (el, isVisible) => {
+    conditionalElements.push({ el, isVisible });
+    el.toggle(isVisible());
+  };
+  const refresh = () => {
+    applyFilter(latestQuery);
   };
   group.addSearch((sc) => {
     sc.setPlaceholder("Filter settings").onChange((value) => {
       applyFilter(value);
     });
   });
-  return { addFilterableSetting };
+  return { addFilterableSetting, addConditionalElement, refresh };
 };
 
 // src/keys.ts
@@ -1201,13 +1229,13 @@ var ColumnDelimiter = _ColumnDelimiter;
 
 // src/util/path.ts
 function basename(path2, ext2) {
-  var _a, _b;
-  const name = (_b = (_a = path2.match(/.+[\\/]([^\\/]+)[\\/]?$/)) == null ? void 0 : _a[1]) != null ? _b : path2;
+  var _a2, _b;
+  const name = (_b = (_a2 = path2.match(/.+[\\/]([^\\/]+)[\\/]?$/)) == null ? void 0 : _a2[1]) != null ? _b : path2;
   return ext2 && name.endsWith(ext2) ? name.replace(ext2, "") : name;
 }
 function dirname(path2) {
-  var _a, _b;
-  return (_b = (_a = path2.match(/(.+)[\\/].+$/)) == null ? void 0 : _a[1]) != null ? _b : ".";
+  var _a2, _b;
+  return (_b = (_a2 = path2.match(/(.+)[\\/].+$/)) == null ? void 0 : _a2[1]) != null ? _b : ".";
 }
 function isURL(path2) {
   return Boolean(path2.match(new RegExp("^https?://")));
@@ -1239,8 +1267,8 @@ _DescriptionOnSuggestion.SHORT = new _DescriptionOnSuggestion("Short", (word) =>
 _DescriptionOnSuggestion.FULL = new _DescriptionOnSuggestion(
   "Full",
   (word) => {
-    var _a;
-    return (_a = word.description) != null ? _a : null;
+    var _a2;
+    return (_a2 = word.description) != null ? _a2 : null;
   }
 );
 var DescriptionOnSuggestion = _DescriptionOnSuggestion;
@@ -1311,7 +1339,7 @@ function pushWord(wordsByFirstLetter, key, word) {
   wordsByFirstLetter[key].push(word);
 }
 function judge(word, query, queryStartWithUpper, options) {
-  var _a, _b, _c;
+  var _a2, _b, _c;
   if (query === "") {
     return {
       word: {
@@ -1324,7 +1352,7 @@ function judge(word, query, queryStartWithUpper, options) {
   }
   const matcher = (options == null ? void 0 : options.fuzzy) ? lowerFuzzy : wrapFuzzy(lowerStartsWith);
   const matched = matcher(word.value, query);
-  if (matched.type === "concrete_match" || matched.type === "fuzzy_match" && matched.score > ((_a = options == null ? void 0 : options.fuzzy) == null ? void 0 : _a.minMatchScore)) {
+  if (matched.type === "concrete_match" || matched.type === "fuzzy_match" && matched.score > ((_a2 = options == null ? void 0 : options.fuzzy) == null ? void 0 : _a2.minMatchScore)) {
     if (queryStartWithUpper && word.type !== "internalLink" && word.type !== "frontMatter") {
       const c = capitalizeFirstLetter(word.value);
       return {
@@ -1372,7 +1400,7 @@ function judge(word, query, queryStartWithUpper, options) {
   };
 }
 function suggestWords(indexedWords, query, maxNum, option = {}) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+  var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
   const {
     frontMatter,
     selectionHistoryStorage,
@@ -1392,17 +1420,17 @@ function suggestWords(indexedWords, query, maxNum, option = {}) {
     return query.length >= minChars;
   };
   const flattenFrontMatterWords = () => {
-    var _a2, _b2;
+    var _a3, _b2;
     if (frontMatter === "alias" || frontMatter === "aliases") {
       return [];
     }
-    if (frontMatter && ((_a2 = indexedWords.frontMatter) == null ? void 0 : _a2[frontMatter])) {
+    if (frontMatter && ((_a3 = indexedWords.frontMatter) == null ? void 0 : _a3[frontMatter])) {
       return Object.values((_b2 = indexedWords.frontMatter) == null ? void 0 : _b2[frontMatter]).flat();
     }
     return [];
   };
   const words = queryStartWithUpper ? frontMatter ? flattenFrontMatterWords() : [
-    ...shouldIncludeProvider("currentFile") ? (_a = indexedWords.currentFile[query.charAt(0)]) != null ? _a : [] : [],
+    ...shouldIncludeProvider("currentFile") ? (_a2 = indexedWords.currentFile[query.charAt(0)]) != null ? _a2 : [] : [],
     ...shouldIncludeProvider("currentFile") ? (_b = indexedWords.currentFile[query.charAt(0).toLowerCase()]) != null ? _b : [] : [],
     ...shouldIncludeProvider("currentVault") ? (_c = indexedWords.currentVault[query.charAt(0)]) != null ? _c : [] : [],
     ...shouldIncludeProvider("currentVault") ? (_d = indexedWords.currentVault[query.charAt(0).toLowerCase()]) != null ? _d : [] : [],
@@ -1424,8 +1452,8 @@ function suggestWords(indexedWords, query, maxNum, option = {}) {
   const latestUpdated = max(
     filteredJudgement.map(
       (x) => {
-        var _a2, _b2;
-        return (_b2 = (_a2 = selectionHistoryStorage == null ? void 0 : selectionHistoryStorage.getSelectionHistory(x.word)) == null ? void 0 : _a2.lastUpdated) != null ? _b2 : 0;
+        var _a3, _b2;
+        return (_b2 = (_a3 = selectionHistoryStorage == null ? void 0 : selectionHistoryStorage.getSelectionHistory(x.word)) == null ? void 0 : _a3.lastUpdated) != null ? _b2 : 0;
       }
     ),
     0
@@ -1464,7 +1492,7 @@ function suggestWords(indexedWords, query, maxNum, option = {}) {
   return uniqWith(candidate, suggestionUniqPredicate);
 }
 function judgeByPartialMatch(word, query, queryStartWithUpper, options) {
-  var _a, _b, _c, _d, _e, _f;
+  var _a2, _b, _c, _d, _e, _f;
   if (query === "") {
     return {
       word: { ...word, hit: word.value },
@@ -1475,7 +1503,7 @@ function judgeByPartialMatch(word, query, queryStartWithUpper, options) {
   const startsWithMatcher = (options == null ? void 0 : options.fuzzy) ? lowerFuzzyStarsWith : wrapFuzzy(lowerStartsWith);
   const includesMatcher = (options == null ? void 0 : options.fuzzy) ? lowerFuzzy : wrapFuzzy(lowerIncludes);
   const startsWithMatched = startsWithMatcher(word.value, query);
-  if (startsWithMatched.type === "concrete_match" || startsWithMatched.type === "fuzzy_match" && startsWithMatched.score > ((_a = options == null ? void 0 : options.fuzzy) == null ? void 0 : _a.minMatchScore)) {
+  if (startsWithMatched.type === "concrete_match" || startsWithMatched.type === "fuzzy_match" && startsWithMatched.score > ((_a2 = options == null ? void 0 : options.fuzzy) == null ? void 0 : _a2.minMatchScore)) {
     if (queryStartWithUpper && word.type !== "internalLink" && word.type !== "frontMatter") {
       const c = capitalizeFirstLetter(word.value);
       return {
@@ -1568,11 +1596,11 @@ function suggestWordsByPartialMatch(indexedWords, query, maxNum, option = {}) {
   };
   const flatObjectValues = (object) => Object.values(object).flat();
   const flattenFrontMatterWords = () => {
-    var _a, _b;
+    var _a2, _b;
     if (frontMatter === "alias" || frontMatter === "aliases") {
       return [];
     }
-    if (frontMatter && ((_a = indexedWords.frontMatter) == null ? void 0 : _a[frontMatter])) {
+    if (frontMatter && ((_a2 = indexedWords.frontMatter) == null ? void 0 : _a2[frontMatter])) {
       return Object.values((_b = indexedWords.frontMatter) == null ? void 0 : _b[frontMatter]).flat();
     }
     return [];
@@ -1587,8 +1615,8 @@ function suggestWordsByPartialMatch(indexedWords, query, maxNum, option = {}) {
   const latestUpdated = max(
     filteredJudgement.map(
       (x) => {
-        var _a, _b;
-        return (_b = (_a = selectionHistoryStorage == null ? void 0 : selectionHistoryStorage.getSelectionHistory(x.word)) == null ? void 0 : _a.lastUpdated) != null ? _b : 0;
+        var _a2, _b;
+        return (_b = (_a2 = selectionHistoryStorage == null ? void 0 : selectionHistoryStorage.getSelectionHistory(x.word)) == null ? void 0 : _a2.lastUpdated) != null ? _b : 0;
       }
     ),
     0
@@ -1852,11 +1880,11 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
     super(app, plugin);
     this.plugin = plugin;
   }
-  async display() {
-    let { containerEl } = this;
+  display() {
+    const { containerEl } = this;
     containerEl.empty();
     containerEl.createEl("h2", { text: "Various Complements - Settings" });
-    await this.addMainSettings(containerEl);
+    this.addMainSettings(containerEl);
     this.addAppearanceSettings(containerEl);
     this.addKeyCustomizationSettings(containerEl);
     this.addCurrentFileComplementSettings(containerEl);
@@ -1868,18 +1896,20 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
     this.addMobileSettings(containerEl);
     this.addDebugSettings(containerEl);
   }
-  async addMainSettings(containerEl) {
+  addMainSettings(containerEl) {
     containerEl.createEl("h3", {
       text: "Main",
       cls: "various-complements__settings__header various-complements__settings__header__main"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, addConditionalElement, refresh } = useFilterSetting(group);
+    const usesChineseStrategy = () => this.plugin.settings.strategy === TokenizeStrategy.CHINESE.name;
     addFilterableSetting("Strategy", null, (setting) => {
       setting.addDropdown(
         (tc) => tc.addOptions(mirrorMap(TokenizeStrategy.values(), (x) => x.name)).setValue(this.plugin.settings.strategy).onChange(async (value) => {
           this.plugin.settings.strategy = value;
-          this.display();
+          refresh();
+          void refreshCedictWarning();
           await this.plugin.saveSettings({
             currentFile: true,
             currentVault: true
@@ -1887,51 +1917,71 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
         })
       );
     });
-    if (this.plugin.settings.strategy === TokenizeStrategy.CHINESE.name) {
-      const df = document.createDocumentFragment();
-      df.append(
-        createSpan({
-          text: "The path to `cedict_ts.u8`. You can download it from "
-        }),
-        createEl("a", {
-          href: "https://www.mdbg.net/chinese/dictionary?page=cc-cedict",
-          text: " the site "
-        })
-      );
-      addFilterableSetting("CC-CEDICT path", df, (setting) => {
+    const cedictDesc = document.createDocumentFragment();
+    cedictDesc.append(
+      createSpan({
+        text: "The path to `cedict_ts.u8`. You can download it from "
+      }),
+      createEl("a", {
+        href: "https://www.mdbg.net/chinese/dictionary?page=cc-cedict",
+        text: " the site "
+      })
+    );
+    addFilterableSetting(
+      "CC-CEDICT path",
+      cedictDesc,
+      (setting) => {
         setting.setClass("various-complements__settings__nested").addText((cb) => {
           TextComponentEvent.onChange(cb, async (value) => {
             this.plugin.settings.cedictPath = value;
+            void refreshCedictWarning();
             await this.plugin.saveSettings();
-            await this.display();
           }).setValue(this.plugin.settings.cedictPath);
         });
-      });
-      const hasCedict = await this.app.vault.adapter.exists(
-        this.plugin.settings.cedictPath
-      );
-      if (!hasCedict) {
-        containerEl.createEl("div", {
-          text: `\u26A0 cedict_ts.u8 doesn't exist in ${this.plugin.settings.cedictPath}.`,
-          cls: "various-complements__settings__warning"
-        });
+      },
+      { visible: usesChineseStrategy }
+    );
+    let cedictExists = true;
+    let latestCedictCheckId = 0;
+    const cedictWarningEl = containerEl.createEl("div", {
+      cls: "various-complements__settings__warning"
+    });
+    addConditionalElement(
+      cedictWarningEl,
+      () => usesChineseStrategy() && !cedictExists
+    );
+    const refreshCedictWarning = async () => {
+      if (!usesChineseStrategy()) {
+        refresh();
+        return;
       }
-    }
+      const checkId = ++latestCedictCheckId;
+      const path2 = this.plugin.settings.cedictPath;
+      const exists = await this.app.vault.adapter.exists(path2).catch(() => true);
+      if (checkId !== latestCedictCheckId) {
+        return;
+      }
+      cedictExists = exists;
+      cedictWarningEl.setText(`\u26A0 cedict_ts.u8 doesn't exist in ${path2}.`);
+      refresh();
+    };
+    void refreshCedictWarning();
     addFilterableSetting("Match strategy", null, (setting) => {
       setting.addDropdown(
         (tc) => tc.addOptions(mirrorMap(MatchStrategy.values(), (x) => x.name)).setValue(this.plugin.settings.matchStrategy).onChange(async (value) => {
           this.plugin.settings.matchStrategy = value;
+          refresh();
           await this.plugin.saveSettings();
-          this.display();
         })
       );
     });
-    if (this.plugin.settings.matchStrategy === MatchStrategy.PARTIAL.name) {
+    addConditionalElement(
       containerEl.createEl("div", {
         text: "\u26A0 `partial` is more than 10 times slower than `prefix`",
         cls: "various-complements__settings__warning"
-      });
-    }
+      }),
+      () => this.plugin.settings.matchStrategy === MatchStrategy.PARTIAL.name
+    );
     addFilterableSetting("Fuzzy match", null, (setting) => {
       setting.addToggle((tc) => {
         tc.setValue(this.plugin.settings.fuzzyMatch).onChange(async (value) => {
@@ -1971,27 +2021,28 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
         });
       }
     );
-    if (TokenizeStrategy.fromName(this.plugin.settings.strategy).canTreatUnderscoreAsPartOfWord) {
-      addFilterableSetting(
-        "Treat an underscore as a part of a word.",
-        "If this setting is enabled, aaa_bbb will be tokenized as a single token aaa_bbb, rather than being split into aaa and bbb.",
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.treatUnderscoreAsPartOfWord
-            ).onChange(async (value) => {
-              this.plugin.settings.treatUnderscoreAsPartOfWord = value;
-              await this.plugin.saveSettings({
-                internalLink: true,
-                customDictionary: true,
-                currentVault: true,
-                currentFile: true
-              });
+    addFilterableSetting(
+      "Treat an underscore as a part of a word.",
+      "If this setting is enabled, aaa_bbb will be tokenized as a single token aaa_bbb, rather than being split into aaa and bbb.",
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.treatUnderscoreAsPartOfWord
+          ).onChange(async (value) => {
+            this.plugin.settings.treatUnderscoreAsPartOfWord = value;
+            await this.plugin.saveSettings({
+              internalLink: true,
+              customDictionary: true,
+              currentVault: true,
+              currentFile: true
             });
           });
-        }
-      );
-    }
+        });
+      },
+      {
+        visible: () => TokenizeStrategy.fromName(this.plugin.settings.strategy).canTreatUnderscoreAsPartOfWord
+      }
+    );
     addFilterableSetting(
       "Matching without emoji",
       "Ex: If enabled, 'aaa' matches with '\u{1F600}aaa'",
@@ -2315,76 +2366,79 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
       cls: "various-complements__settings__header various-complements__settings__header__current-file"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, refresh } = useFilterSetting(group);
+    const isEnabled = () => this.plugin.settings.enableCurrentFileComplement;
     addFilterableSetting("Enable Current file complement", null, (setting) => {
       setting.addToggle((tc) => {
         tc.setValue(this.plugin.settings.enableCurrentFileComplement).onChange(
           async (value) => {
             this.plugin.settings.enableCurrentFileComplement = value;
+            refresh();
             await this.plugin.saveSettings({ currentFile: true });
-            this.display();
           }
         );
       });
     });
-    if (this.plugin.settings.enableCurrentFileComplement) {
-      addFilterableSetting(
-        "Min number of characters for indexing",
-        "It uses a default value of Strategy if set 0.",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 15, 1).setValue(this.plugin.settings.currentFileMinNumberOfCharacters).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.currentFileMinNumberOfCharacters = value;
-              await this.plugin.saveSettings({ currentFile: true });
-            })
-          );
-        }
-      );
-      addFilterableSetting(
-        "Only complement English on current file complement",
-        null,
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.onlyComplementEnglishOnCurrentFileComplement
-            ).onChange(async (value) => {
-              this.plugin.settings.onlyComplementEnglishOnCurrentFileComplement = value;
-              await this.plugin.saveSettings({ currentFile: true });
-            });
+    addFilterableSetting(
+      "Min number of characters for indexing",
+      "It uses a default value of Strategy if set 0.",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 15, 1).setValue(this.plugin.settings.currentFileMinNumberOfCharacters).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.currentFileMinNumberOfCharacters = value;
+            await this.plugin.saveSettings({ currentFile: true });
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Only complement English on current file complement",
+      null,
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.onlyComplementEnglishOnCurrentFileComplement
+          ).onChange(async (value) => {
+            this.plugin.settings.onlyComplementEnglishOnCurrentFileComplement = value;
+            await this.plugin.saveSettings({ currentFile: true });
           });
-        }
-      );
-      addFilterableSetting(
-        "Min number of characters for trigger",
-        "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 10, 1).setValue(
-              this.plugin.settings.currentFileMinNumberOfCharactersForTrigger
-            ).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.currentFileMinNumberOfCharactersForTrigger = value;
-              await this.plugin.saveSettings();
-            })
-          );
-        }
-      );
-      addFilterableSetting(
-        "Exclude word patterns for indexing",
-        "Regexp patterns for words to be excluded from the suggestions, separated by line breaks.",
-        (setting) => {
-          setting.addTextArea((tc) => {
-            const el = tc.setValue(
-              this.plugin.settings.excludeCurrentFileWordPatterns.join("\n")
-            ).onChange(async (value) => {
-              this.plugin.settings.excludeCurrentFileWordPatterns = smartLineBreakSplit(value);
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path-dense";
-            return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Min number of characters for trigger",
+      "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 10, 1).setValue(
+            this.plugin.settings.currentFileMinNumberOfCharactersForTrigger
+          ).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.currentFileMinNumberOfCharactersForTrigger = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude word patterns for indexing",
+      "Regexp patterns for words to be excluded from the suggestions, separated by line breaks.",
+      (setting) => {
+        setting.addTextArea((tc) => {
+          const el = tc.setValue(
+            this.plugin.settings.excludeCurrentFileWordPatterns.join("\n")
+          ).onChange(async (value) => {
+            this.plugin.settings.excludeCurrentFileWordPatterns = smartLineBreakSplit(value);
+            await this.plugin.saveSettings();
           });
-        }
-      );
-    }
+          el.inputEl.className = "various-complements__settings__text-area-path-dense";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
   }
   addCurrentVaultComplementSettings(containerEl) {
     containerEl.createEl("h3", {
@@ -2392,131 +2446,139 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
       cls: "various-complements__settings__header various-complements__settings__header__current-vault"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, addConditionalElement, refresh } = useFilterSetting(group);
+    const isEnabled = () => this.plugin.settings.enableCurrentVaultComplement;
     addFilterableSetting("Enable Current vault complement", null, (setting) => {
       setting.addToggle((tc) => {
         tc.setValue(this.plugin.settings.enableCurrentVaultComplement).onChange(
           async (value) => {
             this.plugin.settings.enableCurrentVaultComplement = value;
-            this.display();
+            refresh();
             await this.plugin.saveSettings({ currentVault: true });
           }
         );
       });
     });
-    if (this.plugin.settings.enableCurrentVaultComplement) {
-      addFilterableSetting(
-        "Min number of characters for indexing",
-        "It uses a default value of Strategy if set 0.",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 15, 1).setValue(this.plugin.settings.currentVaultMinNumberOfCharacters).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.currentVaultMinNumberOfCharacters = value;
-              await this.plugin.saveSettings();
-            })
-          );
-        }
-      );
-      addFilterableSetting(
-        "Include prefix path patterns",
-        "Prefix match path patterns to include files.",
-        (setting) => {
-          setting.addTextArea((tac) => {
-            const el = tac.setValue(
-              this.plugin.settings.includeCurrentVaultPathPrefixPatterns
-            ).setPlaceholder("Private/").onChange(async (value) => {
-              this.plugin.settings.includeCurrentVaultPathPrefixPatterns = value;
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path";
-            return el;
+    addFilterableSetting(
+      "Min number of characters for indexing",
+      "It uses a default value of Strategy if set 0.",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 15, 1).setValue(this.plugin.settings.currentVaultMinNumberOfCharacters).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.currentVaultMinNumberOfCharacters = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Include prefix path patterns",
+      "Prefix match path patterns to include files.",
+      (setting) => {
+        setting.addTextArea((tac) => {
+          const el = tac.setValue(
+            this.plugin.settings.includeCurrentVaultPathPrefixPatterns
+          ).setPlaceholder("Private/").onChange(async (value) => {
+            this.plugin.settings.includeCurrentVaultPathPrefixPatterns = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting(
-        "Exclude prefix path patterns",
-        "Prefix match path patterns to exclude files.",
-        (setting) => {
-          setting.addTextArea((tac) => {
-            const el = tac.setValue(
-              this.plugin.settings.excludeCurrentVaultPathPrefixPatterns
-            ).setPlaceholder("Private/").onChange(async (value) => {
-              this.plugin.settings.excludeCurrentVaultPathPrefixPatterns = value;
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path";
-            return el;
+          el.inputEl.className = "various-complements__settings__text-area-path";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude prefix path patterns",
+      "Prefix match path patterns to exclude files.",
+      (setting) => {
+        setting.addTextArea((tac) => {
+          const el = tac.setValue(
+            this.plugin.settings.excludeCurrentVaultPathPrefixPatterns
+          ).setPlaceholder("Private/").onChange(async (value) => {
+            this.plugin.settings.excludeCurrentVaultPathPrefixPatterns = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting(
-        "Exclude path glob patterns",
-        "Glob patterns to exclude files. Supports wildcards like **/attachments, **/*.png, etc.",
-        (setting) => {
-          setting.addTextArea((tac) => {
-            const el = tac.setValue(
-              this.plugin.settings.excludeCurrentVaultPathGlobPatterns.join(
-                "\n"
-              )
-            ).setPlaceholder("**/attachments\n**/*.png").onChange(async (value) => {
-              this.plugin.settings.excludeCurrentVaultPathGlobPatterns = smartLineBreakSplit(value);
-              await this.plugin.saveSettings();
-              this.display();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path";
-            return el;
+          el.inputEl.className = "various-complements__settings__text-area-path";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude path glob patterns",
+      "Glob patterns to exclude files. Supports wildcards like **/attachments, **/*.png, etc.",
+      (setting) => {
+        setting.addTextArea((tac) => {
+          const el = tac.setValue(
+            this.plugin.settings.excludeCurrentVaultPathGlobPatterns.join(
+              "\n"
+            )
+          ).setPlaceholder("**/attachments\n**/*.png").onChange(async (value) => {
+            this.plugin.settings.excludeCurrentVaultPathGlobPatterns = smartLineBreakSplit(value);
+            await this.plugin.saveSettings();
           });
-        }
-      );
+          el.inputEl.className = "various-complements__settings__text-area-path";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addConditionalElement(
       containerEl.createEl("div", {
         text: "\u26A0 Glob patterns add processing overhead. Use prefix path patterns above for better performance when possible.",
         cls: "various-complements__settings__warning"
-      });
-      addFilterableSetting(
-        "Include only files under current directory",
-        null,
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.includeCurrentVaultOnlyFilesUnderCurrentDirectory
-            ).onChange(async (value) => {
-              this.plugin.settings.includeCurrentVaultOnlyFilesUnderCurrentDirectory = value;
-              await this.plugin.saveSettings();
-            });
+      }),
+      isEnabled
+    );
+    addFilterableSetting(
+      "Include only files under current directory",
+      null,
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.includeCurrentVaultOnlyFilesUnderCurrentDirectory
+          ).onChange(async (value) => {
+            this.plugin.settings.includeCurrentVaultOnlyFilesUnderCurrentDirectory = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting(
-        "Min number of characters for trigger",
-        "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 10, 1).setValue(
-              this.plugin.settings.currentVaultMinNumberOfCharactersForTrigger
-            ).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.currentVaultMinNumberOfCharactersForTrigger = value;
-              await this.plugin.saveSettings();
-            })
-          );
-        }
-      );
-      addFilterableSetting(
-        "Exclude word patterns for indexing",
-        "Regexp patterns for words to be excluded from the suggestions, separated by line breaks.",
-        (setting) => {
-          setting.addTextArea((tc) => {
-            const el = tc.setValue(
-              this.plugin.settings.excludeCurrentVaultWordPatterns.join("\n")
-            ).onChange(async (value) => {
-              this.plugin.settings.excludeCurrentVaultWordPatterns = smartLineBreakSplit(value);
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path-dense";
-            return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Min number of characters for trigger",
+      "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 10, 1).setValue(
+            this.plugin.settings.currentVaultMinNumberOfCharactersForTrigger
+          ).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.currentVaultMinNumberOfCharactersForTrigger = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude word patterns for indexing",
+      "Regexp patterns for words to be excluded from the suggestions, separated by line breaks.",
+      (setting) => {
+        setting.addTextArea((tc) => {
+          const el = tc.setValue(
+            this.plugin.settings.excludeCurrentVaultWordPatterns.join("\n")
+          ).onChange(async (value) => {
+            this.plugin.settings.excludeCurrentVaultWordPatterns = smartLineBreakSplit(value);
+            await this.plugin.saveSettings();
           });
-        }
-      );
-    }
+          el.inputEl.className = "various-complements__settings__text-area-path-dense";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
   }
   addCustomDictionaryComplementSettings(containerEl) {
     containerEl.createEl("h3", {
@@ -2524,7 +2586,8 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
       cls: "various-complements__settings__header various-complements__settings__header__custom-dictionary"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, refresh } = useFilterSetting(group);
+    const isEnabled = () => this.plugin.settings.enableCustomDictionaryComplement;
     addFilterableSetting(
       "Enable Custom dictionary complement",
       null,
@@ -2534,120 +2597,130 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
             this.plugin.settings.enableCustomDictionaryComplement
           ).onChange(async (value) => {
             this.plugin.settings.enableCustomDictionaryComplement = value;
+            refresh();
             await this.plugin.saveSettings({ customDictionary: true });
-            this.display();
           });
         });
       }
     );
-    if (this.plugin.settings.enableCustomDictionaryComplement) {
-      addFilterableSetting(
-        "Custom dictionary paths",
-        "Specify either a relative path from Vault root or URL for each line.",
-        (setting) => {
-          setting.addTextArea((tac) => {
-            const el = tac.setValue(this.plugin.settings.customDictionaryPaths).setPlaceholder("dictionary.md").onChange(async (value) => {
-              this.plugin.settings.customDictionaryPaths = value;
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path";
-            return el;
+    addFilterableSetting(
+      "Custom dictionary paths",
+      "Specify either a relative path from Vault root or URL for each line.",
+      (setting) => {
+        setting.addTextArea((tac) => {
+          const el = tac.setValue(this.plugin.settings.customDictionaryPaths).setPlaceholder("dictionary.md").onChange(async (value) => {
+            this.plugin.settings.customDictionaryPaths = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting("Column delimiter", null, (setting) => {
+          el.inputEl.className = "various-complements__settings__text-area-path";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Column delimiter",
+      null,
+      (setting) => {
         setting.addDropdown(
           (tc) => tc.addOptions(mirrorMap(ColumnDelimiter.values(), (x) => x.name)).setValue(this.plugin.settings.columnDelimiter).onChange(async (value) => {
             this.plugin.settings.columnDelimiter = value;
             await this.plugin.saveSettings();
           })
         );
-      });
-      addFilterableSetting(
-        "Word regex pattern",
-        "Only load words that match the regular expression pattern.",
-        (setting) => {
-          setting.addText((cb) => {
-            cb.setValue(
-              this.plugin.settings.customDictionaryWordRegexPattern
-            ).onChange(async (value) => {
-              this.plugin.settings.customDictionaryWordRegexPattern = value;
-              await this.plugin.saveSettings();
-            });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Word regex pattern",
+      "Only load words that match the regular expression pattern.",
+      (setting) => {
+        setting.addText((cb) => {
+          cb.setValue(
+            this.plugin.settings.customDictionaryWordRegexPattern
+          ).onChange(async (value) => {
+            this.plugin.settings.customDictionaryWordRegexPattern = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting(
-        "Delimiter to hide a suggestion",
-        "If set ';;;', 'abcd;;;efg' is shown as 'abcd' on suggestions, but completes to 'abcdefg'.",
-        (setting) => {
-          setting.addText((cb) => {
-            cb.setValue(
-              this.plugin.settings.delimiterToHideSuggestion
-            ).onChange(async (value) => {
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Delimiter to hide a suggestion",
+      "If set ';;;', 'abcd;;;efg' is shown as 'abcd' on suggestions, but completes to 'abcdefg'.",
+      (setting) => {
+        setting.addText((cb) => {
+          cb.setValue(this.plugin.settings.delimiterToHideSuggestion).onChange(
+            async (value) => {
               this.plugin.settings.delimiterToHideSuggestion = value;
               await this.plugin.saveSettings();
-            });
-          });
-        }
-      );
-      addFilterableSetting(
-        "Delimiter to divide suggestions for display from ones for insertion",
-        "If set ' >>> ', 'displayed >>> inserted' is shown as 'displayed' on suggestions, but completes to 'inserted'.",
-        (setting) => {
-          setting.addText((cb) => {
-            cb.setValue(
-              this.plugin.settings.delimiterToDivideSuggestionsForDisplayFromInsertion
-            ).onChange(async (value) => {
-              this.plugin.settings.delimiterToDivideSuggestionsForDisplayFromInsertion = value;
-              await this.plugin.saveSettings();
-            });
-          });
-        }
-      );
-      addFilterableSetting(
-        "Caret location symbol after complement",
-        "If set '<CARET>' and there is '<li><CARET></li>' in custom dictionary, it complements '<li></li>' and move a caret where between '<li>' and `</li>`.",
-        (setting) => {
-          setting.addText((cb) => {
-            cb.setValue(
-              this.plugin.settings.caretLocationSymbolAfterComplement
-            ).onChange(async (value) => {
-              this.plugin.settings.caretLocationSymbolAfterComplement = value;
-              await this.plugin.saveSettings();
-            });
-          });
-        }
-      );
-      addFilterableSetting(
-        "Displayed text suffix",
-        "It shows as a suffix of displayed text if there is a difference between displayed and inserted",
-        (setting) => {
-          setting.addText((cb) => {
-            cb.setValue(this.plugin.settings.displayedTextSuffix).onChange(
-              async (value) => {
-                this.plugin.settings.displayedTextSuffix = value;
-                await this.plugin.saveSettings();
-              }
-            );
-          });
-        }
-      );
-      addFilterableSetting(
-        "Min number of characters for trigger",
-        "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 10, 1).setValue(
-              this.plugin.settings.customDictionaryMinNumberOfCharactersForTrigger
-            ).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.customDictionaryMinNumberOfCharactersForTrigger = value;
-              await this.plugin.saveSettings();
-            })
+            }
           );
-        }
-      );
-    }
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Delimiter to divide suggestions for display from ones for insertion",
+      "If set ' >>> ', 'displayed >>> inserted' is shown as 'displayed' on suggestions, but completes to 'inserted'.",
+      (setting) => {
+        setting.addText((cb) => {
+          cb.setValue(
+            this.plugin.settings.delimiterToDivideSuggestionsForDisplayFromInsertion
+          ).onChange(async (value) => {
+            this.plugin.settings.delimiterToDivideSuggestionsForDisplayFromInsertion = value;
+            await this.plugin.saveSettings();
+          });
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Caret location symbol after complement",
+      "If set '<CARET>' and there is '<li><CARET></li>' in custom dictionary, it complements '<li></li>' and move a caret where between '<li>' and `</li>`.",
+      (setting) => {
+        setting.addText((cb) => {
+          cb.setValue(
+            this.plugin.settings.caretLocationSymbolAfterComplement
+          ).onChange(async (value) => {
+            this.plugin.settings.caretLocationSymbolAfterComplement = value;
+            await this.plugin.saveSettings();
+          });
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Displayed text suffix",
+      "It shows as a suffix of displayed text if there is a difference between displayed and inserted",
+      (setting) => {
+        setting.addText((cb) => {
+          cb.setValue(this.plugin.settings.displayedTextSuffix).onChange(
+            async (value) => {
+              this.plugin.settings.displayedTextSuffix = value;
+              await this.plugin.saveSettings();
+            }
+          );
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Min number of characters for trigger",
+      "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 10, 1).setValue(
+            this.plugin.settings.customDictionaryMinNumberOfCharactersForTrigger
+          ).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.customDictionaryMinNumberOfCharactersForTrigger = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
   }
   addInternalLinkComplementSettings(containerEl) {
     containerEl.createEl("h3", {
@@ -2655,20 +2728,24 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
       cls: "various-complements__settings__header various-complements__settings__header__internal-link"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, addConditionalElement, refresh } = useFilterSetting(group);
+    const isEnabled = () => this.plugin.settings.enableInternalLinkComplement;
+    const usesAliasTransformation = () => isEnabled() && this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.enabled;
     addFilterableSetting("Enable Internal link complement", null, (setting) => {
       setting.addToggle((tc) => {
         tc.setValue(this.plugin.settings.enableInternalLinkComplement).onChange(
           async (value) => {
             this.plugin.settings.enableInternalLinkComplement = value;
+            refresh();
             await this.plugin.saveSettings({ internalLink: true });
-            this.display();
           }
         );
       });
     });
-    if (this.plugin.settings.enableInternalLinkComplement) {
-      addFilterableSetting("Suggest with an alias", null, (setting) => {
+    addFilterableSetting(
+      "Suggest with an alias",
+      null,
+      (setting) => {
         setting.addToggle((tc) => {
           tc.setValue(
             this.plugin.settings.suggestInternalLinkWithAlias
@@ -2677,22 +2754,28 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
             await this.plugin.saveSettings({ internalLink: true });
           });
         });
-      });
-      addFilterableSetting(
-        "Preserve first-letter case",
-        "If the first letter case differs between the query and the displayed text, insert with an alias using the query's first-letter case.",
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.preserveFirstLetterCaseOnInternalLink
-            ).onChange(async (value) => {
-              this.plugin.settings.preserveFirstLetterCaseOnInternalLink = value;
-              await this.plugin.saveSettings();
-            });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Preserve first-letter case",
+      "If the first letter case differs between the query and the displayed text, insert with an alias using the query's first-letter case.",
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.preserveFirstLetterCaseOnInternalLink
+          ).onChange(async (value) => {
+            this.plugin.settings.preserveFirstLetterCaseOnInternalLink = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting("Update internal links on save", null, (setting) => {
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Update internal links on save",
+      null,
+      (setting) => {
         setting.addToggle((tc) => {
           tc.setValue(this.plugin.settings.updateInternalLinksOnSave).onChange(
             async (value) => {
@@ -2701,8 +2784,13 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
             }
           );
         });
-      });
-      addFilterableSetting("Exclude self internal link", null, (setting) => {
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude self internal link",
+      null,
+      (setting) => {
         setting.addToggle((tc) => {
           tc.setValue(this.plugin.settings.excludeSelfInternalLink).onChange(
             async (value) => {
@@ -2711,173 +2799,190 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
             }
           );
         });
-      });
-      addFilterableSetting(
-        "Exclude existing in active file internal links",
-        "Exclude internal links present in the current file from the suggestions. Note that the number of excluded suggestions will reduce the total suggestions by the value set in the 'Max number of suggestions' option.",
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.excludeExistingInActiveFileInternalLinks
-            ).onChange(async (value) => {
-              this.plugin.settings.excludeExistingInActiveFileInternalLinks = value;
-              await this.plugin.saveSettings({ internalLink: true });
-            });
-          });
-        }
-      );
-      addFilterableSetting(
-        "Exclude unresolved internal links",
-        "Exclude internal links that point to non-existing files (phantom links) from the suggestions.",
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.excludeUnresolvedInternalLinks
-            ).onChange(async (value) => {
-              this.plugin.settings.excludeUnresolvedInternalLinks = value;
-              await this.plugin.saveSettings({ internalLink: true });
-            });
-          });
-        }
-      );
-      addFilterableSetting(
-        "Exclude internal links in code",
-        "Exclude internal link suggestions when the cursor is inside a code block or inline code. Unlike the 'Disable suggestions in the Code block' option, this targets only internal link suggestions and also applies to inline code.",
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.excludeInternalLinksInCode
-            ).onChange(async (value) => {
-              this.plugin.settings.excludeInternalLinksInCode = value;
-              await this.plugin.saveSettings();
-            });
-          });
-        }
-      );
-      addFilterableSetting(
-        "Insert an alias that is transformed from the displayed internal link",
-        null,
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.enabled
-            ).onChange(async (value) => {
-              this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.enabled = value;
-              await this.plugin.saveSettings();
-              this.display();
-            });
-          });
-        }
-      );
-      if (this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.enabled) {
-        addFilterableSetting(
-          "Before: regular expression pattern with captures",
-          String.raw`Ex: (?<name>.+) \(.+\)$`,
-          (setting) => {
-            setting.setClass("various-complements__settings__nested").addText((cb) => {
-              cb.setValue(
-                this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.beforeRegExp
-              ).onChange(async (value) => {
-                this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.beforeRegExp = value;
-                await this.plugin.saveSettings();
-              });
-            });
-          }
-        );
-        addFilterableSetting("After", "Ex: $<name>", (setting) => {
-          setting.setClass("various-complements__settings__nested").addText((cb) => {
-            cb.setValue(
-              this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.after
-            ).onChange(async (value) => {
-              this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.after = value;
-              await this.plugin.saveSettings();
-            });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude existing in active file internal links",
+      "Exclude internal links present in the current file from the suggestions. Note that the number of excluded suggestions will reduce the total suggestions by the value set in the 'Max number of suggestions' option.",
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.excludeExistingInActiveFileInternalLinks
+          ).onChange(async (value) => {
+            this.plugin.settings.excludeExistingInActiveFileInternalLinks = value;
+            await this.plugin.saveSettings({ internalLink: true });
           });
         });
-      }
-      addFilterableSetting(
-        "Exclude prefix path patterns",
-        "Prefix match path patterns to exclude files.",
-        (setting) => {
-          setting.addTextArea((tac) => {
-            const el = tac.setValue(
-              this.plugin.settings.excludeInternalLinkPathPrefixPatterns
-            ).setPlaceholder("Private/").onChange(async (value) => {
-              this.plugin.settings.excludeInternalLinkPathPrefixPatterns = value;
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path";
-            return el;
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude unresolved internal links",
+      "Exclude internal links that point to non-existing files (phantom links) from the suggestions.",
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.excludeUnresolvedInternalLinks
+          ).onChange(async (value) => {
+            this.plugin.settings.excludeUnresolvedInternalLinks = value;
+            await this.plugin.saveSettings({ internalLink: true });
           });
-        }
-      );
-      addFilterableSetting(
-        "Exclude path glob patterns",
-        "Glob patterns to exclude files. Supports wildcards like **/attachments, **/*.png, etc.",
-        (setting) => {
-          setting.addTextArea((tac) => {
-            const el = tac.setValue(
-              this.plugin.settings.excludeInternalLinkPathGlobPatterns.join(
-                "\n"
-              )
-            ).setPlaceholder("**/attachments\n**/*.png").onChange(async (value) => {
-              this.plugin.settings.excludeInternalLinkPathGlobPatterns = smartLineBreakSplit(value);
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude internal links in code",
+      "Exclude internal link suggestions when the cursor is inside a code block or inline code. Unlike the 'Disable suggestions in the Code block' option, this targets only internal link suggestions and also applies to inline code.",
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(this.plugin.settings.excludeInternalLinksInCode).onChange(
+            async (value) => {
+              this.plugin.settings.excludeInternalLinksInCode = value;
               await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path";
-            return el;
+            }
+          );
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Insert an alias that is transformed from the displayed internal link",
+      null,
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.enabled
+          ).onChange(async (value) => {
+            this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.enabled = value;
+            refresh();
+            await this.plugin.saveSettings();
           });
-        }
-      );
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Before: regular expression pattern with captures",
+      String.raw`Ex: (?<name>.+) \(.+\)$`,
+      (setting) => {
+        setting.setClass("various-complements__settings__nested").addText((cb) => {
+          cb.setValue(
+            this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.beforeRegExp
+          ).onChange(async (value) => {
+            this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.beforeRegExp = value;
+            await this.plugin.saveSettings();
+          });
+        });
+      },
+      { visible: usesAliasTransformation }
+    );
+    addFilterableSetting(
+      "After",
+      "Ex: $<name>",
+      (setting) => {
+        setting.setClass("various-complements__settings__nested").addText((cb) => {
+          cb.setValue(
+            this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.after
+          ).onChange(async (value) => {
+            this.plugin.settings.insertAliasTransformedFromDisplayedInternalLink.after = value;
+            await this.plugin.saveSettings();
+          });
+        });
+      },
+      { visible: usesAliasTransformation }
+    );
+    addFilterableSetting(
+      "Exclude prefix path patterns",
+      "Prefix match path patterns to exclude files.",
+      (setting) => {
+        setting.addTextArea((tac) => {
+          const el = tac.setValue(
+            this.plugin.settings.excludeInternalLinkPathPrefixPatterns
+          ).setPlaceholder("Private/").onChange(async (value) => {
+            this.plugin.settings.excludeInternalLinkPathPrefixPatterns = value;
+            await this.plugin.saveSettings();
+          });
+          el.inputEl.className = "various-complements__settings__text-area-path";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Exclude path glob patterns",
+      "Glob patterns to exclude files. Supports wildcards like **/attachments, **/*.png, etc.",
+      (setting) => {
+        setting.addTextArea((tac) => {
+          const el = tac.setValue(
+            this.plugin.settings.excludeInternalLinkPathGlobPatterns.join(
+              "\n"
+            )
+          ).setPlaceholder("**/attachments\n**/*.png").onChange(async (value) => {
+            this.plugin.settings.excludeInternalLinkPathGlobPatterns = smartLineBreakSplit(value);
+            await this.plugin.saveSettings();
+          });
+          el.inputEl.className = "various-complements__settings__text-area-path";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addConditionalElement(
       containerEl.createEl("div", {
         text: "\u26A0 Glob patterns add processing overhead. Use prefix path patterns above for better performance when possible.",
         cls: "various-complements__settings__warning"
-      });
-      addFilterableSetting(
-        "Front matter key for exclusion",
-        "Exclude internal links from the suggestions if whose front matters have the key whose name is same as this setting, and the value is 'true'",
-        (setting) => {
-          setting.addText((cb) => {
-            TextComponentEvent.onChange(cb, async (value) => {
-              this.plugin.settings.frontMatterKeyForExclusionInternalLink = value;
-              await this.plugin.saveSettings({ internalLink: true });
-            }).setValue(
-              this.plugin.settings.frontMatterKeyForExclusionInternalLink
-            );
-          });
-        }
-      );
-      addFilterableSetting(
-        "Tags for exclusion",
-        "Tags to exclude suggestions for internal links. If specifying multiple tags, separate them with line breaks.",
-        (setting) => {
-          setting.addTextArea((tc) => {
-            const el = tc.setValue(
-              this.plugin.settings.tagsForExclusionInternalLink.join("\n")
-            ).onChange(async (value) => {
-              this.plugin.settings.tagsForExclusionInternalLink = smartLineBreakSplit(value);
-              await this.plugin.saveSettings();
-            });
-            el.inputEl.className = "various-complements__settings__text-area-path-mini";
-            return el;
-          });
-        }
-      );
-      addFilterableSetting(
-        "Min number of characters for trigger",
-        "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 10, 1).setValue(
-              this.plugin.settings.internalLinkMinNumberOfCharactersForTrigger
-            ).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.internalLinkMinNumberOfCharactersForTrigger = value;
-              await this.plugin.saveSettings();
-            })
+      }),
+      isEnabled
+    );
+    addFilterableSetting(
+      "Front matter key for exclusion",
+      "Exclude internal links from the suggestions if whose front matters have the key whose name is same as this setting, and the value is 'true'",
+      (setting) => {
+        setting.addText((cb) => {
+          TextComponentEvent.onChange(cb, async (value) => {
+            this.plugin.settings.frontMatterKeyForExclusionInternalLink = value;
+            await this.plugin.saveSettings({ internalLink: true });
+          }).setValue(
+            this.plugin.settings.frontMatterKeyForExclusionInternalLink
           );
-        }
-      );
-    }
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Tags for exclusion",
+      "Tags to exclude suggestions for internal links. If specifying multiple tags, separate them with line breaks.",
+      (setting) => {
+        setting.addTextArea((tc) => {
+          const el = tc.setValue(
+            this.plugin.settings.tagsForExclusionInternalLink.join("\n")
+          ).onChange(async (value) => {
+            this.plugin.settings.tagsForExclusionInternalLink = smartLineBreakSplit(value);
+            await this.plugin.saveSettings();
+          });
+          el.inputEl.className = "various-complements__settings__text-area-path-mini";
+          return el;
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Min number of characters for trigger",
+      "Override the main trigger setting for this provider. Set 0 to use the main setting value.",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 10, 1).setValue(
+            this.plugin.settings.internalLinkMinNumberOfCharactersForTrigger
+          ).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.internalLinkMinNumberOfCharactersForTrigger = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
   }
   addFrontMatterComplementSettings(containerEl) {
     containerEl.createEl("h3", {
@@ -2885,34 +2990,38 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
       cls: "various-complements__settings__header various-complements__settings__header__front-matter"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, refresh } = useFilterSetting(group);
+    const isEnabled = () => this.plugin.settings.enableFrontMatterComplement;
     addFilterableSetting("Enable Front matter complement", null, (setting) => {
       setting.addToggle((tc) => {
         tc.setValue(this.plugin.settings.enableFrontMatterComplement).onChange(
           async (value) => {
             this.plugin.settings.enableFrontMatterComplement = value;
+            refresh();
             await this.plugin.saveSettings({ frontMatter: true });
-            this.display();
           }
         );
       });
     });
-    if (this.plugin.settings.enableFrontMatterComplement) {
-      addFilterableSetting(
-        "Match strategy in the front matter",
-        null,
-        (setting) => {
-          setting.addDropdown(
-            (tc) => tc.addOptions(
-              mirrorMap(SpecificMatchStrategy.values(), (x) => x.name)
-            ).setValue(this.plugin.settings.frontMatterComplementMatchStrategy).onChange(async (value) => {
-              this.plugin.settings.frontMatterComplementMatchStrategy = value;
-              await this.plugin.saveSettings();
-            })
-          );
-        }
-      );
-      addFilterableSetting("Insert comma after completion", null, (setting) => {
+    addFilterableSetting(
+      "Match strategy in the front matter",
+      null,
+      (setting) => {
+        setting.addDropdown(
+          (tc) => tc.addOptions(
+            mirrorMap(SpecificMatchStrategy.values(), (x) => x.name)
+          ).setValue(this.plugin.settings.frontMatterComplementMatchStrategy).onChange(async (value) => {
+            this.plugin.settings.frontMatterComplementMatchStrategy = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Insert comma after completion",
+      null,
+      (setting) => {
         setting.addToggle((tc) => {
           tc.setValue(
             this.plugin.settings.insertCommaAfterFrontMatterCompletion
@@ -2921,8 +3030,9 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
             await this.plugin.saveSettings();
           });
         });
-      });
-    }
+      },
+      { visible: isEnabled }
+    );
   }
   addIntelligentSuggestionPrioritizationSettings(containerEl) {
     containerEl.createEl("h3", {
@@ -2930,7 +3040,8 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
       cls: "various-complements__settings__header various-complements__settings__header__intelligent-suggestion-prioritization"
     });
     const group = new import_obsidian3.SettingGroup(containerEl);
-    const { addFilterableSetting } = useFilterSetting(group);
+    const { addFilterableSetting, refresh } = useFilterSetting(group);
+    const isEnabled = () => this.plugin.settings.intelligentSuggestionPrioritization.enabled;
     addFilterableSetting(
       "Enable Intelligent Suggestion Prioritization",
       null,
@@ -2940,74 +3051,76 @@ var VariousComplementsSettingTab = class extends import_obsidian3.PluginSettingT
             this.plugin.settings.intelligentSuggestionPrioritization.enabled
           ).onChange(async (value) => {
             this.plugin.settings.intelligentSuggestionPrioritization.enabled = value;
+            refresh();
             await this.plugin.saveSettings({
               intelligentSuggestionPrioritization: true
             });
-            this.display();
           });
         });
       }
     );
-    if (this.plugin.settings.intelligentSuggestionPrioritization.enabled) {
-      addFilterableSetting(
-        "history file path",
-        `Default: ${DEFAULT_HISTORIES_PATH}`,
-        (setting) => {
-          setting.addText((cb) => {
-            TextComponentEvent.onChange(cb, async (value) => {
-              this.plugin.settings.intelligentSuggestionPrioritization.historyFilePath = value;
-              await this.plugin.saveSettings({
-                intelligentSuggestionPrioritization: true
-              });
-            }).setValue(
-              this.plugin.settings.intelligentSuggestionPrioritization.historyFilePath
-            );
-          });
-        }
-      );
-      addFilterableSetting(
-        "Pretty-print history file",
-        "Save the history file with indentation to make Git diffs smaller.",
-        (setting) => {
-          setting.addToggle((tc) => {
-            tc.setValue(
-              this.plugin.settings.intelligentSuggestionPrioritization.prettyPrintHistoryFile
-            ).onChange(async (value) => {
-              this.plugin.settings.intelligentSuggestionPrioritization.prettyPrintHistoryFile = value;
-              await this.plugin.saveSettings();
+    addFilterableSetting(
+      "history file path",
+      `Default: ${DEFAULT_HISTORIES_PATH}`,
+      (setting) => {
+        setting.addText((cb) => {
+          TextComponentEvent.onChange(cb, async (value) => {
+            this.plugin.settings.intelligentSuggestionPrioritization.historyFilePath = value;
+            await this.plugin.saveSettings({
+              intelligentSuggestionPrioritization: true
             });
+          }).setValue(
+            this.plugin.settings.intelligentSuggestionPrioritization.historyFilePath
+          );
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Pretty-print history file",
+      "Save the history file with indentation to make Git diffs smaller.",
+      (setting) => {
+        setting.addToggle((tc) => {
+          tc.setValue(
+            this.plugin.settings.intelligentSuggestionPrioritization.prettyPrintHistoryFile
+          ).onChange(async (value) => {
+            this.plugin.settings.intelligentSuggestionPrioritization.prettyPrintHistoryFile = value;
+            await this.plugin.saveSettings();
           });
-        }
-      );
-      addFilterableSetting(
-        "Max days to keep history",
-        "If set 0, it will never remove",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 365, 1).setValue(
-              this.plugin.settings.intelligentSuggestionPrioritization.maxDaysToKeepHistory
-            ).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.intelligentSuggestionPrioritization.maxDaysToKeepHistory = value;
-              await this.plugin.saveSettings();
-            })
-          );
-        }
-      );
-      addFilterableSetting(
-        "Max number of history to keep",
-        "If set 0, it will never remove",
-        (setting) => {
-          setting.addSlider(
-            (sc) => sc.setLimits(0, 1e4, 1).setValue(
-              this.plugin.settings.intelligentSuggestionPrioritization.maxNumberOfHistoryToKeep
-            ).setDynamicTooltip().onChange(async (value) => {
-              this.plugin.settings.intelligentSuggestionPrioritization.maxNumberOfHistoryToKeep = value;
-              await this.plugin.saveSettings();
-            })
-          );
-        }
-      );
-    }
+        });
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Max days to keep history",
+      "If set 0, it will never remove",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 365, 1).setValue(
+            this.plugin.settings.intelligentSuggestionPrioritization.maxDaysToKeepHistory
+          ).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.intelligentSuggestionPrioritization.maxDaysToKeepHistory = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
+    addFilterableSetting(
+      "Max number of history to keep",
+      "If set 0, it will never remove",
+      (setting) => {
+        setting.addSlider(
+          (sc) => sc.setLimits(0, 1e4, 1).setValue(
+            this.plugin.settings.intelligentSuggestionPrioritization.maxNumberOfHistoryToKeep
+          ).setDynamicTooltip().onChange(async (value) => {
+            this.plugin.settings.intelligentSuggestionPrioritization.maxNumberOfHistoryToKeep = value;
+            await this.plugin.saveSettings();
+          })
+        );
+      },
+      { visible: isEnabled }
+    );
   }
   addMobileSettings(containerEl) {
     containerEl.createEl("h3", {
@@ -3090,7 +3203,7 @@ var CurrentFileWordProvider = class {
     this.words = [];
   }
   async refreshWords(option) {
-    var _a;
+    var _a2;
     this.clearWords();
     const editor = this.appHelper.getCurrentEditor();
     if (!editor) {
@@ -3127,7 +3240,7 @@ var CurrentFileWordProvider = class {
     }));
     for (const word of this.words) {
       pushWord(this.wordsByFirstLetter, word.value.charAt(0), word);
-      (_a = word.aliases) == null ? void 0 : _a.forEach(
+      (_a2 = word.aliases) == null ? void 0 : _a2.forEach(
         (a) => pushWord(this.wordsByFirstLetter, a.charAt(0), word)
       );
     }
@@ -3144,7 +3257,7 @@ var CurrentFileWordProvider = class {
   }
 };
 
-// node_modules/.pnpm/@isaacs+balanced-match@4.0.1/node_modules/@isaacs/balanced-match/dist/esm/index.js
+// node_modules/.pnpm/balanced-match@4.0.4/node_modules/balanced-match/dist/esm/index.js
 var balanced = (a, b, str) => {
   const ma = a instanceof RegExp ? maybeMatch(a, str) : a;
   const mb = b instanceof RegExp ? maybeMatch(b, str) : b;
@@ -3197,7 +3310,7 @@ var range = (a, b, str) => {
   return result;
 };
 
-// node_modules/.pnpm/@isaacs+brace-expansion@5.0.0/node_modules/@isaacs/brace-expansion/dist/esm/index.js
+// node_modules/.pnpm/brace-expansion@5.0.9/node_modules/brace-expansion/dist/esm/index.js
 var escSlash = "\0SLASH" + Math.random() + "\0";
 var escOpen = "\0OPEN" + Math.random() + "\0";
 var escClose = "\0CLOSE" + Math.random() + "\0";
@@ -3212,7 +3325,9 @@ var slashPattern = /\\\\/g;
 var openPattern = /\\{/g;
 var closePattern = /\\}/g;
 var commaPattern = /\\,/g;
-var periodPattern = /\\./g;
+var periodPattern = /\\\./g;
+var EXPANSION_MAX = 1e5;
+var EXPANSION_MAX_LENGTH = 4e6;
 function numeric(str) {
   return !isNaN(str) ? parseInt(str, 10) : str.charCodeAt(0);
 }
@@ -3243,14 +3358,15 @@ function parseCommaParts(str) {
   parts.push.apply(parts, p);
   return parts;
 }
-function expand(str) {
+function expand(str, options = {}) {
   if (!str) {
     return [];
   }
+  const { max: max2 = EXPANSION_MAX, maxLength = EXPANSION_MAX_LENGTH } = options;
   if (str.slice(0, 2) === "{}") {
     str = "\\{\\}" + str.slice(2);
   }
-  return expand_(escapeBraces(str), true).map(unescapeBraces);
+  return expand_(escapeBraces(str), max2, maxLength, true).map(unescapeBraces);
 }
 function embrace(str) {
   return "{" + str + "}";
@@ -3264,19 +3380,88 @@ function lte(i, y) {
 function gte(i, y) {
   return i >= y;
 }
-function expand_(str, isTop) {
-  const expansions = [];
-  const m = balanced("{", "}", str);
-  if (!m)
-    return [str];
-  const pre = m.pre;
-  const post = m.post.length ? expand_(m.post, false) : [""];
-  if (/\$$/.test(m.pre)) {
-    for (let k = 0; k < post.length; k++) {
-      const expansion = pre + "{" + m.body + "}" + post[k];
-      expansions.push(expansion);
+function combine(acc, pre, values, max2, maxLength, dropEmpties) {
+  const out = [];
+  let length = 0;
+  for (let a = 0; a < acc.length; a++) {
+    for (let v = 0; v < values.length; v++) {
+      if (out.length >= max2)
+        return out;
+      const expansion = acc[a] + pre + values[v];
+      if (dropEmpties && !expansion)
+        continue;
+      if (length + expansion.length > maxLength)
+        return out;
+      out.push(expansion);
+      length += expansion.length;
     }
-  } else {
+  }
+  return out;
+}
+function expandSequence(body, isAlphaSequence, max2, maxLength) {
+  const n = body.split(/\.\./);
+  const N = [];
+  if (n[0] === void 0 || n[1] === void 0) {
+    return N;
+  }
+  const x = numeric(n[0]);
+  const y = numeric(n[1]);
+  const width = Math.max(n[0].length, n[1].length);
+  let incr = n.length === 3 && n[2] !== void 0 ? Math.max(Math.abs(numeric(n[2])), 1) : 1;
+  let test = lte;
+  const reverse = y < x;
+  if (reverse) {
+    incr *= -1;
+    test = gte;
+  }
+  const pad = n.some(isPadded);
+  let length = 0;
+  for (let i = x; test(i, y) && N.length < max2; i += incr) {
+    let c;
+    if (isAlphaSequence) {
+      c = String.fromCharCode(i);
+      if (c === "\\") {
+        c = "";
+      }
+    } else {
+      c = String(i);
+      if (pad) {
+        const need = width - c.length;
+        if (need > 0) {
+          const z = new Array(need + 1).join("0");
+          if (i < 0) {
+            c = "-" + z + c.slice(1);
+          } else {
+            c = z + c;
+          }
+        }
+      }
+    }
+    if (length + c.length > maxLength)
+      break;
+    N.push(c);
+    length += c.length;
+  }
+  return N;
+}
+function expand_(str, max2, maxLength, isTop) {
+  let acc = [""];
+  let dropEmpties = false;
+  let firstGroup = true;
+  for (; ; ) {
+    const m = balanced("{", "}", str);
+    if (!m) {
+      return combine(acc, str, [""], max2, maxLength, dropEmpties);
+    }
+    const pre = m.pre;
+    if (/\$$/.test(pre)) {
+      acc = combine(acc, pre + "{" + m.body + "}", [""], max2, maxLength, dropEmpties && !m.post.length);
+      firstGroup = false;
+      if (!m.post.length)
+        break;
+      str = m.post;
+      continue;
+    }
     const isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
     const isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
     const isSequence = isNumericSequence || isAlphaSequence;
@@ -3284,78 +3469,61 @@ function expand_(str, isTop) {
     if (!isSequence && !isOptions) {
       if (m.post.match(/,(?!,).*\}/)) {
         str = m.pre + "{" + m.body + escClose + m.post;
-        return expand_(str);
+        isTop = true;
+        continue;
       }
-      return [str];
+      return combine(acc, pre + "{" + m.body + "}" + m.post, [""], max2, maxLength, dropEmpties);
     }
-    let n;
+    if (firstGroup) {
+      dropEmpties = isTop && !isSequence;
+      firstGroup = false;
+    }
+    let values;
     if (isSequence) {
-      n = m.body.split(/\.\./);
+      values = expandSequence(m.body, isAlphaSequence, max2, maxLength);
     } else {
-      n = parseCommaParts(m.body);
+      let n = parseCommaParts(m.body);
       if (n.length === 1 && n[0] !== void 0) {
-        n = expand_(n[0], false).map(embrace);
+        n = expand_(n[0], max2, maxLength, false).map(embrace);
         if (n.length === 1) {
-          return post.map((p) => m.pre + n[0] + p);
+          acc = combine(acc, pre + n[0], [""], max2, maxLength, dropEmpties && !m.post.length);
+          if (!m.post.length)
+            break;
+          str = m.post;
+          continue;
         }
       }
-    }
-    let N;
-    if (isSequence && n[0] !== void 0 && n[1] !== void 0) {
-      const x = numeric(n[0]);
-      const y = numeric(n[1]);
-      const width = Math.max(n[0].length, n[1].length);
-      let incr = n.length === 3 && n[2] !== void 0 ? Math.abs(numeric(n[2])) : 1;
-      let test = lte;
-      const reverse = y < x;
-      if (reverse) {
-        incr *= -1;
-        test = gte;
+      let dropsEmpties = dropEmpties && !m.post.length && !pre;
+      for (let d = 0; dropsEmpties && d < acc.length; d++) {
+        if (acc[d]) {
+          dropsEmpties = false;
+        }
       }
-      const pad = n.some(isPadded);
-      N = [];
-      for (let i = x; test(i, y); i += incr) {
-        let c;
-        if (isAlphaSequence) {
-          c = String.fromCharCode(i);
-          if (c === "\\") {
-            c = "";
+      values = [];
+      let valuesLength = 0;
+      outer: for (let j = 0; j < n.length; j++) {
+        const expanded = expand_(n[j], max2, maxLength, false);
+        for (let k = 0; k < expanded.length; k++) {
+          const v = expanded[k];
+          if (dropsEmpties && !v)
+            continue;
+          if (values.length >= max2 || valuesLength + v.length > maxLength) {
+            break outer;
           }
-        } else {
-          c = String(i);
-          if (pad) {
-            const need = width - c.length;
-            if (need > 0) {
-              const z = new Array(need + 1).join("0");
-              if (i < 0) {
-                c = "-" + z + c.slice(1);
-              } else {
-                c = z + c;
-              }
-            }
-          }
-        }
-        N.push(c);
-      }
-    } else {
-      N = [];
-      for (let j = 0; j < n.length; j++) {
-        N.push.apply(N, expand_(n[j], false));
-      }
-    }
-    for (let j = 0; j < N.length; j++) {
-      for (let k = 0; k < post.length; k++) {
-        const expansion = pre + N[j] + post[k];
-        if (!isTop || isSequence || expansion) {
-          expansions.push(expansion);
+          values.push(v);
+          valuesLength += v.length;
         }
       }
     }
+    acc = combine(acc, pre, values, max2, maxLength, dropEmpties && !m.post.length);
+    if (!m.post.length)
+      break;
+    str = m.post;
   }
-  return expansions;
+  return acc;
 }
 
-// node_modules/.pnpm/minimatch@10.1.1/node_modules/minimatch/dist/esm/assert-valid-pattern.js
+// node_modules/.pnpm/minimatch@10.2.6/node_modules/minimatch/dist/esm/assert-valid-pattern.js
 var MAX_PATTERN_LENGTH = 1024 * 64;
 var assertValidPattern = (pattern) => {
   if (typeof pattern !== "string") {
@@ -3366,7 +3534,7 @@ var assertValidPattern = (pattern) => {
   }
 };
 
-// node_modules/.pnpm/minimatch@10.1.1/node_modules/minimatch/dist/esm/brace-expressions.js
+// node_modules/.pnpm/minimatch@10.2.6/node_modules/minimatch/dist/esm/brace-expressions.js
 var posixClasses = {
   "[:alnum:]": ["\\p{L}\\p{Nl}\\p{Nd}", true],
   "[:alpha:]": ["\\p{L}\\p{Nl}", true],
@@ -3475,17 +3643,65 @@ var parseClass = (glob, position) => {
   return [comb, uflag, endPos - pos, true];
 };
 
-// node_modules/.pnpm/minimatch@10.1.1/node_modules/minimatch/dist/esm/unescape.js
+// node_modules/.pnpm/minimatch@10.2.6/node_modules/minimatch/dist/esm/unescape.js
 var unescape = (s, { windowsPathsNoEscape = false, magicalBraces = true } = {}) => {
   if (magicalBraces) {
-    return windowsPathsNoEscape ? s.replace(/\[([^\/\\])\]/g, "$1") : s.replace(/((?!\\).|^)\[([^\/\\])\]/g, "$1$2").replace(/\\([^\/])/g, "$1");
+    return windowsPathsNoEscape ? s.replace(/\[([^/\\])\]/g, "$1") : s.replace(/((?!\\).|^)\[([^/\\])\]/g, "$1$2").replace(/\\([^/])/g, "$1");
   }
-  return windowsPathsNoEscape ? s.replace(/\[([^\/\\{}])\]/g, "$1") : s.replace(/((?!\\).|^)\[([^\/\\{}])\]/g, "$1$2").replace(/\\([^\/{}])/g, "$1");
+  return windowsPathsNoEscape ? s.replace(/\[([^/\\{}])\]/g, "$1") : s.replace(/((?!\\).|^)\[([^/\\{}])\]/g, "$1$2").replace(/\\([^/{}])/g, "$1");
 };
 
-// node_modules/.pnpm/minimatch@10.1.1/node_modules/minimatch/dist/esm/ast.js
+// node_modules/.pnpm/minimatch@10.2.6/node_modules/minimatch/dist/esm/ast.js
+var _a;
 var types = /* @__PURE__ */ new Set(["!", "?", "+", "*", "@"]);
 var isExtglobType = (c) => types.has(c);
+var isExtglobAST = (c) => isExtglobType(c.type);
+var adoptionMap = /* @__PURE__ */ new Map([
+  ["!", ["@"]],
+  ["?", ["?", "@"]],
+  ["@", ["@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@"]]
+]);
+var adoptionWithSpaceMap = /* @__PURE__ */ new Map([
+  ["!", ["?"]],
+  ["@", ["?"]],
+  ["+", ["?", "*"]]
+]);
+var adoptionAnyMap = /* @__PURE__ */ new Map([
+  ["!", ["?", "@"]],
+  ["?", ["?", "@"]],
+  ["@", ["?", "@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@", "?", "*"]]
+]);
+var usurpMap = /* @__PURE__ */ new Map([
+  ["!", /* @__PURE__ */ new Map([["!", "@"]])],
+  [
+    "?",
+    /* @__PURE__ */ new Map([
+      ["*", "*"],
+      ["+", "*"]
+    ])
+  ],
+  [
+    "@",
+    /* @__PURE__ */ new Map([
+      ["!", "!"],
+      ["?", "?"],
+      ["@", "@"],
+      ["*", "*"],
+      ["+", "+"]
+    ])
+  ],
+  [
+    "+",
+    /* @__PURE__ */ new Map([
+      ["?", "*"],
+      ["*", "*"]
+    ])
+  ]
+]);
 var startNoTraversal = "(?!(?:^|/)\\.\\.?(?:$|/))";
 var startNoDot = "(?!\\.)";
 var addPatternStart = /* @__PURE__ */ new Set(["[", "."]);
@@ -3495,8 +3711,9 @@ var regExpEscape = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 var qmark = "[^/]";
 var star = qmark + "*?";
 var starNoEmpty = qmark + "+?";
-var _root, _hasMagic, _uflag, _parts, _parent, _parentIndex, _negs, _filledNegs, _options, _toString, _emptyExt, _AST_instances, fillNegs_fn, _AST_static, parseAST_fn, partsToRegExp_fn, parseGlob_fn;
-var _AST = class _AST {
+var ID = 0;
+var _root, _hasMagic, _uflag, _parts, _parent, _parentIndex, _negs, _filledNegs, _options, _toString, _emptyExt, _AST_instances, fillNegs_fn, _AST_static, parseAST_fn, canAdoptWithSpace_fn, canAdopt_fn, canAdoptType_fn, adoptWithSpace_fn, adopt_fn, canUsurpType_fn, canUsurp_fn, usurp_fn, flatten_fn, partsToRegExp_fn, parseGlob_fn;
+var AST = class {
   constructor(type, parent, options = {}) {
     __privateAdd(this, _AST_instances);
     __publicField(this, "type");
@@ -3513,6 +3730,7 @@ var _AST = class _AST {
     // set to true if it's an extglob with no children
     // (which really means one child of '')
     __privateAdd(this, _emptyExt, false);
+    __publicField(this, "id", ++ID);
     this.type = type;
     if (type)
       __privateSet(this, _hasMagic, true);
@@ -3523,6 +3741,23 @@ var _AST = class _AST {
     if (type === "!" && !__privateGet(__privateGet(this, _root), _filledNegs))
       __privateGet(this, _negs).push(this);
     __privateSet(this, _parentIndex, __privateGet(this, _parent) ? __privateGet(__privateGet(this, _parent), _parts).length : 0);
+  }
+  get depth() {
+    var _a2, _b;
+    return ((_b = (_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.depth) != null ? _b : -1) + 1;
+  }
+  [/* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom")]() {
+    var _a2;
+    return {
+      "@@type": "AST",
+      id: this.id,
+      type: this.type,
+      root: __privateGet(this, _root).id,
+      parent: (_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.id,
+      depth: this.depth,
+      partsLength: __privateGet(this, _parts).length,
+      parts: __privateGet(this, _parts)
+    };
   }
   get hasMagic() {
     if (__privateGet(this, _hasMagic) !== void 0)
@@ -3537,56 +3772,50 @@ var _AST = class _AST {
   }
   // reconstructs the pattern
   toString() {
-    if (__privateGet(this, _toString) !== void 0)
-      return __privateGet(this, _toString);
-    if (!this.type) {
-      return __privateSet(this, _toString, __privateGet(this, _parts).map((p) => String(p)).join(""));
-    } else {
-      return __privateSet(this, _toString, this.type + "(" + __privateGet(this, _parts).map((p) => String(p)).join("|") + ")");
-    }
+    return __privateGet(this, _toString) !== void 0 ? __privateGet(this, _toString) : !this.type ? __privateSet(this, _toString, __privateGet(this, _parts).map((p) => String(p)).join("")) : __privateSet(this, _toString, this.type + "(" + __privateGet(this, _parts).map((p) => String(p)).join("|") + ")");
   }
   push(...parts) {
     for (const p of parts) {
       if (p === "")
         continue;
-      if (typeof p !== "string" && !(p instanceof _AST && __privateGet(p, _parent) === this)) {
+      if (typeof p !== "string" && !(p instanceof _a && __privateGet(p, _parent) === this)) {
         throw new Error("invalid part: " + p);
       }
       __privateGet(this, _parts).push(p);
     }
   }
   toJSON() {
-    var _a;
+    var _a2;
     const ret = this.type === null ? __privateGet(this, _parts).slice().map((p) => typeof p === "string" ? p : p.toJSON()) : [this.type, ...__privateGet(this, _parts).map((p) => p.toJSON())];
     if (this.isStart() && !this.type)
       ret.unshift([]);
-    if (this.isEnd() && (this === __privateGet(this, _root) || __privateGet(__privateGet(this, _root), _filledNegs) && ((_a = __privateGet(this, _parent)) == null ? void 0 : _a.type) === "!")) {
+    if (this.isEnd() && (this === __privateGet(this, _root) || __privateGet(__privateGet(this, _root), _filledNegs) && ((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!")) {
       ret.push({});
     }
     return ret;
   }
   isStart() {
-    var _a;
+    var _a2;
     if (__privateGet(this, _root) === this)
       return true;
-    if (!((_a = __privateGet(this, _parent)) == null ? void 0 : _a.isStart()))
+    if (!((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.isStart()))
       return false;
     if (__privateGet(this, _parentIndex) === 0)
       return true;
     const p = __privateGet(this, _parent);
     for (let i = 0; i < __privateGet(this, _parentIndex); i++) {
       const pp = __privateGet(p, _parts)[i];
-      if (!(pp instanceof _AST && pp.type === "!")) {
+      if (!(pp instanceof _a && pp.type === "!")) {
         return false;
       }
     }
     return true;
   }
   isEnd() {
-    var _a, _b, _c;
+    var _a2, _b, _c;
     if (__privateGet(this, _root) === this)
       return true;
-    if (((_a = __privateGet(this, _parent)) == null ? void 0 : _a.type) === "!")
+    if (((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!")
       return true;
     if (!((_b = __privateGet(this, _parent)) == null ? void 0 : _b.isEnd()))
       return false;
@@ -3602,16 +3831,16 @@ var _AST = class _AST {
       this.push(part.clone(this));
   }
   clone(parent) {
-    const c = new _AST(this.type, parent);
+    const c = new _a(this.type, parent);
     for (const p of __privateGet(this, _parts)) {
       c.copyIn(p);
     }
     return c;
   }
   static fromGlob(pattern, options = {}) {
-    var _a;
-    const ast = new _AST(null, void 0, options);
-    __privateMethod(_a = _AST, _AST_static, parseAST_fn).call(_a, pattern, ast, 0, options);
+    var _a2;
+    const ast = new _a(null, void 0, options);
+    __privateMethod(_a2 = _a, _AST_static, parseAST_fn).call(_a2, pattern, ast, 0, options, 0);
     return ast;
   }
   // returns the regular expression if there's magic, or the unescaped
@@ -3704,15 +3933,17 @@ var _AST = class _AST {
   // is ^(?!\.), we can just prepend (?!\.) to the pattern (either root
   // or start or whatever) and prepend ^ or / at the Regexp construction.
   toRegExpSource(allowDot) {
-    var _a;
+    var _a2;
     const dot = allowDot != null ? allowDot : !!__privateGet(this, _options).dot;
-    if (__privateGet(this, _root) === this)
+    if (__privateGet(this, _root) === this) {
+      __privateMethod(this, _AST_instances, flatten_fn).call(this);
       __privateMethod(this, _AST_instances, fillNegs_fn).call(this);
-    if (!this.type) {
+    }
+    if (!isExtglobAST(this)) {
       const noEmpty = this.isStart() && this.isEnd() && !__privateGet(this, _parts).some((s) => typeof s !== "string");
       const src = __privateGet(this, _parts).map((p) => {
-        var _a2;
-        const [re, _, hasMagic, uflag] = typeof p === "string" ? __privateMethod(_a2 = _AST, _AST_static, parseGlob_fn).call(_a2, p, __privateGet(this, _hasMagic), noEmpty) : p.toRegExpSource(allowDot);
+        var _a3;
+        const [re, _, hasMagic, uflag] = typeof p === "string" ? __privateMethod(_a3 = _a, _AST_static, parseGlob_fn).call(_a3, p, __privateGet(this, _hasMagic), noEmpty) : p.toRegExpSource(allowDot);
         __privateSet(this, _hasMagic, __privateGet(this, _hasMagic) || hasMagic);
         __privateSet(this, _uflag, __privateGet(this, _uflag) || uflag);
         return re;
@@ -3735,7 +3966,7 @@ var _AST = class _AST {
         }
       }
       let end = "";
-      if (this.isEnd() && __privateGet(__privateGet(this, _root), _filledNegs) && ((_a = __privateGet(this, _parent)) == null ? void 0 : _a.type) === "!") {
+      if (this.isEnd() && __privateGet(__privateGet(this, _root), _filledNegs) && ((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!") {
         end = "(?:$|\\/)";
       }
       const final2 = start2 + src + end;
@@ -3751,9 +3982,10 @@ var _AST = class _AST {
     let body = __privateMethod(this, _AST_instances, partsToRegExp_fn).call(this, dot);
     if (this.isStart() && this.isEnd() && !body && this.type !== "!") {
       const s = this.toString();
-      __privateSet(this, _parts, [s]);
-      this.type = null;
-      __privateSet(this, _hasMagic, void 0);
+      const me = this;
+      __privateSet(me, _parts, [s]);
+      me.type = null;
+      __privateSet(me, _hasMagic, void 0);
       return [s, unescape(this.toString()), false, false];
     }
     let bodyDotAllowed = !repeated || allowDot || dot || !startNoDot ? "" : __privateMethod(this, _AST_instances, partsToRegExp_fn).call(this, true);
@@ -3822,8 +4054,9 @@ fillNegs_fn = function() {
   return this;
 };
 _AST_static = new WeakSet();
-parseAST_fn = function(str, ast, pos, opt) {
-  var _a, _b;
+parseAST_fn = function(str, ast, pos, opt, extDepth) {
+  var _a2, _b, _c, _d, _e;
+  const maxDepth = (_a2 = opt.maxExtglobRecursion) != null ? _a2 : 2;
   let escaping = false;
   let inBrace = false;
   let braceStart = -1;
@@ -3855,11 +4088,12 @@ parseAST_fn = function(str, ast, pos, opt) {
         acc2 += c;
         continue;
       }
-      if (!opt.noext && isExtglobType(c) && str.charAt(i2) === "(") {
+      const doRecurse = !opt.noext && isExtglobType(c) && str.charAt(i2) === "(" && extDepth <= maxDepth;
+      if (doRecurse) {
         ast.push(acc2);
         acc2 = "";
-        const ext2 = new _AST(c, ast);
-        i2 = __privateMethod(_a = _AST, _AST_static, parseAST_fn).call(_a, str, ext2, i2, opt);
+        const ext2 = new _a(c, ast);
+        i2 = __privateMethod(_b = _a, _AST_static, parseAST_fn).call(_b, str, ext2, i2, opt, extDepth + 1);
         ast.push(ext2);
         continue;
       }
@@ -3869,7 +4103,7 @@ parseAST_fn = function(str, ast, pos, opt) {
     return i2;
   }
   let i = pos + 1;
-  let part = new _AST(null, ast);
+  let part = new _a(null, ast);
   const parts = [];
   let acc = "";
   while (i < str.length) {
@@ -3896,19 +4130,22 @@ parseAST_fn = function(str, ast, pos, opt) {
       acc += c;
       continue;
     }
-    if (isExtglobType(c) && str.charAt(i) === "(") {
+    const doRecurse = !opt.noext && isExtglobType(c) && str.charAt(i) === "(" && /* c8 ignore start - the maxDepth is sufficient here */
+    (extDepth <= maxDepth || ast && __privateMethod(_c = ast, _AST_instances, canAdoptType_fn).call(_c, c));
+    if (doRecurse) {
+      const depthAdd = ast && __privateMethod(_d = ast, _AST_instances, canAdoptType_fn).call(_d, c) ? 0 : 1;
       part.push(acc);
       acc = "";
-      const ext2 = new _AST(c, part);
+      const ext2 = new _a(c, part);
       part.push(ext2);
-      i = __privateMethod(_b = _AST, _AST_static, parseAST_fn).call(_b, str, ext2, i, opt);
+      i = __privateMethod(_e = _a, _AST_static, parseAST_fn).call(_e, str, ext2, i, opt, extDepth + depthAdd);
       continue;
     }
     if (c === "|") {
       part.push(acc);
       acc = "";
       parts.push(part);
-      part = new _AST(null, ast);
+      part = new _a(null, ast);
       continue;
     }
     if (c === ")") {
@@ -3927,6 +4164,102 @@ parseAST_fn = function(str, ast, pos, opt) {
   __privateSet(ast, _parts, [str.substring(pos - 1)]);
   return i;
 };
+canAdoptWithSpace_fn = function(child) {
+  return __privateMethod(this, _AST_instances, canAdopt_fn).call(this, child, adoptionWithSpaceMap);
+};
+canAdopt_fn = function(child, map = adoptionMap) {
+  if (!child || typeof child !== "object" || child.type !== null || __privateGet(child, _parts).length !== 1 || this.type === null) {
+    return false;
+  }
+  const gc = __privateGet(child, _parts)[0];
+  if (!gc || typeof gc !== "object" || gc.type === null) {
+    return false;
+  }
+  return __privateMethod(this, _AST_instances, canAdoptType_fn).call(this, gc.type, map);
+};
+canAdoptType_fn = function(c, map = adoptionAnyMap) {
+  var _a2;
+  return !!((_a2 = map.get(this.type)) == null ? void 0 : _a2.includes(c));
+};
+adoptWithSpace_fn = function(child, index) {
+  const gc = __privateGet(child, _parts)[0];
+  const blank = new _a(null, gc, this.options);
+  __privateGet(blank, _parts).push("");
+  gc.push(blank);
+  __privateMethod(this, _AST_instances, adopt_fn).call(this, child, index);
+};
+adopt_fn = function(child, index) {
+  const gc = __privateGet(child, _parts)[0];
+  __privateGet(this, _parts).splice(index, 1, ...__privateGet(gc, _parts));
+  for (const p of __privateGet(gc, _parts)) {
+    if (typeof p === "object")
+      __privateSet(p, _parent, this);
+  }
+  __privateSet(this, _toString, void 0);
+};
+canUsurpType_fn = function(c) {
+  const m = usurpMap.get(this.type);
+  return !!(m == null ? void 0 : m.has(c));
+};
+canUsurp_fn = function(child) {
+  if (!child || typeof child !== "object" || child.type !== null || __privateGet(child, _parts).length !== 1 || this.type === null || __privateGet(this, _parts).length !== 1) {
+    return false;
+  }
+  const gc = __privateGet(child, _parts)[0];
+  if (!gc || typeof gc !== "object" || gc.type === null) {
+    return false;
+  }
+  return __privateMethod(this, _AST_instances, canUsurpType_fn).call(this, gc.type);
+};
+usurp_fn = function(child) {
+  const m = usurpMap.get(this.type);
+  const gc = __privateGet(child, _parts)[0];
+  const nt = m == null ? void 0 : m.get(gc.type);
+  if (!nt)
+    return false;
+  __privateSet(this, _parts, __privateGet(gc, _parts));
+  for (const p of __privateGet(this, _parts)) {
+    if (typeof p === "object") {
+      __privateSet(p, _parent, this);
+    }
+  }
+  this.type = nt;
+  __privateSet(this, _toString, void 0);
+  __privateSet(this, _emptyExt, false);
+};
+flatten_fn = function() {
+  var _a2, _b;
+  if (!isExtglobAST(this)) {
+    for (const p of __privateGet(this, _parts)) {
+      if (typeof p === "object") {
+        __privateMethod(_a2 = p, _AST_instances, flatten_fn).call(_a2);
+      }
+    }
+  } else {
+    let iterations = 0;
+    let done = false;
+    do {
+      done = true;
+      for (let i = 0; i < __privateGet(this, _parts).length; i++) {
+        const c = __privateGet(this, _parts)[i];
+        if (typeof c === "object") {
+          __privateMethod(_b = c, _AST_instances, flatten_fn).call(_b);
+          if (__privateMethod(this, _AST_instances, canAdopt_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, adopt_fn).call(this, c, i);
+          } else if (__privateMethod(this, _AST_instances, canAdoptWithSpace_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, adoptWithSpace_fn).call(this, c, i);
+          } else if (__privateMethod(this, _AST_instances, canUsurp_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, usurp_fn).call(this, c);
+          }
+        }
+      }
+    } while (!done && ++iterations < 10);
+  }
+  __privateSet(this, _toString, void 0);
+};
 partsToRegExp_fn = function(dot) {
   return __privateGet(this, _parts).map((p) => {
     if (typeof p === "string") {
@@ -3941,12 +4274,23 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
   let escaping = false;
   let re = "";
   let uflag = false;
+  let inStar = false;
   for (let i = 0; i < glob.length; i++) {
     const c = glob.charAt(i);
     if (escaping) {
       escaping = false;
       re += (reSpecials.has(c) ? "\\" : "") + c;
       continue;
+    }
+    if (c === "*") {
+      if (inStar)
+        continue;
+      inStar = true;
+      re += noEmpty && /^[*]+$/.test(glob) ? starNoEmpty : star;
+      hasMagic = true;
+      continue;
+    } else {
+      inStar = false;
     }
     if (c === "\\") {
       if (i === glob.length - 1) {
@@ -3966,11 +4310,6 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
         continue;
       }
     }
-    if (c === "*") {
-      re += noEmpty && glob === "*" ? starNoEmpty : star;
-      hasMagic = true;
-      continue;
-    }
     if (c === "?") {
       re += qmark;
       hasMagic = true;
@@ -3980,10 +4319,10 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
   }
   return [re, unescape(glob), !!hasMagic, uflag];
 };
-__privateAdd(_AST, _AST_static);
-var AST = _AST;
+__privateAdd(AST, _AST_static);
+_a = AST;
 
-// node_modules/.pnpm/minimatch@10.1.1/node_modules/minimatch/dist/esm/escape.js
+// node_modules/.pnpm/minimatch@10.2.6/node_modules/minimatch/dist/esm/escape.js
 var escape = (s, { windowsPathsNoEscape = false, magicalBraces = false } = {}) => {
   if (magicalBraces) {
     return windowsPathsNoEscape ? s.replace(/[?*()[\]{}]/g, "[$&]") : s.replace(/[?*()[\]\\{}]/g, "\\$&");
@@ -3991,7 +4330,7 @@ var escape = (s, { windowsPathsNoEscape = false, magicalBraces = false } = {}) =
   return windowsPathsNoEscape ? s.replace(/[?*()[\]]/g, "[$&]") : s.replace(/[?*()[\]\\]/g, "\\$&");
 };
 
-// node_modules/.pnpm/minimatch@10.1.1/node_modules/minimatch/dist/esm/index.js
+// node_modules/.pnpm/minimatch@10.2.6/node_modules/minimatch/dist/esm/index.js
 var minimatch = (p, pattern, options = {}) => {
   assertValidPattern(pattern);
   if (!options.nocomment && pattern.charAt(0) === "#") {
@@ -3999,7 +4338,7 @@ var minimatch = (p, pattern, options = {}) => {
   }
   return new Minimatch(pattern, options).match(p);
 };
-var starDotExtRE = /^\*+([^+@!?\*\[\(]*)$/;
+var starDotExtRE = /^\*+([^+@!?*[(]*)$/;
 var starDotExtTest = (ext2) => (f) => !f.startsWith(".") && f.endsWith(ext2);
 var starDotExtTestDot = (ext2) => (f) => f.endsWith(ext2);
 var starDotExtTestNocase = (ext2) => {
@@ -4018,7 +4357,7 @@ var dotStarTest = (f) => f !== "." && f !== ".." && f.startsWith(".");
 var starRE = /^\*+$/;
 var starTest = (f) => f.length !== 0 && !f.startsWith(".");
 var starTestDot = (f) => f.length !== 0 && f !== "." && f !== "..";
-var qmarksRE = /^\?+([^+@!?\*\[\(]*)?$/;
+var qmarksRE = /^\?+([^+@!?*[(]*)?$/;
 var qmarksTestNocase = ([$0, ext2 = ""]) => {
   const noext = qmarksTestNoExt([$0]);
   if (!ext2)
@@ -4107,7 +4446,7 @@ var braceExpand = (pattern, options = {}) => {
   if (options.nobrace || !/\{(?:(?!\{).)*\}/.test(pattern)) {
     return [pattern];
   }
-  return expand(pattern);
+  return expand(pattern, { max: options.braceExpandMax });
 };
 minimatch.braceExpand = braceExpand;
 var makeRe = (pattern, options = {}) => new Minimatch(pattern, options).makeRe();
@@ -4123,8 +4462,10 @@ var match = (list, pattern, options = {}) => {
 minimatch.match = match;
 var globMagic = /[?*]|[+@!]\(.*?\)|\[|\]/;
 var regExpEscape2 = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+var _Minimatch_instances, matchGlobstar_fn, matchGlobStarBodySections_fn, matchOne_fn;
 var Minimatch = class {
   constructor(pattern, options = {}) {
+    __privateAdd(this, _Minimatch_instances);
     __publicField(this, "options");
     __publicField(this, "set");
     __publicField(this, "pattern");
@@ -4141,14 +4482,18 @@ var Minimatch = class {
     __publicField(this, "isWindows");
     __publicField(this, "platform");
     __publicField(this, "windowsNoMagicRoot");
+    __publicField(this, "maxGlobstarRecursion");
     __publicField(this, "regexp");
+    var _a2;
     assertValidPattern(pattern);
     options = options || {};
     this.options = options;
+    this.maxGlobstarRecursion = (_a2 = options.maxGlobstarRecursion) != null ? _a2 : 200;
     this.pattern = pattern;
     this.platform = options.platform || defaultPlatform;
     this.isWindows = this.platform === "win32";
-    this.windowsPathsNoEscape = !!options.windowsPathsNoEscape || options.allowWindowsEscape === false;
+    const awe = "allowWindowsEscape";
+    this.windowsPathsNoEscape = !!options.windowsPathsNoEscape || options[awe] === false;
     if (this.windowsPathsNoEscape) {
       this.pattern = this.pattern.replace(/\\/g, "/");
     }
@@ -4205,7 +4550,10 @@ var Minimatch = class {
         const isUNC = s[0] === "" && s[1] === "" && (s[2] === "?" || !globMagic.test(s[2])) && !globMagic.test(s[3]);
         const isDrive = /^[a-z]:/i.test(s[0]);
         if (isUNC) {
-          return [...s.slice(0, 4), ...s.slice(4).map((ss) => this.parse(ss))];
+          return [
+            ...s.slice(0, 4),
+            ...s.slice(4).map((ss) => this.parse(ss))
+          ];
         } else if (isDrive) {
           return [s[0], ...s.slice(1).map((ss) => this.parse(ss))];
         }
@@ -4231,10 +4579,10 @@ var Minimatch = class {
   // of patterns that we have to process.
   preprocess(globParts) {
     if (this.options.noglobstar) {
-      for (let i = 0; i < globParts.length; i++) {
-        for (let j = 0; j < globParts[i].length; j++) {
-          if (globParts[i][j] === "**") {
-            globParts[i][j] = "*";
+      for (const partset of globParts) {
+        for (let j = 0; j < partset.length; j++) {
+          if (partset[j] === "**") {
+            partset[j] = "*";
           }
         }
       }
@@ -4312,7 +4660,7 @@ var Minimatch = class {
       let dd = 0;
       while (-1 !== (dd = parts.indexOf("..", dd + 1))) {
         const p = parts[dd - 1];
-        if (p && p !== "." && p !== ".." && p !== "**") {
+        if (p && p !== "." && p !== ".." && p !== "**" && !(this.isWindows && /^[a-z]:$/i.test(p))) {
           didSomething = true;
           parts.splice(dd - 1, 2);
           dd -= 2;
@@ -4477,7 +4825,8 @@ var Minimatch = class {
   // out of pattern, then that's fine, as long as all
   // the parts match.
   matchOne(file, pattern, partial = false) {
-    const options = this.options;
+    let fileStartIndex = 0;
+    let patternStartIndex = 0;
     if (this.isWindows) {
       const fileDrive = typeof file[0] === "string" && /^[a-z]:$/i.test(file[0]);
       const fileUNC = !fileDrive && file[0] === "" && file[1] === "" && file[2] === "?" && /^[a-z]:$/i.test(file[3]);
@@ -4486,14 +4835,14 @@ var Minimatch = class {
       const fdi = fileUNC ? 3 : fileDrive ? 0 : void 0;
       const pdi = patternUNC ? 3 : patternDrive ? 0 : void 0;
       if (typeof fdi === "number" && typeof pdi === "number") {
-        const [fd, pd] = [file[fdi], pattern[pdi]];
+        const [fd, pd] = [
+          file[fdi],
+          pattern[pdi]
+        ];
         if (fd.toLowerCase() === pd.toLowerCase()) {
           pattern[pdi] = fd;
-          if (pdi > fdi) {
-            pattern = pattern.slice(pdi);
-          } else if (fdi > pdi) {
-            file = file.slice(fdi);
-          }
+          patternStartIndex = pdi;
+          fileStartIndex = fdi;
         }
       }
     }
@@ -4501,71 +4850,10 @@ var Minimatch = class {
     if (optimizationLevel >= 2) {
       file = this.levelTwoFileOptimize(file);
     }
-    this.debug("matchOne", this, { file, pattern });
-    this.debug("matchOne", file.length, pattern.length);
-    for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
-      this.debug("matchOne loop");
-      var p = pattern[pi];
-      var f = file[fi];
-      this.debug(pattern, p, f);
-      if (p === false) {
-        return false;
-      }
-      if (p === GLOBSTAR) {
-        this.debug("GLOBSTAR", [pattern, p, f]);
-        var fr = fi;
-        var pr = pi + 1;
-        if (pr === pl) {
-          this.debug("** at the end");
-          for (; fi < fl; fi++) {
-            if (file[fi] === "." || file[fi] === ".." || !options.dot && file[fi].charAt(0) === ".")
-              return false;
-          }
-          return true;
-        }
-        while (fr < fl) {
-          var swallowee = file[fr];
-          this.debug("\nglobstar while", file, fr, pattern, pr, swallowee);
-          if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
-            this.debug("globstar found match!", fr, fl, swallowee);
-            return true;
-          } else {
-            if (swallowee === "." || swallowee === ".." || !options.dot && swallowee.charAt(0) === ".") {
-              this.debug("dot detected!", file, fr, pattern, pr);
-              break;
-            }
-            this.debug("globstar swallow a segment, and continue");
-            fr++;
-          }
-        }
-        if (partial) {
-          this.debug("\n>>> no match, partial?", file, fr, pattern, pr);
-          if (fr === fl) {
-            return true;
-          }
-        }
-        return false;
-      }
-      let hit;
-      if (typeof p === "string") {
-        hit = f === p;
-        this.debug("string match", p, f, hit);
-      } else {
-        hit = p.test(f);
-        this.debug("pattern match", p, f, hit);
-      }
-      if (!hit)
-        return false;
+    if (pattern.includes(GLOBSTAR)) {
+      return __privateMethod(this, _Minimatch_instances, matchGlobstar_fn).call(this, file, pattern, partial, fileStartIndex, patternStartIndex);
     }
-    if (fi === fl && pi === pl) {
-      return true;
-    } else if (fi === fl) {
-      return partial;
-    } else if (pi === pl) {
-      return fi === fl - 1 && file[fi] === "";
-    } else {
-      throw new Error("wtf?");
-    }
+    return __privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, pattern, partial, fileStartIndex, patternStartIndex);
   }
   braceExpand() {
     return braceExpand(this.pattern, this.options);
@@ -4653,7 +4941,7 @@ var Minimatch = class {
       re = "^(?!" + re + ").+$";
     try {
       this.regexp = new RegExp(re, [...flags].join(""));
-    } catch (ex) {
+    } catch (e) {
       this.regexp = false;
     }
     return this.regexp;
@@ -4661,7 +4949,7 @@ var Minimatch = class {
   slashSplit(p) {
     if (this.preserveMultipleSlashes) {
       return p.split("/");
-    } else if (this.isWindows && /^\/\/[^\/]+/.test(p)) {
+    } else if (this.isWindows && /^\/\/[^/]+/.test(p)) {
       return ["", ...p.split(/\/+/)];
     } else {
       return p.split(/\/+/);
@@ -4692,8 +4980,7 @@ var Minimatch = class {
         filename = ff[i];
       }
     }
-    for (let i = 0; i < set.length; i++) {
-      const pattern = set[i];
+    for (const pattern of set) {
       let file = ff;
       if (options.matchBase && pattern.length === 1) {
         file = [filename];
@@ -4713,6 +5000,142 @@ var Minimatch = class {
   }
   static defaults(def) {
     return minimatch.defaults(def).Minimatch;
+  }
+};
+_Minimatch_instances = new WeakSet();
+matchGlobstar_fn = function(file, pattern, partial, fileIndex, patternIndex) {
+  const firstgs = pattern.indexOf(GLOBSTAR, patternIndex);
+  const lastgs = pattern.lastIndexOf(GLOBSTAR);
+  const [head, body, tail] = partial ? [
+    pattern.slice(patternIndex, firstgs),
+    pattern.slice(firstgs + 1),
+    []
+  ] : [
+    pattern.slice(patternIndex, firstgs),
+    pattern.slice(firstgs + 1, lastgs),
+    pattern.slice(lastgs + 1)
+  ];
+  if (head.length) {
+    const fileHead = file.slice(fileIndex, fileIndex + head.length);
+    if (!__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, fileHead, head, partial, 0, 0)) {
+      return false;
+    }
+    fileIndex += head.length;
+    patternIndex += head.length;
+  }
+  let fileTailMatch = 0;
+  if (tail.length) {
+    if (tail.length + fileIndex > file.length)
+      return false;
+    let tailStart = file.length - tail.length;
+    if (__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, tail, partial, tailStart, 0)) {
+      fileTailMatch = tail.length;
+    } else {
+      if (file[file.length - 1] !== "" || fileIndex + tail.length === file.length) {
+        return false;
+      }
+      tailStart--;
+      if (!__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, tail, partial, tailStart, 0)) {
+        return false;
+      }
+      fileTailMatch = tail.length + 1;
+    }
+  }
+  if (!body.length) {
+    let sawSome = !!fileTailMatch;
+    for (let i2 = fileIndex; i2 < file.length - fileTailMatch; i2++) {
+      const f = String(file[i2]);
+      sawSome = true;
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+    }
+    return partial || sawSome;
+  }
+  const bodySegments = [[[], 0]];
+  let currentBody = bodySegments[0];
+  let nonGsParts = 0;
+  const nonGsPartsSums = [0];
+  for (const b of body) {
+    if (b === GLOBSTAR) {
+      nonGsPartsSums.push(nonGsParts);
+      currentBody = [[], 0];
+      bodySegments.push(currentBody);
+    } else {
+      currentBody[0].push(b);
+      nonGsParts++;
+    }
+  }
+  let i = bodySegments.length - 1;
+  const fileLength = file.length - fileTailMatch;
+  for (const b of bodySegments) {
+    b[1] = fileLength - (nonGsPartsSums[i--] + b[0].length);
+  }
+  return !!__privateMethod(this, _Minimatch_instances, matchGlobStarBodySections_fn).call(this, file, bodySegments, fileIndex, 0, partial, 0, !!fileTailMatch);
+};
+// return false for "nope, not matching"
+// return null for "not matching, cannot keep trying"
+matchGlobStarBodySections_fn = function(file, bodySegments, fileIndex, bodyIndex, partial, globStarDepth, sawTail) {
+  const bs = bodySegments[bodyIndex];
+  if (!bs) {
+    for (let i = fileIndex; i < file.length; i++) {
+      sawTail = true;
+      const f = file[i];
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+    }
+    return sawTail;
+  }
+  const [body, after] = bs;
+  while (fileIndex <= after) {
+    const m = __privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file.slice(0, fileIndex + body.length), body, partial, fileIndex, 0);
+    if (m && globStarDepth < this.maxGlobstarRecursion) {
+      const sub = __privateMethod(this, _Minimatch_instances, matchGlobStarBodySections_fn).call(this, file, bodySegments, fileIndex + body.length, bodyIndex + 1, partial, globStarDepth + 1, sawTail);
+      if (sub !== false) {
+        return sub;
+      }
+    }
+    const f = file[fileIndex];
+    if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+      return false;
+    }
+    fileIndex++;
+  }
+  return partial || null;
+};
+matchOne_fn = function(file, pattern, partial, fileIndex, patternIndex) {
+  let fi;
+  let pi;
+  let pl;
+  let fl;
+  for (fi = fileIndex, pi = patternIndex, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
+    this.debug("matchOne loop");
+    let p = pattern[pi];
+    let f = file[fi];
+    this.debug(pattern, p, f);
+    if (p === false || p === GLOBSTAR) {
+      return false;
+    }
+    let hit;
+    if (typeof p === "string") {
+      hit = f === p;
+      this.debug("string match", p, f, hit);
+    } else {
+      hit = p.test(f);
+      this.debug("pattern match", p, f, hit);
+    }
+    if (!hit)
+      return false;
+  }
+  if (fi === fl && pi === pl) {
+    return true;
+  } else if (fi === fl) {
+    return partial;
+  } else if (pi === pl) {
+    return fi === fl - 1 && file[fi] === "";
+  } else {
+    throw new Error("wtf?");
   }
 };
 minimatch.AST = AST;
@@ -4742,7 +5165,7 @@ var CurrentVaultWordProvider = class {
     this.words = [];
   }
   async refreshWords(option) {
-    var _a;
+    var _a2;
     this.clearWords();
     const currentDirname = this.appHelper.getCurrentDirname();
     const markdownFilePaths = this.app.vault.getMarkdownFiles().map((x) => x.path).filter((p) => this.includePrefixPatterns.every((x) => p.startsWith(x))).filter((p) => this.excludePrefixPatterns.every((x) => !p.startsWith(x))).filter((p) => !isMatchedGlobPatterns(p, this.excludePathGlobPatterns)).filter(
@@ -4773,7 +5196,7 @@ var CurrentVaultWordProvider = class {
     this.words = Object.values(wordByValue);
     for (const word of this.words) {
       pushWord(this.wordsByFirstLetter, word.value.charAt(0), word);
-      (_a = word.aliases) == null ? void 0 : _a.forEach(
+      (_a2 = word.aliases) == null ? void 0 : _a2.forEach(
         (a) => pushWord(this.wordsByFirstLetter, a.charAt(0), word)
       );
     }
@@ -4804,7 +5227,7 @@ function unescape2(value) {
 }
 function jsonToWords(json, path2, systemCaretSymbol) {
   return json.words.map((x) => {
-    var _a;
+    var _a2;
     return {
       value: x.displayed || x.value,
       description: x.description,
@@ -4812,7 +5235,7 @@ function jsonToWords(json, path2, systemCaretSymbol) {
       type: "customDictionary",
       createdPath: path2,
       insertedText: x.displayed ? x.value : void 0,
-      caretSymbol: (_a = json.caretSymbol) != null ? _a : systemCaretSymbol,
+      caretSymbol: (_a2 = json.caretSymbol) != null ? _a2 : systemCaretSymbol,
       ignoreSpaceAfterCompletion: json.ignoreSpaceAfterCompletion
     };
   });
@@ -4907,12 +5330,12 @@ var CustomDictionaryWordProvider = class {
     );
   }
   addWord(word, synonymOption) {
-    var _a, _b;
+    var _a2, _b;
     this.words.push(word);
     const wordWithSynonym = {
       ...word,
       aliases: [
-        ...(_a = word.aliases) != null ? _a : [],
+        ...(_a2 = word.aliases) != null ? _a2 : [],
         ...synonymAliases(word.value, synonymOption)
       ]
     };
@@ -5025,7 +5448,7 @@ var InternalLinkWordProvider = class {
     this.wordsByFirstLetter = {};
   }
   refreshWords(option) {
-    var _a;
+    var _a2;
     this.clearWords();
     const resolvedInternalLinkWords = this.app.vault.getMarkdownFiles().filter((f) => {
       if (option.excludePathPrefixPatterns.some((x) => f.path.startsWith(x))) {
@@ -5113,7 +5536,7 @@ var InternalLinkWordProvider = class {
     this.words = [...resolvedInternalLinkWords, ...unresolvedInternalLinkWords];
     for (const word of this.words) {
       pushWord(this.wordsByFirstLetter, word.value.charAt(0), word);
-      (_a = word.aliases) == null ? void 0 : _a.forEach(
+      (_a2 = word.aliases) == null ? void 0 : _a2.forEach(
         (a) => pushWord(this.wordsByFirstLetter, a.charAt(0), word)
       );
     }
@@ -5164,7 +5587,7 @@ var SelectionHistoryStorage = class {
   }
   // noinspection FunctionWithMultipleLoopsJS
   purge() {
-    var _a;
+    var _a2;
     const now2 = Date.now();
     const times = [];
     for (const hit of Object.keys(this.data)) {
@@ -5185,7 +5608,7 @@ var SelectionHistoryStorage = class {
       }
     }
     if (this.maxNumberOfHistoryToKeep) {
-      const threshold = (_a = times.sort((a, b) => a > b ? -1 : 1).slice(0, this.maxNumberOfHistoryToKeep).last()) != null ? _a : 0;
+      const threshold = (_a2 = times.sort((a, b) => a > b ? -1 : 1).slice(0, this.maxNumberOfHistoryToKeep).last()) != null ? _a2 : 0;
       for (const hit of Object.keys(this.data)) {
         for (const value of Object.keys(this.data[hit])) {
           for (const kind of Object.keys(this.data[hit][value])) {
@@ -5204,8 +5627,8 @@ var SelectionHistoryStorage = class {
     }
   }
   getSelectionHistory(word) {
-    var _a, _b;
-    return (_b = (_a = this.data[word.hit]) == null ? void 0 : _a[word.value]) == null ? void 0 : _b[word.type];
+    var _a2, _b;
+    return (_b = (_a2 = this.data[word.hit]) == null ? void 0 : _a2[word.value]) == null ? void 0 : _b[word.type];
   }
   increment(word) {
     if (!this.data[word.hit]) {
@@ -7086,11 +7509,11 @@ var InputDialog = class extends import_obsidian5.Modal {
     this.submitted = false;
   }
   onOpen() {
-    var _a;
+    var _a2;
     this.titleEl.setText(this.args.title);
     this.inputEl = this.contentEl.createEl("input", {
       type: "text",
-      placeholder: (_a = this.args.placeholder) != null ? _a : "",
+      placeholder: (_a2 = this.args.placeholder) != null ? _a2 : "",
       cls: "carnelian-input-dialog-input",
       value: this.args.defaultValue
     });
@@ -7133,7 +7556,7 @@ var InputDialog = class extends import_obsidian5.Modal {
 
 // src/ui/popup-commands.ts
 async function selectWithCustomAliasImpl(popup, evt) {
-  var _a, _b;
+  var _a2, _b;
   if (!popup.context || evt.isComposing) {
     return null;
   }
@@ -7157,7 +7580,7 @@ async function selectWithCustomAliasImpl(popup, evt) {
     return { item, input, changed: false };
   }
   item.aliasMeta = {
-    origin: (_b = (_a = item.aliasMeta) == null ? void 0 : _a.origin) != null ? _b : item.value
+    origin: (_b = (_a2 = item.aliasMeta) == null ? void 0 : _a2.origin) != null ? _b : item.value
   };
   item.value = input;
   return { item, input, changed: true };
@@ -7179,9 +7602,9 @@ function select(popup, evt, index) {
   }
 }
 async function selectWithCustomAlias(popup, evt) {
-  var _a;
+  var _a2;
   const result = await selectWithCustomAliasImpl(popup, evt);
-  return (_a = result == null ? void 0 : result.item) != null ? _a : null;
+  return (_a2 = result == null ? void 0 : result.item) != null ? _a2 : null;
 }
 async function selectWithCustomAliasAndAddToAliases(popup, evt) {
   const result = await selectWithCustomAliasImpl(popup, evt);
@@ -7200,8 +7623,8 @@ async function selectWithCustomAliasAndAddToAliases(popup, evt) {
   await popup.app.fileManager.processFrontMatter(
     markdownFile,
     (frontmatter) => {
-      var _a;
-      const aliases = (_a = (0, import_obsidian6.parseFrontMatterAliases)(frontmatter)) != null ? _a : [];
+      var _a2;
+      const aliases = (_a2 = (0, import_obsidian6.parseFrontMatterAliases)(frontmatter)) != null ? _a2 : [];
       if (!aliases.includes(input)) {
         frontmatter.aliases = [...aliases, input];
         updated = true;
@@ -7217,7 +7640,7 @@ async function selectWithCustomAliasAndAddToAliases(popup, evt) {
   return item;
 }
 function selectWithQueryAlias(popup, evt) {
-  var _a, _b;
+  var _a2, _b;
   if (!popup.context || evt.isComposing) {
     return null;
   }
@@ -7231,7 +7654,7 @@ function selectWithQueryAlias(popup, evt) {
     return null;
   }
   item.aliasMeta = {
-    origin: (_b = (_a = item.aliasMeta) == null ? void 0 : _a.origin) != null ? _b : item.value
+    origin: (_b = (_a2 = item.aliasMeta) == null ? void 0 : _a2.origin) != null ? _b : item.value
   };
   item.valueForHistory = item.value;
   item.value = item.query;
@@ -7388,9 +7811,9 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     await ins.updateSettings(settings);
     await ins.refreshIntelligentSuggestionPrioritization();
     ins.modifyEventRef = app.vault.on("modify", async (_) => {
-      var _a;
+      var _a2;
       await ins.refreshCurrentFileTokens();
-      if ((_a = ins.selectionHistoryStorage) == null ? void 0 : _a.shouldPersist) {
+      if ((_a2 = ins.selectionHistoryStorage) == null ? void 0 : _a2.shouldPersist) {
         ins.selectionHistoryStorage.syncPersistVersion();
         onPersistSelectionHistory();
       }
@@ -7482,7 +7905,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     this.debounceClose();
   }
   collectPredictableCandidates(editor, cursor, originalToken) {
-    var _a, _b;
+    var _a2, _b;
     const seen = /* @__PURE__ */ new Set();
     const candidates = [];
     const addIfNew = (token) => {
@@ -7492,7 +7915,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
       }
     };
     const visibleRange = this.appHelper.getVisibleLineRange();
-    const rangeStart = (_a = visibleRange == null ? void 0 : visibleRange.from) != null ? _a : Math.max(cursor.line - 50, 0);
+    const rangeStart = (_a2 = visibleRange == null ? void 0 : visibleRange.from) != null ? _a2 : Math.max(cursor.line - 50, 0);
     const rangeEnd = (_b = visibleRange == null ? void 0 : visibleRange.to) != null ? _b : Math.min(cursor.line + 50, editor.lineCount() - 1);
     const textAbove = editor.getRange({ line: rangeStart, ch: 0 }, cursor);
     this.tokenizer.tokenize(textAbove).reverse().slice(1).forEach(addIfNew);
@@ -7641,8 +8064,8 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
         if (this.settings.excludeSelfInternalLink) {
           words = words.filter(
             (x) => {
-              var _a;
-              return x.type !== "internalLink" || x.createdPath !== ((_a = this.appHelper.getActiveFile()) == null ? void 0 : _a.path);
+              var _a2;
+              return x.type !== "internalLink" || x.createdPath !== ((_a2 = this.appHelper.getActiveFile()) == null ? void 0 : _a2.path);
             }
           );
         }
@@ -7698,13 +8121,13 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     const ipKeys = ["Enter", "Tab", "ArrowUp", "ArrowDown", "Home", "End"];
     this.scope.keys.filter(
       (x) => {
-        var _a;
-        return ipKeys.map((x2) => x2.toLowerCase()).includes(((_a = x.key) != null ? _a : "").toLowerCase());
+        var _a2;
+        return ipKeys.map((x2) => x2.toLowerCase()).includes(((_a2 = x.key) != null ? _a2 : "").toLowerCase());
       }
     ).forEach((x) => this.scope.unregister(x));
     this.scope.keys.find((x) => {
-      var _a;
-      return ((_a = x.key) == null ? void 0 : _a.toLowerCase()) === "escape";
+      var _a2;
+      return ((_a2 = x.key) == null ? void 0 : _a2.toLowerCase()) === "escape";
     }).func = () => {
       this.close();
       return this.settings.propagateEsc;
@@ -7953,7 +8376,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     );
   }
   onTrigger(cursor, editor) {
-    var _a, _b, _c, _d, _e;
+    var _a2, _b, _c, _d, _e;
     const start = performance.now();
     const showDebugLog = (message) => {
       this.showDebugLog(() => `[onTrigger] ${message}`);
@@ -8016,7 +8439,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
       tokenized.length > this.settings.maxNumberOfWordsAsPhrase ? tokenized.length - this.settings.maxNumberOfWordsAsPhrase : 0
     );
     showDebugLog(`currentTokens is ${JSON.stringify(currentTokens)}`);
-    const currentPhrase = (_a = currentTokens.first()) == null ? void 0 : _a.word;
+    const currentPhrase = (_a2 = currentTokens.first()) == null ? void 0 : _a2.word;
     showDebugLog(`currentPhrase is ${currentPhrase}`);
     if (!currentPhrase) {
       onReturnNull(`Don't show suggestions because currentPhrase is empty`);
@@ -8177,7 +8600,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
     return `[${alias}](${encodeSpace(link)}.md)`;
   }
   selectSuggestion(word) {
-    var _a, _b;
+    var _a2, _b;
     this.completionMode = this.matchStrategy.name;
     let forceWithAlias = false;
     let context = this.context;
@@ -8241,7 +8664,7 @@ var AutoCompleteSuggest = class _AutoCompleteSuggest extends import_obsidian7.Ed
         )
       );
     }
-    (_a = this.selectionHistoryStorage) == null ? void 0 : _a.increment(word);
+    (_a2 = this.selectionHistoryStorage) == null ? void 0 : _a2.increment(word);
     if (this.settings.showLogAboutPerformanceInConsole) {
       console.log("--- history ---");
       console.log((_b = this.selectionHistoryStorage) == null ? void 0 : _b.data);
@@ -8398,12 +8821,12 @@ var ResizeObserverSingleton = class _ResizeObserverSingleton {
    * @private
    */
   _getObserver() {
-    var _a;
-    return (_a = this._observer) != null ? _a : this._observer = new ResizeObserver((entries) => {
-      var _a2;
+    var _a2;
+    return (_a2 = this._observer) != null ? _a2 : this._observer = new ResizeObserver((entries) => {
+      var _a3;
       for (const entry of entries) {
         _ResizeObserverSingleton.entries.set(entry.target, entry);
-        (_a2 = this._listeners.get(entry.target)) == null ? void 0 : _a2(entry);
+        (_a3 = this._listeners.get(entry.target)) == null ? void 0 : _a3(entry);
       }
     });
   }
@@ -8976,11 +9399,11 @@ if (typeof HTMLElement === "function") {
     // We don't need this when working within Svelte code, but for compatibility of people using this outside of Svelte
     // and setting attributes through setAttribute etc, this is helpful
     attributeChangedCallback(attr2, _oldValue, newValue) {
-      var _a;
+      var _a2;
       if (this.$$r) return;
       attr2 = this.$$g_p(attr2);
       this.$$d[attr2] = get_custom_element_value(attr2, newValue, this.$$p_d, "toProp");
-      (_a = this.$$c) == null ? void 0 : _a.$set({ [attr2]: this.$$d[attr2] });
+      (_a2 = this.$$c) == null ? void 0 : _a2.$set({ [attr2]: this.$$d[attr2] });
     }
     disconnectedCallback() {
       this.$$cn = false;
@@ -8999,8 +9422,8 @@ if (typeof HTMLElement === "function") {
   };
 }
 function get_custom_element_value(prop, value, props_definition, transform) {
-  var _a;
-  const type = (_a = props_definition[prop]) == null ? void 0 : _a.type;
+  var _a2;
+  const type = (_a2 = props_definition[prop]) == null ? void 0 : _a2.type;
   value = type === "Boolean" && typeof value !== "boolean" ? value != null : value;
   if (!transform || !props_definition[prop]) {
     return value;
@@ -10303,80 +10726,80 @@ var ProviderStatusBar = class _ProviderStatusBar {
     );
   }
   setOnClickStrategyListener(listener) {
-    var _a;
-    (_a = this.matchStrategy) == null ? void 0 : _a.addEventListener("click", listener);
+    var _a2;
+    (_a2 = this.matchStrategy) == null ? void 0 : _a2.addEventListener("click", listener);
   }
   setOnClickComplementAutomatically(listener) {
-    var _a;
-    (_a = this.complementAutomatically) == null ? void 0 : _a.addEventListener("click", listener);
+    var _a2;
+    (_a2 = this.complementAutomatically) == null ? void 0 : _a2.addEventListener("click", listener);
   }
   setCurrentFileDisabled() {
-    var _a;
-    (_a = this.currentFile) == null ? void 0 : _a.setText("---");
+    var _a2;
+    (_a2 = this.currentFile) == null ? void 0 : _a2.setText("---");
   }
   setCurrentVaultDisabled() {
-    var _a;
-    (_a = this.currentVault) == null ? void 0 : _a.setText("---");
+    var _a2;
+    (_a2 = this.currentVault) == null ? void 0 : _a2.setText("---");
   }
   setCustomDictionaryDisabled() {
-    var _a;
-    (_a = this.customDictionary) == null ? void 0 : _a.setText("---");
+    var _a2;
+    (_a2 = this.customDictionary) == null ? void 0 : _a2.setText("---");
   }
   setInternalLinkDisabled() {
-    var _a;
-    (_a = this.internalLink) == null ? void 0 : _a.setText("---");
+    var _a2;
+    (_a2 = this.internalLink) == null ? void 0 : _a2.setText("---");
   }
   setFrontMatterDisabled() {
-    var _a;
-    (_a = this.frontMatter) == null ? void 0 : _a.setText("---");
+    var _a2;
+    (_a2 = this.frontMatter) == null ? void 0 : _a2.setText("---");
   }
   setCurrentFileIndexing() {
-    var _a;
-    (_a = this.currentFile) == null ? void 0 : _a.setText("indexing...");
+    var _a2;
+    (_a2 = this.currentFile) == null ? void 0 : _a2.setText("indexing...");
   }
   setCurrentVaultIndexing() {
-    var _a;
-    (_a = this.currentVault) == null ? void 0 : _a.setText("indexing...");
+    var _a2;
+    (_a2 = this.currentVault) == null ? void 0 : _a2.setText("indexing...");
   }
   setCustomDictionaryIndexing() {
-    var _a;
-    (_a = this.customDictionary) == null ? void 0 : _a.setText("indexing...");
+    var _a2;
+    (_a2 = this.customDictionary) == null ? void 0 : _a2.setText("indexing...");
   }
   setInternalLinkIndexing() {
-    var _a;
-    (_a = this.internalLink) == null ? void 0 : _a.setText("indexing...");
+    var _a2;
+    (_a2 = this.internalLink) == null ? void 0 : _a2.setText("indexing...");
   }
   setFrontMatterIndexing() {
-    var _a;
-    (_a = this.frontMatter) == null ? void 0 : _a.setText("indexing...");
+    var _a2;
+    (_a2 = this.frontMatter) == null ? void 0 : _a2.setText("indexing...");
   }
   setCurrentFileIndexed(count) {
-    var _a;
-    (_a = this.currentFile) == null ? void 0 : _a.setText(String(count));
+    var _a2;
+    (_a2 = this.currentFile) == null ? void 0 : _a2.setText(String(count));
   }
   setCurrentVaultIndexed(count) {
-    var _a;
-    (_a = this.currentVault) == null ? void 0 : _a.setText(String(count));
+    var _a2;
+    (_a2 = this.currentVault) == null ? void 0 : _a2.setText(String(count));
   }
   setCustomDictionaryIndexed(count) {
-    var _a;
-    (_a = this.customDictionary) == null ? void 0 : _a.setText(String(count));
+    var _a2;
+    (_a2 = this.customDictionary) == null ? void 0 : _a2.setText(String(count));
   }
   setInternalLinkIndexed(count) {
-    var _a;
-    (_a = this.internalLink) == null ? void 0 : _a.setText(String(count));
+    var _a2;
+    (_a2 = this.internalLink) == null ? void 0 : _a2.setText(String(count));
   }
   setFrontMatterIndexed(count) {
-    var _a;
-    (_a = this.frontMatter) == null ? void 0 : _a.setText(String(count));
+    var _a2;
+    (_a2 = this.frontMatter) == null ? void 0 : _a2.setText(String(count));
   }
   setMatchStrategy(strategy) {
-    var _a;
-    (_a = this.matchStrategy) == null ? void 0 : _a.setText(strategy.name);
+    var _a2;
+    (_a2 = this.matchStrategy) == null ? void 0 : _a2.setText(strategy.name);
   }
   setComplementAutomatically(automatically) {
-    var _a;
-    (_a = this.complementAutomatically) == null ? void 0 : _a.setText(automatically ? "auto" : "manual");
+    var _a2;
+    (_a2 = this.complementAutomatically) == null ? void 0 : _a2.setText(automatically ? "auto" : "manual");
   }
 };
 
@@ -10419,12 +10842,12 @@ var VariousComponents = class extends import_obsidian9.Plugin {
       await this.settingTab.toggleComplementAutomatically();
     });
     const debouncedSaveData = (0, import_obsidian9.debounce)(async () => {
-      var _a, _b;
+      var _a2, _b;
       await this.appHelper.saveJson(
         (0, import_obsidian9.normalizePath)(
           this.settings.intelligentSuggestionPrioritization.historyFilePath || DEFAULT_HISTORIES_PATH
         ),
-        (_b = (_a = this.suggester.selectionHistoryStorage) == null ? void 0 : _a.data) != null ? _b : {},
+        (_b = (_a2 = this.suggester.selectionHistoryStorage) == null ? void 0 : _a2.data) != null ? _b : {},
         this.settings.intelligentSuggestionPrioritization.prettyPrintHistoryFile ? 2 : void 0
       );
     }, 5e3);

@@ -23,5 +23,6 @@
   "templater-obsidian",
   "obsidian-list-callouts",
   "obsidian-hover-editor",
-  "vertical-tabs"
+  "vertical-tabs",
+  "advanced-rename-and-delete-handler"
 ]

@@ -1,7 +1,7 @@
 {
+  "attachmentUnitFolderPaths": [],
   "collectAttachmentUsedByMultipleNotesMode": "Skip",
   "consistencyReportFile": "consistency-report.md",
-  "emptyFolderBehavior": "DeleteWithEmptyParents",
   "excludePaths": [
     "/consistant-report.md$/",
     ".git/",
@@ -9,15 +9,21 @@
   ],
   "excludePathsFromAttachmentCollecting": [],
   "includePaths": [],
+  "isAdvancedRenameAndDeleteHandlerSuggestionDeclined": false,
+  "maxVaultRootPathLength": 0,
   "moveAttachmentToProperFolderUsedByMultipleNotesMode": "CopyAll",
+  "proposedRenameDeleteSettings": null,
   "shouldAddCommandsToFileMenu": true,
-  "shouldChangeNoteBacklinksDisplayText": false,
   "shouldCollectAttachmentsAutomatically": false,
-  "shouldDeleteAttachmentsWithNote": false,
-  "shouldDeleteExistingFilesWhenMovingNote": false,
-  "shouldMoveAttachmentsWithNote": false,
+  "shouldCreateNoteToPreserveOriginalName": false,
+  "shouldEnsurePathCompatibilityOnAndroid": false,
+  "shouldEnsurePathCompatibilityOnEveryPlatform": false,
+  "shouldEnsurePathCompatibilityOnIos": false,
+  "shouldEnsurePathCompatibilityOnLinux": false,
+  "shouldEnsurePathCompatibilityOnMacOs": true,
+  "shouldEnsurePathCompatibilityOnWindows": false,
   "shouldShowBackupWarning": false,
-  "shouldUpdateLinks": true,
+  "sidecarNoteNamePattern": "{{fileName}}.md",
   "treatAsAttachmentExtensions": [
     ".excalidraw.md"
   ]

@@ -1,10 +1,12 @@
 {
   "serverUrl": "https://api.languagetool.org",
   "urlMode": "standard",
+  "showRibbonIcon": false,
   "glassBg": true,
   "shouldAutoCheck": false,
   "autoCheckDelay": 3000,
   "pickyMode": false,
   "staticLanguage": "ru-RU",
-  "motherTongue": "en"
+  "motherTongue": "en",
+  "apiKeyStorage": "secret"
 }

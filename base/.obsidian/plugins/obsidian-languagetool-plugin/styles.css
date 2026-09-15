@@ -149,9 +149,10 @@
 }
 
 .lt-status-bar-check-icon {
+  /* A dotted border reads as a dotted underline without relying on the
+     text-decoration longhands, which the plugin review CSS lint flags */
   display: block;
-  text-decoration: underline;
-  text-decoration-style: dotted;
+  border-bottom: 1px dotted currentColor;
 }
 
 .lt-ignore-btn {
@@ -201,4 +202,33 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.lt-settings-endpoint-control {
+  display: inline-grid;
+}
+
+.lt-settings-error-text {
+  color: var(--text-error);
+}
+
+.lt-premium-warning {
+  display: grid;
+}
+
+.lt-premium-warning-buttons {
+  justify-self: center;
+}
+
+.lt-premium-warning-ack {
+  justify-self: flex-start;
+  color: red;
+}
+
+.lt-premium-warning-switch {
+  justify-self: flex-end;
+}
+
+.lt-dict-undo-btn {
+  margin-left: var(--size-4-2);
 }

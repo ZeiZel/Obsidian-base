@@ -32,30 +32,6 @@
             }
           },
           {
-            "id": "31bae1f9fb12f665",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/Teamlead Balun Courses.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Teamlead Balun Courses"
-            }
-          },
-          {
             "id": "1c1f8cf3c086dbb5",
             "type": "leaf",
             "state": {
@@ -342,9 +318,33 @@
               "icon": "lucide-file",
               "title": "gRPC"
             }
+          },
+          {
+            "id": "e75ec333fc123105",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/Teamlead Balun Courses.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Teamlead Balun Courses"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -680,14 +680,16 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "31bae1f9fb12f665",
+  "active": "e75ec333fc123105",
   "lastOpenFiles": [
-    "agile/agile.md",
-    "agile/Teamlead Balun Courses.md",
+    "_png/Pasted image 20260915192640.png",
+    "concepts/gRPC.md",
+    "agile/Teamlead.md",
     "architecture/System Design/System Design.md",
+    "agile/Teamlead Balun Courses.md",
+    "agile/agile.md",
     "cynefin.md",
     "database/PostgreSQL.md",
-    "concepts/gRPC.md",
     "concepts/GraphQL.md",
     "concepts/Client-server architecture.md",
     "backend/Kafka.md",
@@ -706,8 +708,6 @@
     "cs/C.md",
     "tools/ZSH.md",
     "tools/TMUX.md",
-    "tools/nvim.md",
-    "whatsapp.excalidraw.md",
     "Untitled.base",
     "_png/Pasted image 20260830141633.png",
     "_png/Pasted image 20260810112432.png",
