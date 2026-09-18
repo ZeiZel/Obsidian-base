@@ -342,6 +342,30 @@
               "icon": "lucide-file",
               "title": "Teamlead Balun Courses"
             }
+          },
+          {
+            "id": "02f6934a058d966f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "agile/agile.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "agile"
+            }
           }
         ],
         "currentTab": 13
@@ -657,7 +681,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 538.87109375
+    "width": 485.9921875
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -682,13 +706,13 @@
   },
   "active": "e75ec333fc123105",
   "lastOpenFiles": [
+    "agile/agile.md",
+    "agile/Teamlead Balun Courses.md",
     "_png/Pasted image 20260916194631.png",
     "_png/Pasted image 20260915192640.png",
     "concepts/gRPC.md",
     "agile/Teamlead.md",
     "architecture/System Design/System Design.md",
-    "agile/Teamlead Balun Courses.md",
-    "agile/agile.md",
     "cynefin.md",
     "database/PostgreSQL.md",
     "concepts/GraphQL.md",
@@ -718,7 +742,6 @@
     "_png/Pasted image 20260717154243.png",
     "_png/Pasted image 20260715201053.png",
     "_png/Pasted image 20260715201049.png",
-    "_png/Pasted image 20260715200641.png",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
