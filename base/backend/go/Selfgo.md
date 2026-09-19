@@ -1,4 +1,13 @@
+---
+tags:
+  - go
+  - postgresql
+  - gorm
+---
 
+
+
+---
 # Основы
 
 ## Введение
@@ -12229,5 +12238,39 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	router.Handle("GET /link", middleware.IsAuthed(handler.GetAll(), deps.Config))
 }
 ```
+
+
+---
+# Глубокий Go  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+# Конкуррентность в Go 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

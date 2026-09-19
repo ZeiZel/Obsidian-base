@@ -5,20 +5,28 @@
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "agile",
-      "path": "agile/agile.md"
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
     },
     {
-      "basename": "gRPC",
-      "path": "concepts/gRPC.md"
+      "basename": "Go",
+      "path": "backend/go/Go.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Teamlead",
       "path": "agile/Teamlead.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
+      "basename": "gRPC",
+      "path": "concepts/gRPC.md"
     },
     {
       "basename": "PostgreSQL",
@@ -71,14 +79,6 @@
     {
       "basename": "database",
       "path": "database/database.md"
-    },
-    {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
-    },
-    {
-      "basename": "Go",
-      "path": "backend/go/Go.md"
     },
     {
       "basename": "C",
