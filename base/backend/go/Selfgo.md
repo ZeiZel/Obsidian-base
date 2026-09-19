@@ -12320,13 +12320,102 @@ defer cancel()                                                                 /
 
 ### Архитектура профилировщика Go 
 
+Реализуется вызов сэмплирования за счёт сигналов ОС. 
+
+- cpu 
+- block/mutex 
+- allocs/heap 
+- trace 
+- goroutine 
+
+![](../../_png/Pasted%20image%2020260919165822.png)
 
 
 
+![](../../_png/Pasted%20image%2020260919165937.png)
 
 
+
+![](../../_png/Pasted%20image%2020260919165946.png)
 
 ### Интерфейс pprof 
+
+Не рекомендуется собирать профили с помощью пакета `runtime` 
+
+```Go
+runtime.GoroutineProfile()
+runtime.MutexProfile() 
+runtime.MemProfile()
+runtime.EPUPpofile()
+```
+
+
+```Go
+err = pprof. Lookup( name: "heap"). WriteTo(f, debug: 0)
+err = pprof.WriteHeapProfile(f)
+
+err = pprof.StartCPUProfile(f)
+defer pprof.StopCPUProfile()
+```
+
+
+
+```Go
+func lockProfiles () {
+	profiles.mu.Lock()
+
+	if profiles.m == nil {
+		// Initial built-in profiles.
+		profiles.m = map[string]*Profile{ 
+			"goroutine": goroutineProfile, 
+			"threadcreate": threadcreateProfile,
+			"heap": heapProfile, 
+			"allocs": allocsProfile,
+			"block": blockProfile,
+			"mutex": mutexProfile,
+		}
+}
+```
+
+
+```Go
+func registerProfilerEndpoints(mux *http.ServeMux) { 
+	mux.HandleFunc("/debug/pprof/", pprof.Index)
+	mux.HandLeFunc("/debug/pprof/cmdline", pprof.Cmdline)
+	mux.HandleFunc ("/debug/pprof/profile", pprof.Profile)
+	mux.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
+	mux.HandleFunc("/debug/pprof/trace", pprof. Trace)
+	mux.Handle("/debug/pprof/block", pprof. Handler ("block")) 
+	mux.Handle("/debug/pprof/heap", pprof.Handler("heap")) 
+	mux.Handle("/debug/pprof/allocs", pprof.Handler("allocs"))
+	mux.Handle(©"/debug/pprof/goroutine", pprof Handler("goroutine")) 
+	mux.Handle(©"/debug/pprof/threadcreate", pprof.Handler("goroutine"))
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
