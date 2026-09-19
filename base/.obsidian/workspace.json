@@ -343,7 +343,8 @@
               "title": "gRPC"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -642,7 +643,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "agile/Teamlead Balun Courses.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -679,21 +680,28 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e75ec333fc123105",
+  "active": "045cbaa702acbded",
   "lastOpenFiles": [
+    "_png/Pasted image 20260919165211.png",
+    "_png/Pasted image 20260919165208.png",
+    "_png/Pasted image 20260919165107.png",
+    "_png/Pasted image 20260919164034.png",
+    "_png/Pasted image 20260919164018.png",
+    "_png/Pasted image 20260919163939.png",
+    "database/PostgreSQL.md",
+    "_png/Pasted image 20260919163848.png",
     "backend/go/Selfgo.md",
+    "_png/Pasted image 20260919163546.png",
+    "agile/Teamlead Balun Courses.md",
     "backend/go/Go.md",
     "architecture/System Design/System Design.md",
-    "agile/Teamlead Balun Courses.md",
     "agile/Teamlead.md",
     "_png/Pasted image 20260919144801.png",
     "_png/Pasted image 20260918212356.png",
     "agile/agile.md",
     "_png/Pasted image 20260916194631.png",
-    "_png/Pasted image 20260915192640.png",
     "concepts/gRPC.md",
     "cynefin.md",
-    "database/PostgreSQL.md",
     "concepts/GraphQL.md",
     "concepts/Client-server architecture.md",
     "backend/Kafka.md",
@@ -711,12 +719,6 @@
     "tools/ZSH.md",
     "tools/TMUX.md",
     "Untitled.base",
-    "_png/Pasted image 20260830141633.png",
-    "_png/Pasted image 20260810112432.png",
-    "_png/Pasted image 20260809103157.png",
-    "_png/Pasted image 20260808180605.png",
-    "_png/Pasted image 20260802191204.png",
-    "_png/Pasted image 20260717154243.png",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
     "edge/Инструменты/monorepo",
