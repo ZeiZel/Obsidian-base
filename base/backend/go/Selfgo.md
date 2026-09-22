@@ -12320,45 +12320,48 @@ defer cancel()                                                                 /
 
 ### Архитектура профилировщика Go 
 
-Реализуется вызов сэмплирования за счёт сигналов ОС. 
+Реализуется вызов сэмплирования за счёт сигналов ОС. Мы через неё вешаем тикер, который раз в 10 секунд отправляет сигнал SIGPROF. В го есть отдельный обработчик сигнала, который ловит его и запускает снепшотирование приложения. Логический процессор выполняет снэпшот текущей исполняемой горутины. После эти данные кладутся в lock-free очередь, из которой отдельная горутина собирает данные и кладёт в результирующую очередь. 
 
-- cpu 
-- block/mutex 
-- allocs/heap 
-- trace 
-- goroutine 
+Типы профилировщиков: 
+
+- cpu - потребление процессорных мощностей 
+- allocs/heap - профилировщик по памяти 
+- trace - оптимизация GC 
+- block/mutex - позволяет отпрофилировать блокировки данных, но не помогает с deadlock'ами 
+- goroutine - можно явно взять состояние каждой горутины 
 
 ![](../../_png/Pasted%20image%2020260919165822.png)
 
-
+Данные профилировщика - это protobuf 
 
 ![](../../_png/Pasted%20image%2020260919165937.png)
 
-
+Длительность выполнения каждой операции в рамках realtime исполнения мы можем взглянуть на проекции каждого из профилировщиков. 
 
 ![](../../_png/Pasted%20image%2020260919165946.png)
 
 ### Интерфейс pprof 
 
-Не рекомендуется собирать профили с помощью пакета `runtime` 
+Не рекомендуется собирать профили с помощью пакета `runtime` - это legacy. 
 
 ```Go
 runtime.GoroutineProfile()
 runtime.MutexProfile() 
 runtime.MemProfile()
-runtime.EPUPpofile()
+runtime.EPUPpofile() // deprecated 
 ```
 
+Для сборки локального профиля, нужно использовать `pprof`. 
 
 ```Go
-err = pprof. Lookup( name: "heap"). WriteTo(f, debug: 0)
+err = pprof.Lookup("heap").WriteTo(f, 0)
 err = pprof.WriteHeapProfile(f)
 
 err = pprof.StartCPUProfile(f)
 defer pprof.StopCPUProfile()
 ```
 
-
+Можно описать профили для профилирования отдельными функциями 
 
 ```Go
 func lockProfiles () {
@@ -12377,6 +12380,7 @@ func lockProfiles () {
 }
 ```
 
+Так же мы можем на лету снимать профили нашего приложения через отдельные эндпоинты. Это очень удобно, чтобы облачный монитор мог в любой момент времени собрать данные по профилям и вернуть их в централизованную систему сбора. 
 
 ```Go
 func registerProfilerEndpoints(mux *http.ServeMux) { 
@@ -12385,10 +12389,10 @@ func registerProfilerEndpoints(mux *http.ServeMux) {
 	mux.HandleFunc ("/debug/pprof/profile", pprof.Profile)
 	mux.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
 	mux.HandleFunc("/debug/pprof/trace", pprof. Trace)
-	mux.Handle("/debug/pprof/block", pprof. Handler ("block")) 
+	mux.Handle("/debug/pprof/block", pprof. Handler("block")) 
 	mux.Handle("/debug/pprof/heap", pprof.Handler("heap")) 
 	mux.Handle("/debug/pprof/allocs", pprof.Handler("allocs"))
-	mux.Handle(©"/debug/pprof/goroutine", pprof Handler("goroutine")) 
+	mux.Handle(©"/debug/pprof/goroutine", pprof.Handler("goroutine")) 
 	mux.Handle(©"/debug/pprof/threadcreate", pprof.Handler("goroutine"))
 }
 ```

@@ -5,6 +5,10 @@
       "path": "backend/go/Selfgo.md"
     },
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
       "basename": "PostgreSQL",
       "path": "database/PostgreSQL.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "Go",
       "path": "backend/go/Go.md"
-    },
-    {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Teamlead",

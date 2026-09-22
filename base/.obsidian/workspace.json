@@ -614,13 +614,24 @@
             "id": "aab542ecafd4fcf1",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "ae073bb30f8de16e",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 17
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -680,8 +691,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "045cbaa702acbded",
+  "active": "ae073bb30f8de16e",
   "lastOpenFiles": [
+    "architecture/System Design/System Design.md",
+    "backend/go/Selfgo.md",
     "_png/Pasted image 20260919165946.png",
     "_png/Pasted image 20260919165937.png",
     "_png/Pasted image 20260919165822.png",
@@ -693,11 +706,8 @@
     "_png/Pasted image 20260919163939.png",
     "database/PostgreSQL.md",
     "_png/Pasted image 20260919163848.png",
-    "backend/go/Selfgo.md",
-    "_png/Pasted image 20260919163546.png",
     "agile/Teamlead Balun Courses.md",
     "backend/go/Go.md",
-    "architecture/System Design/System Design.md",
     "agile/Teamlead.md",
     "agile/agile.md",
     "concepts/gRPC.md",
