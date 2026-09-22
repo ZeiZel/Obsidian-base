@@ -12388,18 +12388,41 @@ func registerProfilerEndpoints(mux *http.ServeMux) {
 	mux.HandLeFunc("/debug/pprof/cmdline", pprof.Cmdline)
 	mux.HandleFunc ("/debug/pprof/profile", pprof.Profile)
 	mux.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
-	mux.HandleFunc("/debug/pprof/trace", pprof. Trace)
+	mux.HandleFunc("/debug/pprof/trace", pprof.Trace)
+	
 	mux.Handle("/debug/pprof/block", pprof. Handler("block")) 
 	mux.Handle("/debug/pprof/heap", pprof.Handler("heap")) 
 	mux.Handle("/debug/pprof/allocs", pprof.Handler("allocs"))
-	mux.Handle(©"/debug/pprof/goroutine", pprof.Handler("goroutine")) 
-	mux.Handle(©"/debug/pprof/threadcreate", pprof.Handler("goroutine"))
+	mux.Handle("/debug/pprof/goroutine", pprof.Handler("goroutine")) 
+	mux.Handle("/debug/pprof/threadcreate", pprof.Handler("goroutine"))
 }
 ```
 
 
+```Go
+runtime.SetBlockProfileRate (1)
+runtime.SetMutexProfileFraction(1)
+runtime.SetCPUProfileRate(1)
+runtime.MemProfileRate = 1
+```
 
+```Go
+if rate := MemProfileRate; rate › 0 {
+	// Note cache c only valid while m acquired; see #47302
+	//
+	// N.B. Use the full size because that matches how the GC
+	// will update the mem profile on the "free" side.
+	
+	if rate != 1 && fullSize < c.nextSample {
+		c.nextSample -= fullSize
+	} else {
+		profilealloc(mp, x, fullSize)
+	｝
+｝
 
+mp.mallocing = 0
+releasem(mp)
+```
 
 
 
