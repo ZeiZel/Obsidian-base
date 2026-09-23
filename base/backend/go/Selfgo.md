@@ -12244,7 +12244,22 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 ---
 # Глубокий Go  
 
+## Основные типы данных 
 
+Массивы и срезы 
+Строки 
+Словари 
+Функции 
+Структуры данных 
+Интерфейсы 
+Обработка ошибок 
+Дженерики и рефлексия 
+Аллокатор 
+Сборщик мусора 
+Планировщик и горутины 
+Примитивы синхронизации 
+Каналы 
+Контексты 
 
 
 
@@ -12398,11 +12413,15 @@ func registerProfilerEndpoints(mux *http.ServeMux) {
 }
 ```
 
+#### Profile Rate 
+
+Из-за некоторых накладных расходов некоторые профили по умолчанию отключены. [Malloc каждые 512 килобайт](https://github.com/golang/go/blob/c96939fbed3d60159dc81ee9ad591de8cfd41168/src/runtime/malloc.go#L1583) в дефолте собирает профиль. 
 
 ```Go
 runtime.SetBlockProfileRate (1)
 runtime.SetMutexProfileFraction(1)
 runtime.SetCPUProfileRate(1)
+// это позволит записывать каждую аллокацию приложения 
 runtime.MemProfileRate = 1
 ```
 
@@ -12424,24 +12443,99 @@ mp.mallocing = 0
 releasem(mp)
 ```
 
+#### Использование профилировщика 
+
+`pprof` имеет полноценный интерфейс для отслеживания профиля приложения. Поднимаем мы его через `go tool`, где используем `pprof` и передаём порт с протоколом `-http :8081`, где он будет запущен. 
+
+Здесь происходит вызов профилировщика по пути запущенного профилировщика в самом приложении. 
+
+`PPROF_THPDIR` позволяет задать кастомный путь для логов. 
+
+- Для профилирования CPU нужно указывать время продолжительности профилирования 
+- Для профилирования памяти можно не использовать время 
+- Для профилирования трейсов, нужно делать явные курлсы с данными 
+
+`Makefile`
+```makefile
+# --- Profiling --- 
+
+.PHONY: cpuprof 
+
+cpuprot:
+	(PPROF_THPDIR=${PPROFDIR} go tool pprof -http :8081 -seconds 20 http://127.8.0.1:8080/debug/pprof/profile)
+
+PHONY: memprof 
+
+nemprot:
+	(PPROF_THPDIR=${PPROFDIR} go tool pprof -http :8081 http://127.0.0.1:8080/debug/pprof/heap)
+
+.PHONY: traceprof 
+
+traceprof:
+	curt http://Localhost:8080/debug/pprof/trace\?seconds\=20 -o trace.out
+```
+
+После вывода профиля, мы можем легко прочитать через утилиту профилировщика все данные, что есть в нём. 
+
+```bash
+$ go tool pprof pprof.__6348go_build_card_shielder_go.samples.cpu.001.pb.gz
+
+File: ___6348go_build_card_shielder_go
+Type: cpu
+Time: Sep 21, 2024 at 12:42pm (MSK)
+Duration: 20.13s, Total samples = 7.64s (37.96%)
+Entering interactive mode (type "help" for commands, "o" for options) (pprof)
+```
+
+Команда `top` выводит топ функций по потреблению ресурсов того профиля, который мы снимаем. 
+
+![](../../_png/Pasted%20image%2020260923182816.png)
+
+Flat - это потребление вызова функции без дочерних вызовов  
+Cummulative - это потребление вызова функции вместе с потреблением дочерних вызовов 
+
+- `flat=root` 
+- `cum=root+f1+f2+f3`
+
+```Go
+func root() {
+	f1()
+	f2()
+	f3()
+}
+
+func f1() {} 
+
+func f2() {} 
+
+func f3() {} 
+```
+
+Можно вывести обрезанный топ по количество и нужному столбцу основному - `cum` 
+
+![](../../_png/Pasted%20image%2020260923183733.png)
+
+Мы можем вызвать отдельно пики по нужной нам функции. Например, проверить `Fibbonaci` на потребление памяти. 
+
+![](../../_png/Pasted%20image%2020260923183919.png)
 
 
 
+![](../../_png/Pasted%20image%2020260923183842.png)
 
 
 
+![](../../_png/Pasted%20image%2020260923183902.png)
 
+Вершины: 
 
+- Цветные - cum 
+- Размер - flat 
+- красный 
+- белый 
+- зелёный 
 
-
-
-
-
-
-
-
-
-
+![](../../_png/Pasted%20image%2020260923183817.png)
 
 
 
