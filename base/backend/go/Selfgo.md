@@ -12695,6 +12695,11 @@ pools:
 		  times: 7
 ```
 
+> Чтобы стартовать профилировщик, нужно: 
+> 1. Сначала запустить приложение 
+> 2. Запустить нагрузочный тест 
+> 3. Запустить профилировщик (параллельно с нагрузчиком)
+
 После запуска профилировщика на генераторе нагрузки, мы поучили явную карту нагрузки и подтвердили свою гипотезу - f3 занимает больше всего времени выполнения среди всех функций.  
 
 ![](../../_png/Pasted%20image%2020260924083447.png)
@@ -12726,6 +12731,8 @@ Mutex - показывает, кто держал блокировку
 Block - кто ждал блокировку 
 
 ![](../../_png/Pasted%20image%2020260924075100.png)
+
+#### Mutex 
 
 Тут ровно тот же самый сервер, но ему добавлена mutex блокировка. Тут у нас запись блокируется на 10 миллисекунд, а чтение на все 200 - эмуляция большого количества читателей. 
 
@@ -12818,42 +12825,170 @@ go tool pprof -base ./pprof.__1go_build_mx_cmd_app_mx.contentions.delay.001.pb.g
 
 ![](../../_png/Pasted%20image%2020260924090935.png)
 
+#### Block 
 
+Далее реализуем блокировки выполнения кода за счёт ожидания таймаутами. 
 
-#### Threadcreate Profile 
+```Go
+func main() {
+	//...
+	
+	s := &server{
+		Logger: Logger, 
+	}
 
-Был частично сломан и используется очень редко для отладки создания большого количества потоков ОС. 
+	//...
+	
+	runtime.SetBLockProfileRate(1)
+	mux.Handle("/debug/pprof/block", pprof.Handler("block"))
 
+	//...
+}
 
+func (s *server) endPoint(w http.ResponseWriter, r *http.Request) { 
+	s.Logger.Info("request")
+
+	s.f1()
+	s.f2()
+	s.f3()
+	s.f4()
+	s.f5()
+
+	w.WriteHeader (http.StatusOK)
+}
+
+//go:noinline
+func (s *server) f1() int {
+	select {
+	case <-time.Tick(time.Millisecond * 10):
+		return
+	}
+}
+
+//... 
+
+//go:noinline
+func (s *server) f3() int {
+	select {
+	case <-time. Tick(time.Millisecond * 200):
+		return
+	}
+}
+
+//... 
+```
+
+И, как это и ожидалось, блок в той самой функции оказался самым большим среди всех существующих. 
+
+![](../../_png/Pasted%20image%2020260924180518.png)
+
+### Threadcreate Profile 
+
+В го операция N может маппиться на thread OS. Это происходит, если в CGO операция долго исполняется, то она попадает в этот лишний созданный thread. 
+
+Был частично сломан тем, что у него некорректно создаются дампы памяти с 2014 года. Используется очень редко для отладки создания большого количества потоков ОС. 
 
 ### Trace profiling 
 
-
+Данный график нам позволяет проследить, где у нас происходит замедление за счёт запуска GC и где приложение встаёт 
 
 ![](../../_png/Pasted%20image%2020260924075210.png)
 
-
+Тут можно подробно проверить информацию за определённый поток 
 
 ![](../../_png/Pasted%20image%2020260924075222.png)
 
-
+Так же на нём же есть отображение запусков GC и сколько времени от runtime он отъедает  
 
 ![](../../_png/Pasted%20image%2020260924075245.png)
 
 #### Goroutine Profiling 
 
-- Статус горутины (idle, runnable, running, syscall, waiting, dead, copystack, peempted)
-- ﻿﻿Wait reason (IO wait, chan receive, select, trace reader, debug call, finalizer wait and etc.)
-- ﻿﻿Wait since
-- ﻿﻿Stack trace
+Профилировщик горутины, который отображает: 
+
+- Статус горутины (idle, runnable, running, syscall, waiting, dead, copystack, peempted) - её состояние (идёт, ожидает, системные вызовы и так далее) 
+- ﻿﻿Wait reason (IO wait, chan receive, select, trace reader, debug call, finalizer wait and etc.) - причина ожидания 
+- ﻿﻿Wait since - сколько долго ждёт 
+- ﻿﻿Stack trace 
 - ﻿﻿GoPC
 - ﻿﻿Lockedm
 
+Есть возможность подробно проверить работу в runtime 
+
 ![](../../_png/Pasted%20image%2020260924075303.png)
 
-
+Вся информация из разных источников: 
 
 ![](../../_png/Pasted%20image%2020260924075421.png)
+
+Будем использовать старый сервер из прошлого урока, но заменим тело функции `endPoint` 
+
+```Go
+type server struct { 
+	Logger *slog.Logger 
+	pool sync.Pool 
+}
+
+func main() {
+	//...
+
+	s := &server{
+		Logger: logger, 
+		pool: &sync.Pooll{
+			New: func() any {
+				return make([]byte, 1<<20)
+			}
+		｝
+	}
+
+	debug.SetGCPercent(100)
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("POST /v1/action", s.endPoint)
+	mux.HandleFunc("/debug/pprof/trace", pprof.Trace)
+	
+	//... 
+}
+
+func (s *server) endPoint(w http.ResponseWriter, r *http.Request) { 
+	s.Logger.Info("request")
+
+	buffer:= make([]byte, 1<<20)
+	copy(buffer, "test")
+	w.Write(buffer[:10])
+	w.WriteHeader(http.StatusOK)
+}
+```
+
+После открытия профилировщика, нам нужны будут в основном только первые две вкладки 
+
+![](../../_png/Pasted%20image%2020260924183517.png)
+
+У GC есть лимиты в зависимости от количество собранного за прошлые разы байт данных и в рамках этих лимитов он делает проходку очистки по таймалйну профилирования нагрузки на треды. 
+
+![](../../_png/Pasted%20image%2020260924183656.png)
+
+Если посмотреть чуть шире, то можно будет заметить, что у нас очень часто вызывается GC. Это происходит так как в нашем примере в методе `endPoint` каждый раз пересоздаётся буфер памяти, который каждый раз пропадает после выполнения этого метода. Он каждый раз перестаёт быть нужным. 
+
+![](../../_png/Pasted%20image%2020260924183940.png)
+
+Для исправления этой проблемы нам нужно использовать `sync.Pool`, который будет переиспользовать уже созданный буфер. 
+
+Сейчас функция берёт буфер из `sync.Pool` и возвращает его после использования. Буферы переиспользуются между запросами, аллокаций почти нет, GC почти не нагружается. 
+
+```Go
+func (s *server) endPoint(w http.ResponseWriter, r *http.Request) {
+	s.Logger.Info("request")
+
+	bufPtr := s.pool.Get().(*[]byte)
+	defer s.pool.Put(bufPtr)
+	buf := *bufPtr
+
+	n := copy(buf, "test")
+	w.WriteHeader(http.StatusOK)
+	w.Write(buf[:n])
+}
+```
 
 ### PGO 
 
