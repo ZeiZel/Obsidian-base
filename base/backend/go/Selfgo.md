@@ -12568,7 +12568,7 @@ go tool pprof -http :8081 ./pprof.__5990go_build_card_shielder_go.samples.cpu.00
 
 ### CPU Profiling 
 
-
+Поднимем небольшой сервер, который откроет роут профилировщика и одно действие на `/v1/action`
 
 ```Go
 const addr = "0.0.0.0:8080" 
@@ -12586,7 +12586,6 @@ func main () {
 	}
 
 	mux := http.NewServeMux()
-
 	mux.HandLeFunc("POST /v1/action", s.endPoint) 
 	mux.HandLeFunc("/debug/pprof/profile", pprof.Profile) 
 
@@ -12670,6 +12669,7 @@ func f3() int {
 }
 ```
 
+Для профилирования, похожего на реальное, нужно подтянуть нагрузочные тесты. Для этого подойдёт Pandora на Go, которая сделана на базе Yandex Tanker. 
 
 `pandora.yml`
 ```YAML
@@ -12695,26 +12695,130 @@ pools:
 		  times: 7
 ```
 
+После запуска профилировщика на генераторе нагрузки, мы поучили явную карту нагрузки и подтвердили свою гипотезу - f3 занимает больше всего времени выполнения среди всех функций.  
 
-
+![](../../_png/Pasted%20image%2020260924083447.png)
 
 
 
 
 ![](../../_png/Pasted%20image%2020260924075015.png)
 
+#### ALLOCS/HEAP PROFILING
 
+Профилировщик по памяти. 
+
+- alloc - даст профиль со старта работы приложения 
+	- alloc_objects/count и ﻿﻿alloc_space/bytes 
+	- Позволяет подтвердить утечку памяти (например, горутина со старта приложения поднята и постоянно расширяет какой-то слайс) 
+- inuse - показывает профиль с последней сборки мусора 
+	- ﻿﻿inuse_objects/count и ﻿﻿inuse_space/bytes 
+	- Позволяет подтвердить burst нагрузки после определённой операции 
+
+- alloc_* - профиль, начиная со старта процесса 
+- inuse_* - профиль, начиная с последней сборки мусора 
 
 ![](../../_png/Pasted%20image%2020260924075029.png)
 
-
-
-
 ### Block_mutex profiling 
 
-
+Mutex - показывает, кто держал блокировку 
+Block - кто ждал блокировку 
 
 ![](../../_png/Pasted%20image%2020260924075100.png)
+
+Тут ровно тот же самый сервер, но ему добавлена mutex блокировка. Тут у нас запись блокируется на 10 миллисекунд, а чтение на все 200 - эмуляция большого количества читателей. 
+
+> `SetMutexProfileFraction` = 1 - это тестовый рейт. Он говорит о том, что мы собираем все блокировки. Это сильно бьёт по перфомансу приложения. Не стоит так делать.  
+
+```Go
+func main() {
+	// ... 
+	
+	s := &server{
+		Logger: Logger, 
+		mx: new(sync.Mutex),
+		data: make (map[stringlint),
+	}
+	
+	mux := http.NewServeMux() 
+	mux.HandLeFunc("POST /v1/action", s.endPoint) 
+	runtime.SetMutexProfileFraction(rate: 1) 
+	mux.HandLe("/debug/pprof/mutex", pprof.Handler("mutex")) 
+
+	// ... 
+}
+
+func (s *server) endPoint(w http.ResponseWriter, r *http.Request) { 
+	s.logger.Info("request")
+
+	s.writeF1()
+	s.writeF2()
+	s.readF3()
+	s.writeF4()
+	s.writeF5()
+
+	w. WriteHeader(http. StatusOK)
+}
+
+func (s *server) writeF1 { 
+	s.mx.Lock()
+	defer s.mx.UnLock()
+	time.Sleep(time.Millisecond * 10)
+
+	s.data["writeF1"]++
+}
+
+func (s *server) readF3() int { 
+	s.mx.Lock()
+	defer s.mx.UnLock()
+
+	time.Sleep(time.Millisecond * 200)
+	return s.data["readF3"]
+}
+```
+
+После запуска профиля, у нас появилась ожидаемая картина. Есть несколько 
+
+![](../../_png/Pasted%20image%2020260924085816.png)
+
+И чтобы оптимизировать этот вариант, мы можем воспользоваться `RWMutex`. В ситуации, когда у нас много читателей и мало писателей, достаточно будет блокировать не полностью значение, а только его чтение. 
+
+```Go
+func main() {
+	//...
+	
+	s := &server{
+		Logger: Logger, 
+		mx: new(sync.RWMutex),
+		data: make (map[stringlint),
+	}
+
+	//...
+}
+
+func (s *server) readF3() int { 
+	s.mx.RLock()
+	defer s.mx.RUnLock()
+
+	time.Sleep(time.Millisecond * 200)
+	return s.data["readF3"]
+}
+```
+
+И теперь мы получили более внятное дерево. По ощущениям оно сильно лучше, чем было, но чтобы понять точно, нужно сравнить со старым профилем. 
+
+![](../../_png/Pasted%20image%2020260924090714.png)
+
+Для запуска сравнения, нужно передать флаг `-base` и передать то, что было и то, что стало 
+
+```bash
+go tool pprof -base ./pprof.__1go_build_mx_cmd_app_mx.contentions.delay.001.pb.gz ./pprof.___go_build_m_cd_app_rwx.contentions.delay.001.pb.gz
+```
+
+![](../../_png/Pasted%20image%2020260924090935.png)
+
+
 
 #### Threadcreate Profile 
 
