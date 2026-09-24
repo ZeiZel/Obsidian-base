@@ -12244,22 +12244,25 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 ---
 # Глубокий Go  
 
-## Основные типы данных 
+### Основные типы данных 
 
-Массивы и срезы 
-Строки 
-Словари 
-Функции 
-Структуры данных 
-Интерфейсы 
-Обработка ошибок 
-Дженерики и рефлексия 
-Аллокатор 
-Сборщик мусора 
-Планировщик и горутины 
-Примитивы синхронизации 
-Каналы 
-Контексты 
+
+
+
+### Массивы и срезы 
+### Строки 
+### Словари 
+### Функции 
+### Структуры данных 
+### Интерфейсы 
+### Обработка ошибок 
+### Дженерики и рефлексия 
+### Аллокатор 
+### Сборщик мусора 
+### Планировщик и горутины 
+### Примитивы синхронизации 
+### Каналы 
+### Контексты 
 
 
 
@@ -12515,54 +12518,346 @@ func f3() {}
 
 ![](../../_png/Pasted%20image%2020260923183733.png)
 
-Мы можем вызвать отдельно пики по нужной нам функции. Например, проверить `Fibbonaci` на потребление памяти. 
+Мы можем вызвать отдельно пики по нужной нам функции. Например, проверить `Fibbonaci` на потребление памяти. Она позволяет пройтись нам по дереву вызовов этой функции и найти узкое место, которое тормозит выполнение кода. 
 
 ![](../../_png/Pasted%20image%2020260923183919.png)
 
-
+Так же у нас есть возможность дизассемблировать нашу функцию, чтобы увидеть места, которые можно оптимизировать на более глубоком уровне 
 
 ![](../../_png/Pasted%20image%2020260923183842.png)
 
-
+Дерево вызовов 
 
 ![](../../_png/Pasted%20image%2020260923183902.png)
 
+И веб версия. Она открывается командой профилировщика `web` или при вызове в команде ключа `-http :8081`
+
 Вершины: 
 
-- Цветные - cum 
-- Размер - flat 
-- красный 
-- белый 
-- зелёный 
+- Цветные - отображение cummulative 
+- Размер - отображение flat 
+
+Цвета: 
+
+- красный - большие cum и flat
+- серый - малое потребление ресурсов 
+- зелёный - сравнение двух разных профилей 
+
+Рёбра: 
+
+- цвет и размер - показывает ресурсы на пути вызова 
+- пунктир - пропуск вершин (wrapper, interceptors) 
 
 ![](../../_png/Pasted%20image%2020260923183817.png)
 
+Чтобы отобразить существующий бандл с данными по профилировщику: 
 
+```bash
+go tool pprof -http :8081 ./pprof.__5990go_build_card_shielder_go.samples.cpu.001.pb.gz
+```
 
+Так же веб профилировщик имеет удобный flamegraph. 
+
+Наш профилировщик делает сэмплы. Каждый сэмпл хранит в себе информацию о функции, которую он вызывал в определённый момент времени. FG показывает в каком количестве семплов присутствует определённая функция. 
+
+По оси X отображается количество сэмплов, которое занимает функция. По оси Y отображается последовательность вызовов функций. 
+
+Когда мы уже знаем, где находится проблема, мы можем уточнить информацию по проблемной функции. Вполне возможно, что именно дочерний вызов функции и задерживает работу отдельной функции. 
+
+![](../../_png/Pasted%20image%2020260924074141.png)
 
 ### CPU Profiling 
+
+
+
+```Go
+const addr = "0.0.0.0:8080" 
+
+func main () {
+	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT) 
+	defer cancel() 
+
+	logger:= slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog. LevelDebug,
+	}))
+
+	s := &server{
+		Logger: Logger,
+	}
+
+	mux := http.NewServeMux()
+
+	mux.HandLeFunc("POST /v1/action", s.endPoint) 
+	mux.HandLeFunc("/debug/pprof/profile", pprof.Profile) 
+
+	server:= &http.Server{ 
+		Addr: addr,
+		Handler: mux,
+	}
+	
+	go func() {
+		defer cancel()
+		if err := server.ListenAndServe(); err != nil {
+			logger.LogAttrs(
+				ctx,
+				slog.LevelError,
+				"server serve error", 
+				slog.Any("error"),
+			)
+	}() 
+	
+	<-ctx.Done()
+	shutdownCt, cancel := context. WithTimeout(context.Background), time Minute)
+	defer cancel()
+
+	err := server.Shutdown(shutdownCtx) 
+
+	if err != nil {
+		logger.LogAttrs(
+			ctx,
+			slog.LevelError,
+			"server shutdown error", 
+			slog.Any("error"),
+		)
+		return
+	}
+}
+
+type server struct {
+	logger *slog.Logger
+}
+
+
+func (s *server) endPoint(w http.ResponseWriter, r *http.Request) { 
+	s.Logger.Info("request")
+
+	f1()
+	f2()
+	f3()
+	f4()
+	f5()
+
+	w.WriteHeader (http.StatusOK)
+}
+
+//go:noinline
+func f1() int {
+	a := 0
+
+	for range 1_000_000 {
+		a++
+	}
+
+	return a
+}
+// f1..f5 такие же
+
+//go:noinline
+func f3() int {
+	a := 0
+	
+	if rand.N(100) == 3 {
+		for range int(10e8) {
+			a++ 
+		}
+	}
+
+	for range 1_000_000 {
+		a++
+	}
+
+	return a
+}
+```
+
+
+`pandora.yml`
+```YAML
+pools:
+	- id: HTTP pool
+	  gun:
+		type: http
+		target: 127.0.0.1:8080
+	  ammo:
+		type: raw
+		chosencases: [ "action" ]
+		file: ./ammo.txt
+	  result: 
+		type: Rhout 
+		destination: /phout.Log
+	  rps: # количество запросов в секунду 
+		  type: line 
+		  from: 5
+		  to: 7
+		  duration: 60s
+	  startup: # количество тредов, генерирующих нагрузку 
+		  type: once
+		  times: 7
+```
+
+
+
+
+
+
+
+![](../../_png/Pasted%20image%2020260924075015.png)
+
+
+
+![](../../_png/Pasted%20image%2020260924075029.png)
+
 
 
 
 ### Block_mutex profiling 
 
 
+
+![](../../_png/Pasted%20image%2020260924075100.png)
+
+#### Threadcreate Profile 
+
+Был частично сломан и используется очень редко для отладки создания большого количества потоков ОС. 
+
+
+
 ### Trace profiling 
 
 
 
+![](../../_png/Pasted%20image%2020260924075210.png)
+
+
+
+![](../../_png/Pasted%20image%2020260924075222.png)
+
+
+
+![](../../_png/Pasted%20image%2020260924075245.png)
+
+#### Goroutine Profiling 
+
+- Статус горутины (idle, runnable, running, syscall, waiting, dead, copystack, peempted)
+- ﻿﻿Wait reason (IO wait, chan receive, select, trace reader, debug call, finalizer wait and etc.)
+- ﻿﻿Wait since
+- ﻿﻿Stack trace
+- ﻿﻿GoPC
+- ﻿﻿Lockedm
+
+![](../../_png/Pasted%20image%2020260924075303.png)
+
+
+
+![](../../_png/Pasted%20image%2020260924075421.png)
+
 ### PGO 
 
+
+
+![](../../_png/Pasted%20image%2020260924075441.png)
 
 
 ### Continuous profiling 
 
 
 
+![](../../_png/Pasted%20image%2020260924075807.png)
+
+
+
+```Go
+func main () {
+	pyroscope.Start(pyroscope.Config{
+		ApplicationName: "simple.golang.app",
+		ServerAddress: "http://localhost:4040",
+		Logger: pyroscope.StandardLogger,
+		ProfileTypes: []pyroscope.ProfileType{ 
+			pyroscope.ProfileCPU, 
+			pyroscope.ProfileAllocobjects, 
+			pyroscope.ProfileAllocSpace,
+			pyroscope.ProfileInuseObjects, 
+			pyroscope.ProfileInuseSpace,
+		}
+	})
+	
+	// ... 
+}
+```
+
+
+
+![](../../_png/Pasted%20image%2020260924075508.png)
+
 ### Пример профилирования 
 
 
 
+```Go
+func ConvertThroughSerialization(src interface{}, dst interface{}) error {
+	serialized, err := json.Marshal(src)
+
+	if err != nil {
+		return err
+	｝
+	
+	err = json.Unmarshal(serialized, dst)
+	
+	if err != nil {
+		return err
+	｝
+	
+	return nil
+｝
+```
+
+
+
+```Go
+func transform[T, R any]( 
+	ctx context.Context, 
+	in <-chan T, 
+	out chan‹- R, 
+	f func(e T) R,
+) {
+	for {
+		select {
+		case <-ctx.Done(): 
+		case v, ok := <-in:
+			if !ok {
+				return
+			｝
+			out <- f(v) // ??? 
+		}
+	}
+｝
+```
+
+```Go
+func transform[T, R any]( 
+	ctx context.Context, 
+	in <-chan T, 
+	out chan‹- R, 
+	f func(e T) R,
+) {
+	for {
+		select {
+		case <-ctx.Done(): 
+		case v, ok := <-in:
+			if !ok {
+				return
+			｝
+			
+			select {
+				case <-ctx.Done(): 
+					return 
+				case out <- f(v): // ok 
+			}
+			
+		}
+	}
+｝
+```
 
 
 

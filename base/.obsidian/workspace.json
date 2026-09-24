@@ -368,7 +368,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -679,7 +679,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
+                "file": "backend/go/Selfgo.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -716,22 +716,23 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e60f8646650ff457",
+  "active": "045cbaa702acbded",
   "lastOpenFiles": [
-    "backend/go/Selfgo.md",
+    "_png/Pasted image 20260924075807.png",
+    "_png/Pasted image 20260924075508.png",
+    "_png/Pasted image 20260924075441.png",
+    "_png/Pasted image 20260924075421.png",
+    "_png/Pasted image 20260924075303.png",
+    "_png/Pasted image 20260924075245.png",
+    "_png/Pasted image 20260924075222.png",
+    "_png/Pasted image 20260924075210.png",
+    "_png/Pasted image 20260924075100.png",
+    "_png/Pasted image 20260924075029.png",
+    "_png/Pasted image 20260924075015.png",
     "cs/Алгоритмы и Структуры даных.md",
-    "_png/Pasted image 20260923183919.png",
-    "_png/Pasted image 20260923183902.png",
-    "_png/Pasted image 20260923183842.png",
-    "_png/Pasted image 20260923183839.png",
-    "_png/Pasted image 20260923183817.png",
-    "_png/Pasted image 20260923183757.png",
-    "_png/Pasted image 20260923183743.png",
-    "_png/Pasted image 20260923183733.png",
-    "_png/Pasted image 20260923182816.png",
+    "backend/go/Selfgo.md",
     "agile/Teamlead Balun Courses.md",
     "architecture/System Design/System Design.md",
-    "_png/Pasted image 20260919165946.png",
     "database/PostgreSQL.md",
     "backend/go/Go.md",
     "agile/Teamlead.md",
@@ -753,7 +754,6 @@
     "database/database.md",
     "cs/C.md",
     "tools/ZSH.md",
-    "tools/TMUX.md",
     "Untitled.base",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
