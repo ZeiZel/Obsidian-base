@@ -349,7 +349,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concepts/gRPC.md",
+                "file": "ai/AI.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -364,11 +364,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "gRPC"
+              "title": "AI"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -439,8 +439,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 391.7734375,
-    "collapsed": true
+    "width": 391.7734375
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -655,8 +654,7 @@
               "title": "Saved Queries"
             }
           }
-        ],
-        "currentTab": 17
+        ]
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -679,7 +677,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "backend/go/Selfgo.md",
+                "file": "architecture/System Design/System Design.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -716,28 +714,34 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "045cbaa702acbded",
+  "active": "1c1f8cf3c086dbb5",
   "lastOpenFiles": [
+    "architecture/System Design/System Design.md",
+    "ai/AI.md",
+    "_png/Pasted image 20260926114736.png",
+    "_png/Pasted image 20260926114707.png",
+    "_png/Pasted image 20260926114628.png",
+    "_png/Pasted image 20260926110836.png",
+    "_png/Pasted image 20260926110058.png",
+    "_png/Pasted image 20260926100921.png",
+    "ai/AI Instruments.md",
+    "ai",
+    "concepts/gRPC.md",
+    "ai/AI Agent.md",
+    "ai/AI Prompts.md",
+    "ai/AI Engineering.md",
+    "ai/AI and Data Science.md",
+    "agile/Teamlead Balun Courses.md",
+    "agile/Teamlead.md",
+    "backend/go/Selfgo.md",
     "_png/Pasted image 20260924192737.png",
     "_png/Pasted image 20260924192719.png",
     "_png/Pasted image 20260924192716.png",
     "_png/Pasted image 20260924183940.png",
-    "_png/Pasted image 20260924183656.png",
-    "_png/Pasted image 20260924183517.png",
-    "_png/Pasted image 20260924180518.png",
-    "_png/Pasted image 20260924090935.png",
-    "_png/Pasted image 20260924090714.png",
-    "_png/Pasted image 20260924085816.png",
-    "_png/Pasted image 20260924085034.png",
     "cs/Алгоритмы и Структуры даных.md",
-    "backend/go/Selfgo.md",
-    "agile/Teamlead Balun Courses.md",
-    "architecture/System Design/System Design.md",
     "database/PostgreSQL.md",
     "backend/go/Go.md",
-    "agile/Teamlead.md",
     "agile/agile.md",
-    "concepts/gRPC.md",
     "cynefin.md",
     "concepts/GraphQL.md",
     "concepts/Client-server architecture.md",
@@ -747,13 +751,6 @@
     "Kafka.md",
     "backend/Microservices/Микросервисы.md",
     "backend/Python.md",
-    "backend/Rust.md",
-    "tools/terminal.md",
-    "devops/docker/docker.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
-    "database/database.md",
-    "cs/C.md",
-    "tools/ZSH.md",
     "Untitled.base",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",
@@ -763,7 +760,6 @@
     "edge/Инструменты/package-managers",
     "edge/Инструменты/build-tools",
     "edge/Инструменты/engines",
-    "edge/Инструменты/validators",
     "database/_canvas/inner-join.canvas",
     "database/_canvas/left-join.canvas",
     "database/_canvas/ecommerce-schema.canvas",

@@ -1,20 +1,40 @@
 {
   "recentFiles": [
     {
-      "basename": "Selfgo",
-      "path": "backend/go/Selfgo.md"
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "AI Instruments",
+      "path": "ai/AI Instruments.md"
+    },
+    {
+      "basename": "gRPC",
+      "path": "concepts/gRPC.md"
+    },
+    {
+      "basename": "AI and Data Science",
+      "path": "ai/AI and Data Science.md"
     },
     {
       "basename": "Teamlead Balun Courses",
       "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
+    },
+    {
+      "basename": "Selfgo",
+      "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "PostgreSQL",
@@ -29,16 +49,8 @@
       "path": "backend/go/Go.md"
     },
     {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
       "basename": "agile",
       "path": "agile/agile.md"
-    },
-    {
-      "basename": "gRPC",
-      "path": "concepts/gRPC.md"
     },
     {
       "basename": "GraphQL",
@@ -175,30 +187,6 @@
     {
       "basename": "russian",
       "path": "languages/russian.md"
-    },
-    {
-      "basename": "charisma",
-      "path": "soft/charisma.md"
-    },
-    {
-      "basename": "career-growth",
-      "path": "soft/career-growth.md"
-    },
-    {
-      "basename": "anxiety-management",
-      "path": "soft/anxiety-management.md"
-    },
-    {
-      "basename": "speech-and-reading",
-      "path": "soft/speech-and-reading.md"
-    },
-    {
-      "basename": "emotional-intelligence",
-      "path": "soft/emotional-intelligence.md"
-    },
-    {
-      "basename": "social-skills",
-      "path": "soft/social-skills.md"
     }
   ],
   "omittedPaths": [],
