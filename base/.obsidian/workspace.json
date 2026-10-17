@@ -32,30 +32,6 @@
             }
           },
           {
-            "id": "b84b15d5a5be023f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/Teamlead.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Teamlead"
-            }
-          },
-          {
             "id": "cea9ce970f741801",
             "type": "leaf",
             "state": {
@@ -366,9 +342,32 @@
               "icon": "lucide-file",
               "title": "AI"
             }
+          },
+          {
+            "id": "53d68cd365306cc2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "mobile/react-native/react-native.md",
+                "mode": "preview",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "react-native"
+            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -439,7 +438,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 391.7734375
+    "width": 391.7734375,
+    "collapsed": true
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -648,13 +648,24 @@
             "id": "ae073bb30f8de16e",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "275c02ca3eab102c",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
           }
-        ]
+        ],
+        "currentTab": 18
       },
       {
         "id": "2df1decc2eef0b0b",
@@ -677,7 +688,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "architecture/System Design/System Design.md",
+                "file": "agile/Teamlead Balun Courses.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
@@ -691,7 +702,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 485.9921875
+    "width": 870.22265625,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -705,7 +717,6 @@
       "workspaces:Manage workspace layouts": false,
       "audio-recorder:Start/stop recording": false,
       "zk-prefixer:Create new unique note": false,
-      "markdown-importer:Open format converter": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
       "callout-manager:Insert Callout": false,
@@ -714,14 +725,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "1c1f8cf3c086dbb5",
+  "active": "e75ec333fc123105",
   "lastOpenFiles": [
     "backend/go/Selfgo.md",
     "Excalidraw/google_drive.excalidraw.md",
     "architecture/System Design/System Design.md",
+    "mobile/react-native/react-native.md",
+    "devops/kubernetes/Kubernetes + Helm.md",
+    "database/PostgreSQL.md",
+    "ai/AI.md",
+    "Untitled.md",
     "Excalidraw/yandex_taxi.excalidraw.md",
     "Excalidraw/leetcode.excalidraw.md",
-    "ai/AI.md",
     "_png/Pasted image 20260926114736.png",
     "_png/Pasted image 20260926114707.png",
     "_png/Pasted image 20260926114628.png",
@@ -742,7 +757,6 @@
     "_png/Pasted image 20260924192716.png",
     "_png/Pasted image 20260924183940.png",
     "cs/Алгоритмы и Структуры даных.md",
-    "database/PostgreSQL.md",
     "backend/go/Go.md",
     "agile/agile.md",
     "cynefin.md",
@@ -750,9 +764,6 @@
     "concepts/Client-server architecture.md",
     "backend/Kafka.md",
     "devops/NGINX.md",
-    "database/Redis.md",
-    "Kafka.md",
-    "backend/Microservices/Микросервисы.md",
     "Untitled.base",
     "edge/Инструменты/utilities",
     "edge/Инструменты/editor",

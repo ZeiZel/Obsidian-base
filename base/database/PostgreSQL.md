@@ -41,6 +41,7 @@ brew services start postgresql@18
 
 В Windows удобнее использовать графический установщик EnterpriseDB: он предлагает выбрать компоненты, каталог данных, пароль административной роли, порт и локаль.
 
+
 ![Выбор дистрибутива PostgreSQL для Windows](https://metanit.com/sql/postgresql/pics/postgres10.png)
 
 ![Запуск установщика PostgreSQL](https://metanit.com/sql/postgresql/pics/postgres1.png)

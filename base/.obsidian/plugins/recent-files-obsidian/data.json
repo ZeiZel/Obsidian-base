@@ -1,8 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "Selfgo",
@@ -13,16 +13,36 @@
       "path": "Excalidraw/google_drive.excalidraw.md"
     },
     {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
+    },
+    {
+      "basename": "react-native",
+      "path": "mobile/react-native/react-native.md"
+    },
+    {
+      "basename": "Kubernetes + Helm",
+      "path": "devops/kubernetes/Kubernetes + Helm.md"
+    },
+    {
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Untitled.md"
+    },
+    {
       "basename": "yandex_taxi.excalidraw",
       "path": "Excalidraw/yandex_taxi.excalidraw.md"
     },
     {
       "basename": "leetcode.excalidraw",
       "path": "Excalidraw/leetcode.excalidraw.md"
-    },
-    {
-      "basename": "AI",
-      "path": "ai/AI.md"
     },
     {
       "basename": "AI Instruments",
@@ -37,20 +57,12 @@
       "path": "ai/AI and Data Science.md"
     },
     {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
-    },
-    {
       "basename": "Teamlead",
       "path": "agile/Teamlead.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
       "path": "cs/Алгоритмы и Структуры даных.md"
-    },
-    {
-      "basename": "PostgreSQL",
-      "path": "database/PostgreSQL.md"
     },
     {
       "basename": "Pasted image 20260919163848",
@@ -103,10 +115,6 @@
     {
       "basename": "docker",
       "path": "devops/docker/docker.md"
-    },
-    {
-      "basename": "Kubernetes + Helm",
-      "path": "devops/kubernetes/Kubernetes + Helm.md"
     },
     {
       "basename": "database",
@@ -191,14 +199,6 @@
     {
       "basename": "edge",
       "path": "edge/edge.md"
-    },
-    {
-      "basename": "communication",
-      "path": "soft/communication.md"
-    },
-    {
-      "basename": "russian",
-      "path": "languages/russian.md"
     }
   ],
   "omittedPaths": [],
