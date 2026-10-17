@@ -697,13 +697,11 @@
               "title": "Outline"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 870.22265625,
-    "collapsed": true
+    "width": 456.5234375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -725,7 +723,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e75ec333fc123105",
+  "active": "4d30a7c31882a75b",
   "lastOpenFiles": [
     "backend/go/Selfgo.md",
     "Excalidraw/google_drive.excalidraw.md",
