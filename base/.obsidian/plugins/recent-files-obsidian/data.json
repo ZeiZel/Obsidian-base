@@ -1,20 +1,84 @@
 {
   "recentFiles": [
     {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
+      "basename": "Rust",
+      "path": "backend/Rust.md"
+    },
+    {
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
     },
     {
-      "basename": "google_drive.excalidraw",
-      "path": "Excalidraw/google_drive.excalidraw.md"
+      "basename": "gRPC",
+      "path": "concepts/gRPC.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "PHP",
+      "path": "backend/PHP/PHP.md"
+    },
+    {
+      "basename": "YII2",
+      "path": "backend/PHP/YII2.md"
+    },
+    {
+      "basename": "serverless",
+      "path": "backend/serverless.md"
+    },
+    {
+      "basename": "Ruby",
+      "path": "backend/Ruby.md"
+    },
+    {
+      "basename": "Kafka",
+      "path": "backend/Kafka.md"
+    },
+    {
+      "basename": "Redis",
+      "path": "database/Redis.md"
+    },
+    {
+      "basename": "TypeScript",
+      "path": "edge/TypeScript/TypeScript.md"
+    },
+    {
+      "basename": "AI",
+      "path": "ai/AI.md"
+    },
+    {
+      "basename": "Микросервисы",
+      "path": "backend/Microservices/Микросервисы.md"
+    },
+    {
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
+    },
+    {
+      "basename": "Алгоритмы и Структуры даных",
+      "path": "cs/Алгоритмы и Структуры даных.md"
+    },
+    {
+      "basename": "NGINX",
+      "path": "devops/NGINX.md"
+    },
+    {
+      "basename": "GraphQL",
+      "path": "concepts/GraphQL.md"
+    },
+    {
+      "basename": "nvim",
+      "path": "tools/nvim.md"
+    },
+    {
+      "basename": "google_drive.excalidraw",
+      "path": "Excalidraw/google_drive.excalidraw.md"
     },
     {
       "basename": "react-native",
@@ -23,14 +87,6 @@
     {
       "basename": "Kubernetes + Helm",
       "path": "devops/kubernetes/Kubernetes + Helm.md"
-    },
-    {
-      "basename": "PostgreSQL",
-      "path": "database/PostgreSQL.md"
-    },
-    {
-      "basename": "AI",
-      "path": "ai/AI.md"
     },
     {
       "basename": "Untitled",
@@ -49,20 +105,12 @@
       "path": "ai/AI Instruments.md"
     },
     {
-      "basename": "gRPC",
-      "path": "concepts/gRPC.md"
-    },
-    {
       "basename": "AI and Data Science",
       "path": "ai/AI and Data Science.md"
     },
     {
       "basename": "Teamlead",
       "path": "agile/Teamlead.md"
-    },
-    {
-      "basename": "Алгоритмы и Структуры даных",
-      "path": "cs/Алгоритмы и Структуры даных.md"
     },
     {
       "basename": "Pasted image 20260919163848",
@@ -77,36 +125,12 @@
       "path": "agile/agile.md"
     },
     {
-      "basename": "GraphQL",
-      "path": "concepts/GraphQL.md"
-    },
-    {
       "basename": "Client-server architecture",
       "path": "concepts/Client-server architecture.md"
     },
     {
-      "basename": "Kafka",
-      "path": "backend/Kafka.md"
-    },
-    {
-      "basename": "NGINX",
-      "path": "devops/NGINX.md"
-    },
-    {
-      "basename": "Redis",
-      "path": "database/Redis.md"
-    },
-    {
-      "basename": "Микросервисы",
-      "path": "backend/Microservices/Микросервисы.md"
-    },
-    {
       "basename": "Python",
       "path": "backend/Python.md"
-    },
-    {
-      "basename": "Rust",
-      "path": "backend/Rust.md"
     },
     {
       "basename": "terminal",
@@ -133,10 +157,6 @@
       "path": "tools/TMUX.md"
     },
     {
-      "basename": "nvim",
-      "path": "tools/nvim.md"
-    },
-    {
       "basename": "vocabularity - голосовой тренинг",
       "path": "soft/vocabularity - голосовой тренинг.md"
     },
@@ -147,10 +167,6 @@
     {
       "basename": "Prisma ORM",
       "path": "database/Prisma ORM.md"
-    },
-    {
-      "basename": "backend",
-      "path": "backend/backend.md"
     },
     {
       "basename": "Kubernetes Entities",
@@ -183,22 +199,6 @@
     {
       "basename": "react-best-practices",
       "path": "frontend/tips-n-tricks/react-best-practices.md"
-    },
-    {
-      "basename": "helpers-and-types",
-      "path": "frontend/tips-n-tricks/helpers-and-types.md"
-    },
-    {
-      "basename": "frontend-libraries",
-      "path": "frontend/tips-n-tricks/frontend-libraries.md"
-    },
-    {
-      "basename": "mixin-content",
-      "path": "frontend/tips-n-tricks/mixin-content.md"
-    },
-    {
-      "basename": "edge",
-      "path": "edge/edge.md"
     }
   ],
   "omittedPaths": [],

@@ -1,20 +1,17 @@
 {
-  "attachmentUnitFolderPaths": [],
-  "collectAttachmentUsedByMultipleNotesMode": "Skip",
   "consistencyReportFile": "consistency-report.md",
   "excludePaths": [
     "/consistant-report.md$/",
     ".git/",
     ".obsidian/"
   ],
-  "excludePathsFromAttachmentCollecting": [],
+  "externalAttachmentLinkMode": "Report",
   "includePaths": [],
-  "isAdvancedRenameAndDeleteHandlerSuggestionDeclined": false,
+  "isCustomAttachmentLocationSuggestionDeclined": false,
   "maxVaultRootPathLength": 0,
-  "moveAttachmentToProperFolderUsedByMultipleNotesMode": "CopyAll",
+  "proposedCollectSettings": null,
   "proposedRenameDeleteSettings": null,
-  "shouldAddCommandsToFileMenu": true,
-  "shouldCollectAttachmentsAutomatically": false,
+  "sharedAttachmentPaths": [],
   "shouldCreateNoteToPreserveOriginalName": false,
   "shouldEnsurePathCompatibilityOnAndroid": false,
   "shouldEnsurePathCompatibilityOnEveryPlatform": false,
@@ -22,6 +19,7 @@
   "shouldEnsurePathCompatibilityOnLinux": false,
   "shouldEnsurePathCompatibilityOnMacOs": true,
   "shouldEnsurePathCompatibilityOnWindows": false,
+  "shouldNormalizeUnicodeNames": true,
   "shouldShowBackupWarning": false,
   "sidecarNoteNamePattern": "{{fileName}}.md",
   "treatAsAttachmentExtensions": [

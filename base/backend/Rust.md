@@ -6,6 +6,9 @@ tags:
   - tokio
   - axum
   - cs
+  - seaorm
+  - kafka
+  - grpc
 ---
 
 ## Глава 1. Введение в язык Rust
@@ -19,12 +22,12 @@ Rust - компилируемый язык со статической типи�
 - либо быстрый язык без сборщика мусора (C/C++), но с постоянным риском segfault'ов, use-after-free, data race'ов - то есть багов, которые всплывают в рантайме и стоят компаниям миллионов
 - либо безопасный язык (Java, Go, C#), но с GC-паузами и рантайм-накладными расходами
 
-Rust придумал borrow checker - систему, которая проверяет владение памятью **на этапе компиляции**. Если безопасный Rust-код компилируется - у тебя гарантированно нет data race'ов и use-after-free, при этом нет никакого GC в рантайме. Скорость C, безопасность как у языков с GC. Это реально уникальное сочетание, которого раньше не было.
+Rust придумал **borrow checker** - систему, которая проверяет владение памятью **на этапе компиляции**. Если безопасный Rust-код компилируется - у тебя гарантированно нет data race'ов и use-after-free, при этом нет никакого GC в рантайме. Скорость C, безопасность как у языков с GC. Это реально уникальное сочетание, которого раньше не было.
 
-Для macOS и Linux используется команда:
+Установка: 
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+brew install rust
 ```
 
 Обновление инструментов и проверка версии:
@@ -34,32 +37,40 @@ rustup update
 rustc --version
 ```
 
-Источник: https://metanit.com/rust/tutorial/1.1.php
-
 ### Первая программа
 
-Создадим файл `main.rs`. Функция `main` - точка входа, а `println!` - встроенный макрос вывода строки. Вызов макроса завершается точкой с запятой. 
+Создадим файл `src/main.rs`. 
 
+Функция `main` - точка входа любого приложения Rust.
+
+`println!` - встроенный макрос вывода строки. С помощью макроса мы сейчас описали инструкцию. Каждая инструкция должна завершаться `;`, что укажет компилятору на её завершение. 
+
+`src / main.rs` 
 ```rust
 fn main() {
-    println!("Hello METANIT.COM!");
+    println!("Hello!");
 }
 ```
 
-На macOS и Linux команды отличаются путём запуска бинарного файла: 
+Запуск и сборка: 
 
-```text
-> cd rust
-> rustc main.rs
+```bash
+> rustc src/main.rs
+
 > ./main
-Hello METANIT.COM!
+Hello!
 ```
 
 ## Глава 2. Основы Rust
 
 ### Структура программы
 
-Программа состоит из инструкций и выражений. Инструкция выполняет действие и обычно заканчивается точкой с запятой. Несколько инструкций объединяются в блок `{ ... }`. Выполнение бинарной программы начинается с функции `main`; функции объявляются ключевым словом `fn`.
+Любая программа на Rust состоит из инструкций и выражений. 
+
+Инструкция выполняет действие и обычно заканчивается `;`. 
+Несколько инструкций объединяются в блок `{ ... }`. 
+Выполнение программы начинается с функции `main`. 
+Функции объявляются ключевым словом `fn`.
 
 `println!` - макрос, а не функция: об этом говорит `!` после имени. Однострочный комментарий начинается с `//`, многострочный заключается между `/*` и `*/`. Комментарии не попадают в исполняемый код.
 
@@ -78,26 +89,44 @@ fn main() {
 
 ### Переменные
 
-Переменная объявляется через `let`. Тип можно указать явно после двоеточия либо позволить компилятору вывести его из значения. Объявить переменную без значения допустимо, но прочитать её до гарантированной инициализации нельзя.
+Переменная - это область памяти, на которую ссылается программа, где хранятся данные. 
 
-По умолчанию переменные неизменяемы. `mut` разрешает присваивать переменной новые значения того же типа. Затенение - новое объявление `let` с прежним именем - создаёт другую переменную и поэтому может одновременно изменить и значение, и тип.
+Схема указания переменных: 
+
+```rust
+let название_переменной: тип_переменной;
+```
+
+Переменная объявляется через ключевое слово `let`. Тип можно указать явно после двоеточия либо позволить компилятору вывести его из значения. Объявить переменную без значения допустимо, но прочитать её до инициализации со значением - нельзя.
+
+По умолчанию переменные неизменяемы. `mut` разрешает присваивать переменной новые значения того же типа. 
+Затенение (shadowing) - новое объявление `let` с прежним именем - создаёт другую переменную и поэтому может одновременно изменить и значение, и тип. То есть мы в первый раз указываем `let number` с типом `string`, а затем в том же блоке мы можем переинициализировать переменную через `let number` и изменить ей тип на `u32`. 
 
 ```rust
 fn main() {
-    let age: u32;
-    age = 36;
-    println!("Age = {age}");
+    let age: u32 = 23;
+    print!("Age {}", age);
 
-    let mut score = 10;
-    score = 15;
+    let mut name = "Oleg";
+    let number;
+    number = "001";
 
-    let value = " 42 ";
-    let value: i32 = value.trim().parse().expect("ожидалось число");
-    println!("score = {score}, value = {value}");
+    println!("First user {}, number {}", name, number);
+
+    name = "Valera";
+    let number = 7;
+    println!("Second user {name}, number {number}");
 }
 ```
 
-`print!` оставляет курсор в той же строке, а `println!` добавляет перевод строки. Современный формат допускает подстановку имени прямо в строку: `println!("{age}")`.
+```bash
+> rustc src/main.rs && ./main 
+
+Age 23First user Oleg, number 001
+Second user Valera, number 7
+```
+
+`print!` оставляет курсор в той же строке, а `println!` добавляет перевод строки. Подставить переменную в шаблонную строку мы можем указанием переменной в `{}` aka `println!("{age}")` и через подстановку следующими аргументами после шаблона `print!("Age {}", age)`.
 
 ### Типы данных
 
@@ -109,20 +138,30 @@ Rust статически типизирован: тип каждого знач
 - логический `bool` со значениями `true` и `false`;
 - Unicode-символ `char`, занимающий 4 байта.
 
-Целое без уточнения обычно получает тип `i32`, дробное - `f64`. Основание литерала задают префиксы `0b`, `0o`, `0x`; тип - суффикс (`42u8`), а `_` улучшает читаемость числа. Строковый литерал имеет тип `&str`, хранится в UTF-8 и не является `char`-массивом.
+Целое без уточнения обычно получает тип `i32`, дробное - `f64`. 
+Основание литерала задают префиксы `0b`, `0o`, `0x`; тип - суффикс (`42u8`)
+Знак `_` просто улучшает читаемость числа, позволяя отделять те же самые разряды. 
+
+Строковый литерал имеет тип `&str`, хранится в UTF-8 и не является `char`-массивом. 
 
 ```rust
 fn main() {
-    let decimal = 1_000_000;
-    let binary = 0b1101u8;
-    let hexadecimal = 0xff_u16;
-    let ratio: f32 = 2.5;
-    let enabled = true;
-    let letter = 'Ж';
-    let greeting: &str = "Привет";
+    let decimal = 1_000_000; // десятичое значение  
+    let binary = 0b1101u8; // бинарное 
+    let hexadecimal = 0xff_u16; // шестнадцатеричное значение 
+    let ratio: f32 = 2.5; // float 
+    let enabled = true; // bool 
+    let letter = 'Ж'; // char 
+    let greeting: &str = "Привет"; // строка 
 
     println!("{decimal} {binary} {hexadecimal} {ratio} {enabled} {letter} {greeting}");
 }
+```
+
+```bash
+> rustc src/main.rs && ./main 
+
+1000000 13 255 2.5 true Ж Привет
 ```
 
 Байтовый литерал, например `b'A'`, имеет тип `u8` и допускает только ASCII.
@@ -2719,3 +2758,534 @@ fn main() {
 FFI-граница не должна пропускать Rust-панику в C или C++ и C++-исключение в Rust. Снаружи лучше экспортировать минимальный C ABI с простыми типами, кодами ошибок и ясно описанными правилами владения.
 
 Источник главы: https://metanit.com/rust/tutorial/17.1.php
+
+## Глава 18. Tokio. Асинхронный рантайм
+
+### Зачем async-коду внешний рантайм
+
+В Rust `async`/`await` встроены в язык, но в стандартной библиотеке нет исполнителя для асинхронного кода. Вызов `async fn` не выполняет тело сразу - функция возвращает **фичу** (Future), значение, описывающее незавершённое вычисление. Футура начинает работать, только когда исполнитель вызывает у неё метод `poll`:
+
+- данные готовы - `poll` возвращает `Poll::Ready(значение)`;
+- данных нет - `Poll::Pending`, при этом футура сохраняет `Waker` - колбэк, через который источник данных позже сообщит исполнителю, что её пора опросить снова.
+
+Исполнитель, I/O-реактор и таймеры вместе образуют **асинхронный рантайм**. Tokio - самый распространённый рантайм: на нём работают hyper, axum, tonic, SeaORM, rdkafka и почти вся асинхронная экосистема Rust.
+
+Смысл асинхронности - обслуживать тысячи одновременных соединений малым числом потоков ОС. Поток требует мегабайты стека и переключается ядром дорого; асинхронная задача - это компактная структура в куче, которую планировщик переключает внутри пользовательского кода. Один процесс с несколькими worker-потоками держит сотни тысяч одновременных соединений.
+
+### Архитектура: из каких движков состоит Tokio
+
+Runtime Tokio - это несколько движков, работающих поверх обычных потоков ОС:
+
+- **Планировщик (executor)**. По умолчанию multi-threaded со стратегией work-stealing: создаётся по worker-потоку на ядро процессора. Задачи из `tokio::spawn` попадают в локальные очереди воркеров и в глобальную очередь. Если своя очередь опустела, воркер «крадёт» задачи у соседей - ядра загружаются равномерно. Альтернатива - `Builder::new_current_thread`: весь код выполняется в одном потоке (тесты, embedded).
+- **I/O-драйвер (реактор)**. Сокеты регистрируются в событийном механизме ОС: epoll (Linux), kqueue (macOS/BSD), IOCP (Windows); обёрткой над ними служит крейт mio. Пока данных нет, поток не тратит время на сокет. Когда ядро сообщает о готовности, реактор через `Waker` будит именно те задачи, которые ждут этот сокет.
+- **Таймер-драйвер**. Иерархическое «колесо времени» (timing wheel) обслуживает миллионы таймеров `tokio::time::sleep` без пересканирования списков.
+
+Схема жизни одной операции ввода-вывода:
+
+1. Задача вызывает `socket.read().await`, данных нет.
+2. Реактор регистрирует сокет в epoll/kqueue/IOCP и оставляет `Waker`.
+3. `poll` возвращает `Pending`, воркер берёт из очереди другую задачу - поток не простаивает.
+4. Ядро сообщает о готовности сокета, реактор через `Waker` возвращает задачу в очередь.
+5. Какой-то из воркеров опрашивает футуру снова - теперь `read` завершается.
+
+Tokio - фундамент целого стека библиотек: hyper (HTTP), tonic (gRPC), tower (middleware), tracing (наблюдаемость), bytes, mio. Так их изображает официальный сайт tokio.rs:
+
+![](_png/rust-tokio-stack.svg)
+
+А так работает work-stealing: у каждого воркера своя очередь задач, опустевший воркер крадёт задачи у занятого соседа:
+
+![](_png/rust-tokio-work-stealing.png)
+
+### Первый async-код: #[tokio::main]
+
+```toml
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+```
+
+```rust
+use tokio::time::{sleep, Duration};
+
+#[tokio::main]
+async fn main() {
+    println!("старт");
+    sleep(Duration::from_secs(1)).await;
+    println!("прошла секунда");
+}
+```
+
+Макрос `#[tokio::main]` разворачивается примерно в такой код:
+
+```rust
+fn main() {
+    tokio::runtime::Builder::new_multi_thread()
+        .enable_all() // включает I/O-драйвер и таймеры
+        .build()
+        .unwrap()
+        .block_on(async {
+            // тело async main
+        });
+}
+```
+
+`block_on` - единственное блокирующее место: главный поток крутит футуру до завершения, а все вложенные задачи выполняются конкурентно на worker-потоках.
+
+### Задачи: spawn, JoinHandle, spawn_blocking
+
+Сама по себе `async fn` выполняется последовательно: код после `.await` не идёт, пока операция не завершится. Конкурентность даёт `tokio::spawn`: он ставит задачу в очередь планировщика и сразу возвращает `JoinHandle`.
+
+```rust
+#[tokio::main]
+async fn main() {
+    let task = tokio::spawn(async { (1..=10).sum::<u64>() });
+
+    let result = task.await.expect("задача не паниковала");
+    println!("{result}"); // 55
+}
+```
+
+Задача обязана быть `Send + 'static`: планировщик может перенести её на другой поток, поэтому заимствования из внешнего стека внутрь `spawn` не передать - данные перемещаются в замыкание или заворачиваются в `Arc`.
+
+Воркер нельзя блокировать: `std::thread::sleep`, тяжёлые вычисления или синхронные библиотеки заморозят поток, на котором случайно оказалась задача. Для такого кода есть отдельный пул потоков - `spawn_blocking`:
+
+```rust
+let content = tokio::task::spawn_blocking(|| {
+    std::fs::read_to_string("Cargo.toml") // блокирующий вызов вне worker-потоков
+})
+.await
+.unwrap()
+.expect("файл прочитан");
+
+println!("{} байт", content.len());
+```
+
+### select!, join!, таймауты
+
+`join!` ожидает несколько футур параллельно, `select!` завершается первой готовой ветвью и отменяет остальные:
+
+```rust
+use tokio::time::{sleep, Duration, timeout};
+
+#[tokio::main]
+async fn main() {
+    tokio::select! {
+        _ = sleep(Duration::from_millis(300)) => println!("сработал таймер 300 мс"),
+        _ = sleep(Duration::from_secs(1)) => println!("сработал таймер 1 с"),
+    }
+
+    let result = timeout(Duration::from_millis(100), sleep(Duration::from_secs(5))).await;
+    println!("{result:?}"); // Err(Elapsed): операция не уложилась в 100 мс
+}
+```
+
+### Каналы и async-синхронизация
+
+`tokio::sync` даёт каналы для обмена между задачами:
+
+- `mpsc` - много писателей, один читатель (основной рабочий инструмент);
+- `oneshot` - однократная отправка «запрос - ответ»;
+- `watch` - хранение последнего значения с уведомлением подписчиков;
+- `broadcast` - рассылка нескольким читателям.
+
+```rust
+use tokio::sync::mpsc;
+
+#[tokio::main]
+async fn main() {
+    let (tx, mut rx) = mpsc::channel::<u32>(16);
+
+    let producer = tokio::spawn(async move {
+        for i in 1..=5 {
+            tx.send(i).await.expect("получатель жив");
+        }
+    });
+
+    let consumer = tokio::spawn(async move {
+        while let Some(number) = rx.recv().await {
+            println!("получено: {number}");
+        }
+    });
+
+    producer.await.unwrap();
+    consumer.await.unwrap();
+}
+```
+
+Канал ограниченной ёмкости даёт естественный backpressure: когда буфер полон, `send().await` приостанавливает писателя. Помимо каналов, `tokio::sync` содержит async-версии `Mutex` и `RwLock`; их отличие от `std::sync` - захват можно держать через `.await`. Для коротких критических секций без `await` подойдёт и обычный `std::sync::Mutex`.
+
+Источник главы: https://tokio.rs/ и https://docs.rs/tokio
+
+## Глава 19. Axum. Веб-фреймворк поверх Tokio
+
+### Как устроен Axum
+
+axum - веб-фреймворк от команды Tokio, почти целиком собранный из готовых блоков экосистемы:
+
+```text
+HTTP-запрос
+  ↓ axum      роутер, экстракторы аргументов, генерация ответов
+  ↓ tower     trait Service - единый интерфейс «запрос → ответ» и middleware
+  ↓ hyper     реализация HTTP/1.1 и HTTP/2 - «движок» протокола
+  ↓ tokio     асинхронный рантайм: сокеты, планировщик, таймеры
+  ↓ mio       epoll / kqueue / IOCP - события готовности на уровне ОС
+```
+
+У axum нет собственной системы middleware: и роутер, и обработчики реализуют `tower::Service`, поэтому слои из tower и tower-http (таймауты, трейсинг, сжатие, CORS, ограничение частоты запросов) подключаются напрямую и одинаково работают с axum, hyper и tonic. HTTP в этом стеке тянет hyper: он парсит протокол и читает/пишет байты в сокеты; axum занимается только маршрутизацией и преобразованием «запрос → аргументы обработчика» и «результат обработчика → ответ».
+
+### Маршрутизация, экстракторы и ответы
+
+```toml
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+```
+
+Роутер собирается цепочкой `.route`; обработчик - обычная `async fn`:
+
+```rust
+use axum::extract::{Path, Query};
+use axum::routing::get;
+use axum::Router;
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Filters {
+    adult: Option<bool>,
+}
+
+async fn root() -> &'static str {
+    "Hello, World!"
+}
+
+async fn show_user(Path(id): Path<u64>) -> String {
+    format!("пользователь {id}")
+}
+
+async fn list_users(Query(filters): Query<Filters>) -> &'static str {
+    "список пользователей"
+}
+
+let app = Router::new()
+    .route("/", get(root))
+    .route("/users", get(list_users))
+    .route("/users/{id}", get(show_user));
+```
+
+Правила:
+
+- путь `/users/{id}` объявляет параметр (с axum 0.8 - фигурные скобки; раньше писали `/users/:id`);
+- аргументы обработчика - **экстракторы**, типы с trait `FromRequestParts`: `Path`, `Query`, `State`, `HeaderMap` и другие; экстракторов, читающих тело запроса (`Json`, `Bytes`, `String`), допускается не больше одного, и он ставится последним аргументом;
+- вернуть можно всё, что реализует `IntoResponse`: строку, `Html`, `Json`, `StatusCode`, кортеж `(StatusCode, impl IntoResponse)` или `Result` из двух `IntoResponse`.
+
+### Состояние и middleware
+
+Общее состояние (пул соединений к БД, кэш) передаётся через `Router::with_state` и извлекается экстрактором `State<T>`. Middleware навешиваются методом `.layer`:
+
+```rust
+use std::time::Duration;
+use tower::ServiceBuilder;
+use tower_http::{compression::CompressionLayer, trace::TraceLayer};
+
+let app = Router::new()
+    .route("/", get(root))
+    .layer(
+        ServiceBuilder::new()
+            .timeout(Duration::from_secs(10))
+            .layer(TraceLayer::new_for_http())
+            .layer(CompressionLayer::new()),
+    );
+```
+
+```toml
+tower = "0.5"
+tower-http = { version = "0.7", features = ["trace", "compression-gzip"] }
+```
+
+### Пример: REST API с состоянием
+
+Минимальный in-memory CRUD - пользователи в `HashMap` под `Arc<tokio::sync::Mutex<...>>`:
+
+```rust
+use std::collections::HashMap;
+use std::sync::Arc;
+
+use axum::{
+    extract::{Path, State},
+    http::StatusCode,
+    routing::get,
+    Json, Router,
+};
+use serde::{Deserialize, Serialize};
+use tokio::sync::Mutex;
+
+#[derive(Clone, Serialize)]
+struct User {
+    id: u64,
+    name: String,
+}
+
+#[derive(Deserialize)]
+struct CreateUser {
+    name: String,
+}
+
+type Store = Arc<Mutex<HashMap<u64, User>>>;
+
+#[tokio::main]
+async fn main() {
+    let store: Store = Arc::new(Mutex::new(HashMap::new()));
+
+    let app = Router::new()
+        .route("/users", get(list_users).post(create_user))
+        .route("/users/{id}", get(show_user))
+        .with_state(store);
+
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+        .await
+        .expect("порт свободен");
+    axum::serve(listener, app).await.unwrap();
+}
+
+async fn list_users(State(store): State<Store>) -> Json<Vec<User>> {
+    let users: Vec<User> = store.lock().await.values().cloned().collect();
+    Json(users)
+}
+
+async fn create_user(
+    State(store): State<Store>,
+    Json(payload): Json<CreateUser>,
+) -> (StatusCode, Json<User>) {
+    let mut users = store.lock().await;
+    let id = (users.len() + 1) as u64;
+    let user = User { id, name: payload.name };
+    users.insert(id, user.clone());
+    (StatusCode::CREATED, Json(user))
+}
+
+async fn show_user(
+    Path(id): Path<u64>,
+    State(store): State<Store>,
+) -> Result<Json<User>, StatusCode> {
+    store
+        .lock()
+        .await
+        .get(&id)
+        .cloned()
+        .map(Json)
+        .ok_or(StatusCode::NOT_FOUND)
+}
+```
+
+```bash
+> cargo run
+
+> curl -s localhost:3000/users -X POST -H "content-type: application/json" -d '{"name":"Tom"}'
+{"id":1,"name":"Tom"}
+
+> curl -s localhost:3000/users/1
+{"id":1,"name":"Tom"}
+
+> curl -s -i localhost:3000/users/42
+HTTP/1.1 404 Not Found
+```
+
+`with_state` клонирует состояние в каждый обработчик, поэтому оно обёрнуто в `Arc`. `tokio::sync::Mutex` выбран потому, что его можно удерживать через `.await`; для коротких секций без `await` достаточно и `std::sync::Mutex`. `axum::serve` принимает `TcpListener` и роутер: приём соединений, парсинг HTTP и вызов обработчиков выполняются на рантайме Tokio из главы 18.
+
+Источник главы: https://github.com/tokio-rs/axum и https://docs.rs/axum
+
+## Глава 20. Инструменты бэкенда: SeaORM, rdkafka, tonic
+
+Три крейта, которые чаще всего встречаются рядом с axum в типичном Rust-бэкенде: ORM поверх SQL, клиент Kafka и gRPC.
+
+### SeaORM - асинхронная ORM
+
+SeaORM - ORM для PostgreSQL, MySQL и SQLite, работающая поверх крейта sqlx. Таблица описывается сущностью - модулем с derive-макросами; по нему строятся и типобезопасные запросы, и миграции.
+
+```toml
+[dependencies]
+sea-orm = { version = "2", features = ["sqlx-postgres", "runtime-tokio-rustls"] }
+```
+
+```rust
+mod users {
+    use sea_orm::entity::prelude::*;
+
+    #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+    #[sea_orm(table_name = "users")]
+    pub struct Model {
+        #[sea_orm(primary_key)]
+        pub id: i32,
+        pub name: String,
+        pub age: i32,
+    }
+
+    #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+    pub enum Relation {}
+
+    impl ActiveModelBehavior for ActiveModel {}
+}
+```
+
+`Model` - строка таблицы для чтения; `ActiveModel` - строка для записи, где каждое поле принимает значение `Set(...)` или остаётся неустановленным. Типовые операции:
+
+```rust
+use sea_orm::{ActiveModelTrait, ColumnTrait, Database, EntityTrait, QueryFilter, Set};
+
+#[tokio::main]
+async fn main() -> Result<(), sea_orm::DbErr> {
+    let db = Database::connect("postgres://postgres:pass@localhost/blog").await?;
+
+    // SELECT * FROM users WHERE id = 1
+    let tom = users::Entity::find_by_id(1).one(&db).await?;
+
+    // SELECT * FROM users WHERE age > 18
+    let adults = users::Entity::find()
+        .filter(users::Column::Age.gt(18))
+        .all(&db)
+        .await?;
+
+    // INSERT INTO users (name, age) VALUES ('Bob', 25)
+    let bob = users::ActiveModel {
+        name: Set("Bob".to_string()),
+        age: Set(25),
+        ..Default::default()
+    };
+    let inserted = bob.insert(&db).await?;
+
+    println!("{tom:?} {adults:?} {inserted:?}");
+    Ok(())
+}
+```
+
+Сущности обычно не пишут руками: `sea-orm-cli generate entity` генерирует их из живой базы. Схему ведут миграциями крейта sea-orm-migration, а связи между таблицами описываются в `enum Relation` через trait `Related<T>`.
+
+### rdkafka - клиент Apache Kafka
+
+rdkafka - обёртка над промышленной C-библиотекой librdkafka (feature `cmake-build` собирает её из исходников; на Windows понадобятся CMake и MSVC Build Tools). Производительность, ребалансировку групп и повторные попытки доставки берёт на себя librdkafka, а Rust-код получает async-API.
+
+Продюсер отправляет `FutureRecord`; подтверждение доставки - партиция и оффсет - приходит через `await`:
+
+```rust
+use std::time::Duration;
+
+use rdkafka::config::ClientConfig;
+use rdkafka::producer::{FutureProducer, FutureRecord};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let producer: FutureProducer = ClientConfig::new()
+        .set("bootstrap.servers", "localhost:9092")
+        .set("message.timeout.ms", "5000")
+        .create()?;
+
+    for i in 0..5 {
+        let (partition, offset) = producer
+            .send(
+                FutureRecord::to("events")
+                    .key(&format!("key-{i}"))
+                    .payload(&format!("message {i}")),
+                Duration::from_secs(5),
+            )
+            .await
+            .map_err(|(error, _message)| error)?;
+        println!("отправлено: партиция {partition}, оффсет {offset}");
+    }
+
+    Ok(())
+}
+```
+
+Консьюмер входит в группу `group.id` и читает поток сообщений; партиции топика распределяются между членами группы автоматически:
+
+```rust
+use rdkafka::config::ClientConfig;
+use rdkafka::consumer::{Consumer, StreamConsumer};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let consumer: StreamConsumer = ClientConfig::new()
+        .set("bootstrap.servers", "localhost:9092")
+        .set("group.id", "worker-1")
+        .set("auto.offset.reset", "earliest")
+        .create()?;
+
+    consumer.subscribe(&["events"])?;
+
+    loop {
+        let message = consumer.recv().await?;
+        let payload = String::from_utf8_lossy(message.payload().unwrap_or_default());
+        println!("{} [{}] {}", message.topic(), message.partition(), payload);
+    }
+}
+```
+
+`recv()` возвращает `BorrowedMessage` - заимствование внутреннего буфера librdkafka; чтобы хранить данные дольше заимствования, их копируют (`payload()`, `key()`), а сам объект можно превратить во владеющий вызовом `.detach()`. Оффсеты фиксируются автоматически (auto-commit) либо вручную после обработки - это управляется настройками `enable.auto.commit` и `enable.auto.offset.store`.
+
+### tonic - gRPC-клиент
+
+tonic - gRPC-фреймворк экосистемы Tokio: HTTP/2 и Protobuf поверх hyper и tower. Контракт описывается в `.proto`, а код клиента (и сервера) генерируется при сборке. Начиная с tonic 0.14 генерацией занимается отдельный крейт tonic-prost-build; в системе должен быть доступен компилятор `protoc`.
+
+`proto/greet.proto`:
+
+```protobuf
+syntax = "proto3";
+
+package greet;
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+```
+
+`Cargo.toml` и `build.rs`:
+
+```toml
+[dependencies]
+tonic = "0.14"
+prost = "0.14"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+[build-dependencies]
+tonic-prost-build = "0.14"
+```
+
+```rust
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    tonic_prost_build::compile_protos("proto/greet.proto")?;
+    Ok(())
+}
+```
+
+Клиент подключает сгенерированный модуль макросом `include_proto!`; для каждого сервиса генерируется структура `ИмяClient` с async-методами, а `connect` устанавливает HTTP/2-соединение:
+
+```rust
+pub mod greet {
+    tonic::include_proto!("greet");
+}
+
+use greet::greeter_client::GreeterClient;
+use greet::HelloRequest;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut client = GreeterClient::connect("http://localhost:50051").await?;
+
+    let response = client.say_hello(HelloRequest { name: "Tom".into() }).await?;
+    println!("{}", response.into_inner().message);
+
+    Ok(())
+}
+```
+
+Вызов возвращает `tonic::Response` - обёртку с метаданными (заголовки, трейлеры, статус), сам объект достаётся методом `into_inner()`. Ошибки транспорта и приложения приходят как `tonic::Status`. Помимо клиента генерируется и серверный `GreeterServer`: он живёт в том же стеке tower/hyper, поэтому gRPC-эндпоинты можно смонтировать прямо в axum-приложение.
+
+Источник главы: https://docs.rs/sea-orm , https://docs.rs/rdkafka , https://docs.rs/tonic
