@@ -5,16 +5,44 @@
       "path": "backend/Rust.md"
     },
     {
-      "basename": "PostgreSQL",
-      "path": "database/PostgreSQL.md"
+      "basename": "Teamlead Balun Courses",
+      "path": "agile/Teamlead Balun Courses.md"
     },
     {
-      "basename": "System Design",
-      "path": "architecture/System Design/System Design.md"
+      "basename": "agile",
+      "path": "agile/agile.md"
+    },
+    {
+      "basename": "Teamlead",
+      "path": "agile/Teamlead.md"
     },
     {
       "basename": "Selfgo",
       "path": "backend/go/Selfgo.md"
+    },
+    {
+      "basename": "Go",
+      "path": "backend/go/Go.md"
+    },
+    {
+      "basename": "PostgreSQL",
+      "path": "database/PostgreSQL.md"
+    },
+    {
+      "basename": "Redis",
+      "path": "database/Redis.md"
+    },
+    {
+      "basename": "Ruby",
+      "path": "backend/Ruby.md"
+    },
+    {
+      "basename": "Kafka",
+      "path": "backend/Kafka.md"
+    },
+    {
+      "basename": "System Design",
+      "path": "architecture/System Design/System Design.md"
     },
     {
       "basename": "gRPC",
@@ -33,18 +61,6 @@
       "path": "backend/serverless.md"
     },
     {
-      "basename": "Ruby",
-      "path": "backend/Ruby.md"
-    },
-    {
-      "basename": "Kafka",
-      "path": "backend/Kafka.md"
-    },
-    {
-      "basename": "Redis",
-      "path": "database/Redis.md"
-    },
-    {
       "basename": "TypeScript",
       "path": "edge/TypeScript/TypeScript.md"
     },
@@ -55,10 +71,6 @@
     {
       "basename": "Микросервисы",
       "path": "backend/Microservices/Микросервисы.md"
-    },
-    {
-      "basename": "Teamlead Balun Courses",
-      "path": "agile/Teamlead Balun Courses.md"
     },
     {
       "basename": "Алгоритмы и Структуры даных",
@@ -109,20 +121,8 @@
       "path": "ai/AI and Data Science.md"
     },
     {
-      "basename": "Teamlead",
-      "path": "agile/Teamlead.md"
-    },
-    {
       "basename": "Pasted image 20260919163848",
       "path": "_png/Pasted image 20260919163848.png"
-    },
-    {
-      "basename": "Go",
-      "path": "backend/go/Go.md"
-    },
-    {
-      "basename": "agile",
-      "path": "agile/agile.md"
     },
     {
       "basename": "Client-server architecture",

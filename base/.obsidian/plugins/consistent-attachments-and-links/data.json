@@ -6,12 +6,17 @@
     ".obsidian/"
   ],
   "externalAttachmentLinkMode": "Report",
+  "folderNoteFileNames": [],
+  "forbiddenCharacterReplacement": "-",
   "includePaths": [],
   "isCustomAttachmentLocationSuggestionDeclined": false,
   "maxVaultRootPathLength": 0,
+  "pathCompatibilityExcludePaths": [],
   "proposedCollectSettings": null,
   "proposedRenameDeleteSettings": null,
   "sharedAttachmentPaths": [],
+  "shouldAddOriginalNameAsAlias": true,
+  "shouldCommitBulkOperations": false,
   "shouldCreateNoteToPreserveOriginalName": false,
   "shouldEnsurePathCompatibilityOnAndroid": false,
   "shouldEnsurePathCompatibilityOnEveryPlatform": false,
@@ -21,6 +26,7 @@
   "shouldEnsurePathCompatibilityOnWindows": false,
   "shouldNormalizeUnicodeNames": true,
   "shouldShowBackupWarning": false,
+  "shouldUseGitHistoryForBrokenLinks": true,
   "sidecarNoteNamePattern": "{{fileName}}.md",
   "treatAsAttachmentExtensions": [
     ".excalidraw.md"

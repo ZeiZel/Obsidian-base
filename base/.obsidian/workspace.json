@@ -4,12 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "af5558b786083d17",
+        "id": "47d73301f6b0d9d7",
         "type": "tabs",
-        "dimension": 10.644808743169401,
         "children": [
           {
-            "id": "7717f8c8db4df979",
+            "id": "74488d6a366c75f4",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -33,12 +32,12 @@
             }
           },
           {
-            "id": "cf249e0795ac95e6",
+            "id": "a65db492f0042d2d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "database/Redis.md",
+                "file": "backend/Rust.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -53,59 +52,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Redis"
+              "title": "Rust"
             }
           },
           {
-            "id": "8d1d7a3dda7d0b14",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/PostgreSQL.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "PostgreSQL"
-            }
-          },
-          {
-            "id": "079cd8a414507c73",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "concepts/gRPC.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "gRPC"
-            }
-          },
-          {
-            "id": "045cbaa702acbded",
+            "id": "d79f70cebf5afb94",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -129,36 +80,12 @@
             }
           },
           {
-            "id": "b32c855cea66fe8c",
+            "id": "5ddd733040774dd0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "architecture/System Design/System Design.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "System Design"
-            }
-          },
-          {
-            "id": "4eb7dcaa9bf74f41",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/Rust.md",
+                "file": "backend/go/Go.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -173,186 +100,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Rust"
-            }
-          }
-        ],
-        "currentTab": 6
-      },
-      {
-        "id": "731d20cd7c8c533a",
-        "type": "tabs",
-        "dimension": 19.628415300546447,
-        "children": [
-          {
-            "id": "e75ec333fc123105",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/Teamlead Balun Courses.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Teamlead Balun Courses"
+              "title": "Go"
             }
           },
           {
-            "id": "cea9ce970f741801",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "agile/agile.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "agile"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "ac2604dd844d5631",
-        "type": "tabs",
-        "dimension": 9.792349726775956,
-        "children": [
-          {
-            "id": "1c1f8cf3c086dbb5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "architecture/System Design/System Design.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "System Design"
-            }
-          },
-          {
-            "id": "e60f8646650ff457",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "cs/Алгоритмы и Структуры даных.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Алгоритмы и Структуры даных"
-            }
-          },
-          {
-            "id": "6c41952490cbdcec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "backend/Microservices/Микросервисы.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Микросервисы"
-            }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "cccf19b32ea2c9e4",
-        "type": "tabs",
-        "dimension": 22.46994535519126,
-        "children": [
-          {
-            "id": "d67564ad89943b0d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "tools/nvim.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "nvim"
-            }
-          }
-        ]
-      },
-      {
-        "id": "8817216554fe2a8e",
-        "type": "tabs",
-        "dimension": 18.732240437158474,
-        "children": [
-          {
-            "id": "f7d3138dc3c04324",
+            "id": "53669df53e025fd3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -376,31 +128,7 @@
             }
           },
           {
-            "id": "6a6e6f48f4d9dbf4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "database/database.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "database"
-            }
-          },
-          {
-            "id": "85dbcc1a042137c4",
+            "id": "d6d8dd4d5364ba33",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -424,12 +152,12 @@
             }
           },
           {
-            "id": "ce196b2eac5afb53",
+            "id": "df30e00634e1e9a9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "devops/NGINX.md",
+                "file": "agile/agile.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -444,16 +172,16 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "NGINX"
+              "title": "agile"
             }
           },
           {
-            "id": "404f0cbbc758f29b",
+            "id": "1917dbbda9cb01bb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "backend/Kafka.md",
+                "file": "agile/Teamlead Balun Courses.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -468,66 +196,11 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Kafka"
-            }
-          },
-          {
-            "id": "29e5555d9242d7dc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "concepts/GraphQL.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "GraphQL"
+              "title": "Teamlead Balun Courses"
             }
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "0da0bc6d68df42f1",
-        "type": "tabs",
-        "dimension": 18.732240437158474,
-        "children": [
-          {
-            "id": "af091984d50c7891",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ai/AI.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "AI"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -543,7 +216,6 @@
           {
             "id": "2666a47be2af937a",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "file-explorer",
               "state": {
@@ -552,7 +224,6 @@
                 "showSearch": false,
                 "searchQuery": ""
               },
-              "pinned": true,
               "icon": "lucide-folder-closed",
               "title": "Files"
             }
@@ -563,8 +234,8 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "recent-files"
+              "icon": "clock",
+              "title": "Recent files"
             }
           },
           {
@@ -589,27 +260,19 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
-            }
-          },
-          {
-            "id": "af30486e6bc94101",
-            "type": "leaf",
-            "state": {
-              "type": "vertical-tabs",
-              "state": {},
-              "icon": "vertical-tabs",
-              "title": "Vertical tabs"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 391.7734375,
-    "collapsed": true
+    "width": 391.7734375
   },
   "right": {
     "id": "5d906d621d61f331",
@@ -686,8 +349,8 @@
             "state": {
               "type": "advanced-tables-toolbar",
               "state": {},
-              "icon": "spreadsheet",
-              "title": "Advanced Tables"
+              "icon": "lucide-ghost",
+              "title": "advanced-tables-toolbar"
             }
           },
           {
@@ -730,6 +393,16 @@
             "state": {
               "type": "Saved Queries View",
               "state": {},
+              "icon": "lucide-ghost",
+              "title": "Saved Queries View"
+            }
+          },
+          {
+            "id": "716319dbebadcaa0",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
@@ -766,13 +439,11 @@
               "title": "Outline"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 456.5234375,
-    "collapsed": true
+    "width": 678.1796875
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -794,36 +465,37 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "4eb7dcaa9bf74f41",
+  "active": "2666a47be2af937a",
   "lastOpenFiles": [
-    "database/PostgreSQL.md",
-    "architecture/System Design/System Design.md",
+    "backend/Rust.md",
+    "agile/Teamlead Balun Courses.md",
+    "agile/agile.md",
+    "agile/Teamlead.md",
     "backend/go/Selfgo.md",
+    "backend/go/Go.md",
+    "database/PostgreSQL.md",
+    "database/Redis.md",
+    "backend/Ruby.md",
+    "backend/Kafka.md",
+    "architecture/System Design/System Design.md",
     "backend/Rust.md.tmp.41064.c785247cd2a1",
     "backend/_png/rust-tokio-work-stealing.png",
     "backend/_png/rust-tokio-stack.svg",
-    "backend/Rust.md",
     "concepts/gRPC.md",
     "backend/PHP/PHP.md",
     "backend/PHP/YII2.md",
     "backend/serverless.md",
-    "backend/Ruby.md",
     "backend/REST/REST.md",
     "backend/REST/BFF.md",
-    "backend/Kafka.md",
     "backend/backend.md",
-    "database/Redis.md",
     "edge/TypeScript/TypeScript.md",
     "ai/AI.md",
     "backend/Microservices/Микросервисы.md",
-    "agile/Teamlead Balun Courses.md",
     "cs/Алгоритмы и Структуры даных.md",
     "devops/NGINX.md",
     "concepts/GraphQL.md",
     "tools/nvim.md",
     "Excalidraw/google_drive.excalidraw.md",
-    "mobile/react-native/react-native.md",
-    "devops/kubernetes/Kubernetes + Helm.md",
     "_png/Pasted image 20260926114736.png",
     "_png/Pasted image 20260926114707.png",
     "_png/Pasted image 20260926114628.png",

@@ -9,5 +9,6 @@
   "baseFontSizeAction": true,
   "textFontFamily": "JetBrainsMonoNL Nerd Font Mono",
   "monospaceFontFamily": "JetBrainsMonoNL Nerd Font Mono",
-  "enabledCssSnippets": []
+  "enabledCssSnippets": [],
+  "showRibbon": true
 }
